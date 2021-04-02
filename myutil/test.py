@@ -1,20 +1,20 @@
-import os, sys, time, datetime,inspect, json
+import os, sys, time, datetime,inspect
 
-
-from myutil import verbosity_get
+from myutil import os_makedirs, Session, verbosity_get
 
 ##################################################################################################
 def test():
-   pass
+   os_makedirs('ztmp/ztmp2/myfile.txt')
+   os_makedirs('ztmp/ztmp3/ztmp4')
 
 
-  
-  
-  
-  
+   print("success")
+
+
+
 if __name__ == "__main__":
     import fire
-    fire.Fire()
+    fire.Fire(test)
 
 
 
