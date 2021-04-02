@@ -1,6 +1,19 @@
 import os, sys, time, datetime,inspect, json
 
 
+
+class dict_to_namespace(object):
+    def __init__(self, d):
+        self.__dict__ = d
+
+def os_get_function_name():
+    return sys._getframe(1).f_code.co_name
+
+
+def os_getcwd():
+    root = os.path.abspath(os.getcwd()).replace("\\", "/") + "/"
+    return  root
+
 def os_system(cmd, doprint=False):
   """ get values
        os_system( f"   ztmp ",  doprint=True)
