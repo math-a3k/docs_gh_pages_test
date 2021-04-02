@@ -21,18 +21,18 @@ class Session(object) :
       sess = Session("recsys")
       sess.save( globals() )
    """
-   def __init__(self,  name="default", dir_session="ztmp/",) :
+   def __init__(self, dir_session="ztmp/",) :
       self.dir_session =  "ztmp/session/"  if dir_session is None else dir_session
       self.name = name
-      self.cur_session = self.dir_session + "/" + name + "/"
+      self.cur_session = self.dir_session + "/" 
       print(self.cur_session)
 
-   def save(self, tag="", glob) : 
-       path = f"{self.dir_session}/{self.name}_{tag}/"  if tag != "" else self.cur_session
+   def save(self, name="", glob=None, tag="") : 
+       path = f"{self.dir_session}/{name}{tag}/"n
        save_session(path, glob)
 
-   def load(self, name, glob) :
-      self.dir_session = "ztmp/session/"  if self.dir_session is None else self.dir_session
+   def load(self, name="", glob) :
+      self.dir_session = "ztmp/session/"  if self.dir_session is None else self.dir_session + "/" + name
       self.name = name
       self.cur_session = self.dir_session + "/" + name + "/"
       print(self.cur_session)
