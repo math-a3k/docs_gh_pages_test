@@ -1,6 +1,23 @@
 import os, sys, time, datetime,inspect, json
 
 
+def os_system(cmd, doprint=False):
+  """ get values
+       os_system( f"   ztmp ",  doprint=True)
+  """
+  import subprocess  
+  try :
+    p          = subprocess.run( cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, )
+    mout, merr = p.stdout.decode('utf-8'), p.stderr.decode('utf-8')    
+    if doprint: 
+      l = mout  if len(merr) < 1 else mout + "\n\nbash_error:\n" + merr
+      print(l)
+
+    return mout, merr
+  except Exception e :
+    print( f"Error {cmd}, {e}")
+
+    
 def verbosity_get(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
     """
