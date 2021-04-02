@@ -14,7 +14,7 @@ def os_system(cmd, doprint=False):
       print(l)
 
     return mout, merr
-  except Exception e :
+  except Exception as e :
     print( f"Error {cmd}, {e}")
 
     
