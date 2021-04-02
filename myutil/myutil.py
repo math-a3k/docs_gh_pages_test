@@ -1,9 +1,11 @@
 import os, sys, time, datetime,inspect
 
 
-verbosity_get(cur_path, path_relative="/../../config.json", key='verbosity'):
-  try   : verbosity = int(json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))[key])
-  except Exception as e : verbosity = 2
+def verbosity_get(cur_path, path_relative="/../../config.json", key='verbosity', default=5):
+  try   : 
+    verbosity = int(json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))[key])
+  except Exception as e : 
+    verbosity = default
   return verbosity
   #raise Exception(f"{e}")
 
