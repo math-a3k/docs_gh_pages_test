@@ -33,11 +33,12 @@ class Session(object) :
       sess.save( globals() )
     """
     def __init__(self, dir_session="ztmp/session/",) :
+      os.makedirs(dir_session, exist_ok=True)
       self.dir_session =  dir_session
       self.cur_session =  None
       print(self.dir_session)
 
-    def save(self) :
+    def show(self) :
        import glob
        flist = glob.glob(self.dir_session + "/*" )
        print(flist)
@@ -45,6 +46,7 @@ class Session(object) :
     def save(self, name, glob=None, tag="") :
        path = f"{self.dir_session}/{name}{tag}/"
        self.cur_session = path
+       os.makedirs(self.cur_session, exist_ok=True)
        save_session(self.cur_session, glob)
 
     def load(self, name, glob:dict=None, tag="") :
@@ -75,6 +77,7 @@ def save_session(folder , globs, tag="" ) :
           print(fname)    
         except Exception as e:
               print(x, x_type, e)
+
 
 def load_session(folder, globs=None) :
   """
