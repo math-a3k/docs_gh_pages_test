@@ -1,40 +1,55 @@
-import os, sys, time, datetime,inspect
+import os, sys, time, datetime,inspect, json
 
 
-def verbosity_get(cur_path, path_relative="/../../config.json", key='verbosity', default=5):
-  try   : 
-    verbosity = int(json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))[key])
-  except Exception as e : 
-    verbosity = default
-  return verbosity
-  #raise Exception(f"{e}")
+def verbosity_get(cur_path, path_relative="/../../config.json",
+                   default=5, key='verbosity',):
+    """
+    verbosity = verbosity_get(__file__, "/../../config.json", default=5 )
+    :param cur_path:
+    :param path_relative:
+    :param key:
+    :param default:
+    :return:
+    """
+    try   :
+      verbosity = int(json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))[key])
+    except Exception as e :
+      verbosity = default
+      #raise Exception(f"{e}")
+    return verbosity
 
   
 def os_makedirs(dir_or_file):
-    if os.path.isfile(dir_or_file) :os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
-    else : os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
+    if os.path.isfile(dir_or_file) :
+        os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
+    else :
+        os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
 
 
 class Session(object) :
-   """ Save Python session on disk
+    """ Save Python session on disk
       from util import Session
       sess = Session("recsys")
       sess.save( globals() )
-   """
-   def __init__(self, dir_session="ztmp/",) :
-      self.dir_session =  "ztmp/session/"  if dir_session is None else dir_session
-      self.name = name
-      self.cur_session = self.dir_session + "/" 
-      print(self.cur_session)
+    """
+    def __init__(self, dir_session="ztmp/session/",) :
+      self.dir_session =  dir_session
+      self.cur_session =  None
+      print(self.dir_session)
 
-   def save(self, name="", glob=None, tag="") : 
-       path = f"{self.dir_session}/{name}{tag}/"n
-       save_session(path, glob)
+    def save(self) :
+       import glob
+       flist = glob.glob(self.dir_session + "/*" )
+       print(flist)
 
-   def load(self, name="", glob) :
-      self.dir_session = "ztmp/session/"  if self.dir_session is None else self.dir_session + "/" + name
-      self.name = name
-      self.cur_session = self.dir_session + "/" + name + "/"
+    def save(self, name, glob=None, tag="") :
+       path = f"{self.dir_session}/{name}{tag}/"
+       self.cur_session = path
+       save_session(self.cur_session, glob)
+
+    def load(self, name, glob:dict=None, tag="") :
+      path = f"{self.dir_session}/{name}{tag}/"
+      self.cur_session = path
       print(self.cur_session)
       load_session(self.cur_session , glob )
 
@@ -80,7 +95,7 @@ def save(dd, to_file="", verbose=False):
   import pickle, os
   os.makedirs(os.path.dirname(to_file), exist_ok=True)
   pickle.dump(dd, open(to_file, mode="wb") , protocol=pickle.HIGHEST_PROTOCOL)
-  if verbose : os_file_check(to_file)
+  #if verbose : os_file_check(to_file)
 
 
 def load(to_file=""):
@@ -89,8 +104,10 @@ def load(to_file=""):
   return dd
 
 
-def test()
-   pass:
+
+##################################################################################################
+def test():
+   pass
 
   
 if __name__ == "__main__":
