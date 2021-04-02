@@ -2,14 +2,14 @@ import os, sys, time, datetime,inspect, json
 
 
 def git_repo_root():
-    cmd = "git rev-parse --show-toplevel"
-    mout, merr = os_system(cmd)
-    path = mout.split("\n")[0]
-    if len(path) < 1:
-        return None
-    else 
-        return path
-
+    try :
+      cmd = "git rev-parse --show-toplevel"
+      mout, merr = os_system(cmd)
+      path = mout.split("\n")[0]
+      if len(path) < 1:  return None
+    except : return None    
+    return path
+    
     
 class dict_to_namespace(object):
     def __init__(self, d):
