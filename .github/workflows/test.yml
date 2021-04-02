@@ -78,7 +78,7 @@ jobs:
     - name: run_all
       run: |
           mkdir -p    /home/runner/work/log_tmp/  
-          chmod -R 777 . && python  myutil.py  test
+          chmod -R 777 . && cd myutil && python  myutil.py  test
     - name: log_gitcommit
       run: |
            python core_test.py  log_remote_push --name test_fast_linux
