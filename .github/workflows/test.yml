@@ -79,7 +79,7 @@ jobs:
     - name: run_all
       run: |
           mkdir -p    /home/runner/work/log_tmp/  
-          chmod -R 777 . && cd myutil && python  test.py  test
+          chmod -R 777 . && cd myutil && python  test.py  test1
         
         
     - name: log_gitcommit
