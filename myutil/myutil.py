@@ -89,4 +89,13 @@ def load(to_file=""):
 
 
 
+if __name__ == "__main__":
+    import fire
+    fire.Fire()
+
+
+
+
+
+
       
