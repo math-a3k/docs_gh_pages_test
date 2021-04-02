@@ -39,7 +39,8 @@ class Session(object) :
       load_session(self.cur_session , glob )
 
 
-def save_session(folder , globs, tag="" ) :    
+def save_session(folder , globs, tag="" ) : 
+  import pandas as pd
   os.makedirs( folder , exist_ok= True)   
   lcheck = [ "<class 'pandas.core.frame.DataFrame'>", "<class 'list'>", "<class 'dict'>",
              "<class 'str'>" ,  "<class 'numpy.ndarray'>" ]  
