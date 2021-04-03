@@ -14,7 +14,7 @@ A file called .pypirc that has to contain login credentials.
   $ ~ YOURTEXTEDITOR ~/.pypirc
   Open a file and paste this to in it:
   In Github Secrets
-  
+
   [pypi]
   username = _token_    #token is fixex
   password = pypi-AgEI
@@ -76,7 +76,9 @@ def pypi_upload():
 
     """
     os.system('python setup.py sdist bdist_wheel')
-    os.system('twine upload dist/*')
+
+    ### Github
+    os.system('twine upload --repository-url https://upload.pypi.org/legacy/ dist/*  --username ${{ secrets.PYPI_USERNAME }}     --password ${{ secrets.PYPI_PASSWORD }}  --verbose ')
     print("Upload files")
 
     print("Deleting build files")

@@ -36,7 +36,7 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         # echo "$TWINE_USERNAME"
-        pyhon run_pipy.py
+        python run_pipy.py
         python setup.py sdist bdist_wheel
         twine upload --repository-url https://upload.pypi.org/legacy/ dist/*  --username ${{ secrets.PYPI_USERNAME }}     --password ${{ secrets.PYPI_PASSWORD }}  --verbose 
 
