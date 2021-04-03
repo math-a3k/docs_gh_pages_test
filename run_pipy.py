@@ -66,13 +66,14 @@ def get_current_githash():
    label = label.decode('utf-8')
    return label
 
-def update_version(path, n):
+
+def update_version(path, n=1):
     content = open(path, 'r').read()
     
     orig, version = Version.parse(content)
     print (f'Current version: {version}')
 
-    version.minor += int(n)
+    version.minor = int(version.minor) + int(n)
 
     import time
     # version.patch = str(int(time.time()*0.005))[-8:]   ### unique ID
@@ -106,6 +107,7 @@ def pypi_upload():
     """
       It requires credential in .pypirc  files
       __token__
+      or in github SECRETS
 
     """
     os.system('python setup.py sdist bdist_wheel')
