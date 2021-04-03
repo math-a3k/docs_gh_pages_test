@@ -35,7 +35,6 @@ curdir = op.abspath(op.curdir)
 setup_file = op.join(curdir, 'setup.py')
 
 
-time.time in python unix
 
 class Version(object):
     pattern = re.compile(r"(version\s*=\s*['\"]\s*(\d+)\s*\.\s*(\d+)\s*\.\s*(\d+)\s*['\"])")
@@ -76,7 +75,7 @@ def update_version(path, n):
     version.minor += int(n)
 
     import time
-    version.patch = int(time.time()*0.01)
+    version.patch = int(time.time()*0.01)   ### unique ID
 
     print (f'New Version: {version}')
 
