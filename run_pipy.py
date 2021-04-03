@@ -23,13 +23,8 @@ A file called .pypirc that has to contain login credentials.
 
 
 """
-
-
-import os
+import os,re, sys, subprocess
 import os.path as op
-import re
-import subprocess
-import sys
 
 curdir = op.abspath(op.curdir)
 setup_file = op.join(curdir, 'setup.py')
@@ -90,6 +85,8 @@ def update_version(path, n):
         file.write(content.replace(orig, version.new_version(orig)))
 
 
+
+############################################################################################################
 def git_commit(message):
     if not ask(f'About to git commit {message}, are you sure: '):
         exit()
@@ -101,9 +98,9 @@ def git_commit(message):
 
     os.system('git push')
 
-
 def ask(question, ans='yes'):
     return input(question).lower() == ans.lower()
+
 
 def pypi_upload():
     """
@@ -123,10 +120,7 @@ def pypi_upload():
             os.system(f'rm -rf {item}')
 
 
-
-
-
-
+############################################################################################################
 def main(*args):
     print ('Program Started')
     update_version(setup_file, 1)
