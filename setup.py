@@ -30,10 +30,22 @@ install_requires = []
 #with open("README.md", "r") as fh:
 #    long_description = fh.read()
 
-long_description =  """
+def get_current_githash():
+   import subprocess 
+   # label = subprocess.check_output(["git", "describe", "--always"]).strip();   
+   label = subprocess.check_output([ 'git', 'rev-parse', 'HEAD' ]).strip();      
+   label = label.decode('utf-8')
+   return label
+
+githash = get_current_githash()
+
+
+long_description =  f"""
 
 ```
 Utils
+
+git hash : {githash}
 
 
 ```

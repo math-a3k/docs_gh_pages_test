@@ -75,8 +75,8 @@ def update_version(path, n=1):
     version.minor = int(version.minor) + int(n)
 
     import time
-    # version.patch = str(int(time.time()*0.005))[-8:]   ### unique ID
-    version.patch = get_current_githash()
+    version.patch = int(time.time()*0.01)   ### unique ID
+    # version.patch = get_current_githash()
 
 
     print (f'New Version: {version}')
