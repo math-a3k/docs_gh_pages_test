@@ -35,7 +35,7 @@ curdir = op.abspath(op.curdir)
 setup_file = op.join(curdir, 'setup.py')
 
 
-
+time.time in python unix
 
 class Version(object):
     pattern = re.compile(r"(version\s*=\s*['\"]\s*(\d+)\s*\.\s*(\d+)\s*\.\s*(\d+)\s*['\"])")
@@ -66,6 +66,36 @@ class Version(object):
         return re_result[0][0], cls(*re_result[0][1:])
 
 
+
+def update_version(path, n):
+    content = open(path, 'r').read()
+    
+    orig, version = Version.parse(content)
+    print (f'Current version: {version}')
+
+    version.minor += int(n)
+
+    import time
+    version.patch = int(time.time()*0.01)
+
+    print (f'New Version: {version}')
+
+    with open(path, 'w') as file:
+        file.write(content.replace(orig, version.new_version(orig)))
+
+
+def git_commit(message):
+    if not ask(f'About to git commit {message}, are you sure: '):
+        exit()
+
+    os.system(f'git commit -am "{message}"')
+    
+    if not ask('About to git push, are you sure: '):
+        exit()
+
+    os.system('git push')
+
+
 def ask(question, ans='yes'):
     return input(question).lower() == ans.lower()
 
@@ -88,29 +118,7 @@ def pypi_upload():
 
 
 
-def update_version(path, n):
-    content = open(path, 'r').read()
-    
-    orig, version = Version.parse(content)
-    print (f'Current version: {version}')
 
-    version.minor += int(n)
-    print (f'New Version: {version}')
-
-    with open(path, 'w') as file:
-        file.write(content.replace(orig, version.new_version(orig)))
-
-
-def git_commit(message):
-    if not ask(f'About to git commit {message}, are you sure: '):
-        exit()
-
-    os.system(f'git commit -am "{message}"')
-    
-    if not ask('About to git push, are you sure: '):
-        exit()
-
-    os.system('git push')
 
 
 def main(*args):
