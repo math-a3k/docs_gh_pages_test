@@ -15,7 +15,7 @@ def test1():
    os.system("ls ztmp")
 
 
-   print('verbosity', global_verbosity(__file__, "../confi.json", 40,))
+   print('verbosity', global_verbosity(__file__, "config.json", 40,))
 
 
    sess = Session("ztmp/session")
