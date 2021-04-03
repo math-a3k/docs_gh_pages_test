@@ -3,7 +3,7 @@ import os, sys, time, datetime,inspect
 
 ##################################################################################################
 def test1():
-   from myutil import (os_makedirs, Session, verbosity_get, os_system  
+   from utilmy import (os_makedirs, Session, verbosity_get, os_system  
                        
                       )
  
