@@ -1,14 +1,17 @@
 # pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
-import os, sys, time, datetime,inspect, json
+import os, sys, time, datetime,inspect, json, yaml
 
 
 
 ################################################################################################
 def global_verbosity(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
-    """
-    verbosity = verbosity_get(__file__, "/../../config.json", default=5 )
+    """ Get global verbosity
+    verbosity = global_verbosity(__file__, "/../../config.json", default=5 )
+
+    verbosity = global_verbosity("repo_root", "config/config.json", default=5 )
+
     :param cur_path:
     :param path_relative:
     :param key:
@@ -16,7 +19,20 @@ def global_verbosity(cur_path, path_relative="/../../config.json",
     :return:
     """
     try   :
-      verbosity = int(json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))[key])
+      if 'repo_root' == cur_path  :
+          cur_path =  git_repo_root()
+
+      if '.json' in path_relative :
+         dd = json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))
+
+      elif '.yaml' in path_relative or '.yml' in path_relative :
+         import yaml
+         dd = yaml.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))
+
+      else :
+          raise Exception( path_relative + " not supported ")
+      verbosity = int(dd[key])
+
     except Exception as e :
       verbosity = default
       #raise Exception(f"{e}")

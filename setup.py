@@ -22,7 +22,7 @@ print("version", version)
 ##### Requirements ###################################################################
 #with open('install/requirements.txt') as fp:
 #    install_requires = fp.read()
-install_requires = []
+install_requires = ['pyyaml']
 
 
 
