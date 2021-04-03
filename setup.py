@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name='myutil',
+    name='utilmy',
     version='0.0.3',
     packages=find_packages(),
     entry_points={
@@ -11,7 +11,7 @@ setup(
             ],
     },
     license='MIT',
-    description='A simple commandline utility for python scripts.',
+    description='utilities for python scripts.',
     keywords=['PYTHON', 'CLI', 'UTILITIES'],
     install_requires=[
     ],
