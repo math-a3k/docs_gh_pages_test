@@ -38,5 +38,5 @@ jobs:
         # echo "$TWINE_USERNAME"
         python run_pipy.py
         python setup.py sdist bdist_wheel
-        twine upload --repository-url https://upload.pypi.org/legacy/ dist/*  --username ${{ secrets.PYPI_USERNAME }}     --password ${{ secrets.PYPI_PASSWORD }}  --verbose 
+        twine upload dist/*  --username ${{ secrets.PYPI_USERNAME }}     --password ${{ secrets.PYPI_PASSWORD }}  --skip-existing   --repository-url https://upload.pypi.org/legacy/  --verbose   
 
