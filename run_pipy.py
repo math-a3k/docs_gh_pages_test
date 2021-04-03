@@ -40,9 +40,9 @@ class Version(object):
     pattern = re.compile(r"(version\s*=\s*['\"]\s*(\d+)\s*\.\s*(\d+)\s*\.\s*(\d+)\s*['\"])")
 
     def __init__(self, major, minor, patch):
-        self.major = int(major)
-        self.minor = int(minor)
-        self.patch = int(patch)
+        self.major = major
+        self.minor = minor
+        self.patch = patch
 
     def __str__(self):
         return f'Version({self.stringify()})'
@@ -65,6 +65,11 @@ class Version(object):
         return re_result[0][0], cls(*re_result[0][1:])
 
 
+def get_current_githash():
+   import subprocess 
+   label = subprocess.check_output(["git", "describe", "--always"]).strip();   
+   label = label.decode('utf-8')
+   return label
 
 def update_version(path, n):
     content = open(path, 'r').read()
@@ -75,7 +80,9 @@ def update_version(path, n):
     version.minor += int(n)
 
     import time
-    version.patch = int(time.time()*0.01)   ### unique ID
+    # version.patch = str(int(time.time()*0.005))[-8:]   ### unique ID
+    version.patch = get_current_githash()
+
 
     print (f'New Version: {version}')
 
