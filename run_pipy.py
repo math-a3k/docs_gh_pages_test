@@ -30,7 +30,6 @@ curdir = op.abspath(op.curdir)
 setup_file = op.join(curdir, 'setup.py')
 
 
-
 class Version(object):
     pattern = re.compile(r"(version\s*=\s*['\"]\s*(\d+)\s*\.\s*(\d+)\s*\.\s*(\d+)\s*['\"])")
 
