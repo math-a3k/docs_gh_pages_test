@@ -3,6 +3,37 @@
 import os, sys, time, datetime,inspect, json
 
 
+
+################################################################################################
+def global_verbosity(cur_path, path_relative="/../../config.json",
+                   default=5, key='verbosity',):
+    """
+    verbosity = verbosity_get(__file__, "/../../config.json", default=5 )
+    :param cur_path:
+    :param path_relative:
+    :param key:
+    :param default:
+    :return:
+    """
+    try   :
+      verbosity = int(json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))[key])
+    except Exception as e :
+      verbosity = default
+      #raise Exception(f"{e}")
+    return verbosity
+
+
+
+
+
+
+
+
+
+
+
+
+###################################################################################################
 def git_repo_root():
     try :
       cmd = "git rev-parse --show-toplevel"
@@ -11,12 +42,26 @@ def git_repo_root():
       if len(path) < 1:  return None
     except : return None    
     return path
-    
-    
-class dict_to_namespace(object):
-    def __init__(self, d):
-        self.__dict__ = d
 
+    
+def git_current_hash(mode='full'):
+   import subprocess 
+   # label = subprocess.check_output(["git", "describe", "--always"]).strip();   
+   label = subprocess.check_output([ 'git', 'rev-parse', 'HEAD' ]).strip();      
+   label = label.decode('utf-8')
+   return label
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################
 def os_get_function_name():
     return sys._getframe(1).f_code.co_name
 
@@ -24,6 +69,7 @@ def os_get_function_name():
 def os_getcwd():
     root = os.path.abspath(os.getcwd()).replace("\\", "/") + "/"
     return  root
+
 
 def os_system(cmd, doprint=False):
   """ get values
@@ -41,25 +87,7 @@ def os_system(cmd, doprint=False):
   except Exception as e :
     print( f"Error {cmd}, {e}")
 
-    
-def verbosity_get(cur_path, path_relative="/../../config.json",
-                   default=5, key='verbosity',):
-    """
-    verbosity = verbosity_get(__file__, "/../../config.json", default=5 )
-    :param cur_path:
-    :param path_relative:
-    :param key:
-    :param default:
-    :return:
-    """
-    try   :
-      verbosity = int(json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))[key])
-    except Exception as e :
-      verbosity = default
-      #raise Exception(f"{e}")
-    return verbosity
-
-  
+      
 def os_makedirs(dir_or_file):
     if os.path.isfile(dir_or_file) :
         os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
@@ -67,6 +95,18 @@ def os_makedirs(dir_or_file):
         os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
 
 
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################
 class Session(object) :
     """ Save Python session on disk
       from util import Session
@@ -149,9 +189,27 @@ def load(to_file=""):
 
 
 
+
+################################################################################################
+class dict_to_namespace(object):
+    def __init__(self, d):
+        self.__dict__ = d
+
+
+
+
+
+
+
+
+
+
+
 ##################################################################################################
 def test():
-   pass
+   from utilmy import (os_makedirs, Session, global_verbosity, os_system  
+                       
+                      )
 
   
 if __name__ == "__main__":
@@ -161,6 +219,3 @@ if __name__ == "__main__":
 
 
 
-
-
-      
