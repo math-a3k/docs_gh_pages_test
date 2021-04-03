@@ -78,9 +78,12 @@ jobs:
     ########  Test running 
     - name: run_all
       run: |
-          mkdir -p    /home/runner/work/log_tmp/  
-          chmod -R 777 . && cd utilmy && python  test.py  test1
-        
+          mkdir -p    /home/runner/work/log_tmp/
+          pip install -e .
+          chmod -R 777 . &&  python  test.py  test1
+          # chmod -R 777 . && cd utilmy && python  test.py  test1
+
+
         
     - name: log_gitcommit
       run: |
