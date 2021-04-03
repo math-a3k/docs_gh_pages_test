@@ -45,7 +45,7 @@ long_description =  f"""
 ```
 Utils
 
-git hash : {githash}
+git hash : https://github.com/arita37/myutil/tree/{githash}
 
 
 ```
