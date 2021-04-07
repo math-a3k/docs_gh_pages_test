@@ -5,6 +5,38 @@ import os, sys, time, datetime,inspect, json, yaml
 
 
 ################################################################################################
+def show(*df, **kw):
+    import pandas as pd
+    from openpyxl.utils.dataframe import dataframe_to_rows
+    from shutil import copyfile
+
+    template_file = 'Template.xlsx' # Has a header in row 1 already
+    output_file = 'Result.xlsx' # What we are saving the template as
+
+    # Copy Template.xlsx as Result.xlsx
+    copyfile(template_file, output_file)
+    
+    nmax = 10000
+    df = df.iloc[:nmax,:]
+
+    # Load the workbook and access the sheet we'll paste into
+    wb = load_workbook(output_file)
+    ws = wb.get_sheet_by_name('Existing Result Sheet') 
+
+    # Selecting a cell in the header row before writing makes append()
+    #  start writing to the following line i.e. row 2
+    ws['A1']
+    # Write each row of the DataFrame
+    # In this case, I don't want to write the index (useless) or the header (already in the template)
+    for r in dataframe_to_rows(df, index=False, header=False):
+        ws.append(r)
+
+    wb.save(output_file)
+    ### Open File
+    
+    
+    
+
 def global_verbosity(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
     """ Get global verbosity
