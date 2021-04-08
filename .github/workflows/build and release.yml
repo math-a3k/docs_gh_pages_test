@@ -1,4 +1,4 @@
-name: test_fast_linux
+name: Build and Test , Package PyPI
 
 ###  https://github.com/arita37/awesome-actions#static-analysis
 
