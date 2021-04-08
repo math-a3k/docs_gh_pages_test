@@ -3,17 +3,18 @@ name: test_fast_linux
 ###  https://github.com/arita37/awesome-actions#static-analysis
 
 on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
   push:
     branches:
-      #- run_train
-      #- multi
-
-
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
    
@@ -25,24 +26,7 @@ jobs:
     - name: Install pipenv
       uses: dschep/install-pipenv-action@v1
       
-
-    ##### Git Credemtials  ##################################################
-    #- name: ssh_gen
-    #  uses: webfactory/ssh-agent@v0.2.0
-    #  with:
-    #    ssh-private-key: ${{ secrets.GIT_RSA }}
-                
-
-    ########################################################################
-    #- uses: actions/cache@v1
-    #  id: cache
-    #  with:
-    #    path: ~/.cache/pip
-    #    key: ${{ runner.os }}-pip-${{ hashFiles('**/install/requirements.txt') }}
-    #    restore-keys: |
-    #      ${{ runner.os }}-pip-
-   
-
+  
     - name: Cache pipenv virtualenv
       id: cache-pipenv
       uses: actions/cache@v1
@@ -75,23 +59,43 @@ jobs:
            python -c "import os; print(os)"
         
         
-    ########  Test running 
+    ########  Runs All test
     - name: run_all
       run: |
           mkdir -p    /home/runner/work/log_tmp/
           pip install -e .
           chmod -R 777 . &&  python  test.py  test1
-          # chmod -R 777 . && cd utilmy && python  test.py  test1
-
-
-        
+          # chmod -R 777 . && cd utilmy && python  test.py  test1  
+    ########  Runs All test       
     - name: log_gitcommit
       run: |
            ls .
-        
-        
-# https://ianwhitestone.work/AWS-Serverless-Deployments-With-Github-Actions/
-#
-#
-#
-#
+
+# This Job will upload a Python Package using Twine when a release is created
+
+  deploy:
+    needs : [build] # List of dependent Jobs 
+    if: success()   # check if all previous (needs) dependent jobs were successfull  then only execute
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel twine
+
+    - name: Build and publish
+      #env:
+      #  TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+      #  TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        # echo "$TWINE_USERNAME"
+        python run_pipy.py
+        python setup.py sdist bdist_wheel
+        twine upload dist/*  --username ${{ secrets.PYPI_USERNAME }}     --password ${{ secrets.PYPI_PASSWORD }}  --skip-existing   --repository-url https://upload.pypi.org/legacy/  --verbose   
