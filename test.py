@@ -6,7 +6,7 @@ import os, sys, time, datetime,inspect
 ##################################################################################################
 def test1():
    from utilmy import (os_makedirs, Session, global_verbosity, os_system ,
-                       pd_read_file, pd_show
+                       pd_read_file, pd_show, os_removedirs
                       )
 
    import pandas as pd, random
@@ -34,6 +34,10 @@ def test1():
    #############################################################
    os_makedirs('ztmp/ztmp2/myfile.txt')
    os_makedirs('ztmp/ztmp3/ztmp4')
+   os.system("ls ztmp")
+
+
+   os_removedirs("ztmp/ztmp2")
    os.system("ls ztmp")
 
 

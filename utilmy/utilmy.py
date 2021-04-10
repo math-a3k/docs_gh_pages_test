@@ -173,8 +173,35 @@ def git_current_hash(mode='full'):
 
 
 
-
 ################################################################################################
+def os_removedirs(path):
+    """
+       issues with no empty Folder
+    # Delete everything reachable from the directory named in 'top',
+    # assuming there are no symbolic links.
+    # CAUTION:  This is dangerous!  For example, if top == '/', it could delete all your disk files.
+    """
+    if len(path) < 3 :
+        print("cannot delete root folder")
+        return False
+
+    import os
+    for root, dirs, files in os.walk(path, topdown=False):
+        for name in files:
+            try :
+              os.remove(os.path.join(root, name))
+            except :
+              pass
+        for name in dirs:
+            try :
+              os.rmdir(os.path.join(root, name))
+            except: pass
+    try :
+      os.rmdir(path)
+    except: pass
+    return True
+
+
 def os_get_function_name():
     return sys._getframe(1).f_code.co_name
 
