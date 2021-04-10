@@ -38,8 +38,10 @@ def test1():
    df = pd_read_file("data/parquet/fac*.*")
 
    df = pd_read_file("data/parquet/")
+
+
    # the 2nd
-   pd_show()
+   # pd_show()
 
    # the 3rd
    print(git_repo_root())
