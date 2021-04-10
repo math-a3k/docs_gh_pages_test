@@ -35,7 +35,7 @@ def test1():
 
    import pandas as pd, random
 
-   ll = [[ random.random() for i in range(0,100)] for j in range(0,100) ]
+   ll = [[ random.random() for i in range(0, 77)] for j in range(0,103) ]
    df =pd.DataFrame(ll, columns = [i for i in range(0,100)])
    os.makedirs("data/parquet/", exist_ok= True)
    df.to_csv( "data/parquet/f01.csv.gz", compression='gzip' )
@@ -49,6 +49,7 @@ def test1():
    print('pd_read_file gzip ', df1)
    b = df1.mean()
    a = df.mean()
+   assert round(a,5) == round(b,5), "Sum of loaded df <> Original df"
 
 
 
