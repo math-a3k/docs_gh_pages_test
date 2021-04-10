@@ -27,8 +27,8 @@ def test1():
    df = pd_read_file("data/parquet/fab*.*", verbose=1)
    print('pd_read_file csv ', df)
 
-   df = pd_read_file("data/parquet/fab*.*" )
-   print('pd_read_file csv ', df, n_pool=1)
+   df = pd_read_file("data/parquet/fab*.*", n_pool=1 )
+   print('pd_read_file csv ', df)
 
 
    #############################################################
