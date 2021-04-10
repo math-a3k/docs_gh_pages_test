@@ -5,6 +5,72 @@ import os, sys, time, datetime,inspect, json, yaml
 
 
 ################################################################################################
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
+                 verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
+                 col_filter_val=None,  **kw):
+  """
+      Read file in parallel from disk : very Fast
+  :param path_glob:
+  :return:
+  """
+  import glob, gc,  pandas as pd, os
+  def log(*s, **kw):
+      print(*s, flush=True, **kw)
+      
+  readers = {
+          ".pkl"     : pd.read_pickle,
+          ".parquet" : pd.read_parquet,
+          ".csv"     : pd.read_csv,
+          ".txt"     : pd.read_csv,
+          ".zip"     : pd.read_csv,
+          ".gzip"    : pd.read_csv,
+   }
+  from multiprocessing.pool import ThreadPool
+
+  file_list = glob.glob(path_glob)
+  n_file    = len(file_list)
+  if n_file <= 2:
+    m_job  = n_file
+    n_pool = 1
+  else :
+    m_job  = n_file // n_pool  if n_file > 1 else 1
+  
+  pool   = ThreadPool(processes=n_pool)
+  if verbose : log(n_file,  n_file // n_pool )
+
+  dfall  = pd.DataFrame()
+  for j in range(0, m_job ) :
+      if verbose : log("Pool", j, end=",")
+      job_list =[]
+      for i in range(n_pool):
+         if n_pool*j + i >= n_file  : break
+         filei         = file_list[n_pool*j + i]
+         ext           = os.path.splitext(filei)[1]
+         pd_reader_obj = readers[ext]
+         job_list.append( pool.apply_async(pd_reader_obj, (filei, )))
+         if verbose : log(j, filei)
+
+      for i in range(n_pool):
+        if i >= len(job_list): break
+        dfi   = job_list[ i].get()
+
+        if col_filter is not None : dfi = dfi[ dfi[col_filter] == col_filter_val ]
+        if cols is not None :       dfi = dfi[cols]
+        if nrows > 0        :       dfi = dfi.iloc[:nrows,:]
+        if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
+        gc.collect()
+
+        dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
+        #log("Len", n_pool*j + i, len(dfall))
+        del dfi; gc.collect()
+
+  if verbose : log(n_file, j * n_file//n_pool )
+  return dfall
+
+
+
+
+################################################################################################
 def global_verbosity(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
     """ Get global verbosity
@@ -105,15 +171,10 @@ def os_system(cmd, doprint=False):
 
       
 def os_makedirs(dir_or_file):
-    if os.path.isfile(dir_or_file) :
+    if os.path.isfile(dir_or_file) or "." in dir_or_file.split("/")[-1] :
         os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
     else :
         os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
-
-
-
-
-
 
 
 
