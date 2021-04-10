@@ -3,6 +3,7 @@ One liner utilties
 
 
 # myutil
+    https://pypi.org/project/utilmy/#history
 
 
 ## Install
