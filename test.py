@@ -6,7 +6,7 @@ import os, sys, time, datetime,inspect
 ##################################################################################################
 def test1():
    from utilmy import (os_makedirs, Session, global_verbosity, os_system ,
-                       pd_read_file, pd_show, git_repo_root, 
+                       pd_read_file, pd_show, git_repo_root, os_removedirs
                       )
 
    import pandas as pd, random
@@ -53,6 +53,10 @@ def test1():
    os_makedirs('/tmp/myfile')
    os_makedirs('/tmp/one/../mydir/')
    os_makedirs('./tmp/test')
+   os.system("ls ztmp")
+
+
+   os_removedirs("ztmp/ztmp2")
    os.system("ls ztmp")
 
 
