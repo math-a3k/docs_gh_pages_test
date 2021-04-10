@@ -30,6 +30,13 @@ def test1():
    df = pd_read_file("data/parquet/fab*.*", n_pool=1 )
    print('pd_read_file csv ', df)
 
+   df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
+   print('pd_read_file gzip ', df1)
+   b = df1.mean()
+   a = df.mean()
+
+    ### assert round(b, 5) == round( a, 5)
+
    # the 1st
    df = pd_read_file("data/parquet/fab*.*", n_pool=0 )
 
