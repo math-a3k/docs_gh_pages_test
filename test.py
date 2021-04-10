@@ -5,13 +5,38 @@ import os, sys, time, datetime,inspect
 
 ##################################################################################################
 def test1():
-   from utilmy import (os_makedirs, Session, global_verbosity, os_system ,
-                       pd_read_file, pd_show, git_repo_root, os_removedirs
+
+   from utilmy import (Session,
+                       global_verbosity,
+
+
+
+
+                       os_makedirs,
+                       os_system ,
+                       os_removedirs,
+
+
+
+
+
+                       pd_read_file,
+                       pd_show,
+
+
+
+                       git_repo_root,
+                       git_current_hash,
+
+
                       )
+
+
+
 
    import pandas as pd, random
 
-   ll = [[ random.random() for i in range(0,100)] for j in range(0,100) ]
+   ll = [[ random.random() for i in range(0, 77)] for j in range(0,103) ]
    df =pd.DataFrame(ll, columns = [i for i in range(0,100)])
    os.makedirs("data/parquet/", exist_ok= True)
    df.to_csv( "data/parquet/f01.csv.gz", compression='gzip' )
@@ -21,13 +46,18 @@ def test1():
    df.to_csv( "data/parquet/fabc05.csv", )
 
 
-   df = pd_read_file("data/parquet/fa*.gz", verbose=1, n_pool=3)
-   print('pd_read_file gzip ', df)
+   df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
+   print('pd_read_file gzip ', df1)
+   b = df1.mean()
+   a = df.mean()
+   assert round(a,5) == round(b,5), "Sum of loaded df <> Original df"
 
-   df = pd_read_file("data/parquet/fab*.*", verbose=1)
+
+
+   df1 = pd_read_file("data/parquet/fab*.*", verbose=1)
    print('pd_read_file csv ', df)
 
-   df = pd_read_file("data/parquet/fab*.*", n_pool=1 )
+   df1 = pd_read_file("data/parquet/fab*.*", n_pool=1 )
    print('pd_read_file csv ', df)
 
    df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
@@ -43,13 +73,13 @@ def test1():
    #  print(f'{index}: {round( val, 5)}')
 
    # the 1st
-   df = pd_read_file("data/parquet/fab*.*", n_pool=0 )
+   df1 = pd_read_file("data/parquet/fab*.*", n_pool=0 )
 
-   df = pd_read_file("data/parquet/fab*.*", n_pool=1000 )
+   df1 = pd_read_file("data/parquet/fab*.*", n_pool=1000 )
 
-   df = pd_read_file("data/parquet/fac*.*")
+   df1 = pd_read_file("data/parquet/fac*.*")
 
-   df = pd_read_file("data/parquet/")
+   df1 = pd_read_file("data/parquet/")
 
 
    # the 2nd
