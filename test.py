@@ -34,8 +34,13 @@ def test1():
    print('pd_read_file gzip ', df1)
    b = df1.mean()
    a = df.mean()
+   
+   print(a.equals(b))
+   # for index, val in a.iteritems():
+   #  print(f'{index}: {round( val, 5)}')
 
-    ### assert round(b, 5) == round( a, 5)
+   # for index, val in b.iteritems():
+   #  print(f'{index}: {round( val, 5)}')
 
    # the 1st
    df = pd_read_file("data/parquet/fab*.*", n_pool=0 )

@@ -33,13 +33,14 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
 
   file_list = glob.glob(path_glob)
   n_file    = len(file_list)
-  if n_file <= 2:
+
+  if n_file <= 0:
+    m_job = 0
+  elif n_file <= 2:
     m_job  = n_file
     n_pool = 1
-  elif  n_file == 1:
+  else  :
     m_job  = n_file // n_pool  if n_file > 1 else 1
-  else:
-    m_job = 0
 
   pool   = ThreadPool(processes=n_pool)
   if verbose : log(n_file,  n_file // n_pool )
