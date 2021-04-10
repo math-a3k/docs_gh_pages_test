@@ -38,8 +38,10 @@ def test1():
    df = pd_read_file("data/parquet/fac*.*")
 
    df = pd_read_file("data/parquet/")
+
+
    # the 2nd
-   pd_show()
+   # pd_show()
 
    # the 3rd
    print(git_repo_root())
@@ -53,11 +55,12 @@ def test1():
    os_makedirs('/tmp/myfile')
    os_makedirs('/tmp/one/../mydir/')
    os_makedirs('./tmp/test')
+    
    os.system("ls ztmp")
 
 
    os_removedirs("ztmp/ztmp2")
-   os.system("ls ztmp")
+
 
 
    print('verbosity', global_verbosity(__file__, "config.json", 40,))
@@ -71,16 +74,15 @@ def test1():
    sess.save('mysess', globals(), '02')
    sess.show()
 
-   sess.load('mysess')   
-   sess.load('mysess', None, '02')   
+   sess.load('mysess')
+   sess.load('mysess', None, '02')
 
 
-   res = os_system( f" ls . ",  doprint=True) 
+   res = os_system( f" ls . ",  doprint=True)
    print(res)
 
    res = os_system( f" ls . ",  doprint=False) 
    res = os_system( f" ls . ",  doprint=True) 
-
 
    print("success")
 

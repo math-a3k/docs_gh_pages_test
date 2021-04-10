@@ -79,6 +79,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
 
 
 
+
 def pd_show(df, nrows=100, **kw):
     """
       Show from Dataframe
