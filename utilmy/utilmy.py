@@ -28,14 +28,19 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
    }
   from multiprocessing.pool import ThreadPool
 
+  if n_pool < 1:
+    n_pool = 1
+
   file_list = glob.glob(path_glob)
   n_file    = len(file_list)
   if n_file <= 2:
     m_job  = n_file
     n_pool = 1
-  else :
+  elif  n_file == 1:
     m_job  = n_file // n_pool  if n_file > 1 else 1
-  
+  else:
+    m_job = 0
+
   pool   = ThreadPool(processes=n_pool)
   if verbose : log(n_file,  n_file // n_pool )
 
@@ -47,7 +52,11 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
          if n_pool*j + i >= n_file  : break
          filei         = file_list[n_pool*j + i]
          ext           = os.path.splitext(filei)[1]
+         if ext == None or ext == '':
+           continue
          pd_reader_obj = readers[ext]
+         if pd_reader_obj == None:
+           continue
          job_list.append( pool.apply_async(pd_reader_obj, (filei, )))
          if verbose : log(j, filei)
 
@@ -65,7 +74,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
         #log("Len", n_pool*j + i, len(dfall))
         del dfi; gc.collect()
 
-  if verbose : log(n_file, j * n_file//n_pool )
+  if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
   return dfall
 
 
@@ -79,6 +88,9 @@ def pd_show(*df, **kw):
     output_file = 'Result.xlsx' # What we are saving the template as
 
     # Copy Template.xlsx as Result.xlsx
+    if not os.path.isfile(template_file):
+      return
+
     copyfile(template_file, output_file)
     
     nmax = 10000

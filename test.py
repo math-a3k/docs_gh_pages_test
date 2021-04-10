@@ -6,7 +6,7 @@ import os, sys, time, datetime,inspect
 ##################################################################################################
 def test1():
    from utilmy import (os_makedirs, Session, global_verbosity, os_system ,
-                       pd_read_file, pd_show
+                       pd_read_file, pd_show, git_repo_root, 
                       )
 
    import pandas as pd, random
@@ -30,23 +30,52 @@ def test1():
    df = pd_read_file("data/parquet/fab*.*", n_pool=1 )
    print('pd_read_file csv ', df)
 
+   # the 1st
+   df = pd_read_file("data/parquet/fab*.*", n_pool=0 )
+
+   df = pd_read_file("data/parquet/fab*.*", n_pool=1000 )
+
+   df = pd_read_file("data/parquet/fac*.*")
+
+   df = pd_read_file("data/parquet/")
+   # the 2nd
+   pd_show()
+
+   # the 3rd
+   print(git_repo_root())
+
 
    #############################################################
    os_makedirs('ztmp/ztmp2/myfile.txt')
    os_makedirs('ztmp/ztmp3/ztmp4')
+   os_makedirs('/tmp/')
+   os_makedirs('/tmp/one/two')
+   os_makedirs('/tmp/myfile')
+   os_makedirs('/tmp/one/../mydir/')
+   os_makedirs('./tmp/test')
    os.system("ls ztmp")
 
 
    print('verbosity', global_verbosity(__file__, "config.json", 40,))
-
+   print('verbosity', global_verbosity('../', "config.json", 40,))
+   print('verbosity', global_verbosity(__file__))
 
    sess = Session("ztmp/session")
    sess.save('mysess', globals(), '01')
    os.system("ls ztmp/session")
 
+   sess.save('mysess', globals(), '02')
+   sess.show()
+
+   sess.load('mysess')   
+   sess.load('mysess', None, '02')   
+
 
    res = os_system( f" ls . ",  doprint=True) 
    print(res)
+
+   res = os_system( f" ls . ",  doprint=False) 
+   res = os_system( f" ls . ",  doprint=True) 
 
 
    print("success")
