@@ -5,9 +5,33 @@ import os, sys, time, datetime,inspect
 
 ##################################################################################################
 def test1():
-   from utilmy import (os_makedirs, Session, global_verbosity, os_system ,
-                       pd_read_file, pd_show, git_repo_root,
+   from utilmy import (Session,
+                       global_verbosity,
+
+
+
+
+                       os_makedirs,
+                       os_system ,
+                       os_removedirs,
+
+
+
+
+
+                       pd_read_file,
+                       pd_show,
+
+
+
+                       git_repo_root,
+                       git_current_hash,
+
+
                       )
+
+
+
 
    import pandas as pd, random
 
@@ -21,23 +45,27 @@ def test1():
    df.to_csv( "data/parquet/fabc05.csv", )
 
 
-   df = pd_read_file("data/parquet/fa*.gz", verbose=1, n_pool=3)
-   print('pd_read_file gzip ', df)
+   df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
+   print('pd_read_file gzip ', df1)
+   b = df1.mean()
+   a = df.mean()
 
-   df = pd_read_file("data/parquet/fab*.*", verbose=1)
+
+
+   df1 = pd_read_file("data/parquet/fab*.*", verbose=1)
    print('pd_read_file csv ', df)
 
-   df = pd_read_file("data/parquet/fab*.*", n_pool=1 )
+   df1 = pd_read_file("data/parquet/fab*.*", n_pool=1 )
    print('pd_read_file csv ', df)
 
    # the 1st
-   df = pd_read_file("data/parquet/fab*.*", n_pool=0 )
+   df1 = pd_read_file("data/parquet/fab*.*", n_pool=0 )
 
-   df = pd_read_file("data/parquet/fab*.*", n_pool=1000 )
+   df1 = pd_read_file("data/parquet/fab*.*", n_pool=1000 )
 
-   df = pd_read_file("data/parquet/fac*.*")
+   df1 = pd_read_file("data/parquet/fac*.*")
 
-   df = pd_read_file("data/parquet/")
+   df1 = pd_read_file("data/parquet/")
 
 
    # the 2nd
