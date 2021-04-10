@@ -56,7 +56,7 @@ jobs:
 
     - name: test_import
       run: |
-           python -c "import os; print(os)"
+           python -c "import os, pandas as pd; print(os)"
         
         
     ########  Runs All test
@@ -64,15 +64,18 @@ jobs:
       run: |
           mkdir -p    /home/runner/work/log_tmp/
           pip install -e .
-          chmod -R 777 . &&  python  test.py  test1
-          # chmod -R 777 . && cd utilmy && python  test.py  test1  
+          chmod -R 777 . &&  python  test.py
+          # chmod -R 777 . && cd utilmy && python  test.py  test1
+
+
     ########  Runs All test       
     - name: log_gitcommit
       run: |
            ls .
 
-# This Job will upload a Python Package using Twine when a release is created
 
+
+# This Job will upload a Python Package using Twine when a release is created
   deploy:
     needs : [build] # List of dependent Jobs 
     if: success()   # check if all previous (needs) dependent jobs were successfull  then only execute

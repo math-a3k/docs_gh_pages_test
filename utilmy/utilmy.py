@@ -24,6 +24,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
           ".txt"     : pd.read_csv,
           ".zip"     : pd.read_csv,
           ".gzip"    : pd.read_csv,
+          ".gz"      : pd.read_csv,
    }
   from multiprocessing.pool import ThreadPool
 

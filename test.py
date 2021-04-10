@@ -5,11 +5,33 @@ import os, sys, time, datetime,inspect
 
 ##################################################################################################
 def test1():
-   from utilmy import (os_makedirs, Session, global_verbosity, os_system  
-                       
+   from utilmy import (os_makedirs, Session, global_verbosity, os_system ,
+                       pd_read_file, pd_show
                       )
- 
 
+   import pandas as pd, random
+
+   ll = [[ random.random() for i in range(0,100)] for j in range(0,100) ]
+   df =pd.DataFrame(ll, columns = [i for i in range(0,100)])
+   os.makedirs("data/parquet/", exist_ok= True)
+   df.to_csv( "data/parquet/f01.csv.gz", compression='gzip' )
+   df.to_csv( "data/parquet/fa02.csv.gz", compression='gzip' )
+   df.to_csv( "data/parquet/fab03.csv.gz", compression='gzip' )
+   df.to_csv( "data/parquet/fabc04.csv.gz", compression='gzip' )
+   df.to_csv( "data/parquet/fabc05.csv", )
+
+
+   df = pd_read_file("data/parquet/fa*.gz", verbose=1, n_pool=3)
+   print('pd_read_file gzip ', df)
+
+   df = pd_read_file("data/parquet/fab*.*", verbose=1)
+   print('pd_read_file csv ', df)
+
+   df = pd_read_file("data/parquet/fab*.*" )
+   print('pd_read_file csv ', df, n_pool=1)
+
+
+   #############################################################
    os_makedirs('ztmp/ztmp2/myfile.txt')
    os_makedirs('ztmp/ztmp3/ztmp4')
    os.system("ls ztmp")
@@ -32,7 +54,7 @@ def test1():
 
 if __name__ == "__main__":
     import fire
-    fire.Fire()
+    fire.Fire(test1)
 
 
 
