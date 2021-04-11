@@ -5,6 +5,7 @@ import os, sys, time, datetime,inspect
 
 ##################################################################################################
 def test1():
+
    from utilmy import (Session,
                        global_verbosity,
 
@@ -59,6 +60,18 @@ def test1():
    df1 = pd_read_file("data/parquet/fab*.*", n_pool=1 )
    print('pd_read_file csv ', df)
 
+   df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
+   print('pd_read_file gzip ', df1)
+   b = df1.mean()
+   a = df.mean()
+   
+   print(a.equals(b))
+   # for index, val in a.iteritems():
+   #  print(f'{index}: {round( val, 5)}')
+
+   # for index, val in b.iteritems():
+   #  print(f'{index}: {round( val, 5)}')
+
    # the 1st
    df1 = pd_read_file("data/parquet/fab*.*", n_pool=0 )
 
@@ -84,7 +97,12 @@ def test1():
    os_makedirs('/tmp/myfile')
    os_makedirs('/tmp/one/../mydir/')
    os_makedirs('./tmp/test')
+    
    os.system("ls ztmp")
+
+
+   os_removedirs("ztmp/ztmp2")
+
 
 
    print('verbosity', global_verbosity(__file__, "config.json", 40,))
@@ -105,9 +123,8 @@ def test1():
    res = os_system( f" ls . ",  doprint=True)
    print(res)
 
-   res = os_system( f" ls . ",  doprint=False)
-   res = os_system( f" ls . ",  doprint=True)
-
+   res = os_system( f" ls . ",  doprint=False) 
+   res = os_system( f" ls . ",  doprint=True) 
 
    print("success")
 
