@@ -52,44 +52,9 @@ def test1():
    df.to_csv( "data/parquet/fab03.csv.gz",   compression='gzip' , index=False)
    df.to_csv( "data/parquet/fabc04.csv.gz",  compression='gzip' , index=False)
    df.to_csv( "data/parquet/fa0bc05.csv.gz", compression='gzip' , index=False)
-   df.to_csv( "data/parquet/fa0bc05.csv")
-   df.to_csv( "data/parquet/fa0bc05.txt")
 
    df1 = pd_read_file("data/parquet/fab*.*", verbose=1)
-   b = df1.mean()
-   a = df.mean()
    assert len(df1) == 2 * n0, f"df1 {len(df1) }, original {n0}"
-   assert len(a) == len(b), f"df2 mean {len(df1)}, original {ncols}"
-   
-   df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
-   print('pd_read_file gzip ', df1)
-   n1  = len(df1)
-   n0 = len(df)
-   assert round(5*n0,5) == round(n1,5), f"df1 {n1}, original {n0}"
-
-   df2 = pd_read_file("data/parquet/fabc04.csv.gz", verbose=1, n_pool=1)
-   b = df2.mean()
-   a = df.mean()
-   assert len(df2.columns) == ncols, f"df2 {len(df2.columns)}, original {ncols}"
-   assert len(a) == len(b), f"df2 mean {len(df2)}, original {ncols}"
-
-   df2 = pd_read_file("data/parquet/fabc06.zip", verbose=1, n_pool=1)
-   b = df2.mean()
-   a = df.mean()
-   assert len(df2.columns) == ncols, f"df2 {len(df2.columns)}, original {ncols}"
-   assert len(a) == len(b), f"df2 mean {len(df2)}, original {ncols}"
-
-   df2 = pd_read_file("data/parquet/fabc05.txt", verbose=1, n_pool=1)
-   b = df2.mean()
-   a = df.mean()
-   assert len(df2.columns) == ncols, f"df2 {len(df2.columns)}, original {ncols}"
-   assert len(a) == len(b), f"df2 mean {len(df2)}, original {ncols}"
-
-   df2 = pd_read_file("data/parquet/fabc05.cvs", verbose=1, n_pool=1)
-   b = df2.mean()
-   a = df.mean()
-   assert len(df2.columns) == ncols, f"df2 {len(df2.columns)}, original {ncols}"
-   assert len(a) == len(b), f"df2 mean {len(df2)}, original {ncols}"
 
 
    ##### Stresss n_pool
@@ -170,8 +135,5 @@ def test1():
 
 if __name__ == "__main__":
     test1()
-
-
-
 
 
