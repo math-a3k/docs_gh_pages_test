@@ -31,7 +31,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   if n_pool < 1:
     n_pool = 1
 
-  file_list = glob.glob(path_glob)
+  file_list = sorted( glob.glob(path_glob) )
   n_file    = len(file_list)
 
   if n_file <= 0:

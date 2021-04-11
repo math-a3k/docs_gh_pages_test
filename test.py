@@ -36,21 +36,26 @@ def test1():
 
    import pandas as pd, random
 
-   ll = [[ random.random() for i in range(0, 77)] for j in range(0,103) ]
-   df =pd.DataFrame(ll, columns = [i for i in range(0,100)])
+   ncols = 77
+   nrows = 100
+   ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+   df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
+
    os.makedirs("data/parquet/", exist_ok= True)
-   df.to_csv( "data/parquet/f01.csv.gz", compression='gzip' )
-   df.to_csv( "data/parquet/fa02.csv.gz", compression='gzip' )
-   df.to_csv( "data/parquet/fab03.csv.gz", compression='gzip' )
-   df.to_csv( "data/parquet/fabc04.csv.gz", compression='gzip' )
+   df.to_csv( "data/parquet/f01.csv.gz",    compression='gzip' , index=False)
+   df.to_csv( "data/parquet/fa02.csv.gz",   compression='gzip' , index=False)
+   df.to_csv( "data/parquet/fab03.csv.gz",  compression='gzip' , index=False)
+   df.to_csv( "data/parquet/fabc04.csv.gz", compression='gzip' , index=False)
    df.to_csv( "data/parquet/fabc05.csv", )
 
 
    df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
    print('pd_read_file gzip ', df1)
-   b = df1.mean()
-   a = df.mean()
-   assert round(a,5) == round(b,5), "Sum of loaded df <> Original df"
+   n1  = len(df1)
+   n0 = len(df)
+   assert round(5*n0,5) == round(n1,5), f"df1 {n1}, original {n0}"
+
+
 
 
 
