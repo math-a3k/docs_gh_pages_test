@@ -9,21 +9,13 @@ def test1():
    from utilmy import (Session,
                        global_verbosity,
 
-
-
-
                        os_makedirs,
                        os_system ,
                        os_removedirs,
 
 
-
-
-
                        pd_read_file,
                        pd_show,
-
-
 
                        git_repo_root,
                        git_current_hash,
@@ -32,37 +24,36 @@ def test1():
                       )
 
 
-
-
    import pandas as pd, random
 
-   ncols = 77
+   ncols = 7
    nrows = 100
    ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
    df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
+   n0 = len(df)
 
    os.makedirs("data/parquet/", exist_ok= True)
-   df.to_csv( "data/parquet/f01.csv.gz",    compression='gzip' , index=False)
-   df.to_csv( "data/parquet/fa02.csv.gz",   compression='gzip' , index=False)
+
+
+   ##### m_job , n_pool tests
+   ncopy = 20
+   for i in range(0, ncopy) :
+      df.to_csv( f"data/parquet/ppf_{i}.csv.gz",    compression='gzip' , index=False)
+
+   df1 = pd_read_file("data/parquet/ppf*.gz", verbose=1, n_pool= 7 )
+
+   assert len(df1) == ncopy * n0, f"df1 {len(df1) }, original {n0}"
+
+
+
+   df.to_csv( "data/parquet/fa0b2.csv.gz",   compression='gzip' , index=False)
    df.to_csv( "data/parquet/fab03.csv.gz",  compression='gzip' , index=False)
    df.to_csv( "data/parquet/fabc04.csv.gz", compression='gzip' , index=False)
-   df.to_csv( "data/parquet/fabc05.csv.gz", compression='gzip' , index=False)
-
-   df.to_csv( "data/parquet/fabc05.csv", )
-
-
-   df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
-   print('pd_read_file gzip ', df1)
-   n1  = len(df1)
-   n0 = len(df)
-   assert round(5*n0,5) == round(n1,5), f"df1 {n1}, original {n0}"
-
-
-
-
+   df.to_csv( "data/parquet/fa0bc05.csv.gz", compression='gzip' , index=False)
 
    df1 = pd_read_file("data/parquet/fab*.*", verbose=1)
-   print('pd_read_file csv ', df)
+   assert len(df1) == 2 * n0, f"df1 {len(df1) }, original {n0}"
+
 
    df1 = pd_read_file("data/parquet/fab*.*", n_pool=1 )
    print('pd_read_file csv ', df)
