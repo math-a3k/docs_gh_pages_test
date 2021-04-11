@@ -44,7 +44,7 @@ def test1():
    df1 = pd_read_file("data/parquet/ppf*.gz", verbose=1, n_pool= 7 )
 
    assert len(df1) == ncopy * n0,         f"df1 {len(df1) }, original {n0}"
-   assert df1.values.sum() == ncopy * s0, f"df1 {df.values.sum()}, original {ncopy*s0}"
+   assert round(df1.values.sum(), 5) == round(ncopy * s0,5), f"df1 {df1.values.sum()}, original {ncopy*s0}"
 
    
    ########################################################### 
