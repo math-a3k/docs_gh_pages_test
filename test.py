@@ -46,6 +46,8 @@ def test1():
    df.to_csv( "data/parquet/fa02.csv.gz",   compression='gzip' , index=False)
    df.to_csv( "data/parquet/fab03.csv.gz",  compression='gzip' , index=False)
    df.to_csv( "data/parquet/fabc04.csv.gz", compression='gzip' , index=False)
+   df.to_csv( "data/parquet/fabc05.csv.gz", compression='gzip' , index=False)
+
    df.to_csv( "data/parquet/fabc05.csv", )
 
 

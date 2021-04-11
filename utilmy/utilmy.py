@@ -33,14 +33,17 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
 
   file_list = sorted( glob.glob(path_glob) )
   n_file    = len(file_list)
+  if verbose: log(file_list)
 
   if n_file <= 0:
     m_job = 0
+
   elif n_file <= 2:
     m_job  = n_file
     n_pool = 1
+
   else  :
-    m_job  = n_file // n_pool  if n_file > 1 else 1
+    m_job  = 1 + n_file // n_pool  if n_file >= 3 else 1
 
   pool   = ThreadPool(processes=n_pool)
   if verbose : log(n_file,  n_file // n_pool )
@@ -48,16 +51,18 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   dfall  = pd.DataFrame()
   for j in range(0, m_job ) :
       if verbose : log("Pool", j, end=",")
-      job_list =[]
+      job_list = []
       for i in range(n_pool):
          if n_pool*j + i >= n_file  : break
          filei         = file_list[n_pool*j + i]
          ext           = os.path.splitext(filei)[1]
          if ext == None or ext == '':
            continue
+
          pd_reader_obj = readers[ext]
          if pd_reader_obj == None:
            continue
+
          job_list.append( pool.apply_async(pd_reader_obj, (filei, )))
          if verbose : log(j, filei)
 
