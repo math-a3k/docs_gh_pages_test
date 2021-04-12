@@ -85,6 +85,11 @@ def test1():
    os_makedirs('./tmp/test')
     
    os.system("ls ztmp")
+   
+   path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/","/tmp/one/ABC"]
+   for p in path:
+       f = os.path.exists(os.path.abspath(p))
+       assert  f == True, "path "
 
 
    os_removedirs("ztmp/ztmp2")
