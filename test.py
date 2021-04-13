@@ -66,6 +66,7 @@ def test1():
    ###################################################################################
    ###################################################################################
    print(git_repo_root())
+   assert not git_repo_root() == None, "err git repo"
 
 
 
@@ -86,13 +87,14 @@ def test1():
     
    os.system("ls ztmp")
    
-   path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/","/tmp/one/ABC"]
+   path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
    for p in path:
        f = os.path.exists(os.path.abspath(p))
        assert  f == True, "path "
 
 
-   os_removedirs("ztmp/ztmp2")
+   rev_stat = os_removedirs("ztmp/ztmp2")
+   assert not rev_stat == False, "cannot delete root folder"
 
    res = os_system( f" ls . ",  doprint=True)
    print(res)
@@ -110,6 +112,11 @@ def test1():
    print('verbosity', global_verbosity('../', "config.json", 40,))
    print('verbosity', global_verbosity(__file__))
 
+   verbosity = 40
+   gverbosity = global_verbosity(__file__)
+   assert gverbosity == 5, "incorrect default verbosity"
+   gverbosity =global_verbosity(__file__, "config.json", 40,)
+   assert gverbosity == verbosity, "incorrect verbosity "
 
 
 
