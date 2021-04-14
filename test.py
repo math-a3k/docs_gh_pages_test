@@ -138,6 +138,12 @@ def test1():
    sess.save('mysess', globals(), '02')
    sess.show()
 
+   import glob
+   flist = glob.glob("ztmp/session/" + "/*")
+   for f in flist:
+       t = os.path.exists(os.path.abspath(f))
+       assert  t == True, "session path not created "
+
    sess.load('mysess')
    sess.load('mysess', None, '02')
 
