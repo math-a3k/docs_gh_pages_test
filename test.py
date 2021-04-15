@@ -30,6 +30,8 @@ def test1():
    ncols = 7
    nrows = 100
    ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+   # Required for it to be detected in Session's globals()
+   global df
    df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
    n0 = len(df)
    s0 = df.values.sum()
@@ -142,6 +144,9 @@ def test1():
    for f in flist:
        t = os.path.exists(os.path.abspath(f))
        assert  t == True, "session path not created "
+
+       pickle_created = os.path.exists(os.path.abspath(f + "/df.pkl"))
+       assert  pickle_created == True, "Pickle file not created"
 
    sess.load('mysess')
    sess.load('mysess', None, '02')
