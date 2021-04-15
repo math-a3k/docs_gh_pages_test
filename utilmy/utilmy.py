@@ -176,6 +176,28 @@ def git_current_hash(mode='full'):
 
 
 ################################################################################################
+def os_platform_os():
+    #### get linux or windows
+    pass
+
+def os_platform_ncpu():
+    ### Nb of cpus cores
+    pass
+
+
+def os_platform_ramfree():
+    ### Max current free RAM
+    pass
+
+
+def os_platform_ip():
+    ### Max current free RAM
+    pass
+
+
+
+
+
 def os_removedirs(path):
     """
        issues with no empty Folder

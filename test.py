@@ -31,9 +31,7 @@ def test1():
 
                       )
 
-
-
-
+   ############################################################################
    import pandas as pd, random
 
    ncols = 77
@@ -54,9 +52,11 @@ def test1():
    df1 = pd_read_file("data/parquet/f*.gz", verbose=1, n_pool=3)
    print('pd_read_file gzip ', df1)
    n1  = len(df1)
-   n0 = len(df)
-   assert round(5*n0,5) == round(n1,5), f"df1 {n1}, original {n0}"
+   n0  = len(df)
 
+   assert 5*n0 == n1, f"df1 {n1}, original {n0}"
+
+   assert len(df.columns) == ncols, f"df1 {len(df.columns)}, original {ncols}"
 
 
 
