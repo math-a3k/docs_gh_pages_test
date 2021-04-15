@@ -101,8 +101,19 @@ def pd_show(df, nrows=100, **kw):
     os.system(cmd)
 
     
-    
+def to_float(x):
+    try :
+        return float(x)
+    except :
+        return float("NaN")
+      
+def to_int(x):
+    try :
+        return int(x)
+    except :
+        return float("NaN")    
 
+      
 ################################################################################################
 def global_verbosity(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
