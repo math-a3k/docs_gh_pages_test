@@ -84,7 +84,12 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   return dfall
 
 
-
+def pd_dtype_reduce(dfm) :
+    for c in dfm.columns :
+        if   dfm[c].dtype ==  np.dtype(np.int64) :   dfm[c] = dfm[c].astype( 'int32' )
+        elif dfm[c].dtype ==  np.dtype(np.float64) : dfm[c] = dfm[c].astype( 'float32' )
+    return dfm
+      
 
 def pd_show(df, nrows=100, **kw):
     """
@@ -202,7 +207,7 @@ def os_platform_ramfree():
 
 
 def os_platform_ip():
-    ### Max current free RAM
+    ### IP
     pass
 
 
