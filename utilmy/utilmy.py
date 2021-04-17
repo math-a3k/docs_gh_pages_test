@@ -7,9 +7,8 @@ import os, sys, time, datetime,inspect, json, yaml
 ################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
-                 col_filter_val=None,  **kw):
-  """
-      Read file in parallel from disk : very Fast
+                 col_filter_val=None, dtype=None,  **kw):
+  """  Read file in parallel from disk : very Fast
   :param path_glob:
   :return:
   """
@@ -20,6 +19,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   readers = {
           ".pkl"     : pd.read_pickle,
           ".parquet" : pd.read_parquet,
+          ".tsv"     : pd.read_csv,
           ".csv"     : pd.read_csv,
           ".txt"     : pd.read_csv,
           ".zip"     : pd.read_csv,
@@ -69,7 +69,8 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
       for i in range(n_pool):
         if i >= len(job_list): break
         dfi   = job_list[ i].get()
-
+        
+        if dtype is not None      : dfi   = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32') 
         if col_filter is not None : dfi = dfi[ dfi[col_filter] == col_filter_val ]
         if cols is not None :       dfi = dfi[cols]
         if nrows > 0        :       dfi = dfi.iloc[:nrows,:]
@@ -84,11 +85,15 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   return dfall
 
 
-def pd_dtype_reduce(dfm) :
+
+def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
     for c in dfm.columns :
-        if   dfm[c].dtype ==  np.dtype(np.int64) :   dfm[c] = dfm[c].astype( 'int32' )
-        elif dfm[c].dtype ==  np.dtype(np.float64) : dfm[c] = dfm[c].astype( 'float32' )
+        if dfm[c].dtype ==  np.dtype(np.int32) :       dfm[c] = dfm[c].astype( int0 )
+        elif   dfm[c].dtype ==  np.dtype(np.int64) :   dfm[c] = dfm[c].astype( int0 )  
+        elif dfm[c].dtype ==  np.dtype(np.float64) :   dfm[c] = dfm[c].astype( float0 )
     return dfm
+
+
       
 
 def pd_show(df, nrows=100, **kw):
