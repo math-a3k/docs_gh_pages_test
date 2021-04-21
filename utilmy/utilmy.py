@@ -201,13 +201,8 @@ def os_platform_os():
     #### get linux or windows
     pass
 
-def os_platform_ncpu():
+def os_cpu():
     ### Nb of cpus cores
-    pass
-
-
-def os_platform_ramfree():
-    ### Max current free RAM
     pass
 
 
@@ -215,6 +210,21 @@ def os_platform_ip():
     ### IP
     pass
 
+def os_memory():
+    """ Get node total memory and memory usage in linux
+    """
+    with open('/proc/meminfo', 'r') as mem:
+        ret = {}
+        tmp = 0
+        for i in mem:
+            sline = i.split()
+            if str(sline[0]) == 'MemTotal:':
+                ret['total'] = int(sline[1])
+            elif str(sline[0]) in ('MemFree:', 'Buffers:', 'Cached:'):
+                tmp += int(sline[1])
+        ret['free'] = tmp
+        ret['used'] = int(ret['total']) - int(ret['free'])
+    return ret
 
 
 
@@ -278,7 +288,6 @@ def os_makedirs(dir_or_file):
         os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
     else :
         os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
-
 
 
 
