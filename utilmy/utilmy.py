@@ -5,9 +5,6 @@ import os, sys, time, datetime,inspect, json, yaml
 
 
 ################################################################################################
-
-
-
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
                  col_filter_val=None, dtype=None,  **kw):
@@ -33,11 +30,11 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   #### File
   if isinstance(path_glob, list):  path_glob = ";".join(path_glob)
   path_glob  = path_glob.split(";")
-  flist_list = []
+  file_list = []
   for pi in path_glob :    
       file_list.extend( sorted( glob.glob(pi) ) )
-  flist_list = sorted(list(set(flist_list)))
-  n_file     = len(file_list)
+  file_list = sorted(list(set(file_list)))
+  n_file    = len(file_list)
   if verbose: log(file_list)
 
   #### Pool count
