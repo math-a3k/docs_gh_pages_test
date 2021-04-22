@@ -5,17 +5,19 @@ import os, sys, time, datetime,inspect, json, yaml
 
 
 ################################################################################################
+
+
+
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
                  col_filter_val=None, dtype=None,  **kw):
   """  Read file in parallel from disk : very Fast
-  :param path_glob:
+  :param path_glob: list of pattern, or sep by ";"
   :return:
   """
   import glob, gc,  pandas as pd, os
   def log(*s, **kw):
-      print(*s, flush=True, **kw)
-      
+      print(*s, flush=True, **kw)      
   readers = {
           ".pkl"     : pd.read_pickle,
           ".parquet" : pd.read_parquet,
@@ -28,26 +30,27 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
    }
   from multiprocessing.pool import ThreadPool
 
-  if n_pool < 1:
-    n_pool = 1
-
-  file_list = sorted( glob.glob(path_glob) )
-  n_file    = len(file_list)
+  #### File
+  if isinstance(path_glob, list):  path_glob = ";".join(path_glob)
+  path_glob  = path_glob.split(";")
+  flist_list = []
+  for pi in path_glob :    
+      file_list.extend( sorted( glob.glob(pi) ) )
+  flist_list = sorted(list(set(flist_list)))
+  n_file     = len(file_list)
   if verbose: log(file_list)
 
-  if n_file <= 0:
-    m_job = 0
-
+  #### Pool count
+  if n_pool < 1 :  n_pool = 1
+  if n_file <= 0:  m_job  = 0
   elif n_file <= 2:
     m_job  = n_file
     n_pool = 1
-
   else  :
     m_job  = 1 + n_file // n_pool  if n_file >= 3 else 1
-
-  pool   = ThreadPool(processes=n_pool)
   if verbose : log(n_file,  n_file // n_pool )
 
+  pool   = ThreadPool(processes=n_pool)
   dfall  = pd.DataFrame()
   for j in range(0, m_job ) :
       if verbose : log("Pool", j, end=",")
@@ -70,7 +73,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
         if i >= len(job_list): break
         dfi   = job_list[ i].get()
         
-        if dtype is not None      : dfi   = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32') 
+        if dtype is not None      : dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32') 
         if col_filter is not None : dfi = dfi[ dfi[col_filter] == col_filter_val ]
         if cols is not None :       dfi = dfi[cols]
         if nrows > 0        :       dfi = dfi.iloc[:nrows,:]
@@ -83,6 +86,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
 
   if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
   return dfall
+
 
 
 
