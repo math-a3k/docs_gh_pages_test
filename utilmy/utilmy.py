@@ -94,12 +94,19 @@ def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
         elif dfm[c].dtype ==  np.dtype(np.float64) :   dfm[c] = dfm[c].astype( float0 )
     return dfm
 
+  
 
+def pd_sample_strat(df, col, n):
+  ### Stratified sampling
+  n   = min(n, df[col].value_counts().min())
+  df_ = df.groupby(col).apply(lambda x: x.sample(n))
+  df_.index = df_.index.droplevel(0)
+  return df_
       
 
+  
 def pd_show(df, nrows=100, **kw):
-    """
-      Show from Dataframe
+    """ Show from Dataframe
     """
     import pandas as pd
     fpath = 'ztmp/ztmp_dataframe.csv'
