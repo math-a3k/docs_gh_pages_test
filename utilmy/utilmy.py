@@ -7,7 +7,7 @@ import os, sys, time, datetime,inspect, json, yaml
 ################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
-                 col_filter_val=None,  **kw):
+                 col_filter_val=None,sep=",",  **kw):
   """
       Read file in parallel from disk : very Fast
   :param path_glob:
@@ -63,6 +63,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
          if pd_reader_obj == None:
            continue
 
+         ### TODO : use with kewyword arguments
          job_list.append( pool.apply_async(pd_reader_obj, (filei, )))
          if verbose : log(j, filei)
 
