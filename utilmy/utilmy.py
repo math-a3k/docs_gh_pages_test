@@ -127,6 +127,48 @@ def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.05, q95=0.95, show=False) 
     plt.close()
 
 
+
+
+def pd_coltype_unique(df,  col_continuous=[]):
+    """Learns the number of categories in each variable and standardizes the data.
+        ----------
+        data: pd.DataFrame
+        continuous_ids: list of ints
+            List containing the indices of known continuous variables. Useful for
+            discrete data like age, which is better modeled as continuous.
+        Returns
+        -------
+        ncat:  number of categories of each variable. -1 if the variable is  continuous.
+    """
+    import numpy as np
+    def gef_is_continuous(data, dtype):
+        """ Returns true if data was sampled from a continuous variables, and false
+        """
+        if dtype == "Object":
+            return False
+
+        observed = data[~np.isnan(data)]  # not consider missing values for this.
+        rules = [np.min(observed) < 0,
+                 np.sum((observed) != np.round(observed)) > 0,
+                 len(np.unique(observed)) > min(30, len(observed)/3)]
+        if any(rules):
+            return True
+        else:
+            return False
+
+    cols = list(df.columns)
+    ncat = {}
+
+    for coli in cols:
+        is_cont = gef_is_continuous( df[coli].sample( n=min(3000, len(df)) ).values , dtype = df[coli].dtype )
+        if coli in col_continuous or is_cont:
+            ncat[coli] =  -1
+        else:
+            ncat[coli] =  len( df[coli].unique() )
+    return ncat
+
+
+
   
 def pd_show(df, nrows=100, **kw):
     """ Show from Dataframe
