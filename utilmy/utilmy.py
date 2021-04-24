@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, json, yaml
 
-
-
 ################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
@@ -87,15 +85,14 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
 
 
 
-
 def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
+    import numpy as np
     for c in dfm.columns :
         if dfm[c].dtype ==  np.dtype(np.int32) :       dfm[c] = dfm[c].astype( int0 )
         elif   dfm[c].dtype ==  np.dtype(np.int64) :   dfm[c] = dfm[c].astype( int0 )  
         elif dfm[c].dtype ==  np.dtype(np.float64) :   dfm[c] = dfm[c].astype( float0 )
     return dfm
 
-  
 
 def pd_sample_strat(df, col, n):
   ### Stratified sampling
@@ -103,7 +100,32 @@ def pd_sample_strat(df, col, n):
   df_ = df.groupby(col).apply(lambda x: x.sample(n))
   df_.index = df_.index.droplevel(0)
   return df_
-      
+
+
+def pd_cartesian(df1, df2) :
+  ### Cartesian preoduct
+  import pandas as pd
+  col1 =  list(df1.columns)
+  col2 =  list(df2.columns)
+  df1['xxx'] = 1
+  df2['xxx'] = 1
+  df3 = pd.merge(df1, df2,on='xxx')[ col1 + col2 ]
+  del df3['xxx']
+  return df3
+
+
+def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.05, q95=0.95, show=False) :
+    ### Plot histogram
+    from matplotlib import pyplot as plt
+    import numpy as np, os
+    q0 = dfi.quantile(q5)
+    q1 = dfi.quantile(q95)
+    dfi.hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
+    os.makedirs(os.path.dirname(path_save), exist_ok=True)
+    if path_save is not None : plt.savefig( path_save );
+    if show : plt.show();
+    plt.close()
+
 
   
 def pd_show(df, nrows=100, **kw):
@@ -119,7 +141,37 @@ def pd_show(df, nrows=100, **kw):
     cmd = f"notepad.exe {fpath}"
     os.system(cmd)
 
-    
+
+
+def pd_plot_multi(data, cols=None, spacing=.1, **kwargs):
+    from pandas import plotting
+    from pandas.plotting import _matplotlib
+
+    # Get default color style from pandas - can be changed to any other color list
+    if cols is None: cols = data.columns
+    if len(cols) == 0: return
+    colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols))
+
+    # First axis
+    ax = data.loc[:, cols[0]].plot(label=cols[0], color=colors[0], **kwargs)
+    ax.set_ylabel(ylabel=cols[0])
+    lines, labels = ax.get_legend_handles_labels()
+
+    for n in range(1, len(cols)):
+        # Multiple y-axes
+        ax_new = ax.twinx()
+        ax_new.spines['right'].set_position(('axes', 1 + spacing * (n - 1)))
+        data.loc[:, cols[n]].plot(ax=ax_new, label=cols[n], color=colors[n % len(colors)], **kwargs)
+        ax_new.set_ylabel(ylabel=cols[n])
+        # Proper legend position
+        line, label = ax_new.get_legend_handles_labels()
+        lines += line
+        labels += label
+
+    ax.legend(lines, labels, loc=0)
+    return ax
+
+################################################################################################
 def to_float(x):
     try :
         return float(x)
@@ -131,6 +183,7 @@ def to_int(x):
         return int(x)
     except :
         return float("NaN")    
+
 
       
 ################################################################################################
