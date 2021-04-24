@@ -7,19 +7,18 @@ import os, sys, time, datetime,inspect, json, yaml
 ################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
-                 col_filter_val=None,sep=",",  **kw):
-  """
-      Read file in parallel from disk : very Fast
-  :param path_glob:
+                 col_filter_val=None, dtype=None,  **kw):
+  """  Read file in parallel from disk : very Fast
+  :param path_glob: list of pattern, or sep by ";"
   :return:
   """
   import glob, gc,  pandas as pd, os
   def log(*s, **kw):
-      print(*s, flush=True, **kw)
-      
+      print(*s, flush=True, **kw)      
   readers = {
           ".pkl"     : pd.read_pickle,
           ".parquet" : pd.read_parquet,
+          ".tsv"     : pd.read_csv,
           ".csv"     : pd.read_csv,
           ".txt"     : pd.read_csv,
           ".zip"     : pd.read_csv,
@@ -28,26 +27,27 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
    }
   from multiprocessing.pool import ThreadPool
 
-  if n_pool < 1:
-    n_pool = 1
-
-  file_list = sorted( glob.glob(path_glob) )
+  #### File
+  if isinstance(path_glob, list):  path_glob = ";".join(path_glob)
+  path_glob  = path_glob.split(";")
+  file_list = []
+  for pi in path_glob :    
+      file_list.extend( sorted( glob.glob(pi) ) )
+  file_list = sorted(list(set(file_list)))
   n_file    = len(file_list)
   if verbose: log(file_list)
 
-  if n_file <= 0:
-    m_job = 0
-
+  #### Pool count
+  if n_pool < 1 :  n_pool = 1
+  if n_file <= 0:  m_job  = 0
   elif n_file <= 2:
     m_job  = n_file
     n_pool = 1
-
   else  :
     m_job  = 1 + n_file // n_pool  if n_file >= 3 else 1
-
-  pool   = ThreadPool(processes=n_pool)
   if verbose : log(n_file,  n_file // n_pool )
 
+  pool   = ThreadPool(processes=n_pool)
   dfall  = pd.DataFrame()
   for j in range(0, m_job ) :
       if verbose : log("Pool", j, end=",")
@@ -70,7 +70,8 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
       for i in range(n_pool):
         if i >= len(job_list): break
         dfi   = job_list[ i].get()
-
+        
+        if dtype is not None      : dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32') 
         if col_filter is not None : dfi = dfi[ dfi[col_filter] == col_filter_val ]
         if cols is not None :       dfi = dfi[cols]
         if nrows > 0        :       dfi = dfi.iloc[:nrows,:]
@@ -87,9 +88,26 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
 
 
 
+def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
+    for c in dfm.columns :
+        if dfm[c].dtype ==  np.dtype(np.int32) :       dfm[c] = dfm[c].astype( int0 )
+        elif   dfm[c].dtype ==  np.dtype(np.int64) :   dfm[c] = dfm[c].astype( int0 )  
+        elif dfm[c].dtype ==  np.dtype(np.float64) :   dfm[c] = dfm[c].astype( float0 )
+    return dfm
+
+  
+
+def pd_sample_strat(df, col, n):
+  ### Stratified sampling
+  n   = min(n, df[col].value_counts().min())
+  df_ = df.groupby(col).apply(lambda x: x.sample(n))
+  df_.index = df_.index.droplevel(0)
+  return df_
+      
+
+  
 def pd_show(df, nrows=100, **kw):
-    """
-      Show from Dataframe
+    """ Show from Dataframe
     """
     import pandas as pd
     fpath = 'ztmp/ztmp_dataframe.csv'
@@ -192,20 +210,30 @@ def os_platform_os():
     #### get linux or windows
     pass
 
-def os_platform_ncpu():
+def os_cpu():
     ### Nb of cpus cores
     pass
 
 
-def os_platform_ramfree():
-    ### Max current free RAM
-    pass
-
-
 def os_platform_ip():
-    ### Max current free RAM
+    ### IP
     pass
 
+def os_memory():
+    """ Get node total memory and memory usage in linux
+    """
+    with open('/proc/meminfo', 'r') as mem:
+        ret = {}
+        tmp = 0
+        for i in mem:
+            sline = i.split()
+            if str(sline[0]) == 'MemTotal:':
+                ret['total'] = int(sline[1])
+            elif str(sline[0]) in ('MemFree:', 'Buffers:', 'Cached:'):
+                tmp += int(sline[1])
+        ret['free'] = tmp
+        ret['used'] = int(ret['total']) - int(ret['free'])
+    return ret
 
 
 
@@ -269,7 +297,6 @@ def os_makedirs(dir_or_file):
         os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
     else :
         os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
-
 
 
 
