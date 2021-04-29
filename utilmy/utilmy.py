@@ -504,7 +504,38 @@ def test():
                        
                       )
 
+###################################################################################################
+
+
+# a function that removes list of elements and adds an element from a set 
+def add_remove(set_, to_remove, to_add):
+    result_temp = set_.copy()
+    for element in to_remove:
+        result_temp.remove(element)
+    result_temp.add(to_add)
+    return result_temp
+
+def optimized_merge(df1, df2, merge_column):
+    import pandas as pd
+    df1, df2 = pd.to_DataFrame(df1), pd.to_DataFrame(df2)
+    df2 = df2[df2[merge_column].isin(df1[merge_column])]
+    return df1.merge(df2, on=merge_column)
   
+def optimize_objects(df, datetime_features):
+  import pandas as pd
+  if isinstance(df, pd.DataFrame):
+    for col in df.select_dtypes(include=['object']):
+        if col not in datetime_features:
+            num_unique_values = len(df[col].unique())
+            num_total_values = len(df[col])
+            if float(num_unique_values) / num_total_values < 0.5:
+                df[col] = df[col].astype('category')
+        else:
+            df[col] = pd.to_datetime(df[col])
+    return df
+  else:
+    print("convert to dataframe")
+###################################################################################################
 if __name__ == "__main__":
     import fire
     fire.Fire()
