@@ -87,14 +87,11 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   return dfall
 
 
-
-def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
-    import numpy as np
-    for c in dfm.columns :
-        if dfm[c].dtype ==  np.dtype(np.int32) :       dfm[c] = dfm[c].astype( int0 )
-        elif   dfm[c].dtype ==  np.dtype(np.int64) :   dfm[c] = dfm[c].astype( int0 )  
-        elif dfm[c].dtype ==  np.dtype(np.float64) :   dfm[c] = dfm[c].astype( float0 )
-    return dfm
+def pd_merge(df1, df2, cols_merge):
+    import pandas as pd
+    df1, df2 = pd.to_DataFrame(df1), pd.to_DataFrame(df2)
+    df2 = df2[df2[cols_merge].isin(df1[cols_merge])]
+    return df1.merge(df2, on=cols_merge)
 
 
 def pd_sample_strat(df, col, n):
@@ -128,6 +125,15 @@ def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.05, q95=0.95, show=False) 
     if path_save is not None : plt.savefig( path_save );
     if show : plt.show();
     plt.close()
+
+
+def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
+    import numpy as np
+    for c in dfm.columns :
+        if dfm[c].dtype ==  np.dtype(np.int32) :       dfm[c] = dfm[c].astype( int0 )
+        elif   dfm[c].dtype ==  np.dtype(np.int64) :   dfm[c] = dfm[c].astype( int0 )
+        elif dfm[c].dtype ==  np.dtype(np.float64) :   dfm[c] = dfm[c].astype( float0 )
+    return dfm
 
 
 def pd_dtype_info(df, col_continuous=[]):
@@ -169,7 +175,25 @@ def pd_dtype_info(df, col_continuous=[]):
     return ncat
 
 
-  
+def pd_dtype_to_category(df, col_exclude, treshold=0.5):
+  """
+    Convert string to category
+  """
+  import pandas as pd
+  if isinstance(df, pd.DataFrame):
+    for col in df.select_dtypes(include=['object']):
+        if col not in col_exclude :
+            num_unique_values = len(df[col].unique())
+            num_total_values  = len(df[col])
+            if float(num_unique_values) / num_total_values < treshold:
+                df[col] = df[col].astype('category')
+        else:
+            df[col] = pd.to_datetime(df[col])
+    return df
+  else:
+    print("Not dataframe")
+
+
 def pd_show(df, nrows=100, **kw):
     """ Show from Dataframe
     """
@@ -182,7 +206,6 @@ def pd_show(df, nrows=100, **kw):
     ## In Windows
     cmd = f"notepad.exe {fpath}"
     os.system(cmd)
-
 
 
 def pd_plot_multi(data, cols=None, spacing=.1, **kwargs):
@@ -214,34 +237,10 @@ def pd_plot_multi(data, cols=None, spacing=.1, **kwargs):
     return ax
 
 
-def pd_merge(df1, df2, cols_merge):
-    import pandas as pd
-    df1, df2 = pd.to_DataFrame(df1), pd.to_DataFrame(df2)
-    df2 = df2[df2[cols_merge].isin(df1[cols_merge])]
-    return df1.merge(df2, on=cols_merge)
 
 
 
-def pd_dtype_to_category(df, col_exclude, treshold=0.5):
-  """
-    Convert string to category
-  """
-  import pandas as pd
-  if isinstance(df, pd.DataFrame):
-    for col in df.select_dtypes(include=['object']):
-        if col not in col_exclude :
-            num_unique_values = len(df[col].unique())
-            num_total_values  = len(df[col])
-            if float(num_unique_values) / num_total_values < treshold:
-                df[col] = df[col].astype('category')
-        else:
-            df[col] = pd.to_datetime(df[col])
-    return df
-  else:
-    print("Not dataframe")
 
-
-################################################################################################
 ################################################################################################
 def np_add_remove(set_, to_remove, to_add):
     # a function that removes list of elements and adds an element from a set
@@ -257,7 +256,8 @@ def to_float(x):
         return float(x)
     except :
         return float("NaN")
-      
+
+
 def to_int(x):
     try :
         return int(x)
@@ -267,6 +267,8 @@ def to_int(x):
 
       
 ################################################################################################
+
+
 def global_verbosity(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
     """ Get global verbosity
@@ -404,6 +406,7 @@ def os_get_function_name():
 
 
 def os_getcwd():
+    ## Windows Path normalized
     root = os.path.abspath(os.getcwd()).replace("\\", "/") + "/"
     return  root
 
@@ -531,16 +534,6 @@ class dict_to_namespace(object):
 
 
 
-
-
-
-
-
-##################################################################################################
-def test():
-   from utilmy import (os_makedirs, Session, global_verbosity, os_system  
-                       
-                      )
 
 
 ###################################################################################################
