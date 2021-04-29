@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, json, yaml
 
+
+
+
 ################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
@@ -127,9 +130,7 @@ def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.05, q95=0.95, show=False) 
     plt.close()
 
 
-
-
-def pd_coltype_unique(df,  col_continuous=[]):
+def pd_dtype_info(df, col_continuous=[]):
     """Learns the number of categories in each variable and standardizes the data.
         ----------
         data: pd.DataFrame
@@ -166,7 +167,6 @@ def pd_coltype_unique(df,  col_continuous=[]):
         else:
             ncat[coli] =  len( df[coli].unique() )
     return ncat
-
 
 
   
@@ -213,7 +213,44 @@ def pd_plot_multi(data, cols=None, spacing=.1, **kwargs):
     ax.legend(lines, labels, loc=0)
     return ax
 
+
+def pd_merge(df1, df2, merge_column):
+    import pandas as pd
+    df1, df2 = pd.to_DataFrame(df1), pd.to_DataFrame(df2)
+    df2 = df2[df2[merge_column].isin(df1[merge_column])]
+    return df1.merge(df2, on=merge_column)
+
+
+def pd_dtype_to_category(df, col_exclude, treshold=0.5):
+  """
+    Convert string to category
+  """
+  import pandas as pd
+  if isinstance(df, pd.DataFrame):
+    for col in df.select_dtypes(include=['object']):
+        if col not in col_exclude :
+            num_unique_values = len(df[col].unique())
+            num_total_values  = len(df[col])
+            if float(num_unique_values) / num_total_values < treshold:
+                df[col] = df[col].astype('category')
+        else:
+            df[col] = pd.to_datetime(df[col])
+    return df
+  else:
+    print("Not dataframe")
+
+
 ################################################################################################
+################################################################################################
+def np_add_remove(set_, to_remove, to_add):
+    # a function that removes list of elements and adds an element from a set
+    result_temp = set_.copy()
+    for element in to_remove:
+        result_temp.remove(element)
+    result_temp.add(to_add)
+    return result_temp
+
+
 def to_float(x):
     try :
         return float(x)
@@ -395,7 +432,7 @@ def os_makedirs(dir_or_file):
 
 
 
-
+pd_
 
 
 
@@ -504,37 +541,7 @@ def test():
                        
                       )
 
-###################################################################################################
 
-
-# a function that removes list of elements and adds an element from a set 
-def add_remove(set_, to_remove, to_add):
-    result_temp = set_.copy()
-    for element in to_remove:
-        result_temp.remove(element)
-    result_temp.add(to_add)
-    return result_temp
-
-def optimized_merge(df1, df2, merge_column):
-    import pandas as pd
-    df1, df2 = pd.to_DataFrame(df1), pd.to_DataFrame(df2)
-    df2 = df2[df2[merge_column].isin(df1[merge_column])]
-    return df1.merge(df2, on=merge_column)
-  
-def optimize_objects(df, datetime_features):
-  import pandas as pd
-  if isinstance(df, pd.DataFrame):
-    for col in df.select_dtypes(include=['object']):
-        if col not in datetime_features:
-            num_unique_values = len(df[col].unique())
-            num_total_values = len(df[col])
-            if float(num_unique_values) / num_total_values < 0.5:
-                df[col] = df[col].astype('category')
-        else:
-            df[col] = pd.to_datetime(df[col])
-    return df
-  else:
-    print("convert to dataframe")
 ###################################################################################################
 if __name__ == "__main__":
     import fire
