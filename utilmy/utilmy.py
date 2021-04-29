@@ -214,11 +214,11 @@ def pd_plot_multi(data, cols=None, spacing=.1, **kwargs):
     return ax
 
 
-def pd_merge(df1, df2, merge_column):
+def pd_merge(df1, df2, cols_merge):
     import pandas as pd
     df1, df2 = pd.to_DataFrame(df1), pd.to_DataFrame(df2)
-    df2 = df2[df2[merge_column].isin(df1[merge_column])]
-    return df1.merge(df2, on=merge_column)
+    df2 = df2[df2[cols_merge].isin(df1[cols_merge])]
+    return df1.merge(df2, on=cols_merge)
 
 
 
