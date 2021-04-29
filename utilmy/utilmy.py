@@ -221,6 +221,7 @@ def pd_merge(df1, df2, merge_column):
     return df1.merge(df2, on=merge_column)
 
 
+
 def pd_dtype_to_category(df, col_exclude, treshold=0.5):
   """
     Convert string to category
