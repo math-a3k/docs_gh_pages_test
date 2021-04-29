@@ -1,4 +1,4 @@
-pandas
-numpy
 fire
+numpy
+pandas
 
