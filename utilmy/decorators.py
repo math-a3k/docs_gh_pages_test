@@ -4,6 +4,7 @@ import os
 import errno
 import signal
 from functools import wraps
+import time
 
 
 class _TimeoutError(Exception):
@@ -87,3 +88,18 @@ def timeout(seconds=10, error_message=os.strerror(errno.ETIME)):
         return wraps(func)(wrapper)
 
     return decorator
+
+
+def timer(func):
+    """
+    Decorator to show the execution time of a function or a method in a class.
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter()
+        result = func(*args, **kwargs)
+        end = time.perf_counter()
+        print(f'function {func.__name__} finished in: {(end - start):.2f} s')
+        return result
+
+    return wrapper
