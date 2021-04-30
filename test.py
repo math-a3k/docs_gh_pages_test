@@ -23,7 +23,7 @@ def test1():
 
 
                       )
-
+   from utilmy.decorators import timer
    ############################################################################
    import pandas as pd, random
 
@@ -151,8 +151,18 @@ def test1():
    sess.load('mysess')
    sess.load('mysess', None, '02')
 
+   @timer
+   def dummy_func():
+       time.sleep(2)
 
+   class DummyClass:
+       @timer
+       def method(self):
+           time.sleep(3)
 
+   dummy_func()
+   a = DummyClass()
+   a.method()
 
 
 if __name__ == "__main__":
