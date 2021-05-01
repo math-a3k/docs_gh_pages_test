@@ -177,7 +177,19 @@ def test1():
        print(x)
 
 
+def test_thread(*args):
+
+    def test_print(*args):
+        print(args[0]*args[0])
+        return args[0]*args[0]
+
+    from utilmy.decorators import os_multithread
+    assert os_multithread(function1=(test_print, (5,)),
+                          function2=(test_print, (4,)),
+                          function3=(test_print, (2,)))
+
+
 if __name__ == "__main__":
     test1()
-
+    test_thread()
 
