@@ -194,6 +194,14 @@ def pd_dtype_to_category(df, col_exclude, treshold=0.5):
     print("Not dataframe")
 
     
+def pd_del(df, cols:list):
+    ### Delete columns without errors
+    for col in cols :
+        try:
+            del df[col]
+        except : pass
+    return df        
+
 
 def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
     df2 = pd.DataFrame()
