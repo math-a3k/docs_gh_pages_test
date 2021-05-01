@@ -193,6 +193,55 @@ def pd_dtype_to_category(df, col_exclude, treshold=0.5):
   else:
     print("Not dataframe")
 
+    
+
+def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
+    df2 = pd.DataFrame()
+    colsnum = pd_cols_getcontinuous(df, cols_exclude) 
+    for ci in df.columns :
+        if ci in colsnum :
+           print(f'adding noise {ci}') 
+           sigma = level * (df[ci].quantile(0.95) - df[ci].quantile(0.05)  )
+           df2[ci] = df[ci] + np.random.normal(0.0, sigma, [len(df)]) 
+        else :
+           df2[ci] = df[ci]   
+    return df2 
+
+
+def pd_cols_getcontinuous(df, cols_exclude:list=[], nsample=-1) :
+    ### Return continuous variable
+    clist = {}
+    for ci in df.columns :
+        ctype   = df[ci].dtype 
+        if nsample == -1 :
+            nunique = len(df[ci].unique())  
+        else :
+            nunique = len(df.sample(n= nsample, replace=True)[ci].unique())  
+        if 'float' in  str(ctype) and ci not in cols_exclude and nunique > 5 :
+           clist[ci] = 1
+        else :
+           clist[ci] = nunique
+    return clist       
+
+
+def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
+    ### Return cadinat=lity
+    clist = {}
+    for ci in df.columns :
+        ctype   = df[ci].dtype 
+        if nsample == -1 :
+            nunique = len(df[ci].unique())  
+        else :
+            nunique = len(df.sample(n= nsample, replace=True)[ci].unique())  
+
+        if 'float' in  str(ctype) and ci not in cols_exclude and nunique > 5 :
+           clist[ci] = 0
+        else :
+           clist[ci] = nunique
+
+    return clist       
+    
+    
 
 def pd_show(df, nrows=100, **kw):
     """ Show from Dataframe
