@@ -599,12 +599,12 @@ class dict_to_namespace(object):
 profiler = Profiler()
 
 
-def start_profiler():
+def profiler_start():
     global profiler
     profiler.start()
 
 
-def stop_profiler():
+def profiler_stop():
     global profiler
     profiler.stop()
     print(profiler.output_text(unicode=True, color=True))

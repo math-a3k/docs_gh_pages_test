@@ -21,8 +21,8 @@ def test1():
                        git_repo_root,
                        git_current_hash,
 
-                       start_profiler,
-                       stop_profiler,
+                       profiler_start,
+                       profiler_stop,
                        os_platform_os
                       )
    from utilmy.decorators import timer, profiled, context_profiler
@@ -179,9 +179,9 @@ def test1():
        print(x)
 
    ###################################################################################
-   start_profiler()
+   profiler_start()
    print(sum(range(1000000)))
-   stop_profiler()
+   profiler_stop()
 
    assert os_platform_os() == sys.platform
 
