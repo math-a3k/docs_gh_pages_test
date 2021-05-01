@@ -1,6 +1,7 @@
 # pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, json, yaml
+from pyinstrument import Profiler
 
 
 
@@ -400,11 +401,12 @@ def git_current_hash(mode='full'):
 ################################################################################################
 def os_platform_os():
     #### get linux or windows
-    pass
+    return sys.platform
+
 
 def os_cpu():
     ### Nb of cpus cores
-    pass
+    return os.cpu_count()
 
 
 def os_platform_ip():
@@ -592,6 +594,20 @@ class dict_to_namespace(object):
 
 
 
+
+###################################################################################################
+profiler = Profiler()
+
+
+def start_profiler():
+    global profiler
+    profiler.start()
+
+
+def stop_profiler():
+    global profiler
+    profiler.stop()
+    print(profiler.output_text(unicode=True, color=True))
 
 ###################################################################################################
 if __name__ == "__main__":
