@@ -23,7 +23,7 @@ def test1():
 
 
                       )
-   from utilmy.decorators import timer
+   from utilmy.decorators import timer, profiled, context_profiler
    ############################################################################
    import pandas as pd, random
 
@@ -47,8 +47,8 @@ def test1():
    assert len(df1) == ncopy * n0,         f"df1 {len(df1) }, original {n0}"
    assert round(df1.values.sum(), 5) == round(ncopy * s0,5), f"df1 {df1.values.sum()}, original {ncopy*s0}"
 
-   
-   ########################################################### 
+
+   ###########################################################
    df.to_csv( "data/parquet/fa0b2.csv.gz",   compression='gzip' , index=False)
    df.to_csv( "data/parquet/fab03.csv.gz",   compression='gzip' , index=False)
    df.to_csv( "data/parquet/fabc04.csv.gz",  compression='gzip' , index=False)
@@ -85,9 +85,9 @@ def test1():
    os_makedirs('/tmp/myfile')
    os_makedirs('/tmp/one/../mydir/')
    os_makedirs('./tmp/test')
-    
+
    os.system("ls ztmp")
-   
+
    path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
    for p in path:
        f = os.path.exists(os.path.abspath(p))
@@ -99,7 +99,7 @@ def test1():
 
    res = os_system( f" ls . ",  doprint=True)
    print(res)
-   res = os_system( f" ls . ",  doprint=False) 
+   res = os_system( f" ls . ",  doprint=False)
 
 
 
@@ -108,7 +108,7 @@ def test1():
 
 
    ###################################################################################
-   ###################################################################################   
+   ###################################################################################
    print('verbosity', global_verbosity(__file__, "config.json", 40,))
    print('verbosity', global_verbosity('../', "config.json", 40,))
    print('verbosity', global_verbosity(__file__))
@@ -163,6 +163,18 @@ def test1():
    dummy_func()
    a = DummyClass()
    a.method()
+
+
+   ###################################################################################
+   @profiled
+   def profiled_sum():
+       return sum(range(100000))
+
+   profiled_sum()
+
+   with context_profiler():
+       x = sum(range(1000000))
+       print(x)
 
 
 if __name__ == "__main__":
