@@ -143,3 +143,32 @@ def profiled(func):
         print(profiler.output_text(unicode=True, color=True))
         return result
     return wrapper
+
+
+class ThreadWithResult(Thread):
+    def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, *, daemon=None):
+        def function():
+            self.result = target(*args, **kwargs)
+        super().__init__(group=group, target=function, name=name, daemon=daemon)
+
+
+def os_multithread(**kwargs):
+    """
+    Creating n number of threads, starting them
+    and waiting for their subsequent completion
+    """
+
+    list_of_threads = []
+    for thread in kwargs.values():
+        t = ThreadWithResult(target=thread[0], args=thread[1])
+        list_of_threads.append(t)
+
+    for thread in list_of_threads:
+        thread.start()
+
+    results = []
+    for thread, keys in zip(list_of_threads, kwargs.keys()):
+        thread.join()
+        results.append((keys, thread.result))
+
+    return results
