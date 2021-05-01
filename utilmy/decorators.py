@@ -5,6 +5,7 @@ import errno
 import signal
 from functools import wraps
 import time
+from contextlib import contextmanager
 
 
 class _TimeoutError(Exception):
@@ -102,4 +103,43 @@ def timer(func):
         print(f'function {func.__name__} finished in: {(end - start):.2f} s')
         return result
 
+    return wrapper
+
+
+@contextmanager
+def context_profiler():
+    """
+    Context Manager the will profile code inside it's bloc.
+    And print the result of profiler.
+    Example:
+        with context_profiler():
+            # code to profile here
+
+    """
+    from pyinstrument import Profiler
+    profiler = Profiler()
+    profiler.start()
+    try:
+        yield profiler
+    except Exception as e:
+        raise e
+    finally:
+        profiler.stop()
+        print(profiler.output_text(unicode=True, color=True))
+
+
+def profiled(func):
+    """
+    A decorator that will profile a function
+    And print the result of profiler.
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        from pyinstrument import Profiler
+        profiler = Profiler()
+        profiler.start()
+        result = func(*args, **kwargs)
+        profiler.stop()
+        print(profiler.output_text(unicode=True, color=True))
+        return result
     return wrapper
