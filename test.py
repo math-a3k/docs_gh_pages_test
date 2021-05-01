@@ -5,28 +5,13 @@ import os, sys, time, datetime,inspect
 
 #########################################################################################
 def test1():
-   from utilmy import (Session,
-                       global_verbosity,
-
-
-                       os_makedirs,
-                       os_system ,
-                       os_removedirs,
-
-
-                       pd_read_file,
+   from utilmy import ( 
                        pd_show,
-
-
-                       git_repo_root,
                        git_current_hash,
-
-                       profiler_start,
-                       profiler_stop,
-                       os_platform_os
                       )
-   from utilmy.decorators import timer, profiled, context_profiler
+
    ############################################################################
+   from utilmy import pd_read_file
    import pandas as pd, random
 
    ncols = 7
@@ -68,33 +53,27 @@ def test1():
 
    ###################################################################################
    ###################################################################################
+   from utilmy import git_repo_root
    print(git_repo_root())
    assert not git_repo_root() == None, "err git repo"
 
 
 
-
-
-
-
-
    ###################################################################################
    ###################################################################################
+   from utilmy import os_makedirs, os_system, os_removedirs
    os_makedirs('ztmp/ztmp2/myfile.txt')
    os_makedirs('ztmp/ztmp3/ztmp4')
-   os_makedirs('/tmp/')
    os_makedirs('/tmp/one/two')
    os_makedirs('/tmp/myfile')
    os_makedirs('/tmp/one/../mydir/')
    os_makedirs('./tmp/test')
-
    os.system("ls ztmp")
 
    path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
    for p in path:
        f = os.path.exists(os.path.abspath(p))
-       assert  f == True, "path "
-
+       assert  f == True, "path " + p
 
    rev_stat = os_removedirs("ztmp/ztmp2")
    assert not rev_stat == False, "cannot delete root folder"
@@ -105,12 +84,9 @@ def test1():
 
 
 
-
-
-
-
    ###################################################################################
    ###################################################################################
+   from utilmy import global_verbsosity
    print('verbosity', global_verbosity(__file__, "config.json", 40,))
    print('verbosity', global_verbosity('../', "config.json", 40,))
    print('verbosity', global_verbosity(__file__))
@@ -125,15 +101,9 @@ def test1():
 
 
 
-
-
-
-
-
-
-
    ###################################################################################
    ###################################################################################
+   from utilmy import Session
    sess = Session("ztmp/session")
    sess.save('mysess', globals(), '01')
    os.system("ls ztmp/session")
@@ -153,6 +123,9 @@ def test1():
    sess.load('mysess')
    sess.load('mysess', None, '02')
 
+   
+   ###################################################################################   
+   from utilmy.decorators import timer
    @timer
    def dummy_func():
        time.sleep(2)
@@ -168,6 +141,8 @@ def test1():
 
 
    ###################################################################################
+   from utilmy.decorators import profiled, context_profiler
+   
    @profiled
    def profiled_sum():
        return sum(range(100000))
@@ -178,21 +153,28 @@ def test1():
        x = sum(range(1000000))
        print(x)
 
+      
    ###################################################################################
+   from utilmy import profiler_start, profiler_stop
+   
    profiler_start()
    print(sum(range(1000000)))
    profiler_stop()
 
+   
+   ###################################################################################
+   from utilmy import os_platform_os
    assert os_platform_os() == sys.platform
 
 
+   
 def test_thread(*args):
-
+    from utilmy.decorators import os_multithread
+      
     def test_print(*args):
         print(args[0]*args[0])
         return args[0]*args[0]
 
-    from utilmy.decorators import os_multithread
     assert os_multithread(function1=(test_print, (5,)),
                           function2=(test_print, (4,)),
                           function3=(test_print, (2,)))
