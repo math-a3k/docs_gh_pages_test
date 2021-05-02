@@ -2,10 +2,6 @@
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, json, yaml
 
-
-
-
-
 ################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
                  verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
@@ -88,7 +84,8 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
   return dfall
 
 
-def pd_merge(df1, df2, cols_merge):
+def pd_merge(df1, df2, cols_merge, mode='inter'):
+    #### Accelerate Intersection Merge  : A bit in-complete
     import pandas as pd
     df1, df2 = pd.to_DataFrame(df1), pd.to_DataFrame(df2)
     df2 = df2[df2[cols_merge].isin(df1[cols_merge])]
@@ -446,8 +443,7 @@ def os_memory():
 
 
 def os_removedirs(path):
-    """
-       issues with no empty Folder
+    """  issues with no empty Folder
     # Delete everything reachable from the directory named in 'top',
     # assuming there are no symbolic links.
     # CAUTION:  This is dangerous!  For example, if top == '/', it could delete all your disk files.
@@ -478,7 +474,7 @@ def os_get_function_name():
 
 
 def os_getcwd():
-    ## Windows Path normalized
+    ## This is for Windows Path normalized As Linux /
     root = os.path.abspath(os.getcwd()).replace("\\", "/") + "/"
     return  root
 
@@ -511,10 +507,9 @@ def os_makedirs(dir_or_file):
 
 
 
-
 ################################################################################################
 class Session(object) :
-    """ Save Python session on disk
+    """ Save Python Interpreter session on disk
       from util import Session
       sess = Session("recsys")
       sess.save( globals() )
