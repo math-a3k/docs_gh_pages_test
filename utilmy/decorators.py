@@ -128,11 +128,14 @@ def os_multithread(**kwargs):
     """
     Creating n number of threads:  1 thread per function,
     starting them and waiting for their subsequent completion
+   Example:
+        os_multithread(function1=(function_name1, (arg1, arg2, ...)),
+                       ...)
 
     def test_print(*args):
         print(*args)
 
-    assert os_multithread(function1=(test_print, ("some text",)),
+    os_multithread(function1=(test_print, ("some text",)),
                           function2=(test_print, ("bbbbb",)),
                           function3=(test_print, ("ccccc",)))
 
