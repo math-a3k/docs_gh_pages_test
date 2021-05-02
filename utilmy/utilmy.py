@@ -122,10 +122,12 @@ def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.05, q95=0.95, show=False) 
     q0 = dfi.quantile(q5)
     q1 = dfi.quantile(q95)
     dfi.hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
-    os.makedirs(os.path.dirname(path_save), exist_ok=True)
-    if path_save is not None : plt.savefig( path_save );
+
+    if path_save is not None : 
+      os.makedirs(os.path.dirname(path_save), exist_ok=True)
+      plt.savefig( path_save );
     if show : plt.show();
-    plt.close()
+    # plt.close()
 
 
 def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
