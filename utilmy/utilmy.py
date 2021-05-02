@@ -137,7 +137,7 @@ def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
     return dfm
 
 
-def pd_dtype_info(df, col_continuous=[]):
+def pd_dtype_count_unique(df, col_continuous=[]):
     """Learns the number of categories in each variable and standardizes the data.
         ----------
         data: pd.DataFrame
@@ -207,7 +207,7 @@ def pd_del(df, cols:list):
 def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
     import numpy as np, pandas as pd
     df2 = pd.DataFrame()
-    colsnum = pd_cols_getcontinuous(df, cols_exclude) 
+    colsnum = pd_dtype_getcontinuous(df, cols_exclude)
     for ci in df.columns :
         if ci in colsnum :
            print(f'adding noise {ci}') 
@@ -218,7 +218,7 @@ def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
     return df2 
 
 
-def pd_cols_getcontinuous(df, cols_exclude:list=[], nsample=-1) :
+def pd_dtype_getcontinuous(df, cols_exclude:list=[], nsample=-1) :
     ### Return continuous variable
     clist = {}
     for ci in df.columns :
