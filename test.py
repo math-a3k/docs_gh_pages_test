@@ -5,15 +5,13 @@ import os, sys, time, datetime,inspect
 
 #########################################################################################
 def test1():
-   from utilmy import ( 
-                       pd_show,
+   from utilmy import (pd_show,
                        git_current_hash,
                       )
 
    ############################################################################
    from utilmy import pd_read_file
    import pandas as pd, random
-
    ncols = 7
    nrows = 100
    ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
@@ -35,7 +33,7 @@ def test1():
    assert round(df1.values.sum(), 5) == round(ncopy * s0,5), f"df1 {df1.values.sum()}, original {ncopy*s0}"
 
 
-   ###########################################################
+   ####################################################
    df.to_csv( "data/parquet/fa0b2.csv.gz",   compression='gzip' , index=False)
    df.to_csv( "data/parquet/fab03.csv.gz",   compression='gzip' , index=False)
    df.to_csv( "data/parquet/fabc04.csv.gz",  compression='gzip' , index=False)
@@ -86,7 +84,7 @@ def test1():
 
    ###################################################################################
    ###################################################################################
-   from utilmy import global_verbsosity
+   from utilmy import global_verbosity
    print('verbosity', global_verbosity(__file__, "config.json", 40,))
    print('verbosity', global_verbosity('../', "config.json", 40,))
    print('verbosity', global_verbosity(__file__))
@@ -141,15 +139,15 @@ def test1():
 
 
    ###################################################################################
-   from utilmy.decorators import profiled, context_profiler
+   from utilmy.decorators import profiler_deco, profiler_context
    
-   @profiled
+   @profiler_deco
    def profiled_sum():
        return sum(range(100000))
 
    profiled_sum()
 
-   with context_profiler():
+   with profiler_context():
        x = sum(range(1000000))
        print(x)
 
@@ -168,7 +166,7 @@ def test1():
 
 
    
-def test_thread(*args):
+def test2(*args):
     from utilmy.decorators import os_multithread
       
     def test_print(*args):
@@ -182,5 +180,9 @@ def test_thread(*args):
 
 if __name__ == "__main__":
     test1()
-    test_thread()
+    test2()
+
+
+
+
 

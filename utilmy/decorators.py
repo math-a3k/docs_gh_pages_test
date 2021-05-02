@@ -7,64 +7,20 @@ from functools import wraps
 import time
 from contextlib import contextmanager
 
-
+########################################################################################################################
 class _TimeoutError(Exception):
     """Time out error"""
-
     pass
 
 
-def profile(fnc):
-
-    """
-    A decorator that uses cProfile to profile a function
-    And print the result
-    """
-
-    def inner(*args, **kwargs):
-
-        pr = cProfile.Profile()
-        pr.enable()
-        retval = fnc(*args, **kwargs)
-        pr.disable()
-        s = io.StringIO()
-        sortby = "cumulative"
-        ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-        ps.print_stats()
-        print(s.getvalue())
-        return retval
-
-    return inner
 
 
-def threading_d(func):
-
-    """
-    A decorator to run function in background on thread
-    
-	Args:
-		func:``function``
-			Function with args
-	
-	Return:
-		background_thread: ``Thread``
-		
-    """
-
-    @wraps(func)
-    def wrapper(*args, **kwags):
-        background_thread = Thread(target=func, args=(*args,))
-        background_thread.daemon = True
-        background_thread.start()
-        return background_thread
-
-    return wrapper
 
 
+
+########################################################################################################################
 def timeout(seconds=10, error_message=os.strerror(errno.ETIME)):
-    """
-    Decorator to throw timeout error, if function doesnt complete in certain time
-    
+    """Decorator to throw timeout error, if function doesnt complete in certain time
     Args:
         seconds:``int``
             No of seconds to wait
@@ -72,7 +28,6 @@ def timeout(seconds=10, error_message=os.strerror(errno.ETIME)):
             Error message
             
     """
-
     def decorator(func):
         def _handle_timeout(signum, frame):
             raise _TimeoutError(error_message)
@@ -106,15 +61,16 @@ def timer(func):
     return wrapper
 
 
+
+########################################################################################################################
 @contextmanager
-def context_profiler():
+def profiler_context():
     """
     Context Manager the will profile code inside it's bloc.
     And print the result of profiler.
     Example:
-        with context_profiler():
+        with profiler_context():
             # code to profile here
-
     """
     from pyinstrument import Profiler
     profiler = Profiler()
@@ -128,7 +84,7 @@ def context_profiler():
         print(profiler.output_text(unicode=True, color=True))
 
 
-def profiled(func):
+def profiler_deco(func):
     """
     A decorator that will profile a function
     And print the result of profiler.
@@ -145,18 +101,48 @@ def profiled(func):
     return wrapper
 
 
-class ThreadWithResult(Thread):
-    def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, *, daemon=None):
-        def function():
-            self.result = target(*args, **kwargs)
-        super().__init__(group=group, target=function, name=name, daemon=daemon)
+
+def profiler_decorator_base(fnc):
+    """
+    A decorator that uses cProfile to profile a function
+    And print the result
+    """
+    def inner(*args, **kwargs):
+        pr = cProfile.Profile()
+        pr.enable()
+        retval = fnc(*args, **kwargs)
+        pr.disable()
+        s = io.StringIO()
+        sortby = "cumulative"
+        ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+        ps.print_stats()
+        print(s.getvalue())
+        return retval
+
+    return inner
 
 
+
+########################################################################################################################
 def os_multithread(**kwargs):
     """
-    Creating n number of threads, starting them
-    and waiting for their subsequent completion
+    Creating n number of threads:  1 thread per function,
+    starting them and waiting for their subsequent completion
+
+    def test_print(*args):
+        print(*args)
+
+    assert os_multithread(function1=(test_print, ("some text",)),
+                          function2=(test_print, ("bbbbb",)),
+                          function3=(test_print, ("ccccc",)))
+
+
     """
+    class ThreadWithResult(Thread):
+        def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, *, daemon=None):
+            def function():
+                self.result = target(*args, **kwargs)
+            super().__init__(group=group, target=function, name=name, daemon=daemon)
 
     list_of_threads = []
     for thread in kwargs.values():
@@ -172,3 +158,27 @@ def os_multithread(**kwargs):
         results.append((keys, thread.result))
 
     return results
+
+
+def threading_deco(func):
+    """ A decorator to run function in background on thread
+	Args:
+		func:``function``
+			Function with args
+
+	Return:
+		background_thread: ``Thread``
+
+    """
+
+    @wraps(func)
+    def wrapper(*args, **kwags):
+        background_thread = Thread(target=func, args=(*args,))
+        background_thread.daemon = True
+        background_thread.start()
+        return background_thread
+
+    return wrapper
+
+
+

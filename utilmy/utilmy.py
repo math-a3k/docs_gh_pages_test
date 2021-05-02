@@ -1,7 +1,7 @@
 # pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, json, yaml
-from pyinstrument import Profiler
+
 
 
 
@@ -205,6 +205,7 @@ def pd_del(df, cols:list):
 
 
 def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
+    import numpy as np, pandas as pd
     df2 = pd.DataFrame()
     colsnum = pd_cols_getcontinuous(df, cols_exclude) 
     for ci in df.columns :
@@ -585,6 +586,7 @@ def load(to_file=""):
 
 ################################################################################################
 class dict_to_namespace(object):
+    #### Dict to namespace
     def __init__(self, d):
         self.__dict__ = d
 
@@ -596,11 +598,11 @@ class dict_to_namespace(object):
 
 
 ###################################################################################################
-profiler = Profiler()
-
-
 def profiler_start():
+    ### Code profiling
+    from pyinstrument import Profiler
     global profiler
+    profiler = Profiler()
     profiler.start()
 
 
@@ -608,6 +610,7 @@ def profiler_stop():
     global profiler
     profiler.stop()
     print(profiler.output_text(unicode=True, color=True))
+
 
 ###################################################################################################
 if __name__ == "__main__":
