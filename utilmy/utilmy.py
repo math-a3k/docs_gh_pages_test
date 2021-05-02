@@ -115,19 +115,29 @@ def pd_cartesian(df1, df2) :
   return df3
 
 
-def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.05, q95=0.95, show=False) :
+def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -1, show=False, clear=True) :
     ### Plot histogram
     from matplotlib import pyplot as plt
-    import numpy as np, os
+    import numpy as np, os, time
     q0 = dfi.quantile(q5)
     q1 = dfi.quantile(q95)
-    dfi.hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
 
+    if nsample < 0 :    
+        dfi.hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
+    else :
+        dfi.sample(n=nsample, replace=True ).hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
+    plt.title( path_save.split("/")[-1] )
+
+    if show : 
+      plt.show()
+        
     if path_save is not None : 
       os.makedirs(os.path.dirname(path_save), exist_ok=True)
-      plt.savefig( path_save );
-    if show : plt.show();
-    # plt.close()
+      plt.savefig( path_save )
+      print(path_save )
+    if clear :
+        # time.sleep(5) 
+        plt.close()
 
 
 def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
