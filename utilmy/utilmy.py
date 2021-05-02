@@ -137,6 +137,13 @@ def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -
         plt.close()
 
 
+def pd_qcut(df, col, nbins=5):
+  ### Shortcuts for easy bin of numerical values
+  assert nbins < 256, 'nbins< 255'  
+  return pd.qcut(dfy[col], q=nbins,labels= np.arange(0, nbins, 1)).astype('int8')
+
+
+#########################################################################################
 def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
     import numpy as np
     for c in dfm.columns :
