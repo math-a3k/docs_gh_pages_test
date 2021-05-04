@@ -510,6 +510,18 @@ def to_int(x):
 
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
+def os_get_function_name():
+    ### Get ane,
+    import sys, socket
+    ss = str(os.getpid()) # + "-" + str( socket.gethostname())
+    ss = ss + "," + str(__name__)
+    try :
+        ss = ss + "," + __class__.__name__
+    except :
+        ss = ss + ","
+    ss = ss + "," + str(  sys._getframe(1).f_code.co_name)
+    return ss
+
 def os_variable_init(ll, globs):
     for x in ll :
         try :
@@ -668,9 +680,6 @@ def os_removedirs(path):
     except: pass
     return True
 
-
-def os_get_function_name():
-    return sys._getframe(1).f_code.co_name
 
 
 def os_getcwd():
