@@ -19,8 +19,11 @@ def test_hypothesis(df_obs, df_ref, method='', **kw):
     https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py
 
     """
-    from hypothetical.contingency import ChiSquareContingency, CochranQ, McNemarTest,
-    table_margins, expected_frequencies )
+    try:
+       from hypothetical.contingency import (ChiSquareContingency, CochranQ, McNemarTest,
+            table_margins, expected_frequencies )
+    except :
+       print(' pip install hypothetical ')
 
     if method == 'chisquare' :
         c = ChiSquareContingency(df_obs, df_ref)
