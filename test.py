@@ -1,12 +1,9 @@
 # pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect
+from utilmy import *
 
 #########################################################################################
-def test0():
-   from utilmy import *
-
-
 def test1():
    from utilmy import (pd_show, git_current_hash, )
 
@@ -180,7 +177,6 @@ def test2(*args):
 
 
 if __name__ == "__main__":
-    test0()
     test1()
     test2()
 
