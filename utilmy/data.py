@@ -1,5 +1,37 @@
 import os, sys, pandas as pd, numpy as np
 
+
+
+def pd_train_test_split_time(df, test_period = 40, cols=None , coltime ="time_key", sort=True, minsize=5,
+                     n_sample=5,  verbose=False) :
+   cols = list(df.columns) if cols is None else cols
+   if sort :
+       df   = df.sort_values( coltime, ascending=1 )
+   #imax = len(df) - test_period
+   colkey = [ t for t in cols if t not in [coltime] ]  #### All time reference be removed
+   if verbose : log(colkey)
+   imax = test_period * n_sample ## Over sampling
+   df1  = df.groupby( colkey ).apply(lambda dfi : dfi.iloc[:max(minsize, len(dfi) -imax), :] ).reset_index(colkey, drop=True).reset_index(drop=True)
+   df2  = df.groupby( colkey ).apply(lambda dfi : dfi.iloc[max(minsize,  len(dfi) -imax):, :] ).reset_index(colkey, drop=True).reset_index(drop=True)
+   return df1, df2
+
+
+def pd_to_scipy_sparse_matrix(df):
+    """
+    Converts a sparse pandas data frame to sparse scipy csr_matrix.
+    :param df: pandas data frame
+    :return: csr_matrix
+    """
+    import numpy as np
+    from scipy.sparse import lil_matrix
+    arr = lil_matrix(df.shape, dtype=np.float32)
+    for i, col in enumerate(df.columns):
+        ix = df[col] != 0
+        arr[np.where(ix), i] = 1
+
+    return arr.tocsr()
+
+
 def pd_stat_correl_pair(df, coltarget=None, colname=None):
     """
       Genearte correletion between the column and target column
