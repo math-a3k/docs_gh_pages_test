@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect
 
-
 #########################################################################################
+def test0():
+   from utilmy import *
+
+
 def test1():
-   from utilmy import (pd_show,
-                       git_current_hash,
-                      )
+   from utilmy import (pd_show, git_current_hash, )
 
    ############################################################################
    from utilmy import pd_read_file
@@ -179,6 +180,7 @@ def test2(*args):
 
 
 if __name__ == "__main__":
+    test0()
     test1()
     test2()
 

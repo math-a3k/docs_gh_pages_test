@@ -20,7 +20,7 @@ def pd_date_split(df, coldate =  'time_key', prefix_col ="", verbose=False ):
     df['day']           = df['date'].apply( lambda x : x.day   )
     df['weekday']       = df['date'].apply( lambda x : x.weekday()   )
     df['weekmonth']     = df['date'].apply( lambda x : date_weekmonth(x)   )
-    df['weekmonth2']     = df['date'].apply( lambda x : date_weekmonth2(x)   )
+    df['weekmonth2']    = df['date'].apply( lambda x : date_weekmonth2(x)   )
     df['weekyeariso']   = df['date'].apply( lambda x : x.isocalendar()[1]   )
     df['weekyear2']     = df['date'].apply( lambda x : date_weekyear2( x )  )
     df['quarter']       = df.apply( lambda x :  int( x['month'] / 4.0) + 1 , axis=1  )
@@ -38,6 +38,7 @@ def pd_date_split(df, coldate =  'time_key', prefix_col ="", verbose=False ):
 
 
 def pd_merge(df1, df2, on=None, colkeep=None):
+  ### Faster merge
   cols = list(df2.columns) if colkeep is None else on + colkeep
   return df1.join( df2[ cols   ].set_index(on), on=on, how='left', rsuffix="2")
 
@@ -174,9 +175,8 @@ def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
   gc.collect()
 
 
-def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
-                 verbose=False, nrows=-1, concat_sort=True, n_pool=1, drop_duplicates=None, col_filter=None,
-                 col_filter_val=None, dtype=None,  **kw):
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
   :return:
@@ -257,8 +257,8 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,
 
 def pd_sample_strat(df, col, n):
   ### Stratified sampling
-  n   = min(n, df[col].value_counts().min())
-  df_ = df.groupby(col).apply(lambda x: x.sample(n))
+  # n   = min(n, df[col].value_counts().min())
+  df_ = df.groupby(col).apply(lambda x: x.sample(n = n, replace=True))
   df_.index = df_.index.droplevel(0)
   return df_
 
@@ -374,6 +374,22 @@ def pd_dtype_to_category(df, col_exclude, treshold=0.5):
     print("Not dataframe")
 
 
+def pd_dtype_getcontinuous(df, cols_exclude:list=[], nsample=-1) :
+    ### Return continuous variable
+    clist = {}
+    for ci in df.columns :
+        ctype   = df[ci].dtype
+        if nsample == -1 :
+            nunique = len(df[ci].unique())
+        else :
+            nunique = len(df.sample(n= nsample, replace=True)[ci].unique())
+        if 'float' in  str(ctype) and ci not in cols_exclude and nunique > 5 :
+           clist[ci] = 1
+        else :
+           clist[ci] = nunique
+    return clist
+
+
 def pd_del(df, cols:list):
     ### Delete columns without errors
     for col in cols :
@@ -395,22 +411,6 @@ def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
         else :
            df2[ci] = df[ci]
     return df2
-
-
-def pd_dtype_getcontinuous(df, cols_exclude:list=[], nsample=-1) :
-    ### Return continuous variable
-    clist = {}
-    for ci in df.columns :
-        ctype   = df[ci].dtype
-        if nsample == -1 :
-            nunique = len(df[ci].unique())
-        else :
-            nunique = len(df.sample(n= nsample, replace=True)[ci].unique())
-        if 'float' in  str(ctype) and ci not in cols_exclude and nunique > 5 :
-           clist[ci] = 1
-        else :
-           clist[ci] = nunique
-    return clist
 
 
 def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
@@ -449,7 +449,7 @@ def pd_show(df, nrows=100, **kw):
 
 
 #########################################################################################################
-##### Utils numpy, list ##################################################################################
+##### Utils numpy, list #################################################################################
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
@@ -461,11 +461,7 @@ def to_dict(**kw):
   return kw
 
 
-def to_timeunix(timekey) :
-    return timekey*86400
-
-
-def to_timeunix2(datex="2018-01-16"):
+def to_timeunix(datex="2018-01-16"):
   if isinstance(datex, str)  :
      return int(time.mktime(datetime.datetime.strptime(datex, "%Y-%m-%d").timetuple()) * 1000)
 
@@ -503,7 +499,6 @@ def to_int(x):
         return int(x)
     except :
         return float("NaN")
-
 
 
 
@@ -679,7 +674,6 @@ def os_removedirs(path):
       os.rmdir(path)
     except: pass
     return True
-
 
 
 def os_getcwd():
@@ -968,11 +962,6 @@ def load(to_file=""):
 
 
 
-################################################################################################
-
-
-
-
 ###################################################################################################
 ###### Debug ######################################################################################
 def log_break(msg="", dump_path="", globs=None):
@@ -992,6 +981,8 @@ def profiler_stop():
     global profiler
     profiler.stop()
     print(profiler.output_text(unicode=True, color=True))
+
+
 
 
 ###################################################################################################
