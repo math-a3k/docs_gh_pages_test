@@ -480,6 +480,138 @@ def to_int(x):
 
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
+
+
+
+def os_file_replacestring2(findstr, replacestr, some_dir, pattern="*.*", dirlevel=1):
+    """ #fil_replacestring_files("logo.png", "logonew.png", r"D:/__Alpaca__details/aiportfolio",
+        pattern="*.html", dirlevel=5  )
+    """
+    def os_file_replacestring1(find_str, rep_str, file_path):
+        """replaces all find_str by rep_str in file file_path"""
+        import fileinput
+
+        file1 = fileinput.FileInput(file_path, inplace=True, backup=".bak")
+        for line in file1:
+            line = line.replace(find_str, rep_str)
+            sys.stdout.write(line)
+        file1.close()
+        print(("OK: " + format(file_path)))
+
+
+    list_file = os_walk(some_dir, pattern=pattern, dirlevel=dirlevel)
+    list_file = list_file[2]
+    for file1 in list_file:
+        os_file_replacestring1(findstr, replacestr, file1)
+
+
+
+
+def os_walk(dir1, pattern="*.*", dirlevel=20, path_only=False):
+    """
+            matches["dirpath"]  = []
+            matches["filename"] = []
+            matches["fullpath"] = []
+
+    """
+    import fnmatch, os, numpy as np
+
+    matches = {}
+    dir1 = dir1.rstrip(os.path.sep)
+    num_sep = dir1.count(os.path.sep)
+
+    if path_only:
+        for root, dirs, files in os.walk(dir1):
+            num_sep_this = root.count(os.path.sep)
+            if num_sep + dirlevel <= num_sep_this:
+                del dirs[:]
+            matches["dirpath"]  = []
+            matches["filename"] = []
+            matches["fullpath"] = []
+            # Filename, DirName
+            for inner_dirs in fnmatch.filter(dirs, pattern):
+                matches["dirpath"].append(os.path.splitext(inner_dirs)[0])
+                matches["filename"].append(os.path.splitext(root)[0])
+                matches["fullpath"].append(os.path.join(root, inner_dirs))
+        return np.array(matches)
+
+    for root, dirs, files in os.walk(dir1):
+        num_sep_this = root.count(os.path.sep)
+        if num_sep + dirlevel <= num_sep_this:
+            del dirs[:]
+        matches["dirpath"]  = []
+        matches["filename"] = []
+        matches["fullpath"] = []
+        # Filename, DirName
+        for inner_files in fnmatch.filter(files, pattern):
+            matches["dirpath"].append(os.path.splitext(inner_files)[0])
+            matches["filename"].append(os.path.splitext(inner_files)[1])
+            matches["fullpath"].append(os.path.join(root, inner_files))
+    return  matches
+
+
+
+
+
+
+def z_os_search_fast(fname, texts=None, mode="regex/str"):
+    import re
+    if texts is None:
+        texts = ["myword"]
+
+    res = []  # url:   line_id, match start, line
+    enc = "utf-8"
+    fname = os.path.abspath(fname)
+    try:
+        if mode == "regex":
+            texts = [(text, re.compile(text.encode(enc))) for text in texts]
+            for lineno, line in enumerate(open(fname, "rb")):
+                for text, textc in texts:
+                    found = re.search(textc, line)
+                    if found is not None:
+                        try:
+                            line_enc = line.decode(enc)
+                        except UnicodeError:
+                            line_enc = line
+                        res.append((text, fname, lineno + 1, found.start(), line_enc))
+
+        elif mode == "str":
+            texts = [(text, text.encode(enc)) for text in texts]
+            for lineno, line in enumerate(open(fname, "rb")):
+                for text, textc in texts:
+                    found = line.find(textc)
+                    if found > -1:
+                        try:
+                            line_enc = line.decode(enc)
+                        except UnicodeError:
+                            line_enc = line
+                        res.append((text, fname, lineno + 1, found, line_enc))
+
+    except IOError as xxx_todo_changeme:
+        (_errno, _strerror) = xxx_todo_changeme.args
+        print("permission denied errors were encountered")
+
+    except re.error:
+        print("invalid regular expression")
+
+    return res
+
+
+
+def os_search_content(srch_pattern=None, mode="str", dir1="", file_pattern="*.*", dirlevel=1):
+    """  search inside the files
+
+    """
+    if srch_pattern is None:
+        srch_pattern = ["from ", "import "]
+
+    list_all = os_walk(dir1, pattern=file_pattern, dirlevel=dirlevel)
+    ll = []
+    for f in list_all["fullpath"]:
+        ll = ll + z_os_search_fast(f, texts=srch_pattern, mode=mode)
+    df = pd.DataFrame(ll, columns=["search", "filename", "lineno", "pos", "line"])
+    return df
+
 def os_get_function_name():
     ### Get ane,
     import sys, socket
@@ -622,6 +754,62 @@ def os_memory():
         ret['free'] = tmp
         ret['used'] = int(ret['total']) - int(ret['free'])
     return ret
+
+
+
+
+
+def os_sleep_cpu(priority=300, cpu_min=50, sleep=10):
+    #### Sleep until CPU becomes normal usage
+    import psutil, time
+
+    aux = psutil.cpu_percent()
+    while aux > cpu_min:
+        #print("CPU:", aux, time.time())
+        time.sleep(priority)
+        aux = psutil.cpu_percent()
+        time.sleep(sleep)
+        aux = 0.5 * (aux + psutil.cpu_percent())
+    return aux
+
+
+
+
+def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
+    """ deep_getsizeof(df_pd, set())
+    Find the memory footprint of a Python object
+    The sys.getsizeof function does a shallow size of only. It counts each
+    object inside a container as pointer only regardless of how big it
+    """
+    from collections import Mapping, Container
+    from sys import getsizeof
+
+    _ = hint
+
+    d = os_ram_object
+    if id(o) in ids:
+        return 0
+
+    r = getsizeof(o)
+    ids.add(id(o))
+
+    if isinstance(o, str) or isinstance(0, str):
+        r = r
+
+    if isinstance(o, Mapping):
+        r = r + sum(d(k, ids) + d(v, ids) for k, v in o.items())
+
+    if isinstance(o, Container):
+        r = r + sum(d(x, ids) for x in o)
+
+    return r * 0.0000001
+
+
+
+
+
+
+
 
 
 def os_removedirs(path):
