@@ -1040,6 +1040,27 @@ def load(to_file=""):
 
 ###################################################################################################
 ###### Debug ######################################################################################
+def snoop():
+    """
+    https://github.com/alexmojaki/snoop
+    """
+    txt ="""
+    import snoop; snoop.install()  ### can be used anywhere
+    
+    @snoop
+    def myfun():
+    
+    from snoop import pp
+    pp(myvariable)
+    
+    
+    
+    """
+    print(txt)
+    
+    
+        
+    
 def ic(*s):
     """    ### Equivalent of print, but more :  https://github.com/gruns/icecream
     ic()  --->  ic| example.py:4 in foo()
