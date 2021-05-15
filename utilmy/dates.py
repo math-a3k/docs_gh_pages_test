@@ -8,6 +8,36 @@ def log(*s):
 
 ####################################################################################################
 ##### Utilities for date  ##########################################################################
+def pd_date_split(df, coldate =  'time_key', prefix_col ="", verbose=False ):
+    import pandas as pd
+
+    df = df.drop_duplicates(coldate)
+    df['date'] =  pd.to_datetime( df[coldate] )
+
+    ############# dates
+    df['year']          = df['date'].apply( lambda x : x.year   )
+    df['month']         = df['date'].apply( lambda x : x.month   )
+    df['day']           = df['date'].apply( lambda x : x.day   )
+    df['weekday']       = df['date'].apply( lambda x : x.weekday()   )
+    df['weekmonth']     = df['date'].apply( lambda x : date_weekmonth(x)   )
+    df['weekmonth2']    = df['date'].apply( lambda x : date_weekmonth2(x)   )
+    df['weekyeariso']   = df['date'].apply( lambda x : x.isocalendar()[1]   )
+    df['weekyear2']     = df['date'].apply( lambda x : date_weekyear2( x )  )
+    df['quarter']       = df.apply( lambda x :  int( x['month'] / 4.0) + 1 , axis=1  )
+
+    df['yearweek']      = df.apply(  lambda x :  merge1(  x['year']  , x['weekyeariso'] )  , axis=1  )
+    df['yearmonth']     = df.apply( lambda x : merge1( x['year'] ,  x['month'] )         , axis=1  )
+    df['yearquarter']   = df.apply( lambda x : merge1( x['year'] ,  x['quarter'] )         , axis=1  )
+
+    df['isholiday']     = date_is_holiday( df['date'].values )
+
+    exclude = [ 'date', coldate]
+    df.columns = [  prefix_col + x if not x in exclude else x for x in df.columns]
+    if verbose : log( "holidays check", df[df['isholiday'] == 1].tail(15)  )
+    return df
+
+
+
 def date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo'):
     from pytz import timezone
     from datetime import datetime

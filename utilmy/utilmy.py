@@ -8,41 +8,10 @@ def log(*s):
 
 ###################################################################################################
 ###### Pandas #####################################################################################
-def pd_date_split(df, coldate =  'time_key', prefix_col ="", verbose=False ):
-    import pandas as pd
-
-    df = df.drop_duplicates(coldate)
-    df['date'] =  pd.to_datetime( df[coldate] )
-
-    ############# dates
-    df['year']          = df['date'].apply( lambda x : x.year   )
-    df['month']         = df['date'].apply( lambda x : x.month   )
-    df['day']           = df['date'].apply( lambda x : x.day   )
-    df['weekday']       = df['date'].apply( lambda x : x.weekday()   )
-    df['weekmonth']     = df['date'].apply( lambda x : date_weekmonth(x)   )
-    df['weekmonth2']    = df['date'].apply( lambda x : date_weekmonth2(x)   )
-    df['weekyeariso']   = df['date'].apply( lambda x : x.isocalendar()[1]   )
-    df['weekyear2']     = df['date'].apply( lambda x : date_weekyear2( x )  )
-    df['quarter']       = df.apply( lambda x :  int( x['month'] / 4.0) + 1 , axis=1  )
-
-    df['yearweek']      = df.apply(  lambda x :  merge1(  x['year']  , x['weekyeariso'] )  , axis=1  )
-    df['yearmonth']     = df.apply( lambda x : merge1( x['year'] ,  x['month'] )         , axis=1  )
-    df['yearquarter']   = df.apply( lambda x : merge1( x['year'] ,  x['quarter'] )         , axis=1  )
-
-    df['isholiday']     = date_is_holiday( df['date'].values )
-
-    exclude = [ 'date', coldate]
-    df.columns = [  prefix_col + x if not x in exclude else x for x in df.columns]
-    if verbose : log( "holidays check", df[df['isholiday'] == 1].tail(15)  )
-    return df
-
-
 def pd_merge(df1, df2, on=None, colkeep=None):
   ### Faster merge
   cols = list(df2.columns) if colkeep is None else on + colkeep
   return df1.join( df2[ cols   ].set_index(on), on=on, how='left', rsuffix="2")
-
-
 
 
 def pd_plot_multi(data, cols=[], cols2=[], spacing=.1, **kwargs):
@@ -81,9 +50,6 @@ def pd_plot_multi(data, cols=[], cols2=[], spacing=.1, **kwargs):
 
     ax.legend(lines, labels, loc=0)
     return ax
-
-
-
 
 
 def pd_filter(df, filter_dict="shop_id=11, l1_genre_id>600, l2_genre_id<80311," , verbose=False) :
@@ -250,7 +216,7 @@ def pd_cartesian(df1, df2) :
   return df3
 
 
-def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -1, show=False, clear=True) :
+def pd_plot_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -1, show=False, clear=True) :
     ### Plot histogram
     from matplotlib import pyplot as plt
     import numpy as np, os, time
@@ -275,7 +241,7 @@ def pd_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -
         plt.close()
 
 
-def pd_qcut(df, col, nbins=5):
+def pd_col_bins(df, col, nbins=5):
   ### Shortcuts for easy bin of numerical values
   import pandas as pd, numpy as np
   assert nbins < 256, 'nbins< 255'
@@ -480,6 +446,23 @@ def to_int(x):
 
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
+def os_path_split(fpath:str=""):
+    #### Get path split
+    fpath = fpath.replace("\\", "/")
+    if fpath[-1] == "/":
+        fpath = fpath[:-1]
+
+    parent = "/".join(fpath.split("/")[:-1])
+    fname  = fpath.split("/")[-1]
+    if "." in fname :
+        ext = ".".join(fname.split(".")[1:])
+    else :
+        ext = ""
+
+    return parent, fname, ext
+
+
+
 def os_file_replacestring(findstr, replacestr, some_dir, pattern="*.*", dirlevel=1):
     """ #fil_replacestring_files("logo.png", "logonew.png", r"D:/__Alpaca__details/aiportfolio",
         pattern="*.html", dirlevel=5  )
