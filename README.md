@@ -7,7 +7,15 @@
 
 
 # myutil
-One liner utilties
+One liner utilities
+
+
+# Looking for contributors
+
+   This package is looking for contributors.
+   Documentation is here:  https://github.com/arita37/myutil/issues/9
+   
+   
 
 
 # myutil
