@@ -9,18 +9,12 @@ https://pypi.org/project/pysie/#description
 """
 import os, sys, pandas as pd, numpy as np
 
-
 def log(*s):
     print(s)
 
 
-
-
-
-
-
-
-
+#############################################################################
+#############################################################################
 def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10):
     '''
     For each of the entry create a hash function
@@ -49,7 +43,7 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10):
 
 
 
-def pd_text_getcluster(df, column_name, threshold, num_perm):
+def pd_text_getcluster(df, col, threshold, num_perm):
     '''
     For each of the hash function find a cluster and assign unique id to the dataframe cluster_id
     '''
@@ -57,7 +51,7 @@ def pd_text_getcluster(df, column_name, threshold, num_perm):
     all_cluster_ids = []
 
     #REturn from hash list
-    hash_lines, lsh = pd_text_hash_create_lsh(df, col=column_name, threshold = threshold, num_perm = num_perm)
+    hash_lines, lsh = pd_text_hash_create_lsh(df, col=col, threshold = threshold, num_perm = num_perm)
 
     #For each local hash find the cluster ids and assign to the dataframe and return dataframe
     cluster_count = 1
@@ -66,36 +60,27 @@ def pd_text_getcluster(df, column_name, threshold, num_perm):
         if ind in all_cluster_ids:
             continue
 
-        duplicate_elements = lsh.query(i)
-        duplicate_elements_int = list(map(int, duplicate_elements))
-        #print(duplicate_elements_int)
-        df.at[duplicate_elements_int, 'cluster_id'] = cluster_count
-        cluster_count+=1
-
-        all_cluster_ids += duplicate_elements_int
+        x_duplicate     = lsh.query(i)
+        x_duplicate_int = list(map(int, x_duplicate))
+        #print(x_duplicate_int)
+        df.at[x_duplicate_int, 'cluster_id'] = cluster_count
+        cluster_count   += 1
+        all_cluster_ids += x_duplicate_int
 
     return df
 
 
 def test_lsh():
-    with open("Sentences.pkl",'rb') as f:
-        sentences = pkl.load(f)
 
+    ll = [ 'aa bb cc', 'a b c', 'cc bb cc']
     column_name = "sentence"
     threshold   = 0.7
     num_perm    = 10
     num_items   = 100000
 
-    df   = pd.DataFrame(sentences, columns = [column_name])
-    df_1 = pd_text_getcluster(df.head(num_items), column_name, threshold, num_perm)
-
-
-
-
-
-
-
-
+    df   = pd.DataFrame(ll, columns = [column_name])
+    df1  = pd_text_getcluster(df.head(num_items), column_name, threshold, num_perm)
+    print(df1)
 
 
 
@@ -114,10 +99,6 @@ def test_hypothesis(df_obs, df_ref, method='', **kw):
     if method == 'chisquare' :
         c = ChiSquareContingency(df_obs, df_ref)
         return c
-
-
-
-
 
 
 
