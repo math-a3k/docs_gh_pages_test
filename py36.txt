@@ -6,3 +6,4 @@ icecream  ### debugger
 rebound-cli  ## stackoverflow
 pysnooper   ### Debugger show lines of code step by step
 snoop
+datasketch  ### lSH
