@@ -176,10 +176,18 @@ def test2(*args):
                           function3=(test_print, (2,)))
 
 
+      
+def test_data():
+   from utilmy.data import pd_text_getcluster, test_lsh
+   test_lsh()
+
+   
+   
+   
 if __name__ == "__main__":
     test1()
     test2()
-
+    test_data()
 
 
 
