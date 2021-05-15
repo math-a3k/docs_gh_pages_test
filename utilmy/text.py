@@ -15,6 +15,7 @@ def log(*s):
 
 #############################################################################
 #############################################################################
+
 def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10):
     '''
     For each of the entry create a hash function
@@ -25,7 +26,7 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10):
 
     #Intialize list
     hash_lines = []
-    
+
     ll = df[col].values
     for index, sentence in enumerate(ll):
 
