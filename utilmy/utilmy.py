@@ -577,6 +577,7 @@ def os_search_content(srch_pattern=None, mode="str", dir1="", file_pattern="*.*"
     """  search inside the files
 
     """
+    import pandas as pd
     if srch_pattern is None:
         srch_pattern = ["from ", "import "]
 
@@ -609,7 +610,7 @@ def os_variable_init(ll, globs):
           globs[x] = None
 
 
-def os_import(mod_name="offline.config.genre_l2_model", globs=None, verbose=True):
+def os_import(mod_name="myfile.config.model", globs=None, verbose=True):
     ### Import in Current Python Session a module   from module import *
     ### from mod_name import *
     module = __import__(mod_name, fromlist=['*'])
@@ -733,9 +734,6 @@ def os_memory():
     return ret
 
 
-
-
-
 def os_sleep_cpu(priority=300, cpu_min=50, sleep=10):
     #### Sleep until CPU becomes normal usage
     import psutil, time
@@ -748,8 +746,6 @@ def os_sleep_cpu(priority=300, cpu_min=50, sleep=10):
         time.sleep(sleep)
         aux = 0.5 * (aux + psutil.cpu_percent())
     return aux
-
-
 
 
 def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
@@ -780,13 +776,6 @@ def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
         r = r + sum(d(x, ids) for x in o)
 
     return r * 0.0000001
-
-
-
-
-
-
-
 
 
 def os_removedirs(path):
@@ -959,51 +948,52 @@ class Session(object) :
        path = f"{self.dir_session}/{name}{tag}/"
        self.cur_session = path
        os.makedirs(self.cur_session, exist_ok=True)
-       save_session(self.cur_session, glob)
+       self.save_session(self.cur_session, glob)
 
     def load(self, name, glob:dict=None, tag="") :
       path = f"{self.dir_session}/{name}{tag}/"
       self.cur_session = path
       print(self.cur_session)
-      load_session(self.cur_session , glob )
+      self.load_session(self.cur_session , glob )
 
 
-def save_session(folder , globs, tag="" ) :
-  import pandas as pd
-  os.makedirs( folder , exist_ok= True)
-  lcheck = [ "<class 'pandas.core.frame.DataFrame'>", "<class 'list'>", "<class 'dict'>",
-             "<class 'str'>" ,  "<class 'numpy.ndarray'>" ]
-  lexclude = {   "In", "Out" }
-  gitems = globs.items()
-  for x, _ in gitems :
-     if not x.startswith('_') and  x not in lexclude  :
-        x_type =  str(type(globs.get(x) ))
-        fname  =  folder  + "/" + x + ".pkl"
-        try :
-          if "pandas.core.frame.DataFrame" in x_type :
-              pd.to_pickle( globs[x], fname)
+    def save_session(self, folder , globs, tag="" ) :
+      import pandas as pd
+      os.makedirs( folder , exist_ok= True)
+      lcheck = [ "<class 'pandas.core.frame.DataFrame'>", "<class 'list'>", "<class 'dict'>",
+                 "<class 'str'>" ,  "<class 'numpy.ndarray'>" ]
+      lexclude = {   "In", "Out" }
+      gitems = globs.items()
+      for x, _ in gitems :
+         if not x.startswith('_') and  x not in lexclude  :
+            x_type =  str(type(globs.get(x) ))
+            fname  =  folder  + "/" + x + ".pkl"
+            try :
+              if "pandas.core.frame.DataFrame" in x_type :
+                  pd.to_pickle( globs[x], fname)
 
-          elif x_type in lcheck or x.startswith('clf')  :
-              save( globs[x], fname )
+              elif x_type in lcheck or x.startswith('clf')  :
+                  save( globs[x], fname )
 
-          print(fname)
-        except Exception as e:
-              print(x, x_type, e)
+              print(fname)
+            except Exception as e:
+                  print(x, x_type, e)
 
 
-def load_session(folder, globs=None) :
-  """
-  """
-  print(folder)
-  for dirpath, subdirs, files in os.walk( folder ):
-    for x in files:
-       filename = os.path.join(dirpath, x)
-       x = x.replace(".pkl", "")
-       try :
-         globs[x] = load(  filename )
-         print(filename)
-       except Exception as e :
-         print(filename, e)
+    def load_session(self, folder, globs=None) :
+      """
+      """
+      print(folder)
+      for dirpath, subdirs, files in os.walk( folder ):
+        for x in files:
+           filename = os.path.join(dirpath, x)
+           x = x.replace(".pkl", "")
+           try :
+             globs[x] = load(  filename )
+             print(filename)
+           except Exception as e :
+             print(filename, e)
+
 
 
 def save(dd, to_file="", verbose=False):
@@ -1023,7 +1013,7 @@ def load(to_file=""):
 
 ###################################################################################################
 ###### Debug ######################################################################################
-def snoop():
+def print_everywhere():
     """
     https://github.com/alexmojaki/snoop
     """
@@ -1039,7 +1029,9 @@ def snoop():
     
     
     """
-    print(txt)
+    import snoop
+    snoop.install()  ### can be used anywhere"
+    print("Decaorator @snoop ")
     
     
         
@@ -1058,6 +1050,7 @@ def log_break(msg="", dump_path="", globs=None):
     print(msg)
     import pdb;
     pdb.set_trace()
+
 
 def profiler_start():
     ### Code profiling
