@@ -1,5 +1,5 @@
 
-from utilmy.data import *
+from utilmy.tabular import *
 
 
 from utilmy.dates import *

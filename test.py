@@ -178,7 +178,7 @@ def test2(*args):
 
       
 def test_data():
-   from utilmy.data import pd_text_getcluster, test_lsh
+   from utilmy.text import pd_text_getcluster, test_lsh
    test_lsh()
 
    
