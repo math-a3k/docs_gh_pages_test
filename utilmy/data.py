@@ -25,7 +25,9 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10):
 
     #Intialize list
     hash_lines = []
-    for index, sentence in df[col].itertuples():
+    
+    ll = df[col].values
+    for index, sentence in enumerate(ll):
 
         #Get tokens of individual elements
         tokens = sentence.split(sep)
