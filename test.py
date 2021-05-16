@@ -1,9 +1,23 @@
 # pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect
-from utilmy import *
+
+
 
 #########################################################################################
+def pd_random(ncols=7, nrows=100):
+   import pandas as pd, random
+   ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+   df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
+   return df
+
+
+def test0():
+    df = pd_random(7, 100)
+    from utilmy import pd_plot_multi
+    pd_plot_multi(df, cols_axe1=['0', '1'])
+
+
 def test1():
    from utilmy import (pd_show, git_current_hash, )
 

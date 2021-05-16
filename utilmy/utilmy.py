@@ -14,42 +14,47 @@ def pd_merge(df1, df2, on=None, colkeep=None):
   return df1.join( df2[ cols   ].set_index(on), on=on, how='left', rsuffix="2")
 
 
-def pd_plot_multi(data, cols=[], cols2=[], spacing=.1, **kwargs):
+def pd_plot_multi(df, cols_axe1:list=[], cols_axe2:list=[],figsize=(12,8), spacing=0.1, **kwargs):
     from pandas import plotting
     from pandas.plotting import _matplotlib
+    from matplotlib import pyplot as plt
 
+
+    plt.figure(figsize= figsize )
     # Get default color style from pandas - can be changed to any other color list
-    if cols is None: cols = data.columns
-    if len(cols) == 0: return
-    colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols+cols2))
+    if cols_axe1 is None: cols_axe1 = df.columns
+    if len(cols_axe1) == 0: return
+    colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
 
     # First axis
-    ax = data.loc[:, cols[0]].plot(label=cols[0], color=colors[0], **kwargs)
-    ax.set_ylabel(ylabel=cols[0])
+    ax = df.loc[:, cols_axe1[0]].plot(label=cols_axe1[0], color=colors[0], **kwargs)
+    ax.set_ylabel(ylabel=cols_axe1[0])
     ##  lines, labels = ax.get_legend_handles_labels()
     lines, labels = [], []
 
-    i1 = len(cols)
-    for n in range(1, len(cols)):
-        data.loc[:, cols[n]].plot(ax=ax, label=cols[n], color=colors[ (n) % len(colors)], **kwargs)
+    i1 = len(cols_axe1)
+    for n in range(1, len(cols_axe1)):
+        df.loc[:, cols_axe1[n]].plot(ax=ax, label=cols_axe1[n], color=colors[(n) % len(colors)], **kwargs)
         line, label = ax.get_legend_handles_labels()
-        lines += line
+        lines  += line
         labels += label
 
-    for n in range(0, len(cols2)):
-        # Multiple y-axes
+    for n in range(0, len(cols_axe2)):
+        ######### Multiple y-axes
         ax_new = ax.twinx()
         ax_new.spines['right'].set_position(('axes', 1 + spacing * (n - 1)))
-        data.loc[:, cols2[n]].plot(ax=ax_new, label=cols2[n], color=colors[ (i1+n) % len(colors)], **kwargs)
-        ax_new.set_ylabel(ylabel=cols2[n])
+        df.loc[:, cols_axe2[n]].plot(ax=ax_new, label=cols_axe2[n], color=colors[(i1 + n) % len(colors)], **kwargs)
+        ax_new.set_ylabel(ylabel=cols_axe2[n])
 
-        # Proper legend position
+        ######### Proper legend position
         line, label = ax_new.get_legend_handles_labels()
         lines += line
         labels += label
 
     ax.legend(lines, labels, loc=0)
+    plt.show()
     return ax
+
 
 
 def pd_filter(df, filter_dict="shop_id=11, l1_genre_id>600, l2_genre_id<80311," , verbose=False) :
