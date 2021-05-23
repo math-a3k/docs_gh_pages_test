@@ -74,7 +74,7 @@ def pd_text_getcluster(df, col, threshold, num_perm):
     return df
 
 
-def pd_similarity(df: pd.DataFrame, *cols: Tuple[str]) -> pd.Dataframe:
+def pd_similarity(df: pd.DataFrame, *cols: Tuple[str]) -> pd.DataFrame:
     '''
         Return similarities between two columns with 
         python's SequenceMatcher algorithm
