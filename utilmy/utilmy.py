@@ -122,7 +122,7 @@ def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
 
 
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype=None,  **kw):
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
   :return:
@@ -186,17 +186,20 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         if i >= len(job_list): break
         dfi   = job_list[ i].get()
 
-        if dtype is not None      : dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
-        if col_filter is not None : dfi = dfi[ dfi[col_filter] == col_filter_val ]
-        if cols is not None :       dfi = dfi[cols]
-        if nrows > 0        :       dfi = dfi.iloc[:nrows,:]
+        if dtype_reduce is not None: dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+        if col_filter is not None :  dfi = dfi[ dfi[col_filter] == col_filter_val ]
+        if cols is not None :        dfi = dfi[cols]
+        if nrows > 0        :        dfi = dfi.iloc[:nrows,:]
         if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
         gc.collect()
 
         dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
         #log("Len", n_pool*j + i, len(dfall))
         del dfi; gc.collect()
-
+                
+  pool.terminate()
+  pool.join()  
+  pool = None          
   if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
   return dfall
 
