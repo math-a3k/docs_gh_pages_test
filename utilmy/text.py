@@ -74,18 +74,18 @@ def pd_text_getcluster(df, col, threshold, num_perm):
     return df
 
 
-def pd_similarity(df: pd.DataFrame, *cols: Tuple[str]) -> pd.Series:
+def pd_similarity(df: pd.DataFrame, *cols: Tuple[str]) -> pd.Dataframe:
     '''
-        Return similarities between two columns with
+        Return similarities between two columns with 
         python's SequenceMatcher algorithm
-
+        
         Args:
             df (pd.DataFrame): Pandas Dataframe.
             cols (Tuple[str]) : List of of columns name
-
+        
         Returns:
-            pd.Series
-
+            pd.Dataframe
+        
     '''
 
     if len(cols) > 3:
@@ -94,20 +94,18 @@ def pd_similarity(df: pd.DataFrame, *cols: Tuple[str]) -> pd.Series:
     for col in cols:
         if col not in df:
             raise Exception(f"Columns not found {col}")
-            break
 
     from difflib import SequenceMatcher
 
-    def find_similarity(x, *strings):
-        values = []
-        for string in strings:
-            values.append(x[string])
+    def find_similarity(*values):
         is_junk = None
-        similarity_score = SequenceMatcher(is_junk, *values).ratio()
+        similarity_score = SequenceMatcher(is_junk, *values[0]).ratio()
         return similarity_score
 
-    score = df.apply(find_similarity, args=cols, axis=1)
-    return score
+    df['score'] = df[[*cols]
+                     ].apply(lambda x: find_similarity(x[[*cols]]), axis=1)
+
+    return df
 
 def test_lsh():
 
