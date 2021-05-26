@@ -14,7 +14,7 @@ def pd_merge(df1, df2, on=None, colkeep=None):
   return df1.join( df2[ cols   ].set_index(on), on=on, how='left', rsuffix="2")
 
 
-def pd_plot_multi(df, cols_axe1:list=[], cols_axe2:list=[],figsize=(12,8), spacing=0.1, **kwargs):
+def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsize=(8,4), spacing=0.1, **kwargs):
     from pandas import plotting
     from pandas.plotting import _matplotlib
     from matplotlib import pyplot as plt
@@ -25,7 +25,13 @@ def pd_plot_multi(df, cols_axe1:list=[], cols_axe2:list=[],figsize=(12,8), spaci
     if cols_axe1 is None: cols_axe1 = df.columns
     if len(cols_axe1) == 0: return
     colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
-
+    
+    # Displays subplot's pair in case of plot_type defined as `pair`
+    if plot_type=='pair':
+        ax = df.plot(subplots=True, figsize=figsize, **kwargs)
+        plt.show()
+        return
+    
     # First axis
     ax = df.loc[:, cols_axe1[0]].plot(label=cols_axe1[0], color=colors[0], **kwargs)
     ax.set_ylabel(ylabel=cols_axe1[0])
@@ -122,7 +128,7 @@ def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
 
 
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype=None,  **kw):
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
   :return:
@@ -186,17 +192,20 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         if i >= len(job_list): break
         dfi   = job_list[ i].get()
 
-        if dtype is not None      : dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
-        if col_filter is not None : dfi = dfi[ dfi[col_filter] == col_filter_val ]
-        if cols is not None :       dfi = dfi[cols]
-        if nrows > 0        :       dfi = dfi.iloc[:nrows,:]
+        if dtype_reduce is not None: dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+        if col_filter is not None :  dfi = dfi[ dfi[col_filter] == col_filter_val ]
+        if cols is not None :        dfi = dfi[cols]
+        if nrows > 0        :        dfi = dfi.iloc[:nrows,:]
         if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
         gc.collect()
 
         dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
         #log("Len", n_pool*j + i, len(dfall))
         del dfi; gc.collect()
-
+                
+  pool.terminate()
+  pool.join()  
+  pool = None          
   if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
   return dfall
 

@@ -192,9 +192,7 @@ def test2(*args):
 
 
 
-    
 #######################################################################################
-
 def pd_generateData(ncols=7, nrows=100):
     """
     Generate sample data for function testing
@@ -211,8 +209,6 @@ def pd_generateData(ncols=7, nrows=100):
     df['cat2']=categorical2
     df['cat1']= np.where( df['cat1'] == 4,'low',np.where(df['cat1'] == 5, 'High','V.High'))
     return df
-
-
 
 def test3():
         """
@@ -238,8 +234,25 @@ def test5():
 
 
 ########################################################################################
+def test6():
+    from utilmy import text
+    from difflib import SequenceMatcher
+    from pandas._testing import assert_series_equal
+
+    import pandas as pd
+    list1 = ['dog', 'cat']
+    list2 = ['doggy', 'cat']
+
+    cols = ['name','pet_name']
+    sample_df = pd.DataFrame(zip(list1, list2), columns=cols)
+    original_value = text.pd_similarity(sample_df, *cols)['score']
+
+    check_similarity = lambda *x: SequenceMatcher(None, *x[0]).ratio()
     
-    
+    output_value = pd.Series(sample_df.apply(lambda x: check_similarity(x[[*cols]]), axis=1), name="score")
+
+    assert_series_equal(original_value, output_value, check_names=False)
+      
 
 def test_data():
        from utilmy.text import pd_text_getcluster, test_lsh
