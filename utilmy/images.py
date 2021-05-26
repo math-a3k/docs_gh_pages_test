@@ -1,7 +1,5 @@
 """
-
-https://github.com/topics/hypothesis-testing?l=python&o=desc&s=stars
-
+Image related utils
 https://pypi.org/project/pysie/#description
 
 """
@@ -9,22 +7,30 @@ import os, sys, io, pandas as pd, numpy as np
 import typing
 import urllib.request
 import urllib.parse
-import validators
-import cv2
-import matplotlib.pyplot as plt
-import tifffile.tifffile
+
 
 
 def log(*s):
     print(s)
 
 
+def deps():
+    with open('dependencies/reqs_image.txt') as fp:
+        txt = fp.readlines()
+    print(txt)
+
+
+###################################################################################################
 def read_image(filepath_or_buffer: typing.Union[str, io.BytesIO]):
     """Read a file into an image object
     Args:
         filepath_or_buffer: The path to the file, a URL, or any object
             with a `read` method (such as `io.BytesIO`)
     """
+    import cv2
+    import tifffile.tifffile
+    import validators
+
     if isinstance(filepath_or_buffer, np.ndarray):
         return filepath_or_buffer
     if hasattr(filepath_or_buffer, 'read'):
@@ -46,6 +52,7 @@ def read_image(filepath_or_buffer: typing.Union[str, io.BytesIO]):
 # helper function for data visualization
 def visualize_in_row(**images):
     """Plot images in one row."""
+    import matplotlib.pyplot as plt
     n = len(images)
     plt.figure(figsize=(16, 5))
     for i, (name, image) in enumerate(images.items()):
@@ -60,6 +67,7 @@ def visualize_in_row(**images):
 # Resizes a image and maintains aspect ratio
 def maintain_aspect_ratio_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     # Grab the image size and initialize dimensions
+    import cv2
     dim = None
     (h, w) = image.shape[:2]
 

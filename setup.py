@@ -20,7 +20,7 @@ print("version", version)
 
 
 ##### Requirements ###################################################################
-#with open('install/requirements.txt') as fp:
+#with open('install/reqs_image.txt') as fp:
 #    install_requires = fp.read()
 install_requires = ['pyyaml']
 
