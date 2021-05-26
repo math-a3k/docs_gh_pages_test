@@ -377,7 +377,7 @@ def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
     return clist
 
 
-def pd_show(df, nrows=100, **kw):
+def pd_show(df, nrows=100, reader='notepad.exe', **kw):
     """ Show from Dataframe
     """
     import pandas as pd
@@ -389,8 +389,6 @@ def pd_show(df, nrows=100, **kw):
     ## In Windows
     cmd = f"notepad.exe {fpath}"
     os.system(cmd)
-
-
 
 
 
