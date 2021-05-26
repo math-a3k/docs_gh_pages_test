@@ -14,7 +14,7 @@ def pd_merge(df1, df2, on=None, colkeep=None):
   return df1.join( df2[ cols   ].set_index(on), on=on, how='left', rsuffix="2")
 
 
-def pd_plot_multi(df, cols_axe1:list=[], cols_axe2:list=[],figsize=(12,8), spacing=0.1, **kwargs):
+def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsize=(8,4), spacing=0.1, **kwargs):
     from pandas import plotting
     from pandas.plotting import _matplotlib
     from matplotlib import pyplot as plt
@@ -25,7 +25,13 @@ def pd_plot_multi(df, cols_axe1:list=[], cols_axe2:list=[],figsize=(12,8), spaci
     if cols_axe1 is None: cols_axe1 = df.columns
     if len(cols_axe1) == 0: return
     colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
-
+    
+    # Displays subplot's pair in case of plot_type defined as `pair`
+    if plot_type=='pair':
+        ax = df.plot(subplots=True, figsize=figsize, **kwargs)
+        plt.show()
+        return
+    
     # First axis
     ax = df.loc[:, cols_axe1[0]].plot(label=cols_axe1[0], color=colors[0], **kwargs)
     ax.set_ylabel(ylabel=cols_axe1[0])
