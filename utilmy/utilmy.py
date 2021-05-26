@@ -14,7 +14,7 @@ def pd_merge(df1, df2, on=None, colkeep=None):
   return df1.join( df2[ cols   ].set_index(on), on=on, how='left', rsuffix="2")
 
 
-def pd_plot_multi(df, cols_axe1:list=[], cols_axe2:list=[],figsize=(12,8), spacing=0.1, **kwargs):
+def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsize=(8,4), spacing=0.1, **kwargs):
     from pandas import plotting
     from pandas.plotting import _matplotlib
     from matplotlib import pyplot as plt
@@ -25,7 +25,13 @@ def pd_plot_multi(df, cols_axe1:list=[], cols_axe2:list=[],figsize=(12,8), spaci
     if cols_axe1 is None: cols_axe1 = df.columns
     if len(cols_axe1) == 0: return
     colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
-
+    
+    # Displays subplot's pair in case of plot_type defined as `pair`
+    if plot_type=='pair':
+        ax = df.plot(subplots=True, figsize=figsize, **kwargs)
+        plt.show()
+        return
+    
     # First axis
     ax = df.loc[:, cols_axe1[0]].plot(label=cols_axe1[0], color=colors[0], **kwargs)
     ax.set_ylabel(ylabel=cols_axe1[0])
@@ -122,7 +128,7 @@ def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
 
 
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype=None,  **kw):
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
   :return:
@@ -186,17 +192,20 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         if i >= len(job_list): break
         dfi   = job_list[ i].get()
 
-        if dtype is not None      : dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
-        if col_filter is not None : dfi = dfi[ dfi[col_filter] == col_filter_val ]
-        if cols is not None :       dfi = dfi[cols]
-        if nrows > 0        :       dfi = dfi.iloc[:nrows,:]
+        if dtype_reduce is not None: dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+        if col_filter is not None :  dfi = dfi[ dfi[col_filter] == col_filter_val ]
+        if cols is not None :        dfi = dfi[cols]
+        if nrows > 0        :        dfi = dfi.iloc[:nrows,:]
         if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
         gc.collect()
 
         dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
         #log("Len", n_pool*j + i, len(dfall))
         del dfi; gc.collect()
-
+                
+  pool.terminate()
+  pool.join()  
+  pool = None          
   if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
   return dfall
 
@@ -384,6 +393,105 @@ def pd_show(df, nrows=100, reader='notepad.exe', **kw):
     fpath = 'ztmp/ztmp_dataframe.csv'
     os_makedirs(fpath)
     df.iloc[:nrows,:].to_csv(fpath, sep=",", mode='w')
+
+
+
+def pd_ANOVA(df,col1,col2):
+    """
+    ANOVA test two categorical features
+    Input dfframe, 1st feature and 2nd feature
+    """
+    import scipy.stats as stats
+    
+    ov=pd.crosstab(df[col1],df[col2])   
+    edu_frame=df[[col1, col2]]    
+    groups = edu_frame.groupby(col1).groups
+    edu_class=edu_frame[col2]
+    lis_group = groups.keys()
+    lg=[]
+    for i in groups.keys():
+        globals()[i]  = edu_class[groups[i]].values
+        lg.append(globals()[i])
+    dfd = 0
+    for m in lis_group:       
+        dfd=len(m)-1+dfd   
+    print(stats.f_oneway(*lg))
+    stat_val = stats.f_oneway(*lg)[0]
+    crit_val = stats.f.ppf(q=1-0.05, dfn=len(lis_group)-1, dfd=dfd)
+    if stat_val >= crit_val :
+         print('Reject null hypothesies and conclude that atleast one group is different and the feature is releavant to the class.')
+    else:
+         print('Accept null hypothesies and conclude that atleast one group is same and the feature is not releavant to the class.')
+    
+
+
+def pd_normality_test(df,column,test_type):
+    """
+    Function to check Normal Distribution of a Feature by 3 methods
+    Input dfframe, feature name, and a test type 
+    Three types of test
+    1)'Shapiro'
+    2)'Normal'
+    3)'Anderson'
+    
+    output the statistical test score and result whether accept or reject
+    Accept mean the feature is Gaussain
+    Reject mean the feature is not Gaussain
+    """
+    from scipy.stats import shapiro
+    from scipy.stats import normaltest
+    from scipy.stats import anderson
+    if  test_type == 'Shapiro':
+        stat, p = shapiro(df[column])
+        print('Statistics=%.3f, p=%.3f' % (stat, p))
+        # interpret
+        alpha = 0.05
+        if p > alpha:
+            print(column,' looks Gaussian (fail to reject H0)')
+        else:
+            print(column,' does not look Gaussian (reject H0)')
+    if  test_type == 'Normal':
+        stat, p = normaltest(df[column])
+        print('Statistics=%.3f, p=%.3f' % (stat, p))
+        # interpret
+        alpha = 0.05
+        if p > alpha:
+            print(column,' looks Gaussian (fail to reject H0)')
+        else:
+            print(column,' does not look Gaussian (reject H0)')
+        # normality test
+    if  test_type == 'Anderson':
+        result = anderson(df[column])
+        print('Statistic: %.3f' % result.statistic)
+        p = 0
+        for i in range(len(result.critical_values)):
+            sl, cv = result.significance_level[i], result.critical_values[i]
+            if result.statistic < result.critical_values[i]:
+                print(sl,' : ',cv,' ',column,' looks normal (fail to reject H0)')
+            else:
+                print(sl,' : ',cv,' ',column,' does not looks normal (fail to reject H0)')
+
+
+def pd_numerical_plots(df,col_name):
+    """
+    Function to plot boxplot, histplot and qqplot for numerical feature analyze
+    """
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import statsmodels.api as sm
+    fig, axes = plt.subplots(1, 3, figsize=(18,5))
+    fig.suptitle('Numerical Analysis'+" "+col_name)
+    sns.boxplot(ax=axes[0], data=df,x=col_name)
+    sns.histplot(ax=axes[1],data=df, x=col_name, kde=True)
+    sm.qqplot(ax=axes[2],data=df[col_name], line ='45') 
+    print(df[col_name].describe())
+
+
+
+
+
+
+
 
 
     ## In Windows
