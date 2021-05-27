@@ -8,7 +8,7 @@ https://pypi.org/project/pysie/#description
 
 """
 import os, sys, pandas as pd, numpy as np
-from typing import Tuple
+from typing import List
 
 def log(*s):
     print(s)
@@ -74,36 +74,40 @@ def pd_text_getcluster(df, col, threshold, num_perm):
     return df
 
 
-def pd_similarity(df: pd.DataFrame, cols: Tuple[str]) -> pd.DataFrame:
+def pd_similarity(df:pd.DataFrame, cols:List[str], algo='')->pd.DataFrame:
     '''
         Return similarities between two columns with 
         python's SequenceMatcher algorithm
         
         Args:
             df (pd.DataFrame): Pandas Dataframe.
-            cols (Tuple[str]) : List of of columns name
+            algo (String)    : rapidfuzz | editdistance 
+            cols (list[str]) : List of of columns name
         
         Returns:
-            pd.Dataframe
+            pd.Series
         
     '''
-
-    if len(cols) > 3:
-        raise Exception("Maximum 3 columns allowed")
 
     for col in cols:
         if col not in df:
             raise Exception(f"Columns not found {col}")
-
+            break
+    
     from difflib import SequenceMatcher
-
+    from rapidfuzz import fuzz            
+    import editdistance
+    
     def find_similarity(*values):
-        is_junk = None
-        similarity_score = SequenceMatcher(is_junk, *values[0]).ratio()
+        if algo=="rapidfuzz":
+            similarity_score = fuzz.ratio(*values[0])
+        elif algo=="editdistance":
+            similarity_score = editdistance.eval(*values[0])
+        else:
+            is_junk = None
+            similarity_score = SequenceMatcher(is_junk, *values[0]).ratio()
         return similarity_score
-
-    df['score'] = df[cols].apply(lambda x: find_similarity(x[cols]), axis=1)
-
+    df['score'] = df[cols].apply( lambda x : find_similarity(x[cols]), axis=1)
     return df
 
 def test_lsh():
