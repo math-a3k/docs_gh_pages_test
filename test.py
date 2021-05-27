@@ -18,7 +18,7 @@ def test0():
     pd_plot_multi(df, cols_axe1=['0', '1'])
 
 
-def test1():
+def test_utilmy_pd_os_session():
    from utilmy import (pd_show, git_current_hash, )
 
    ############################################################################
@@ -179,7 +179,7 @@ def test1():
 
 
    
-def test2(*args):
+def test_decorators_os(*args):
     from utilmy.decorators import os_multithread
       
     def test_print(*args):
@@ -211,7 +211,7 @@ def pd_generateData(ncols=7, nrows=100):
     return df
 
 
-def test3():
+def test_tabular_test():
         """
         ANOVA test
         """
@@ -229,7 +229,7 @@ def test3():
 
 
 ########################################################################################
-def test6():
+def test_text_similarity():
     from utilmy import text
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
@@ -257,10 +257,10 @@ def test_data():
    
    
 if __name__ == "__main__":
-    test1()
-    test2()
-    # test3()
-    # test6()
+    test_utilmy_pd_os_session()
+    test_decorators_os()
+    # test_tabular_test()
+    # test_text_similarity()
     # test_data()
 
 
