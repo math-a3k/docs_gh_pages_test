@@ -15,6 +15,162 @@ def log(*s):
 
 #############################################################################
 #############################################################################
+
+def test_anova(df, col1, col2):
+    """
+    ANOVA test two categorical features
+    Input dfframe, 1st feature and 2nd feature
+    """
+    import scipy.stats as stats
+
+    ov=pd.crosstab(df[col1],df[col2])
+    edu_frame=df[[col1, col2]]
+    groups = edu_frame.groupby(col1).groups
+    edu_class=edu_frame[col2]
+    lis_group = groups.keys()
+    lg=[]
+    for i in groups.keys():
+        globals()[i]  = edu_class[groups[i]].values
+        lg.append(globals()[i])
+    dfd = 0
+    for m in lis_group:
+        dfd=len(m)-1+dfd
+    print(stats.f_oneway(*lg))
+    stat_val = stats.f_oneway(*lg)[0]
+    crit_val = stats.f.ppf(q=1-0.05, dfn=len(lis_group)-1, dfd=dfd)
+    if stat_val >= crit_val :
+         print('Reject null hypothesies and conclude that atleast one group is different and the feature is releavant to the class.')
+    else:
+         print('Accept null hypothesies and conclude that atleast one group is same and the feature is not releavant to the class.')
+
+
+
+def test_normality2(df, column, test_type):
+    """
+    Function to check Normal Distribution of a Feature by 3 methods
+    Input dfframe, feature name, and a test type
+    Three types of test
+    1)'Shapiro'
+    2)'Normal'
+    3)'Anderson'
+
+    output the statistical test score and result whether accept or reject
+    Accept mean the feature is Gaussain
+    Reject mean the feature is not Gaussain
+    """
+    from scipy.stats import shapiro
+    from scipy.stats import normaltest
+    from scipy.stats import anderson
+    if  test_type == 'Shapiro':
+        stat, p = shapiro(df[column])
+        print('Statistics=%.3f, p=%.3f' % (stat, p))
+        # interpret
+        alpha = 0.05
+        if p > alpha:
+            print(column,' looks Gaussian (fail to reject H0)')
+        else:
+            print(column,' does not look Gaussian (reject H0)')
+    if  test_type == 'Normal':
+        stat, p = normaltest(df[column])
+        print('Statistics=%.3f, p=%.3f' % (stat, p))
+        # interpret
+        alpha = 0.05
+        if p > alpha:
+            print(column,' looks Gaussian (fail to reject H0)')
+        else:
+            print(column,' does not look Gaussian (reject H0)')
+        # normality test
+    if  test_type == 'Anderson':
+        result = anderson(df[column])
+        print('Statistic: %.3f' % result.statistic)
+        p = 0
+        for i in range(len(result.critical_values)):
+            sl, cv = result.significance_level[i], result.critical_values[i]
+            if result.statistic < result.critical_values[i]:
+                print(sl,' : ',cv,' ',column,' looks normal (fail to reject H0)')
+            else:
+                print(sl,' : ',cv,' ',column,' does not looks normal (fail to reject H0)')
+
+
+def test_plot_qqplot(df, col_name):
+    """
+    Function to plot boxplot, histplot and qqplot for numerical feature analyze
+    """
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import statsmodels.api as sm
+    fig, axes = plt.subplots(1, 3, figsize=(18,5))
+    fig.suptitle('Numerical Analysis'+" "+col_name)
+    sns.boxplot(ax=axes[0], data=df,x=col_name)
+    sns.histplot(ax=axes[1],data=df, x=col_name, kde=True)
+    sm.qqplot(ax=axes[2],data=df[col_name], line ='45')
+    print(df[col_name].describe())
+
+
+
+####################################################################################################
+def test_heteroscedacity(y, y_pred, pred_value_only=1):
+    ss = """
+       Test  Heteroscedacity :  Residual**2  = Linear(X, Pred, Pred**2)
+       F pvalues < 0.01 : Null is Rejected  ---> Not Homoscedastic
+       het_breuschpagan
+
+    """
+    from statsmodels.stats.diagnostic import het_breuschpagan, het_white
+    error    = y_pred - y
+
+    ypred_df = pd.DataFrame({"pcst": [1.0] * len(y), "pred": y_pred, "pred2": y_pred * y_pred})
+    labels   = ["LM Statistic", "LM-Test p-value", "F-Statistic", "F-Test p-value"]
+    test1    = het_breuschpagan(error * error, ypred_df.values)
+    test2    = het_white(error * error, ypred_df.values)
+    ddict    = {"het-breuschpagan": dict(zip(labels, test1)),
+             "het-white": dict(zip(labels, test2)),
+             }
+
+    return ddict
+
+
+def test_normality(error, distribution="norm", test_size_limit=5000):
+    """
+       Test  Is Normal distribution
+       F pvalues < 0.01 : Rejected
+
+    """
+    from scipy.stats import shapiro, anderson, kstest
+
+    error2 = error
+
+    error2 = error2[np.random.choice(len(error2), 5000)]  # limit test
+    test1  = shapiro(error2)
+    ddict1 = dict(zip(["shapiro", "W-p-value"], test1))
+
+    test2  = anderson(error2, dist=distribution)
+    ddict2 = dict(zip(["anderson", "p-value", "P critical"], test2))
+
+    test3  = kstest(error2, distribution)
+    ddict3 = dict(zip(["kstest", "p-value"], test3))
+
+    ddict  = dict(zip(["shapiro", "anderson", "kstest"], [ddict1, ddict2, ddict3]))
+
+    return ddict
+
+
+def test_mutualinfo(error, Xtest, colname=None, bins=5):
+    """
+       Test  Error vs Input Variable Independance byt Mutual ifno
+       sklearn.feature_selection.mutual_info_classif(X, y, discrete_features='auto', n_neighbors=3, copy=True, random_state=None)
+
+    """
+    from sklearn.feature_selection import mutual_info_classif
+    error = pd.DataFrame({"error": error})
+    error_dis, _ = pd_colnum_tocat(error, bins=bins, method="quantile")
+    # print(error_dis)
+
+    res = mutual_info_classif(Xtest.values, error_dis.values.ravel())
+
+    return dict(zip(colname, res))
+
+
 def test_hypothesis(df_obs, df_ref, method='', **kw):
     """
     https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py
@@ -32,6 +188,41 @@ def test_hypothesis(df_obs, df_ref, method='', **kw):
 
 
 
+####################################################################################################
+####################################################################################################
+def estimator_std_normal(err, alpha=0.05, ):
+    # estimate_std( err, alpha=0.05, )
+    from scipy import stats
+    n = len(err)  # sample sizes
+    s2 = np.var(err, ddof=1)  # sample variance
+    df = n - 1  # degrees of freedom
+    upper = np.sqrt((n - 1) * s2 / stats.chi2.ppf(alpha / 2, df))
+    lower = np.sqrt((n - 1) * s2 / stats.chi2.ppf(1 - alpha / 2, df))
+
+    return np.sqrt(s2), (lower, upper)
+
+
+def estimator_boostrap_bayes(err, alpha=0.05, ):
+    from scipy.stats import bayes_mvs
+    mean, var, std = bayes_mvs(err, alpha=alpha)
+    return mean, var, std
+
+
+def estimator_bootstrap(err, custom_stat=None, alpha=0.05, n_iter=10000):
+    """
+      def custom_stat(values, axis=1):
+      # stat_val = np.mean(np.asmatrix(values),axis=axis)
+      # stat_val = np.std(np.asmatrix(values),axis=axis)p.mean
+      stat_val = np.sqrt(np.mean(np.asmatrix(values*values),axis=axis))
+      return stat_val
+    """
+    import bootstrapped.bootstrap as bs
+    res = bs.bootstrap(err, stat_func=custom_stat, alpha=alpha, num_iterations=n_iter)
+    return res
+
+
+
+#############################################################################################################
 def pd_train_test_split_time(df, test_period = 40, cols=None , coltime ="time_key", sort=True, minsize=5,
                      n_sample=5,  verbose=False) :
    cols = list(df.columns) if cols is None else cols

@@ -210,27 +210,22 @@ def pd_generateData(ncols=7, nrows=100):
     df['cat1']= np.where( df['cat1'] == 4,'low',np.where(df['cat1'] == 5, 'High','V.High'))
     return df
 
+
 def test3():
         """
         ANOVA test
         """
+        from utilmy.tabular import test_anova
         df=pd_generateData(7,100)
-        pd_ANOVA(df,'cat1','cat2')
+        test_anova(df, 'cat1', 'cat2')
 
-def test4():
-        """
-            Normality test
-        """
-        df=pd_generateData(7,100)
-        pd_normality_test(df,'0',"Shapiro")  
+        from utilmy.tabular import test_normality2
+        test_normality2(df, '0', "Shapiro")
+
+        from utilmy.tabular import test_plot_qqplot
+        test_plot_qqplot(df, '1')
 
 
-def test5():
-        """
-        Numerical_plots
-        """
-        df=pd_generateData(7,100)
-        pd_numerical_plots(df,'1')
 
 
 ########################################################################################
@@ -265,8 +260,7 @@ if __name__ == "__main__":
     test1()
     test2()
     test3()
-    test4()
-    test5()
+    test6()
     test_data()
 
 
