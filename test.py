@@ -12,7 +12,7 @@ def pd_random(ncols=7, nrows=100):
    return df
 
 
-def test0():
+def test_utilmy_plot():
     df = pd_random(7, 100)
     from utilmy import pd_plot_multi
     pd_plot_multi(df, cols_axe1=['0', '1'])
@@ -193,7 +193,7 @@ def test_decorators_os(*args):
 
 
 #######################################################################################
-def pd_generateData(ncols=7, nrows=100):
+def pd_generate_data(ncols=7, nrows=100):
     """
     Generate sample data for function testing
     categorical features for anova test
@@ -216,7 +216,7 @@ def test_tabular_test():
         ANOVA test
         """
         from utilmy.tabular import test_anova
-        df=pd_generateData(7,100)
+        df=pd_generate_data(7, 100)
         test_anova(df, 'cat1', 'cat2')
 
         from utilmy.tabular import test_normality2
@@ -249,7 +249,7 @@ def test_text_similarity():
     assert_series_equal(original_value, output_value, check_names=False)
       
 
-def test_data():
+def test_text_pdcluster():
        from utilmy.text import pd_text_getcluster, test_lsh
        test_lsh()
 
@@ -261,7 +261,7 @@ if __name__ == "__main__":
     test_decorators_os()
     # test_tabular_test()
     # test_text_similarity()
-    # test_data()
+    # test_text_pdcluster()
 
 
 
