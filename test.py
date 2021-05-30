@@ -12,6 +12,10 @@ def pd_random(ncols=7, nrows=100):
    return df
 
 
+
+
+#########################################################################################
+#########################################################################################
 def test_utilmy_plot():
     df = pd_random(7, 100)
     from utilmy import pd_plot_multi
@@ -60,8 +64,6 @@ def test_utilmy_pd_os_session():
    assert len(df2) == 2 * n0, f"df1 {len(df2) }, original {n0}"
 
    
-
-
    ###################################################################################
    ###################################################################################
    from utilmy import git_repo_root
@@ -93,7 +95,9 @@ def test_utilmy_pd_os_session():
    print(res)
    res = os_system( f" ls . ",  doprint=False)
 
-
+   from utilmy import os_platform_os
+   assert os_platform_os() == sys.platform
+   
 
    ###################################################################################
    ###################################################################################
@@ -108,12 +112,10 @@ def test_utilmy_pd_os_session():
    gverbosity =global_verbosity(__file__, "config.json", 40,)
    assert gverbosity == verbosity, "incorrect verbosity "
 
-
-
-
-
-   ###################################################################################
-   ###################################################################################
+   
+   
+   
+def test_utilmy_session():   
    from utilmy import Session
    sess = Session("ztmp/session")
    sess.save('mysess', globals(), '01')
@@ -135,6 +137,45 @@ def test_utilmy_pd_os_session():
    sess.load('mysess', None, '02')
 
    
+
+
+
+   
+   
+   
+   
+#########################################################################################
+#########################################################################################
+def test_decorators_os(*args):
+    from utilmy.decorators import os_multithread   
+    def test_print(*args):
+        print(args[0]*args[0])
+        return args[0]*args[0]
+
+    assert os_multithread(function1=(test_print, (5,)),
+                          function2=(test_print, (4,)),
+                          function3=(test_print, (2,)))
+
+      
+   ###################################################################################    
+   from utilmy.decorators import profiler_deco, profiler_context
+   @profiler_deco
+   def profiled_sum():
+       return sum(range(100000))
+
+   profiled_sum()
+
+   with profiler_context():
+       x = sum(range(1000000))
+       print(x)
+
+      
+   from utilmy import profiler_start, profiler_stop
+   profiler_start()
+   print(sum(range(1000000)))
+   profiler_stop()      
+      
+               
    ###################################################################################   
    from utilmy.decorators import timer
    @timer
@@ -148,50 +189,15 @@ def test_utilmy_pd_os_session():
 
    dummy_func()
    a = DummyClass()
-   a.method()
-
-
-   ###################################################################################
-   from utilmy.decorators import profiler_deco, profiler_context
-   
-   @profiler_deco
-   def profiled_sum():
-       return sum(range(100000))
-
-   profiled_sum()
-
-   with profiler_context():
-       x = sum(range(1000000))
-       print(x)
-
+   a.method()      
       
-   ###################################################################################
-   from utilmy import profiler_start, profiler_stop
-   
-   profiler_start()
-   print(sum(range(1000000)))
-   profiler_stop()
-
-   
-   ###################################################################################
-   from utilmy import os_platform_os
-   assert os_platform_os() == sys.platform
-
-
-   
-def test_decorators_os(*args):
-    from utilmy.decorators import os_multithread
       
-    def test_print(*args):
-        print(args[0]*args[0])
-        return args[0]*args[0]
-
-    assert os_multithread(function1=(test_print, (5,)),
-                          function2=(test_print, (4,)),
-                          function3=(test_print, (2,)))
-
-
-
+      
+      
+      
+      
+      
+#########################################################################################
 #######################################################################################
 def pd_generate_data(ncols=7, nrows=100):
     """
@@ -227,8 +233,9 @@ def test_tabular_test():
 
 
 
-
-########################################################################################
+         
+#########################################################################################
+#########################################################################################
 def test_text_similarity():
     from utilmy import text
     from difflib import SequenceMatcher
@@ -256,6 +263,10 @@ def test_text_pdcluster():
    
    
    
+   
+   
+   
+#########################################################################################   
 if __name__ == "__main__":
     test_utilmy_pd_os_session()
     test_decorators_os()
