@@ -260,7 +260,7 @@ if __name__ == "__main__":
     test_utilmy_pd_os_session()
     test_decorators_os()
     # test_tabular_test()
-    # test_text_similarity()
+    test_text_similarity()
     # test_text_pdcluster()
 
 
