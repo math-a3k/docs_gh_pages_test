@@ -157,39 +157,40 @@ def test_decorators_os(*args):
                           function3=(test_print, (2,)))
 
       
-   ###################################################################################    
-   from utilmy.decorators import profiler_deco, profiler_context
-   @profiler_deco
-   def profiled_sum():
+    ###################################################################################
+    from utilmy.decorators import profiler_deco, profiler_context
+
+    @profiler_deco
+    def profiled_sum():
        return sum(range(100000))
 
-   profiled_sum()
+    profiled_sum()
 
-   with profiler_context():
+    with profiler_context():
        x = sum(range(1000000))
        print(x)
 
-      
-   from utilmy import profiler_start, profiler_stop
-   profiler_start()
-   print(sum(range(1000000)))
-   profiler_stop()      
-      
-               
-   ###################################################################################   
-   from utilmy.decorators import timer
-   @timer
-   def dummy_func():
+
+    from utilmy import profiler_start, profiler_stop
+    profiler_start()
+    print(sum(range(1000000)))
+    profiler_stop()
+
+
+    ###################################################################################
+    from utilmy.decorators import timer
+    @timer
+    def dummy_func():
        time.sleep(2)
 
-   class DummyClass:
+    class DummyClass:
        @timer
        def method(self):
            time.sleep(3)
 
-   dummy_func()
-   a = DummyClass()
-   a.method()      
+    dummy_func()
+    a = DummyClass()
+    a.method()
       
       
       
@@ -221,14 +222,10 @@ def test_tabular_test():
         """
         ANOVA test
         """
-        from utilmy.tabular import test_anova
-        df=pd_generate_data(7, 100)
+        from utilmy.tabular import test_anova, test_normality2,test_plot_qqplot
+        df = pd_generate_data(7, 100)
         test_anova(df, 'cat1', 'cat2')
-
-        from utilmy.tabular import test_normality2
         test_normality2(df, '0', "Shapiro")
-
-        from utilmy.tabular import test_plot_qqplot
         test_plot_qqplot(df, '1')
 
 
