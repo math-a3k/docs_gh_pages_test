@@ -455,6 +455,68 @@ def to_int(x):
 
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
+def config_load(config_path:str = None, 
+                path_default:str=None, 
+                config_default:dict=None):
+    """Load Config file into a dict  from .json or .yaml file
+    TODO .cfg file
+    1) load config_path
+    2) If not, load default from HOME USER
+    3) If not, create default on in python code
+    Args:
+        config_path: path of config or 'default' tag value
+    Returns: dict config
+    """
+    import json, yaml
+    from Path import pathlib
+
+    path_default        = pathlib.Path.home() / ".mygenerator" if path_default is None else path_default
+    config_path_default = path_default / "config.yaml"
+    if config_default is None :
+        config_default = {
+            "current_dataset": "mnist",
+            "datasets": {
+                "mnist": {
+                    "url": "/mnist_png.tar.gz",
+                    "path": str(path_default / "mnist_png" / "training"),
+                }
+            },
+        }
+
+    #####################################################################
+    if config_path is None or config_path == "default":
+        log(f"Using config: {config_path_default}")
+        config_path = config_path_default
+    else :
+        config_path = pathlib.Path(config_path)
+        
+    try:
+        log("loading config", config_path)
+        if ".yaml" in config_path :
+            cfg = yaml.load(config_path.read_text(), Loader=yaml.Loader)
+            dd = {}
+            for x in cfg :   ### Map to dict
+                for key,val in x.items():
+                   dd[key] = val
+            return cfg
+
+        if ".json" in config_path :
+           return json.load(config_path.read_text())
+
+    except Exception as e:
+        log(f"Cannot read yaml/json file {config_path}", e)
+
+
+    log("#### Using default configuration")
+    log(config_default)
+    log(f"Creating config file in {config_path_default}")
+    os.makedirs(path_default, exist_ok=True)
+    with open(config_path_default, mode="w") as fp:
+        yaml.dump(config_default, fp)
+    return config_default
+
+
+
 def os_path_split(fpath:str=""):
     #### Get path split
     fpath = fpath.replace("\\", "/")
