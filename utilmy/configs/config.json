@@ -1,0 +1,23 @@
+{
+  "string": "hello",
+  "regex": "abcde",
+  "number": 13.12,
+  "integer": 2,
+  "boolean": true,
+  "list": [
+    "hi"
+  ],
+  "enum": 1,
+  "map": {
+    "hello": 1,
+    "another": "hi"
+  },
+  "empty": null,
+  "date": "2015-01-01T00:00:00.000Z",
+  "nest": {
+    "integer": 1,
+    "nest": {
+      "string": "nested"
+    }
+  }
+}

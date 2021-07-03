@@ -1,0 +1,37 @@
+schemas:
+  - name: NestedSchema2
+    props:
+      - name: string
+        type: str
+
+  - name: NestedSchema1
+    props:
+      - name: integer
+        type: int
+      - name: nest
+        type: NestedSchema2
+
+  - name: MainSchema
+    props:
+      - name: string
+        type: str
+      - name: regex
+        type: str
+      - name: number
+        type: int
+      - name: integer
+        type: int
+      - name: boolean
+        type: bool
+      - name: list
+        type: list
+      - name: enum
+        type: str
+      - name: map
+        type: dict
+      - name: empty
+        type: None
+      - name: date
+        type: date
+      - name: nest
+        type: NestedSchema1
