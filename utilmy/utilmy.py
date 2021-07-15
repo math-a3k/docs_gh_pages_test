@@ -1105,10 +1105,18 @@ def print_everywhere():
     print("Decaorator @snoop ")
     
     
+def log10(*s, nmax=60):
+    """ Display variable name, type when showing,  pip install varname
+    
+    """
+    from varname import varname, nameof
+    for x in s :
+        print(nameof(x, frame=2), ":", type(x), "\n",  str(x)[:nmax], "\n")
         
     
-def ic(*s):
+def log5(*s):
     """    ### Equivalent of print, but more :  https://github.com/gruns/icecream
+    pip install icrecream
     ic()  --->  ic| example.py:4 in foo()
     ic(var)  -->   ic| d['key'][1]: 'one'
     
@@ -1117,7 +1125,7 @@ def ic(*s):
     return ic(*s)
     
     
-def log_break(msg="", dump_path="", globs=None):
+def log_trace(msg="", dump_path="", globs=None):
     print(msg)
     import pdb;
     pdb.set_trace()
