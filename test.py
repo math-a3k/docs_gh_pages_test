@@ -139,11 +139,17 @@ def test_utilmy_session():
    
 
 
+def test_docs_cli():
+    """
+      from utilmy.docs.generate_doc import run_markdown, run_table
 
+    """
+    cmd = "doc-gen  --repo_dir utilmy/      --doc_dir docs/"
+    os.system(cmd)
+    os.system('ls docs/')
    
    
-   
-   
+
 #########################################################################################
 #########################################################################################
 def test_decorators_os(*args):
@@ -269,7 +275,8 @@ if __name__ == "__main__":
     test_decorators_os()
     # test_tabular_test()
     test_text_similarity()
-    # test_text_pdcluster()
+    test_docs_cli()
+
 
 
 

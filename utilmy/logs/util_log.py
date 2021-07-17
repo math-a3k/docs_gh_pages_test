@@ -56,11 +56,16 @@ def logger_setup(log_config_path: str = None, log_template: str = "default", **k
         cfg = {"log_level": "DEBUG", "handlers": {"default": [{"sink": "sys.stdout"}]}}
 
     ########## Parse handlers  ####################################################
-    globals_, handlers = cfg, cfg.pop("handlers")[log_template]
-
+    globals_ = cfg
+    handlers = cfg.pop("handlers")[log_template]
     rotation = globals_.pop("rotation")
 
+
     for handler in handlers:
+        if 'sink' not in handler : 
+            print(f'Skipping {handler}')
+            continue
+
         if handler["sink"] == "sys.stdout":
             handler["sink"] = sys.stdout
 
@@ -68,9 +73,9 @@ def logger_setup(log_config_path: str = None, log_template: str = "default", **k
             handler["sink"] = sys.stderr
 
         elif handler["sink"].startswith("socket"):
-            sink_data = handler["sink"].split(",")
-            ip = sink_data[1]
-            port = int(sink_data[2])
+            sink_data       = handler["sink"].split(",")
+            ip              = sink_data[1]
+            port            = int(sink_data[2])
             handler["sink"] = SocketHandler(ip, port)
 
         elif ".log" in handler["sink"] or ".txt" in handler["sink"]:
