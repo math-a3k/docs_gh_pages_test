@@ -6,7 +6,9 @@ from utilmy.docs.code_parser import  export_stats_perfile, export_stats_perrepo,
 
 
 def run_cli():
-    """
+    """ USage
+    
+    doc-gen  doc-gen  --repo_dir utilmy/      --doc_dir docs/"
     """
     p   = argparse.ArgumentParser()
     add = p.add_argument
