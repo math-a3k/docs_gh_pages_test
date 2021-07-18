@@ -849,6 +849,19 @@ def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
     return r * 0.0000001
 
 
+
+def os_copy(src, dst, overwrite=False, exclude=""):
+    import shutil
+    def ignore_pyc_files(dirname, filenames):
+        return [name for name in filenames if name.endswith('.pyc')]
+
+
+    patterns = exclude.split(";")
+    os.makedirs(dst, exist_ok=True)
+    shutil.copytree(src, dst, ignore = shutil.ignore_patterns(*patterns))
+
+
+
 def os_removedirs(path):
     """  issues with no empty Folder
     # Delete everything reachable from the directory named in 'top',

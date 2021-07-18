@@ -65,7 +65,10 @@ scripts = [     ]
 ### CLI Scripts  ###################################################   
 entry_points={ 'console_scripts': [
 
-    'doc-gen=utilmy.docs.cli:run_cli'
+    'doc-gen=utilmy.docs.cli:run_cli',
+
+    'templates=utilmy.templates.cli:run_cli'
+
 
  ] }
 
