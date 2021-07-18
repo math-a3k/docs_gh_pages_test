@@ -15,7 +15,17 @@ One liner utilities
    This package is looking for contributors.
    Documentation is here:  https://github.com/arita37/myutil/issues/9
    
-   
+ 
+ # Usage
+ ```
+ #### Generate automatic docs/stats
+ cd yourrepo
+ doc-gen   --prefix   https://github.com/arita37/yourepo/tree/main/
+ 
+ 
+ 
+ ```
+ 
 
 
 # myutil
