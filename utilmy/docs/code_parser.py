@@ -559,6 +559,8 @@ def _get_all_lines_in_function(function_name, array, indentMethod=''):
     # 2. get indent
     start_idx = 0
     if response[0].rstrip()[-1] == ':':
+        if not re.match(r"(\s+)\w*", response[1]):
+            return [], ""
         indent = re.match(r"(\s+)\w*", response[1]).group(1)
         start_idx = 1
     else:
@@ -566,6 +568,8 @@ def _get_all_lines_in_function(function_name, array, indentMethod=''):
             if response[i].rstrip()[-1] == ':':
                 start_idx = i+1
                 break
+        if not re.match(r"(\s+)\w*", response[start_idx]):
+            return [], ""
         indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
 
     # 3. get all lines in function
@@ -644,6 +648,8 @@ def _get_all_lines_define_function(function_name, array, indentMethod=''):
     # 2. check if the is one or multi lines
     start_idx = 0
     if response[0].rstrip()[-1] == ':':
+        if not re.match(r"(\s+)\w*", response[1]):
+            return [], ""
         indent = re.match(r"(\s+)\w*", response[1]).group(1)
         start_idx = 1
         list_lines.append(response[0])
@@ -653,6 +659,8 @@ def _get_all_lines_define_function(function_name, array, indentMethod=''):
             if response[i].rstrip()[-1] == ':':
                 start_idx = i+1
                 break
+        if not re.match(r"(\s+)\w*", response[start_idx]):
+            return [], ""
         indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
     return list_lines, indent
 
@@ -906,7 +914,7 @@ if __name__ == "__main__":
       'file': export_stats_perfile,
       'repo': export_stats_perrepo,
     })
-    test_example()
+    # test_example()
 
     '''List example to run:
         python code_parser.py type parser/test3/arrow_dataset.py method parser/output/output_method.csv
