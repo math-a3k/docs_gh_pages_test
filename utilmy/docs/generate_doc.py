@@ -85,16 +85,21 @@ def markdown_createall(dfi, prefix=""):
   
 #############################################################################
 ############ TABLE
-def table_create_row(uri, name, type, start_line, prefix):
-    rsp  = "| <a name='{}' href='{}'>{}</a> | {} | <a href='{}#L{}'>{}</a> |"
+def table_create_row(uri, name, type, start_line, list_funtions, prefix):
+    rsp  = "| <a name='{}' href='{}'>{}</a> | {} | <a href='{}#L{}'>{}</a> | {} |"
+    list_funtions = literal_eval(list_funtions)
+    print(list_funtions)
+    funcs_str = ""
+    for function in list_funtions:
+        funcs_str += f'{function}<br>'
     file = uri.split(':', 1)[0]
-    return rsp.format(file, f'{prefix}/{file}', file, type, f'{prefix}/{file}', start_line, name)
+    return rsp.format(file, f'{prefix}/{file}', file, type, f'{prefix}/{file}', start_line, name, funcs_str)
 
 
 def table_all_row(list_rows):
     rsp = '''
-| file | type | name  |
-| ------- | --- | --- |
+| file | type | name  | List functions |
+| ------- | --- | --- | -------------- |
 '''
     for row in list_rows:
         rsp += f'{row}\n'
@@ -102,8 +107,8 @@ def table_all_row(list_rows):
 
 
 def table_create(dfi, prefix):
-    list_rows = [table_create_row(row[0], row[1], row[2], row[3], prefix)
-                 for row in zip(dfi['uri'], dfi['name'], dfi['type'], dfi['line'])]
+    list_rows = [table_create_row(row[0], row[1], row[2], row[3], row[4], prefix)
+                 for row in zip(dfi['uri'], dfi['name'], dfi['type'], dfi['line'], dfi['list_functions'])]
     data = table_all_row(list_rows)
     return data
 

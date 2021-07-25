@@ -399,12 +399,16 @@ def get_stats(df:pd.DataFrame, file_path:str):
     df['n_words_unique']    = df['list_words'].apply(lambda x : len(set( x )))
     df['n_characters']      = df['code_source'].apply(lambda x : len(x.strip().replace(" ","") ))
     df['avg_char_per_word'] = df.apply(lambda x : _get_avg_char_per_word(x), axis=1)
+
+    # get list function was called inside functions, methods
+    df['list_functions']    = df.apply( lambda x : _get_functions(x), axis=1)
+    df['n_functions']       = df['list_functions'].apply(lambda x : len( x ))
     # print(df)
 
     cols = ['uri', 'name', 'type', 'n_variable', 'n_words', 
             'n_words_unique', 'n_characters', 'avg_char_per_word', 
             'n_loop', 'n_ifthen', 'arg_name', 'arg_type', 'arg_value',
-            'line', 'docs']
+            'line', 'docs', 'list_functions', 'n_functions']
 
     df = df[cols]
     # print(df)
@@ -440,12 +444,32 @@ def get_file_stats(file_path):
 # ====================================================================================
 def _get_words(row):
     data = [row['code_source'].strip().split(" ")]
-    # print(data)
+    # print(data[0])
     for ele in data[0].copy():
         if ele in ['', '-', '+', '=', '*', '/', '==', '<=', '>=', '!=']:
             data[0].remove(ele)
     # print(data)
     return data[0]
+
+
+def _get_functions(row):
+    list_funcs = []
+    list_words = [row['list_words']][0]
+    type = [row['type']][0]
+    # print(list_words)
+
+    re1 = r"^([A-Za-z0-9_]+)\("
+    re2 = r"^([A-Za-z0-9_]+.[A-Za-z0-9_]+)\("
+
+    if type in ['function', 'method']:
+        for word in list_words:
+            if re.match(re1, word):
+                list_funcs.append(re.match(re1, word).group(1))
+            elif re.match(re2, word):
+                list_funcs.append(re.match(re2, word).group(1))
+        list_funcs = list(dict.fromkeys(list_funcs))
+    # print(list_funcs)
+    return(list_funcs)
 
 
 def _get_avg_char_per_word(row):
