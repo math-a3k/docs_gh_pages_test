@@ -1,0 +1,464 @@
+uri,type,list_functions
+./run_pipy.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"
+./run_pipy.py:update_version,function,"['open', 'Version.parse', 'int', 'file.write', 'version.new_version']"
+./run_pipy.py:git_commit,function,"['ask', 'exit', 'os.system']"
+./run_pipy.py:ask,function,"['input', 'ans.lower']"
+./run_pipy.py:pypi_upload,function,"['os.system', 'print', 'os.listdir', 'item.endswith']"
+./run_pipy.py:main,function,['update_version']
+./run_pipy.py:Version:__init__,method,[]
+./run_pipy.py:Version:__str__,method,"[""f'Version""]"
+./run_pipy.py:Version:__repr__,method,['self.__str__']
+./run_pipy.py:Version:stringify,method,[]
+./run_pipy.py:Version:new_version,method,['self.stringify']
+./run_pipy.py:Version:parse,method,"['re.findall', 'len', 'Exception', 'cls']"
+./setup.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"
+./test.py:pd_random,function,"['random.random', 'range', 'pd.DataFrame']"
+./test.py:test_utilmy_plot,function,"['pd_random', 'pd_plot_multi']"
+./test.py:test_utilmy_pd_os_session,function,"['random.random', 'range', 'pd.DataFrame', 'len', 'os.makedirs', 'df.to_csv', 'pd_read_file', 'round', 'print', 'git_repo_root', 'os_makedirs', 'os.system', 'os_removedirs', 'os_system', 'os_platform_os', 'global_verbosity']"
+./test.py:test_utilmy_session,function,"['Session', 'sess.save', 'globals', 'os.system', 'sess.show', 'glob.glob', 'sess.load']"
+./test.py:test_docs_cli,function,['os.system']
+./test.py:test_decorators_os,function,"['test_print', 'print', 'os_multithread', 'profiled_sum', 'sum', 'profiler_context', 'profiler_start', 'profiler_stop', 'dummy_func', 'time.sleep', 'method', 'DummyClass', 'a.method']"
+./test.py:pd_generate_data,function,"['random.random', 'range', 'pd.DataFrame', 'np.where']"
+./test.py:test_tabular_test,function,"['pd_generate_data', 'test_anova', 'test_normality2', 'test_plot_qqplot']"
+./test.py:test_text_similarity,function,"['pd.DataFrame', 'text.pd_similarity', 'SequenceMatcher', 'pd.Series', 'check_similarity', 'assert_series_equal']"
+./test.py:test_text_pdcluster,function,['test_lsh']
+./utilmy/dates.py:log,function,['print']
+./utilmy/dates.py:pd_date_split,function,"['df.drop_duplicates', 'pd.to_datetime', 'x.weekday', 'date_weekmonth', 'date_weekmonth2', 'x.isocalendar', 'date_weekyear2', 'df.apply', 'int', 'merge1', 'date_is_holiday', 'log']"
+./utilmy/dates.py:date_now,function,"['datetime.now', 'datetime.timedelta', 'now_new.astimezone', 'now_pacific.strftime']"
+./utilmy/dates.py:date_is_holiday,function,"['holidays.CountryHoliday', 'np.array', 'x.astype']"
+./utilmy/dates.py:date_weekmonth2,function,[]
+./utilmy/dates.py:date_weekmonth,function,"['date_weekmonth', 'date_value.replace']"
+./utilmy/dates.py:date_weekyear2,function,['datetime.datetime']
+./utilmy/dates.py:date_weekday_excel,function,"['arrow.get', 'str']"
+./utilmy/dates.py:date_weekyear_excel,function,"['arrow.get', 'str', 'dd.isocalendar', 'date_weekday_excel', 'int']"
+./utilmy/dates.py:date_generate,function,"['relativedelta', 'range']"
+./utilmy/decorators.py:timeout,function,"['decorator', '_handle_timeout', '_TimeoutError', 'wrapper', 'signal.signal', 'signal.alarm', 'func', 'wraps']"
+./utilmy/decorators.py:timer,function,"['wrapper', 'time.perf_counter', 'func', 'print']"
+./utilmy/decorators.py:profiler_context,function,"['Profiler', 'profiler.start', 'profiler.stop', 'print']"
+./utilmy/decorators.py:profiler_deco,function,"['wrapper', 'Profiler', 'profiler.start', 'func', 'profiler.stop', 'print', 'profiler_decorator_base', 'inner', 'cProfile.Profile', 'pr.enable', 'fnc', 'pr.disable', 'io.StringIO', 'pstats.Stats', 'ps.print_stats']"
+./utilmy/decorators.py:profiler_decorator_base,function,"['inner', 'cProfile.Profile', 'pr.enable', 'fnc', 'pr.disable', 'io.StringIO', 'pstats.Stats', 'ps.print_stats', 'print']"
+./utilmy/decorators.py:os_multithread,function,"['ThreadWithResult', '__init__', 'function', 'target', 'super', 'kwargs.values', 'list_of_threads.append', 'thread.start', 'zip', 'kwargs.keys', 'thread.join', 'results.append']"
+./utilmy/decorators.py:threading_deco,function,"['wrapper', 'Thread', 'background_thread.start']"
+./utilmy/images.py:log,function,['print']
+./utilmy/images.py:deps,function,"['open', 'fp.readlines', 'print']"
+./utilmy/images.py:read_image,function,"['isinstance', 'hasattr', 'np.asarray', 'cv2.imdecode', 'validators.url', 'read', 'filepath_or_buffer.endswith', 'tifffile.imread', 'cv2.imread', 'cv2.cvtColor']"
+./utilmy/images.py:visualize_in_row,function,"['len', 'plt.figure', 'enumerate', 'plt.subplot', 'plt.xticks', 'plt.yticks', 'plt.title', 'plt.imshow', 'plt.show']"
+./utilmy/images.py:maintain_aspect_ratio_resize,function,"['float', 'int', 'cv2.resize']"
+./utilmy/io.py:screenshot,function,"['sct.shot', 'print']"
+./utilmy/tabular.py:log,function,['print']
+./utilmy/tabular.py:test_anova,function,"['edu_frame.groupby', 'groups.keys', 'globals', 'lg.append', 'dfd=len', 'print', 'stats.f_oneway', 'dfn=len']"
+./utilmy/tabular.py:test_normality2,function,"['shapiro', 'print', 'normaltest', 'anderson', 'range']"
+./utilmy/tabular.py:test_plot_qqplot,function,"['plt.subplots', 'fig.suptitle', 'sns.boxplot', 'sns.histplot', 'sm.qqplot', 'print']"
+./utilmy/tabular.py:test_heteroscedacity,function,"['Linear', 'custom_stat', 'np.sqrt', 'print', 'df.profile_report', 'profile.to_file', 'profile.get_rejected_variables']"
+./utilmy/tabular.py:pd_stat_distribution_colnum,function,"['df.sample', 'getstat', 'str', 'len', 'pd.DataFrame', 'pd.concat', 'print', 'np.arange']"
+./utilmy/tabular.py:pd_stat_histogram,function,"['np.histogram', 'pd.DataFrame']"
+./utilmy/tabular.py:np_col_extractname,function,"['len', 'colnew.append']"
+./utilmy/tabular.py:np_list_remove,function,"['cols.remove', 'cols3.append']"
+./utilmy/tabular.py:pd_stat_shift_trend_changes,function,"['target_diffs.fillna', 'target_diffs.divide', 'target_diffs_norm.diff', 'target_diffs_lvl2.fillna', 'int']"
+./utilmy/tabular.py:pd_stat_shift_trend_correlation,function,"['df.merge', 'pd.isnull', 'len', 'np.corrcoef', 'print']"
+./utilmy/tabular.py:pd_stat_shift_changes,function,"['type', 'list', 'features_list.remove', 'ignored.append', 'pd_colnum_tocat_stat', 'pd_stat_shift_trend_correlation', 'pd_stat_shift_changes', 'stats_all.append', 'pd.DataFrame', 'len', 'print', 'str']"
+./utilmy/tabular.py:np_conv_to_one_col,function,"['row2string', 'sep_char.join']"
+./utilmy/text.py:log,function,['print']
+./utilmy/text.py:pd_text_hash_create_lsh,function,"['MinHashLSH', 'enumerate', 'sentence.split', 'MinHash', 'set', 'v.update', 'hash_lines.append', 'lsh.insert']"
+./utilmy/text.py:pd_text_getcluster,function,"['pd_text_hash_create_lsh', 'enumerate', 'lsh.query', 'list']"
+./utilmy/text.py:pd_similarity,function,"['len', 'Exception', 'find_similarity', 'fuzz.ratio', 'editdistance.eval', 'SequenceMatcher', 'df.apply']"
+./utilmy/text.py:test_lsh,function,"['pd.DataFrame', 'pd_text_getcluster', 'df.head', 'print']"
+./utilmy/utilmy.py:log,function,['print']
+./utilmy/utilmy.py:pd_merge,function,"['list', 'df1.join']"
+./utilmy/utilmy.py:pd_plot_multi,function,"['plt.figure', 'len', 'getattr', 'df.plot', 'plt.show', 'ax.set_ylabel', 'range', 'ax.get_legend_handles_labels', 'ax.twinx', 'ax_new.set_ylabel', 'ax_new.get_legend_handles_labels', 'ax.legend']"
+./utilmy/utilmy.py:pd_filter,function,"['isinstance', 'filter_dict.items', 'filter_dict.split', 'x_convert', 'str', 'dict', 'float', 'x.strip', 'print', 'len', 'x.split']"
+./utilmy/utilmy.py:pd_to_file,function,"['Path', 'os.makedirs', 'df.to_pickle', 'df.to_parquet', 'df.to_csv', 'gc.collect']"
+./utilmy/utilmy.py:pd_read_file,function,"['log', 'print', 'isinstance', 'path_glob.split', 'file_list.extend', 'sorted', 'glob.glob', 'len', 'ThreadPool', 'pd.DataFrame', 'range', 'job_list.append', 'pool.apply_async', 'pd_dtype_reduce', 'dfi.drop_duplicates', 'gc.collect', 'pd.concat', 'pool.terminate', 'pool.join']"
+./utilmy/utilmy.py:pd_sample_strat,function,"['df.groupby', 'x.sample']"
+./utilmy/utilmy.py:pd_cartesian,function,"['list', 'pd.merge']"
+./utilmy/utilmy.py:pd_plot_histogram,function,"['dfi.quantile', 'dfi.hist', 'dfi.sample', 'plt.title', 'path_save.split', 'plt.show', 'os.makedirs', 'plt.savefig', 'print', 'plt.close']"
+./utilmy/utilmy.py:pd_col_bins,function,"['pd.qcut', 'np.arange']"
+./utilmy/utilmy.py:pd_dtype_reduce,function,['np.dtype']
+./utilmy/utilmy.py:pd_dtype_count_unique,function,"['gef_is_continuous', 'np.sum', 'np.round', 'len', 'min', 'any', 'list', 'n=min']"
+./utilmy/utilmy.py:pd_dtype_to_category,function,"['isinstance', 'df.select_dtypes', 'len', 'float', 'pd.to_datetime', 'print']"
+./utilmy/utilmy.py:pd_dtype_getcontinuous,function,"['len', 'str']"
+./utilmy/utilmy.py:pd_del,function,[]
+./utilmy/utilmy.py:pd_add_noise,function,"['pd.DataFrame', 'pd_dtype_getcontinuous', 'print']"
+./utilmy/utilmy.py:pd_cols_unique_count,function,"['len', 'str']"
+./utilmy/utilmy.py:pd_show,function,['os_makedirs']
+./utilmy/utilmy.py:to_dict,function,[]
+./utilmy/utilmy.py:to_timeunix,function,"['isinstance', 'int', 'datex.timetuple']"
+./utilmy/utilmy.py:to_datetime,function,"['pd.to_datetime', 'str']"
+./utilmy/utilmy.py:np_list_intersection,function,[]
+./utilmy/utilmy.py:np_add_remove,function,"['set_.copy', 'result_temp.remove', 'result_temp.add']"
+./utilmy/utilmy.py:to_float,function,['float']
+./utilmy/utilmy.py:to_int,function,"['int', 'float']"
+./utilmy/utilmy.py:config_load,function,"['str', 'log', 'pathlib.Path', 'yaml.load', 'x.items', 'json.load', 'os.makedirs', 'open', 'yaml.dump']"
+./utilmy/utilmy.py:os_path_split,function,"['fpath.replace', 'fpath.split']"
+./utilmy/utilmy.py:os_file_replacestring,function,"['os_file_replacestring1', 'fileinput.FileInput', 'line.replace', 'file1.close', 'print', 'format', 'os_walk']"
+./utilmy/utilmy.py:os_walk,function,"['dir1.rstrip', 'dir1.count', 'os.walk', 'root.count', 'fnmatch.filter', 'np.array']"
+./utilmy/utilmy.py:z_os_search_fast,function,"['re.compile', 'enumerate', 're.search', 'line.decode', 'res.append', 'found.start', 'text.encode', 'line.find', 'print']"
+./utilmy/utilmy.py:os_search_content,function,"['os_walk', 'z_os_search_fast', 'pd.DataFrame']"
+./utilmy/utilmy.py:os_get_function_name,function,"['str', 'socket.gethostname', 'sys._getframe']"
+./utilmy/utilmy.py:os_variable_init,function,[]
+./utilmy/utilmy.py:os_import,function,"['__import__', 'hasattr', 'dir', 'name.startswith', 'all_names2.append', 'print', 'globs.update', 'getattr']"
+./utilmy/utilmy.py:os_variable_exist,function,"['str', 'log']"
+./utilmy/utilmy.py:os_variable_check,function,"['Exception', 'log', 'sys.exit']"
+./utilmy/utilmy.py:os_clean_memory,function,['gc.collect']
+./utilmy/utilmy.py:os_system_list,function,"['len', 'enumerate', 'log', 'os.system', 'time.sleep']"
+./utilmy/utilmy.py:os_file_check,function,"['log', 'os.stat', 'time.ctime']"
+./utilmy/utilmy.py:os_to_file,function,"['open', 'fp.write']"
+./utilmy/utilmy.py:os_platform_os,function,[]
+./utilmy/utilmy.py:os_cpu,function,['os.cpu_count']
+./utilmy/utilmy.py:os_platform_ip,function,[]
+./utilmy/utilmy.py:os_memory,function,"['open', 'i.split', 'str', 'int']"
+./utilmy/utilmy.py:os_sleep_cpu,function,"['psutil.cpu_percent', 'time.sleep']"
+./utilmy/utilmy.py:os_ram_object,function,"['id', 'getsizeof', 'ids.add', 'isinstance', 'sum', 'd', 'o.items']"
+./utilmy/utilmy.py:os_copy,function,"['ignore_pyc_files', 'name.endswith', 'exclude.split', 'os.makedirs', 'shutil.copytree', 'shutil.ignore_patterns']"
+./utilmy/utilmy.py:os_removedirs,function,"['len', 'print', 'os.walk', 'os.remove', 'os.rmdir']"
+./utilmy/utilmy.py:os_getcwd,function,[]
+./utilmy/utilmy.py:os_system,function,"['len', 'enumerate', 'log', 'os.system', 'time.sleep']"
+./utilmy/utilmy.py:os_makedirs,function,"['dir_or_file.split', 'os.makedirs']"
+./utilmy/utilmy.py:global_verbosity,function,"['git_repo_root', 'json.load', 'yaml.load', 'Exception', 'int']"
+./utilmy/utilmy.py:git_repo_root,function,"['os_system', 'mout.split', 'len']"
+./utilmy/utilmy.py:git_current_hash,function,"['subprocess.check_output', 'label.decode']"
+./utilmy/utilmy.py:plot_to_html,function,"['glob.glob', 'flist.sorted', 'print', 'open', 'base64.b64encode', 'f.write']"
+./utilmy/utilmy.py:save,function,"['os.makedirs', 'pickle.dump', 'open']"
+./utilmy/utilmy.py:load,function,['pickle.load']
+./utilmy/utilmy.py:print_everywhere,function,"['snoop.install', 'myfun', 'pp', 'print', 'type', 'str']"
+./utilmy/utilmy.py:log5,function,['ic']
+./utilmy/utilmy.py:log_trace,function,"['print', 'pdb.set_trace']"
+./utilmy/utilmy.py:profiler_start,function,"['Profiler', 'profiler.start']"
+./utilmy/utilmy.py:profiler_stop,function,"['profiler.stop', 'print']"
+./utilmy/utilmy.py:dict_to_namespace:__init__,method,[]
+./utilmy/utilmy.py:Session:__init__,method,"['os.makedirs', 'print']"
+./utilmy/utilmy.py:Session:show,method,"['glob.glob', 'print']"
+./utilmy/utilmy.py:Session:save,method,"['os.makedirs', 'self.save_session']"
+./utilmy/utilmy.py:Session:load,method,"['print', 'self.load_session']"
+./utilmy/utilmy.py:Session:save_session,method,"['os.makedirs', 'globs.items', 'x.startswith', 'str', 'pd.to_pickle', 'save', 'print']"
+./utilmy/utilmy.py:Session:load_session,method,"['print', 'os.walk', 'x.replace', 'load']"
+./utilmy/util_default.py:log,function,"['logger.info', 'log2', 'logger.debug', 'logw', 'logger.warning', 'loge', 'logger.error', 'logger_setup', 'logger.configure']"
+./utilmy/util_default.py:log2,function,['logger.debug']
+./utilmy/util_default.py:logw,function,['logger.warning']
+./utilmy/util_default.py:loge,function,['logger.error']
+./utilmy/util_default.py:logger_setup,function,['logger.configure']
+./utilmy/util_default.py:config_load,function,"['str', 'logw', 'log2', 'yaml.load', 'log', 'os.makedirs', 'open', 'json.dump']"
+./utilmy/util_default.py:dataset_donwload,function,"['log', 'os.makedirs', 'wget.download', 'url.split', 'os_extract_archive', 'log2']"
+./utilmy/util_default.py:os_extract_archive,function,"['isinstance', 'is_match_fn', 'open_fn', 'archive.extractall', 'os.remove', 'shutil.rmtree']"
+./utilmy/util_default.py:to_file,function,"['open', 'fp.write']"
+./utilmy/zutil.py:session_load_function,function,"['dill.load_session', 'print']"
+./utilmy/zutil.py:session_save_function,function,"['date_now', 'dill.dump_session', 'print']"
+./utilmy/zutil.py:py_save_obj_dill,function,"['z_key_splitinto_dir_name', 'os_folder_create', 'open', 'dill.dumps', 'print']"
+./utilmy/zutil.py:aa_unicode_ascii_utf8_issue,function,[]
+./utilmy/zutil.py:isfloat,function,['float']
+./utilmy/zutil.py:isint,function,['isinstance']
+./utilmy/zutil.py:isanaconda,function,['txt.find']
+./utilmy/zutil.py:a_run_ipython,function,['IPython.get_ipython']
+./utilmy/zutil.py:py_autoreload,function,['a_run_ipython']
+./utilmy/zutil.py:os_platform,function,[]
+./utilmy/zutil.py:a_start_log,function,"['a_run_ipython', 'str', 'os_platform', 'date_now']"
+./utilmy/zutil.py:a_cleanmemory,function,['gc.collect']
+./utilmy/zutil.py:a_info_conda_jupyter,function,[]
+./utilmy/zutil.py:print_object_tofile,function,"['open', 'file1.write', 'np.shape', 'range', 'str']"
+./utilmy/zutil.py:print_progressbar,function,"['str', 'format_str.format', 'float', 'int']"
+./utilmy/zutil.py:os_zip_checkintegrity,function,"['zipfile.ZipFile', 'zip_file.testzip', 'print']"
+./utilmy/zutil.py:os_zipfile,function,"['zipfile.ZipFile', 'os.walk', 'zf.write', 'zf.close', 'os_zip_checkintegrity', 'print']"
+./utilmy/zutil.py:os_zipfolder,function,['dir_tozip.split']
+./utilmy/zutil.py:os_zipextractall,function,"['filezip_or_dir.find', 'os_file_listall', 'os_file_getname', 'zipfile.ZipFile', 'zip_ref.extractall', 'zip_ref.close', 'print']"
+./utilmy/zutil.py:os_folder_copy,function,"['_default_fun_file_toignore', 'fnmatch.filter', 'shutil.copytree', 'shutil.copy']"
+./utilmy/zutil.py:os_folder_create,function,"['os.getcwd', 'os.makedirs', 'os.chdir']"
+./utilmy/zutil.py:os_folder_robocopy,function,"['subprocess.call', 'print']"
+./utilmy/zutil.py:os_file_replace,function,"['mkstemp', 'open', 'target_file.write', 'remove', 'move', 'os_file_replacestring1', 'fileinput.FileInput', 'line.replace', 'file1.close', 'print', 'format', 'os_file_replacestring2', 'os_file_listall']"
+./utilmy/zutil.py:os_file_replacestring1,function,"['fileinput.FileInput', 'line.replace', 'file1.close', 'print', 'format']"
+./utilmy/zutil.py:os_file_replacestring2,function,"['os_file_listall', 'os_file_replacestring1']"
+./utilmy/zutil.py:os_file_getname,function,"['ntpath.split', 'ntpath.basename']"
+./utilmy/zutil.py:os_file_getpath,function,['ntpath.split']
+./utilmy/zutil.py:os_file_gettext,function,"['open', 'f.read']"
+./utilmy/zutil.py:os_file_listall,function,"['dir1.rstrip', 'dir1.count', 'os.walk', 'root.count', 'fnmatch.filter']"
+./utilmy/zutil.py:_os_file_search_fast,function,"['re.compile', 'enumerate', 're.search', 'line.decode', 'res.append', 'found.start', 'text.encode', 'line.find', 'print']"
+./utilmy/zutil.py:os_file_search_content,function,"['os_file_listall', '_os_file_search_fast', 'pd.DataFrame']"
+./utilmy/zutil.py:os_file_rename,function,"['some_dir.rstrip', 'some_dir.count', 'os.walk', 'root.count', 'matches.append', 'fnmatch.filter', 're.sub', 'os.rename', 'np.array']"
+./utilmy/zutil.py:os_gui_popup_show,function,"['os_gui_popup_show2', 'Tk', 'Scrollbar', 'Text', 'scrollbar.pack', 'text.pack', 'scrollbar.config', 'text.config', 'text.insert', 'root.attributes', 'mainloop']"
+./utilmy/zutil.py:os_print_tofile,function,['text_file.write']
+./utilmy/zutil.py:os_path_norm,function,"['pth.find', 'b.lstrip']"
+./utilmy/zutil.py:os_path_change,function,"['os_path_norm', 'os.chdir']"
+./utilmy/zutil.py:os_path_current,function,['os.getcwd']
+./utilmy/zutil.py:os_file_exist,function,[]
+./utilmy/zutil.py:os_file_size,function,[]
+./utilmy/zutil.py:os_file_read,function,"['open', 'fh.read']"
+./utilmy/zutil.py:os_file_isame,function,['filecmp.cmp']
+./utilmy/zutil.py:os_file_get_extension,function,['_ext.startswith']
+./utilmy/zutil.py:os_file_normpath,function,[]
+./utilmy/zutil.py:os_folder_is_path,function,['isinstance']
+./utilmy/zutil.py:os_file_get_path_from_stream,function,"['os_folder_is_path', 'getattr']"
+./utilmy/zutil.py:os_file_try_to_get_extension,function,"['os_file_get_path_from_stream', 'os_file_get_extension']"
+./utilmy/zutil.py:os_file_are_same_file_types,function,"['os_file_try_to_get_extension', 'all']"
+./utilmy/zutil.py:os_file_norm_paths,function,"['sglob', 'sorted', '_norm_paths_itr', 'os_folder_is_path', 'list']"
+./utilmy/zutil.py:os_file_mergeall,function,"['os_file_listall', 'open', 'os_file_gettext', 'nfile1.write', 'nfile1.close']"
+./utilmy/zutil.py:os_file_extracttext,function,"['os_file_listall', 'open', 'os_file_gettext', 'BeautifulSoup', 'soup.find_all', 'txt2.strip', 'output_file1.write']"
+./utilmy/zutil.py:os_path_append,function,[]
+./utilmy/zutil.py:os_wait_cpu,function,"['psutil.cpu_percent', 'print', 'arrow.utcnow', 'time.sleep']"
+./utilmy/zutil.py:os_split_dir_file,function,"['dirfile.split', 'len']"
+./utilmy/zutil.py:os_process_run,function,"['subprocess.Popen', 'proc.communicate', 'print', 'str']"
+./utilmy/zutil.py:os_process_2,function,[]
+./utilmy/zutil.py:py_importfromfile,function,"['a_get_pythonversion', 'SourceFileLoader', 'foo.MyClass', 'importlib.import_module']"
+./utilmy/zutil.py:py_memorysize,function,"['id', 'getsizeof', 'ids.add', 'isinstance', 'sum', 'd', 'o.items']"
+./utilmy/zutil.py:save,function,['py_save_obj']
+./utilmy/zutil.py:load,function,['py_load_obj']
+./utilmy/zutil.py:save_test,function,"['py_load_obj', 'print', 'str', 'gc.collect']"
+./utilmy/zutil.py:py_save_obj,function,"['z_key_splitinto_dir_name', 'os_folder_create', 'open', 'dill.dumps', 'print']"
+./utilmy/zutil.py:py_load_obj,function,"['folder.find', 'z_key_splitinto_dir_name', 'os_folder_create', 'open', 'pickle.load']"
+./utilmy/zutil.py:z_key_splitinto_dir_name,function,"['keyname.split', 'len']"
+./utilmy/zutil.py:os_config_setfile,function,"['open', 'dict_params.items', 'isinstance', 'f1.write', 'str', 'f1.close', 'print']"
+./utilmy/zutil.py:os_config_getfile,function,"['open', 'f1.readlines', 'print']"
+./utilmy/zutil.py:os_csv_process,function,[]
+./utilmy/zutil.py:pd_toexcel,function,"['os_file_exist', 'load_workbook', 'pd.ExcelWriter', 'dict', 'df.to_excel', 'writer.save', 'pd_toexcel_many', 'pd_toexcel']"
+./utilmy/zutil.py:pd_toexcel_many,function,['pd_toexcel']
+./utilmy/zutil.py:find_fuzzy,function,['xi.find']
+./utilmy/zutil.py:str_match_fuzzy,function,['xstring.find']
+./utilmy/zutil.py:str_parse_stringcalendar,function,"['cal.split', 'x.find', 'cal4.append', 'np.array', 'print']"
+./utilmy/zutil.py:str_make_unicode,function,"['type', 'input_str.decode']"
+./utilmy/zutil.py:str_empty_string_array,function,"['range', 'str_empty_string_array_numpy', 'np.empty']"
+./utilmy/zutil.py:str_empty_string_array_numpy,function,['np.empty']
+./utilmy/zutil.py:str_isfloat,function,['float']
+./utilmy/zutil.py:str_is_azchar,function,['float']
+./utilmy/zutil.py:str_is_az09char,function,['float']
+./utilmy/zutil.py:str_reindent,function,['x.decode']
+./utilmy/zutil.py:str_split2,function,['x.decode']
+./utilmy/zutil.py:str_split_pattern,function,['x.decode']
+./utilmy/zutil.py:pd_str_isascii,function,['x.decode']
+./utilmy/zutil.py:str_to_utf8,function,['x.encode']
+./utilmy/zutil.py:str_to_unicode,function,"['isinstance', 'str']"
+./utilmy/zutil.py:np_minimize,function,"['penalty', 'enumerate', 'max', 'loss', 'fun_obj', 'np_minimize_de', 'range', 'next', 'print', 'save', 'date_now', 'np_int_tostr', 'np.mod', 'np.abs']"
+./utilmy/zutil.py:np_minimize_de,function,"['range', 'next', 'print', 'save', 'date_now', 'np_int_tostr', 'np.mod', 'np.abs']"
+./utilmy/zutil.py:np_remove_na_inf_2d,function,"['np.shape', 'range', 'np.isnan', 'np.isinf']"
+./utilmy/zutil.py:np_addcolumn,function,"['np.shape', 'np.zeros', 'np.column_stack']"
+./utilmy/zutil.py:np_addrow,function,"['np.shape', 'len', 'np.zeros', 'np.row_stack', 'np.append']"
+./utilmy/zutil.py:np_int_tostr,function,['str']
+./utilmy/zutil.py:np_dictordered_create,function,['OrderedDict']
+./utilmy/zutil.py:np_list_unique,function,['list']
+./utilmy/zutil.py:np_list_tofreqdict,function,"['dict', 'len', 'enumerate']"
+./utilmy/zutil.py:np_list_flatten,function,"['type', 'np_list_flatten', 'ret.append']"
+./utilmy/zutil.py:np_dict_tolist,function,['list']
+./utilmy/zutil.py:np_dict_tostr_val,function,['list']
+./utilmy/zutil.py:np_dict_tostr_key,function,['list']
+./utilmy/zutil.py:np_removelist,function,"['np_findfirst', 'xnew.append']"
+./utilmy/zutil.py:np_transform2d_int_1d,function,"['np.shape', 'np.zeros', 'range', 'np.abs', 'np_sortbycol']"
+./utilmy/zutil.py:np_mergelist,function,"['list', 'xnew.append']"
+./utilmy/zutil.py:np_enumerate2,function,"['np.empty', 'enumerate']"
+./utilmy/zutil.py:np_pivottable_count,function,"['np_dict_tolist', 'sorted', 'int']"
+./utilmy/zutil.py:np_nan_helper,function,"['np.isnan', 'z.nonzero']"
+./utilmy/zutil.py:np_interpolate_nan,function,"['np_nan_helper', 'np.interp', 'x']"
+./utilmy/zutil.py:np_and1,function,[]
+./utilmy/zutil.py:np_sortcol,function,"['pd.DataFrame', 'df.sort_values']"
+./utilmy/zutil.py:np_ma,function,"['np.convolve', 'np.ones']"
+./utilmy/zutil.py:np_cleanmatrix,function,"['np.nan_to_num', 'np.shape', 'range', 'abs']"
+./utilmy/zutil.py:np_torecarray,function,['np.shape']
+./utilmy/zutil.py:np_sortbycolumn,function,"['pd.DataFrame', 'df.sort_values']"
+./utilmy/zutil.py:np_sortbycol,function,"['pd.DataFrame', 'df.sort_values', 'np_sortbycol', 'len', 'np.reshape']"
+./utilmy/zutil.py:np_min_kpos,function,['np.partition']
+./utilmy/zutil.py:np_max_kpos,function,"['len', 'np.partition']"
+./utilmy/zutil.py:np_findfirst,function,['range']
+./utilmy/zutil.py:np_find,function,['range']
+./utilmy/zutil.py:find,function,['xi.find']
+./utilmy/zutil.py:findnone,function,['range']
+./utilmy/zutil.py:findx,function,"['type', 'vec.index', 'np.where', 'len']"
+./utilmy/zutil.py:finds,function,"['range', 'idlist.append']"
+./utilmy/zutil.py:findhigher,function,['range']
+./utilmy/zutil.py:findlower,function,['range']
+./utilmy/zutil.py:np_find_minpos,function,['min']
+./utilmy/zutil.py:np_find_maxpos,function,"['max', 'np_find_maxpos_2nd', 'float', 'enumerate']"
+./utilmy/zutil.py:np_find_maxpos_2nd,function,"['float', 'enumerate']"
+./utilmy/zutil.py:np_findlocalmax2,function,"['len', 'np.zeros', 'np_find_maxpos', 'enumerate', 'np_sortbycolumn', 'range', 'findhigher', 'np.abs']"
+./utilmy/zutil.py:np_findlocalmin2,function,"['len', 'np.zeros', 'np_find_minpos', 'enumerate', 'np_sortbycolumn', 'range', 'findlower', 'np.abs']"
+./utilmy/zutil.py:np_findlocalmax,function,"['len', 'np.zeros', 'np_find_maxpos', 'enumerate', 'np_sortbycolumn', 'range', 'findhigher', 'np.abs']"
+./utilmy/zutil.py:np_findlocalmin,function,"['len', 'np.zeros', 'np_find_minpos', 'enumerate', 'np_sortbycolumn', 'range', 'findlower', 'np.abs']"
+./utilmy/zutil.py:np_stack,function,"['np.shape', 'np.row_stack', 'np.column_stack']"
+./utilmy/zutil.py:np_uniquerows,function,"['np.ascontiguousarray', 'np.unique', 'unique_a.view']"
+./utilmy/zutil.py:np_remove_zeros,function,[]
+./utilmy/zutil.py:np_sort,function,"['pd.DataFrame', 'df.sort_values']"
+./utilmy/zutil.py:np_memory_array_adress,function,[]
+./utilmy/zutil.py:np_pivotable_create,function,"['tuple', 'ysort.append', 'xsort.append', 'len', 'list', 'xsort.sort', 'headings.extend', 'sortedkeys.sort', 'row.extend', 't.append']"
+./utilmy/zutil.py:pd_info,function,"['df.info', 'print', 'type', 'pd_info_memsize', 'pd_info', 'df.memory_usage']"
+./utilmy/zutil.py:pd_info_memsize,function,"['df.info', 'pd_info', 'df.memory_usage']"
+./utilmy/zutil.py:pd_row_findlast,function,['df.iterrows']
+./utilmy/zutil.py:pd_row_select,function,"['type', 'pd.DataFrame', 'list', 'c.endswith', 'np.in1d', 'ValueError']"
+./utilmy/zutil.py:pd_csv_randomread,function,"['sum', 'open', 'np.sort', 'pd.read_csv']"
+./utilmy/zutil.py:pd_array_todataframe,function,"['np.shape', 'len', 'pd.DataFrame']"
+./utilmy/zutil.py:pd_dataframe_toarray,function,['df.reset_index']
+./utilmy/zutil.py:pd_createdf,function,['pd.DataFrame']
+./utilmy/zutil.py:pd_create_colmapdict_nametoint,function,['enumerate']
+./utilmy/zutil.py:pd_extract_col_idx_val,function,[]
+./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv,function,"['np.array', 'pd.DataFrame', 'print']"
+./utilmy/zutil.py:pd_split_col_idx_val,function,[]
+./utilmy/zutil.py:pd_splitdf_inlist,function,"['list', 'l1.append']"
+./utilmy/zutil.py:pd_find,function,"['str', 'print', 'enumerate', 'np.column_stack', 'len', 'gc.collect', 'np_dictordered_create', 'range', 'np.array']"
+./utilmy/zutil.py:pd_dtypes_totype2,function,[]
+./utilmy/zutil.py:pd_dtypes,function,"['pd_dtypes', 'OrderedDict', 'enumerate', 'eval', 'print']"
+./utilmy/zutil.py:pd_df_todict2,function,"['df.drop_duplicates', 'range', 'len', 'dict0.setdefault']"
+./utilmy/zutil.py:pd_df_todict,function,"['df.drop_duplicates', 'range', 'len', 'dict0.setdefault', 'pd_df_todict', 'df.iterrows']"
+./utilmy/zutil.py:pd_col_addfrom_dfmap,function,[]
+./utilmy/zutil.py:pd_applyfun_col,function,['ff']
+./utilmy/zutil.py:pd_date_intersection,function,"['set', 'set.intersection', 'list', 'sorted']"
+./utilmy/zutil.py:pd_is_categorical,function,['isinstance']
+./utilmy/zutil.py:pd_str_encoding_change,function,[]
+./utilmy/zutil.py:pd_str_unicode_tostr,function,['pd_dtypes_type1_totype2']
+./utilmy/zutil.py:pd_dtypes_type1_totype2,function,['isinstance']
+./utilmy/zutil.py:pd_resetindex,function,"['list', 'len']"
+./utilmy/zutil.py:pd_insertdatecol,function,['date_nowtime']
+./utilmy/zutil.py:pd_replacevalues,function,['np.shape']
+./utilmy/zutil.py:pd_removerow,function,['df.drop']
+./utilmy/zutil.py:pd_removecol,function,['df1.drop']
+./utilmy/zutil.py:pd_insertrow,function,"['pd_array_todataframe', 'df.append']"
+./utilmy/zutil.py:pd_h5_cleanbeforesave,function,"['pd_resetindex', 'pd_str_unicode_tostr']"
+./utilmy/zutil.py:pd_h5_addtable,function,"['pd.HDFStore', 'find', 'list', 'print', 'store.append', 'store.close']"
+./utilmy/zutil.py:pd_h5_tableinfo,function,"['pd.HDFStore', 'store.get_storer']"
+./utilmy/zutil.py:pd_h5_dumpinfo,function,"['pd.HDFStore', 'list', 'pd.DataFrame', 'extract.append', 'datetime_tostring', 'errsym.append', 'np.array']"
+./utilmy/zutil.py:pd_h5_save,function,"['pd.HDFStore', 'store.append', 'store.close']"
+./utilmy/zutil.py:pd_h5_load,function,"['pd.read_hdf', 'pd.DataFrame']"
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs,function,"['os_file_listall', 'pd.HDFStore', 'enumerate', 'pd.read_csv', 'print', 'store.append', 'store.close', 'os_file_exist']"
+./utilmy/zutil.py:pd_np_toh5file,function,"['pd.DataFrame', 'pd.HDFStore', 'st.append']"
+./utilmy/zutil.py:date_allinfo,function,[]
+./utilmy/zutil.py:datetime_tostring,function,"['isinstance', 'datelist1.strftime', 'pd.to_datetime', 't.strftime', 'date2.append']"
+./utilmy/zutil.py:date_remove_bdays,function,"['isint', 'dateint_todatetime', 'datetime.timedelta', 'current_date.weekday', 'datetime_toint']"
+./utilmy/zutil.py:date_add_bdays,function,"['isint', 'dateint_todatetime', 'datetime.timedelta', 'current_date.weekday', 'datetime_toint']"
+./utilmy/zutil.py:datenumpy_todatetime,function,['type']
+./utilmy/zutil.py:datetime_tonumpydate,function,['np.datetime64']
+./utilmy/zutil.py:datestring_todatetime,function,"['isinstance', 'parser.parse', 'date2.append']"
+./utilmy/zutil.py:datetime_toint,function,"['isinstance', 'int', 'date2.append']"
+./utilmy/zutil.py:date_holiday,function,[]
+./utilmy/zutil.py:date_add_bday,function,"['isint', 'dateint_todatetime', 'datetime.timedelta', 'current_date.weekday', 'datetime_toint']"
+./utilmy/zutil.py:dateint_todatetime,function,"['isinstance', 'parser.parse', 'date2.append']"
+./utilmy/zutil.py:date_diffinday,function,['dateint_todatetime']
+./utilmy/zutil.py:date_diffinbday,function,"['dateint_todatetime', 'd1.date', 'd2.date', 'np.busday_count']"
+./utilmy/zutil.py:date_gencalendar,function,"['CustomBusinessDay', 'np.array']"
+./utilmy/zutil.py:date_finddateid,function,['np_findfirst']
+./utilmy/zutil.py:datestring_toint,function,"['isinstance', 'int', 'date2.append']"
+./utilmy/zutil.py:date_now,function,"['datetime.now', 'date_add_bdays', 'date_remove_bdays', 'str', 'date_nowtime', 'datetime.today', 'd.strftime']"
+./utilmy/zutil.py:date_nowtime,function,"['datetime.today', 'd.strftime']"
+./utilmy/zutil.py:date_generatedatetime,function,"['datestring_todatetime', 'date_add_bdays', 'datetime.timedelta', 'list', 'np.array']"
+./utilmy/zutil.py:np_numexpr_vec_calc,function,[]
+./utilmy/zutil_features.py:log,function,"['print', 'log2', 'log3']"
+./utilmy/zutil_features.py:log2,function,['print']
+./utilmy/zutil_features.py:log3,function,['print']
+./utilmy/zutil_features.py:os_get_function_name,function,['sys._getframe']
+./utilmy/zutil_features.py:os_getcwd,function,[]
+./utilmy/zutil_features.py:pa_read_file,function,"['hdfs.ls', 'glob.glob', 'fi.split', 'print', 'pq.read_table', 'arr_table.to_pandas', 'gc.collect', 'pd.concat', 'len', 'dfall.head']"
+./utilmy/zutil_features.py:pa_write_file,function,"['hdfs.rm', 'hdfs.mkdir', 'pq.write_to_dataset', 'hdfs.ls', 'print', 'os.removedirs', 'os.makedirs', 'os.listdir']"
+./utilmy/zutil_features.py:test_get_classification_data,function,"['make_classification', 'range', 'pd.DataFrame', 'np.arange', 'len', 'dfX.set_index', 'dfy.set_index']"
+./utilmy/zutil_features.py:params_check,function,"['isinstance', 'Exception']"
+./utilmy/zutil_features.py:save_features,function,"['os.makedirs', 'isinstance', 'log', 'list', 'df0.to_parquet']"
+./utilmy/zutil_features.py:load_features,function,"['pd.read_parquet', 'log']"
+./utilmy/zutil_features.py:save_list,function,"['os.makedirs', 'log', 'pickle.dump', 'open']"
+./utilmy/zutil_features.py:save,function,"['os.makedirs', 'isinstance', 'log', 'list', 'df0.to_parquet']"
+./utilmy/zutil_features.py:load,function,"['pd.read_parquet', 'log']"
+./utilmy/zutil_features.py:pd_read_file,function,"['ThreadPool', 'glob.glob', 'pd.DataFrame', 'len', 'log', 'range', 'job_list.append', 'pool.apply_async', 'dfi.drop_duplicates', 'gc.collect', 'pd.concat']"
+./utilmy/zutil_features.py:load_dataset,function,"['log', 'fetch_spark_koalas', 'fetch_dataset', 'glob.glob', 'ntpath.dirname', 'ntpath.basename', 'len', 'print', 'pd.read_csv', 'fi.endswith', 'pd.read_parquet', 'pd.read_pickle', 'pd.concat', 'df.head', 'list', 'np.arange', 'df.set_index', 'pd_read_file', 'dfy.head', 'df.join']"
+./utilmy/zutil_features.py:fetch_spark_koalas,function,"['path_data_x.replace', 'ks.read_parquet']"
+./utilmy/zutil_features.py:fetch_dataset,function,"['log', 'mkdtemp', 'pathlib.Path', 'mktemp', 'url_dataset.replace', 'urlx.replace', 'urlpath.split', 'os.makedirs', 'requests.Session', 's.get', 'print', 'open', 'f.write', 'res.raise_for_status', 'urlparse', 'parse_qs', 'download_googledrive', 'download_dtopbox', 'os.listdir', 'os.unlink', 'os.link']"
+./utilmy/zutil_features.py:load_function_uri,function,"['uri_name.split', 'len', 'package_path.replace', 'getattr', 'str', 'log', 'Path', 'NameError']"
+./utilmy/zutil_features.py:metrics_eval,function,"['len', 'isinstance', 'getattr', 'range', 'mval_.append', 'np.mean', 'np.sqrt', 'metric_scorer', 'pd.DataFrame']"
+./utilmy/zutil_features.py:pd_stat_dataset_shift,function,"['print', 'pd_stat_datashift_psi', 'pd.DataFrame']"
+./utilmy/zutil_features.py:pd_stat_datashift_psi,function,"['psi', 'scale_range', 'np.max', 'np.arange', 'np.min', 'np.stack', 'np.histogram', 'len', 'sub_psi', 'np.log', 'np.sum', 'range', 'np.empty']"
+./utilmy/zutil_features.py:feature_importance_perm,function,"['permutation_importance', 'list', 'pd.DataFrame', 'np.arange', 'min', 'len', 'plt.subplots', 'ax1.boxplot', 'ax1.set_yticklabels', 'ax1.set_ylim', 'fig.tight_layout', 'plt.show']"
+./utilmy/zutil_features.py:feature_selection_multicolinear,function,"['list', 'spearmanr', 'hierarchy.ward', 'hierarchy.fcluster', 'defaultdict', 'enumerate', 'cluster_id_to_feature_ids.values']"
+./utilmy/zutil_features.py:feature_correlation_cat,function,"['plt.subplots', 'spearmanr', 'hierarchy.ward', 'hierarchy.dendrogram', 'np.arange', 'len', 'ax2.imshow', 'ax2.set_xticks', 'ax2.set_yticks', 'ax2.set_xticklabels', 'ax2.set_yticklabels', 'fig.tight_layout', 'plt.show']"
+./utilmy/zutil_features.py:pd_feature_generate_cross,function,"['len', 'itertools.combinations', 'range', 'y.sum', 'col_cross.append']"
+./utilmy/zutil_features.py:pd_col_to_onehot,function,"['copy.deepcopy', 'list', 'len', 'print', 'pd.concat', 'pd.get_dummies', 'coladded.append']"
+./utilmy/zutil_features.py:pd_colcat_mergecol,function,"['pd.DataFrame', 't.rfind', 'int', 'print', 'dfz.set_index']"
+./utilmy/zutil_features.py:pd_colcat_tonum,function,"['pd.DataFrame', 'dict', 'pd.unique', 'len', 'pd.factorize', 'pd.get_dummies', 'pd.concat']"
+./utilmy/zutil_features.py:pd_colcat_mapping,function,['enumerate']
+./utilmy/zutil_features.py:pd_colcat_toint,function,"['isinstance', 'pd.DataFrame', 'print', 'ddict.get', 'colname_new.append', 'enumerate']"
+./utilmy/zutil_features.py:pd_colnum_tocat,function,"['list', 'OrderedDict', 'bin_create', 'dfc.min', 'dfc.max', 'range', 'bin_create_quantile', 'np.arange', 'dfc.quantile', 'print', 'colbinmap.get', 'len', 'pd.cut', 'df.groupby', 'colnew.append']"
+./utilmy/zutil_features.py:pd_colnum_normalize,function,"['np.log', 'max', 'min', 'log', 'list']"
+./utilmy/zutil_features.py:pd_col_merge_onehot,function,"['t[len', 'len', 'merge_array.append']"
+./utilmy/zutil_features.py:pd_col_to_num,function,"['to_float', 'float', 'list']"
+./utilmy/zutil_features.py:pd_col_filter,function,"['col_delete.append', 'df.drop']"
+./utilmy/zutil_features.py:pd_col_fillna,function,"['list', 'df.groupby', 'print']"
+./utilmy/zutil_features.py:pd_pipeline_apply,function,"['copy.deepcopy', 'enumerate', 'print', 'str']"
+./utilmy/zutil_features.py:pd_stat_correl_pair,function,"['list', 'target_corr.append', 'pd.DataFrame', 'len']"
+./utilmy/zutil_features.py:pd_stat_pandas_profile,function,"['print', 'df.profile_report', 'profile.to_file', 'profile.get_rejected_variables']"
+./utilmy/zutil_features.py:pd_stat_distribution_colnum,function,"['df.sample', 'getstat', 'str', 'len', 'pd.DataFrame', 'pd.concat', 'print', 'np.arange']"
+./utilmy/zutil_features.py:pd_stat_histogram,function,"['np.histogram', 'pd.DataFrame']"
+./utilmy/zutil_features.py:col_extractname,function,"['len', 'colnew.append']"
+./utilmy/zutil_features.py:col_remove,function,"['cols.remove', 'cols3.append']"
+./utilmy/zutil_features.py:pd_colnum_tocat_stat,function,"['pd.isnull', 'df.reset_index', 'min', 'range', 'np.percentile', 'cuts.append', 'pd.cut', 'df.groupby', 'df_grouped.reset_index', 'list', 'df_grouped.rename', 'str', 'len', 'pd.concat']"
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes,function,"['target_diffs.fillna', 'target_diffs.divide', 'target_diffs_norm.diff', 'target_diffs_lvl2.fillna', 'int']"
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation,function,"['df.merge', 'pd.isnull', 'len', 'np.corrcoef', 'print']"
+./utilmy/zutil_features.py:pd_stat_shift_changes,function,"['type', 'list', 'features_list.remove', 'ignored.append', 'pd_colnum_tocat_stat', 'pd_stat_shift_trend_correlation', 'pd_stat_shift_changes', 'stats_all.append', 'pd.DataFrame', 'len', 'print', 'str']"
+./utilmy/zutil_features.py:np_conv_to_one_col,function,"['row2string', 'sep_char.join']"
+./utilmy/zutil_features.py:dict2:__init__,method,[]
+./utilmy/configs/util_config.py:log,function,"['print', 'loge']"
+./utilmy/configs/util_config.py:loge,function,['print']
+./utilmy/configs/util_config.py:config_load,function,"['log', 'pathlib.Path', 'yaml.safe_load', 'json.loads', 'SafeConfigParser', 'cfg.read', 'toml.loads', 'Exception', 'Box', 'os.makedirs', 'open', 'yaml.dump']"
+./utilmy/configs/util_config.py:config_isvalid_yamlschema,function,"['schema.validate', 'result.isValid', 'yamale.YamaleError', 'loge']"
+./utilmy/configs/util_config.py:config_isvalid_pydantic,function,[]
+./utilmy/configs/util_config.py:convert_yaml_to_box,function,"['open', 'yaml.load', 'Box']"
+./utilmy/configs/util_config.py:convert_dict_to_pydantic,function,"['SchemaGen', 'generated.to_file', 'importlib.import_module', 'pydantic_module.MainSchema']"
+./utilmy/configs/util_config.py:pydantic_model_generator,function,"['generate', 'loge', 'log']"
+./utilmy/configs/util_config.py:test_yamlschema,function,"['config_load', 'config_isvalid_yamlschema', 'log']"
+./utilmy/configs/util_config.py:test_pydanticgenrator,function,"['pydantic_model_generator', 'Path']"
+./utilmy/configs/util_config.py:test4,function,"['config_load', 'convert_dict_to_pydantic', 'isinstance']"
+./utilmy/configs/util_config.py:test_example,function,[]
+./utilmy/docs/cli.py:run_cli,function,"['argparse.ArgumentParser', 'add', 'p.parse_args', 'os.makedirs', 'export_stats_perrepo', 'run_markdown', 'run_table']"
+./utilmy/docs/code_parser.py:get_list_function_name,function,"['_get_all_line', '_get_and_clean_all_lines', 'list', 're.match', 'line.rstrip', 're_response.group', 'all_lines.index', 'list_functions.append']"
+./utilmy/docs/code_parser.py:get_list_class_name,function,"['_get_all_line', '_get_and_clean_all_lines', 'list', 're.match', 'line.rstrip', 're_response.group', 'all_lines.index', 'list_classes.append']"
+./utilmy/docs/code_parser.py:get_list_class_methods,function,"['_get_all_line', '_get_and_clean_all_lines', 'get_list_class_name', '_get_all_lines_in_class', 're.match', 'line.rstrip', 're_response.group', 'all_lines.index', 'list_names.append']"
+./utilmy/docs/code_parser.py:get_list_variable_global,function,"['_get_and_clean_all_lines', 're.match', 'line.rstrip', 'list_var.append', 'list']"
+./utilmy/docs/code_parser.py:_get_docs,function,"['line.strip', 'len', 'response.append']"
+./utilmy/docs/code_parser.py:get_list_function_info,function,"['_get_all_line', '_get_and_clean_all_lines', 'get_list_function_name', '_get_all_lines_in_function', 'len', '_get_function_stats', '_get_docs', '_get_all_lines_define_function', '_get_define_function_stats', 'output.append']"
+./utilmy/docs/code_parser.py:get_list_class_info,function,"['_get_and_clean_all_lines', 'get_list_class_name', '_get_all_lines_in_class', 'len', '_get_function_stats', 'output.append']"
+./utilmy/docs/code_parser.py:get_list_method_info,function,"['_get_all_line', '_get_and_clean_all_lines', 'get_list_class_methods', '_get_all_lines_in_class', '_get_all_lines_in_function', 'len', '_get_function_stats', '_get_docs', '_get_all_lines_define_function', '_get_define_function_stats', 'output.append']"
+./utilmy/docs/code_parser.py:get_list_method_stats,function,"['get_list_method_info', 'get_stats']"
+./utilmy/docs/code_parser.py:get_list_class_stats,function,"['get_list_class_info', 'get_stats']"
+./utilmy/docs/code_parser.py:get_list_function_stats,function,"['get_list_function_info', 'get_stats']"
+./utilmy/docs/code_parser.py:get_stats,function,"['len', 'df.apply', '_get_words', '_get_avg_char_per_word', '_get_functions']"
+./utilmy/docs/code_parser.py:get_file_stats,function,"['get_list_function_stats', 'len', 'avg_lines/len']"
+./utilmy/docs/code_parser.py:_get_words,function,[]
+./utilmy/docs/code_parser.py:_get_functions,function,"['re.match', 'list_funcs.append', 'list', 'return']"
+./utilmy/docs/code_parser.py:_get_avg_char_per_word,function,[]
+./utilmy/docs/code_parser.py:_validate_file,function,['print']
+./utilmy/docs/code_parser.py:_clean_data,function,"['array.copy', '_remove_empty_line', '_remmove_commemt_line', 'response.remove', 'response.copy', 'line.strip', 'len']"
+./utilmy/docs/code_parser.py:_remove_empty_line,function,['line.strip']
+./utilmy/docs/code_parser.py:_remmove_commemt_line,function,['line.strip']
+./utilmy/docs/code_parser.py:_get_and_clean_all_lines,function,"['_validate_file', '_get_all_line', '_clean_data']"
+./utilmy/docs/code_parser.py:_get_all_line,function,"['open', '_get_all_lines_in_function', 'array.copy', 're.match', 'line.rstrip', 'response.remove', 'range', 'list', 'list_lines.append', 'len', '_get_all_lines_in_class', '_get_all_lines_define_function']"
+./utilmy/docs/code_parser.py:_get_all_lines_in_function,function,"['array.copy', 're.match', 'line.rstrip', 'response.remove', 'range', 'list', 'list_lines.append', 'len']"
+./utilmy/docs/code_parser.py:_get_all_lines_in_class,function,"['array.copy', 're.match', 'line.rstrip', 'response.remove', 'list', 'list_lines.append', 'len']"
+./utilmy/docs/code_parser.py:_get_all_lines_define_function,function,"['list', 'array.copy', 're.match', 'line.rstrip', 'response.remove', 'list_lines.append', 'range']"
+./utilmy/docs/code_parser.py:_get_define_function_stats,function,"['len', 'line.strip', 'print', 'i.start', 're.finditer', 'range', 'data.split', 'arg.replace', 'arg.strip', 'arg.find', 'arg_name.append', 'arg_type.append', 'arg_value.append']"
+./utilmy/docs/code_parser.py:_get_function_stats,function,"['array.copy', 'check_array.copy', 'line.rstrip', 'check_array.remove', 'line.split', 're.match', 'list_var.append', 'list']"
+./utilmy/docs/code_parser.py:export_stats_pertype,function,"['get_list_function_stats', 'print', 'df.to_csv', 'get_list_class_stats', 'get_list_method_stats']"
+./utilmy/docs/code_parser.py:export_stats_perfile,function,"['get_list_function_stats', 'print', 'df.to_csv', 'get_list_class_stats', 'get_list_method_stats']"
+./utilmy/docs/code_parser.py:export_stats_perrepo,function,"['glob.glob', 'range', 'get_list_function_stats', 'print', 'df.to_csv', 'get_list_class_stats', 'get_list_method_stats']"
+./utilmy/docs/code_parser.py:function_graph,function,"['glob.glob', 'range', 'get_list_function_stats', 'print', 'df.to_csv', 'get_list_method_stats']"
+./utilmy/docs/code_parser.py:test_example,function,"['export_stats_pertype', 'export_stats_perfile', 'export_stats_perrepo']"
+./utilmy/docs/generate_doc.py:markdown_create_function,function,"['uri.split', 'literal_eval', 'zip', 'rsp.format']"
+./utilmy/docs/generate_doc.py:markdown_create_file,function,[]
+./utilmy/logs/test_log.py:test1,function,"['log3', 'log2', 'log', 'logw', 'logc', 'logr', 'loge']"
+./utilmy/logs/test_log.py:test2,function,"['print', 'util_log.logger_setup', 'log3', 'log2', 'log', 'logw', 'logc', 'logr', 'loge']"
+./utilmy/logs/test_log.py:test_launch_server,function,['socketserver.TCPServer']
+./utilmy/logs/test_log.py:test_server,function,"['print', 'util_log.logger_setup', 'log3', 'log2', 'log', 'logw', 'logc', 'logr', 'loge']"
+./utilmy/logs/test_log.py:LoggingStreamHandler:handle,method,"['len', 'struct.unpack', 'pickle.loads', 'json.loads', 'logger.patch', 'record.update']"
+./utilmy/logs/util_log.py:logger_setup,function,"['open', 'yaml.safe_load', 'print', 'cfg.pop', 'globals_.pop', 'int', 'SocketHandler', 'handler.get', 'handler.items', 'handler.update', 'logger.configure', 'logger.level']"
+./utilmy/logs/util_log.py:log,function,"['open', 'yaml.safe_load', 'print', 'cfg.pop', 'globals_.pop', 'int', 'SocketHandler', 'handler.get', 'handler.items', 'handler.update', 'logger.configure', 'logger.level']"
+./utilmy/logs/util_log.py:log2,function,['logger.opt']
+./utilmy/logs/util_log.py:log3,function,['logger.opt']
+./utilmy/logs/util_log.py:logw,function,['logger.opt']
+./utilmy/logs/util_log.py:logc,function,['logger.opt']
+./utilmy/logs/util_log.py:loge,function,['logger.opt']
+./utilmy/logs/util_log.py:logr,function,['logger.opt']
+./utilmy/logs/util_log.py:test,function,"['log3', 'log2', 'log', 'logw', 'loge', 'logc', 'logr']"
+./utilmy/logs/util_log.py:z_logger_stdout_override,function,"['__init__', 'write', 'buffer.rstrip', 'logger.opt', 'line.rstrip', 'flush', 'logger.remove', 'logger.add', 'StreamToLogger', 'contextlib.redirect_stdout', 'print']"
+./utilmy/logs/util_log.py:z_logger_custom_1,function,"['InterceptHandler', 'emit', 'logger.level', 'str', 'logging.currentframe', 'logger.opt', 'record.getMessage', 'format_record', 'pformat', 'setup_logging', 'logging.getLogger', 'logger.configure']"
+./utilmy/templates/cli.py:run_cli,function,"['argparse.ArgumentParser', 'add', 'p.parse_args', 'template_show', 'template_copy']"
+./utilmy/templates/cli.py:template_show,function,"['os.walk', 'print']"
+./utilmy/templates/cli.py:template_copy,function,"['os_copy', 'print', 'Path']"
+./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version,function,"['open', 'Version.parse', 'print', 'int', 'file.write', 'version.new_version']"
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit,function,"['ask', 'exit', 'os.system']"
+./utilmy/templates/templist/pypi_package/run_pipy.py:ask,function,"['input', 'ans.lower']"
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload,function,"['os.system', 'print', 'os.listdir', 'item.endswith']"
+./utilmy/templates/templist/pypi_package/run_pipy.py:main,function,"['print', 'update_version']"
+./utilmy/templates/templist/pypi_package/run_pipy.py:Version:__init__,method,[]
+./utilmy/templates/templist/pypi_package/run_pipy.py:Version:__str__,method,"[""f'Version""]"
+./utilmy/templates/templist/pypi_package/run_pipy.py:Version:__repr__,method,['self.__str__']
+./utilmy/templates/templist/pypi_package/run_pipy.py:Version:stringify,method,[]
+./utilmy/templates/templist/pypi_package/run_pipy.py:Version:new_version,method,['self.stringify']
+./utilmy/templates/templist/pypi_package/run_pipy.py:Version:parse,method,"['re.findall', 'len', 'Exception', 'cls']"
+./utilmy/templates/templist/pypi_package/setup.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"

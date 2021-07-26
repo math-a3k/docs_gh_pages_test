@@ -9,6 +9,7 @@ Usage
 
     python code_parser.py repo   parser/test3    parser/output/output_repo.csv
 
+    python code_parser.py function_graph parser/test3   docs/function_graph.csv
 
 """
 
@@ -925,6 +926,37 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
+def function_graph(in_path:str=None, out_path:str=None):
+    """ 
+        python code_parser.py  function_graph <in_path> <out_path>
+
+    Returns:
+        1  csv output
+    """
+    root = in_path
+    flist = glob.glob(root +"/*.py")
+    flist = flist + glob.glob(root +"/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*/*/*.py")
+
+    for i in range(len(flist)):
+        cols = ['uri', 'type', 'list_functions']
+        df = get_list_function_stats(flist[i])
+        if df is not None:
+            df = df[cols]
+            print(df)
+            if i == 0:
+                df.to_csv(f'{out_path}', index=False)
+            else:
+                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+        df = get_list_method_stats(flist[i])
+        if df is not None:
+            df = df[cols]
+            print(df)
+            df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+
+
 def test_example():
     # export_stats_pertype('parser/test3/arrow_dataset.py', "function", "parser/output/output_function.csv")
     # export_stats_pertype('parser/test3/arrow_dataset.py', "class", "parser/output/output_function.csv")
@@ -937,6 +969,7 @@ if __name__ == "__main__":
       'type': export_stats_pertype,
       'file': export_stats_perfile,
       'repo': export_stats_perrepo,
+      'function_graph': function_graph,
     })
     # test_example()
 
@@ -944,4 +977,5 @@ if __name__ == "__main__":
         python code_parser.py type parser/test3/arrow_dataset.py method parser/output/output_method.csv
         python code_parser.py file parser/code_parser.py method parser/output/output_file.csv
         python code_parser.py repo parser/test3 parser/output/output_repo.csv
+        python code_parser.py function_graph . docs/function_graph.csv
     '''
