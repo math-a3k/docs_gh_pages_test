@@ -17,6 +17,7 @@ import os
 import glob
 import fire
 from posixpath import dirname, split
+from ast import literal_eval
 import re
 import pandas as pd
 
@@ -926,6 +927,14 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
+def write_to_file(uri, type, list_functions, out_path):
+    # list_functions = literal_eval(list_functions)
+    # print(list_functions)
+    for function in list_functions:
+        with open(f'{out_path}', 'a+') as f:
+            f.write(f'{uri}, {type}, {function}\n')
+
+
 def function_graph(in_path:str=None, out_path:str=None):
     """ 
         python code_parser.py  function_graph <in_path> <out_path>
@@ -944,17 +953,33 @@ def function_graph(in_path:str=None, out_path:str=None):
         cols = ['uri', 'type', 'list_functions']
         df = get_list_function_stats(flist[i])
         if df is not None:
-            df = df[cols]
-            print(df)
+            dfi = df[cols]
+            print(dfi)
             if i == 0:
-                df.to_csv(f'{out_path}', index=False)
+                # df.to_csv(f'{out_path}', index=False)
+                with open(f'{out_path}', 'w+') as f:
+                    f.write('uri, type, function\n')
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], out_path) 
             else:
-                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], out_path)
+
         df = get_list_method_stats(flist[i])
         if df is not None:
             df = df[cols]
             print(df)
-            df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+            if i == 0:
+                # df.to_csv(f'{out_path}', index=False)
+                with open(f'{out_path}', 'w+') as f:
+                    f.write('uri, type, function')
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], out_path)
+            else:
+                # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], out_path)
 
 
 def test_example():

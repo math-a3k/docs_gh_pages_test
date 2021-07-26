@@ -1,464 +1,2297 @@
-uri,type,list_functions
-./run_pipy.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"
-./run_pipy.py:update_version,function,"['open', 'Version.parse', 'int', 'file.write', 'version.new_version']"
-./run_pipy.py:git_commit,function,"['ask', 'exit', 'os.system']"
-./run_pipy.py:ask,function,"['input', 'ans.lower']"
-./run_pipy.py:pypi_upload,function,"['os.system', 'print', 'os.listdir', 'item.endswith']"
-./run_pipy.py:main,function,['update_version']
-./run_pipy.py:Version:__init__,method,[]
-./run_pipy.py:Version:__str__,method,"[""f'Version""]"
-./run_pipy.py:Version:__repr__,method,['self.__str__']
-./run_pipy.py:Version:stringify,method,[]
-./run_pipy.py:Version:new_version,method,['self.stringify']
-./run_pipy.py:Version:parse,method,"['re.findall', 'len', 'Exception', 'cls']"
-./setup.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"
-./test.py:pd_random,function,"['random.random', 'range', 'pd.DataFrame']"
-./test.py:test_utilmy_plot,function,"['pd_random', 'pd_plot_multi']"
-./test.py:test_utilmy_pd_os_session,function,"['random.random', 'range', 'pd.DataFrame', 'len', 'os.makedirs', 'df.to_csv', 'pd_read_file', 'round', 'print', 'git_repo_root', 'os_makedirs', 'os.system', 'os_removedirs', 'os_system', 'os_platform_os', 'global_verbosity']"
-./test.py:test_utilmy_session,function,"['Session', 'sess.save', 'globals', 'os.system', 'sess.show', 'glob.glob', 'sess.load']"
-./test.py:test_docs_cli,function,['os.system']
-./test.py:test_decorators_os,function,"['test_print', 'print', 'os_multithread', 'profiled_sum', 'sum', 'profiler_context', 'profiler_start', 'profiler_stop', 'dummy_func', 'time.sleep', 'method', 'DummyClass', 'a.method']"
-./test.py:pd_generate_data,function,"['random.random', 'range', 'pd.DataFrame', 'np.where']"
-./test.py:test_tabular_test,function,"['pd_generate_data', 'test_anova', 'test_normality2', 'test_plot_qqplot']"
-./test.py:test_text_similarity,function,"['pd.DataFrame', 'text.pd_similarity', 'SequenceMatcher', 'pd.Series', 'check_similarity', 'assert_series_equal']"
-./test.py:test_text_pdcluster,function,['test_lsh']
-./utilmy/dates.py:log,function,['print']
-./utilmy/dates.py:pd_date_split,function,"['df.drop_duplicates', 'pd.to_datetime', 'x.weekday', 'date_weekmonth', 'date_weekmonth2', 'x.isocalendar', 'date_weekyear2', 'df.apply', 'int', 'merge1', 'date_is_holiday', 'log']"
-./utilmy/dates.py:date_now,function,"['datetime.now', 'datetime.timedelta', 'now_new.astimezone', 'now_pacific.strftime']"
-./utilmy/dates.py:date_is_holiday,function,"['holidays.CountryHoliday', 'np.array', 'x.astype']"
-./utilmy/dates.py:date_weekmonth2,function,[]
-./utilmy/dates.py:date_weekmonth,function,"['date_weekmonth', 'date_value.replace']"
-./utilmy/dates.py:date_weekyear2,function,['datetime.datetime']
-./utilmy/dates.py:date_weekday_excel,function,"['arrow.get', 'str']"
-./utilmy/dates.py:date_weekyear_excel,function,"['arrow.get', 'str', 'dd.isocalendar', 'date_weekday_excel', 'int']"
-./utilmy/dates.py:date_generate,function,"['relativedelta', 'range']"
-./utilmy/decorators.py:timeout,function,"['decorator', '_handle_timeout', '_TimeoutError', 'wrapper', 'signal.signal', 'signal.alarm', 'func', 'wraps']"
-./utilmy/decorators.py:timer,function,"['wrapper', 'time.perf_counter', 'func', 'print']"
-./utilmy/decorators.py:profiler_context,function,"['Profiler', 'profiler.start', 'profiler.stop', 'print']"
-./utilmy/decorators.py:profiler_deco,function,"['wrapper', 'Profiler', 'profiler.start', 'func', 'profiler.stop', 'print', 'profiler_decorator_base', 'inner', 'cProfile.Profile', 'pr.enable', 'fnc', 'pr.disable', 'io.StringIO', 'pstats.Stats', 'ps.print_stats']"
-./utilmy/decorators.py:profiler_decorator_base,function,"['inner', 'cProfile.Profile', 'pr.enable', 'fnc', 'pr.disable', 'io.StringIO', 'pstats.Stats', 'ps.print_stats', 'print']"
-./utilmy/decorators.py:os_multithread,function,"['ThreadWithResult', '__init__', 'function', 'target', 'super', 'kwargs.values', 'list_of_threads.append', 'thread.start', 'zip', 'kwargs.keys', 'thread.join', 'results.append']"
-./utilmy/decorators.py:threading_deco,function,"['wrapper', 'Thread', 'background_thread.start']"
-./utilmy/images.py:log,function,['print']
-./utilmy/images.py:deps,function,"['open', 'fp.readlines', 'print']"
-./utilmy/images.py:read_image,function,"['isinstance', 'hasattr', 'np.asarray', 'cv2.imdecode', 'validators.url', 'read', 'filepath_or_buffer.endswith', 'tifffile.imread', 'cv2.imread', 'cv2.cvtColor']"
-./utilmy/images.py:visualize_in_row,function,"['len', 'plt.figure', 'enumerate', 'plt.subplot', 'plt.xticks', 'plt.yticks', 'plt.title', 'plt.imshow', 'plt.show']"
-./utilmy/images.py:maintain_aspect_ratio_resize,function,"['float', 'int', 'cv2.resize']"
-./utilmy/io.py:screenshot,function,"['sct.shot', 'print']"
-./utilmy/tabular.py:log,function,['print']
-./utilmy/tabular.py:test_anova,function,"['edu_frame.groupby', 'groups.keys', 'globals', 'lg.append', 'dfd=len', 'print', 'stats.f_oneway', 'dfn=len']"
-./utilmy/tabular.py:test_normality2,function,"['shapiro', 'print', 'normaltest', 'anderson', 'range']"
-./utilmy/tabular.py:test_plot_qqplot,function,"['plt.subplots', 'fig.suptitle', 'sns.boxplot', 'sns.histplot', 'sm.qqplot', 'print']"
-./utilmy/tabular.py:test_heteroscedacity,function,"['Linear', 'custom_stat', 'np.sqrt', 'print', 'df.profile_report', 'profile.to_file', 'profile.get_rejected_variables']"
-./utilmy/tabular.py:pd_stat_distribution_colnum,function,"['df.sample', 'getstat', 'str', 'len', 'pd.DataFrame', 'pd.concat', 'print', 'np.arange']"
-./utilmy/tabular.py:pd_stat_histogram,function,"['np.histogram', 'pd.DataFrame']"
-./utilmy/tabular.py:np_col_extractname,function,"['len', 'colnew.append']"
-./utilmy/tabular.py:np_list_remove,function,"['cols.remove', 'cols3.append']"
-./utilmy/tabular.py:pd_stat_shift_trend_changes,function,"['target_diffs.fillna', 'target_diffs.divide', 'target_diffs_norm.diff', 'target_diffs_lvl2.fillna', 'int']"
-./utilmy/tabular.py:pd_stat_shift_trend_correlation,function,"['df.merge', 'pd.isnull', 'len', 'np.corrcoef', 'print']"
-./utilmy/tabular.py:pd_stat_shift_changes,function,"['type', 'list', 'features_list.remove', 'ignored.append', 'pd_colnum_tocat_stat', 'pd_stat_shift_trend_correlation', 'pd_stat_shift_changes', 'stats_all.append', 'pd.DataFrame', 'len', 'print', 'str']"
-./utilmy/tabular.py:np_conv_to_one_col,function,"['row2string', 'sep_char.join']"
-./utilmy/text.py:log,function,['print']
-./utilmy/text.py:pd_text_hash_create_lsh,function,"['MinHashLSH', 'enumerate', 'sentence.split', 'MinHash', 'set', 'v.update', 'hash_lines.append', 'lsh.insert']"
-./utilmy/text.py:pd_text_getcluster,function,"['pd_text_hash_create_lsh', 'enumerate', 'lsh.query', 'list']"
-./utilmy/text.py:pd_similarity,function,"['len', 'Exception', 'find_similarity', 'fuzz.ratio', 'editdistance.eval', 'SequenceMatcher', 'df.apply']"
-./utilmy/text.py:test_lsh,function,"['pd.DataFrame', 'pd_text_getcluster', 'df.head', 'print']"
-./utilmy/utilmy.py:log,function,['print']
-./utilmy/utilmy.py:pd_merge,function,"['list', 'df1.join']"
-./utilmy/utilmy.py:pd_plot_multi,function,"['plt.figure', 'len', 'getattr', 'df.plot', 'plt.show', 'ax.set_ylabel', 'range', 'ax.get_legend_handles_labels', 'ax.twinx', 'ax_new.set_ylabel', 'ax_new.get_legend_handles_labels', 'ax.legend']"
-./utilmy/utilmy.py:pd_filter,function,"['isinstance', 'filter_dict.items', 'filter_dict.split', 'x_convert', 'str', 'dict', 'float', 'x.strip', 'print', 'len', 'x.split']"
-./utilmy/utilmy.py:pd_to_file,function,"['Path', 'os.makedirs', 'df.to_pickle', 'df.to_parquet', 'df.to_csv', 'gc.collect']"
-./utilmy/utilmy.py:pd_read_file,function,"['log', 'print', 'isinstance', 'path_glob.split', 'file_list.extend', 'sorted', 'glob.glob', 'len', 'ThreadPool', 'pd.DataFrame', 'range', 'job_list.append', 'pool.apply_async', 'pd_dtype_reduce', 'dfi.drop_duplicates', 'gc.collect', 'pd.concat', 'pool.terminate', 'pool.join']"
-./utilmy/utilmy.py:pd_sample_strat,function,"['df.groupby', 'x.sample']"
-./utilmy/utilmy.py:pd_cartesian,function,"['list', 'pd.merge']"
-./utilmy/utilmy.py:pd_plot_histogram,function,"['dfi.quantile', 'dfi.hist', 'dfi.sample', 'plt.title', 'path_save.split', 'plt.show', 'os.makedirs', 'plt.savefig', 'print', 'plt.close']"
-./utilmy/utilmy.py:pd_col_bins,function,"['pd.qcut', 'np.arange']"
-./utilmy/utilmy.py:pd_dtype_reduce,function,['np.dtype']
-./utilmy/utilmy.py:pd_dtype_count_unique,function,"['gef_is_continuous', 'np.sum', 'np.round', 'len', 'min', 'any', 'list', 'n=min']"
-./utilmy/utilmy.py:pd_dtype_to_category,function,"['isinstance', 'df.select_dtypes', 'len', 'float', 'pd.to_datetime', 'print']"
-./utilmy/utilmy.py:pd_dtype_getcontinuous,function,"['len', 'str']"
-./utilmy/utilmy.py:pd_del,function,[]
-./utilmy/utilmy.py:pd_add_noise,function,"['pd.DataFrame', 'pd_dtype_getcontinuous', 'print']"
-./utilmy/utilmy.py:pd_cols_unique_count,function,"['len', 'str']"
-./utilmy/utilmy.py:pd_show,function,['os_makedirs']
-./utilmy/utilmy.py:to_dict,function,[]
-./utilmy/utilmy.py:to_timeunix,function,"['isinstance', 'int', 'datex.timetuple']"
-./utilmy/utilmy.py:to_datetime,function,"['pd.to_datetime', 'str']"
-./utilmy/utilmy.py:np_list_intersection,function,[]
-./utilmy/utilmy.py:np_add_remove,function,"['set_.copy', 'result_temp.remove', 'result_temp.add']"
-./utilmy/utilmy.py:to_float,function,['float']
-./utilmy/utilmy.py:to_int,function,"['int', 'float']"
-./utilmy/utilmy.py:config_load,function,"['str', 'log', 'pathlib.Path', 'yaml.load', 'x.items', 'json.load', 'os.makedirs', 'open', 'yaml.dump']"
-./utilmy/utilmy.py:os_path_split,function,"['fpath.replace', 'fpath.split']"
-./utilmy/utilmy.py:os_file_replacestring,function,"['os_file_replacestring1', 'fileinput.FileInput', 'line.replace', 'file1.close', 'print', 'format', 'os_walk']"
-./utilmy/utilmy.py:os_walk,function,"['dir1.rstrip', 'dir1.count', 'os.walk', 'root.count', 'fnmatch.filter', 'np.array']"
-./utilmy/utilmy.py:z_os_search_fast,function,"['re.compile', 'enumerate', 're.search', 'line.decode', 'res.append', 'found.start', 'text.encode', 'line.find', 'print']"
-./utilmy/utilmy.py:os_search_content,function,"['os_walk', 'z_os_search_fast', 'pd.DataFrame']"
-./utilmy/utilmy.py:os_get_function_name,function,"['str', 'socket.gethostname', 'sys._getframe']"
-./utilmy/utilmy.py:os_variable_init,function,[]
-./utilmy/utilmy.py:os_import,function,"['__import__', 'hasattr', 'dir', 'name.startswith', 'all_names2.append', 'print', 'globs.update', 'getattr']"
-./utilmy/utilmy.py:os_variable_exist,function,"['str', 'log']"
-./utilmy/utilmy.py:os_variable_check,function,"['Exception', 'log', 'sys.exit']"
-./utilmy/utilmy.py:os_clean_memory,function,['gc.collect']
-./utilmy/utilmy.py:os_system_list,function,"['len', 'enumerate', 'log', 'os.system', 'time.sleep']"
-./utilmy/utilmy.py:os_file_check,function,"['log', 'os.stat', 'time.ctime']"
-./utilmy/utilmy.py:os_to_file,function,"['open', 'fp.write']"
-./utilmy/utilmy.py:os_platform_os,function,[]
-./utilmy/utilmy.py:os_cpu,function,['os.cpu_count']
-./utilmy/utilmy.py:os_platform_ip,function,[]
-./utilmy/utilmy.py:os_memory,function,"['open', 'i.split', 'str', 'int']"
-./utilmy/utilmy.py:os_sleep_cpu,function,"['psutil.cpu_percent', 'time.sleep']"
-./utilmy/utilmy.py:os_ram_object,function,"['id', 'getsizeof', 'ids.add', 'isinstance', 'sum', 'd', 'o.items']"
-./utilmy/utilmy.py:os_copy,function,"['ignore_pyc_files', 'name.endswith', 'exclude.split', 'os.makedirs', 'shutil.copytree', 'shutil.ignore_patterns']"
-./utilmy/utilmy.py:os_removedirs,function,"['len', 'print', 'os.walk', 'os.remove', 'os.rmdir']"
-./utilmy/utilmy.py:os_getcwd,function,[]
-./utilmy/utilmy.py:os_system,function,"['len', 'enumerate', 'log', 'os.system', 'time.sleep']"
-./utilmy/utilmy.py:os_makedirs,function,"['dir_or_file.split', 'os.makedirs']"
-./utilmy/utilmy.py:global_verbosity,function,"['git_repo_root', 'json.load', 'yaml.load', 'Exception', 'int']"
-./utilmy/utilmy.py:git_repo_root,function,"['os_system', 'mout.split', 'len']"
-./utilmy/utilmy.py:git_current_hash,function,"['subprocess.check_output', 'label.decode']"
-./utilmy/utilmy.py:plot_to_html,function,"['glob.glob', 'flist.sorted', 'print', 'open', 'base64.b64encode', 'f.write']"
-./utilmy/utilmy.py:save,function,"['os.makedirs', 'pickle.dump', 'open']"
-./utilmy/utilmy.py:load,function,['pickle.load']
-./utilmy/utilmy.py:print_everywhere,function,"['snoop.install', 'myfun', 'pp', 'print', 'type', 'str']"
-./utilmy/utilmy.py:log5,function,['ic']
-./utilmy/utilmy.py:log_trace,function,"['print', 'pdb.set_trace']"
-./utilmy/utilmy.py:profiler_start,function,"['Profiler', 'profiler.start']"
-./utilmy/utilmy.py:profiler_stop,function,"['profiler.stop', 'print']"
-./utilmy/utilmy.py:dict_to_namespace:__init__,method,[]
-./utilmy/utilmy.py:Session:__init__,method,"['os.makedirs', 'print']"
-./utilmy/utilmy.py:Session:show,method,"['glob.glob', 'print']"
-./utilmy/utilmy.py:Session:save,method,"['os.makedirs', 'self.save_session']"
-./utilmy/utilmy.py:Session:load,method,"['print', 'self.load_session']"
-./utilmy/utilmy.py:Session:save_session,method,"['os.makedirs', 'globs.items', 'x.startswith', 'str', 'pd.to_pickle', 'save', 'print']"
-./utilmy/utilmy.py:Session:load_session,method,"['print', 'os.walk', 'x.replace', 'load']"
-./utilmy/util_default.py:log,function,"['logger.info', 'log2', 'logger.debug', 'logw', 'logger.warning', 'loge', 'logger.error', 'logger_setup', 'logger.configure']"
-./utilmy/util_default.py:log2,function,['logger.debug']
-./utilmy/util_default.py:logw,function,['logger.warning']
-./utilmy/util_default.py:loge,function,['logger.error']
-./utilmy/util_default.py:logger_setup,function,['logger.configure']
-./utilmy/util_default.py:config_load,function,"['str', 'logw', 'log2', 'yaml.load', 'log', 'os.makedirs', 'open', 'json.dump']"
-./utilmy/util_default.py:dataset_donwload,function,"['log', 'os.makedirs', 'wget.download', 'url.split', 'os_extract_archive', 'log2']"
-./utilmy/util_default.py:os_extract_archive,function,"['isinstance', 'is_match_fn', 'open_fn', 'archive.extractall', 'os.remove', 'shutil.rmtree']"
-./utilmy/util_default.py:to_file,function,"['open', 'fp.write']"
-./utilmy/zutil.py:session_load_function,function,"['dill.load_session', 'print']"
-./utilmy/zutil.py:session_save_function,function,"['date_now', 'dill.dump_session', 'print']"
-./utilmy/zutil.py:py_save_obj_dill,function,"['z_key_splitinto_dir_name', 'os_folder_create', 'open', 'dill.dumps', 'print']"
-./utilmy/zutil.py:aa_unicode_ascii_utf8_issue,function,[]
-./utilmy/zutil.py:isfloat,function,['float']
-./utilmy/zutil.py:isint,function,['isinstance']
-./utilmy/zutil.py:isanaconda,function,['txt.find']
-./utilmy/zutil.py:a_run_ipython,function,['IPython.get_ipython']
-./utilmy/zutil.py:py_autoreload,function,['a_run_ipython']
-./utilmy/zutil.py:os_platform,function,[]
-./utilmy/zutil.py:a_start_log,function,"['a_run_ipython', 'str', 'os_platform', 'date_now']"
-./utilmy/zutil.py:a_cleanmemory,function,['gc.collect']
-./utilmy/zutil.py:a_info_conda_jupyter,function,[]
-./utilmy/zutil.py:print_object_tofile,function,"['open', 'file1.write', 'np.shape', 'range', 'str']"
-./utilmy/zutil.py:print_progressbar,function,"['str', 'format_str.format', 'float', 'int']"
-./utilmy/zutil.py:os_zip_checkintegrity,function,"['zipfile.ZipFile', 'zip_file.testzip', 'print']"
-./utilmy/zutil.py:os_zipfile,function,"['zipfile.ZipFile', 'os.walk', 'zf.write', 'zf.close', 'os_zip_checkintegrity', 'print']"
-./utilmy/zutil.py:os_zipfolder,function,['dir_tozip.split']
-./utilmy/zutil.py:os_zipextractall,function,"['filezip_or_dir.find', 'os_file_listall', 'os_file_getname', 'zipfile.ZipFile', 'zip_ref.extractall', 'zip_ref.close', 'print']"
-./utilmy/zutil.py:os_folder_copy,function,"['_default_fun_file_toignore', 'fnmatch.filter', 'shutil.copytree', 'shutil.copy']"
-./utilmy/zutil.py:os_folder_create,function,"['os.getcwd', 'os.makedirs', 'os.chdir']"
-./utilmy/zutil.py:os_folder_robocopy,function,"['subprocess.call', 'print']"
-./utilmy/zutil.py:os_file_replace,function,"['mkstemp', 'open', 'target_file.write', 'remove', 'move', 'os_file_replacestring1', 'fileinput.FileInput', 'line.replace', 'file1.close', 'print', 'format', 'os_file_replacestring2', 'os_file_listall']"
-./utilmy/zutil.py:os_file_replacestring1,function,"['fileinput.FileInput', 'line.replace', 'file1.close', 'print', 'format']"
-./utilmy/zutil.py:os_file_replacestring2,function,"['os_file_listall', 'os_file_replacestring1']"
-./utilmy/zutil.py:os_file_getname,function,"['ntpath.split', 'ntpath.basename']"
-./utilmy/zutil.py:os_file_getpath,function,['ntpath.split']
-./utilmy/zutil.py:os_file_gettext,function,"['open', 'f.read']"
-./utilmy/zutil.py:os_file_listall,function,"['dir1.rstrip', 'dir1.count', 'os.walk', 'root.count', 'fnmatch.filter']"
-./utilmy/zutil.py:_os_file_search_fast,function,"['re.compile', 'enumerate', 're.search', 'line.decode', 'res.append', 'found.start', 'text.encode', 'line.find', 'print']"
-./utilmy/zutil.py:os_file_search_content,function,"['os_file_listall', '_os_file_search_fast', 'pd.DataFrame']"
-./utilmy/zutil.py:os_file_rename,function,"['some_dir.rstrip', 'some_dir.count', 'os.walk', 'root.count', 'matches.append', 'fnmatch.filter', 're.sub', 'os.rename', 'np.array']"
-./utilmy/zutil.py:os_gui_popup_show,function,"['os_gui_popup_show2', 'Tk', 'Scrollbar', 'Text', 'scrollbar.pack', 'text.pack', 'scrollbar.config', 'text.config', 'text.insert', 'root.attributes', 'mainloop']"
-./utilmy/zutil.py:os_print_tofile,function,['text_file.write']
-./utilmy/zutil.py:os_path_norm,function,"['pth.find', 'b.lstrip']"
-./utilmy/zutil.py:os_path_change,function,"['os_path_norm', 'os.chdir']"
-./utilmy/zutil.py:os_path_current,function,['os.getcwd']
-./utilmy/zutil.py:os_file_exist,function,[]
-./utilmy/zutil.py:os_file_size,function,[]
-./utilmy/zutil.py:os_file_read,function,"['open', 'fh.read']"
-./utilmy/zutil.py:os_file_isame,function,['filecmp.cmp']
-./utilmy/zutil.py:os_file_get_extension,function,['_ext.startswith']
-./utilmy/zutil.py:os_file_normpath,function,[]
-./utilmy/zutil.py:os_folder_is_path,function,['isinstance']
-./utilmy/zutil.py:os_file_get_path_from_stream,function,"['os_folder_is_path', 'getattr']"
-./utilmy/zutil.py:os_file_try_to_get_extension,function,"['os_file_get_path_from_stream', 'os_file_get_extension']"
-./utilmy/zutil.py:os_file_are_same_file_types,function,"['os_file_try_to_get_extension', 'all']"
-./utilmy/zutil.py:os_file_norm_paths,function,"['sglob', 'sorted', '_norm_paths_itr', 'os_folder_is_path', 'list']"
-./utilmy/zutil.py:os_file_mergeall,function,"['os_file_listall', 'open', 'os_file_gettext', 'nfile1.write', 'nfile1.close']"
-./utilmy/zutil.py:os_file_extracttext,function,"['os_file_listall', 'open', 'os_file_gettext', 'BeautifulSoup', 'soup.find_all', 'txt2.strip', 'output_file1.write']"
-./utilmy/zutil.py:os_path_append,function,[]
-./utilmy/zutil.py:os_wait_cpu,function,"['psutil.cpu_percent', 'print', 'arrow.utcnow', 'time.sleep']"
-./utilmy/zutil.py:os_split_dir_file,function,"['dirfile.split', 'len']"
-./utilmy/zutil.py:os_process_run,function,"['subprocess.Popen', 'proc.communicate', 'print', 'str']"
-./utilmy/zutil.py:os_process_2,function,[]
-./utilmy/zutil.py:py_importfromfile,function,"['a_get_pythonversion', 'SourceFileLoader', 'foo.MyClass', 'importlib.import_module']"
-./utilmy/zutil.py:py_memorysize,function,"['id', 'getsizeof', 'ids.add', 'isinstance', 'sum', 'd', 'o.items']"
-./utilmy/zutil.py:save,function,['py_save_obj']
-./utilmy/zutil.py:load,function,['py_load_obj']
-./utilmy/zutil.py:save_test,function,"['py_load_obj', 'print', 'str', 'gc.collect']"
-./utilmy/zutil.py:py_save_obj,function,"['z_key_splitinto_dir_name', 'os_folder_create', 'open', 'dill.dumps', 'print']"
-./utilmy/zutil.py:py_load_obj,function,"['folder.find', 'z_key_splitinto_dir_name', 'os_folder_create', 'open', 'pickle.load']"
-./utilmy/zutil.py:z_key_splitinto_dir_name,function,"['keyname.split', 'len']"
-./utilmy/zutil.py:os_config_setfile,function,"['open', 'dict_params.items', 'isinstance', 'f1.write', 'str', 'f1.close', 'print']"
-./utilmy/zutil.py:os_config_getfile,function,"['open', 'f1.readlines', 'print']"
-./utilmy/zutil.py:os_csv_process,function,[]
-./utilmy/zutil.py:pd_toexcel,function,"['os_file_exist', 'load_workbook', 'pd.ExcelWriter', 'dict', 'df.to_excel', 'writer.save', 'pd_toexcel_many', 'pd_toexcel']"
-./utilmy/zutil.py:pd_toexcel_many,function,['pd_toexcel']
-./utilmy/zutil.py:find_fuzzy,function,['xi.find']
-./utilmy/zutil.py:str_match_fuzzy,function,['xstring.find']
-./utilmy/zutil.py:str_parse_stringcalendar,function,"['cal.split', 'x.find', 'cal4.append', 'np.array', 'print']"
-./utilmy/zutil.py:str_make_unicode,function,"['type', 'input_str.decode']"
-./utilmy/zutil.py:str_empty_string_array,function,"['range', 'str_empty_string_array_numpy', 'np.empty']"
-./utilmy/zutil.py:str_empty_string_array_numpy,function,['np.empty']
-./utilmy/zutil.py:str_isfloat,function,['float']
-./utilmy/zutil.py:str_is_azchar,function,['float']
-./utilmy/zutil.py:str_is_az09char,function,['float']
-./utilmy/zutil.py:str_reindent,function,['x.decode']
-./utilmy/zutil.py:str_split2,function,['x.decode']
-./utilmy/zutil.py:str_split_pattern,function,['x.decode']
-./utilmy/zutil.py:pd_str_isascii,function,['x.decode']
-./utilmy/zutil.py:str_to_utf8,function,['x.encode']
-./utilmy/zutil.py:str_to_unicode,function,"['isinstance', 'str']"
-./utilmy/zutil.py:np_minimize,function,"['penalty', 'enumerate', 'max', 'loss', 'fun_obj', 'np_minimize_de', 'range', 'next', 'print', 'save', 'date_now', 'np_int_tostr', 'np.mod', 'np.abs']"
-./utilmy/zutil.py:np_minimize_de,function,"['range', 'next', 'print', 'save', 'date_now', 'np_int_tostr', 'np.mod', 'np.abs']"
-./utilmy/zutil.py:np_remove_na_inf_2d,function,"['np.shape', 'range', 'np.isnan', 'np.isinf']"
-./utilmy/zutil.py:np_addcolumn,function,"['np.shape', 'np.zeros', 'np.column_stack']"
-./utilmy/zutil.py:np_addrow,function,"['np.shape', 'len', 'np.zeros', 'np.row_stack', 'np.append']"
-./utilmy/zutil.py:np_int_tostr,function,['str']
-./utilmy/zutil.py:np_dictordered_create,function,['OrderedDict']
-./utilmy/zutil.py:np_list_unique,function,['list']
-./utilmy/zutil.py:np_list_tofreqdict,function,"['dict', 'len', 'enumerate']"
-./utilmy/zutil.py:np_list_flatten,function,"['type', 'np_list_flatten', 'ret.append']"
-./utilmy/zutil.py:np_dict_tolist,function,['list']
-./utilmy/zutil.py:np_dict_tostr_val,function,['list']
-./utilmy/zutil.py:np_dict_tostr_key,function,['list']
-./utilmy/zutil.py:np_removelist,function,"['np_findfirst', 'xnew.append']"
-./utilmy/zutil.py:np_transform2d_int_1d,function,"['np.shape', 'np.zeros', 'range', 'np.abs', 'np_sortbycol']"
-./utilmy/zutil.py:np_mergelist,function,"['list', 'xnew.append']"
-./utilmy/zutil.py:np_enumerate2,function,"['np.empty', 'enumerate']"
-./utilmy/zutil.py:np_pivottable_count,function,"['np_dict_tolist', 'sorted', 'int']"
-./utilmy/zutil.py:np_nan_helper,function,"['np.isnan', 'z.nonzero']"
-./utilmy/zutil.py:np_interpolate_nan,function,"['np_nan_helper', 'np.interp', 'x']"
-./utilmy/zutil.py:np_and1,function,[]
-./utilmy/zutil.py:np_sortcol,function,"['pd.DataFrame', 'df.sort_values']"
-./utilmy/zutil.py:np_ma,function,"['np.convolve', 'np.ones']"
-./utilmy/zutil.py:np_cleanmatrix,function,"['np.nan_to_num', 'np.shape', 'range', 'abs']"
-./utilmy/zutil.py:np_torecarray,function,['np.shape']
-./utilmy/zutil.py:np_sortbycolumn,function,"['pd.DataFrame', 'df.sort_values']"
-./utilmy/zutil.py:np_sortbycol,function,"['pd.DataFrame', 'df.sort_values', 'np_sortbycol', 'len', 'np.reshape']"
-./utilmy/zutil.py:np_min_kpos,function,['np.partition']
-./utilmy/zutil.py:np_max_kpos,function,"['len', 'np.partition']"
-./utilmy/zutil.py:np_findfirst,function,['range']
-./utilmy/zutil.py:np_find,function,['range']
-./utilmy/zutil.py:find,function,['xi.find']
-./utilmy/zutil.py:findnone,function,['range']
-./utilmy/zutil.py:findx,function,"['type', 'vec.index', 'np.where', 'len']"
-./utilmy/zutil.py:finds,function,"['range', 'idlist.append']"
-./utilmy/zutil.py:findhigher,function,['range']
-./utilmy/zutil.py:findlower,function,['range']
-./utilmy/zutil.py:np_find_minpos,function,['min']
-./utilmy/zutil.py:np_find_maxpos,function,"['max', 'np_find_maxpos_2nd', 'float', 'enumerate']"
-./utilmy/zutil.py:np_find_maxpos_2nd,function,"['float', 'enumerate']"
-./utilmy/zutil.py:np_findlocalmax2,function,"['len', 'np.zeros', 'np_find_maxpos', 'enumerate', 'np_sortbycolumn', 'range', 'findhigher', 'np.abs']"
-./utilmy/zutil.py:np_findlocalmin2,function,"['len', 'np.zeros', 'np_find_minpos', 'enumerate', 'np_sortbycolumn', 'range', 'findlower', 'np.abs']"
-./utilmy/zutil.py:np_findlocalmax,function,"['len', 'np.zeros', 'np_find_maxpos', 'enumerate', 'np_sortbycolumn', 'range', 'findhigher', 'np.abs']"
-./utilmy/zutil.py:np_findlocalmin,function,"['len', 'np.zeros', 'np_find_minpos', 'enumerate', 'np_sortbycolumn', 'range', 'findlower', 'np.abs']"
-./utilmy/zutil.py:np_stack,function,"['np.shape', 'np.row_stack', 'np.column_stack']"
-./utilmy/zutil.py:np_uniquerows,function,"['np.ascontiguousarray', 'np.unique', 'unique_a.view']"
-./utilmy/zutil.py:np_remove_zeros,function,[]
-./utilmy/zutil.py:np_sort,function,"['pd.DataFrame', 'df.sort_values']"
-./utilmy/zutil.py:np_memory_array_adress,function,[]
-./utilmy/zutil.py:np_pivotable_create,function,"['tuple', 'ysort.append', 'xsort.append', 'len', 'list', 'xsort.sort', 'headings.extend', 'sortedkeys.sort', 'row.extend', 't.append']"
-./utilmy/zutil.py:pd_info,function,"['df.info', 'print', 'type', 'pd_info_memsize', 'pd_info', 'df.memory_usage']"
-./utilmy/zutil.py:pd_info_memsize,function,"['df.info', 'pd_info', 'df.memory_usage']"
-./utilmy/zutil.py:pd_row_findlast,function,['df.iterrows']
-./utilmy/zutil.py:pd_row_select,function,"['type', 'pd.DataFrame', 'list', 'c.endswith', 'np.in1d', 'ValueError']"
-./utilmy/zutil.py:pd_csv_randomread,function,"['sum', 'open', 'np.sort', 'pd.read_csv']"
-./utilmy/zutil.py:pd_array_todataframe,function,"['np.shape', 'len', 'pd.DataFrame']"
-./utilmy/zutil.py:pd_dataframe_toarray,function,['df.reset_index']
-./utilmy/zutil.py:pd_createdf,function,['pd.DataFrame']
-./utilmy/zutil.py:pd_create_colmapdict_nametoint,function,['enumerate']
-./utilmy/zutil.py:pd_extract_col_idx_val,function,[]
-./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv,function,"['np.array', 'pd.DataFrame', 'print']"
-./utilmy/zutil.py:pd_split_col_idx_val,function,[]
-./utilmy/zutil.py:pd_splitdf_inlist,function,"['list', 'l1.append']"
-./utilmy/zutil.py:pd_find,function,"['str', 'print', 'enumerate', 'np.column_stack', 'len', 'gc.collect', 'np_dictordered_create', 'range', 'np.array']"
-./utilmy/zutil.py:pd_dtypes_totype2,function,[]
-./utilmy/zutil.py:pd_dtypes,function,"['pd_dtypes', 'OrderedDict', 'enumerate', 'eval', 'print']"
-./utilmy/zutil.py:pd_df_todict2,function,"['df.drop_duplicates', 'range', 'len', 'dict0.setdefault']"
-./utilmy/zutil.py:pd_df_todict,function,"['df.drop_duplicates', 'range', 'len', 'dict0.setdefault', 'pd_df_todict', 'df.iterrows']"
-./utilmy/zutil.py:pd_col_addfrom_dfmap,function,[]
-./utilmy/zutil.py:pd_applyfun_col,function,['ff']
-./utilmy/zutil.py:pd_date_intersection,function,"['set', 'set.intersection', 'list', 'sorted']"
-./utilmy/zutil.py:pd_is_categorical,function,['isinstance']
-./utilmy/zutil.py:pd_str_encoding_change,function,[]
-./utilmy/zutil.py:pd_str_unicode_tostr,function,['pd_dtypes_type1_totype2']
-./utilmy/zutil.py:pd_dtypes_type1_totype2,function,['isinstance']
-./utilmy/zutil.py:pd_resetindex,function,"['list', 'len']"
-./utilmy/zutil.py:pd_insertdatecol,function,['date_nowtime']
-./utilmy/zutil.py:pd_replacevalues,function,['np.shape']
-./utilmy/zutil.py:pd_removerow,function,['df.drop']
-./utilmy/zutil.py:pd_removecol,function,['df1.drop']
-./utilmy/zutil.py:pd_insertrow,function,"['pd_array_todataframe', 'df.append']"
-./utilmy/zutil.py:pd_h5_cleanbeforesave,function,"['pd_resetindex', 'pd_str_unicode_tostr']"
-./utilmy/zutil.py:pd_h5_addtable,function,"['pd.HDFStore', 'find', 'list', 'print', 'store.append', 'store.close']"
-./utilmy/zutil.py:pd_h5_tableinfo,function,"['pd.HDFStore', 'store.get_storer']"
-./utilmy/zutil.py:pd_h5_dumpinfo,function,"['pd.HDFStore', 'list', 'pd.DataFrame', 'extract.append', 'datetime_tostring', 'errsym.append', 'np.array']"
-./utilmy/zutil.py:pd_h5_save,function,"['pd.HDFStore', 'store.append', 'store.close']"
-./utilmy/zutil.py:pd_h5_load,function,"['pd.read_hdf', 'pd.DataFrame']"
-./utilmy/zutil.py:pd_h5_fromcsv_tohdfs,function,"['os_file_listall', 'pd.HDFStore', 'enumerate', 'pd.read_csv', 'print', 'store.append', 'store.close', 'os_file_exist']"
-./utilmy/zutil.py:pd_np_toh5file,function,"['pd.DataFrame', 'pd.HDFStore', 'st.append']"
-./utilmy/zutil.py:date_allinfo,function,[]
-./utilmy/zutil.py:datetime_tostring,function,"['isinstance', 'datelist1.strftime', 'pd.to_datetime', 't.strftime', 'date2.append']"
-./utilmy/zutil.py:date_remove_bdays,function,"['isint', 'dateint_todatetime', 'datetime.timedelta', 'current_date.weekday', 'datetime_toint']"
-./utilmy/zutil.py:date_add_bdays,function,"['isint', 'dateint_todatetime', 'datetime.timedelta', 'current_date.weekday', 'datetime_toint']"
-./utilmy/zutil.py:datenumpy_todatetime,function,['type']
-./utilmy/zutil.py:datetime_tonumpydate,function,['np.datetime64']
-./utilmy/zutil.py:datestring_todatetime,function,"['isinstance', 'parser.parse', 'date2.append']"
-./utilmy/zutil.py:datetime_toint,function,"['isinstance', 'int', 'date2.append']"
-./utilmy/zutil.py:date_holiday,function,[]
-./utilmy/zutil.py:date_add_bday,function,"['isint', 'dateint_todatetime', 'datetime.timedelta', 'current_date.weekday', 'datetime_toint']"
-./utilmy/zutil.py:dateint_todatetime,function,"['isinstance', 'parser.parse', 'date2.append']"
-./utilmy/zutil.py:date_diffinday,function,['dateint_todatetime']
-./utilmy/zutil.py:date_diffinbday,function,"['dateint_todatetime', 'd1.date', 'd2.date', 'np.busday_count']"
-./utilmy/zutil.py:date_gencalendar,function,"['CustomBusinessDay', 'np.array']"
-./utilmy/zutil.py:date_finddateid,function,['np_findfirst']
-./utilmy/zutil.py:datestring_toint,function,"['isinstance', 'int', 'date2.append']"
-./utilmy/zutil.py:date_now,function,"['datetime.now', 'date_add_bdays', 'date_remove_bdays', 'str', 'date_nowtime', 'datetime.today', 'd.strftime']"
-./utilmy/zutil.py:date_nowtime,function,"['datetime.today', 'd.strftime']"
-./utilmy/zutil.py:date_generatedatetime,function,"['datestring_todatetime', 'date_add_bdays', 'datetime.timedelta', 'list', 'np.array']"
-./utilmy/zutil.py:np_numexpr_vec_calc,function,[]
-./utilmy/zutil_features.py:log,function,"['print', 'log2', 'log3']"
-./utilmy/zutil_features.py:log2,function,['print']
-./utilmy/zutil_features.py:log3,function,['print']
-./utilmy/zutil_features.py:os_get_function_name,function,['sys._getframe']
-./utilmy/zutil_features.py:os_getcwd,function,[]
-./utilmy/zutil_features.py:pa_read_file,function,"['hdfs.ls', 'glob.glob', 'fi.split', 'print', 'pq.read_table', 'arr_table.to_pandas', 'gc.collect', 'pd.concat', 'len', 'dfall.head']"
-./utilmy/zutil_features.py:pa_write_file,function,"['hdfs.rm', 'hdfs.mkdir', 'pq.write_to_dataset', 'hdfs.ls', 'print', 'os.removedirs', 'os.makedirs', 'os.listdir']"
-./utilmy/zutil_features.py:test_get_classification_data,function,"['make_classification', 'range', 'pd.DataFrame', 'np.arange', 'len', 'dfX.set_index', 'dfy.set_index']"
-./utilmy/zutil_features.py:params_check,function,"['isinstance', 'Exception']"
-./utilmy/zutil_features.py:save_features,function,"['os.makedirs', 'isinstance', 'log', 'list', 'df0.to_parquet']"
-./utilmy/zutil_features.py:load_features,function,"['pd.read_parquet', 'log']"
-./utilmy/zutil_features.py:save_list,function,"['os.makedirs', 'log', 'pickle.dump', 'open']"
-./utilmy/zutil_features.py:save,function,"['os.makedirs', 'isinstance', 'log', 'list', 'df0.to_parquet']"
-./utilmy/zutil_features.py:load,function,"['pd.read_parquet', 'log']"
-./utilmy/zutil_features.py:pd_read_file,function,"['ThreadPool', 'glob.glob', 'pd.DataFrame', 'len', 'log', 'range', 'job_list.append', 'pool.apply_async', 'dfi.drop_duplicates', 'gc.collect', 'pd.concat']"
-./utilmy/zutil_features.py:load_dataset,function,"['log', 'fetch_spark_koalas', 'fetch_dataset', 'glob.glob', 'ntpath.dirname', 'ntpath.basename', 'len', 'print', 'pd.read_csv', 'fi.endswith', 'pd.read_parquet', 'pd.read_pickle', 'pd.concat', 'df.head', 'list', 'np.arange', 'df.set_index', 'pd_read_file', 'dfy.head', 'df.join']"
-./utilmy/zutil_features.py:fetch_spark_koalas,function,"['path_data_x.replace', 'ks.read_parquet']"
-./utilmy/zutil_features.py:fetch_dataset,function,"['log', 'mkdtemp', 'pathlib.Path', 'mktemp', 'url_dataset.replace', 'urlx.replace', 'urlpath.split', 'os.makedirs', 'requests.Session', 's.get', 'print', 'open', 'f.write', 'res.raise_for_status', 'urlparse', 'parse_qs', 'download_googledrive', 'download_dtopbox', 'os.listdir', 'os.unlink', 'os.link']"
-./utilmy/zutil_features.py:load_function_uri,function,"['uri_name.split', 'len', 'package_path.replace', 'getattr', 'str', 'log', 'Path', 'NameError']"
-./utilmy/zutil_features.py:metrics_eval,function,"['len', 'isinstance', 'getattr', 'range', 'mval_.append', 'np.mean', 'np.sqrt', 'metric_scorer', 'pd.DataFrame']"
-./utilmy/zutil_features.py:pd_stat_dataset_shift,function,"['print', 'pd_stat_datashift_psi', 'pd.DataFrame']"
-./utilmy/zutil_features.py:pd_stat_datashift_psi,function,"['psi', 'scale_range', 'np.max', 'np.arange', 'np.min', 'np.stack', 'np.histogram', 'len', 'sub_psi', 'np.log', 'np.sum', 'range', 'np.empty']"
-./utilmy/zutil_features.py:feature_importance_perm,function,"['permutation_importance', 'list', 'pd.DataFrame', 'np.arange', 'min', 'len', 'plt.subplots', 'ax1.boxplot', 'ax1.set_yticklabels', 'ax1.set_ylim', 'fig.tight_layout', 'plt.show']"
-./utilmy/zutil_features.py:feature_selection_multicolinear,function,"['list', 'spearmanr', 'hierarchy.ward', 'hierarchy.fcluster', 'defaultdict', 'enumerate', 'cluster_id_to_feature_ids.values']"
-./utilmy/zutil_features.py:feature_correlation_cat,function,"['plt.subplots', 'spearmanr', 'hierarchy.ward', 'hierarchy.dendrogram', 'np.arange', 'len', 'ax2.imshow', 'ax2.set_xticks', 'ax2.set_yticks', 'ax2.set_xticklabels', 'ax2.set_yticklabels', 'fig.tight_layout', 'plt.show']"
-./utilmy/zutil_features.py:pd_feature_generate_cross,function,"['len', 'itertools.combinations', 'range', 'y.sum', 'col_cross.append']"
-./utilmy/zutil_features.py:pd_col_to_onehot,function,"['copy.deepcopy', 'list', 'len', 'print', 'pd.concat', 'pd.get_dummies', 'coladded.append']"
-./utilmy/zutil_features.py:pd_colcat_mergecol,function,"['pd.DataFrame', 't.rfind', 'int', 'print', 'dfz.set_index']"
-./utilmy/zutil_features.py:pd_colcat_tonum,function,"['pd.DataFrame', 'dict', 'pd.unique', 'len', 'pd.factorize', 'pd.get_dummies', 'pd.concat']"
-./utilmy/zutil_features.py:pd_colcat_mapping,function,['enumerate']
-./utilmy/zutil_features.py:pd_colcat_toint,function,"['isinstance', 'pd.DataFrame', 'print', 'ddict.get', 'colname_new.append', 'enumerate']"
-./utilmy/zutil_features.py:pd_colnum_tocat,function,"['list', 'OrderedDict', 'bin_create', 'dfc.min', 'dfc.max', 'range', 'bin_create_quantile', 'np.arange', 'dfc.quantile', 'print', 'colbinmap.get', 'len', 'pd.cut', 'df.groupby', 'colnew.append']"
-./utilmy/zutil_features.py:pd_colnum_normalize,function,"['np.log', 'max', 'min', 'log', 'list']"
-./utilmy/zutil_features.py:pd_col_merge_onehot,function,"['t[len', 'len', 'merge_array.append']"
-./utilmy/zutil_features.py:pd_col_to_num,function,"['to_float', 'float', 'list']"
-./utilmy/zutil_features.py:pd_col_filter,function,"['col_delete.append', 'df.drop']"
-./utilmy/zutil_features.py:pd_col_fillna,function,"['list', 'df.groupby', 'print']"
-./utilmy/zutil_features.py:pd_pipeline_apply,function,"['copy.deepcopy', 'enumerate', 'print', 'str']"
-./utilmy/zutil_features.py:pd_stat_correl_pair,function,"['list', 'target_corr.append', 'pd.DataFrame', 'len']"
-./utilmy/zutil_features.py:pd_stat_pandas_profile,function,"['print', 'df.profile_report', 'profile.to_file', 'profile.get_rejected_variables']"
-./utilmy/zutil_features.py:pd_stat_distribution_colnum,function,"['df.sample', 'getstat', 'str', 'len', 'pd.DataFrame', 'pd.concat', 'print', 'np.arange']"
-./utilmy/zutil_features.py:pd_stat_histogram,function,"['np.histogram', 'pd.DataFrame']"
-./utilmy/zutil_features.py:col_extractname,function,"['len', 'colnew.append']"
-./utilmy/zutil_features.py:col_remove,function,"['cols.remove', 'cols3.append']"
-./utilmy/zutil_features.py:pd_colnum_tocat_stat,function,"['pd.isnull', 'df.reset_index', 'min', 'range', 'np.percentile', 'cuts.append', 'pd.cut', 'df.groupby', 'df_grouped.reset_index', 'list', 'df_grouped.rename', 'str', 'len', 'pd.concat']"
-./utilmy/zutil_features.py:pd_stat_shift_trend_changes,function,"['target_diffs.fillna', 'target_diffs.divide', 'target_diffs_norm.diff', 'target_diffs_lvl2.fillna', 'int']"
-./utilmy/zutil_features.py:pd_stat_shift_trend_correlation,function,"['df.merge', 'pd.isnull', 'len', 'np.corrcoef', 'print']"
-./utilmy/zutil_features.py:pd_stat_shift_changes,function,"['type', 'list', 'features_list.remove', 'ignored.append', 'pd_colnum_tocat_stat', 'pd_stat_shift_trend_correlation', 'pd_stat_shift_changes', 'stats_all.append', 'pd.DataFrame', 'len', 'print', 'str']"
-./utilmy/zutil_features.py:np_conv_to_one_col,function,"['row2string', 'sep_char.join']"
-./utilmy/zutil_features.py:dict2:__init__,method,[]
-./utilmy/configs/util_config.py:log,function,"['print', 'loge']"
-./utilmy/configs/util_config.py:loge,function,['print']
-./utilmy/configs/util_config.py:config_load,function,"['log', 'pathlib.Path', 'yaml.safe_load', 'json.loads', 'SafeConfigParser', 'cfg.read', 'toml.loads', 'Exception', 'Box', 'os.makedirs', 'open', 'yaml.dump']"
-./utilmy/configs/util_config.py:config_isvalid_yamlschema,function,"['schema.validate', 'result.isValid', 'yamale.YamaleError', 'loge']"
-./utilmy/configs/util_config.py:config_isvalid_pydantic,function,[]
-./utilmy/configs/util_config.py:convert_yaml_to_box,function,"['open', 'yaml.load', 'Box']"
-./utilmy/configs/util_config.py:convert_dict_to_pydantic,function,"['SchemaGen', 'generated.to_file', 'importlib.import_module', 'pydantic_module.MainSchema']"
-./utilmy/configs/util_config.py:pydantic_model_generator,function,"['generate', 'loge', 'log']"
-./utilmy/configs/util_config.py:test_yamlschema,function,"['config_load', 'config_isvalid_yamlschema', 'log']"
-./utilmy/configs/util_config.py:test_pydanticgenrator,function,"['pydantic_model_generator', 'Path']"
-./utilmy/configs/util_config.py:test4,function,"['config_load', 'convert_dict_to_pydantic', 'isinstance']"
-./utilmy/configs/util_config.py:test_example,function,[]
-./utilmy/docs/cli.py:run_cli,function,"['argparse.ArgumentParser', 'add', 'p.parse_args', 'os.makedirs', 'export_stats_perrepo', 'run_markdown', 'run_table']"
-./utilmy/docs/code_parser.py:get_list_function_name,function,"['_get_all_line', '_get_and_clean_all_lines', 'list', 're.match', 'line.rstrip', 're_response.group', 'all_lines.index', 'list_functions.append']"
-./utilmy/docs/code_parser.py:get_list_class_name,function,"['_get_all_line', '_get_and_clean_all_lines', 'list', 're.match', 'line.rstrip', 're_response.group', 'all_lines.index', 'list_classes.append']"
-./utilmy/docs/code_parser.py:get_list_class_methods,function,"['_get_all_line', '_get_and_clean_all_lines', 'get_list_class_name', '_get_all_lines_in_class', 're.match', 'line.rstrip', 're_response.group', 'all_lines.index', 'list_names.append']"
-./utilmy/docs/code_parser.py:get_list_variable_global,function,"['_get_and_clean_all_lines', 're.match', 'line.rstrip', 'list_var.append', 'list']"
-./utilmy/docs/code_parser.py:_get_docs,function,"['line.strip', 'len', 'response.append']"
-./utilmy/docs/code_parser.py:get_list_function_info,function,"['_get_all_line', '_get_and_clean_all_lines', 'get_list_function_name', '_get_all_lines_in_function', 'len', '_get_function_stats', '_get_docs', '_get_all_lines_define_function', '_get_define_function_stats', 'output.append']"
-./utilmy/docs/code_parser.py:get_list_class_info,function,"['_get_and_clean_all_lines', 'get_list_class_name', '_get_all_lines_in_class', 'len', '_get_function_stats', 'output.append']"
-./utilmy/docs/code_parser.py:get_list_method_info,function,"['_get_all_line', '_get_and_clean_all_lines', 'get_list_class_methods', '_get_all_lines_in_class', '_get_all_lines_in_function', 'len', '_get_function_stats', '_get_docs', '_get_all_lines_define_function', '_get_define_function_stats', 'output.append']"
-./utilmy/docs/code_parser.py:get_list_method_stats,function,"['get_list_method_info', 'get_stats']"
-./utilmy/docs/code_parser.py:get_list_class_stats,function,"['get_list_class_info', 'get_stats']"
-./utilmy/docs/code_parser.py:get_list_function_stats,function,"['get_list_function_info', 'get_stats']"
-./utilmy/docs/code_parser.py:get_stats,function,"['len', 'df.apply', '_get_words', '_get_avg_char_per_word', '_get_functions']"
-./utilmy/docs/code_parser.py:get_file_stats,function,"['get_list_function_stats', 'len', 'avg_lines/len']"
-./utilmy/docs/code_parser.py:_get_words,function,[]
-./utilmy/docs/code_parser.py:_get_functions,function,"['re.match', 'list_funcs.append', 'list', 'return']"
-./utilmy/docs/code_parser.py:_get_avg_char_per_word,function,[]
-./utilmy/docs/code_parser.py:_validate_file,function,['print']
-./utilmy/docs/code_parser.py:_clean_data,function,"['array.copy', '_remove_empty_line', '_remmove_commemt_line', 'response.remove', 'response.copy', 'line.strip', 'len']"
-./utilmy/docs/code_parser.py:_remove_empty_line,function,['line.strip']
-./utilmy/docs/code_parser.py:_remmove_commemt_line,function,['line.strip']
-./utilmy/docs/code_parser.py:_get_and_clean_all_lines,function,"['_validate_file', '_get_all_line', '_clean_data']"
-./utilmy/docs/code_parser.py:_get_all_line,function,"['open', '_get_all_lines_in_function', 'array.copy', 're.match', 'line.rstrip', 'response.remove', 'range', 'list', 'list_lines.append', 'len', '_get_all_lines_in_class', '_get_all_lines_define_function']"
-./utilmy/docs/code_parser.py:_get_all_lines_in_function,function,"['array.copy', 're.match', 'line.rstrip', 'response.remove', 'range', 'list', 'list_lines.append', 'len']"
-./utilmy/docs/code_parser.py:_get_all_lines_in_class,function,"['array.copy', 're.match', 'line.rstrip', 'response.remove', 'list', 'list_lines.append', 'len']"
-./utilmy/docs/code_parser.py:_get_all_lines_define_function,function,"['list', 'array.copy', 're.match', 'line.rstrip', 'response.remove', 'list_lines.append', 'range']"
-./utilmy/docs/code_parser.py:_get_define_function_stats,function,"['len', 'line.strip', 'print', 'i.start', 're.finditer', 'range', 'data.split', 'arg.replace', 'arg.strip', 'arg.find', 'arg_name.append', 'arg_type.append', 'arg_value.append']"
-./utilmy/docs/code_parser.py:_get_function_stats,function,"['array.copy', 'check_array.copy', 'line.rstrip', 'check_array.remove', 'line.split', 're.match', 'list_var.append', 'list']"
-./utilmy/docs/code_parser.py:export_stats_pertype,function,"['get_list_function_stats', 'print', 'df.to_csv', 'get_list_class_stats', 'get_list_method_stats']"
-./utilmy/docs/code_parser.py:export_stats_perfile,function,"['get_list_function_stats', 'print', 'df.to_csv', 'get_list_class_stats', 'get_list_method_stats']"
-./utilmy/docs/code_parser.py:export_stats_perrepo,function,"['glob.glob', 'range', 'get_list_function_stats', 'print', 'df.to_csv', 'get_list_class_stats', 'get_list_method_stats']"
-./utilmy/docs/code_parser.py:function_graph,function,"['glob.glob', 'range', 'get_list_function_stats', 'print', 'df.to_csv', 'get_list_method_stats']"
-./utilmy/docs/code_parser.py:test_example,function,"['export_stats_pertype', 'export_stats_perfile', 'export_stats_perrepo']"
-./utilmy/docs/generate_doc.py:markdown_create_function,function,"['uri.split', 'literal_eval', 'zip', 'rsp.format']"
-./utilmy/docs/generate_doc.py:markdown_create_file,function,[]
-./utilmy/logs/test_log.py:test1,function,"['log3', 'log2', 'log', 'logw', 'logc', 'logr', 'loge']"
-./utilmy/logs/test_log.py:test2,function,"['print', 'util_log.logger_setup', 'log3', 'log2', 'log', 'logw', 'logc', 'logr', 'loge']"
-./utilmy/logs/test_log.py:test_launch_server,function,['socketserver.TCPServer']
-./utilmy/logs/test_log.py:test_server,function,"['print', 'util_log.logger_setup', 'log3', 'log2', 'log', 'logw', 'logc', 'logr', 'loge']"
-./utilmy/logs/test_log.py:LoggingStreamHandler:handle,method,"['len', 'struct.unpack', 'pickle.loads', 'json.loads', 'logger.patch', 'record.update']"
-./utilmy/logs/util_log.py:logger_setup,function,"['open', 'yaml.safe_load', 'print', 'cfg.pop', 'globals_.pop', 'int', 'SocketHandler', 'handler.get', 'handler.items', 'handler.update', 'logger.configure', 'logger.level']"
-./utilmy/logs/util_log.py:log,function,"['open', 'yaml.safe_load', 'print', 'cfg.pop', 'globals_.pop', 'int', 'SocketHandler', 'handler.get', 'handler.items', 'handler.update', 'logger.configure', 'logger.level']"
-./utilmy/logs/util_log.py:log2,function,['logger.opt']
-./utilmy/logs/util_log.py:log3,function,['logger.opt']
-./utilmy/logs/util_log.py:logw,function,['logger.opt']
-./utilmy/logs/util_log.py:logc,function,['logger.opt']
-./utilmy/logs/util_log.py:loge,function,['logger.opt']
-./utilmy/logs/util_log.py:logr,function,['logger.opt']
-./utilmy/logs/util_log.py:test,function,"['log3', 'log2', 'log', 'logw', 'loge', 'logc', 'logr']"
-./utilmy/logs/util_log.py:z_logger_stdout_override,function,"['__init__', 'write', 'buffer.rstrip', 'logger.opt', 'line.rstrip', 'flush', 'logger.remove', 'logger.add', 'StreamToLogger', 'contextlib.redirect_stdout', 'print']"
-./utilmy/logs/util_log.py:z_logger_custom_1,function,"['InterceptHandler', 'emit', 'logger.level', 'str', 'logging.currentframe', 'logger.opt', 'record.getMessage', 'format_record', 'pformat', 'setup_logging', 'logging.getLogger', 'logger.configure']"
-./utilmy/templates/cli.py:run_cli,function,"['argparse.ArgumentParser', 'add', 'p.parse_args', 'template_show', 'template_copy']"
-./utilmy/templates/cli.py:template_show,function,"['os.walk', 'print']"
-./utilmy/templates/cli.py:template_copy,function,"['os_copy', 'print', 'Path']"
-./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"
-./utilmy/templates/templist/pypi_package/run_pipy.py:update_version,function,"['open', 'Version.parse', 'print', 'int', 'file.write', 'version.new_version']"
-./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit,function,"['ask', 'exit', 'os.system']"
-./utilmy/templates/templist/pypi_package/run_pipy.py:ask,function,"['input', 'ans.lower']"
-./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload,function,"['os.system', 'print', 'os.listdir', 'item.endswith']"
-./utilmy/templates/templist/pypi_package/run_pipy.py:main,function,"['print', 'update_version']"
-./utilmy/templates/templist/pypi_package/run_pipy.py:Version:__init__,method,[]
-./utilmy/templates/templist/pypi_package/run_pipy.py:Version:__str__,method,"[""f'Version""]"
-./utilmy/templates/templist/pypi_package/run_pipy.py:Version:__repr__,method,['self.__str__']
-./utilmy/templates/templist/pypi_package/run_pipy.py:Version:stringify,method,[]
-./utilmy/templates/templist/pypi_package/run_pipy.py:Version:new_version,method,['self.stringify']
-./utilmy/templates/templist/pypi_package/run_pipy.py:Version:parse,method,"['re.findall', 'len', 'Exception', 'cls']"
-./utilmy/templates/templist/pypi_package/setup.py:get_current_githash,function,"['subprocess.check_output', 'label.decode']"
+uri, type, function./run_pipy.py:get_current_githash, function, subprocess.check_output
+./run_pipy.py:get_current_githash, function, label.decode
+./run_pipy.py:update_version, function, open
+./run_pipy.py:update_version, function, Version.parse
+./run_pipy.py:update_version, function, int
+./run_pipy.py:update_version, function, file.write
+./run_pipy.py:update_version, function, version.new_version
+./run_pipy.py:git_commit, function, ask
+./run_pipy.py:git_commit, function, exit
+./run_pipy.py:git_commit, function, os.system
+./run_pipy.py:ask, function, input
+./run_pipy.py:ask, function, ans.lower
+./run_pipy.py:pypi_upload, function, os.system
+./run_pipy.py:pypi_upload, function, print
+./run_pipy.py:pypi_upload, function, os.listdir
+./run_pipy.py:pypi_upload, function, item.endswith
+./run_pipy.py:main, function, update_version
+./setup.py:get_current_githash, function, subprocess.check_output
+./setup.py:get_current_githash, function, label.decode
+./test.py:pd_random, function, random.random
+./test.py:pd_random, function, range
+./test.py:pd_random, function, pd.DataFrame
+./test.py:test_utilmy_plot, function, pd_random
+./test.py:test_utilmy_plot, function, pd_plot_multi
+./test.py:test_utilmy_pd_os_session, function, random.random
+./test.py:test_utilmy_pd_os_session, function, range
+./test.py:test_utilmy_pd_os_session, function, pd.DataFrame
+./test.py:test_utilmy_pd_os_session, function, len
+./test.py:test_utilmy_pd_os_session, function, os.makedirs
+./test.py:test_utilmy_pd_os_session, function, df.to_csv
+./test.py:test_utilmy_pd_os_session, function, pd_read_file
+./test.py:test_utilmy_pd_os_session, function, round
+./test.py:test_utilmy_pd_os_session, function, print
+./test.py:test_utilmy_pd_os_session, function, git_repo_root
+./test.py:test_utilmy_pd_os_session, function, os_makedirs
+./test.py:test_utilmy_pd_os_session, function, os.system
+./test.py:test_utilmy_pd_os_session, function, os_removedirs
+./test.py:test_utilmy_pd_os_session, function, os_system
+./test.py:test_utilmy_pd_os_session, function, os_platform_os
+./test.py:test_utilmy_pd_os_session, function, global_verbosity
+./test.py:test_utilmy_session, function, Session
+./test.py:test_utilmy_session, function, sess.save
+./test.py:test_utilmy_session, function, globals
+./test.py:test_utilmy_session, function, os.system
+./test.py:test_utilmy_session, function, sess.show
+./test.py:test_utilmy_session, function, glob.glob
+./test.py:test_utilmy_session, function, sess.load
+./test.py:test_docs_cli, function, os.system
+./test.py:test_decorators_os, function, test_print
+./test.py:test_decorators_os, function, print
+./test.py:test_decorators_os, function, os_multithread
+./test.py:test_decorators_os, function, profiled_sum
+./test.py:test_decorators_os, function, sum
+./test.py:test_decorators_os, function, profiler_context
+./test.py:test_decorators_os, function, profiler_start
+./test.py:test_decorators_os, function, profiler_stop
+./test.py:test_decorators_os, function, dummy_func
+./test.py:test_decorators_os, function, time.sleep
+./test.py:test_decorators_os, function, method
+./test.py:test_decorators_os, function, DummyClass
+./test.py:test_decorators_os, function, a.method
+./test.py:pd_generate_data, function, random.random
+./test.py:pd_generate_data, function, range
+./test.py:pd_generate_data, function, pd.DataFrame
+./test.py:pd_generate_data, function, np.where
+./test.py:test_tabular_test, function, pd_generate_data
+./test.py:test_tabular_test, function, test_anova
+./test.py:test_tabular_test, function, test_normality2
+./test.py:test_tabular_test, function, test_plot_qqplot
+./test.py:test_text_similarity, function, pd.DataFrame
+./test.py:test_text_similarity, function, text.pd_similarity
+./test.py:test_text_similarity, function, SequenceMatcher
+./test.py:test_text_similarity, function, pd.Series
+./test.py:test_text_similarity, function, check_similarity
+./test.py:test_text_similarity, function, assert_series_equal
+./test.py:test_text_pdcluster, function, test_lsh
+./utilmy/dates.py:log, function, print
+./utilmy/dates.py:pd_date_split, function, df.drop_duplicates
+./utilmy/dates.py:pd_date_split, function, pd.to_datetime
+./utilmy/dates.py:pd_date_split, function, x.weekday
+./utilmy/dates.py:pd_date_split, function, date_weekmonth
+./utilmy/dates.py:pd_date_split, function, date_weekmonth2
+./utilmy/dates.py:pd_date_split, function, x.isocalendar
+./utilmy/dates.py:pd_date_split, function, date_weekyear2
+./utilmy/dates.py:pd_date_split, function, df.apply
+./utilmy/dates.py:pd_date_split, function, int
+./utilmy/dates.py:pd_date_split, function, merge1
+./utilmy/dates.py:pd_date_split, function, date_is_holiday
+./utilmy/dates.py:pd_date_split, function, log
+./utilmy/dates.py:date_now, function, datetime.now
+./utilmy/dates.py:date_now, function, datetime.timedelta
+./utilmy/dates.py:date_now, function, now_new.astimezone
+./utilmy/dates.py:date_now, function, now_pacific.strftime
+./utilmy/dates.py:date_is_holiday, function, holidays.CountryHoliday
+./utilmy/dates.py:date_is_holiday, function, np.array
+./utilmy/dates.py:date_is_holiday, function, x.astype
+./utilmy/dates.py:date_weekmonth, function, date_weekmonth
+./utilmy/dates.py:date_weekmonth, function, date_value.replace
+./utilmy/dates.py:date_weekyear2, function, datetime.datetime
+./utilmy/dates.py:date_weekday_excel, function, arrow.get
+./utilmy/dates.py:date_weekday_excel, function, str
+./utilmy/dates.py:date_weekyear_excel, function, arrow.get
+./utilmy/dates.py:date_weekyear_excel, function, str
+./utilmy/dates.py:date_weekyear_excel, function, dd.isocalendar
+./utilmy/dates.py:date_weekyear_excel, function, date_weekday_excel
+./utilmy/dates.py:date_weekyear_excel, function, int
+./utilmy/dates.py:date_generate, function, relativedelta
+./utilmy/dates.py:date_generate, function, range
+./utilmy/decorators.py:timeout, function, decorator
+./utilmy/decorators.py:timeout, function, _handle_timeout
+./utilmy/decorators.py:timeout, function, _TimeoutError
+./utilmy/decorators.py:timeout, function, wrapper
+./utilmy/decorators.py:timeout, function, signal.signal
+./utilmy/decorators.py:timeout, function, signal.alarm
+./utilmy/decorators.py:timeout, function, func
+./utilmy/decorators.py:timeout, function, wraps
+./utilmy/decorators.py:timer, function, wrapper
+./utilmy/decorators.py:timer, function, time.perf_counter
+./utilmy/decorators.py:timer, function, func
+./utilmy/decorators.py:timer, function, print
+./utilmy/decorators.py:profiler_context, function, Profiler
+./utilmy/decorators.py:profiler_context, function, profiler.start
+./utilmy/decorators.py:profiler_context, function, profiler.stop
+./utilmy/decorators.py:profiler_context, function, print
+./utilmy/decorators.py:profiler_deco, function, wrapper
+./utilmy/decorators.py:profiler_deco, function, Profiler
+./utilmy/decorators.py:profiler_deco, function, profiler.start
+./utilmy/decorators.py:profiler_deco, function, func
+./utilmy/decorators.py:profiler_deco, function, profiler.stop
+./utilmy/decorators.py:profiler_deco, function, print
+./utilmy/decorators.py:profiler_deco, function, profiler_decorator_base
+./utilmy/decorators.py:profiler_deco, function, inner
+./utilmy/decorators.py:profiler_deco, function, cProfile.Profile
+./utilmy/decorators.py:profiler_deco, function, pr.enable
+./utilmy/decorators.py:profiler_deco, function, fnc
+./utilmy/decorators.py:profiler_deco, function, pr.disable
+./utilmy/decorators.py:profiler_deco, function, io.StringIO
+./utilmy/decorators.py:profiler_deco, function, pstats.Stats
+./utilmy/decorators.py:profiler_deco, function, ps.print_stats
+./utilmy/decorators.py:profiler_decorator_base, function, inner
+./utilmy/decorators.py:profiler_decorator_base, function, cProfile.Profile
+./utilmy/decorators.py:profiler_decorator_base, function, pr.enable
+./utilmy/decorators.py:profiler_decorator_base, function, fnc
+./utilmy/decorators.py:profiler_decorator_base, function, pr.disable
+./utilmy/decorators.py:profiler_decorator_base, function, io.StringIO
+./utilmy/decorators.py:profiler_decorator_base, function, pstats.Stats
+./utilmy/decorators.py:profiler_decorator_base, function, ps.print_stats
+./utilmy/decorators.py:profiler_decorator_base, function, print
+./utilmy/decorators.py:os_multithread, function, ThreadWithResult
+./utilmy/decorators.py:os_multithread, function, __init__
+./utilmy/decorators.py:os_multithread, function, function
+./utilmy/decorators.py:os_multithread, function, target
+./utilmy/decorators.py:os_multithread, function, super
+./utilmy/decorators.py:os_multithread, function, kwargs.values
+./utilmy/decorators.py:os_multithread, function, list_of_threads.append
+./utilmy/decorators.py:os_multithread, function, thread.start
+./utilmy/decorators.py:os_multithread, function, zip
+./utilmy/decorators.py:os_multithread, function, kwargs.keys
+./utilmy/decorators.py:os_multithread, function, thread.join
+./utilmy/decorators.py:os_multithread, function, results.append
+./utilmy/decorators.py:threading_deco, function, wrapper
+./utilmy/decorators.py:threading_deco, function, Thread
+./utilmy/decorators.py:threading_deco, function, background_thread.start
+./utilmy/images.py:log, function, print
+./utilmy/images.py:deps, function, open
+./utilmy/images.py:deps, function, fp.readlines
+./utilmy/images.py:deps, function, print
+./utilmy/images.py:read_image, function, isinstance
+./utilmy/images.py:read_image, function, hasattr
+./utilmy/images.py:read_image, function, np.asarray
+./utilmy/images.py:read_image, function, cv2.imdecode
+./utilmy/images.py:read_image, function, validators.url
+./utilmy/images.py:read_image, function, read
+./utilmy/images.py:read_image, function, filepath_or_buffer.endswith
+./utilmy/images.py:read_image, function, tifffile.imread
+./utilmy/images.py:read_image, function, cv2.imread
+./utilmy/images.py:read_image, function, cv2.cvtColor
+./utilmy/images.py:visualize_in_row, function, len
+./utilmy/images.py:visualize_in_row, function, plt.figure
+./utilmy/images.py:visualize_in_row, function, enumerate
+./utilmy/images.py:visualize_in_row, function, plt.subplot
+./utilmy/images.py:visualize_in_row, function, plt.xticks
+./utilmy/images.py:visualize_in_row, function, plt.yticks
+./utilmy/images.py:visualize_in_row, function, plt.title
+./utilmy/images.py:visualize_in_row, function, plt.imshow
+./utilmy/images.py:visualize_in_row, function, plt.show
+./utilmy/images.py:maintain_aspect_ratio_resize, function, float
+./utilmy/images.py:maintain_aspect_ratio_resize, function, int
+./utilmy/images.py:maintain_aspect_ratio_resize, function, cv2.resize
+./utilmy/io.py:screenshot, function, sct.shot
+./utilmy/io.py:screenshot, function, print
+./utilmy/tabular.py:log, function, print
+./utilmy/tabular.py:test_anova, function, edu_frame.groupby
+./utilmy/tabular.py:test_anova, function, groups.keys
+./utilmy/tabular.py:test_anova, function, globals
+./utilmy/tabular.py:test_anova, function, lg.append
+./utilmy/tabular.py:test_anova, function, dfd=len
+./utilmy/tabular.py:test_anova, function, print
+./utilmy/tabular.py:test_anova, function, stats.f_oneway
+./utilmy/tabular.py:test_anova, function, dfn=len
+./utilmy/tabular.py:test_normality2, function, shapiro
+./utilmy/tabular.py:test_normality2, function, print
+./utilmy/tabular.py:test_normality2, function, normaltest
+./utilmy/tabular.py:test_normality2, function, anderson
+./utilmy/tabular.py:test_normality2, function, range
+./utilmy/tabular.py:test_plot_qqplot, function, plt.subplots
+./utilmy/tabular.py:test_plot_qqplot, function, fig.suptitle
+./utilmy/tabular.py:test_plot_qqplot, function, sns.boxplot
+./utilmy/tabular.py:test_plot_qqplot, function, sns.histplot
+./utilmy/tabular.py:test_plot_qqplot, function, sm.qqplot
+./utilmy/tabular.py:test_plot_qqplot, function, print
+./utilmy/tabular.py:test_heteroscedacity, function, Linear
+./utilmy/tabular.py:test_heteroscedacity, function, custom_stat
+./utilmy/tabular.py:test_heteroscedacity, function, np.sqrt
+./utilmy/tabular.py:test_heteroscedacity, function, print
+./utilmy/tabular.py:test_heteroscedacity, function, df.profile_report
+./utilmy/tabular.py:test_heteroscedacity, function, profile.to_file
+./utilmy/tabular.py:test_heteroscedacity, function, profile.get_rejected_variables
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, df.sample
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, getstat
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, str
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, len
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, pd.DataFrame
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, pd.concat
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, print
+./utilmy/tabular.py:pd_stat_distribution_colnum, function, np.arange
+./utilmy/tabular.py:pd_stat_histogram, function, np.histogram
+./utilmy/tabular.py:pd_stat_histogram, function, pd.DataFrame
+./utilmy/tabular.py:np_col_extractname, function, len
+./utilmy/tabular.py:np_col_extractname, function, colnew.append
+./utilmy/tabular.py:np_list_remove, function, cols.remove
+./utilmy/tabular.py:np_list_remove, function, cols3.append
+./utilmy/tabular.py:pd_stat_shift_trend_changes, function, target_diffs.fillna
+./utilmy/tabular.py:pd_stat_shift_trend_changes, function, target_diffs.divide
+./utilmy/tabular.py:pd_stat_shift_trend_changes, function, target_diffs_norm.diff
+./utilmy/tabular.py:pd_stat_shift_trend_changes, function, target_diffs_lvl2.fillna
+./utilmy/tabular.py:pd_stat_shift_trend_changes, function, int
+./utilmy/tabular.py:pd_stat_shift_trend_correlation, function, df.merge
+./utilmy/tabular.py:pd_stat_shift_trend_correlation, function, pd.isnull
+./utilmy/tabular.py:pd_stat_shift_trend_correlation, function, len
+./utilmy/tabular.py:pd_stat_shift_trend_correlation, function, np.corrcoef
+./utilmy/tabular.py:pd_stat_shift_trend_correlation, function, print
+./utilmy/tabular.py:pd_stat_shift_changes, function, type
+./utilmy/tabular.py:pd_stat_shift_changes, function, list
+./utilmy/tabular.py:pd_stat_shift_changes, function, features_list.remove
+./utilmy/tabular.py:pd_stat_shift_changes, function, ignored.append
+./utilmy/tabular.py:pd_stat_shift_changes, function, pd_colnum_tocat_stat
+./utilmy/tabular.py:pd_stat_shift_changes, function, pd_stat_shift_trend_correlation
+./utilmy/tabular.py:pd_stat_shift_changes, function, pd_stat_shift_changes
+./utilmy/tabular.py:pd_stat_shift_changes, function, stats_all.append
+./utilmy/tabular.py:pd_stat_shift_changes, function, pd.DataFrame
+./utilmy/tabular.py:pd_stat_shift_changes, function, len
+./utilmy/tabular.py:pd_stat_shift_changes, function, print
+./utilmy/tabular.py:pd_stat_shift_changes, function, str
+./utilmy/tabular.py:np_conv_to_one_col, function, row2string
+./utilmy/tabular.py:np_conv_to_one_col, function, sep_char.join
+./utilmy/text.py:log, function, print
+./utilmy/text.py:pd_text_hash_create_lsh, function, MinHashLSH
+./utilmy/text.py:pd_text_hash_create_lsh, function, enumerate
+./utilmy/text.py:pd_text_hash_create_lsh, function, sentence.split
+./utilmy/text.py:pd_text_hash_create_lsh, function, MinHash
+./utilmy/text.py:pd_text_hash_create_lsh, function, set
+./utilmy/text.py:pd_text_hash_create_lsh, function, v.update
+./utilmy/text.py:pd_text_hash_create_lsh, function, hash_lines.append
+./utilmy/text.py:pd_text_hash_create_lsh, function, lsh.insert
+./utilmy/text.py:pd_text_getcluster, function, pd_text_hash_create_lsh
+./utilmy/text.py:pd_text_getcluster, function, enumerate
+./utilmy/text.py:pd_text_getcluster, function, lsh.query
+./utilmy/text.py:pd_text_getcluster, function, list
+./utilmy/text.py:pd_similarity, function, len
+./utilmy/text.py:pd_similarity, function, Exception
+./utilmy/text.py:pd_similarity, function, find_similarity
+./utilmy/text.py:pd_similarity, function, fuzz.ratio
+./utilmy/text.py:pd_similarity, function, editdistance.eval
+./utilmy/text.py:pd_similarity, function, SequenceMatcher
+./utilmy/text.py:pd_similarity, function, df.apply
+./utilmy/text.py:test_lsh, function, pd.DataFrame
+./utilmy/text.py:test_lsh, function, pd_text_getcluster
+./utilmy/text.py:test_lsh, function, df.head
+./utilmy/text.py:test_lsh, function, print
+./utilmy/utilmy.py:log, function, print
+./utilmy/utilmy.py:pd_merge, function, list
+./utilmy/utilmy.py:pd_merge, function, df1.join
+./utilmy/utilmy.py:pd_plot_multi, function, plt.figure
+./utilmy/utilmy.py:pd_plot_multi, function, len
+./utilmy/utilmy.py:pd_plot_multi, function, getattr
+./utilmy/utilmy.py:pd_plot_multi, function, df.plot
+./utilmy/utilmy.py:pd_plot_multi, function, plt.show
+./utilmy/utilmy.py:pd_plot_multi, function, ax.set_ylabel
+./utilmy/utilmy.py:pd_plot_multi, function, range
+./utilmy/utilmy.py:pd_plot_multi, function, ax.get_legend_handles_labels
+./utilmy/utilmy.py:pd_plot_multi, function, ax.twinx
+./utilmy/utilmy.py:pd_plot_multi, function, ax_new.set_ylabel
+./utilmy/utilmy.py:pd_plot_multi, function, ax_new.get_legend_handles_labels
+./utilmy/utilmy.py:pd_plot_multi, function, ax.legend
+./utilmy/utilmy.py:pd_filter, function, isinstance
+./utilmy/utilmy.py:pd_filter, function, filter_dict.items
+./utilmy/utilmy.py:pd_filter, function, filter_dict.split
+./utilmy/utilmy.py:pd_filter, function, x_convert
+./utilmy/utilmy.py:pd_filter, function, str
+./utilmy/utilmy.py:pd_filter, function, dict
+./utilmy/utilmy.py:pd_filter, function, float
+./utilmy/utilmy.py:pd_filter, function, x.strip
+./utilmy/utilmy.py:pd_filter, function, print
+./utilmy/utilmy.py:pd_filter, function, len
+./utilmy/utilmy.py:pd_filter, function, x.split
+./utilmy/utilmy.py:pd_to_file, function, Path
+./utilmy/utilmy.py:pd_to_file, function, os.makedirs
+./utilmy/utilmy.py:pd_to_file, function, df.to_pickle
+./utilmy/utilmy.py:pd_to_file, function, df.to_parquet
+./utilmy/utilmy.py:pd_to_file, function, df.to_csv
+./utilmy/utilmy.py:pd_to_file, function, gc.collect
+./utilmy/utilmy.py:pd_read_file, function, log
+./utilmy/utilmy.py:pd_read_file, function, print
+./utilmy/utilmy.py:pd_read_file, function, isinstance
+./utilmy/utilmy.py:pd_read_file, function, path_glob.split
+./utilmy/utilmy.py:pd_read_file, function, file_list.extend
+./utilmy/utilmy.py:pd_read_file, function, sorted
+./utilmy/utilmy.py:pd_read_file, function, glob.glob
+./utilmy/utilmy.py:pd_read_file, function, len
+./utilmy/utilmy.py:pd_read_file, function, ThreadPool
+./utilmy/utilmy.py:pd_read_file, function, pd.DataFrame
+./utilmy/utilmy.py:pd_read_file, function, range
+./utilmy/utilmy.py:pd_read_file, function, job_list.append
+./utilmy/utilmy.py:pd_read_file, function, pool.apply_async
+./utilmy/utilmy.py:pd_read_file, function, pd_dtype_reduce
+./utilmy/utilmy.py:pd_read_file, function, dfi.drop_duplicates
+./utilmy/utilmy.py:pd_read_file, function, gc.collect
+./utilmy/utilmy.py:pd_read_file, function, pd.concat
+./utilmy/utilmy.py:pd_read_file, function, pool.terminate
+./utilmy/utilmy.py:pd_read_file, function, pool.join
+./utilmy/utilmy.py:pd_sample_strat, function, df.groupby
+./utilmy/utilmy.py:pd_sample_strat, function, x.sample
+./utilmy/utilmy.py:pd_cartesian, function, list
+./utilmy/utilmy.py:pd_cartesian, function, pd.merge
+./utilmy/utilmy.py:pd_plot_histogram, function, dfi.quantile
+./utilmy/utilmy.py:pd_plot_histogram, function, dfi.hist
+./utilmy/utilmy.py:pd_plot_histogram, function, dfi.sample
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.title
+./utilmy/utilmy.py:pd_plot_histogram, function, path_save.split
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.show
+./utilmy/utilmy.py:pd_plot_histogram, function, os.makedirs
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.savefig
+./utilmy/utilmy.py:pd_plot_histogram, function, print
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.close
+./utilmy/utilmy.py:pd_col_bins, function, pd.qcut
+./utilmy/utilmy.py:pd_col_bins, function, np.arange
+./utilmy/utilmy.py:pd_dtype_reduce, function, np.dtype
+./utilmy/utilmy.py:pd_dtype_count_unique, function, gef_is_continuous
+./utilmy/utilmy.py:pd_dtype_count_unique, function, np.sum
+./utilmy/utilmy.py:pd_dtype_count_unique, function, np.round
+./utilmy/utilmy.py:pd_dtype_count_unique, function, len
+./utilmy/utilmy.py:pd_dtype_count_unique, function, min
+./utilmy/utilmy.py:pd_dtype_count_unique, function, any
+./utilmy/utilmy.py:pd_dtype_count_unique, function, list
+./utilmy/utilmy.py:pd_dtype_count_unique, function, n=min
+./utilmy/utilmy.py:pd_dtype_to_category, function, isinstance
+./utilmy/utilmy.py:pd_dtype_to_category, function, df.select_dtypes
+./utilmy/utilmy.py:pd_dtype_to_category, function, len
+./utilmy/utilmy.py:pd_dtype_to_category, function, float
+./utilmy/utilmy.py:pd_dtype_to_category, function, pd.to_datetime
+./utilmy/utilmy.py:pd_dtype_to_category, function, print
+./utilmy/utilmy.py:pd_dtype_getcontinuous, function, len
+./utilmy/utilmy.py:pd_dtype_getcontinuous, function, str
+./utilmy/utilmy.py:pd_add_noise, function, pd.DataFrame
+./utilmy/utilmy.py:pd_add_noise, function, pd_dtype_getcontinuous
+./utilmy/utilmy.py:pd_add_noise, function, print
+./utilmy/utilmy.py:pd_cols_unique_count, function, len
+./utilmy/utilmy.py:pd_cols_unique_count, function, str
+./utilmy/utilmy.py:pd_show, function, os_makedirs
+./utilmy/utilmy.py:to_timeunix, function, isinstance
+./utilmy/utilmy.py:to_timeunix, function, int
+./utilmy/utilmy.py:to_timeunix, function, datex.timetuple
+./utilmy/utilmy.py:to_datetime, function, pd.to_datetime
+./utilmy/utilmy.py:to_datetime, function, str
+./utilmy/utilmy.py:np_add_remove, function, set_.copy
+./utilmy/utilmy.py:np_add_remove, function, result_temp.remove
+./utilmy/utilmy.py:np_add_remove, function, result_temp.add
+./utilmy/utilmy.py:to_float, function, float
+./utilmy/utilmy.py:to_int, function, int
+./utilmy/utilmy.py:to_int, function, float
+./utilmy/utilmy.py:config_load, function, str
+./utilmy/utilmy.py:config_load, function, log
+./utilmy/utilmy.py:config_load, function, pathlib.Path
+./utilmy/utilmy.py:config_load, function, yaml.load
+./utilmy/utilmy.py:config_load, function, x.items
+./utilmy/utilmy.py:config_load, function, json.load
+./utilmy/utilmy.py:config_load, function, os.makedirs
+./utilmy/utilmy.py:config_load, function, open
+./utilmy/utilmy.py:config_load, function, yaml.dump
+./utilmy/utilmy.py:os_path_split, function, fpath.replace
+./utilmy/utilmy.py:os_path_split, function, fpath.split
+./utilmy/utilmy.py:os_file_replacestring, function, os_file_replacestring1
+./utilmy/utilmy.py:os_file_replacestring, function, fileinput.FileInput
+./utilmy/utilmy.py:os_file_replacestring, function, line.replace
+./utilmy/utilmy.py:os_file_replacestring, function, file1.close
+./utilmy/utilmy.py:os_file_replacestring, function, print
+./utilmy/utilmy.py:os_file_replacestring, function, format
+./utilmy/utilmy.py:os_file_replacestring, function, os_walk
+./utilmy/utilmy.py:os_walk, function, dir1.rstrip
+./utilmy/utilmy.py:os_walk, function, dir1.count
+./utilmy/utilmy.py:os_walk, function, os.walk
+./utilmy/utilmy.py:os_walk, function, root.count
+./utilmy/utilmy.py:os_walk, function, fnmatch.filter
+./utilmy/utilmy.py:os_walk, function, np.array
+./utilmy/utilmy.py:z_os_search_fast, function, re.compile
+./utilmy/utilmy.py:z_os_search_fast, function, enumerate
+./utilmy/utilmy.py:z_os_search_fast, function, re.search
+./utilmy/utilmy.py:z_os_search_fast, function, line.decode
+./utilmy/utilmy.py:z_os_search_fast, function, res.append
+./utilmy/utilmy.py:z_os_search_fast, function, found.start
+./utilmy/utilmy.py:z_os_search_fast, function, text.encode
+./utilmy/utilmy.py:z_os_search_fast, function, line.find
+./utilmy/utilmy.py:z_os_search_fast, function, print
+./utilmy/utilmy.py:os_search_content, function, os_walk
+./utilmy/utilmy.py:os_search_content, function, z_os_search_fast
+./utilmy/utilmy.py:os_search_content, function, pd.DataFrame
+./utilmy/utilmy.py:os_get_function_name, function, str
+./utilmy/utilmy.py:os_get_function_name, function, socket.gethostname
+./utilmy/utilmy.py:os_get_function_name, function, sys._getframe
+./utilmy/utilmy.py:os_import, function, __import__
+./utilmy/utilmy.py:os_import, function, hasattr
+./utilmy/utilmy.py:os_import, function, dir
+./utilmy/utilmy.py:os_import, function, name.startswith
+./utilmy/utilmy.py:os_import, function, all_names2.append
+./utilmy/utilmy.py:os_import, function, print
+./utilmy/utilmy.py:os_import, function, globs.update
+./utilmy/utilmy.py:os_import, function, getattr
+./utilmy/utilmy.py:os_variable_exist, function, str
+./utilmy/utilmy.py:os_variable_exist, function, log
+./utilmy/utilmy.py:os_variable_check, function, Exception
+./utilmy/utilmy.py:os_variable_check, function, log
+./utilmy/utilmy.py:os_variable_check, function, sys.exit
+./utilmy/utilmy.py:os_clean_memory, function, gc.collect
+./utilmy/utilmy.py:os_system_list, function, len
+./utilmy/utilmy.py:os_system_list, function, enumerate
+./utilmy/utilmy.py:os_system_list, function, log
+./utilmy/utilmy.py:os_system_list, function, os.system
+./utilmy/utilmy.py:os_system_list, function, time.sleep
+./utilmy/utilmy.py:os_file_check, function, log
+./utilmy/utilmy.py:os_file_check, function, os.stat
+./utilmy/utilmy.py:os_file_check, function, time.ctime
+./utilmy/utilmy.py:os_to_file, function, open
+./utilmy/utilmy.py:os_to_file, function, fp.write
+./utilmy/utilmy.py:os_cpu, function, os.cpu_count
+./utilmy/utilmy.py:os_memory, function, open
+./utilmy/utilmy.py:os_memory, function, i.split
+./utilmy/utilmy.py:os_memory, function, str
+./utilmy/utilmy.py:os_memory, function, int
+./utilmy/utilmy.py:os_sleep_cpu, function, psutil.cpu_percent
+./utilmy/utilmy.py:os_sleep_cpu, function, time.sleep
+./utilmy/utilmy.py:os_ram_object, function, id
+./utilmy/utilmy.py:os_ram_object, function, getsizeof
+./utilmy/utilmy.py:os_ram_object, function, ids.add
+./utilmy/utilmy.py:os_ram_object, function, isinstance
+./utilmy/utilmy.py:os_ram_object, function, sum
+./utilmy/utilmy.py:os_ram_object, function, d
+./utilmy/utilmy.py:os_ram_object, function, o.items
+./utilmy/utilmy.py:os_copy, function, ignore_pyc_files
+./utilmy/utilmy.py:os_copy, function, name.endswith
+./utilmy/utilmy.py:os_copy, function, exclude.split
+./utilmy/utilmy.py:os_copy, function, os.makedirs
+./utilmy/utilmy.py:os_copy, function, shutil.copytree
+./utilmy/utilmy.py:os_copy, function, shutil.ignore_patterns
+./utilmy/utilmy.py:os_removedirs, function, len
+./utilmy/utilmy.py:os_removedirs, function, print
+./utilmy/utilmy.py:os_removedirs, function, os.walk
+./utilmy/utilmy.py:os_removedirs, function, os.remove
+./utilmy/utilmy.py:os_removedirs, function, os.rmdir
+./utilmy/utilmy.py:os_system, function, len
+./utilmy/utilmy.py:os_system, function, enumerate
+./utilmy/utilmy.py:os_system, function, log
+./utilmy/utilmy.py:os_system, function, os.system
+./utilmy/utilmy.py:os_system, function, time.sleep
+./utilmy/utilmy.py:os_makedirs, function, dir_or_file.split
+./utilmy/utilmy.py:os_makedirs, function, os.makedirs
+./utilmy/utilmy.py:global_verbosity, function, git_repo_root
+./utilmy/utilmy.py:global_verbosity, function, json.load
+./utilmy/utilmy.py:global_verbosity, function, yaml.load
+./utilmy/utilmy.py:global_verbosity, function, Exception
+./utilmy/utilmy.py:global_verbosity, function, int
+./utilmy/utilmy.py:git_repo_root, function, os_system
+./utilmy/utilmy.py:git_repo_root, function, mout.split
+./utilmy/utilmy.py:git_repo_root, function, len
+./utilmy/utilmy.py:git_current_hash, function, subprocess.check_output
+./utilmy/utilmy.py:git_current_hash, function, label.decode
+./utilmy/utilmy.py:plot_to_html, function, glob.glob
+./utilmy/utilmy.py:plot_to_html, function, flist.sorted
+./utilmy/utilmy.py:plot_to_html, function, print
+./utilmy/utilmy.py:plot_to_html, function, open
+./utilmy/utilmy.py:plot_to_html, function, base64.b64encode
+./utilmy/utilmy.py:plot_to_html, function, f.write
+./utilmy/utilmy.py:save, function, os.makedirs
+./utilmy/utilmy.py:save, function, pickle.dump
+./utilmy/utilmy.py:save, function, open
+./utilmy/utilmy.py:load, function, pickle.load
+./utilmy/utilmy.py:print_everywhere, function, snoop.install
+./utilmy/utilmy.py:print_everywhere, function, myfun
+./utilmy/utilmy.py:print_everywhere, function, pp
+./utilmy/utilmy.py:print_everywhere, function, print
+./utilmy/utilmy.py:print_everywhere, function, type
+./utilmy/utilmy.py:print_everywhere, function, str
+./utilmy/utilmy.py:log5, function, ic
+./utilmy/utilmy.py:log_trace, function, print
+./utilmy/utilmy.py:log_trace, function, pdb.set_trace
+./utilmy/utilmy.py:profiler_start, function, Profiler
+./utilmy/utilmy.py:profiler_start, function, profiler.start
+./utilmy/utilmy.py:profiler_stop, function, profiler.stop
+./utilmy/utilmy.py:profiler_stop, function, print
+./utilmy/utilmy.py:log, function, print
+./utilmy/utilmy.py:pd_merge, function, list
+./utilmy/utilmy.py:pd_merge, function, df1.join
+./utilmy/utilmy.py:pd_plot_multi, function, plt.figure
+./utilmy/utilmy.py:pd_plot_multi, function, len
+./utilmy/utilmy.py:pd_plot_multi, function, getattr
+./utilmy/utilmy.py:pd_plot_multi, function, df.plot
+./utilmy/utilmy.py:pd_plot_multi, function, plt.show
+./utilmy/utilmy.py:pd_plot_multi, function, ax.set_ylabel
+./utilmy/utilmy.py:pd_plot_multi, function, range
+./utilmy/utilmy.py:pd_plot_multi, function, ax.get_legend_handles_labels
+./utilmy/utilmy.py:pd_plot_multi, function, ax.twinx
+./utilmy/utilmy.py:pd_plot_multi, function, ax_new.set_ylabel
+./utilmy/utilmy.py:pd_plot_multi, function, ax_new.get_legend_handles_labels
+./utilmy/utilmy.py:pd_plot_multi, function, ax.legend
+./utilmy/utilmy.py:pd_filter, function, isinstance
+./utilmy/utilmy.py:pd_filter, function, filter_dict.items
+./utilmy/utilmy.py:pd_filter, function, filter_dict.split
+./utilmy/utilmy.py:pd_filter, function, x_convert
+./utilmy/utilmy.py:pd_filter, function, str
+./utilmy/utilmy.py:pd_filter, function, dict
+./utilmy/utilmy.py:pd_filter, function, float
+./utilmy/utilmy.py:pd_filter, function, x.strip
+./utilmy/utilmy.py:pd_filter, function, print
+./utilmy/utilmy.py:pd_filter, function, len
+./utilmy/utilmy.py:pd_filter, function, x.split
+./utilmy/utilmy.py:pd_to_file, function, Path
+./utilmy/utilmy.py:pd_to_file, function, os.makedirs
+./utilmy/utilmy.py:pd_to_file, function, df.to_pickle
+./utilmy/utilmy.py:pd_to_file, function, df.to_parquet
+./utilmy/utilmy.py:pd_to_file, function, df.to_csv
+./utilmy/utilmy.py:pd_to_file, function, gc.collect
+./utilmy/utilmy.py:pd_read_file, function, log
+./utilmy/utilmy.py:pd_read_file, function, print
+./utilmy/utilmy.py:pd_read_file, function, isinstance
+./utilmy/utilmy.py:pd_read_file, function, path_glob.split
+./utilmy/utilmy.py:pd_read_file, function, file_list.extend
+./utilmy/utilmy.py:pd_read_file, function, sorted
+./utilmy/utilmy.py:pd_read_file, function, glob.glob
+./utilmy/utilmy.py:pd_read_file, function, len
+./utilmy/utilmy.py:pd_read_file, function, ThreadPool
+./utilmy/utilmy.py:pd_read_file, function, pd.DataFrame
+./utilmy/utilmy.py:pd_read_file, function, range
+./utilmy/utilmy.py:pd_read_file, function, job_list.append
+./utilmy/utilmy.py:pd_read_file, function, pool.apply_async
+./utilmy/utilmy.py:pd_read_file, function, pd_dtype_reduce
+./utilmy/utilmy.py:pd_read_file, function, dfi.drop_duplicates
+./utilmy/utilmy.py:pd_read_file, function, gc.collect
+./utilmy/utilmy.py:pd_read_file, function, pd.concat
+./utilmy/utilmy.py:pd_read_file, function, pool.terminate
+./utilmy/utilmy.py:pd_read_file, function, pool.join
+./utilmy/utilmy.py:pd_sample_strat, function, df.groupby
+./utilmy/utilmy.py:pd_sample_strat, function, x.sample
+./utilmy/utilmy.py:pd_cartesian, function, list
+./utilmy/utilmy.py:pd_cartesian, function, pd.merge
+./utilmy/utilmy.py:pd_plot_histogram, function, dfi.quantile
+./utilmy/utilmy.py:pd_plot_histogram, function, dfi.hist
+./utilmy/utilmy.py:pd_plot_histogram, function, dfi.sample
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.title
+./utilmy/utilmy.py:pd_plot_histogram, function, path_save.split
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.show
+./utilmy/utilmy.py:pd_plot_histogram, function, os.makedirs
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.savefig
+./utilmy/utilmy.py:pd_plot_histogram, function, print
+./utilmy/utilmy.py:pd_plot_histogram, function, plt.close
+./utilmy/utilmy.py:pd_col_bins, function, pd.qcut
+./utilmy/utilmy.py:pd_col_bins, function, np.arange
+./utilmy/utilmy.py:pd_dtype_reduce, function, np.dtype
+./utilmy/utilmy.py:pd_dtype_count_unique, function, gef_is_continuous
+./utilmy/utilmy.py:pd_dtype_count_unique, function, np.sum
+./utilmy/utilmy.py:pd_dtype_count_unique, function, np.round
+./utilmy/utilmy.py:pd_dtype_count_unique, function, len
+./utilmy/utilmy.py:pd_dtype_count_unique, function, min
+./utilmy/utilmy.py:pd_dtype_count_unique, function, any
+./utilmy/utilmy.py:pd_dtype_count_unique, function, list
+./utilmy/utilmy.py:pd_dtype_count_unique, function, n=min
+./utilmy/utilmy.py:pd_dtype_to_category, function, isinstance
+./utilmy/utilmy.py:pd_dtype_to_category, function, df.select_dtypes
+./utilmy/utilmy.py:pd_dtype_to_category, function, len
+./utilmy/utilmy.py:pd_dtype_to_category, function, float
+./utilmy/utilmy.py:pd_dtype_to_category, function, pd.to_datetime
+./utilmy/utilmy.py:pd_dtype_to_category, function, print
+./utilmy/utilmy.py:pd_dtype_getcontinuous, function, len
+./utilmy/utilmy.py:pd_dtype_getcontinuous, function, str
+./utilmy/utilmy.py:pd_add_noise, function, pd.DataFrame
+./utilmy/utilmy.py:pd_add_noise, function, pd_dtype_getcontinuous
+./utilmy/utilmy.py:pd_add_noise, function, print
+./utilmy/utilmy.py:pd_cols_unique_count, function, len
+./utilmy/utilmy.py:pd_cols_unique_count, function, str
+./utilmy/utilmy.py:pd_show, function, os_makedirs
+./utilmy/utilmy.py:to_timeunix, function, isinstance
+./utilmy/utilmy.py:to_timeunix, function, int
+./utilmy/utilmy.py:to_timeunix, function, datex.timetuple
+./utilmy/utilmy.py:to_datetime, function, pd.to_datetime
+./utilmy/utilmy.py:to_datetime, function, str
+./utilmy/utilmy.py:np_add_remove, function, set_.copy
+./utilmy/utilmy.py:np_add_remove, function, result_temp.remove
+./utilmy/utilmy.py:np_add_remove, function, result_temp.add
+./utilmy/utilmy.py:to_float, function, float
+./utilmy/utilmy.py:to_int, function, int
+./utilmy/utilmy.py:to_int, function, float
+./utilmy/utilmy.py:config_load, function, str
+./utilmy/utilmy.py:config_load, function, log
+./utilmy/utilmy.py:config_load, function, pathlib.Path
+./utilmy/utilmy.py:config_load, function, yaml.load
+./utilmy/utilmy.py:config_load, function, x.items
+./utilmy/utilmy.py:config_load, function, json.load
+./utilmy/utilmy.py:config_load, function, os.makedirs
+./utilmy/utilmy.py:config_load, function, open
+./utilmy/utilmy.py:config_load, function, yaml.dump
+./utilmy/utilmy.py:os_path_split, function, fpath.replace
+./utilmy/utilmy.py:os_path_split, function, fpath.split
+./utilmy/utilmy.py:os_file_replacestring, function, os_file_replacestring1
+./utilmy/utilmy.py:os_file_replacestring, function, fileinput.FileInput
+./utilmy/utilmy.py:os_file_replacestring, function, line.replace
+./utilmy/utilmy.py:os_file_replacestring, function, file1.close
+./utilmy/utilmy.py:os_file_replacestring, function, print
+./utilmy/utilmy.py:os_file_replacestring, function, format
+./utilmy/utilmy.py:os_file_replacestring, function, os_walk
+./utilmy/utilmy.py:os_walk, function, dir1.rstrip
+./utilmy/utilmy.py:os_walk, function, dir1.count
+./utilmy/utilmy.py:os_walk, function, os.walk
+./utilmy/utilmy.py:os_walk, function, root.count
+./utilmy/utilmy.py:os_walk, function, fnmatch.filter
+./utilmy/utilmy.py:os_walk, function, np.array
+./utilmy/utilmy.py:z_os_search_fast, function, re.compile
+./utilmy/utilmy.py:z_os_search_fast, function, enumerate
+./utilmy/utilmy.py:z_os_search_fast, function, re.search
+./utilmy/utilmy.py:z_os_search_fast, function, line.decode
+./utilmy/utilmy.py:z_os_search_fast, function, res.append
+./utilmy/utilmy.py:z_os_search_fast, function, found.start
+./utilmy/utilmy.py:z_os_search_fast, function, text.encode
+./utilmy/utilmy.py:z_os_search_fast, function, line.find
+./utilmy/utilmy.py:z_os_search_fast, function, print
+./utilmy/utilmy.py:os_search_content, function, os_walk
+./utilmy/utilmy.py:os_search_content, function, z_os_search_fast
+./utilmy/utilmy.py:os_search_content, function, pd.DataFrame
+./utilmy/utilmy.py:os_get_function_name, function, str
+./utilmy/utilmy.py:os_get_function_name, function, socket.gethostname
+./utilmy/utilmy.py:os_get_function_name, function, sys._getframe
+./utilmy/utilmy.py:os_import, function, __import__
+./utilmy/utilmy.py:os_import, function, hasattr
+./utilmy/utilmy.py:os_import, function, dir
+./utilmy/utilmy.py:os_import, function, name.startswith
+./utilmy/utilmy.py:os_import, function, all_names2.append
+./utilmy/utilmy.py:os_import, function, print
+./utilmy/utilmy.py:os_import, function, globs.update
+./utilmy/utilmy.py:os_import, function, getattr
+./utilmy/utilmy.py:os_variable_exist, function, str
+./utilmy/utilmy.py:os_variable_exist, function, log
+./utilmy/utilmy.py:os_variable_check, function, Exception
+./utilmy/utilmy.py:os_variable_check, function, log
+./utilmy/utilmy.py:os_variable_check, function, sys.exit
+./utilmy/utilmy.py:os_clean_memory, function, gc.collect
+./utilmy/utilmy.py:os_system_list, function, len
+./utilmy/utilmy.py:os_system_list, function, enumerate
+./utilmy/utilmy.py:os_system_list, function, log
+./utilmy/utilmy.py:os_system_list, function, os.system
+./utilmy/utilmy.py:os_system_list, function, time.sleep
+./utilmy/utilmy.py:os_file_check, function, log
+./utilmy/utilmy.py:os_file_check, function, os.stat
+./utilmy/utilmy.py:os_file_check, function, time.ctime
+./utilmy/utilmy.py:os_to_file, function, open
+./utilmy/utilmy.py:os_to_file, function, fp.write
+./utilmy/utilmy.py:os_cpu, function, os.cpu_count
+./utilmy/utilmy.py:os_memory, function, open
+./utilmy/utilmy.py:os_memory, function, i.split
+./utilmy/utilmy.py:os_memory, function, str
+./utilmy/utilmy.py:os_memory, function, int
+./utilmy/utilmy.py:os_sleep_cpu, function, psutil.cpu_percent
+./utilmy/utilmy.py:os_sleep_cpu, function, time.sleep
+./utilmy/utilmy.py:os_ram_object, function, id
+./utilmy/utilmy.py:os_ram_object, function, getsizeof
+./utilmy/utilmy.py:os_ram_object, function, ids.add
+./utilmy/utilmy.py:os_ram_object, function, isinstance
+./utilmy/utilmy.py:os_ram_object, function, sum
+./utilmy/utilmy.py:os_ram_object, function, d
+./utilmy/utilmy.py:os_ram_object, function, o.items
+./utilmy/utilmy.py:os_copy, function, ignore_pyc_files
+./utilmy/utilmy.py:os_copy, function, name.endswith
+./utilmy/utilmy.py:os_copy, function, exclude.split
+./utilmy/utilmy.py:os_copy, function, os.makedirs
+./utilmy/utilmy.py:os_copy, function, shutil.copytree
+./utilmy/utilmy.py:os_copy, function, shutil.ignore_patterns
+./utilmy/utilmy.py:os_removedirs, function, len
+./utilmy/utilmy.py:os_removedirs, function, print
+./utilmy/utilmy.py:os_removedirs, function, os.walk
+./utilmy/utilmy.py:os_removedirs, function, os.remove
+./utilmy/utilmy.py:os_removedirs, function, os.rmdir
+./utilmy/utilmy.py:os_system, function, len
+./utilmy/utilmy.py:os_system, function, enumerate
+./utilmy/utilmy.py:os_system, function, log
+./utilmy/utilmy.py:os_system, function, os.system
+./utilmy/utilmy.py:os_system, function, time.sleep
+./utilmy/utilmy.py:os_makedirs, function, dir_or_file.split
+./utilmy/utilmy.py:os_makedirs, function, os.makedirs
+./utilmy/utilmy.py:global_verbosity, function, git_repo_root
+./utilmy/utilmy.py:global_verbosity, function, json.load
+./utilmy/utilmy.py:global_verbosity, function, yaml.load
+./utilmy/utilmy.py:global_verbosity, function, Exception
+./utilmy/utilmy.py:global_verbosity, function, int
+./utilmy/utilmy.py:git_repo_root, function, os_system
+./utilmy/utilmy.py:git_repo_root, function, mout.split
+./utilmy/utilmy.py:git_repo_root, function, len
+./utilmy/utilmy.py:git_current_hash, function, subprocess.check_output
+./utilmy/utilmy.py:git_current_hash, function, label.decode
+./utilmy/utilmy.py:plot_to_html, function, glob.glob
+./utilmy/utilmy.py:plot_to_html, function, flist.sorted
+./utilmy/utilmy.py:plot_to_html, function, print
+./utilmy/utilmy.py:plot_to_html, function, open
+./utilmy/utilmy.py:plot_to_html, function, base64.b64encode
+./utilmy/utilmy.py:plot_to_html, function, f.write
+./utilmy/utilmy.py:save, function, os.makedirs
+./utilmy/utilmy.py:save, function, pickle.dump
+./utilmy/utilmy.py:save, function, open
+./utilmy/utilmy.py:load, function, pickle.load
+./utilmy/utilmy.py:print_everywhere, function, snoop.install
+./utilmy/utilmy.py:print_everywhere, function, myfun
+./utilmy/utilmy.py:print_everywhere, function, pp
+./utilmy/utilmy.py:print_everywhere, function, print
+./utilmy/utilmy.py:print_everywhere, function, type
+./utilmy/utilmy.py:print_everywhere, function, str
+./utilmy/utilmy.py:log5, function, ic
+./utilmy/utilmy.py:log_trace, function, print
+./utilmy/utilmy.py:log_trace, function, pdb.set_trace
+./utilmy/utilmy.py:profiler_start, function, Profiler
+./utilmy/utilmy.py:profiler_start, function, profiler.start
+./utilmy/utilmy.py:profiler_stop, function, profiler.stop
+./utilmy/utilmy.py:profiler_stop, function, print
+./utilmy/util_default.py:log, function, logger.info
+./utilmy/util_default.py:log, function, log2
+./utilmy/util_default.py:log, function, logger.debug
+./utilmy/util_default.py:log, function, logw
+./utilmy/util_default.py:log, function, logger.warning
+./utilmy/util_default.py:log, function, loge
+./utilmy/util_default.py:log, function, logger.error
+./utilmy/util_default.py:log, function, logger_setup
+./utilmy/util_default.py:log, function, logger.configure
+./utilmy/util_default.py:log2, function, logger.debug
+./utilmy/util_default.py:logw, function, logger.warning
+./utilmy/util_default.py:loge, function, logger.error
+./utilmy/util_default.py:logger_setup, function, logger.configure
+./utilmy/util_default.py:config_load, function, str
+./utilmy/util_default.py:config_load, function, logw
+./utilmy/util_default.py:config_load, function, log2
+./utilmy/util_default.py:config_load, function, yaml.load
+./utilmy/util_default.py:config_load, function, log
+./utilmy/util_default.py:config_load, function, os.makedirs
+./utilmy/util_default.py:config_load, function, open
+./utilmy/util_default.py:config_load, function, json.dump
+./utilmy/util_default.py:dataset_donwload, function, log
+./utilmy/util_default.py:dataset_donwload, function, os.makedirs
+./utilmy/util_default.py:dataset_donwload, function, wget.download
+./utilmy/util_default.py:dataset_donwload, function, url.split
+./utilmy/util_default.py:dataset_donwload, function, os_extract_archive
+./utilmy/util_default.py:dataset_donwload, function, log2
+./utilmy/util_default.py:os_extract_archive, function, isinstance
+./utilmy/util_default.py:os_extract_archive, function, is_match_fn
+./utilmy/util_default.py:os_extract_archive, function, open_fn
+./utilmy/util_default.py:os_extract_archive, function, archive.extractall
+./utilmy/util_default.py:os_extract_archive, function, os.remove
+./utilmy/util_default.py:os_extract_archive, function, shutil.rmtree
+./utilmy/util_default.py:to_file, function, open
+./utilmy/util_default.py:to_file, function, fp.write
+./utilmy/zutil.py:session_load_function, function, dill.load_session
+./utilmy/zutil.py:session_load_function, function, print
+./utilmy/zutil.py:session_save_function, function, date_now
+./utilmy/zutil.py:session_save_function, function, dill.dump_session
+./utilmy/zutil.py:session_save_function, function, print
+./utilmy/zutil.py:py_save_obj_dill, function, z_key_splitinto_dir_name
+./utilmy/zutil.py:py_save_obj_dill, function, os_folder_create
+./utilmy/zutil.py:py_save_obj_dill, function, open
+./utilmy/zutil.py:py_save_obj_dill, function, dill.dumps
+./utilmy/zutil.py:py_save_obj_dill, function, print
+./utilmy/zutil.py:isfloat, function, float
+./utilmy/zutil.py:isint, function, isinstance
+./utilmy/zutil.py:isanaconda, function, txt.find
+./utilmy/zutil.py:a_run_ipython, function, IPython.get_ipython
+./utilmy/zutil.py:py_autoreload, function, a_run_ipython
+./utilmy/zutil.py:a_start_log, function, a_run_ipython
+./utilmy/zutil.py:a_start_log, function, str
+./utilmy/zutil.py:a_start_log, function, os_platform
+./utilmy/zutil.py:a_start_log, function, date_now
+./utilmy/zutil.py:a_cleanmemory, function, gc.collect
+./utilmy/zutil.py:print_object_tofile, function, open
+./utilmy/zutil.py:print_object_tofile, function, file1.write
+./utilmy/zutil.py:print_object_tofile, function, np.shape
+./utilmy/zutil.py:print_object_tofile, function, range
+./utilmy/zutil.py:print_object_tofile, function, str
+./utilmy/zutil.py:print_progressbar, function, str
+./utilmy/zutil.py:print_progressbar, function, format_str.format
+./utilmy/zutil.py:print_progressbar, function, float
+./utilmy/zutil.py:print_progressbar, function, int
+./utilmy/zutil.py:os_zip_checkintegrity, function, zipfile.ZipFile
+./utilmy/zutil.py:os_zip_checkintegrity, function, zip_file.testzip
+./utilmy/zutil.py:os_zip_checkintegrity, function, print
+./utilmy/zutil.py:os_zipfile, function, zipfile.ZipFile
+./utilmy/zutil.py:os_zipfile, function, os.walk
+./utilmy/zutil.py:os_zipfile, function, zf.write
+./utilmy/zutil.py:os_zipfile, function, zf.close
+./utilmy/zutil.py:os_zipfile, function, os_zip_checkintegrity
+./utilmy/zutil.py:os_zipfile, function, print
+./utilmy/zutil.py:os_zipfolder, function, dir_tozip.split
+./utilmy/zutil.py:os_zipextractall, function, filezip_or_dir.find
+./utilmy/zutil.py:os_zipextractall, function, os_file_listall
+./utilmy/zutil.py:os_zipextractall, function, os_file_getname
+./utilmy/zutil.py:os_zipextractall, function, zipfile.ZipFile
+./utilmy/zutil.py:os_zipextractall, function, zip_ref.extractall
+./utilmy/zutil.py:os_zipextractall, function, zip_ref.close
+./utilmy/zutil.py:os_zipextractall, function, print
+./utilmy/zutil.py:os_folder_copy, function, _default_fun_file_toignore
+./utilmy/zutil.py:os_folder_copy, function, fnmatch.filter
+./utilmy/zutil.py:os_folder_copy, function, shutil.copytree
+./utilmy/zutil.py:os_folder_copy, function, shutil.copy
+./utilmy/zutil.py:os_folder_create, function, os.getcwd
+./utilmy/zutil.py:os_folder_create, function, os.makedirs
+./utilmy/zutil.py:os_folder_create, function, os.chdir
+./utilmy/zutil.py:os_folder_robocopy, function, subprocess.call
+./utilmy/zutil.py:os_folder_robocopy, function, print
+./utilmy/zutil.py:os_file_replace, function, mkstemp
+./utilmy/zutil.py:os_file_replace, function, open
+./utilmy/zutil.py:os_file_replace, function, target_file.write
+./utilmy/zutil.py:os_file_replace, function, remove
+./utilmy/zutil.py:os_file_replace, function, move
+./utilmy/zutil.py:os_file_replace, function, os_file_replacestring1
+./utilmy/zutil.py:os_file_replace, function, fileinput.FileInput
+./utilmy/zutil.py:os_file_replace, function, line.replace
+./utilmy/zutil.py:os_file_replace, function, file1.close
+./utilmy/zutil.py:os_file_replace, function, print
+./utilmy/zutil.py:os_file_replace, function, format
+./utilmy/zutil.py:os_file_replace, function, os_file_replacestring2
+./utilmy/zutil.py:os_file_replace, function, os_file_listall
+./utilmy/zutil.py:os_file_replacestring1, function, fileinput.FileInput
+./utilmy/zutil.py:os_file_replacestring1, function, line.replace
+./utilmy/zutil.py:os_file_replacestring1, function, file1.close
+./utilmy/zutil.py:os_file_replacestring1, function, print
+./utilmy/zutil.py:os_file_replacestring1, function, format
+./utilmy/zutil.py:os_file_replacestring2, function, os_file_listall
+./utilmy/zutil.py:os_file_replacestring2, function, os_file_replacestring1
+./utilmy/zutil.py:os_file_getname, function, ntpath.split
+./utilmy/zutil.py:os_file_getname, function, ntpath.basename
+./utilmy/zutil.py:os_file_getpath, function, ntpath.split
+./utilmy/zutil.py:os_file_gettext, function, open
+./utilmy/zutil.py:os_file_gettext, function, f.read
+./utilmy/zutil.py:os_file_listall, function, dir1.rstrip
+./utilmy/zutil.py:os_file_listall, function, dir1.count
+./utilmy/zutil.py:os_file_listall, function, os.walk
+./utilmy/zutil.py:os_file_listall, function, root.count
+./utilmy/zutil.py:os_file_listall, function, fnmatch.filter
+./utilmy/zutil.py:_os_file_search_fast, function, re.compile
+./utilmy/zutil.py:_os_file_search_fast, function, enumerate
+./utilmy/zutil.py:_os_file_search_fast, function, re.search
+./utilmy/zutil.py:_os_file_search_fast, function, line.decode
+./utilmy/zutil.py:_os_file_search_fast, function, res.append
+./utilmy/zutil.py:_os_file_search_fast, function, found.start
+./utilmy/zutil.py:_os_file_search_fast, function, text.encode
+./utilmy/zutil.py:_os_file_search_fast, function, line.find
+./utilmy/zutil.py:_os_file_search_fast, function, print
+./utilmy/zutil.py:os_file_search_content, function, os_file_listall
+./utilmy/zutil.py:os_file_search_content, function, _os_file_search_fast
+./utilmy/zutil.py:os_file_search_content, function, pd.DataFrame
+./utilmy/zutil.py:os_file_rename, function, some_dir.rstrip
+./utilmy/zutil.py:os_file_rename, function, some_dir.count
+./utilmy/zutil.py:os_file_rename, function, os.walk
+./utilmy/zutil.py:os_file_rename, function, root.count
+./utilmy/zutil.py:os_file_rename, function, matches.append
+./utilmy/zutil.py:os_file_rename, function, fnmatch.filter
+./utilmy/zutil.py:os_file_rename, function, re.sub
+./utilmy/zutil.py:os_file_rename, function, os.rename
+./utilmy/zutil.py:os_file_rename, function, np.array
+./utilmy/zutil.py:os_gui_popup_show, function, os_gui_popup_show2
+./utilmy/zutil.py:os_gui_popup_show, function, Tk
+./utilmy/zutil.py:os_gui_popup_show, function, Scrollbar
+./utilmy/zutil.py:os_gui_popup_show, function, Text
+./utilmy/zutil.py:os_gui_popup_show, function, scrollbar.pack
+./utilmy/zutil.py:os_gui_popup_show, function, text.pack
+./utilmy/zutil.py:os_gui_popup_show, function, scrollbar.config
+./utilmy/zutil.py:os_gui_popup_show, function, text.config
+./utilmy/zutil.py:os_gui_popup_show, function, text.insert
+./utilmy/zutil.py:os_gui_popup_show, function, root.attributes
+./utilmy/zutil.py:os_gui_popup_show, function, mainloop
+./utilmy/zutil.py:os_print_tofile, function, text_file.write
+./utilmy/zutil.py:os_path_norm, function, pth.find
+./utilmy/zutil.py:os_path_norm, function, b.lstrip
+./utilmy/zutil.py:os_path_change, function, os_path_norm
+./utilmy/zutil.py:os_path_change, function, os.chdir
+./utilmy/zutil.py:os_path_current, function, os.getcwd
+./utilmy/zutil.py:os_file_read, function, open
+./utilmy/zutil.py:os_file_read, function, fh.read
+./utilmy/zutil.py:os_file_isame, function, filecmp.cmp
+./utilmy/zutil.py:os_file_get_extension, function, _ext.startswith
+./utilmy/zutil.py:os_folder_is_path, function, isinstance
+./utilmy/zutil.py:os_file_get_path_from_stream, function, os_folder_is_path
+./utilmy/zutil.py:os_file_get_path_from_stream, function, getattr
+./utilmy/zutil.py:os_file_try_to_get_extension, function, os_file_get_path_from_stream
+./utilmy/zutil.py:os_file_try_to_get_extension, function, os_file_get_extension
+./utilmy/zutil.py:os_file_are_same_file_types, function, os_file_try_to_get_extension
+./utilmy/zutil.py:os_file_are_same_file_types, function, all
+./utilmy/zutil.py:os_file_norm_paths, function, sglob
+./utilmy/zutil.py:os_file_norm_paths, function, sorted
+./utilmy/zutil.py:os_file_norm_paths, function, _norm_paths_itr
+./utilmy/zutil.py:os_file_norm_paths, function, os_folder_is_path
+./utilmy/zutil.py:os_file_norm_paths, function, list
+./utilmy/zutil.py:os_file_mergeall, function, os_file_listall
+./utilmy/zutil.py:os_file_mergeall, function, open
+./utilmy/zutil.py:os_file_mergeall, function, os_file_gettext
+./utilmy/zutil.py:os_file_mergeall, function, nfile1.write
+./utilmy/zutil.py:os_file_mergeall, function, nfile1.close
+./utilmy/zutil.py:os_file_extracttext, function, os_file_listall
+./utilmy/zutil.py:os_file_extracttext, function, open
+./utilmy/zutil.py:os_file_extracttext, function, os_file_gettext
+./utilmy/zutil.py:os_file_extracttext, function, BeautifulSoup
+./utilmy/zutil.py:os_file_extracttext, function, soup.find_all
+./utilmy/zutil.py:os_file_extracttext, function, txt2.strip
+./utilmy/zutil.py:os_file_extracttext, function, output_file1.write
+./utilmy/zutil.py:os_wait_cpu, function, psutil.cpu_percent
+./utilmy/zutil.py:os_wait_cpu, function, print
+./utilmy/zutil.py:os_wait_cpu, function, arrow.utcnow
+./utilmy/zutil.py:os_wait_cpu, function, time.sleep
+./utilmy/zutil.py:os_split_dir_file, function, dirfile.split
+./utilmy/zutil.py:os_split_dir_file, function, len
+./utilmy/zutil.py:os_process_run, function, subprocess.Popen
+./utilmy/zutil.py:os_process_run, function, proc.communicate
+./utilmy/zutil.py:os_process_run, function, print
+./utilmy/zutil.py:os_process_run, function, str
+./utilmy/zutil.py:py_importfromfile, function, a_get_pythonversion
+./utilmy/zutil.py:py_importfromfile, function, SourceFileLoader
+./utilmy/zutil.py:py_importfromfile, function, foo.MyClass
+./utilmy/zutil.py:py_importfromfile, function, importlib.import_module
+./utilmy/zutil.py:py_memorysize, function, id
+./utilmy/zutil.py:py_memorysize, function, getsizeof
+./utilmy/zutil.py:py_memorysize, function, ids.add
+./utilmy/zutil.py:py_memorysize, function, isinstance
+./utilmy/zutil.py:py_memorysize, function, sum
+./utilmy/zutil.py:py_memorysize, function, d
+./utilmy/zutil.py:py_memorysize, function, o.items
+./utilmy/zutil.py:save, function, py_save_obj
+./utilmy/zutil.py:load, function, py_load_obj
+./utilmy/zutil.py:save_test, function, py_load_obj
+./utilmy/zutil.py:save_test, function, print
+./utilmy/zutil.py:save_test, function, str
+./utilmy/zutil.py:save_test, function, gc.collect
+./utilmy/zutil.py:py_save_obj, function, z_key_splitinto_dir_name
+./utilmy/zutil.py:py_save_obj, function, os_folder_create
+./utilmy/zutil.py:py_save_obj, function, open
+./utilmy/zutil.py:py_save_obj, function, dill.dumps
+./utilmy/zutil.py:py_save_obj, function, print
+./utilmy/zutil.py:py_load_obj, function, folder.find
+./utilmy/zutil.py:py_load_obj, function, z_key_splitinto_dir_name
+./utilmy/zutil.py:py_load_obj, function, os_folder_create
+./utilmy/zutil.py:py_load_obj, function, open
+./utilmy/zutil.py:py_load_obj, function, pickle.load
+./utilmy/zutil.py:z_key_splitinto_dir_name, function, keyname.split
+./utilmy/zutil.py:z_key_splitinto_dir_name, function, len
+./utilmy/zutil.py:os_config_setfile, function, open
+./utilmy/zutil.py:os_config_setfile, function, dict_params.items
+./utilmy/zutil.py:os_config_setfile, function, isinstance
+./utilmy/zutil.py:os_config_setfile, function, f1.write
+./utilmy/zutil.py:os_config_setfile, function, str
+./utilmy/zutil.py:os_config_setfile, function, f1.close
+./utilmy/zutil.py:os_config_setfile, function, print
+./utilmy/zutil.py:os_config_getfile, function, open
+./utilmy/zutil.py:os_config_getfile, function, f1.readlines
+./utilmy/zutil.py:os_config_getfile, function, print
+./utilmy/zutil.py:pd_toexcel, function, os_file_exist
+./utilmy/zutil.py:pd_toexcel, function, load_workbook
+./utilmy/zutil.py:pd_toexcel, function, pd.ExcelWriter
+./utilmy/zutil.py:pd_toexcel, function, dict
+./utilmy/zutil.py:pd_toexcel, function, df.to_excel
+./utilmy/zutil.py:pd_toexcel, function, writer.save
+./utilmy/zutil.py:pd_toexcel, function, pd_toexcel_many
+./utilmy/zutil.py:pd_toexcel, function, pd_toexcel
+./utilmy/zutil.py:pd_toexcel_many, function, pd_toexcel
+./utilmy/zutil.py:find_fuzzy, function, xi.find
+./utilmy/zutil.py:str_match_fuzzy, function, xstring.find
+./utilmy/zutil.py:str_parse_stringcalendar, function, cal.split
+./utilmy/zutil.py:str_parse_stringcalendar, function, x.find
+./utilmy/zutil.py:str_parse_stringcalendar, function, cal4.append
+./utilmy/zutil.py:str_parse_stringcalendar, function, np.array
+./utilmy/zutil.py:str_parse_stringcalendar, function, print
+./utilmy/zutil.py:str_make_unicode, function, type
+./utilmy/zutil.py:str_make_unicode, function, input_str.decode
+./utilmy/zutil.py:str_empty_string_array, function, range
+./utilmy/zutil.py:str_empty_string_array, function, str_empty_string_array_numpy
+./utilmy/zutil.py:str_empty_string_array, function, np.empty
+./utilmy/zutil.py:str_empty_string_array_numpy, function, np.empty
+./utilmy/zutil.py:str_isfloat, function, float
+./utilmy/zutil.py:str_is_azchar, function, float
+./utilmy/zutil.py:str_is_az09char, function, float
+./utilmy/zutil.py:str_reindent, function, x.decode
+./utilmy/zutil.py:str_split2, function, x.decode
+./utilmy/zutil.py:str_split_pattern, function, x.decode
+./utilmy/zutil.py:pd_str_isascii, function, x.decode
+./utilmy/zutil.py:str_to_utf8, function, x.encode
+./utilmy/zutil.py:str_to_unicode, function, isinstance
+./utilmy/zutil.py:str_to_unicode, function, str
+./utilmy/zutil.py:np_minimize, function, penalty
+./utilmy/zutil.py:np_minimize, function, enumerate
+./utilmy/zutil.py:np_minimize, function, max
+./utilmy/zutil.py:np_minimize, function, loss
+./utilmy/zutil.py:np_minimize, function, fun_obj
+./utilmy/zutil.py:np_minimize, function, np_minimize_de
+./utilmy/zutil.py:np_minimize, function, range
+./utilmy/zutil.py:np_minimize, function, next
+./utilmy/zutil.py:np_minimize, function, print
+./utilmy/zutil.py:np_minimize, function, save
+./utilmy/zutil.py:np_minimize, function, date_now
+./utilmy/zutil.py:np_minimize, function, np_int_tostr
+./utilmy/zutil.py:np_minimize, function, np.mod
+./utilmy/zutil.py:np_minimize, function, np.abs
+./utilmy/zutil.py:np_minimize_de, function, range
+./utilmy/zutil.py:np_minimize_de, function, next
+./utilmy/zutil.py:np_minimize_de, function, print
+./utilmy/zutil.py:np_minimize_de, function, save
+./utilmy/zutil.py:np_minimize_de, function, date_now
+./utilmy/zutil.py:np_minimize_de, function, np_int_tostr
+./utilmy/zutil.py:np_minimize_de, function, np.mod
+./utilmy/zutil.py:np_minimize_de, function, np.abs
+./utilmy/zutil.py:np_remove_na_inf_2d, function, np.shape
+./utilmy/zutil.py:np_remove_na_inf_2d, function, range
+./utilmy/zutil.py:np_remove_na_inf_2d, function, np.isnan
+./utilmy/zutil.py:np_remove_na_inf_2d, function, np.isinf
+./utilmy/zutil.py:np_addcolumn, function, np.shape
+./utilmy/zutil.py:np_addcolumn, function, np.zeros
+./utilmy/zutil.py:np_addcolumn, function, np.column_stack
+./utilmy/zutil.py:np_addrow, function, np.shape
+./utilmy/zutil.py:np_addrow, function, len
+./utilmy/zutil.py:np_addrow, function, np.zeros
+./utilmy/zutil.py:np_addrow, function, np.row_stack
+./utilmy/zutil.py:np_addrow, function, np.append
+./utilmy/zutil.py:np_int_tostr, function, str
+./utilmy/zutil.py:np_dictordered_create, function, OrderedDict
+./utilmy/zutil.py:np_list_unique, function, list
+./utilmy/zutil.py:np_list_tofreqdict, function, dict
+./utilmy/zutil.py:np_list_tofreqdict, function, len
+./utilmy/zutil.py:np_list_tofreqdict, function, enumerate
+./utilmy/zutil.py:np_list_flatten, function, type
+./utilmy/zutil.py:np_list_flatten, function, np_list_flatten
+./utilmy/zutil.py:np_list_flatten, function, ret.append
+./utilmy/zutil.py:np_dict_tolist, function, list
+./utilmy/zutil.py:np_dict_tostr_val, function, list
+./utilmy/zutil.py:np_dict_tostr_key, function, list
+./utilmy/zutil.py:np_removelist, function, np_findfirst
+./utilmy/zutil.py:np_removelist, function, xnew.append
+./utilmy/zutil.py:np_transform2d_int_1d, function, np.shape
+./utilmy/zutil.py:np_transform2d_int_1d, function, np.zeros
+./utilmy/zutil.py:np_transform2d_int_1d, function, range
+./utilmy/zutil.py:np_transform2d_int_1d, function, np.abs
+./utilmy/zutil.py:np_transform2d_int_1d, function, np_sortbycol
+./utilmy/zutil.py:np_mergelist, function, list
+./utilmy/zutil.py:np_mergelist, function, xnew.append
+./utilmy/zutil.py:np_enumerate2, function, np.empty
+./utilmy/zutil.py:np_enumerate2, function, enumerate
+./utilmy/zutil.py:np_pivottable_count, function, np_dict_tolist
+./utilmy/zutil.py:np_pivottable_count, function, sorted
+./utilmy/zutil.py:np_pivottable_count, function, int
+./utilmy/zutil.py:np_nan_helper, function, np.isnan
+./utilmy/zutil.py:np_nan_helper, function, z.nonzero
+./utilmy/zutil.py:np_interpolate_nan, function, np_nan_helper
+./utilmy/zutil.py:np_interpolate_nan, function, np.interp
+./utilmy/zutil.py:np_interpolate_nan, function, x
+./utilmy/zutil.py:np_sortcol, function, pd.DataFrame
+./utilmy/zutil.py:np_sortcol, function, df.sort_values
+./utilmy/zutil.py:np_ma, function, np.convolve
+./utilmy/zutil.py:np_ma, function, np.ones
+./utilmy/zutil.py:np_cleanmatrix, function, np.nan_to_num
+./utilmy/zutil.py:np_cleanmatrix, function, np.shape
+./utilmy/zutil.py:np_cleanmatrix, function, range
+./utilmy/zutil.py:np_cleanmatrix, function, abs
+./utilmy/zutil.py:np_torecarray, function, np.shape
+./utilmy/zutil.py:np_sortbycolumn, function, pd.DataFrame
+./utilmy/zutil.py:np_sortbycolumn, function, df.sort_values
+./utilmy/zutil.py:np_sortbycol, function, pd.DataFrame
+./utilmy/zutil.py:np_sortbycol, function, df.sort_values
+./utilmy/zutil.py:np_sortbycol, function, np_sortbycol
+./utilmy/zutil.py:np_sortbycol, function, len
+./utilmy/zutil.py:np_sortbycol, function, np.reshape
+./utilmy/zutil.py:np_min_kpos, function, np.partition
+./utilmy/zutil.py:np_max_kpos, function, len
+./utilmy/zutil.py:np_max_kpos, function, np.partition
+./utilmy/zutil.py:np_findfirst, function, range
+./utilmy/zutil.py:np_find, function, range
+./utilmy/zutil.py:find, function, xi.find
+./utilmy/zutil.py:findnone, function, range
+./utilmy/zutil.py:findx, function, type
+./utilmy/zutil.py:findx, function, vec.index
+./utilmy/zutil.py:findx, function, np.where
+./utilmy/zutil.py:findx, function, len
+./utilmy/zutil.py:finds, function, range
+./utilmy/zutil.py:finds, function, idlist.append
+./utilmy/zutil.py:findhigher, function, range
+./utilmy/zutil.py:findlower, function, range
+./utilmy/zutil.py:np_find_minpos, function, min
+./utilmy/zutil.py:np_find_maxpos, function, max
+./utilmy/zutil.py:np_find_maxpos, function, np_find_maxpos_2nd
+./utilmy/zutil.py:np_find_maxpos, function, float
+./utilmy/zutil.py:np_find_maxpos, function, enumerate
+./utilmy/zutil.py:np_find_maxpos_2nd, function, float
+./utilmy/zutil.py:np_find_maxpos_2nd, function, enumerate
+./utilmy/zutil.py:np_findlocalmax2, function, len
+./utilmy/zutil.py:np_findlocalmax2, function, np.zeros
+./utilmy/zutil.py:np_findlocalmax2, function, np_find_maxpos
+./utilmy/zutil.py:np_findlocalmax2, function, enumerate
+./utilmy/zutil.py:np_findlocalmax2, function, np_sortbycolumn
+./utilmy/zutil.py:np_findlocalmax2, function, range
+./utilmy/zutil.py:np_findlocalmax2, function, findhigher
+./utilmy/zutil.py:np_findlocalmax2, function, np.abs
+./utilmy/zutil.py:np_findlocalmin2, function, len
+./utilmy/zutil.py:np_findlocalmin2, function, np.zeros
+./utilmy/zutil.py:np_findlocalmin2, function, np_find_minpos
+./utilmy/zutil.py:np_findlocalmin2, function, enumerate
+./utilmy/zutil.py:np_findlocalmin2, function, np_sortbycolumn
+./utilmy/zutil.py:np_findlocalmin2, function, range
+./utilmy/zutil.py:np_findlocalmin2, function, findlower
+./utilmy/zutil.py:np_findlocalmin2, function, np.abs
+./utilmy/zutil.py:np_findlocalmax, function, len
+./utilmy/zutil.py:np_findlocalmax, function, np.zeros
+./utilmy/zutil.py:np_findlocalmax, function, np_find_maxpos
+./utilmy/zutil.py:np_findlocalmax, function, enumerate
+./utilmy/zutil.py:np_findlocalmax, function, np_sortbycolumn
+./utilmy/zutil.py:np_findlocalmax, function, range
+./utilmy/zutil.py:np_findlocalmax, function, findhigher
+./utilmy/zutil.py:np_findlocalmax, function, np.abs
+./utilmy/zutil.py:np_findlocalmin, function, len
+./utilmy/zutil.py:np_findlocalmin, function, np.zeros
+./utilmy/zutil.py:np_findlocalmin, function, np_find_minpos
+./utilmy/zutil.py:np_findlocalmin, function, enumerate
+./utilmy/zutil.py:np_findlocalmin, function, np_sortbycolumn
+./utilmy/zutil.py:np_findlocalmin, function, range
+./utilmy/zutil.py:np_findlocalmin, function, findlower
+./utilmy/zutil.py:np_findlocalmin, function, np.abs
+./utilmy/zutil.py:np_stack, function, np.shape
+./utilmy/zutil.py:np_stack, function, np.row_stack
+./utilmy/zutil.py:np_stack, function, np.column_stack
+./utilmy/zutil.py:np_uniquerows, function, np.ascontiguousarray
+./utilmy/zutil.py:np_uniquerows, function, np.unique
+./utilmy/zutil.py:np_uniquerows, function, unique_a.view
+./utilmy/zutil.py:np_sort, function, pd.DataFrame
+./utilmy/zutil.py:np_sort, function, df.sort_values
+./utilmy/zutil.py:np_pivotable_create, function, tuple
+./utilmy/zutil.py:np_pivotable_create, function, ysort.append
+./utilmy/zutil.py:np_pivotable_create, function, xsort.append
+./utilmy/zutil.py:np_pivotable_create, function, len
+./utilmy/zutil.py:np_pivotable_create, function, list
+./utilmy/zutil.py:np_pivotable_create, function, xsort.sort
+./utilmy/zutil.py:np_pivotable_create, function, headings.extend
+./utilmy/zutil.py:np_pivotable_create, function, sortedkeys.sort
+./utilmy/zutil.py:np_pivotable_create, function, row.extend
+./utilmy/zutil.py:np_pivotable_create, function, t.append
+./utilmy/zutil.py:pd_info, function, df.info
+./utilmy/zutil.py:pd_info, function, print
+./utilmy/zutil.py:pd_info, function, type
+./utilmy/zutil.py:pd_info, function, pd_info_memsize
+./utilmy/zutil.py:pd_info, function, pd_info
+./utilmy/zutil.py:pd_info, function, df.memory_usage
+./utilmy/zutil.py:pd_info_memsize, function, df.info
+./utilmy/zutil.py:pd_info_memsize, function, pd_info
+./utilmy/zutil.py:pd_info_memsize, function, df.memory_usage
+./utilmy/zutil.py:pd_row_findlast, function, df.iterrows
+./utilmy/zutil.py:pd_row_select, function, type
+./utilmy/zutil.py:pd_row_select, function, pd.DataFrame
+./utilmy/zutil.py:pd_row_select, function, list
+./utilmy/zutil.py:pd_row_select, function, c.endswith
+./utilmy/zutil.py:pd_row_select, function, np.in1d
+./utilmy/zutil.py:pd_row_select, function, ValueError
+./utilmy/zutil.py:pd_csv_randomread, function, sum
+./utilmy/zutil.py:pd_csv_randomread, function, open
+./utilmy/zutil.py:pd_csv_randomread, function, np.sort
+./utilmy/zutil.py:pd_csv_randomread, function, pd.read_csv
+./utilmy/zutil.py:pd_array_todataframe, function, np.shape
+./utilmy/zutil.py:pd_array_todataframe, function, len
+./utilmy/zutil.py:pd_array_todataframe, function, pd.DataFrame
+./utilmy/zutil.py:pd_dataframe_toarray, function, df.reset_index
+./utilmy/zutil.py:pd_createdf, function, pd.DataFrame
+./utilmy/zutil.py:pd_create_colmapdict_nametoint, function, enumerate
+./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, np.array
+./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, pd.DataFrame
+./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, print
+./utilmy/zutil.py:pd_splitdf_inlist, function, list
+./utilmy/zutil.py:pd_splitdf_inlist, function, l1.append
+./utilmy/zutil.py:pd_find, function, str
+./utilmy/zutil.py:pd_find, function, print
+./utilmy/zutil.py:pd_find, function, enumerate
+./utilmy/zutil.py:pd_find, function, np.column_stack
+./utilmy/zutil.py:pd_find, function, len
+./utilmy/zutil.py:pd_find, function, gc.collect
+./utilmy/zutil.py:pd_find, function, np_dictordered_create
+./utilmy/zutil.py:pd_find, function, range
+./utilmy/zutil.py:pd_find, function, np.array
+./utilmy/zutil.py:pd_dtypes, function, pd_dtypes
+./utilmy/zutil.py:pd_dtypes, function, OrderedDict
+./utilmy/zutil.py:pd_dtypes, function, enumerate
+./utilmy/zutil.py:pd_dtypes, function, eval
+./utilmy/zutil.py:pd_dtypes, function, print
+./utilmy/zutil.py:pd_df_todict2, function, df.drop_duplicates
+./utilmy/zutil.py:pd_df_todict2, function, range
+./utilmy/zutil.py:pd_df_todict2, function, len
+./utilmy/zutil.py:pd_df_todict2, function, dict0.setdefault
+./utilmy/zutil.py:pd_df_todict, function, df.drop_duplicates
+./utilmy/zutil.py:pd_df_todict, function, range
+./utilmy/zutil.py:pd_df_todict, function, len
+./utilmy/zutil.py:pd_df_todict, function, dict0.setdefault
+./utilmy/zutil.py:pd_df_todict, function, pd_df_todict
+./utilmy/zutil.py:pd_df_todict, function, df.iterrows
+./utilmy/zutil.py:pd_applyfun_col, function, ff
+./utilmy/zutil.py:pd_date_intersection, function, set
+./utilmy/zutil.py:pd_date_intersection, function, set.intersection
+./utilmy/zutil.py:pd_date_intersection, function, list
+./utilmy/zutil.py:pd_date_intersection, function, sorted
+./utilmy/zutil.py:pd_is_categorical, function, isinstance
+./utilmy/zutil.py:pd_str_unicode_tostr, function, pd_dtypes_type1_totype2
+./utilmy/zutil.py:pd_dtypes_type1_totype2, function, isinstance
+./utilmy/zutil.py:pd_resetindex, function, list
+./utilmy/zutil.py:pd_resetindex, function, len
+./utilmy/zutil.py:pd_insertdatecol, function, date_nowtime
+./utilmy/zutil.py:pd_replacevalues, function, np.shape
+./utilmy/zutil.py:pd_removerow, function, df.drop
+./utilmy/zutil.py:pd_removecol, function, df1.drop
+./utilmy/zutil.py:pd_insertrow, function, pd_array_todataframe
+./utilmy/zutil.py:pd_insertrow, function, df.append
+./utilmy/zutil.py:pd_h5_cleanbeforesave, function, pd_resetindex
+./utilmy/zutil.py:pd_h5_cleanbeforesave, function, pd_str_unicode_tostr
+./utilmy/zutil.py:pd_h5_addtable, function, pd.HDFStore
+./utilmy/zutil.py:pd_h5_addtable, function, find
+./utilmy/zutil.py:pd_h5_addtable, function, list
+./utilmy/zutil.py:pd_h5_addtable, function, print
+./utilmy/zutil.py:pd_h5_addtable, function, store.append
+./utilmy/zutil.py:pd_h5_addtable, function, store.close
+./utilmy/zutil.py:pd_h5_tableinfo, function, pd.HDFStore
+./utilmy/zutil.py:pd_h5_tableinfo, function, store.get_storer
+./utilmy/zutil.py:pd_h5_dumpinfo, function, pd.HDFStore
+./utilmy/zutil.py:pd_h5_dumpinfo, function, list
+./utilmy/zutil.py:pd_h5_dumpinfo, function, pd.DataFrame
+./utilmy/zutil.py:pd_h5_dumpinfo, function, extract.append
+./utilmy/zutil.py:pd_h5_dumpinfo, function, datetime_tostring
+./utilmy/zutil.py:pd_h5_dumpinfo, function, errsym.append
+./utilmy/zutil.py:pd_h5_dumpinfo, function, np.array
+./utilmy/zutil.py:pd_h5_save, function, pd.HDFStore
+./utilmy/zutil.py:pd_h5_save, function, store.append
+./utilmy/zutil.py:pd_h5_save, function, store.close
+./utilmy/zutil.py:pd_h5_load, function, pd.read_hdf
+./utilmy/zutil.py:pd_h5_load, function, pd.DataFrame
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, os_file_listall
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, pd.HDFStore
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, enumerate
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, pd.read_csv
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, print
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, store.append
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, store.close
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, os_file_exist
+./utilmy/zutil.py:pd_np_toh5file, function, pd.DataFrame
+./utilmy/zutil.py:pd_np_toh5file, function, pd.HDFStore
+./utilmy/zutil.py:pd_np_toh5file, function, st.append
+./utilmy/zutil.py:datetime_tostring, function, isinstance
+./utilmy/zutil.py:datetime_tostring, function, datelist1.strftime
+./utilmy/zutil.py:datetime_tostring, function, pd.to_datetime
+./utilmy/zutil.py:datetime_tostring, function, t.strftime
+./utilmy/zutil.py:datetime_tostring, function, date2.append
+./utilmy/zutil.py:date_remove_bdays, function, isint
+./utilmy/zutil.py:date_remove_bdays, function, dateint_todatetime
+./utilmy/zutil.py:date_remove_bdays, function, datetime.timedelta
+./utilmy/zutil.py:date_remove_bdays, function, current_date.weekday
+./utilmy/zutil.py:date_remove_bdays, function, datetime_toint
+./utilmy/zutil.py:date_add_bdays, function, isint
+./utilmy/zutil.py:date_add_bdays, function, dateint_todatetime
+./utilmy/zutil.py:date_add_bdays, function, datetime.timedelta
+./utilmy/zutil.py:date_add_bdays, function, current_date.weekday
+./utilmy/zutil.py:date_add_bdays, function, datetime_toint
+./utilmy/zutil.py:datenumpy_todatetime, function, type
+./utilmy/zutil.py:datetime_tonumpydate, function, np.datetime64
+./utilmy/zutil.py:datestring_todatetime, function, isinstance
+./utilmy/zutil.py:datestring_todatetime, function, parser.parse
+./utilmy/zutil.py:datestring_todatetime, function, date2.append
+./utilmy/zutil.py:datetime_toint, function, isinstance
+./utilmy/zutil.py:datetime_toint, function, int
+./utilmy/zutil.py:datetime_toint, function, date2.append
+./utilmy/zutil.py:date_add_bday, function, isint
+./utilmy/zutil.py:date_add_bday, function, dateint_todatetime
+./utilmy/zutil.py:date_add_bday, function, datetime.timedelta
+./utilmy/zutil.py:date_add_bday, function, current_date.weekday
+./utilmy/zutil.py:date_add_bday, function, datetime_toint
+./utilmy/zutil.py:dateint_todatetime, function, isinstance
+./utilmy/zutil.py:dateint_todatetime, function, parser.parse
+./utilmy/zutil.py:dateint_todatetime, function, date2.append
+./utilmy/zutil.py:date_diffinday, function, dateint_todatetime
+./utilmy/zutil.py:date_diffinbday, function, dateint_todatetime
+./utilmy/zutil.py:date_diffinbday, function, d1.date
+./utilmy/zutil.py:date_diffinbday, function, d2.date
+./utilmy/zutil.py:date_diffinbday, function, np.busday_count
+./utilmy/zutil.py:date_gencalendar, function, CustomBusinessDay
+./utilmy/zutil.py:date_gencalendar, function, np.array
+./utilmy/zutil.py:date_finddateid, function, np_findfirst
+./utilmy/zutil.py:datestring_toint, function, isinstance
+./utilmy/zutil.py:datestring_toint, function, int
+./utilmy/zutil.py:datestring_toint, function, date2.append
+./utilmy/zutil.py:date_now, function, datetime.now
+./utilmy/zutil.py:date_now, function, date_add_bdays
+./utilmy/zutil.py:date_now, function, date_remove_bdays
+./utilmy/zutil.py:date_now, function, str
+./utilmy/zutil.py:date_now, function, date_nowtime
+./utilmy/zutil.py:date_now, function, datetime.today
+./utilmy/zutil.py:date_now, function, d.strftime
+./utilmy/zutil.py:date_nowtime, function, datetime.today
+./utilmy/zutil.py:date_nowtime, function, d.strftime
+./utilmy/zutil.py:date_generatedatetime, function, datestring_todatetime
+./utilmy/zutil.py:date_generatedatetime, function, date_add_bdays
+./utilmy/zutil.py:date_generatedatetime, function, datetime.timedelta
+./utilmy/zutil.py:date_generatedatetime, function, list
+./utilmy/zutil.py:date_generatedatetime, function, np.array
+./utilmy/zutil_features.py:log, function, print
+./utilmy/zutil_features.py:log, function, log2
+./utilmy/zutil_features.py:log, function, log3
+./utilmy/zutil_features.py:log2, function, print
+./utilmy/zutil_features.py:log3, function, print
+./utilmy/zutil_features.py:os_get_function_name, function, sys._getframe
+./utilmy/zutil_features.py:pa_read_file, function, hdfs.ls
+./utilmy/zutil_features.py:pa_read_file, function, glob.glob
+./utilmy/zutil_features.py:pa_read_file, function, fi.split
+./utilmy/zutil_features.py:pa_read_file, function, print
+./utilmy/zutil_features.py:pa_read_file, function, pq.read_table
+./utilmy/zutil_features.py:pa_read_file, function, arr_table.to_pandas
+./utilmy/zutil_features.py:pa_read_file, function, gc.collect
+./utilmy/zutil_features.py:pa_read_file, function, pd.concat
+./utilmy/zutil_features.py:pa_read_file, function, len
+./utilmy/zutil_features.py:pa_read_file, function, dfall.head
+./utilmy/zutil_features.py:pa_write_file, function, hdfs.rm
+./utilmy/zutil_features.py:pa_write_file, function, hdfs.mkdir
+./utilmy/zutil_features.py:pa_write_file, function, pq.write_to_dataset
+./utilmy/zutil_features.py:pa_write_file, function, hdfs.ls
+./utilmy/zutil_features.py:pa_write_file, function, print
+./utilmy/zutil_features.py:pa_write_file, function, os.removedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.makedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.listdir
+./utilmy/zutil_features.py:test_get_classification_data, function, make_classification
+./utilmy/zutil_features.py:test_get_classification_data, function, range
+./utilmy/zutil_features.py:test_get_classification_data, function, pd.DataFrame
+./utilmy/zutil_features.py:test_get_classification_data, function, np.arange
+./utilmy/zutil_features.py:test_get_classification_data, function, len
+./utilmy/zutil_features.py:test_get_classification_data, function, dfX.set_index
+./utilmy/zutil_features.py:test_get_classification_data, function, dfy.set_index
+./utilmy/zutil_features.py:params_check, function, isinstance
+./utilmy/zutil_features.py:params_check, function, Exception
+./utilmy/zutil_features.py:save_features, function, os.makedirs
+./utilmy/zutil_features.py:save_features, function, isinstance
+./utilmy/zutil_features.py:save_features, function, log
+./utilmy/zutil_features.py:save_features, function, list
+./utilmy/zutil_features.py:save_features, function, df0.to_parquet
+./utilmy/zutil_features.py:load_features, function, pd.read_parquet
+./utilmy/zutil_features.py:load_features, function, log
+./utilmy/zutil_features.py:save_list, function, os.makedirs
+./utilmy/zutil_features.py:save_list, function, log
+./utilmy/zutil_features.py:save_list, function, pickle.dump
+./utilmy/zutil_features.py:save_list, function, open
+./utilmy/zutil_features.py:save, function, os.makedirs
+./utilmy/zutil_features.py:save, function, isinstance
+./utilmy/zutil_features.py:save, function, log
+./utilmy/zutil_features.py:save, function, list
+./utilmy/zutil_features.py:save, function, df0.to_parquet
+./utilmy/zutil_features.py:load, function, pd.read_parquet
+./utilmy/zutil_features.py:load, function, log
+./utilmy/zutil_features.py:pd_read_file, function, ThreadPool
+./utilmy/zutil_features.py:pd_read_file, function, glob.glob
+./utilmy/zutil_features.py:pd_read_file, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_read_file, function, len
+./utilmy/zutil_features.py:pd_read_file, function, log
+./utilmy/zutil_features.py:pd_read_file, function, range
+./utilmy/zutil_features.py:pd_read_file, function, job_list.append
+./utilmy/zutil_features.py:pd_read_file, function, pool.apply_async
+./utilmy/zutil_features.py:pd_read_file, function, dfi.drop_duplicates
+./utilmy/zutil_features.py:pd_read_file, function, gc.collect
+./utilmy/zutil_features.py:pd_read_file, function, pd.concat
+./utilmy/zutil_features.py:load_dataset, function, log
+./utilmy/zutil_features.py:load_dataset, function, fetch_spark_koalas
+./utilmy/zutil_features.py:load_dataset, function, fetch_dataset
+./utilmy/zutil_features.py:load_dataset, function, glob.glob
+./utilmy/zutil_features.py:load_dataset, function, ntpath.dirname
+./utilmy/zutil_features.py:load_dataset, function, ntpath.basename
+./utilmy/zutil_features.py:load_dataset, function, len
+./utilmy/zutil_features.py:load_dataset, function, print
+./utilmy/zutil_features.py:load_dataset, function, pd.read_csv
+./utilmy/zutil_features.py:load_dataset, function, fi.endswith
+./utilmy/zutil_features.py:load_dataset, function, pd.read_parquet
+./utilmy/zutil_features.py:load_dataset, function, pd.read_pickle
+./utilmy/zutil_features.py:load_dataset, function, pd.concat
+./utilmy/zutil_features.py:load_dataset, function, df.head
+./utilmy/zutil_features.py:load_dataset, function, list
+./utilmy/zutil_features.py:load_dataset, function, np.arange
+./utilmy/zutil_features.py:load_dataset, function, df.set_index
+./utilmy/zutil_features.py:load_dataset, function, pd_read_file
+./utilmy/zutil_features.py:load_dataset, function, dfy.head
+./utilmy/zutil_features.py:load_dataset, function, df.join
+./utilmy/zutil_features.py:fetch_spark_koalas, function, path_data_x.replace
+./utilmy/zutil_features.py:fetch_spark_koalas, function, ks.read_parquet
+./utilmy/zutil_features.py:fetch_dataset, function, log
+./utilmy/zutil_features.py:fetch_dataset, function, mkdtemp
+./utilmy/zutil_features.py:fetch_dataset, function, pathlib.Path
+./utilmy/zutil_features.py:fetch_dataset, function, mktemp
+./utilmy/zutil_features.py:fetch_dataset, function, url_dataset.replace
+./utilmy/zutil_features.py:fetch_dataset, function, urlx.replace
+./utilmy/zutil_features.py:fetch_dataset, function, urlpath.split
+./utilmy/zutil_features.py:fetch_dataset, function, os.makedirs
+./utilmy/zutil_features.py:fetch_dataset, function, requests.Session
+./utilmy/zutil_features.py:fetch_dataset, function, s.get
+./utilmy/zutil_features.py:fetch_dataset, function, print
+./utilmy/zutil_features.py:fetch_dataset, function, open
+./utilmy/zutil_features.py:fetch_dataset, function, f.write
+./utilmy/zutil_features.py:fetch_dataset, function, res.raise_for_status
+./utilmy/zutil_features.py:fetch_dataset, function, urlparse
+./utilmy/zutil_features.py:fetch_dataset, function, parse_qs
+./utilmy/zutil_features.py:fetch_dataset, function, download_googledrive
+./utilmy/zutil_features.py:fetch_dataset, function, download_dtopbox
+./utilmy/zutil_features.py:fetch_dataset, function, os.listdir
+./utilmy/zutil_features.py:fetch_dataset, function, os.unlink
+./utilmy/zutil_features.py:fetch_dataset, function, os.link
+./utilmy/zutil_features.py:load_function_uri, function, uri_name.split
+./utilmy/zutil_features.py:load_function_uri, function, len
+./utilmy/zutil_features.py:load_function_uri, function, package_path.replace
+./utilmy/zutil_features.py:load_function_uri, function, getattr
+./utilmy/zutil_features.py:load_function_uri, function, str
+./utilmy/zutil_features.py:load_function_uri, function, log
+./utilmy/zutil_features.py:load_function_uri, function, Path
+./utilmy/zutil_features.py:load_function_uri, function, NameError
+./utilmy/zutil_features.py:metrics_eval, function, len
+./utilmy/zutil_features.py:metrics_eval, function, isinstance
+./utilmy/zutil_features.py:metrics_eval, function, getattr
+./utilmy/zutil_features.py:metrics_eval, function, range
+./utilmy/zutil_features.py:metrics_eval, function, mval_.append
+./utilmy/zutil_features.py:metrics_eval, function, np.mean
+./utilmy/zutil_features.py:metrics_eval, function, np.sqrt
+./utilmy/zutil_features.py:metrics_eval, function, metric_scorer
+./utilmy/zutil_features.py:metrics_eval, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_dataset_shift, function, print
+./utilmy/zutil_features.py:pd_stat_dataset_shift, function, pd_stat_datashift_psi
+./utilmy/zutil_features.py:pd_stat_dataset_shift, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, psi
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, scale_range
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.max
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.arange
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.min
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.stack
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.histogram
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, len
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, sub_psi
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.log
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.sum
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, range
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.empty
+./utilmy/zutil_features.py:feature_importance_perm, function, permutation_importance
+./utilmy/zutil_features.py:feature_importance_perm, function, list
+./utilmy/zutil_features.py:feature_importance_perm, function, pd.DataFrame
+./utilmy/zutil_features.py:feature_importance_perm, function, np.arange
+./utilmy/zutil_features.py:feature_importance_perm, function, min
+./utilmy/zutil_features.py:feature_importance_perm, function, len
+./utilmy/zutil_features.py:feature_importance_perm, function, plt.subplots
+./utilmy/zutil_features.py:feature_importance_perm, function, ax1.boxplot
+./utilmy/zutil_features.py:feature_importance_perm, function, ax1.set_yticklabels
+./utilmy/zutil_features.py:feature_importance_perm, function, ax1.set_ylim
+./utilmy/zutil_features.py:feature_importance_perm, function, fig.tight_layout
+./utilmy/zutil_features.py:feature_importance_perm, function, plt.show
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, list
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, spearmanr
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.ward
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.fcluster
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, enumerate
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, cluster_id_to_feature_ids.values
+./utilmy/zutil_features.py:feature_correlation_cat, function, plt.subplots
+./utilmy/zutil_features.py:feature_correlation_cat, function, spearmanr
+./utilmy/zutil_features.py:feature_correlation_cat, function, hierarchy.ward
+./utilmy/zutil_features.py:feature_correlation_cat, function, hierarchy.dendrogram
+./utilmy/zutil_features.py:feature_correlation_cat, function, np.arange
+./utilmy/zutil_features.py:feature_correlation_cat, function, len
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.imshow
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_xticks
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_yticks
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_xticklabels
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_yticklabels
+./utilmy/zutil_features.py:feature_correlation_cat, function, fig.tight_layout
+./utilmy/zutil_features.py:feature_correlation_cat, function, plt.show
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, len
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, itertools.combinations
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, range
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, y.sum
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, col_cross.append
+./utilmy/zutil_features.py:pd_col_to_onehot, function, copy.deepcopy
+./utilmy/zutil_features.py:pd_col_to_onehot, function, list
+./utilmy/zutil_features.py:pd_col_to_onehot, function, len
+./utilmy/zutil_features.py:pd_col_to_onehot, function, print
+./utilmy/zutil_features.py:pd_col_to_onehot, function, pd.concat
+./utilmy/zutil_features.py:pd_col_to_onehot, function, pd.get_dummies
+./utilmy/zutil_features.py:pd_col_to_onehot, function, coladded.append
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, t.rfind
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, int
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, print
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, dfz.set_index
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_colcat_tonum, function, dict
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.unique
+./utilmy/zutil_features.py:pd_colcat_tonum, function, len
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.factorize
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.get_dummies
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.concat
+./utilmy/zutil_features.py:pd_colcat_mapping, function, enumerate
+./utilmy/zutil_features.py:pd_colcat_toint, function, isinstance
+./utilmy/zutil_features.py:pd_colcat_toint, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_colcat_toint, function, print
+./utilmy/zutil_features.py:pd_colcat_toint, function, ddict.get
+./utilmy/zutil_features.py:pd_colcat_toint, function, colname_new.append
+./utilmy/zutil_features.py:pd_colcat_toint, function, enumerate
+./utilmy/zutil_features.py:pd_colnum_tocat, function, list
+./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict
+./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create
+./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.min
+./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.max
+./utilmy/zutil_features.py:pd_colnum_tocat, function, range
+./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create_quantile
+./utilmy/zutil_features.py:pd_colnum_tocat, function, np.arange
+./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.quantile
+./utilmy/zutil_features.py:pd_colnum_tocat, function, print
+./utilmy/zutil_features.py:pd_colnum_tocat, function, colbinmap.get
+./utilmy/zutil_features.py:pd_colnum_tocat, function, len
+./utilmy/zutil_features.py:pd_colnum_tocat, function, pd.cut
+./utilmy/zutil_features.py:pd_colnum_tocat, function, df.groupby
+./utilmy/zutil_features.py:pd_colnum_tocat, function, colnew.append
+./utilmy/zutil_features.py:pd_colnum_normalize, function, np.log
+./utilmy/zutil_features.py:pd_colnum_normalize, function, max
+./utilmy/zutil_features.py:pd_colnum_normalize, function, min
+./utilmy/zutil_features.py:pd_colnum_normalize, function, log
+./utilmy/zutil_features.py:pd_colnum_normalize, function, list
+./utilmy/zutil_features.py:pd_col_merge_onehot, function, t[len
+./utilmy/zutil_features.py:pd_col_merge_onehot, function, len
+./utilmy/zutil_features.py:pd_col_merge_onehot, function, merge_array.append
+./utilmy/zutil_features.py:pd_col_to_num, function, to_float
+./utilmy/zutil_features.py:pd_col_to_num, function, float
+./utilmy/zutil_features.py:pd_col_to_num, function, list
+./utilmy/zutil_features.py:pd_col_filter, function, col_delete.append
+./utilmy/zutil_features.py:pd_col_filter, function, df.drop
+./utilmy/zutil_features.py:pd_col_fillna, function, list
+./utilmy/zutil_features.py:pd_col_fillna, function, df.groupby
+./utilmy/zutil_features.py:pd_col_fillna, function, print
+./utilmy/zutil_features.py:pd_pipeline_apply, function, copy.deepcopy
+./utilmy/zutil_features.py:pd_pipeline_apply, function, enumerate
+./utilmy/zutil_features.py:pd_pipeline_apply, function, print
+./utilmy/zutil_features.py:pd_pipeline_apply, function, str
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, list
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, target_corr.append
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, len
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, print
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, df.profile_report
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.to_file
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.get_rejected_variables
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, df.sample
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, getstat
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, str
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, len
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, pd.concat
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, print
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, np.arange
+./utilmy/zutil_features.py:pd_stat_histogram, function, np.histogram
+./utilmy/zutil_features.py:pd_stat_histogram, function, pd.DataFrame
+./utilmy/zutil_features.py:col_extractname, function, len
+./utilmy/zutil_features.py:col_extractname, function, colnew.append
+./utilmy/zutil_features.py:col_remove, function, cols.remove
+./utilmy/zutil_features.py:col_remove, function, cols3.append
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, pd.isnull
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df.reset_index
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, min
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, range
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, np.percentile
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, cuts.append
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, pd.cut
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df.groupby
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df_grouped.reset_index
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, list
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df_grouped.rename
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, str
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, len
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, pd.concat
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs.fillna
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs.divide
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs_norm.diff
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs_lvl2.fillna
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, int
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, df.merge
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, pd.isnull
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, len
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, np.corrcoef
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, print
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, type
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, list
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, features_list.remove
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, ignored.append
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd_colnum_tocat_stat
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd_stat_shift_trend_correlation
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd_stat_shift_changes
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, stats_all.append
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, len
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, print
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, str
+./utilmy/zutil_features.py:np_conv_to_one_col, function, row2string
+./utilmy/zutil_features.py:np_conv_to_one_col, function, sep_char.join
+./utilmy/zutil_features.py:log, function, print
+./utilmy/zutil_features.py:log, function, log2
+./utilmy/zutil_features.py:log, function, log3
+./utilmy/zutil_features.py:log2, function, print
+./utilmy/zutil_features.py:log3, function, print
+./utilmy/zutil_features.py:os_get_function_name, function, sys._getframe
+./utilmy/zutil_features.py:pa_read_file, function, hdfs.ls
+./utilmy/zutil_features.py:pa_read_file, function, glob.glob
+./utilmy/zutil_features.py:pa_read_file, function, fi.split
+./utilmy/zutil_features.py:pa_read_file, function, print
+./utilmy/zutil_features.py:pa_read_file, function, pq.read_table
+./utilmy/zutil_features.py:pa_read_file, function, arr_table.to_pandas
+./utilmy/zutil_features.py:pa_read_file, function, gc.collect
+./utilmy/zutil_features.py:pa_read_file, function, pd.concat
+./utilmy/zutil_features.py:pa_read_file, function, len
+./utilmy/zutil_features.py:pa_read_file, function, dfall.head
+./utilmy/zutil_features.py:pa_write_file, function, hdfs.rm
+./utilmy/zutil_features.py:pa_write_file, function, hdfs.mkdir
+./utilmy/zutil_features.py:pa_write_file, function, pq.write_to_dataset
+./utilmy/zutil_features.py:pa_write_file, function, hdfs.ls
+./utilmy/zutil_features.py:pa_write_file, function, print
+./utilmy/zutil_features.py:pa_write_file, function, os.removedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.makedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.listdir
+./utilmy/zutil_features.py:test_get_classification_data, function, make_classification
+./utilmy/zutil_features.py:test_get_classification_data, function, range
+./utilmy/zutil_features.py:test_get_classification_data, function, pd.DataFrame
+./utilmy/zutil_features.py:test_get_classification_data, function, np.arange
+./utilmy/zutil_features.py:test_get_classification_data, function, len
+./utilmy/zutil_features.py:test_get_classification_data, function, dfX.set_index
+./utilmy/zutil_features.py:test_get_classification_data, function, dfy.set_index
+./utilmy/zutil_features.py:params_check, function, isinstance
+./utilmy/zutil_features.py:params_check, function, Exception
+./utilmy/zutil_features.py:save_features, function, os.makedirs
+./utilmy/zutil_features.py:save_features, function, isinstance
+./utilmy/zutil_features.py:save_features, function, log
+./utilmy/zutil_features.py:save_features, function, list
+./utilmy/zutil_features.py:save_features, function, df0.to_parquet
+./utilmy/zutil_features.py:load_features, function, pd.read_parquet
+./utilmy/zutil_features.py:load_features, function, log
+./utilmy/zutil_features.py:save_list, function, os.makedirs
+./utilmy/zutil_features.py:save_list, function, log
+./utilmy/zutil_features.py:save_list, function, pickle.dump
+./utilmy/zutil_features.py:save_list, function, open
+./utilmy/zutil_features.py:save, function, os.makedirs
+./utilmy/zutil_features.py:save, function, isinstance
+./utilmy/zutil_features.py:save, function, log
+./utilmy/zutil_features.py:save, function, list
+./utilmy/zutil_features.py:save, function, df0.to_parquet
+./utilmy/zutil_features.py:load, function, pd.read_parquet
+./utilmy/zutil_features.py:load, function, log
+./utilmy/zutil_features.py:pd_read_file, function, ThreadPool
+./utilmy/zutil_features.py:pd_read_file, function, glob.glob
+./utilmy/zutil_features.py:pd_read_file, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_read_file, function, len
+./utilmy/zutil_features.py:pd_read_file, function, log
+./utilmy/zutil_features.py:pd_read_file, function, range
+./utilmy/zutil_features.py:pd_read_file, function, job_list.append
+./utilmy/zutil_features.py:pd_read_file, function, pool.apply_async
+./utilmy/zutil_features.py:pd_read_file, function, dfi.drop_duplicates
+./utilmy/zutil_features.py:pd_read_file, function, gc.collect
+./utilmy/zutil_features.py:pd_read_file, function, pd.concat
+./utilmy/zutil_features.py:load_dataset, function, log
+./utilmy/zutil_features.py:load_dataset, function, fetch_spark_koalas
+./utilmy/zutil_features.py:load_dataset, function, fetch_dataset
+./utilmy/zutil_features.py:load_dataset, function, glob.glob
+./utilmy/zutil_features.py:load_dataset, function, ntpath.dirname
+./utilmy/zutil_features.py:load_dataset, function, ntpath.basename
+./utilmy/zutil_features.py:load_dataset, function, len
+./utilmy/zutil_features.py:load_dataset, function, print
+./utilmy/zutil_features.py:load_dataset, function, pd.read_csv
+./utilmy/zutil_features.py:load_dataset, function, fi.endswith
+./utilmy/zutil_features.py:load_dataset, function, pd.read_parquet
+./utilmy/zutil_features.py:load_dataset, function, pd.read_pickle
+./utilmy/zutil_features.py:load_dataset, function, pd.concat
+./utilmy/zutil_features.py:load_dataset, function, df.head
+./utilmy/zutil_features.py:load_dataset, function, list
+./utilmy/zutil_features.py:load_dataset, function, np.arange
+./utilmy/zutil_features.py:load_dataset, function, df.set_index
+./utilmy/zutil_features.py:load_dataset, function, pd_read_file
+./utilmy/zutil_features.py:load_dataset, function, dfy.head
+./utilmy/zutil_features.py:load_dataset, function, df.join
+./utilmy/zutil_features.py:fetch_spark_koalas, function, path_data_x.replace
+./utilmy/zutil_features.py:fetch_spark_koalas, function, ks.read_parquet
+./utilmy/zutil_features.py:fetch_dataset, function, log
+./utilmy/zutil_features.py:fetch_dataset, function, mkdtemp
+./utilmy/zutil_features.py:fetch_dataset, function, pathlib.Path
+./utilmy/zutil_features.py:fetch_dataset, function, mktemp
+./utilmy/zutil_features.py:fetch_dataset, function, url_dataset.replace
+./utilmy/zutil_features.py:fetch_dataset, function, urlx.replace
+./utilmy/zutil_features.py:fetch_dataset, function, urlpath.split
+./utilmy/zutil_features.py:fetch_dataset, function, os.makedirs
+./utilmy/zutil_features.py:fetch_dataset, function, requests.Session
+./utilmy/zutil_features.py:fetch_dataset, function, s.get
+./utilmy/zutil_features.py:fetch_dataset, function, print
+./utilmy/zutil_features.py:fetch_dataset, function, open
+./utilmy/zutil_features.py:fetch_dataset, function, f.write
+./utilmy/zutil_features.py:fetch_dataset, function, res.raise_for_status
+./utilmy/zutil_features.py:fetch_dataset, function, urlparse
+./utilmy/zutil_features.py:fetch_dataset, function, parse_qs
+./utilmy/zutil_features.py:fetch_dataset, function, download_googledrive
+./utilmy/zutil_features.py:fetch_dataset, function, download_dtopbox
+./utilmy/zutil_features.py:fetch_dataset, function, os.listdir
+./utilmy/zutil_features.py:fetch_dataset, function, os.unlink
+./utilmy/zutil_features.py:fetch_dataset, function, os.link
+./utilmy/zutil_features.py:load_function_uri, function, uri_name.split
+./utilmy/zutil_features.py:load_function_uri, function, len
+./utilmy/zutil_features.py:load_function_uri, function, package_path.replace
+./utilmy/zutil_features.py:load_function_uri, function, getattr
+./utilmy/zutil_features.py:load_function_uri, function, str
+./utilmy/zutil_features.py:load_function_uri, function, log
+./utilmy/zutil_features.py:load_function_uri, function, Path
+./utilmy/zutil_features.py:load_function_uri, function, NameError
+./utilmy/zutil_features.py:metrics_eval, function, len
+./utilmy/zutil_features.py:metrics_eval, function, isinstance
+./utilmy/zutil_features.py:metrics_eval, function, getattr
+./utilmy/zutil_features.py:metrics_eval, function, range
+./utilmy/zutil_features.py:metrics_eval, function, mval_.append
+./utilmy/zutil_features.py:metrics_eval, function, np.mean
+./utilmy/zutil_features.py:metrics_eval, function, np.sqrt
+./utilmy/zutil_features.py:metrics_eval, function, metric_scorer
+./utilmy/zutil_features.py:metrics_eval, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_dataset_shift, function, print
+./utilmy/zutil_features.py:pd_stat_dataset_shift, function, pd_stat_datashift_psi
+./utilmy/zutil_features.py:pd_stat_dataset_shift, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, psi
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, scale_range
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.max
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.arange
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.min
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.stack
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.histogram
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, len
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, sub_psi
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.log
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.sum
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, range
+./utilmy/zutil_features.py:pd_stat_datashift_psi, function, np.empty
+./utilmy/zutil_features.py:feature_importance_perm, function, permutation_importance
+./utilmy/zutil_features.py:feature_importance_perm, function, list
+./utilmy/zutil_features.py:feature_importance_perm, function, pd.DataFrame
+./utilmy/zutil_features.py:feature_importance_perm, function, np.arange
+./utilmy/zutil_features.py:feature_importance_perm, function, min
+./utilmy/zutil_features.py:feature_importance_perm, function, len
+./utilmy/zutil_features.py:feature_importance_perm, function, plt.subplots
+./utilmy/zutil_features.py:feature_importance_perm, function, ax1.boxplot
+./utilmy/zutil_features.py:feature_importance_perm, function, ax1.set_yticklabels
+./utilmy/zutil_features.py:feature_importance_perm, function, ax1.set_ylim
+./utilmy/zutil_features.py:feature_importance_perm, function, fig.tight_layout
+./utilmy/zutil_features.py:feature_importance_perm, function, plt.show
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, list
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, spearmanr
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.ward
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.fcluster
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, enumerate
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, cluster_id_to_feature_ids.values
+./utilmy/zutil_features.py:feature_correlation_cat, function, plt.subplots
+./utilmy/zutil_features.py:feature_correlation_cat, function, spearmanr
+./utilmy/zutil_features.py:feature_correlation_cat, function, hierarchy.ward
+./utilmy/zutil_features.py:feature_correlation_cat, function, hierarchy.dendrogram
+./utilmy/zutil_features.py:feature_correlation_cat, function, np.arange
+./utilmy/zutil_features.py:feature_correlation_cat, function, len
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.imshow
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_xticks
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_yticks
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_xticklabels
+./utilmy/zutil_features.py:feature_correlation_cat, function, ax2.set_yticklabels
+./utilmy/zutil_features.py:feature_correlation_cat, function, fig.tight_layout
+./utilmy/zutil_features.py:feature_correlation_cat, function, plt.show
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, len
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, itertools.combinations
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, range
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, y.sum
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, col_cross.append
+./utilmy/zutil_features.py:pd_col_to_onehot, function, copy.deepcopy
+./utilmy/zutil_features.py:pd_col_to_onehot, function, list
+./utilmy/zutil_features.py:pd_col_to_onehot, function, len
+./utilmy/zutil_features.py:pd_col_to_onehot, function, print
+./utilmy/zutil_features.py:pd_col_to_onehot, function, pd.concat
+./utilmy/zutil_features.py:pd_col_to_onehot, function, pd.get_dummies
+./utilmy/zutil_features.py:pd_col_to_onehot, function, coladded.append
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, t.rfind
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, int
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, print
+./utilmy/zutil_features.py:pd_colcat_mergecol, function, dfz.set_index
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_colcat_tonum, function, dict
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.unique
+./utilmy/zutil_features.py:pd_colcat_tonum, function, len
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.factorize
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.get_dummies
+./utilmy/zutil_features.py:pd_colcat_tonum, function, pd.concat
+./utilmy/zutil_features.py:pd_colcat_mapping, function, enumerate
+./utilmy/zutil_features.py:pd_colcat_toint, function, isinstance
+./utilmy/zutil_features.py:pd_colcat_toint, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_colcat_toint, function, print
+./utilmy/zutil_features.py:pd_colcat_toint, function, ddict.get
+./utilmy/zutil_features.py:pd_colcat_toint, function, colname_new.append
+./utilmy/zutil_features.py:pd_colcat_toint, function, enumerate
+./utilmy/zutil_features.py:pd_colnum_tocat, function, list
+./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict
+./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create
+./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.min
+./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.max
+./utilmy/zutil_features.py:pd_colnum_tocat, function, range
+./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create_quantile
+./utilmy/zutil_features.py:pd_colnum_tocat, function, np.arange
+./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.quantile
+./utilmy/zutil_features.py:pd_colnum_tocat, function, print
+./utilmy/zutil_features.py:pd_colnum_tocat, function, colbinmap.get
+./utilmy/zutil_features.py:pd_colnum_tocat, function, len
+./utilmy/zutil_features.py:pd_colnum_tocat, function, pd.cut
+./utilmy/zutil_features.py:pd_colnum_tocat, function, df.groupby
+./utilmy/zutil_features.py:pd_colnum_tocat, function, colnew.append
+./utilmy/zutil_features.py:pd_colnum_normalize, function, np.log
+./utilmy/zutil_features.py:pd_colnum_normalize, function, max
+./utilmy/zutil_features.py:pd_colnum_normalize, function, min
+./utilmy/zutil_features.py:pd_colnum_normalize, function, log
+./utilmy/zutil_features.py:pd_colnum_normalize, function, list
+./utilmy/zutil_features.py:pd_col_merge_onehot, function, t[len
+./utilmy/zutil_features.py:pd_col_merge_onehot, function, len
+./utilmy/zutil_features.py:pd_col_merge_onehot, function, merge_array.append
+./utilmy/zutil_features.py:pd_col_to_num, function, to_float
+./utilmy/zutil_features.py:pd_col_to_num, function, float
+./utilmy/zutil_features.py:pd_col_to_num, function, list
+./utilmy/zutil_features.py:pd_col_filter, function, col_delete.append
+./utilmy/zutil_features.py:pd_col_filter, function, df.drop
+./utilmy/zutil_features.py:pd_col_fillna, function, list
+./utilmy/zutil_features.py:pd_col_fillna, function, df.groupby
+./utilmy/zutil_features.py:pd_col_fillna, function, print
+./utilmy/zutil_features.py:pd_pipeline_apply, function, copy.deepcopy
+./utilmy/zutil_features.py:pd_pipeline_apply, function, enumerate
+./utilmy/zutil_features.py:pd_pipeline_apply, function, print
+./utilmy/zutil_features.py:pd_pipeline_apply, function, str
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, list
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, target_corr.append
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_correl_pair, function, len
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, print
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, df.profile_report
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.to_file
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.get_rejected_variables
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, df.sample
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, getstat
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, str
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, len
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, pd.concat
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, print
+./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, np.arange
+./utilmy/zutil_features.py:pd_stat_histogram, function, np.histogram
+./utilmy/zutil_features.py:pd_stat_histogram, function, pd.DataFrame
+./utilmy/zutil_features.py:col_extractname, function, len
+./utilmy/zutil_features.py:col_extractname, function, colnew.append
+./utilmy/zutil_features.py:col_remove, function, cols.remove
+./utilmy/zutil_features.py:col_remove, function, cols3.append
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, pd.isnull
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df.reset_index
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, min
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, range
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, np.percentile
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, cuts.append
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, pd.cut
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df.groupby
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df_grouped.reset_index
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, list
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, df_grouped.rename
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, str
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, len
+./utilmy/zutil_features.py:pd_colnum_tocat_stat, function, pd.concat
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs.fillna
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs.divide
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs_norm.diff
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, target_diffs_lvl2.fillna
+./utilmy/zutil_features.py:pd_stat_shift_trend_changes, function, int
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, df.merge
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, pd.isnull
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, len
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, np.corrcoef
+./utilmy/zutil_features.py:pd_stat_shift_trend_correlation, function, print
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, type
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, list
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, features_list.remove
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, ignored.append
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd_colnum_tocat_stat
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd_stat_shift_trend_correlation
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd_stat_shift_changes
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, stats_all.append
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, pd.DataFrame
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, len
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, print
+./utilmy/zutil_features.py:pd_stat_shift_changes, function, str
+./utilmy/zutil_features.py:np_conv_to_one_col, function, row2string
+./utilmy/zutil_features.py:np_conv_to_one_col, function, sep_char.join
+./utilmy/configs/util_config.py:log, function, print
+./utilmy/configs/util_config.py:log, function, loge
+./utilmy/configs/util_config.py:loge, function, print
+./utilmy/configs/util_config.py:config_load, function, log
+./utilmy/configs/util_config.py:config_load, function, pathlib.Path
+./utilmy/configs/util_config.py:config_load, function, yaml.safe_load
+./utilmy/configs/util_config.py:config_load, function, json.loads
+./utilmy/configs/util_config.py:config_load, function, SafeConfigParser
+./utilmy/configs/util_config.py:config_load, function, cfg.read
+./utilmy/configs/util_config.py:config_load, function, toml.loads
+./utilmy/configs/util_config.py:config_load, function, Exception
+./utilmy/configs/util_config.py:config_load, function, Box
+./utilmy/configs/util_config.py:config_load, function, os.makedirs
+./utilmy/configs/util_config.py:config_load, function, open
+./utilmy/configs/util_config.py:config_load, function, yaml.dump
+./utilmy/configs/util_config.py:config_isvalid_yamlschema, function, schema.validate
+./utilmy/configs/util_config.py:config_isvalid_yamlschema, function, result.isValid
+./utilmy/configs/util_config.py:config_isvalid_yamlschema, function, yamale.YamaleError
+./utilmy/configs/util_config.py:config_isvalid_yamlschema, function, loge
+./utilmy/configs/util_config.py:convert_yaml_to_box, function, open
+./utilmy/configs/util_config.py:convert_yaml_to_box, function, yaml.load
+./utilmy/configs/util_config.py:convert_yaml_to_box, function, Box
+./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, SchemaGen
+./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, generated.to_file
+./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, importlib.import_module
+./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, pydantic_module.MainSchema
+./utilmy/configs/util_config.py:pydantic_model_generator, function, generate
+./utilmy/configs/util_config.py:pydantic_model_generator, function, loge
+./utilmy/configs/util_config.py:pydantic_model_generator, function, log
+./utilmy/configs/util_config.py:test_yamlschema, function, config_load
+./utilmy/configs/util_config.py:test_yamlschema, function, config_isvalid_yamlschema
+./utilmy/configs/util_config.py:test_yamlschema, function, log
+./utilmy/configs/util_config.py:test_pydanticgenrator, function, pydantic_model_generator
+./utilmy/configs/util_config.py:test_pydanticgenrator, function, Path
+./utilmy/configs/util_config.py:test4, function, config_load
+./utilmy/configs/util_config.py:test4, function, convert_dict_to_pydantic
+./utilmy/configs/util_config.py:test4, function, isinstance
+./utilmy/docs/cli.py:run_cli, function, argparse.ArgumentParser
+./utilmy/docs/cli.py:run_cli, function, add
+./utilmy/docs/cli.py:run_cli, function, p.parse_args
+./utilmy/docs/cli.py:run_cli, function, os.makedirs
+./utilmy/docs/cli.py:run_cli, function, export_stats_perrepo
+./utilmy/docs/cli.py:run_cli, function, run_markdown
+./utilmy/docs/cli.py:run_cli, function, run_table
+./utilmy/docs/code_parser.py:get_list_function_name, function, _get_all_line
+./utilmy/docs/code_parser.py:get_list_function_name, function, _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_function_name, function, list
+./utilmy/docs/code_parser.py:get_list_function_name, function, re.match
+./utilmy/docs/code_parser.py:get_list_function_name, function, line.rstrip
+./utilmy/docs/code_parser.py:get_list_function_name, function, re_response.group
+./utilmy/docs/code_parser.py:get_list_function_name, function, all_lines.index
+./utilmy/docs/code_parser.py:get_list_function_name, function, list_functions.append
+./utilmy/docs/code_parser.py:get_list_class_name, function, _get_all_line
+./utilmy/docs/code_parser.py:get_list_class_name, function, _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_class_name, function, list
+./utilmy/docs/code_parser.py:get_list_class_name, function, re.match
+./utilmy/docs/code_parser.py:get_list_class_name, function, line.rstrip
+./utilmy/docs/code_parser.py:get_list_class_name, function, re_response.group
+./utilmy/docs/code_parser.py:get_list_class_name, function, all_lines.index
+./utilmy/docs/code_parser.py:get_list_class_name, function, list_classes.append
+./utilmy/docs/code_parser.py:get_list_class_methods, function, _get_all_line
+./utilmy/docs/code_parser.py:get_list_class_methods, function, _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_class_methods, function, get_list_class_name
+./utilmy/docs/code_parser.py:get_list_class_methods, function, _get_all_lines_in_class
+./utilmy/docs/code_parser.py:get_list_class_methods, function, re.match
+./utilmy/docs/code_parser.py:get_list_class_methods, function, line.rstrip
+./utilmy/docs/code_parser.py:get_list_class_methods, function, re_response.group
+./utilmy/docs/code_parser.py:get_list_class_methods, function, all_lines.index
+./utilmy/docs/code_parser.py:get_list_class_methods, function, list_names.append
+./utilmy/docs/code_parser.py:get_list_variable_global, function, _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_variable_global, function, re.match
+./utilmy/docs/code_parser.py:get_list_variable_global, function, line.rstrip
+./utilmy/docs/code_parser.py:get_list_variable_global, function, list_var.append
+./utilmy/docs/code_parser.py:get_list_variable_global, function, list
+./utilmy/docs/code_parser.py:_get_docs, function, line.strip
+./utilmy/docs/code_parser.py:_get_docs, function, len
+./utilmy/docs/code_parser.py:_get_docs, function, response.append
+./utilmy/docs/code_parser.py:get_list_function_info, function, _get_all_line
+./utilmy/docs/code_parser.py:get_list_function_info, function, _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_function_info, function, get_list_function_name
+./utilmy/docs/code_parser.py:get_list_function_info, function, _get_all_lines_in_function
+./utilmy/docs/code_parser.py:get_list_function_info, function, len
+./utilmy/docs/code_parser.py:get_list_function_info, function, _get_function_stats
+./utilmy/docs/code_parser.py:get_list_function_info, function, _get_docs
+./utilmy/docs/code_parser.py:get_list_function_info, function, _get_all_lines_define_function
+./utilmy/docs/code_parser.py:get_list_function_info, function, _get_define_function_stats
+./utilmy/docs/code_parser.py:get_list_function_info, function, output.append
+./utilmy/docs/code_parser.py:get_list_class_info, function, _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_class_info, function, get_list_class_name
+./utilmy/docs/code_parser.py:get_list_class_info, function, _get_all_lines_in_class
+./utilmy/docs/code_parser.py:get_list_class_info, function, len
+./utilmy/docs/code_parser.py:get_list_class_info, function, _get_function_stats
+./utilmy/docs/code_parser.py:get_list_class_info, function, output.append
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_all_line
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_method_info, function, get_list_class_methods
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_all_lines_in_class
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_all_lines_in_function
+./utilmy/docs/code_parser.py:get_list_method_info, function, len
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_function_stats
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_docs
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_all_lines_define_function
+./utilmy/docs/code_parser.py:get_list_method_info, function, _get_define_function_stats
+./utilmy/docs/code_parser.py:get_list_method_info, function, output.append
+./utilmy/docs/code_parser.py:get_list_method_stats, function, get_list_method_info
+./utilmy/docs/code_parser.py:get_list_method_stats, function, get_stats
+./utilmy/docs/code_parser.py:get_list_class_stats, function, get_list_class_info
+./utilmy/docs/code_parser.py:get_list_class_stats, function, get_stats
+./utilmy/docs/code_parser.py:get_list_function_stats, function, get_list_function_info
+./utilmy/docs/code_parser.py:get_list_function_stats, function, get_stats
+./utilmy/docs/code_parser.py:get_stats, function, len
+./utilmy/docs/code_parser.py:get_stats, function, df.apply
+./utilmy/docs/code_parser.py:get_stats, function, _get_words
+./utilmy/docs/code_parser.py:get_stats, function, _get_avg_char_per_word
+./utilmy/docs/code_parser.py:get_stats, function, _get_functions
+./utilmy/docs/code_parser.py:get_file_stats, function, get_list_function_stats
+./utilmy/docs/code_parser.py:get_file_stats, function, len
+./utilmy/docs/code_parser.py:get_file_stats, function, avg_lines/len
+./utilmy/docs/code_parser.py:_get_functions, function, re.match
+./utilmy/docs/code_parser.py:_get_functions, function, list_funcs.append
+./utilmy/docs/code_parser.py:_get_functions, function, list
+./utilmy/docs/code_parser.py:_get_functions, function, return
+./utilmy/docs/code_parser.py:_validate_file, function, print
+./utilmy/docs/code_parser.py:_clean_data, function, array.copy
+./utilmy/docs/code_parser.py:_clean_data, function, _remove_empty_line
+./utilmy/docs/code_parser.py:_clean_data, function, _remmove_commemt_line
+./utilmy/docs/code_parser.py:_clean_data, function, response.remove
+./utilmy/docs/code_parser.py:_clean_data, function, response.copy
+./utilmy/docs/code_parser.py:_clean_data, function, line.strip
+./utilmy/docs/code_parser.py:_clean_data, function, len
+./utilmy/docs/code_parser.py:_remove_empty_line, function, line.strip
+./utilmy/docs/code_parser.py:_remmove_commemt_line, function, line.strip
+./utilmy/docs/code_parser.py:_get_and_clean_all_lines, function, _validate_file
+./utilmy/docs/code_parser.py:_get_and_clean_all_lines, function, _get_all_line
+./utilmy/docs/code_parser.py:_get_and_clean_all_lines, function, _clean_data
+./utilmy/docs/code_parser.py:_get_all_line, function, open
+./utilmy/docs/code_parser.py:_get_all_line, function, _get_all_lines_in_function
+./utilmy/docs/code_parser.py:_get_all_line, function, array.copy
+./utilmy/docs/code_parser.py:_get_all_line, function, re.match
+./utilmy/docs/code_parser.py:_get_all_line, function, line.rstrip
+./utilmy/docs/code_parser.py:_get_all_line, function, response.remove
+./utilmy/docs/code_parser.py:_get_all_line, function, range
+./utilmy/docs/code_parser.py:_get_all_line, function, list
+./utilmy/docs/code_parser.py:_get_all_line, function, list_lines.append
+./utilmy/docs/code_parser.py:_get_all_line, function, len
+./utilmy/docs/code_parser.py:_get_all_line, function, _get_all_lines_in_class
+./utilmy/docs/code_parser.py:_get_all_line, function, _get_all_lines_define_function
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, array.copy
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, re.match
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, line.rstrip
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, response.remove
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, range
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, list
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, list_lines.append
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, len
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, array.copy
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, re.match
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, line.rstrip
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, response.remove
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, list
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, list_lines.append
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, len
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, list
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, array.copy
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, re.match
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, line.rstrip
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, response.remove
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, list_lines.append
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, range
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, len
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, line.strip
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, print
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, i.start
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, re.finditer
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, range
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, data.split
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg.replace
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg.strip
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg.find
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg_name.append
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg_type.append
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg_value.append
+./utilmy/docs/code_parser.py:_get_function_stats, function, array.copy
+./utilmy/docs/code_parser.py:_get_function_stats, function, check_array.copy
+./utilmy/docs/code_parser.py:_get_function_stats, function, line.rstrip
+./utilmy/docs/code_parser.py:_get_function_stats, function, check_array.remove
+./utilmy/docs/code_parser.py:_get_function_stats, function, line.split
+./utilmy/docs/code_parser.py:_get_function_stats, function, re.match
+./utilmy/docs/code_parser.py:_get_function_stats, function, list_var.append
+./utilmy/docs/code_parser.py:_get_function_stats, function, list
+./utilmy/docs/code_parser.py:export_stats_pertype, function, get_list_function_stats
+./utilmy/docs/code_parser.py:export_stats_pertype, function, print
+./utilmy/docs/code_parser.py:export_stats_pertype, function, df.to_csv
+./utilmy/docs/code_parser.py:export_stats_pertype, function, get_list_class_stats
+./utilmy/docs/code_parser.py:export_stats_pertype, function, get_list_method_stats
+./utilmy/docs/code_parser.py:export_stats_perfile, function, get_list_function_stats
+./utilmy/docs/code_parser.py:export_stats_perfile, function, print
+./utilmy/docs/code_parser.py:export_stats_perfile, function, df.to_csv
+./utilmy/docs/code_parser.py:export_stats_perfile, function, get_list_class_stats
+./utilmy/docs/code_parser.py:export_stats_perfile, function, get_list_method_stats
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, glob.glob
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, range
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, get_list_function_stats
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, print
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, df.to_csv
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, get_list_class_stats
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, get_list_method_stats
+./utilmy/docs/code_parser.py:write_to_file, function, open
+./utilmy/docs/code_parser.py:write_to_file, function, f.write
+./utilmy/docs/code_parser.py:function_graph, function, glob.glob
+./utilmy/docs/code_parser.py:function_graph, function, range
+./utilmy/docs/code_parser.py:function_graph, function, get_list_function_stats
+./utilmy/docs/code_parser.py:function_graph, function, print
+./utilmy/docs/code_parser.py:function_graph, function, open
+./utilmy/docs/code_parser.py:function_graph, function, f.write
+./utilmy/docs/code_parser.py:function_graph, function, zip
+./utilmy/docs/code_parser.py:function_graph, function, write_to_file
+./utilmy/docs/code_parser.py:function_graph, function, get_list_method_stats
+./utilmy/docs/code_parser.py:test_example, function, export_stats_pertype
+./utilmy/docs/code_parser.py:test_example, function, export_stats_perfile
+./utilmy/docs/code_parser.py:test_example, function, export_stats_perrepo
+./utilmy/docs/generate_doc.py:markdown_create_function, function, uri.split
+./utilmy/docs/generate_doc.py:markdown_create_function, function, literal_eval
+./utilmy/docs/generate_doc.py:markdown_create_function, function, zip
+./utilmy/docs/generate_doc.py:markdown_create_function, function, rsp.format
+./utilmy/logs/test_log.py:test1, function, log3
+./utilmy/logs/test_log.py:test1, function, log2
+./utilmy/logs/test_log.py:test1, function, log
+./utilmy/logs/test_log.py:test1, function, logw
+./utilmy/logs/test_log.py:test1, function, logc
+./utilmy/logs/test_log.py:test1, function, logr
+./utilmy/logs/test_log.py:test1, function, loge
+./utilmy/logs/test_log.py:test2, function, print
+./utilmy/logs/test_log.py:test2, function, util_log.logger_setup
+./utilmy/logs/test_log.py:test2, function, log3
+./utilmy/logs/test_log.py:test2, function, log2
+./utilmy/logs/test_log.py:test2, function, log
+./utilmy/logs/test_log.py:test2, function, logw
+./utilmy/logs/test_log.py:test2, function, logc
+./utilmy/logs/test_log.py:test2, function, logr
+./utilmy/logs/test_log.py:test2, function, loge
+./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer
+./utilmy/logs/test_log.py:test_server, function, print
+./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup
+./utilmy/logs/test_log.py:test_server, function, log3
+./utilmy/logs/test_log.py:test_server, function, log2
+./utilmy/logs/test_log.py:test_server, function, log
+./utilmy/logs/test_log.py:test_server, function, logw
+./utilmy/logs/test_log.py:test_server, function, logc
+./utilmy/logs/test_log.py:test_server, function, logr
+./utilmy/logs/test_log.py:test_server, function, loge
+./utilmy/logs/test_log.py:test1, function, log3
+./utilmy/logs/test_log.py:test1, function, log2
+./utilmy/logs/test_log.py:test1, function, log
+./utilmy/logs/test_log.py:test1, function, logw
+./utilmy/logs/test_log.py:test1, function, logc
+./utilmy/logs/test_log.py:test1, function, logr
+./utilmy/logs/test_log.py:test1, function, loge
+./utilmy/logs/test_log.py:test2, function, print
+./utilmy/logs/test_log.py:test2, function, util_log.logger_setup
+./utilmy/logs/test_log.py:test2, function, log3
+./utilmy/logs/test_log.py:test2, function, log2
+./utilmy/logs/test_log.py:test2, function, log
+./utilmy/logs/test_log.py:test2, function, logw
+./utilmy/logs/test_log.py:test2, function, logc
+./utilmy/logs/test_log.py:test2, function, logr
+./utilmy/logs/test_log.py:test2, function, loge
+./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer
+./utilmy/logs/test_log.py:test_server, function, print
+./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup
+./utilmy/logs/test_log.py:test_server, function, log3
+./utilmy/logs/test_log.py:test_server, function, log2
+./utilmy/logs/test_log.py:test_server, function, log
+./utilmy/logs/test_log.py:test_server, function, logw
+./utilmy/logs/test_log.py:test_server, function, logc
+./utilmy/logs/test_log.py:test_server, function, logr
+./utilmy/logs/test_log.py:test_server, function, loge
+./utilmy/logs/util_log.py:logger_setup, function, open
+./utilmy/logs/util_log.py:logger_setup, function, yaml.safe_load
+./utilmy/logs/util_log.py:logger_setup, function, print
+./utilmy/logs/util_log.py:logger_setup, function, cfg.pop
+./utilmy/logs/util_log.py:logger_setup, function, globals_.pop
+./utilmy/logs/util_log.py:logger_setup, function, int
+./utilmy/logs/util_log.py:logger_setup, function, SocketHandler
+./utilmy/logs/util_log.py:logger_setup, function, handler.get
+./utilmy/logs/util_log.py:logger_setup, function, handler.items
+./utilmy/logs/util_log.py:logger_setup, function, handler.update
+./utilmy/logs/util_log.py:logger_setup, function, logger.configure
+./utilmy/logs/util_log.py:logger_setup, function, logger.level
+./utilmy/logs/util_log.py:log, function, open
+./utilmy/logs/util_log.py:log, function, yaml.safe_load
+./utilmy/logs/util_log.py:log, function, print
+./utilmy/logs/util_log.py:log, function, cfg.pop
+./utilmy/logs/util_log.py:log, function, globals_.pop
+./utilmy/logs/util_log.py:log, function, int
+./utilmy/logs/util_log.py:log, function, SocketHandler
+./utilmy/logs/util_log.py:log, function, handler.get
+./utilmy/logs/util_log.py:log, function, handler.items
+./utilmy/logs/util_log.py:log, function, handler.update
+./utilmy/logs/util_log.py:log, function, logger.configure
+./utilmy/logs/util_log.py:log, function, logger.level
+./utilmy/logs/util_log.py:log2, function, logger.opt
+./utilmy/logs/util_log.py:log3, function, logger.opt
+./utilmy/logs/util_log.py:logw, function, logger.opt
+./utilmy/logs/util_log.py:logc, function, logger.opt
+./utilmy/logs/util_log.py:loge, function, logger.opt
+./utilmy/logs/util_log.py:logr, function, logger.opt
+./utilmy/logs/util_log.py:test, function, log3
+./utilmy/logs/util_log.py:test, function, log2
+./utilmy/logs/util_log.py:test, function, log
+./utilmy/logs/util_log.py:test, function, logw
+./utilmy/logs/util_log.py:test, function, loge
+./utilmy/logs/util_log.py:test, function, logc
+./utilmy/logs/util_log.py:test, function, logr
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, __init__
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, write
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, buffer.rstrip
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, logger.opt
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, line.rstrip
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, flush
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, logger.remove
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, logger.add
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, StreamToLogger
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, contextlib.redirect_stdout
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, print
+./utilmy/logs/util_log.py:z_logger_custom_1, function, InterceptHandler
+./utilmy/logs/util_log.py:z_logger_custom_1, function, emit
+./utilmy/logs/util_log.py:z_logger_custom_1, function, logger.level
+./utilmy/logs/util_log.py:z_logger_custom_1, function, str
+./utilmy/logs/util_log.py:z_logger_custom_1, function, logging.currentframe
+./utilmy/logs/util_log.py:z_logger_custom_1, function, logger.opt
+./utilmy/logs/util_log.py:z_logger_custom_1, function, record.getMessage
+./utilmy/logs/util_log.py:z_logger_custom_1, function, format_record
+./utilmy/logs/util_log.py:z_logger_custom_1, function, pformat
+./utilmy/logs/util_log.py:z_logger_custom_1, function, setup_logging
+./utilmy/logs/util_log.py:z_logger_custom_1, function, logging.getLogger
+./utilmy/logs/util_log.py:z_logger_custom_1, function, logger.configure
+./utilmy/templates/cli.py:run_cli, function, argparse.ArgumentParser
+./utilmy/templates/cli.py:run_cli, function, add
+./utilmy/templates/cli.py:run_cli, function, p.parse_args
+./utilmy/templates/cli.py:run_cli, function, template_show
+./utilmy/templates/cli.py:run_cli, function, template_copy
+./utilmy/templates/cli.py:template_show, function, os.walk
+./utilmy/templates/cli.py:template_show, function, print
+./utilmy/templates/cli.py:template_copy, function, os_copy
+./utilmy/templates/cli.py:template_copy, function, print
+./utilmy/templates/cli.py:template_copy, function, Path
+./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output
+./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, label.decode
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, open
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, print
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, int
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, file.write
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, version.new_version
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, ask
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, exit
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, os.system
+./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, input
+./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, ans.lower
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.system
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, print
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.listdir
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, item.endswith
+./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, print
+./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, update_version
+./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output
+./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, label.decode
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, open
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, print
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, int
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, file.write
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, version.new_version
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, ask
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, exit
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, os.system
+./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, input
+./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, ans.lower
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.system
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, print
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.listdir
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, item.endswith
+./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, print
+./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, update_version
+./utilmy/templates/templist/pypi_package/setup.py:get_current_githash, function, subprocess.check_output
+./utilmy/templates/templist/pypi_package/setup.py:get_current_githash, function, label.decode
