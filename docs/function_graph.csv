@@ -1,4 +1,5 @@
-uri, type, function./run_pipy.py:get_current_githash, function, subprocess.check_output
+uri, type, function
+./run_pipy.py:get_current_githash, function, subprocess.check_output
 ./run_pipy.py:get_current_githash, function, label.decode
 ./run_pipy.py:update_version, function, open
 ./run_pipy.py:update_version, function, Version.parse

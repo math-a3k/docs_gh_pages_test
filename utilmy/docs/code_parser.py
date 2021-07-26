@@ -973,7 +973,7 @@ def function_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function')
+                    f.write('uri, type, function\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
                     write_to_file(row[0], row[1], row[2], out_path)
             else:
