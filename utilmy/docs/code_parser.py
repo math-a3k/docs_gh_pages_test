@@ -945,12 +945,12 @@ def write_to_file(uri, type, list_functions, out_path):
     # print(list_functions)
     info = ''
     for function in list_functions:
-        uri = function
+        function_uri = function
         if function in list_built_in:
-            uri = f'[built-In]:{function}'
+            function_uri = f'[built-In]:{function}'
         if '.' in function:
-            uri = f"[CLASS]: {function.split('.')[0]}:{function.split('.')[1]}"
-        info += f'{uri}, {type}, {function}, {uri}\n'
+            function_uri = f"[CLASS]: {function.split('.')[0]}:{function.split('.')[1]}"
+        info += f'{uri}, {type}, {function}, {function_uri}\n'
     with open(f'{out_path}', 'a+') as f:
         f.write(info)
 
@@ -978,7 +978,7 @@ def function_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function, uri\n')
+                    f.write('uri, type, function, detail\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
                     write_to_file(row[0], row[1], row[2], out_path) 
             else:
@@ -993,7 +993,7 @@ def function_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function\n')
+                    f.write('uri, type, function, detail\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
                     write_to_file(row[0], row[1], row[2], out_path)
             else:
