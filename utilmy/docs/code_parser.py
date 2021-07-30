@@ -22,6 +22,19 @@ import re
 import pandas as pd
 
 
+list_built_in = [
+    "abs", "delattr", "hash", "memoryview", "set", "all", "dict",
+    "help", "min", "setattr", "any", "dir", "hex", "next", "slice",
+    "ascii", "divmod", "id", "object", "sorted", "bin", "enumerate",
+    "input", "oct", "staticmethod", "bool", "eval", "int", "open",
+    "str", "breakpoint", "exec", "isinstance", "ord", "sum", "bytearray",
+    "filter", "issubclass", "pow", "super", "bytes", "float", "iter", "print",
+    "tuple", "callable", "format", "len", "property", "type", "chr", "frozenset",
+    "list", "range", "vars", "classmethod", "getattr", "locals", "repr",
+    "zip", "compile", "globals", "map", "reversed", "__import__",
+    "complex", "hasattr", "max", "round"
+]
+
 # ====================================================================================
 # Functions
 # ====================================================================================
@@ -930,9 +943,16 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
 def write_to_file(uri, type, list_functions, out_path):
     # list_functions = literal_eval(list_functions)
     # print(list_functions)
+    info = ''
     for function in list_functions:
-        with open(f'{out_path}', 'a+') as f:
-            f.write(f'{uri}, {type}, {function}\n')
+        uri = function
+        if function in list_built_in:
+            uri = f'[built-In]:{function}'
+        if '.' in function:
+            uri = f"[CLASS]: {function.split('.')[0]}:{function.split('.')[1]}"
+        info += f'{uri}, {type}, {function}, {uri}\n'
+    with open(f'{out_path}', 'a+') as f:
+        f.write(info)
 
 
 def function_graph(in_path:str=None, out_path:str=None):
@@ -958,7 +978,7 @@ def function_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function\n')
+                    f.write('uri, type, function, uri\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
                     write_to_file(row[0], row[1], row[2], out_path) 
             else:
