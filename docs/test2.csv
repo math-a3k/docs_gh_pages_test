@@ -2,7 +2,7 @@ uri, type, function, detail
 ./run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
 ./run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
 ./run_pipy.py:update_version, function, open, [built-In]:open
-./run_pipy.py:update_version, function, Version.parse, [CLASS] [SIDE PACKAGE]: Version:parse
+./run_pipy.py:update_version, function, Version.parse, [CLASS] [REPO]: Version:parse
 ./run_pipy.py:update_version, function, int, [built-In]:int
 ./run_pipy.py:update_version, function, file.write, [CLASS] [SIDE PACKAGE]: file:write
 ./run_pipy.py:update_version, function, version.new_version, [CLASS] [SIDE PACKAGE]: version:new_version
@@ -2121,10 +2121,11 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:write_to_file, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
 ./utilmy/docs/code_parser.py:function_graph, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
 ./utilmy/docs/code_parser.py:function_graph, function, range, [built-In]:range
-./utilmy/docs/code_parser.py:function_graph, function, get_list_function_stats, get_list_function_stats
+./utilmy/docs/code_parser.py:function_graph, function, get_list_class_stats, get_list_class_stats
 ./utilmy/docs/code_parser.py:function_graph, function, zip, [built-In]:zip
 ./utilmy/docs/code_parser.py:function_graph, function, list_classes.append, [CLASS] [SIDE PACKAGE]: list_classes:append
 ./utilmy/docs/code_parser.py:function_graph, function, print, [built-In]:print
+./utilmy/docs/code_parser.py:function_graph, function, get_list_function_stats, get_list_function_stats
 ./utilmy/docs/code_parser.py:function_graph, function, open, [built-In]:open
 ./utilmy/docs/code_parser.py:function_graph, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
 ./utilmy/docs/code_parser.py:function_graph, function, write_to_file, write_to_file
@@ -2261,7 +2262,7 @@ uri, type, function, detail
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, open, [built-In]:open
-./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [SIDE PACKAGE]: Version:parse
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [REPO]: Version:parse
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, print, [built-In]:print
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, int, [built-In]:int
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, file.write, [CLASS] [SIDE PACKAGE]: file:write
@@ -2280,7 +2281,7 @@ uri, type, function, detail
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, open, [built-In]:open
-./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [SIDE PACKAGE]: Version:parse
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [REPO]: Version:parse
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, print, [built-In]:print
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, int, [built-In]:int
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, file.write, [CLASS] [SIDE PACKAGE]: file:write

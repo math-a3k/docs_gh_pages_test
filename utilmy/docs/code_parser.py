@@ -975,7 +975,7 @@ def function_graph(in_path:str=None, out_path:str=None):
     list_classes = []
     for i in range(len(flist)):
         cols = ['uri', 'name', 'type', 'list_functions']
-        df = get_list_function_stats(flist[i])
+        df = get_list_class_stats(flist[i])
         if df is not None:
             dfi = df[cols]
             # print(dfi)
@@ -984,7 +984,7 @@ def function_graph(in_path:str=None, out_path:str=None):
             for row in zip(dfi['type'], dfi['name']):
                 if row[0] == 'class':
                     list_classes.append(row[1])
-    # print(list_classes)
+    print(list_classes)
 
     for i in range(len(flist)):
         cols = ['uri', 'name', 'type', 'list_functions']
