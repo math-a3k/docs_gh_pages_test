@@ -20,8 +20,12 @@ from posixpath import dirname, split
 from ast import literal_eval
 import re
 import pandas as pd
+from stdlib_list import stdlib_list
+import platform
+import pkgutil
 
 
+stdlib_libraries = stdlib_list(platform.python_version()[:-2])
 list_built_in = [
     "abs", "delattr", "hash", "memoryview", "set", "all", "dict",
     "help", "min", "setattr", "any", "dir", "hex", "next", "slice",
@@ -951,6 +955,8 @@ def write_to_file(uri, type, list_functions, list_classes, out_path):
         if '.' in function:
             if function.split('.')[0] in list_classes:
                 function_uri = f"[CLASS] [REPO]: {function.split('.')[0]}:{function.split('.')[1]}"
+            elif function.split('.')[0] in stdlib_libraries:
+                function_uri = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
             else:
                 function_uri = f"[CLASS] [SIDE PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
         info += f'{uri}, {type}, {function}, {function_uri}\n'
