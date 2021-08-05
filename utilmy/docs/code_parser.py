@@ -20,8 +20,12 @@ from posixpath import dirname, split
 from ast import literal_eval
 import re
 import pandas as pd
+from stdlib_list import stdlib_list
+import platform
+import pkgutil
 
 
+stdlib_libraries = stdlib_list(platform.python_version()[:-2])
 list_built_in = [
     "abs", "delattr", "hash", "memoryview", "set", "all", "dict",
     "help", "min", "setattr", "any", "dir", "hex", "next", "slice",
@@ -940,7 +944,7 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
-def write_to_file(uri, type, list_functions, out_path):
+def write_to_file(uri, type, list_functions, list_classes, out_path):
     # list_functions = literal_eval(list_functions)
     # print(list_functions)
     info = ''
@@ -949,7 +953,12 @@ def write_to_file(uri, type, list_functions, out_path):
         if function in list_built_in:
             function_uri = f'[built-In]:{function}'
         if '.' in function:
-            function_uri = f"[CLASS]: {function.split('.')[0]}:{function.split('.')[1]}"
+            if function.split('.')[0] in list_classes:
+                function_uri = f"[CLASS] [REPO]: {function.split('.')[0]}:{function.split('.')[1]}"
+            elif function.split('.')[0] in stdlib_libraries:
+                function_uri = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
+            else:
+                function_uri = f"[CLASS] [SIDE PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
         info += f'{uri}, {type}, {function}, {function_uri}\n'
     with open(f'{out_path}', 'a+') as f:
         f.write(info)
@@ -969,22 +978,37 @@ def function_graph(in_path:str=None, out_path:str=None):
     flist = flist + glob.glob(root +"/*/*/*/*.py")
     flist = flist + glob.glob(root +"/*/*/*/*/*.py")
 
+    list_classes = []
     for i in range(len(flist)):
-        cols = ['uri', 'type', 'list_functions']
+        cols = ['uri', 'name', 'type', 'list_functions']
+        df = get_list_class_stats(flist[i])
+        if df is not None:
+            dfi = df[cols]
+            # print(dfi)
+            # get list Class in repo
+            # list_classes.append(x[0] for x in zip(dfi['name']))
+            for row in zip(dfi['type'], dfi['name']):
+                if row[0] == 'class':
+                    list_classes.append(row[1])
+    print(list_classes)
+
+    for i in range(len(flist)):
+        cols = ['uri', 'name', 'type', 'list_functions']
         df = get_list_function_stats(flist[i])
         if df is not None:
             dfi = df[cols]
             print(dfi)
+            # get list Class in repo
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
                     f.write('uri, type, function, detail\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], out_path) 
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path) 
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], out_path)
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path)
 
         df = get_list_method_stats(flist[i])
         if df is not None:
@@ -995,11 +1019,11 @@ def function_graph(in_path:str=None, out_path:str=None):
                 with open(f'{out_path}', 'w+') as f:
                     f.write('uri, type, function, detail\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], out_path)
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path)
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], out_path)
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path)
 
 
 def test_example():

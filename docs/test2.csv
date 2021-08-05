@@ -1,40 +1,40 @@
 uri, type, function, detail
-./run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
+./run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB]: subprocess:check_output
 ./run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
 ./run_pipy.py:update_version, function, open, [built-In]:open
-./run_pipy.py:update_version, function, Version.parse, [CLASS] [SIDE PACKAGE]: Version:parse
+./run_pipy.py:update_version, function, Version.parse, [CLASS] [REPO]: Version:parse
 ./run_pipy.py:update_version, function, int, [built-In]:int
 ./run_pipy.py:update_version, function, file.write, [CLASS] [SIDE PACKAGE]: file:write
 ./run_pipy.py:update_version, function, version.new_version, [CLASS] [SIDE PACKAGE]: version:new_version
 ./run_pipy.py:git_commit, function, ask, ask
 ./run_pipy.py:git_commit, function, exit, exit
-./run_pipy.py:git_commit, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./run_pipy.py:git_commit, function, os.system, [CLASS] [STDLIB]: os:system
 ./run_pipy.py:ask, function, input, [built-In]:input
 ./run_pipy.py:ask, function, ans.lower, [CLASS] [SIDE PACKAGE]: ans:lower
-./run_pipy.py:pypi_upload, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./run_pipy.py:pypi_upload, function, os.system, [CLASS] [STDLIB]: os:system
 ./run_pipy.py:pypi_upload, function, print, [built-In]:print
-./run_pipy.py:pypi_upload, function, os.listdir, [CLASS] [SIDE PACKAGE]: os:listdir
+./run_pipy.py:pypi_upload, function, os.listdir, [CLASS] [STDLIB]: os:listdir
 ./run_pipy.py:pypi_upload, function, item.endswith, [CLASS] [SIDE PACKAGE]: item:endswith
 ./run_pipy.py:main, function, update_version, update_version
-./setup.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
+./setup.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB]: subprocess:check_output
 ./setup.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
-./test.py:pd_random, function, random.random, [CLASS] [SIDE PACKAGE]: random:random
+./test.py:pd_random, function, random.random, [CLASS] [STDLIB]: random:random
 ./test.py:pd_random, function, range, [built-In]:range
 ./test.py:pd_random, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./test.py:test_utilmy_plot, function, pd_random, pd_random
 ./test.py:test_utilmy_plot, function, pd_plot_multi, pd_plot_multi
-./test.py:test_utilmy_pd_os_session, function, random.random, [CLASS] [SIDE PACKAGE]: random:random
+./test.py:test_utilmy_pd_os_session, function, random.random, [CLASS] [STDLIB]: random:random
 ./test.py:test_utilmy_pd_os_session, function, range, [built-In]:range
 ./test.py:test_utilmy_pd_os_session, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./test.py:test_utilmy_pd_os_session, function, len, [built-In]:len
-./test.py:test_utilmy_pd_os_session, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./test.py:test_utilmy_pd_os_session, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./test.py:test_utilmy_pd_os_session, function, df.to_csv, [CLASS] [SIDE PACKAGE]: df:to_csv
 ./test.py:test_utilmy_pd_os_session, function, pd_read_file, pd_read_file
 ./test.py:test_utilmy_pd_os_session, function, round, [built-In]:round
 ./test.py:test_utilmy_pd_os_session, function, print, [built-In]:print
 ./test.py:test_utilmy_pd_os_session, function, git_repo_root, git_repo_root
 ./test.py:test_utilmy_pd_os_session, function, os_makedirs, os_makedirs
-./test.py:test_utilmy_pd_os_session, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./test.py:test_utilmy_pd_os_session, function, os.system, [CLASS] [STDLIB]: os:system
 ./test.py:test_utilmy_pd_os_session, function, os_removedirs, os_removedirs
 ./test.py:test_utilmy_pd_os_session, function, os_system, os_system
 ./test.py:test_utilmy_pd_os_session, function, os_platform_os, os_platform_os
@@ -42,11 +42,11 @@ uri, type, function, detail
 ./test.py:test_utilmy_session, function, Session, Session
 ./test.py:test_utilmy_session, function, sess.save, [CLASS] [SIDE PACKAGE]: sess:save
 ./test.py:test_utilmy_session, function, globals, [built-In]:globals
-./test.py:test_utilmy_session, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./test.py:test_utilmy_session, function, os.system, [CLASS] [STDLIB]: os:system
 ./test.py:test_utilmy_session, function, sess.show, [CLASS] [SIDE PACKAGE]: sess:show
-./test.py:test_utilmy_session, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./test.py:test_utilmy_session, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./test.py:test_utilmy_session, function, sess.load, [CLASS] [SIDE PACKAGE]: sess:load
-./test.py:test_docs_cli, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./test.py:test_docs_cli, function, os.system, [CLASS] [STDLIB]: os:system
 ./test.py:test_decorators_os, function, test_print, test_print
 ./test.py:test_decorators_os, function, print, [built-In]:print
 ./test.py:test_decorators_os, function, os_multithread, os_multithread
@@ -56,11 +56,11 @@ uri, type, function, detail
 ./test.py:test_decorators_os, function, profiler_start, profiler_start
 ./test.py:test_decorators_os, function, profiler_stop, profiler_stop
 ./test.py:test_decorators_os, function, dummy_func, dummy_func
-./test.py:test_decorators_os, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./test.py:test_decorators_os, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./test.py:test_decorators_os, function, method, method
 ./test.py:test_decorators_os, function, DummyClass, DummyClass
 ./test.py:test_decorators_os, function, a.method, [CLASS] [SIDE PACKAGE]: a:method
-./test.py:pd_generate_data, function, random.random, [CLASS] [SIDE PACKAGE]: random:random
+./test.py:pd_generate_data, function, random.random, [CLASS] [STDLIB]: random:random
 ./test.py:pd_generate_data, function, range, [built-In]:range
 ./test.py:pd_generate_data, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./test.py:pd_generate_data, function, np.where, [CLASS] [SIDE PACKAGE]: np:where
@@ -88,8 +88,8 @@ uri, type, function, detail
 ./utilmy/dates.py:pd_date_split, function, merge1, merge1
 ./utilmy/dates.py:pd_date_split, function, date_is_holiday, date_is_holiday
 ./utilmy/dates.py:pd_date_split, function, log, log
-./utilmy/dates.py:date_now, function, datetime.now, [CLASS] [SIDE PACKAGE]: datetime:now
-./utilmy/dates.py:date_now, function, datetime.timedelta, [CLASS] [SIDE PACKAGE]: datetime:timedelta
+./utilmy/dates.py:date_now, function, datetime.now, [CLASS] [STDLIB]: datetime:now
+./utilmy/dates.py:date_now, function, datetime.timedelta, [CLASS] [STDLIB]: datetime:timedelta
 ./utilmy/dates.py:date_now, function, now_new.astimezone, [CLASS] [SIDE PACKAGE]: now_new:astimezone
 ./utilmy/dates.py:date_now, function, now_pacific.strftime, [CLASS] [SIDE PACKAGE]: now_pacific:strftime
 ./utilmy/dates.py:date_is_holiday, function, holidays.CountryHoliday, [CLASS] [SIDE PACKAGE]: holidays:CountryHoliday
@@ -97,7 +97,7 @@ uri, type, function, detail
 ./utilmy/dates.py:date_is_holiday, function, x.astype, [CLASS] [SIDE PACKAGE]: x:astype
 ./utilmy/dates.py:date_weekmonth, function, date_weekmonth, date_weekmonth
 ./utilmy/dates.py:date_weekmonth, function, date_value.replace, [CLASS] [SIDE PACKAGE]: date_value:replace
-./utilmy/dates.py:date_weekyear2, function, datetime.datetime, [CLASS] [SIDE PACKAGE]: datetime:datetime
+./utilmy/dates.py:date_weekyear2, function, datetime.datetime, [CLASS] [STDLIB]: datetime:datetime
 ./utilmy/dates.py:date_weekday_excel, function, arrow.get, [CLASS] [SIDE PACKAGE]: arrow:get
 ./utilmy/dates.py:date_weekday_excel, function, str, [built-In]:str
 ./utilmy/dates.py:date_weekyear_excel, function, arrow.get, [CLASS] [SIDE PACKAGE]: arrow:get
@@ -111,12 +111,12 @@ uri, type, function, detail
 ./utilmy/decorators.py:timeout, function, _handle_timeout, _handle_timeout
 ./utilmy/decorators.py:timeout, function, _TimeoutError, _TimeoutError
 ./utilmy/decorators.py:timeout, function, wrapper, wrapper
-./utilmy/decorators.py:timeout, function, signal.signal, [CLASS] [SIDE PACKAGE]: signal:signal
-./utilmy/decorators.py:timeout, function, signal.alarm, [CLASS] [SIDE PACKAGE]: signal:alarm
+./utilmy/decorators.py:timeout, function, signal.signal, [CLASS] [STDLIB]: signal:signal
+./utilmy/decorators.py:timeout, function, signal.alarm, [CLASS] [STDLIB]: signal:alarm
 ./utilmy/decorators.py:timeout, function, func, func
 ./utilmy/decorators.py:timeout, function, wraps, wraps
 ./utilmy/decorators.py:timer, function, wrapper, wrapper
-./utilmy/decorators.py:timer, function, time.perf_counter, [CLASS] [SIDE PACKAGE]: time:perf_counter
+./utilmy/decorators.py:timer, function, time.perf_counter, [CLASS] [STDLIB]: time:perf_counter
 ./utilmy/decorators.py:timer, function, func, func
 ./utilmy/decorators.py:timer, function, print, [built-In]:print
 ./utilmy/decorators.py:profiler_context, function, Profiler, Profiler
@@ -131,20 +131,20 @@ uri, type, function, detail
 ./utilmy/decorators.py:profiler_deco, function, print, [built-In]:print
 ./utilmy/decorators.py:profiler_deco, function, profiler_decorator_base, profiler_decorator_base
 ./utilmy/decorators.py:profiler_deco, function, inner, inner
-./utilmy/decorators.py:profiler_deco, function, cProfile.Profile, [CLASS] [SIDE PACKAGE]: cProfile:Profile
+./utilmy/decorators.py:profiler_deco, function, cProfile.Profile, [CLASS] [STDLIB]: cProfile:Profile
 ./utilmy/decorators.py:profiler_deco, function, pr.enable, [CLASS] [SIDE PACKAGE]: pr:enable
 ./utilmy/decorators.py:profiler_deco, function, fnc, fnc
 ./utilmy/decorators.py:profiler_deco, function, pr.disable, [CLASS] [SIDE PACKAGE]: pr:disable
-./utilmy/decorators.py:profiler_deco, function, io.StringIO, [CLASS] [SIDE PACKAGE]: io:StringIO
-./utilmy/decorators.py:profiler_deco, function, pstats.Stats, [CLASS] [SIDE PACKAGE]: pstats:Stats
+./utilmy/decorators.py:profiler_deco, function, io.StringIO, [CLASS] [STDLIB]: io:StringIO
+./utilmy/decorators.py:profiler_deco, function, pstats.Stats, [CLASS] [STDLIB]: pstats:Stats
 ./utilmy/decorators.py:profiler_deco, function, ps.print_stats, [CLASS] [SIDE PACKAGE]: ps:print_stats
 ./utilmy/decorators.py:profiler_decorator_base, function, inner, inner
-./utilmy/decorators.py:profiler_decorator_base, function, cProfile.Profile, [CLASS] [SIDE PACKAGE]: cProfile:Profile
+./utilmy/decorators.py:profiler_decorator_base, function, cProfile.Profile, [CLASS] [STDLIB]: cProfile:Profile
 ./utilmy/decorators.py:profiler_decorator_base, function, pr.enable, [CLASS] [SIDE PACKAGE]: pr:enable
 ./utilmy/decorators.py:profiler_decorator_base, function, fnc, fnc
 ./utilmy/decorators.py:profiler_decorator_base, function, pr.disable, [CLASS] [SIDE PACKAGE]: pr:disable
-./utilmy/decorators.py:profiler_decorator_base, function, io.StringIO, [CLASS] [SIDE PACKAGE]: io:StringIO
-./utilmy/decorators.py:profiler_decorator_base, function, pstats.Stats, [CLASS] [SIDE PACKAGE]: pstats:Stats
+./utilmy/decorators.py:profiler_decorator_base, function, io.StringIO, [CLASS] [STDLIB]: io:StringIO
+./utilmy/decorators.py:profiler_decorator_base, function, pstats.Stats, [CLASS] [STDLIB]: pstats:Stats
 ./utilmy/decorators.py:profiler_decorator_base, function, ps.print_stats, [CLASS] [SIDE PACKAGE]: ps:print_stats
 ./utilmy/decorators.py:profiler_decorator_base, function, print, [built-In]:print
 ./utilmy/decorators.py:os_multithread, function, ThreadWithResult, ThreadWithResult
@@ -215,8 +215,8 @@ uri, type, function, detail
 ./utilmy/tabular.py:test_heteroscedacity, function, np.sqrt, [CLASS] [SIDE PACKAGE]: np:sqrt
 ./utilmy/tabular.py:test_heteroscedacity, function, print, [built-In]:print
 ./utilmy/tabular.py:test_heteroscedacity, function, df.profile_report, [CLASS] [SIDE PACKAGE]: df:profile_report
-./utilmy/tabular.py:test_heteroscedacity, function, profile.to_file, [CLASS] [SIDE PACKAGE]: profile:to_file
-./utilmy/tabular.py:test_heteroscedacity, function, profile.get_rejected_variables, [CLASS] [SIDE PACKAGE]: profile:get_rejected_variables
+./utilmy/tabular.py:test_heteroscedacity, function, profile.to_file, [CLASS] [STDLIB]: profile:to_file
+./utilmy/tabular.py:test_heteroscedacity, function, profile.get_rejected_variables, [CLASS] [STDLIB]: profile:get_rejected_variables
 ./utilmy/tabular.py:pd_stat_distribution_colnum, function, df.sample, [CLASS] [SIDE PACKAGE]: df:sample
 ./utilmy/tabular.py:pd_stat_distribution_colnum, function, getstat, getstat
 ./utilmy/tabular.py:pd_stat_distribution_colnum, function, str, [built-In]:str
@@ -306,18 +306,18 @@ uri, type, function, detail
 ./utilmy/utilmy.py:pd_filter, function, len, [built-In]:len
 ./utilmy/utilmy.py:pd_filter, function, x.split, [CLASS] [SIDE PACKAGE]: x:split
 ./utilmy/utilmy.py:pd_to_file, function, Path, Path
-./utilmy/utilmy.py:pd_to_file, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:pd_to_file, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:pd_to_file, function, df.to_pickle, [CLASS] [SIDE PACKAGE]: df:to_pickle
 ./utilmy/utilmy.py:pd_to_file, function, df.to_parquet, [CLASS] [SIDE PACKAGE]: df:to_parquet
 ./utilmy/utilmy.py:pd_to_file, function, df.to_csv, [CLASS] [SIDE PACKAGE]: df:to_csv
-./utilmy/utilmy.py:pd_to_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/utilmy.py:pd_to_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/utilmy.py:pd_read_file, function, log, log
 ./utilmy/utilmy.py:pd_read_file, function, print, [built-In]:print
 ./utilmy/utilmy.py:pd_read_file, function, isinstance, [built-In]:isinstance
 ./utilmy/utilmy.py:pd_read_file, function, path_glob.split, [CLASS] [SIDE PACKAGE]: path_glob:split
 ./utilmy/utilmy.py:pd_read_file, function, file_list.extend, [CLASS] [SIDE PACKAGE]: file_list:extend
 ./utilmy/utilmy.py:pd_read_file, function, sorted, [built-In]:sorted
-./utilmy/utilmy.py:pd_read_file, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/utilmy.py:pd_read_file, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/utilmy.py:pd_read_file, function, len, [built-In]:len
 ./utilmy/utilmy.py:pd_read_file, function, ThreadPool, ThreadPool
 ./utilmy/utilmy.py:pd_read_file, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
@@ -326,7 +326,7 @@ uri, type, function, detail
 ./utilmy/utilmy.py:pd_read_file, function, pool.apply_async, [CLASS] [SIDE PACKAGE]: pool:apply_async
 ./utilmy/utilmy.py:pd_read_file, function, pd_dtype_reduce, pd_dtype_reduce
 ./utilmy/utilmy.py:pd_read_file, function, dfi.drop_duplicates, [CLASS] [SIDE PACKAGE]: dfi:drop_duplicates
-./utilmy/utilmy.py:pd_read_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/utilmy.py:pd_read_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/utilmy.py:pd_read_file, function, pd.concat, [CLASS] [SIDE PACKAGE]: pd:concat
 ./utilmy/utilmy.py:pd_read_file, function, pool.terminate, [CLASS] [SIDE PACKAGE]: pool:terminate
 ./utilmy/utilmy.py:pd_read_file, function, pool.join, [CLASS] [SIDE PACKAGE]: pool:join
@@ -340,7 +340,7 @@ uri, type, function, detail
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.title, [CLASS] [SIDE PACKAGE]: plt:title
 ./utilmy/utilmy.py:pd_plot_histogram, function, path_save.split, [CLASS] [SIDE PACKAGE]: path_save:split
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.show, [CLASS] [SIDE PACKAGE]: plt:show
-./utilmy/utilmy.py:pd_plot_histogram, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:pd_plot_histogram, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.savefig, [CLASS] [SIDE PACKAGE]: plt:savefig
 ./utilmy/utilmy.py:pd_plot_histogram, function, print, [built-In]:print
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.close, [CLASS] [SIDE PACKAGE]: plt:close
@@ -382,17 +382,17 @@ uri, type, function, detail
 ./utilmy/utilmy.py:to_int, function, float, [built-In]:float
 ./utilmy/utilmy.py:config_load, function, str, [built-In]:str
 ./utilmy/utilmy.py:config_load, function, log, log
-./utilmy/utilmy.py:config_load, function, pathlib.Path, [CLASS] [SIDE PACKAGE]: pathlib:Path
+./utilmy/utilmy.py:config_load, function, pathlib.Path, [CLASS] [STDLIB]: pathlib:Path
 ./utilmy/utilmy.py:config_load, function, yaml.load, [CLASS] [SIDE PACKAGE]: yaml:load
 ./utilmy/utilmy.py:config_load, function, x.items, [CLASS] [SIDE PACKAGE]: x:items
-./utilmy/utilmy.py:config_load, function, json.load, [CLASS] [SIDE PACKAGE]: json:load
-./utilmy/utilmy.py:config_load, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:config_load, function, json.load, [CLASS] [STDLIB]: json:load
+./utilmy/utilmy.py:config_load, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:config_load, function, open, [built-In]:open
 ./utilmy/utilmy.py:config_load, function, yaml.dump, [CLASS] [SIDE PACKAGE]: yaml:dump
 ./utilmy/utilmy.py:os_path_split, function, fpath.replace, [CLASS] [SIDE PACKAGE]: fpath:replace
 ./utilmy/utilmy.py:os_path_split, function, fpath.split, [CLASS] [SIDE PACKAGE]: fpath:split
 ./utilmy/utilmy.py:os_file_replacestring, function, os_file_replacestring1, os_file_replacestring1
-./utilmy/utilmy.py:os_file_replacestring, function, fileinput.FileInput, [CLASS] [SIDE PACKAGE]: fileinput:FileInput
+./utilmy/utilmy.py:os_file_replacestring, function, fileinput.FileInput, [CLASS] [STDLIB]: fileinput:FileInput
 ./utilmy/utilmy.py:os_file_replacestring, function, line.replace, [CLASS] [SIDE PACKAGE]: line:replace
 ./utilmy/utilmy.py:os_file_replacestring, function, file1.close, [CLASS] [SIDE PACKAGE]: file1:close
 ./utilmy/utilmy.py:os_file_replacestring, function, print, [built-In]:print
@@ -400,13 +400,13 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_file_replacestring, function, os_walk, os_walk
 ./utilmy/utilmy.py:os_walk, function, dir1.rstrip, [CLASS] [SIDE PACKAGE]: dir1:rstrip
 ./utilmy/utilmy.py:os_walk, function, dir1.count, [CLASS] [SIDE PACKAGE]: dir1:count
-./utilmy/utilmy.py:os_walk, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
+./utilmy/utilmy.py:os_walk, function, os.walk, [CLASS] [STDLIB]: os:walk
 ./utilmy/utilmy.py:os_walk, function, root.count, [CLASS] [SIDE PACKAGE]: root:count
-./utilmy/utilmy.py:os_walk, function, fnmatch.filter, [CLASS] [SIDE PACKAGE]: fnmatch:filter
+./utilmy/utilmy.py:os_walk, function, fnmatch.filter, [CLASS] [STDLIB]: fnmatch:filter
 ./utilmy/utilmy.py:os_walk, function, np.array, [CLASS] [SIDE PACKAGE]: np:array
-./utilmy/utilmy.py:z_os_search_fast, function, re.compile, [CLASS] [SIDE PACKAGE]: re:compile
+./utilmy/utilmy.py:z_os_search_fast, function, re.compile, [CLASS] [STDLIB]: re:compile
 ./utilmy/utilmy.py:z_os_search_fast, function, enumerate, [built-In]:enumerate
-./utilmy/utilmy.py:z_os_search_fast, function, re.search, [CLASS] [SIDE PACKAGE]: re:search
+./utilmy/utilmy.py:z_os_search_fast, function, re.search, [CLASS] [STDLIB]: re:search
 ./utilmy/utilmy.py:z_os_search_fast, function, line.decode, [CLASS] [SIDE PACKAGE]: line:decode
 ./utilmy/utilmy.py:z_os_search_fast, function, res.append, [CLASS] [SIDE PACKAGE]: res:append
 ./utilmy/utilmy.py:z_os_search_fast, function, found.start, [CLASS] [SIDE PACKAGE]: found:start
@@ -417,8 +417,8 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_search_content, function, z_os_search_fast, z_os_search_fast
 ./utilmy/utilmy.py:os_search_content, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./utilmy/utilmy.py:os_get_function_name, function, str, [built-In]:str
-./utilmy/utilmy.py:os_get_function_name, function, socket.gethostname, [CLASS] [SIDE PACKAGE]: socket:gethostname
-./utilmy/utilmy.py:os_get_function_name, function, sys._getframe, [CLASS] [SIDE PACKAGE]: sys:_getframe
+./utilmy/utilmy.py:os_get_function_name, function, socket.gethostname, [CLASS] [STDLIB]: socket:gethostname
+./utilmy/utilmy.py:os_get_function_name, function, sys._getframe, [CLASS] [STDLIB]: sys:_getframe
 ./utilmy/utilmy.py:os_import, function, __import__, [built-In]:__import__
 ./utilmy/utilmy.py:os_import, function, hasattr, [built-In]:hasattr
 ./utilmy/utilmy.py:os_import, function, dir, [built-In]:dir
@@ -431,25 +431,25 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_variable_exist, function, log, log
 ./utilmy/utilmy.py:os_variable_check, function, Exception, Exception
 ./utilmy/utilmy.py:os_variable_check, function, log, log
-./utilmy/utilmy.py:os_variable_check, function, sys.exit, [CLASS] [SIDE PACKAGE]: sys:exit
-./utilmy/utilmy.py:os_clean_memory, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/utilmy.py:os_variable_check, function, sys.exit, [CLASS] [STDLIB]: sys:exit
+./utilmy/utilmy.py:os_clean_memory, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/utilmy.py:os_system_list, function, len, [built-In]:len
 ./utilmy/utilmy.py:os_system_list, function, enumerate, [built-In]:enumerate
 ./utilmy/utilmy.py:os_system_list, function, log, log
-./utilmy/utilmy.py:os_system_list, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
-./utilmy/utilmy.py:os_system_list, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./utilmy/utilmy.py:os_system_list, function, os.system, [CLASS] [STDLIB]: os:system
+./utilmy/utilmy.py:os_system_list, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./utilmy/utilmy.py:os_file_check, function, log, log
-./utilmy/utilmy.py:os_file_check, function, os.stat, [CLASS] [SIDE PACKAGE]: os:stat
-./utilmy/utilmy.py:os_file_check, function, time.ctime, [CLASS] [SIDE PACKAGE]: time:ctime
+./utilmy/utilmy.py:os_file_check, function, os.stat, [CLASS] [STDLIB]: os:stat
+./utilmy/utilmy.py:os_file_check, function, time.ctime, [CLASS] [STDLIB]: time:ctime
 ./utilmy/utilmy.py:os_to_file, function, open, [built-In]:open
 ./utilmy/utilmy.py:os_to_file, function, fp.write, [CLASS] [SIDE PACKAGE]: fp:write
-./utilmy/utilmy.py:os_cpu, function, os.cpu_count, [CLASS] [SIDE PACKAGE]: os:cpu_count
+./utilmy/utilmy.py:os_cpu, function, os.cpu_count, [CLASS] [STDLIB]: os:cpu_count
 ./utilmy/utilmy.py:os_memory, function, open, [built-In]:open
 ./utilmy/utilmy.py:os_memory, function, i.split, [CLASS] [SIDE PACKAGE]: i:split
 ./utilmy/utilmy.py:os_memory, function, str, [built-In]:str
 ./utilmy/utilmy.py:os_memory, function, int, [built-In]:int
 ./utilmy/utilmy.py:os_sleep_cpu, function, psutil.cpu_percent, [CLASS] [SIDE PACKAGE]: psutil:cpu_percent
-./utilmy/utilmy.py:os_sleep_cpu, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./utilmy/utilmy.py:os_sleep_cpu, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./utilmy/utilmy.py:os_ram_object, function, id, [built-In]:id
 ./utilmy/utilmy.py:os_ram_object, function, getsizeof, getsizeof
 ./utilmy/utilmy.py:os_ram_object, function, ids.add, [CLASS] [SIDE PACKAGE]: ids:add
@@ -460,41 +460,41 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_copy, function, ignore_pyc_files, ignore_pyc_files
 ./utilmy/utilmy.py:os_copy, function, name.endswith, [CLASS] [SIDE PACKAGE]: name:endswith
 ./utilmy/utilmy.py:os_copy, function, exclude.split, [CLASS] [SIDE PACKAGE]: exclude:split
-./utilmy/utilmy.py:os_copy, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
-./utilmy/utilmy.py:os_copy, function, shutil.copytree, [CLASS] [SIDE PACKAGE]: shutil:copytree
-./utilmy/utilmy.py:os_copy, function, shutil.ignore_patterns, [CLASS] [SIDE PACKAGE]: shutil:ignore_patterns
+./utilmy/utilmy.py:os_copy, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./utilmy/utilmy.py:os_copy, function, shutil.copytree, [CLASS] [STDLIB]: shutil:copytree
+./utilmy/utilmy.py:os_copy, function, shutil.ignore_patterns, [CLASS] [STDLIB]: shutil:ignore_patterns
 ./utilmy/utilmy.py:os_removedirs, function, len, [built-In]:len
 ./utilmy/utilmy.py:os_removedirs, function, print, [built-In]:print
-./utilmy/utilmy.py:os_removedirs, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
-./utilmy/utilmy.py:os_removedirs, function, os.remove, [CLASS] [SIDE PACKAGE]: os:remove
-./utilmy/utilmy.py:os_removedirs, function, os.rmdir, [CLASS] [SIDE PACKAGE]: os:rmdir
+./utilmy/utilmy.py:os_removedirs, function, os.walk, [CLASS] [STDLIB]: os:walk
+./utilmy/utilmy.py:os_removedirs, function, os.remove, [CLASS] [STDLIB]: os:remove
+./utilmy/utilmy.py:os_removedirs, function, os.rmdir, [CLASS] [STDLIB]: os:rmdir
 ./utilmy/utilmy.py:os_system, function, len, [built-In]:len
 ./utilmy/utilmy.py:os_system, function, enumerate, [built-In]:enumerate
 ./utilmy/utilmy.py:os_system, function, log, log
-./utilmy/utilmy.py:os_system, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
-./utilmy/utilmy.py:os_system, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./utilmy/utilmy.py:os_system, function, os.system, [CLASS] [STDLIB]: os:system
+./utilmy/utilmy.py:os_system, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./utilmy/utilmy.py:os_makedirs, function, dir_or_file.split, [CLASS] [SIDE PACKAGE]: dir_or_file:split
-./utilmy/utilmy.py:os_makedirs, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:os_makedirs, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:global_verbosity, function, git_repo_root, git_repo_root
-./utilmy/utilmy.py:global_verbosity, function, json.load, [CLASS] [SIDE PACKAGE]: json:load
+./utilmy/utilmy.py:global_verbosity, function, json.load, [CLASS] [STDLIB]: json:load
 ./utilmy/utilmy.py:global_verbosity, function, yaml.load, [CLASS] [SIDE PACKAGE]: yaml:load
 ./utilmy/utilmy.py:global_verbosity, function, Exception, Exception
 ./utilmy/utilmy.py:global_verbosity, function, int, [built-In]:int
 ./utilmy/utilmy.py:git_repo_root, function, os_system, os_system
 ./utilmy/utilmy.py:git_repo_root, function, mout.split, [CLASS] [SIDE PACKAGE]: mout:split
 ./utilmy/utilmy.py:git_repo_root, function, len, [built-In]:len
-./utilmy/utilmy.py:git_current_hash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
+./utilmy/utilmy.py:git_current_hash, function, subprocess.check_output, [CLASS] [STDLIB]: subprocess:check_output
 ./utilmy/utilmy.py:git_current_hash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
-./utilmy/utilmy.py:plot_to_html, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/utilmy.py:plot_to_html, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/utilmy.py:plot_to_html, function, flist.sorted, [CLASS] [SIDE PACKAGE]: flist:sorted
 ./utilmy/utilmy.py:plot_to_html, function, print, [built-In]:print
 ./utilmy/utilmy.py:plot_to_html, function, open, [built-In]:open
-./utilmy/utilmy.py:plot_to_html, function, base64.b64encode, [CLASS] [SIDE PACKAGE]: base64:b64encode
+./utilmy/utilmy.py:plot_to_html, function, base64.b64encode, [CLASS] [STDLIB]: base64:b64encode
 ./utilmy/utilmy.py:plot_to_html, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
-./utilmy/utilmy.py:save, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
-./utilmy/utilmy.py:save, function, pickle.dump, [CLASS] [SIDE PACKAGE]: pickle:dump
+./utilmy/utilmy.py:save, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./utilmy/utilmy.py:save, function, pickle.dump, [CLASS] [STDLIB]: pickle:dump
 ./utilmy/utilmy.py:save, function, open, [built-In]:open
-./utilmy/utilmy.py:load, function, pickle.load, [CLASS] [SIDE PACKAGE]: pickle:load
+./utilmy/utilmy.py:load, function, pickle.load, [CLASS] [STDLIB]: pickle:load
 ./utilmy/utilmy.py:print_everywhere, function, snoop.install, [CLASS] [SIDE PACKAGE]: snoop:install
 ./utilmy/utilmy.py:print_everywhere, function, myfun, myfun
 ./utilmy/utilmy.py:print_everywhere, function, pp, pp
@@ -503,7 +503,7 @@ uri, type, function, detail
 ./utilmy/utilmy.py:print_everywhere, function, str, [built-In]:str
 ./utilmy/utilmy.py:log5, function, ic, ic
 ./utilmy/utilmy.py:log_trace, function, print, [built-In]:print
-./utilmy/utilmy.py:log_trace, function, pdb.set_trace, [CLASS] [SIDE PACKAGE]: pdb:set_trace
+./utilmy/utilmy.py:log_trace, function, pdb.set_trace, [CLASS] [STDLIB]: pdb:set_trace
 ./utilmy/utilmy.py:profiler_start, function, Profiler, Profiler
 ./utilmy/utilmy.py:profiler_start, function, profiler.start, [CLASS] [SIDE PACKAGE]: profiler:start
 ./utilmy/utilmy.py:profiler_stop, function, profiler.stop, [CLASS] [SIDE PACKAGE]: profiler:stop
@@ -535,18 +535,18 @@ uri, type, function, detail
 ./utilmy/utilmy.py:pd_filter, function, len, [built-In]:len
 ./utilmy/utilmy.py:pd_filter, function, x.split, [CLASS] [SIDE PACKAGE]: x:split
 ./utilmy/utilmy.py:pd_to_file, function, Path, Path
-./utilmy/utilmy.py:pd_to_file, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:pd_to_file, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:pd_to_file, function, df.to_pickle, [CLASS] [SIDE PACKAGE]: df:to_pickle
 ./utilmy/utilmy.py:pd_to_file, function, df.to_parquet, [CLASS] [SIDE PACKAGE]: df:to_parquet
 ./utilmy/utilmy.py:pd_to_file, function, df.to_csv, [CLASS] [SIDE PACKAGE]: df:to_csv
-./utilmy/utilmy.py:pd_to_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/utilmy.py:pd_to_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/utilmy.py:pd_read_file, function, log, log
 ./utilmy/utilmy.py:pd_read_file, function, print, [built-In]:print
 ./utilmy/utilmy.py:pd_read_file, function, isinstance, [built-In]:isinstance
 ./utilmy/utilmy.py:pd_read_file, function, path_glob.split, [CLASS] [SIDE PACKAGE]: path_glob:split
 ./utilmy/utilmy.py:pd_read_file, function, file_list.extend, [CLASS] [SIDE PACKAGE]: file_list:extend
 ./utilmy/utilmy.py:pd_read_file, function, sorted, [built-In]:sorted
-./utilmy/utilmy.py:pd_read_file, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/utilmy.py:pd_read_file, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/utilmy.py:pd_read_file, function, len, [built-In]:len
 ./utilmy/utilmy.py:pd_read_file, function, ThreadPool, ThreadPool
 ./utilmy/utilmy.py:pd_read_file, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
@@ -555,7 +555,7 @@ uri, type, function, detail
 ./utilmy/utilmy.py:pd_read_file, function, pool.apply_async, [CLASS] [SIDE PACKAGE]: pool:apply_async
 ./utilmy/utilmy.py:pd_read_file, function, pd_dtype_reduce, pd_dtype_reduce
 ./utilmy/utilmy.py:pd_read_file, function, dfi.drop_duplicates, [CLASS] [SIDE PACKAGE]: dfi:drop_duplicates
-./utilmy/utilmy.py:pd_read_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/utilmy.py:pd_read_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/utilmy.py:pd_read_file, function, pd.concat, [CLASS] [SIDE PACKAGE]: pd:concat
 ./utilmy/utilmy.py:pd_read_file, function, pool.terminate, [CLASS] [SIDE PACKAGE]: pool:terminate
 ./utilmy/utilmy.py:pd_read_file, function, pool.join, [CLASS] [SIDE PACKAGE]: pool:join
@@ -569,7 +569,7 @@ uri, type, function, detail
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.title, [CLASS] [SIDE PACKAGE]: plt:title
 ./utilmy/utilmy.py:pd_plot_histogram, function, path_save.split, [CLASS] [SIDE PACKAGE]: path_save:split
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.show, [CLASS] [SIDE PACKAGE]: plt:show
-./utilmy/utilmy.py:pd_plot_histogram, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:pd_plot_histogram, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.savefig, [CLASS] [SIDE PACKAGE]: plt:savefig
 ./utilmy/utilmy.py:pd_plot_histogram, function, print, [built-In]:print
 ./utilmy/utilmy.py:pd_plot_histogram, function, plt.close, [CLASS] [SIDE PACKAGE]: plt:close
@@ -611,17 +611,17 @@ uri, type, function, detail
 ./utilmy/utilmy.py:to_int, function, float, [built-In]:float
 ./utilmy/utilmy.py:config_load, function, str, [built-In]:str
 ./utilmy/utilmy.py:config_load, function, log, log
-./utilmy/utilmy.py:config_load, function, pathlib.Path, [CLASS] [SIDE PACKAGE]: pathlib:Path
+./utilmy/utilmy.py:config_load, function, pathlib.Path, [CLASS] [STDLIB]: pathlib:Path
 ./utilmy/utilmy.py:config_load, function, yaml.load, [CLASS] [SIDE PACKAGE]: yaml:load
 ./utilmy/utilmy.py:config_load, function, x.items, [CLASS] [SIDE PACKAGE]: x:items
-./utilmy/utilmy.py:config_load, function, json.load, [CLASS] [SIDE PACKAGE]: json:load
-./utilmy/utilmy.py:config_load, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:config_load, function, json.load, [CLASS] [STDLIB]: json:load
+./utilmy/utilmy.py:config_load, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:config_load, function, open, [built-In]:open
 ./utilmy/utilmy.py:config_load, function, yaml.dump, [CLASS] [SIDE PACKAGE]: yaml:dump
 ./utilmy/utilmy.py:os_path_split, function, fpath.replace, [CLASS] [SIDE PACKAGE]: fpath:replace
 ./utilmy/utilmy.py:os_path_split, function, fpath.split, [CLASS] [SIDE PACKAGE]: fpath:split
 ./utilmy/utilmy.py:os_file_replacestring, function, os_file_replacestring1, os_file_replacestring1
-./utilmy/utilmy.py:os_file_replacestring, function, fileinput.FileInput, [CLASS] [SIDE PACKAGE]: fileinput:FileInput
+./utilmy/utilmy.py:os_file_replacestring, function, fileinput.FileInput, [CLASS] [STDLIB]: fileinput:FileInput
 ./utilmy/utilmy.py:os_file_replacestring, function, line.replace, [CLASS] [SIDE PACKAGE]: line:replace
 ./utilmy/utilmy.py:os_file_replacestring, function, file1.close, [CLASS] [SIDE PACKAGE]: file1:close
 ./utilmy/utilmy.py:os_file_replacestring, function, print, [built-In]:print
@@ -629,13 +629,13 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_file_replacestring, function, os_walk, os_walk
 ./utilmy/utilmy.py:os_walk, function, dir1.rstrip, [CLASS] [SIDE PACKAGE]: dir1:rstrip
 ./utilmy/utilmy.py:os_walk, function, dir1.count, [CLASS] [SIDE PACKAGE]: dir1:count
-./utilmy/utilmy.py:os_walk, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
+./utilmy/utilmy.py:os_walk, function, os.walk, [CLASS] [STDLIB]: os:walk
 ./utilmy/utilmy.py:os_walk, function, root.count, [CLASS] [SIDE PACKAGE]: root:count
-./utilmy/utilmy.py:os_walk, function, fnmatch.filter, [CLASS] [SIDE PACKAGE]: fnmatch:filter
+./utilmy/utilmy.py:os_walk, function, fnmatch.filter, [CLASS] [STDLIB]: fnmatch:filter
 ./utilmy/utilmy.py:os_walk, function, np.array, [CLASS] [SIDE PACKAGE]: np:array
-./utilmy/utilmy.py:z_os_search_fast, function, re.compile, [CLASS] [SIDE PACKAGE]: re:compile
+./utilmy/utilmy.py:z_os_search_fast, function, re.compile, [CLASS] [STDLIB]: re:compile
 ./utilmy/utilmy.py:z_os_search_fast, function, enumerate, [built-In]:enumerate
-./utilmy/utilmy.py:z_os_search_fast, function, re.search, [CLASS] [SIDE PACKAGE]: re:search
+./utilmy/utilmy.py:z_os_search_fast, function, re.search, [CLASS] [STDLIB]: re:search
 ./utilmy/utilmy.py:z_os_search_fast, function, line.decode, [CLASS] [SIDE PACKAGE]: line:decode
 ./utilmy/utilmy.py:z_os_search_fast, function, res.append, [CLASS] [SIDE PACKAGE]: res:append
 ./utilmy/utilmy.py:z_os_search_fast, function, found.start, [CLASS] [SIDE PACKAGE]: found:start
@@ -646,8 +646,8 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_search_content, function, z_os_search_fast, z_os_search_fast
 ./utilmy/utilmy.py:os_search_content, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./utilmy/utilmy.py:os_get_function_name, function, str, [built-In]:str
-./utilmy/utilmy.py:os_get_function_name, function, socket.gethostname, [CLASS] [SIDE PACKAGE]: socket:gethostname
-./utilmy/utilmy.py:os_get_function_name, function, sys._getframe, [CLASS] [SIDE PACKAGE]: sys:_getframe
+./utilmy/utilmy.py:os_get_function_name, function, socket.gethostname, [CLASS] [STDLIB]: socket:gethostname
+./utilmy/utilmy.py:os_get_function_name, function, sys._getframe, [CLASS] [STDLIB]: sys:_getframe
 ./utilmy/utilmy.py:os_import, function, __import__, [built-In]:__import__
 ./utilmy/utilmy.py:os_import, function, hasattr, [built-In]:hasattr
 ./utilmy/utilmy.py:os_import, function, dir, [built-In]:dir
@@ -660,25 +660,25 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_variable_exist, function, log, log
 ./utilmy/utilmy.py:os_variable_check, function, Exception, Exception
 ./utilmy/utilmy.py:os_variable_check, function, log, log
-./utilmy/utilmy.py:os_variable_check, function, sys.exit, [CLASS] [SIDE PACKAGE]: sys:exit
-./utilmy/utilmy.py:os_clean_memory, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/utilmy.py:os_variable_check, function, sys.exit, [CLASS] [STDLIB]: sys:exit
+./utilmy/utilmy.py:os_clean_memory, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/utilmy.py:os_system_list, function, len, [built-In]:len
 ./utilmy/utilmy.py:os_system_list, function, enumerate, [built-In]:enumerate
 ./utilmy/utilmy.py:os_system_list, function, log, log
-./utilmy/utilmy.py:os_system_list, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
-./utilmy/utilmy.py:os_system_list, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./utilmy/utilmy.py:os_system_list, function, os.system, [CLASS] [STDLIB]: os:system
+./utilmy/utilmy.py:os_system_list, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./utilmy/utilmy.py:os_file_check, function, log, log
-./utilmy/utilmy.py:os_file_check, function, os.stat, [CLASS] [SIDE PACKAGE]: os:stat
-./utilmy/utilmy.py:os_file_check, function, time.ctime, [CLASS] [SIDE PACKAGE]: time:ctime
+./utilmy/utilmy.py:os_file_check, function, os.stat, [CLASS] [STDLIB]: os:stat
+./utilmy/utilmy.py:os_file_check, function, time.ctime, [CLASS] [STDLIB]: time:ctime
 ./utilmy/utilmy.py:os_to_file, function, open, [built-In]:open
 ./utilmy/utilmy.py:os_to_file, function, fp.write, [CLASS] [SIDE PACKAGE]: fp:write
-./utilmy/utilmy.py:os_cpu, function, os.cpu_count, [CLASS] [SIDE PACKAGE]: os:cpu_count
+./utilmy/utilmy.py:os_cpu, function, os.cpu_count, [CLASS] [STDLIB]: os:cpu_count
 ./utilmy/utilmy.py:os_memory, function, open, [built-In]:open
 ./utilmy/utilmy.py:os_memory, function, i.split, [CLASS] [SIDE PACKAGE]: i:split
 ./utilmy/utilmy.py:os_memory, function, str, [built-In]:str
 ./utilmy/utilmy.py:os_memory, function, int, [built-In]:int
 ./utilmy/utilmy.py:os_sleep_cpu, function, psutil.cpu_percent, [CLASS] [SIDE PACKAGE]: psutil:cpu_percent
-./utilmy/utilmy.py:os_sleep_cpu, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./utilmy/utilmy.py:os_sleep_cpu, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./utilmy/utilmy.py:os_ram_object, function, id, [built-In]:id
 ./utilmy/utilmy.py:os_ram_object, function, getsizeof, getsizeof
 ./utilmy/utilmy.py:os_ram_object, function, ids.add, [CLASS] [SIDE PACKAGE]: ids:add
@@ -689,41 +689,41 @@ uri, type, function, detail
 ./utilmy/utilmy.py:os_copy, function, ignore_pyc_files, ignore_pyc_files
 ./utilmy/utilmy.py:os_copy, function, name.endswith, [CLASS] [SIDE PACKAGE]: name:endswith
 ./utilmy/utilmy.py:os_copy, function, exclude.split, [CLASS] [SIDE PACKAGE]: exclude:split
-./utilmy/utilmy.py:os_copy, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
-./utilmy/utilmy.py:os_copy, function, shutil.copytree, [CLASS] [SIDE PACKAGE]: shutil:copytree
-./utilmy/utilmy.py:os_copy, function, shutil.ignore_patterns, [CLASS] [SIDE PACKAGE]: shutil:ignore_patterns
+./utilmy/utilmy.py:os_copy, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./utilmy/utilmy.py:os_copy, function, shutil.copytree, [CLASS] [STDLIB]: shutil:copytree
+./utilmy/utilmy.py:os_copy, function, shutil.ignore_patterns, [CLASS] [STDLIB]: shutil:ignore_patterns
 ./utilmy/utilmy.py:os_removedirs, function, len, [built-In]:len
 ./utilmy/utilmy.py:os_removedirs, function, print, [built-In]:print
-./utilmy/utilmy.py:os_removedirs, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
-./utilmy/utilmy.py:os_removedirs, function, os.remove, [CLASS] [SIDE PACKAGE]: os:remove
-./utilmy/utilmy.py:os_removedirs, function, os.rmdir, [CLASS] [SIDE PACKAGE]: os:rmdir
+./utilmy/utilmy.py:os_removedirs, function, os.walk, [CLASS] [STDLIB]: os:walk
+./utilmy/utilmy.py:os_removedirs, function, os.remove, [CLASS] [STDLIB]: os:remove
+./utilmy/utilmy.py:os_removedirs, function, os.rmdir, [CLASS] [STDLIB]: os:rmdir
 ./utilmy/utilmy.py:os_system, function, len, [built-In]:len
 ./utilmy/utilmy.py:os_system, function, enumerate, [built-In]:enumerate
 ./utilmy/utilmy.py:os_system, function, log, log
-./utilmy/utilmy.py:os_system, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
-./utilmy/utilmy.py:os_system, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./utilmy/utilmy.py:os_system, function, os.system, [CLASS] [STDLIB]: os:system
+./utilmy/utilmy.py:os_system, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./utilmy/utilmy.py:os_makedirs, function, dir_or_file.split, [CLASS] [SIDE PACKAGE]: dir_or_file:split
-./utilmy/utilmy.py:os_makedirs, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/utilmy.py:os_makedirs, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/utilmy.py:global_verbosity, function, git_repo_root, git_repo_root
-./utilmy/utilmy.py:global_verbosity, function, json.load, [CLASS] [SIDE PACKAGE]: json:load
+./utilmy/utilmy.py:global_verbosity, function, json.load, [CLASS] [STDLIB]: json:load
 ./utilmy/utilmy.py:global_verbosity, function, yaml.load, [CLASS] [SIDE PACKAGE]: yaml:load
 ./utilmy/utilmy.py:global_verbosity, function, Exception, Exception
 ./utilmy/utilmy.py:global_verbosity, function, int, [built-In]:int
 ./utilmy/utilmy.py:git_repo_root, function, os_system, os_system
 ./utilmy/utilmy.py:git_repo_root, function, mout.split, [CLASS] [SIDE PACKAGE]: mout:split
 ./utilmy/utilmy.py:git_repo_root, function, len, [built-In]:len
-./utilmy/utilmy.py:git_current_hash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
+./utilmy/utilmy.py:git_current_hash, function, subprocess.check_output, [CLASS] [STDLIB]: subprocess:check_output
 ./utilmy/utilmy.py:git_current_hash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
-./utilmy/utilmy.py:plot_to_html, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/utilmy.py:plot_to_html, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/utilmy.py:plot_to_html, function, flist.sorted, [CLASS] [SIDE PACKAGE]: flist:sorted
 ./utilmy/utilmy.py:plot_to_html, function, print, [built-In]:print
 ./utilmy/utilmy.py:plot_to_html, function, open, [built-In]:open
-./utilmy/utilmy.py:plot_to_html, function, base64.b64encode, [CLASS] [SIDE PACKAGE]: base64:b64encode
+./utilmy/utilmy.py:plot_to_html, function, base64.b64encode, [CLASS] [STDLIB]: base64:b64encode
 ./utilmy/utilmy.py:plot_to_html, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
-./utilmy/utilmy.py:save, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
-./utilmy/utilmy.py:save, function, pickle.dump, [CLASS] [SIDE PACKAGE]: pickle:dump
+./utilmy/utilmy.py:save, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./utilmy/utilmy.py:save, function, pickle.dump, [CLASS] [STDLIB]: pickle:dump
 ./utilmy/utilmy.py:save, function, open, [built-In]:open
-./utilmy/utilmy.py:load, function, pickle.load, [CLASS] [SIDE PACKAGE]: pickle:load
+./utilmy/utilmy.py:load, function, pickle.load, [CLASS] [STDLIB]: pickle:load
 ./utilmy/utilmy.py:print_everywhere, function, snoop.install, [CLASS] [SIDE PACKAGE]: snoop:install
 ./utilmy/utilmy.py:print_everywhere, function, myfun, myfun
 ./utilmy/utilmy.py:print_everywhere, function, pp, pp
@@ -732,7 +732,7 @@ uri, type, function, detail
 ./utilmy/utilmy.py:print_everywhere, function, str, [built-In]:str
 ./utilmy/utilmy.py:log5, function, ic, ic
 ./utilmy/utilmy.py:log_trace, function, print, [built-In]:print
-./utilmy/utilmy.py:log_trace, function, pdb.set_trace, [CLASS] [SIDE PACKAGE]: pdb:set_trace
+./utilmy/utilmy.py:log_trace, function, pdb.set_trace, [CLASS] [STDLIB]: pdb:set_trace
 ./utilmy/utilmy.py:profiler_start, function, Profiler, Profiler
 ./utilmy/utilmy.py:profiler_start, function, profiler.start, [CLASS] [SIDE PACKAGE]: profiler:start
 ./utilmy/utilmy.py:profiler_stop, function, profiler.stop, [CLASS] [SIDE PACKAGE]: profiler:stop
@@ -755,11 +755,11 @@ uri, type, function, detail
 ./utilmy/util_default.py:config_load, function, log2, log2
 ./utilmy/util_default.py:config_load, function, yaml.load, [CLASS] [SIDE PACKAGE]: yaml:load
 ./utilmy/util_default.py:config_load, function, log, log
-./utilmy/util_default.py:config_load, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/util_default.py:config_load, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/util_default.py:config_load, function, open, [built-In]:open
-./utilmy/util_default.py:config_load, function, json.dump, [CLASS] [SIDE PACKAGE]: json:dump
+./utilmy/util_default.py:config_load, function, json.dump, [CLASS] [STDLIB]: json:dump
 ./utilmy/util_default.py:dataset_donwload, function, log, log
-./utilmy/util_default.py:dataset_donwload, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/util_default.py:dataset_donwload, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/util_default.py:dataset_donwload, function, wget.download, [CLASS] [SIDE PACKAGE]: wget:download
 ./utilmy/util_default.py:dataset_donwload, function, url.split, [CLASS] [SIDE PACKAGE]: url:split
 ./utilmy/util_default.py:dataset_donwload, function, os_extract_archive, os_extract_archive
@@ -768,8 +768,8 @@ uri, type, function, detail
 ./utilmy/util_default.py:os_extract_archive, function, is_match_fn, is_match_fn
 ./utilmy/util_default.py:os_extract_archive, function, open_fn, open_fn
 ./utilmy/util_default.py:os_extract_archive, function, archive.extractall, [CLASS] [SIDE PACKAGE]: archive:extractall
-./utilmy/util_default.py:os_extract_archive, function, os.remove, [CLASS] [SIDE PACKAGE]: os:remove
-./utilmy/util_default.py:os_extract_archive, function, shutil.rmtree, [CLASS] [SIDE PACKAGE]: shutil:rmtree
+./utilmy/util_default.py:os_extract_archive, function, os.remove, [CLASS] [STDLIB]: os:remove
+./utilmy/util_default.py:os_extract_archive, function, shutil.rmtree, [CLASS] [STDLIB]: shutil:rmtree
 ./utilmy/util_default.py:to_file, function, open, [built-In]:open
 ./utilmy/util_default.py:to_file, function, fp.write, [CLASS] [SIDE PACKAGE]: fp:write
 ./utilmy/zutil.py:session_load_function, function, dill.load_session, [CLASS] [SIDE PACKAGE]: dill:load_session
@@ -791,7 +791,7 @@ uri, type, function, detail
 ./utilmy/zutil.py:a_start_log, function, str, [built-In]:str
 ./utilmy/zutil.py:a_start_log, function, os_platform, os_platform
 ./utilmy/zutil.py:a_start_log, function, date_now, date_now
-./utilmy/zutil.py:a_cleanmemory, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/zutil.py:a_cleanmemory, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil.py:print_object_tofile, function, open, [built-In]:open
 ./utilmy/zutil.py:print_object_tofile, function, file1.write, [CLASS] [SIDE PACKAGE]: file1:write
 ./utilmy/zutil.py:print_object_tofile, function, np.shape, [CLASS] [SIDE PACKAGE]: np:shape
@@ -801,11 +801,11 @@ uri, type, function, detail
 ./utilmy/zutil.py:print_progressbar, function, format_str.format, [CLASS] [SIDE PACKAGE]: format_str:format
 ./utilmy/zutil.py:print_progressbar, function, float, [built-In]:float
 ./utilmy/zutil.py:print_progressbar, function, int, [built-In]:int
-./utilmy/zutil.py:os_zip_checkintegrity, function, zipfile.ZipFile, [CLASS] [SIDE PACKAGE]: zipfile:ZipFile
+./utilmy/zutil.py:os_zip_checkintegrity, function, zipfile.ZipFile, [CLASS] [STDLIB]: zipfile:ZipFile
 ./utilmy/zutil.py:os_zip_checkintegrity, function, zip_file.testzip, [CLASS] [SIDE PACKAGE]: zip_file:testzip
 ./utilmy/zutil.py:os_zip_checkintegrity, function, print, [built-In]:print
-./utilmy/zutil.py:os_zipfile, function, zipfile.ZipFile, [CLASS] [SIDE PACKAGE]: zipfile:ZipFile
-./utilmy/zutil.py:os_zipfile, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
+./utilmy/zutil.py:os_zipfile, function, zipfile.ZipFile, [CLASS] [STDLIB]: zipfile:ZipFile
+./utilmy/zutil.py:os_zipfile, function, os.walk, [CLASS] [STDLIB]: os:walk
 ./utilmy/zutil.py:os_zipfile, function, zf.write, [CLASS] [SIDE PACKAGE]: zf:write
 ./utilmy/zutil.py:os_zipfile, function, zf.close, [CLASS] [SIDE PACKAGE]: zf:close
 ./utilmy/zutil.py:os_zipfile, function, os_zip_checkintegrity, os_zip_checkintegrity
@@ -814,18 +814,18 @@ uri, type, function, detail
 ./utilmy/zutil.py:os_zipextractall, function, filezip_or_dir.find, [CLASS] [SIDE PACKAGE]: filezip_or_dir:find
 ./utilmy/zutil.py:os_zipextractall, function, os_file_listall, os_file_listall
 ./utilmy/zutil.py:os_zipextractall, function, os_file_getname, os_file_getname
-./utilmy/zutil.py:os_zipextractall, function, zipfile.ZipFile, [CLASS] [SIDE PACKAGE]: zipfile:ZipFile
+./utilmy/zutil.py:os_zipextractall, function, zipfile.ZipFile, [CLASS] [STDLIB]: zipfile:ZipFile
 ./utilmy/zutil.py:os_zipextractall, function, zip_ref.extractall, [CLASS] [SIDE PACKAGE]: zip_ref:extractall
 ./utilmy/zutil.py:os_zipextractall, function, zip_ref.close, [CLASS] [SIDE PACKAGE]: zip_ref:close
 ./utilmy/zutil.py:os_zipextractall, function, print, [built-In]:print
 ./utilmy/zutil.py:os_folder_copy, function, _default_fun_file_toignore, _default_fun_file_toignore
-./utilmy/zutil.py:os_folder_copy, function, fnmatch.filter, [CLASS] [SIDE PACKAGE]: fnmatch:filter
-./utilmy/zutil.py:os_folder_copy, function, shutil.copytree, [CLASS] [SIDE PACKAGE]: shutil:copytree
-./utilmy/zutil.py:os_folder_copy, function, shutil.copy, [CLASS] [SIDE PACKAGE]: shutil:copy
-./utilmy/zutil.py:os_folder_create, function, os.getcwd, [CLASS] [SIDE PACKAGE]: os:getcwd
-./utilmy/zutil.py:os_folder_create, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
-./utilmy/zutil.py:os_folder_create, function, os.chdir, [CLASS] [SIDE PACKAGE]: os:chdir
-./utilmy/zutil.py:os_folder_robocopy, function, subprocess.call, [CLASS] [SIDE PACKAGE]: subprocess:call
+./utilmy/zutil.py:os_folder_copy, function, fnmatch.filter, [CLASS] [STDLIB]: fnmatch:filter
+./utilmy/zutil.py:os_folder_copy, function, shutil.copytree, [CLASS] [STDLIB]: shutil:copytree
+./utilmy/zutil.py:os_folder_copy, function, shutil.copy, [CLASS] [STDLIB]: shutil:copy
+./utilmy/zutil.py:os_folder_create, function, os.getcwd, [CLASS] [STDLIB]: os:getcwd
+./utilmy/zutil.py:os_folder_create, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./utilmy/zutil.py:os_folder_create, function, os.chdir, [CLASS] [STDLIB]: os:chdir
+./utilmy/zutil.py:os_folder_robocopy, function, subprocess.call, [CLASS] [STDLIB]: subprocess:call
 ./utilmy/zutil.py:os_folder_robocopy, function, print, [built-In]:print
 ./utilmy/zutil.py:os_file_replace, function, mkstemp, mkstemp
 ./utilmy/zutil.py:os_file_replace, function, open, [built-In]:open
@@ -833,33 +833,33 @@ uri, type, function, detail
 ./utilmy/zutil.py:os_file_replace, function, remove, remove
 ./utilmy/zutil.py:os_file_replace, function, move, move
 ./utilmy/zutil.py:os_file_replace, function, os_file_replacestring1, os_file_replacestring1
-./utilmy/zutil.py:os_file_replace, function, fileinput.FileInput, [CLASS] [SIDE PACKAGE]: fileinput:FileInput
+./utilmy/zutil.py:os_file_replace, function, fileinput.FileInput, [CLASS] [STDLIB]: fileinput:FileInput
 ./utilmy/zutil.py:os_file_replace, function, line.replace, [CLASS] [SIDE PACKAGE]: line:replace
 ./utilmy/zutil.py:os_file_replace, function, file1.close, [CLASS] [SIDE PACKAGE]: file1:close
 ./utilmy/zutil.py:os_file_replace, function, print, [built-In]:print
 ./utilmy/zutil.py:os_file_replace, function, format, [built-In]:format
 ./utilmy/zutil.py:os_file_replace, function, os_file_replacestring2, os_file_replacestring2
 ./utilmy/zutil.py:os_file_replace, function, os_file_listall, os_file_listall
-./utilmy/zutil.py:os_file_replacestring1, function, fileinput.FileInput, [CLASS] [SIDE PACKAGE]: fileinput:FileInput
+./utilmy/zutil.py:os_file_replacestring1, function, fileinput.FileInput, [CLASS] [STDLIB]: fileinput:FileInput
 ./utilmy/zutil.py:os_file_replacestring1, function, line.replace, [CLASS] [SIDE PACKAGE]: line:replace
 ./utilmy/zutil.py:os_file_replacestring1, function, file1.close, [CLASS] [SIDE PACKAGE]: file1:close
 ./utilmy/zutil.py:os_file_replacestring1, function, print, [built-In]:print
 ./utilmy/zutil.py:os_file_replacestring1, function, format, [built-In]:format
 ./utilmy/zutil.py:os_file_replacestring2, function, os_file_listall, os_file_listall
 ./utilmy/zutil.py:os_file_replacestring2, function, os_file_replacestring1, os_file_replacestring1
-./utilmy/zutil.py:os_file_getname, function, ntpath.split, [CLASS] [SIDE PACKAGE]: ntpath:split
-./utilmy/zutil.py:os_file_getname, function, ntpath.basename, [CLASS] [SIDE PACKAGE]: ntpath:basename
-./utilmy/zutil.py:os_file_getpath, function, ntpath.split, [CLASS] [SIDE PACKAGE]: ntpath:split
+./utilmy/zutil.py:os_file_getname, function, ntpath.split, [CLASS] [STDLIB]: ntpath:split
+./utilmy/zutil.py:os_file_getname, function, ntpath.basename, [CLASS] [STDLIB]: ntpath:basename
+./utilmy/zutil.py:os_file_getpath, function, ntpath.split, [CLASS] [STDLIB]: ntpath:split
 ./utilmy/zutil.py:os_file_gettext, function, open, [built-In]:open
 ./utilmy/zutil.py:os_file_gettext, function, f.read, [CLASS] [SIDE PACKAGE]: f:read
 ./utilmy/zutil.py:os_file_listall, function, dir1.rstrip, [CLASS] [SIDE PACKAGE]: dir1:rstrip
 ./utilmy/zutil.py:os_file_listall, function, dir1.count, [CLASS] [SIDE PACKAGE]: dir1:count
-./utilmy/zutil.py:os_file_listall, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
+./utilmy/zutil.py:os_file_listall, function, os.walk, [CLASS] [STDLIB]: os:walk
 ./utilmy/zutil.py:os_file_listall, function, root.count, [CLASS] [SIDE PACKAGE]: root:count
-./utilmy/zutil.py:os_file_listall, function, fnmatch.filter, [CLASS] [SIDE PACKAGE]: fnmatch:filter
-./utilmy/zutil.py:_os_file_search_fast, function, re.compile, [CLASS] [SIDE PACKAGE]: re:compile
+./utilmy/zutil.py:os_file_listall, function, fnmatch.filter, [CLASS] [STDLIB]: fnmatch:filter
+./utilmy/zutil.py:_os_file_search_fast, function, re.compile, [CLASS] [STDLIB]: re:compile
 ./utilmy/zutil.py:_os_file_search_fast, function, enumerate, [built-In]:enumerate
-./utilmy/zutil.py:_os_file_search_fast, function, re.search, [CLASS] [SIDE PACKAGE]: re:search
+./utilmy/zutil.py:_os_file_search_fast, function, re.search, [CLASS] [STDLIB]: re:search
 ./utilmy/zutil.py:_os_file_search_fast, function, line.decode, [CLASS] [SIDE PACKAGE]: line:decode
 ./utilmy/zutil.py:_os_file_search_fast, function, res.append, [CLASS] [SIDE PACKAGE]: res:append
 ./utilmy/zutil.py:_os_file_search_fast, function, found.start, [CLASS] [SIDE PACKAGE]: found:start
@@ -871,12 +871,12 @@ uri, type, function, detail
 ./utilmy/zutil.py:os_file_search_content, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:os_file_rename, function, some_dir.rstrip, [CLASS] [SIDE PACKAGE]: some_dir:rstrip
 ./utilmy/zutil.py:os_file_rename, function, some_dir.count, [CLASS] [SIDE PACKAGE]: some_dir:count
-./utilmy/zutil.py:os_file_rename, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
+./utilmy/zutil.py:os_file_rename, function, os.walk, [CLASS] [STDLIB]: os:walk
 ./utilmy/zutil.py:os_file_rename, function, root.count, [CLASS] [SIDE PACKAGE]: root:count
 ./utilmy/zutil.py:os_file_rename, function, matches.append, [CLASS] [SIDE PACKAGE]: matches:append
-./utilmy/zutil.py:os_file_rename, function, fnmatch.filter, [CLASS] [SIDE PACKAGE]: fnmatch:filter
-./utilmy/zutil.py:os_file_rename, function, re.sub, [CLASS] [SIDE PACKAGE]: re:sub
-./utilmy/zutil.py:os_file_rename, function, os.rename, [CLASS] [SIDE PACKAGE]: os:rename
+./utilmy/zutil.py:os_file_rename, function, fnmatch.filter, [CLASS] [STDLIB]: fnmatch:filter
+./utilmy/zutil.py:os_file_rename, function, re.sub, [CLASS] [STDLIB]: re:sub
+./utilmy/zutil.py:os_file_rename, function, os.rename, [CLASS] [STDLIB]: os:rename
 ./utilmy/zutil.py:os_file_rename, function, np.array, [CLASS] [SIDE PACKAGE]: np:array
 ./utilmy/zutil.py:os_gui_popup_show, function, os_gui_popup_show2, os_gui_popup_show2
 ./utilmy/zutil.py:os_gui_popup_show, function, Tk, Tk
@@ -893,11 +893,11 @@ uri, type, function, detail
 ./utilmy/zutil.py:os_path_norm, function, pth.find, [CLASS] [SIDE PACKAGE]: pth:find
 ./utilmy/zutil.py:os_path_norm, function, b.lstrip, [CLASS] [SIDE PACKAGE]: b:lstrip
 ./utilmy/zutil.py:os_path_change, function, os_path_norm, os_path_norm
-./utilmy/zutil.py:os_path_change, function, os.chdir, [CLASS] [SIDE PACKAGE]: os:chdir
-./utilmy/zutil.py:os_path_current, function, os.getcwd, [CLASS] [SIDE PACKAGE]: os:getcwd
+./utilmy/zutil.py:os_path_change, function, os.chdir, [CLASS] [STDLIB]: os:chdir
+./utilmy/zutil.py:os_path_current, function, os.getcwd, [CLASS] [STDLIB]: os:getcwd
 ./utilmy/zutil.py:os_file_read, function, open, [built-In]:open
 ./utilmy/zutil.py:os_file_read, function, fh.read, [CLASS] [SIDE PACKAGE]: fh:read
-./utilmy/zutil.py:os_file_isame, function, filecmp.cmp, [CLASS] [SIDE PACKAGE]: filecmp:cmp
+./utilmy/zutil.py:os_file_isame, function, filecmp.cmp, [CLASS] [STDLIB]: filecmp:cmp
 ./utilmy/zutil.py:os_file_get_extension, function, _ext.startswith, [CLASS] [SIDE PACKAGE]: _ext:startswith
 ./utilmy/zutil.py:os_folder_is_path, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil.py:os_file_get_path_from_stream, function, os_folder_is_path, os_folder_is_path
@@ -926,17 +926,17 @@ uri, type, function, detail
 ./utilmy/zutil.py:os_wait_cpu, function, psutil.cpu_percent, [CLASS] [SIDE PACKAGE]: psutil:cpu_percent
 ./utilmy/zutil.py:os_wait_cpu, function, print, [built-In]:print
 ./utilmy/zutil.py:os_wait_cpu, function, arrow.utcnow, [CLASS] [SIDE PACKAGE]: arrow:utcnow
-./utilmy/zutil.py:os_wait_cpu, function, time.sleep, [CLASS] [SIDE PACKAGE]: time:sleep
+./utilmy/zutil.py:os_wait_cpu, function, time.sleep, [CLASS] [STDLIB]: time:sleep
 ./utilmy/zutil.py:os_split_dir_file, function, dirfile.split, [CLASS] [SIDE PACKAGE]: dirfile:split
 ./utilmy/zutil.py:os_split_dir_file, function, len, [built-In]:len
-./utilmy/zutil.py:os_process_run, function, subprocess.Popen, [CLASS] [SIDE PACKAGE]: subprocess:Popen
+./utilmy/zutil.py:os_process_run, function, subprocess.Popen, [CLASS] [STDLIB]: subprocess:Popen
 ./utilmy/zutil.py:os_process_run, function, proc.communicate, [CLASS] [SIDE PACKAGE]: proc:communicate
 ./utilmy/zutil.py:os_process_run, function, print, [built-In]:print
 ./utilmy/zutil.py:os_process_run, function, str, [built-In]:str
 ./utilmy/zutil.py:py_importfromfile, function, a_get_pythonversion, a_get_pythonversion
 ./utilmy/zutil.py:py_importfromfile, function, SourceFileLoader, SourceFileLoader
 ./utilmy/zutil.py:py_importfromfile, function, foo.MyClass, [CLASS] [SIDE PACKAGE]: foo:MyClass
-./utilmy/zutil.py:py_importfromfile, function, importlib.import_module, [CLASS] [SIDE PACKAGE]: importlib:import_module
+./utilmy/zutil.py:py_importfromfile, function, importlib.import_module, [CLASS] [STDLIB]: importlib:import_module
 ./utilmy/zutil.py:py_memorysize, function, id, [built-In]:id
 ./utilmy/zutil.py:py_memorysize, function, getsizeof, getsizeof
 ./utilmy/zutil.py:py_memorysize, function, ids.add, [CLASS] [SIDE PACKAGE]: ids:add
@@ -949,7 +949,7 @@ uri, type, function, detail
 ./utilmy/zutil.py:save_test, function, py_load_obj, py_load_obj
 ./utilmy/zutil.py:save_test, function, print, [built-In]:print
 ./utilmy/zutil.py:save_test, function, str, [built-In]:str
-./utilmy/zutil.py:save_test, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/zutil.py:save_test, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil.py:py_save_obj, function, z_key_splitinto_dir_name, z_key_splitinto_dir_name
 ./utilmy/zutil.py:py_save_obj, function, os_folder_create, os_folder_create
 ./utilmy/zutil.py:py_save_obj, function, open, [built-In]:open
@@ -959,7 +959,7 @@ uri, type, function, detail
 ./utilmy/zutil.py:py_load_obj, function, z_key_splitinto_dir_name, z_key_splitinto_dir_name
 ./utilmy/zutil.py:py_load_obj, function, os_folder_create, os_folder_create
 ./utilmy/zutil.py:py_load_obj, function, open, [built-In]:open
-./utilmy/zutil.py:py_load_obj, function, pickle.load, [CLASS] [SIDE PACKAGE]: pickle:load
+./utilmy/zutil.py:py_load_obj, function, pickle.load, [CLASS] [STDLIB]: pickle:load
 ./utilmy/zutil.py:z_key_splitinto_dir_name, function, keyname.split, [CLASS] [SIDE PACKAGE]: keyname:split
 ./utilmy/zutil.py:z_key_splitinto_dir_name, function, len, [built-In]:len
 ./utilmy/zutil.py:os_config_setfile, function, open, [built-In]:open
@@ -1193,7 +1193,7 @@ uri, type, function, detail
 ./utilmy/zutil.py:pd_find, function, enumerate, [built-In]:enumerate
 ./utilmy/zutil.py:pd_find, function, np.column_stack, [CLASS] [SIDE PACKAGE]: np:column_stack
 ./utilmy/zutil.py:pd_find, function, len, [built-In]:len
-./utilmy/zutil.py:pd_find, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/zutil.py:pd_find, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil.py:pd_find, function, np_dictordered_create, np_dictordered_create
 ./utilmy/zutil.py:pd_find, function, range, [built-In]:range
 ./utilmy/zutil.py:pd_find, function, np.array, [CLASS] [SIDE PACKAGE]: np:array
@@ -1268,29 +1268,29 @@ uri, type, function, detail
 ./utilmy/zutil.py:datetime_tostring, function, date2.append, [CLASS] [SIDE PACKAGE]: date2:append
 ./utilmy/zutil.py:date_remove_bdays, function, isint, isint
 ./utilmy/zutil.py:date_remove_bdays, function, dateint_todatetime, dateint_todatetime
-./utilmy/zutil.py:date_remove_bdays, function, datetime.timedelta, [CLASS] [SIDE PACKAGE]: datetime:timedelta
+./utilmy/zutil.py:date_remove_bdays, function, datetime.timedelta, [CLASS] [STDLIB]: datetime:timedelta
 ./utilmy/zutil.py:date_remove_bdays, function, current_date.weekday, [CLASS] [SIDE PACKAGE]: current_date:weekday
 ./utilmy/zutil.py:date_remove_bdays, function, datetime_toint, datetime_toint
 ./utilmy/zutil.py:date_add_bdays, function, isint, isint
 ./utilmy/zutil.py:date_add_bdays, function, dateint_todatetime, dateint_todatetime
-./utilmy/zutil.py:date_add_bdays, function, datetime.timedelta, [CLASS] [SIDE PACKAGE]: datetime:timedelta
+./utilmy/zutil.py:date_add_bdays, function, datetime.timedelta, [CLASS] [STDLIB]: datetime:timedelta
 ./utilmy/zutil.py:date_add_bdays, function, current_date.weekday, [CLASS] [SIDE PACKAGE]: current_date:weekday
 ./utilmy/zutil.py:date_add_bdays, function, datetime_toint, datetime_toint
 ./utilmy/zutil.py:datenumpy_todatetime, function, type, [built-In]:type
 ./utilmy/zutil.py:datetime_tonumpydate, function, np.datetime64, [CLASS] [SIDE PACKAGE]: np:datetime64
 ./utilmy/zutil.py:datestring_todatetime, function, isinstance, [built-In]:isinstance
-./utilmy/zutil.py:datestring_todatetime, function, parser.parse, [CLASS] [SIDE PACKAGE]: parser:parse
+./utilmy/zutil.py:datestring_todatetime, function, parser.parse, [CLASS] [STDLIB]: parser:parse
 ./utilmy/zutil.py:datestring_todatetime, function, date2.append, [CLASS] [SIDE PACKAGE]: date2:append
 ./utilmy/zutil.py:datetime_toint, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil.py:datetime_toint, function, int, [built-In]:int
 ./utilmy/zutil.py:datetime_toint, function, date2.append, [CLASS] [SIDE PACKAGE]: date2:append
 ./utilmy/zutil.py:date_add_bday, function, isint, isint
 ./utilmy/zutil.py:date_add_bday, function, dateint_todatetime, dateint_todatetime
-./utilmy/zutil.py:date_add_bday, function, datetime.timedelta, [CLASS] [SIDE PACKAGE]: datetime:timedelta
+./utilmy/zutil.py:date_add_bday, function, datetime.timedelta, [CLASS] [STDLIB]: datetime:timedelta
 ./utilmy/zutil.py:date_add_bday, function, current_date.weekday, [CLASS] [SIDE PACKAGE]: current_date:weekday
 ./utilmy/zutil.py:date_add_bday, function, datetime_toint, datetime_toint
 ./utilmy/zutil.py:dateint_todatetime, function, isinstance, [built-In]:isinstance
-./utilmy/zutil.py:dateint_todatetime, function, parser.parse, [CLASS] [SIDE PACKAGE]: parser:parse
+./utilmy/zutil.py:dateint_todatetime, function, parser.parse, [CLASS] [STDLIB]: parser:parse
 ./utilmy/zutil.py:dateint_todatetime, function, date2.append, [CLASS] [SIDE PACKAGE]: date2:append
 ./utilmy/zutil.py:date_diffinday, function, dateint_todatetime, dateint_todatetime
 ./utilmy/zutil.py:date_diffinbday, function, dateint_todatetime, dateint_todatetime
@@ -1303,18 +1303,18 @@ uri, type, function, detail
 ./utilmy/zutil.py:datestring_toint, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil.py:datestring_toint, function, int, [built-In]:int
 ./utilmy/zutil.py:datestring_toint, function, date2.append, [CLASS] [SIDE PACKAGE]: date2:append
-./utilmy/zutil.py:date_now, function, datetime.now, [CLASS] [SIDE PACKAGE]: datetime:now
+./utilmy/zutil.py:date_now, function, datetime.now, [CLASS] [STDLIB]: datetime:now
 ./utilmy/zutil.py:date_now, function, date_add_bdays, date_add_bdays
 ./utilmy/zutil.py:date_now, function, date_remove_bdays, date_remove_bdays
 ./utilmy/zutil.py:date_now, function, str, [built-In]:str
 ./utilmy/zutil.py:date_now, function, date_nowtime, date_nowtime
-./utilmy/zutil.py:date_now, function, datetime.today, [CLASS] [SIDE PACKAGE]: datetime:today
+./utilmy/zutil.py:date_now, function, datetime.today, [CLASS] [STDLIB]: datetime:today
 ./utilmy/zutil.py:date_now, function, d.strftime, [CLASS] [SIDE PACKAGE]: d:strftime
-./utilmy/zutil.py:date_nowtime, function, datetime.today, [CLASS] [SIDE PACKAGE]: datetime:today
+./utilmy/zutil.py:date_nowtime, function, datetime.today, [CLASS] [STDLIB]: datetime:today
 ./utilmy/zutil.py:date_nowtime, function, d.strftime, [CLASS] [SIDE PACKAGE]: d:strftime
 ./utilmy/zutil.py:date_generatedatetime, function, datestring_todatetime, datestring_todatetime
 ./utilmy/zutil.py:date_generatedatetime, function, date_add_bdays, date_add_bdays
-./utilmy/zutil.py:date_generatedatetime, function, datetime.timedelta, [CLASS] [SIDE PACKAGE]: datetime:timedelta
+./utilmy/zutil.py:date_generatedatetime, function, datetime.timedelta, [CLASS] [STDLIB]: datetime:timedelta
 ./utilmy/zutil.py:date_generatedatetime, function, list, [built-In]:list
 ./utilmy/zutil.py:date_generatedatetime, function, np.array, [CLASS] [SIDE PACKAGE]: np:array
 ./utilmy/zutil_features.py:log, function, print, [built-In]:print
@@ -1322,14 +1322,14 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:log, function, log3, log3
 ./utilmy/zutil_features.py:log2, function, print, [built-In]:print
 ./utilmy/zutil_features.py:log3, function, print, [built-In]:print
-./utilmy/zutil_features.py:os_get_function_name, function, sys._getframe, [CLASS] [SIDE PACKAGE]: sys:_getframe
+./utilmy/zutil_features.py:os_get_function_name, function, sys._getframe, [CLASS] [STDLIB]: sys:_getframe
 ./utilmy/zutil_features.py:pa_read_file, function, hdfs.ls, [CLASS] [SIDE PACKAGE]: hdfs:ls
-./utilmy/zutil_features.py:pa_read_file, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/zutil_features.py:pa_read_file, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/zutil_features.py:pa_read_file, function, fi.split, [CLASS] [SIDE PACKAGE]: fi:split
 ./utilmy/zutil_features.py:pa_read_file, function, print, [built-In]:print
 ./utilmy/zutil_features.py:pa_read_file, function, pq.read_table, [CLASS] [SIDE PACKAGE]: pq:read_table
 ./utilmy/zutil_features.py:pa_read_file, function, arr_table.to_pandas, [CLASS] [SIDE PACKAGE]: arr_table:to_pandas
-./utilmy/zutil_features.py:pa_read_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/zutil_features.py:pa_read_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil_features.py:pa_read_file, function, pd.concat, [CLASS] [SIDE PACKAGE]: pd:concat
 ./utilmy/zutil_features.py:pa_read_file, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pa_read_file, function, dfall.head, [CLASS] [SIDE PACKAGE]: dfall:head
@@ -1338,9 +1338,9 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pa_write_file, function, pq.write_to_dataset, [CLASS] [SIDE PACKAGE]: pq:write_to_dataset
 ./utilmy/zutil_features.py:pa_write_file, function, hdfs.ls, [CLASS] [SIDE PACKAGE]: hdfs:ls
 ./utilmy/zutil_features.py:pa_write_file, function, print, [built-In]:print
-./utilmy/zutil_features.py:pa_write_file, function, os.removedirs, [CLASS] [SIDE PACKAGE]: os:removedirs
-./utilmy/zutil_features.py:pa_write_file, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
-./utilmy/zutil_features.py:pa_write_file, function, os.listdir, [CLASS] [SIDE PACKAGE]: os:listdir
+./utilmy/zutil_features.py:pa_write_file, function, os.removedirs, [CLASS] [STDLIB]: os:removedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.listdir, [CLASS] [STDLIB]: os:listdir
 ./utilmy/zutil_features.py:test_get_classification_data, function, make_classification, make_classification
 ./utilmy/zutil_features.py:test_get_classification_data, function, range, [built-In]:range
 ./utilmy/zutil_features.py:test_get_classification_data, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
@@ -1350,18 +1350,18 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:test_get_classification_data, function, dfy.set_index, [CLASS] [SIDE PACKAGE]: dfy:set_index
 ./utilmy/zutil_features.py:params_check, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil_features.py:params_check, function, Exception, Exception
-./utilmy/zutil_features.py:save_features, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:save_features, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:save_features, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil_features.py:save_features, function, log, log
 ./utilmy/zutil_features.py:save_features, function, list, [built-In]:list
 ./utilmy/zutil_features.py:save_features, function, df0.to_parquet, [CLASS] [SIDE PACKAGE]: df0:to_parquet
 ./utilmy/zutil_features.py:load_features, function, pd.read_parquet, [CLASS] [SIDE PACKAGE]: pd:read_parquet
 ./utilmy/zutil_features.py:load_features, function, log, log
-./utilmy/zutil_features.py:save_list, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:save_list, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:save_list, function, log, log
-./utilmy/zutil_features.py:save_list, function, pickle.dump, [CLASS] [SIDE PACKAGE]: pickle:dump
+./utilmy/zutil_features.py:save_list, function, pickle.dump, [CLASS] [STDLIB]: pickle:dump
 ./utilmy/zutil_features.py:save_list, function, open, [built-In]:open
-./utilmy/zutil_features.py:save, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:save, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:save, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil_features.py:save, function, log, log
 ./utilmy/zutil_features.py:save, function, list, [built-In]:list
@@ -1369,7 +1369,7 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:load, function, pd.read_parquet, [CLASS] [SIDE PACKAGE]: pd:read_parquet
 ./utilmy/zutil_features.py:load, function, log, log
 ./utilmy/zutil_features.py:pd_read_file, function, ThreadPool, ThreadPool
-./utilmy/zutil_features.py:pd_read_file, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/zutil_features.py:pd_read_file, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/zutil_features.py:pd_read_file, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./utilmy/zutil_features.py:pd_read_file, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pd_read_file, function, log, log
@@ -1377,14 +1377,14 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pd_read_file, function, job_list.append, [CLASS] [SIDE PACKAGE]: job_list:append
 ./utilmy/zutil_features.py:pd_read_file, function, pool.apply_async, [CLASS] [SIDE PACKAGE]: pool:apply_async
 ./utilmy/zutil_features.py:pd_read_file, function, dfi.drop_duplicates, [CLASS] [SIDE PACKAGE]: dfi:drop_duplicates
-./utilmy/zutil_features.py:pd_read_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/zutil_features.py:pd_read_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil_features.py:pd_read_file, function, pd.concat, [CLASS] [SIDE PACKAGE]: pd:concat
 ./utilmy/zutil_features.py:load_dataset, function, log, log
 ./utilmy/zutil_features.py:load_dataset, function, fetch_spark_koalas, fetch_spark_koalas
 ./utilmy/zutil_features.py:load_dataset, function, fetch_dataset, fetch_dataset
-./utilmy/zutil_features.py:load_dataset, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
-./utilmy/zutil_features.py:load_dataset, function, ntpath.dirname, [CLASS] [SIDE PACKAGE]: ntpath:dirname
-./utilmy/zutil_features.py:load_dataset, function, ntpath.basename, [CLASS] [SIDE PACKAGE]: ntpath:basename
+./utilmy/zutil_features.py:load_dataset, function, glob.glob, [CLASS] [STDLIB]: glob:glob
+./utilmy/zutil_features.py:load_dataset, function, ntpath.dirname, [CLASS] [STDLIB]: ntpath:dirname
+./utilmy/zutil_features.py:load_dataset, function, ntpath.basename, [CLASS] [STDLIB]: ntpath:basename
 ./utilmy/zutil_features.py:load_dataset, function, len, [built-In]:len
 ./utilmy/zutil_features.py:load_dataset, function, print, [built-In]:print
 ./utilmy/zutil_features.py:load_dataset, function, pd.read_csv, [CLASS] [SIDE PACKAGE]: pd:read_csv
@@ -1403,12 +1403,12 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:fetch_spark_koalas, function, ks.read_parquet, [CLASS] [SIDE PACKAGE]: ks:read_parquet
 ./utilmy/zutil_features.py:fetch_dataset, function, log, log
 ./utilmy/zutil_features.py:fetch_dataset, function, mkdtemp, mkdtemp
-./utilmy/zutil_features.py:fetch_dataset, function, pathlib.Path, [CLASS] [SIDE PACKAGE]: pathlib:Path
+./utilmy/zutil_features.py:fetch_dataset, function, pathlib.Path, [CLASS] [STDLIB]: pathlib:Path
 ./utilmy/zutil_features.py:fetch_dataset, function, mktemp, mktemp
 ./utilmy/zutil_features.py:fetch_dataset, function, url_dataset.replace, [CLASS] [SIDE PACKAGE]: url_dataset:replace
 ./utilmy/zutil_features.py:fetch_dataset, function, urlx.replace, [CLASS] [SIDE PACKAGE]: urlx:replace
 ./utilmy/zutil_features.py:fetch_dataset, function, urlpath.split, [CLASS] [SIDE PACKAGE]: urlpath:split
-./utilmy/zutil_features.py:fetch_dataset, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:fetch_dataset, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:fetch_dataset, function, requests.Session, [CLASS] [SIDE PACKAGE]: requests:Session
 ./utilmy/zutil_features.py:fetch_dataset, function, s.get, [CLASS] [SIDE PACKAGE]: s:get
 ./utilmy/zutil_features.py:fetch_dataset, function, print, [built-In]:print
@@ -1419,9 +1419,9 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:fetch_dataset, function, parse_qs, parse_qs
 ./utilmy/zutil_features.py:fetch_dataset, function, download_googledrive, download_googledrive
 ./utilmy/zutil_features.py:fetch_dataset, function, download_dtopbox, download_dtopbox
-./utilmy/zutil_features.py:fetch_dataset, function, os.listdir, [CLASS] [SIDE PACKAGE]: os:listdir
-./utilmy/zutil_features.py:fetch_dataset, function, os.unlink, [CLASS] [SIDE PACKAGE]: os:unlink
-./utilmy/zutil_features.py:fetch_dataset, function, os.link, [CLASS] [SIDE PACKAGE]: os:link
+./utilmy/zutil_features.py:fetch_dataset, function, os.listdir, [CLASS] [STDLIB]: os:listdir
+./utilmy/zutil_features.py:fetch_dataset, function, os.unlink, [CLASS] [STDLIB]: os:unlink
+./utilmy/zutil_features.py:fetch_dataset, function, os.link, [CLASS] [STDLIB]: os:link
 ./utilmy/zutil_features.py:load_function_uri, function, uri_name.split, [CLASS] [SIDE PACKAGE]: uri_name:split
 ./utilmy/zutil_features.py:load_function_uri, function, len, [built-In]:len
 ./utilmy/zutil_features.py:load_function_uri, function, package_path.replace, [CLASS] [SIDE PACKAGE]: package_path:replace
@@ -1488,11 +1488,11 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:feature_correlation_cat, function, fig.tight_layout, [CLASS] [SIDE PACKAGE]: fig:tight_layout
 ./utilmy/zutil_features.py:feature_correlation_cat, function, plt.show, [CLASS] [SIDE PACKAGE]: plt:show
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, len, [built-In]:len
-./utilmy/zutil_features.py:pd_feature_generate_cross, function, itertools.combinations, [CLASS] [SIDE PACKAGE]: itertools:combinations
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, itertools.combinations, [CLASS] [STDLIB]: itertools:combinations
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, range, [built-In]:range
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, y.sum, [CLASS] [SIDE PACKAGE]: y:sum
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, col_cross.append, [CLASS] [SIDE PACKAGE]: col_cross:append
-./utilmy/zutil_features.py:pd_col_to_onehot, function, copy.deepcopy, [CLASS] [SIDE PACKAGE]: copy:deepcopy
+./utilmy/zutil_features.py:pd_col_to_onehot, function, copy.deepcopy, [CLASS] [STDLIB]: copy:deepcopy
 ./utilmy/zutil_features.py:pd_col_to_onehot, function, list, [built-In]:list
 ./utilmy/zutil_features.py:pd_col_to_onehot, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pd_col_to_onehot, function, print, [built-In]:print
@@ -1549,7 +1549,7 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pd_col_fillna, function, list, [built-In]:list
 ./utilmy/zutil_features.py:pd_col_fillna, function, df.groupby, [CLASS] [SIDE PACKAGE]: df:groupby
 ./utilmy/zutil_features.py:pd_col_fillna, function, print, [built-In]:print
-./utilmy/zutil_features.py:pd_pipeline_apply, function, copy.deepcopy, [CLASS] [SIDE PACKAGE]: copy:deepcopy
+./utilmy/zutil_features.py:pd_pipeline_apply, function, copy.deepcopy, [CLASS] [STDLIB]: copy:deepcopy
 ./utilmy/zutil_features.py:pd_pipeline_apply, function, enumerate, [built-In]:enumerate
 ./utilmy/zutil_features.py:pd_pipeline_apply, function, print, [built-In]:print
 ./utilmy/zutil_features.py:pd_pipeline_apply, function, str, [built-In]:str
@@ -1559,8 +1559,8 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pd_stat_correl_pair, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pd_stat_pandas_profile, function, print, [built-In]:print
 ./utilmy/zutil_features.py:pd_stat_pandas_profile, function, df.profile_report, [CLASS] [SIDE PACKAGE]: df:profile_report
-./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.to_file, [CLASS] [SIDE PACKAGE]: profile:to_file
-./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.get_rejected_variables, [CLASS] [SIDE PACKAGE]: profile:get_rejected_variables
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.to_file, [CLASS] [STDLIB]: profile:to_file
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.get_rejected_variables, [CLASS] [STDLIB]: profile:get_rejected_variables
 ./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, df.sample, [CLASS] [SIDE PACKAGE]: df:sample
 ./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, getstat, getstat
 ./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, str, [built-In]:str
@@ -1618,14 +1618,14 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:log, function, log3, log3
 ./utilmy/zutil_features.py:log2, function, print, [built-In]:print
 ./utilmy/zutil_features.py:log3, function, print, [built-In]:print
-./utilmy/zutil_features.py:os_get_function_name, function, sys._getframe, [CLASS] [SIDE PACKAGE]: sys:_getframe
+./utilmy/zutil_features.py:os_get_function_name, function, sys._getframe, [CLASS] [STDLIB]: sys:_getframe
 ./utilmy/zutil_features.py:pa_read_file, function, hdfs.ls, [CLASS] [SIDE PACKAGE]: hdfs:ls
-./utilmy/zutil_features.py:pa_read_file, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/zutil_features.py:pa_read_file, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/zutil_features.py:pa_read_file, function, fi.split, [CLASS] [SIDE PACKAGE]: fi:split
 ./utilmy/zutil_features.py:pa_read_file, function, print, [built-In]:print
 ./utilmy/zutil_features.py:pa_read_file, function, pq.read_table, [CLASS] [SIDE PACKAGE]: pq:read_table
 ./utilmy/zutil_features.py:pa_read_file, function, arr_table.to_pandas, [CLASS] [SIDE PACKAGE]: arr_table:to_pandas
-./utilmy/zutil_features.py:pa_read_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/zutil_features.py:pa_read_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil_features.py:pa_read_file, function, pd.concat, [CLASS] [SIDE PACKAGE]: pd:concat
 ./utilmy/zutil_features.py:pa_read_file, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pa_read_file, function, dfall.head, [CLASS] [SIDE PACKAGE]: dfall:head
@@ -1634,9 +1634,9 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pa_write_file, function, pq.write_to_dataset, [CLASS] [SIDE PACKAGE]: pq:write_to_dataset
 ./utilmy/zutil_features.py:pa_write_file, function, hdfs.ls, [CLASS] [SIDE PACKAGE]: hdfs:ls
 ./utilmy/zutil_features.py:pa_write_file, function, print, [built-In]:print
-./utilmy/zutil_features.py:pa_write_file, function, os.removedirs, [CLASS] [SIDE PACKAGE]: os:removedirs
-./utilmy/zutil_features.py:pa_write_file, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
-./utilmy/zutil_features.py:pa_write_file, function, os.listdir, [CLASS] [SIDE PACKAGE]: os:listdir
+./utilmy/zutil_features.py:pa_write_file, function, os.removedirs, [CLASS] [STDLIB]: os:removedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./utilmy/zutil_features.py:pa_write_file, function, os.listdir, [CLASS] [STDLIB]: os:listdir
 ./utilmy/zutil_features.py:test_get_classification_data, function, make_classification, make_classification
 ./utilmy/zutil_features.py:test_get_classification_data, function, range, [built-In]:range
 ./utilmy/zutil_features.py:test_get_classification_data, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
@@ -1646,18 +1646,18 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:test_get_classification_data, function, dfy.set_index, [CLASS] [SIDE PACKAGE]: dfy:set_index
 ./utilmy/zutil_features.py:params_check, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil_features.py:params_check, function, Exception, Exception
-./utilmy/zutil_features.py:save_features, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:save_features, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:save_features, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil_features.py:save_features, function, log, log
 ./utilmy/zutil_features.py:save_features, function, list, [built-In]:list
 ./utilmy/zutil_features.py:save_features, function, df0.to_parquet, [CLASS] [SIDE PACKAGE]: df0:to_parquet
 ./utilmy/zutil_features.py:load_features, function, pd.read_parquet, [CLASS] [SIDE PACKAGE]: pd:read_parquet
 ./utilmy/zutil_features.py:load_features, function, log, log
-./utilmy/zutil_features.py:save_list, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:save_list, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:save_list, function, log, log
-./utilmy/zutil_features.py:save_list, function, pickle.dump, [CLASS] [SIDE PACKAGE]: pickle:dump
+./utilmy/zutil_features.py:save_list, function, pickle.dump, [CLASS] [STDLIB]: pickle:dump
 ./utilmy/zutil_features.py:save_list, function, open, [built-In]:open
-./utilmy/zutil_features.py:save, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:save, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:save, function, isinstance, [built-In]:isinstance
 ./utilmy/zutil_features.py:save, function, log, log
 ./utilmy/zutil_features.py:save, function, list, [built-In]:list
@@ -1665,7 +1665,7 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:load, function, pd.read_parquet, [CLASS] [SIDE PACKAGE]: pd:read_parquet
 ./utilmy/zutil_features.py:load, function, log, log
 ./utilmy/zutil_features.py:pd_read_file, function, ThreadPool, ThreadPool
-./utilmy/zutil_features.py:pd_read_file, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/zutil_features.py:pd_read_file, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/zutil_features.py:pd_read_file, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./utilmy/zutil_features.py:pd_read_file, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pd_read_file, function, log, log
@@ -1673,14 +1673,14 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pd_read_file, function, job_list.append, [CLASS] [SIDE PACKAGE]: job_list:append
 ./utilmy/zutil_features.py:pd_read_file, function, pool.apply_async, [CLASS] [SIDE PACKAGE]: pool:apply_async
 ./utilmy/zutil_features.py:pd_read_file, function, dfi.drop_duplicates, [CLASS] [SIDE PACKAGE]: dfi:drop_duplicates
-./utilmy/zutil_features.py:pd_read_file, function, gc.collect, [CLASS] [SIDE PACKAGE]: gc:collect
+./utilmy/zutil_features.py:pd_read_file, function, gc.collect, [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil_features.py:pd_read_file, function, pd.concat, [CLASS] [SIDE PACKAGE]: pd:concat
 ./utilmy/zutil_features.py:load_dataset, function, log, log
 ./utilmy/zutil_features.py:load_dataset, function, fetch_spark_koalas, fetch_spark_koalas
 ./utilmy/zutil_features.py:load_dataset, function, fetch_dataset, fetch_dataset
-./utilmy/zutil_features.py:load_dataset, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
-./utilmy/zutil_features.py:load_dataset, function, ntpath.dirname, [CLASS] [SIDE PACKAGE]: ntpath:dirname
-./utilmy/zutil_features.py:load_dataset, function, ntpath.basename, [CLASS] [SIDE PACKAGE]: ntpath:basename
+./utilmy/zutil_features.py:load_dataset, function, glob.glob, [CLASS] [STDLIB]: glob:glob
+./utilmy/zutil_features.py:load_dataset, function, ntpath.dirname, [CLASS] [STDLIB]: ntpath:dirname
+./utilmy/zutil_features.py:load_dataset, function, ntpath.basename, [CLASS] [STDLIB]: ntpath:basename
 ./utilmy/zutil_features.py:load_dataset, function, len, [built-In]:len
 ./utilmy/zutil_features.py:load_dataset, function, print, [built-In]:print
 ./utilmy/zutil_features.py:load_dataset, function, pd.read_csv, [CLASS] [SIDE PACKAGE]: pd:read_csv
@@ -1699,12 +1699,12 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:fetch_spark_koalas, function, ks.read_parquet, [CLASS] [SIDE PACKAGE]: ks:read_parquet
 ./utilmy/zutil_features.py:fetch_dataset, function, log, log
 ./utilmy/zutil_features.py:fetch_dataset, function, mkdtemp, mkdtemp
-./utilmy/zutil_features.py:fetch_dataset, function, pathlib.Path, [CLASS] [SIDE PACKAGE]: pathlib:Path
+./utilmy/zutil_features.py:fetch_dataset, function, pathlib.Path, [CLASS] [STDLIB]: pathlib:Path
 ./utilmy/zutil_features.py:fetch_dataset, function, mktemp, mktemp
 ./utilmy/zutil_features.py:fetch_dataset, function, url_dataset.replace, [CLASS] [SIDE PACKAGE]: url_dataset:replace
 ./utilmy/zutil_features.py:fetch_dataset, function, urlx.replace, [CLASS] [SIDE PACKAGE]: urlx:replace
 ./utilmy/zutil_features.py:fetch_dataset, function, urlpath.split, [CLASS] [SIDE PACKAGE]: urlpath:split
-./utilmy/zutil_features.py:fetch_dataset, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/zutil_features.py:fetch_dataset, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/zutil_features.py:fetch_dataset, function, requests.Session, [CLASS] [SIDE PACKAGE]: requests:Session
 ./utilmy/zutil_features.py:fetch_dataset, function, s.get, [CLASS] [SIDE PACKAGE]: s:get
 ./utilmy/zutil_features.py:fetch_dataset, function, print, [built-In]:print
@@ -1715,9 +1715,9 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:fetch_dataset, function, parse_qs, parse_qs
 ./utilmy/zutil_features.py:fetch_dataset, function, download_googledrive, download_googledrive
 ./utilmy/zutil_features.py:fetch_dataset, function, download_dtopbox, download_dtopbox
-./utilmy/zutil_features.py:fetch_dataset, function, os.listdir, [CLASS] [SIDE PACKAGE]: os:listdir
-./utilmy/zutil_features.py:fetch_dataset, function, os.unlink, [CLASS] [SIDE PACKAGE]: os:unlink
-./utilmy/zutil_features.py:fetch_dataset, function, os.link, [CLASS] [SIDE PACKAGE]: os:link
+./utilmy/zutil_features.py:fetch_dataset, function, os.listdir, [CLASS] [STDLIB]: os:listdir
+./utilmy/zutil_features.py:fetch_dataset, function, os.unlink, [CLASS] [STDLIB]: os:unlink
+./utilmy/zutil_features.py:fetch_dataset, function, os.link, [CLASS] [STDLIB]: os:link
 ./utilmy/zutil_features.py:load_function_uri, function, uri_name.split, [CLASS] [SIDE PACKAGE]: uri_name:split
 ./utilmy/zutil_features.py:load_function_uri, function, len, [built-In]:len
 ./utilmy/zutil_features.py:load_function_uri, function, package_path.replace, [CLASS] [SIDE PACKAGE]: package_path:replace
@@ -1784,11 +1784,11 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:feature_correlation_cat, function, fig.tight_layout, [CLASS] [SIDE PACKAGE]: fig:tight_layout
 ./utilmy/zutil_features.py:feature_correlation_cat, function, plt.show, [CLASS] [SIDE PACKAGE]: plt:show
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, len, [built-In]:len
-./utilmy/zutil_features.py:pd_feature_generate_cross, function, itertools.combinations, [CLASS] [SIDE PACKAGE]: itertools:combinations
+./utilmy/zutil_features.py:pd_feature_generate_cross, function, itertools.combinations, [CLASS] [STDLIB]: itertools:combinations
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, range, [built-In]:range
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, y.sum, [CLASS] [SIDE PACKAGE]: y:sum
 ./utilmy/zutil_features.py:pd_feature_generate_cross, function, col_cross.append, [CLASS] [SIDE PACKAGE]: col_cross:append
-./utilmy/zutil_features.py:pd_col_to_onehot, function, copy.deepcopy, [CLASS] [SIDE PACKAGE]: copy:deepcopy
+./utilmy/zutil_features.py:pd_col_to_onehot, function, copy.deepcopy, [CLASS] [STDLIB]: copy:deepcopy
 ./utilmy/zutil_features.py:pd_col_to_onehot, function, list, [built-In]:list
 ./utilmy/zutil_features.py:pd_col_to_onehot, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pd_col_to_onehot, function, print, [built-In]:print
@@ -1845,7 +1845,7 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pd_col_fillna, function, list, [built-In]:list
 ./utilmy/zutil_features.py:pd_col_fillna, function, df.groupby, [CLASS] [SIDE PACKAGE]: df:groupby
 ./utilmy/zutil_features.py:pd_col_fillna, function, print, [built-In]:print
-./utilmy/zutil_features.py:pd_pipeline_apply, function, copy.deepcopy, [CLASS] [SIDE PACKAGE]: copy:deepcopy
+./utilmy/zutil_features.py:pd_pipeline_apply, function, copy.deepcopy, [CLASS] [STDLIB]: copy:deepcopy
 ./utilmy/zutil_features.py:pd_pipeline_apply, function, enumerate, [built-In]:enumerate
 ./utilmy/zutil_features.py:pd_pipeline_apply, function, print, [built-In]:print
 ./utilmy/zutil_features.py:pd_pipeline_apply, function, str, [built-In]:str
@@ -1855,8 +1855,8 @@ uri, type, function, detail
 ./utilmy/zutil_features.py:pd_stat_correl_pair, function, len, [built-In]:len
 ./utilmy/zutil_features.py:pd_stat_pandas_profile, function, print, [built-In]:print
 ./utilmy/zutil_features.py:pd_stat_pandas_profile, function, df.profile_report, [CLASS] [SIDE PACKAGE]: df:profile_report
-./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.to_file, [CLASS] [SIDE PACKAGE]: profile:to_file
-./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.get_rejected_variables, [CLASS] [SIDE PACKAGE]: profile:get_rejected_variables
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.to_file, [CLASS] [STDLIB]: profile:to_file
+./utilmy/zutil_features.py:pd_stat_pandas_profile, function, profile.get_rejected_variables, [CLASS] [STDLIB]: profile:get_rejected_variables
 ./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, df.sample, [CLASS] [SIDE PACKAGE]: df:sample
 ./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, getstat, getstat
 ./utilmy/zutil_features.py:pd_stat_distribution_colnum, function, str, [built-In]:str
@@ -1913,15 +1913,15 @@ uri, type, function, detail
 ./utilmy/configs/util_config.py:log, function, loge, loge
 ./utilmy/configs/util_config.py:loge, function, print, [built-In]:print
 ./utilmy/configs/util_config.py:config_load, function, log, log
-./utilmy/configs/util_config.py:config_load, function, pathlib.Path, [CLASS] [SIDE PACKAGE]: pathlib:Path
+./utilmy/configs/util_config.py:config_load, function, pathlib.Path, [CLASS] [STDLIB]: pathlib:Path
 ./utilmy/configs/util_config.py:config_load, function, yaml.safe_load, [CLASS] [SIDE PACKAGE]: yaml:safe_load
-./utilmy/configs/util_config.py:config_load, function, json.loads, [CLASS] [SIDE PACKAGE]: json:loads
+./utilmy/configs/util_config.py:config_load, function, json.loads, [CLASS] [STDLIB]: json:loads
 ./utilmy/configs/util_config.py:config_load, function, SafeConfigParser, SafeConfigParser
 ./utilmy/configs/util_config.py:config_load, function, cfg.read, [CLASS] [SIDE PACKAGE]: cfg:read
 ./utilmy/configs/util_config.py:config_load, function, toml.loads, [CLASS] [SIDE PACKAGE]: toml:loads
 ./utilmy/configs/util_config.py:config_load, function, Exception, Exception
 ./utilmy/configs/util_config.py:config_load, function, Box, Box
-./utilmy/configs/util_config.py:config_load, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/configs/util_config.py:config_load, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/configs/util_config.py:config_load, function, open, [built-In]:open
 ./utilmy/configs/util_config.py:config_load, function, yaml.dump, [CLASS] [SIDE PACKAGE]: yaml:dump
 ./utilmy/configs/util_config.py:config_isvalid_yamlschema, function, schema.validate, [CLASS] [SIDE PACKAGE]: schema:validate
@@ -1933,7 +1933,7 @@ uri, type, function, detail
 ./utilmy/configs/util_config.py:convert_yaml_to_box, function, Box, Box
 ./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, SchemaGen, SchemaGen
 ./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, generated.to_file, [CLASS] [SIDE PACKAGE]: generated:to_file
-./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, importlib.import_module, [CLASS] [SIDE PACKAGE]: importlib:import_module
+./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, importlib.import_module, [CLASS] [STDLIB]: importlib:import_module
 ./utilmy/configs/util_config.py:convert_dict_to_pydantic, function, pydantic_module.MainSchema, [CLASS] [SIDE PACKAGE]: pydantic_module:MainSchema
 ./utilmy/configs/util_config.py:pydantic_model_generator, function, generate, generate
 ./utilmy/configs/util_config.py:pydantic_model_generator, function, loge, loge
@@ -1946,17 +1946,17 @@ uri, type, function, detail
 ./utilmy/configs/util_config.py:test4, function, config_load, config_load
 ./utilmy/configs/util_config.py:test4, function, convert_dict_to_pydantic, convert_dict_to_pydantic
 ./utilmy/configs/util_config.py:test4, function, isinstance, [built-In]:isinstance
-./utilmy/docs/cli.py:run_cli, function, argparse.ArgumentParser, [CLASS] [SIDE PACKAGE]: argparse:ArgumentParser
+./utilmy/docs/cli.py:run_cli, function, argparse.ArgumentParser, [CLASS] [STDLIB]: argparse:ArgumentParser
 ./utilmy/docs/cli.py:run_cli, function, add, add
 ./utilmy/docs/cli.py:run_cli, function, p.parse_args, [CLASS] [SIDE PACKAGE]: p:parse_args
-./utilmy/docs/cli.py:run_cli, function, os.makedirs, [CLASS] [SIDE PACKAGE]: os:makedirs
+./utilmy/docs/cli.py:run_cli, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
 ./utilmy/docs/cli.py:run_cli, function, export_stats_perrepo, export_stats_perrepo
 ./utilmy/docs/cli.py:run_cli, function, run_markdown, run_markdown
 ./utilmy/docs/cli.py:run_cli, function, run_table, run_table
 ./utilmy/docs/code_parser.py:get_list_function_name, function, _get_all_line, _get_all_line
 ./utilmy/docs/code_parser.py:get_list_function_name, function, _get_and_clean_all_lines, _get_and_clean_all_lines
 ./utilmy/docs/code_parser.py:get_list_function_name, function, list, [built-In]:list
-./utilmy/docs/code_parser.py:get_list_function_name, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:get_list_function_name, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:get_list_function_name, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:get_list_function_name, function, re_response.group, [CLASS] [SIDE PACKAGE]: re_response:group
 ./utilmy/docs/code_parser.py:get_list_function_name, function, all_lines.index, [CLASS] [SIDE PACKAGE]: all_lines:index
@@ -1964,7 +1964,7 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:get_list_class_name, function, _get_all_line, _get_all_line
 ./utilmy/docs/code_parser.py:get_list_class_name, function, _get_and_clean_all_lines, _get_and_clean_all_lines
 ./utilmy/docs/code_parser.py:get_list_class_name, function, list, [built-In]:list
-./utilmy/docs/code_parser.py:get_list_class_name, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:get_list_class_name, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:get_list_class_name, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:get_list_class_name, function, re_response.group, [CLASS] [SIDE PACKAGE]: re_response:group
 ./utilmy/docs/code_parser.py:get_list_class_name, function, all_lines.index, [CLASS] [SIDE PACKAGE]: all_lines:index
@@ -1973,13 +1973,13 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:get_list_class_methods, function, _get_and_clean_all_lines, _get_and_clean_all_lines
 ./utilmy/docs/code_parser.py:get_list_class_methods, function, get_list_class_name, get_list_class_name
 ./utilmy/docs/code_parser.py:get_list_class_methods, function, _get_all_lines_in_class, _get_all_lines_in_class
-./utilmy/docs/code_parser.py:get_list_class_methods, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:get_list_class_methods, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:get_list_class_methods, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:get_list_class_methods, function, re_response.group, [CLASS] [SIDE PACKAGE]: re_response:group
 ./utilmy/docs/code_parser.py:get_list_class_methods, function, all_lines.index, [CLASS] [SIDE PACKAGE]: all_lines:index
 ./utilmy/docs/code_parser.py:get_list_class_methods, function, list_names.append, [CLASS] [SIDE PACKAGE]: list_names:append
 ./utilmy/docs/code_parser.py:get_list_variable_global, function, _get_and_clean_all_lines, _get_and_clean_all_lines
-./utilmy/docs/code_parser.py:get_list_variable_global, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:get_list_variable_global, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:get_list_variable_global, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:get_list_variable_global, function, list_var.append, [CLASS] [SIDE PACKAGE]: list_var:append
 ./utilmy/docs/code_parser.py:get_list_variable_global, function, list, [built-In]:list
@@ -2027,12 +2027,12 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:get_file_stats, function, get_list_function_stats, get_list_function_stats
 ./utilmy/docs/code_parser.py:get_file_stats, function, len, [built-In]:len
 ./utilmy/docs/code_parser.py:get_file_stats, function, avg_lines/len, avg_lines/len
-./utilmy/docs/code_parser.py:_get_functions, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:_get_functions, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:_get_functions, function, list_funcs.append, [CLASS] [SIDE PACKAGE]: list_funcs:append
 ./utilmy/docs/code_parser.py:_get_functions, function, list, [built-In]:list
 ./utilmy/docs/code_parser.py:_get_functions, function, return, return
 ./utilmy/docs/code_parser.py:_validate_file, function, print, [built-In]:print
-./utilmy/docs/code_parser.py:_clean_data, function, array.copy, [CLASS] [SIDE PACKAGE]: array:copy
+./utilmy/docs/code_parser.py:_clean_data, function, array.copy, [CLASS] [STDLIB]: array:copy
 ./utilmy/docs/code_parser.py:_clean_data, function, _remove_empty_line, _remove_empty_line
 ./utilmy/docs/code_parser.py:_clean_data, function, _remmove_commemt_line, _remmove_commemt_line
 ./utilmy/docs/code_parser.py:_clean_data, function, response.remove, [CLASS] [SIDE PACKAGE]: response:remove
@@ -2046,8 +2046,8 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:_get_and_clean_all_lines, function, _clean_data, _clean_data
 ./utilmy/docs/code_parser.py:_get_all_line, function, open, [built-In]:open
 ./utilmy/docs/code_parser.py:_get_all_line, function, _get_all_lines_in_function, _get_all_lines_in_function
-./utilmy/docs/code_parser.py:_get_all_line, function, array.copy, [CLASS] [SIDE PACKAGE]: array:copy
-./utilmy/docs/code_parser.py:_get_all_line, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:_get_all_line, function, array.copy, [CLASS] [STDLIB]: array:copy
+./utilmy/docs/code_parser.py:_get_all_line, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:_get_all_line, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:_get_all_line, function, response.remove, [CLASS] [SIDE PACKAGE]: response:remove
 ./utilmy/docs/code_parser.py:_get_all_line, function, range, [built-In]:range
@@ -2056,24 +2056,24 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:_get_all_line, function, len, [built-In]:len
 ./utilmy/docs/code_parser.py:_get_all_line, function, _get_all_lines_in_class, _get_all_lines_in_class
 ./utilmy/docs/code_parser.py:_get_all_line, function, _get_all_lines_define_function, _get_all_lines_define_function
-./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, array.copy, [CLASS] [SIDE PACKAGE]: array:copy
-./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, array.copy, [CLASS] [STDLIB]: array:copy
+./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, response.remove, [CLASS] [SIDE PACKAGE]: response:remove
 ./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, range, [built-In]:range
 ./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, list, [built-In]:list
 ./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, list_lines.append, [CLASS] [SIDE PACKAGE]: list_lines:append
 ./utilmy/docs/code_parser.py:_get_all_lines_in_function, function, len, [built-In]:len
-./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, array.copy, [CLASS] [SIDE PACKAGE]: array:copy
-./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, array.copy, [CLASS] [STDLIB]: array:copy
+./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, response.remove, [CLASS] [SIDE PACKAGE]: response:remove
 ./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, list, [built-In]:list
 ./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, list_lines.append, [CLASS] [SIDE PACKAGE]: list_lines:append
 ./utilmy/docs/code_parser.py:_get_all_lines_in_class, function, len, [built-In]:len
 ./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, list, [built-In]:list
-./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, array.copy, [CLASS] [SIDE PACKAGE]: array:copy
-./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, array.copy, [CLASS] [STDLIB]: array:copy
+./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, response.remove, [CLASS] [SIDE PACKAGE]: response:remove
 ./utilmy/docs/code_parser.py:_get_all_lines_define_function, function, list_lines.append, [CLASS] [SIDE PACKAGE]: list_lines:append
@@ -2082,7 +2082,7 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, line.strip, [CLASS] [SIDE PACKAGE]: line:strip
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, print, [built-In]:print
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, i.start, [CLASS] [SIDE PACKAGE]: i:start
-./utilmy/docs/code_parser.py:_get_define_function_stats, function, re.finditer, [CLASS] [SIDE PACKAGE]: re:finditer
+./utilmy/docs/code_parser.py:_get_define_function_stats, function, re.finditer, [CLASS] [STDLIB]: re:finditer
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, range, [built-In]:range
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, data.split, [CLASS] [SIDE PACKAGE]: data:split
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg.replace, [CLASS] [SIDE PACKAGE]: arg:replace
@@ -2091,12 +2091,12 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg_name.append, [CLASS] [SIDE PACKAGE]: arg_name:append
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg_type.append, [CLASS] [SIDE PACKAGE]: arg_type:append
 ./utilmy/docs/code_parser.py:_get_define_function_stats, function, arg_value.append, [CLASS] [SIDE PACKAGE]: arg_value:append
-./utilmy/docs/code_parser.py:_get_function_stats, function, array.copy, [CLASS] [SIDE PACKAGE]: array:copy
+./utilmy/docs/code_parser.py:_get_function_stats, function, array.copy, [CLASS] [STDLIB]: array:copy
 ./utilmy/docs/code_parser.py:_get_function_stats, function, check_array.copy, [CLASS] [SIDE PACKAGE]: check_array:copy
 ./utilmy/docs/code_parser.py:_get_function_stats, function, line.rstrip, [CLASS] [SIDE PACKAGE]: line:rstrip
 ./utilmy/docs/code_parser.py:_get_function_stats, function, check_array.remove, [CLASS] [SIDE PACKAGE]: check_array:remove
 ./utilmy/docs/code_parser.py:_get_function_stats, function, line.split, [CLASS] [SIDE PACKAGE]: line:split
-./utilmy/docs/code_parser.py:_get_function_stats, function, re.match, [CLASS] [SIDE PACKAGE]: re:match
+./utilmy/docs/code_parser.py:_get_function_stats, function, re.match, [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:_get_function_stats, function, list_var.append, [CLASS] [SIDE PACKAGE]: list_var:append
 ./utilmy/docs/code_parser.py:_get_function_stats, function, list, [built-In]:list
 ./utilmy/docs/code_parser.py:export_stats_pertype, function, get_list_function_stats, get_list_function_stats
@@ -2109,7 +2109,7 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:export_stats_perfile, function, df.to_csv, [CLASS] [SIDE PACKAGE]: df:to_csv
 ./utilmy/docs/code_parser.py:export_stats_perfile, function, get_list_class_stats, get_list_class_stats
 ./utilmy/docs/code_parser.py:export_stats_perfile, function, get_list_method_stats, get_list_method_stats
-./utilmy/docs/code_parser.py:export_stats_perrepo, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/docs/code_parser.py:export_stats_perrepo, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/docs/code_parser.py:export_stats_perrepo, function, range, [built-In]:range
 ./utilmy/docs/code_parser.py:export_stats_perrepo, function, get_list_function_stats, get_list_function_stats
 ./utilmy/docs/code_parser.py:export_stats_perrepo, function, print, [built-In]:print
@@ -2119,12 +2119,13 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:write_to_file, function, function.split, [CLASS] [SIDE PACKAGE]: function:split
 ./utilmy/docs/code_parser.py:write_to_file, function, open, [built-In]:open
 ./utilmy/docs/code_parser.py:write_to_file, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
-./utilmy/docs/code_parser.py:function_graph, function, glob.glob, [CLASS] [SIDE PACKAGE]: glob:glob
+./utilmy/docs/code_parser.py:function_graph, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./utilmy/docs/code_parser.py:function_graph, function, range, [built-In]:range
-./utilmy/docs/code_parser.py:function_graph, function, get_list_function_stats, get_list_function_stats
+./utilmy/docs/code_parser.py:function_graph, function, get_list_class_stats, get_list_class_stats
 ./utilmy/docs/code_parser.py:function_graph, function, zip, [built-In]:zip
 ./utilmy/docs/code_parser.py:function_graph, function, list_classes.append, [CLASS] [SIDE PACKAGE]: list_classes:append
 ./utilmy/docs/code_parser.py:function_graph, function, print, [built-In]:print
+./utilmy/docs/code_parser.py:function_graph, function, get_list_function_stats, get_list_function_stats
 ./utilmy/docs/code_parser.py:function_graph, function, open, [built-In]:open
 ./utilmy/docs/code_parser.py:function_graph, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
 ./utilmy/docs/code_parser.py:function_graph, function, write_to_file, write_to_file
@@ -2152,7 +2153,7 @@ uri, type, function, detail
 ./utilmy/logs/test_log.py:test2, function, logc, logc
 ./utilmy/logs/test_log.py:test2, function, logr, logr
 ./utilmy/logs/test_log.py:test2, function, loge, loge
-./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer, [CLASS] [SIDE PACKAGE]: socketserver:TCPServer
+./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer, [CLASS] [STDLIB]: socketserver:TCPServer
 ./utilmy/logs/test_log.py:test_server, function, print, [built-In]:print
 ./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup, [CLASS] [SIDE PACKAGE]: util_log:logger_setup
 ./utilmy/logs/test_log.py:test_server, function, log3, log3
@@ -2178,7 +2179,7 @@ uri, type, function, detail
 ./utilmy/logs/test_log.py:test2, function, logc, logc
 ./utilmy/logs/test_log.py:test2, function, logr, logr
 ./utilmy/logs/test_log.py:test2, function, loge, loge
-./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer, [CLASS] [SIDE PACKAGE]: socketserver:TCPServer
+./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer, [CLASS] [STDLIB]: socketserver:TCPServer
 ./utilmy/logs/test_log.py:test_server, function, print, [built-In]:print
 ./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup, [CLASS] [SIDE PACKAGE]: util_log:logger_setup
 ./utilmy/logs/test_log.py:test_server, function, log3, log3
@@ -2234,67 +2235,67 @@ uri, type, function, detail
 ./utilmy/logs/util_log.py:z_logger_stdout_override, function, logger.remove, [CLASS] [SIDE PACKAGE]: logger:remove
 ./utilmy/logs/util_log.py:z_logger_stdout_override, function, logger.add, [CLASS] [SIDE PACKAGE]: logger:add
 ./utilmy/logs/util_log.py:z_logger_stdout_override, function, StreamToLogger, StreamToLogger
-./utilmy/logs/util_log.py:z_logger_stdout_override, function, contextlib.redirect_stdout, [CLASS] [SIDE PACKAGE]: contextlib:redirect_stdout
+./utilmy/logs/util_log.py:z_logger_stdout_override, function, contextlib.redirect_stdout, [CLASS] [STDLIB]: contextlib:redirect_stdout
 ./utilmy/logs/util_log.py:z_logger_stdout_override, function, print, [built-In]:print
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, InterceptHandler, InterceptHandler
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, emit, emit
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, logger.level, [CLASS] [SIDE PACKAGE]: logger:level
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, str, [built-In]:str
-./utilmy/logs/util_log.py:z_logger_custom_1, function, logging.currentframe, [CLASS] [SIDE PACKAGE]: logging:currentframe
+./utilmy/logs/util_log.py:z_logger_custom_1, function, logging.currentframe, [CLASS] [STDLIB]: logging:currentframe
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, logger.opt, [CLASS] [SIDE PACKAGE]: logger:opt
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, record.getMessage, [CLASS] [SIDE PACKAGE]: record:getMessage
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, format_record, format_record
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, pformat, pformat
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, setup_logging, setup_logging
-./utilmy/logs/util_log.py:z_logger_custom_1, function, logging.getLogger, [CLASS] [SIDE PACKAGE]: logging:getLogger
+./utilmy/logs/util_log.py:z_logger_custom_1, function, logging.getLogger, [CLASS] [STDLIB]: logging:getLogger
 ./utilmy/logs/util_log.py:z_logger_custom_1, function, logger.configure, [CLASS] [SIDE PACKAGE]: logger:configure
-./utilmy/templates/cli.py:run_cli, function, argparse.ArgumentParser, [CLASS] [SIDE PACKAGE]: argparse:ArgumentParser
+./utilmy/templates/cli.py:run_cli, function, argparse.ArgumentParser, [CLASS] [STDLIB]: argparse:ArgumentParser
 ./utilmy/templates/cli.py:run_cli, function, add, add
 ./utilmy/templates/cli.py:run_cli, function, p.parse_args, [CLASS] [SIDE PACKAGE]: p:parse_args
 ./utilmy/templates/cli.py:run_cli, function, template_show, template_show
 ./utilmy/templates/cli.py:run_cli, function, template_copy, template_copy
-./utilmy/templates/cli.py:template_show, function, os.walk, [CLASS] [SIDE PACKAGE]: os:walk
+./utilmy/templates/cli.py:template_show, function, os.walk, [CLASS] [STDLIB]: os:walk
 ./utilmy/templates/cli.py:template_show, function, print, [built-In]:print
 ./utilmy/templates/cli.py:template_copy, function, os_copy, os_copy
 ./utilmy/templates/cli.py:template_copy, function, print, [built-In]:print
 ./utilmy/templates/cli.py:template_copy, function, Path, Path
-./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
+./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB]: subprocess:check_output
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, open, [built-In]:open
-./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [SIDE PACKAGE]: Version:parse
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [REPO]: Version:parse
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, print, [built-In]:print
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, int, [built-In]:int
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, file.write, [CLASS] [SIDE PACKAGE]: file:write
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, version.new_version, [CLASS] [SIDE PACKAGE]: version:new_version
 ./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, ask, ask
 ./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, exit, exit
-./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, os.system, [CLASS] [STDLIB]: os:system
 ./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, input, [built-In]:input
 ./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, ans.lower, [CLASS] [SIDE PACKAGE]: ans:lower
-./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.system, [CLASS] [STDLIB]: os:system
 ./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, print, [built-In]:print
-./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.listdir, [CLASS] [SIDE PACKAGE]: os:listdir
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.listdir, [CLASS] [STDLIB]: os:listdir
 ./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, item.endswith, [CLASS] [SIDE PACKAGE]: item:endswith
 ./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, print, [built-In]:print
 ./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, update_version, update_version
-./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
+./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB]: subprocess:check_output
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, open, [built-In]:open
-./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [SIDE PACKAGE]: Version:parse
+./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, Version.parse, [CLASS] [REPO]: Version:parse
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, print, [built-In]:print
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, int, [built-In]:int
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, file.write, [CLASS] [SIDE PACKAGE]: file:write
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, version.new_version, [CLASS] [SIDE PACKAGE]: version:new_version
 ./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, ask, ask
 ./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, exit, exit
-./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./utilmy/templates/templist/pypi_package/run_pipy.py:git_commit, function, os.system, [CLASS] [STDLIB]: os:system
 ./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, input, [built-In]:input
 ./utilmy/templates/templist/pypi_package/run_pipy.py:ask, function, ans.lower, [CLASS] [SIDE PACKAGE]: ans:lower
-./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.system, [CLASS] [SIDE PACKAGE]: os:system
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.system, [CLASS] [STDLIB]: os:system
 ./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, print, [built-In]:print
-./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.listdir, [CLASS] [SIDE PACKAGE]: os:listdir
+./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, os.listdir, [CLASS] [STDLIB]: os:listdir
 ./utilmy/templates/templist/pypi_package/run_pipy.py:pypi_upload, function, item.endswith, [CLASS] [SIDE PACKAGE]: item:endswith
 ./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, print, [built-In]:print
 ./utilmy/templates/templist/pypi_package/run_pipy.py:main, function, update_version, update_version
-./utilmy/templates/templist/pypi_package/setup.py:get_current_githash, function, subprocess.check_output, [CLASS] [SIDE PACKAGE]: subprocess:check_output
+./utilmy/templates/templist/pypi_package/setup.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB]: subprocess:check_output
 ./utilmy/templates/templist/pypi_package/setup.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE]: label:decode
