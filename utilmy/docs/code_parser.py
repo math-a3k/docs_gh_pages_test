@@ -9,7 +9,10 @@ Usage
 
     python code_parser.py repo   parser/test3    parser/output/output_repo.csv
 
-    python code_parser.py function_graph parser/test3   docs/function_graph.csv
+    python code_parser.py export_call_graph parser/test3   docs/export_call_graph.csv
+
+     python code_parser.py  export_call_graph <in_path> <out_path>
+
 
 """
 
@@ -31,12 +34,8 @@ list_built_in = [
     "help", "min", "setattr", "any", "dir", "hex", "next", "slice",
     "ascii", "divmod", "id", "object", "sorted", "bin", "enumerate",
     "input", "oct", "staticmethod", "bool", "eval", "int", "open",
-    "str", "breakpoint", "exec", "isinstance", "ord", "sum", "bytearray",
-    "filter", "issubclass", "pow", "super", "bytes", "float", "iter", "print",
-    "tuple", "callable", "format", "len", "property", "type", "chr", "frozenset",
-    "list", "range", "vars", "classmethod", "getattr", "locals", "repr",
-    "zip", "compile", "globals", "map", "reversed", "__import__",
-    "complex", "hasattr", "max", "round"
+    "str", "breakpoint", "exec", "isinstance", "ord", "sum", "bytear"
+
 ]
 
 # ====================================================================================
@@ -950,23 +949,28 @@ def write_to_file(uri, type, list_functions, list_classes, out_path):
     info = ''
     for function in list_functions:
         function_uri = function
+
         if function in list_built_in:
             function_uri = f'[built-In]:{function}'
+
         if '.' in function:
             if function.split('.')[0] in list_classes:
                 function_uri = f"[CLASS] [REPO]: {function.split('.')[0]}:{function.split('.')[1]}"
+
             elif function.split('.')[0] in stdlib_libraries:
                 function_uri = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
+
             else:
                 function_uri = f"[CLASS] [SIDE PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
+
         info += f'{uri}, {type}, {function}, {function_uri}\n'
     with open(f'{out_path}', 'a+') as f:
         f.write(info)
 
 
-def function_graph(in_path:str=None, out_path:str=None):
-    """ 
-        python code_parser.py  function_graph <in_path> <out_path>
+def export_call_graph(in_path:str=None, out_path:str=None):
+    """
+        python code_parser.py  export_call_graph <in_path> <out_path>
 
     Returns:
         1  csv output
@@ -978,6 +982,8 @@ def function_graph(in_path:str=None, out_path:str=None):
     flist = flist + glob.glob(root +"/*/*/*/*.py")
     flist = flist + glob.glob(root +"/*/*/*/*/*.py")
 
+
+    ############ List of classes
     list_classes = []
     for i in range(len(flist)):
         cols = ['uri', 'name', 'type', 'list_functions']
@@ -991,6 +997,8 @@ def function_graph(in_path:str=None, out_path:str=None):
                 if row[0] == 'class':
                     list_classes.append(row[1])
     print(list_classes)
+
+
 
     for i in range(len(flist)):
         cols = ['uri', 'name', 'type', 'list_functions']
@@ -1009,6 +1017,7 @@ def function_graph(in_path:str=None, out_path:str=None):
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
                     write_to_file(row[0], row[1], row[2], list_classes, out_path)
+
 
         df = get_list_method_stats(flist[i])
         if df is not None:
@@ -1038,7 +1047,7 @@ if __name__ == "__main__":
       'type': export_stats_pertype,
       'file': export_stats_perfile,
       'repo': export_stats_perrepo,
-      'function_graph': function_graph,
+      'export_call_graph': export_call_graph,
     })
     # test_example()
 
@@ -1046,5 +1055,5 @@ if __name__ == "__main__":
         python code_parser.py type parser/test3/arrow_dataset.py method parser/output/output_method.csv
         python code_parser.py file parser/code_parser.py method parser/output/output_file.csv
         python code_parser.py repo parser/test3 parser/output/output_repo.csv
-        python code_parser.py function_graph . docs/function_graph.csv
+        python code_parser.py export_call_graph . docs/export_call_graph.csv
     '''

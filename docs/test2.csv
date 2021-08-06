@@ -2119,17 +2119,17 @@ uri, type, function, detail
 ./utilmy/docs/code_parser.py:write_to_file, function, function.split, [CLASS] [SIDE PACKAGE]: function:split
 ./utilmy/docs/code_parser.py:write_to_file, function, open, [built-In]:open
 ./utilmy/docs/code_parser.py:write_to_file, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
-./utilmy/docs/code_parser.py:function_graph, function, glob.glob, [CLASS] [STDLIB]: glob:glob
-./utilmy/docs/code_parser.py:function_graph, function, range, [built-In]:range
-./utilmy/docs/code_parser.py:function_graph, function, get_list_class_stats, get_list_class_stats
-./utilmy/docs/code_parser.py:function_graph, function, zip, [built-In]:zip
-./utilmy/docs/code_parser.py:function_graph, function, list_classes.append, [CLASS] [SIDE PACKAGE]: list_classes:append
-./utilmy/docs/code_parser.py:function_graph, function, print, [built-In]:print
-./utilmy/docs/code_parser.py:function_graph, function, get_list_function_stats, get_list_function_stats
-./utilmy/docs/code_parser.py:function_graph, function, open, [built-In]:open
-./utilmy/docs/code_parser.py:function_graph, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
-./utilmy/docs/code_parser.py:function_graph, function, write_to_file, write_to_file
-./utilmy/docs/code_parser.py:function_graph, function, get_list_method_stats, get_list_method_stats
+./utilmy/docs/code_parser.py:export_call_graph, function, glob.glob, [CLASS] [STDLIB]: glob:glob
+./utilmy/docs/code_parser.py:export_call_graph, function, range, [built-In]:range
+./utilmy/docs/code_parser.py:export_call_graph, function, get_list_class_stats, get_list_class_stats
+./utilmy/docs/code_parser.py:export_call_graph, function, zip, [built-In]:zip
+./utilmy/docs/code_parser.py:export_call_graph, function, list_classes.append, [CLASS] [SIDE PACKAGE]: list_classes:append
+./utilmy/docs/code_parser.py:export_call_graph, function, print, [built-In]:print
+./utilmy/docs/code_parser.py:export_call_graph, function, get_list_function_stats, get_list_function_stats
+./utilmy/docs/code_parser.py:export_call_graph, function, open, [built-In]:open
+./utilmy/docs/code_parser.py:export_call_graph, function, f.write, [CLASS] [SIDE PACKAGE]: f:write
+./utilmy/docs/code_parser.py:export_call_graph, function, write_to_file, write_to_file
+./utilmy/docs/code_parser.py:export_call_graph, function, get_list_method_stats, get_list_method_stats
 ./utilmy/docs/code_parser.py:test_example, function, export_stats_pertype, export_stats_pertype
 ./utilmy/docs/code_parser.py:test_example, function, export_stats_perfile, export_stats_perfile
 ./utilmy/docs/code_parser.py:test_example, function, export_stats_perrepo, export_stats_perrepo
