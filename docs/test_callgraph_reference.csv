@@ -1,0 +1,13 @@
+uri, type, function,type2,path2,tag
+./run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB],,
+./run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE PACKAGE],, [CLASS] [SIDE PACKAGE]: label:decode
+./run_pipy.py:update_version, function, open, [built-In],, [built-In]:open
+./run_pipy.py:update_version, function, Version.parse, [CLASS] [REPO],, [CLASS] [REPO]: Version:parse
+./run_pipy.py:update_version, function, int, [built-In],, [built-In]:int
+./run_pipy.py:update_version, function, file.write, [CLASS] [SIDE PACKAGE],, [CLASS] [SIDE PACKAGE]: file:write
+./run_pipy.py:update_version, function, version.new_version,,, [CLASS] [SIDE PACKAGE]: version:new_version
+./run_pipy.py:git_commit, function, ask,,,ask
+./test.py:test_utilmy_plot, function, pd_random,,./utilmy/utilmy.py,utilmy.utilmy.pd_random
+./test.py:test_utilmy_plot, function, pd_plot_multi,,./utilmy/utilmy.py,utilmy.utilmy.pd_plot_multi
+./test.py:test_utilmy_pd_os_session, function, random.random, [CLASS] [STDLIB],,
+./test.py:test_utilmy_pd_os_session, function, range, [built-In],,

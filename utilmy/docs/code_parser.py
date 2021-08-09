@@ -971,9 +971,22 @@ def write_to_file(uri, type, list_functions, list_classes, out_path):
 def export_call_graph(in_path:str=None, out_path:str=None):
     """
         python code_parser.py  export_call_graph <in_path> <out_path>
-
     Returns:
         1  csv output
+
+
+    How to grab paht
+      1) Parse all imports
+
+         from utilmy.tabular import myfun
+
+         uri_dict["myfun"] = "utilmy.tabular.myfun"
+
+
+      2)  ## Use uri_dict to map into full path name
+        df['path2'] = df.apply( lamba x :  uri_dict.get(  x['function'], x['function']    ), axis=1)
+
+
     """
     root = in_path
     flist = glob.glob(root +"/*.py")
