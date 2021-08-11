@@ -976,7 +976,7 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
-def write_to_file(uri, type, list_functions, list_classes, out_path, list_imported):
+def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, out_path):
     # list_functions = literal_eval(list_functions)
     # print(list_functions)
     info = ''
@@ -988,8 +988,13 @@ def write_to_file(uri, type, list_functions, list_classes, out_path, list_import
             type2 = '[built-In]'
 
         elif function in list_imported:
-            tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
-            type2 = '[FUNC] [REPO]'
+            if function in dict_functions:
+                tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
+                type2 = '[FUNC] [REPO]'
+            else:
+                tag = f"[FUNC] [SIDE_PACKAGE]: {list_imported[function]}.{function}"
+                type2 = '[FUNC] [SIDE_PACKAGE]'
+
 
         if '.' in function:
             if function.split('.')[0] in list_classes:
@@ -1051,10 +1056,29 @@ def export_call_graph(in_path:str=None, out_path:str=None):
     print(list_classes)
 
 
+    dict_functions = {}
+    for i in range(len(flist)):
+        cols = ['uri', 'name', 'type']
+        df = get_list_function_stats(flist[i])
+        if df is not None:
+            dfi = df[cols]
+            # print(dfi)
+            # get list Class in repo
+            # list_classes.append(x[0] for x in zip(dfi['name']))
+            for row in zip(dfi['uri'], dfi['name']):
+                # if row[0] == 'class':
+                dict_functions[row[1]] = row[0]
+                    
+    print('-------------------------')
+    print(dict_functions)
+
+
+
     for i in range(len(flist)):
         ######### Get the list imported functions
         # from class_name import funtion_name
         list_imported = get_list_imported_func(flist[i])
+        print('1-------------------------')
         print(list_imported)
 
         cols = ['uri', 'name', 'type', 'list_functions']
@@ -1068,11 +1092,11 @@ def export_call_graph(in_path:str=None, out_path:str=None):
                 with open(f'{out_path}', 'w+') as f:
                     f.write('uri, type, function, type2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported) 
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported)
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
 
 
         df = get_list_method_stats(flist[i])
@@ -1084,11 +1108,11 @@ def export_call_graph(in_path:str=None, out_path:str=None):
                 with open(f'{out_path}', 'w+') as f:
                     f.write('uri, type, function, type2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported)
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported)
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
 
 
 def test_example():
