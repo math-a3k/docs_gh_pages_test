@@ -457,6 +457,39 @@ def get_file_stats(file_path):
     return output
 
 
+def get_list_imported_func(file_path: str):
+    """Get list funtions was imported in python file.
+    Args:
+        IN: file_path         - the file path input
+        OUT: List function
+    Example Output:
+        [
+            {'func1': 'zc.Class'},
+            {'func2': 'Hola'}
+        ]
+    """
+    output = dict()
+    all_clean_lines = _get_and_clean_all_lines(file_path)
+    re_check = r"from (\w+) import"
+    for line in all_clean_lines:
+        if re.search(re_check, line.rstrip()):
+            print('============Detected============: ', line)
+            class_name = re.search(re_check, line.rstrip()).group(1)
+            functions = line.split('import')[1].strip()
+            if functions != '*':
+                # special case: EG:  from pyplot import pyplot as plt
+                if 'as' in functions:
+                    functions = [functions.split('as')[1].strip()]
+                else:
+                    functions = [function.strip() for function in functions.split(',')]
+
+                print(class_name, functions)
+                for function in functions:
+                    # output.append({function: class_name})
+                    output[function] = class_name
+    return output
+
+
 # ====================================================================================
 # internal Functions
 # ====================================================================================
@@ -943,27 +976,33 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
-def write_to_file(uri, type, list_functions, list_classes, out_path):
+def write_to_file(uri, type, list_functions, list_classes, out_path, list_imported):
     # list_functions = literal_eval(list_functions)
     # print(list_functions)
     info = ''
     for function in list_functions:
-        function_uri = function
-
+        tag = function
+        type2 = ''
         if function in list_built_in:
-            function_uri = f'[built-In]:{function}'
+            tag = f'[built-In]: {function}'
+            type2 = '[built-In]'
+
+        elif function in list_imported:
+            tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
+            type2 = '[FUNC] [REPO]'
 
         if '.' in function:
             if function.split('.')[0] in list_classes:
-                function_uri = f"[CLASS] [REPO]: {function.split('.')[0]}:{function.split('.')[1]}"
+                tag = f"[CLASS] [REPO]: {function.split('.')[0]}:{function.split('.')[1]}"
+                type2 = '[CLASS] [REPO]'
 
             elif function.split('.')[0] in stdlib_libraries:
-                function_uri = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
-
-            else:
-                function_uri = f"[CLASS] [SIDE PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
-
-        info += f'{uri}, {type}, {function}, {function_uri}\n'
+                tag = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
+                type2 = '[CLASS] [STDLIB]'
+            else:   
+                tag = f"[CLASS] [SIDE PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
+                type2 = '[CLASS] [SIDE PACKAGE]'
+        info += f'{uri}, {type}, {function}, {type2}, {tag}\n'
     with open(f'{out_path}', 'a+') as f:
         f.write(info)
 
@@ -996,7 +1035,7 @@ def export_call_graph(in_path:str=None, out_path:str=None):
     flist = flist + glob.glob(root +"/*/*/*/*/*.py")
 
 
-    ############ List of classes
+    ############ Get liss class of the Repo
     list_classes = []
     for i in range(len(flist)):
         cols = ['uri', 'name', 'type', 'list_functions']
@@ -1012,8 +1051,12 @@ def export_call_graph(in_path:str=None, out_path:str=None):
     print(list_classes)
 
 
-
     for i in range(len(flist)):
+        ######### Get the list imported functions
+        # from class_name import funtion_name
+        list_imported = get_list_imported_func(flist[i])
+        print(list_imported)
+
         cols = ['uri', 'name', 'type', 'list_functions']
         df = get_list_function_stats(flist[i])
         if df is not None:
@@ -1023,13 +1066,13 @@ def export_call_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function, detail\n')
+                    f.write('uri, type, function, type2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path) 
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported) 
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path)
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported)
 
 
         df = get_list_method_stats(flist[i])
@@ -1039,13 +1082,13 @@ def export_call_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function, detail\n')
+                    f.write('uri, type, function, type2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path)
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported)
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, out_path)
+                    write_to_file(row[0], row[1], row[2], list_classes, out_path, list_imported)
 
 
 def test_example():
