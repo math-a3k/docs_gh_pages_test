@@ -22,23 +22,23 @@ uri, type, function, type2, path2, tag
 ./test.py:pd_random, function, range, , , range
 ./test.py:pd_random, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./test.py:test_utilmy_plot, function, pd_random, , , pd_random
-./test.py:test_utilmy_plot, function, pd_plot_multi, [FUNC] [REPO], ./utilmy/utilmy.py:pd_plot_multi, [FUNC] [REPO]: utilmy.pd_plot_multi
+./test.py:test_utilmy_plot, function, pd_plot_multi, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.pd_plot_multi
 ./test.py:test_utilmy_pd_os_session, function, random.random, [CLASS] [STDLIB], , [CLASS] [STDLIB]: random:random
 ./test.py:test_utilmy_pd_os_session, function, range, , , range
 ./test.py:test_utilmy_pd_os_session, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./test.py:test_utilmy_pd_os_session, function, len, , , len
 ./test.py:test_utilmy_pd_os_session, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
 ./test.py:test_utilmy_pd_os_session, function, df.to_csv, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:to_csv
-./test.py:test_utilmy_pd_os_session, function, pd_read_file, [FUNC] [REPO], ./utilmy/zutil_features.py:pd_read_file, [FUNC] [REPO]: utilmy.pd_read_file
+./test.py:test_utilmy_pd_os_session, function, pd_read_file, [FUNC] [REPO], ./utilmy/zutil_features.py, [FUNC] [REPO]: utilmy.pd_read_file
 ./test.py:test_utilmy_pd_os_session, function, round, , , round
 ./test.py:test_utilmy_pd_os_session, function, print, , , print
-./test.py:test_utilmy_pd_os_session, function, git_repo_root, [FUNC] [REPO], ./utilmy/utilmy.py:git_repo_root, [FUNC] [REPO]: utilmy.git_repo_root
-./test.py:test_utilmy_pd_os_session, function, os_makedirs, [FUNC] [REPO], ./utilmy/utilmy.py:os_makedirs, [FUNC] [REPO]: utilmy.os_makedirs
+./test.py:test_utilmy_pd_os_session, function, git_repo_root, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.git_repo_root
+./test.py:test_utilmy_pd_os_session, function, os_makedirs, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_makedirs
 ./test.py:test_utilmy_pd_os_session, function, os.system, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:system
-./test.py:test_utilmy_pd_os_session, function, os_removedirs, [FUNC] [REPO], ./utilmy/utilmy.py:os_removedirs, [FUNC] [REPO]: utilmy.os_removedirs
-./test.py:test_utilmy_pd_os_session, function, os_system, [FUNC] [REPO], ./utilmy/utilmy.py:os_system, [FUNC] [REPO]: utilmy.os_system
-./test.py:test_utilmy_pd_os_session, function, os_platform_os, [FUNC] [REPO], ./utilmy/utilmy.py:os_platform_os, [FUNC] [REPO]: utilmy.os_platform_os
-./test.py:test_utilmy_pd_os_session, function, global_verbosity, [FUNC] [REPO], ./utilmy/utilmy.py:global_verbosity, [FUNC] [REPO]: utilmy.global_verbosity
+./test.py:test_utilmy_pd_os_session, function, os_removedirs, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_removedirs
+./test.py:test_utilmy_pd_os_session, function, os_system, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_system
+./test.py:test_utilmy_pd_os_session, function, os_platform_os, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_platform_os
+./test.py:test_utilmy_pd_os_session, function, global_verbosity, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.global_verbosity
 ./test.py:test_utilmy_session, function, Session, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: utilmy.Session
 ./test.py:test_utilmy_session, function, sess.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: sess:save
 ./test.py:test_utilmy_session, function, globals, , , globals
@@ -53,8 +53,8 @@ uri, type, function, type2, path2, tag
 ./test.py:test_decorators_os, function, profiled_sum, , , profiled_sum
 ./test.py:test_decorators_os, function, sum, [BUILT_IN], , [BUILT_IN]: sum
 ./test.py:test_decorators_os, function, profiler_context, , , profiler_context
-./test.py:test_decorators_os, function, profiler_start, [FUNC] [REPO], ./utilmy/utilmy.py:profiler_start, [FUNC] [REPO]: utilmy.profiler_start
-./test.py:test_decorators_os, function, profiler_stop, [FUNC] [REPO], ./utilmy/utilmy.py:profiler_stop, [FUNC] [REPO]: utilmy.profiler_stop
+./test.py:test_decorators_os, function, profiler_start, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.profiler_start
+./test.py:test_decorators_os, function, profiler_stop, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.profiler_stop
 ./test.py:test_decorators_os, function, dummy_func, , , dummy_func
 ./test.py:test_decorators_os, function, time.sleep, [CLASS] [STDLIB], , [CLASS] [STDLIB]: time:sleep
 ./test.py:test_decorators_os, function, method, , , method
@@ -2188,58 +2188,58 @@ uri, type, function, type2, path2, tag
 ./utilmy/docs/test.py:trading_down, function, t.start, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:start
 ./utilmy/docs/test.py:update_price, function, threading.Timer, [CLASS] [STDLIB], , [CLASS] [STDLIB]: threading:Timer
 ./utilmy/docs/test.py:update_price, function, t.start, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:start
-./utilmy/logs/test_log.py:test1, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py:log3, [FUNC] [REPO]: util_log.log3
-./utilmy/logs/test_log.py:test1, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py:log2, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test1, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py:log, [FUNC] [REPO]: util_log.log
-./utilmy/logs/test_log.py:test1, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py:logw, [FUNC] [REPO]: util_log.logw
-./utilmy/logs/test_log.py:test1, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py:logc, [FUNC] [REPO]: util_log.logc
-./utilmy/logs/test_log.py:test1, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py:logr, [FUNC] [REPO]: util_log.logr
-./utilmy/logs/test_log.py:test1, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py:loge, [FUNC] [REPO]: util_log.loge
+./utilmy/logs/test_log.py:test1, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
+./utilmy/logs/test_log.py:test1, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
+./utilmy/logs/test_log.py:test1, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test1, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
+./utilmy/logs/test_log.py:test1, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
+./utilmy/logs/test_log.py:test1, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
+./utilmy/logs/test_log.py:test1, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.loge
 ./utilmy/logs/test_log.py:test2, function, print, , , print
 ./utilmy/logs/test_log.py:test2, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
-./utilmy/logs/test_log.py:test2, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py:log3, [FUNC] [REPO]: util_log.log3
-./utilmy/logs/test_log.py:test2, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py:log2, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test2, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py:log, [FUNC] [REPO]: util_log.log
-./utilmy/logs/test_log.py:test2, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py:logw, [FUNC] [REPO]: util_log.logw
-./utilmy/logs/test_log.py:test2, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py:logc, [FUNC] [REPO]: util_log.logc
-./utilmy/logs/test_log.py:test2, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py:logr, [FUNC] [REPO]: util_log.logr
-./utilmy/logs/test_log.py:test2, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py:loge, [FUNC] [REPO]: util_log.loge
+./utilmy/logs/test_log.py:test2, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
+./utilmy/logs/test_log.py:test2, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
+./utilmy/logs/test_log.py:test2, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test2, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
+./utilmy/logs/test_log.py:test2, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
+./utilmy/logs/test_log.py:test2, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
+./utilmy/logs/test_log.py:test2, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.loge
 ./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer, [CLASS] [STDLIB], , [CLASS] [STDLIB]: socketserver:TCPServer
 ./utilmy/logs/test_log.py:test_server, function, print, , , print
 ./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
-./utilmy/logs/test_log.py:test_server, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py:log3, [FUNC] [REPO]: util_log.log3
-./utilmy/logs/test_log.py:test_server, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py:log2, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test_server, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py:log, [FUNC] [REPO]: util_log.log
-./utilmy/logs/test_log.py:test_server, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py:logw, [FUNC] [REPO]: util_log.logw
-./utilmy/logs/test_log.py:test_server, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py:logc, [FUNC] [REPO]: util_log.logc
-./utilmy/logs/test_log.py:test_server, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py:logr, [FUNC] [REPO]: util_log.logr
-./utilmy/logs/test_log.py:test_server, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py:loge, [FUNC] [REPO]: util_log.loge
-./utilmy/logs/test_log.py:test1, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py:log3, [FUNC] [REPO]: util_log.log3
-./utilmy/logs/test_log.py:test1, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py:log2, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test1, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py:log, [FUNC] [REPO]: util_log.log
-./utilmy/logs/test_log.py:test1, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py:logw, [FUNC] [REPO]: util_log.logw
-./utilmy/logs/test_log.py:test1, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py:logc, [FUNC] [REPO]: util_log.logc
-./utilmy/logs/test_log.py:test1, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py:logr, [FUNC] [REPO]: util_log.logr
-./utilmy/logs/test_log.py:test1, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py:loge, [FUNC] [REPO]: util_log.loge
+./utilmy/logs/test_log.py:test_server, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
+./utilmy/logs/test_log.py:test_server, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
+./utilmy/logs/test_log.py:test_server, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test_server, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
+./utilmy/logs/test_log.py:test_server, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
+./utilmy/logs/test_log.py:test_server, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
+./utilmy/logs/test_log.py:test_server, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.loge
+./utilmy/logs/test_log.py:test1, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
+./utilmy/logs/test_log.py:test1, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
+./utilmy/logs/test_log.py:test1, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test1, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
+./utilmy/logs/test_log.py:test1, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
+./utilmy/logs/test_log.py:test1, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
+./utilmy/logs/test_log.py:test1, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.loge
 ./utilmy/logs/test_log.py:test2, function, print, , , print
 ./utilmy/logs/test_log.py:test2, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
-./utilmy/logs/test_log.py:test2, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py:log3, [FUNC] [REPO]: util_log.log3
-./utilmy/logs/test_log.py:test2, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py:log2, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test2, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py:log, [FUNC] [REPO]: util_log.log
-./utilmy/logs/test_log.py:test2, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py:logw, [FUNC] [REPO]: util_log.logw
-./utilmy/logs/test_log.py:test2, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py:logc, [FUNC] [REPO]: util_log.logc
-./utilmy/logs/test_log.py:test2, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py:logr, [FUNC] [REPO]: util_log.logr
-./utilmy/logs/test_log.py:test2, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py:loge, [FUNC] [REPO]: util_log.loge
+./utilmy/logs/test_log.py:test2, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
+./utilmy/logs/test_log.py:test2, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
+./utilmy/logs/test_log.py:test2, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test2, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
+./utilmy/logs/test_log.py:test2, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
+./utilmy/logs/test_log.py:test2, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
+./utilmy/logs/test_log.py:test2, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.loge
 ./utilmy/logs/test_log.py:test_launch_server, function, socketserver.TCPServer, [CLASS] [STDLIB], , [CLASS] [STDLIB]: socketserver:TCPServer
 ./utilmy/logs/test_log.py:test_server, function, print, , , print
 ./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
-./utilmy/logs/test_log.py:test_server, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py:log3, [FUNC] [REPO]: util_log.log3
-./utilmy/logs/test_log.py:test_server, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py:log2, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test_server, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py:log, [FUNC] [REPO]: util_log.log
-./utilmy/logs/test_log.py:test_server, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py:logw, [FUNC] [REPO]: util_log.logw
-./utilmy/logs/test_log.py:test_server, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py:logc, [FUNC] [REPO]: util_log.logc
-./utilmy/logs/test_log.py:test_server, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py:logr, [FUNC] [REPO]: util_log.logr
-./utilmy/logs/test_log.py:test_server, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py:loge, [FUNC] [REPO]: util_log.loge
+./utilmy/logs/test_log.py:test_server, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
+./utilmy/logs/test_log.py:test_server, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
+./utilmy/logs/test_log.py:test_server, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test_server, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
+./utilmy/logs/test_log.py:test_server, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
+./utilmy/logs/test_log.py:test_server, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
+./utilmy/logs/test_log.py:test_server, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.loge
 ./utilmy/logs/util_log.py:logger_setup, function, open, [BUILT_IN], , [BUILT_IN]: open
 ./utilmy/logs/util_log.py:logger_setup, function, yaml.safe_load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: yaml:safe_load
 ./utilmy/logs/util_log.py:logger_setup, function, print, , , print
@@ -2307,7 +2307,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/templates/cli.py:run_cli, function, template_copy, , , template_copy
 ./utilmy/templates/cli.py:template_show, function, os.walk, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:walk
 ./utilmy/templates/cli.py:template_show, function, print, , , print
-./utilmy/templates/cli.py:template_copy, function, os_copy, [FUNC] [REPO], ./utilmy/utilmy.py:os_copy, [FUNC] [REPO]: utilmy.os_copy
+./utilmy/templates/cli.py:template_copy, function, os_copy, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_copy
 ./utilmy/templates/cli.py:template_copy, function, print, , , print
 ./utilmy/templates/cli.py:template_copy, function, Path, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: pathlib.Path
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB], , [CLASS] [STDLIB]: subprocess:check_output

@@ -994,13 +994,12 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
                     if list_imported[function].split('.')[-1] in dict_functions[function]:
                         tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
                         type2 = '[FUNC] [REPO]'
-                        path2 = dict_functions[function]
+                        path2 = dict_functions[function].split(':')[0]
                 else:
                     if list_imported[function] in dict_functions[function]:
                         tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
                         type2 = '[FUNC] [REPO]'
-                        path2 = dict_functions[function]
-
+                        path2 = dict_functions[function].split(':')[0]
             else:
                 tag = f"[FUNC] [SIDE_PACKAGE]: {list_imported[function]}.{function}"
                 type2 = '[FUNC] [SIDE_PACKAGE]'
