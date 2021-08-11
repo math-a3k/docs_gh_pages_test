@@ -983,14 +983,24 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
     for function in list_functions:
         tag = function
         type2 = ''
+        path2 = ''
         if function in list_built_in:
-            tag = f'[built-In]: {function}'
-            type2 = '[built-In]'
+            tag = f'[BUILT_IN]: {function}'
+            type2 = '[BUILT_IN]'
 
         elif function in list_imported:
             if function in dict_functions:
-                tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
-                type2 = '[FUNC] [REPO]'
+                if '.' in list_imported[function]:
+                    if list_imported[function].split('.')[-1] in dict_functions[function]:
+                        tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
+                        type2 = '[FUNC] [REPO]'
+                        path2 = dict_functions[function]
+                else:
+                    if list_imported[function] in dict_functions[function]:
+                        tag = f"[FUNC] [REPO]: {list_imported[function]}.{function}"
+                        type2 = '[FUNC] [REPO]'
+                        path2 = dict_functions[function]
+
             else:
                 tag = f"[FUNC] [SIDE_PACKAGE]: {list_imported[function]}.{function}"
                 type2 = '[FUNC] [SIDE_PACKAGE]'
@@ -1005,9 +1015,9 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
                 tag = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
                 type2 = '[CLASS] [STDLIB]'
             else:   
-                tag = f"[CLASS] [SIDE PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
-                type2 = '[CLASS] [SIDE PACKAGE]'
-        info += f'{uri}, {type}, {function}, {type2}, {tag}\n'
+                tag = f"[CLASS] [SIDE_PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
+                type2 = '[CLASS] [SIDE_PACKAGE]'
+        info += f'{uri}, {type}, {function}, {type2}, {path2}, {tag}\n'
     with open(f'{out_path}', 'a+') as f:
         f.write(info)
 
@@ -1090,7 +1100,7 @@ def export_call_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function, type2, tag\n')
+                    f.write('uri, type, function, type2, path2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
                     write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
             else:
@@ -1106,7 +1116,7 @@ def export_call_graph(in_path:str=None, out_path:str=None):
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function, type2, tag\n')
+                    f.write('uri, type, function, type2, path2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
                     write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
             else:
