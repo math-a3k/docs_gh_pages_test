@@ -400,6 +400,37 @@ def pd_show(df, nrows=100, reader='notepad.exe', **kw):
 
 #########################################################################################################
 ##### Utils numpy, list #################################################################################
+def diskcache_save(df, colkey:str, colvalue:str, db_path:str="", size_limit=50000000000, timeout=999, shards:int=1):    
+    """ Create dict type on disk, < 100 Gb
+       shards>1 : disk spaced is BLOCKED in advance, so high disk usage
+       shards is for concurrent writes
+    """
+    if shards == 1 :
+       import diskcache as dc
+       cache = dc.Cache(db_path, size_limit= size_limit, timeout= timeout )        
+    else :
+       from diskcache import FanoutCache
+       cache = FanoutCache( db_path, shards= shards, size_limit= size_limit, timeout= timeout )
+
+    v  = df[[ colkey, colvalue  ]].drop_duplicates(colkey)
+    v  = v.values
+    for i in range(len(v)):
+        cache[ v[i,0] ] = v1[i,1]        
+    print('Cache size', len(cache), "\n", db_path)    
+    return cache
+
+
+def diskcache_load( db_path=""):    
+    """ Load cache dict from disk and use as dict
+       val = cache[mykey]
+    
+    """
+    import diskcache as dc
+    cache = dc.Cache(db_path )
+    print('Cache size', len(cache)) 
+    return cache
+
+
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
