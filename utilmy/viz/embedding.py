@@ -1,3 +1,13 @@
+
+"""
+
+https://try2explore.com/questions/10109123
+
+https://mpld3.github.io/examples/index.html
+
+
+
+"""
 import random
 from datetime import datetime
 from typing import List
@@ -12,9 +22,10 @@ from sklearn.manifold import MDS
 from sklearn.metrics.pairwise import cosine_similarity
 from tqdm import tqdm
 
-from embedisualization.top_toolbar import TopToolbar
+from utilmy.viz.top_toolbar import TopToolbar
 
 
+################################################################################################################
 CSS = """
     text.mpld3-text, div.mpld3-tooltip {
       font-family:Arial, Helvetica, sans-serif;
@@ -27,7 +38,6 @@ CSS = """
 
 
 ################################################################################################################
-
 class vizEmbedding:
     def __init__(self, path="myembed.parquet", num_clusters=5, config:dict):
         """
@@ -42,8 +52,11 @@ class vizEmbedding:
         self.dist = None
 
         
-    def dim_reduction(self, mode="umap", col_embed='embed', ndim=2):        
-        df            = pd.read_parquet(self.path)
+    def dim_reduction(self, mode="umap", col_embed='embed', ndim=2): 
+        
+        if ".csv"     in self.path :        df  = pd.read_csv(self.path)
+        if ".parquet" in self.path :        df  = pd.read_parquet(self.path)
+        
         
         vector_matrix = np.vstack( [ v for  v in  df[col_embed].values ] )   ## into 2D numpy array
         self.id_list  = np.arange(0, len(df))
