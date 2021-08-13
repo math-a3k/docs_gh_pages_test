@@ -49,6 +49,9 @@ for df2_i in df2_list :
 doc.tag('<h2> My histo title </h2>')
 doc.plot_histogram(df3, cfg.histo, mode='mpld3', save_img=False)
 
+####  https://pypi.org/project/pretty-html-table/
+doc.table(df, format_name="ok")
+
 
 doc.tag("""<p>    My mutilplin whatever I want to write
     ok
