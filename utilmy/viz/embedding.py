@@ -21,36 +21,40 @@ from sklearn.manifold import MDS
 from sklearn.metrics.pairwise import cosine_similarity
 from tqdm import tqdm
 
-from utilmy.viz.toptoolbar import TopToolbar
-
-
-from toptoolbar import TopToolbar
-
-
 from box import Box 
-self = Box({})
+
+##################################################################################################################
+from utilmy.viz.toptoolbar import TopToolbar
+# from toptoolbar import TopToolbar
 
 
-self.path = "C:/D/gitdev/cpa/data/model.vec"
+def log(*s):
+    print(*s, exist_ok=True)
 
 
-################################################################################################################
+
 CSS = """
     text.mpld3-text, div.mpld3-tooltip {
       font-family:Arial, Helvetica, sans-serif;
     }
     g.mpld3-xaxis, g.mpld3-yaxis {
     display: none; }
-    """
+"""
 
 
 
 ################################################################################################################
 class vizEmbedding:
-    def __init__(self, path="myembed.parquet", num_clusters=5, sep=";", config:dict):
+    def __init__(self, path="myembed.parquet", num_clusters=5, sep=";", config:dict=None):
         """
+           self = Box({})
+           self.path = "C:/D/gitdev/cpa/data/model.vec"
+
            from utilmy.viz.embedding import vizEmbedding
-           myviz = vizEmbedding(path = "myvec.vec")
+           myviz = vizEmbedding(path = "C:/D/gitdev/cpa/data/model.vec")
+           myviz.run_all(nmax=100)
+
+
            myviz.dim_reduction(mode='mds')
            myviz.create_visualization(dir_out="ztmp/vis/")        
         
@@ -61,7 +65,12 @@ class vizEmbedding:
         self.num_clusters = num_clusters
         self.dist         = None
 
-        
+    def run_all(self, mode="mds", col_embed='embed', ndim=2, nmax= 5000, dir_out="ztmp/"):
+       self.dim_reduction( mode, col_embed, ndim=ndim, nmax= nmax, dir_out=dir_out)
+       self.create_clusters(after_dim_reduction=True)
+       self.create_visualization(dir_out, mode='d3', cols_label=None, show_server=False)
+
+
     def dim_reduction(self, mode="mds", col_embed='embed', ndim=2, nmax= 5000, dir_out=None): 
         
         if ".vec"     in self.path :        
@@ -128,11 +137,8 @@ class vizEmbedding:
         
         
 
-
     def create_visualization(self, dir_out="ztmp/", mode='d3', cols_label=None, show_server=False,  **kw ):
         """
-
-
 
         """
         os.makedirs(dir_out, exist_ok=True)
@@ -237,7 +243,9 @@ class vizEmbedding:
         plt.tick_params(axis='x', which='both', bottom='off', top='off', labelbottom='off')
         plt.tight_layout()
         plt.savefig('dendogram_clusters.png', dpi=200)
-        
+
+
+   
         
         
 #########################################################################################################
@@ -306,3 +314,23 @@ def tokenize_text(text):
            not token.like_num
     ]
         
+
+
+
+def run(dir_in="in/model.vec", dir_out="ztmp/", nmax=100):
+   myviz = vizEmbedding(path = dir_in, dir_out= dir_out)
+   myviz.run_all(nmax=nmax)
+
+
+
+
+###################################################################################################
+if __name__ == "__main__":
+    ### python 
+    import fire
+    fire.Fire()
+
+
+
+
+
