@@ -7,6 +7,13 @@ https://mpld3.github.io/examples/index.html
 
 
 
+#### Pandas HighCharts
+https://pypi.org/project/pandas-highcharts/#description
+
+https://pypi.org/project/panel-highcharts/#description
+
+https://mpld3.github.io/examples/networkxd3forcelayout.html
+
 """
 import random, os, sys, numpy as np, pandas as pd
 from datetime import datetime
