@@ -39,8 +39,14 @@ CSS = """
 
 ################################################################################################################
 class vizEmbedding:
-    def __init__(self, path="myembed.parquet", num_clusters=5, config:dict):
+    def __init__(self, path="myembed.parquet", num_clusters=5, sep=";" config:dict):
         """
+           from utilmy.viz.embedding import vizEmbedding
+           myviz = vizEmbedding()
+           myviz.dim_reduction()
+           myviz.create_visualization()        
+        
+        
           id, label,   embedding
           0    'five'   [ 1.0, 7.0, 6.0 ]
           
@@ -48,13 +54,14 @@ class vizEmbedding:
         """
 
         self.path = path
+        self.sep  = sep
         self.num_clusters = num_clusters
         self.dist = None
 
         
-    def dim_reduction(self, mode="umap", col_embed='embed', ndim=2): 
+    def dim_reduction(self, mode="mds", col_embed='embed', ndim=2): 
         
-        if ".csv"     in self.path :        df  = pd.read_csv(self.path)
+        if ".csv"     in self.path :        df  = pd.read_csv(self.path, sep=self.sep)
         if ".parquet" in self.path :        df  = pd.read_parquet(self.path)
         
         
