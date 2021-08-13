@@ -8,21 +8,26 @@ https://mpld3.github.io/examples/index.html
 
 
 """
-import random
+import random, os, sys, numpy as np, pandas as pd
 from datetime import datetime
 from typing import List
+from box import Box 
 
 import matplotlib.pyplot as plt
-import mpld3,
-import numpy as np, pandas as pd
-import spacy
+import mpld3
+# import spacy
 from scipy.cluster.hierarchy import ward, dendrogram
 from sklearn.cluster import KMeans
 from sklearn.manifold import MDS
 from sklearn.metrics.pairwise import cosine_similarity
 from tqdm import tqdm
 
-from utilmy.viz.top_toolbar import TopToolbar
+from utilmy.viz.toptoolbar import TopToolbar
+
+
+# from toptoolbar import TopToolbar
+# self = Box({})
+
 
 
 ################################################################################################################
@@ -36,42 +41,86 @@ CSS = """
 
 
 
+vis = vizEmbedding(path = )
+
+
+def embedding_load_word2vec(model_vector_path="model.vec", nmax = 500):
+    from gensim.models import KeyedVectors    
+    from collections import OrderedDict
+    def isvalid(t):
+        return True          
+
+    ## [Warning] Takes a lot of time 
+    en_model = KeyedVectors.load_word2vec_format( model_vector_path)
+        
+    # Limit number of tokens to be visualized
+    limit      = nmax if nmax > 0 else  len( en_model.vocab) #5000
+    vector_dim = en_model[ list(en_model.vocab.keys())[0]  ].shape[0]   
+    
+    jj    = 0
+    words = OrderedDict()
+    embs  = np.zeros((limit, vector_dim ))
+    for i,word in enumerate(en_model.vocab):
+        if jj >= limit: break
+        if isvalid(word) :
+           words[word]  = jj #.append(word)
+           embs[jj,:]   = en_model[word]
+           jj = jj + 1 
+              
+    embs     = embs[ :len(words), :]
+
+    df_label = pd.DataFrame(words.keys(), columns = ['id'] )           
+    return embs, words, df_label
+
+
+
+def embedding_load_parquet(path="df.parquet", nmax = 500):
+    col_embed = "emb"
+    colid     = 'id'
+
+    df      = pd.read_parquet(path)
+
+    ###### Limit number of tokens to be visualized
+    limit = nmax if nmax > 0 else  len(df) #5000
+    df    = df.iloc[:nmax, :]
+
+    embs    = np.vstack( [ v for  v in  df[col_embed].values ] )   ## into 2D numpy array
+    id_map  = { name: i for i,name in enumerate(df[colid].values) } 
+
+    ### Keep only label infos
+    del df[col_embd]              
+    return embs, id_map, df 
+
 
 ################################################################################################################
 class vizEmbedding:
-    def __init__(self, path="myembed.parquet", num_clusters=5, sep=";" config:dict):
+    def __init__(self, path="myembed.parquet", num_clusters=5, sep=";", config:dict):
         """
            from utilmy.viz.embedding import vizEmbedding
            myviz = vizEmbedding()
            myviz.dim_reduction()
-           myviz.create_visualization()        
+           myviz.create_visualization(dir_out="/tmp/vis/")        
         
-        
-          id, label,   embedding
-          0    'five'   [ 1.0, 7.0, 6.0 ]
           
           
         """
-
-        self.path = path
-        self.sep  = sep
+        self.path         = path
+        self.sep          = sep
         self.num_clusters = num_clusters
-        self.dist = None
+        self.dist         = None
 
         
-    def dim_reduction(self, mode="mds", col_embed='embed', ndim=2): 
+    def dim_reduction(self, mode="mds", col_embed='embed', ndim=2, nmax= 100): 
         
-        if ".csv"     in self.path :        df  = pd.read_csv(self.path, sep=self.sep)
-        if ".parquet" in self.path :        df  = pd.read_parquet(self.path)
+        if ".vec"     in self.path :        
+          embs, id_map, df_labels  = embedding_load_word2vec(self.path, nmax= nmax)
         
-        
-        vector_matrix = np.vstack( [ v for  v in  df[col_embed].values ] )   ## into 2D numpy array
-        self.id_list  = np.arange(0, len(df))
-        self.labels   = df["label"].values
-        
-        
-        # vectors_matrix = np.vstack([nlp(text).vector for text in tqdm(self.texts)])
-        self.dist = 1 - cosine_similarity(vectors_matrix)
+        if ".parquet" in self.path :        
+          embs, id_map, df_labels  = embedding_load_parquet(self.path, nmax= nmax)
+
+            
+
+        self.dist = 1 - cosine_similarity(embs)
 
         if mode == 'mds' :
             mds = MDS(n_components=ndim, dissimilarity="precomputed", random_state=1)
@@ -79,27 +128,44 @@ class vizEmbedding:
             
         if mode == 'umap' :
             pass
-        
-        self.vectors_matrix = vectors_matrix
+
+
+        self.embs      = embs
+        self.id_map    = id_map
+        self.df_labels = df_labels        
         self.pos = pos
         
         
         
     def create_clusters(self):        
         km = KMeans(n_clusters=self.num_clusters)
-        km.fit( self.vectors_matrix)
+        km.fit( self.embs)
         clusters = km.labels_.tolist()
         
         self.cluster_color = [f'#{random.randint(0, 0xFFFFFF):06x}' for _ in range(self.num_clusters)]        
         self.clusters      = clusters
         
         
-    def create_visualization(self, mode='d3', **kw ):
+    def create_visualization(self, dir_out="ztmp", mode='d3', cols_label=None, show=True,  **kw ):
+        """
 
+
+
+        """
+        os.makedirs(dir_out, exist_ok=True)
         xs, ys = self.pos[:, 0], self.pos[:, 1]
 
-        cluster_names = {i: f'Cluster {i}' for i in range(self.num_clusters)}
-        text_label_and_text = [': '.join(t) for t in list(zip(self.text_labels, self.texts))]
+        cols_label          = [] if cols_label is None else cols_label 
+        cluster_names       = {i: f'Cluster {i}' for i in range(self.num_clusters)}
+        # text_label_and_text = [': '.join(t) for t in list(zip(self.text_labels, self.texts))]
+
+        text_label_and_text = []
+        for i,x in self.df_labels.iterrows():
+          ss = x["id"]  
+          for ci in cols_label:  
+             ss = ss + ":" + x[ci]
+          text_label_and_text.append(ss) 
+
 
         # create data frame that has the result of the MDS plus the cluster numbers and titles
         df = pd.DataFrame(dict(x=xs, y=ys, clusters=clusters, title=text_label_and_text))
@@ -134,10 +200,10 @@ class vizEmbedding:
 
         # add label in x,y position with the label as the
         for i in range(len(df)):
-            ax.text(df.ix[i]['x'], df.ix[i]['y'], df.ix[i]['title'], size=8)
+            ax.text(df.loc[i]['x'], df.loc[i]['y'], df.loc[i]['title'], size=8)
 
         # uncomment the below to save the plot if need be
-        plt.savefig(f'clusters_static-{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png', dpi=200)
+        plt.savefig(f' {dir_out}/clusters_static-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
 
         # Plot
         fig, ax = plt.subplots(figsize=(20, 15))  # set plot size
@@ -164,9 +230,16 @@ class vizEmbedding:
             ax.axes.get_yaxis().set_visible(False)
 
         ax.legend(numpoints=1)  # show legend with only one dot
-        mpld3.show()  # show the plot
 
-    def draw_dendogram(self):
+
+        mpld3.save_html( f"{dir_out}/embeds.html")
+
+        if show :
+           mpld3.show()  # show the plot
+
+
+
+    def draw_hiearchy(self):
         linkage_matrix = ward(self.dist)  # define the linkage_matrix using ward clustering pre-computed distances
         fig, ax = plt.subplots(figsize=(15, 20))  # set size
         ax = dendrogram(linkage_matrix, orientation="right", labels=self.text_labels)
