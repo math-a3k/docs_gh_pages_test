@@ -1011,8 +1011,8 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
                     _path = mymodule.__path__
                 except:
                     pass
-                print('=========================================', _path)
-                path2 = _path[0].replace('\\', '.')
+                # print('=========================================', _path)
+                path2 = _path[0].replace('\\', '/')
 
 
         if '.' in function:
@@ -1023,9 +1023,29 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
             elif function.split('.')[0] in stdlib_libraries:
                 tag = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
                 type2 = '[CLASS] [STDLIB]'
+                
+                _path = ['']
+                try:
+                    mymodule = importlib.import_module(f"{function.split('.')[0]}")
+                    _path = mymodule.__path__
+                except:
+                    pass
+                # print('=========================================', _path)
+                path2 = _path[0].replace('\\', '/')
+
+
             else:   
                 tag = f"[CLASS] [SIDE_PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
                 type2 = '[CLASS] [SIDE_PACKAGE]'
+                _path = ['']
+                try:
+                    mymodule = importlib.import_module(f"{function.split('.')[0]}")
+                    _path = mymodule.__path__
+                except:
+                    pass
+                print('=========================================', _path)
+                path2 = _path[0].replace('\\', '/')
+
         info += f'{uri}, {type}, {function}, {type2}, {path2}, {tag}\n'
     with open(f'{out_path}', 'a+') as f:
         f.write(info)
