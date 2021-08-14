@@ -275,7 +275,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/text.py:pd_similarity, function, editdistance.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: editdistance:eval
 ./utilmy/text.py:pd_similarity, function, SequenceMatcher, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: difflib.SequenceMatcher
 ./utilmy/text.py:pd_similarity, function, df.apply, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:apply
-./utilmy/text.py:test_lsh, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/text.py:test_lsh, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/text.py:test_lsh, function, pd_text_getcluster, , , pd_text_getcluster
 ./utilmy/text.py:test_lsh, function, df.head, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:head
 ./utilmy/text.py:test_lsh, function, print, , , print
@@ -814,7 +814,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:a_cleanmemory, function, gc.collect, [CLASS] [STDLIB], , [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil.py:print_object_tofile, function, open, [BUILT_IN], , [BUILT_IN]: open
 ./utilmy/zutil.py:print_object_tofile, function, file1.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: file1:write
-./utilmy/zutil.py:print_object_tofile, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:print_object_tofile, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
 ./utilmy/zutil.py:print_object_tofile, function, range, , , range
 ./utilmy/zutil.py:print_object_tofile, function, str, [BUILT_IN], , [BUILT_IN]: str
 ./utilmy/zutil.py:print_progressbar, function, str, [BUILT_IN], , [BUILT_IN]: str
@@ -888,7 +888,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:_os_file_search_fast, function, print, , , print
 ./utilmy/zutil.py:os_file_search_content, function, os_file_listall, , , os_file_listall
 ./utilmy/zutil.py:os_file_search_content, function, _os_file_search_fast, , , _os_file_search_fast
-./utilmy/zutil.py:os_file_search_content, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:os_file_search_content, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:os_file_rename, function, some_dir.rstrip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: some_dir:rstrip
 ./utilmy/zutil.py:os_file_rename, function, some_dir.count, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: some_dir:count
 ./utilmy/zutil.py:os_file_rename, function, os.walk, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:walk
@@ -897,7 +897,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_file_rename, function, fnmatch.filter, [CLASS] [STDLIB], , [CLASS] [STDLIB]: fnmatch:filter
 ./utilmy/zutil.py:os_file_rename, function, re.sub, [CLASS] [STDLIB], , [CLASS] [STDLIB]: re:sub
 ./utilmy/zutil.py:os_file_rename, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
-./utilmy/zutil.py:os_file_rename, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
+./utilmy/zutil.py:os_file_rename, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:os_gui_popup_show, function, os_gui_popup_show2, , , os_gui_popup_show2
 ./utilmy/zutil.py:os_gui_popup_show, function, Tk, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Tk
 ./utilmy/zutil.py:os_gui_popup_show, function, Scrollbar, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Scrollbar
@@ -994,7 +994,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_config_getfile, function, print, , , print
 ./utilmy/zutil.py:pd_toexcel, function, os_file_exist, , , os_file_exist
 ./utilmy/zutil.py:pd_toexcel, function, load_workbook, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/openpyxl, [FUNC] [SIDE_PACKAGE]: openpyxl.load_workbook
-./utilmy/zutil.py:pd_toexcel, function, pd.ExcelWriter, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:ExcelWriter
+./utilmy/zutil.py:pd_toexcel, function, pd.ExcelWriter, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:ExcelWriter
 ./utilmy/zutil.py:pd_toexcel, function, dict, [BUILT_IN], , [BUILT_IN]: dict
 ./utilmy/zutil.py:pd_toexcel, function, df.to_excel, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:to_excel
 ./utilmy/zutil.py:pd_toexcel, function, writer.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: writer:save
@@ -1006,14 +1006,14 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:str_parse_stringcalendar, function, cal.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cal:split
 ./utilmy/zutil.py:str_parse_stringcalendar, function, x.find, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:find
 ./utilmy/zutil.py:str_parse_stringcalendar, function, cal4.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cal4:append
-./utilmy/zutil.py:str_parse_stringcalendar, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
+./utilmy/zutil.py:str_parse_stringcalendar, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:str_parse_stringcalendar, function, print, , , print
 ./utilmy/zutil.py:str_make_unicode, function, type, , , type
 ./utilmy/zutil.py:str_make_unicode, function, input_str.decode, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: input_str:decode
 ./utilmy/zutil.py:str_empty_string_array, function, range, , , range
 ./utilmy/zutil.py:str_empty_string_array, function, str_empty_string_array_numpy, , , str_empty_string_array_numpy
-./utilmy/zutil.py:str_empty_string_array, function, np.empty, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:empty
-./utilmy/zutil.py:str_empty_string_array_numpy, function, np.empty, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:empty
+./utilmy/zutil.py:str_empty_string_array, function, np.empty, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:empty
+./utilmy/zutil.py:str_empty_string_array_numpy, function, np.empty, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:empty
 ./utilmy/zutil.py:str_isfloat, function, float, , , float
 ./utilmy/zutil.py:str_is_azchar, function, float, , , float
 ./utilmy/zutil.py:str_is_az09char, function, float, , , float
@@ -1036,28 +1036,28 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:np_minimize, function, save, , , save
 ./utilmy/zutil.py:np_minimize, function, date_now, , , date_now
 ./utilmy/zutil.py:np_minimize, function, np_int_tostr, , , np_int_tostr
-./utilmy/zutil.py:np_minimize, function, np.mod, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:mod
-./utilmy/zutil.py:np_minimize, function, np.abs, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:abs
+./utilmy/zutil.py:np_minimize, function, np.mod, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:mod
+./utilmy/zutil.py:np_minimize, function, np.abs, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:abs
 ./utilmy/zutil.py:np_minimize_de, function, range, , , range
 ./utilmy/zutil.py:np_minimize_de, function, next, [BUILT_IN], , [BUILT_IN]: next
 ./utilmy/zutil.py:np_minimize_de, function, print, , , print
 ./utilmy/zutil.py:np_minimize_de, function, save, , , save
 ./utilmy/zutil.py:np_minimize_de, function, date_now, , , date_now
 ./utilmy/zutil.py:np_minimize_de, function, np_int_tostr, , , np_int_tostr
-./utilmy/zutil.py:np_minimize_de, function, np.mod, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:mod
-./utilmy/zutil.py:np_minimize_de, function, np.abs, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:abs
-./utilmy/zutil.py:np_remove_na_inf_2d, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:np_minimize_de, function, np.mod, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:mod
+./utilmy/zutil.py:np_minimize_de, function, np.abs, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:abs
+./utilmy/zutil.py:np_remove_na_inf_2d, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
 ./utilmy/zutil.py:np_remove_na_inf_2d, function, range, , , range
-./utilmy/zutil.py:np_remove_na_inf_2d, function, np.isnan, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:isnan
-./utilmy/zutil.py:np_remove_na_inf_2d, function, np.isinf, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:isinf
-./utilmy/zutil.py:np_addcolumn, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
-./utilmy/zutil.py:np_addcolumn, function, np.zeros, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:zeros
-./utilmy/zutil.py:np_addcolumn, function, np.column_stack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:column_stack
-./utilmy/zutil.py:np_addrow, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:np_remove_na_inf_2d, function, np.isnan, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:isnan
+./utilmy/zutil.py:np_remove_na_inf_2d, function, np.isinf, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:isinf
+./utilmy/zutil.py:np_addcolumn, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:np_addcolumn, function, np.zeros, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:zeros
+./utilmy/zutil.py:np_addcolumn, function, np.column_stack, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:column_stack
+./utilmy/zutil.py:np_addrow, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
 ./utilmy/zutil.py:np_addrow, function, len, , , len
-./utilmy/zutil.py:np_addrow, function, np.zeros, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:zeros
-./utilmy/zutil.py:np_addrow, function, np.row_stack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:row_stack
-./utilmy/zutil.py:np_addrow, function, np.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:append
+./utilmy/zutil.py:np_addrow, function, np.zeros, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:zeros
+./utilmy/zutil.py:np_addrow, function, np.row_stack, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:row_stack
+./utilmy/zutil.py:np_addrow, function, np.append, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:append
 ./utilmy/zutil.py:np_int_tostr, function, str, [BUILT_IN], , [BUILT_IN]: str
 ./utilmy/zutil.py:np_dictordered_create, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil.py:np_list_unique, function, list, , , list
@@ -1072,49 +1072,49 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:np_dict_tostr_key, function, list, , , list
 ./utilmy/zutil.py:np_removelist, function, np_findfirst, , , np_findfirst
 ./utilmy/zutil.py:np_removelist, function, xnew.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: xnew:append
-./utilmy/zutil.py:np_transform2d_int_1d, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
-./utilmy/zutil.py:np_transform2d_int_1d, function, np.zeros, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:zeros
+./utilmy/zutil.py:np_transform2d_int_1d, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:np_transform2d_int_1d, function, np.zeros, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:zeros
 ./utilmy/zutil.py:np_transform2d_int_1d, function, range, , , range
-./utilmy/zutil.py:np_transform2d_int_1d, function, np.abs, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:abs
+./utilmy/zutil.py:np_transform2d_int_1d, function, np.abs, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:abs
 ./utilmy/zutil.py:np_transform2d_int_1d, function, np_sortbycol, , , np_sortbycol
 ./utilmy/zutil.py:np_mergelist, function, list, , , list
 ./utilmy/zutil.py:np_mergelist, function, xnew.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: xnew:append
-./utilmy/zutil.py:np_enumerate2, function, np.empty, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:empty
+./utilmy/zutil.py:np_enumerate2, function, np.empty, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:empty
 ./utilmy/zutil.py:np_enumerate2, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:np_pivottable_count, function, np_dict_tolist, , , np_dict_tolist
 ./utilmy/zutil.py:np_pivottable_count, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
 ./utilmy/zutil.py:np_pivottable_count, function, int, [BUILT_IN], , [BUILT_IN]: int
-./utilmy/zutil.py:np_nan_helper, function, np.isnan, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:isnan
+./utilmy/zutil.py:np_nan_helper, function, np.isnan, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:isnan
 ./utilmy/zutil.py:np_nan_helper, function, z.nonzero, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: z:nonzero
 ./utilmy/zutil.py:np_interpolate_nan, function, np_nan_helper, , , np_nan_helper
-./utilmy/zutil.py:np_interpolate_nan, function, np.interp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:interp
+./utilmy/zutil.py:np_interpolate_nan, function, np.interp, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:interp
 ./utilmy/zutil.py:np_interpolate_nan, function, x, , , x
-./utilmy/zutil.py:np_sortcol, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:np_sortcol, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:np_sortcol, function, df.sort_values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:sort_values
-./utilmy/zutil.py:np_ma, function, np.convolve, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:convolve
-./utilmy/zutil.py:np_ma, function, np.ones, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:ones
-./utilmy/zutil.py:np_cleanmatrix, function, np.nan_to_num, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:nan_to_num
-./utilmy/zutil.py:np_cleanmatrix, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:np_ma, function, np.convolve, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:convolve
+./utilmy/zutil.py:np_ma, function, np.ones, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:ones
+./utilmy/zutil.py:np_cleanmatrix, function, np.nan_to_num, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:nan_to_num
+./utilmy/zutil.py:np_cleanmatrix, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
 ./utilmy/zutil.py:np_cleanmatrix, function, range, , , range
 ./utilmy/zutil.py:np_cleanmatrix, function, abs, [BUILT_IN], , [BUILT_IN]: abs
-./utilmy/zutil.py:np_torecarray, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
-./utilmy/zutil.py:np_sortbycolumn, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:np_torecarray, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:np_sortbycolumn, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:np_sortbycolumn, function, df.sort_values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:sort_values
-./utilmy/zutil.py:np_sortbycol, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:np_sortbycol, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:np_sortbycol, function, df.sort_values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:sort_values
 ./utilmy/zutil.py:np_sortbycol, function, np_sortbycol, , , np_sortbycol
 ./utilmy/zutil.py:np_sortbycol, function, len, , , len
-./utilmy/zutil.py:np_sortbycol, function, np.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:reshape
-./utilmy/zutil.py:np_min_kpos, function, np.partition, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:partition
+./utilmy/zutil.py:np_sortbycol, function, np.reshape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:reshape
+./utilmy/zutil.py:np_min_kpos, function, np.partition, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:partition
 ./utilmy/zutil.py:np_max_kpos, function, len, , , len
-./utilmy/zutil.py:np_max_kpos, function, np.partition, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:partition
+./utilmy/zutil.py:np_max_kpos, function, np.partition, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:partition
 ./utilmy/zutil.py:np_findfirst, function, range, , , range
 ./utilmy/zutil.py:np_find, function, range, , , range
 ./utilmy/zutil.py:find, function, xi.find, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: xi:find
 ./utilmy/zutil.py:findnone, function, range, , , range
 ./utilmy/zutil.py:findx, function, type, , , type
 ./utilmy/zutil.py:findx, function, vec.index, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: vec:index
-./utilmy/zutil.py:findx, function, np.where, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:where
+./utilmy/zutil.py:findx, function, np.where, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:where
 ./utilmy/zutil.py:findx, function, len, , , len
 ./utilmy/zutil.py:finds, function, range, , , range
 ./utilmy/zutil.py:finds, function, idlist.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: idlist:append
@@ -1128,44 +1128,44 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:np_find_maxpos_2nd, function, float, , , float
 ./utilmy/zutil.py:np_find_maxpos_2nd, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:np_findlocalmax2, function, len, , , len
-./utilmy/zutil.py:np_findlocalmax2, function, np.zeros, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:zeros
+./utilmy/zutil.py:np_findlocalmax2, function, np.zeros, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:zeros
 ./utilmy/zutil.py:np_findlocalmax2, function, np_find_maxpos, , , np_find_maxpos
 ./utilmy/zutil.py:np_findlocalmax2, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:np_findlocalmax2, function, np_sortbycolumn, , , np_sortbycolumn
 ./utilmy/zutil.py:np_findlocalmax2, function, range, , , range
 ./utilmy/zutil.py:np_findlocalmax2, function, findhigher, , , findhigher
-./utilmy/zutil.py:np_findlocalmax2, function, np.abs, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:abs
+./utilmy/zutil.py:np_findlocalmax2, function, np.abs, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:abs
 ./utilmy/zutil.py:np_findlocalmin2, function, len, , , len
-./utilmy/zutil.py:np_findlocalmin2, function, np.zeros, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:zeros
+./utilmy/zutil.py:np_findlocalmin2, function, np.zeros, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:zeros
 ./utilmy/zutil.py:np_findlocalmin2, function, np_find_minpos, , , np_find_minpos
 ./utilmy/zutil.py:np_findlocalmin2, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:np_findlocalmin2, function, np_sortbycolumn, , , np_sortbycolumn
 ./utilmy/zutil.py:np_findlocalmin2, function, range, , , range
 ./utilmy/zutil.py:np_findlocalmin2, function, findlower, , , findlower
-./utilmy/zutil.py:np_findlocalmin2, function, np.abs, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:abs
+./utilmy/zutil.py:np_findlocalmin2, function, np.abs, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:abs
 ./utilmy/zutil.py:np_findlocalmax, function, len, , , len
-./utilmy/zutil.py:np_findlocalmax, function, np.zeros, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:zeros
+./utilmy/zutil.py:np_findlocalmax, function, np.zeros, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:zeros
 ./utilmy/zutil.py:np_findlocalmax, function, np_find_maxpos, , , np_find_maxpos
 ./utilmy/zutil.py:np_findlocalmax, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:np_findlocalmax, function, np_sortbycolumn, , , np_sortbycolumn
 ./utilmy/zutil.py:np_findlocalmax, function, range, , , range
 ./utilmy/zutil.py:np_findlocalmax, function, findhigher, , , findhigher
-./utilmy/zutil.py:np_findlocalmax, function, np.abs, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:abs
+./utilmy/zutil.py:np_findlocalmax, function, np.abs, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:abs
 ./utilmy/zutil.py:np_findlocalmin, function, len, , , len
-./utilmy/zutil.py:np_findlocalmin, function, np.zeros, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:zeros
+./utilmy/zutil.py:np_findlocalmin, function, np.zeros, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:zeros
 ./utilmy/zutil.py:np_findlocalmin, function, np_find_minpos, , , np_find_minpos
 ./utilmy/zutil.py:np_findlocalmin, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:np_findlocalmin, function, np_sortbycolumn, , , np_sortbycolumn
 ./utilmy/zutil.py:np_findlocalmin, function, range, , , range
 ./utilmy/zutil.py:np_findlocalmin, function, findlower, , , findlower
-./utilmy/zutil.py:np_findlocalmin, function, np.abs, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:abs
-./utilmy/zutil.py:np_stack, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
-./utilmy/zutil.py:np_stack, function, np.row_stack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:row_stack
-./utilmy/zutil.py:np_stack, function, np.column_stack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:column_stack
-./utilmy/zutil.py:np_uniquerows, function, np.ascontiguousarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:ascontiguousarray
-./utilmy/zutil.py:np_uniquerows, function, np.unique, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:unique
+./utilmy/zutil.py:np_findlocalmin, function, np.abs, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:abs
+./utilmy/zutil.py:np_stack, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:np_stack, function, np.row_stack, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:row_stack
+./utilmy/zutil.py:np_stack, function, np.column_stack, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:column_stack
+./utilmy/zutil.py:np_uniquerows, function, np.ascontiguousarray, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:ascontiguousarray
+./utilmy/zutil.py:np_uniquerows, function, np.unique, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:unique
 ./utilmy/zutil.py:np_uniquerows, function, unique_a.view, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: unique_a:view
-./utilmy/zutil.py:np_sort, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:np_sort, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:np_sort, function, df.sort_values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:sort_values
 ./utilmy/zutil.py:np_pivotable_create, function, tuple, , , tuple
 ./utilmy/zutil.py:np_pivotable_create, function, ysort.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: ysort:append
@@ -1188,35 +1188,35 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:pd_info_memsize, function, df.memory_usage, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:memory_usage
 ./utilmy/zutil.py:pd_row_findlast, function, df.iterrows, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:iterrows
 ./utilmy/zutil.py:pd_row_select, function, type, , , type
-./utilmy/zutil.py:pd_row_select, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:pd_row_select, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:pd_row_select, function, list, , , list
 ./utilmy/zutil.py:pd_row_select, function, c.endswith, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: c:endswith
-./utilmy/zutil.py:pd_row_select, function, np.in1d, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:in1d
+./utilmy/zutil.py:pd_row_select, function, np.in1d, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:in1d
 ./utilmy/zutil.py:pd_row_select, function, ValueError, , , ValueError
 ./utilmy/zutil.py:pd_csv_randomread, function, sum, [BUILT_IN], , [BUILT_IN]: sum
 ./utilmy/zutil.py:pd_csv_randomread, function, open, [BUILT_IN], , [BUILT_IN]: open
-./utilmy/zutil.py:pd_csv_randomread, function, np.sort, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:sort
-./utilmy/zutil.py:pd_csv_randomread, function, pd.read_csv, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:read_csv
-./utilmy/zutil.py:pd_array_todataframe, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:pd_csv_randomread, function, np.sort, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:sort
+./utilmy/zutil.py:pd_csv_randomread, function, pd.read_csv, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:read_csv
+./utilmy/zutil.py:pd_array_todataframe, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
 ./utilmy/zutil.py:pd_array_todataframe, function, len, , , len
-./utilmy/zutil.py:pd_array_todataframe, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:pd_array_todataframe, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:pd_dataframe_toarray, function, df.reset_index, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:reset_index
-./utilmy/zutil.py:pd_createdf, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:pd_createdf, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:pd_create_colmapdict_nametoint, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
-./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
-./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:pd_extract_col_uniquevalue_tocsv, function, print, , , print
 ./utilmy/zutil.py:pd_splitdf_inlist, function, list, , , list
 ./utilmy/zutil.py:pd_splitdf_inlist, function, l1.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: l1:append
 ./utilmy/zutil.py:pd_find, function, str, [BUILT_IN], , [BUILT_IN]: str
 ./utilmy/zutil.py:pd_find, function, print, , , print
 ./utilmy/zutil.py:pd_find, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
-./utilmy/zutil.py:pd_find, function, np.column_stack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:column_stack
+./utilmy/zutil.py:pd_find, function, np.column_stack, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:column_stack
 ./utilmy/zutil.py:pd_find, function, len, , , len
 ./utilmy/zutil.py:pd_find, function, gc.collect, [CLASS] [STDLIB], , [CLASS] [STDLIB]: gc:collect
 ./utilmy/zutil.py:pd_find, function, np_dictordered_create, , , np_dictordered_create
 ./utilmy/zutil.py:pd_find, function, range, , , range
-./utilmy/zutil.py:pd_find, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
+./utilmy/zutil.py:pd_find, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:pd_dtypes, function, pd_dtypes, , , pd_dtypes
 ./utilmy/zutil.py:pd_dtypes, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil.py:pd_dtypes, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
@@ -1243,47 +1243,47 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:pd_resetindex, function, list, , , list
 ./utilmy/zutil.py:pd_resetindex, function, len, , , len
 ./utilmy/zutil.py:pd_insertdatecol, function, date_nowtime, , , date_nowtime
-./utilmy/zutil.py:pd_replacevalues, function, np.shape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:shape
+./utilmy/zutil.py:pd_replacevalues, function, np.shape, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:shape
 ./utilmy/zutil.py:pd_removerow, function, df.drop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:drop
 ./utilmy/zutil.py:pd_removecol, function, df1.drop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df1:drop
 ./utilmy/zutil.py:pd_insertrow, function, pd_array_todataframe, , , pd_array_todataframe
 ./utilmy/zutil.py:pd_insertrow, function, df.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:append
 ./utilmy/zutil.py:pd_h5_cleanbeforesave, function, pd_resetindex, , , pd_resetindex
 ./utilmy/zutil.py:pd_h5_cleanbeforesave, function, pd_str_unicode_tostr, , , pd_str_unicode_tostr
-./utilmy/zutil.py:pd_h5_addtable, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:HDFStore
+./utilmy/zutil.py:pd_h5_addtable, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:HDFStore
 ./utilmy/zutil.py:pd_h5_addtable, function, find, , , find
 ./utilmy/zutil.py:pd_h5_addtable, function, list, , , list
 ./utilmy/zutil.py:pd_h5_addtable, function, print, , , print
 ./utilmy/zutil.py:pd_h5_addtable, function, store.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: store:append
 ./utilmy/zutil.py:pd_h5_addtable, function, store.close, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: store:close
-./utilmy/zutil.py:pd_h5_tableinfo, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:HDFStore
+./utilmy/zutil.py:pd_h5_tableinfo, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:HDFStore
 ./utilmy/zutil.py:pd_h5_tableinfo, function, store.get_storer, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: store:get_storer
-./utilmy/zutil.py:pd_h5_dumpinfo, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:HDFStore
+./utilmy/zutil.py:pd_h5_dumpinfo, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:HDFStore
 ./utilmy/zutil.py:pd_h5_dumpinfo, function, list, , , list
-./utilmy/zutil.py:pd_h5_dumpinfo, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:pd_h5_dumpinfo, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:pd_h5_dumpinfo, function, extract.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: extract:append
 ./utilmy/zutil.py:pd_h5_dumpinfo, function, datetime_tostring, , , datetime_tostring
 ./utilmy/zutil.py:pd_h5_dumpinfo, function, errsym.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: errsym:append
-./utilmy/zutil.py:pd_h5_dumpinfo, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
-./utilmy/zutil.py:pd_h5_save, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:HDFStore
+./utilmy/zutil.py:pd_h5_dumpinfo, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+./utilmy/zutil.py:pd_h5_save, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:HDFStore
 ./utilmy/zutil.py:pd_h5_save, function, store.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: store:append
 ./utilmy/zutil.py:pd_h5_save, function, store.close, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: store:close
-./utilmy/zutil.py:pd_h5_load, function, pd.read_hdf, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:read_hdf
-./utilmy/zutil.py:pd_h5_load, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:pd_h5_load, function, pd.read_hdf, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:read_hdf
+./utilmy/zutil.py:pd_h5_load, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
 ./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, os_file_listall, , , os_file_listall
-./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:HDFStore
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:HDFStore
 ./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
-./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, pd.read_csv, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:read_csv
+./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, pd.read_csv, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:read_csv
 ./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, print, , , print
 ./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, store.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: store:append
 ./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, store.close, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: store:close
 ./utilmy/zutil.py:pd_h5_fromcsv_tohdfs, function, os_file_exist, , , os_file_exist
-./utilmy/zutil.py:pd_np_toh5file, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:DataFrame
-./utilmy/zutil.py:pd_np_toh5file, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:HDFStore
+./utilmy/zutil.py:pd_np_toh5file, function, pd.DataFrame, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:DataFrame
+./utilmy/zutil.py:pd_np_toh5file, function, pd.HDFStore, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:HDFStore
 ./utilmy/zutil.py:pd_np_toh5file, function, st.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:append
 ./utilmy/zutil.py:datetime_tostring, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
 ./utilmy/zutil.py:datetime_tostring, function, datelist1.strftime, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: datelist1:strftime
-./utilmy/zutil.py:datetime_tostring, function, pd.to_datetime, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:to_datetime
+./utilmy/zutil.py:datetime_tostring, function, pd.to_datetime, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/pandas, [CLASS] [SIDE_PACKAGE]: pd:to_datetime
 ./utilmy/zutil.py:datetime_tostring, function, t.strftime, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:strftime
 ./utilmy/zutil.py:datetime_tostring, function, date2.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: date2:append
 ./utilmy/zutil.py:date_remove_bdays, function, isint, , , isint
@@ -1297,7 +1297,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:date_add_bdays, function, current_date.weekday, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: current_date:weekday
 ./utilmy/zutil.py:date_add_bdays, function, datetime_toint, , , datetime_toint
 ./utilmy/zutil.py:datenumpy_todatetime, function, type, , , type
-./utilmy/zutil.py:datetime_tonumpydate, function, np.datetime64, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:datetime64
+./utilmy/zutil.py:datetime_tonumpydate, function, np.datetime64, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:datetime64
 ./utilmy/zutil.py:datestring_todatetime, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
 ./utilmy/zutil.py:datestring_todatetime, function, parser.parse, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:parse
 ./utilmy/zutil.py:datestring_todatetime, function, date2.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: date2:append
@@ -1316,9 +1316,9 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:date_diffinbday, function, dateint_todatetime, , , dateint_todatetime
 ./utilmy/zutil.py:date_diffinbday, function, d1.date, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: d1:date
 ./utilmy/zutil.py:date_diffinbday, function, d2.date, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: d2:date
-./utilmy/zutil.py:date_diffinbday, function, np.busday_count, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:busday_count
+./utilmy/zutil.py:date_diffinbday, function, np.busday_count, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:busday_count
 ./utilmy/zutil.py:date_gencalendar, function, CustomBusinessDay, , , CustomBusinessDay
-./utilmy/zutil.py:date_gencalendar, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
+./utilmy/zutil.py:date_gencalendar, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:date_finddateid, function, np_findfirst, , , np_findfirst
 ./utilmy/zutil.py:datestring_toint, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
 ./utilmy/zutil.py:datestring_toint, function, int, [BUILT_IN], , [BUILT_IN]: int
@@ -1336,7 +1336,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:date_generatedatetime, function, date_add_bdays, , , date_add_bdays
 ./utilmy/zutil.py:date_generatedatetime, function, datetime.timedelta, [CLASS] [STDLIB], , [CLASS] [STDLIB]: datetime:timedelta
 ./utilmy/zutil.py:date_generatedatetime, function, list, , , list
-./utilmy/zutil.py:date_generatedatetime, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
+./utilmy/zutil.py:date_generatedatetime, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil_features.py:log, function, print, , , print
 ./utilmy/zutil_features.py:log, function, log2, , , log2
 ./utilmy/zutil_features.py:log, function, log3, , , log3
@@ -2051,9 +2051,15 @@ uri, type, function, type2, path2, tag
 ./utilmy/docs/code_parser.py:get_list_imported_func, function, _get_and_clean_all_lines, , , _get_and_clean_all_lines
 ./utilmy/docs/code_parser.py:get_list_imported_func, function, re.search, [CLASS] [STDLIB], , [CLASS] [STDLIB]: re:search
 ./utilmy/docs/code_parser.py:get_list_imported_func, function, line.rstrip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: line:rstrip
-./utilmy/docs/code_parser.py:get_list_imported_func, function, print, , , print
 ./utilmy/docs/code_parser.py:get_list_imported_func, function, line.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: line:split
 ./utilmy/docs/code_parser.py:get_list_imported_func, function, functions.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: functions:split
+./utilmy/docs/code_parser.py:get_list_import_class_as, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+./utilmy/docs/code_parser.py:get_list_import_class_as, function, _get_and_clean_all_lines, , , _get_and_clean_all_lines
+./utilmy/docs/code_parser.py:get_list_import_class_as, function, re.match, [CLASS] [STDLIB], , [CLASS] [STDLIB]: re:match
+./utilmy/docs/code_parser.py:get_list_import_class_as, function, line.rstrip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: line:rstrip
+./utilmy/docs/code_parser.py:get_list_import_class_as, function, print, , , print
+./utilmy/docs/code_parser.py:get_list_import_class_as, function, line.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: line:split
+./utilmy/docs/code_parser.py:get_list_import_class_as, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
 ./utilmy/docs/code_parser.py:_get_functions, function, re.match, [CLASS] [STDLIB], , [CLASS] [STDLIB]: re:match
 ./utilmy/docs/code_parser.py:_get_functions, function, list_funcs.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: list_funcs:append
 ./utilmy/docs/code_parser.py:_get_functions, function, list, , , list
@@ -2156,6 +2162,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/docs/code_parser.py:export_call_graph, function, print, , , print
 ./utilmy/docs/code_parser.py:export_call_graph, function, get_list_function_stats, , , get_list_function_stats
 ./utilmy/docs/code_parser.py:export_call_graph, function, get_list_imported_func, , , get_list_imported_func
+./utilmy/docs/code_parser.py:export_call_graph, function, get_list_import_class_as, , , get_list_import_class_as
 ./utilmy/docs/code_parser.py:export_call_graph, function, open, [BUILT_IN], , [BUILT_IN]: open
 ./utilmy/docs/code_parser.py:export_call_graph, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
 ./utilmy/docs/code_parser.py:export_call_graph, function, write_to_file, , , write_to_file
