@@ -597,51 +597,34 @@ def os_file_replacestring(findstr, replacestr, some_dir, pattern="*.*", dirlevel
 
 
     list_file = os_walk(some_dir, pattern=pattern, dirlevel=dirlevel)
-    list_file = list_file[2]
+    list_file = list_file['file']
     for file1 in list_file:
         os_file_replacestring1(findstr, replacestr, file1)
 
 
-def os_walk(dir1, pattern="*.*", dirlevel=20, path_only=False):
-    """
-            matches["dirpath"]  = []
-            matches["filename"] = []
-            matches["fullpath"] = []
+def os_walk(path, pattern="*", dirlevel=50):
+    """ dirlevel=0 : root directory
+        dirlevel=1 : 1 path below
 
     """
     import fnmatch, os, numpy as np
 
-    matches = {}
-    dir1 = dir1.rstrip(os.path.sep)
-    num_sep = dir1.count(os.path.sep)
-
-    if path_only:
-        for root, dirs, files in os.walk(dir1):
-            num_sep_this = root.count(os.path.sep)
-            if num_sep + dirlevel <= num_sep_this:
-                del dirs[:]
-            matches["dirpath"]  = []
-            matches["filename"] = []
-            matches["fullpath"] = []
-            # Filename, DirName
-            for inner_dirs in fnmatch.filter(dirs, pattern):
-                matches["dirpath"].append(os.path.splitext(inner_dirs)[0])
-                matches["filename"].append(os.path.splitext(root)[0])
-                matches["fullpath"].append(os.path.join(root, inner_dirs))
-        return np.array(matches)
+    matches = {'file':[], 'dir':[]}
+    dir1    = path.replace("\\", "/").rstrip("/")
+    num_sep = dir1.count("/")
 
     for root, dirs, files in os.walk(dir1):
-        num_sep_this = root.count(os.path.sep)
-        if num_sep + dirlevel <= num_sep_this:
-            del dirs[:]
-        matches["dirpath"]  = []
-        matches["filename"] = []
-        matches["fullpath"] = []
-        # Filename, DirName
-        for inner_files in fnmatch.filter(files, pattern):
-            matches["dirpath"].append(os.path.splitext(inner_files)[0])
-            matches["filename"].append(os.path.splitext(inner_files)[1])
-            matches["fullpath"].append(os.path.join(root, inner_files))
+        root = root.replace("\\", "/")
+        for fi in files :
+            if root.count("/") > num_sep + dirlevel: continue 
+            matches['file'].append(os.path.join(root, fi).replace("\\","/"))
+
+        for di in dirs :
+            if root.count("/") > num_sep + dirlevel: continue 
+            matches['dir'].append(os.path.join(root, di).replace("\\","/") + "/")
+
+    ### Filter files
+    matches['file'] = [ t for t in fnmatch.filter(matches['file'], pattern) ] 
     return  matches
 
 
