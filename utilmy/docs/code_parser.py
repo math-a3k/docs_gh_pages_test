@@ -1012,7 +1012,7 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
                 except:
                     pass
                 print('=========================================', _path)
-                path2 = _path[0]
+                path2 = _path[0].replace('\\', '.')
 
 
         if '.' in function:

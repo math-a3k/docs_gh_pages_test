@@ -39,7 +39,7 @@ uri, type, function, type2, path2, tag
 ./test.py:test_utilmy_pd_os_session, function, os_system, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_system
 ./test.py:test_utilmy_pd_os_session, function, os_platform_os, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_platform_os
 ./test.py:test_utilmy_pd_os_session, function, global_verbosity, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.global_verbosity
-./test.py:test_utilmy_session, function, Session, [FUNC] [SIDE_PACKAGE], d:\project\job\myutil\utilmy, [FUNC] [SIDE_PACKAGE]: utilmy.Session
+./test.py:test_utilmy_session, function, Session, [FUNC] [SIDE_PACKAGE], d:.project.job.myutil.utilmy, [FUNC] [SIDE_PACKAGE]: utilmy.Session
 ./test.py:test_utilmy_session, function, sess.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: sess:save
 ./test.py:test_utilmy_session, function, globals, , , globals
 ./test.py:test_utilmy_session, function, os.system, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:system
@@ -369,6 +369,14 @@ uri, type, function, type2, path2, tag
 ./utilmy/utilmy.py:pd_cols_unique_count, function, len, , , len
 ./utilmy/utilmy.py:pd_cols_unique_count, function, str, [BUILT_IN], , [BUILT_IN]: str
 ./utilmy/utilmy.py:pd_show, function, os_makedirs, , , os_makedirs
+./utilmy/utilmy.py:diskcache_save, function, dc.Cache, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dc:Cache
+./utilmy/utilmy.py:diskcache_save, function, FanoutCache, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: diskcache.FanoutCache
+./utilmy/utilmy.py:diskcache_save, function, range, , , range
+./utilmy/utilmy.py:diskcache_save, function, print, , , print
+./utilmy/utilmy.py:diskcache_save, function, len, , , len
+./utilmy/utilmy.py:diskcache_load, function, dc.Cache, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dc:Cache
+./utilmy/utilmy.py:diskcache_load, function, print, , , print
+./utilmy/utilmy.py:diskcache_load, function, len, , , len
 ./utilmy/utilmy.py:to_timeunix, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
 ./utilmy/utilmy.py:to_timeunix, function, int, [BUILT_IN], , [BUILT_IN]: int
 ./utilmy/utilmy.py:to_timeunix, function, datex.timetuple, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: datex:timetuple
@@ -380,6 +388,8 @@ uri, type, function, type2, path2, tag
 ./utilmy/utilmy.py:to_float, function, float, , , float
 ./utilmy/utilmy.py:to_int, function, int, [BUILT_IN], , [BUILT_IN]: int
 ./utilmy/utilmy.py:to_int, function, float, , , float
+./utilmy/utilmy.py:is_int, function, int, [BUILT_IN], , [BUILT_IN]: int
+./utilmy/utilmy.py:is_float, function, float, , , float
 ./utilmy/utilmy.py:config_load, function, str, [BUILT_IN], , [BUILT_IN]: str
 ./utilmy/utilmy.py:config_load, function, log, , , log
 ./utilmy/utilmy.py:config_load, function, pathlib.Path, [CLASS] [STDLIB], , [CLASS] [STDLIB]: pathlib:Path
@@ -598,6 +608,14 @@ uri, type, function, type2, path2, tag
 ./utilmy/utilmy.py:pd_cols_unique_count, function, len, , , len
 ./utilmy/utilmy.py:pd_cols_unique_count, function, str, [BUILT_IN], , [BUILT_IN]: str
 ./utilmy/utilmy.py:pd_show, function, os_makedirs, , , os_makedirs
+./utilmy/utilmy.py:diskcache_save, function, dc.Cache, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dc:Cache
+./utilmy/utilmy.py:diskcache_save, function, FanoutCache, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: diskcache.FanoutCache
+./utilmy/utilmy.py:diskcache_save, function, range, , , range
+./utilmy/utilmy.py:diskcache_save, function, print, , , print
+./utilmy/utilmy.py:diskcache_save, function, len, , , len
+./utilmy/utilmy.py:diskcache_load, function, dc.Cache, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dc:Cache
+./utilmy/utilmy.py:diskcache_load, function, print, , , print
+./utilmy/utilmy.py:diskcache_load, function, len, , , len
 ./utilmy/utilmy.py:to_timeunix, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
 ./utilmy/utilmy.py:to_timeunix, function, int, [BUILT_IN], , [BUILT_IN]: int
 ./utilmy/utilmy.py:to_timeunix, function, datex.timetuple, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: datex:timetuple
@@ -609,6 +627,8 @@ uri, type, function, type2, path2, tag
 ./utilmy/utilmy.py:to_float, function, float, , , float
 ./utilmy/utilmy.py:to_int, function, int, [BUILT_IN], , [BUILT_IN]: int
 ./utilmy/utilmy.py:to_int, function, float, , , float
+./utilmy/utilmy.py:is_int, function, int, [BUILT_IN], , [BUILT_IN]: int
+./utilmy/utilmy.py:is_float, function, float, , , float
 ./utilmy/utilmy.py:config_load, function, str, [BUILT_IN], , [BUILT_IN]: str
 ./utilmy/utilmy.py:config_load, function, log, , , log
 ./utilmy/utilmy.py:config_load, function, pathlib.Path, [CLASS] [STDLIB], , [CLASS] [STDLIB]: pathlib:Path
@@ -879,16 +899,16 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_file_rename, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
 ./utilmy/zutil.py:os_file_rename, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:os_gui_popup_show, function, os_gui_popup_show2, , , os_gui_popup_show2
-./utilmy/zutil.py:os_gui_popup_show, function, Tk, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Tk
-./utilmy/zutil.py:os_gui_popup_show, function, Scrollbar, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Scrollbar
-./utilmy/zutil.py:os_gui_popup_show, function, Text, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Text
+./utilmy/zutil.py:os_gui_popup_show, function, Tk, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Tk
+./utilmy/zutil.py:os_gui_popup_show, function, Scrollbar, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Scrollbar
+./utilmy/zutil.py:os_gui_popup_show, function, Text, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Text
 ./utilmy/zutil.py:os_gui_popup_show, function, scrollbar.pack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: scrollbar:pack
 ./utilmy/zutil.py:os_gui_popup_show, function, text.pack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:pack
 ./utilmy/zutil.py:os_gui_popup_show, function, scrollbar.config, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: scrollbar:config
 ./utilmy/zutil.py:os_gui_popup_show, function, text.config, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:config
 ./utilmy/zutil.py:os_gui_popup_show, function, text.insert, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:insert
 ./utilmy/zutil.py:os_gui_popup_show, function, root.attributes, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: root:attributes
-./utilmy/zutil.py:os_gui_popup_show, function, mainloop, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.mainloop
+./utilmy/zutil.py:os_gui_popup_show, function, mainloop, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.mainloop
 ./utilmy/zutil.py:os_print_tofile, function, text_file.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text_file:write
 ./utilmy/zutil.py:os_path_norm, function, pth.find, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pth:find
 ./utilmy/zutil.py:os_path_norm, function, b.lstrip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: b:lstrip
@@ -919,7 +939,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_file_extracttext, function, os_file_listall, , , os_file_listall
 ./utilmy/zutil.py:os_file_extracttext, function, open, [BUILT_IN], , [BUILT_IN]: open
 ./utilmy/zutil.py:os_file_extracttext, function, os_file_gettext, , , os_file_gettext
-./utilmy/zutil.py:os_file_extracttext, function, BeautifulSoup, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\site-packages\bs4, [FUNC] [SIDE_PACKAGE]: bs4.BeautifulSoup
+./utilmy/zutil.py:os_file_extracttext, function, BeautifulSoup, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.site-packages.bs4, [FUNC] [SIDE_PACKAGE]: bs4.BeautifulSoup
 ./utilmy/zutil.py:os_file_extracttext, function, soup.find_all, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: soup:find_all
 ./utilmy/zutil.py:os_file_extracttext, function, txt2.strip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: txt2:strip
 ./utilmy/zutil.py:os_file_extracttext, function, output_file1.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output_file1:write
@@ -973,7 +993,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_config_getfile, function, f1.readlines, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f1:readlines
 ./utilmy/zutil.py:os_config_getfile, function, print, , , print
 ./utilmy/zutil.py:pd_toexcel, function, os_file_exist, , , os_file_exist
-./utilmy/zutil.py:pd_toexcel, function, load_workbook, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\site-packages\openpyxl, [FUNC] [SIDE_PACKAGE]: openpyxl.load_workbook
+./utilmy/zutil.py:pd_toexcel, function, load_workbook, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.site-packages.openpyxl, [FUNC] [SIDE_PACKAGE]: openpyxl.load_workbook
 ./utilmy/zutil.py:pd_toexcel, function, pd.ExcelWriter, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:ExcelWriter
 ./utilmy/zutil.py:pd_toexcel, function, dict, [BUILT_IN], , [BUILT_IN]: dict
 ./utilmy/zutil.py:pd_toexcel, function, df.to_excel, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:to_excel
@@ -1039,7 +1059,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:np_addrow, function, np.row_stack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:row_stack
 ./utilmy/zutil.py:np_addrow, function, np.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:append
 ./utilmy/zutil.py:np_int_tostr, function, str, [BUILT_IN], , [BUILT_IN]: str
-./utilmy/zutil.py:np_dictordered_create, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil.py:np_dictordered_create, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil.py:np_list_unique, function, list, , , list
 ./utilmy/zutil.py:np_list_tofreqdict, function, dict, [BUILT_IN], , [BUILT_IN]: dict
 ./utilmy/zutil.py:np_list_tofreqdict, function, len, , , len
@@ -1198,7 +1218,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:pd_find, function, range, , , range
 ./utilmy/zutil.py:pd_find, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:pd_dtypes, function, pd_dtypes, , , pd_dtypes
-./utilmy/zutil.py:pd_dtypes, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil.py:pd_dtypes, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil.py:pd_dtypes, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:pd_dtypes, function, eval, [BUILT_IN], , [BUILT_IN]: eval
 ./utilmy/zutil.py:pd_dtypes, function, print, , , print
@@ -1471,7 +1491,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, spearmanr, , , spearmanr
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.ward, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:ward
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.fcluster, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:fcluster
-./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.defaultdict
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.collections, [FUNC] [SIDE_PACKAGE]: collections.defaultdict
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, cluster_id_to_feature_ids.values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cluster_id_to_feature_ids:values
 ./utilmy/zutil_features.py:feature_correlation_cat, function, plt.subplots, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: plt:subplots
@@ -1519,7 +1539,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:pd_colcat_toint, function, colname_new.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: colname_new:append
 ./utilmy/zutil_features.py:pd_colcat_toint, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, list, , , list
-./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create, , , bin_create
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.min, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:min
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.max, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:max
@@ -1767,7 +1787,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, spearmanr, , , spearmanr
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.ward, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:ward
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.fcluster, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:fcluster
-./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.defaultdict
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.collections, [FUNC] [SIDE_PACKAGE]: collections.defaultdict
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, cluster_id_to_feature_ids.values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cluster_id_to_feature_ids:values
 ./utilmy/zutil_features.py:feature_correlation_cat, function, plt.subplots, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: plt:subplots
@@ -1815,7 +1835,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:pd_colcat_toint, function, colname_new.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: colname_new:append
 ./utilmy/zutil_features.py:pd_colcat_toint, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, list, , , list
-./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:.Python39.lib.collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create, , , bin_create
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.min, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:min
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.max, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:max
@@ -2192,7 +2212,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/docs/test.py:update_price, function, t.start, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:start
 ./utilmy/logs/test_log.py:test1, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
 ./utilmy/logs/test_log.py:test1, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test1, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test1, function, log, , , log
 ./utilmy/logs/test_log.py:test1, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
 ./utilmy/logs/test_log.py:test1, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
 ./utilmy/logs/test_log.py:test1, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
@@ -2201,7 +2221,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/logs/test_log.py:test2, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
 ./utilmy/logs/test_log.py:test2, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
 ./utilmy/logs/test_log.py:test2, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test2, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test2, function, log, , , log
 ./utilmy/logs/test_log.py:test2, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
 ./utilmy/logs/test_log.py:test2, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
 ./utilmy/logs/test_log.py:test2, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
@@ -2211,14 +2231,14 @@ uri, type, function, type2, path2, tag
 ./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
 ./utilmy/logs/test_log.py:test_server, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
 ./utilmy/logs/test_log.py:test_server, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test_server, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test_server, function, log, , , log
 ./utilmy/logs/test_log.py:test_server, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
 ./utilmy/logs/test_log.py:test_server, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
 ./utilmy/logs/test_log.py:test_server, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
 ./utilmy/logs/test_log.py:test_server, function, loge, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.loge
 ./utilmy/logs/test_log.py:test1, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
 ./utilmy/logs/test_log.py:test1, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test1, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test1, function, log, , , log
 ./utilmy/logs/test_log.py:test1, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
 ./utilmy/logs/test_log.py:test1, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
 ./utilmy/logs/test_log.py:test1, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
@@ -2227,7 +2247,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/logs/test_log.py:test2, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
 ./utilmy/logs/test_log.py:test2, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
 ./utilmy/logs/test_log.py:test2, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test2, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test2, function, log, , , log
 ./utilmy/logs/test_log.py:test2, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
 ./utilmy/logs/test_log.py:test2, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
 ./utilmy/logs/test_log.py:test2, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
@@ -2237,7 +2257,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/logs/test_log.py:test_server, function, util_log.logger_setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: util_log:logger_setup
 ./utilmy/logs/test_log.py:test_server, function, log3, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log3
 ./utilmy/logs/test_log.py:test_server, function, log2, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log2
-./utilmy/logs/test_log.py:test_server, function, log, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.log
+./utilmy/logs/test_log.py:test_server, function, log, , , log
 ./utilmy/logs/test_log.py:test_server, function, logw, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logw
 ./utilmy/logs/test_log.py:test_server, function, logc, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logc
 ./utilmy/logs/test_log.py:test_server, function, logr, [FUNC] [REPO], ./utilmy/logs/util_log.py, [FUNC] [REPO]: util_log.logr
@@ -2312,6 +2332,8 @@ uri, type, function, type2, path2, tag
 ./utilmy/templates/cli.py:template_copy, function, os_copy, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_copy
 ./utilmy/templates/cli.py:template_copy, function, print, , , print
 ./utilmy/templates/cli.py:template_copy, function, Path, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: pathlib.Path
+./utilmy/viz/embedding.py:log, function, print, , , print
+./utilmy/viz/vizhtml.py:log, function, print, , , print
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, subprocess.check_output, [CLASS] [STDLIB], , [CLASS] [STDLIB]: subprocess:check_output
 ./utilmy/templates/templist/pypi_package/run_pipy.py:get_current_githash, function, label.decode, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: label:decode
 ./utilmy/templates/templist/pypi_package/run_pipy.py:update_version, function, open, [BUILT_IN], , [BUILT_IN]: open
