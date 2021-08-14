@@ -26,9 +26,10 @@ import pandas as pd
 from stdlib_list import stdlib_list
 import platform
 import pkgutil
-
+import importlib
 
 stdlib_libraries = stdlib_list(platform.python_version()[:-2])
+# print(stdlib_libraries)
 list_built_in = [
     "abs", "delattr", "hash", "memoryview", "set", "all", "dict",
     "help", "min", "setattr", "any", "dir", "hex", "next", "slice",
@@ -1003,6 +1004,15 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
             else:
                 tag = f"[FUNC] [SIDE_PACKAGE]: {list_imported[function]}.{function}"
                 type2 = '[FUNC] [SIDE_PACKAGE]'
+
+                _path = ['']
+                try:
+                    mymodule = importlib.import_module(f'{list_imported[function]}')
+                    _path = mymodule.__path__
+                except:
+                    pass
+                print('=========================================', _path)
+                path2 = _path[0]
 
 
         if '.' in function:

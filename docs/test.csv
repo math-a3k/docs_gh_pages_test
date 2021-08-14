@@ -39,7 +39,7 @@ uri, type, function, type2, path2, tag
 ./test.py:test_utilmy_pd_os_session, function, os_system, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_system
 ./test.py:test_utilmy_pd_os_session, function, os_platform_os, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.os_platform_os
 ./test.py:test_utilmy_pd_os_session, function, global_verbosity, [FUNC] [REPO], ./utilmy/utilmy.py, [FUNC] [REPO]: utilmy.global_verbosity
-./test.py:test_utilmy_session, function, Session, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: utilmy.Session
+./test.py:test_utilmy_session, function, Session, [FUNC] [SIDE_PACKAGE], d:\project\job\myutil\utilmy, [FUNC] [SIDE_PACKAGE]: utilmy.Session
 ./test.py:test_utilmy_session, function, sess.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: sess:save
 ./test.py:test_utilmy_session, function, globals, , , globals
 ./test.py:test_utilmy_session, function, os.system, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:system
@@ -879,16 +879,16 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_file_rename, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
 ./utilmy/zutil.py:os_file_rename, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:os_gui_popup_show, function, os_gui_popup_show2, , , os_gui_popup_show2
-./utilmy/zutil.py:os_gui_popup_show, function, Tk, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: tkinter.Tk
-./utilmy/zutil.py:os_gui_popup_show, function, Scrollbar, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: tkinter.Scrollbar
-./utilmy/zutil.py:os_gui_popup_show, function, Text, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: tkinter.Text
+./utilmy/zutil.py:os_gui_popup_show, function, Tk, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Tk
+./utilmy/zutil.py:os_gui_popup_show, function, Scrollbar, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Scrollbar
+./utilmy/zutil.py:os_gui_popup_show, function, Text, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.Text
 ./utilmy/zutil.py:os_gui_popup_show, function, scrollbar.pack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: scrollbar:pack
 ./utilmy/zutil.py:os_gui_popup_show, function, text.pack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:pack
 ./utilmy/zutil.py:os_gui_popup_show, function, scrollbar.config, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: scrollbar:config
 ./utilmy/zutil.py:os_gui_popup_show, function, text.config, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:config
 ./utilmy/zutil.py:os_gui_popup_show, function, text.insert, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:insert
 ./utilmy/zutil.py:os_gui_popup_show, function, root.attributes, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: root:attributes
-./utilmy/zutil.py:os_gui_popup_show, function, mainloop, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: tkinter.mainloop
+./utilmy/zutil.py:os_gui_popup_show, function, mainloop, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\tkinter, [FUNC] [SIDE_PACKAGE]: tkinter.mainloop
 ./utilmy/zutil.py:os_print_tofile, function, text_file.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text_file:write
 ./utilmy/zutil.py:os_path_norm, function, pth.find, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pth:find
 ./utilmy/zutil.py:os_path_norm, function, b.lstrip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: b:lstrip
@@ -919,7 +919,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_file_extracttext, function, os_file_listall, , , os_file_listall
 ./utilmy/zutil.py:os_file_extracttext, function, open, [BUILT_IN], , [BUILT_IN]: open
 ./utilmy/zutil.py:os_file_extracttext, function, os_file_gettext, , , os_file_gettext
-./utilmy/zutil.py:os_file_extracttext, function, BeautifulSoup, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: bs4.BeautifulSoup
+./utilmy/zutil.py:os_file_extracttext, function, BeautifulSoup, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\site-packages\bs4, [FUNC] [SIDE_PACKAGE]: bs4.BeautifulSoup
 ./utilmy/zutil.py:os_file_extracttext, function, soup.find_all, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: soup:find_all
 ./utilmy/zutil.py:os_file_extracttext, function, txt2.strip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: txt2:strip
 ./utilmy/zutil.py:os_file_extracttext, function, output_file1.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output_file1:write
@@ -973,7 +973,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:os_config_getfile, function, f1.readlines, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f1:readlines
 ./utilmy/zutil.py:os_config_getfile, function, print, , , print
 ./utilmy/zutil.py:pd_toexcel, function, os_file_exist, , , os_file_exist
-./utilmy/zutil.py:pd_toexcel, function, load_workbook, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: openpyxl.load_workbook
+./utilmy/zutil.py:pd_toexcel, function, load_workbook, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\site-packages\openpyxl, [FUNC] [SIDE_PACKAGE]: openpyxl.load_workbook
 ./utilmy/zutil.py:pd_toexcel, function, pd.ExcelWriter, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pd:ExcelWriter
 ./utilmy/zutil.py:pd_toexcel, function, dict, [BUILT_IN], , [BUILT_IN]: dict
 ./utilmy/zutil.py:pd_toexcel, function, df.to_excel, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:to_excel
@@ -1039,7 +1039,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:np_addrow, function, np.row_stack, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:row_stack
 ./utilmy/zutil.py:np_addrow, function, np.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:append
 ./utilmy/zutil.py:np_int_tostr, function, str, [BUILT_IN], , [BUILT_IN]: str
-./utilmy/zutil.py:np_dictordered_create, function, OrderedDict, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil.py:np_dictordered_create, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil.py:np_list_unique, function, list, , , list
 ./utilmy/zutil.py:np_list_tofreqdict, function, dict, [BUILT_IN], , [BUILT_IN]: dict
 ./utilmy/zutil.py:np_list_tofreqdict, function, len, , , len
@@ -1198,7 +1198,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil.py:pd_find, function, range, , , range
 ./utilmy/zutil.py:pd_find, function, np.array, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: np:array
 ./utilmy/zutil.py:pd_dtypes, function, pd_dtypes, , , pd_dtypes
-./utilmy/zutil.py:pd_dtypes, function, OrderedDict, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil.py:pd_dtypes, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil.py:pd_dtypes, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil.py:pd_dtypes, function, eval, [BUILT_IN], , [BUILT_IN]: eval
 ./utilmy/zutil.py:pd_dtypes, function, print, , , print
@@ -1471,7 +1471,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, spearmanr, , , spearmanr
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.ward, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:ward
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.fcluster, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:fcluster
-./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: collections.defaultdict
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.defaultdict
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, cluster_id_to_feature_ids.values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cluster_id_to_feature_ids:values
 ./utilmy/zutil_features.py:feature_correlation_cat, function, plt.subplots, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: plt:subplots
@@ -1519,7 +1519,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:pd_colcat_toint, function, colname_new.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: colname_new:append
 ./utilmy/zutil_features.py:pd_colcat_toint, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, list, , , list
-./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create, , , bin_create
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.min, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:min
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.max, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:max
@@ -1767,7 +1767,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, spearmanr, , , spearmanr
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.ward, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:ward
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, hierarchy.fcluster, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: hierarchy:fcluster
-./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: collections.defaultdict
+./utilmy/zutil_features.py:feature_selection_multicolinear, function, defaultdict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.defaultdict
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:feature_selection_multicolinear, function, cluster_id_to_feature_ids.values, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cluster_id_to_feature_ids:values
 ./utilmy/zutil_features.py:feature_correlation_cat, function, plt.subplots, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: plt:subplots
@@ -1815,7 +1815,7 @@ uri, type, function, type2, path2, tag
 ./utilmy/zutil_features.py:pd_colcat_toint, function, colname_new.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: colname_new:append
 ./utilmy/zutil_features.py:pd_colcat_toint, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, list, , , list
-./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
+./utilmy/zutil_features.py:pd_colnum_tocat, function, OrderedDict, [FUNC] [SIDE_PACKAGE], C:\Python39\lib\collections, [FUNC] [SIDE_PACKAGE]: collections.OrderedDict
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, bin_create, , , bin_create
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.min, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:min
 ./utilmy/zutil_features.py:pd_colnum_tocat, function, dfc.max, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dfc:max
@@ -2123,6 +2123,8 @@ uri, type, function, type2, path2, tag
 ./utilmy/docs/code_parser.py:export_stats_perrepo, function, df.to_csv, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: df:to_csv
 ./utilmy/docs/code_parser.py:export_stats_perrepo, function, get_list_class_stats, , , get_list_class_stats
 ./utilmy/docs/code_parser.py:export_stats_perrepo, function, get_list_method_stats, , , get_list_method_stats
+./utilmy/docs/code_parser.py:write_to_file, function, importlib.import_module, [CLASS] [STDLIB], , [CLASS] [STDLIB]: importlib:import_module
+./utilmy/docs/code_parser.py:write_to_file, function, print, , , print
 ./utilmy/docs/code_parser.py:write_to_file, function, function.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: function:split
 ./utilmy/docs/code_parser.py:write_to_file, function, open, [BUILT_IN], , [BUILT_IN]: open
 ./utilmy/docs/code_parser.py:write_to_file, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
