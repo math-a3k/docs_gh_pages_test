@@ -460,6 +460,31 @@ def pd_plot_highcharts(df ):
 
 
 
+############################################################################################################################
+############################################################################################################################
+def images_to_html(dir_input="*.png",  title="", verbose=False):
+    """
+      images_to_html( model_path + "/graph_shop_17_past/*.png" , model_path + "shop_17.html" )
+    """
+    import matplotlib.pyplot as plt
+    import base64
+    from io import BytesIO
+    import glob
+    html = ""
+    flist = glob.glob(dir_input)
+    flist.sorted()
+    for fp in flist :
+        if verbose : print(fp,end=",")
+        with open(fp, mode="rb" ) as fp2 :
+            tmpfile =fp2.read()
+        encoded = base64.b64encode( tmpfile ) .decode('utf-8')
+        html =  html + f'<p><img src=\'data:image/png;base64,{encoded}\'> </p>\n'
+
+    return html
+
+
+
+
 
 
 
