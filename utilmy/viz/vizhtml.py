@@ -12,19 +12,19 @@ import random, os, sys, numpy as np, pandas as pd
 from datetime import datetime ; from typing import List
 from tqdm import tqdm
 
-from box import Box 
+from box import Box
 
 #### Converting python --> HTML
 import matplotlib.pyplot as plt
 import mpld3
 import pandas_highcharts
-import pretty_html_table 
+import pretty_html_table
 
 
 
 ##################################################################################################################
 def log(*s):
-    print(*s, exist_ok=True)
+    print(*s, flush=True)
 
 
 ###################################################################################
@@ -82,29 +82,31 @@ class htmlDoc(object):
 
         self.cc      = Box(cfg)   #### Config dict
         self.dir_out = dir_out
-        
+
         self.cc.use_datatable = self.cc.get('use_datatable', False)  ### Default val
-        
+
         self.head = "<body>"
         self.html = """<body>        """
-        
-        
+
+
         if self.cc.use_datatable:
             self.head = self.head + """\n
               <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
               <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
             """
             #https://datatables.net/manual/installation
-            
+
             ### add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
-   
+
 
     def tag(self, x):  self.html += "\n" + x
 
     def h1(self, x)  : self.html += "\n" + f"<h1>{x}</h1>"
+    def h2(self, x)  : self.html += "\n" + f"<h2>{x}</h2>"
+    def h3(self, x)  : self.html += "\n" + f"<h3>{x}</h3>"
     def hr(self)     : self.html += "\n" + f"</hr>"
-    def sep(self, x) : self.html += "\n" + f"</hr>"
+    def sep(self   ) : self.html += "\n" + f"</hr>"
     def br(self, x)  : self.html += "\n" + f"</br>"
 
 
@@ -123,13 +125,15 @@ class htmlDoc(object):
 
 
 
-    def table(self, df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
+    def table(self, df,  cfg:dict=None, mode='d3', use_datatable=False,  **kw ):
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         ## pretty_html_table
         html_code = pretty_html_table.build_table(df, mode)
 
-        if self.cc.use_datatable :
-            html_code += """$(document).ready( function () {    $('#{table_id}').DataTable(); } );""".format(table_id="ok")
+        table_id = '1'
+
+        if use_datatable :
+            html_code += """$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );""".replace('mytable_id', table_id)
         return html_code
 
 
@@ -149,9 +153,9 @@ class htmlDoc(object):
 
 
 
-    
-    
-    
+
+
+
 ##################################################################################################################
 ######### MLPD3 Display ##########################################################################################
 mpld3_CSS = """
@@ -225,7 +229,7 @@ def pd_plot_scatter_mlpd3(df,  cfg:dict=None, mode='d3', save_img=False,  **kw )
     """
     cc = Box(cfg)
 
-    cc.name      = cc.get('name',    'my scatter')  
+    cc.name      = cc.get('name',    'my scatter')
     cc.figsize   = cc.get('figsize', (25, 15) )   ### Dict type default values
     cc.title     = ' my graph title'
     cc.save_name = 'myfile'
@@ -233,10 +237,10 @@ def pd_plot_scatter_mlpd3(df,  cfg:dict=None, mode='d3', save_img=False,  **kw )
 
     #######################################################################################
     # create data frame that has the result of the MDS plus the cluster numbers and titles
-    cols = ['x', 'y', 
-            'label', 
-            'class1', 'class1_color',    ### Color per
-            'class2', 'class2_size'      ### Size
+    cols = ['x', 'y',
+            'label',                     ### label per point
+            'class1', 'class1_color',    ### Color per point
+            'class2', 'class2_size'      ### Size per point
            ]
     df   = df[cols]
     ##  df[cols]
@@ -284,19 +288,12 @@ def pd_plot_scatter_mlpd3(df,  cfg:dict=None, mode='d3', save_img=False,  **kw )
 
     # iterate through groups to layer the plot
     for name, group in groups_clusters:
-        points = ax.plot(group.x, group.y, marker='o', linestyle='', 
-                         ms   = df['class2_size'].values, 
+        points = ax.plot(group.x, group.y, marker='o', linestyle='',
+                         ms   = df['class2_size'].values,
                          label= df['class1'].values, mec='none',
                          color= df['class1_color'].values)
         ax.set_aspect('auto')
         labels = [i for i in group['label']]
-
-        # set tooltip using points, labels and the already defined 'css'
-        tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
-
-
-        # connect tooltip to fig
-        mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
         # set tick marks as blank
         ax.axes.get_xaxis().set_ticks([])
@@ -306,15 +303,28 @@ def pd_plot_scatter_mlpd3(df,  cfg:dict=None, mode='d3', save_img=False,  **kw )
         ax.axes.get_xaxis().set_visible(False)
         ax.axes.get_yaxis().set_visible(False)
 
+
+        mlpd3_add_tooltip(fig, points, labels)
+        # set tooltip using points, labels and the already defined 'css'
+        # tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
+        # connect tooltip to fig
+        # mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
+
+
     ax.legend(numpoints=1)  # show legend with only one dot
 
 
     ##### Export ############################################################
     #mpld3.fig_to_html(fig, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False, **kwargs)[source]
-    html_code = mpld3.fig_to_html(fig,  **cfg.html_opts)
+    html_code = mpld3.fig_to_html(fig,  **kw)
     return html_code
 
 
+def mlpd3_add_tooltip(fig, points, labels):
+        # set tooltip using points, labels and the already defined 'css'
+        tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
+        # connect tooltip to fig
+        mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
 
 
@@ -355,13 +365,13 @@ def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsi
     if cols_axe1 is None: cols_axe1 = df.columns
     if len(cols_axe1) == 0: return
     colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
-    
+
     # Displays subplot's pair in case of plot_type defined as `pair`
     if plot_type=='pair':
         ax = df.plot(subplots=True, figsize=figsize, **kwargs)
         plt.show()
         return
-    
+
     # First axis
     ax = df.loc[:, cols_axe1[0]].plot(label=cols_axe1[0], color=colors[0], **kwargs)
     ax.set_ylabel(ylabel=cols_axe1[0])
@@ -403,6 +413,6 @@ def mpld3_server_start():
 
 ###################################################################################################
 if __name__ == "__main__":
-    ### python 
+    ### python
     import fire
     fire.Fire()
