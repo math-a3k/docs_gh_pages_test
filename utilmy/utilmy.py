@@ -986,6 +986,120 @@ def global_verbosity(cur_path, path_relative="/../../config.json",
 
 
 
+
+
+
+
+
+
+######################################################################################################
+######## External IO #################################################################################
+def hdfs_put(from_dir="", to_dir="",  verbose=True, n_pool=25, dirlevel=50,  **kw):
+    """ 
+     hdfs_put LocalFile into HDFS in multi-thread
+    from_dir = "hdfs://nameservice1/user/
+    to_dir   = "data/"
+    
+    """
+    import glob, gc,os, time, pyarrow as pa
+    from multiprocessing.pool import ThreadPool
+
+    def log(*s, **kw):
+      print(*s, flush=True)
+    
+    #### File ############################################   
+    hdfs      = pa.hdfs.connect()  
+    hdfs.mkdir(to_dir  )  
+
+    from utilmy import os_walk    
+    dd = os_walk(from_dir, dirlevel= dirlevel, pattern="*") 
+    fdirs, file_list = dd['dir'], dd['file']
+    file_list = sorted(list(set(file_list)))
+    n_file    = len(file_list)
+    log('Files', n_file)
+
+    file_list2 = [] 
+    for i, filei in enumerate(file_list) :
+        file_list2.append( (filei,   to_dir + filei.replace(from_dir,"")   )  )
+
+
+    ##### Create Target dirs  ###########################
+    fdirs = [ t.replace(from_dir,"") for t in fdirs]
+    for di in fdirs :
+        hdfs.mkdir(to_dir + "/" + di )   
+
+    #### Input xi #######################################    
+    xi_list = [ []  for t in range(n_pool) ]     
+    for i, xi in enumerate(file_list2) :
+        jj = i % n_pool 
+        xi_list[jj].append( xi )
+        
+    #### function #######################################
+    def fun_async(xlist):
+      for x in xlist :   
+         try :
+           with open(x[0], mode='rb') as f:
+                hdfs.upload(x[1], f,)                        
+         except :
+            try :
+               time.sleep(60)
+               with open(x[0], mode='rb') as f:
+                  hdfs.upload(x[1], f,)  
+            except : print('error', x[1])
+                  
+    #### Pool execute ###################################
+    pool     = ThreadPool(processes=n_pool)
+    job_list = []
+    for i in range(n_pool):
+         job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
+         if verbose : log(i, xi_list[i] )
+
+    res_list = []            
+    for i in range(n_pool):
+        if i >= len(job_list): break
+        res_list.append( job_list[ i].get() )
+        log(i, 'job finished')
+
+
+    pool.terminate() ; pool.join()  ;  pool = None          
+    log('n_processed', len(res_list) )
+    
+ 
+
+ def multithread_run(fun_async, input_list:list, n_pool=5, verbose=True):
+    """  input is as list of tuples
+    def fun_async(xlist):
+      for x in xlist :   
+            hdfs.upload(x[0], x[1])
+    """
+    #### Input xi #######################################    
+    xi_list = [ []  for t in range(n_pool) ]     
+    for i, xi in enumerate(input_list) :
+        jj = i % n_pool 
+        xi_list[jj].append( xi )
+
+    #### Pool execute ###################################
+    pool     = ThreadPool(processes=n_pool)
+    job_list = []
+    for i in range(n_pool):
+         job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
+         if verbose : log(i, xi_list[i] )
+
+    res_list = []            
+    for i in range(n_pool):
+        if i >= len(job_list): break
+        res_list.append( job_list[ i].get() )
+        log(i, 'job finished')
+
+    pool.terminate() ; pool.join()  ; pool = None          
+    log('n_processed', len(res_list) )    
+
+
+
+
+
+
+
 ######################################################################################################
 ########Git ##########################################################################################
 def git_repo_root():
