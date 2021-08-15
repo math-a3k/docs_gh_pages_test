@@ -1,20 +1,26 @@
-
-"""
-
+""" Converter python ---> HTML
 https://try2explore.com/questions/10109123
-
 https://mpld3.github.io/examples/index.html
-
 https://notebook.community/johnnycakes79/pyops/dashboard/pandas-highcharts-examples
 
-"""
-import random, os, sys, numpy as np, pandas as pd, mpld3
-from datetime import datetime ; from typing import List
 
-import matplotlib.pyplot as plt
+https://datatables.net/
+
+
+"""
+import random, os, sys, numpy as np, pandas as pd
+from datetime import datetime ; from typing import List
 from tqdm import tqdm
 
 from box import Box 
+
+#### Converting python --> HTML
+import matplotlib.pyplot as plt
+import mpld3
+import pandas_highcharts
+import pretty_html_table 
+
+
 
 ##################################################################################################################
 def log(*s):
@@ -23,99 +29,132 @@ def log(*s):
 
 ###################################################################################
 #### Example usage ################################################################
-cfg = Box({})    #### pip install box-python    can use .key or ["mykey"]  for dict
+def test_usage():
+  cfg = Box({})    #### pip install box-python    can use .key or ["mykey"]  for dict
 
-cfg.tseries = { "title": 'ok'}
-cfg.scatter = { "title": 'ok'}
-cfg.histo   = { "title": 'ok'}
-
-
-doc = htmlDoc(dir_out="")
-
-doc.h1('My title')  ## h1
-doc.sep()
-doc.br()  ### <br>
-
-doc.tag('<h2> My graph title </h2>')
-doc.plot_scatter(df, cfg.scatter, mode='highcharts', save_img=False)
-doc.hr()   ###   doc.sep() line separator
+  cfg.tseries = { "title": 'ok'}
+  cfg.scatter = { "title": 'ok'}
+  cfg.histo   = { "title": 'ok'}
+  cfg.use_datatable = True
 
 
-for df2_i in df2_list :
-    doc.h3( f" plot title: {df2_i['category'].values[0]}" )
-    doc.plot_tseries(df2_i, cfg.tseries, mode='highcharts', save_img=False)
+  df       = pd.DataFrame([[1,2]])
+  df2_list = [ df, df, df]
 
 
-doc.tag('<h2> My histo title </h2>')
-doc.plot_histogram(df3, cfg.histo, mode='mpld3', save_img=False)
+  doc = htmlDoc(dir_out="", title="hrllo")
 
-####  https://pypi.org/project/pretty-html-table/
-doc.table(df, format_name="ok")
+  doc.h1('My title')  ## h1
+  doc.sep()
+  doc.br()  ### <br>
+
+  doc.tag('<h2> My graph title </h2>')
+  doc.plot_scatter(df, cfg.scatter, mode='highcharts', save_img=False)
+  doc.hr()   ###   doc.sep() line separator
 
 
-doc.tag("""<p>    My mutilplin whatever I want to write
-    ok
-  """)
+  for df2_i in df2_list :
+      doc.h3( f" plot title: {df2_i['category'].values[0]}" )
+      doc.plot_tseries(df2_i, cfg.tseries, mode='highcharts', save_img=False)
 
-doc.save(dir_out= "myfile.html")
 
+  doc.tag('<h2> My histo title </h2>')
+  doc.plot_histogram(df[['col1', 'col2' ]], cfg.histo, mode='mpld3', save_img=False)
+
+  doc.table(df, format='blue_light')
+
+
+  doc.tag("""<p>    My mutilines whatever I want to write
+      ok
+    """)
+
+  doc.save(dir_out= "myfile.html")
+
+  doc.open_browser()  #### Open myfile.html
 
 
 
 
 #####################################################################################
-#### Prototype Class ################################################################
+#### Class ##########################################################################
 class htmlDoc(object):
-   def __init__()
-      self.html= """
-      <head>
+    def __init__(self, dir_out=None, mode="", title="", cfg:dict=None):
 
-      <body>
+        self.cc      = Box(cfg)   #### Config dict
+        self.dir_out = dir_out
+        
+        self.cc.use_datatable = self.cc.get('use_datatable', False)  ### Default val
+        
+        self.head = "<body>"
+        self.html = """<body>        """
+        
+        
+        if self.cc.use_datatable:
+            self.head = self.head + """\n
+              <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+              <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+            """
+            #https://datatables.net/manual/installation
+            
+            ### add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
-
-      """
    
 
-  def h1(self, x):
-    self.html += "\n" + f"<h1>{x}</h1>" 
+    def tag(self, x):  self.html += "\n" + x
 
-    
-  def save(self, dir_out=None):
-    self.dir_out = dir_out if dir_out is not None else self.dir_out
-    fp.write(self.html) 
-    
-  def open(self):
-        if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
-            
-            
-            
-  def table(self, df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
-     ## show table in HTML
+    def h1(self, x)  : self.html += "\n" + f"<h1>{x}</h1>"
+    def hr(self)     : self.html += "\n" + f"</hr>"
+    def sep(self, x) : self.html += "\n" + f"</hr>"
+    def br(self, x)  : self.html += "\n" + f"</br>"
+
+
+
+    def save(self, dir_out=None):
+        self.dir_out = dir_out if dir_out is not None else self.dir_out
+
+        full  = self.head + "</head>" + self.html + "</body></html>"
+
+        with open(self.dir_out, mode='w') as fp :
+           fp.write(full)
+
+
+    def open_browser(self):
+        if os.name == 'nt': os.system(f'start chrome "{self.dir_out}/embeds.html" ')
+
+
+
+    def table(self, df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
+        ## show table in HTML : https://pypi.org/project/pretty-html-table/
+        ## pretty_html_table
+        html_code = pretty_html_table.build_table(df, mode)
+
+        if self.cc.use_datatable :
+            html_code += """$(document).ready( function () {    $('#{table_id}').DataTable(); } );""".format(table_id="ok")
+        return html_code
+
+
+    def plot_tseries(self, df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
      pass
 
-    
-  def plot_tseries(self, df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
-     pass
-    
-    
-  def plot_histogram(self, df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
-     pass
-    
 
-  def plot_scatter(self, df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
+    def plot_histogram(self, df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
+     pass
+
+
+    def plot_scatter(self, df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
      if mode == 'mpld3' :
-        html_code  = plot_scatter_mlpd3(df,  cfg, mode, save_img,  )
+        html_code  = pd_plot_scatter_mlpd3(df,  cfg, mode, save_img,  )
 
-     self.html += "\n\n" + html_code 
+     self.html += "\n\n" + html_code
 
 
 
     
     
     
-
 ##################################################################################################################
-CSS = """
+######### MLPD3 Display ##########################################################################################
+mpld3_CSS = """
     text.mpld3-text, div.mpld3-tooltip {
       font-family:Arial, Helvetica, sans-serif;
     }
@@ -125,7 +164,7 @@ CSS = """
 
 
 
-class TopToolbar(mpld3.plugins.PluginBase):
+class mpld3_TopToolbar(mpld3.plugins.PluginBase):
     """Plugin for moving toolbar to top of figure"""
 
     JAVASCRIPT = """
@@ -152,11 +191,37 @@ class TopToolbar(mpld3.plugins.PluginBase):
     def __init__(self):
         self.dict_ = {"type": "toptoolbar"}
 
-    
 
-def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
+
+def pd_plot_highcharts(df ):
+   """
+   # Basic line plot
+  chart = serialize(df, render_to="my-chart", title="My Chart")
+  # Basic column plot
+  chart = serialize(df, render_to="my-chart", title="Test", kind="bar")
+  # Basic column plot
+  chart = serialize(df, render_to="my-chart", title="Test", kind="barh")
+  # Plot C on secondary axis
+  chart = serialize(df, render_to="my-chart", title="Test", secondary_y = ["C"])
+  # Plot on a 1000x700 div
+  chart = serialize(df, render_to="my-chart", title="Test", figsize = (1000, 700))
+
+
+   """
+   # df = ... # create your dataframe here
+
+   data = pandas_highcharts.serialize(df, render_to='my-chart', output_type='json')
+   json_data_2 = "new Highcharts.StockChart(%s);" % pandas_highcharts.core.json_encode(data)
+
+   html_code = """<div id="{chart_id}"</div>
+      <script type="text/javascript">{data}</script>""".format(chart_id="new_brownian", data=json_data_2)
+   return html_code
+
+
+
+
+def pd_plot_scatter_mlpd3(df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
     """
-
     """
     cc = Box(cfg)
 
@@ -168,7 +233,11 @@ def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
 
     #######################################################################################
     # create data frame that has the result of the MDS plus the cluster numbers and titles
-    cols = ['x', 'y', 'label', 'class1', 'class1_color', 'class2', 'class2_size']
+    cols = ['x', 'y', 
+            'label', 
+            'class1', 'class1_color',    ### Color per
+            'class2', 'class2_size'      ### Size
+           ]
     df   = df[cols]
     ##  df[cols]
 
@@ -223,9 +292,11 @@ def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
         labels = [i for i in group['label']]
 
         # set tooltip using points, labels and the already defined 'css'
-        tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=CSS)
+        tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
+
+
         # connect tooltip to fig
-        mpld3.plugins.connect(fig, tooltip, TopToolbar())
+        mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
         # set tick marks as blank
         ax.axes.get_xaxis().set_ticks([])
@@ -238,10 +309,8 @@ def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
     ax.legend(numpoints=1)  # show legend with only one dot
 
 
-
     ##### Export ############################################################
     #mpld3.fig_to_html(fig, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False, **kwargs)[source]
-
     html_code = mpld3.fig_to_html(fig,  **cfg.html_opts)
     return html_code
 
@@ -324,14 +393,11 @@ def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsi
 
 
 
-def html_add():
+def mpld3_server_start():
     ### Windows specifc
-    if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
-
-
-    if show_server :
-       # mpld3.show(fig=None, ip='127.0.0.1', port=8888, n_retries=50, local=True, open_browser=True, http_server=None, **kwargs)[source] 
-       mpld3.show()  # show the plot
+    # if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
+    # mpld3.show(fig=None, ip='127.0.0.1', port=8888, n_retries=50, local=True, open_browser=True, http_server=None, **kwargs)[source]
+    mpld3.show()  # show the plot
 
 
 
@@ -340,8 +406,3 @@ if __name__ == "__main__":
     ### python 
     import fire
     fire.Fire()
-
-
-
-
-
