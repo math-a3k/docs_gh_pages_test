@@ -41,13 +41,8 @@ def test_usage():
     cfg.histo = {"title": 'ok'}
     cfg.use_datatable = True
 
-    # TODO: tdchung. checking
-    print(cfg)
-
     df = pd.DataFrame([[1, 2]])
     df2_list = [df, df, df]
-    # TODO: tdchung. checking
-    print(df2_list)
 
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
 
@@ -55,34 +50,62 @@ def test_usage():
     doc.sep()
     doc.br()  # <br>
 
-    print(doc.get_html())
 
-    doc.tag('<h2> My graph title </h2>')
-    doc.plot_scatter(df, cfg.scatter, mode='highcharts', save_img=False)
-    doc.hr()  # doc.sep() line separator
+    # list_info = []
+    # for i in range(100):
+    #     info = {}
+    #     info ['x'] = i
+    #     info ['y'] = i
+    #     info ['label'] = i
+    #     info ['class1'] = i
+    #     info ['class2'] = i
+    #     info ['class2_size'] = i
+    #     info ['class1_color'] = i
+    #     list_info.append(info)
+    # df = pd.DataFrame.from_records(list_info)
 
-    print(doc.get_html())
+    # doc.tag('<h2> My graph title </h2>')
+    # doc.plot_scatter(df, cfg.scatter, mode='mpld3', save_img=False)
+    # doc.hr()  # doc.sep() line separator
 
+
+
+    # for df2_i in df2_list:
+    #     print(df2_i)
+    #     # doc.h3(f" plot title: {df2_i['category'].values[0]}")
+    #     doc.plot_tseries(df2_i, cfg.tseries, mode='mpld3', save_img="")
+
+    # print(doc.get_html())
+
+
+    # df2 = pd.DataFrame({
+    #     'col1': [1.5, 0.5, 1.2, 0.9, 3],
+    #     'col2': [0.7, 0.2, 0.15, 0.2, 1.1]
+    #     })
+
+    # doc.tag('<h2> My histo title </h2>')
+    # print(df2)
+    # # doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='mpld3', save_img="")
+    # doc.plot_histogram(df2, cfg.histo, mode='mpld3', save_img="")
+
+    # print(doc.get_html())
+
+
+
+    df2 = pd.DataFrame({
+        'col1': [1.5, 0.5, 1.2, 0.9, 3],
+        'col2': [0.7, 0.2, 0.15, 0.2, 1.1]
+        })
 
     for df2_i in df2_list:
-        print(df2_i)
-        # doc.h3(f" plot title: {df2_i['category'].values[0]}")
-        doc.plot_tseries(df2_i, cfg.tseries, mode='highcharts', save_img="")
-
-    print(doc.get_html())
-
-
-    doc.tag('<h2> My histo title </h2>')
-    print(df)
-    doc.plot_histogram(df, cfg.histo, mode='mpld3', save_img="")
-
-    for df2_i in df2_list:
-        doc.h3(f" title: {df2_i['category'].values[0]}")
+        # doc.h3(f" title: {df2_i['category'].values[0]}")
         doc.table(df2_i.iloc[:100, :], format='blue_light')
+
 
     doc.tag("""<p>    My mutilines whatever I want to write
       ok</p>
     """)
+    print(doc.get_html())
 
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
@@ -163,8 +186,9 @@ class htmlDoc(object):
         if mode == 'mpld3':
             fig = pd_plot_tseries_matplot(df)
             html_code = mpld3.fig_to_html(fig)
-        else:
-            html_code = ''
+        elif mode == 'highcharts':
+            fig = pd_plot_highcharts(df)
+            html_code = mpld3.fig_to_html(fig)
         self.html += "\n\n" + html_code
 
 
@@ -248,6 +272,7 @@ def pd_plot_scatter_matplot(df,  cfg: dict = None, mode='d3', save_img=False,  *
             'class2', 'class2_size'  # Size per point
             ]
     df = df[cols]
+    print(df)
     # df[cols]
 
     df['class1'] = df['class1'].fillna('NA1')
@@ -361,11 +386,12 @@ def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.99
     fig = plt.figure()
 
     if nsample < 0:
-        dfi.hist(bins=np.arange(q0, q1,  (q1 - q0) / nbin))
+        dfi.hist(bins=2)
+        # dfi.hist(bins=np.arange(q0, q1,  (q1 - q0) / nbin))
     else:
         dfi.sample(n=nsample, replace=True).hist(
             bins=np.arange(q0, q1,  (q1 - q0) / nbin))
-    plt.title(path_save.split("/")[-1])
+    plt.title(path_save.split("/")[-1] if path_save else 'None')
 
     if path_save is not None:
         os.makedirs(os.path.dirname(path_save), exist_ok=True)
