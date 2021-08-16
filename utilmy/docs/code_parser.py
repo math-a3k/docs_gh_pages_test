@@ -26,9 +26,10 @@ import pandas as pd
 from stdlib_list import stdlib_list
 import platform
 import pkgutil
-
+import importlib
 
 stdlib_libraries = stdlib_list(platform.python_version()[:-2])
+# print(stdlib_libraries)
 list_built_in = [
     "abs", "delattr", "hash", "memoryview", "set", "all", "dict",
     "help", "min", "setattr", "any", "dir", "hex", "next", "slice",
@@ -473,7 +474,7 @@ def get_list_imported_func(file_path: str):
     re_check = r"from (\w+) import"
     for line in all_clean_lines:
         if re.search(re_check, line.rstrip()):
-            print('============Detected============: ', line)
+            # print('============Detected============: ', line)
             class_name = re.search(re_check, line.rstrip()).group(1)
             functions = line.split('import')[1].strip()
             if functions != '*':
@@ -483,10 +484,45 @@ def get_list_imported_func(file_path: str):
                 else:
                     functions = [function.strip() for function in functions.split(',')]
 
-                print(class_name, functions)
+                # print(class_name, functions)
                 for function in functions:
                     # output.append({function: class_name})
                     output[function] = class_name
+    return output
+
+
+
+def get_list_import_class_as(file_path: str):
+    """Get list funtions was imported in python file.
+    Args:
+        IN: file_path         - the file path input
+        OUT: List function
+    Example Output:
+        [
+            {'class': 'zc.Class'},
+            {'class': 'Hola'}
+        ]
+    """
+    output = dict()
+    all_clean_lines = _get_and_clean_all_lines(file_path)
+    re_check = r"import (\w+) as"
+    for line in all_clean_lines:
+        if re.match(re_check, line.rstrip()):
+            print('============Detected============: ', line)
+            class_name = re.match(re_check, line.rstrip()).group(1)
+            class_as = line.split(' as ')[1].strip()
+            
+            _path = ['']
+            try:
+                mymodule = importlib.import_module(f"{class_name}")
+                _path = mymodule.__path__
+            except:
+                pass
+            # print('=========================================', _path)
+            _path = _path[0].replace('\\', '/')
+
+            output[class_as] = _path
+            
     return output
 
 
@@ -976,7 +1012,7 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
-def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, out_path):
+def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, list_class_as, out_path):
     # list_functions = literal_eval(list_functions)
     # print(list_functions)
     info = ''
@@ -1004,6 +1040,15 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
                 tag = f"[FUNC] [SIDE_PACKAGE]: {list_imported[function]}.{function}"
                 type2 = '[FUNC] [SIDE_PACKAGE]'
 
+                _path = ['']
+                try:
+                    mymodule = importlib.import_module(f'{list_imported[function]}')
+                    _path = mymodule.__path__
+                except:
+                    pass
+                # print('=========================================', _path)
+                path2 = _path[0].replace('\\', '/')
+
 
         if '.' in function:
             if function.split('.')[0] in list_classes:
@@ -1013,9 +1058,33 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
             elif function.split('.')[0] in stdlib_libraries:
                 tag = f"[CLASS] [STDLIB]: {function.split('.')[0]}:{function.split('.')[1]}"
                 type2 = '[CLASS] [STDLIB]'
+                
+                _path = ['']
+                try:
+                    mymodule = importlib.import_module(f"{function.split('.')[0]}")
+                    _path = mymodule.__path__
+                except:
+                    pass
+                # print('=========================================', _path)
+                path2 = _path[0].replace('\\', '/')
+
+
             else:   
                 tag = f"[CLASS] [SIDE_PACKAGE]: {function.split('.')[0]}:{function.split('.')[1]}"
                 type2 = '[CLASS] [SIDE_PACKAGE]'
+                if function.split('.')[0] in list_class_as:
+                    path2 = list_class_as[function.split('.')[0]].replace('\\', '/')
+                    print('======================', path2)
+                else:
+                    _path = ['']
+                    try:
+                        mymodule = importlib.import_module(f"{function.split('.')[0]}")
+                        _path = mymodule.__path__
+                    except:
+                        pass
+                    # print('=========================================', _path)
+                    path2 = _path[0].replace('\\', '/')
+
         info += f'{uri}, {type}, {function}, {type2}, {path2}, {tag}\n'
     with open(f'{out_path}', 'a+') as f:
         f.write(info)
@@ -1087,6 +1156,8 @@ def export_call_graph(in_path:str=None, out_path:str=None):
         ######### Get the list imported functions
         # from class_name import funtion_name
         list_imported = get_list_imported_func(flist[i])
+        list_class_as = get_list_import_class_as(flist[i])
+        print(list_class_as)
         print('1-------------------------')
         print(list_imported)
 
@@ -1101,11 +1172,11 @@ def export_call_graph(in_path:str=None, out_path:str=None):
                 with open(f'{out_path}', 'w+') as f:
                     f.write('uri, type, function, type2, path2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
 
 
         df = get_list_method_stats(flist[i])
@@ -1117,11 +1188,11 @@ def export_call_graph(in_path:str=None, out_path:str=None):
                 with open(f'{out_path}', 'w+') as f:
                     f.write('uri, type, function, type2, path2, tag\n')
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
             else:
                 # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
                 for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, out_path) 
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
 
 
 def test_example():
