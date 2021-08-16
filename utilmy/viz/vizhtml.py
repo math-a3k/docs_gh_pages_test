@@ -116,8 +116,8 @@ def test_usage():
 class htmlDoc(object):
     def __init__(self, dir_out=None, mode="", title="", format: str = None, cfg: dict = None):
         """
-           Generate HTML Code to display graph
-
+           Generate HTML page to display graph/Table.
+           Combine pages together.
 
         """
         self.cc = Box(cfg)  # Config dict
@@ -183,28 +183,36 @@ class htmlDoc(object):
 
 
     def plot_tseries(self, df,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+        html_code = ''
         if mode == 'mpld3':
-            fig = pd_plot_tseries_matplot(df)
+            fig       = pd_plot_tseries_matplot(df)
             html_code = mpld3.fig_to_html(fig)
+
         elif mode == 'highcharts':
-            fig = pd_plot_highcharts(df)
-            html_code = mpld3.fig_to_html(fig)
+            html_code = pd_plot_highcharts(df)
+
         self.html += "\n\n" + html_code
 
 
     def plot_histogram(self, df,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+        html_code = ''
         if mode == 'mpld3':
-            fig = pd_plot_histogram_matplot(df)
+            fig       = pd_plot_histogram_matplot(df)
             html_code = mpld3.fig_to_html(fig)
         self.html += "\n\n" + html_code
 
 
     def plot_scatter(self, df,  cfg: dict = None, mode='mpld3', save_img=False,  **kw):
+        html_code = ''
         if mode == 'mpld3':
             html_code = pd_plot_scatter_matplot(df,  cfg, mode, save_img,)
-        else:
-            html_code = ''
         self.html += "\n\n" + html_code
+
+
+
+
+
+
 
 
 ##################################################################################################################
@@ -253,6 +261,58 @@ def mlpd3_add_tooltip(fig, points, labels):
         points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
     # connect tooltip to fig
     mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
+
+
+
+def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
+                            colclass1=None, colclass2=None):
+    import copy
+    df = copy.deepcopy(df0)
+    from box import Box
+
+    colx      = 'x'      if colx is None else colx
+    coly      = 'y'      if coly is None else coly
+    collabel  = 'label'  if collabel is None else collabel
+    colclass1 = 'class1' if colclass1 is None else colclass1
+    colclass2 = 'class2' if colclass2 is None else colclass2
+
+    #######################################################################################
+    cols = [ colx, coly,    ### X, Y name
+             collabel,      ### label per point
+             colclass1,     ### Color per point class1
+             colclass2,     ### Size per point class2
+           ]
+
+    for ci in [ collabel, colclass1, colclass2 ] :
+       if ci  not in df.columns : df[ci]  = ''
+       df[ci]  = df[ci].fillna('')
+
+    #######################################################################################
+    xx = df[colx].values
+    yy = df[coly].values
+
+    label_list = df[collabel].values
+
+    ### Using Class 1 ---> Color
+    color_scheme = [ 0,1,2,3]
+    n_colors     = len(color_scheme)
+    color_list   = [  color_scheme[ hash(str( x)) % n_colors ] for x in df[colclass1].values     ]
+
+
+    ### Using Class 2  ---> Color
+    n_size      = len(df['class2'].unique())
+    smin, smax  = 1.0, 15.0
+    size_scheme = np.arange(smin, smax, (smax-smin)/n_size)
+    n_colors    = len(size_scheme)
+    size_list   = [  size_scheme[ hash(str( x)) % n_colors ] for x in df[colclass2].values     ]
+
+
+    ###
+    ptype_list = []
+
+    return xx, yy, label_list, color_list, size_list, ptype_list
+
+
 
 
 def pd_plot_scatter_matplot(df,  cfg: dict = None, mode='d3', save_img=False,  **kw):
@@ -347,10 +407,12 @@ def pd_plot_scatter_matplot(df,  cfg: dict = None, mode='d3', save_img=False,  *
 
     ax.legend(numpoints=1)  # show legend with only one dot
 
+    return fig
     ##### Export ############################################################
     #mpld3.fig_to_html(fig, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False, **kwargs)[source]
-    html_code = mpld3.fig_to_html(fig,  **kw)
-    return html_code
+    ## html_code = mpld3.fig_to_html(fig,  **kw)
+    ## return html_code
+
 
 
 def pd_matplotlib_histogram2(df, config):
@@ -376,10 +438,7 @@ def pd_matplotlib_histogram2(df, config):
 
 def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample=-1, show=False, clear=True):
     # Plot histogram
-    from matplotlib import pyplot as plt
-    import numpy as np
-    import os
-    import time
+
     q0 = dfi.quantile(q5)
     q1 = dfi.quantile(q95)
 
@@ -402,7 +461,7 @@ def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.99
     return fig
 
 
-def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [], figsize=(8, 4), spacing=0.1, **kwargs):
+def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [], figsize=(8, 4), spacing=0.1, **kw):
     from pandas import plotting
     from pandas.plotting import _matplotlib
     from matplotlib import pyplot as plt
@@ -419,8 +478,9 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
     # Displays subplot's pair in case of plot_type defined as `pair`
     if plot_type == 'pair':
         ax = df.plot(subplots=True, figsize=figsize, **kwargs)
-        plt.show()
-        return
+        # plt.show()
+        html_code = mpld3.fig_to_html(ax,  **kw)
+        return html_code
 
     # First axis
     ax = df.loc[:, cols_axe1[0]].plot(
@@ -451,8 +511,11 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
         labels += label
 
     ax.legend(lines, labels, loc=0)
-    plt.show()
+    #plt.show()
     return ax
+    # html_code = mpld3.fig_to_html(ax,  **kw)
+    # return html_code
+
 
 
 def mpld3_server_start():
@@ -488,6 +551,19 @@ def pd_plot_highcharts(df):
     html_code = """<div id="{chart_id}"</div>
       <script type="text/javascript">{data}</script>""".format(chart_id="new_brownian", data=json_data_2)
     return html_code
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ############################################################################################################################
