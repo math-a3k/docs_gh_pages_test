@@ -1,101 +1,184 @@
-
-"""
-
+""" Converter python ---> HTML
 https://try2explore.com/questions/10109123
-
 https://mpld3.github.io/examples/index.html
-
 https://notebook.community/johnnycakes79/pyops/dashboard/pandas-highcharts-examples
 
-"""
-import random, os, sys, numpy as np, pandas as pd, mpld3
-from datetime import datetime ; from typing import List
 
-import matplotlib.pyplot as plt
+https://datatables.net/
+
+
+"""
+import random, os, sys, numpy as np, pandas as pd
+from datetime import datetime ; from typing import List
 from tqdm import tqdm
 
-from box import Box 
+from box import Box
+
+#### Converting python --> HTML
+import matplotlib.pyplot as plt
+import mpld3
+
 
 ##################################################################################################################
 def log(*s):
-    print(*s, exist_ok=True)
+    print(*s, flush=True)
 
 
 ###################################################################################
 #### Example usage ################################################################
-cfg = Box({})    #### pip install box-python    can use .key or ["mykey"]  for dict
+def test_usage():
+  cfg = Box({})    #### pip install box-python    can use .key or ["mykey"]  for dict
 
-cfg.tseries = { "title": 'ok'}
-cfg.scatter = { "title": 'ok'}
-cfg.histo   = { "title": 'ok'}
-
-
-doc = htmlDoc(dir_out="")
-
-doc.h1('My title')  ## h1
-doc.sep()
-doc.br()  ### <br>
-
-doc.tag('<h2> My graph title </h2>')
-doc.plot_scatter(df, cfg.scatter, mode='highcharts', save_img=False)
-doc.hr()   ###   doc.sep() line separator
+  cfg.tseries = { "title": 'ok'}
+  cfg.scatter = { "title": 'ok'}
+  cfg.histo   = { "title": 'ok'}
+  cfg.use_datatable = True
 
 
-for df2_i in df2_list :
-    doc.h3( f" plot title: {df2_i['category'].values[0]}" )
-    doc.plot_tseries(df2_i, cfg.tseries, mode='highcharts', save_img=False)
+  df       = pd.DataFrame([[1,2]])
+  df2_list = [ df, df, df]
 
 
-doc.tag('<h2> My histo title </h2>')
-doc.plot_histogram(df3, cfg.histo, mode='mpld3', save_img=False)
+  doc = htmlDoc(dir_out="", title="hello", format='myxxxx')
 
-####  https://pypi.org/project/pretty-html-table/
-doc.table(df, format_name="ok")
+  doc.h1('My title')  ## h1
+  doc.sep()
+  doc.br()  ### <br>
+
+  doc.tag('<h2> My graph title </h2>')
+  doc.plot_scatter(df, cfg.scatter, mode='highcharts', save_img=False)
+  doc.hr()   ###   doc.sep() line separator
 
 
-doc.tag("""<p>    My mutilplin whatever I want to write
-    ok
-  """)
+  for df2_i in df2_list :
+      doc.h3( f" plot title: {df2_i['category'].values[0]}" )
+      doc.plot_tseries(df2_i, cfg.tseries, mode='highcharts', save_img="")
 
-doc.save(dir_out= "myfile.html")
 
+  doc.tag('<h2> My histo title </h2>')
+  doc.plot_histogram(df[['col1', 'col2' ]], cfg.histo, mode='mpld3', save_img="")
+
+
+  for df2_i in df2_list :
+      doc.h3( f" title: {df2_i['category'].values[0]}" )
+      doc.table(df2_i.iloc[:100,:], format='blue_light')
+
+
+  doc.tag("""<p>    My mutilines whatever I want to write
+      ok</p>
+    """)
+
+
+  doc.save(dir_out= "myfile.html")
+  doc.open_browser()  #### Open myfile.html
 
 
 
 
 #####################################################################################
-#### Prototype Class ################################################################
+#### Class ##########################################################################
 class htmlDoc(object):
-   def __init__()
-      self.html= """
-      <head>
-
-      <body>
+    def __init__(self, dir_out=None, mode="", title="", format:str=None, cfg:dict=None):
+        """
+           Generate HTML Code to display graph
 
 
-      """
-   
+        """
+        self.cc      = Box(cfg)   #### Config dict
+        self.dir_out = dir_out
 
-  def h1(self, x):
-    self.html += "\n" + f"<h1>{x}</h1>" 
+        self.cc.use_datatable = self.cc.get('use_datatable', False)  ### Default val
+
+        self.head = "<html><head>"
+        self.html = """<body>        """
+
+
+        if self.cc.use_datatable:
+            self.head = self.head + """\n
+              <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+              <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+            """
+            #https://datatables.net/manual/installation
+            ### add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
 
 
-  def plot_scatter(self, df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
+    def tag(self, x):  self.html += "\n" + x
+    def h1(self, x)  : self.html += "\n" + f"<h1>{x}</h1>"
+    def h2(self, x)  : self.html += "\n" + f"<h2>{x}</h2>"
+    def h3(self, x)  : self.html += "\n" + f"<h3>{x}</h3>"
+    def h4(self, x)  : self.html += "\n" + f"<h4>{x}</h4>"
+    def hr(self)     : self.html += "\n" + f"</hr>"
+    def sep(self   ) : self.html += "\n" + f"</hr>"
+    def br(self, x)  : self.html += "\n" + f"</br>"
+    def p(self, x)   : self.html += "\n" + f"<p>{x}</p>"
 
+    def hidden(self, x)   :
+      ### Hidden paragraph 
+      self.html += "\n" + f"<div id='hidden_section_id'>{x}</div>"
+      self.head += "\n" + js_code.js_hidden #### Hidden  javascript 
+
+
+    def save(self, dir_out=None):
+        self.dir_out = dir_out if dir_out is not None else self.dir_out
+
+        full  = self.head + "</head>" + self.html + "</body></html>"
+
+        with open(self.dir_out, mode='w') as fp :
+           fp.write(full)
+
+
+    def open_browser(self):
+        if os.name == 'nt': os.system(f'start chrome "{self.dir_out}" ')
+
+
+
+    def table(self, df,  cfg:dict=None, mode='', use_datatable=False,  **kw ):
+        """
+        ## show table in HTML : https://pypi.org/project/pretty-html-table/
+
+
+        """
+        import pretty_html_table
+        html_code = pretty_html_table.build_table(df, mode)
+
+        table_id = '1'
+
+        if use_datatable :
+            html_code += """$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );""".replace('mytable_id', table_id)
+        return html_code
+
+
+    def plot_tseries(self, df,  cfg:dict=None, mode='mpld3', save_img="",  **kw ):
+     if mode == 'mpld3' :     
+         fig       = pd_plot_tseries_matplot(df)
+         html_code = mpld3.fig_to_html(fig)
+
+     self.html += "\n\n" + html_code
+
+
+    def plot_histogram(self, df,  cfg:dict=None, mode='mpld3', save_img="",  **kw ):
+     if mode == 'mpld3' :     
+         fig       = pd_plot_histogram_matplot(df)
+         html_code = mpld3.fig_to_html(fig)
+
+     self.html += "\n\n" + html_code
+
+
+    def plot_scatter(self, df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
      if mode == 'mpld3' :
-        html_code  = plot_scatter_mlpd3(df,  cfg, mode, save_img,  )
+        html_code  = pd_plot_scatter_matplot(df,  cfg, mode, save_img,  )
 
-     self.html += "\n\n" + html_code 
+     self.html += "\n\n" + html_code
 
 
 
-    
-    
-    
+
+
 
 ##################################################################################################################
-CSS = """
+######### MLPD3 Display ##########################################################################################
+mpld3_CSS = """
     text.mpld3-text, div.mpld3-tooltip {
       font-family:Arial, Helvetica, sans-serif;
     }
@@ -105,7 +188,7 @@ CSS = """
 
 
 
-class TopToolbar(mpld3.plugins.PluginBase):
+class mpld3_TopToolbar(mpld3.plugins.PluginBase):
     """Plugin for moving toolbar to top of figure"""
 
     JAVASCRIPT = """
@@ -132,15 +215,21 @@ class TopToolbar(mpld3.plugins.PluginBase):
     def __init__(self):
         self.dict_ = {"type": "toptoolbar"}
 
-    
 
-def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
+def mlpd3_add_tooltip(fig, points, labels):
+        # set tooltip using points, labels and the already defined 'css'
+        tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
+        # connect tooltip to fig
+        mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
+
+
+
+def pd_plot_scatter_matplot(df,  cfg:dict=None, mode='d3', save_img=False,  **kw ):
     """
-
     """
     cc = Box(cfg)
 
-    cc.name      = cc.get('name',    'my scatter')  
+    cc.name      = cc.get('name',    'my scatter')
     cc.figsize   = cc.get('figsize', (25, 15) )   ### Dict type default values
     cc.title     = ' my graph title'
     cc.save_name = 'myfile'
@@ -148,9 +237,19 @@ def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
 
     #######################################################################################
     # create data frame that has the result of the MDS plus the cluster numbers and titles
-    cols = ['x', 'y', 'label', 'class1', 'class1_color', 'class2', 'class2_size']
+    cols = ['x', 'y',
+            'label',                     ### label per point
+            'class1', 'class1_color',    ### Color per point
+            'class2', 'class2_size'      ### Size per point
+           ]
     df   = df[cols]
     ##  df[cols]
+
+    df['class1']       = df['class1'].fillna('NA1')
+    df['class1_color'] = df['class1'].fillna(1)
+
+    df['class2']      = df['class2'].fillna('NA2')
+    df['class2_size'] = df['class2'].fillna(2)
 
 
     # group by cluster
@@ -195,17 +294,12 @@ def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
 
     # iterate through groups to layer the plot
     for name, group in groups_clusters:
-        points = ax.plot(group.x, group.y, marker='o', linestyle='', 
-                         ms   = df['class2_size'].values, 
+        points = ax.plot(group.x, group.y, marker='o', linestyle='',
+                         ms   = df['class2_size'].values,
                          label= df['class1'].values, mec='none',
                          color= df['class1_color'].values)
         ax.set_aspect('auto')
         labels = [i for i in group['label']]
-
-        # set tooltip using points, labels and the already defined 'css'
-        tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=CSS)
-        # connect tooltip to fig
-        mpld3.plugins.connect(fig, tooltip, TopToolbar())
 
         # set tick marks as blank
         ax.axes.get_xaxis().set_ticks([])
@@ -215,40 +309,309 @@ def plot_scatter_mlpd3(df,  cfg:dict={}, mode='d3', save_img=False,  **kw ):
         ax.axes.get_xaxis().set_visible(False)
         ax.axes.get_yaxis().set_visible(False)
 
-    ax.legend(numpoints=1)  # show legend with only one dot
 
+        mlpd3_add_tooltip(fig, points, labels)
+        # set tooltip using points, labels and the already defined 'css'
+        # tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
+        # connect tooltip to fig
+        # mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
+
+
+    ax.legend(numpoints=1)  # show legend with only one dot
 
 
     ##### Export ############################################################
     #mpld3.fig_to_html(fig, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False, **kwargs)[source]
-
-    html_code = mpld3.fig_to_html(fig,  **cfg.html_opts)
+    html_code = mpld3.fig_to_html(fig,  **kw)
     return html_code
 
 
 
 
 
+def pd_matplotlib_histogram2(df, config):
+  """
+    return matplotlib figure histogram from pandas dataframe
+      """
+  
+  import matplotlib.pyplot as plt
+  import pandas as pd
+  import numpy as np
+  
+  fig = plt.figure()
+  ax  = fig.add_subplot(111)
+  ax.hist(df[config['x']].values, bins=config['bins'], color='red', alpha=0.5)
+  ax.set_xlabel(config['x'])
+  ax.set_ylabel(config['y'])
+  ax.set_title(config['title'])
+  ax.set_xlim(config['xlim'])
+  ax.set_ylim(config['ylim'])
+  return fig
+  
 
 
-def html_add():
+
+def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -1, show=False, clear=True) :
+    ### Plot histogram
+    from matplotlib import pyplot as plt
+    import numpy as np, os, time
+    q0 = dfi.quantile(q5)
+    q1 = dfi.quantile(q95)
+
+    fig = plt.figure()
+
+    if nsample < 0 :
+        dfi.hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
+    else :
+        dfi.sample(n=nsample, replace=True ).hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
+    plt.title( path_save.split("/")[-1] )
+
+    if path_save is not None :
+      os.makedirs(os.path.dirname(path_save), exist_ok=True)
+      plt.savefig( path_save )
+      print(path_save )
+
+    # plt.close(fig)
+    return fig
+
+
+
+def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsize=(8,4), spacing=0.1, **kwargs):
+    from pandas import plotting
+    from pandas.plotting import _matplotlib
+    from matplotlib import pyplot as plt
+
+
+    plt.figure(figsize= figsize )
+    # Get default color style from pandas - can be changed to any other color list
+    if cols_axe1 is None: cols_axe1 = df.columns
+    if len(cols_axe1) == 0: return
+    colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
+
+    # Displays subplot's pair in case of plot_type defined as `pair`
+    if plot_type=='pair':
+        ax = df.plot(subplots=True, figsize=figsize, **kwargs)
+        plt.show()
+        return
+
+    # First axis
+    ax = df.loc[:, cols_axe1[0]].plot(label=cols_axe1[0], color=colors[0], **kwargs)
+    ax.set_ylabel(ylabel=cols_axe1[0])
+    ##  lines, labels = ax.get_legend_handles_labels()
+    lines, labels = [], []
+
+    i1 = len(cols_axe1)
+    for n in range(1, len(cols_axe1)):
+        df.loc[:, cols_axe1[n]].plot(ax=ax, label=cols_axe1[n], color=colors[(n) % len(colors)], **kwargs)
+        line, label = ax.get_legend_handles_labels()
+        lines  += line
+        labels += label
+
+    for n in range(0, len(cols_axe2)):
+        ######### Multiple y-axes
+        ax_new = ax.twinx()
+        ax_new.spines['right'].set_position(('axes', 1 + spacing * (n - 1)))
+        df.loc[:, cols_axe2[n]].plot(ax=ax_new, label=cols_axe2[n], color=colors[(i1 + n) % len(colors)], **kwargs)
+        ax_new.set_ylabel(ylabel=cols_axe2[n])
+
+        ######### Proper legend position
+        line, label = ax_new.get_legend_handles_labels()
+        lines += line
+        labels += label
+
+    ax.legend(lines, labels, loc=0)
+    plt.show()
+    return ax
+
+
+
+def mpld3_server_start():
     ### Windows specifc
-    if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
+    # if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
+    # mpld3.show(fig=None, ip='127.0.0.1', port=8888, n_retries=50, local=True, open_browser=True, http_server=None, **kwargs)[source]
+    mpld3.show()  # show the plot
 
 
-    if show_server :
-       # mpld3.show(fig=None, ip='127.0.0.1', port=8888, n_retries=50, local=True, open_browser=True, http_server=None, **kwargs)[source] 
-       mpld3.show()  # show the plot
+############################################################################################################################
+############################################################################################################################
+def pd_plot_highcharts(df ):
+   """
+   # Basic line plot
+  chart = serialize(df, render_to="my-chart", title="My Chart")
+  # Basic column plot
+  chart = serialize(df, render_to="my-chart", title="Test", kind="bar")
+  # Basic column plot
+  chart = serialize(df, render_to="my-chart", title="Test", kind="barh")
+  # Plot C on secondary axis
+  chart = serialize(df, render_to="my-chart", title="Test", secondary_y = ["C"])
+  # Plot on a 1000x700 div
+  chart = serialize(df, render_to="my-chart", title="Test", figsize = (1000, 700))
+
+
+   """
+   import pandas_highcharts
+   data = pandas_highcharts.serialize(df, render_to='my-chart', output_type='json')
+   json_data_2 = "new Highcharts.StockChart(%s);" % pandas_highcharts.core.json_encode(data)
+
+   html_code = """<div id="{chart_id}"</div>
+      <script type="text/javascript">{data}</script>""".format(chart_id="new_brownian", data=json_data_2)
+   return html_code
+
+
+
+
+############################################################################################################################
+############################################################################################################################
+def images_to_html(dir_input="*.png",  title="", verbose=False):
+    """
+      images_to_html( model_path + "/graph_shop_17_past/*.png" , model_path + "shop_17.html" )
+    """
+    import matplotlib.pyplot as plt
+    import base64
+    from io import BytesIO
+    import glob
+    html = ""
+    flist = glob.glob(dir_input)
+    flist.sorted()
+    for fp in flist :
+        if verbose : print(fp,end=",")
+        with open(fp, mode="rb" ) as fp2 :
+            tmpfile =fp2.read()
+        encoded = base64.b64encode( tmpfile ) .decode('utf-8')
+        html =  html + f'<p><img src=\'data:image/png;base64,{encoded}\'> </p>\n'
+
+    return html
+
+
+
+
+
+
+
+
+############################################################################################################################
+############################################################################################################################
+def pd_plot_network(df):
+  def pandas_plot_network_graph(df):
+    """
+       Plot network graph with pyviz, networks from pandas dataframe.
+    """
+    import pandas as pd
+    import pyviz_app
+    from pyviz_app.pyviz_app import Network
+    from pyviz_app.pyviz_app import Node
+    from pyviz_app.pyviz_app import Edge
+    from pyviz_app.pyviz_app import Graph
+    from pyviz_app.pyviz_app import Document
+
+    g = Graph()
+    for index, row in df.iterrows():
+      node = Node(str(index), label=row['name'])
+      g.add_node(node)
+      for column in row.index:
+        if row[column] != 0:
+          if column == 'name':
+            continue
+          edge = Edge(str(index), str(index), label=column)
+          g.add_edge(edge)
+    return g
+
+
+
+  def draw_graph3(networkx_graph,notebook=True,output_filename='graph.html',show_buttons=True,only_physics_buttons=False):
+      """
+      This function accepts a networkx graph object,
+      converts it to a pyvis network object preserving its node and edge attributes,
+      and both returns and saves a dynamic network visualization.
+      
+      Valid node attributes include:
+          "size", "value", "title", "x", "y", "label", "color".
+          
+          (For more info: https://pyvis.readthedocs.io/en/latest/documentation.html#pyvis.network.Network.add_node)
+          
+      Valid edge attributes include:
+          "arrowStrikethrough", "hidden", "physics", "title", "value", "width"
+          (For more info: https://pyvis.readthedocs.io/en/latest/documentation.html#pyvis.network.Network.add_edge)
+                
+      Args:
+          networkx_graph: The graph to convert and display
+          notebook: Display in Jupyter?
+          output_filename: Where to save the converted network
+          show_buttons: Show buttons in saved version of network?
+          only_physics_buttons: Show only buttons controlling physics of network?
+      """
+      
+      # import
+      from pyvis import network as net
+      
+      # make a pyvis network
+      pyvis_graph = net.Network(notebook=notebook)
+      
+      # for each node and its attributes in the networkx graph
+      for node,node_attrs in networkx_graph.nodes(data=True):
+          pyvis_graph.add_node(str(node),**node_attrs)
+          
+      # for each edge and its attributes in the networkx graph
+      for source,target,edge_attrs in networkx_graph.edges(data=True):
+          # if value/width not specified directly, and weight is specified, set 'value' to 'weight'
+          if not 'value' in edge_attrs and not 'width' in edge_attrs and 'weight' in edge_attrs:
+              # place at key 'value' the weight of the edge
+              edge_attrs['value']=edge_attrs['weight']
+          # add the edge
+          pyvis_graph.add_edge(str(source),str(target),**edge_attrs)
+          
+      # turn buttons on
+      if show_buttons:
+          if only_physics_buttons:
+              pyvis_graph.show_buttons(filter_=['physics'])
+          else:
+              pyvis_graph.show_buttons()
+      
+      # return and also save
+      return pyvis_graph.show(output_filename)
+
+
+  ##
+  # For example:
+  ##
+
+  # make a new neworkx network
+  import networkx as nx
+  G=nx.Graph()
+
+  # add nodes and edges (color can be html color name or hex code)
+  G.add_node('a',color='red',size=4)
+  G.add_node('b',color='#30a1a5',size=3)
+  G.add_node('c',color='green',size=1)
+  G.add_edge('a','b',weight=1023)
+  G.add_edge('a','c',weight=435)
+  G.add_edge('b','c',weight=100)
+
+  # draw
+  draw_graph3(G)
+
+
+
+###################################################################################################
+###################################################################################################
+js_code = Box({})    ##### List of javascript code
+js_code.js_hidden = """<SCRIPT>
+function ShowAndHide() {
+    var x = document.getElementById('hidden_section_id');
+    if (x.style.display == 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+</SCRIPT>
+"""
+
 
 
 
 ###################################################################################################
 if __name__ == "__main__":
-    ### python 
+    ### python
     import fire
     fire.Fire()
-
-
-
-
-
