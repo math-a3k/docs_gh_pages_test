@@ -423,7 +423,8 @@ def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.99
     return fig
 
 
-def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [], figsize=(8, 4), spacing=0.1, **kw):
+def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [],
+                            figsize=(8, 4), spacing=0.1, **kw):
     """
 
 
@@ -443,14 +444,14 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
 
     # Displays subplot's pair in case of plot_type defined as `pair`
     if plot_type == 'pair':
-        ax = df.plot(subplots=True, figsize=figsize, **kwargs)
+        ax = df.plot(subplots=True, figsize=figsize, **kw)
         # plt.show()
         html_code = mpld3.fig_to_html(ax,  **kw)
         return html_code
 
     # First axis
     ax = df.loc[:, cols_axe1[0]].plot(
-        label=cols_axe1[0], color=colors[0], **kwargs)
+        label=cols_axe1[0], color=colors[0], **kw)
     ax.set_ylabel(ylabel=cols_axe1[0])
     ##  lines, labels = ax.get_legend_handles_labels()
     lines, labels = [], []
@@ -458,7 +459,7 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
     i1 = len(cols_axe1)
     for n in range(1, len(cols_axe1)):
         df.loc[:, cols_axe1[n]].plot(
-            ax=ax, label=cols_axe1[n], color=colors[(n) % len(colors)], **kwargs)
+            ax=ax, label=cols_axe1[n], color=colors[(n) % len(colors)], **kw)
         line, label = ax.get_legend_handles_labels()
         lines += line
         labels += label
@@ -468,7 +469,7 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
         ax_new = ax.twinx()
         ax_new.spines['right'].set_position(('axes', 1 + spacing * (n - 1)))
         df.loc[:, cols_axe2[n]].plot(
-            ax=ax_new, label=cols_axe2[n], color=colors[(i1 + n) % len(colors)], **kwargs)
+            ax=ax_new, label=cols_axe2[n], color=colors[(i1 + n) % len(colors)], **kw)
         ax_new.set_ylabel(ylabel=cols_axe2[n])
 
         # Proper legend position
