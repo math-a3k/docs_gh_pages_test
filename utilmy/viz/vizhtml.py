@@ -265,24 +265,18 @@ def mlpd3_add_tooltip(fig, points, labels):
 
 
 def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
-                            colclass1=None, colclass2=None):
+                            colclass1=None, colclass2=None, nmax=20000):
     import copy
-    df = copy.deepcopy(df0)
-    from box import Box
+    nmax = min(nmax, len(df0))
+    df   = df0.sample(nmax)
 
     colx      = 'x'      if colx is None else colx
     coly      = 'y'      if coly is None else coly
-    collabel  = 'label'  if collabel is None else collabel
-    colclass1 = 'class1' if colclass1 is None else colclass1
-    colclass2 = 'class2' if colclass2 is None else colclass2
+    collabel  = 'label'  if collabel is None else collabel    ### label per point
+    colclass1 = 'class1' if colclass1 is None else colclass1  ### Color per point class1
+    colclass2 = 'class2' if colclass2 is None else colclass2  ### Size per point class2
 
     #######################################################################################
-    cols = [ colx, coly,    ### X, Y name
-             collabel,      ### label per point
-             colclass1,     ### Color per point class1
-             colclass2,     ### Size per point class2
-           ]
-
     for ci in [ collabel, colclass1, colclass2 ] :
        if ci  not in df.columns : df[ci]  = ''
        df[ci]  = df[ci].fillna('')
