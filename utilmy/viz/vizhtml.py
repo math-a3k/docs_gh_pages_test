@@ -310,13 +310,12 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
 
 
 def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
-                            colclass1=None, colclass2=None, cfg: dict = None, mode='d3', save_img=False,  **kw):
+                            colclass1=None, colclass2=None, cfg: dict = None, mode='d3', save_path='',  **kw):
     """
     """
     cc           = Box(cfg)
     cc.figsize   = cc.get('figsize', (25, 15))  # Dict type default values
-    cc.title     = ' my graph title'
-    cc.save_name = 'myfile'
+    cc.title     = cc.get('title', 'scatter title' )
 
     #######################################################################################
     xx, yy, label_list, color_list, size_list, ptype_list = pd_plot_scatter_get_data(df,colx, coly, collabel,
@@ -349,9 +348,8 @@ def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
         ax.text(xx[i], yy[i], label_list[i], size=8)
 
 
-    if save_img:
-        plt.savefig(
-            f'{cc.dir_out}/{cc.save_name}-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
+    if len(save_path) > 1 :
+        plt.savefig(f'{cc.save_path}-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
 
     # Plot
     fig, ax = plt.subplots(figsize=cc.figsize)  # set plot size
