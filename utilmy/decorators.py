@@ -1,6 +1,5 @@
 from threading import Thread
-import cProfile, pstats, io
-import os, errno, signal, time
+import cProfile, pstats, io, os, errno, signal, time
 from functools import wraps
 from contextlib import contextmanager
 
@@ -66,7 +65,7 @@ def multithread_run_list(**kwargs):
     return results
 
 
-def thread_deco(func):
+def thread_decorator(func):
     """ A decorator to run function in background on thread
 	Return:
 		background_thread: ``Thread``
@@ -91,7 +90,7 @@ class _TimeoutError(Exception):
 
 
 ########################################################################################################################
-def timeout(seconds=10, error_message=os.strerror(errno.ETIME)):
+def timeout_decorator(seconds=10, error_message=os.strerror(errno.ETIME)):
     """Decorator to throw timeout error, if function doesnt complete in certain time
     Args:
         seconds:``int``
@@ -118,7 +117,7 @@ def timeout(seconds=10, error_message=os.strerror(errno.ETIME)):
     return decorator
 
 
-def timer(func):
+def timer_decorator(func):
     """
     Decorator to show the execution time of a function or a method in a class.
     """
@@ -156,7 +155,7 @@ def profiler_context():
         print(profiler.output_text(unicode=True, color=True))
 
 
-def profiler_deco(func):
+def profiler_decorator(func):
     """
     A decorator that will profile a function
     And print the result of profiler.
