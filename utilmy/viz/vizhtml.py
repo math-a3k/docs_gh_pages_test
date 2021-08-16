@@ -315,65 +315,46 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
 
 
 
-def pd_plot_scatter_matplot(df,  cfg: dict = None, mode='d3', save_img=False,  **kw):
+def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
+                            colclass1=None, colclass2=None, cfg: dict = None, mode='d3', save_img=False,  **kw):
     """
     """
-    cc = Box(cfg)
-    cc.name = cc.get('name',    'my scatter')
-    cc.figsize = cc.get('figsize', (25, 15))  # Dict type default values
-    cc.title = ' my graph title'
+    cc           = Box(cfg)
+    cc.figsize   = cc.get('figsize', (25, 15))  # Dict type default values
+    cc.title     = ' my graph title'
     cc.save_name = 'myfile'
 
     #######################################################################################
-    # create data frame that has the result of the MDS plus the cluster numbers and titles
-    cols = ['x', 'y',
-            'label',  # label per point
-            'class1', 'class1_color',  # Color per point
-            'class2', 'class2_size'  # Size per point
-            ]
-    df = df[cols]
-    print(df)
-    # df[cols]
-
-    df['class1'] = df['class1'].fillna('NA1')
-    df['class1_color'] = df['class1'].fillna(1)
-
-    df['class2'] = df['class2'].fillna('NA2')
-    df['class2_size'] = df['class2'].fillna(2)
-
-    # group by cluster
-    groups_clusters = df.groupby('class1')
+    xx, yy, label_list, color_list, size_list, ptype_list = pd_plot_scatter_get_data(df,colx, coly, collabel,
+                                                            colclass1, colclass2)
 
     # set up plot
-    fig, ax = plt.subplots(figsize=(25, 15))  # set size
+    fig, ax = plt.subplots(figsize= cc.figsize)  # set size
     ax.margins(0.05)  # Optional, just adds 5% padding to the autoscaling
 
-    # iterate through groups to layer the plot
-    # note that I use the cluster_name and cluster_color dicts with the 'name' lookup to return
-    # the appropriate color/label
-    for name, group in groups_clusters:
-        ax.plot(group['x'], group['y'], marker='o', linestyle='', ms=2, label=group['class1'],
-                color=group['class1_color'],
-                mec='none')
-        ax.set_aspect('auto')
-        ax.tick_params(axis='x',  # changes apply to the x-axis
-                       which='both',  # both major and minor ticks are affected
-                       bottom='off',  # ticks along the bottom edge are off
-                       top='off',  # ticks along the top edge are off
-                       labelbottom='off')
-        ax.tick_params(axis='y',  # changes apply to the y-axis
-                       which='both',  # both major and minor ticks are affected
-                       left='off',  # ticks along the bottom edge are off
-                       top='off',  # ticks along the top edge are off
-                       labelleft='off')
+    # note that I use the cluster_name and cluster_color dicts with the 'name' lookup to returnthe appropriate color/label
+    ax.plot(xx, yy, marker='o', linestyle='', ms= size_list, label=label_list,
+            color=color_list,
+            mec='none')
+    ax.set_aspect('auto')
+    ax.tick_params(axis='x',  # changes apply to the x-axis
+                   which='both',  # both major and minor ticks are affected
+                   bottom='off',  # ticks along the bottom edge are off
+                   top='off',  # ticks along the top edge are off
+                   labelbottom='off')
+    ax.tick_params(axis='y',  # changes apply to the y-axis
+                   which='both',  # both major and minor ticks are affected
+                   left='off',  # ticks along the bottom edge are off
+                   top='off',  # ticks along the top edge are off
+                   labelleft='off')
 
     ax.legend(numpoints=1)  # show legend with only 1 point
 
-    # add label in x,y position with the label as the
+    # add label in x,y position with the label
     for i in range(len(df)):
-        ax.text(df.loc[i]['x'], df.loc[i]['y'], df.loc[i]['label'], size=8)
+        ax.text(xx[i], yy[i], label_list[i], size=8)
 
-    # uncomment the below to save the plot if need be
+
     if save_img:
         plt.savefig(
             f'{cc.dir_out}/{cc.save_name}-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
@@ -383,27 +364,26 @@ def pd_plot_scatter_matplot(df,  cfg: dict = None, mode='d3', save_img=False,  *
     ax.margins(0.03)  # Optional, just adds 5% padding to the autoscaling
 
     # iterate through groups to layer the plot
-    for name, group in groups_clusters:
-        points = ax.plot(group.x, group.y, marker='o', linestyle='',
-                         ms=df['class2_size'].values,
-                         label=df['class1'].values, mec='none',
-                         color=df['class1_color'].values)
-        ax.set_aspect('auto')
-        labels = [i for i in group['label']]
+    #for name, group in groups_clusters:
+    points = ax.plot(xx, yy, marker='o', linestyle='',
+                     ms    = size_list,
+                     label = label_list, mec='none',
+                     color = color_list)
+    ax.set_aspect('auto')
 
-        # set tick marks as blank
-        ax.axes.get_xaxis().set_ticks([])
-        ax.axes.get_yaxis().set_ticks([])
+    # set tick marks as blank
+    ax.axes.get_xaxis().set_ticks([])
+    ax.axes.get_yaxis().set_ticks([])
 
-        # set axis as blank
-        ax.axes.get_xaxis().set_visible(False)
-        ax.axes.get_yaxis().set_visible(False)
+    # set axis as blank
+    ax.axes.get_xaxis().set_visible(False)
+    ax.axes.get_yaxis().set_visible(False)
 
-        mlpd3_add_tooltip(fig, points, labels)
-        # set tooltip using points, labels and the already defined 'css'
-        # tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
-        # connect tooltip to fig
-        # mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
+    mlpd3_add_tooltip(fig, points, label_list)
+    # set tooltip using points, labels and the already defined 'css'
+    # tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
+    # connect tooltip to fig
+    # mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
     ax.legend(numpoints=1)  # show legend with only one dot
 
@@ -415,16 +395,9 @@ def pd_plot_scatter_matplot(df,  cfg: dict = None, mode='d3', save_img=False,  *
 
 
 
-def pd_matplotlib_histogram2(df, config):
+def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample=-1, show=False, clear=True):
     """
-      return matplotlib figure histogram from pandas dataframe
-        """
-
-    import matplotlib.pyplot as plt
-    import pandas as pd
-    import numpy as np
-
-    fig = plt.figure()
+       fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.hist(df[config['x']].values,
             bins=config['bins'], color='red', alpha=0.5)
@@ -435,10 +408,7 @@ def pd_matplotlib_histogram2(df, config):
     ax.set_ylim(config['ylim'])
     return fig
 
-
-def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample=-1, show=False, clear=True):
-    # Plot histogram
-
+    """
     q0 = dfi.quantile(q5)
     q1 = dfi.quantile(q95)
 
@@ -462,6 +432,10 @@ def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.99
 
 
 def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [], figsize=(8, 4), spacing=0.1, **kw):
+    """
+
+
+    """
     from pandas import plotting
     from pandas.plotting import _matplotlib
     from matplotlib import pyplot as plt
@@ -523,6 +497,18 @@ def mpld3_server_start():
     # if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
     # mpld3.show(fig=None, ip='127.0.0.1', port=8888, n_retries=50, local=True, open_browser=True, http_server=None, **kwargs)[source]
     mpld3.show()  # show the plot
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ############################################################################################################################
