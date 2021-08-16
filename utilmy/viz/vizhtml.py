@@ -141,14 +141,14 @@ class htmlDoc(object):
         return self.html
 
     def tag(self, x):  self.html += "\n" + x
-    def h1(self, x): self.html += "\n" + f"<h1>{x}</h1>"
-    def h2(self, x): self.html += "\n" + f"<h2>{x}</h2>"
-    def h3(self, x): self.html += "\n" + f"<h3>{x}</h3>"
-    def h4(self, x): self.html += "\n" + f"<h4>{x}</h4>"
-    def hr(self): self.html += "\n" + f"</hr>"
-    def sep(self): self.html += "\n" + f"</hr>"
-    def br(self): self.html += "\n" + f"</br>"
-    def p(self, x): self.html += "\n" + f"<p>{x}</p>"
+    def h1(self, x)  : self.html += "\n" + f"<h1>{x}</h1>"
+    def h2(self, x)  : self.html += "\n" + f"<h2>{x}</h2>"
+    def h3(self, x)  : self.html += "\n" + f"<h3>{x}</h3>"
+    def h4(self, x)  : self.html += "\n" + f"<h4>{x}</h4>"
+    def hr(self)     : self.html += "\n" + f"</hr>"
+    def sep(self   ) : self.html += "\n" + f"</hr>"
+    def br(self, x)  : self.html += "\n" + f"</br>"
+    def p(self, x)   : self.html += "\n" + f"<p>{x}</p>"
 
 
     def hidden(self, x):
