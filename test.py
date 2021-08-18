@@ -153,20 +153,20 @@ def test_docs_cli():
 #########################################################################################
 #########################################################################################
 def test_decorators_os(*args):
-    from utilmy.decorators import os_multithread   
+    from utilmy.multithread import multithread_run_list
     def test_print(*args):
         print(args[0]*args[0])
         return args[0]*args[0]
 
-    assert os_multithread(function1=(test_print, (5,)),
+    assert multithread_run_list(function1=(test_print, (5,)),
                           function2=(test_print, (4,)),
                           function3=(test_print, (2,)))
 
       
     ###################################################################################
-    from utilmy.decorators import profiler_deco, profiler_context
+    from utilmy.decorators import profiler_decorator, profiler_context
 
-    @profiler_deco
+    @profiler_decorator
     def profiled_sum():
        return sum(range(100000))
 
@@ -184,13 +184,13 @@ def test_decorators_os(*args):
 
 
     ###################################################################################
-    from utilmy.decorators import timer
-    @timer
+    from utilmy.decorators import timer_decorator
+    @timer_decorator
     def dummy_func():
        time.sleep(2)
 
     class DummyClass:
-       @timer
+       @timer_decorator
        def method(self):
            time.sleep(3)
 

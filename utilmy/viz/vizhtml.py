@@ -122,8 +122,8 @@ def test_usage():
 class htmlDoc(object):
     def __init__(self, dir_out=None, mode="", title="", format: str = None, cfg: dict = None):
         """
-           Generate HTML Code to display graph
-
+           Generate HTML page to display graph/Table.
+           Combine pages together.
 
         """
         self.cc = Box(cfg)  # Config dict
@@ -146,14 +146,14 @@ class htmlDoc(object):
         return self.html
 
     def tag(self, x):  self.html += "\n" + x
-    def h1(self, x): self.html += "\n" + f"<h1>{x}</h1>"
-    def h2(self, x): self.html += "\n" + f"<h2>{x}</h2>"
-    def h3(self, x): self.html += "\n" + f"<h3>{x}</h3>"
-    def h4(self, x): self.html += "\n" + f"<h4>{x}</h4>"
-    def hr(self): self.html += "\n" + f"</hr>"
-    def sep(self): self.html += "\n" + f"</hr>"
-    def br(self): self.html += "\n" + f"</br>"
-    def p(self, x): self.html += "\n" + f"<p>{x}</p>"
+    def h1(self, x)  : self.html += "\n" + f"<h1>{x}</h1>"
+    def h2(self, x)  : self.html += "\n" + f"<h2>{x}</h2>"
+    def h3(self, x)  : self.html += "\n" + f"<h3>{x}</h3>"
+    def h4(self, x)  : self.html += "\n" + f"<h4>{x}</h4>"
+    def hr(self)     : self.html += "\n" + f"</hr>"
+    def sep(self   ) : self.html += "\n" + f"</hr>"
+    def br(self, x)  : self.html += "\n" + f"</br>"
+    def p(self, x)   : self.html += "\n" + f"<p>{x}</p>"
 
 
     def hidden(self, x):
@@ -188,28 +188,36 @@ class htmlDoc(object):
 
 
     def plot_tseries(self, df,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+        html_code = ''
         if mode == 'mpld3':
-            fig = pd_plot_tseries_matplot(df)
+            fig       = pd_plot_tseries_matplot(df)
             html_code = mpld3.fig_to_html(fig)
+
         elif mode == 'highcharts':
-            fig = pd_plot_highcharts(df)
-            html_code = mpld3.fig_to_html(fig)
+            html_code = pd_plot_highcharts(df)
+
         self.html += "\n\n" + html_code
 
 
     def plot_histogram(self, df,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+        html_code = ''
         if mode == 'mpld3':
-            fig = pd_plot_histogram_matplot(df)
+            fig       = pd_plot_histogram_matplot(df)
             html_code = mpld3.fig_to_html(fig)
         self.html += "\n\n" + html_code
 
 
     def plot_scatter(self, df,  cfg: dict = None, mode='mpld3', save_img=False,  **kw):
+        html_code = ''
         if mode == 'mpld3':
             html_code = pd_plot_scatter_matplot(df,  cfg, mode, save_img,)
-        else:
-            html_code = ''
         self.html += "\n\n" + html_code
+
+
+
+
+
+
 
 
 ##################################################################################################################
@@ -260,114 +268,133 @@ def mlpd3_add_tooltip(fig, points, labels):
     mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
 
-def pd_plot_scatter_matplot(df,  cfg: dict = None, mode='d3', save_img=False,  **kw):
-    """
-    """
-    cc = Box(cfg)
-    cc.name = cc.get('name',    'my scatter')
-    cc.figsize = cc.get('figsize', (25, 15))  # Dict type default values
-    cc.title = ' my graph title'
-    cc.save_name = 'myfile'
+
+def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
+                            colclass1=None, colclass2=None, nmax=20000):
+    import copy
+    nmax = min(nmax, len(df0))
+    df   = df0.sample(nmax)
+
+    colx      = 'x'      if colx is None else colx
+    coly      = 'y'      if coly is None else coly
+    collabel  = 'label'  if collabel is None else collabel    ### label per point
+    colclass1 = 'class1' if colclass1 is None else colclass1  ### Color per point class1
+    colclass2 = 'class2' if colclass2 is None else colclass2  ### Size per point class2
 
     #######################################################################################
-    # create data frame that has the result of the MDS plus the cluster numbers and titles
-    cols = ['x', 'y',
-            'label',  # label per point
-            'class1', 'class1_color',  # Color per point
-            'class2', 'class2_size'  # Size per point
-            ]
-    df = df[cols]
-    print(df)
-    # df[cols]
+    for ci in [ collabel, colclass1, colclass2 ] :
+       if ci  not in df.columns : df[ci]  = ''
+       df[ci]  = df[ci].fillna('')
 
-    df['class1'] = df['class1'].fillna('NA1')
-    df['class1_color'] = df['class1'].fillna(1)
+    #######################################################################################
+    xx = df[colx].values
+    yy = df[coly].values
 
-    df['class2'] = df['class2'].fillna('NA2')
-    df['class2_size'] = df['class2'].fillna(2)
+    label_list = df[collabel].values
 
-    # group by cluster
-    groups_clusters = df.groupby('class1')
+    ### Using Class 1 ---> Color
+    color_scheme = [ 0,1,2,3]
+    n_colors     = len(color_scheme)
+    color_list   = [  color_scheme[ hash(str( x)) % n_colors ] for x in df[colclass1].values     ]
+
+
+    ### Using Class 2  ---> Color
+    n_size      = len(df['class2'].unique())
+    smin, smax  = 1.0, 15.0
+    size_scheme = np.arange(smin, smax, (smax-smin)/n_size)
+    n_colors    = len(size_scheme)
+    size_list   = [  size_scheme[ hash(str( x)) % n_colors ] for x in df[colclass2].values     ]
+
+
+    ###
+    ptype_list = []
+
+    return xx, yy, label_list, color_list, size_list, ptype_list
+
+
+
+
+def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
+                            colclass1=None, colclass2=None, cfg: dict = None, mode='d3', save_path='',  **kw):
+    """
+    """
+    cc           = Box(cfg)
+    cc.figsize   = cc.get('figsize', (25, 15))  # Dict type default values
+    cc.title     = cc.get('title', 'scatter title' )
+
+    #######################################################################################
+    xx, yy, label_list, color_list, size_list, ptype_list = pd_plot_scatter_get_data(df,colx, coly, collabel,
+                                                            colclass1, colclass2)
 
     # set up plot
-    fig, ax = plt.subplots(figsize=(25, 15))  # set size
+    fig, ax = plt.subplots(figsize= cc.figsize)  # set size
     ax.margins(0.05)  # Optional, just adds 5% padding to the autoscaling
 
-    # iterate through groups to layer the plot
-    # note that I use the cluster_name and cluster_color dicts with the 'name' lookup to return
-    # the appropriate color/label
-    for name, group in groups_clusters:
-        ax.plot(group['x'], group['y'], marker='o', linestyle='', ms=2, label=group['class1'],
-                color=group['class1_color'],
-                mec='none')
-        ax.set_aspect('auto')
-        ax.tick_params(axis='x',  # changes apply to the x-axis
-                       which='both',  # both major and minor ticks are affected
-                       bottom='off',  # ticks along the bottom edge are off
-                       top='off',  # ticks along the top edge are off
-                       labelbottom='off')
-        ax.tick_params(axis='y',  # changes apply to the y-axis
-                       which='both',  # both major and minor ticks are affected
-                       left='off',  # ticks along the bottom edge are off
-                       top='off',  # ticks along the top edge are off
-                       labelleft='off')
+    # note that I use the cluster_name and cluster_color dicts with the 'name' lookup to returnthe appropriate color/label
+    ax.plot(xx, yy, marker='o', linestyle='', ms= size_list, label=label_list,
+            color=color_list,
+            mec='none')
+    ax.set_aspect('auto')
+    ax.tick_params(axis='x',  # changes apply to the x-axis
+                   which='both',  # both major and minor ticks are affected
+                   bottom='off',  # ticks along the bottom edge are off
+                   top='off',  # ticks along the top edge are off
+                   labelbottom='off')
+    ax.tick_params(axis='y',  # changes apply to the y-axis
+                   which='both',  # both major and minor ticks are affected
+                   left='off',  # ticks along the bottom edge are off
+                   top='off',  # ticks along the top edge are off
+                   labelleft='off')
 
     ax.legend(numpoints=1)  # show legend with only 1 point
 
-    # add label in x,y position with the label as the
+    # add label in x,y position with the label
     for i in range(len(df)):
-        ax.text(df.loc[i]['x'], df.loc[i]['y'], df.loc[i]['label'], size=8)
+        ax.text(xx[i], yy[i], label_list[i], size=8)
 
-    # uncomment the below to save the plot if need be
-    if save_img:
-        plt.savefig(
-            f'{cc.dir_out}/{cc.save_name}-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
+
+    if len(save_path) > 1 :
+        plt.savefig(f'{cc.save_path}-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
 
     # Plot
     fig, ax = plt.subplots(figsize=cc.figsize)  # set plot size
     ax.margins(0.03)  # Optional, just adds 5% padding to the autoscaling
 
     # iterate through groups to layer the plot
-    for name, group in groups_clusters:
-        points = ax.plot(group.x, group.y, marker='o', linestyle='',
-                         ms=df['class2_size'].values,
-                         label=df['class1'].values, mec='none',
-                         color=df['class1_color'].values)
-        ax.set_aspect('auto')
-        labels = [i for i in group['label']]
+    #for name, group in groups_clusters:
+    points = ax.plot(xx, yy, marker='o', linestyle='',
+                     ms    = size_list,
+                     label = label_list, mec='none',
+                     color = color_list)
+    ax.set_aspect('auto')
 
-        # set tick marks as blank
-        ax.axes.get_xaxis().set_ticks([])
-        ax.axes.get_yaxis().set_ticks([])
+    # set tick marks as blank
+    ax.axes.get_xaxis().set_ticks([])
+    ax.axes.get_yaxis().set_ticks([])
 
-        # set axis as blank
-        ax.axes.get_xaxis().set_visible(False)
-        ax.axes.get_yaxis().set_visible(False)
+    # set axis as blank
+    ax.axes.get_xaxis().set_visible(False)
+    ax.axes.get_yaxis().set_visible(False)
 
-        mlpd3_add_tooltip(fig, points, labels)
-        # set tooltip using points, labels and the already defined 'css'
-        # tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
-        # connect tooltip to fig
-        # mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
+    mlpd3_add_tooltip(fig, points, label_list)
+    # set tooltip using points, labels and the already defined 'css'
+    # tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
+    # connect tooltip to fig
+    # mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
     ax.legend(numpoints=1)  # show legend with only one dot
 
+    return fig
     ##### Export ############################################################
     #mpld3.fig_to_html(fig, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False, **kwargs)[source]
-    html_code = mpld3.fig_to_html(fig,  **kw)
-    return html_code
+    ## html_code = mpld3.fig_to_html(fig,  **kw)
+    ## return html_code
 
 
-def pd_matplotlib_histogram2(df, config):
+
+def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample=-1, show=False, clear=True):
     """
-      return matplotlib figure histogram from pandas dataframe
-        """
-
-    import matplotlib.pyplot as plt
-    import pandas as pd
-    import numpy as np
-
-    fig = plt.figure()
+       fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.hist(df[config['x']].values,
             bins=config['bins'], color='red', alpha=0.5)
@@ -378,13 +405,7 @@ def pd_matplotlib_histogram2(df, config):
     ax.set_ylim(config['ylim'])
     return fig
 
-
-def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample=-1, show=False, clear=True):
-    # Plot histogram
-    from matplotlib import pyplot as plt
-    import numpy as np
-    import os
-    import time
+    """
     q0 = dfi.quantile(q5)
     q1 = dfi.quantile(q95)
 
@@ -407,7 +428,12 @@ def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.99
     return fig
 
 
-def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [], figsize=(8, 4), spacing=0.1, **kwargs):
+def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [],
+                            figsize=(8, 4), spacing=0.1, **kw):
+    """
+
+
+    """
     from pandas import plotting
     from pandas.plotting import _matplotlib
     from matplotlib import pyplot as plt
@@ -423,13 +449,14 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
 
     # Displays subplot's pair in case of plot_type defined as `pair`
     if plot_type == 'pair':
-        ax = df.plot(subplots=True, figsize=figsize, **kwargs)
-        plt.show()
-        return
+        ax = df.plot(subplots=True, figsize=figsize, **kw)
+        # plt.show()
+        html_code = mpld3.fig_to_html(ax,  **kw)
+        return html_code
 
     # First axis
     ax = df.loc[:, cols_axe1[0]].plot(
-        label=cols_axe1[0], color=colors[0], **kwargs)
+        label=cols_axe1[0], color=colors[0], **kw)
     ax.set_ylabel(ylabel=cols_axe1[0])
     ##  lines, labels = ax.get_legend_handles_labels()
     lines, labels = [], []
@@ -437,7 +464,7 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
     i1 = len(cols_axe1)
     for n in range(1, len(cols_axe1)):
         df.loc[:, cols_axe1[n]].plot(
-            ax=ax, label=cols_axe1[n], color=colors[(n) % len(colors)], **kwargs)
+            ax=ax, label=cols_axe1[n], color=colors[(n) % len(colors)], **kw)
         line, label = ax.get_legend_handles_labels()
         lines += line
         labels += label
@@ -447,7 +474,7 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
         ax_new = ax.twinx()
         ax_new.spines['right'].set_position(('axes', 1 + spacing * (n - 1)))
         df.loc[:, cols_axe2[n]].plot(
-            ax=ax_new, label=cols_axe2[n], color=colors[(i1 + n) % len(colors)], **kwargs)
+            ax=ax_new, label=cols_axe2[n], color=colors[(i1 + n) % len(colors)], **kw)
         ax_new.set_ylabel(ylabel=cols_axe2[n])
 
         # Proper legend position
@@ -456,8 +483,11 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
         labels += label
 
     ax.legend(lines, labels, loc=0)
-    plt.show()
+    #plt.show()
     return ax
+    # html_code = mpld3.fig_to_html(ax,  **kw)
+    # return html_code
+
 
 
 def mpld3_server_start():
@@ -465,6 +495,18 @@ def mpld3_server_start():
     # if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
     # mpld3.show(fig=None, ip='127.0.0.1', port=8888, n_retries=50, local=True, open_browser=True, http_server=None, **kwargs)[source]
     mpld3.show()  # show the plot
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ############################################################################################################################
@@ -493,6 +535,19 @@ def pd_plot_highcharts(df):
     html_code = """<div id="{chart_id}"</div>
       <script type="text/javascript">{data}</script>""".format(chart_id="new_brownian", data=json_data_2)
     return html_code
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ############################################################################################################################
