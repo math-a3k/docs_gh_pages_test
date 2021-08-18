@@ -8,17 +8,10 @@ https://datatables.net/
 
 
 """
-import random
-import os
-import sys
-import numpy as np
-import pandas as pd
+import os, sys, random, numpy as np, pandas as pd, fire
 from datetime import datetime
 from typing import List
 from tqdm import tqdm
-
-import fire
-
 from box import Box
 
 # Converting python --> HTML
@@ -209,6 +202,13 @@ class htmlDoc(object):
         self.head = "<html>\n    <head>"
         self.html = "<body>"
 
+        ##### HighCharts
+        self.head = self.head + """
+            <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+            <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js">/script>         
+         """
+
+
         if self.cc.use_datatable:
             self.head = self.head + """
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
@@ -216,6 +216,7 @@ class htmlDoc(object):
             <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>"""
             # https://datatables.net/manual/installation
             # add $(document).ready( function () {    $('#table_id').DataTable(); } );
+
 
     def get_html(self):
         return self.html
@@ -226,6 +227,7 @@ class htmlDoc(object):
     def h3(self, x)  : self.html += "\n" + f"<h3>{x}</h3>"
     def h4(self, x)  : self.html += "\n" + f"<h4>{x}</h4>"
     def p(self, x)   : self.html += "\n" + f"<p>{x}</p>"
+    def div(self, x) : self.html += "\n" + f"<div>{x}</div>"
     def hr(self)     : self.html += "\n" + f"</hr>"
     def sep(self)    : self.html += "\n" + f"</hr>"
     def br(self)     : self.html += "\n" + f"</br>"
@@ -276,18 +278,26 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_histogram(self, df,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+    def plot_histogram(self, df, col:str,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
         html_code = ''
         if mode == 'mpld3':
             fig       = pd_plot_histogram_matplot(df)
             html_code = mpld3.fig_to_html(fig)
+
+        elif mode == 'highcharts':
+            html_code = pd_plot_histogram_highcharts(df, col= col, cfg=cfg)
+
         self.html += "\n\n" + html_code
 
 
-    def plot_scatter(self, df,  cfg: dict = None, mode='mpld3', save_img=False,  **kw):
+    def plot_scatter(self, df, colx, coly,  cfg: dict = None, mode='mpld3', save_img=False,  **kw):
         html_code = ''
         if mode == 'mpld3':
-            html_code = pd_plot_scatter_matplot(df,  cfg, mode, save_img,)
+            html_code = pd_plot_scatter_matplot(df, colx=colx, coly=coly,  cfg=cfg, mode=mode, save_img=save_img,)
+
+        elif mode == 'highcharts':
+            html_code = pd_plot_scatter_highcharts(df, colx= colx, coly=coly, cfg=cfg)
+
         self.html += "\n\n" + html_code
 
 
@@ -586,6 +596,12 @@ def mpld3_server_start():
 
 ############################################################################################################################
 ############################################################################################################################
+highcharts_doc ="""
+https://www.highcharts.com/docs/getting-started/how-to-set-options
+
+"""
+
+
 def pd_plot_highcharts(df):
     """
     # Basic line plot
@@ -1042,6 +1058,14 @@ def pd_plot_network(df):
     draw_graph3(G)
 
 
+
+
+
+
+
+
+
+
 ###################################################################################################
 ###################################################################################################
 js_code = Box({})  # List of javascript code
@@ -1057,6 +1081,26 @@ function ShowAndHide() {
 </SCRIPT>
 """
 
+
+
+
+###################################################################################################
+###################################################################################################
+doc_api ="""
+cfg_common = {'figsize': (20, 14)}   #### Common Config
+html_code = pd_plot_tseries_highcharts(data['stock_data.csv'],
+                                      coldate='Date',
+                                      cols_axe1=['Open','Low','Close'],
+                                      cols_axe2=["Total Trade Quantity"],
+                                      x_label='Date', 
+                                      axe1_label="Stock Price",
+                                      axe2_label="Stock volume", 
+                                      title =   "Stock Price",
+                                      cfg= cfg_common )
+highcharts_show_chart(html_code)
+
+
+"""
 
 ###################################################################################################
 if __name__ == "__main__":
