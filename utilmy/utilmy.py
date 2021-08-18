@@ -292,7 +292,7 @@ def pd_dtype_count_unique(df, col_continuous=[]):
         observed = data[~np.isnan(data)]  # not consider missing values for this.
         rules = [np.min(observed) < 0,
                  np.sum((observed) != np.round(observed)) > 0,
-                 len(np.unique(observed)) > min(30, len(observed)/3)]
+                 len(np.unique(observed)) > n(30, len(observed)/3)]
         if any(rules):
             return True
         else:
@@ -420,15 +420,19 @@ def diskcache_save(df, colkey:str, colvalue:str, db_path:str="", size_limit=5000
     return cache
 
 
-def diskcache_load( db_path=""):    
+def diskcache_load( db_path="", size_limit=50000000000,timeout=2, force_create=False ):    
     """ Load cache dict from disk and use as dict
        val = cache[mykey]
     
     """
     import diskcache as dc
-    cache = dc.Cache(db_path )
+    if os.path.exists(db_path) and not force_create :
+      cache = dc.Cache(db_path )               
+    else :   ### create new one
+      cache = dc.Cache(db_path, size_limit= size_limit, timeout= timeout )           
     print('Cache size', len(cache)) 
     return cache
+
 
 
 class dict_to_namespace(object):
