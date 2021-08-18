@@ -209,12 +209,14 @@ class htmlDoc(object):
             os.system(f'start chrome "{self.dir_out}" ')
 
 
-    def table(self, df, format='blue_light', use_datatable=False, table_id=1, **kw):
+    def table(self, df, format='blue_light', use_datatable=False, table_id=None, **kw):
         """
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         """
         import pretty_html_table
         html_code = pretty_html_table.build_table(df, format)
+
+        table_id = random.randint(9999,999999) if table_id is None else table_id  #### Unique ID
         if use_datatable:
             html_code = html_code.replace('<table', f'<table id="{table_id}"')
             html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );</script>\n""".replace(
@@ -222,14 +224,14 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_tseries(self, df, coldate, cols_axe1, cols_aex2=None,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+    def plot_tseries(self, df, coldate, cols_axe1, cols_axe2=None,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
         html_code = ''
         if mode == 'mpld3':
             fig       = pd_plot_tseries_matplot(df)
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
-            html_code = pd_plot_tseries_highcharts(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2)
+            html_code = pd_plot_tseries_highcharts(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2, cfg=cfg)
 
         self.html += "\n\n" + html_code
 
