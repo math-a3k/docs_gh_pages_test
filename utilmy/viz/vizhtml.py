@@ -709,13 +709,12 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
 
 
 
-
 def pd_plot_tseries_highcharts(df,
                               coldate:str=None,
+                              date_format='%m/%d/%Y',
                               cols_axe1=[],
                               cols_axe2=[],
                               figsize=None,
-
                               title=None,
                               x_label=None,
                               axe1_label=None,
@@ -725,6 +724,7 @@ def pd_plot_tseries_highcharts(df,
     from highcharts import Highchart
     from box import Box
 
+
     cc = Box(cfg)
     cc.coldate      = 'date'  if coldate is None else coldate
     cc.x_label      = coldate if x_label is None else x_label
@@ -733,7 +733,9 @@ def pd_plot_tseries_highcharts(df,
     cc.title        = cc.get('title',    axe1_label + " vs " + coldate ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
     cc.subtitle     = cc.get('subtitle', '')
-
+    cc.cols_axe1     = cols_axe1
+    cc.cols_axe2     = cols_axe2
+    df[coldate] = pd.to_datetime(df[coldate],format=date_format)
 
     #########################################################
     H = Highchart()
@@ -796,6 +798,9 @@ def pd_plot_tseries_highcharts(df,
     H.buildcontent()
     html_code = H._htmlcontent.decode('utf-8')
     return html_code
+
+
+
 
 
 def pd_plot_histogram_highcharts_base(bins, vals, figsize=None,
