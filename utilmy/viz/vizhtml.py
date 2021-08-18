@@ -708,7 +708,6 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
 
 
 
-
 def pd_plot_tseries_highcharts(df,
                               coldate:str=None,
                               date_format='%m/%d/%Y',
@@ -719,12 +718,24 @@ def pd_plot_tseries_highcharts(df,
                               x_label=None,
                               axe1_label=None,
                               axe2_label=None,
+                              dtae_format = "",
                               cfg:dict={}, mode='d3', save_img=False):
+
+    '''
+        function to return highchart json cord for time_series.
+
+        input parameter
+        df : panda dataframe on which you want to apply time_series
+        cols_axe1: column name for y-axis one
+        cols_axe2: column name for y-axis second
+        x_label : label of x-axis
+        cols_axe1_label : label for yaxis 1
+        cols_axe2_label : label for yaxis 2
+        date_format : %m for moth , %d for day and %Y for Year.
+    '''
 
     from highcharts import Highchart
     from box import Box
-
-
     cc = Box(cfg)
     cc.coldate      = 'date'  if coldate is None else coldate
     cc.x_label      = coldate if x_label is None else x_label
@@ -733,9 +744,9 @@ def pd_plot_tseries_highcharts(df,
     cc.title        = cc.get('title',    axe1_label + " vs " + coldate ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
     cc.subtitle     = cc.get('subtitle', '')
-    cc.cols_axe1     = cols_axe1
-    cc.cols_axe2     = cols_axe2
-    df[coldate] = pd.to_datetime(df[coldate],format=date_format)
+    cc.cols_axe1    = cols_axe1
+    cc.cols_axe2    = cols_axe2
+    df[coldate]     = pd.to_datetime(df[coldate],format=date_format)
 
     #########################################################
     H = Highchart()
@@ -798,6 +809,9 @@ def pd_plot_tseries_highcharts(df,
     H.buildcontent()
     html_code = H._htmlcontent.decode('utf-8')
     return html_code
+
+
+
 
 
 
