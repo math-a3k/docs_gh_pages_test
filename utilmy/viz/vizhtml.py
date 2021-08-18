@@ -33,6 +33,41 @@ def log(*s):
 
 ###################################################################################
 #### Example usage ################################################################
+def test_getdata():
+    """
+    data = test_get_data()
+    df   = data['housing.csv']
+    df.head(3)
+
+    https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data
+    """
+    import pandas as pd
+    flist = [
+       'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv',
+
+       'https://raw.githubusercontent.com/szrlee/Stock-Time-Series-Analysis/master/data/AAPL_2006-01-01_to_2018-01-01.csv',
+
+       'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
+
+
+    ]
+
+    data = {}
+    for url in flist :
+       fname =  url.split("/")[-1]
+       print( "\n", "\n", url, )
+       df = pd.read_csv(url)
+       data[fname] = df
+       print(df)
+       # df.to_csv(fname , index=False)
+    print(data.keys() )
+    return data
+
+
+
+
+
+
 def test_usage():
     # pip install box-python    can use .key or ["mykey"]  for dict
     cfg = Box({})
@@ -132,7 +167,7 @@ class htmlDoc(object):
         self.cc.use_datatable = self.cc.get('use_datatable', False)  # Default val
 
         self.head = "<html>\n    <head>"
-        self.html = """    <body>"""
+        self.html = "<body>"
 
         if self.cc.use_datatable:
             self.head = self.head + """
@@ -150,10 +185,10 @@ class htmlDoc(object):
     def h2(self, x)  : self.html += "\n" + f"<h2>{x}</h2>"
     def h3(self, x)  : self.html += "\n" + f"<h3>{x}</h3>"
     def h4(self, x)  : self.html += "\n" + f"<h4>{x}</h4>"
-    def hr(self)     : self.html += "\n" + f"</hr>"
-    def sep(self   ) : self.html += "\n" + f"</hr>"
-    def br(self)     : self.html += "\n" + f"</br>"
     def p(self, x)   : self.html += "\n" + f"<p>{x}</p>"
+    def hr(self)     : self.html += "\n" + f"</hr>"
+    def sep(self)    : self.html += "\n" + f"</hr>"
+    def br(self)     : self.html += "\n" + f"</br>"
 
 
     def hidden(self, x):
@@ -187,14 +222,14 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_tseries(self, df,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+    def plot_tseries(self, df, coldate, cols_axe1, cols_aex2=None,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
         html_code = ''
         if mode == 'mpld3':
             fig       = pd_plot_tseries_matplot(df)
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
-            html_code = pd_plot_highcharts(df)
+            html_code = pd_plot_tseries_highcharts(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2)
 
         self.html += "\n\n" + html_code
 
@@ -254,8 +289,6 @@ class mpld3_TopToolbar(mpld3.plugins.PluginBase):
       this.fig.toolbar.draw = function() {}
     }
     """
-
-
     def __init__(self):
         self.dict_ = {"type": "toptoolbar"}
 
@@ -538,14 +571,288 @@ def pd_plot_highcharts(df):
 
 
 
+def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, collabel=None,
+                               colclass1=None, colclass2=None, colclass3=None, nmax=10000,
+                               cfg:dict={}, mode='d3', save_img=False,  verbose=True,  **kw ):
+    """ Plot Highcharts X=Y Scatter
+
+    """
+    import matplotlib
+    from box import Box
+    from highcharts import Highchart
+
+    cc = Box(cfg)
+    cc.title      = cc.get('title',    'my scatter')
+    cc.figsize    = cc.get('figsize', (640, 480) )   ### Dict type default values
+    cc.colormap   = cc.get('colormap', 'brg')
+    if verbose: print(cc['title'], cc['figsize'])
+
+    nmax = min(nmax, len(df0))
+    df   = df0.sample(nmax)
+
+    colx      = 'x'      if colx is None else colx
+    coly      = 'y'      if coly is None else coly
+    collabel  = 'label'  if collabel is None else collabel    ### label per point
+    colclass1 = 'class1' if colclass1 is None else colclass1  ### Color per point class1
+    colclass2 = 'class2' if colclass2 is None else colclass2  ### Size per point class2
+    colclass3 = 'class3' if colclass3 is None else colclass3  ### Marker per point
+
+
+    #######################################################################################
+    for ci in [ collabel, colclass1, colclass2 ] :
+       if ci  not in df.columns : df[ci]  = ''  ### add missing
+       df[ci]  = df[ci].fillna('')
+
+    xx         = df[colx].values
+    yy         = df[coly].values
+    label_list = df[collabel].values
+
+    ### Using Class 1 ---> Color
+    color_list   = [ hash(str(x)) for x in df[colclass1].values     ]
+    # Normalize the classes value over [0.0, 1.0]
+    norm          = matplotlib.colors.Normalize(vmin=min(color_list), vmax=max(color_list))
+    c_map         = plt.cm.get_cmap(cc.colormap)
+    color_list   = [  matplotlib.colors.rgb2hex(c_map(norm(x))).upper() for x in color_list    ]
+
+
+    ### Using Class 2  ---> Color
+    n_size      = len(df[colclass2].unique())
+    smin, smax  = 1.0, 15.0
+    size_scheme = np.arange(smin, smax, (smax-smin)/n_size)
+    n_colors    = len(size_scheme)
+    size_list   = [  size_scheme[ hash(str( x)) % n_colors ] for x in df[colclass2].values     ]
+
+
+    # Create chart object
+    chart = Highchart()
+    options = { 'chart': {
+            'width': cc.figsize[0],
+            'height': cc.figsize[1]
+        },   'title': {
+        'text': cc.title
+    },
+    'xAxis': {
+        'title': {
+            'text': colx
+        }
+    },
+    'yAxis': {
+        'title': {
+            'text': coly
+        }
+    },
+    'legend': {
+        'enabled': False
+    },'tooltip': {
+        'pointFormat': '{point.label}'
+    }}
+
+    chart.set_dict_options(options)
+
+    # Plot each cluster with the correct size and color
+    data = [{
+        'x' : float(xx[i]),
+        'y' : float(yy[i]),
+        "label" : str(label_list[i]),
+        "marker": { 'radius' : int(size_list[i]) },
+        'color' : color_list[i]
+        } for i in range(len(df))
+    ]
+
+    chart.add_data_set(data, 'scatter')
+    chart.buildcontent()
+    html_code = chart._htmlcontent.decode('utf-8')
+    return html_code
+
+
+
+
+
+def pd_plot_tseries_highcharts(df,
+                              coldate:str=None,
+                              cols_axe1=[],
+                              cols_axe2=[],
+                              figsize=None,
+
+                              title=None,
+                              x_label=None,
+                              axe1_label=None,
+                              axe2_label=None,
+                              cfg:dict={}, mode='d3', save_img=False):
+
+    from highcharts import Highchart
+    from box import Box
+
+    cc = Box(cfg)
+    cc.coldate      = 'date'  if coldate is None else coldate
+    cc.x_label      = coldate if x_label is None else x_label
+    cc.axe1_label   = "_".join(cols_axe1)      if axe1_label is None else axe1_label
+    cc.axe2_label   = "_".join(cols_axe2)      if axe2_label is None else axe2_label
+    cc.title        = cc.get('title',    axe1_label + " vs " + coldate ) if title is None else title
+    cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
+    cc.subtitle     = cc.get('subtitle', '')
+
+
+    #########################################################
+    H = Highchart()
+    options = {
+      'chart':   { 'zoomType': 'xy'},
+        'title': { 'text': cc.title},
+        'subtitle': {  'text': cc.subtitle },
+        'xAxis': [{
+                      'type': 'datetime',
+                      'title': { 'text': cc.x_label }
+                  }],
+        'yAxis': [{
+            'labels': {
+                'style': {  'color': 'Highcharts.getOptions().colors[2]' }
+            },
+            'title': {
+                'text': cc.axe2_label,
+                'style': {   'color': 'Highcharts.getOptions().colors[2]' }
+            },
+            'opposite': True
+
+        }, {
+            'gridLineWidth': 0,
+            'title': {
+                'text': cc.axe1_label,
+                'style': {
+                    'color': 'Highcharts.getOptions().colors[0]'
+                }
+            },
+            'labels': {
+                'style': {
+                    'color': 'Highcharts.getOptions().colors[0]'
+                }
+            }
+
+        }],
+
+        'tooltip': { 'shared': True,    },
+        'legend': {
+            'layout': 'vertical',
+            'align': 'left',
+            'x': 80,
+            'verticalAlign': 'top',
+            'y': 55,
+            'floating': True,
+            'backgroundColor': "(Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'"
+        },
+    }
+    H.set_dict_options(options)
+
+    for col_name in cc.cols_axe1:
+      data = [[df[cc.coldate][i] , float(df[col_name][i]) ] for i in range(df.shape[0])]
+      H.add_data_set(data, 'spline', col_name,yAxis=1)
+
+    for col_name in cc.cols_axe2:
+      data = [[df[cc.coldate][i] , float(df[col_name][i])] for i in range(df.shape[0])]
+      H.add_data_set(data, 'spline', col_name, yAxis=0, )
+
+    ##################################################################
+    H.buildcontent()
+    html_code = H._htmlcontent.decode('utf-8')
+    return html_code
+
+
+def pd_plot_histogram_highcharts_base(bins, vals, figsize=None,
+                                  title=None,
+                                  x_label=None, y_label=None, cfg:dict={}, mode='d3', save_img=False):
+      from highcharts import Highchart
+      from box import Box
+
+      cc = Box(cfg)
+      cc.title        = cc.get('title',    'Histogram' ) if title is None else title
+      cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
+      cc.subtitle     = cc.get('subtitle', '')
+
+      cc.x_label = 'Bins' if x_label is None else x_label
+      cc.y_label = 'Frequency' if y_label is None else y_label
+
+      ################################################################
+      H = Highchart()
+      options = {
+        'chart': {
+            'zoomType': 'xy',
+            'width' :  cc.figsize[0],
+            'height' : cc.figsize[1],
+        },
+        'title': {
+            'text': cc.title
+        },
+        'xAxis': [{
+            'categories' : bins
+        }],
+        'yAxis': [{
+            'title': {
+                'text': "Frequency",
+                'style': {
+                    'color': 'Highcharts.getOptions().colors[0]'
+                }
+            }
+        }],
+        'tooltip': {
+            'shared': True,
+
+        }
+      }
+      H.set_dict_options(options)
+
+      H.add_data_set(vals, 'bar', cc.x_label)
+
+      #############################################################
+      H.buildcontent()
+      html_code = H._htmlcontent.decode('utf-8')
+      return html_code
+
+
+
+
+def pd_plot_histogram_highcharts(df, col, figsize=None,
+                                 title=None,
+                                 cfg:dict={}, mode='d3', save_img=False):
+    from box import Box
+
+    cc = Box(cfg)
+    cc.title        = cc.get('title',    'Histogram' + col ) if title is None else title
+    cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
+    cc.subtitle     = cc.get('subtitle', '')
+    x_label         = col+'-bins'
+    y_label         = col+'-frequency'
+
+    # Get data, calculate histogram and bar centers
+    hist, bin_edges = np.histogram( df[col].values )
+    bin_centers     = [float(bin_edges[i+1] + bin_edges[i]) / 2 for i in range(len(hist))]
+    hist_val        = hist.tolist()
+
+    #### Plot
+    pd_plot_histogram_highcharts_base(bins    = bin_centers,
+                                      vals    = hist_val,
+                                      figsize = figsize,
+                                      title   = title,
+                                      x_label = x_label, y_label=y_label, cfg=cfg, mode=mode, save_img=save_img)
 
 
 
 
 
 
+# Function to display highcharts graph
+def html_show_chart_highchart(html_code, verbose=True):
+    from highcharts import Highchart
+    from IPython.core.display import display, HTML
+    hc = Highchart()
+    hc.buildhtmlheader()
+    if verbose: print(html_code)
+    display(HTML(hc.htmlheader + html_code))
 
 
+
+# Function to display HTML
+def html_show(html_code, verbose=True):
+    from IPython.core.display import display, HTML
+    display(HTML( html_code))
 
 
 
