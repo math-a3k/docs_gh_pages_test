@@ -66,6 +66,46 @@ def test_getdata():
 
 
 
+def test_usage2():
+    # pip install box-python    can use .key or ["mykey"]  for dict
+
+    data = test_getdata()
+    df = data['housing.csv']
+    df2 = data['housing.csv']
+
+    cfg = Box({})
+    cfg.tseries = {"title": 'ok'}
+    cfg.scatter = {"title": 'ok'}
+    cfg.histo = {"title": 'ok'}
+    cfg.use_datatable = True
+
+    df = pd.DataFrame([[1, 2]])
+    df2_list = [df, df, df]
+
+    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+
+    doc.h1('My title')  # h1
+    doc.sep()
+    doc.br()  # <br>
+
+    doc.tag('<h2> My graph title </h2>')
+    doc.plot_scatter(df, cfg.scatter, mode='mpld3', save_img=False)
+    doc.hr()  # doc.sep() line separator
+
+    for df2_i in df2_list:
+         print(df2_i)
+         # doc.h3(f" plot title: {df2_i['category'].values[0]}")
+         doc.plot_tseries(df2_i, cfg.tseries, mode='mpld3', save_img="")
+
+    print(doc.get_html())
+
+    doc.tag('<h2> My histo title </h2>')
+    print(df2)
+    doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='mpld3', save_img="")
+    doc.plot_histogram(df2, cfg.histo, mode='mpld3', save_img="")
+
+    doc.save(dir_out="myfile.html")
+    doc.open_browser()  # Open myfile.html
 
 
 def test_usage():
