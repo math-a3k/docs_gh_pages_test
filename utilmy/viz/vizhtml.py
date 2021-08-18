@@ -94,7 +94,7 @@ def test_usage():
 
     # test create table
     list_info = []
-    for i in range(100):
+    for i in range(1000):
         info = {}
         info ['x'] = i
         info ['y'] = i
@@ -105,7 +105,7 @@ def test_usage():
         info ['class1_color'] = i
         list_info.append(info)
     df = pd.DataFrame.from_records(list_info)
-    doc.table(df, format='orange_light')
+    doc.table(df, use_datatable=cfg.use_datatable, table_id="test")
 
 
     doc.tag("""<p>    My mutilines whatever I want to write
@@ -136,8 +136,9 @@ class htmlDoc(object):
 
         if self.cc.use_datatable:
             self.head = self.head + """
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>"""
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>"""
             # https://datatables.net/manual/installation
             # add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
@@ -173,15 +174,16 @@ class htmlDoc(object):
             os.system(f'start chrome "{self.dir_out}" ')
 
 
-    def table(self, df, format='blue_light', use_datatable=False, table_id:int=1, **kw):
+    def table(self, df, format='blue_light', use_datatable=False, table_id=1, **kw):
         """
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         """
         import pretty_html_table
         html_code = pretty_html_table.build_table(df, format)
         if use_datatable:
+            html_code = html_code.replace('<table', f'<table id="{table_id}"')
             html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );</script>\n""".replace(
-                'mytable_id', table_id)
+                '{mytable_id}', str(table_id))
         self.html += "\n\n" + html_code
 
 
