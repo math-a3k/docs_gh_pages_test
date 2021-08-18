@@ -152,7 +152,7 @@ class htmlDoc(object):
     def h4(self, x)  : self.html += "\n" + f"<h4>{x}</h4>"
     def hr(self)     : self.html += "\n" + f"</hr>"
     def sep(self   ) : self.html += "\n" + f"</hr>"
-    def br(self, x)  : self.html += "\n" + f"</br>"
+    def br(self)     : self.html += "\n" + f"</br>"
     def p(self, x)   : self.html += "\n" + f"<p>{x}</p>"
 
 
