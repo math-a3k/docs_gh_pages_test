@@ -92,14 +92,20 @@ def test_usage():
 
 
 
-    df2 = pd.DataFrame({
-        'col1': [1.5, 0.5, 1.2, 0.9, 3],
-        'col2': [0.7, 0.2, 0.15, 0.2, 1.1]
-        })
-
-    for df2_i in df2_list:
-        # doc.h3(f" title: {df2_i['category'].values[0]}")
-        doc.table(df2_i.iloc[:100, :], format='blue_light')
+    # test create table
+    list_info = []
+    for i in range(100):
+        info = {}
+        info ['x'] = i
+        info ['y'] = i
+        info ['label'] = i
+        info ['class1'] = i
+        info ['class2'] = i
+        info ['class2_size'] = i
+        info ['class1_color'] = i
+        list_info.append(info)
+    df = pd.DataFrame.from_records(list_info)
+    doc.table(df, format='orange_light')
 
 
     doc.tag("""<p>    My mutilines whatever I want to write
@@ -123,17 +129,15 @@ class htmlDoc(object):
         self.cc = Box(cfg)  # Config dict
         self.dir_out = dir_out
 
-        self.cc.use_datatable = self.cc.get(
-            'use_datatable', False)  # Default val
+        self.cc.use_datatable = self.cc.get('use_datatable', False)  # Default val
 
-        self.head = "<html><head>"
-        self.html = """<body>        """
+        self.head = "<html>\n    <head>"
+        self.html = """    <body>"""
 
         if self.cc.use_datatable:
-            self.head = self.head + """\n
-              <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-              <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-            """
+            self.head = self.head + """
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>"""
             # https://datatables.net/manual/installation
             # add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
@@ -159,7 +163,7 @@ class htmlDoc(object):
 
     def save(self, dir_out=None):
         self.dir_out = dir_out if dir_out is not None else self.dir_out
-        full = self.head + "</head>" + self.html + "</body></html>"
+        full = self.head + "\n    </head>\n" + self.html + "\n    </body>\n</html>"
         with open(self.dir_out, mode='w') as fp:
             fp.write(full)
 
@@ -169,17 +173,16 @@ class htmlDoc(object):
             os.system(f'start chrome "{self.dir_out}" ')
 
 
-    def table(self, df,  cfg: dict = None, mode='', use_datatable=False,  **kw):
+    def table(self, df, format='blue_light', use_datatable=False, table_id:int=1, **kw):
         """
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         """
         import pretty_html_table
-        html_code = pretty_html_table.build_table(df, mode)
-        table_id = '1'
+        html_code = pretty_html_table.build_table(df, format)
         if use_datatable:
-            html_code += """$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );""".replace(
+            html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );</script>\n""".replace(
                 'mytable_id', table_id)
-        return html_code
+        self.html += "\n\n" + html_code
 
 
     def plot_tseries(self, df,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
