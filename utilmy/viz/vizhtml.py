@@ -159,6 +159,12 @@ def test_usage():
     # print(doc.get_html())
 
 
+    # check add css
+    css = """.intro {
+        background-color: yellow;
+}
+    """
+    doc.add_css(css)
 
     # test create table
     list_info = []
@@ -173,7 +179,7 @@ def test_usage():
         info ['class1_color'] = i
         list_info.append(info)
     df = pd.DataFrame.from_records(list_info)
-    doc.table(df, use_datatable=cfg.use_datatable, table_id="test")
+    doc.table(df, use_datatable=cfg.use_datatable, table_id="test", custom_class='intro')
 
 
     doc.tag("""<p>    My mutilines whatever I want to write
@@ -205,7 +211,7 @@ class htmlDoc(object):
         ##### HighCharts
         self.head = self.head + """
             <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
-            <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js">/script>         
+            <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>         
          """
 
 
@@ -233,6 +239,11 @@ class htmlDoc(object):
     def br(self)     : self.html += "\n" + f"</br>"
 
 
+    def add_css(self, css):
+        data = f"\n<style>\n{css}\n</style>\n"
+        self.head += data
+
+
     def hidden(self, x):
         # Hidden paragraph
         self.html += "\n" + f"<div id='hidden_section_id'>{x}</div>"
@@ -251,12 +262,16 @@ class htmlDoc(object):
             os.system(f'start chrome "{self.dir_out}" ')
 
 
-    def table(self, df, format='blue_light', use_datatable=False, table_id=None, **kw):
+    def table(self, df, format='blue_light', custom_class=None, use_datatable=False, table_id=None, **kw):
         """
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         """
         import pretty_html_table
         html_code = pretty_html_table.build_table(df, format)
+
+        # add custom class
+        if custom_class:
+            html_code = html_code.replace('<table', f'<table class="{custom_class}"')
 
         table_id = random.randint(9999,999999) if table_id is None else table_id  #### Unique ID
         if use_datatable:
