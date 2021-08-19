@@ -62,8 +62,6 @@ def test_getdata():
     return data
 
 
-
-
 def test_usage2(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
 
@@ -271,12 +269,13 @@ class htmlDoc(object):
         """
         import pretty_html_table
         html_code = pretty_html_table.build_table(df, format)
+        table_id  = random.randint(9999,999999) if table_id is None else table_id  #### Unique ID
 
-        # add custom class
+
+        # add custom CSS class
         if custom_class:
             html_code = html_code.replace('<table', f'<table class="{custom_class}"')
 
-        table_id = random.randint(9999,999999) if table_id is None else table_id  #### Unique ID
         if use_datatable:
             html_code = html_code.replace('<table', f'<table id="{table_id}" ')
             html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );</script>\n""".replace(
@@ -284,37 +283,70 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_tseries(self, df, coldate, cols_axe1, cols_axe2=None,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+    def plot_tseries(self, df, coldate, cols_axe1, cols_axe2=None,  cfg: dict = None, mode='mpld3',
+                     title="",
+                     plot_type="",
+                     figsize=(14,7), spacing=0.1,
+                     x_label=None,
+                     axe1_label=None,
+                     axe2_label=None,
+                     save_img="",  **kw):
+        """
+        """
         html_code = ''
         if mode == 'mpld3':
-            fig       = pd_plot_tseries_matplot(df)
+            fig       = pd_plot_tseries_matplot(df, plot_type=plot_type, cols_axe1=cols_axe1, cols_axe2=cols_axe2,
+                                                figsize=figsize, spacing=spacing)
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
-            html_code = pd_plot_tseries_highcharts(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2, cfg=cfg)
+            html_code = pd_plot_tseries_highcharts(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2,
+                                                   figsize=figsize,title=title,
+                                                   x_label=x_label,
+                                                   axe1_label=axe1_label,
+                                                   axe2_label=axe2_label,
+                                                   cfg=cfg, mode=mode, save_img=save_img,
+                                                  )
+        self.html += "\n\n" + html_code
+
+
+    def plot_histogram(self, df, col, title='',  figsize=(14,7), nsample=10000,
+                       nbin=10, q5=0.005, q95=0.95,
+                       cfg: dict = None, mode='mpld3', save_img="",  **kw):
+        html_code = ''
+        if mode == 'mpld3':
+            fig       = pd_plot_histogram_matplot(df, title=title, nbin=nbin, q5=q5, q95=q95,
+                                                  nsample=nsample, save_img=save_img)
+            html_code = mpld3.fig_to_html(fig)
+
+        elif mode == 'highcharts':
+            html_code = pd_plot_histogram_highcharts(df,col=col, title=title, figsize=figsize,  cfg=cfg,mode=mode,
+                                                     save_img=save_img)
 
         self.html += "\n\n" + html_code
 
 
-    def plot_histogram(self, df, col:str,  cfg: dict = None, mode='mpld3', save_img="",  **kw):
+    def plot_scatter(self, df, colx, coly,
+                     collabel=None, colclass1=None, colclass2=None, colclass3=None,
+                     nmax=10000,
+                     cfg: dict = None, mode='mpld3', save_img=False,  **kw):
+        """
+
+
+        """
         html_code = ''
         if mode == 'mpld3':
-            fig       = pd_plot_histogram_matplot(df)
-            html_code = mpld3.fig_to_html(fig)
+            html_code = pd_plot_scatter_matplot(df, colx=colx, coly=coly,
+                                                collabel=collabel, colclass1=colclass1, colclass2=colclass2,
+                                                cfg=cfg, mode=mode, save_img=save_img,)
 
         elif mode == 'highcharts':
-            html_code = pd_plot_histogram_highcharts(df, col= col, cfg=cfg)
+            html_code = pd_plot_scatter_highcharts(df, colx= colx, coly=coly,
+                                                   colclass1=colclass1, colclass2=colclass2, colclass3=colclass3,
+                                                   nmax=nmax,
+                                                   cfg=cfg, mode=mode, save_img=save_img,
 
-        self.html += "\n\n" + html_code
-
-
-    def plot_scatter(self, df, colx, coly,  cfg: dict = None, mode='mpld3', save_img=False,  **kw):
-        html_code = ''
-        if mode == 'mpld3':
-            html_code = pd_plot_scatter_matplot(df, colx=colx, coly=coly,  cfg=cfg, mode=mode, save_img=save_img,)
-
-        elif mode == 'highcharts':
-            html_code = pd_plot_scatter_highcharts(df, colx= colx, coly=coly, cfg=cfg)
+            )
 
         self.html += "\n\n" + html_code
 
@@ -495,7 +527,7 @@ def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
 
 
 
-def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample=-1, show=False, clear=True):
+def pd_plot_histogram_matplot(dfi:pd.DataFrame, title='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1, save_img=None):
     """
        fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -520,12 +552,12 @@ def pd_plot_histogram_matplot(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.99
     else:
         dfi.sample(n=nsample, replace=True).hist(
             bins=np.arange(q0, q1,  (q1 - q0) / nbin))
-    plt.title(path_save.split("/")[-1] if path_save else 'None')
+    plt.title(title)
 
-    if path_save is not None:
-        os.makedirs(os.path.dirname(path_save), exist_ok=True)
-        plt.savefig(path_save)
-        print(path_save)
+    if save_img is not None:
+        os.makedirs(os.path.dirname(save_img), exist_ok=True)
+        plt.savefig(save_img)
+        print(save_img)
 
     # plt.close(fig)
     return fig
@@ -598,16 +630,6 @@ def mpld3_server_start():
     # if os.name == 'nt': os.system(f'start chrome "{dir_out}/embeds.html" ')
     # mpld3.show(fig=None, ip='127.0.0.1', port=8888, n_retries=50, local=True, open_browser=True, http_server=None, **kwargs)[source]
     mpld3.show()  # show the plot
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -750,17 +772,11 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
 
 
 def pd_plot_tseries_highcharts(df,
-                              coldate:str=None,
-                              date_format='%m/%d/%Y',
-                              cols_axe1=[],
-                              cols_axe2=[],
-                              figsize=None,
-                              title=None,
-                              x_label=None,
-                              axe1_label=None,
-                              axe2_label=None,
-                              dtae_format = "",
-                              cfg:dict={}, mode='d3', save_img=False):
+                              coldate:str=None, date_format='%m/%d/%Y',
+                              cols_axe1=[],     cols_axe2=[],
+                              figsize=None, title=None,
+                              x_label=None,  axe1_label=None, axe2_label=None,
+                              cfg:dict={}, mode='d3', save_img=""):
 
     '''
         function to return highchart json cord for time_series.
@@ -854,10 +870,6 @@ def pd_plot_tseries_highcharts(df,
 
 
 
-
-
-
-
 def pd_plot_histogram_highcharts_base(bins, vals, figsize=None,
                                   title=None,
                                   x_label=None, y_label=None, cfg:dict={}, mode='d3', save_img=False):
@@ -910,7 +922,6 @@ def pd_plot_histogram_highcharts_base(bins, vals, figsize=None,
 
 
 
-
 def pd_plot_histogram_highcharts(df, col, figsize=None,
                                  title=None,
                                  cfg:dict={}, mode='d3', save_img=False):
@@ -934,9 +945,6 @@ def pd_plot_histogram_highcharts(df, col, figsize=None,
                                       figsize = figsize,
                                       title   = title,
                                       x_label = x_label, y_label=y_label, cfg=cfg, mode=mode, save_img=save_img)
-
-
-
 
 
 
