@@ -263,8 +263,8 @@ class htmlDoc(object):
             os.system(f'start chrome "{self.dir_out}" ')
 
 
-    def table(self, df, format='blue_light', custom_class=None, use_datatable=False, table_id=None, **kw):
-        """
+    def table(self, df:pd.DataFrame, format='blue_light', custom_class=None, use_datatable=False, table_id=None, **kw):
+        """ Show Pandas in HTML and interactive
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         """
         import pretty_html_table
@@ -312,13 +312,16 @@ class htmlDoc(object):
                        cfg: dict = None, mode='mpld3', save_img="",  **kw):
         html_code = ''
         if mode == 'mpld3':
-            fig       = pd_plot_histogram_matplot(df, col, title=title, nbin=nbin, q5=q5, q95=q95,
+            fig       = pd_plot_histogram_matplot(df, col,
+                                                  title=title,
+                                                  nbin=nbin, q5=q5, q95=q95,
                                                   nsample=nsample, save_img=save_img)
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
-            html_code = pd_plot_histogram_highcharts(df,col=col, title=title, figsize=figsize,  cfg=cfg,mode=mode,
-                                                     save_img=save_img)
+            html_code = pd_plot_histogram_highcharts(df,col=col,
+                                                     title=title, figsize=figsize,
+                                                     cfg=cfg,mode=mode,save_img=save_img)
 
         self.html += "\n\n" + html_code
 
