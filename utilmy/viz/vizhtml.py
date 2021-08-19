@@ -182,9 +182,7 @@ def test_usage():
     doc.table(df, use_datatable=cfg.use_datatable, table_id="test", custom_class='intro')
 
 
-    doc.tag("""<p>    My mutilines whatever I want to write
-      ok</p>
-    """)
+    doc.tag("""<p>    My mutilines whatever I want to write      ok</p> """)
     print(doc.get_html())
 
     doc.save(dir_out="myfile.html")
@@ -275,7 +273,7 @@ class htmlDoc(object):
 
         table_id = random.randint(9999,999999) if table_id is None else table_id  #### Unique ID
         if use_datatable:
-            html_code = html_code.replace('<table', f'<table id="{table_id}"')
+            html_code = html_code.replace('<table', f'<table id="{table_id}" ')
             html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );</script>\n""".replace(
                 '{mytable_id}', str(table_id))
         self.html += "\n\n" + html_code
