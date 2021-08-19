@@ -66,12 +66,13 @@ def test_usage2(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
 
     data = test_getdata()
+    dft = data['titanic.csv']
     df  = data['housing.csv']
     df2 = data['sales.csv']
 
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
-    cfg.scatter = {"title": 'ok'}
+    cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
     cfg.histo = {"title": 'ok'}
     cfg.use_datatable = True
 
@@ -85,8 +86,11 @@ def test_usage2(verbose=True):
     doc.br()  # <br>
 
     doc.tag('<h2> My graph title </h2>')
-    doc.plot_scatter(df, cfg.scatter, mode='mpld3', save_img=False)
+    doc.plot_scatter(dft, colx='Age', coly='Fare',
+                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                     cfg=cfg.scatter, mode='mpld3', save_img='')
     doc.hr()  # doc.sep() line separator
+
 
 
     for df2_i in df2_list:
@@ -329,7 +333,7 @@ class htmlDoc(object):
     def plot_scatter(self, df, colx, coly,
                      title='', figsize=(14,7), nsample=10000,
                      collabel=None, colclass1=None, colclass2=None, colclass3=None,
-                     cfg: dict = None, mode='mpld3', save_img=False,  **kw):
+                     cfg: dict = None, mode='mpld3', save_img='',  **kw):
         """
 
 
