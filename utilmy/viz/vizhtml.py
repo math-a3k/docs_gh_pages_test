@@ -36,12 +36,17 @@ def test_getdata():
     """
     import pandas as pd
     flist = [
-       'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv',
+    'https://raw.githubusercontent.com/samigamer1999/datasets/main/titanic.csv',
 
-       'https://raw.githubusercontent.com/szrlee/Stock-Time-Series-Analysis/master/data/AAPL_2006-01-01_to_2018-01-01.csv',
+    'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
 
-       'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
+    'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/stock_data.csv',
 
+    'https://raw.githubusercontent.com/samigamer1999/datasets/main/cars.csv',
+
+    'https://raw.githubusercontent.com/samigamer1999/datasets/main/sales.csv',
+
+    'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/weatherdata.csv'
 
     ]
 
@@ -59,12 +64,12 @@ def test_getdata():
 
 
 
-def test_usage2():
+def test_usage2(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
 
     data = test_getdata()
-    df = data['housing.csv']
-    df2 = data['housing.csv']
+    df  = data['housing.csv']
+    df2 = data['sales.csv']
 
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
@@ -85,15 +90,15 @@ def test_usage2():
     doc.plot_scatter(df, cfg.scatter, mode='mpld3', save_img=False)
     doc.hr()  # doc.sep() line separator
 
+
     for df2_i in df2_list:
          print(df2_i)
+         col2 =df2_i.columns
          # doc.h3(f" plot title: {df2_i['category'].values[0]}")
-         doc.plot_tseries(df2_i, cfg.tseries, mode='mpld3', save_img="")
+         doc.plot_tseries(df2_i, coldate= col2[0], cols_axe1= col2[1],   cfg = cfg.tseries, mode='highcharts')
 
-    print(doc.get_html())
 
     doc.tag('<h2> My histo title </h2>')
-    print(df2)
     doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='mpld3', save_img="")
     doc.plot_histogram(df2, cfg.histo, mode='mpld3', save_img="")
 
