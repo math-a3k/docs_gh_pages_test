@@ -54,7 +54,8 @@ def test_getdata(verbose=True):
     print(data.keys() )
     return data
 
-def test3():
+
+def test1():
     ####  Test Datatable
     cfg ={}
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
@@ -77,21 +78,19 @@ def test3():
 
 
 
-
 def test2():
-
     data = test_getdata()
 
-    doc = htmlDoc(title='Weather report', cfg={} )
+    doc = htmlDoc(title='Weather report', dir_out="", cfg={} )
     doc.h1(' Weather report')
     doc.hr() ; doc.br()
 
     doc.h2('Plot of weather data') 
     doc.plot_tseries(data['weatherdata.csv'],
-                      coldate=     'Date',
-                      date_format= '%m/%d/%Y',
-                      cols_axe1=   ['Temperature'],
-                      cols_axe2=   ["Rainfall"],
+                      coldate     =  'Date',
+                      date_format =  '%m/%d/%Y',
+                      cols_axe1   =  ['Temperature'],
+                      cols_axe2   =  ["Rainfall"],
                       # x_label=     'Date', 
                       # axe1_label=  "Temperature",
                       # axe2_label=  "Rainfall", 
@@ -105,14 +104,20 @@ def test2():
     doc.table(data['weatherdata.csv'].iloc[:10 : ], use_datatable=True )
 
 
-     # Testing with example data sets (Titanic)
-    cfg = {"title" : "Titanic", 'figsize' : (1024, 720)}
+    #df  = data['housing.csv']
+    #doc.plot_histogram(df,col="median_income",
+    #    xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+    # highcharts_show_chart(html_code)
 
-    #doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
-    #                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-    #                     cfg={}, mode='highcharts',
-    #                     
-    #                     )
+
+     # Testing with example data sets (Titanic)
+    cfg = {"title" : "Titanic", 'figsize' : (20, 7)}
+
+    doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
+                         collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                         cfg={}, mode='highcharts',
+                         
+                         )
 
     #print(html_code)
     # Display html
@@ -120,7 +125,7 @@ def test2():
 
 
     doc.save('myfile.html')
-
+    doc.open_browser()
     html1 = doc.get_html()
     # print(html1)
     # html_show(html1)
@@ -128,7 +133,7 @@ def test2():
 
 
 
-def test2(verbose=True):
+def test3(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata()
     dft  = data['titanic.csv']
@@ -138,7 +143,7 @@ def test2(verbose=True):
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
     cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
-    cfg.histo = {"title": 'ok'}
+    cfg.histo   = {"title": 'ok'}
     cfg.use_datatable = True
 
     df = pd.DataFrame([[1, 2]])
@@ -178,7 +183,7 @@ def test2(verbose=True):
 #####################################################################################
 #### Class ##########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out=None, mode="", title="", format: str = None, cfg: dict =None):
+    def __init__(self, dir_out="", mode="", title="", format: str = None, cfg: dict =None):
         """
            Generate HTML page to display graph/Table.
            Combine pages together.
@@ -198,6 +203,7 @@ class htmlDoc(object):
             <script type="text/javascript" src="https://code.highcharts.com/6/highcharts.js"></script>
             <script type="text/javascript" src="https://code.highcharts.com/6/highcharts-more.js"></script>
             <script type="text/javascript" src="https://code.highcharts.com/6/modules/heatmap.js"></script>
+            <script type="text/javascript" src="https://code.highcharts.com/6/modules/histogram-bellcurve.js"></script>
             <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script>        
          """
 
@@ -317,8 +323,9 @@ class htmlDoc(object):
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
-            html_code = pd_plot_histogram_highcharts(df,col=col,
-                                                     title=title, figsize=figsize,
+            cfg['figsize'] = figsize
+            html_code = pd_plot_histogram_highcharts(df,colname=col,
+                                                     title=title,
                                                      cfg=cfg,mode=mode,save_img=save_img)
         self.html += "\n\n" + html_code
 
@@ -340,12 +347,10 @@ class htmlDoc(object):
             html_code = pd_plot_scatter_highcharts(df, colx= colx, coly=coly,
                                                    colclass1=colclass1, colclass2=colclass2, colclass3=colclass3,
                                                    nmax=nsample,
-                                                   cfg=cfg, mode=mode, save_img=save_img,
+                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=False
             )
 
         self.html += "\n\n" + html_code
-
-
 
 
 
@@ -704,11 +709,11 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
     label_list = df[collabel].values
 
     ### Using Class 1 ---> Color
-    color_list   = [ hash(str(x)) for x in df[colclass1].values     ]
+    color_list    = [ hash(str(x)) for x in df[colclass1].values     ]
     # Normalize the classes value over [0.0, 1.0]
     norm          = matplotlib.colors.Normalize(vmin=min(color_list), vmax=max(color_list))
     c_map         = plt.cm.get_cmap(cc.colormap)
-    color_list   = [  matplotlib.colors.rgb2hex(c_map(norm(x))).upper() for x in color_list    ]
+    color_list    = [  matplotlib.colors.rgb2hex(c_map(norm(x))).upper() for x in color_list    ]
 
 
     ### Using Class 2  ---> Color
@@ -720,8 +725,9 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
 
 
     # Create chart object
-    chart = Highchart()
-    options = { 'chart': {
+    container_id = 'cid_' + str(np.random.randint(9999, 99999999))
+    chart        = Highchart(renderTo=container_id)
+    options      = { 'chart': {
             'width': cc.figsize[0],
             'height': cc.figsize[1]
         },   'title': {
@@ -747,8 +753,8 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
 
     # Plot each cluster with the correct size and color
     data = [{
-        'x' : float(xx[i]),
-        'y' : float(yy[i]),
+        'x'     : float(xx[i]),
+        'y'     : float(yy[i]),
         "label" : str(label_list[i]),
         "marker": { 'radius' : int(size_list[i]) },
         'color' : color_list[i]
@@ -796,7 +802,8 @@ def pd_plot_tseries_highcharts(df,
     df[coldate]     = pd.to_datetime(df[coldate],format=date_format)
 
     #########################################################
-    H = Highchart()
+    container_id = 'cid_' + str(np.random.randint(9999, 99999999))
+    H = Highchart(renderTo=container_id)
     options = {
       'chart':   { 'zoomType': 'xy'},
         'title': { 'text': cc.title},
@@ -859,79 +866,111 @@ def pd_plot_tseries_highcharts(df,
 
 
 
-def pd_plot_histogram_highcharts_base(bins, vals, figsize=None,
-                                  title=None,
-                                  x_label=None, y_label=None, cfg:dict={}, mode='d3', save_img=False):
-      from highcharts import Highchart
-      from box import Box
+def pd_plot_histogram_highcharts(df,
+                              colname=None,
+                              xaxis_label= "x-axis",
+                              binsNumber=None,
+                              binWidth=None,
+                              yaxis_label="y-axis",
+                              title=None,
+                              cfg:dict={},
+                              mode='d3',
+                              save_img=False,
+                              show=False):
 
-      cc = Box(cfg)
-      cc.title        = cc.get('title',    'Histogram' ) if title is None else title
-      cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
-      cc.subtitle     = cc.get('subtitle', '')
+    ''' function to return highchart json code for histogram.
 
-      cc.x_label = 'Bins' if x_label is None else x_label
-      cc.y_label = 'Frequency' if y_label is None else y_label
+        df  = data['housing.csv']
+        html_code = pd_plot_histogram_hcharts(df,colname="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='d3', save_img=False)
+        highcharts_show_chart(html_code)
 
-      ################################################################
-      H = Highchart()
-      options = {
-        'chart': {
-            'zoomType': 'xy',
-            'width' :  cc.figsize[0],
-            'height' : cc.figsize[1],
-        },
-        'title': {
-            'text': cc.title
-        },
-        'xAxis': [{
-            'categories' : bins
-        }],
-        'yAxis': [{
-            'title': {
-                'text': "Frequency",
-                'style': {
-                    'color': 'Highcharts.getOptions().colors[0]'
-                }
-            }
-        }],
-        'tooltip': {
-            'shared': True,
-
-        }
-      }
-      H.set_dict_options(options)
-
-      H.add_data_set(vals, 'bar', cc.x_label)
-
-      #############################################################
-      H.buildcontent()
-      html_code = H._htmlcontent.decode('utf-8')
-      return html_code
-
-
-def pd_plot_histogram_highcharts(df, col, figsize=None,
-                                 title=None,
-                                 cfg:dict={}, mode='d3', save_img=''):
-    from box import Box
+        input parameter
+        df : panda dataframe on which you want to apply histogram
+        colname : column name from dataframe in which histogram will apply
+        xaxis_label: label for x-axis
+        yaxis_label: label for y-axis
+        binsNumber: Number of bin in bistogram.
+        binWidth : width of each bin in histogram
+        title : title of histogram
+        cols_axe2_label : label for yaxis 2
+        date_format : %m for moth , %d for day and %Y for Year.
+    '''
     cc = Box(cfg)
-    cc.title        = cc.get('title',    'Histogram' + col ) if title is None else title
-    cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
-    cc.subtitle     = cc.get('subtitle', '')
-    x_label         = col+'-bins'
-    y_label         = col+'-frequency'
+    cc.title        = cc.get('title',    "My Title" ) if title is None else title
+    cc.xaxis_label  = xaxis_label
+    cc.yaxis_label  = yaxis_label
 
-    #### Get data, calculate histogram and bar centers
-    hist, bin_edges = np.histogram( df[col].values )
-    bin_centers     = [float(bin_edges[i+1] + bin_edges[i]) / 2 for i in range(len(hist))]
-    hist_val        = hist.tolist()
+    container_id = 'cid_' + str(np.random.randint(9999, 99999999))
+    data         = df[colname].values.tolist()
 
-    #### Plot
-    pd_plot_histogram_highcharts_base(bins    = bin_centers,
-                                      vals    = hist_val,
-                                      figsize = figsize,
-                                      title   = title,
-                                      x_label = x_label, y_label=y_label, cfg=cfg, mode=mode, save_img=save_img)
+    code_html_start = f"""
+         <script src="https://code.highcharts.com/6/modules/histogram-bellcurve.js"></script>
+             <div id="{container_id}">Loading</div>
+         <script>
+    """
+
+    data_code = """
+     var data = {data}
+     """.format(data = data)
+
+    title  = """{
+                    text:'""" + cc.title +"""'
+                }"""
+
+    xAxis = """[{
+                title: { text:'""" + cc.xaxis_label + """'},
+                alignTicks: false,
+                opposite: false
+            }]"""
+
+    yAxis = """[{
+                title: { text:'""" + cc.yaxis_label + """'},
+                opposite: false
+            }] """
+
+    append_series1 = """[{
+            name: 'Histogram',
+            type: 'histogram',
+            baseSeries: 's1',"""
+
+    if binsNumber is not None:
+      append_series1 += """
+            binsNumber:{binsNumber},
+            """.format(binsNumber = binsNumber)
+    if binWidth is not None:
+      append_series1 += """
+            binWidth:{binWidth},
+            """.format(binWidth = binWidth)
+
+    append_series2 =  """}, {
+            name: ' ',
+            type: 'scatter',
+            data: data,
+            visible:false,
+            id: 's1',
+            marker: {
+                radius: 0
+            }
+        }] """
+
+    append_series = append_series1 + append_series2
+
+    js_code = """Highcharts.chart(""" + f"'{container_id}'" + """, {
+        title:""" +  title+""",
+        xAxis:""" +  xAxis+""",
+        yAxis:""" + yAxis+""",
+        series: """+append_series+"""
+    });
+    </script>"""
+
+    html_code = data_code + js_code
+
+    if show :
+       html_code = code_html_start + html_code
+
+    # print(html_code)
+    return html_code
+
 
 
 # Function to display highcharts graph
@@ -1157,3 +1196,30 @@ if __name__ == "__main__":
 
 
 
+
+
+
+
+
+def zz_pd_plot_histogram_highcharts_old(df, col, figsize=None,
+                                 title=None,
+                                 cfg:dict={}, mode='d3', save_img=''):
+    from box import Box
+    cc = Box(cfg)
+    cc.title        = cc.get('title',    'Histogram' + col ) if title is None else title
+    cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
+    cc.subtitle     = cc.get('subtitle', '')
+    x_label         = col+'-bins'
+    y_label         = col+'-frequency'
+
+    #### Get data, calculate histogram and bar centers
+    hist, bin_edges = np.histogram( df[col].values )
+    bin_centers     = [float(bin_edges[i+1] + bin_edges[i]) / 2 for i in range(len(hist))]
+    hist_val        = hist.tolist()
+
+    #### Plot
+    pd_plot_histogram_highcharts_base(bins    = bin_centers,
+                                      vals    = hist_val,
+                                      figsize = figsize,
+                                      title   = title,
+                                      x_label = x_label, y_label=y_label, cfg=cfg, mode=mode, save_img=save_img)
