@@ -19,14 +19,14 @@ import matplotlib.pyplot as plt
 import mpld3
 
 
-##################################################################################################################
+#################################################################################################
 def log(*s):
     print(*s, flush=True)
 
 
 ###################################################################################
 #### Example usage ################################################################
-def test_getdata():
+def test_getdata(verbose=True):
     """
     data = test_get_data()
     df   = data['housing.csv']
@@ -49,38 +49,91 @@ def test_getdata():
        print( "\n", "\n", url, )
        df = pd.read_csv(url)
        data[fname] = df
-       print(df)
+       if verbose: print(df)
        # df.to_csv(fname , index=False)
     print(data.keys() )
     return data
 
+def test3():
+    ####  Test Datatable
+    cfg ={}
+    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+
+    # check add css
+    css = """.intro {
+        background-color: yellow;
+    }
+    """
+    doc.add_css(css)
+
+    # test create table
+    df = test_getdata()['titanic.csv']
+    doc.h1(" Table test ")
+    doc.table(df, use_datatable=True, table_id="test", custom_class='intro')
+
+    doc.print()
+    doc.save(dir_out="testdata/test_viz_table.html")
+    doc.open_browser()  # Open myfile.html
 
 
-def test_get_random_data(n=100):
-    ### return  random data
-    df = {'date' :pd.date_range("1/1/2018", "1/1/2020")[:n] }
-    df = pd.DataFrame(df)
-    df['col1'] = np.random.choice( a=[0, 1, 2],  size=len(df),    p=[0.5, 0.3, 0.2]   )
-    df['col2'] = np.random.choice( a=['a0', 'a1', 'a2'],  size=len(df),    p=[0.5, 0.3, 0.2]   )
-    for ci in ['col3', 'col4', 'col5'] :
-        df[ci] = np.random.random(len(df))
-    return df
 
 
 def test2():
 
     data = test_getdata()
 
+    doc = htmlDoc(title='Weather report', cfg={} )
+    doc.h1(' Weather report')
+    doc.hr() ; doc.br()
+
+    doc.h2('Plot of weather data') 
+    doc.plot_tseries(data['weatherdata.csv'],
+                      coldate=     'Date',
+                      date_format= '%m/%d/%Y',
+                      cols_axe1=   ['Temperature'],
+                      cols_axe2=   ["Rainfall"],
+                      # x_label=     'Date', 
+                      # axe1_label=  "Temperature",
+                      # axe2_label=  "Rainfall", 
+                     title =      "Weather",
+                     cfg={},             
+                     mode='highcharts'
+                     )
+
+    doc.hr() ; doc.br()
+    doc.h3('Weather data') 
+    doc.table(data['weatherdata.csv'].iloc[:10 : ], use_datatable=True )
+
+
+     # Testing with example data sets (Titanic)
+    cfg = {"title" : "Titanic", 'figsize' : (1024, 720)}
+
+    #doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
+    #                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+    #                     cfg={}, mode='highcharts',
+    #                     
+    #                     )
+
+    #print(html_code)
+    # Display html
+    #highcharts_show_chart(html_code)
+
+
+    doc.save('myfile.html')
+
+    html1 = doc.get_html()
+    # print(html1)
+    # html_show(html1)
 
 
 
-def test_usage2(verbose=True):
+
+def test2(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
-
     data = test_getdata()
-    dft = data['titanic.csv']
-    df  = data['housing.csv']
-    df2 = data['sales.csv']
+    dft  = data['titanic.csv']
+    df   = data['housing.csv']
+    df2  = data['sales.csv']
 
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
@@ -120,45 +173,6 @@ def test_usage2(verbose=True):
     doc.open_browser()  # Open myfile.html
 
 
-def test_usage():
-    # pip install box-python    can use .key or ["mykey"]  for dict
-    cfg = Box({})
-    cfg.tseries = {"title": 'ok'}
-    cfg.scatter = {"title": 'ok'}
-    cfg.histo = {"title": 'ok'}
-    cfg.use_datatable = True
-
-    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
-    doc.h1('My title')  # h1
-    doc.br()  # <br>
-
-    # check add css
-    css = """.intro {
-        background-color: yellow;
-}
-    """
-    doc.add_css(css)
-
-    # test create table
-    list_info = []
-    for i in range(1000):
-        info= {}
-        info['x'] = i
-        info['y'] = i
-        info['label'] = i
-        info['class1'] = i
-        info['class2'] = i
-        info['class2_size'] = i
-        info['class1_color'] = i
-        list_info.append(info)
-    df = pd.DataFrame.from_records(list_info)
-    doc.table(df, use_datatable=cfg.use_datatable, table_id="test", custom_class='intro')
-
-    doc.tag("""<p>    My mutilines whatever I want to write      ok</p> """)
-
-    doc.print()
-    doc.save(dir_out="myfile.html")
-    doc.open_browser()  # Open myfile.html
 
 
 #####################################################################################
@@ -172,7 +186,7 @@ class htmlDoc(object):
         """
         cfg          = {} if cfg is None else cfg
         self.cc      = Box(cfg)  # Config dict
-        self.dir_out = dir_out
+        self.dir_out = dir_out.replace("\\", "/")
         # self.cc.use_datatable = self.cc.get('use_datatable', False)  # Default val
 
         self.head = "<html>\n    <head>"
@@ -209,13 +223,19 @@ class htmlDoc(object):
 
     def save(self, dir_out=None):
         self.dir_out = dir_out if dir_out is not None else self.dir_out
+        self.dir_out = dir_out.replace("\\", "/")
+        self.dir_out = os.getcwd() + "/" + self.dir_out if "/" not in self.dir_out[0] else self.dir_out
+        os.makedirs( os.path.dirname(self.dir_out) , exist_ok = True )
+
         full = self.head + "\n    </head>\n" + self.html + "\n    </body>\n</html>"
         with open(self.dir_out, mode='w') as fp:
             fp.write(full)
 
+
     def open_browser(self):
         if os.name == 'nt':
-            os.system(f'start chrome "{self.dir_out}" ')
+            os.system(f'start chrome "file:///{self.dir_out}" ')
+            ### file:///D:/_devs/Python01/gitdev/myutil/utilmy/viz/test_viz_table.html   
 
     def add_css(self, css):
         data = f"\n<style>\n{css}\n</style>\n"
@@ -248,8 +268,12 @@ class htmlDoc(object):
             # add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
             html_code = html_code.replace('<table', f'<table id="{table_id}" ')
-            html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );</script>\n""".replace(
-                '{mytable_id}', str(table_id))
+            html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable({
+                            "lengthMenu": [[10, 50, 100, 500, -1], [10, 50, 100, 500, "All"]]
+             
+                           }); 
+                           } );</script>\n
+                         """.replace('{mytable_id}', str(table_id))
 
 
         self.html += "\n\n" + html_code
@@ -375,7 +399,6 @@ def mlpd3_add_tooltip(fig, points, labels):
     mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
 
-
 def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
                             colclass1=None, colclass2=None, nmax=20000):
     import copy
@@ -419,8 +442,6 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
     return xx, yy, label_list, color_list, size_list, ptype_list
 
 
-
-
 def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
                             colclass1=None, colclass2=None, cfg: dict = None, mode='d3', save_path='',  **kw):
     """
@@ -442,10 +463,10 @@ def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
             color=color_list,
             mec='none')
     ax.set_aspect('auto')
-    ax.tick_params(axis='x',  # changes apply to the x-axis
-                   which='both',  # both major and minor ticks are affected
-                   bottom='off',  # ticks along the bottom edge are off
-                   top='off',  # ticks along the top edge are off
+    ax.tick_params(axis='x',        # changes apply to the x-axis
+                   which='both',    # both major and minor ticks are affected
+                   bottom='off',    # ticks along the bottom edge are off
+                   top='off',       # ticks along the top edge are off
                    labelbottom='off')
     ax.tick_params(axis='y',  # changes apply to the y-axis
                    which='both',  # both major and minor ticks are affected
@@ -496,7 +517,6 @@ def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
     #mpld3.fig_to_html(fig, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False, **kwargs)[source]
     ## html_code = mpld3.fig_to_html(fig,  **kw)
     ## return html_code
-
 
 
 def pd_plot_histogram_matplot(df:pd.DataFrame, col='', title='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
@@ -595,7 +615,6 @@ def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2:
     return ax
     # html_code = mpld3.fig_to_html(ax,  **kw)
     # return html_code
-
 
 
 def mpld3_server_start():
@@ -750,7 +769,6 @@ def pd_plot_tseries_highcharts(df,
                               figsize=None, title=None,
                               x_label=None,  axe1_label=None, axe2_label=None,
                               cfg:dict={}, mode='d3', save_img=""):
-
     '''
         function to return highchart json cord for time_series.
 
@@ -842,7 +860,6 @@ def pd_plot_tseries_highcharts(df,
 
 
 
-
 def pd_plot_histogram_highcharts_base(bins, vals, figsize=None,
                                   title=None,
                                   x_label=None, y_label=None, cfg:dict={}, mode='d3', save_img=False):
@@ -894,12 +911,10 @@ def pd_plot_histogram_highcharts_base(bins, vals, figsize=None,
       return html_code
 
 
-
 def pd_plot_histogram_highcharts(df, col, figsize=None,
                                  title=None,
                                  cfg:dict={}, mode='d3', save_img=''):
     from box import Box
-
     cc = Box(cfg)
     cc.title        = cc.get('title',    'Histogram' + col ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
@@ -907,7 +922,7 @@ def pd_plot_histogram_highcharts(df, col, figsize=None,
     x_label         = col+'-bins'
     y_label         = col+'-frequency'
 
-    # Get data, calculate histogram and bar centers
+    #### Get data, calculate histogram and bar centers
     hist, bin_edges = np.histogram( df[col].values )
     bin_centers     = [float(bin_edges[i+1] + bin_edges[i]) / 2 for i in range(len(hist))]
     hist_val        = hist.tolist()
@@ -918,7 +933,6 @@ def pd_plot_histogram_highcharts(df, col, figsize=None,
                                       figsize = figsize,
                                       title   = title,
                                       x_label = x_label, y_label=y_label, cfg=cfg, mode=mode, save_img=save_img)
-
 
 
 # Function to display highcharts graph
@@ -1068,8 +1082,34 @@ def pd_plot_network(df):
 
 
 
+def test_get_random_data(n=100):
+    ### return  random data
+    df = {'date' :pd.date_range("1/1/2018", "1/1/2020")[:n] }
+    df = pd.DataFrame(df)
+    df['col1'] = np.random.choice( a=[0, 1, 2],  size=len(df),    p=[0.5, 0.3, 0.2]   )
+    df['col2'] = np.random.choice( a=['a0', 'a1', 'a2'],  size=len(df),    p=[0.5, 0.3, 0.2]   )
+    for ci in ['col3', 'col4', 'col5'] :
+        df[ci] = np.random.random(len(df))
+    return df
 
 
+
+
+
+###################################################################################################
+###################################################################################################
+css_code =Box({})
+css_code.grey ="""
+.body {
+  font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #fff;
+}
+
+
+"""
 
 
 ###################################################################################################
@@ -1108,8 +1148,13 @@ highcharts_show_chart(html_code)
 
 """
 
+
+
 ###################################################################################################
 if __name__ == "__main__":
     # python
-    # fire.Fire()
-    test_usage()
+    fire.Fire()
+    # test_usage()
+
+
+
