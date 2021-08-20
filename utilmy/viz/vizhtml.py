@@ -172,7 +172,7 @@ class htmlDoc(object):
            Combine pages together.
 
         """
-        self.cc = Box(cfg)  # Config dict
+        self.cc = Box(cfg if cfg is not None else {})  # Config dict
         self.dir_out = dir_out
 
         self.cc.use_datatable = self.cc.get('use_datatable', False)  # Default val
