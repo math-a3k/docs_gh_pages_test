@@ -79,6 +79,12 @@ def test1():
 
 
 def test2():
+    """
+      # pip install --upgrade utilmy
+      from util.viz import vizhtml as vi
+      vi.test2()
+
+    """
     data = test_getdata()
 
     doc = htmlDoc(title='Weather report', dir_out="", cfg={} )
