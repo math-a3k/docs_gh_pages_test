@@ -92,7 +92,7 @@ def test2():
     doc.hr() ; doc.br()
 
     doc.h2('Plot of weather data') 
-    doc.plot_tseries(data['weatherdata.csv'],
+    doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],
                       coldate     =  'Date',
                       date_format =  '%m/%d/%Y',
                       cols_axe1   =  ['Temperature'],
@@ -110,16 +110,16 @@ def test2():
     doc.table(data['weatherdata.csv'].iloc[:10 : ], use_datatable=True )
 
 
-    #df  = data['housing.csv']
-    #doc.plot_histogram(df,col="median_income",
-    #    xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+    #df  = 
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+        xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
     # highcharts_show_chart(html_code)
 
 
      # Testing with example data sets (Titanic)
     cfg = {"title" : "Titanic", 'figsize' : (20, 7)}
 
-    doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
+    doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
                          collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
                          cfg={}, mode='highcharts',
                          
@@ -130,7 +130,7 @@ def test2():
     #highcharts_show_chart(html_code)
 
 
-    doc.save('myfile.html')
+    doc.save('viz_test3_all_graphs.html')
     doc.open_browser()
     html1 = doc.get_html()
     # print(html1)
@@ -961,18 +961,18 @@ def pd_plot_histogram_highcharts(df,
 
     append_series = append_series1 + append_series2
 
-    js_code = """Highcharts.chart(""" + f"'{container_id}'" + """, {
+    js_code = """Highcharts.chart('"""+container_id+"""', {
         title:""" +  title+""",
         xAxis:""" +  xAxis+""",
-        yAxis:""" + yAxis+""",
+        yAxis:""" +  yAxis+""",
         series: """+append_series+"""
     });
     </script>"""
 
     html_code = data_code + js_code
 
-    if show :
-       html_code = code_html_start + html_code
+    # if show :
+    html_code = code_html_start + html_code
 
     # print(html_code)
     return html_code
