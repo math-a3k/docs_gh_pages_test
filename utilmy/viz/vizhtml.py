@@ -62,6 +62,20 @@ def test_getdata():
     return data
 
 
+
+def test_get_random_data(n=100):
+    ### return  random data
+    df = {'date' :pd.date_range("1/1/2018", "1/1/2020")[:n] }
+    df = pd.DataFrame(df)
+    df['col1'] = np.random.choice( a=[0, 1, 2],  size=len(df),    p=[0.5, 0.3, 0.2]   )
+    df['col2'] = np.random.choice( a=['a0', 'a1', 'a2'],  size=len(df),    p=[0.5, 0.3, 0.2]   )
+    for ci in ['col3', 'col4', 'col5'] :
+        df[ci] = np.random.random(len(df))
+    return df
+
+
+
+
 def test_usage2(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
 
