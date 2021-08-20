@@ -182,8 +182,12 @@ class htmlDoc(object):
 
         ##### HighCharts
         self.head = self.head + """
-            <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
-            <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>         
+            <link href="https://www.highcharts.com/highslide/highslide.css" rel="stylesheet" />
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script type="text/javascript" src="https://code.highcharts.com/6/highcharts.js"></script>
+            <script type="text/javascript" src="https://code.highcharts.com/6/highcharts-more.js"></script>
+            <script type="text/javascript" src="https://code.highcharts.com/6/modules/heatmap.js"></script>
+            <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script>        
          """
 
 
