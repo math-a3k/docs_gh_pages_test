@@ -74,6 +74,11 @@ def test_get_random_data(n=100):
     return df
 
 
+def test2():
+
+    data = test_getdata()
+
+
 
 
 def test_usage2(verbose=True):
@@ -166,16 +171,16 @@ def test_usage():
 #####################################################################################
 #### Class ##########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out=None, mode="", title="", format: str = None, cfg: dict = None):
+    def __init__(self, dir_out=None, mode="", title="", format: str = None, cfg: dict =None):
         """
            Generate HTML page to display graph/Table.
            Combine pages together.
 
         """
-        self.cc = Box(cfg if cfg is not None else {})  # Config dict
+        cfg          = {} if cfg is None else cfg
+        self.cc      = Box(cfg)  # Config dict
         self.dir_out = dir_out
-
-        self.cc.use_datatable = self.cc.get('use_datatable', False)  # Default val
+        # self.cc.use_datatable = self.cc.get('use_datatable', False)  # Default val
 
         self.head = "<html>\n    <head>"
         self.html = "<body>"
@@ -190,16 +195,6 @@ class htmlDoc(object):
             <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script>        
          """
 
-
-        if self.cc.use_datatable:
-            self.head = self.head + """
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>"""
-            # https://datatables.net/manual/installation
-            # add $(document).ready( function () {    $('#table_id').DataTable(); } );
-
-
     def tag(self, x):  self.html += "\n" + x
     def h1(self, x)  : self.html += "\n" + f"<h1>{x}</h1>"
     def h2(self, x)  : self.html += "\n" + f"<h2>{x}</h2>"
@@ -212,10 +207,12 @@ class htmlDoc(object):
     def br(self)     : self.html += "\n" + f"</br>"
 
     def get_html(self):
-        return self.html
+        full = self.head + "\n    </head>\n" + self.html + "\n    </body>\n</html>"
+        return full
 
     def print(self):
-        print(self.html, flush=True)
+        full = self.head + "\n    </head>\n" + self.html + "\n    </body>\n</html>"
+        print(full, flush=True)
 
     def save(self, dir_out=None):
         self.dir_out = dir_out if dir_out is not None else self.dir_out
@@ -250,9 +247,18 @@ class htmlDoc(object):
             html_code = html_code.replace('<table', f'<table class="{custom_class}"')
 
         if use_datatable:
+            self.head = self.head + """
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>"""
+            # https://datatables.net/manual/installation
+            # add $(document).ready( function () {    $('#table_id').DataTable(); } );
+
             html_code = html_code.replace('<table', f'<table id="{table_id}" ')
             html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable(); } );</script>\n""".replace(
                 '{mytable_id}', str(table_id))
+
+
         self.html += "\n\n" + html_code
 
 
@@ -260,7 +266,7 @@ class htmlDoc(object):
                      title="", figsize=(14,7),  nsample= 10000,
                      x_label=None, axe1_label=None,  axe2_label=None,
                      plot_type="",spacing=0.1,
-                     cfg: dict = None, mode='mpld3', save_img="",  **kw):
+                     cfg: dict = {}, mode='mpld3', save_img="",  **kw):
         """
         """
         html_code = ''
@@ -282,7 +288,7 @@ class htmlDoc(object):
     def plot_histogram(self, df, col,
                        title='', figsize=(14,7), nsample=10000,
                        nbin=10,  q5=0.005, q95=0.95,
-                       cfg: dict = None, mode='mpld3', save_img="",  **kw):
+                       cfg: dict = {}, mode='mpld3', save_img="",  **kw):
         html_code = ''
         if mode == 'mpld3':
             fig       = pd_plot_histogram_matplot(df, col,
@@ -302,7 +308,7 @@ class htmlDoc(object):
     def plot_scatter(self, df, colx, coly,
                      title='', figsize=(14,7), nsample=10000,
                      collabel=None, colclass1=None, colclass2=None, colclass3=None,
-                     cfg: dict = None, mode='mpld3', save_img='',  **kw):
+                     cfg: dict = {}, mode='mpld3', save_img='',  **kw):
         """
 
 
