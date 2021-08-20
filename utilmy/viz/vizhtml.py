@@ -130,55 +130,9 @@ def test_usage():
     cfg.histo = {"title": 'ok'}
     cfg.use_datatable = True
 
-    df = pd.DataFrame([[1, 2]])
-    df2_list = [df, df, df]
-
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
-
     doc.h1('My title')  # h1
-    doc.sep()
     doc.br()  # <br>
-
-
-    # list_info = []
-    # for i in range(100):
-    #     info = {}
-    #     info ['x'] = i
-    #     info ['y'] = i
-    #     info ['label'] = i
-    #     info ['class1'] = i
-    #     info ['class2'] = i
-    #     info ['class2_size'] = i
-    #     info ['class1_color'] = i
-    #     list_info.append(info)
-    # df = pd.DataFrame.from_records(list_info)
-
-    # doc.tag('<h2> My graph title </h2>')
-    # doc.plot_scatter(df, cfg.scatter, mode='mpld3', save_img=False)
-    # doc.hr()  # doc.sep() line separator
-
-
-
-    # for df2_i in df2_list:
-    #     print(df2_i)
-    #     # doc.h3(f" plot title: {df2_i['category'].values[0]}")
-    #     doc.plot_tseries(df2_i, cfg.tseries, mode='mpld3', save_img="")
-
-    # print(doc.get_html())
-
-
-    # df2 = pd.DataFrame({
-    #     'col1': [1.5, 0.5, 1.2, 0.9, 3],
-    #     'col2': [0.7, 0.2, 0.15, 0.2, 1.1]
-    #     })
-
-    # doc.tag('<h2> My histo title </h2>')
-    # print(df2)
-    # # doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='mpld3', save_img="")
-    # doc.plot_histogram(df2, cfg.histo, mode='mpld3', save_img="")
-
-    # print(doc.get_html())
-
 
     # check add css
     css = """.intro {
@@ -190,22 +144,21 @@ def test_usage():
     # test create table
     list_info = []
     for i in range(1000):
-        info = {}
-        info ['x'] = i
-        info ['y'] = i
-        info ['label'] = i
-        info ['class1'] = i
-        info ['class2'] = i
-        info ['class2_size'] = i
-        info ['class1_color'] = i
+        info= {}
+        info['x'] = i
+        info['y'] = i
+        info['label'] = i
+        info['class1'] = i
+        info['class2'] = i
+        info['class2_size'] = i
+        info['class1_color'] = i
         list_info.append(info)
     df = pd.DataFrame.from_records(list_info)
     doc.table(df, use_datatable=cfg.use_datatable, table_id="test", custom_class='intro')
 
-
     doc.tag("""<p>    My mutilines whatever I want to write      ok</p> """)
-    print(doc.get_html())
 
+    doc.print()
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
@@ -243,9 +196,6 @@ class htmlDoc(object):
             # add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
 
-    def get_html(self):
-        return self.html
-
     def tag(self, x):  self.html += "\n" + x
     def h1(self, x)  : self.html += "\n" + f"<h1>{x}</h1>"
     def h2(self, x)  : self.html += "\n" + f"<h2>{x}</h2>"
@@ -257,17 +207,11 @@ class htmlDoc(object):
     def sep(self)    : self.html += "\n" + f"</hr>"
     def br(self)     : self.html += "\n" + f"</br>"
 
+    def get_html(self):
+        return self.html
 
-    def add_css(self, css):
-        data = f"\n<style>\n{css}\n</style>\n"
-        self.head += data
-
-
-    def hidden(self, x):
-        # Hidden paragraph
-        self.html += "\n" + f"<div id='hidden_section_id'>{x}</div>"
-        self.head += "\n" + js_code.js_hidden  # Hidden  javascript
-
+    def print(self):
+        print(self.html, flush=True)
 
     def save(self, dir_out=None):
         self.dir_out = dir_out if dir_out is not None else self.dir_out
@@ -275,11 +219,18 @@ class htmlDoc(object):
         with open(self.dir_out, mode='w') as fp:
             fp.write(full)
 
-
     def open_browser(self):
         if os.name == 'nt':
             os.system(f'start chrome "{self.dir_out}" ')
 
+    def add_css(self, css):
+        data = f"\n<style>\n{css}\n</style>\n"
+        self.head += data
+
+    def hidden(self, x):
+        # Hidden paragraph
+        self.head += "\n" + js_code.js_hidden  # Hidden  javascript
+        self.html += "\n" + f"<div id='hidden_section_id'>{x}</div>"
 
     def table(self, df:pd.DataFrame, format='blue_light', custom_class=None, use_datatable=False, table_id=None, **kw):
         """ Show Pandas in HTML and interactive
