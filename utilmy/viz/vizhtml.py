@@ -690,7 +690,7 @@ def pd_plot_highcharts(df):
 
 def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, collabel=None,
                                colclass1=None, colclass2=None, colclass3=None, nmax=10000,
-                               cfg:dict={}, mode='d3', save_img=False,  verbose=True,  **kw ):
+                               cfg:dict={}, mode='d3', save_img='',  verbose=True,  **kw ):
     """ Plot Highcharts X=Y Scatter
 
     # pip install utilmy
