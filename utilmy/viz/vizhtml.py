@@ -153,7 +153,7 @@ def test2(verbose=True):
     doc.tag('<h2> My graph title </h2>')
     doc.plot_scatter(dft, colx='Age', coly='Fare',
                      collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                     cfg=cfg.scatter, mode='mpld3', save_img='')
+                     cfg=cfg.scatter, mode='matplot', save_img='')
     doc.hr()  # doc.sep() line separator
 
 
@@ -166,8 +166,8 @@ def test2(verbose=True):
 
 
     doc.tag('<h2> My histo title </h2>')
-    doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='mpld3', save_img="")
-    doc.plot_histogram(df2, cfg.histo, mode='mpld3', save_img="")
+    doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='matplot', save_img="")
+    doc.plot_histogram(df2, cfg.histo, mode='matplot', save_img="")
 
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
@@ -187,7 +187,6 @@ class htmlDoc(object):
         cfg          = {} if cfg is None else cfg
         self.cc      = Box(cfg)  # Config dict
         self.dir_out = dir_out.replace("\\", "/")
-        # self.cc.use_datatable = self.cc.get('use_datatable', False)  # Default val
 
         self.head = "<html>\n    <head>"
         self.html = "<body>"
@@ -283,14 +282,17 @@ class htmlDoc(object):
                      title="", figsize=(14,7),  nsample= 10000,
                      x_label=None, axe1_label=None,  axe2_label=None,
                      plot_type="",spacing=0.1,
-                     cfg: dict = {}, mode='mpld3', save_img="",  **kw):
+                     cfg: dict = {}, mode='matplot', save_img="",  **kw):
         """
         """
         html_code = ''
-        if mode == 'mpld3':
-            fig       = pd_plot_tseries_matplot(df, cols_axe1=cols_axe1, cols_axe2=cols_axe2,
-                                                plot_type=plot_type,
-                                                figsize=figsize, spacing=spacing)
+        if mode == 'matplot':
+            fig       = pd_plot_tseries_matplot(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2,
+                                                   figsize=figsize, title=title,
+                                                   x_label=x_label, axe1_label=axe1_label, axe2_label=axe2_label,
+                                                   cfg=cfg, mode=mode, save_img=save_img,
+                                                   spacing=spacing
+                                                  )
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
@@ -305,9 +307,9 @@ class htmlDoc(object):
     def plot_histogram(self, df, col,
                        title='', figsize=(14,7), nsample=10000,
                        nbin=10,  q5=0.005, q95=0.95,
-                       cfg: dict = {}, mode='mpld3', save_img="",  **kw):
+                       cfg: dict = {}, mode='matplot', save_img="",  **kw):
         html_code = ''
-        if mode == 'mpld3':
+        if mode == 'matplot':
             fig       = pd_plot_histogram_matplot(df, col,
                                                   title=title,
                                                   nbin=nbin, q5=q5, q95=q95,
@@ -318,22 +320,20 @@ class htmlDoc(object):
             html_code = pd_plot_histogram_highcharts(df,col=col,
                                                      title=title, figsize=figsize,
                                                      cfg=cfg,mode=mode,save_img=save_img)
-
         self.html += "\n\n" + html_code
 
 
     def plot_scatter(self, df, colx, coly,
                      title='', figsize=(14,7), nsample=10000,
                      collabel=None, colclass1=None, colclass2=None, colclass3=None,
-                     cfg: dict = {}, mode='mpld3', save_img='',  **kw):
+                     cfg: dict = {}, mode='matplot', save_img='',  **kw):
         """
-
-
         """
         html_code = ''
-        if mode == 'mpld3':
+        if mode == 'matplot':
             html_code = pd_plot_scatter_matplot(df, colx=colx, coly=coly,
                                                 collabel=collabel, colclass1=colclass1, colclass2=colclass2,
+                                                nsample=nsample,
                                                 cfg=cfg, mode=mode, save_img=save_img,)
 
         elif mode == 'highcharts':
@@ -341,7 +341,6 @@ class htmlDoc(object):
                                                    colclass1=colclass1, colclass2=colclass2, colclass3=colclass3,
                                                    nmax=nsample,
                                                    cfg=cfg, mode=mode, save_img=save_img,
-
             )
 
         self.html += "\n\n" + html_code
