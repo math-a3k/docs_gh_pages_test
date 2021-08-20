@@ -36,20 +36,13 @@ def test_getdata():
     """
     import pandas as pd
     flist = [
-    'https://raw.githubusercontent.com/samigamer1999/datasets/main/titanic.csv',
-
-    'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
-
-    'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/stock_data.csv',
-
-    'https://raw.githubusercontent.com/samigamer1999/datasets/main/cars.csv',
-
-    'https://raw.githubusercontent.com/samigamer1999/datasets/main/sales.csv',
-
-    'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/weatherdata.csv'
-
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/titanic.csv',
+        'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
+        'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/stock_data.csv',
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/cars.csv',
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/sales.csv',
+        'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/weatherdata.csv'
     ]
-
     data = {}
     for url in flist :
        fname =  url.split("/")[-1]
