@@ -1,9 +1,7 @@
-""" Converter python ---> HTML
+""" Converter python Graph ---> HTML
 https://try2explore.com/questions/10109123
 https://mpld3.github.io/examples/index.html
 https://notebook.community/johnnycakes79/pyops/dashboard/pandas-highcharts-examples
-
-
 https://datatables.net/
 
 
@@ -859,23 +857,17 @@ def pd_plot_tseries_highcharts(df,
 
 
 
-def pd_plot_histogram_highcharts(df,
-                              colname=None,
-                              xaxis_label= "x-axis",
-                              binsNumber=None,
-                              binWidth=None,
-                              yaxis_label="y-axis",
-                              title=None,
-                              cfg:dict={},
-                              mode='d3',
-                              save_img="",
+def pd_plot_histogram_highcharts(df, colname=None,
+                              binsNumber=None, binWidth=None,
+                              title="", xaxis_label= "x-axis", yaxis_label="y-axis",
+                              cfg:dict={}, mode='d3', save_img="",
                               show=False):
 
     ''' function to return highchart json code for histogram.
 
-        df  = data['housing.csv']
+        df        = data['housing.csv']
         html_code = pd_plot_histogram_hcharts(df,colname="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='d3', save_img=False)
-        highcharts_show_chart(html_code)
+        # highcharts_show_chart(html_code)
 
         input parameter
         df : panda dataframe on which you want to apply histogram
@@ -1008,40 +1000,37 @@ def images_to_html(dir_input="*.png",  title="", verbose=False):
 
 ############################################################################################################################
 ############################################################################################################################
-def pd_plot_network(df):
-    def pandas_plot_network_graph(df):
-        """
-           Plot network graph with pyviz, networks from pandas dataframe.
-        """
-        import pandas as pd
-        import pyviz_app
-        from pyviz_app.pyviz_app import Network
-        from pyviz_app.pyviz_app import Node
-        from pyviz_app.pyviz_app import Edge
-        from pyviz_app.pyviz_app import Graph
-        from pyviz_app.pyviz_app import Document
+def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge'):
+    """
+        https://pyviz.org/tools.html
 
-        g = Graph()
+
+    """
+
+    def convert_to_networkx(df:pd.DataFrame, cola="", colb="", colweight="", collabel=""):
+        """
+           Convert a panadas dataframe into a networkx graph
+           and return a networkx graph
+        Args:
+            df ([type]): [description]
+        """
+        import networkx as nx
+        import pandas as pd
+        g = nx.Graph()
         for index, row in df.iterrows():
-            node = Node(str(index), label=row['name'])
-            g.add_node(node)
-            for column in row.index:
-                if row[column] != 0:
-                    if column == 'name':
-                        continue
-                    edge = Edge(str(index), str(index), label=column)
-                    g.add_edge(edge)
+            g.add_edge(row[cola], row[colb], weight=row[colweight],)
         return g
 
-    def draw_graph3(networkx_graph, notebook=True, output_filename='graph.html', show_buttons=True, only_physics_buttons=False):
+
+    def draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
+                   show_buttons=True, only_physics_buttons=False):
         """
-        This function accepts a networkx graph object,
-        converts it to a pyvis network object preserving its node and edge attributes,
+        This function accepts a networkx graph object, converts it to a pyvis network object preserving
+        its node and edge attributes,
         and both returns and saves a dynamic network visualization.
 
         Valid node attributes include:
             "size", "value", "title", "x", "y", "label", "color".
-
             (For more info: https://pyvis.readthedocs.io/en/latest/documentation.html#pyvis.network.Network.add_node)
 
         Valid edge attributes include:
@@ -1054,9 +1043,26 @@ def pd_plot_network(df):
             output_filename: Where to save the converted network
             show_buttons: Show buttons in saved version of network?
             only_physics_buttons: Show only buttons controlling physics of network?
-        """
 
-        # import
+        ##
+        # For example:
+        ##
+
+        # make a new neworkx network
+        import networkx as nx
+        G = nx.Graph()
+
+        # add nodes and edges (color can be html color name or hex code)
+        G.add_node('a', color='red', size=4)
+        G.add_node('b', color='#30a1a5', size=3)
+        G.add_node('c', color='green', size=1)
+        G.add_edge('a', 'b', weight=1023)
+        G.add_edge('a', 'c', weight=435)
+        G.add_edge('b', 'c', weight=100)
+
+        # draw
+        draw_graph3(G)
+        """
         from pyvis import network as net
 
         # make a pyvis network
@@ -1085,24 +1091,10 @@ def pd_plot_network(df):
         # return and also save
         return pyvis_graph.show(output_filename)
 
-    ##
-    # For example:
-    ##
+    networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight, collabel=colabel)
 
-    # make a new neworkx network
-    import networkx as nx
-    G = nx.Graph()
-
-    # add nodes and edges (color can be html color name or hex code)
-    G.add_node('a', color='red', size=4)
-    G.add_node('b', color='#30a1a5', size=3)
-    G.add_node('c', color='green', size=1)
-    G.add_edge('a', 'b', weight=1023)
-    G.add_edge('a', 'c', weight=435)
-    G.add_edge('b', 'c', weight=100)
-
-    # draw
-    draw_graph3(G)
+    ng2 = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
+               show_buttons=True, only_physics_buttons=False)
 
 
 
@@ -1212,3 +1204,32 @@ def zz_pd_plot_histogram_highcharts_old(df, col, figsize=None,
                                       figsize = figsize,
                                       title   = title,
                                       x_label = x_label, y_label=y_label, cfg=cfg, mode=mode, save_img=save_img)
+
+
+"""
+
+https://pyviz.org/tools.html
+
+        Name		Stars	Contributors	Downloads		License	Docs	PyPI	Conda	Sponsors
+        networkx										-
+        graphviz										-
+        pydot							-			-
+        pygraphviz										-
+        python-igraph										-
+        pyvis										-
+        pygsp										-
+        graph-tool				-		-		-		-
+        nxviz										-
+        Py3Plex					-				-	-
+        py2cytoscape										-
+        ipydagred3							-			-
+        ipycytoscape							-			-
+        webweb										-
+        netwulf					-				-	-
+        ipysigma					-		-		-
+        
+        
+        
+        
+
+"""
