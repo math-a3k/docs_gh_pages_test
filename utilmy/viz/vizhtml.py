@@ -1137,21 +1137,56 @@ function ShowAndHide() {
 
 ###################################################################################################
 ###################################################################################################
-doc_api ="""
-cfg_common = {'figsize': (20, 14)}   #### Common Config
-html_code = pd_plot_tseries_highcharts(data['stock_data.csv'],
-                                      coldate='Date',
-                                      cols_axe1=['Open','Low','Close'],
-                                      cols_axe2=["Total Trade Quantity"],
-                                      x_label='Date', 
-                                      axe1_label="Stock Price",
-                                      axe2_label="Stock volume", 
-                                      title =   "Stock Price",
-                                      cfg= cfg_common )
-highcharts_show_chart(html_code)
+def help():
+    ss= """
+        cfg_common = {'figsize': (20, 14)}   #### Common Config
+        html_code = pd_plot_tseries_highcharts(data['stock_data.csv'],
+                                              coldate='Date',
+                                              cols_axe1=['Open','Low','Close'],
+                                              cols_axe2=["Total Trade Quantity"],
+                                              x_label='Date', 
+                                              axe1_label="Stock Price",
+                                              axe2_label="Stock volume", 
+                                              title =   "Stock Price",
+                                              cfg= cfg_common )
+        highcharts_show_chart(html_code)
+        
+        
+    ######## Report 2  ###############################################    
+    dir_out = ""
+    title   = "Metrics"
 
+    data  = vi.test_getdata()
+    df    = data['weatherdata.csv'].iloc[:1000, :]
 
-"""
+    coldate = 'Date'
+    colref = 'Temperature'
+
+    doc  = vi.htmlDoc(title=title, dir_out="", cfg={} )
+    doc.h1(title) ; doc.hr() ; doc.br()
+
+    doc.h2('CA vs BTA (Control)') 
+    colsy = [ t for t in df.columns if t not in ['Date' ] ]
+    for i in range(0, len(colsy)) : 
+        doc.plot_tseries(df,
+                          coldate     =  coldate,
+                          date_format =  '%m/%d/%Y',
+                          cols_axe1   =  [ colref ],
+                          cols_axe2   =  [ colsy[i] ],
+                          title =      title,
+                          cfg={},             
+                          mode='highcharts'
+                         )
+
+    doc.hr() ; doc.br()
+    doc.table(df, use_datatable=True )
+
+    doc.save( dir_out + 'metrics.html')
+    doc.open_browser()
+
+    """
+    print(ss)
+
 
 
 
