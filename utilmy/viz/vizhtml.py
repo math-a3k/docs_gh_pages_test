@@ -88,6 +88,7 @@ def test2():
     doc.h1(' Weather report')
     doc.hr() ; doc.br()
 
+    # create time series chart. mode highcharts
     doc.h2('Plot of weather data') 
     doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],
                       coldate     =  'Date',
@@ -107,6 +108,7 @@ def test2():
     doc.table(data['weatherdata.csv'].iloc[:10 : ], use_datatable=True )
 
 
+    # create histogram chart. mode highcharts
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
                        xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
 
@@ -114,6 +116,7 @@ def test2():
      # Testing with example data sets (Titanic)
     cfg = {"title" : "Titanic", 'figsize' : (20, 7)}
 
+    # create scatter chart. mode highcharts
     doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
                          collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
                          figsize=(20,7),
@@ -215,10 +218,12 @@ class htmlDoc(object):
     def br(self)     : self.html += "\n" + f"</br>"
 
     def get_html(self):
+        """Get full html content."""
         full = self.head + "\n    </head>\n" + self.html + "\n    </body>\n</html>"
         return full
 
     def print(self):
+        """Testing purpose. Print all html content."""
         full = self.head + "\n    </head>\n" + self.html + "\n    </body>\n</html>"
         print(full, flush=True)
 
@@ -250,6 +255,12 @@ class htmlDoc(object):
     def table(self, df:pd.DataFrame, format='blue_light', custom_css_class=None, use_datatable=False, table_id=None, **kw):
         """ Show Pandas in HTML and interactive
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
+
+        Args:
+            format:             List of colors available at https://pypi.org/project/pretty-html-table/
+            custom_css_class:   [Option] Add custom class for table
+            use_datatable:      [Option] Create html table as a database
+            table_id:           [Option] Id for table tag
         """
         import pretty_html_table
         html_code = pretty_html_table.build_table(df, format)
@@ -260,6 +271,7 @@ class htmlDoc(object):
             html_code = html_code.replace('<table', f'<table class="{custom_css_class}"')
 
         if use_datatable:
+            # JS add datatables library
             self.head = self.head + """
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -267,15 +279,13 @@ class htmlDoc(object):
             # https://datatables.net/manual/installation
             # add $(document).ready( function () {    $('#table_id').DataTable(); } );
 
+            # add data table
             html_code = html_code.replace('<table', f'<table id="{table_id}" ')
             html_code += """\n<script>$(document).ready( function () {    $('#{mytable_id}').DataTable({
                             "lengthMenu": [[10, 50, 100, 500, -1], [10, 50, 100, 500, "All"]]
-             
                            }); 
                            } );</script>\n
                          """.replace('{mytable_id}', str(table_id))
-
-
         self.html += "\n\n" + html_code
 
 
@@ -284,7 +294,14 @@ class htmlDoc(object):
                      x_label=None, axe1_label=None,  axe2_label=None,
                      plot_type="",spacing=0.1,
                      cfg: dict = {}, mode='matplot', save_img="",  **kw):
-        """
+        """Create html time series chart.
+
+        Args:
+            df:         pd Dataframe
+            cols_axe1:
+            cols_axe2:
+            ...
+            mode:       matplot or highcharts
         """
         html_code = ''
         if mode == 'matplot':
@@ -309,6 +326,14 @@ class htmlDoc(object):
                        title='', figsize=(14,7), nsample=10000,
                        nbin=10,  q5=0.005, q95=0.95,
                        cfg: dict = {}, mode='matplot', save_img="",  **kw):
+        """Create html histogram chart.
+
+        Args:
+            df:         pd Dataframe
+            col:        x Axis
+            ...
+            mode:       matplot or highcharts
+        """
         html_code = ''
         if mode == 'matplot':
             fig       = pd_plot_histogram_matplot(df, col,
@@ -329,7 +354,14 @@ class htmlDoc(object):
                      title='', figsize=(14,7), nsample=10000,
                      collabel=None, colclass1=None, colclass2=None, colclass3=None,
                      cfg: dict = {}, mode='matplot', save_img='',  **kw):
-        """
+        """Create html scatter chart.
+
+        Args:
+            df:         pd Dataframe
+            colx:       x Axis
+            coly:       y Axis
+            ...
+            mode:       matplot or highcharts
         """
         html_code = ''
         if mode == 'matplot':
@@ -1120,16 +1152,18 @@ css_code.grey ="""
 ###################################################################################################
 ###################################################################################################
 js_code = Box({})  # List of javascript code
-js_code.js_hidden = """<SCRIPT>
-function ShowAndHide() {
-    var x = document.getElementById('hidden_section_id');
+js_code.js_hidden = """<script>
+var x = document.getElementById('hidden_section_id');
+x.onclick = function() {
     if (x.style.display == 'none') {
         x.style.display = 'block';
     } else {
         x.style.display = 'none';
     }
+
 }
-</SCRIPT>
+
+</script>
 """
 
 
@@ -1193,8 +1227,8 @@ def help():
 ###################################################################################################
 if __name__ == "__main__":
     # python
-    fire.Fire()
-    # test_usage()
+    # fire.Fire()
+    test2()
 
 
 
