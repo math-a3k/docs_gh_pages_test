@@ -350,9 +350,6 @@ class htmlDoc(object):
 
 
 
-
-
-
 ##################################################################################################################
 ######### MLPD3 Display ##########################################################################################
 mpld3_CSS = """
@@ -969,8 +966,9 @@ def html_show_chart_highchart(html_code, verbose=True):
     from IPython.core.display import display, HTML
     hc = Highchart()
     hc.buildhtmlheader()
+    html_code = hc.htmlheader + html_code
     if verbose: print(html_code)
-    display(HTML(hc.htmlheader + html_code))
+    display(HTML(html_code))
 
 
 
@@ -1110,21 +1108,6 @@ def pd_plot_network(df):
 
 
 
-
-def test_get_random_data(n=100):
-    ### return  random data
-    df = {'date' :pd.date_range("1/1/2018", "1/1/2020")[:n] }
-    df = pd.DataFrame(df)
-    df['col1'] = np.random.choice( a=[0, 1, 2],  size=len(df),    p=[0.5, 0.3, 0.2]   )
-    df['col2'] = np.random.choice( a=['a0', 'a1', 'a2'],  size=len(df),    p=[0.5, 0.3, 0.2]   )
-    for ci in ['col3', 'col4', 'col5'] :
-        df[ci] = np.random.random(len(df))
-    return df
-
-
-
-
-
 ###################################################################################################
 ###################################################################################################
 css_code =Box({})
@@ -1187,6 +1170,21 @@ if __name__ == "__main__":
 
 
 
+
+
+
+
+
+
+def zz_test_get_random_data(n=100):
+    ### return  random data
+    df = {'date' :pd.date_range("1/1/2018", "1/1/2020")[:n] }
+    df = pd.DataFrame(df)
+    df['col1'] = np.random.choice( a=[0, 1, 2],  size=len(df),    p=[0.5, 0.3, 0.2]   )
+    df['col2'] = np.random.choice( a=['a0', 'a1', 'a2'],  size=len(df),    p=[0.5, 0.3, 0.2]   )
+    for ci in ['col3', 'col4', 'col5'] :
+        df[ci] = np.random.random(len(df))
+    return df
 
 
 
