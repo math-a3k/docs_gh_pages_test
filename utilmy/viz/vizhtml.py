@@ -116,7 +116,8 @@ def test2():
 
     doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
                          collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                         cfg=figsize, mode='highcharts',                         
+                         figsize=(20,7),
+                         cfg=cfg, mode='highcharts',                         
                          )
 
     doc.save('viz_test3_all_graphs.html')
