@@ -57,8 +57,7 @@ def test_getdata(verbose=True):
 
 def test1():
     ####  Test Datatable
-    cfg ={}
-    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
 
     # check add css
     css = """.intro {
@@ -70,7 +69,7 @@ def test1():
     # test create table
     df = test_getdata()['titanic.csv']
     doc.h1(" Table test ")
-    doc.table(df, use_datatable=True, table_id="test", custom_class='intro')
+    doc.table(df, use_datatable=True, table_id="test", custom_css_class='intro')
 
     doc.print()
     doc.save(dir_out="testdata/test_viz_table.html")
@@ -110,10 +109,8 @@ def test2():
     doc.table(data['weatherdata.csv'].iloc[:10 : ], use_datatable=True )
 
 
-    #df  = 
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
-        xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
-    # highcharts_show_chart(html_code)
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
 
 
      # Testing with example data sets (Titanic)
@@ -121,14 +118,8 @@ def test2():
 
     doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
                          collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                         cfg={}, mode='highcharts',
-                         
+                         cfg=figsize, mode='highcharts',                         
                          )
-
-    #print(html_code)
-    # Display html
-    #highcharts_show_chart(html_code)
-
 
     doc.save('viz_test3_all_graphs.html')
     doc.open_browser()
@@ -199,7 +190,7 @@ class htmlDoc(object):
         self.cc      = Box(cfg)  # Config dict
         self.dir_out = dir_out.replace("\\", "/")
 
-        self.head = "<html>\n    <head>"
+        self.head = f"<html>\n    <head><title>{title}</title>"
         self.html = "<body>"
 
         ##### HighCharts
@@ -257,7 +248,7 @@ class htmlDoc(object):
         self.head += "\n" + js_code.js_hidden  # Hidden  javascript
         self.html += "\n" + f"<div id='hidden_section_id'>{x}</div>"
 
-    def table(self, df:pd.DataFrame, format='blue_light', custom_class=None, use_datatable=False, table_id=None, **kw):
+    def table(self, df:pd.DataFrame, format='blue_light', custom_css_class=None, use_datatable=False, table_id=None, **kw):
         """ Show Pandas in HTML and interactive
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         """
@@ -265,10 +256,9 @@ class htmlDoc(object):
         html_code = pretty_html_table.build_table(df, format)
         table_id  = random.randint(9999,999999) if table_id is None else table_id  #### Unique ID
 
-
         # add custom CSS class
-        if custom_class:
-            html_code = html_code.replace('<table', f'<table class="{custom_class}"')
+        if custom_css_class:
+            html_code = html_code.replace('<table', f'<table class="{custom_css_class}"')
 
         if use_datatable:
             self.head = self.head + """
@@ -881,7 +871,7 @@ def pd_plot_histogram_highcharts(df,
                               title=None,
                               cfg:dict={},
                               mode='d3',
-                              save_img=False,
+                              save_img="",
                               show=False):
 
     ''' function to return highchart json code for histogram.
@@ -919,9 +909,7 @@ def pd_plot_histogram_highcharts(df,
      var data = {data}
      """.format(data = data)
 
-    title  = """{
-                    text:'""" + cc.title +"""'
-                }"""
+    title  = """{ text:'""" + cc.title +"""' }"""
 
     xAxis = """[{
                 title: { text:'""" + cc.xaxis_label + """'},
@@ -940,13 +928,10 @@ def pd_plot_histogram_highcharts(df,
             baseSeries: 's1',"""
 
     if binsNumber is not None:
-      append_series1 += """
-            binsNumber:{binsNumber},
-            """.format(binsNumber = binsNumber)
+      append_series1 += """ binsNumber:{binsNumber},  """.format(binsNumber = binsNumber)
+
     if binWidth is not None:
-      append_series1 += """
-            binWidth:{binWidth},
-            """.format(binWidth = binWidth)
+      append_series1 += """ binWidth:{binWidth},""".format(binWidth = binWidth)
 
     append_series2 =  """}, {
             name: ' ',
@@ -954,9 +939,7 @@ def pd_plot_histogram_highcharts(df,
             data: data,
             visible:false,
             id: 's1',
-            marker: {
-                radius: 0
-            }
+            marker: {  radius: 0}
         }] """
 
     append_series = append_series1 + append_series2
@@ -979,8 +962,9 @@ def pd_plot_histogram_highcharts(df,
 
 
 
-# Function to display highcharts graph
+
 def html_show_chart_highchart(html_code, verbose=True):
+    # Function to display highcharts graph
     from highcharts import Highchart
     from IPython.core.display import display, HTML
     hc = Highchart()
@@ -990,8 +974,9 @@ def html_show_chart_highchart(html_code, verbose=True):
 
 
 
-# Function to display HTML
+
 def html_show(html_code, verbose=True):
+    # Function to display HTML
     from IPython.core.display import display, HTML
     display(HTML( html_code))
 
