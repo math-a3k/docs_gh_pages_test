@@ -4,8 +4,12 @@ import os, sys, time, datetime,inspect, json, yaml, gc
 
 
 def log(*s):
-    print(*s)
+    print(*s, flush=True)
 
+def log2(*s, verbose=1):
+    if verbose >0 : print(*s, flush=True)
+
+    
 ###################################################################################################
 ###### Pandas #####################################################################################
 def pd_merge(df1, df2, on=None, colkeep=None):
