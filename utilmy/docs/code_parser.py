@@ -13,7 +13,10 @@ Usage
 
     python code_parser.py export_call_graph parser/test3   docs/export_call_graph.csv
 
+    python code_parser.py export_call_graph_url https://github.com/CompVis/taming-transformers.git docs/repo_taming_graph.csv
+
     python code_parser.py  export_call_graph <in_path> <out_path>
+    
 
 
 """
@@ -1119,6 +1122,24 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
         f.write(info)
 
 
+def export_call_graph_url(repo_link: str, out_path:str=None):
+    """
+        python code_parser.py  export_call_graph_url <repo_link> <out_path>
+    Returns:
+        1  csv output
+    """
+    # https://github.com/lucidrains/DALLE-pytorch.git
+    repo_name = repo_link.split('/')[-1].split('.')[0]
+
+    # do not clone if repo already existed
+    if not os.path.exists(repo_name):
+        print(f'Start clone Repo: {repo_link}')
+        Repo.clone_from(repo_link, repo_name)
+        print('Clone done')
+
+    export_call_graph(repo_name, out_path)
+
+
 def export_call_graph(in_path:str=None, out_path:str=None):
     """
         python code_parser.py  export_call_graph <in_path> <out_path>
@@ -1239,6 +1260,7 @@ if __name__ == "__main__":
       'repo': export_stats_perrepo,
       'repo_url': export_stats_repolink,
       'export_call_graph': export_call_graph,
+      'export_call_graph_url': export_call_graph_url,
     })
     # test_example()
     # export_stats_repolink('https://github.com/lucidrains/DALLE-pytorch.git', 'docs/test_example1.csv')
