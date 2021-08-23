@@ -1,0 +1,273 @@
+uri, type, function, type2, path2, tag
+DALLE-pytorch/train_dalle.py:get_trainable_params, function, model.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:parameters
+DALLE-pytorch/train_dalle.py:cp_path_to_dir, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+DALLE-pytorch/train_dalle.py:cp_path_to_dir, function, Path, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: pathlib.Path
+DALLE-pytorch/train_dalle.py:cp_path_to_dir, function, cp_path.is_dir, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cp_path:is_dir
+DALLE-pytorch/train_dalle.py:group_weight, function, model.named_parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:named_parameters
+DALLE-pytorch/train_dalle.py:group_weight, function, group_no_decay.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: group_no_decay:append
+DALLE-pytorch/train_dalle.py:group_weight, function, group_decay.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: group_decay:append
+DALLE-pytorch/train_dalle.py:group_weight, function, len, , , len
+DALLE-pytorch/train_dalle.py:group_weight, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/train_dalle.py:imagetransform, function, Image.open, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:open
+DALLE-pytorch/train_dalle.py:tokenize, function, tokenizer.tokenize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: tokenizer:tokenize
+DALLE-pytorch/train_dalle.py:tokenize, function, s.decode, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: s:decode
+DALLE-pytorch/train_dalle.py:save_model, function, cp_path_to_dir, , , cp_path_to_dir
+DALLE-pytorch/train_dalle.py:save_model, function, distr_backend.is_root_worker, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: distr_backend:is_root_worker
+DALLE-pytorch/train_dalle.py:save_model, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
+DALLE-pytorch/train_dalle.py:save_model, function, shutil.rmtree, [CLASS] [STDLIB], , [CLASS] [STDLIB]: shutil:rmtree
+DALLE-pytorch/train_dalle.py:save_model, function, distr_dalle.save_checkpoint, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: distr_dalle:save_checkpoint
+DALLE-pytorch/train_dalle.py:save_model, function, torch.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:save
+DALLE-pytorch/train_dalle.py:save_model, function, str, [BUILT_IN], , [BUILT_IN]: str
+DALLE-pytorch/train_dalle.py:save_model, function, deepspeed_config.get, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: deepspeed_config:get
+DALLE-pytorch/train_dalle.py:save_model, function, dalle.state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: dalle:state_dict
+DALLE-pytorch/train_dalle.py:save_model, function, opt.state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: opt:state_dict
+DALLE-pytorch/train_vae.py:save_model, function, Path, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: pathlib.Path
+DALLE-pytorch/train_vae.py:save_model, function, str, [BUILT_IN], , [BUILT_IN]: str
+DALLE-pytorch/train_vae.py:save_model, function, distr_vae.save_checkpoint, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: distr_vae:save_checkpoint
+DALLE-pytorch/train_vae.py:save_model, function, distr_backend.is_root_worker, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: distr_backend:is_root_worker
+DALLE-pytorch/train_vae.py:save_model, function, vae.state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: vae:state_dict
+DALLE-pytorch/train_vae.py:save_model, function, torch.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:save
+DALLE-pytorch/dalle_pytorch/attention.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/attention.py:default, function, d, , , d
+DALLE-pytorch/dalle_pytorch/attention.py:default, function, isfunction, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: inspect.isfunction
+DALLE-pytorch/dalle_pytorch/attention.py:stable_softmax, function, torch.amax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:amax
+DALLE-pytorch/dalle_pytorch/attention.py:apply_pos_emb, function, tuple, , , tuple
+DALLE-pytorch/dalle_pytorch/attention.py:apply_pos_emb, function, apply_rotary_emb, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: rotary_embedding_torch.apply_rotary_emb
+DALLE-pytorch/dalle_pytorch/attention.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/attention.py:default, function, d, , , d
+DALLE-pytorch/dalle_pytorch/attention.py:default, function, isfunction, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: inspect.isfunction
+DALLE-pytorch/dalle_pytorch/attention.py:stable_softmax, function, torch.amax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:amax
+DALLE-pytorch/dalle_pytorch/attention.py:apply_pos_emb, function, tuple, , , tuple
+DALLE-pytorch/dalle_pytorch/attention.py:apply_pos_emb, function, apply_rotary_emb, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: rotary_embedding_torch.apply_rotary_emb
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:is_empty, function, t.nelement, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:nelement
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:masked_mean, function, t.masked_fill, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:masked_fill
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:masked_mean, function, t.sum, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:sum
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:masked_mean, function, mask.sum, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: mask:sum
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:set_requires_grad, function, model.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:parameters
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, inner, , , inner
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, fn, , , fn
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, model.train, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:train
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, max, , , max
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, torch.full_like, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:full_like
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, float, , , float
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, probs.scatter_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: probs:scatter_
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:is_empty, function, t.nelement, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:nelement
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:masked_mean, function, t.masked_fill, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:masked_fill
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:masked_mean, function, t.sum, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: t:sum
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:masked_mean, function, mask.sum, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: mask:sum
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:set_requires_grad, function, model.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:parameters
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, inner, , , inner
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, fn, , , fn
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:eval_decorator, function, model.train, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:train
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, max, , , max
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, torch.full_like, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:full_like
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, float, , , float
+DALLE-pytorch/dalle_pytorch/dalle_pytorch.py:top_k, function, probs.scatter_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: probs:scatter_
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:wrap_arg_parser, function, parser.add_argument, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:add_argument
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:wrap_arg_parser, function, distr_backend.wrap_arg_parser, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: distr_backend:wrap_arg_parser
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, backend.has_backend, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: backend:has_backend
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, ModuleNotFoundError, , , ModuleNotFoundError
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, print, , , print
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, ValueError, , , ValueError
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:using_backend, function, require_set_backend, , , require_set_backend
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:using_backend, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:wrap_arg_parser, function, parser.add_argument, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:add_argument
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:wrap_arg_parser, function, distr_backend.wrap_arg_parser, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: distr_backend:wrap_arg_parser
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, backend.has_backend, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: backend:has_backend
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, ModuleNotFoundError, , , ModuleNotFoundError
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, print, , , print
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:set_backend_from_args, function, ValueError, , , ValueError
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:using_backend, function, require_set_backend, , , require_set_backend
+DALLE-pytorch/dalle_pytorch/distributed_utils.py:using_backend, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, range, , , range
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, args.keys, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: args:keys
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, map, , , map
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, range, , , range
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, args.keys, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: args:keys
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
+DALLE-pytorch/dalle_pytorch/reversible.py:route_args, function, map, , , map
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, list, , , list
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, ord, [BUILT_IN], , [BUILT_IN]: ord
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, range, , , range
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, bs.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: bs:append
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, cs.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cs:append
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/tokenizer.py:get_pairs, function, set, [BUILT_IN], , [BUILT_IN]: set
+DALLE-pytorch/dalle_pytorch/tokenizer.py:get_pairs, function, pairs.add, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pairs:add
+DALLE-pytorch/dalle_pytorch/tokenizer.py:basic_clean, function, ftfy.fix_text, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: ftfy:fix_text
+DALLE-pytorch/dalle_pytorch/tokenizer.py:basic_clean, function, html.unescape, [CLASS] [STDLIB], C:/Python39/lib/html, [CLASS] [STDLIB]: html:unescape
+DALLE-pytorch/dalle_pytorch/tokenizer.py:basic_clean, function, text.strip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:strip
+DALLE-pytorch/dalle_pytorch/tokenizer.py:whitespace_clean, function, re.sub, [CLASS] [STDLIB], , [CLASS] [STDLIB]: re:sub
+DALLE-pytorch/dalle_pytorch/tokenizer.py:whitespace_clean, function, text.strip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:strip
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, list, , , list
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, ord, [BUILT_IN], , [BUILT_IN]: ord
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, range, , , range
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, bs.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: bs:append
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, cs.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cs:append
+DALLE-pytorch/dalle_pytorch/tokenizer.py:bytes_to_unicode, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/tokenizer.py:get_pairs, function, set, [BUILT_IN], , [BUILT_IN]: set
+DALLE-pytorch/dalle_pytorch/tokenizer.py:get_pairs, function, pairs.add, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pairs:add
+DALLE-pytorch/dalle_pytorch/tokenizer.py:basic_clean, function, ftfy.fix_text, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: ftfy:fix_text
+DALLE-pytorch/dalle_pytorch/tokenizer.py:basic_clean, function, html.unescape, [CLASS] [STDLIB], C:/Python39/lib/html, [CLASS] [STDLIB]: html:unescape
+DALLE-pytorch/dalle_pytorch/tokenizer.py:basic_clean, function, text.strip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:strip
+DALLE-pytorch/dalle_pytorch/tokenizer.py:whitespace_clean, function, re.sub, [CLASS] [STDLIB], , [CLASS] [STDLIB]: re:sub
+DALLE-pytorch/dalle_pytorch/tokenizer.py:whitespace_clean, function, text.strip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: text:strip
+DALLE-pytorch/dalle_pytorch/transformer.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/transformer.py:cast_tuple, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+DALLE-pytorch/dalle_pytorch/transformer.py:cast_tuple, function, tuple, , , tuple
+DALLE-pytorch/dalle_pytorch/transformer.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/transformer.py:cast_tuple, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+DALLE-pytorch/dalle_pytorch/transformer.py:cast_tuple, function, tuple, , , tuple
+DALLE-pytorch/dalle_pytorch/vae.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.device, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:device
+DALLE-pytorch/dalle_pytorch/vae.py:unmap_pixels, function, torch.clamp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:clamp
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, default, , , default
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, RuntimeError, , , RuntimeError
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, source.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: source:read
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, output.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output:write
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, loop.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: loop:update
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, module.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: module:parameters
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, param.set_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: param:set_
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, string.rsplit, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:rsplit
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.reload, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:reload
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, getattr, , , getattr
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, KeyError, , , KeyError
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, get_obj_from_str, , , get_obj_from_str
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/vae.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.device, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:device
+DALLE-pytorch/dalle_pytorch/vae.py:unmap_pixels, function, torch.clamp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:clamp
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, default, , , default
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, RuntimeError, , , RuntimeError
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, source.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: source:read
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, output.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output:write
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, loop.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: loop:update
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, module.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: module:parameters
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, param.set_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: param:set_
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, string.rsplit, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:rsplit
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.reload, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:reload
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, getattr, , , getattr
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, KeyError, , , KeyError
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, get_obj_from_str, , , get_obj_from_str
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/vae.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.device, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:device
+DALLE-pytorch/dalle_pytorch/vae.py:unmap_pixels, function, torch.clamp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:clamp
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, default, , , default
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, RuntimeError, , , RuntimeError
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, tqdm, , , tqdm
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, source.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: source:read
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, output.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output:write
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, loop.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: loop:update
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, module.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: module:parameters
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, param.set_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: param:set_
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, string.rsplit, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:rsplit
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.reload, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:reload
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, getattr, , , getattr
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, KeyError, , , KeyError
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, get_obj_from_str, , , get_obj_from_str
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/vae.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.device, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:device
+DALLE-pytorch/dalle_pytorch/vae.py:unmap_pixels, function, torch.clamp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:clamp
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, default, , , default
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, RuntimeError, , , RuntimeError
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, tqdm, , , tqdm
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, source.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: source:read
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, output.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output:write
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, loop.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: loop:update
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, module.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: module:parameters
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, param.set_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: param:set_
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, string.rsplit, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:rsplit
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.reload, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:reload
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, getattr, , , getattr
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, KeyError, , , KeyError
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, get_obj_from_str, , , get_obj_from_str
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/vae.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.device, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:device
+DALLE-pytorch/dalle_pytorch/vae.py:unmap_pixels, function, torch.clamp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:clamp
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, default, , , default
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, RuntimeError, , , RuntimeError
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, tqdm, , , tqdm
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, source.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: source:read
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, output.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output:write
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, loop.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: loop:update
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, module.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: module:parameters
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, param.set_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: param:set_
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, string.rsplit, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:rsplit
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.reload, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:reload
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, getattr, , , getattr
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, KeyError, , , KeyError
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, get_obj_from_str, , , get_obj_from_str
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+DALLE-pytorch/dalle_pytorch/vae.py:default, function, exists, , , exists
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+DALLE-pytorch/dalle_pytorch/vae.py:load_model, function, torch.device, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:device
+DALLE-pytorch/dalle_pytorch/vae.py:unmap_pixels, function, torch.clamp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:clamp
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, default, , , default
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, RuntimeError, , , RuntimeError
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, tqdm, , , tqdm
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, source.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: source:read
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, output.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output:write
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, loop.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: loop:update
+DALLE-pytorch/dalle_pytorch/vae.py:download, function, os.rename, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:rename
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, module.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: module:parameters
+DALLE-pytorch/dalle_pytorch/vae.py:make_contiguous, function, param.set_, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: param:set_
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, string.rsplit, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:rsplit
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, importlib.reload, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:reload
+DALLE-pytorch/dalle_pytorch/vae.py:get_obj_from_str, function, getattr, , , getattr
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, KeyError, , , KeyError
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, get_obj_from_str, , , get_obj_from_str
+DALLE-pytorch/dalle_pytorch/vae.py:instantiate_from_config, function, dict, [BUILT_IN], , [BUILT_IN]: dict
