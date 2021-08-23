@@ -9,14 +9,17 @@ Usage
 
     python code_parser.py repo   parser/test3    parser/output/output_repo.csv
 
+    python code_parser.py repo_url https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
+
     python code_parser.py export_call_graph parser/test3   docs/export_call_graph.csv
 
-     python code_parser.py  export_call_graph <in_path> <out_path>
+    python code_parser.py  export_call_graph <in_path> <out_path>
 
 
 """
 
 import os
+import shutil
 import glob
 import fire
 from posixpath import dirname, split
@@ -27,6 +30,7 @@ from stdlib_list import stdlib_list
 import platform
 import pkgutil
 import importlib
+from git import Repo
 
 stdlib_libraries = stdlib_list(platform.python_version()[:-2])
 # print(stdlib_libraries)
@@ -1012,6 +1016,31 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
+def export_stats_repolink(repo_link: str, out_path:str=None):
+    """ 
+        python code_parser.py  url_repo <repo_link> <out_path>
+
+    Returns:
+        1  csv   --->  data info detail
+    """
+
+    # https://github.com/lucidrains/DALLE-pytorch.git
+    repo_name = repo_link.split('/')[-1].split('.')[0]
+
+    try:
+        if os.path.exists(repo_name):
+            shutil.rmtree(repo_name)
+    except OSError as e:
+        print(f"Failed to delete repo: {e}")
+        exit()
+
+    print(f'Start clone Repo: {repo_link}')
+    Repo.clone_from(repo_link, repo_name)
+    print('Clone done')
+
+    export_stats_perrepo(repo_name, out_path)
+
+
 def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, list_class_as, out_path):
     # list_functions = literal_eval(list_functions)
     # print(list_functions)
@@ -1202,14 +1231,17 @@ def test_example():
     export_stats_perfile('parser/code_parser.py', "parser/output/output_file.csv")
     export_stats_perrepo('parser', "parser/output/output_repo.csv")
 
+
 if __name__ == "__main__":
     fire.Fire({
       'type': export_stats_pertype,
       'file': export_stats_perfile,
       'repo': export_stats_perrepo,
+      'repo_url': export_stats_repolink,
       'export_call_graph': export_call_graph,
     })
     # test_example()
+    # export_stats_repolink('https://github.com/lucidrains/DALLE-pytorch.git', 'docs/test_example1.csv')
 
     '''List example to run:
         python code_parser.py type parser/test3/arrow_dataset.py method parser/output/output_method.csv
