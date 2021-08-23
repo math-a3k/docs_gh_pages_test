@@ -983,7 +983,7 @@ def export_stats_perfile(in_path:str=None, out_path:str=None):
         df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
-def export_stats_perrepo(in_path:str=None, out_path:str=None):
+def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None):
     """ 
         python code_parser.py  export_stats_perfile <in_path> <out_path>
 
@@ -1004,24 +1004,31 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None):
         df = get_list_function_stats(flist[i])
         print(df)
         if df is not None:
+            if repo_name:
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
             if i == 0:
                 df.to_csv(f'{out_path}', index=False)
             else:
                 df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+
         df = get_list_class_stats(flist[i])
         print(df)
         if df is not None:
+            if repo_name:
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
         df = get_list_method_stats(flist[i])
         print(df)
         if df is not None:
+            if repo_name:
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
             df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
 def export_stats_repolink(repo_link: str, out_path:str=None):
     """ 
-        python code_parser.py  url_repo <repo_link> <out_path>
+        python code_parser.py  repo_url <repo_link> <out_path>
 
     Returns:
         1  csv   --->  data info detail
@@ -1041,7 +1048,7 @@ def export_stats_repolink(repo_link: str, out_path:str=None):
     Repo.clone_from(repo_link, repo_name)
     print('Clone done')
 
-    export_stats_perrepo(repo_name, out_path)
+    export_stats_perrepo(f'{repo_name}', out_path, repo_name)
 
 
 def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, list_class_as, out_path):
