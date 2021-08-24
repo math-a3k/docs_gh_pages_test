@@ -126,6 +126,7 @@ def run_markdown(repo_stat_file, output='docs/doc_main.md', prefix="https://gith
     with open(output, 'w+', encoding='utf-8') as f:
         # edit here to write
         f.write('# All files\n')
+        f.write(f'## link: {prefix}')
         f.write(str_markdown)
     print(f"Done.")
 
