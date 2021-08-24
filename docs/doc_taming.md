@@ -1,4 +1,763 @@
 # All files
+## link: https://github.com/CompVis/taming-transformers/tree/master
+<details>
+<summary>
+<a name='taming/modules/misc/coord.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py'>taming/modules/misc/coord.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        class | <a name='taming/modules/misc/coord.py:CoordStage' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L3'>CoordStage</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/misc/coord.py:CoordStage:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L4'>CoordStage:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>n_embed,<br>down_factor,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/misc/coord.py:CoordStage:eval' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L8'>CoordStage:eval</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/misc/coord.py:CoordStage:encode' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L11'>CoordStage:encode</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>c,<br></ul>
+        <li>Docs:<br>        """fake vqmodel interface"""
+<br>
+</li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/misc/coord.py:CoordStage:decode' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L27'>CoordStage:decode</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>c,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='scripts/extract_segmentation.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py'>scripts/extract_segmentation.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        function | <a name='scripts/extract_segmentation.py:rescale_bgr' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L20'>rescale_bgr</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>x,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/extract_segmentation.py:run_model' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L67'>run_model</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>img,<br>model,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/extract_segmentation.py:get_input' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L75'>get_input</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>batch,<br>k,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/extract_segmentation.py:save_segmentation' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L83'>save_segmentation</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>segmentation,<br>path,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/extract_segmentation.py:iterate_dataset' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L94'>iterate_dataset</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>dataloader,<br>destpath,<br>model,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L26'>COCOStuffSegmenter</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L27'>COCOStuffSegmenter:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>config,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:forward' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L42'>COCOStuffSegmenter:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>upsample = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:_pre_process' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L49'>COCOStuffSegmenter:_pre_process</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:mean' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L54'>COCOStuffSegmenter:mean</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:std' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L59'>COCOStuffSegmenter:std</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:input_size' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L63'>COCOStuffSegmenter:input_size</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/modules/losses/lpips.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py'>taming/modules/losses/lpips.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        function | <a name='taming/modules/losses/lpips.py:normalize_tensor' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L116'>normalize_tensor</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>x,<br>eps = 1e-10,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/modules/losses/lpips.py:spatial_average' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L121'>spatial_average</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>x,<br>keepdim = True,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/losses/lpips.py:LPIPS' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L11'>LPIPS</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/losses/lpips.py:ScalingLayer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L57'>ScalingLayer</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/losses/lpips.py:NetLinLayer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L67'>NetLinLayer</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/losses/lpips.py:vgg16' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L76'>vgg16</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:LPIPS:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L13'>LPIPS:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>use_dropout = True,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:LPIPS:load_from_pretrained' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L27'>LPIPS:load_from_pretrained</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>name = "vgg_lpips",<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:LPIPS:from_pretrained' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L33'>LPIPS:from_pretrained</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>cls,<br>name = "vgg_lpips",<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:LPIPS:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L41'>LPIPS:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>input,<br>target,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:ScalingLayer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L58'>ScalingLayer:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:ScalingLayer:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L63'>ScalingLayer:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>inp,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:NetLinLayer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L69'>NetLinLayer:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>chn_in,<br>chn_out = 1,<br>use_dropout = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:vgg16:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L77'>vgg16:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>requires_grad = False,<br>pretrained = True,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/lpips.py:vgg16:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L100'>vgg16:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>X,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/data/coco.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py'>taming/data/coco.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        class | <a name='taming/data/coco.py:Examples' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L12'>Examples</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/data/coco.py:CocoBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L22'>CocoBase</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/data/coco.py:CocoImagesAndCaptionsTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L151'>CocoImagesAndCaptionsTrain</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/data/coco.py:CocoImagesAndCaptionsValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L164'>CocoImagesAndCaptionsValidation</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:Examples:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L13'>Examples:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size = 256,<br>random_crop = False,<br>interpolation = "bicubic",<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L24'>CocoBase:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size = None,<br>dataroot = "",<br>datajson = "",<br>onehot_segmentation = False,<br>use_stuffthing = False,<br>crop_size = None,<br>force_no_crop = False,<br>given_files = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L93'>CocoBase:__len__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoBase:preprocess_image' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L96'>CocoBase:preprocess_image</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>image_path,<br>segmentation_path,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L134'>CocoBase:__getitem__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>i,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L153'>CocoImagesAndCaptionsTrain:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>onehot_segmentation = False,<br>use_stuffthing = False,<br>crop_size = None,<br>force_no_crop = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsTrain:get_split' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L160'>CocoImagesAndCaptionsTrain:get_split</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L166'>CocoImagesAndCaptionsValidation:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>onehot_segmentation = False,<br>use_stuffthing = False,<br>crop_size = None,<br>force_no_crop = False,<br>given_files = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsValidation:get_split' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L160'>CocoImagesAndCaptionsValidation:get_split</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br>    """returns a pair of (image, caption)"""
+<br>
+</li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='main.py' href='https://github.com/CompVis/taming-transformers/tree/master/main.py'>main.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        function | <a name='main.py:get_obj_from_str' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L14'>get_obj_from_str</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>string,<br>reload = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='main.py:get_parser' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L22'>get_parser</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>**parser_kwargs,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='main.py:nondefault_trainer_args' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L106'>nondefault_trainer_args</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>opt,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='main.py:instantiate_from_config' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L113'>instantiate_from_config</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>config,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='main.py:WrappedDataset' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L119'>WrappedDataset</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='main.py:DataModuleFromConfig' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L131'>DataModuleFromConfig</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='main.py:SetupCallback' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L175'>SetupCallback</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='main.py:ImageLogger' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L215'>ImageLogger</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:WrappedDataset:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L121'>WrappedDataset:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>dataset,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:WrappedDataset:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L124'>WrappedDataset:__len__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:WrappedDataset:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L127'>WrappedDataset:__getitem__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:DataModuleFromConfig:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L132'>DataModuleFromConfig:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch_size,<br>train = None,<br>validation = None,<br>test = None,<br>wrap = False,<br>num_workers = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:DataModuleFromConfig:prepare_data' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L149'>DataModuleFromConfig:prepare_data</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:DataModuleFromConfig:setup' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L153'>DataModuleFromConfig:setup</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>stage = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:DataModuleFromConfig:_train_dataloader' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L161'>DataModuleFromConfig:_train_dataloader</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:DataModuleFromConfig:_val_dataloader' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L165'>DataModuleFromConfig:_val_dataloader</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:DataModuleFromConfig:_test_dataloader' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L170'>DataModuleFromConfig:_test_dataloader</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:SetupCallback:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L176'>SetupCallback:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>resume,<br>now,<br>logdir,<br>ckptdir,<br>cfgdir,<br>config,<br>lightning_config,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:SetupCallback:on_pretrain_routine_start' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L186'>SetupCallback:on_pretrain_routine_start</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>trainer,<br>pl_module,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L216'>ImageLogger:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch_frequency,<br>max_images,<br>clamp = True,<br>increase_log_steps = True,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:_wandb' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L230'>ImageLogger:_wandb</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>pl_module,<br>images,<br>batch_idx,<br>split,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:_testtube' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L239'>ImageLogger:_testtube</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>pl_module,<br>images,<br>batch_idx,<br>split,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:log_local' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L250'>ImageLogger:log_local</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>save_dir,<br>split,<br>images,<br>global_step,<br>current_epoch,<br>batch_idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:log_img' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L269'>ImageLogger:log_img</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>pl_module,<br>batch,<br>batch_idx,<br>split = "train",<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:check_frequency' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L300'>ImageLogger:check_frequency</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch_idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:on_train_batch_end' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L309'>ImageLogger:on_train_batch_end</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>trainer,<br>pl_module,<br>outputs,<br>batch,<br>batch_idx,<br>dataloader_idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='main.py:ImageLogger:on_validation_batch_end' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L312'>ImageLogger:on_validation_batch_end</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>trainer,<br>pl_module,<br>outputs,<br>batch,<br>batch_idx,<br>dataloader_idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
 
 <details>
 <summary>
@@ -119,6 +878,191 @@
 
 <details>
 <summary>
+<a name='taming/modules/vqvae/quantize.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py'>taming/modules/vqvae/quantize.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        class | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L9'>VectorQuantizer</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L110'>GumbelQuantize</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L213'>VectorQuantizer2</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L25'>VectorQuantizer:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>n_e,<br>e_dim,<br>beta,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L34'>VectorQuantizer:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>z,<br></ul>
+        <li>Docs:<br>        """
+<br>
+        Inputs the output of the encoder network z and maps it to a discrete
+<br>
+        one-hot vector that is the index of the closest embedding vector e_j
+<br>
+        z (continuous) -> z_q (discrete)
+<br>
+        z.shape = (batch, channel, height, width)
+<br>
+        quantization pipeline:
+<br>
+            1. get encoder input (B,C,H,W)
+<br>
+            2. flatten input to (B*H*W,C)
+<br>
+        """
+<br>
+</li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer:get_codebook_entry' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L92'>VectorQuantizer:get_codebook_entry</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>indices,<br>shape,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L117'>GumbelQuantize:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>num_hiddens,<br>embedding_dim,<br>n_embed,<br>straight_through = True,<br>kl_weight = 5e-4,<br>temp_init = 1.0,<br>use_vqinterface = True,<br>remap = None,<br>unknown_index = "random",<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:remap_to_used' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L147'>GumbelQuantize:remap_to_used</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>inds,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:unmap_to_all' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L161'>GumbelQuantize:unmap_to_all</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>inds,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L171'>GumbelQuantize:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>z,<br>temp = None,<br>return_logits = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:get_codebook_entry' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L92'>GumbelQuantize:get_codebook_entry</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>indices,<br>shape,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L221'>VectorQuantizer2:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>n_e,<br>e_dim,<br>beta,<br>remap = None,<br>unknown_index = "random",<br>sane_index_shape = False,<br>legacy = True,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:remap_to_used' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L147'>VectorQuantizer2:remap_to_used</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>inds,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:unmap_to_all' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L161'>VectorQuantizer2:unmap_to_all</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>inds,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L271'>VectorQuantizer2:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>z,<br>temp = None,<br>rescale_logits = False,<br>return_logits = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:get_codebook_entry' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L92'>VectorQuantizer2:get_codebook_entry</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>indices,<br>shape,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
 <a name='taming/modules/losses/vqperceptual.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/vqperceptual.py'>taming/modules/losses/vqperceptual.py</a>
 </summary>
 <ul>
@@ -216,12 +1160,32 @@
 
 <details>
 <summary>
-<a name='taming/lr_scheduler.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py'>taming/lr_scheduler.py</a>
+<a name='scripts/make_samples.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py'>scripts/make_samples.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        class | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L4'>LambdaWarmUpCosineScheduler</a>
+        function | <a name='scripts/make_samples.py:save_image' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L12'>save_image</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>x,<br>path,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/make_samples.py:run_conditional' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L20'>run_conditional</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>model,<br>dsets,<br>outdir,<br>top_k,<br>temperature,<br>batch_size = 1,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/make_samples.py:get_parser' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L124'>get_parser</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -231,31 +1195,31 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L8'>LambdaWarmUpCosineScheduler:__init__</a>
+        function | <a name='scripts/make_samples.py:load_model_from_config' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L179'>load_model_from_config</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>warm_up_steps,<br>lr_min,<br>lr_max,<br>lr_start,<br>max_decay_steps,<br>verbosity_interval = 0,<br></ul>
+        <ul>config,<br>sd,<br>gpu = True,<br>eval_mode = True,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler:schedule' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L17'>LambdaWarmUpCosineScheduler:schedule</a>
+        function | <a name='scripts/make_samples.py:get_data' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L209'>get_data</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>n,<br></ul>
+        <ul>config,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler:__call__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L32'>LambdaWarmUpCosineScheduler:__call__</a>
+        function | <a name='scripts/make_samples.py:load_model_and_dset' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L217'>load_model_and_dset</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>n,<br></ul>
+        <ul>config,<br>ckpt,<br>gpu,<br>eval_mode,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details></ul>
@@ -263,93 +1227,227 @@
 
 <details>
 <summary>
-<a name='taming/modules/losses/segmentation.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py'>taming/modules/losses/segmentation.py</a>
+<a name='taming/models/cond_transformer.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py'>taming/models/cond_transformer.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        class | <a name='taming/modules/losses/segmentation.py:BCELoss' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L5'>BCELoss</a>
+        function | <a name='taming/models/cond_transformer.py:disabled_train' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L10'>disabled_train</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/losses/segmentation.py:BCELossWithQuant' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L11'>BCELossWithQuant</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/segmentation.py:BCELoss:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L6'>BCELoss:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>prediction,<br>target,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/segmentation.py:BCELossWithQuant:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L12'>BCELossWithQuant:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>codebook_weight = 1.,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/segmentation.py:BCELossWithQuant:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L16'>BCELossWithQuant:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>qloss,<br>target,<br>prediction,<br>split,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/modules/diffusionmodules/model.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py'>taming/modules/diffusionmodules/model.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='taming/modules/diffusionmodules/model.py:get_timestep_embedding' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L8'>get_timestep_embedding</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>timesteps,<br>embedding_dim,<br></ul>
-        <li>Docs:<br>    """
+        <ul>self,<br>mode = True,<br></ul>
+        <li>Docs:<br>    """Overwrite model.train with this function to make sure train/eval mode
 <br>
-    This matches the implementation in Denoising Diffusion Probabilistic Models:
-<br>
-    From Fairseq.
-<br>
-    Build sinusoidal embeddings.
-<br>
-    This matches the implementation in tensor2tensor, but differs slightly
-<br>
-    from the description in Section 3.5 of "Attention Is All You Need".
-<br>
-    """
+    does not change anymore."""
 <br>
 </li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/modules/diffusionmodules/model.py:nonlinearity' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L29'>nonlinearity</a>
+        class | <a name='taming/models/cond_transformer.py:Net2NetTransformer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L16'>Net2NetTransformer</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L17'>Net2NetTransformer:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>transformer_config,<br>first_stage_config,<br>cond_stage_config,<br>permuter_config = None,<br>ckpt_path = None,<br>ignore_keys = [],<br>first_stage_key = "image",<br>cond_stage_key = "depth",<br>downsample_cond_size = -1,<br>pkeep = 1.0,<br>sos_token = 0,<br>unconditional = False,<br>,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:init_from_ckpt' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L48'>Net2NetTransformer:init_from_ckpt</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>path,<br>ignore_keys = list(,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:init_first_stage_from_ckpt' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L58'>Net2NetTransformer:init_first_stage_from_ckpt</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>config,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:init_cond_stage_from_ckpt' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L64'>Net2NetTransformer:init_cond_stage_from_ckpt</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>config,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L80'>Net2NetTransformer:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>c,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:top_k_logits' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L106'>Net2NetTransformer:top_k_logits</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>logits,<br>k,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:sample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L113'>Net2NetTransformer:sample</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>c,<br>steps,<br>temperature = 1.0,<br>sample = False,<br>top_k = None,<br>callback=lambda k:  = lambda k: None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:encode_to_z' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L169'>Net2NetTransformer:encode_to_z</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:encode_to_c' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L176'>Net2NetTransformer:encode_to_c</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>c,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:decode_to_img' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L185'>Net2NetTransformer:decode_to_img</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>index,<br>zshape,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:log_images' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L194'>Net2NetTransformer:log_images</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch,<br>temperature = None,<br>top_k = None,<br>callback = None,<br>lr_interface = False,<br>**kwargs,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:get_input' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L265'>Net2NetTransformer:get_input</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>key,<br>batch,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:get_xc' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L275'>Net2NetTransformer:get_xc</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch,<br>N = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:shared_step' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L283'>Net2NetTransformer:shared_step</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch,<br>batch_idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:training_step' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L289'>Net2NetTransformer:training_step</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch,<br>batch_idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:validation_step' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L294'>Net2NetTransformer:validation_step</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>batch,<br>batch_idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:configure_optimizers' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L299'>Net2NetTransformer:configure_optimizers</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br>        """
+<br>
+        Following minGPT:
+<br>
+        This long function is unfortunately doing something very simple and is being very defensive:
+<br>
+        We are separating out all parameters of the model into two buckets: those that will experience
+<br>
+        weight decay for regularization and those that won't (biases, and layernorm/embedding weights).
+<br>
+        We are then returning the PyTorch optimizer object.
+<br>
+        """
+<br>
+</li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='scripts/sample_fast.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py'>scripts/sample_fast.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        function | <a name='scripts/sample_fast.py:chw_to_pillow' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L17'>chw_to_pillow</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -359,57 +1457,47 @@
     </details>
     <details>
         <summary>
-        function | <a name='taming/modules/diffusionmodules/model.py:Normalize' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L34'>Normalize</a>
+        function | <a name='scripts/sample_fast.py:sample_classconditional' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L22'>sample_classconditional</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>in_channels,<br></ul>
+        <ul>model,<br>batch_size,<br>class_label,<br>steps = 256,<br>temperature = None,<br>top_k = None,<br>callback = None,<br>dim_z = 256,<br>h = 16,<br>w = 16,<br>verbose_time = False,<br>top_p = None,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:Upsample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L38'>Upsample</a>
+        function | <a name='scripts/sample_fast.py:sample_unconditional' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L43'>sample_unconditional</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>model,<br>batch_size,<br>steps = 256,<br>temperature = None,<br>top_k = None,<br>top_p = None,<br>callback = None,<br>dim_z = 256,<br>h = 16,<br>w = 16,<br>verbose_time = False,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:Downsample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L56'>Downsample</a>
+        function | <a name='scripts/sample_fast.py:run' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L62'>run</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>logdir,<br>model,<br>batch_size,<br>temperature,<br>top_k,<br>unconditional = True,<br>num_samples = 50000,<br>given_classes = None,<br>top_p = None,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:ResnetBlock' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L78'>ResnetBlock</a>
+        function | <a name='scripts/sample_fast.py:save_from_logs' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L84'>save_from_logs</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>logs,<br>logdir,<br>base_count,<br>key = "samples",<br>cond_key = None,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:AttnBlock' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L140'>AttnBlock</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:Model' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L195'>Model</a>
+        function | <a name='scripts/sample_fast.py:get_parser' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L98'>get_parser</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -419,7 +1507,76 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:Encoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L342'>Encoder</a>
+        function | <a name='scripts/sample_fast.py:load_model_from_config' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L183'>load_model_from_config</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>config,<br>sd,<br>gpu = True,<br>eval_mode = True,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/sample_fast.py:load_model' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L194'>load_model</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>config,<br>sd,<br>gpu = True,<br>eval_mode = True,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/modules/transformer/mingpt.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py'>taming/modules/transformer/mingpt.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        function | <a name='taming/modules/transformer/mingpt.py:top_k_logits' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L286'>top_k_logits</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>logits,<br>k,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/modules/transformer/mingpt.py:sample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L293'>sample</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>model,<br>x,<br>steps,<br>temperature = 1.0,<br>sample = False,<br>top_k = None,<br></ul>
+        <li>Docs:<br>    """
+<br>
+    take a conditioning sequence of indices in x (of shape (b,t)) and predict the next token in
+<br>
+    the sequence, feeding the predictions back into the model each time. Clearly the sampling
+<br>
+    has quadratic complexity unlike an RNN that is only linear, and has a finite context window
+<br>
+    of block_size, unlike an RNN that has an infinite context window.
+<br>
+    """
+<br>
+</li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/modules/transformer/mingpt.py:sample_with_past' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L324'>sample_with_past</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>x,<br>model,<br>steps,<br>temperature = 1.,<br>sample_logits = True,<br>top_k = None,<br>top_p = None,<br>callback = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/mingpt.py:GPTConfig' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L22'>GPTConfig</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -429,7 +1586,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:Decoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L436'>Decoder</a>
+        class | <a name='taming/modules/transformer/mingpt.py:GPT1Config' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L35'>GPT1Config</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -439,7 +1596,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:VUNet' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L540'>VUNet</a>
+        class | <a name='taming/modules/transformer/mingpt.py:CausalSelfAttention' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L42'>CausalSelfAttention</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -449,7 +1606,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:SimpleDecoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L694'>SimpleDecoder</a>
+        class | <a name='taming/modules/transformer/mingpt.py:Block' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L98'>Block</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -459,7 +1616,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/diffusionmodules/model.py:UpsampleDecoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L730'>UpsampleDecoder</a>
+        class | <a name='taming/modules/transformer/mingpt.py:GPT' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L125'>GPT</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -469,17 +1626,217 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Upsample:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L39'>Upsample:__init__</a>
+        class | <a name='taming/modules/transformer/mingpt.py:DummyGPT' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L215'>DummyGPT</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>in_channels,<br>with_conv,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Upsample:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>Upsample:forward</a>
+        class | <a name='taming/modules/transformer/mingpt.py:CodeGPT' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L225'>CodeGPT</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/mingpt.py:KMeans' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L356'>KMeans</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:GPTConfig:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L28'>GPTConfig:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>vocab_size,<br>block_size,<br>**kwargs,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:CausalSelfAttention:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L49'>CausalSelfAttention:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>config,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:CausalSelfAttention:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L69'>CausalSelfAttention:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>layer_past = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:Block:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L49'>Block:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>config,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:Block:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L112'>Block:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>layer_past = None,<br>return_present = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:GPT:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L127'>GPT:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>vocab_size,<br>block_size,<br>n_layer = 12,<br>n_head = 8,<br>n_embd = 256,<br>embd_pdrop = 0.,<br>resid_pdrop = 0.,<br>attn_pdrop = 0.,<br>n_unmasked = 0,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:GPT:get_block_size' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L148'>GPT:get_block_size</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:GPT:_init_weights' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L151'>GPT:_init_weights</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>module,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:GPT:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L160'>GPT:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>idx,<br>embeddings = None,<br>targets = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:GPT:forward_with_past' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L182'>GPT:forward_with_past</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>idx,<br>embeddings = None,<br>targets = None,<br>past = None,<br>past_length = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:DummyGPT:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L217'>DummyGPT:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>add_value = 1,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:DummyGPT:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L221'>DummyGPT:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>idx,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L227'>CodeGPT:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>vocab_size,<br>block_size,<br>in_channels,<br>n_layer = 12,<br>n_head = 8,<br>n_embd = 256,<br>embd_pdrop = 0.,<br>resid_pdrop = 0.,<br>attn_pdrop = 0.,<br>n_unmasked = 0,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:get_block_size' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L148'>CodeGPT:get_block_size</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:_init_weights' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L151'>CodeGPT:_init_weights</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>module,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L160'>CodeGPT:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>idx,<br>embeddings = None,<br>targets = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:KMeans:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L357'>KMeans:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>ncluster = 512,<br>nc = 3,<br>niter = 10,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:KMeans:is_initialized' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L366'>KMeans:is_initialized</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/mingpt.py:KMeans:initialize' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L370'>KMeans:initialize</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -489,181 +1846,11 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Downsample:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L39'>Downsample:__init__</a>
+        method | <a name='taming/modules/transformer/mingpt.py:KMeans:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L389'>KMeans:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>in_channels,<br>with_conv,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Downsample:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>Downsample:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:ResnetBlock:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L79'>ResnetBlock:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>*,<br>in_channels,<br>out_channels = None,<br>conv_shortcut = False,<br>dropout,<br>temb_channels = 512,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:ResnetBlock:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L117'>ResnetBlock:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>temb,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:AttnBlock:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L141'>AttnBlock:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>in_channels,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:AttnBlock:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>AttnBlock:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Model:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>Model:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>resolution,<br>use_timestep = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Model:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L295'>Model:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>t = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Encoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>Encoder:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>resolution,<br>z_channels,<br>double_z = True,<br>**ignore_kwargs,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Encoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>Encoder:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Decoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>Decoder:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>resolution,<br>z_channels,<br>give_pre_end = False,<br>**ignorekwargs,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:Decoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L506'>Decoder:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>z,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:VUNet:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>VUNet:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>c_channels,<br>resolution,<br>z_channels,<br>use_timestep = False,<br>**ignore_kwargs,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:VUNet:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L645'>VUNet:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>z,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:SimpleDecoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L695'>SimpleDecoder:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>in_channels,<br>out_channels,<br>*args,<br>**kwargs,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:SimpleDecoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>SimpleDecoder:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:UpsampleDecoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L731'>UpsampleDecoder:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>in_channels,<br>out_channels,<br>ch,<br>num_res_blocks,<br>resolution,<br>2,<br>2),<br>dropout=0.0):  = 0.0):,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/diffusionmodules/model.py:UpsampleDecoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>UpsampleDecoder:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br></ul>
+        <ul>self,<br>x,<br>reverse = False,<br>shape = None,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details></ul>
@@ -1260,12 +2447,281 @@
 
 <details>
 <summary>
-<a name='taming/data/utils.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py'>taming/data/utils.py</a>
+<a name='taming/modules/transformer/permuter.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py'>taming/modules/transformer/permuter.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:unpack' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L9'>unpack</a>
+        function | <a name='taming/modules/transformer/permuter.py:mortonify' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L47'>mortonify</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>i,<br>j,<br></ul>
+        <li>Docs:<br>    """(i,j) index to linear morton code"""
+<br>
+</li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:AbstractPermuter' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L6'>AbstractPermuter</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:Identity' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L13'>Identity</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:Subsample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L21'>Subsample</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:ZCurve' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L62'>ZCurve</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:SpiralOut' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L81'>SpiralOut</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:SpiralIn' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L141'>SpiralIn</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:Random' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L202'>Random</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/transformer/permuter.py:AlternateParsing' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L217'>AlternateParsing</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:AbstractPermuter:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L7'>AbstractPermuter:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>*args,<br>**kwargs,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:AbstractPermuter:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>AbstractPermuter:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:Identity:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L14'>Identity:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:Identity:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>Identity:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:Subsample:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>Subsample:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>H,<br>W,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:Subsample:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>Subsample:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:ZCurve:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>ZCurve:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>H,<br>W,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:ZCurve:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>ZCurve:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:SpiralOut:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>SpiralOut:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>H,<br>W,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:SpiralOut:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>SpiralOut:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:SpiralIn:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>SpiralIn:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>H,<br>W,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:SpiralIn:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>SpiralIn:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:Random:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>Random:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>H,<br>W,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:Random:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>Random:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:AlternateParsing:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>AlternateParsing:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>H,<br>W,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/transformer/permuter.py:AlternateParsing:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>AlternateParsing:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/util.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py'>taming/util.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        function | <a name='taming/util.py:download' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L18'>download</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>url,<br>local_path,<br>chunk_size = 1024,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/util.py:md5_hash' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L30'>md5_hash</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -1275,86 +2731,453 @@
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:reporthook' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L25'>reporthook</a>
+        function | <a name='taming/util.py:get_ckpt_path' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L36'>get_ckpt_path</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>bar,<br></ul>
-        <li>Docs:<br>    """tqdm progress bar for downloads."""
+        <ul>name,<br>root,<br>check = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/util.py:retrieve' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L62'>retrieve</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>list_or_dict,<br>key,<br>splitval = "/",<br>default = None,<br>expand = True,<br>pass_success = False,<br></ul>
+        <li>Docs:<br>    """Given a nested list or dict return the desired value at key expanding
+<br>
+    callable nodes if necessary and :attr:`expand` is ``True``. The expansion
+<br>
+    is done in-place.
+<br>
+
+<br>
+    Parameters
+<br>
+    ----------
+<br>
+        list_or_dict : list or dict
+<br>
+            Possibly nested list or dictionary.
+<br>
+        key : str
+<br>
+            key/to/value, path like string describing all keys necessary to
+<br>
+            consider to get to the desired value. List indices can also be
+<br>
+            passed here.
+<br>
+        splitval : str
+<br>
+            String that defines the delimiter between keys of the
+<br>
+            different depth levels in `key`.
+<br>
+        default : obj
+<br>
+            Value returned if :attr:`key` is not found.
+<br>
+        expand : bool
+<br>
+            Whether to expand callable nodes on the path or not.
+<br>
+
+<br>
+    Returns
+<br>
+    -------
+<br>
+        The desired value or if :attr:`default` is not ``None`` and the
+<br>
+        :attr:`key` is not found returns ``default``.
+<br>
+
+<br>
+    Raises
+<br>
+    ------
+<br>
+        Exception if ``key`` not in ``list_or_dict`` and :attr:`default` is
+<br>
+        ``None``.
+<br>
+    """
 <br>
 </li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:get_root' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L36'>get_root</a>
+        class | <a name='taming/util.py:KeyNotFoundError' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L47'>KeyNotFoundError</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>name,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:is_prepared' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L43'>is_prepared</a>
+        method | <a name='taming/util.py:KeyNotFoundError:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L48'>KeyNotFoundError:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>root,<br></ul>
+        <ul>self,<br>cause,<br>keys = None,<br>visited = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/data/faceshq.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py'>taming/data/faceshq.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        class | <a name='taming/data/faceshq.py:FacesBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L9'>FacesBase</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:mark_prepared' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L47'>mark_prepared</a>
+        class | <a name='taming/data/faceshq.py:CelebAHQTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L29'>CelebAHQTrain</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>root,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:prompt_download' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L51'>prompt_download</a>
+        class | <a name='taming/data/faceshq.py:CelebAHQValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L40'>CelebAHQValidation</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>file_,<br>source,<br>target_dir,<br>content_dir = None,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:download_url' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L71'>download_url</a>
+        class | <a name='taming/data/faceshq.py:FFHQTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L51'>FFHQTrain</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>file_,<br>url,<br>target_dir,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:download_urls' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L81'>download_urls</a>
+        class | <a name='taming/data/faceshq.py:FFHQValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L62'>FFHQValidation</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>urls,<br>target_dir,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='taming/data/utils.py:quadratic_crop' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L89'>quadratic_crop</a>
+        class | <a name='taming/data/faceshq.py:FacesHQTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L73'>FacesHQTrain</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>x,<br>bbox,<br>alpha = 1.0,<br></ul>
-        <li>Docs:<br>    """bbox is xmin, ymin, xmax, ymax"""
-<br>
-</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/data/faceshq.py:FacesHQValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L105'>FacesHQValidation</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L10'>FacesBase:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>*args,<br>**kwargs,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L15'>FacesBase:__len__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L18'>FacesBase:__getitem__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>i,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:CelebAHQTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>CelebAHQTrain:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>keys = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:CelebAHQValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>CelebAHQValidation:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>keys = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FFHQTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>FFHQTrain:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>keys = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FFHQValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>FFHQValidation:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>keys = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesHQTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L75'>FacesHQTrain:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>keys = None,<br>crop_size = None,<br>coord = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesHQTrain:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L15'>FacesHQTrain:__len__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesHQTrain:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L18'>FacesHQTrain:__getitem__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>i,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesHQValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L75'>FacesHQValidation:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>keys = None,<br>crop_size = None,<br>coord = False,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesHQValidation:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L15'>FacesHQValidation:__len__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/faceshq.py:FacesHQValidation:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L18'>FacesHQValidation:__getitem__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>i,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/modules/losses/segmentation.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py'>taming/modules/losses/segmentation.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        class | <a name='taming/modules/losses/segmentation.py:BCELoss' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L5'>BCELoss</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/modules/losses/segmentation.py:BCELossWithQuant' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L11'>BCELossWithQuant</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/segmentation.py:BCELoss:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L6'>BCELoss:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>prediction,<br>target,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/segmentation.py:BCELossWithQuant:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L12'>BCELossWithQuant:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>codebook_weight = 1.,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/modules/losses/segmentation.py:BCELossWithQuant:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/segmentation.py#L16'>BCELossWithQuant:forward</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>qloss,<br>target,<br>prediction,<br>split,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/data/custom.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py'>taming/data/custom.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        class | <a name='taming/data/custom.py:CustomBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L9'>CustomBase</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/data/custom.py:CustomTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L23'>CustomTrain</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        class | <a name='taming/data/custom.py:CustomTest' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L31'>CustomTest</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/custom.py:CustomBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L10'>CustomBase:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>*args,<br>**kwargs,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/custom.py:CustomBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L14'>CustomBase:__len__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/custom.py:CustomBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L17'>CustomBase:__getitem__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>i,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/custom.py:CustomTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L24'>CustomTrain:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>training_images_list_file,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        method | <a name='taming/data/custom.py:CustomTest:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L32'>CustomTest:__init__</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>self,<br>size,<br>test_images_list_file,<br></ul>
+        <li>Docs:<br></li>
         </ul>
     </details></ul>
 </details>
@@ -1468,32 +3291,12 @@
 
 <details>
 <summary>
-<a name='taming/modules/losses/lpips.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py'>taming/modules/losses/lpips.py</a>
+<a name='taming/data/base.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py'>taming/data/base.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        function | <a name='taming/modules/losses/lpips.py:normalize_tensor' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L116'>normalize_tensor</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>x,<br>eps = 1e-10,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='taming/modules/losses/lpips.py:spatial_average' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L121'>spatial_average</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>x,<br>keepdim = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/losses/lpips.py:LPIPS' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L11'>LPIPS</a>
+        class | <a name='taming/data/base.py:ConcatDatasetWithIndex' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L8'>ConcatDatasetWithIndex</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -1503,7 +3306,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/losses/lpips.py:ScalingLayer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L57'>ScalingLayer</a>
+        class | <a name='taming/data/base.py:ImagePaths' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L23'>ImagePaths</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -1513,7 +3316,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/losses/lpips.py:NetLinLayer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L67'>NetLinLayer</a>
+        class | <a name='taming/data/base.py:NumpyPaths' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L62'>NumpyPaths</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -1523,614 +3326,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/losses/lpips.py:vgg16' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L76'>vgg16</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:LPIPS:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L13'>LPIPS:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>use_dropout = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:LPIPS:load_from_pretrained' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L27'>LPIPS:load_from_pretrained</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>name = "vgg_lpips",<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:LPIPS:from_pretrained' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L33'>LPIPS:from_pretrained</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>cls,<br>name = "vgg_lpips",<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:LPIPS:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L41'>LPIPS:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>input,<br>target,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:ScalingLayer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L58'>ScalingLayer:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:ScalingLayer:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L63'>ScalingLayer:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>inp,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:NetLinLayer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L69'>NetLinLayer:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>chn_in,<br>chn_out = 1,<br>use_dropout = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:vgg16:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L77'>vgg16:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>requires_grad = False,<br>pretrained = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/losses/lpips.py:vgg16:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/losses/lpips.py#L100'>vgg16:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>X,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/models/cond_transformer.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py'>taming/models/cond_transformer.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='taming/models/cond_transformer.py:disabled_train' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L10'>disabled_train</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>mode = True,<br></ul>
-        <li>Docs:<br>    """Overwrite model.train with this function to make sure train/eval mode
-<br>
-    does not change anymore."""
-<br>
-</li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/models/cond_transformer.py:Net2NetTransformer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L16'>Net2NetTransformer</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L17'>Net2NetTransformer:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>transformer_config,<br>first_stage_config,<br>cond_stage_config,<br>permuter_config = None,<br>ckpt_path = None,<br>ignore_keys = [],<br>first_stage_key = "image",<br>cond_stage_key = "depth",<br>downsample_cond_size = -1,<br>pkeep = 1.0,<br>sos_token = 0,<br>unconditional = False,<br>,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:init_from_ckpt' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L48'>Net2NetTransformer:init_from_ckpt</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>path,<br>ignore_keys = list(,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:init_first_stage_from_ckpt' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L58'>Net2NetTransformer:init_first_stage_from_ckpt</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>config,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:init_cond_stage_from_ckpt' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L64'>Net2NetTransformer:init_cond_stage_from_ckpt</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>config,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L80'>Net2NetTransformer:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>c,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:top_k_logits' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L106'>Net2NetTransformer:top_k_logits</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>logits,<br>k,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:sample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L113'>Net2NetTransformer:sample</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>c,<br>steps,<br>temperature = 1.0,<br>sample = False,<br>top_k = None,<br>callback=lambda k:  = lambda k: None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:encode_to_z' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L169'>Net2NetTransformer:encode_to_z</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:encode_to_c' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L176'>Net2NetTransformer:encode_to_c</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>c,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:decode_to_img' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L185'>Net2NetTransformer:decode_to_img</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>index,<br>zshape,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:log_images' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L194'>Net2NetTransformer:log_images</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>batch,<br>temperature = None,<br>top_k = None,<br>callback = None,<br>lr_interface = False,<br>**kwargs,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:get_input' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L265'>Net2NetTransformer:get_input</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>key,<br>batch,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:get_xc' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L275'>Net2NetTransformer:get_xc</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>batch,<br>N = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:shared_step' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L283'>Net2NetTransformer:shared_step</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>batch,<br>batch_idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:training_step' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L289'>Net2NetTransformer:training_step</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>batch,<br>batch_idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:validation_step' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L294'>Net2NetTransformer:validation_step</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>batch,<br>batch_idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/models/cond_transformer.py:Net2NetTransformer:configure_optimizers' href='https://github.com/CompVis/taming-transformers/tree/master/taming/models/cond_transformer.py#L299'>Net2NetTransformer:configure_optimizers</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br>        """
-<br>
-        Following minGPT:
-<br>
-        This long function is unfortunately doing something very simple and is being very defensive:
-<br>
-        We are separating out all parameters of the model into two buckets: those that will experience
-<br>
-        weight decay for regularization and those that won't (biases, and layernorm/embedding weights).
-<br>
-        We are then returning the PyTorch optimizer object.
-<br>
-        """
-<br>
-</li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/modules/vqvae/quantize.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py'>taming/modules/vqvae/quantize.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        class | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L9'>VectorQuantizer</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L110'>GumbelQuantize</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L213'>VectorQuantizer2</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L25'>VectorQuantizer:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>n_e,<br>e_dim,<br>beta,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L34'>VectorQuantizer:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>z,<br></ul>
-        <li>Docs:<br>        """
-<br>
-        Inputs the output of the encoder network z and maps it to a discrete
-<br>
-        one-hot vector that is the index of the closest embedding vector e_j
-<br>
-        z (continuous) -> z_q (discrete)
-<br>
-        z.shape = (batch, channel, height, width)
-<br>
-        quantization pipeline:
-<br>
-            1. get encoder input (B,C,H,W)
-<br>
-            2. flatten input to (B*H*W,C)
-<br>
-        """
-<br>
-</li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer:get_codebook_entry' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L92'>VectorQuantizer:get_codebook_entry</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>indices,<br>shape,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L117'>GumbelQuantize:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>num_hiddens,<br>embedding_dim,<br>n_embed,<br>straight_through = True,<br>kl_weight = 5e-4,<br>temp_init = 1.0,<br>use_vqinterface = True,<br>remap = None,<br>unknown_index = "random",<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:remap_to_used' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L147'>GumbelQuantize:remap_to_used</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>inds,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:unmap_to_all' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L161'>GumbelQuantize:unmap_to_all</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>inds,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L171'>GumbelQuantize:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>z,<br>temp = None,<br>return_logits = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:GumbelQuantize:get_codebook_entry' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L92'>GumbelQuantize:get_codebook_entry</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>indices,<br>shape,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L221'>VectorQuantizer2:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>n_e,<br>e_dim,<br>beta,<br>remap = None,<br>unknown_index = "random",<br>sane_index_shape = False,<br>legacy = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:remap_to_used' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L147'>VectorQuantizer2:remap_to_used</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>inds,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:unmap_to_all' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L161'>VectorQuantizer2:unmap_to_all</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>inds,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L271'>VectorQuantizer2:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>z,<br>temp = None,<br>rescale_logits = False,<br>return_logits = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/vqvae/quantize.py:VectorQuantizer2:get_codebook_entry' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/vqvae/quantize.py#L92'>VectorQuantizer2:get_codebook_entry</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>indices,<br>shape,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='main.py' href='https://github.com/CompVis/taming-transformers/tree/master/main.py'>main.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='main.py:get_obj_from_str' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L14'>get_obj_from_str</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>string,<br>reload = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='main.py:get_parser' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L22'>get_parser</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>**parser_kwargs,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='main.py:nondefault_trainer_args' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L106'>nondefault_trainer_args</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>opt,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='main.py:instantiate_from_config' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L113'>instantiate_from_config</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>config,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='main.py:WrappedDataset' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L119'>WrappedDataset</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='main.py:DataModuleFromConfig' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L131'>DataModuleFromConfig</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='main.py:SetupCallback' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L175'>SetupCallback</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='main.py:ImageLogger' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L215'>ImageLogger</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:WrappedDataset:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L121'>WrappedDataset:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>dataset,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:WrappedDataset:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L124'>WrappedDataset:__len__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:WrappedDataset:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L127'>WrappedDataset:__getitem__</a>
+        method | <a name='taming/data/base.py:ConcatDatasetWithIndex:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L10'>ConcatDatasetWithIndex:__getitem__</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -2140,17 +3336,17 @@
     </details>
     <details>
         <summary>
-        method | <a name='main.py:DataModuleFromConfig:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L132'>DataModuleFromConfig:__init__</a>
+        method | <a name='taming/data/base.py:ImagePaths:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L24'>ImagePaths:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>batch_size,<br>train = None,<br>validation = None,<br>test = None,<br>wrap = False,<br>num_workers = None,<br></ul>
+        <ul>self,<br>paths,<br>size = None,<br>random_crop = False,<br>labels = None,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='main.py:DataModuleFromConfig:prepare_data' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L149'>DataModuleFromConfig:prepare_data</a>
+        method | <a name='taming/data/base.py:ImagePaths:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L42'>ImagePaths:__len__</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -2160,194 +3356,17 @@
     </details>
     <details>
         <summary>
-        method | <a name='main.py:DataModuleFromConfig:setup' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L153'>DataModuleFromConfig:setup</a>
+        method | <a name='taming/data/base.py:ImagePaths:preprocess_image' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L45'>ImagePaths:preprocess_image</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>stage = None,<br></ul>
+        <ul>self,<br>image_path,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='main.py:DataModuleFromConfig:_train_dataloader' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L161'>DataModuleFromConfig:_train_dataloader</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:DataModuleFromConfig:_val_dataloader' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L165'>DataModuleFromConfig:_val_dataloader</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:DataModuleFromConfig:_test_dataloader' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L170'>DataModuleFromConfig:_test_dataloader</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:SetupCallback:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L176'>SetupCallback:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>resume,<br>now,<br>logdir,<br>ckptdir,<br>cfgdir,<br>config,<br>lightning_config,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:SetupCallback:on_pretrain_routine_start' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L186'>SetupCallback:on_pretrain_routine_start</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>trainer,<br>pl_module,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L216'>ImageLogger:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>batch_frequency,<br>max_images,<br>clamp = True,<br>increase_log_steps = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:_wandb' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L230'>ImageLogger:_wandb</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>pl_module,<br>images,<br>batch_idx,<br>split,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:_testtube' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L239'>ImageLogger:_testtube</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>pl_module,<br>images,<br>batch_idx,<br>split,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:log_local' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L250'>ImageLogger:log_local</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>save_dir,<br>split,<br>images,<br>global_step,<br>current_epoch,<br>batch_idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:log_img' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L269'>ImageLogger:log_img</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>pl_module,<br>batch,<br>batch_idx,<br>split = "train",<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:check_frequency' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L300'>ImageLogger:check_frequency</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>batch_idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:on_train_batch_end' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L309'>ImageLogger:on_train_batch_end</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>trainer,<br>pl_module,<br>outputs,<br>batch,<br>batch_idx,<br>dataloader_idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='main.py:ImageLogger:on_validation_batch_end' href='https://github.com/CompVis/taming-transformers/tree/master/main.py#L312'>ImageLogger:on_validation_batch_end</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>trainer,<br>pl_module,<br>outputs,<br>batch,<br>batch_idx,<br>dataloader_idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/data/sflckr.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py'>taming/data/sflckr.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        class | <a name='taming/data/sflckr.py:SegmentationBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L9'>SegmentationBase</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/data/sflckr.py:Examples' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L86'>Examples</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/sflckr.py:SegmentationBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L10'>SegmentationBase:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>data_csv,<br>data_root,<br>segmentation_root,<br>size = None,<br>random_crop = False,<br>interpolation = "bicubic",<br>n_labels = 182,<br>shift_segmentation = False,<br>,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/sflckr.py:SegmentationBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L52'>SegmentationBase:__len__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/sflckr.py:SegmentationBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L55'>SegmentationBase:__getitem__</a>
+        method | <a name='taming/data/base.py:ImagePaths:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L54'>ImagePaths:__getitem__</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -2357,75 +3376,12 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/sflckr.py:Examples:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L87'>Examples:__init__</a>
+        method | <a name='taming/data/base.py:NumpyPaths:preprocess_image' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L45'>NumpyPaths:preprocess_image</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>size = None,<br>random_crop = False,<br>interpolation = "bicubic",<br></ul>
+        <ul>self,<br>image_path,<br></ul>
         <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/modules/discriminator/model.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py'>taming/modules/discriminator/model.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='taming/modules/discriminator/model.py:weights_init' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L8'>weights_init</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>m,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/discriminator/model.py:NLayerDiscriminator' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L17'>NLayerDiscriminator</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/discriminator/model.py:NLayerDiscriminator:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L21'>NLayerDiscriminator:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>input_nc = 3,<br>ndf = 64,<br>n_layers = 3,<br>use_actnorm = False,<br></ul>
-        <li>Docs:<br>        """Construct a PatchGAN discriminator
-<br>
-        Parameters:
-<br>
-            input_nc (int)  -- the number of channels in input images
-<br>
-            ndf (int)       -- the number of filters in the last conv layer
-<br>
-            n_layers (int)  -- the number of conv layers in the discriminator
-<br>
-            norm_layer      -- normalization layer
-<br>
-        """
-<br>
-</li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/discriminator/model.py:NLayerDiscriminator:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L65'>NLayerDiscriminator:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>input,<br></ul>
-        <li>Docs:<br>        """Standard forward."""
-<br>
-</li>
         </ul>
     </details></ul>
 </details>
@@ -2589,12 +3545,22 @@
 
 <details>
 <summary>
-<a name='scripts/sample_fast.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py'>scripts/sample_fast.py</a>
+<a name='scripts/extract_depth.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py'>scripts/extract_depth.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        function | <a name='scripts/sample_fast.py:chw_to_pillow' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L17'>chw_to_pillow</a>
+        function | <a name='scripts/extract_depth.py:get_state' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L8'>get_state</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>gpu,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='scripts/extract_depth.py:depth_to_rgba' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L23'>depth_to_rgba</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -2604,71 +3570,41 @@
     </details>
     <details>
         <summary>
-        function | <a name='scripts/sample_fast.py:sample_classconditional' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L22'>sample_classconditional</a>
+        function | <a name='scripts/extract_depth.py:rgba_to_depth' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L32'>rgba_to_depth</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>model,<br>batch_size,<br>class_label,<br>steps = 256,<br>temperature = None,<br>top_k = None,<br>callback = None,<br>dim_z = 256,<br>h = 16,<br>w = 16,<br>verbose_time = False,<br>top_p = None,<br></ul>
+        <ul>x,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='scripts/sample_fast.py:sample_unconditional' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L43'>sample_unconditional</a>
+        function | <a name='scripts/extract_depth.py:run' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L41'>run</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>model,<br>batch_size,<br>steps = 256,<br>temperature = None,<br>top_k = None,<br>top_p = None,<br>callback = None,<br>dim_z = 256,<br>h = 16,<br>w = 16,<br>verbose_time = False,<br></ul>
+        <ul>x,<br>state,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='scripts/sample_fast.py:run' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L62'>run</a>
+        function | <a name='scripts/extract_depth.py:get_filename' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L57'>get_filename</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>logdir,<br>model,<br>batch_size,<br>temperature,<br>top_k,<br>unconditional = True,<br>num_samples = 50000,<br>given_classes = None,<br>top_p = None,<br></ul>
+        <ul>relpath,<br>level = -2,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='scripts/sample_fast.py:save_from_logs' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L84'>save_from_logs</a>
+        function | <a name='scripts/extract_depth.py:save_depth' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L65'>save_depth</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>logs,<br>logdir,<br>base_count,<br>key = "samples",<br>cond_key = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/sample_fast.py:get_parser' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L98'>get_parser</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/sample_fast.py:load_model_from_config' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L183'>load_model_from_config</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>config,<br>sd,<br>gpu = True,<br>eval_mode = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/sample_fast.py:load_model' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/sample_fast.py#L194'>load_model</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>config,<br>sd,<br>gpu = True,<br>eval_mode = True,<br></ul>
+        <ul>dataset,<br>path,<br>debug = False,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details></ul>
@@ -2676,12 +3612,113 @@
 
 <details>
 <summary>
-<a name='taming/data/base.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py'>taming/data/base.py</a>
+<a name='taming/data/utils.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py'>taming/data/utils.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        class | <a name='taming/data/base.py:ConcatDatasetWithIndex' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L8'>ConcatDatasetWithIndex</a>
+        function | <a name='taming/data/utils.py:unpack' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L9'>unpack</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>path,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:reporthook' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L25'>reporthook</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>bar,<br></ul>
+        <li>Docs:<br>    """tqdm progress bar for downloads."""
+<br>
+</li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:get_root' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L36'>get_root</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>name,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:is_prepared' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L43'>is_prepared</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>root,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:mark_prepared' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L47'>mark_prepared</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>root,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:prompt_download' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L51'>prompt_download</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>file_,<br>source,<br>target_dir,<br>content_dir = None,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:download_url' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L71'>download_url</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>file_,<br>url,<br>target_dir,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:download_urls' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L81'>download_urls</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>urls,<br>target_dir,<br></ul>
+        <li>Docs:<br></li>
+        </ul>
+    </details>
+    <details>
+        <summary>
+        function | <a name='taming/data/utils.py:quadratic_crop' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/utils.py#L89'>quadratic_crop</a>
+        </summary>
+        <ul>
+        <li>Args:</li>
+        <ul>x,<br>bbox,<br>alpha = 1.0,<br></ul>
+        <li>Docs:<br>    """bbox is xmin, ymin, xmax, ymax"""
+<br>
+</li>
+        </ul>
+    </details></ul>
+</details>
+
+<details>
+<summary>
+<a name='taming/lr_scheduler.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py'>taming/lr_scheduler.py</a>
+</summary>
+<ul>
+    <details>
+        <summary>
+        class | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L4'>LambdaWarmUpCosineScheduler</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -2691,81 +3728,31 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/base.py:ImagePaths' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L23'>ImagePaths</a>
+        method | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L8'>LambdaWarmUpCosineScheduler:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>warm_up_steps,<br>lr_min,<br>lr_max,<br>lr_start,<br>max_decay_steps,<br>verbosity_interval = 0,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/base.py:NumpyPaths' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L62'>NumpyPaths</a>
+        method | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler:schedule' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L17'>LambdaWarmUpCosineScheduler:schedule</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>n,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/base.py:ConcatDatasetWithIndex:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L10'>ConcatDatasetWithIndex:__getitem__</a>
+        method | <a name='taming/lr_scheduler.py:LambdaWarmUpCosineScheduler:__call__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/lr_scheduler.py#L32'>LambdaWarmUpCosineScheduler:__call__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/base.py:ImagePaths:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L24'>ImagePaths:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>paths,<br>size = None,<br>random_crop = False,<br>labels = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/base.py:ImagePaths:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L42'>ImagePaths:__len__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/base.py:ImagePaths:preprocess_image' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L45'>ImagePaths:preprocess_image</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>image_path,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/base.py:ImagePaths:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L54'>ImagePaths:__getitem__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>i,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/base.py:NumpyPaths:preprocess_image' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/base.py#L45'>NumpyPaths:preprocess_image</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>image_path,<br></ul>
+        <ul>self,<br>n,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details></ul>
@@ -3110,32 +4097,22 @@
 
 <details>
 <summary>
-<a name='scripts/make_samples.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py'>scripts/make_samples.py</a>
+<a name='taming/modules/discriminator/model.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py'>taming/modules/discriminator/model.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        function | <a name='scripts/make_samples.py:save_image' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L12'>save_image</a>
+        function | <a name='taming/modules/discriminator/model.py:weights_init' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L8'>weights_init</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>x,<br>path,<br></ul>
+        <ul>m,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        function | <a name='scripts/make_samples.py:run_conditional' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L20'>run_conditional</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>model,<br>dsets,<br>outdir,<br>top_k,<br>temperature,<br>batch_size = 1,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/make_samples.py:get_parser' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L124'>get_parser</a>
+        class | <a name='taming/modules/discriminator/model.py:NLayerDiscriminator' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L17'>NLayerDiscriminator</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3145,424 +4122,50 @@
     </details>
     <details>
         <summary>
-        function | <a name='scripts/make_samples.py:load_model_from_config' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L179'>load_model_from_config</a>
+        method | <a name='taming/modules/discriminator/model.py:NLayerDiscriminator:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L21'>NLayerDiscriminator:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>config,<br>sd,<br>gpu = True,<br>eval_mode = True,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/make_samples.py:get_data' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L209'>get_data</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>config,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/make_samples.py:load_model_and_dset' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/make_samples.py#L217'>load_model_and_dset</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>config,<br>ckpt,<br>gpu,<br>eval_mode,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='scripts/extract_segmentation.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py'>scripts/extract_segmentation.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_segmentation.py:rescale_bgr' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L20'>rescale_bgr</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_segmentation.py:run_model' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L67'>run_model</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>img,<br>model,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_segmentation.py:get_input' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L75'>get_input</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>batch,<br>k,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_segmentation.py:save_segmentation' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L83'>save_segmentation</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>segmentation,<br>path,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_segmentation.py:iterate_dataset' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L94'>iterate_dataset</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>dataloader,<br>destpath,<br>model,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L26'>COCOStuffSegmenter</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L27'>COCOStuffSegmenter:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>config,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:forward' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L42'>COCOStuffSegmenter:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>upsample = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:_pre_process' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L49'>COCOStuffSegmenter:_pre_process</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:mean' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L54'>COCOStuffSegmenter:mean</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:std' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L59'>COCOStuffSegmenter:std</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='scripts/extract_segmentation.py:COCOStuffSegmenter:input_size' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_segmentation.py#L63'>COCOStuffSegmenter:input_size</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='scripts/extract_depth.py' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py'>scripts/extract_depth.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_depth.py:get_state' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L8'>get_state</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>gpu,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_depth.py:depth_to_rgba' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L23'>depth_to_rgba</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_depth.py:rgba_to_depth' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L32'>rgba_to_depth</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>x,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_depth.py:run' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L41'>run</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>x,<br>state,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_depth.py:get_filename' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L57'>get_filename</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>relpath,<br>level = -2,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='scripts/extract_depth.py:save_depth' href='https://github.com/CompVis/taming-transformers/tree/master/scripts/extract_depth.py#L65'>save_depth</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>dataset,<br>path,<br>debug = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/util.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py'>taming/util.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='taming/util.py:download' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L18'>download</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>url,<br>local_path,<br>chunk_size = 1024,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='taming/util.py:md5_hash' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L30'>md5_hash</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>path,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='taming/util.py:get_ckpt_path' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L36'>get_ckpt_path</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>name,<br>root,<br>check = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='taming/util.py:retrieve' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L62'>retrieve</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>list_or_dict,<br>key,<br>splitval = "/",<br>default = None,<br>expand = True,<br>pass_success = False,<br></ul>
-        <li>Docs:<br>    """Given a nested list or dict return the desired value at key expanding
+        <ul>self,<br>input_nc = 3,<br>ndf = 64,<br>n_layers = 3,<br>use_actnorm = False,<br></ul>
+        <li>Docs:<br>        """Construct a PatchGAN discriminator
 <br>
-    callable nodes if necessary and :attr:`expand` is ``True``. The expansion
+        Parameters:
 <br>
-    is done in-place.
+            input_nc (int)  -- the number of channels in input images
 <br>
-
+            ndf (int)       -- the number of filters in the last conv layer
 <br>
-    Parameters
+            n_layers (int)  -- the number of conv layers in the discriminator
 <br>
-    ----------
+            norm_layer      -- normalization layer
 <br>
-        list_or_dict : list or dict
-<br>
-            Possibly nested list or dictionary.
-<br>
-        key : str
-<br>
-            key/to/value, path like string describing all keys necessary to
-<br>
-            consider to get to the desired value. List indices can also be
-<br>
-            passed here.
-<br>
-        splitval : str
-<br>
-            String that defines the delimiter between keys of the
-<br>
-            different depth levels in `key`.
-<br>
-        default : obj
-<br>
-            Value returned if :attr:`key` is not found.
-<br>
-        expand : bool
-<br>
-            Whether to expand callable nodes on the path or not.
-<br>
-
-<br>
-    Returns
-<br>
-    -------
-<br>
-        The desired value or if :attr:`default` is not ``None`` and the
-<br>
-        :attr:`key` is not found returns ``default``.
-<br>
-
-<br>
-    Raises
-<br>
-    ------
-<br>
-        Exception if ``key`` not in ``list_or_dict`` and :attr:`default` is
-<br>
-        ``None``.
-<br>
-    """
+        """
 <br>
 </li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/util.py:KeyNotFoundError' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L47'>KeyNotFoundError</a>
+        method | <a name='taming/modules/discriminator/model.py:NLayerDiscriminator:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/discriminator/model.py#L65'>NLayerDiscriminator:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/util.py:KeyNotFoundError:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/util.py#L48'>KeyNotFoundError:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>cause,<br>keys = None,<br>visited = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/modules/misc/coord.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py'>taming/modules/misc/coord.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        class | <a name='taming/modules/misc/coord.py:CoordStage' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L3'>CoordStage</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/misc/coord.py:CoordStage:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L4'>CoordStage:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>n_embed,<br>down_factor,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/misc/coord.py:CoordStage:eval' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L8'>CoordStage:eval</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/misc/coord.py:CoordStage:encode' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L11'>CoordStage:encode</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>c,<br></ul>
-        <li>Docs:<br>        """fake vqmodel interface"""
+        <ul>self,<br>input,<br></ul>
+        <li>Docs:<br>        """Standard forward."""
 <br>
 </li>
         </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/misc/coord.py:CoordStage:decode' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/misc/coord.py#L27'>CoordStage:decode</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>c,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
     </details></ul>
 </details>
 
 <details>
 <summary>
-<a name='taming/data/coco.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py'>taming/data/coco.py</a>
+<a name='taming/data/sflckr.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py'>taming/data/sflckr.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        class | <a name='taming/data/coco.py:Examples' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L12'>Examples</a>
+        class | <a name='taming/data/sflckr.py:SegmentationBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L9'>SegmentationBase</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3572,7 +4175,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/coco.py:CocoBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L22'>CocoBase</a>
+        class | <a name='taming/data/sflckr.py:Examples' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L86'>Examples</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3582,47 +4185,17 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/coco.py:CocoImagesAndCaptionsTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L151'>CocoImagesAndCaptionsTrain</a>
+        method | <a name='taming/data/sflckr.py:SegmentationBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L10'>SegmentationBase:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>data_csv,<br>data_root,<br>segmentation_root,<br>size = None,<br>random_crop = False,<br>interpolation = "bicubic",<br>n_labels = 182,<br>shift_segmentation = False,<br>,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/coco.py:CocoImagesAndCaptionsValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L164'>CocoImagesAndCaptionsValidation</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/coco.py:Examples:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L13'>Examples:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size = 256,<br>random_crop = False,<br>interpolation = "bicubic",<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/coco.py:CocoBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L24'>CocoBase:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size = None,<br>dataroot = "",<br>datajson = "",<br>onehot_segmentation = False,<br>use_stuffthing = False,<br>crop_size = None,<br>force_no_crop = False,<br>given_files = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/coco.py:CocoBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L93'>CocoBase:__len__</a>
+        method | <a name='taming/data/sflckr.py:SegmentationBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L52'>SegmentationBase:__len__</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3632,17 +4205,7 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/coco.py:CocoBase:preprocess_image' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L96'>CocoBase:preprocess_image</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>image_path,<br>segmentation_path,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/coco.py:CocoBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L134'>CocoBase:__getitem__</a>
+        method | <a name='taming/data/sflckr.py:SegmentationBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L55'>SegmentationBase:__getitem__</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3652,79 +4215,39 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L153'>CocoImagesAndCaptionsTrain:__init__</a>
+        method | <a name='taming/data/sflckr.py:Examples:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/sflckr.py#L87'>Examples:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>size,<br>onehot_segmentation = False,<br>use_stuffthing = False,<br>crop_size = None,<br>force_no_crop = False,<br></ul>
+        <ul>self,<br>size = None,<br>random_crop = False,<br>interpolation = "bicubic",<br></ul>
         <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsTrain:get_split' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L160'>CocoImagesAndCaptionsTrain:get_split</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L166'>CocoImagesAndCaptionsValidation:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size,<br>onehot_segmentation = False,<br>use_stuffthing = False,<br>crop_size = None,<br>force_no_crop = False,<br>given_files = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/coco.py:CocoImagesAndCaptionsValidation:get_split' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/coco.py#L160'>CocoImagesAndCaptionsValidation:get_split</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br>    """returns a pair of (image, caption)"""
-<br>
-</li>
         </ul>
     </details></ul>
 </details>
 
 <details>
 <summary>
-<a name='taming/modules/transformer/mingpt.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py'>taming/modules/transformer/mingpt.py</a>
+<a name='taming/modules/diffusionmodules/model.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py'>taming/modules/diffusionmodules/model.py</a>
 </summary>
 <ul>
     <details>
         <summary>
-        function | <a name='taming/modules/transformer/mingpt.py:top_k_logits' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L286'>top_k_logits</a>
+        function | <a name='taming/modules/diffusionmodules/model.py:get_timestep_embedding' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L8'>get_timestep_embedding</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>logits,<br>k,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        function | <a name='taming/modules/transformer/mingpt.py:sample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L293'>sample</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>model,<br>x,<br>steps,<br>temperature = 1.0,<br>sample = False,<br>top_k = None,<br></ul>
+        <ul>timesteps,<br>embedding_dim,<br></ul>
         <li>Docs:<br>    """
 <br>
-    take a conditioning sequence of indices in x (of shape (b,t)) and predict the next token in
+    This matches the implementation in Denoising Diffusion Probabilistic Models:
 <br>
-    the sequence, feeding the predictions back into the model each time. Clearly the sampling
+    From Fairseq.
 <br>
-    has quadratic complexity unlike an RNN that is only linear, and has a finite context window
+    Build sinusoidal embeddings.
 <br>
-    of block_size, unlike an RNN that has an infinite context window.
+    This matches the implementation in tensor2tensor, but differs slightly
+<br>
+    from the description in Section 3.5 of "Attention Is All You Need".
 <br>
     """
 <br>
@@ -3733,37 +4256,27 @@
     </details>
     <details>
         <summary>
-        function | <a name='taming/modules/transformer/mingpt.py:sample_with_past' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L324'>sample_with_past</a>
+        function | <a name='taming/modules/diffusionmodules/model.py:nonlinearity' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L29'>nonlinearity</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>x,<br>model,<br>steps,<br>temperature = 1.,<br>sample_logits = True,<br>top_k = None,<br>top_p = None,<br>callback = None,<br></ul>
+        <ul>x,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:GPTConfig' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L22'>GPTConfig</a>
+        function | <a name='taming/modules/diffusionmodules/model.py:Normalize' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L34'>Normalize</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>in_channels,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:GPT1Config' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L35'>GPT1Config</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:CausalSelfAttention' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L42'>CausalSelfAttention</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:Upsample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L38'>Upsample</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3773,7 +4286,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:Block' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L98'>Block</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:Downsample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L56'>Downsample</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3783,7 +4296,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:GPT' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L125'>GPT</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:ResnetBlock' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L78'>ResnetBlock</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3793,7 +4306,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:DummyGPT' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L215'>DummyGPT</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:AttnBlock' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L140'>AttnBlock</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3803,7 +4316,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:CodeGPT' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L225'>CodeGPT</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:Model' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L195'>Model</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3813,7 +4326,7 @@
     </details>
     <details>
         <summary>
-        class | <a name='taming/modules/transformer/mingpt.py:KMeans' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L356'>KMeans</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:Encoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L342'>Encoder</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -3823,187 +4336,57 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:GPTConfig:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L28'>GPTConfig:__init__</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:Decoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L436'>Decoder</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>vocab_size,<br>block_size,<br>**kwargs,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:CausalSelfAttention:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L49'>CausalSelfAttention:__init__</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:VUNet' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L540'>VUNet</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>config,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:CausalSelfAttention:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L69'>CausalSelfAttention:forward</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:SimpleDecoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L694'>SimpleDecoder</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>x,<br>layer_past = None,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:Block:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L49'>Block:__init__</a>
+        class | <a name='taming/modules/diffusionmodules/model.py:UpsampleDecoder' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L730'>UpsampleDecoder</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>config,<br></ul>
+        <ul></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:Block:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L112'>Block:forward</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Upsample:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L39'>Upsample:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>x,<br>layer_past = None,<br>return_present = False,<br></ul>
+        <ul>self,<br>in_channels,<br>with_conv,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:GPT:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L127'>GPT:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>vocab_size,<br>block_size,<br>n_layer = 12,<br>n_head = 8,<br>n_embd = 256,<br>embd_pdrop = 0.,<br>resid_pdrop = 0.,<br>attn_pdrop = 0.,<br>n_unmasked = 0,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:GPT:get_block_size' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L148'>GPT:get_block_size</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:GPT:_init_weights' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L151'>GPT:_init_weights</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>module,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:GPT:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L160'>GPT:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>idx,<br>embeddings = None,<br>targets = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:GPT:forward_with_past' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L182'>GPT:forward_with_past</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>idx,<br>embeddings = None,<br>targets = None,<br>past = None,<br>past_length = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:DummyGPT:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L217'>DummyGPT:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>add_value = 1,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:DummyGPT:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L221'>DummyGPT:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>idx,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L227'>CodeGPT:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>vocab_size,<br>block_size,<br>in_channels,<br>n_layer = 12,<br>n_head = 8,<br>n_embd = 256,<br>embd_pdrop = 0.,<br>resid_pdrop = 0.,<br>attn_pdrop = 0.,<br>n_unmasked = 0,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:get_block_size' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L148'>CodeGPT:get_block_size</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:_init_weights' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L151'>CodeGPT:_init_weights</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>module,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:CodeGPT:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L160'>CodeGPT:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>idx,<br>embeddings = None,<br>targets = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:KMeans:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L357'>KMeans:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>ncluster = 512,<br>nc = 3,<br>niter = 10,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:KMeans:is_initialized' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L366'>KMeans:is_initialized</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:KMeans:initialize' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L370'>KMeans:initialize</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Upsample:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>Upsample:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
@@ -4013,564 +4396,181 @@
     </details>
     <details>
         <summary>
-        method | <a name='taming/modules/transformer/mingpt.py:KMeans:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/mingpt.py#L389'>KMeans:forward</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Downsample:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L39'>Downsample:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br>shape = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/data/custom.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py'>taming/data/custom.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        class | <a name='taming/data/custom.py:CustomBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L9'>CustomBase</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>in_channels,<br>with_conv,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/custom.py:CustomTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L23'>CustomTrain</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Downsample:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>Downsample:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>x,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/custom.py:CustomTest' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L31'>CustomTest</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:ResnetBlock:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L79'>ResnetBlock:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>*,<br>in_channels,<br>out_channels = None,<br>conv_shortcut = False,<br>dropout,<br>temb_channels = 512,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/custom.py:CustomBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L10'>CustomBase:__init__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:ResnetBlock:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L117'>ResnetBlock:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>*args,<br>**kwargs,<br></ul>
+        <ul>self,<br>x,<br>temb,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/custom.py:CustomBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L14'>CustomBase:__len__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:AttnBlock:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L141'>AttnBlock:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br></ul>
+        <ul>self,<br>in_channels,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/custom.py:CustomBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L17'>CustomBase:__getitem__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:AttnBlock:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>AttnBlock:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>i,<br></ul>
+        <ul>self,<br>x,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/custom.py:CustomTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L24'>CustomTrain:__init__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Model:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>Model:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>size,<br>training_images_list_file,<br></ul>
+        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>resolution,<br>use_timestep = True,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/custom.py:CustomTest:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/custom.py#L32'>CustomTest:__init__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Model:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L295'>Model:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>size,<br>test_images_list_file,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/data/faceshq.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py'>taming/data/faceshq.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        class | <a name='taming/data/faceshq.py:FacesBase' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L9'>FacesBase</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>x,<br>t = None,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/faceshq.py:CelebAHQTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L29'>CelebAHQTrain</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Encoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>Encoder:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>resolution,<br>z_channels,<br>double_z = True,<br>**ignore_kwargs,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/faceshq.py:CelebAHQValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L40'>CelebAHQValidation</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Encoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>Encoder:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>x,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/faceshq.py:FFHQTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L51'>FFHQTrain</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Decoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>Decoder:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>resolution,<br>z_channels,<br>give_pre_end = False,<br>**ignorekwargs,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/faceshq.py:FFHQValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L62'>FFHQValidation</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:Decoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L506'>Decoder:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>z,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/faceshq.py:FacesHQTrain' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L73'>FacesHQTrain</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:VUNet:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L196'>VUNet:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>*,<br>ch,<br>out_ch,<br>ch_mult = (1,<br>2,<br>4,<br>8),<br>num_res_blocks,<br>attn_resolutions,<br>dropout = 0.0,<br>resamp_with_conv = True,<br>in_channels,<br>c_channels,<br>resolution,<br>z_channels,<br>use_timestep = False,<br>**ignore_kwargs,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        class | <a name='taming/data/faceshq.py:FacesHQValidation' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L105'>FacesHQValidation</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:VUNet:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L645'>VUNet:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul></ul>
+        <ul>self,<br>x,<br>z,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/faceshq.py:FacesBase:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L10'>FacesBase:__init__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:SimpleDecoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L695'>SimpleDecoder:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>*args,<br>**kwargs,<br></ul>
+        <ul>self,<br>in_channels,<br>out_channels,<br>*args,<br>**kwargs,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/faceshq.py:FacesBase:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L15'>FacesBase:__len__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:SimpleDecoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>SimpleDecoder:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br></ul>
+        <ul>self,<br>x,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/faceshq.py:FacesBase:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L18'>FacesBase:__getitem__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:UpsampleDecoder:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L731'>UpsampleDecoder:__init__</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>i,<br></ul>
+        <ul>self,<br>in_channels,<br>out_channels,<br>ch,<br>num_res_blocks,<br>resolution,<br>2,<br>2),<br>dropout=0.0):  = 0.0):,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details>
     <details>
         <summary>
-        method | <a name='taming/data/faceshq.py:CelebAHQTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>CelebAHQTrain:__init__</a>
+        method | <a name='taming/modules/diffusionmodules/model.py:UpsampleDecoder:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/diffusionmodules/model.py#L49'>UpsampleDecoder:forward</a>
         </summary>
         <ul>
         <li>Args:</li>
-        <ul>self,<br>size,<br>keys = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:CelebAHQValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>CelebAHQValidation:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size,<br>keys = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FFHQTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>FFHQTrain:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size,<br>keys = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FFHQValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L30'>FFHQValidation:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size,<br>keys = None,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FacesHQTrain:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L75'>FacesHQTrain:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size,<br>keys = None,<br>crop_size = None,<br>coord = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FacesHQTrain:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L15'>FacesHQTrain:__len__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FacesHQTrain:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L18'>FacesHQTrain:__getitem__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>i,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FacesHQValidation:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L75'>FacesHQValidation:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>size,<br>keys = None,<br>crop_size = None,<br>coord = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FacesHQValidation:__len__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L15'>FacesHQValidation:__len__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/data/faceshq.py:FacesHQValidation:__getitem__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/data/faceshq.py#L18'>FacesHQValidation:__getitem__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>i,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details></ul>
-</details>
-
-<details>
-<summary>
-<a name='taming/modules/transformer/permuter.py' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py'>taming/modules/transformer/permuter.py</a>
-</summary>
-<ul>
-    <details>
-        <summary>
-        function | <a name='taming/modules/transformer/permuter.py:mortonify' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L47'>mortonify</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>i,<br>j,<br></ul>
-        <li>Docs:<br>    """(i,j) index to linear morton code"""
-<br>
-</li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:AbstractPermuter' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L6'>AbstractPermuter</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:Identity' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L13'>Identity</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:Subsample' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L21'>Subsample</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:ZCurve' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L62'>ZCurve</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:SpiralOut' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L81'>SpiralOut</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:SpiralIn' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L141'>SpiralIn</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:Random' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L202'>Random</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        class | <a name='taming/modules/transformer/permuter.py:AlternateParsing' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L217'>AlternateParsing</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:AbstractPermuter:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L7'>AbstractPermuter:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>*args,<br>**kwargs,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:AbstractPermuter:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>AbstractPermuter:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:Identity:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L14'>Identity:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:Identity:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>Identity:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:Subsample:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>Subsample:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>H,<br>W,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:Subsample:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>Subsample:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:ZCurve:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>ZCurve:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>H,<br>W,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:ZCurve:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>ZCurve:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:SpiralOut:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>SpiralOut:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>H,<br>W,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:SpiralOut:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>SpiralOut:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:SpiralIn:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>SpiralIn:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>H,<br>W,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:SpiralIn:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>SpiralIn:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:Random:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>Random:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>H,<br>W,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:Random:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>Random:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:AlternateParsing:__init__' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L22'>AlternateParsing:__init__</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>H,<br>W,<br></ul>
-        <li>Docs:<br></li>
-        </ul>
-    </details>
-    <details>
-        <summary>
-        method | <a name='taming/modules/transformer/permuter.py:AlternateParsing:forward' href='https://github.com/CompVis/taming-transformers/tree/master/taming/modules/transformer/permuter.py#L9'>AlternateParsing:forward</a>
-        </summary>
-        <ul>
-        <li>Args:</li>
-        <ul>self,<br>x,<br>reverse = False,<br></ul>
+        <ul>self,<br>x,<br></ul>
         <li>Docs:<br></li>
         </ul>
     </details></ul>
