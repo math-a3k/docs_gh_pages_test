@@ -181,6 +181,8 @@ def test3(verbose=True):
 
 #####################################################################################
 #### Class ##########################################################################
+#####################################################################################
+#### Class ##########################################################################
 class htmlDoc(object):
     def __init__(self, dir_out="", mode="", title="", format: str = None, cfg: dict =None):
         """
@@ -276,7 +278,6 @@ class htmlDoc(object):
     def table(self, df:pd.DataFrame, format='blue_light', custom_css_class=None, use_datatable=False, table_id=None, **kw):
         """ Show Pandas in HTML and interactive
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
-
         Args:
             format:             List of colors available at https://pypi.org/project/pretty-html-table/
             custom_css_class:   [Option] Add custom class for table
@@ -313,10 +314,10 @@ class htmlDoc(object):
     def plot_tseries(self, df, coldate, cols_axe1, cols_axe2=None,
                      title="", figsize=(14,7),  nsample= 10000,
                      x_label=None, axe1_label=None,  axe2_label=None,
+                     date_format='%m/%d/%Y',
                      plot_type="",spacing=0.1,
                      cfg: dict = {}, mode='matplot', save_img="",  **kw):
         """Create html time series chart.
-
         Args:
             df:         pd Dataframe
             cols_axe1:
@@ -336,6 +337,7 @@ class htmlDoc(object):
 
         elif mode == 'highcharts':
             html_code = pd_plot_tseries_highcharts(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2,
+                                                   date_format='%m/%d/%Y',
                                                    figsize=figsize, title=title,
                                                    x_label=x_label, axe1_label=axe1_label, axe2_label=axe2_label,
                                                    cfg=cfg, mode=mode, save_img=save_img,
@@ -348,7 +350,6 @@ class htmlDoc(object):
                        nbin=10,  q5=0.005, q95=0.95,
                        cfg: dict = {}, mode='matplot', save_img="",  **kw):
         """Create html histogram chart.
-
         Args:
             df:         pd Dataframe
             col:        x Axis
@@ -377,7 +378,6 @@ class htmlDoc(object):
                      collabel=None, colclass1=None, colclass2=None, colclass3=None,
                      cfg: dict = {}, mode='matplot', save_img='',  **kw):
         """Create html scatter chart.
-
         Args:
             df:         pd Dataframe
             colx:       x Axis
@@ -400,6 +400,11 @@ class htmlDoc(object):
             )
 
         self.html += "\n\n" + html_code
+
+
+
+
+
 
 
 
@@ -471,7 +476,7 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
     yy = df[coly].values
 
 #     label_list = df[collabel].values
-    label_list = ['{collabel} : {value}'.format(collabel=collabel,value =  d_small[collabel][i]) for i in range(N)]
+    label_list = ['{collabel} : {value}'.format(collabel=collabel,value =  df0[collabel][i]) for i in range(len(df0[collabel]))]
 
     ### Using Class 1 ---> Color
     color_scheme = [ 0,1,2,3]
@@ -491,6 +496,9 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
     ptype_list = []
 
     return xx, yy, label_list, color_list, size_list, ptype_list
+
+
+
 
 
 
@@ -850,7 +858,7 @@ def pd_plot_tseries_highcharts(df,
     cc.x_label      = coldate if x_label is None else x_label
     cc.axe1_label   = "_".join(cols_axe1)      if axe1_label is None else axe1_label
     cc.axe2_label   = "_".join(cols_axe2)      if axe2_label is None else axe2_label
-    cc.title        = cc.get('title',    axe1_label + " vs " + coldate ) if title is None else title
+    cc.title        = cc.get('title',    str(axe1_label) + " vs " + str(coldate) ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
     cc.subtitle     = cc.get('subtitle', '')
     cc.cols_axe1    = cols_axe1
