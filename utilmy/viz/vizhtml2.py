@@ -470,7 +470,8 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
     xx = df[colx].values
     yy = df[coly].values
 
-    label_list = df[collabel].values
+#     label_list = df[collabel].values
+    label_list = ['{collabel} : {value}'.format(collabel=collabel,value =  d_small[collabel][i]) for i in range(N)]
 
     ### Using Class 1 ---> Color
     color_scheme = [ 0,1,2,3]
@@ -479,8 +480,8 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
 
 
     ### Using Class 2  ---> Color
-    n_size      = len(df['class2'].unique())
-    smin, smax  = 1.0, 15.0
+    n_size      = len(df[colclass2].unique())
+    smin, smax  = 100.0, 200.0
     size_scheme = np.arange(smin, smax, (smax-smin)/n_size)
     n_colors    = len(size_scheme)
     size_list   = [  size_scheme[ hash(str( x)) % n_colors ] for x in df[colclass2].values     ]
@@ -492,8 +493,9 @@ def pd_plot_scatter_get_data(df0,colx=None, coly=None, collabel=None,
     return xx, yy, label_list, color_list, size_list, ptype_list
 
 
+
 def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
-                            colclass1=None, colclass2=None, cfg: dict = None, mode='d3', save_path='',  **kw):
+                            colclass1=None, colclass2=None, cfg: dict = {}, mode='d3', save_path='',  **kw):
     """
     """
     cc           = Box(cfg)
@@ -508,10 +510,18 @@ def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
     fig, ax = plt.subplots(figsize= cc.figsize)  # set size
     ax.margins(0.05)  # Optional, just adds 5% padding to the autoscaling
 
-    # note that I use the cluster_name and cluster_color dicts with the 'name' lookup to returnthe appropriate color/label
-    ax.plot(xx, yy, marker='o', linestyle='', ms= size_list, label=label_list,
-            color=color_list,
-            mec='none')
+    
+
+    
+    scatter = ax.scatter(xx,
+                     yy,
+                     c=color_list,
+                     s=size_list,
+                     alpha=1,
+                     cmap=plt.cm.jet)
+    ax.grid(color='white', linestyle='solid')
+    # ax.scatter(xx, yy, s= size_list, label=label_list,
+    #         c=color_list)
     ax.set_aspect('auto')
     ax.tick_params(axis='x',        # changes apply to the x-axis
                    which='both',    # both major and minor ticks are affected
@@ -524,49 +534,49 @@ def pd_plot_scatter_matplot(df, colx=None, coly=None, collabel=None,
                    top='off',  # ticks along the top edge are off
                    labelleft='off')
 
-    ax.legend(numpoints=1)  # show legend with only 1 point
-
+    # ax.legend(numpoints=1)  # show legend with only 1 point
+    # label_list = ['{0}'.format(d_small['Name'][i]) for i in range(N)]
     # add label in x,y position with the label
-    for i in range(len(df)):
-        ax.text(xx[i], yy[i], label_list[i], size=8)
+    # for i in range(N):
+    #     ax.text(df['Age'][i], df['Fare'][i], label_list[i], size=8)
 
 
     if len(save_path) > 1 :
         plt.savefig(f'{cc.save_path}-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
 
-    # Plot
-    fig, ax = plt.subplots(figsize=cc.figsize)  # set plot size
-    ax.margins(0.03)  # Optional, just adds 5% padding to the autoscaling
-
-    # iterate through groups to layer the plot
-    #for name, group in groups_clusters:
-    points = ax.plot(xx, yy, marker='o', linestyle='',
-                     ms    = size_list,
-                     label = label_list, mec='none',
-                     color = color_list)
+    
     ax.set_aspect('auto')
 
+    #  uncomment to hide tick
     # set tick marks as blank
-    ax.axes.get_xaxis().set_ticks([])
-    ax.axes.get_yaxis().set_ticks([])
+    # ax.axes.get_xaxis().set_ticks([])
+    # ax.axes.get_yaxis().set_ticks([])
 
     # set axis as blank
-    ax.axes.get_xaxis().set_visible(False)
-    ax.axes.get_yaxis().set_visible(False)
+    # ax.axes.get_xaxis().set_visible(False)
+    # ax.axes.get_yaxis().set_visible(False)
+    
+    tooltip = mpld3.plugins.PointLabelTooltip(scatter, labels=label_list, voffset=10, hoffset=10)
+    # mpld3.plugins.connect(fig, tooltip)
 
-    mlpd3_add_tooltip(fig, points, label_list)
+    # tooltip = mpld3.plugins.PointHTMLTooltip(scatter, labels=label_list, voffset=10, hoffset=10, css=mpld3_CSS)
+    # connect tooltip to fig
+    mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
+    # mlpd3_add_tooltip(fig, points, label_list)
+    
     # set tooltip using points, labels and the already defined 'css'
     # tooltip = mpld3.plugins.PointHTMLTooltip(points[0], labels, voffset=10, hoffset=10, css=mpld3_CSS)
     # connect tooltip to fig
     # mpld3.plugins.connect(fig, tooltip, mpld3_TopToolbar())
 
-    ax.legend(numpoints=1)  # show legend with only one dot
-
-    return fig
+    # ax.legend(numpoints=1)  # show legend with only one dot
+    # mpld3.save_html(fig,  f"okembeds.html")
+    # return fig
     ##### Export ############################################################
-    #mpld3.fig_to_html(fig, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False, **kwargs)[source]
-    ## html_code = mpld3.fig_to_html(fig,  **kw)
-    ## return html_code
+    html_code = mpld3.fig_to_html(fig)
+    # print(html_code)
+    return html_code
+
 
 
 def pd_plot_histogram_matplot(df:pd.DataFrame, col='', title='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
