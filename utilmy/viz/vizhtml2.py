@@ -177,7 +177,38 @@ def test3(verbose=True):
     doc.open_browser()  # Open myfile.html
 
 
+def test_scatter_and_histogram_matplot():
 
+  data = test_getdata()
+
+  dft  = data['titanic.csv']
+  df   = data['housing.csv']
+  df2  = data['sales.csv']
+  cfg = Box({})
+  cfg.tseries = {"title": 'ok'}
+  cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
+  cfg.histo   = {"title": 'ok'}
+  cfg.use_datatable = True
+
+  df = pd.DataFrame([[1, 2]])
+  df2_list = [df, df, df]
+
+  doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+  doc.h1('My title')  # h1
+  doc.sep()
+  doc.br()  # <br>
+
+  doc.tag('<h2> My graph title </h2>')
+  doc.plot_scatter(dft, colx='Age', coly='Fare',
+                    collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                    cfg=cfg.scatter, mode='matplot', save_img='')
+  doc.hr()  # doc.sep() line separator
+
+
+  doc.plot_histogram(df2,col='Unit Cost',mode='matplot', save_img="")
+
+  doc.save(dir_out="myfile.html")
+  doc.open_browser()  # Open myfile.html
 
 #####################################################################################
 #### Class ##########################################################################
