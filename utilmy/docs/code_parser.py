@@ -7,7 +7,7 @@ Usage
 
     python code_parser.py file   parser/code_parser.py  method parser/output/output_file.csv
 
-    python code_parser.py repo   parser/test3    parser/output/output_repo.csv
+    python code_parser.py repo   parser/test3    parser/output/output_repo.csv --type=csv
 
     python code_parser.py repo_url https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
 
@@ -676,19 +676,22 @@ def _get_all_lines_in_function(function_name, array, indentMethod=''):
 
     # 2. get indent
     start_idx = 0
-    if response[0].rstrip()[-1] == ':':
-        if not re.match(r"(\s+)\w*", response[1]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[1]).group(1)
-        start_idx = 1
+    if len(response) > 1:
+        if response[0].rstrip()[-1] == ':':
+            if not re.match(r"(\s+)\w*", response[1]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[1]).group(1)
+            start_idx = 1
+        else:
+            for i in range(len(response)):
+                if response[i].rstrip()[-1] == ':':
+                    start_idx = i+1
+                    break
+            if not re.match(r"(\s+)\w*", response[start_idx]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
     else:
-        for i in range(len(response)):
-            if response[i].rstrip()[-1] == ':':
-                start_idx = i+1
-                break
-        if not re.match(r"(\s+)\w*", response[start_idx]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
+        return [], ''
 
     # 3. get all lines in function
     list_lines = list()
@@ -765,22 +768,25 @@ def _get_all_lines_define_function(function_name, array, indentMethod=''):
 
     # 2. check if the is one or multi lines
     start_idx = 0
-    if response[0].rstrip()[-1] == ':':
-        if not re.match(r"(\s+)\w*", response[1]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[1]).group(1)
-        start_idx = 1
-        list_lines.append(response[0])
+    if len(response) > 1:
+        if response[0].rstrip()[-1] == ':':
+            if not re.match(r"(\s+)\w*", response[1]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[1]).group(1)
+            start_idx = 1
+            list_lines.append(response[0])
+        else:
+            for i in range(len(response)):
+                list_lines.append(response[i])
+                if response[i].rstrip()[-1] == ':':
+                    start_idx = i+1
+                    break
+            if not re.match(r"(\s+)\w*", response[start_idx]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
+        return list_lines, indent
     else:
-        for i in range(len(response)):
-            list_lines.append(response[i])
-            if response[i].rstrip()[-1] == ':':
-                start_idx = i+1
-                break
-        if not re.match(r"(\s+)\w*", response[start_idx]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
-    return list_lines, indent
+        return [], ''
 
 
 def _get_define_function_stats(array):
@@ -983,9 +989,9 @@ def export_stats_perfile(in_path:str=None, out_path:str=None):
         df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
-def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None):
+def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None, type:str='csv'):
     """ 
-        python code_parser.py  export_stats_perfile <in_path> <out_path>
+        python code_parser.py  export_stats_perfile <in_path> <out_path>  <type>
 
     Returns:
         1  repo   --->  a single file stats for all sub-diractory
@@ -1003,32 +1009,66 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
         # export_stats_perfile(file, f"{out_path}/file_{output_file}.csv")
         df = get_list_function_stats(flist[i])
         print(df)
+        print(flist[i])
+        if type == 'txt':
+            with open(f'{out_path}', 'a+') as f:
+                f.write(f"\n\n\n\n{flist[i]}\n")
         if df is not None:
             if repo_name:
-                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
-            if i == 0:
-                df.to_csv(f'{out_path}', index=False)
-            else:
-                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/','', 1))
+            
+            if type == 'csv':
+                if i == 0:
+                    df.to_csv(f'{out_path}', index=False)
+                else:
+                    df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+
+            elif type == 'txt':
+                with open(f'{out_path}', 'a+') as f:
+                    f.write(f"-------------------------functions----------------------\n")
+                    for index, row in df.iterrows():
+                        str1 = ''
+                        for arg_name, arg_type, arg_value in zip(row['arg_name'], row['arg_type'], row['arg_value']):
+                            str1 += f'{arg_name}{f":{arg_type}" if arg_type else ""}{f" = {arg_value}" if arg_value else ""}, '
+                        str1 = str1[:-2] if str1 != '' else str1
+                        f.write(f"{row['name']}({str1})\n")
+                    f.write('\n')
 
         df = get_list_class_stats(flist[i])
         print(df)
         if df is not None:
             if repo_name:
-                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
-            df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/','', 1))
+            if type == 'csv':
+                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+            # elif type == 'txt':
+            #     for index, row in df.iterrows():
+            #         print(f"{index}: {df['uri']}")
+
 
         df = get_list_method_stats(flist[i])
         print(df)
         if df is not None:
             if repo_name:
                 df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
-            df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+            if type == 'csv':
+                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+            elif type == 'txt':
+                with open(f'{out_path}', 'a+') as f:
+                    f.write(f"-------------------------methods----------------------\n")
+                    for index, row in df.iterrows():
+                        str1 = ''
+                        for arg_name, arg_type, arg_value in zip(row['arg_name'], row['arg_type'], row['arg_value']):
+                            str1 += f'{arg_name}{f":{arg_type}" if arg_type else ""}{f" = {arg_value}" if arg_value else ""}, '
+                        str1 = str1[:-2] if str1 != '' else str1
+                        # f.write(f"{row['uri']}({str1})\n")
+                        f.write(f"{row['name'].replace(':', '.')}({str1})\n")
 
 
-def export_stats_repolink(repo_link: str, out_path:str=None):
+
+def export_stats_repolink(repo_link: str, out_path:str=None, type:str='csv'):
     """ 
-        python code_parser.py  repo_url <repo_link> <out_path>
+        python code_parser.py  repo_url <repo_link> <out_path>  <type>
 
     Returns:
         1  csv   --->  data info detail
@@ -1042,13 +1082,15 @@ def export_stats_repolink(repo_link: str, out_path:str=None):
             shutil.rmtree(repo_name)
     except OSError as e:
         print(f"Failed to delete repo: {e}")
-        exit()
+        # repo is existed
+        # exit()
 
-    print(f'Start clone Repo: {repo_link}')
-    Repo.clone_from(repo_link, repo_name)
-    print('Clone done')
+    if not os.path.exists(repo_name):
+        print(f'Start clone Repo: {repo_link}')
+        Repo.clone_from(repo_link, repo_name)
+        print('Clone done')
 
-    export_stats_perrepo(f'{repo_name}', out_path, repo_name)
+    export_stats_perrepo(f'{repo_name}', out_path, repo_name, type)
 
 
 def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, list_class_as, out_path):
