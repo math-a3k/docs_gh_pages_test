@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 """
+###########
 Usage
+      'type': export_stats_pertype,
+      'file': export_stats_perfile,
+      'repo': export_stats_perrepo,
+      'repo_url': export_stats_repolink,
+      'export_call_graph': export_call_graph,
+      'export_call_graph_url': export_call_graph_url,
 
-
+###########
     python code_parser.py type   parser/test3/arrow_dataset.py  method  parser/output/output_method.csv
 
     python code_parser.py file   parser/code_parser.py  method parser/output/output_file.csv
@@ -1290,7 +1297,7 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
         f.write(info)
 
 
-
+###############################################################################################################
 def test_example():
     # export_stats_pertype('parser/test3/arrow_dataset.py', "function", "parser/output/output_function.csv")
     # export_stats_pertype('parser/test3/arrow_dataset.py', "class", "parser/output/output_function.csv")
