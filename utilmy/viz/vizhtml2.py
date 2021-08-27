@@ -210,6 +210,14 @@ def test_scatter_and_histogram_matplot():
   doc.save(dir_out="myfile.html")
   doc.open_browser()  # Open myfile.html
 
+
+def test_pd_plot_network():
+  df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
+  pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
+
+
+
+
 #####################################################################################
 #### Class ##########################################################################
 #####################################################################################
@@ -1104,14 +1112,12 @@ def images_to_html(dir_input="*.png",  title="", verbose=False):
 
 ############################################################################################################################
 ############################################################################################################################
-def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge'):
+def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge',colweight=None):
     """
         https://pyviz.org/tools.html
-
-
     """
 
-    def convert_to_networkx(df:pd.DataFrame, cola="", colb="", colweight="", collabel=""):
+    def convert_to_networkx(df:pd.DataFrame, cola="", colb="", colweight=None):
         """
            Convert a panadas dataframe into a networkx graph
            and return a networkx graph
@@ -1123,6 +1129,8 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
         g = nx.Graph()
         for index, row in df.iterrows():
             g.add_edge(row[cola], row[colb], weight=row[colweight],)
+
+        nx.draw(G, with_labels=True)
         return g
 
 
@@ -1132,30 +1140,24 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
         This function accepts a networkx graph object, converts it to a pyvis network object preserving
         its node and edge attributes,
         and both returns and saves a dynamic network visualization.
-
         Valid node attributes include:
             "size", "value", "title", "x", "y", "label", "color".
             (For more info: https://pyvis.readthedocs.io/en/latest/documentation.html#pyvis.network.Network.add_node)
-
         Valid edge attributes include:
             "arrowStrikethrough", "hidden", "physics", "title", "value", "width"
             (For more info: https://pyvis.readthedocs.io/en/latest/documentation.html#pyvis.network.Network.add_edge)
-
         Args:
             networkx_graph: The graph to convert and display
             notebook: Display in Jupyter?
             output_filename: Where to save the converted network
             show_buttons: Show buttons in saved version of network?
             only_physics_buttons: Show only buttons controlling physics of network?
-
         ##
         # For example:
         ##
-
         # make a new neworkx network
         import networkx as nx
         G = nx.Graph()
-
         # add nodes and edges (color can be html color name or hex code)
         G.add_node('a', color='red', size=4)
         G.add_node('b', color='#30a1a5', size=3)
@@ -1163,7 +1165,6 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
         G.add_edge('a', 'b', weight=1023)
         G.add_edge('a', 'c', weight=435)
         G.add_edge('b', 'c', weight=100)
-
         # draw
         draw_graph3(G)
         """
@@ -1195,7 +1196,8 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
         # return and also save
         return pyvis_graph.show(output_filename)
 
-    networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight, collabel=colabel)
+    networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight)
+
 
     ng2 = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
                show_buttons=True, only_physics_buttons=False)
