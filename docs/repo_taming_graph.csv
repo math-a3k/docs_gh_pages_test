@@ -1,0 +1,639 @@
+uri, type, function, type2, path2, tag
+taming-transformers/main.py:get_obj_from_str, function, string.rsplit, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:rsplit
+taming-transformers/main.py:get_obj_from_str, function, importlib.import_module, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:import_module
+taming-transformers/main.py:get_obj_from_str, function, importlib.reload, [CLASS] [STDLIB], C:/Python39/lib/importlib, [CLASS] [STDLIB]: importlib:reload
+taming-transformers/main.py:get_obj_from_str, function, getattr, , , getattr
+taming-transformers/main.py:get_parser, function, str2bool, , , str2bool
+taming-transformers/main.py:get_parser, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/main.py:get_parser, function, v.lower, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: v:lower
+taming-transformers/main.py:get_parser, function, argparse.ArgumentTypeError, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentTypeError
+taming-transformers/main.py:get_parser, function, argparse.ArgumentParser, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentParser
+taming-transformers/main.py:get_parser, function, parser.add_argument, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:add_argument
+taming-transformers/main.py:get_parser, function, default=list, , , default=list
+taming-transformers/main.py:nondefault_trainer_args, function, argparse.ArgumentParser, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentParser
+taming-transformers/main.py:nondefault_trainer_args, function, Trainer.add_argparse_args, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Trainer:add_argparse_args
+taming-transformers/main.py:nondefault_trainer_args, function, parser.parse_args, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:parse_args
+taming-transformers/main.py:nondefault_trainer_args, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
+taming-transformers/main.py:nondefault_trainer_args, function, vars, , , vars
+taming-transformers/main.py:nondefault_trainer_args, function, getattr, , , getattr
+taming-transformers/main.py:instantiate_from_config, function, KeyError, , , KeyError
+taming-transformers/main.py:instantiate_from_config, function, get_obj_from_str, , , get_obj_from_str
+taming-transformers/main.py:instantiate_from_config, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+taming-transformers/scripts/extract_depth.py:get_state, function, midas.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: midas:cuda
+taming-transformers/scripts/extract_depth.py:get_state, function, midas.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: midas:eval
+taming-transformers/scripts/extract_depth.py:depth_to_rgba, function, len, , , len
+taming-transformers/scripts/extract_depth.py:depth_to_rgba, function, x.copy, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:copy
+taming-transformers/scripts/extract_depth.py:depth_to_rgba, function, y.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: y:reshape
+taming-transformers/scripts/extract_depth.py:depth_to_rgba, function, np.ascontiguousarray, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:ascontiguousarray
+taming-transformers/scripts/extract_depth.py:rgba_to_depth, function, len, , , len
+taming-transformers/scripts/extract_depth.py:rgba_to_depth, function, x.copy, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:copy
+taming-transformers/scripts/extract_depth.py:rgba_to_depth, function, y.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: y:reshape
+taming-transformers/scripts/extract_depth.py:rgba_to_depth, function, np.ascontiguousarray, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:ascontiguousarray
+taming-transformers/scripts/extract_depth.py:run, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+taming-transformers/scripts/extract_depth.py:run, function, model, , , model
+taming-transformers/scripts/extract_depth.py:run, function, prediction.unsqueeze, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: prediction:unsqueeze
+taming-transformers/scripts/extract_depth.py:run, function, prediction.cpu, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: prediction:cpu
+taming-transformers/scripts/extract_depth.py:get_filename, function, relpath.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: relpath:split
+taming-transformers/scripts/extract_depth.py:save_depth, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/scripts/extract_depth.py:save_depth, function, len, , , len
+taming-transformers/scripts/extract_depth.py:save_depth, function, get_state, , , get_state
+taming-transformers/scripts/extract_depth.py:save_depth, function, trange, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.trange
+taming-transformers/scripts/extract_depth.py:save_depth, function, get_filename, , , get_filename
+taming-transformers/scripts/extract_depth.py:save_depth, function, run, , , run
+taming-transformers/scripts/extract_depth.py:save_depth, function, depth_to_rgba, , , depth_to_rgba
+taming-transformers/scripts/extract_depth.py:save_depth, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/extract_segmentation.py:rescale_bgr, function, torch.flip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:flip
+taming-transformers/scripts/extract_segmentation.py:run_model, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/extract_segmentation.py:run_model, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+taming-transformers/scripts/extract_segmentation.py:run_model, function, model, , , model
+taming-transformers/scripts/extract_segmentation.py:run_model, function, torch.argmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:argmax
+taming-transformers/scripts/extract_segmentation.py:run_model, function, segmentation.detach, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: segmentation:detach
+taming-transformers/scripts/extract_segmentation.py:get_input, function, len, , , len
+taming-transformers/scripts/extract_segmentation.py:get_input, function, x.permute, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:permute
+taming-transformers/scripts/extract_segmentation.py:get_input, function, x.float, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:float
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, len, , , len
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, seg.permute, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: seg:permute
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, seg.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: seg:save
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, get_input, , , get_input
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, img.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: img:cuda
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, run_model, , , run_model
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, save_segmentation, , , save_segmentation
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, print, , , print
+taming-transformers/scripts/extract_segmentation.py:rescale_bgr, function, torch.flip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:flip
+taming-transformers/scripts/extract_segmentation.py:run_model, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/extract_segmentation.py:run_model, function, torch.no_grad, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:no_grad
+taming-transformers/scripts/extract_segmentation.py:run_model, function, model, , , model
+taming-transformers/scripts/extract_segmentation.py:run_model, function, torch.argmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:argmax
+taming-transformers/scripts/extract_segmentation.py:run_model, function, segmentation.detach, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: segmentation:detach
+taming-transformers/scripts/extract_segmentation.py:get_input, function, len, , , len
+taming-transformers/scripts/extract_segmentation.py:get_input, function, x.permute, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:permute
+taming-transformers/scripts/extract_segmentation.py:get_input, function, x.float, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:float
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, len, , , len
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, seg.permute, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: seg:permute
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/extract_segmentation.py:save_segmentation, function, seg.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: seg:save
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, get_input, , , get_input
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, img.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: img:cuda
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, run_model, , , run_model
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, save_segmentation, , , save_segmentation
+taming-transformers/scripts/extract_segmentation.py:iterate_dataset, function, print, , , print
+taming-transformers/scripts/make_samples.py:save_image, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/make_samples.py:run_conditional, function, len, , , len
+taming-transformers/scripts/make_samples.py:run_conditional, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
+taming-transformers/scripts/make_samples.py:run_conditional, function, next, [BUILT_IN], , [BUILT_IN]: next
+taming-transformers/scripts/make_samples.py:run_conditional, function, print, , , print
+taming-transformers/scripts/make_samples.py:run_conditional, function, trange, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.trange
+taming-transformers/scripts/make_samples.py:run_conditional, function, list, , , list
+taming-transformers/scripts/make_samples.py:run_conditional, function, default_collate, , , default_collate
+taming-transformers/scripts/make_samples.py:run_conditional, function, model.get_input, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:get_input
+taming-transformers/scripts/make_samples.py:run_conditional, function, range, , , range
+taming-transformers/scripts/make_samples.py:run_conditional, function, save_image, , , save_image
+taming-transformers/scripts/make_samples.py:run_conditional, function, model.encode_to_z, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:encode_to_z
+taming-transformers/scripts/make_samples.py:run_conditional, function, model.encode_to_c, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:encode_to_c
+taming-transformers/scripts/make_samples.py:run_conditional, function, torch.argmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:argmax
+taming-transformers/scripts/make_samples.py:run_conditional, function, c.squeeze, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: c:squeeze
+taming-transformers/scripts/make_samples.py:run_conditional, function, idx.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: idx:reshape
+taming-transformers/scripts/make_samples.py:run_conditional, function, cidx.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cidx:reshape
+taming-transformers/scripts/make_samples.py:run_conditional, function, patch.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: patch:reshape
+taming-transformers/scripts/make_samples.py:run_conditional, function, cpatch.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cpatch:reshape
+taming-transformers/scripts/make_samples.py:run_conditional, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/scripts/make_samples.py:run_conditional, function, model.transformer, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:transformer
+taming-transformers/scripts/make_samples.py:run_conditional, function, logits.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: logits:reshape
+taming-transformers/scripts/make_samples.py:run_conditional, function, model.top_k_logits, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:top_k_logits
+taming-transformers/scripts/make_samples.py:run_conditional, function, torch.multinomial, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:multinomial
+taming-transformers/scripts/make_samples.py:run_conditional, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/scripts/make_samples.py:run_conditional, function, model.decode_to_img, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:decode_to_img
+taming-transformers/scripts/make_samples.py:get_parser, function, argparse.ArgumentParser, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentParser
+taming-transformers/scripts/make_samples.py:get_parser, function, parser.add_argument, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:add_argument
+taming-transformers/scripts/make_samples.py:get_parser, function, default=list, , , default=list
+taming-transformers/scripts/make_samples.py:load_model_from_config, function, print, , , print
+taming-transformers/scripts/make_samples.py:load_model_from_config, function, instantiate_from_config, [FUNC] [REPO], taming-transformers/main.py, [FUNC] [REPO]: main.instantiate_from_config
+taming-transformers/scripts/make_samples.py:load_model_from_config, function, model.load_state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:load_state_dict
+taming-transformers/scripts/make_samples.py:load_model_from_config, function, model.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:cuda
+taming-transformers/scripts/make_samples.py:load_model_from_config, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/make_samples.py:get_data, function, instantiate_from_config, [FUNC] [REPO], taming-transformers/main.py, [FUNC] [REPO]: main.instantiate_from_config
+taming-transformers/scripts/make_samples.py:get_data, function, data.prepare_data, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: data:prepare_data
+taming-transformers/scripts/make_samples.py:get_data, function, data.setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: data:setup
+taming-transformers/scripts/make_samples.py:load_model_and_dset, function, get_data, , , get_data
+taming-transformers/scripts/make_samples.py:load_model_and_dset, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+taming-transformers/scripts/make_samples.py:load_model_and_dset, function, load_model_from_config, , , load_model_from_config
+taming-transformers/scripts/sample_conditional.py:bchw_to_st, function, rescale, , , rescale
+taming-transformers/scripts/sample_conditional.py:save_img, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/sample_conditional.py:get_interactive_image, function, st.file_uploader, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:file_uploader
+taming-transformers/scripts/sample_conditional.py:get_interactive_image, function, Image.open, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:open
+taming-transformers/scripts/sample_conditional.py:get_interactive_image, function, image.convert, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: image:convert
+taming-transformers/scripts/sample_conditional.py:get_interactive_image, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+taming-transformers/scripts/sample_conditional.py:get_interactive_image, function, print, , , print
+taming-transformers/scripts/sample_conditional.py:get_interactive_image, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/sample_conditional.py:get_interactive_image, function, img.resize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: img:resize
+taming-transformers/scripts/sample_conditional.py:single_image_to_torch, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+taming-transformers/scripts/sample_conditional.py:single_image_to_torch, function, torch.FloatTensor, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:FloatTensor
+taming-transformers/scripts/sample_conditional.py:single_image_to_torch, function, x.permute, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:permute
+taming-transformers/scripts/sample_conditional.py:pad_to_M, function, math.ceil, [CLASS] [STDLIB], , [CLASS] [STDLIB]: math:ceil
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, len, , , len
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, next, [BUILT_IN], , [BUILT_IN]: next
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, max_value=len, , , max_value=len
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, list, , , list
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, default_collate, , , default_collate
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, model.get_input, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:get_input
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, model.encode_to_z, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:encode_to_z
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, model.encode_to_c, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:encode_to_c
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:write
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.image, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:image
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, torch.argmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:argmax
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, c.squeeze, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: c:squeeze
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, idx.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: idx:reshape
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.info, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:info
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, c_indices.clone, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: c_indices:clone
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, cidx.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cidx:reshape
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, model.decode_to_img, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:decode_to_img
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.number_input, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:number_input
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.checkbox, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:checkbox
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.text, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:text
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, imageio.get_writer, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: imageio:get_writer
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.empty, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:empty
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.button, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:button
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, time.time, [CLASS] [STDLIB], , [CLASS] [STDLIB]: time:time
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, range, , , range
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, elapsed_t.text, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: elapsed_t:text
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, info.text, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: info:text
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, patch.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: patch:reshape
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, cpatch.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: cpatch:reshape
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, model.transformer, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:transformer
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, logits.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: logits:reshape
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, model.top_k_logits, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:top_k_logits
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, torch.multinomial, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:multinomial
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, bchw_to_st, , , bchw_to_st
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, output.image, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: output:image
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, writer.append_data, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: writer:append_data
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, writer.close, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: writer:close
+taming-transformers/scripts/sample_conditional.py:run_conditional, function, st.video, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:video
+taming-transformers/scripts/sample_conditional.py:get_parser, function, argparse.ArgumentParser, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentParser
+taming-transformers/scripts/sample_conditional.py:get_parser, function, parser.add_argument, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:add_argument
+taming-transformers/scripts/sample_conditional.py:get_parser, function, default=list, , , default=list
+taming-transformers/scripts/sample_conditional.py:load_model_from_config, function, st.warning, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:warning
+taming-transformers/scripts/sample_conditional.py:load_model_from_config, function, instantiate_from_config, [FUNC] [REPO], taming-transformers/main.py, [FUNC] [REPO]: main.instantiate_from_config
+taming-transformers/scripts/sample_conditional.py:load_model_from_config, function, model.load_state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:load_state_dict
+taming-transformers/scripts/sample_conditional.py:load_model_from_config, function, st.info, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: st:info
+taming-transformers/scripts/sample_conditional.py:load_model_from_config, function, model.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:cuda
+taming-transformers/scripts/sample_conditional.py:load_model_from_config, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/sample_conditional.py:get_data, function, instantiate_from_config, [FUNC] [REPO], taming-transformers/main.py, [FUNC] [REPO]: main.instantiate_from_config
+taming-transformers/scripts/sample_conditional.py:get_data, function, data.prepare_data, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: data:prepare_data
+taming-transformers/scripts/sample_conditional.py:get_data, function, data.setup, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: data:setup
+taming-transformers/scripts/sample_conditional.py:load_model_and_dset, function, get_data, , , get_data
+taming-transformers/scripts/sample_conditional.py:load_model_and_dset, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+taming-transformers/scripts/sample_conditional.py:load_model_and_dset, function, load_model_from_config, , , load_model_from_config
+taming-transformers/scripts/sample_fast.py:chw_to_pillow, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, type, , , type
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, repeat, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: einops.repeat
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, time.time, [CLASS] [STDLIB], , [CLASS] [STDLIB]: time:time
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, sample_with_past, , , sample_with_past
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, print, , , print
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, model.decode_to_img, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:decode_to_img
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, repeat, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: einops.repeat
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, time.time, [CLASS] [STDLIB], , [CLASS] [STDLIB]: time:time
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, sample_with_past, , , sample_with_past
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, print, , , print
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, model.decode_to_img, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:decode_to_img
+taming-transformers/scripts/sample_fast.py:run, function, range, , , range
+taming-transformers/scripts/sample_fast.py:run, function, print, , , print
+taming-transformers/scripts/sample_fast.py:run, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+taming-transformers/scripts/sample_fast.py:run, function, sample_classconditional, , , sample_classconditional
+taming-transformers/scripts/sample_fast.py:run, function, save_from_logs, , , save_from_logs
+taming-transformers/scripts/sample_fast.py:run, function, sample_unconditional, , , sample_unconditional
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, chw_to_pillow, , , chw_to_pillow
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, x.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:save
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, type, , , type
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, condlabel.item, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: condlabel:item
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, str, [BUILT_IN], , [BUILT_IN]: str
+taming-transformers/scripts/sample_fast.py:get_parser, function, str2bool, , , str2bool
+taming-transformers/scripts/sample_fast.py:get_parser, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/scripts/sample_fast.py:get_parser, function, v.lower, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: v:lower
+taming-transformers/scripts/sample_fast.py:get_parser, function, argparse.ArgumentTypeError, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentTypeError
+taming-transformers/scripts/sample_fast.py:get_parser, function, argparse.ArgumentParser, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentParser
+taming-transformers/scripts/sample_fast.py:get_parser, function, parser.add_argument, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:add_argument
+taming-transformers/scripts/sample_fast.py:get_parser, function, default=list, , , default=list
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, instantiate_from_config, [FUNC] [REPO], taming-transformers/main.py, [FUNC] [REPO]: main.instantiate_from_config
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, model.load_state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:load_state_dict
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, model.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:cuda
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/sample_fast.py:load_model, function, instantiate_from_config, [FUNC] [REPO], taming-transformers/main.py, [FUNC] [REPO]: main.instantiate_from_config
+taming-transformers/scripts/sample_fast.py:load_model, function, model.load_state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:load_state_dict
+taming-transformers/scripts/sample_fast.py:load_model, function, model.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:cuda
+taming-transformers/scripts/sample_fast.py:load_model, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/sample_fast.py:load_model, function, load_model, , , load_model
+taming-transformers/scripts/sample_fast.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+taming-transformers/scripts/sample_fast.py:load_model, function, print, , , print
+taming-transformers/scripts/sample_fast.py:load_model, function, load_model_from_config, , , load_model_from_config
+taming-transformers/scripts/sample_fast.py:chw_to_pillow, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, type, , , type
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, repeat, , , repeat
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, time.time, [CLASS] [STDLIB], , [CLASS] [STDLIB]: time:time
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, sample_with_past, , , sample_with_past
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, print, , , print
+taming-transformers/scripts/sample_fast.py:sample_classconditional, function, model.decode_to_img, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:decode_to_img
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, repeat, , , repeat
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, time.time, [CLASS] [STDLIB], , [CLASS] [STDLIB]: time:time
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, sample_with_past, , , sample_with_past
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, print, , , print
+taming-transformers/scripts/sample_fast.py:sample_unconditional, function, model.decode_to_img, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:decode_to_img
+taming-transformers/scripts/sample_fast.py:run, function, range, , , range
+taming-transformers/scripts/sample_fast.py:run, function, print, , , print
+taming-transformers/scripts/sample_fast.py:run, function, tqdm, , , tqdm
+taming-transformers/scripts/sample_fast.py:run, function, sample_classconditional, , , sample_classconditional
+taming-transformers/scripts/sample_fast.py:run, function, save_from_logs, , , save_from_logs
+taming-transformers/scripts/sample_fast.py:run, function, sample_unconditional, , , sample_unconditional
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, enumerate, [BUILT_IN], , [BUILT_IN]: enumerate
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, chw_to_pillow, , , chw_to_pillow
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, x.save, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:save
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, type, , , type
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, condlabel.item, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: condlabel:item
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/scripts/sample_fast.py:save_from_logs, function, str, [BUILT_IN], , [BUILT_IN]: str
+taming-transformers/scripts/sample_fast.py:get_parser, function, str2bool, , , str2bool
+taming-transformers/scripts/sample_fast.py:get_parser, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/scripts/sample_fast.py:get_parser, function, v.lower, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: v:lower
+taming-transformers/scripts/sample_fast.py:get_parser, function, argparse.ArgumentTypeError, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentTypeError
+taming-transformers/scripts/sample_fast.py:get_parser, function, argparse.ArgumentParser, [CLASS] [STDLIB], , [CLASS] [STDLIB]: argparse:ArgumentParser
+taming-transformers/scripts/sample_fast.py:get_parser, function, parser.add_argument, [CLASS] [STDLIB], , [CLASS] [STDLIB]: parser:add_argument
+taming-transformers/scripts/sample_fast.py:get_parser, function, default=list, , , default=list
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, instantiate_from_config, , , instantiate_from_config
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, model.load_state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:load_state_dict
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, model.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:cuda
+taming-transformers/scripts/sample_fast.py:load_model_from_config, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/sample_fast.py:load_model, function, instantiate_from_config, , , instantiate_from_config
+taming-transformers/scripts/sample_fast.py:load_model, function, model.load_state_dict, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:load_state_dict
+taming-transformers/scripts/sample_fast.py:load_model, function, model.cuda, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:cuda
+taming-transformers/scripts/sample_fast.py:load_model, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/scripts/sample_fast.py:load_model, function, load_model, , , load_model
+taming-transformers/scripts/sample_fast.py:load_model, function, torch.load, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:load
+taming-transformers/scripts/sample_fast.py:load_model, function, print, , , print
+taming-transformers/scripts/sample_fast.py:load_model, function, load_model_from_config, , , load_model_from_config
+taming-transformers/taming/util.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/util.py:download, function, requests.get, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/requests, [CLASS] [SIDE_PACKAGE]: requests:get
+taming-transformers/taming/util.py:download, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/util.py:download, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+taming-transformers/taming/util.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:download, function, r.iter_content, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: r:iter_content
+taming-transformers/taming/util.py:download, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
+taming-transformers/taming/util.py:download, function, pbar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pbar:update
+taming-transformers/taming/util.py:md5_hash, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:md5_hash, function, f.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:read
+taming-transformers/taming/util.py:md5_hash, function, hashlib.md5, [CLASS] [STDLIB], , [CLASS] [STDLIB]: hashlib:md5
+taming-transformers/taming/util.py:get_ckpt_path, function, md5_hash, , , md5_hash
+taming-transformers/taming/util.py:get_ckpt_path, function, print, , , print
+taming-transformers/taming/util.py:get_ckpt_path, function, download, , , download
+taming-transformers/taming/util.py:retrieve, function, key.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: key:split
+taming-transformers/taming/util.py:retrieve, function, callable, , , callable
+taming-transformers/taming/util.py:retrieve, function, KeyNotFoundError, , , KeyNotFoundError
+taming-transformers/taming/util.py:retrieve, function, ValueError, , , ValueError
+taming-transformers/taming/util.py:retrieve, function, list_or_dict, , , list_or_dict
+taming-transformers/taming/util.py:retrieve, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/taming/util.py:retrieve, function, list_or_dict[int, , , list_or_dict[int
+taming-transformers/taming/util.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/util.py:download, function, requests.get, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/requests, [CLASS] [SIDE_PACKAGE]: requests:get
+taming-transformers/taming/util.py:download, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/util.py:download, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+taming-transformers/taming/util.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:download, function, r.iter_content, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: r:iter_content
+taming-transformers/taming/util.py:download, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
+taming-transformers/taming/util.py:download, function, pbar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pbar:update
+taming-transformers/taming/util.py:md5_hash, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:md5_hash, function, f.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:read
+taming-transformers/taming/util.py:md5_hash, function, hashlib.md5, [CLASS] [STDLIB], , [CLASS] [STDLIB]: hashlib:md5
+taming-transformers/taming/util.py:get_ckpt_path, function, md5_hash, , , md5_hash
+taming-transformers/taming/util.py:get_ckpt_path, function, print, , , print
+taming-transformers/taming/util.py:get_ckpt_path, function, download, , , download
+taming-transformers/taming/util.py:retrieve, function, key.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: key:split
+taming-transformers/taming/util.py:retrieve, function, callable, , , callable
+taming-transformers/taming/util.py:retrieve, function, KeyNotFoundError, , , KeyNotFoundError
+taming-transformers/taming/util.py:retrieve, function, ValueError, , , ValueError
+taming-transformers/taming/util.py:retrieve, function, list_or_dict, , , list_or_dict
+taming-transformers/taming/util.py:retrieve, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/taming/util.py:retrieve, function, list_or_dict[int, , , list_or_dict[int
+taming-transformers/taming/util.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/util.py:download, function, requests.get, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/requests, [CLASS] [SIDE_PACKAGE]: requests:get
+taming-transformers/taming/util.py:download, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/util.py:download, function, tqdm, , , tqdm
+taming-transformers/taming/util.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:download, function, r.iter_content, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: r:iter_content
+taming-transformers/taming/util.py:download, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
+taming-transformers/taming/util.py:download, function, pbar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pbar:update
+taming-transformers/taming/util.py:md5_hash, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:md5_hash, function, f.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:read
+taming-transformers/taming/util.py:md5_hash, function, hashlib.md5, [CLASS] [STDLIB], , [CLASS] [STDLIB]: hashlib:md5
+taming-transformers/taming/util.py:get_ckpt_path, function, md5_hash, , , md5_hash
+taming-transformers/taming/util.py:get_ckpt_path, function, print, , , print
+taming-transformers/taming/util.py:get_ckpt_path, function, download, , , download
+taming-transformers/taming/util.py:retrieve, function, key.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: key:split
+taming-transformers/taming/util.py:retrieve, function, callable, , , callable
+taming-transformers/taming/util.py:retrieve, function, KeyNotFoundError, , , KeyNotFoundError
+taming-transformers/taming/util.py:retrieve, function, ValueError, , , ValueError
+taming-transformers/taming/util.py:retrieve, function, list_or_dict, , , list_or_dict
+taming-transformers/taming/util.py:retrieve, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/taming/util.py:retrieve, function, list_or_dict[int, , , list_or_dict[int
+taming-transformers/taming/util.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/util.py:download, function, requests.get, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/requests, [CLASS] [SIDE_PACKAGE]: requests:get
+taming-transformers/taming/util.py:download, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/util.py:download, function, tqdm, , , tqdm
+taming-transformers/taming/util.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:download, function, r.iter_content, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: r:iter_content
+taming-transformers/taming/util.py:download, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
+taming-transformers/taming/util.py:download, function, pbar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pbar:update
+taming-transformers/taming/util.py:md5_hash, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:md5_hash, function, f.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:read
+taming-transformers/taming/util.py:md5_hash, function, hashlib.md5, [CLASS] [STDLIB], , [CLASS] [STDLIB]: hashlib:md5
+taming-transformers/taming/util.py:get_ckpt_path, function, md5_hash, , , md5_hash
+taming-transformers/taming/util.py:get_ckpt_path, function, print, , , print
+taming-transformers/taming/util.py:get_ckpt_path, function, download, , , download
+taming-transformers/taming/util.py:retrieve, function, key.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: key:split
+taming-transformers/taming/util.py:retrieve, function, callable, , , callable
+taming-transformers/taming/util.py:retrieve, function, KeyNotFoundError, , , KeyNotFoundError
+taming-transformers/taming/util.py:retrieve, function, ValueError, , , ValueError
+taming-transformers/taming/util.py:retrieve, function, list_or_dict, , , list_or_dict
+taming-transformers/taming/util.py:retrieve, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/taming/util.py:retrieve, function, list_or_dict[int, , , list_or_dict[int
+taming-transformers/taming/util.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/util.py:download, function, requests.get, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/requests, [CLASS] [SIDE_PACKAGE]: requests:get
+taming-transformers/taming/util.py:download, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/util.py:download, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+taming-transformers/taming/util.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:download, function, r.iter_content, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: r:iter_content
+taming-transformers/taming/util.py:download, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
+taming-transformers/taming/util.py:download, function, pbar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pbar:update
+taming-transformers/taming/util.py:md5_hash, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:md5_hash, function, f.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:read
+taming-transformers/taming/util.py:md5_hash, function, hashlib.md5, [CLASS] [STDLIB], , [CLASS] [STDLIB]: hashlib:md5
+taming-transformers/taming/util.py:get_ckpt_path, function, md5_hash, , , md5_hash
+taming-transformers/taming/util.py:get_ckpt_path, function, print, , , print
+taming-transformers/taming/util.py:get_ckpt_path, function, download, , , download
+taming-transformers/taming/util.py:retrieve, function, key.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: key:split
+taming-transformers/taming/util.py:retrieve, function, callable, , , callable
+taming-transformers/taming/util.py:retrieve, function, KeyNotFoundError, , , KeyNotFoundError
+taming-transformers/taming/util.py:retrieve, function, ValueError, , , ValueError
+taming-transformers/taming/util.py:retrieve, function, list_or_dict, , , list_or_dict
+taming-transformers/taming/util.py:retrieve, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/taming/util.py:retrieve, function, list_or_dict[int, , , list_or_dict[int
+taming-transformers/taming/util.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/util.py:download, function, requests.get, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/requests, [CLASS] [SIDE_PACKAGE]: requests:get
+taming-transformers/taming/util.py:download, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/util.py:download, function, tqdm, , , tqdm
+taming-transformers/taming/util.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:download, function, r.iter_content, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: r:iter_content
+taming-transformers/taming/util.py:download, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
+taming-transformers/taming/util.py:download, function, pbar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pbar:update
+taming-transformers/taming/util.py:md5_hash, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:md5_hash, function, f.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:read
+taming-transformers/taming/util.py:md5_hash, function, hashlib.md5, [CLASS] [STDLIB], , [CLASS] [STDLIB]: hashlib:md5
+taming-transformers/taming/util.py:get_ckpt_path, function, md5_hash, , , md5_hash
+taming-transformers/taming/util.py:get_ckpt_path, function, print, , , print
+taming-transformers/taming/util.py:get_ckpt_path, function, download, , , download
+taming-transformers/taming/util.py:retrieve, function, key.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: key:split
+taming-transformers/taming/util.py:retrieve, function, callable, , , callable
+taming-transformers/taming/util.py:retrieve, function, KeyNotFoundError, , , KeyNotFoundError
+taming-transformers/taming/util.py:retrieve, function, ValueError, , , ValueError
+taming-transformers/taming/util.py:retrieve, function, list_or_dict, , , list_or_dict
+taming-transformers/taming/util.py:retrieve, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/taming/util.py:retrieve, function, list_or_dict[int, , , list_or_dict[int
+taming-transformers/taming/util.py:download, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/util.py:download, function, requests.get, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/requests, [CLASS] [SIDE_PACKAGE]: requests:get
+taming-transformers/taming/util.py:download, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/util.py:download, function, tqdm, , , tqdm
+taming-transformers/taming/util.py:download, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:download, function, r.iter_content, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: r:iter_content
+taming-transformers/taming/util.py:download, function, f.write, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:write
+taming-transformers/taming/util.py:download, function, pbar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: pbar:update
+taming-transformers/taming/util.py:md5_hash, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/util.py:md5_hash, function, f.read, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:read
+taming-transformers/taming/util.py:md5_hash, function, hashlib.md5, [CLASS] [STDLIB], , [CLASS] [STDLIB]: hashlib:md5
+taming-transformers/taming/util.py:get_ckpt_path, function, md5_hash, , , md5_hash
+taming-transformers/taming/util.py:get_ckpt_path, function, print, , , print
+taming-transformers/taming/util.py:get_ckpt_path, function, download, , , download
+taming-transformers/taming/util.py:retrieve, function, key.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: key:split
+taming-transformers/taming/util.py:retrieve, function, callable, , , callable
+taming-transformers/taming/util.py:retrieve, function, KeyNotFoundError, , , KeyNotFoundError
+taming-transformers/taming/util.py:retrieve, function, ValueError, , , ValueError
+taming-transformers/taming/util.py:retrieve, function, list_or_dict, , , list_or_dict
+taming-transformers/taming/util.py:retrieve, function, isinstance, [BUILT_IN], , [BUILT_IN]: isinstance
+taming-transformers/taming/util.py:retrieve, function, list_or_dict[int, , , list_or_dict[int
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, yaml.load, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/yaml, [CLASS] [SIDE_PACKAGE]: yaml:load
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, synsets.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: synsets:append
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, print, , , print
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, string.endswith, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:endswith
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, string.split, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:split
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, sub.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: sub:split
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, len, , , len
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, indices.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: indices:append
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, range, , , range
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, indices.extend, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: indices:extend
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, list, , , list
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.SmallestMaxSize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:SmallestMaxSize
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, transforms.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: transforms:append
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.CenterCrop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:CenterCrop
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.RandomCrop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:RandomCrop
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.HorizontalFlip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:HorizontalFlip
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.Compose, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:Compose
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, len, , , len
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, x.copy, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:copy
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, y.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: y:reshape
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, np.ascontiguousarray, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:ascontiguousarray
+taming-transformers/taming/data/imagenet.py:imscale, function, x.min, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:min
+taming-transformers/taming/data/imagenet.py:imscale, function, x.max, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:max
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.clip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:clip
+taming-transformers/taming/data/imagenet.py:imscale, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.resize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:resize
+taming-transformers/taming/data/imagenet.py:imscale, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.astype, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:astype
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, yaml.load, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/yaml, [CLASS] [SIDE_PACKAGE]: yaml:load
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, synsets.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: synsets:append
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, print, , , print
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, string.endswith, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:endswith
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, string.split, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:split
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, sub.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: sub:split
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, len, , , len
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, indices.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: indices:append
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, range, , , range
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, indices.extend, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: indices:extend
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, list, , , list
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.SmallestMaxSize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:SmallestMaxSize
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, transforms.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: transforms:append
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.CenterCrop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:CenterCrop
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.RandomCrop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:RandomCrop
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.HorizontalFlip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:HorizontalFlip
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.Compose, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:Compose
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, len, , , len
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, x.copy, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:copy
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, y.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: y:reshape
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, np.ascontiguousarray, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:ascontiguousarray
+taming-transformers/taming/data/imagenet.py:imscale, function, x.min, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:min
+taming-transformers/taming/data/imagenet.py:imscale, function, x.max, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:max
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.clip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:clip
+taming-transformers/taming/data/imagenet.py:imscale, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.resize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:resize
+taming-transformers/taming/data/imagenet.py:imscale, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.astype, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:astype
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, open, [BUILT_IN], , [BUILT_IN]: open
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, yaml.load, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/yaml, [CLASS] [SIDE_PACKAGE]: yaml:load
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, synsets.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: synsets:append
+taming-transformers/taming/data/imagenet.py:give_synsets_from_indices, function, print, , , print
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, string.endswith, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:endswith
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, string.split, [CLASS] [STDLIB], , [CLASS] [STDLIB]: string:split
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, sub.split, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: sub:split
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, len, , , len
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, indices.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: indices:append
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, range, , , range
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, indices.extend, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: indices:extend
+taming-transformers/taming/data/imagenet.py:str_to_indices, function, sorted, [BUILT_IN], , [BUILT_IN]: sorted
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, list, , , list
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.SmallestMaxSize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:SmallestMaxSize
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, transforms.append, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: transforms:append
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.CenterCrop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:CenterCrop
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.RandomCrop, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:RandomCrop
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.HorizontalFlip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:HorizontalFlip
+taming-transformers/taming/data/imagenet.py:get_preprocessor, function, albumentations.Compose, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: albumentations:Compose
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, len, , , len
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, x.copy, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:copy
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, y.reshape, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: y:reshape
+taming-transformers/taming/data/imagenet.py:rgba_to_depth, function, np.ascontiguousarray, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:ascontiguousarray
+taming-transformers/taming/data/imagenet.py:imscale, function, x.min, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:min
+taming-transformers/taming/data/imagenet.py:imscale, function, x.max, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:max
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.clip, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:clip
+taming-transformers/taming/data/imagenet.py:imscale, function, Image.fromarray, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: Image:fromarray
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.resize, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:resize
+taming-transformers/taming/data/imagenet.py:imscale, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+taming-transformers/taming/data/imagenet.py:imscale, function, lr.astype, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: lr:astype
+taming-transformers/taming/data/utils.py:unpack, function, path.endswith, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: path:endswith
+taming-transformers/taming/data/utils.py:unpack, function, tarfile.open, [CLASS] [STDLIB], , [CLASS] [STDLIB]: tarfile:open
+taming-transformers/taming/data/utils.py:unpack, function, tar.extractall, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: tar:extractall
+taming-transformers/taming/data/utils.py:unpack, function, zipfile.ZipFile, [CLASS] [STDLIB], , [CLASS] [STDLIB]: zipfile:ZipFile
+taming-transformers/taming/data/utils.py:unpack, function, f.extractall, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: f:extractall
+taming-transformers/taming/data/utils.py:unpack, function, NotImplementedError, , , NotImplementedError
+taming-transformers/taming/data/utils.py:reporthook, function, hook, , , hook
+taming-transformers/taming/data/utils.py:reporthook, function, bar.update, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: bar:update
+taming-transformers/taming/data/utils.py:get_root, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/data/utils.py:is_prepared, function, Path, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: pathlib.Path
+taming-transformers/taming/data/utils.py:mark_prepared, function, Path, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: pathlib.Path
+taming-transformers/taming/data/utils.py:prompt_download, function, print, , , print
+taming-transformers/taming/data/utils.py:prompt_download, function, input, [BUILT_IN], , [BUILT_IN]: input
+taming-transformers/taming/data/utils.py:download_url, function, os.makedirs, [CLASS] [STDLIB], , [CLASS] [STDLIB]: os:makedirs
+taming-transformers/taming/data/utils.py:download_url, function, tqdm, [FUNC] [SIDE_PACKAGE], C:/Python39/lib/site-packages/tqdm, [FUNC] [SIDE_PACKAGE]: tqdm.tqdm
+taming-transformers/taming/data/utils.py:download_url, function, reporthook=reporthook, , , reporthook=reporthook
+taming-transformers/taming/data/utils.py:download_url, function, download_urls, , , download_urls
+taming-transformers/taming/data/utils.py:download_url, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+taming-transformers/taming/data/utils.py:download_url, function, urls.items, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: urls:items
+taming-transformers/taming/data/utils.py:download_url, function, download_url, , , download_url
+taming-transformers/taming/data/utils.py:download_urls, function, dict, [BUILT_IN], , [BUILT_IN]: dict
+taming-transformers/taming/data/utils.py:download_urls, function, urls.items, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: urls:items
+taming-transformers/taming/data/utils.py:download_urls, function, download_url, , , download_url
+taming-transformers/taming/data/utils.py:quadratic_crop, function, np.array, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:array
+taming-transformers/taming/data/utils.py:quadratic_crop, function, np.clip, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:clip
+taming-transformers/taming/data/utils.py:quadratic_crop, function, max, , , max
+taming-transformers/taming/data/utils.py:quadratic_crop, function, int, [BUILT_IN], , [BUILT_IN]: int
+taming-transformers/taming/data/utils.py:quadratic_crop, function, min, [BUILT_IN], , [BUILT_IN]: min
+taming-transformers/taming/data/utils.py:quadratic_crop, function, np.pad, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:pad
+taming-transformers/taming/modules/util.py:count_params, function, sum, [BUILT_IN], , [BUILT_IN]: sum
+taming-transformers/taming/modules/util.py:count_params, function, model.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:parameters
+taming-transformers/taming/modules/util.py:count_params, function, sum, [BUILT_IN], , [BUILT_IN]: sum
+taming-transformers/taming/modules/util.py:count_params, function, model.parameters, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:parameters
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, len, , , len
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, math.log, [CLASS] [STDLIB], , [CLASS] [STDLIB]: math:log
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, torch.exp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:exp
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, emb.to, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: emb:to
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, timesteps.float, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: timesteps:float
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, torch.cos, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cos
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, len, , , len
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, math.log, [CLASS] [STDLIB], , [CLASS] [STDLIB]: math:log
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, torch.exp, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:exp
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, emb.to, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: emb:to
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, timesteps.float, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: timesteps:float
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/taming/modules/diffusionmodules/model.py:get_timestep_embedding, function, torch.cos, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cos
+taming-transformers/taming/modules/discriminator/model.py:weights_init, function, classname.find, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: classname:find
+taming-transformers/taming/modules/discriminator/model.py:weights_init, function, classname.find, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: classname:find
+taming-transformers/taming/modules/losses/lpips.py:normalize_tensor, function, torch.sqrt, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:sqrt
+taming-transformers/taming/modules/losses/lpips.py:spatial_average, function, x.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:mean
+taming-transformers/taming/modules/losses/lpips.py:normalize_tensor, function, torch.sqrt, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:sqrt
+taming-transformers/taming/modules/losses/lpips.py:spatial_average, function, x.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:mean
+taming-transformers/taming/modules/losses/lpips.py:normalize_tensor, function, torch.sqrt, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:sqrt
+taming-transformers/taming/modules/losses/lpips.py:spatial_average, function, x.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:mean
+taming-transformers/taming/modules/losses/vqperceptual.py:hinge_d_loss, function, torch.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:mean
+taming-transformers/taming/modules/losses/vqperceptual.py:vanilla_d_loss, function, torch.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:mean
+taming-transformers/taming/modules/losses/vqperceptual.py:hinge_d_loss, function, torch.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:mean
+taming-transformers/taming/modules/losses/vqperceptual.py:vanilla_d_loss, function, torch.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:mean
+taming-transformers/taming/modules/losses/vqperceptual.py:hinge_d_loss, function, torch.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:mean
+taming-transformers/taming/modules/losses/vqperceptual.py:vanilla_d_loss, function, torch.mean, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:mean
+taming-transformers/taming/modules/transformer/mingpt.py:top_k_logits, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/taming/modules/transformer/mingpt.py:top_k_logits, function, logits.clone, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: logits:clone
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, model.get_block_size, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:get_block_size
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, range, , , range
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, x.size, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:size
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, model, , , model
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, top_k_logits, , , top_k_logits
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, F.softmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: F:softmax
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, torch.multinomial, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:multinomial
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, range, , , range
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, callback, , , callback
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, model.forward_with_past, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:forward_with_past
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, past.append, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/past, [CLASS] [SIDE_PACKAGE]: past:append
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, top_k_top_p_filtering, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: transformers.top_k_top_p_filtering
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, F.softmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: F:softmax
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, torch.multinomial, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:multinomial
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/taming/modules/transformer/mingpt.py:top_k_logits, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/taming/modules/transformer/mingpt.py:top_k_logits, function, logits.clone, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: logits:clone
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, model.get_block_size, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:get_block_size
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, model.eval, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:eval
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, range, , , range
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, x.size, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: x:size
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, model, , , model
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, top_k_logits, , , top_k_logits
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, F.softmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: F:softmax
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, torch.multinomial, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:multinomial
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/taming/modules/transformer/mingpt.py:sample, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, range, , , range
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, callback, , , callback
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, model.forward_with_past, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: model:forward_with_past
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, past.append, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/past, [CLASS] [SIDE_PACKAGE]: past:append
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, top_k_top_p_filtering, [FUNC] [SIDE_PACKAGE], , [FUNC] [SIDE_PACKAGE]: transformers.top_k_top_p_filtering
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, F.softmax, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: F:softmax
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, torch.topk, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:topk
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, torch.multinomial, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:multinomial
+taming-transformers/taming/modules/transformer/mingpt.py:sample_with_past, function, torch.cat, [CLASS] [SIDE_PACKAGE], , [CLASS] [SIDE_PACKAGE]: torch:cat
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, np.uint64, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:uint64
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, np.uint, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:uint
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, range, , , range
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, np.uint64, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:uint64
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, np.uint, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:uint
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, range, , , range
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, np.uint64, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:uint64
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, np.uint, [CLASS] [SIDE_PACKAGE], C:/Python39/lib/site-packages/numpy, [CLASS] [SIDE_PACKAGE]: np:uint
+taming-transformers/taming/modules/transformer/permuter.py:mortonify, function, range, , , range

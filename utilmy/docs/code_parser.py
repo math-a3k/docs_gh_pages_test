@@ -1,32 +1,38 @@
 # -*- coding: utf-8 -*-
 """
+###########
 Usage
+      'type': export_stats_pertype,
+      'file': export_stats_perfile,
+      'repo': export_stats_perrepo,
+      'repo_url': export_stats_repolink,
+      'export_call_graph': export_call_graph,
+      'export_call_graph_url': export_call_graph_url,
 
-
+###########
     python code_parser.py type   parser/test3/arrow_dataset.py  method  parser/output/output_method.csv
 
     python code_parser.py file   parser/code_parser.py  method parser/output/output_file.csv
 
-    python code_parser.py repo   parser/test3    parser/output/output_repo.csv
+    python code_parser.py repo   parser/test3    parser/output/output_repo.csv --type=csv
+
+    python code_parser.py repo_url https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
 
     python code_parser.py export_call_graph parser/test3   docs/export_call_graph.csv
 
-     python code_parser.py  export_call_graph <in_path> <out_path>
+    python code_parser.py export_call_graph_url https://github.com/CompVis/taming-transformers.git docs/repo_taming_graph.csv
+
+    python code_parser.py export_call_graph <in_path> <out_path>
+    
 
 
 """
-
-import os
-import glob
-import fire
+import os, shutil, glob, re, platform, fire, pkgutil, importlib, pandas as pd
 from posixpath import dirname, split
 from ast import literal_eval
-import re
-import pandas as pd
 from stdlib_list import stdlib_list
-import platform
-import pkgutil
-import importlib
+
+
 
 stdlib_libraries = stdlib_list(platform.python_version()[:-2])
 # print(stdlib_libraries)
@@ -39,6 +45,287 @@ list_built_in = [
 
 ]
 
+
+###########################################################################################################
+########  Export ##########################################################################################
+def export_stats_pertype(in_path:str=None, type:str=None, out_path:str=None):
+    """
+        python code_parser.py type <in_path> <type> <out_path>
+    Returns:
+
+    """
+    file = in_path
+    if type == "function":
+        df = get_list_function_stats(file)
+        print(df)
+        if df is not None:
+            df.to_csv(f'{out_path}', index=False)
+    elif type == "class":
+        df = get_list_class_stats(file)
+        print(df)
+        if df is not None:
+            df.to_csv(f'{out_path}', index=False)
+    elif type == "method":
+        df = get_list_method_stats(file)
+        print(df)
+        if df is not None:
+            df.to_csv(f'{out_path}', index=False)
+    else:
+        print("Type is invalid. ")
+
+
+def export_stats_perfile(in_path:str=None, out_path:str=None):
+    """
+        python code_parser.py  export_stats_perfile <in_path> <out_path>
+
+    Returns:
+
+    """
+    file = in_path
+    df = get_list_function_stats(file)
+    print(df)
+    if df is not None:
+        df.to_csv(f'{out_path}', index=False)
+
+    df = get_list_class_stats(file)
+    print(df)
+    if df is not None:
+        df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+
+    df = get_list_method_stats(file)
+    print(df)
+    if df is not None:
+        df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+
+
+def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None, type:str='csv'):
+    """
+        python code_parser.py  export_stats_perfile <in_path> <out_path>  <type>
+
+    Returns:
+        1  repo   --->  a single file stats for all sub-diractory
+    """
+    root = in_path
+    flist = glob.glob(root +"/*.py")
+    flist = flist + glob.glob(root +"/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*/*/*.py")
+
+    # print(flist)
+    for i in range(len(flist)):
+        # output_file = re.search(r'(\w+).py', file).group(1)
+        # export_stats_perfile(file, f"{out_path}/file_{output_file}.csv")
+        df = get_list_function_stats(flist[i])
+        print(df)
+        print(flist[i])
+        if type == 'txt':
+            with open(f'{out_path}', 'a+') as f:
+                f.write(f"\n\n\n\n{flist[i]}\n")
+        if df is not None:
+            if repo_name:
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/','', 1))
+
+            if type == 'csv':
+                if i == 0:
+                    df.to_csv(f'{out_path}', index=False)
+                else:
+                    df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+
+            elif type == 'txt':
+                with open(f'{out_path}', 'a+') as f:
+                    f.write(f"-------------------------functions----------------------\n")
+                    for index, row in df.iterrows():
+                        str1 = ''
+                        for arg_name, arg_type, arg_value in zip(row['arg_name'], row['arg_type'], row['arg_value']):
+                            str1 += f'{arg_name}{f":{arg_type}" if arg_type else ""}{f" = {arg_value}" if arg_value else ""}, '
+                        str1 = str1[:-2] if str1 != '' else str1
+                        f.write(f"{row['name']}({str1})\n")
+                    f.write('\n')
+
+        df = get_list_class_stats(flist[i])
+        print(df)
+        if df is not None:
+            if repo_name:
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/','', 1))
+            if type == 'csv':
+                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+            # elif type == 'txt':
+            #     for index, row in df.iterrows():
+            #         print(f"{index}: {df['uri']}")
+
+
+        df = get_list_method_stats(flist[i])
+        print(df)
+        if df is not None:
+            if repo_name:
+                df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
+            if type == 'csv':
+                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+            elif type == 'txt':
+                with open(f'{out_path}', 'a+') as f:
+                    f.write(f"-------------------------methods----------------------\n")
+                    for index, row in df.iterrows():
+                        str1 = ''
+                        for arg_name, arg_type, arg_value in zip(row['arg_name'], row['arg_type'], row['arg_value']):
+                            str1 += f'{arg_name}{f":{arg_type}" if arg_type else ""}{f" = {arg_value}" if arg_value else ""}, '
+                        str1 = str1[:-2] if str1 != '' else str1
+                        # f.write(f"{row['uri']}({str1})\n")
+                        f.write(f"{row['name'].replace(':', '.')}({str1})\n")
+
+
+
+def export_stats_repolink(repo_link: str, out_path:str=None, type:str='csv'):
+    """
+        python code_parser.py  repo_url https://github.com/lucidrains/DALLE-pytorch.git  <out_path>  <type>
+
+    Returns:
+        1  csv   --->  data info detail
+    """
+
+    #
+    repo_name = repo_link.split('/')[-1].split('.')[0]
+
+    try:
+        if os.path.exists(repo_name):
+            shutil.rmtree(repo_name)
+    except OSError as e:
+        print(f"Failed to delete repo: {e}")
+        # repo is existed
+        # exit()
+
+    if not os.path.exists(repo_name):
+        print(f'Start clone Repo: {repo_link}')
+        Repo.clone_from(repo_link, repo_name)
+        print('Clone done')
+
+    export_stats_perrepo(f'{repo_name}', out_path, repo_name, type)
+def export_call_graph_url(repo_link: str, out_path:str=None):
+    """
+        python code_parser.py  export_call_graph_url <repo_link> <out_path>
+    Returns:
+        1  csv output
+    """
+    # https://github.com/lucidrains/DALLE-pytorch.git
+    repo_name = repo_link.split('/')[-1].split('.')[0]
+
+    # do not clone if repo already existed
+    if not os.path.exists(repo_name):
+        print(f'Start clone Repo: {repo_link}')
+        from git import Repo
+        Repo.clone_from(repo_link, repo_name)
+        print('Clone done')
+
+    export_call_graph(repo_name, out_path)
+
+
+def export_call_graph(in_path:str=None, out_path:str=None):
+    """
+        python code_parser.py  export_call_graph <in_path> <out_path>
+    Returns:    1  csv output
+
+    How to grab paht
+      1) Parse all imports
+         from utilmy.tabular import myfun
+         uri_dict["myfun"] = "utilmy.tabular.myfun"
+
+      2)  ## Use uri_dict to map into full path name
+        df['path2'] = df.apply( lamba x :  uri_dict.get(  x['function'], x['function']    ), axis=1)
+    """
+    root = in_path
+    flist = glob.glob(root +"/*.py")
+    flist = flist + glob.glob(root +"/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*/*.py")
+    flist = flist + glob.glob(root +"/*/*/*/*/*.py")
+
+
+    ############ Get liss class of the Repo
+    list_classes = []
+    for i in range(len(flist)):
+        cols = ['uri', 'name', 'type', 'list_functions']
+        df = get_list_class_stats(flist[i])
+        if df is not None:
+            dfi = df[cols]
+            # print(dfi)
+            # get list Class in repo
+            # list_classes.append(x[0] for x in zip(dfi['name']))
+            for row in zip(dfi['type'], dfi['name']):
+                if row[0] == 'class':
+                    list_classes.append(row[1])
+    print(list_classes)
+
+
+    dict_functions = {}
+    for i in range(len(flist)):
+        cols = ['uri', 'name', 'type']
+        df = get_list_function_stats(flist[i])
+        if df is not None:
+            dfi = df[cols]
+            # print(dfi)
+            # get list Class in repo
+            # list_classes.append(x[0] for x in zip(dfi['name']))
+            for row in zip(dfi['uri'], dfi['name']):
+                # if row[0] == 'class':
+                dict_functions[row[1]] = row[0]
+
+    print('-------------------------')
+    print(dict_functions)
+
+
+
+    for i in range(len(flist)):
+        ######### Get the list imported functions
+        # from class_name import funtion_name
+        list_imported = get_list_imported_func(flist[i])
+        list_class_as = get_list_import_class_as(flist[i])
+        print(list_class_as)
+        print('1-------------------------')
+        print(list_imported)
+
+        cols = ['uri', 'name', 'type', 'list_functions']
+        df = get_list_function_stats(flist[i])
+        if df is not None:
+            dfi = df[cols]
+            print(dfi)
+            # get list Class in repo
+            if i == 0:
+                # df.to_csv(f'{out_path}', index=False)
+                with open(f'{out_path}', 'w+') as f:
+                    f.write('uri, type, function, type2, path2, tag\n')
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path)
+            else:
+                # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path)
+
+
+        df = get_list_method_stats(flist[i])
+        if df is not None:
+            df = df[cols]
+            print(df)
+            if i == 0:
+                # df.to_csv(f'{out_path}', index=False)
+                with open(f'{out_path}', 'w+') as f:
+                    f.write('uri, type, function, type2, path2, tag\n')
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path)
+            else:
+                # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
+                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path)
+
+
+
+
+
+
+
+
+
+
+##################################################################################################
 # ====================================================================================
 # Functions
 # ====================================================================================
@@ -669,19 +956,22 @@ def _get_all_lines_in_function(function_name, array, indentMethod=''):
 
     # 2. get indent
     start_idx = 0
-    if response[0].rstrip()[-1] == ':':
-        if not re.match(r"(\s+)\w*", response[1]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[1]).group(1)
-        start_idx = 1
+    if len(response) > 1:
+        if response[0].rstrip()[-1] == ':':
+            if not re.match(r"(\s+)\w*", response[1]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[1]).group(1)
+            start_idx = 1
+        else:
+            for i in range(len(response)):
+                if response[i].rstrip()[-1] == ':':
+                    start_idx = i+1
+                    break
+            if not re.match(r"(\s+)\w*", response[start_idx]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
     else:
-        for i in range(len(response)):
-            if response[i].rstrip()[-1] == ':':
-                start_idx = i+1
-                break
-        if not re.match(r"(\s+)\w*", response[start_idx]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
+        return [], ''
 
     # 3. get all lines in function
     list_lines = list()
@@ -758,22 +1048,25 @@ def _get_all_lines_define_function(function_name, array, indentMethod=''):
 
     # 2. check if the is one or multi lines
     start_idx = 0
-    if response[0].rstrip()[-1] == ':':
-        if not re.match(r"(\s+)\w*", response[1]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[1]).group(1)
-        start_idx = 1
-        list_lines.append(response[0])
+    if len(response) > 1:
+        if response[0].rstrip()[-1] == ':':
+            if not re.match(r"(\s+)\w*", response[1]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[1]).group(1)
+            start_idx = 1
+            list_lines.append(response[0])
+        else:
+            for i in range(len(response)):
+                list_lines.append(response[i])
+                if response[i].rstrip()[-1] == ':':
+                    start_idx = i+1
+                    break
+            if not re.match(r"(\s+)\w*", response[start_idx]):
+                return [], ""
+            indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
+        return list_lines, indent
     else:
-        for i in range(len(response)):
-            list_lines.append(response[i])
-            if response[i].rstrip()[-1] == ':':
-                start_idx = i+1
-                break
-        if not re.match(r"(\s+)\w*", response[start_idx]):
-            return [], ""
-        indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
-    return list_lines, indent
+        return [], ''
 
 
 def _get_define_function_stats(array):
@@ -923,93 +1216,7 @@ def _get_function_stats(array, indent):
     return list(dict.fromkeys(list_var)), n_loops, n_ifthen
 
 
-# ====================================================================================
-# MAIN
-# ====================================================================================
-def export_stats_pertype(in_path:str=None, type:str=None, out_path:str=None):
-    """
-        python code_parser.py type <in_path> <type> <out_path>
-    Returns:
 
-    """
-    file = in_path
-    if type == "function":
-        df = get_list_function_stats(file)
-        print(df)
-        if df is not None:
-            df.to_csv(f'{out_path}', index=False)
-    elif type == "class":
-        df = get_list_class_stats(file)
-        print(df)
-        if df is not None:
-            df.to_csv(f'{out_path}', index=False)
-    elif type == "method":
-        df = get_list_method_stats(file)
-        print(df)
-        if df is not None:
-            df.to_csv(f'{out_path}', index=False)
-    else:
-        print("Type is invalid. ")
-
-
-def export_stats_perfile(in_path:str=None, out_path:str=None):
-    """
-        python code_parser.py  export_stats_perfile <in_path> <out_path>
-
-    Returns:
-
-    """
-    file = in_path
-    df = get_list_function_stats(file)
-    print(df)
-    if df is not None:
-        df.to_csv(f'{out_path}', index=False)
-
-    df = get_list_class_stats(file)
-    print(df)
-    if df is not None:
-        df.to_csv(f'{out_path}', mode='a', header=False, index=False)
-
-    df = get_list_method_stats(file)
-    print(df)
-    if df is not None:
-        df.to_csv(f'{out_path}', mode='a', header=False, index=False)
-
-
-def export_stats_perrepo(in_path:str=None, out_path:str=None):
-    """ 
-        python code_parser.py  export_stats_perfile <in_path> <out_path>
-
-    Returns:
-        1  repo   --->  a single file stats for all sub-diractory
-    """
-    root = in_path
-    flist = glob.glob(root +"/*.py")
-    flist = flist + glob.glob(root +"/*/*.py")
-    flist = flist + glob.glob(root +"/*/*/*.py")
-    flist = flist + glob.glob(root +"/*/*/*/*.py")
-    flist = flist + glob.glob(root +"/*/*/*/*/*.py")
-
-    # print(flist)
-    for i in range(len(flist)):
-        # output_file = re.search(r'(\w+).py', file).group(1)
-        # export_stats_perfile(file, f"{out_path}/file_{output_file}.csv")
-        df = get_list_function_stats(flist[i])
-        print(df)
-        if df is not None:
-            if i == 0:
-                df.to_csv(f'{out_path}', index=False)
-            else:
-                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
-        df = get_list_class_stats(flist[i])
-        print(df)
-        if df is not None:
-            df.to_csv(f'{out_path}', mode='a', header=False, index=False)
-
-        df = get_list_method_stats(flist[i])
-        print(df)
-        if df is not None:
-            df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
 def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, list_class_as, out_path):
@@ -1090,111 +1297,7 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
         f.write(info)
 
 
-def export_call_graph(in_path:str=None, out_path:str=None):
-    """
-        python code_parser.py  export_call_graph <in_path> <out_path>
-    Returns:
-        1  csv output
-
-
-    How to grab paht
-      1) Parse all imports
-
-         from utilmy.tabular import myfun
-
-         uri_dict["myfun"] = "utilmy.tabular.myfun"
-
-
-      2)  ## Use uri_dict to map into full path name
-        df['path2'] = df.apply( lamba x :  uri_dict.get(  x['function'], x['function']    ), axis=1)
-
-
-    """
-    root = in_path
-    flist = glob.glob(root +"/*.py")
-    flist = flist + glob.glob(root +"/*/*.py")
-    flist = flist + glob.glob(root +"/*/*/*.py")
-    flist = flist + glob.glob(root +"/*/*/*/*.py")
-    flist = flist + glob.glob(root +"/*/*/*/*/*.py")
-
-
-    ############ Get liss class of the Repo
-    list_classes = []
-    for i in range(len(flist)):
-        cols = ['uri', 'name', 'type', 'list_functions']
-        df = get_list_class_stats(flist[i])
-        if df is not None:
-            dfi = df[cols]
-            # print(dfi)
-            # get list Class in repo
-            # list_classes.append(x[0] for x in zip(dfi['name']))
-            for row in zip(dfi['type'], dfi['name']):
-                if row[0] == 'class':
-                    list_classes.append(row[1])
-    print(list_classes)
-
-
-    dict_functions = {}
-    for i in range(len(flist)):
-        cols = ['uri', 'name', 'type']
-        df = get_list_function_stats(flist[i])
-        if df is not None:
-            dfi = df[cols]
-            # print(dfi)
-            # get list Class in repo
-            # list_classes.append(x[0] for x in zip(dfi['name']))
-            for row in zip(dfi['uri'], dfi['name']):
-                # if row[0] == 'class':
-                dict_functions[row[1]] = row[0]
-                    
-    print('-------------------------')
-    print(dict_functions)
-
-
-
-    for i in range(len(flist)):
-        ######### Get the list imported functions
-        # from class_name import funtion_name
-        list_imported = get_list_imported_func(flist[i])
-        list_class_as = get_list_import_class_as(flist[i])
-        print(list_class_as)
-        print('1-------------------------')
-        print(list_imported)
-
-        cols = ['uri', 'name', 'type', 'list_functions']
-        df = get_list_function_stats(flist[i])
-        if df is not None:
-            dfi = df[cols]
-            print(dfi)
-            # get list Class in repo
-            if i == 0:
-                # df.to_csv(f'{out_path}', index=False)
-                with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function, type2, path2, tag\n')
-                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
-            else:
-                # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
-                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
-
-
-        df = get_list_method_stats(flist[i])
-        if df is not None:
-            df = df[cols]
-            print(df)
-            if i == 0:
-                # df.to_csv(f'{out_path}', index=False)
-                with open(f'{out_path}', 'w+') as f:
-                    f.write('uri, type, function, type2, path2, tag\n')
-                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
-            else:
-                # df.to_csv(f'{out_path}', mode='a', header=False, index=False)
-                for row in zip(dfi['uri'],  dfi['type'], dfi['list_functions']):
-                    write_to_file(row[0], row[1], row[2], list_classes, list_imported, dict_functions, list_class_as, out_path) 
-
-
+###############################################################################################################
 def test_example():
     # export_stats_pertype('parser/test3/arrow_dataset.py', "function", "parser/output/output_function.csv")
     # export_stats_pertype('parser/test3/arrow_dataset.py', "class", "parser/output/output_function.csv")
@@ -1202,14 +1305,18 @@ def test_example():
     export_stats_perfile('parser/code_parser.py', "parser/output/output_file.csv")
     export_stats_perrepo('parser', "parser/output/output_repo.csv")
 
+
 if __name__ == "__main__":
     fire.Fire({
       'type': export_stats_pertype,
       'file': export_stats_perfile,
       'repo': export_stats_perrepo,
+      'repo_url': export_stats_repolink,
       'export_call_graph': export_call_graph,
+      'export_call_graph_url': export_call_graph_url,
     })
     # test_example()
+    # export_stats_repolink('https://github.com/lucidrains/DALLE-pytorch.git', 'docs/test_example1.csv')
 
     '''List example to run:
         python code_parser.py type parser/test3/arrow_dataset.py method parser/output/output_method.csv

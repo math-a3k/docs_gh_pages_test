@@ -237,7 +237,6 @@ class htmlDoc(object):
         with open(self.dir_out, mode='w') as fp:
             fp.write(full)
 
-
     def open_browser(self):
         if os.name == 'nt':
             os.system(f'start chrome "file:///{self.dir_out}" ')
@@ -378,6 +377,18 @@ class htmlDoc(object):
             )
 
         self.html += "\n\n" + html_code
+
+
+    def images_dir(self, dir_input="*.png",  title="", verbose=False):
+        html_code = images_to_html(dir_input=dir_input,  title=title, verbose=verbose)
+        self.html += "\n\n" + html_code
+
+
+    def pd_plot_network(self, df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge'):
+        html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
+        self.html += "\n\n" + html_code
+
+
 
 
 
@@ -584,7 +595,7 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col='', title='', nbin=20.0, q5=0
     return fig
 
 
-def pd_plot_tseries_matplot(df, plot_type=None, cols_axe1: list = [], cols_axe2: list = [],
+def pd_plot_tseries_matplot(df:pd.DataFrame, plot_type=None, cols_axe1: list = [], cols_axe2: list = [],
                             figsize=(8, 4), spacing=0.1, **kw):
     """
 
