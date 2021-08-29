@@ -24,3 +24,7 @@ mpld3
 pandas-highcharts
 pretty-html-table
 #####################
+
+######################
+#### utilmy.docs
+stdlib_list
