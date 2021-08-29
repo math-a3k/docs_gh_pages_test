@@ -1,4 +1,8 @@
 """ Converter python Graph ---> HTML
+!pip install python-box python-highcharts  mpld3 pandas-highcharts fire
+!pip install utilmy matplotlib ipython
+!pip install pretty-html-table
+
 https://try2explore.com/questions/10109123
 https://mpld3.github.io/examples/index.html
 https://notebook.community/johnnycakes79/pyops/dashboard/pandas-highcharts-examples
