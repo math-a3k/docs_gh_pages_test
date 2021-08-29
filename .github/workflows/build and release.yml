@@ -64,7 +64,7 @@ jobs:
     - name: test_import
       run: |
            python -c "import os, pandas as pd; print(os)"
-           python -c "import utilmy)"        
+           python -c "import utilmy"        
         
         
     ########  Runs All test
