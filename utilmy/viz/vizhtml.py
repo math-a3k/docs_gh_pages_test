@@ -217,13 +217,23 @@ def test_pd_plot_network():
   print(html_code)
 
 
+def help():
+    
+    ss = "from utilmy.vi.vizhtml import * \n\n"
+    ss = ss + "data = test_getdata() \n\n "
+    ss = ss + help_get_body(test1 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test2 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test3 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test_scatter_and_histogram_matplot )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test_pd_plot_network )  + "\n\n\n ##############################\n"
+    
+    print(ss)
+
 
 
 
 #####################################################################################
-#### Class ##########################################################################
-#####################################################################################
-#### Class ##########################################################################
+#### HTML doc ########################################################################
 class htmlDoc(object):
     def __init__(self, dir_out="", mode="", title="", format: str = None, cfg: dict =None):
         """
@@ -1260,16 +1270,6 @@ def help_get_body(func):
     lines = inspect.getsourcelines(func)[0]
     return ''.join( lines[lines_to_skip+1:] )
 
-
-def help():
-    
-    ss = "from utilmy.vi.vizhtml import * \n\n"
-    ss = ss + "data = test_getdata() \n\n "
-    ss = ss + help_get_body(test1 )  + "\n\n\n ##############################\n"
-    ss = ss + help_get_body(test2 )  + "\n\n\n ##############################\n"
-    ss = ss + help_get_body(test3 )  + "\n\n\n ##############################\n"
-
-    print(ss)
 
 
 
