@@ -1257,100 +1257,17 @@ def help_get_body(func):
         lines_to_skip = len(func.__doc__.split('\n'))
     except AttributeError:
         lines_to_skip = 0
-
     lines = inspect.getsourcelines(func)[0]
-
     return ''.join( lines[lines_to_skip+1:] )
 
 
 def help():
-    ss = "from utilmy.vi.vizhtml import * \n\n"
-    ss = "data = test_getdata() \n\n "
-    ss = help_get_body(test1 )  + "\n\n\n ##############################\n"
-    ss = help_get_body(test2 )  + "\n\n\n ##############################\n"
-    ss = help_get_body(test3 )  + "\n\n\n ##############################\n"
+    ss = ss + "from utilmy.vi.vizhtml import * \n\n"
+    ss = ss + "data = test_getdata() \n\n "
+    ss = ss + help_get_body(test1 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test2 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test3 )  + "\n\n\n ##############################\n"
 
-    
-    sss= """
-        
-        
-        
-        cfg_common = {'figsize': (20, 14)}   #### Common Config
-        html_code = pd_plot_tseries_highcharts(data['stock_data.csv'],
-                                              coldate='Date',
-                                              cols_axe1=['Open','Low','Close'],
-                                              cols_axe2=["Total Trade Quantity"],
-                                              x_label='Date', 
-                                              axe1_label="Stock Price",
-                                              axe2_label="Stock volume", 
-                                              title =   "Stock Price",
-                                              cfg= cfg_common )
-        highcharts_show_chart(html_code)
-        
-        
-    ######## Report 2  ###############################################   
-    data = test_getdata()
-    dir_out = ""
-    title   = "Metrics"
-    data  = vi.test_getdata()
-    df    = data['weatherdata.csv'].iloc[:1000, :]
-    coldate = 'Date'
-    colref = 'Temperature'
-    doc  = vi.htmlDoc(title=title, dir_out="", cfg={} )
-    doc.h1(title) ; doc.hr() ; doc.br()
-    doc.h2('CA vs BTA (Control)') 
-    colsy = [ t for t in df.columns if t not in ['Date' ] ]
-    for i in range(0, len(colsy)) : 
-        doc.plot_tseries(df,
-                          coldate     =  coldate,
-                          date_format =  '%m/%d/%Y',
-                          cols_axe1   =  [ colref ],
-                          cols_axe2   =  [ colsy[i] ],
-                          title =      title,
-                          cfg={},             
-                          mode='highcharts'
-                         )
-    doc.hr() ; doc.br()
-    doc.table(df, use_datatable=True )
-    doc.save( dir_out + 'metrics.html')
-    doc.open_browser()
-    
-    
-    
-    
-    
-    ######## Report 3  ############################################### 
-    data = test_getdata()
-
-    dft  = data['titanic.csv']
-    df   = data['housing.csv']
-    df2  = data['sales.csv']
-    cfg = Box({})
-    cfg.tseries = {"title": 'ok'}
-    cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
-    cfg.histo   = {"title": 'ok'}
-    cfg.use_datatable = True
-
-    df = pd.DataFrame([[1, 2]])
-    df2_list = [df, df, df]
-
-    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
-    doc.h1('My title')  # h1
-    doc.sep()
-    doc.br()  # <br>
-
-    doc.tag('<h2> My graph title </h2>')
-    doc.plot_scatter(dft, colx='Age', coly='Fare',
-                    collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                    cfg=cfg.scatter, mode='matplot', save_img='')
-    doc.hr()  # doc.sep() line separator
-
-
-    doc.plot_histogram(df2,col='Unit Cost',mode='matplot', save_img="")
-
-    doc.save(dir_out="myfile.html")
-    doc.open_browser()  # Open myfile.html
-    """
     print(ss)
 
 
