@@ -55,6 +55,8 @@ git hash : https://github.com/arita37/myutil/tree/{githash}
 
 ### Packages  ########################################################
 packages = ["utilmy"] + ["utilmy." + p for p in find_packages("utilmy")]
+packages = packages ["utilmy.viz" + p for p in find_packages("utilmy.viz")]
+
 print(packages)
 
 
