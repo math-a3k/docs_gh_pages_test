@@ -1262,7 +1262,8 @@ def help_get_body(func):
 
 
 def help():
-    ss = ss + "from utilmy.vi.vizhtml import * \n\n"
+    
+    ss = "from utilmy.vi.vizhtml import * \n\n"
     ss = ss + "data = test_getdata() \n\n "
     ss = ss + help_get_body(test1 )  + "\n\n\n ##############################\n"
     ss = ss + help_get_body(test2 )  + "\n\n\n ##############################\n"
