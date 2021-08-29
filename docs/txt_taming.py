@@ -1,7 +1,5 @@
 
 
-
-
 taming-transformers\main.py
 -------------------------functions----------------------
 get_obj_from_str(string, reload = False)
@@ -31,11 +29,7 @@ ImageLogger.on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_i
 ImageLogger.on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx)
 
 
-
-
 taming-transformers\setup.py
-
-
 
 
 taming-transformers\scripts\extract_depth.py
@@ -46,8 +40,6 @@ rgba_to_depth(x)
 run(x, state)
 get_filename(relpath, level = -2)
 save_depth(dataset, path, debug = False)
-
-
 
 
 
@@ -68,11 +60,7 @@ COCOStuffSegmenter.std(self)
 COCOStuffSegmenter.input_size(self)
 
 
-
-
 taming-transformers\scripts\extract_submodel.py
-
-
 
 
 taming-transformers\scripts\make_samples.py
@@ -83,8 +71,6 @@ get_parser()
 load_model_from_config(config, sd, gpu = True, eval_mode = True)
 get_data(config)
 load_model_and_dset(config, ckpt, gpu, eval_mode)
-
-
 
 
 
@@ -103,8 +89,6 @@ load_model_and_dset(config, ckpt, gpu, eval_mode)
 
 
 
-
-
 taming-transformers\scripts\sample_fast.py
 -------------------------functions----------------------
 chw_to_pillow(x)
@@ -118,15 +102,11 @@ load_model(config, sd, gpu = True, eval_mode = True)
 
 
 
-
-
 taming-transformers\taming\lr_scheduler.py
 -------------------------methods----------------------
 LambdaWarmUpCosineScheduler.__init__(self, warm_up_steps, lr_min, lr_max, lr_start, max_decay_steps, verbosity_interval = 0)
 LambdaWarmUpCosineScheduler.schedule(self, n)
 LambdaWarmUpCosineScheduler.__call__(self, n)
-
-
 
 
 taming-transformers\taming\util.py
@@ -140,8 +120,6 @@ retrieve(list_or_dict, key, splitval = "/", default = None, expand = True, pass_
 KeyNotFoundError.__init__(self, cause, keys = None, visited = None)
 
 
-
-
 taming-transformers\taming\data\ade20k.py
 -------------------------methods----------------------
 Examples.__init__(self, size = 256, random_crop = False, interpolation = "bicubic")
@@ -153,8 +131,6 @@ ADE20kTrain.get_split(self)
 ADE20kValidation.get_split(self)
 
 
-
-
 taming-transformers\taming\data\base.py
 -------------------------methods----------------------
 ConcatDatasetWithIndex.__getitem__(self, idx)
@@ -163,8 +139,6 @@ ImagePaths.__len__(self)
 ImagePaths.preprocess_image(self, image_path)
 ImagePaths.__getitem__(self, i)
 NumpyPaths.preprocess_image(self, image_path)
-
-
 
 
 taming-transformers\taming\data\coco.py
@@ -180,8 +154,6 @@ CocoImagesAndCaptionsValidation.__init__(self, size, onehot_segmentation = False
 CocoImagesAndCaptionsValidation.get_split(self)
 
 
-
-
 taming-transformers\taming\data\custom.py
 -------------------------methods----------------------
 CustomBase.__init__(self, *args, **kwargs)
@@ -189,8 +161,6 @@ CustomBase.__len__(self)
 CustomBase.__getitem__(self, i)
 CustomTrain.__init__(self, size, training_images_list_file)
 CustomTest.__init__(self, size, test_images_list_file)
-
-
 
 
 taming-transformers\taming\data\faceshq.py
@@ -208,8 +178,6 @@ FacesHQTrain.__getitem__(self, i)
 FacesHQValidation.__init__(self, size, keys = None, crop_size = None, coord = False)
 FacesHQValidation.__len__(self)
 FacesHQValidation.__getitem__(self, i)
-
-
 
 
 taming-transformers\taming\data\imagenet.py
@@ -261,16 +229,12 @@ ImageNetEdgesTrain.get_base(self)
 ImageNetEdgesValidation.get_base(self)
 
 
-
-
 taming-transformers\taming\data\sflckr.py
 -------------------------methods----------------------
 SegmentationBase.__init__(self, data_csv, data_root, segmentation_root, size = None, random_crop = False, interpolation = "bicubic", n_labels = 182, shift_segmentation = False, )
 SegmentationBase.__len__(self)
 SegmentationBase.__getitem__(self, i)
 Examples.__init__(self, size = None, random_crop = False, interpolation = "bicubic")
-
-
 
 
 taming-transformers\taming\data\utils.py
@@ -284,8 +248,6 @@ prompt_download(file_, source, target_dir, content_dir = None)
 download_url(file_, url, target_dir)
 download_urls(urls, target_dir)
 quadratic_crop(x, bbox, alpha = 1.0)
-
-
 
 
 
@@ -311,8 +273,6 @@ Net2NetTransformer.shared_step(self, batch, batch_idx)
 Net2NetTransformer.training_step(self, batch, batch_idx)
 Net2NetTransformer.validation_step(self, batch, batch_idx)
 Net2NetTransformer.configure_optimizers(self)
-
-
 
 
 taming-transformers\taming\models\vqgan.py
@@ -348,8 +308,6 @@ GumbelVQ.validation_step(self, batch, batch_idx)
 GumbelVQ.log_images(self, batch, **kwargs)
 
 
-
-
 taming-transformers\taming\modules\util.py
 -------------------------functions----------------------
 count_params(model)
@@ -365,8 +323,6 @@ Labelator.__init__(self, n_classes, quantize_interface = True)
 Labelator.encode(self, c)
 SOSProvider.__init__(self, sos_token, quantize_interface = True)
 SOSProvider.encode(self, x)
-
-
 
 
 taming-transformers\taming\modules\diffusionmodules\model.py
@@ -398,8 +354,6 @@ UpsampleDecoder.__init__(self, in_channels, out_channels, ch, num_res_blocks, re
 UpsampleDecoder.forward(self, x)
 
 
-
-
 taming-transformers\taming\modules\discriminator\model.py
 -------------------------functions----------------------
 weights_init(m)
@@ -407,8 +361,6 @@ weights_init(m)
 -------------------------methods----------------------
 NLayerDiscriminator.__init__(self, input_nc = 3, ndf = 64, n_layers = 3, use_actnorm = False)
 NLayerDiscriminator.forward(self, input)
-
-
 
 
 taming-transformers\taming\modules\losses\lpips.py
@@ -428,15 +380,11 @@ vgg16.__init__(self, requires_grad = False, pretrained = True)
 vgg16.forward(self, X)
 
 
-
-
 taming-transformers\taming\modules\losses\segmentation.py
 -------------------------methods----------------------
 BCELoss.forward(self, prediction, target)
 BCELossWithQuant.__init__(self, codebook_weight = 1.)
 BCELossWithQuant.forward(self, qloss, target, prediction, split)
-
-
 
 
 taming-transformers\taming\modules\losses\vqperceptual.py
@@ -452,11 +400,7 @@ VQLPIPSWithDiscriminator.calculate_adaptive_weight(self, nll_loss, g_loss, last_
 VQLPIPSWithDiscriminator.forward(self, codebook_loss, inputs, reconstructions, optimizer_idx, global_step, last_layer = None, cond = None, split = "train")
 
 
-
-
 taming-transformers\taming\modules\losses\__init__.py
-
-
 
 
 taming-transformers\taming\modules\misc\coord.py
@@ -465,8 +409,6 @@ CoordStage.__init__(self, n_embed, down_factor)
 CoordStage.eval(self)
 CoordStage.encode(self, c)
 CoordStage.decode(self, c)
-
-
 
 
 taming-transformers\taming\modules\transformer\mingpt.py
@@ -498,8 +440,6 @@ KMeans.initialize(self, x)
 KMeans.forward(self, x, reverse = False, shape = None)
 
 
-
-
 taming-transformers\taming\modules\transformer\permuter.py
 -------------------------functions----------------------
 mortonify(i, j)
@@ -521,8 +461,6 @@ Random.__init__(self, H, W)
 Random.forward(self, x, reverse = False)
 AlternateParsing.__init__(self, H, W)
 AlternateParsing.forward(self, x, reverse = False)
-
-
 
 
 taming-transformers\taming\modules\vqvae\quantize.py
