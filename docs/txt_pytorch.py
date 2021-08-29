@@ -1,18 +1,12 @@
 
 
-
-
 DALLE-pytorch\generate.py
 -------------------------functions----------------------
 exists(val)
 
 
 
-
-
 DALLE-pytorch\setup.py
-
-
 
 
 DALLE-pytorch\train_dalle.py
@@ -27,13 +21,9 @@ save_model(path, epoch = 0)
 
 
 
-
-
 DALLE-pytorch\train_vae.py
 -------------------------functions----------------------
 save_model(path)
-
-
 
 
 
@@ -55,8 +45,6 @@ SparseAxialCausalAttention.__init__(self, dim, seq_len, image_size  =  32, axis 
 SparseAxialCausalAttention.forward(self, x, mask  =  None, rotary_pos_emb  =  None)
 SparseAttention.__init__(self, *args, block_size  =  16, text_seq_len  =  256, num_random_blocks  =  None, **kwargs)
 SparseAttention.forward(self, x, mask  =  None, rotary_pos_emb  =  None)
-
-
 
 
 DALLE-pytorch\dalle_pytorch\dalle_pytorch.py
@@ -88,16 +76,12 @@ DALLE.generate_images(self, text, *, clip  =  None, mask  =  None, filter_thres 
 DALLE.forward(self, text, image  =  None, mask  =  None, return_loss  =  False)
 
 
-
-
 DALLE-pytorch\dalle_pytorch\distributed_utils.py
 -------------------------functions----------------------
 wrap_arg_parser(parser)
 set_backend_from_args(args)
 require_set_backend()
 using_backend(test_backend)
-
-
 
 
 
@@ -109,8 +93,6 @@ TextImageDataset.random_sample(self)
 TextImageDataset.sequential_sample(self, ind)
 TextImageDataset.skip_sample(self, ind)
 TextImageDataset.__getitem__(self, ind)
-
-
 
 
 DALLE-pytorch\dalle_pytorch\reversible.py
@@ -130,8 +112,6 @@ SequentialSequence.__init__(self, layers, args_route  =  {}, layer_dropout  =  0
 SequentialSequence.forward(self, x, **kwargs)
 ReversibleSequence.__init__(self, blocks, args_route  =  {})
 ReversibleSequence.forward(self, x, **kwargs)
-
-
 
 
 DALLE-pytorch\dalle_pytorch\tokenizer.py
@@ -162,8 +142,6 @@ YttmTokenizer.encode(self, texts)
 YttmTokenizer.tokenize(self, texts, context_length  =  256, truncate_text  =  False)
 
 
-
-
 DALLE-pytorch\dalle_pytorch\transformer.py
 -------------------------functions----------------------
 exists(val)
@@ -184,8 +162,6 @@ PreShiftToken.__init__(self, fn, image_size, seq_len)
 PreShiftToken.forward(self, x, **kwargs)
 Transformer.__init__(self, *, dim, depth, seq_len, reversible  =  False, causal  =  True, heads  =  8, dim_head  =  64, ff_mult  =  4, attn_dropout  =  0., ff_dropout  =  0., attn_types  =  None, image_fmap_size  =  None, sparse_attn  =  False, stable  =  False, shift_tokens  =  False, rotary_emb  =  True)
 Transformer.forward(self, x, **kwargs)
-
-
 
 
 DALLE-pytorch\dalle_pytorch\vae.py
@@ -212,11 +188,7 @@ VQGanVAE.decode(self, img_seq)
 VQGanVAE.forward(self, img)
 
 
-
-
 DALLE-pytorch\dalle_pytorch\__init__.py
-
-
 
 
 DALLE-pytorch\dalle_pytorch\distributed_backends\deepspeed_backend.py
@@ -233,8 +205,6 @@ DeepSpeedBackend._check_argvs(self, args, optimizer, lr_scheduler, kwargs)
 DeepSpeedBackend._check_config(self, args, optimizer, lr_scheduler, kwargs)
 DeepSpeedBackend._distribute(self, args = None, model = None, optimizer = None, model_parameters = None, training_data = None, lr_scheduler = None, **kwargs, )
 DeepSpeedBackend._average_all(self, tensor)
-
-
 
 
 DALLE-pytorch\dalle_pytorch\distributed_backends\distributed_backend.py
@@ -262,8 +232,6 @@ DistributedBackend.average_all(self, tensor)
 DistributedBackend._average_all(self, tensor)
 
 
-
-
 DALLE-pytorch\dalle_pytorch\distributed_backends\dummy_backend.py
 -------------------------methods----------------------
 DummyBackend.has_backend(self)
@@ -277,8 +245,6 @@ DummyBackend._distribute(self, _args = None, model = None, optimizer = None, _mo
 DummyBackend._average_all(self, tensor)
 
 
-
-
 DALLE-pytorch\dalle_pytorch\distributed_backends\horovod_backend.py
 -------------------------methods----------------------
 HorovodBackend.wrap_arg_parser(self, parser)
@@ -290,8 +256,6 @@ HorovodBackend._get_local_rank(self)
 HorovodBackend._local_barrier(self)
 HorovodBackend._distribute(self, _args = None, model = None, optimizer = None, _model_parameters = None, training_data = None, lr_scheduler = None, **_kwargs, )
 HorovodBackend._average_all(self, tensor)
-
-
 
 
 DALLE-pytorch\dalle_pytorch\distributed_backends\__init__.py
