@@ -1248,11 +1248,33 @@ x.onclick = function() {
 
 ###################################################################################################
 ###################################################################################################
+def help_get_body(func):
+    """ Using the magic method __doc__, we KNOW the size of the docstring.
+        We then, just substract this from the total length of the function
+    """
+    import inspect
+    try:
+        lines_to_skip = len(func.__doc__.split('\n'))
+    except AttributeError:
+        lines_to_skip = 0
+
+    lines = inspect.getsourcelines(func)[0]
+
+    return ''.join( lines[lines_to_skip+1:] )
+
+
 def help():
-    ss= """
-        from utilmy.vi.vizhtml import *
+    ss = "from utilmy.vi.vizhtml import * \n\n"
+    ss = "data = test_getdata() \n\n "
+    ss = help_get_body(test1 )  + "\n\n\n ##############################\n"
+    ss = help_get_body(test2 )  + "\n\n\n ##############################\n"
+    ss = help_get_body(test3 )  + "\n\n\n ##############################\n"
+
+    
+    sss= """
         
-        data = test_getdata()
+        
+        
         cfg_common = {'figsize': (20, 14)}   #### Common Config
         html_code = pd_plot_tseries_highcharts(data['stock_data.csv'],
                                               coldate='Date',
