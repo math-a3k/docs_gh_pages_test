@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect
 
-
+def log(*s):
+   print(*s, flush=True)
 
 #########################################################################################
 def pd_random(ncols=7, nrows=100):
