@@ -265,6 +265,14 @@ def test_text_pdcluster():
 
    
    
+def test_viz_vizhtml():
+   from utilmy.viz import vizhtml as vi
+   
+   vi.test1()
+   vi.test2()
+   vi.test3()
+   test_scatter_and_histogram_matplot()
+   
    
    
    
@@ -276,6 +284,8 @@ if __name__ == "__main__":
     # test_tabular_test()
     test_text_similarity()
     test_docs_cli()
+      
+    test_viz_vizhtml()   
 
 
 
