@@ -54,16 +54,23 @@ jobs:
     #  run: pip install -e . -r install/py36.txt  --no-deps
 
 
+
+    - name: Install utilmy
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run:  |
+        pip install -e .
+
+
     - name: test_import
       run: |
            python -c "import os, pandas as pd; print(os)"
+           python -c "import utilmy)"        
         
         
     ########  Runs All test
     - name: run_all
       run: |
           mkdir -p    /home/runner/work/log_tmp/
-          pip install -e .
           chmod -R 777 . &&  python  test.py
           # chmod -R 777 . && cd utilmy && python  test.py  test1
 
