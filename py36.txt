@@ -13,5 +13,7 @@ datasketch  ### lSH
 rapidfuzz
 editdistance
 
-
+######################
+#### utilmy.viz.html
+tqdm
 #####################
