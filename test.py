@@ -270,9 +270,9 @@ def test_viz_vizhtml():
    log("Visualization ")
    log(" from utilmy.viz import vizhtml as vi     ")
    vi.test1()
-   vi.test2()
-   vi.test3()
-   test_scatter_and_histogram_matplot()
+   #vi.test2()
+   #vi.test3()
+   #test_scatter_and_histogram_matplot()
    
    
    
