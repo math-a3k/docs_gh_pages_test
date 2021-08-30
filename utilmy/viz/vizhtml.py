@@ -306,6 +306,7 @@ class htmlDoc(object):
         data = f"\n<script>\n{js}\n</script>\n"
         self.tail = data + self.tail
 
+
     def hidden(self, x,css=''):
         # Hidden paragraph
         custom_id = str(random.randint(9999,999999))
@@ -324,6 +325,7 @@ class htmlDoc(object):
 
 
         self.add_js(js)
+
 
     def table(self, df:pd.DataFrame, format='blue_light', custom_css_class=None, use_datatable=False, table_id=None, **kw):
         """ Show Pandas in HTML and interactive
@@ -1125,7 +1127,7 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
         for index, row in df.iterrows():
             g.add_edge(row[cola], row[colb], weight=row[colweight],)
 
-        nx.draw(G, with_labels=True)
+        nx.draw(g, with_labels=True)
         return g
 
 
@@ -1147,21 +1149,6 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
             output_filename: Where to save the converted network
             show_buttons: Show buttons in saved version of network?
             only_physics_buttons: Show only buttons controlling physics of network?
-        ##
-        # For example:
-        ##
-        # make a new neworkx network
-        import networkx as nx
-        G = nx.Graph()
-        # add nodes and edges (color can be html color name or hex code)
-        G.add_node('a', color='red', size=4)
-        G.add_node('b', color='#30a1a5', size=3)
-        G.add_node('c', color='green', size=1)
-        G.add_edge('a', 'b', weight=1023)
-        G.add_edge('a', 'c', weight=435)
-        G.add_edge('b', 'c', weight=100)
-        # draw
-        draw_graph3(G)
         """
         from pyvis import network as net
 
@@ -1203,16 +1190,9 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
 
             return head + "\n" + body
 
-            
-
-          
-
-
-    networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight)
-
-
-    ng2 = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
-               show_buttons=True, only_physics_buttons=False,html_code = True)
+    net_graph = convert_to_networkx(df, cola, colb, colweight=colweight)
+    ng2       = draw_graph(net_graph, notebook=False, output_filename='graph.html',
+                            show_buttons=True, only_physics_buttons=False,html_code = True)
     return ng2
 
 
