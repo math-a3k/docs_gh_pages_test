@@ -297,7 +297,18 @@ class htmlDoc(object):
         if os.name == 'nt':
             os.system(f'start chrome "file:///{self.dir_out}" ')
             ### file:///D:/_devs/Python01/gitdev/myutil/utilmy/viz/test_viz_table.html   
+    
+    
+    def images_dir(self, dir_input="*.png",  title="", verbose=False):
+        html_code = images_to_html(dir_input=dir_input,  title=title, verbose=verbose)
+        self.html += "\n\n" + html_code
 
+
+    def pd_plot_network(self, df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge'):
+        html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
+        self.html += "\n\n" + html_code
+    
+    
     def add_css(self, css):
         data = f"\n<style>\n{css}\n</style>\n"
         self.head += data
