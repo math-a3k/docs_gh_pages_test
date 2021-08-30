@@ -966,7 +966,7 @@ def pd_plot_tseries_highcharts(df,
 
 
 
-def pd_plot_histogram_highcharts(dfpd.DataFrame, colname:str=None,
+def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
                               binsNumber=None, binWidth=None,
                               title:str="", xaxis_labe:strl= "x-axis", yaxis_label:str="y-axis",
                               cfg:dict={}, mode='d3', save_img="",
