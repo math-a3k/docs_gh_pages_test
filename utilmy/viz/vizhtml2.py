@@ -213,7 +213,9 @@ def test_scatter_and_histogram_matplot():
 
 def test_pd_plot_network():
   df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
-  pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
+  html_code = pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
+  print(html_code)
+
 
 
 
@@ -1112,7 +1114,7 @@ def images_to_html(dir_input="*.png",  title="", verbose=False):
 
 ############################################################################################################################
 ############################################################################################################################
-def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge',colweight=None):
+def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge',colweight="weight",html_code = True):
     """
         https://pyviz.org/tools.html
     """
@@ -1135,7 +1137,7 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
 
 
     def draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
-                   show_buttons=True, only_physics_buttons=False):
+                   show_buttons=True, only_physics_buttons=False,html_code = True):
         """
         This function accepts a networkx graph object, converts it to a pyvis network object preserving
         its node and edge attributes,
@@ -1194,13 +1196,31 @@ def pd_plot_network(df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge
                 pyvis_graph.show_buttons()
 
         # return and also save
-        return pyvis_graph.show(output_filename)
+        pyvis_graph.show(output_filename)
+        if html_code:
+
+          def extract_text(tag,content):
+            reg_str = "<" + tag + ">\s*((?:.|\n)*?)</" + tag + ">"
+            extracted = re.findall(reg_str, content)[0]
+            return extracted
+          with open(output_filename) as f:
+            content = f.read()
+            head = extract_text('head',content)
+            body = extract_text('head',content)
+
+            return head + "\n" + body
+
+            
+
+          
+
 
     networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight)
 
 
     ng2 = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
-               show_buttons=True, only_physics_buttons=False)
+               show_buttons=True, only_physics_buttons=False,html_code = True)
+    return ng2
 
 
 
