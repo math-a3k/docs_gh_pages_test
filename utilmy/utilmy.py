@@ -419,7 +419,7 @@ def diskcache_save(df, colkey:str, colvalue:str, db_path:str="", size_limit=5000
     v  = df[[ colkey, colvalue  ]].drop_duplicates(colkey)
     v  = v.values
     for i in range(len(v)):
-        cache[ v[i,0] ] = v1[i,1]        
+        cache[ v[i,0] ] = v[i,1]
     print('Cache size', len(cache), "\n", db_path)    
     return cache
 
