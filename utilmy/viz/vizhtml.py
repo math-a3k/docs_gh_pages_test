@@ -453,7 +453,14 @@ class htmlDoc(object):
 
 
 
+    def images_dir(self, dir_input="*.png",  title="", verbose=False):
+        html_code = images_to_html(dir_input=dir_input,  title=title, verbose=verbose)
+        self.html += "\n\n" + html_code
 
+
+    def pd_plot_network(self, df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge'):
+        html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
+        self.html += "\n\n" + html_code
 
 
 
