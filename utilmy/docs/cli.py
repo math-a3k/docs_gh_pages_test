@@ -62,7 +62,6 @@ def run_cli():
     args = p.parse_args()
 
     doc_dir        = args.out_dir
-    repo_stat_file = doc_dir + "/output_repo.csv"
     prefix         = args.prefix if args.prefix is not None else "./"
 
 
@@ -72,6 +71,7 @@ def run_cli():
 
     if args.task == 'markdown':
         os.makedirs(doc_dir, exist_ok=True)
+        repo_stat_file = doc_dir + "/output_repo.csv"
         cp.export_stats_perrepo(args.repo_dir,  repo_stat_file)
         gdoc.run_markdown(repo_stat_file, output= doc_dir + '/doc_main.md',   prefix= prefix)
         gdoc.run_table(repo_stat_file,    output= doc_dir + '/doc_table.md',  prefix= prefix)
