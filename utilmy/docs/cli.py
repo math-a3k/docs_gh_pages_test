@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
+HELP ="""
 ###########
 Usage
       'type': export_stats_pertype,
       'file': export_stats_perfile,
       'repo': export_stats_perrepo,
+      
       'repo_url': export_stats_repolink,
+      
       'export_call_graph': export_call_graph,
       'export_call_graph_url': export_call_graph_url,
 
@@ -30,6 +32,7 @@ Usage
 
 
 
+
 """
 import argparse, os
 
@@ -38,9 +41,8 @@ from utilmy.docs import code_parser as cp
 
 
 def run_cli():
-    """ USage
-    
-    docs  markdown  --repo_dir utilmy/      --doc_dir docs/"
+    """ Usage
+    docs  markdown   --repo_dir utilmy/      --doc_dir docs/"
 
     docs  index      --repo_dir utilmy/      --doc_dir docs/"
     docs  callgraph  --repo_dir utilmy/      --doc_dir docs/"
@@ -62,6 +64,10 @@ def run_cli():
     doc_dir        = args.out_dir
     repo_stat_file = doc_dir + "/output_repo.csv"
     prefix         = args.prefix if args.prefix is not None else "./"
+
+
+    if args.task == 'help':
+         print(HELP)
 
 
     if args.task == 'markdown':
@@ -86,6 +92,11 @@ def run_cli():
 
 
     if args.task == 'csv':
+        os.makedirs(doc_dir, exist_ok=True)
+        cp.export_stats_perrepo(args.repo_dir,  repo_stat_file)
+
+
+    if args.task == 'csv_stats':
         os.makedirs(doc_dir, exist_ok=True)
         cp.export_stats_perrepo(args.repo_dir,  repo_stat_file)
 

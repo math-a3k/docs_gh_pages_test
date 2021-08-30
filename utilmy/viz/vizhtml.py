@@ -372,7 +372,7 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_tseries(self, df, coldate, cols_axe1, cols_axe2=None,
+    def plot_tseries(self, df:pd.DataFrame, coldate, cols_axe1, cols_axe2=None,
                      title="", figsize=(14,7),  nsample= 10000,
                      x_label=None, axe1_label=None,  axe2_label=None,
                      date_format='%m/%d/%Y',
@@ -380,10 +380,6 @@ class htmlDoc(object):
                      cfg: dict = {}, mode='matplot', save_img="",  **kw):
         """Create html time series chart.
         Args:
-            df:         pd Dataframe
-            cols_axe1:
-            cols_axe2:
-            ...
             mode:       matplot or highcharts
         """
         html_code = ''
@@ -406,15 +402,12 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_histogram(self, df, col,
+    def plot_histogram(self, df:pd.DataFrame, col,
                        title='', figsize=(14,7), nsample=10000,
                        nbin=10,  q5=0.005, q95=0.95,
                        cfg: dict = {}, mode='matplot', save_img="",  **kw):
         """Create html histogram chart.
         Args:
-            df:         pd Dataframe
-            col:        x Axis
-            ...
             mode:       matplot or highcharts
         """
         html_code = ''
@@ -434,16 +427,12 @@ class htmlDoc(object):
 
 
 
-    def plot_scatter(self, df, colx, coly,
+    def plot_scatter(self, df:pd.DataFrame, colx, coly,
                      title='', figsize=(14,7), nsample=10000,
                      collabel=None, colclass1=None, colclass2=None, colclass3=None,
                      cfg: dict = {}, mode='matplot', save_img='',  **kw):
         """Create html scatter chart.
         Args:
-            df:         pd Dataframe
-            colx:       x Axis
-            coly:       y Axis
-            ...
             mode:       matplot or highcharts
         """
         html_code = ''
@@ -464,7 +453,14 @@ class htmlDoc(object):
 
 
 
+    def images_dir(self, dir_input="*.png",  title="", verbose=False):
+        html_code = images_to_html(dir_input=dir_input,  title=title, verbose=verbose)
+        self.html += "\n\n" + html_code
 
+
+    def pd_plot_network(self, df:pd.DataFrame, cola='col_node1', colb='col_node2', coledge='col_edge'):
+        html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
+        self.html += "\n\n" + html_code
 
 
 
