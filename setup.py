@@ -55,6 +55,8 @@ git hash : https://github.com/arita37/myutil/tree/{githash}
 
 ### Packages  ########################################################
 packages = ["utilmy"] + ["utilmy." + p for p in find_packages("utilmy")]
+#packages = ["utilmy"] + ["utilmy.viz" + p for p in find_packages("utilmy.viz")]
+packages = ["utilmy"] + [ p for p in  find_packages(include=['utilmy.*']) ]
 print(packages)
 
 
@@ -65,7 +67,7 @@ scripts = [     ]
 ### CLI Scripts  ###################################################   
 entry_points={ 'console_scripts': [
 
-    'doc-gen=utilmy.docs.cli:run_cli',
+    'docs=utilmy.docs.cli:run_cli',
 
     'templates=utilmy.templates.cli:run_cli'
 

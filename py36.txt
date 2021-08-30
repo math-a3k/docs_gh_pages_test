@@ -13,5 +13,18 @@ datasketch  ### lSH
 rapidfuzz
 editdistance
 
-
+######################
+#### utilmy.viz.html
+tqdm
+python-box
+matplotlib
+python-highcharts
+python-highcharts  
+mpld3 
+pandas-highcharts
+pretty-html-table
 #####################
+
+######################
+#### utilmy.docs
+stdlib_list

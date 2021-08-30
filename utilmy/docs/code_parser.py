@@ -14,9 +14,13 @@ Usage
 
     python code_parser.py file   parser/code_parser.py  method parser/output/output_file.csv
 
-    python code_parser.py repo   parser/test3    parser/output/output_repo.csv --type=csv
+    python code_parser.py repo   parser/test3    parser/output/output_repo.csv
 
     python code_parser.py repo_url https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
+
+    python code_parser.py repo_txt   parser/test3    parser/output/output_repo.csv
+
+    python code_parser.py repo_url_txt https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
 
     python code_parser.py export_call_graph parser/test3   docs/export_call_graph.csv
 
@@ -98,6 +102,16 @@ def export_stats_perfile(in_path:str=None, out_path:str=None):
         df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
 
+def export_stats_perrepo_txt(in_path:str=None, out_path:str=None, repo_name:str=None):
+    """
+        python code_parser.py  repo_txt   parser/test3    parser/output/output_repo.csv
+
+    Returns:
+        1  txt file
+    """
+    export_stats_perrepo(in_path, out_path, repo_name, type='txt')
+
+
 def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None, type:str='csv'):
     """
         python code_parser.py  export_stats_perfile <in_path> <out_path>  <type>
@@ -121,7 +135,7 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
         print(flist[i])
         if type == 'txt':
             with open(f'{out_path}', 'a+') as f:
-                f.write(f"\n\n\n\n{flist[i]}\n")
+                f.write(f"\n\n{flist[i]}\n")
         if df is not None:
             if repo_name:
                 df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/','', 1))
@@ -175,9 +189,19 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
 
 
 
+def export_stats_repolink_txt(repo_link: str, out_path:str=None):
+    """
+        python code_parser.py repo_url_txt https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
+
+    Returns:
+        1  txt   --->  data info detail
+    """
+    export_stats_repolink(repo_link, out_path, type='txt')
+
+
 def export_stats_repolink(repo_link: str, out_path:str=None, type:str='csv'):
     """
-        python code_parser.py  repo_url https://github.com/lucidrains/DALLE-pytorch.git  <out_path>  <type>
+        python code_parser.py  repo_url https://github.com/lucidrains/DALLE-pytorch.git  <out_path>
 
     Returns:
         1  csv   --->  data info detail
@@ -196,10 +220,11 @@ def export_stats_repolink(repo_link: str, out_path:str=None, type:str='csv'):
 
     if not os.path.exists(repo_name):
         print(f'Start clone Repo: {repo_link}')
-        Repo.clone_from(repo_link, repo_name)
+        os.system(f"git clone {repo_link} {repo_name}")
         print('Clone done')
-
     export_stats_perrepo(f'{repo_name}', out_path, repo_name, type)
+
+
 def export_call_graph_url(repo_link: str, out_path:str=None):
     """
         python code_parser.py  export_call_graph_url <repo_link> <out_path>
@@ -1312,6 +1337,8 @@ if __name__ == "__main__":
       'file': export_stats_perfile,
       'repo': export_stats_perrepo,
       'repo_url': export_stats_repolink,
+      'repo_txt': export_stats_perrepo_txt,
+      'repo_url_txt': export_stats_repolink_txt,
       'export_call_graph': export_call_graph,
       'export_call_graph_url': export_call_graph_url,
     })
@@ -1323,4 +1350,6 @@ if __name__ == "__main__":
         python code_parser.py file parser/code_parser.py method parser/output/output_file.csv
         python code_parser.py repo parser/test3 parser/output/output_repo.csv
         python code_parser.py export_call_graph . docs/export_call_graph.csv
+        python code_parser.py repo_txt   parser/test3    parser/output/output_repo.csv
+        python code_parser.py repo_url_txt https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
     '''

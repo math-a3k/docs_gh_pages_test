@@ -1,4 +1,8 @@
 """ Converter python Graph ---> HTML
+!pip install python-box python-highcharts  mpld3 pandas-highcharts fire
+!pip install utilmy matplotlib ipython
+!pip install pretty-html-table
+
 https://try2explore.com/questions/10109123
 https://mpld3.github.io/examples/index.html
 https://notebook.community/johnnycakes79/pyops/dashboard/pandas-highcharts-examples
@@ -127,7 +131,6 @@ def test2():
 
 
 
-
 def test3(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata()
@@ -213,13 +216,23 @@ def test_pd_plot_network():
   print(html_code)
 
 
+def help():
+    
+    ss = "from utilmy.vi.vizhtml import * \n\n"
+    ss = ss + "data = test_getdata() \n\n "
+    ss = ss + help_get_body(test1 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test2 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test3 )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test_scatter_and_histogram_matplot )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_body(test_pd_plot_network )  + "\n\n\n ##############################\n"
+    
+    print(ss)
+
 
 
 
 #####################################################################################
-#### Class ##########################################################################
-#####################################################################################
-#### Class ##########################################################################
+#### HTML doc ########################################################################
 class htmlDoc(object):
     def __init__(self, dir_out="", mode="", title="", format: str = None, cfg: dict =None):
         """
@@ -1244,48 +1257,18 @@ x.onclick = function() {
 
 ###################################################################################################
 ###################################################################################################
-def help():
-    ss= """
-        cfg_common = {'figsize': (20, 14)}   #### Common Config
-        html_code = pd_plot_tseries_highcharts(data['stock_data.csv'],
-                                              coldate='Date',
-                                              cols_axe1=['Open','Low','Close'],
-                                              cols_axe2=["Total Trade Quantity"],
-                                              x_label='Date', 
-                                              axe1_label="Stock Price",
-                                              axe2_label="Stock volume", 
-                                              title =   "Stock Price",
-                                              cfg= cfg_common )
-        highcharts_show_chart(html_code)
-        
-        
-    ######## Report 2  ###############################################    
-    dir_out = ""
-    title   = "Metrics"
-    data  = vi.test_getdata()
-    df    = data['weatherdata.csv'].iloc[:1000, :]
-    coldate = 'Date'
-    colref = 'Temperature'
-    doc  = vi.htmlDoc(title=title, dir_out="", cfg={} )
-    doc.h1(title) ; doc.hr() ; doc.br()
-    doc.h2('CA vs BTA (Control)') 
-    colsy = [ t for t in df.columns if t not in ['Date' ] ]
-    for i in range(0, len(colsy)) : 
-        doc.plot_tseries(df,
-                          coldate     =  coldate,
-                          date_format =  '%m/%d/%Y',
-                          cols_axe1   =  [ colref ],
-                          cols_axe2   =  [ colsy[i] ],
-                          title =      title,
-                          cfg={},             
-                          mode='highcharts'
-                         )
-    doc.hr() ; doc.br()
-    doc.table(df, use_datatable=True )
-    doc.save( dir_out + 'metrics.html')
-    doc.open_browser()
+def help_get_body(func):
+    """ Using the magic method __doc__, we KNOW the size of the docstring.
+        We then, just substract this from the total length of the function
     """
-    print(ss)
+    import inspect
+    try:
+        lines_to_skip = len(func.__doc__.split('\n'))
+    except AttributeError:
+        lines_to_skip = 0
+    lines = inspect.getsourcelines(func)[0]
+    return ''.join( lines[lines_to_skip+1:] )
+
 
 
 

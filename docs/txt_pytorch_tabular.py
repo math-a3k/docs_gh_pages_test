@@ -1,12 +1,8 @@
 
 
-
-
 pytorch_tabular\setup.py
 -------------------------functions----------------------
 read_requirements(thelibFolder, filename)
-
-
 
 
 
@@ -17,11 +13,7 @@ print_metrics(y_true, y_pred, tag)
 
 
 
-
-
 pytorch_tabular\examples\to_test_classification.py
-
-
 
 
 pytorch_tabular\examples\to_test_node.py
@@ -33,19 +25,13 @@ test_classification(classification_data, continuous_cols, categorical_cols, embe
 
 
 
-
-
 pytorch_tabular\examples\to_test_regression.py
 -------------------------functions----------------------
 fake_metric(y_hat, y)
 
 
 
-
-
 pytorch_tabular\examples\to_test_regression_custom_models.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\categorical_encoders.py
@@ -68,8 +54,6 @@ CategoricalEmbeddingTransformer.save_as_object_file(self, path)
 CategoricalEmbeddingTransformer.load_from_object_file(self, path)
 
 
-
-
 pytorch_tabular\pytorch_tabular\feature_extractor.py
 -------------------------methods----------------------
 DeepFeatureExtractor.__init__(self, tabular_model, extract_keys = ["backbone_features"], drop_original = True)
@@ -78,8 +62,6 @@ DeepFeatureExtractor.transform(self, X: pd.DataFrame, y = None)
 DeepFeatureExtractor.fit_transform(self, X: pd.DataFrame, y = None)
 DeepFeatureExtractor.save_as_object_file(self, path)
 DeepFeatureExtractor.load_from_object_file(self, path)
-
-
 
 
 pytorch_tabular\pytorch_tabular\tabular_datamodule.py
@@ -96,8 +78,6 @@ TabularDatamodule.prepare_inference_dataloader(self, df: pd.DataFrame)
 TabularDataset.__init__(self, data: pd.DataFrame, task: str, continuous_cols: List[str]  =  None, categorical_cols: List[str]  =  None, embed_categorical: bool  =  True, target: List[str]  =  None, )
 TabularDataset.__len__(self)
 TabularDataset.__getitem__(self, idx)
-
-
 
 
 pytorch_tabular\pytorch_tabular\tabular_model.py
@@ -121,8 +101,6 @@ TabularModel.save_model(self, dir: str)
 TabularModel.load_from_checkpoint(cls, dir: str)
 
 
-
-
 pytorch_tabular\pytorch_tabular\utils.py
 -------------------------functions----------------------
 _make_smooth_weights_for_balanced_classes(y_train, mu = 0.15)
@@ -134,11 +112,7 @@ get_gaussian_centers(y, n_components)
 
 
 
-
-
 pytorch_tabular\pytorch_tabular\__init__.py
-
-
 
 
 pytorch_tabular\tests\conftest.py
@@ -152,14 +126,10 @@ timeseries_data()
 
 
 
-
-
 pytorch_tabular\tests\test_autoint.py
 -------------------------functions----------------------
 test_regression(regression_data, multi_target, continuous_cols, categorical_cols, continuous_feature_transform, normalize_continuous_features, target_range, deep_layers, batch_norm_continuous_input, attention_pooling)
 test_classification(classification_data, continuous_cols, categorical_cols, continuous_feature_transform, normalize_continuous_features, deep_layers, batch_norm_continuous_input)
-
-
 
 
 
@@ -172,15 +142,11 @@ test_embedding_transformer(regression_data)
 
 
 
-
-
 pytorch_tabular\tests\test_common.py
 -------------------------functions----------------------
 fake_metric(y_hat, y)
 test_save_load(regression_data, model_config_class, continuous_cols, categorical_cols, custom_metrics, custom_loss, custom_optimizer, tmpdir, )
 test_feature_extractor(regression_data, model_config_class, continuous_cols, categorical_cols, )
-
-
 
 
 
@@ -191,14 +157,10 @@ test_date_encoding(timeseries_data, freq)
 
 
 
-
-
 pytorch_tabular\tests\test_mdn.py
 -------------------------functions----------------------
 test_regression(regression_data, multi_target, continuous_cols, categorical_cols, continuous_feature_transform, normalize_continuous_features, variant, num_gaussian)
 test_classification(classification_data, continuous_cols, categorical_cols, continuous_feature_transform, normalize_continuous_features, num_gaussian)
-
-
 
 
 
@@ -210,8 +172,6 @@ test_embedding_transformer(regression_data)
 
 
 
-
-
 pytorch_tabular\tests\test_tabnet.py
 -------------------------functions----------------------
 test_regression(regression_data, multi_target, continuous_cols, categorical_cols, continuous_feature_transform, normalize_continuous_features, target_range)
@@ -219,11 +179,7 @@ test_classification(classification_data, continuous_cols, categorical_cols, cont
 
 
 
-
-
 pytorch_tabular\tests\__init__.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\config\config.py
@@ -239,11 +195,7 @@ ExperimentRunManager.update_versions(self, name)
 ModelConfig.__post_init__(self)
 
 
-
-
 pytorch_tabular\pytorch_tabular\config\__init__.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\base_model.py
@@ -265,11 +217,7 @@ BaseModel.create_plotly_histogram(self, arr, name, bin_dict = None)
 BaseModel.validation_epoch_end(self, outputs)
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\__init__.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\autoint\autoint.py
@@ -282,16 +230,10 @@ AutoIntModel._build_network(self)
 AutoIntModel.forward(self, x: Dict)
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\autoint\config.py
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\autoint\__init__.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\category_embedding\category_embedding_model.py
@@ -305,21 +247,13 @@ CategoryEmbeddingModel.unpack_input(self, x: Dict)
 CategoryEmbeddingModel.forward(self, x: Dict)
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\category_embedding\config.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\category_embedding\__init__.py
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\mixture_density\config.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\mixture_density\mdn.py
@@ -354,11 +288,7 @@ AutoIntMDN._build_network(self)
 AutoIntMDN.unpack_input(self, x: Dict)
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\mixture_density\__init__.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\node\architecture_blocks.py
@@ -367,11 +297,7 @@ DenseODSTBlock.__init__(self, input_dim, num_trees, num_layers, tree_output_dim 
 DenseODSTBlock.forward(self, x)
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\node\config.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\node\node_model.py
@@ -387,8 +313,6 @@ NODEModel.unpack_input(self, x: Dict)
 NODEModel.forward(self, x: Dict)
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\node\odst.py
 -------------------------functions----------------------
 check_numpy(x)
@@ -398,8 +322,6 @@ ODST.__init__(self, in_features, num_trees, depth = 6, tree_output_dim = 1, flat
 ODST.forward(self, input)
 ODST.initialize(self, input, eps = 1e-6)
 ODST.__repr__(self)
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\node\utils.py
@@ -424,16 +346,10 @@ ModuleWithInit.initialize(self, *args, **kwargs)
 ModuleWithInit.__call__(self, *args, **kwargs)
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\node\__init__.py
 
 
-
-
 pytorch_tabular\pytorch_tabular\models\tabnet\config.py
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\tabnet\tabnet_model.py
@@ -445,8 +361,6 @@ TabNetModel.__init__(self, config: DictConfig, **kwargs)
 TabNetModel._build_network(self)
 TabNetModel.unpack_input(self, x: Dict)
 TabNetModel.forward(self, x: Dict)
-
-
 
 
 pytorch_tabular\pytorch_tabular\models\tabnet\__init__.py
