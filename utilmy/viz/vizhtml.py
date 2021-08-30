@@ -575,10 +575,6 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
     # set up plot
     fig, ax = plt.subplots(figsize= cc.figsize)  # set size
     ax.margins(0.05)  # Optional, just adds 5% padding to the autoscaling
-
-    
-
-    
     scatter = ax.scatter(xx,
                      yy,
                      c=color_list,
@@ -605,8 +601,7 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
     # add label in x,y position with the label
     # for i in range(N):
     #     ax.text(df['Age'][i], df['Fare'][i], label_list[i], size=8)
-
-
+    
     if len(save_path) > 1 :
         plt.savefig(f'{cc.save_path}-{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png', dpi=200)
 
