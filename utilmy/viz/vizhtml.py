@@ -109,8 +109,8 @@ def test2():
 
 
     # create histogram chart. mode highcharts
-    # doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
-    #                    xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
 
 
      # Testing with example data sets (Titanic)
@@ -970,7 +970,7 @@ def pd_plot_tseries_highcharts(df,
 
 def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
                               binsNumber=None, binWidth=None,
-                              title:str="", xaxis_labe:str= "x-axis", yaxis_label:str="y-axis",
+                              title:str="", xaxis_label:str= "x-axis", yaxis_label:str="y-axis",
                               cfg:dict={}, mode='d3', save_img="",
                               show=False):
 
