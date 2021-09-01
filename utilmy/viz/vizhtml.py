@@ -82,9 +82,9 @@ def test2():
       from util.viz import vizhtml as vi
       vi.test2()
     """
-    data = test_getdata()
+    data = vi.test_getdata()
 
-    doc = htmlDoc(title='Weather report', dir_out="", cfg={} )
+    doc = vi.htmlDoc(title='Weather report', dir_out="", cfg={} )
     doc.h1(' Weather report')
     doc.hr() ; doc.br()
 
@@ -109,8 +109,8 @@ def test2():
 
 
     # create histogram chart. mode highcharts
-    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
-                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+    # doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+    #                    xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
 
 
      # Testing with example data sets (Titanic)
@@ -128,6 +128,8 @@ def test2():
     html1 = doc.get_html()
     # print(html1)
     # html_show(html1)
+
+
 
 
 
@@ -161,13 +163,15 @@ def test3(verbose=True):
 
 
 
-    for df2_i in df2_list:
-         print(df2_i)
-         col2 =df2_i.columns
-         # doc.h3(f" plot title: {df2_i['category'].values[0]}")
-         doc.plot_tseries(df2_i, coldate= col2[0], cols_axe1= col2[1],   cfg = cfg.tseries, mode='highcharts')
+#     for df2_i in df2_list:
+#          print(df2_i)
+#          col2 =df2_i.columns
+#          # doc.h3(f" plot title: {df2_i['category'].values[0]}")
+#          doc.plot_tseries(df2_i, coldate= col2[0], cols_axe1= col2[1],   cfg = cfg.tseries, mode='highcharts')
 
-
+    
+    
+    
     doc.tag('<h2> My histo title </h2>')
     doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='matplot', save_img="")
     doc.plot_histogram(df2, cfg.histo, mode='matplot', save_img="")
@@ -1127,7 +1131,7 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
         for index, row in df.iterrows():
             g.add_edge(row[cola], row[colb], weight=row[colweight],)
 
-        nx.draw(G, with_labels=True)
+        nx.draw(g, with_labels=True)
         return g
 
 
@@ -1166,7 +1170,7 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
         draw_graph3(G)
         """
         from pyvis import network as net
-
+        import re
         # make a pyvis network
         pyvis_graph = net.Network(notebook=notebook)
 
