@@ -109,8 +109,8 @@ def test2():
 
 
     # create histogram chart. mode highcharts
-    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
-                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+    # doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+    #                    xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
 
 
      # Testing with example data sets (Titanic)
@@ -131,13 +131,15 @@ def test2():
 
 
 
+
+
 def test3(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata()
     dft  = data['titanic.csv']
     df   = data['housing.csv']
     df2  = data['sales.csv']
-
+    from box import Box
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
     cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
@@ -146,7 +148,7 @@ def test3(verbose=True):
 
     df = pd.DataFrame([[1, 2]])
     df2_list = [df, df, df]
-
+    print(df2_list)
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
 
     doc.h1('My title')  # h1
@@ -161,20 +163,20 @@ def test3(verbose=True):
 
 
 
-    for df2_i in df2_list:
-         print(df2_i)
-         col2 =df2_i.columns
-         # doc.h3(f" plot title: {df2_i['category'].values[0]}")
-         doc.plot_tseries(df2_i, coldate= col2[0], cols_axe1= col2[1],   cfg = cfg.tseries, mode='highcharts')
+    # for df2_i in df2_list:
+    #      print(df2_i)
+    #      col2 =df2_i.columns
+    #      # doc.h3(f" plot title: {df2_i['category'].values[0]}")
+    #      doc.plot_tseries(df2_i, coldate= col2[0], cols_axe1= col2[1],   cfg = cfg.tseries, mode='highcharts')
 
+    
 
     doc.tag('<h2> My histo title </h2>')
-    doc.plot_histogram(df2['col1', 'col2'], cfg.histo, mode='matplot', save_img="")
-    doc.plot_histogram(df2, cfg.histo, mode='matplot', save_img="")
+    doc.plot_histogram(df2,col='Unit Cost',mode='matplot', save_img="")
+    doc.plot_histogram(df2,col='Unit Price',cfg =  cfg.histo,title="Price", mode='matplot', save_img="")
 
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
-
 
 def test_scatter_and_histogram_matplot():
 
@@ -1127,7 +1129,7 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
         for index, row in df.iterrows():
             g.add_edge(row[cola], row[colb], weight=row[colweight],)
 
-        nx.draw(G, with_labels=True)
+        nx.draw(g, with_labels=True)
         return g
 
 
@@ -1166,7 +1168,7 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
         draw_graph3(G)
         """
         from pyvis import network as net
-
+        import re
         # make a pyvis network
         pyvis_graph = net.Network(notebook=notebook)
 
