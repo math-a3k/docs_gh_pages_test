@@ -478,11 +478,11 @@ def integrate(its, nchunks):
     return sum / float(its)
 
 
-def mc01(nprocs, nmax, chunksize):
-    n_perproc = nmax / nprocs  # Each process gets a share of the iterations
+def mc01(nprocs, nsample, chunksize):
+    n_perproc = nsample / nprocs  # Each process gets a share of the iterations
     pool = mp.Pool(processes=nprocs)
 
-    result = pool.map(mpf.integrate, [nmax], chunksize   )
+    result = pool.map(mpf.integrate, [nsample], chunksize   )
     # Async is faster element 'i' being the return value of 'integrate' fromprocess 'i'
 
     pool.terminate();   pool.join();

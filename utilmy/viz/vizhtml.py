@@ -222,11 +222,11 @@ def help():
     
     ss = "from utilmy.vi.vizhtml import * \n\n"
     ss = ss + "data = test_getdata() \n\n "
-    ss = ss + help_get_body(test1 )  + "\n\n\n ##############################\n"
-    ss = ss + help_get_body(test2 )  + "\n\n\n ##############################\n"
-    ss = ss + help_get_body(test3 )  + "\n\n\n ##############################\n"
-    ss = ss + help_get_body(test_scatter_and_histogram_matplot )  + "\n\n\n ##############################\n"
-    ss = ss + help_get_body(test_pd_plot_network )  + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test1) + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test2) + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test3) + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test_scatter_and_histogram_matplot) + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test_pd_plot_network) + "\n\n\n ##############################\n"
     
     print(ss)
 
@@ -246,9 +246,9 @@ class htmlDoc(object):
         cfg          = {} if cfg is None else cfg
         self.cc      = Box(cfg)  # Config dict
         self.dir_out = dir_out.replace("\\", "/")
-        self.head = f"<html>\n    "
-        self.html = "\n</head> \n<body>"
-        self.tail = "\n    </body>\n</html>"
+        self.head    = f"  <html>\n    "
+        self.html    = "\n </head> \n<body>"
+        self.tail    = "\n </body>\n</html>"
 
         ##### HighCharts
         links = """<link href="https://www.highcharts.com/highslide/highslide.css" rel="stylesheet" />
@@ -258,6 +258,7 @@ class htmlDoc(object):
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/heatmap.js"></script>
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/histogram-bellcurve.js"></script>
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script> """
+
         self.head = self.head + """
             <head>
               <title>{title}</title>
@@ -308,7 +309,7 @@ class htmlDoc(object):
         self.tail = data + self.tail
 
     def hidden(self, x,css: str=''):
-        # Hidden paragraph
+        # Hidden P paragraph
         custom_id = str(random.randint(9999,999999))
         # self.head += "\n" + js_code.js_hidden  # Hidden  javascript
         self.html += "\n" + f"<div id='div{custom_id}' style='{css}'>{x}</div>"
@@ -447,9 +448,9 @@ class htmlDoc(object):
         elif mode == 'highcharts':
             html_code = pd_plot_scatter_highcharts(df, colx= colx, coly=coly,
                                                    colclass1=colclass1, colclass2=colclass2, colclass3=colclass3,
-                                                   nmax=nsample,
+                                                   nsample=nsample,
                                                    cfg=cfg, mode=mode, save_img=save_img, verbose=False
-            )
+                                                   )
 
         self.html += "\n\n" + html_code
 
@@ -636,7 +637,7 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
 
 
 def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
-                              save_img: bool=False):
+                              save_img: str=""):
     """
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -662,7 +663,7 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='', title: str='', nbin=
         dfi.sample(n=nsample, replace=True).hist( bins=np.arange(q0, q1,  (q1 - q0) / nbin))
     plt.title(title)
 
-    if save_img :
+    if len(save_img)>0 :
         os.makedirs(os.path.dirname(save_img), exist_ok=True)
         plt.savefig(save_img)
         print(save_img)
@@ -753,8 +754,6 @@ def pd_plot_highcharts(df):
    chart = serialize(df, render_to="my-chart", title="My Chart")
    # Basic column plot
    chart = serialize(df, render_to="my-chart", title="Test", kind="bar")
-   # Basic column plot
-   chart = serialize(df, render_to="my-chart", title="Test", kind="barh")
    # Plot C on secondary axis
    chart = serialize(df, render_to="my-chart", title="Test", secondary_y = ["C"])
    # Plot on a 1000x700 div
@@ -773,13 +772,12 @@ def pd_plot_highcharts(df):
 
 
 def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, collabel: str=None,
-                               colclass1: str=None, colclass2: str=None, colclass3: str=None, nmax=10000,
-                               cfg:dict={}, mode='d3', save_img='',  verbose=True,  **kw )-> str:
+                               colclass1: str=None, colclass2: str=None, colclass3: str=None, nsample=10000,
+                               cfg:dict={}, mode='d3', save_img='', verbose=True, **kw)-> str:
     """ Plot Highcharts X=Y Scatter
-    # pip install utilmy
     from utilmy.viz import vizhtml
     vizhtml.pd_plot_scatter_highcharts(df, colx:str=None, coly:str=None, collabel=None,
-                               colclass1=None, colclass2=None, colclass3=None, nmax=10000,
+                               colclass1=None, colclass2=None, colclass3=None, nsample=10000,
                                cfg:dict={}, mode='d3', save_img=False,  verbose=True )
     """
     import matplotlib
@@ -792,8 +790,8 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
     cc.colormap   = cc.get('colormap', 'brg')
     if verbose: print(cc['title'], cc['figsize'])
 
-    nmax = min(nmax, len(df0))
-    df   = df0.sample(nmax)
+    nsample = min(nsample, len(df0))
+    df   = df0.sample(nsample)
 
     colx      = 'x'      if colx is None else colx
     coly      = 'y'      if coly is None else coly
@@ -901,7 +899,7 @@ def pd_plot_tseries_highcharts(df,
     cc.subtitle     = cc.get('subtitle', '')
     cc.cols_axe1    = cols_axe1
     cc.cols_axe2    = cols_axe2
-    df[coldate]     = pd.to_datetime(df[coldate],format=date_format)
+    df[cc.coldate]     = pd.to_datetime(df[cc.coldate],format=date_format)
 
     #########################################################
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
@@ -928,13 +926,11 @@ def pd_plot_tseries_highcharts(df,
             'gridLineWidth': 0,
             'title': {
                 'text': cc.axe1_label,
-                'style': {
-                    'color': 'Highcharts.getOptions().colors[0]'
+                'style': { 'color': 'Highcharts.getOptions().colors[0]'
                 }
             },
             'labels': {
-                'style': {
-                    'color': 'Highcharts.getOptions().colors[0]'
+                'style': { 'color': 'Highcharts.getOptions().colors[0]'
                 }
             }
 
@@ -975,9 +971,6 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
                               show=False):
 
     ''' function to return highchart json code for histogram.
-        df        = data['housing.csv']
-        html_code = pd_plot_histogram_hcharts(df,colname="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='d3', save_img=False)
-        # highcharts_show_chart(html_code)
         input parameter
         df : panda dataframe on which you want to apply histogram
         colname : column name from dataframe in which histogram will apply
@@ -988,6 +981,10 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
         title : title of histogram
         cols_axe2_label : label for yaxis 2
         date_format : %m for moth , %d for day and %Y for Year.
+
+        df        = data['housing.csv']
+        html_code = pd_plot_histogram_hcharts(df,colname="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='d3', save_img=False)
+        # highcharts_show_chart(html_code)
     '''
     cc = Box(cfg)
     cc.title        = cc.get('title',    "My Title" ) if title is None else title
@@ -1142,30 +1139,14 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
         Valid node attributes include:
             "size", "value", "title", "x", "y", "label", "color".
             (For more info: https://pyvis.readthedocs.io/en/latest/documentation.html#pyvis.network.Network.add_node)
-        Valid edge attributes include:
-            "arrowStrikethrough", "hidden", "physics", "title", "value", "width"
-            (For more info: https://pyvis.readthedocs.io/en/latest/documentation.html#pyvis.network.Network.add_edge)
+
         Args:
             networkx_graph: The graph to convert and display
             notebook: Display in Jupyter?
             output_filename: Where to save the converted network
             show_buttons: Show buttons in saved version of network?
             only_physics_buttons: Show only buttons controlling physics of network?
-        ##
-        # For example:
-        ##
-        # make a new neworkx network
-        import networkx as nx
-        G = nx.Graph()
-        # add nodes and edges (color can be html color name or hex code)
-        G.add_node('a', color='red', size=4)
-        G.add_node('b', color='#30a1a5', size=3)
-        G.add_node('c', color='green', size=1)
-        G.add_edge('a', 'b', weight=1023)
-        G.add_edge('a', 'c', weight=435)
-        G.add_edge('b', 'c', weight=100)
-        # draw
-        draw_graph3(G)
+
         """
         from pyvis import network as net
         import re
@@ -1210,8 +1191,10 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
                show_buttons=True, only_physics_buttons=False,html_code = True)
     return ng2
 
+
+
 ###################################################################################################
-###################################################################################################
+########CSS Teamplates ############################################################################
 css_code =Box({})
 css_code.grey ="""
 .body {
@@ -1225,7 +1208,7 @@ css_code.grey ="""
 
 
 ###################################################################################################
-###################################################################################################
+######### JScript #################################################################################
 js_code = Box({})  # List of javascript code
 js_code.js_hidden = """<script>
 var x = document.getElementById('hidden_section_id');
@@ -1244,7 +1227,7 @@ x.onclick = function() {
 
 ###################################################################################################
 ###################################################################################################
-def help_get_body(func):
+def help_get_codesource(func):
     """ Using the magic method __doc__, we KNOW the size of the docstring.
         We then, just substract this from the total length of the function
     """
@@ -1262,9 +1245,9 @@ def help_get_body(func):
 
 ###################################################################################################
 if __name__ == "__main__":
-    # python
-    # fire.Fire()
-    test2()
+    import fire
+    fire.Fire()
+    # test2()
 
 
 

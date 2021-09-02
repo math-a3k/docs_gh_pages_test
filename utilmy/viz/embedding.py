@@ -59,7 +59,7 @@ class vizEmbedding:
 
            from utilmy.viz.embedding import vizEmbedding
            myviz = vizEmbedding(path = "C:/D/gitdev/cpa/data/model.vec")
-           myviz.run_all(nmax=100)
+           myviz.run_all(nsample=100)
 
 
            myviz.dim_reduction(mode='mds')
