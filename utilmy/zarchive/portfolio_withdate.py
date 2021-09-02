@@ -1430,7 +1430,7 @@ def folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark,
     stk_select.append(int(kmin))
 
   volx= volhisto_fromret(ret_close1, t1, 252, axis=1)
-  # 1.0/nmax+np.zeros(nmax)
+  # 1.0/nsample+np.zeros(nsample)
   ww= 1/volx[stk_select]
   ww= ww/ sum(ww)
   if np.isnan(sum(ww)) :  ww= 1/len(stk_select) +np.zeros(len(stk_select))
