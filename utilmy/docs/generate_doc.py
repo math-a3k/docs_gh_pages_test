@@ -32,7 +32,10 @@ def markdown_create_function(uri, name, type, args_name, args_type, args_value, 
         </ul>
     </details>'''
 
-    function_name = uri.split(':', 1)[1]
+    try:
+        function_name = uri.split(':', 1)[1]
+    except:
+        function_name = name
     file          = uri.split(':', 1)[0]
     args_name     = literal_eval(args_name)
     args_type     = literal_eval(args_type)
