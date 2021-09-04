@@ -126,6 +126,7 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
     flist = flist + glob.glob(root +"/*/*/*/*.py")
     flist = flist + glob.glob(root +"/*/*/*/*/*.py")
 
+    header = False
     # print(flist)
     for i in range(len(flist)):
         # output_file = re.search(r'(\w+).py', file).group(1)
@@ -141,8 +142,9 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
                 df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/','', 1))
 
             if type == 'csv':
-                if i == 0:
-                    df.to_csv(f'{out_path}', index=False)
+                if not header:
+                    df.to_csv(f'{out_path}', mode='a', header=True, index=False)
+                    header = True
                 else:
                     df.to_csv(f'{out_path}', mode='a', header=False, index=False)
 
@@ -163,7 +165,11 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
             if repo_name:
                 df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/','', 1))
             if type == 'csv':
-                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                if not header:
+                    df.to_csv(f'{out_path}', mode='a', header=True, index=False)
+                    header = True
+                else:
+                    df.to_csv(f'{out_path}', mode='a', header=False, index=False)
             # elif type == 'txt':
             #     for index, row in df.iterrows():
             #         print(f"{index}: {df['uri']}")
@@ -175,7 +181,11 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
             if repo_name:
                 df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
             if type == 'csv':
-                df.to_csv(f'{out_path}', mode='a', header=False, index=False)
+                if not header:
+                    df.to_csv(f'{out_path}', mode='a', header=True, index=False)
+                    header = True
+                else:
+                    df.to_csv(f'{out_path}', mode='a', header=False, index=False)
             elif type == 'txt':
                 with open(f'{out_path}', 'a+') as f:
                     f.write(f"-------------------------methods----------------------\n")
@@ -237,8 +247,7 @@ def export_call_graph_url(repo_link: str, out_path:str=None):
     # do not clone if repo already existed
     if not os.path.exists(repo_name):
         print(f'Start clone Repo: {repo_link}')
-        from git import Repo
-        Repo.clone_from(repo_link, repo_name)
+        os.system(f"git clone {repo_link} {repo_name}")
         print('Clone done')
 
     export_call_graph(repo_name, out_path)
@@ -328,8 +337,8 @@ def export_call_graph(in_path:str=None, out_path:str=None):
 
         df = get_list_method_stats(flist[i])
         if df is not None:
-            df = df[cols]
-            print(df)
+            dfi = df[cols]
+            print(dfi)
             if i == 0:
                 # df.to_csv(f'{out_path}', index=False)
                 with open(f'{out_path}', 'w+') as f:
@@ -1033,8 +1042,11 @@ def _get_all_lines_in_class(class_name, array):
             break
 
     # 2. get indent
-    if re.match(r"(\s+)\w*", response[1]):
-        indent = re.match(r"(\s+)\w*", response[1]).group(1)
+    if len(response) > 1:
+        if re.match(r"(\s+)\w*", response[1]):
+            indent = re.match(r"(\s+)\w*", response[1]).group(1)
+        else:
+            return [], ''
     else:
         return [], ''
 
