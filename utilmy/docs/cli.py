@@ -35,17 +35,25 @@ Usage
 
 """
 import argparse, os
+import  stdlib_list
 
-import generate_doc as gdoc
-import code_parser as cp
+###  !!!!!!!! Do NOT Change this import structure
+from utilmy.docs import generate_doc as gdoc
+from utilmy.docs import code_parser as cp
+###################################################
 
 
 def run_cli():
     """ Usage
-    docs  markdown   --repo_dir utilmy/      --doc_dir docs/"
-    docs  callgraph  --repo_dir utilmy/      --doc_dir docs/"
-    docs  csv        --repo_dir utilmy/      --doc_dir docs/"
-    docs  txt        --repo_dir utilmy/      --doc_dir docs/"
+    cd myutil
+    pip install -e  .
+
+
+    docs  markdown   --repo_dir utilmy/      --out_dir docs/
+
+    docs  callgraph  --repo_dir utilmy/      --out_dir docs/
+    docs  csv        --repo_dir utilmy/      --out_dir docs/
+    docs  txt        --repo_dir utilmy/      --out_dir docs/
 
 
     """
