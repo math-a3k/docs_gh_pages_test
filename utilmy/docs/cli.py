@@ -32,6 +32,25 @@ Usage
 
 
 
+########  pip install -e .
+    docs type   parser/test3/arrow_dataset.py  method  parser/output/output_method.csv
+
+    docs file   parser/code_parser.py  method parser/output/output_file.csv
+
+    docs repo   parser/test3    parser/output/output_repo.csv
+
+    docs repo_url https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
+
+    docs repo_txt   parser/test3    parser/output/output_repo.csv
+
+    docs repo_url_txt https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
+
+    docs export_call_graph parser/test3   docs/export_call_graph.csv
+
+    docs export_call_graph_url https://github.com/CompVis/taming-transformers.git docs/repo_taming_graph.csv
+
+    docs export_call_graph <in_path> <out_path>
+
 
 """
 import argparse, os
@@ -61,7 +80,7 @@ def run_cli():
     add = p.add_argument
 
 
-    add('task', metavar='task', type=str, nargs=1, help='markdown/index/callgraph/csv')
+    add('task', metavar='task', type=str, nargs=1, help='markdown/index/callgraph/csv/help')
 
     add("--repo_url", type=str, default=None,     help = "repo_url")
     add("--repo_dir", type=str, default="./",     help = "repo_dir")
