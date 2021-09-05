@@ -12,23 +12,21 @@ Usage
       'export_call_graph_url': export_call_graph_url,
 
 ###########
-    python code_parser.py type   parser/test3/arrow_dataset.py  method  parser/output/output_method.csv
+    python utilmy/docs/cli.py markdown --repo_url https://github.com/CompVis/taming-transformers.git
 
-    python code_parser.py file   parser/code_parser.py  method parser/output/output_file.csv
+    python utilmy/docs/cli.py markdown --repo_dir utilmy/      --out_dir docs/
 
-    python code_parser.py repo   parser/test3    parser/output/output_repo.csv
+    python utilmy/docs/cli.py callgraph  --repo_url https://github.com/CompVis/taming-transformers.git
 
-    python code_parser.py repo_url https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
+    python utilmy/docs/cli.py callgraph  --repo_dir utilmy/      --out_dir docs/
 
-    python code_parser.py repo_txt   parser/test3    parser/output/output_repo.csv
+    python utilmy/docs/cli.py csv  --repo_url https://github.com/CompVis/taming-transformers.git
 
-    python code_parser.py repo_url_txt https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
+    python utilmy/docs/cli.py csv  --repo_dir utilmy/      --out_dir docs/
 
-    python code_parser.py export_call_graph parser/test3   docs/export_call_graph.csv
+    python utilmy/docs/cli.py txt  --repo_url https://github.com/CompVis/taming-transformers.git
 
-    python code_parser.py export_call_graph_url https://github.com/CompVis/taming-transformers.git docs/repo_taming_graph.csv
-
-    python code_parser.py export_call_graph <in_path> <out_path>
+    python utilmy/docs/cli.py csv  --repo_dir utilmy/      --out_dir docs/
 
 
 
