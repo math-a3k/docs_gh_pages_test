@@ -33,23 +33,11 @@ Usage
 
 
 ########  pip install -e .
-    docs type   parser/test3/arrow_dataset.py  method  parser/output/output_method.csv
+    docs  markdown   --repo_dir utilmy/      --out_dir docs/
 
-    docs file   parser/code_parser.py  method parser/output/output_file.csv
-
-    docs repo   parser/test3    parser/output/output_repo.csv
-
-    docs repo_url https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
-
-    docs repo_txt   parser/test3    parser/output/output_repo.csv
-
-    docs repo_url_txt https://github.com/lucidrains/DALLE-pytorch.git docs/test_example1.csv
-
-    docs export_call_graph parser/test3   docs/export_call_graph.csv
-
-    docs export_call_graph_url https://github.com/CompVis/taming-transformers.git docs/repo_taming_graph.csv
-
-    docs export_call_graph <in_path> <out_path>
+    docs  callgraph  --repo_dir utilmy/      --out_dir docs/
+    docs  csv        --repo_dir utilmy/      --out_dir docs/
+    docs  txt        --repo_dir utilmy/      --out_dir docs/
 
 
 """
@@ -67,7 +55,7 @@ def run_cli():
     cd myutil
     pip install -e  .
 
-
+    docs  help
     docs  markdown   --repo_dir utilmy/      --out_dir docs/
 
     docs  callgraph  --repo_dir utilmy/      --out_dir docs/
@@ -92,8 +80,8 @@ def run_cli():
     prefix         = args.prefix if args.prefix is not None else "./"
 
     repo_stat_csv_file = doc_dir + "/output_repo.csv"
-    repo_sta_txt_file = doc_dir + "/output_repo.py"
-    repo_graph_file = doc_dir + "/output_repo_graph.csv"
+    repo_sta_txt_file  = doc_dir + "/output_repo.py"
+    repo_graph_file    = doc_dir + "/output_repo_graph.csv"
 
     if args.task[0] == 'help':
         print(HELP)
@@ -102,8 +90,13 @@ def run_cli():
         os.makedirs(doc_dir, exist_ok=True)
         if args.repo_url is not None :
             cp.export_stats_repolink(args.repo_url,  repo_stat_csv_file)
+
         elif args.repo_dir is not None :
             cp.export_stats_perrepo(args.repo_dir,  repo_stat_csv_file)
+        else:
+            raise Exception(" Needs repo_url or repo_dir")
+
+
         gdoc.run_markdown(repo_stat_csv_file, output= doc_dir + '/doc_main.md',   prefix= prefix)
         gdoc.run_table(repo_stat_csv_file,    output= doc_dir + '/doc_table.md',  prefix= prefix)
 
@@ -112,29 +105,31 @@ def run_cli():
         os.makedirs(doc_dir, exist_ok=True)
         if args.repo_url is not None :
             cp.export_call_graph_url(args.repo_url,  repo_graph_file)
+
         elif args.repo_dir is not None :
             cp.export_call_graph(args.repo_dir,  repo_graph_file)
         else:
-            print(HELP)
-
+            raise Exception(" Needs repo_url or repo_dir")
 
     if args.task[0] == 'csv':
         os.makedirs(doc_dir, exist_ok=True)
         if args.repo_url is not None :
             cp.export_stats_repolink(args.repo_url,  repo_stat_csv_file)
+
         elif args.repo_dir is not None :
             cp.export_stats_perrepo(args.repo_dir,  repo_stat_csv_file)
         else:
-            print(HELP)
-
+            raise Exception(" Needs repo_url or repo_dir")
 
     if args.task[0] == 'txt':
         os.makedirs(doc_dir, exist_ok=True)
         if args.repo_url is not None :
             cp.export_stats_repolink_txt(args.repo_url,  repo_sta_txt_file)
+
         elif args.repo_dir is not None :
             cp.export_stats_perrepo_txt(args.repo_dir,  repo_sta_txt_file)
-
+        else:
+            raise Exception(" Needs repo_url or repo_dir")
 
 
 #############################################################################
