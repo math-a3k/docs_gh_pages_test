@@ -218,6 +218,104 @@ def test_pd_plot_network():
   print(html_code)
 
 
+def test_cssname_3d(verbose=True):
+    # pip install box-python    can use .key or ["mykey"]  for dict
+    data = test_getdata()
+    dft  = data['titanic.csv']
+    df   = data['housing.csv']
+    df2  = data['sales.csv']
+    from box import Box
+    cfg = Box({})
+    cfg.tseries = {"title": 'ok'}
+    cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
+    cfg.histo   = {"title": 'ok'}
+    cfg.use_datatable = True
+
+    df = pd.DataFrame([[1, 2]])
+    df2_list = [df, df, df]
+    print(df2_list)
+    doc = htmlDoc(dir_out="", title="hello",css_name="3d", format='myxxxx', cfg=cfg)
+
+    doc.h1('My title')  # h1
+    doc.sep()
+    doc.br()  # <br>
+
+    doc.tag('<h2> My graph title </h2>')
+    doc.plot_scatter(dft, colx='Age', coly='Fare',
+                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                     cfg=cfg.scatter, mode='matplot', save_img='')
+
+    doc.save(dir_out="myfile.html")
+    doc.open_browser()  # Open myfile.html
+
+
+
+def test_cssname_border(verbose=True):
+    # pip install box-python    can use .key or ["mykey"]  for dict
+    data = test_getdata()
+    dft  = data['titanic.csv']
+    df   = data['housing.csv']
+    df2  = data['sales.csv']
+    from box import Box
+    cfg = Box({})
+    cfg.tseries = {"title": 'ok'}
+    cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
+    cfg.histo   = {"title": 'ok'}
+    cfg.use_datatable = True
+
+    df = pd.DataFrame([[1, 2]])
+    df2_list = [df, df, df]
+    print(df2_list)
+    doc = htmlDoc(dir_out="", title="hello",css_name="border", format='myxxxx', cfg=cfg)
+
+    doc.h1('My title')  # h1
+    doc.sep()
+    doc.br()  # <br>
+
+    doc.tag('<h2> My graph title </h2>')
+    doc.plot_scatter(dft, colx='Age', coly='Fare',
+                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                     cfg=cfg.scatter, mode='matplot', save_img='')
+
+    doc.save(dir_out="myfile.html")
+    doc.open_browser()  # Open myfile.html
+
+
+
+def test_cssname_A4_Size(verbose=True):
+    # pip install box-python    can use .key or ["mykey"]  for dict
+    data = test_getdata()
+    dft  = data['titanic.csv']
+    df   = data['housing.csv']
+    df2  = data['sales.csv']
+    from box import Box
+    cfg = Box({})
+    cfg.tseries = {"title": 'ok'}
+    cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
+    cfg.histo   = {"title": 'ok'}
+    cfg.use_datatable = True
+
+    df = pd.DataFrame([[1, 2]])
+    df2_list = [df, df, df]
+    print(df2_list)
+    doc = htmlDoc(dir_out="", title="hello",css_name="A4_size", format='myxxxx', cfg=cfg)
+
+    doc.h1('My title')  # h1
+    doc.sep()
+    doc.br()  # <br>
+
+    doc.tag('<h2> My graph title </h2>')
+    doc.plot_scatter(dft, colx='Age', coly='Fare',
+                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                     cfg=cfg.scatter, mode='matplot', save_img='')
+
+    doc.save(dir_out="myfile.html")
+    doc.open_browser()  # Open myfile.html
+
+
+
+
+
 def help():
     
     ss = "from utilmy.vi.vizhtml import * \n\n"
@@ -232,11 +330,14 @@ def help():
 
 
 
+    
 
 #####################################################################################
 #### HTML doc ########################################################################
+#####################################################################################
+#### HTML doc ########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None):
+    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="A4_size"):
         """
            Generate HTML page to display graph/Table.
            Combine pages together.
@@ -257,13 +358,150 @@ class htmlDoc(object):
               <script type="text/javascript" src="https://code.highcharts.com/6/highcharts-more.js"></script>
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/heatmap.js"></script>
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/histogram-bellcurve.js"></script>
-              <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script> """
+              <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script> 
+              <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet"> """
+        
+
+
 
         self.head = self.head + """
             <head>
               <title>{title}</title>
               {links}
          """.format(title=title,links=links)
+
+        
+        # defaul css 
+        self.head = self.head + """
+          <style>
+              body{
+                margin:25px;
+                font-family: 'Open Sans', sans-serif;;
+              }
+              h1,
+              h2,
+              h3,
+              h4,
+              h5,
+              h6{
+              margin-bottom: 0.5rem;
+              font-family: 'Arvo', serif;
+              font-weight: 600;
+              line-height: 1.5;
+              color: #32325d;
+              }
+              .h1 {
+              font-size: 1.625rem;
+              }
+              .h2 {
+              font-size: 1.25rem;
+              }
+              .h3 {
+              font-size: 1.0625rem;
+              }
+              .h4 {
+              font-size: 0.9375rem;
+              }
+
+              .h5 {
+              font-size: 0.8125rem;
+              }
+              .h6 {
+              font-size: 0.625rem;
+              }
+            .dataTables_wrapper{
+                overflow-x: auto;
+            }
+            
+            hr{
+                border-top: dotted 4px rgba(26, 47, 51, 0.7);
+                opacity:0.3 ;
+            }
+            div{
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            /* Default Table Style */
+            table {
+              color: #333;
+              background: white;
+              font-size: 12pt;
+              border-collapse: collapse;
+            }
+            table thead th,
+            table tfoot th {
+              color: #777;
+              background: rgba(0,0,0,.1);
+            }
+            table caption {
+              padding:.5em;
+            }
+            table th,
+            table td {
+              padding: .5em;
+              border: 1px solid lightgrey;
+            }
+          </style>
+
+        """
+        if css_name == "3d":
+          self.head = self.head + """
+          <style>
+            div {
+            background: white;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+          }
+          h1,h2,h3,h4,h5,h6 {
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            padding: 5px;
+          } 
+          </style>
+
+        """
+        if css_name == "border":
+          self.head = self.head + """
+          <style>
+            .highcharts-container {
+            border: 3px dotted grey;
+            }
+            .mpld3-figure {
+                border: 3px dotted grey;
+            }
+          </style>
+
+        """
+        if css_name == "A4_size":
+          self.head = self.head + """
+          <style>
+            body {
+              background: rgb(204,204,204); 
+            }
+            page {
+              background: white;
+              display: block;
+              padding:15px;
+              margin: 0 auto;
+              margin-bottom: 0.5cm;
+              box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            }
+            page[size="A4"] {  
+              width: 21cm;
+              height: 29.7cm; 
+            }
+            @media print {
+              body, page {
+                margin: 0;
+                box-shadow: 0;
+              }
+            }
+          </style>
+
+        """
+        self.html = self.html + '\n <page size="A4">'
+        self.tail = "</page> \n" + self.tail
 
     def tag(self, x):  self.html += "\n" + x
     def h1(self, x,css: str='')  : self.html += "\n" + f"<h1 style='{css}'>{x}</h1>"
@@ -465,6 +703,8 @@ class htmlDoc(object):
                         colb: str='col_node2', coledge: str='col_edge'):
         html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
         self.html += "\n\n" + html_code
+
+
 
 
 
