@@ -304,12 +304,10 @@ class htmlDoc(object):
         self.head = self.head + """<head><title>{title}</title>
               {links}""".format(title=title,links=links)
 
-        self.head = self.head + """<style>{css}</style>
-          """.format(css = CSS_TEMPLATE.get(css_name, '') )
-        # """.format(css = css_get_template(css_name=css_name))
+        self.add_css(CSS_TEMPLATE.get(css_name, ''))
+        # self.add_css(css_get_template(css_name=css_name))
 
-
-        if css_name=="A4_size":
+        if css_name=="a4_size":
           self.html = self.html + '\n <page size="A4">'
           self.tail = "</page> \n" + self.tail
 
@@ -446,6 +444,7 @@ class htmlDoc(object):
 
 
     def plot_histogram(self, df:pd.DataFrame, col,
+                       xlabel: str=None,ylabel: str=None,
                        title: str='', figsize: tuple=(14,7),
                        nsample=10000,nbin=10,
                        q5=0.005, q95=0.95,cfg: dict = {}, 
@@ -462,6 +461,7 @@ class htmlDoc(object):
             fig       = pd_plot_histogram_matplot(df, col,
                                                   title=title,
                                                   nbin=nbin, q5=q5, q95=q95,
+                                                  xlabel= xlabel,ylabel=ylabel,
                                                   nsample=nsample, save_img=save_img)
             html_code = self.fig_to_html(fig)
 
@@ -513,7 +513,6 @@ class htmlDoc(object):
                         colb: str='col_node2', coledge: str='col_edge'):
         html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
         self.html += "\n\n" + html_code
-
 
 
 
@@ -684,7 +683,7 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
 
 
 def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
-                              save_img: str=""):
+                              save_img: str="",xlabel: str=None,ylabel: str=None):
     """
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -709,6 +708,8 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='', title: str='', nbin=
     else:
         dfi.sample(n=nsample, replace=True).hist( bins=np.arange(q0, q1,  (q1 - q0) / nbin))
     plt.title(title)
+    plt.xlabel(xlabel) 
+    plt.ylabel(ylabel)
 
     if len(save_img)>0 :
         os.makedirs(os.path.dirname(save_img), exist_ok=True)
