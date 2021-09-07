@@ -275,7 +275,7 @@ def help():
     ss = ss + help_get_codesource(test3) + "\n\n\n ##############################\n"
     ss = ss + help_get_codesource(test_scatter_and_histogram_matplot) + "\n\n\n ##############################\n"
     ss = ss + help_get_codesource(test_pd_plot_network) + "\n\n\n ##############################\n"
-    ss = ss + help_get_codesource(test_cssname()) + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test_cssname ) + "\n\n\n ##############################\n"
 
     ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()  )
     
@@ -1298,8 +1298,6 @@ CSS_TEMPLATE.a3d = CSS_TEMPLATE.base + """
             h1,h2,h3,h4,h5,h6 {box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
             padding: 5px;} 
 """
-
-
 
 
 
