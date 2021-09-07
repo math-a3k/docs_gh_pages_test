@@ -275,6 +275,9 @@ def help():
     ss = ss + help_get_codesource(test3) + "\n\n\n ##############################\n"
     ss = ss + help_get_codesource(test_scatter_and_histogram_matplot) + "\n\n\n ##############################\n"
     ss = ss + help_get_codesource(test_pd_plot_network) + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test_cssname()) + "\n\n\n ##############################\n"
+
+    ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()  )
     
     print(ss)
 
@@ -284,7 +287,7 @@ def help():
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="A4_size"):
+    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_size"):
         """
            Generate HTML page to display graph/Table.
            Combine pages together.
@@ -308,31 +311,28 @@ class htmlDoc(object):
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script> 
               <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet"> """
         
-        self.head = self.head + """
-            <head>
-              <title>{title}</title>
-              {links}
-         """.format(title=title,links=links)
+        self.head = self.head + """<head><title>{title}</title>
+              {links}""".format(title=title,links=links)
 
-        self.head = self.head + """<style>
-              {css}
-          </style>
-          """.format(css = get_css_code(css_name=css_name))
-        
+        self.head = self.head + """<style>{css}</style>
+          """.format(css = CSS_TEMPLATE.get(css_name, '') )
+        # """.format(css = css_get_template(css_name=css_name))
+
+
         if css_name=="A4_size":
           self.html = self.html + '\n <page size="A4">'
           self.tail = "</page> \n" + self.tail
 
     def tag(self, x):  self.html += "\n" + x
-    def h1(self, x,css: str='')  : self.html += "\n" + f"<h1 style='{css}'>{x}</h1>"
-    def h2(self, x,css: str='')  : self.html += "\n" + f"<h2 style='{css}'>{x}</h2>"
-    def h3(self, x,css: str='')  : self.html += "\n" + f"<h3 style='{css}'>{x}</h3>"
-    def h4(self, x,cs: str='')  : self.html += "\n" + f"<h4 style='{css}'>{x}</h4>"
-    def p(self, x,css: str='')   : self.html += "\n" + f"<p style='{css}'>{x}</p>"
+    def h1(self,  x,css: str='')  : self.html += "\n" + f"<h1 style='{css}'>{x}</h1>"
+    def h2(self,  x,css: str='')  : self.html += "\n" + f"<h2 style='{css}'>{x}</h2>"
+    def h3(self,  x,css: str='')  : self.html += "\n" + f"<h3 style='{css}'>{x}</h3>"
+    def h4(self,  x,cs: str='')  : self.html += "\n" + f"<h4 style='{css}'>{x}</h4>"
+    def p(self,   x,css: str='')   : self.html += "\n" + f"<p style='{css}'>{x}</p>"
     def div(self, x,css: str='') : self.html += "\n" + f"<div style='{css}'>{x}</div>"
-    def hr(self,css: str='')     : self.html += "\n" + f"<hr style='{css}'/>"
-    def sep(self,css: str='')    : self.html += "\n" + f"<hr style='{css}'/>"
-    def br(self,css: str='')     : self.html += "\n" + f"<br style='{css}'/>"
+    def hr(self,    css: str='')     : self.html += "\n" + f"<hr style='{css}'/>"
+    def sep(self,   css: str='')    : self.html += "\n" + f"<hr style='{css}'/>"
+    def br(self,    css: str='')     : self.html += "\n" + f"<br style='{css}'/>"
 
     def get_html(self)-> str:
         full = self.head  + self.html + self.tail
@@ -524,47 +524,6 @@ class htmlDoc(object):
         html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
         self.html += "\n\n" + html_code
 
-
-
-
-
-def get_css_code(css_name:str="A4_size"):
-    css_code = """
-              body{margin:25px;font-family: 'Open Sans', sans-serif;}
-              h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
-              .dataTables_wrapper{overflow-x: auto;}
-              hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
-              div{margin-top: 5px;margin-bottom: 5px;}
-              table {border-collapse: collapse;}
-              table th,table td {border: 1px solid lightgrey;}         
-    """
-    if css_name == "A4_size":
-          css_code = css_code + """
-            body {background: rgb(204,204,204); }
-            page {
-              background: white;display: block;padding:15px;margin: 0 auto;margin-bottom: 0.5cm;
-              box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-            }
-            page[size="A4"] {width: 21cm; }
-            @media print {body, page {margin: 0;box-shadow: 0;}}
-        """
-    if css_name == "border":
-          css_code = css_code + """
-            .highcharts-container {border: 3px dotted grey;}
-            .mpld3-figure {border: 3px dotted grey;}
-        """
-    if css_name == "3d":
-          css_code = css_code + """
-            div {
-            background: white;display: block;margin: 0 auto;
-            margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);}
-          h1,h2,h3,h4,h5,h6 {box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-            padding: 5px;} 
-        """
-    return css_code
-
-
-        
 
 
 
@@ -1293,16 +1252,61 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
 
 ###################################################################################################
 ########CSS Teamplates ############################################################################
-css_code =Box({})
-css_code.grey ="""
-.body {
-  font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #333;
-  background-color: #fff;
-}
+CSS_TEMPLATE = Box({})
+CSS_TEMPLATE.base_grey = """
+        .body {
+          font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+          margin: 0;
+          padding: 0;
+          color: #333;
+          background-color: #fff;
+        }
 """
+
+CSS_TEMPLATE.base = """
+              body{margin:25px;font-family: 'Open Sans', sans-serif;}
+              h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
+              .dataTables_wrapper{overflow-x: auto;}
+              hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
+              div{margin-top: 5px;margin-bottom: 5px;}
+              table {border-collapse: collapse;}
+              table th,table td {border: 1px solid lightgrey;}         
+"""
+
+
+CSS_TEMPLATE.a4_page = CSS_TEMPLATE.base + """
+            body {background: rgb(204,204,204); }
+            page {
+              background: white;display: block;padding:15px;margin: 0 auto;margin-bottom: 0.5cm;
+              box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            }
+            page[size="A4"] {width: 21cm; }
+            @media print {body, page {margin: 0;box-shadow: 0;}}
+"""
+
+
+CSS_TEMPLATE.border = CSS_TEMPLATE.base + """
+            .highcharts-container {border: 3px dotted grey;}
+            .mpld3-figure {border: 3px dotted grey;}
+"""
+
+
+CSS_TEMPLATE.a3d = CSS_TEMPLATE.base + """
+            div {
+            background: white;display: block;margin: 0 auto;
+            margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);}
+            h1,h2,h3,h4,h5,h6 {box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            padding: 5px;} 
+"""
+
+
+
+
+
+
+
+
+
 
 
 ###################################################################################################
@@ -1347,6 +1351,48 @@ if __name__ == "__main__":
     fire.Fire()
     # test2()
 
+
+
+
+
+
+
+
+
+def zz_css_get_template(css_name:str= "A4_size"):
+    css_code = """
+              body{margin:25px;font-family: 'Open Sans', sans-serif;}
+              h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
+              .dataTables_wrapper{overflow-x: auto;}
+              hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
+              div{margin-top: 5px;margin-bottom: 5px;}
+              table {border-collapse: collapse;}
+              table th,table td {border: 1px solid lightgrey;}         
+    """
+    if css_name == "A4_size":
+          css_code = css_code + """
+            body {background: rgb(204,204,204); }
+            page {
+              background: white;display: block;padding:15px;margin: 0 auto;margin-bottom: 0.5cm;
+              box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            }
+            page[size="A4"] {width: 21cm; }
+            @media print {body, page {margin: 0;box-shadow: 0;}}
+        """
+    if css_name == "border":
+          css_code = css_code + """
+            .highcharts-container {border: 3px dotted grey;}
+            .mpld3-figure {border: 3px dotted grey;}
+        """
+    if css_name == "3d":
+          css_code = css_code + """
+            div {
+            background: white;display: block;margin: 0 auto;
+            margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);}
+          h1,h2,h3,h4,h5,h6 {box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            padding: 5px;} 
+        """
+    return css_code
 
 
 
