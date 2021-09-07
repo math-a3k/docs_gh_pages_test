@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 HELP ="""
 ########  Usage 
-    docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir ./
-
+    pip install --upgrade utilmy
+    cd  myutil
     docs  markdown   --repo_dir utilmy/      --out_dir docs/
+    
+    docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
+    
+    
     docs  callgraph  --repo_dir utilmy/      --out_dir docs/
     docs  csv        --repo_dir utilmy/      --out_dir docs/
     docs  txt        --repo_dir utilmy/      --out_dir docs/
     
     
-
-
 
 ###########
     python utilmy/docs/cli.py markdown --repo_url https://github.com/CompVis/taming-transformers.git
@@ -70,10 +72,11 @@ def run_cli():
 
     add('task', metavar='task', type=str, nargs=1, help='markdown/index/callgraph/csv/help')
 
-    add("--repo_url", type=str, default=None,     help = "repo_url")
-    add("--repo_dir", type=str, default="./",     help = "repo_dir")
-    add("--out_dir",  type=str, default="docs/",  help = "doc_dir")
-    add("--prefix",   type=str, default=None,     help = "https://github.com/user/repo/tree/a")
+    add("--repo_url",    type=str, default=None,     help = "repo_url")
+    add("--repo_dir",    type=str, default="./",     help = "repo_dir")
+    add("--out_dir",     type=str, default="docs/",  help = "doc_dir")
+    add("--exclude_dir", type=str, default="",       help = "path1,path2")
+    add("--prefix",      type=str, default=None,     help = "https://github.com/user/repo/tree/a")
     args = p.parse_args()
 
     doc_dir            = args.out_dir
@@ -87,7 +90,7 @@ def run_cli():
         print(HELP)
 
     ###############################################################################################        
-    os.makedirs(os.path.abs(doc_dir), exists_ok=True)            
+    os.makedirs(os.path.abspath(doc_dir), exist_ok=True)
     if args.task[0] == 'markdown':
         if args.repo_url is not None :
             cp.export_stats_repolink(args.repo_url,  repo_stat_csv_file)
