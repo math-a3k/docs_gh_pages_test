@@ -72,10 +72,11 @@ def run_cli():
 
     add('task', metavar='task', type=str, nargs=1, help='markdown/index/callgraph/csv/help')
 
-    add("--repo_url", type=str, default=None,     help = "repo_url")
-    add("--repo_dir", type=str, default="./",     help = "repo_dir")
-    add("--out_dir",  type=str, default="docs/",  help = "doc_dir")
-    add("--prefix",   type=str, default=None,     help = "https://github.com/user/repo/tree/a")
+    add("--repo_url",    type=str, default=None,     help = "repo_url")
+    add("--repo_dir",    type=str, default="./",     help = "repo_dir")
+    add("--out_dir",     type=str, default="docs/",  help = "doc_dir")
+    add("--exclude_dir", type=str, default="",       help = "path1,path2")
+    add("--prefix",      type=str, default=None,     help = "https://github.com/user/repo/tree/a")
     args = p.parse_args()
 
     doc_dir            = args.out_dir
