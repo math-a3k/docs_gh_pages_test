@@ -130,9 +130,6 @@ def test2():
     # html_show(html1)
 
 
-
-
-
 def test3(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata()
@@ -161,15 +158,11 @@ def test3(verbose=True):
                      cfg=cfg.scatter, mode='matplot', save_img='')
     doc.hr()  # doc.sep() line separator
 
-
-
     # for df2_i in df2_list:
     #      print(df2_i)
     #      col2 =df2_i.columns
     #      # doc.h3(f" plot title: {df2_i['category'].values[0]}")
     #      doc.plot_tseries(df2_i, coldate= col2[0], cols_axe1= col2[1],   cfg = cfg.tseries, mode='highcharts')
-
-    
 
     doc.tag('<h2> My histo title </h2>')
     doc.plot_histogram(df2,col='Unit Cost',mode='matplot', save_img="")
@@ -177,6 +170,7 @@ def test3(verbose=True):
 
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
+
 
 def test_scatter_and_histogram_matplot():
 
@@ -263,11 +257,7 @@ def test_cssname(verbose=True,css_name="A4_size"):
     doc.open_browser()  # Open myfile.html
 
 
-
-
-
 def help():
-    
     ss = "from utilmy.vi.vizhtml import * \n\n"
     ss = ss + "data = test_getdata() \n\n "
     ss = ss + help_get_codesource(test1) + "\n\n\n ##############################\n"
