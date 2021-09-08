@@ -15,7 +15,7 @@ def multithread_run(fun_async, input_list:list, n_pool=5, verbose=True):
     xi_list = [ []  for t in range(n_pool) ]
     for i, xi in enumerate(input_list) :
         jj = i % n_pool
-        xi_list[jj].append( xi )
+        xi_list[jj].append( tuple(xi) )
 
     #### Pool execute ###################################
     pool     = ThreadPool(processes=n_pool)
