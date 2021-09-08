@@ -404,6 +404,42 @@ def pd_show(df, nrows=100, reader='notepad.exe', **kw):
 
 #########################################################################################################
 ##### Utils numpy, list #################################################################################
+def diskcache_save2(df, colkey, colvalue, db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=5, verbose=True):    
+    """ Create dict type on disk, < 100 Gb
+       shards>1 : disk spaced is BLOCKED in advance, so high usage
+    
+    """
+    import time, random
+    if shards == 1 :
+       import diskcache as dc
+       cache = dc.Cache(db_path, size_limit= size_limit, timeout= timeout )        
+    else :
+       from diskcache import FanoutCache
+       cache = FanoutCache( db_path, shards= shards, size_limit= size_limit, timeout= timeout )
+
+    v  = df[[ colkey, colvalue  ]].drop_duplicates(colkey)
+    v  = v.values  
+    print('Starting insert: ', db_path, v.shape )
+    
+  
+    def insert_key(vlist):     
+       for vi in vlist : 
+          try :
+             cache[ vi[0] ] = vi[1] 
+          except :
+             time.sleep(0.5)                
+             cache[ vi[0] ] = vi[1] 
+            
+    from utilmy.multithread import multithread_run  #  (fun_async, input_list:list, n_pool=5, verbose=True)      
+    multithread_run(insert_key, input_list= v, n_pool=npool, verbose=verbose)
+    
+    print('Cache size:', len(cache) )    
+    for k in cache:
+       print("Cache check:",k,  str(cache[k])[:100] ); break
+    
+    return cache
+
+
 def diskcache_save(df, colkey:str, colvalue:str, db_path:str="", size_limit=50000000000, timeout=999, shards:int=1):    
     """ Create dict type on disk, < 100 Gb
        shards>1 : disk spaced is BLOCKED in advance, so high disk usage
