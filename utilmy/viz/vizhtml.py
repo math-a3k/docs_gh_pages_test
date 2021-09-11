@@ -315,12 +315,12 @@ class htmlDoc(object):
     def h1(self,  x,css: str='')  : self.html += "\n" + f"<h1 style='{css}'>{x}</h1>"
     def h2(self,  x,css: str='')  : self.html += "\n" + f"<h2 style='{css}'>{x}</h2>"
     def h3(self,  x,css: str='')  : self.html += "\n" + f"<h3 style='{css}'>{x}</h3>"
-    def h4(self,  x,cs: str='')  : self.html += "\n" + f"<h4 style='{css}'>{x}</h4>"
-    def p(self,   x,css: str='')   : self.html += "\n" + f"<p style='{css}'>{x}</p>"
-    def div(self, x,css: str='') : self.html += "\n" + f"<div style='{css}'>{x}</div>"
-    def hr(self,    css: str='')     : self.html += "\n" + f"<hr style='{css}'/>"
-    def sep(self,   css: str='')    : self.html += "\n" + f"<hr style='{css}'/>"
-    def br(self,    css: str='')     : self.html += "\n" + f"<br style='{css}'/>"
+    def h4(self,  x,css: str='')  : self.html += "\n" + f"<h4 style='{css}'>{x}</h4>"
+    def p(self,   x,css: str='')  : self.html += "\n" + f"<p style='{css}'>{x}</p>"
+    def div(self, x,css: str='')  : self.html += "\n" + f"<div style='{css}'>{x}</div>"
+    def hr(self,    css: str='')  : self.html += "\n" + f"<hr style='{css}'/>"
+    def sep(self,   css: str='')  : self.html += "\n" + f"<hr style='{css}'/>"
+    def br(self,    css: str='')  : self.html += "\n" + f"<br style='{css}'/>"
 
     def get_html(self)-> str:
         full = self.head  + self.html + self.tail

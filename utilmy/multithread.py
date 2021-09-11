@@ -5,22 +5,32 @@ from threading import Thread
 
 
 
-def multithread_run(fun_async, input_list:list, n_pool=5, verbose=True):
+def multithread_run(fun_async, input_list:list, n_pool=5, start_delay=0.1, verbose=True, **kw):
     """  input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
       for x in xlist :
             hdfs.upload(x[0], x[1])
     """
+    import time
     #### Input xi #######################################
     xi_list = [ []  for t in range(n_pool) ]
     for i, xi in enumerate(input_list) :
         jj = i % n_pool
-        xi_list[jj].append( xi )
-
+        xi_list[jj].append( tuple(xi) )
+    
+    if verbose :
+        for j in range( len(xi_list) ):
+            print('thread ', j, len(xi_list[j]))
+        time.sleep(6)    
+        
     #### Pool execute ###################################
-    pool     = ThreadPool(processes=n_pool)
+    import multiprocessing as mp
+    # pool     = multiprocessing.Pool(processes=3)  
+    pool     = mp.pool.ThreadPool(processes=n_pool)
     job_list = []
     for i in range(n_pool):
+         time.sleep(start_delay)
+         log('starts', i)   
          job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
          if verbose : log(i, xi_list[i] )
 
@@ -32,6 +42,7 @@ def multithread_run(fun_async, input_list:list, n_pool=5, verbose=True):
 
     pool.terminate() ; pool.join()  ; pool = None
     log('n_processed', len(res_list) )
+
 
 
 def multithread_run_list(**kwargs):

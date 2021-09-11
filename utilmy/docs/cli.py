@@ -3,9 +3,12 @@ HELP ="""
 ########  Usage 
     pip install --upgrade utilmy
     cd  myutil
+    docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
+    docs markdown --repo_path  your_path/   --out_dir docs/
+
+
     docs  markdown   --repo_dir utilmy/      --out_dir docs/
     
-    docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
     
     
     docs  callgraph  --repo_dir utilmy/      --out_dir docs/
@@ -53,13 +56,19 @@ from utilmy.docs import code_parser as cp
 ###################################################
 
 
+def os_remove(filepath):
+    try:
+        os.remove(filepath)
+    except : pass
+
+
 def run_cli():
     """ Usage
     cd myutil
     pip install -e  .
 
     docs  help
-    docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir ./
+    docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
 
     docs  callgraph  --repo_dir utilmy/      --out_dir docs/
     docs  csv        --repo_dir utilmy/      --out_dir docs/
@@ -75,23 +84,46 @@ def run_cli():
     add("--repo_url",    type=str, default=None,     help = "repo_url")
     add("--repo_dir",    type=str, default="./",     help = "repo_dir")
     add("--out_dir",     type=str, default="docs/",  help = "doc_dir")
+    add("--out_file",     type=str, default="",      help = "out_file")
     add("--exclude_dir", type=str, default="",       help = "path1,path2")
     add("--prefix",      type=str, default=None,     help = "https://github.com/user/repo/tree/a")
     args = p.parse_args()
 
     doc_dir            = args.out_dir
     prefix             = args.prefix if args.prefix is not None else "./"
+    out_file           = args.out_file
 
-    repo_stat_csv_file = doc_dir + "/output_repo.csv"
-    repo_sta_txt_file  = doc_dir + "/output_repo.py"
-    repo_graph_file    = doc_dir + "/output_repo_graph.csv"
+    repo_stat_csv_file = doc_dir + f"/{out_file if out_file is not '' else 'output_repo.csv'}"
+
+    ### Custom name
+    repo_sta_txt_file  = doc_dir + f"/{out_file if out_file is not '' else 'doc_index.py'}"
+    repo_graph_file    = doc_dir + f"/{out_file if out_file is not '' else 'output_repo_graph.csv'}"
 
     if args.task[0] == 'help':
         print(HELP)
 
     ###############################################################################################        
     os.makedirs(os.path.abspath(doc_dir), exist_ok=True)
+
+    if args.task[0] == 'all':
+        os_remove(repo_stat_csv_file)
+        os_remove(repo_sta_txt_file)
+        if args.repo_url is not None :
+            cp.export_stats_repolink(args.repo_url,  repo_stat_csv_file)
+            cp.export_stats_repolink_txt(args.repo_url,  repo_sta_txt_file)
+
+        elif args.repo_dir is not None :
+            cp.export_stats_perrepo(args.repo_dir,  repo_stat_csv_file)
+            cp.export_stats_perrepo_txt(args.repo_dir,  repo_sta_txt_file)
+        else:
+            raise Exception(" Needs repo_url or repo_dir")
+
+        gdoc.run_markdown(repo_stat_csv_file, output= doc_dir + f"/doc_main.md",   prefix= prefix)
+        gdoc.run_table(repo_stat_csv_file,    output= doc_dir + f"/doc_table.md",  prefix= prefix)
+
+
     if args.task[0] == 'markdown':
+        os_remove(repo_stat_csv_file)
         if args.repo_url is not None :
             cp.export_stats_repolink(args.repo_url,  repo_stat_csv_file)
 
@@ -100,11 +132,12 @@ def run_cli():
         else:
             raise Exception(" Needs repo_url or repo_dir")
 
-        gdoc.run_markdown(repo_stat_csv_file, output= doc_dir + '/doc_main.md',   prefix= prefix)
-        gdoc.run_table(repo_stat_csv_file,    output= doc_dir + '/doc_table.md',  prefix= prefix)
+        gdoc.run_markdown(repo_stat_csv_file, output= doc_dir + f"/doc_main.md",   prefix= prefix)
+        gdoc.run_table(repo_stat_csv_file,    output= doc_dir + f"/doc_table.md",  prefix= prefix)
 
 
     if args.task[0] == 'callgraph':
+        os_remove(repo_graph_file)
         if args.repo_url is not None :
             cp.export_call_graph_url(args.repo_url,  repo_graph_file)
 
@@ -113,7 +146,9 @@ def run_cli():
         else:
             raise Exception(" Needs repo_url or repo_dir")
 
+
     if args.task[0] == 'csv':
+        os_remove(repo_stat_csv_file)
         if args.repo_url is not None :
             cp.export_stats_repolink(args.repo_url,  repo_stat_csv_file)
 
@@ -122,7 +157,9 @@ def run_cli():
         else:
             raise Exception(" Needs repo_url or repo_dir")
 
+
     if args.task[0] == 'txt':
+        os_remove(repo_sta_txt_file)
         if args.repo_url is not None :
             cp.export_stats_repolink_txt(args.repo_url,  repo_sta_txt_file)
 
@@ -130,6 +167,9 @@ def run_cli():
             cp.export_stats_perrepo_txt(args.repo_dir,  repo_sta_txt_file)
         else:
             raise Exception(" Needs repo_url or repo_dir")
+
+
+
 
 
 #############################################################################
