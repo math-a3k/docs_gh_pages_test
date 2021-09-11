@@ -258,14 +258,16 @@ def test_cssname(verbose=True,css_name="A4_size"):
 
 
 def help():
+
+    suffix = "\n\n\n ##############################\n"
     ss = "from utilmy.vi.vizhtml import * \n\n"
     ss = ss + "data = test_getdata() \n\n "
-    ss = ss + help_get_codesource(test1) + "\n\n\n ##############################\n"
-    ss = ss + help_get_codesource(test2) + "\n\n\n ##############################\n"
-    ss = ss + help_get_codesource(test3) + "\n\n\n ##############################\n"
-    ss = ss + help_get_codesource(test_scatter_and_histogram_matplot) + "\n\n\n ##############################\n"
-    ss = ss + help_get_codesource(test_pd_plot_network) + "\n\n\n ##############################\n"
-    ss = ss + help_get_codesource(test_cssname ) + "\n\n\n ##############################\n"
+    ss = ss + help_get_codesource(test1) + suffix
+    ss = ss + help_get_codesource(test2) + suffix
+    ss = ss + help_get_codesource(test3) + suffix
+    ss = ss + help_get_codesource(test_scatter_and_histogram_matplot) + suffix
+    ss = ss + help_get_codesource(test_pd_plot_network) + suffix
+    ss = ss + help_get_codesource(test_cssname ) + suffix
 
     ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()  )
     
