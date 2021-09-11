@@ -715,6 +715,10 @@ def get_list_function_stats(file_path):
     """
     #### Calcualte Stats:
     list_info = get_list_function_info(file_path)
+    
+    # for info in list_info:
+    #     print(info['name'])
+
     if (len(list_info)):
         df = pd.DataFrame.from_records(list_info)
         return get_stats(df, file_path)
@@ -908,7 +912,9 @@ def _clean_data(array):
             response.remove(line)
 
     detect_block = False
+    not_remove = False
     for line in response.copy():
+
         # start block comments detected
         if not detect_block:
             if line.strip()[:3] == '"""':
@@ -917,13 +923,30 @@ def _clean_data(array):
                 else:
                     detect_block = True
                     response.remove(line)
+            # detect block string
+            elif re.search(r'\s+=\s+"""', line) or re.search(r'\s+\+\s+"""', line):
+                detect_block = True
+                not_remove = True
+                # print("re.search: ", line)
+
         else:
             # end block comments detected
+            if not not_remove:
+                response.remove(line)
+            # else:
+            #     print("skip: ", line)
+
             if line.strip()[-3:] == '"""':
                 detect_block = False
-            response.remove(line)
+                not_remove = False
+            elif not_remove:
+                if '"""' in line:
+                    detect_block = False
+                    not_remove = False
+
 
     detect_block = False
+    not_remove = False
     for line in response.copy():
         # start block comments detected
         if not detect_block:
@@ -933,11 +956,21 @@ def _clean_data(array):
                 else:
                     detect_block = True
                     response.remove(line)
+            # detect block string
+            elif re.search(r"\s+=\s+'''", line) or re.search(r"\s+\+\s+'''", line):
+                detect_block = True
+                not_remove = True
         else:
+            if not not_remove:
+                response.remove(line)
             # end block comments detected
             if line.strip()[-3:] == "'''":
                 detect_block = False
-            response.remove(line)
+                not_remove = False
+            elif not_remove:
+                if "'''" in line:
+                    detect_block = False
+                    not_remove = False
 
     return response
 
@@ -1116,17 +1149,22 @@ def _get_define_function_stats(array):
     arg_type  = []
     arg_value = []
     data      = ''
+    # if 'def h1' in array[0]:
+    #     print(array[0])
     if len(array) == 1:
         data = array[0].strip()[array[0].strip().find('(') + 1: array[0].strip().find(')')]
     elif len(array) > 1:
-        data = ''
-        for line in array:
-            if line.strip().find('(') >= 0:
-                data += line.strip()[line.strip().find('(')+1:]
-            elif line.strip().find(')') >= 0:
-                data += line.strip()[: line.strip().find(')')]
-            else:
-                data += line.strip()
+        if re.search(r'(\)\s+:)', array[0]) or re.search(r'(\):)', array[0]):
+            data = array[0].strip()[array[0].strip().find('(') + 1: array[0].strip().find(')')]
+        else:
+            data = ''
+            for line in array:
+                if line.strip().find('(') >= 0:
+                    data += line.strip()[line.strip().find('(')+1:]
+                elif line.strip().find(')') >= 0:
+                    data += line.strip()[: line.strip().find(')')]
+                else:
+                    data += line.strip()
     else:
         print("Invalid array data")
     if data != '':
