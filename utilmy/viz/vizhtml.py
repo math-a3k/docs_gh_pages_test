@@ -446,6 +446,7 @@ class htmlDoc(object):
     def plot_histogram(self, df:pd.DataFrame, col,
                        xlabel: str=None,ylabel: str=None,
                        title: str='', figsize: tuple=(14,7),
+                       color_schema:str = 'RdYlBu', 
                        nsample=10000,nbin=10,
                        q5=0.005, q95=0.95,cfg: dict = {}, 
                        mode: str='matplot', save_img="",  **kw):
@@ -461,7 +462,7 @@ class htmlDoc(object):
             fig       = pd_plot_histogram_matplot(df, col,
                                                   title=title,
                                                   nbin=nbin, q5=q5, q95=q95,
-                                                  xlabel= xlabel,ylabel=ylabel,
+                                                  xlabel= xlabel,ylabel=ylabel,color_schema=color_schema,
                                                   nsample=nsample, save_img=save_img)
             html_code = self.fig_to_html(fig)
 
@@ -682,7 +683,7 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
 
 
 
-def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
+def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,color_schema:str='RdYlBu', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
                               save_img: str="",xlabel: str=None,ylabel: str=None):
     """
     fig = plt.figure()
@@ -696,6 +697,7 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='', title: str='', nbin=
     ax.set_ylim(config['ylim'])
     return fig
     """
+    cm = plt.cm.get_cmap(color_schema)
     dfi = df[col]
     q0  = dfi.quantile(q5)
     q1  = dfi.quantile(q95)
@@ -706,7 +708,10 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='', title: str='', nbin=
         dfi.hist(bins=2)
         # dfi.hist(bins=np.arange(q0, q1,  (q1 - q0) / nbin))
     else:
-        dfi.sample(n=nsample, replace=True).hist( bins=np.arange(q0, q1,  (q1 - q0) / nbin))
+        n, bins, patches = plt.hist(dfi.sample(n=nsample, replace=True), bins=np.arange(q0, q1,  (q1 - q0) / nbin))
+        # dfi.sample(n=nsample, replace=True).hist( bins=np.arange(q0, q1,  (q1 - q0) / nbin))
+    for i, p in enumerate(patches):
+        plt.setp(p, 'facecolor', cm(i/nbin))
     plt.title(title)
     plt.xlabel(xlabel) 
     plt.ylabel(ylabel)
@@ -1345,7 +1350,52 @@ if __name__ == "__main__":
 
 
 
+def get_colors_schema_list():
+  cmaps = {}
+  cmaps['Perceptually Uniform Sequential'] = [
+            'viridis', 'plasma', 'inferno', 'magma', 'cividis']
+  cmaps['Sequential'] = [
+            'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
+            'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
+            'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
+  cmaps['Sequential (2)'] = [
+            'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone', 'pink',
+            'spring', 'summer', 'autumn', 'winter', 'cool', 'Wistia',
+            'hot', 'afmhot', 'gist_heat', 'copper']
+  cmaps['Diverging'] = [
+            'PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
+            'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic']
+  cmaps['Cyclic'] = ['twilight', 'twilight_shifted', 'hsv']
+  cmaps['Qualitative'] = ['Pastel1', 'Pastel2', 'Paired', 'Accent',
+                        'Dark2', 'Set1', 'Set2', 'Set3',
+                        'tab10', 'tab20', 'tab20b', 'tab20c']
+  gradient = np.linspace(0, 1, 256)
+  gradient = np.vstack((gradient, gradient))
 
+
+  def plot_color_gradients(cmap_category, cmap_list):
+      # Create figure and adjust figure height to number of colormaps
+      nrows = len(cmap_list)
+      figh = 0.35 + 0.15 + (nrows + (nrows - 1) * 0.1) * 0.22
+      fig, axs = plt.subplots(nrows=nrows + 1, figsize=(6.4, figh))
+      fig.subplots_adjust(top=1 - 0.35 / figh, bottom=0.15 / figh,
+                          left=0.2, right=0.99)
+      axs[0].set_title(cmap_category + ' colormaps', fontsize=14)
+
+      for ax, name in zip(axs, cmap_list):
+          ax.imshow(gradient, aspect='auto', cmap=plt.get_cmap(name))
+          ax.text(-0.01, 0.5, name, va='center', ha='right', fontsize=10,
+                  transform=ax.transAxes)
+
+      # Turn off *all* ticks & spines, not just the ones with colormaps.
+      for ax in axs:
+          ax.set_axis_off()
+
+
+  for cmap_category, cmap_list in cmaps.items():
+      plot_color_gradients(cmap_category, cmap_list)
+
+  plt.show()
 
 
 def zz_css_get_template(css_name:str= "A4_size"):
