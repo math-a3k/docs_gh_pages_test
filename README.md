@@ -43,8 +43,11 @@ One liner utilities
     
     
 
- # Code
+ ### Example
  ```
+
+
+
 
 def test2():
     """
