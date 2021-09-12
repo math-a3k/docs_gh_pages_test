@@ -1,7 +1,7 @@
 """ Converter python Graph ---> HTML
-!pip install python-box python-highcharts  mpld3 pandas-highcharts fire
-!pip install utilmy matplotlib ipython
-!pip install pretty-html-table
+!pip install python-box python-highcharts  mpld3 pandas-highcharts fire  pretty-html-table matplotlib ipython
+!pip install utilmy 
+!
 
 https://try2explore.com/questions/10109123
 https://mpld3.github.io/examples/index.html
@@ -27,8 +27,7 @@ def log(*s):
 ###################################################################################
 #### Example usage ################################################################
 def test_getdata(verbose=True):
-    """
-    data = test_get_data()
+    """data = test_get_data()
     df   = data['housing.csv']
     df.head(3)
     https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data
@@ -59,9 +58,7 @@ def test1():
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
 
     # check add css
-    css = """.intro {
-        background-color: yellow;
-    }
+    css = """.intro { background-color: yellow;}
     """
     doc.add_css(css)
 
@@ -370,10 +367,11 @@ class htmlDoc(object):
                   document.getElementById("{div_id}").style.visibility = "visible"
                 }}
               }}
-              document.getElementById('{btn_id}').addEventListener('click', toggle);""".format(btn_id="btn"+custom_id,div_id="div"+custom_id)
-
+              document.getElementById('{btn_id}').addEventListener('click', toggle);""".format(btn_id="btn"+custom_id,
+                div_id="div"+custom_id)
 
         self.add_js(js)
+
 
     def table(self, df:pd.DataFrame, format: str='blue_light', custom_css_class=None, use_datatable=False, table_id=None, **kw):
         """ Show Pandas in HTML and interactive
@@ -566,7 +564,7 @@ def mlpd3_add_tooltip(fig, points, labels):
 
 
 def pd_plot_scatter_get_data(df0:pd.DataFrame,colx: str=None, coly: str=None, collabel: str=None,
-                            colclass1: str=None, colclass2: str=None, nmax: int=20000):
+                            colclass1: str=None, colclass2: str=None, nmax: int=20000, **kw):
     # import copy
     nmax = min(nmax, len(df0))
     df   = df0.sample(nmax)
@@ -686,7 +684,7 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
 
 
 def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,color_schema:str='RdYlBu', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
-                              save_img: str="",xlabel: str=None,ylabel: str=None):
+                              save_img: str="",xlabel: str=None,ylabel: str=None, **kw):
     """
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -884,27 +882,12 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
     # Create chart object
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
     chart        = Highchart(renderTo=container_id)
-    options      = { 'chart': {
-            'width': cc.figsize[0],
-            'height': cc.figsize[1]
-        },   'title': {
-        'text': cc.title
-    },
-    'xAxis': {
-        'title': {
-            'text': colx
-        }
-    },
-    'yAxis': {
-        'title': {
-            'text': coly
-        }
-    },
-    'legend': {
-        'enabled': False
-    },'tooltip': {
-        'pointFormat': '{point.label}'
-    }}
+    options      = {
+      'chart':  {'width': cc.figsize[0], 'height': cc.figsize[1] },   'title': {'text': cc.title},
+      'xAxis':  {'title': {'text': colx }},
+      'yAxis':  {'title': {   'text': coly }},
+      'legend': {'enabled': False },'tooltip': {'pointFormat': '{point.label}'}
+    }
 
     chart.set_dict_options(options)
 
@@ -929,7 +912,7 @@ def pd_plot_tseries_highcharts(df,
                               cols_axe1:list =[],     cols_axe2:list =[],
                               figsize:tuple =  None, title:str=None,
                               x_label:str=None,  axe1_label:str=None, axe2_label:str=None,
-                              cfg:dict={}, mode='d3', save_img="")-> str:
+                              cfg:dict={}, mode='d3', save_img="", **kw)-> str:
     '''
         function to return highchart json cord for time_series.
         input parameter
@@ -963,41 +946,20 @@ def pd_plot_tseries_highcharts(df,
       'chart':   { 'zoomType': 'xy'},
         'title': { 'text': cc.title},
         'subtitle': {  'text': cc.subtitle },
-        'xAxis': [{
-                      'type': 'datetime',
-                      'title': { 'text': cc.x_label }
-                  }],
-        'yAxis': [{
-            'labels': {
-                'style': {  'color': 'Highcharts.getOptions().colors[2]' }
-            },
-            'title': {
-                'text': cc.axe2_label,
-                'style': {   'color': 'Highcharts.getOptions().colors[2]' }
-            },
-            'opposite': True
-
-        }, {
+        'xAxis': [{'type': 'datetime', 'title': { 'text': cc.x_label } }],
+        'yAxis': [{'labels': {'style': {  'color': 'Highcharts.getOptions().colors[2]' } }, 
+                   'title' : {'text': cc.axe2_label,
+                   'style' : {   'color': 'Highcharts.getOptions().colors[2]' } }, 'opposite': True }, 
+        {
             'gridLineWidth': 0,
-            'title': {
-                'text': cc.axe1_label,
-                'style': { 'color': 'Highcharts.getOptions().colors[0]'
-                }
-            },
-            'labels': {
-                'style': { 'color': 'Highcharts.getOptions().colors[0]'
-                }
-            }
+            'title':  {'text': cc.axe1_label, 'style': { 'color': 'Highcharts.getOptions().colors[0]'}},
+            'labels': {'style': { 'color': 'Highcharts.getOptions().colors[0]'} }
 
         }],
 
         'tooltip': { 'shared': True,    },
         'legend': {
-            'layout': 'vertical',
-            'align': 'left',
-            'x': 80,
-            'verticalAlign': 'top',
-            'y': 55,
+            'layout': 'vertical', 'align': 'left', 'x': 80, 'verticalAlign': 'top', 'y': 55,
             'floating': True,
             'backgroundColor': "(Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'"
         },
@@ -1023,7 +985,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
                               binsNumber=None, binWidth=None,
                               title:str="", xaxis_label:str= "x-axis", yaxis_label:str="y-axis",
                               cfg:dict={}, mode='d3', save_img="",
-                              show=False):
+                              show=False, **kw):
 
     ''' function to return highchart json code for histogram.
         input parameter
@@ -1063,19 +1025,15 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
 
     xAxis = """[{
                 title: { text:'""" + cc.xaxis_label + """'},
-                alignTicks: false,
-                opposite: false
+                alignTicks: false, opposite: false
             }]"""
 
     yAxis = """[{
-                title: { text:'""" + cc.yaxis_label + """'},
-                opposite: false
+                title: { text:'""" + cc.yaxis_label + """'}, opposite: false
             }] """
 
     append_series1 = """[{
-            name: 'Histogram',
-            type: 'histogram',
-            baseSeries: 's1',"""
+            name: 'Histogram', type: 'histogram', baseSeries: 's1',"""
 
     if binsNumber is not None:
       append_series1 += """ binsNumber:{binsNumber},  """.format(binsNumber = binsNumber)
@@ -1084,12 +1042,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
       append_series1 += """ binWidth:{binWidth},""".format(binWidth = binWidth)
 
     append_series2 =  """}, {
-            name: ' ',
-            type: 'scatter',
-            data: data,
-            visible:false,
-            id: 's1',
-            marker: {  radius: 0}
+            name: ' ', type: 'scatter', data: data, visible:false, id: 's1', marker: {  radius: 0}
         }] """
 
     append_series = append_series1 + append_series2
@@ -1111,8 +1064,6 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
     return html_code
 
 
-
-
 def html_show_chart_highchart(html_code, verbose=True):
     # Function to display highcharts graph
     from highcharts import Highchart
@@ -1122,7 +1073,6 @@ def html_show_chart_highchart(html_code, verbose=True):
     html_code = hc.htmlheader + html_code
     if verbose: print(html_code)
     display(HTML(html_code))
-
 
 
 
@@ -1141,9 +1091,8 @@ def images_to_html(dir_input="*.png",  title="", verbose=False):
         images_to_html( model_path + "/graph_shop_17_past/*.png" , model_path + "shop_17.html" )
     """
     import matplotlib.pyplot as plt
-    import base64
+    import base64, glob
     from io import BytesIO
-    import glob
     html = ""
     flist = glob.glob(dir_input)
     flist.sorted()
@@ -1354,21 +1303,21 @@ if __name__ == "__main__":
 
 def get_colors_schema_list():
   cmaps = {}
-  cmaps['Perceptually Uniform Sequential'] = [
+  cmaps['uniform_sequential'] = [
             'viridis', 'plasma', 'inferno', 'magma', 'cividis']
-  cmaps['Sequential'] = [
+  cmaps['sequential'] = [
             'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
             'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
             'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
-  cmaps['Sequential (2)'] = [
+  cmaps['sequential_2'] = [
             'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone', 'pink',
             'spring', 'summer', 'autumn', 'winter', 'cool', 'Wistia',
             'hot', 'afmhot', 'gist_heat', 'copper']
-  cmaps['Diverging'] = [
+  cmaps['diverging'] = [
             'PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
             'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic']
-  cmaps['Cyclic'] = ['twilight', 'twilight_shifted', 'hsv']
-  cmaps['Qualitative'] = ['Pastel1', 'Pastel2', 'Paired', 'Accent',
+  cmaps['cyclic'] = ['twilight', 'twilight_shifted', 'hsv']
+  cmaps['qualitative'] = ['Pastel1', 'Pastel2', 'Paired', 'Accent',
                         'Dark2', 'Set1', 'Set2', 'Set3',
                         'tab10', 'tab20', 'tab20b', 'tab20c']
   gradient = np.linspace(0, 1, 256)
@@ -1482,23 +1431,23 @@ def zz_pd_plot_histogram_highcharts_old(df, col, figsize=None,
 
 """
 https://pyviz.org/tools.html
-        Name		Stars	Contributors	Downloads		License	Docs	PyPI	Conda	Sponsors
-        networkx										-
-        graphviz										-
-        pydot							-			-
-        pygraphviz										-
-        python-igraph										-
-        pyvis										-
-        pygsp										-
-        graph-tool				-		-		-		-
-        nxviz										-
-        Py3Plex					-				-	-
-        py2cytoscape										-
-        ipydagred3							-			-
-        ipycytoscape							-			-
-        webweb										-
-        netwulf					-				-	-
-        ipysigma					-		-		-
+        Name        Stars   Contributors    Downloads       License Docs    PyPI    Conda   Sponsors
+        networkx                                        -
+        graphviz                                        -
+        pydot                           -           -
+        pygraphviz                                      -
+        python-igraph                                       -
+        pyvis                                       -
+        pygsp                                       -
+        graph-tool              -       -       -       -
+        nxviz                                       -
+        Py3Plex                 -               -   -
+        py2cytoscape                                        -
+        ipydagred3                          -           -
+        ipycytoscape                            -           -
+        webweb                                      -
+        netwulf                 -               -   -
+        ipysigma                    -       -       -
         
         
         
