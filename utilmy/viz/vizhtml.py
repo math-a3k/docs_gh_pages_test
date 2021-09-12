@@ -168,7 +168,55 @@ def test3(verbose=True):
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
+def test4():
+    data = test_getdata()
+    dft  = data['titanic.csv']
+    df   = data['housing.csv']
+    df2  = data['sales.csv']
+    from box import Box
+    cfg = Box({})
+    cfg.tseries = {"title": 'ok'}
+    cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
+    cfg.histo   = {"title": 'ok'}
+    cfg.use_datatable = True
+    df = test_getdata()['titanic.csv']
+    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+    # table
+    doc.h1(" Table test ")
+    doc.table(df, use_datatable=True, table_id="test", custom_css_class='intro')
+    doc.hr()
+    # histogram
+    doc.h1(" histo test ")
+    doc.plot_histogram(df2,col='Unit Price',color_schema='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+    doc.hr()
+    #  scatter plot
+    doc.tag('<h2> Scater Plot </h2>')
+    doc.plot_scatter(dft, colx='Age', coly='Fare',
+                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                     cfg=cfg.scatter, mode='matplot', save_img='')
+    doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
+                         collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                         figsize=(20,7),
+                         cfg=cfg, mode='highcharts',                         
+                         )
+    
+    # create time series chart. mode highcharts
+    doc.h2('Plot of weather data') 
+    doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
+                      cols_axe1   =  ['Temperature'],cols_axe2   =  ["Rainfall"],
+                      # x_label=     'Date', 
+                      # axe1_label=  "Temperature",
+                      # axe2_label=  "Rainfall", 
+                     title =      "Weather",cfg={},mode='highcharts')
+    # plot network
+    df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
+    doc.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
 
+    doc.save('test4.html')
+    doc.open_browser()
+    html1 = doc.get_html()
+    
 def test_scatter_and_histogram_matplot():
 
   data = test_getdata()
