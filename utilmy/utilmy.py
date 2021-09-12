@@ -12,6 +12,14 @@ def log2(*s, verbose=1):
     
 ###################################################################################################
 ###### Pandas #####################################################################################
+def pd_random(nrows=100):
+   df = pd.DataFrame(np.random.randint(0, 10, size=(nrows, 4)), 
+                     columns=list('abcd'))
+   return df 
+
+
+
+
 def pd_merge(df1, df2, on=None, colkeep=None):
   ### Faster merge
   cols = list(df2.columns) if colkeep is None else on + colkeep
@@ -157,7 +165,12 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
   path_glob  = path_glob.split(";")
   file_list = []
   for pi in path_glob :
-      file_list.extend( sorted( glob.glob(pi) ) )
+      if "*" in pi :
+        file_list.extend( sorted( glob.glob(pi) ) )
+      else :
+        file_list.append( pi )
+
+
   file_list = sorted(list(set(file_list)))
   n_file    = len(file_list)
   if verbose: log(file_list)
@@ -296,7 +309,7 @@ def pd_dtype_count_unique(df, col_continuous=[]):
         observed = data[~np.isnan(data)]  # not consider missing values for this.
         rules = [np.min(observed) < 0,
                  np.sum((observed) != np.round(observed)) > 0,
-                 len(np.unique(observed)) > n(30, len(observed)/3)]
+                 len(np.unique(observed)) > min(30, len(observed)/3)]
         if any(rules):
             return True
         else:
@@ -558,7 +571,7 @@ def config_load(config_path:str = None,
     Returns: dict config
     """
     import json, yaml
-    from Path import pathlib
+    from pathlib import Path
 
     path_default        = pathlib.Path.home() / ".mygenerator" if path_default is None else path_default
     config_path_default = path_default / "config.yaml"
@@ -605,6 +618,18 @@ def config_load(config_path:str = None,
         yaml.dump(config_default, fp)
     return config_default
 
+
+
+def os_getsize(start_path = '.'):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(start_path):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            # skip if it is symbolic link
+            if not os.path.islink(fp):
+                total_size += os.path.getsize(fp)
+
+    return total_size
 
 
 def os_path_split(fpath:str=""):

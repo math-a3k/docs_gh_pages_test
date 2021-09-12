@@ -3,14 +3,12 @@ HELP ="""
 ########  Usage 
     pip install --upgrade utilmy
     cd  myutil
-    docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
-    docs markdown --repo_path  your_path/   --out_dir docs/
+    docs all --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
+    docs all --repo_path  your_path/   --out_dir docs/
 
-
-    docs  markdown   --repo_dir utilmy/      --out_dir docs/
+    docs  all   --repo_dir utilmy/      --out_dir docs/
     
-    
-    
+        
     docs  callgraph  --repo_dir utilmy/      --out_dir docs/
     docs  csv        --repo_dir utilmy/      --out_dir docs/
     docs  txt        --repo_dir utilmy/      --out_dir docs/

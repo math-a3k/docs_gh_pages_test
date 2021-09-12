@@ -154,7 +154,7 @@ def test_docs_cli():
 #########################################################################################
 #########################################################################################
 def test_decorators_os(*args):
-    from utilmy.multithread import multithread_run_list
+    from utilmy.parallel import multithread_run_list
     def test_print(*args):
         print(args[0]*args[0])
         return args[0]*args[0]
