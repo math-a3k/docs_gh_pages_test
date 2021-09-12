@@ -209,7 +209,9 @@ def test4():
                       # axe1_label=  "Temperature",
                       # axe2_label=  "Rainfall", 
                      title =      "Weather",cfg={},mode='highcharts')
+    doc.hr()
     # plot network
+    doc.h1(" plot network test ")
     df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
     doc.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
 
@@ -324,7 +326,7 @@ def help():
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_size"):
+    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_page"):
         """
            Generate HTML page to display graph/Table.
            Combine pages together.
@@ -354,7 +356,7 @@ class htmlDoc(object):
         self.add_css(CSS_TEMPLATE.get(css_name, ''))
         # self.add_css(css_get_template(css_name=css_name))
 
-        if css_name=="a4_size":
+        if css_name=="a4_page":
           self.html = self.html + '\n <page size="A4">'
           self.tail = "</page> \n" + self.tail
 
@@ -1236,7 +1238,7 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
           with open(output_filename) as f:
             content = f.read()
             head = extract_text('head',content)
-            body = extract_text('head',content)
+            body = extract_text('body',content)
             return head + "\n" + body
     networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight)
     ng2 = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
