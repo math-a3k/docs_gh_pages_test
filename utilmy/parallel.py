@@ -66,14 +66,14 @@ def pd_apply_parallel(df, colsgroup=None, fun_apply=None, npool=5):
     for  i in range(npool):        
         if i == npool-1 : 
             i = i + 1   ## Full size
-        dfi =  df.iloc[ i*ksize : (i+1):ksize, : ]
-        p    = ppe.submit(f2, dfi )
+        dfi = df.iloc[ i*ksize : (i+1):ksize, : ]
+        p   = ppe.submit(f2, dfi )
         futures.append(p)
         del dfi
     del df ; gc.collect()
     
     
-    dfr =  None
+    df_out =  None
     for future in as_completed(futures):
         dfr    = future.result()        
         df_out = pd.concat((df_out, dfr )) if df_out is not None else dfr
