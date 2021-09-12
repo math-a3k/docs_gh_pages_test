@@ -560,9 +560,9 @@ class htmlDoc(object):
       self.html += "\n\n" + html_code
 
 
-    def pd_plot_network(self, df:pd.DataFrame, cola: str='col_node1',
+    def pd_plot_network(self, df:pd.DataFrame, cola: str='col_node1',colweight:str="weight",
                         colb: str='col_node2', coledge: str='col_edge'):
-        html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
+        html_code = pd_plot_network(df, cola=cola, colb=colb,colweight=colweight, coledge=coledge)
         self.html += "\n\n" + html_code
 
 
