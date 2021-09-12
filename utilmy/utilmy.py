@@ -12,6 +12,14 @@ def log2(*s, verbose=1):
     
 ###################################################################################################
 ###### Pandas #####################################################################################
+def pd_random(nrows=100):
+   df = pd.DataFrame(np.random.randint(0, 10, size=(nrows, 4)), 
+                     columns=list('abcd'))
+   return df 
+
+
+
+
 def pd_merge(df1, df2, on=None, colkeep=None):
   ### Faster merge
   cols = list(df2.columns) if colkeep is None else on + colkeep
