@@ -1,7 +1,4 @@
-from multiprocessing import cpu_count
 from utilmy import parallel
-import pandas as pd
-import numpy as np
 
 
 counter = 0
@@ -26,7 +23,7 @@ def test_multithread_run():
         ("yw", "zs", "psd"),
         ("yd", "zf", "pf"),
     ]
-    return parallel.multithread_run(
+    assert [["xyz", "ywzspsd"], ["yzp", "ydzfpf"]] == parallel.multithread_run(
         fun_async, li_of_tuples, n_pool=2, start_delay=0.1, verbose=True
     )
 
@@ -37,9 +34,12 @@ def test_multithread_run_list():
         ["x", "y", "z"],
         ["y", "z", "p"],
     ]
-    return parallel.multithread_run_list(
-        function1=(fun_async, (li_of_tuples[0],)),
-        function2=(fun_async, (li_of_tuples[1],)),
+    assert (
+        parallel.multithread_run_list(
+            function1=(fun_async, (li_of_tuples[0],)),
+            function2=(fun_async, (li_of_tuples[1],)),
+        )
+        == [("function1", ["x", "y", "z"]), ("function2", ["y", "z", "p"])]
     )
 
 
@@ -51,9 +51,9 @@ def test_multiproc_run():
         ("yw", "zs", "psd"),
         ("yd", "zf", "pf"),
     ]
-    return parallel.multiproc_run(
+    assert parallel.multiproc_run(
         fun_async, li_of_tuples, n_pool=2, start_delay=0.1, verbose=True
-    )
+    ) == [["xyz"], ["yzp"], ["ywzspsd"], ["ydzfpf"], []]
 
 
 def group_function(name, group):
@@ -70,18 +70,17 @@ def test_pd_groupby_parallel():
     import pandas as pd
 
     df = pd.DataFrame()
-    # 5000 users with approx 100 values
-    df["user_id"] = np.random.randint(5000, size=500000)
-    # Generate 500000 random integer values
-    df["value"] = np.random.randint(30, size=500000)
-    # Create data_chunk based on modulo of user_id
-    df["data_chunk"] = df["user_id"].mod(cpu_count() * 3)
+    df["result"] = [5, 8, 1, 7, 0, 3, 2, 9, 4, 6]
+    df["user_id"] = [1, 1, 2, 3, 4, 4, 5, 8, 9, 9]
+    df["value"] = [27, 14, 26, 19, 28, 9, 11, 1, 26, 18]
+    df["data_chunk"] = [1, 1, 2, 3, 4, 4, 5, 8, 9, 9]
 
-    return parallel.pd_groupby_parallel(
-        df.groupby("user_id"),
-        func=group_function,
-        int=1,
+    expected_df = df.copy()
+    expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
+    result = parallel.pd_groupby_parallel(
+        df.groupby("user_id"), func=group_function, int=1
     )
+    assert expected_df.equals(result)
 
 
 def apply_func(x):
@@ -95,22 +94,15 @@ def test_pd_apply_parallel():
     import pandas as pd
 
     df = pd.DataFrame(
-        {"A": [0, 1, 2, 3, 4, 5, 6], "B": [100, 200, 300, 400, 500, 600, 700]}
+        {
+            "A": [0, 1, 2, 3, 4],
+            "B": [100, 200, 300, 400, 500],
+        }
     )
-
-    return parallel.pd_apply_parallel(
+    expected_df = pd.DataFrame(
+        {"A": [0, 1, 4, 9, 16], "B": [10000, 40000, 90000, 160000, 250000]}
+    )
+    result = parallel.pd_apply_parallel(
         df=df, colsgroup=["A" "B"], fun_apply=apply_func, npool=4
     )
-
-
-if __name__ == "__main__":
-    print("Testing .. \n")
-    for fun in [
-        test_multithread_run,
-        test_multithread_run_list,
-        test_multiproc_run,
-        test_pd_apply_parallel,
-        test_pd_groupby_parallel,
-    ]:
-        print("Running:", fun.__name__, "\n\n")
-        print(fun())
+    assert expected_df.equals(result)
