@@ -7,9 +7,9 @@ import multiprocessing
 from typing import Callable, Tuple, Union
 
 #################################################################################################
-from utilmy import log
 
-# def log(*s): print(*s, flush=True)
+
+def log(*s): print(*s, flush=True)
 
 def fun_async(xlist):
         list = []
