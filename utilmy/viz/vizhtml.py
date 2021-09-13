@@ -187,7 +187,7 @@ def test4():
     doc.hr()
     # histogram
     doc.h1(" histo test ")
-    doc.plot_histogram(df2,col='Unit Price',color_schema='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
+    doc.plot_histogram(df2,col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
     doc.hr()
     #  scatter plot
@@ -209,7 +209,9 @@ def test4():
                       # axe1_label=  "Temperature",
                       # axe2_label=  "Rainfall", 
                      title =      "Weather",cfg={},mode='highcharts')
+    doc.hr()
     # plot network
+    doc.h1(" plot network test ")
     df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
     doc.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
 
@@ -324,7 +326,7 @@ def help():
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_size"):
+    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_page"):
         """
            Generate HTML page to display graph/Table.
            Combine pages together.
@@ -354,7 +356,7 @@ class htmlDoc(object):
         self.add_css(CSS_TEMPLATE.get(css_name, ''))
         # self.add_css(css_get_template(css_name=css_name))
 
-        if css_name=="a4_size":
+        if css_name=="a4_page":
           self.html = self.html + '\n <page size="A4">'
           self.tail = "</page> \n" + self.tail
 
@@ -494,7 +496,7 @@ class htmlDoc(object):
     def plot_histogram(self, df:pd.DataFrame, col,
                        xlabel: str=None,ylabel: str=None,
                        title: str='', figsize: tuple=(14,7),
-                       color_schema:str = 'RdYlBu', 
+                       colormap:str = 'RdYlBu', 
                        nsample=10000,nbin=10,
                        q5=0.005, q95=0.95,cfg: dict = {}, 
                        mode: str='matplot', save_img="",  **kw):
@@ -510,7 +512,7 @@ class htmlDoc(object):
             fig       = pd_plot_histogram_matplot(df, col,
                                                   title=title,
                                                   nbin=nbin, q5=q5, q95=q95,
-                                                  xlabel= xlabel,ylabel=ylabel,color_schema=color_schema,
+                                                  xlabel= xlabel,ylabel=ylabel,colormap=colormap,
                                                   nsample=nsample, save_img=save_img)
             html_code = self.fig_to_html(fig)
 
@@ -558,9 +560,9 @@ class htmlDoc(object):
       self.html += "\n\n" + html_code
 
 
-    def pd_plot_network(self, df:pd.DataFrame, cola: str='col_node1',
+    def pd_plot_network(self, df:pd.DataFrame, cola: str='col_node1',colweight:str="weight",
                         colb: str='col_node2', coledge: str='col_edge'):
-        html_code = pd_plot_network(df, cola=cola, colb=colb, coledge=coledge)
+        html_code = pd_plot_network(df, cola=cola, colb=colb,colweight=colweight, coledge=coledge)
         self.html += "\n\n" + html_code
 
 
@@ -731,7 +733,7 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
 
 
 
-def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,color_schema:str='RdYlBu', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
+def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,colormap:str='RdYlBu', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
                               save_img: str="",xlabel: str=None,ylabel: str=None, **kw):
     """
     fig = plt.figure()
@@ -745,7 +747,7 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,color_schema:str='Rd
     ax.set_ylim(config['ylim'])
     return fig
     """
-    cm = plt.cm.get_cmap(color_schema)
+    cm = plt.cm.get_cmap(colormap)
     dfi = df[col]
     q0  = dfi.quantile(q5)
     q1  = dfi.quantile(q95)
@@ -1236,7 +1238,7 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
           with open(output_filename) as f:
             content = f.read()
             head = extract_text('head',content)
-            body = extract_text('head',content)
+            body = extract_text('body',content)
             return head + "\n" + body
     networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight)
     ng2 = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
