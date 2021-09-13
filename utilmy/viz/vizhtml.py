@@ -83,7 +83,7 @@ def test2():
     doc.h2('Plot of weather data') 
     doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate=  'Date',date_format =  '%m/%d/%Y',
                       col_y1   =  ['Temperature'],col_y2   =  ["Rainfall"],
-                      # x_label='Date',  axe1_label=  "Temperature", axe2_label=  "Rainfall", 
+                      # xlabel='Date',  col_y1_label=  "Temperature", col_y2_label=  "Rainfall", 
                      title = "Weather",cfg={}, mode='highcharts')
     doc.hr() 
     doc.h3('Weather data') 
@@ -91,7 +91,7 @@ def test2():
 
     # create histogram chart. mode highcharts
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
-                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+                       xlabel= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
 
      # Testing with example data sets (Titanic)
     cfg = {"title" : "Titanic", 'figsize' : (20, 7)}
@@ -160,7 +160,7 @@ def test4():
     # histogram
     doc.h1(" histo test ")
     doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
-    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xlabel= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
     doc.hr()
     #  scatter plot
     doc.tag('<h2> Scater Plot </h2>')
@@ -175,7 +175,7 @@ def test4():
     doc.h2('Plot of weather data') 
     doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
                       col_y1   =  ['Temperature'],col_y2   =  ["Rainfall"],
-                      # x_label=     'Date', axe1_label=  "Temperature", axe2_label=  "Rainfall", 
+                      # xlabel=     'Date', col_y1_label=  "Temperature", col_y2_label=  "Rainfall", 
                      title ="Weather",cfg={},mode='highcharts')
     doc.hr()
     # plot network
@@ -405,7 +405,7 @@ class htmlDoc(object):
 
     def plot_tseries(self, df:pd.DataFrame, coldate, col_y1: list, col_y2=None,
                      title: str="", figsize: tuple=(14,7),  nsample: int= 10000,
-                     x_label=None, axe1_label=None,  axe2_label=None,
+                     xlabel=None, col_y1_label=None,  col_y2_label=None,
                      date_format: str='%m/%d/%Y',
                      plot_type="",spacing=0.1,
                      cfg: dict = {}, mode: str='matplot', save_img="",  **kw):
@@ -421,7 +421,7 @@ class htmlDoc(object):
         if mode == 'matplot':
             fig       = pd_plot_tseries_matplot(df, coldate, col_y1=col_y1, col_y2=col_y2,
                                                    figsize=figsize, title=title,
-                                                   x_label=x_label, axe1_label=axe1_label, axe2_label=axe2_label,
+                                                   xlabel=xlabel, col_y1_label=col_y1_label, col_y2_label=col_y2_label,
                                                    cfg=cfg, mode=mode, save_img=save_img,
                                                    spacing=spacing
                                                   )
@@ -431,7 +431,7 @@ class htmlDoc(object):
             html_code = pd_plot_tseries_highcharts(df, coldate, col_y1=col_y1, col_y2=col_y2,
                                                    date_format='%m/%d/%Y',
                                                    figsize=figsize, title=title,
-                                                   x_label=x_label, axe1_label=axe1_label, axe2_label=axe2_label,
+                                                   xlabel=xlabel, col_y1_label=col_y1_label, col_y2_label=col_y2_label,
                                                    cfg=cfg, mode=mode, save_img=save_img,
                                                   )
         self.html += "\n\n" + html_code
@@ -901,11 +901,10 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
     return html_code
 
 
-def pd_plot_tseries_highcharts(df,
-                              coldate:str=None, date_format:str='%m/%d/%Y',
+def pd_plot_tseries_highcharts(df,coldate:str=None, date_format:str='%m/%d/%Y',
                               col_y1:list =[],     col_y2:list =[],
                               figsize:tuple =  None, title:str=None,
-                              x_label:str=None,  axe1_label:str=None, axe2_label:str=None,
+                              xlabel:str=None,  col_y1_label:str=None, col_y2_label:str=None,
                               cfg:dict={}, mode='d3', save_img="", **kw)-> str:
     '''
         function to return highchart json cord for time_series.
@@ -913,9 +912,9 @@ def pd_plot_tseries_highcharts(df,
         df : panda dataframe on which you want to apply time_series
         col_y1: column name for y-axis one
         col_y2: column name for y-axis second
-        x_label : label of x-axis
-        cols_axe1_label : label for yaxis 1
-        cols_axe2_label : label for yaxis 2
+        xlabel : label of x-axis
+        col_y1_label : label for yaxis 1
+        col_y2_label : label for yaxis 2
         date_format : %m for moth , %d for day and %Y for Year.
     '''
 
@@ -923,10 +922,10 @@ def pd_plot_tseries_highcharts(df,
     from box import Box
     cc = Box(cfg)
     cc.coldate      = 'date'  if coldate is None else coldate
-    cc.x_label      = coldate if x_label is None else x_label
-    cc.axe1_label   = "_".join(col_y1)      if axe1_label is None else axe1_label
-    cc.axe2_label   = "_".join(col_y2)      if axe2_label is None else axe2_label
-    cc.title        = cc.get('title',    str(axe1_label) + " vs " + str(coldate) ) if title is None else title
+    cc.xlabel      = coldate if xlabel is None else xlabel
+    cc.col_y1_label   = "_".join(col_y1)      if col_y1_label is None else col_y1_label
+    cc.col_y2_label   = "_".join(col_y2)      if col_y2_label is None else col_y2_label
+    cc.title        = cc.get('title',    str(col_y1_label) + " vs " + str(coldate) ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
     cc.subtitle     = cc.get('subtitle', '')
     cc.col_y1    = col_y1
@@ -940,13 +939,13 @@ def pd_plot_tseries_highcharts(df,
       'chart':   { 'zoomType': 'xy'},
         'title': { 'text': cc.title},
         'subtitle': {  'text': cc.subtitle },
-        'xAxis': [{'type': 'datetime', 'title': { 'text': cc.x_label } }],
+        'xAxis': [{'type': 'datetime', 'title': { 'text': cc.xlabel } }],
         'yAxis': [{'labels': {'style': {  'color': 'Highcharts.getOptions().colors[2]' } }, 
-                   'title' : {'text': cc.axe2_label,
+                   'title' : {'text': cc.col_y2_label,
                    'style' : {   'color': 'Highcharts.getOptions().colors[2]' } }, 'opposite': True }, 
         {
             'gridLineWidth': 0,
-            'title':  {'text': cc.axe1_label, 'style': { 'color': 'Highcharts.getOptions().colors[0]'}},
+            'title':  {'text': cc.col_y1_label, 'style': { 'color': 'Highcharts.getOptions().colors[0]'}},
             'labels': {'style': { 'color': 'Highcharts.getOptions().colors[0]'} }
 
         }],
@@ -977,7 +976,7 @@ def pd_plot_tseries_highcharts(df,
 
 def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
                               binsNumber=None, binWidth=None,
-                              title:str="", xaxis_label:str= "x-axis", yaxis_label:str="y-axis",
+                              title:str="", xlabel:str= "x-axis", yaxis_label:str="y-axis",
                               cfg:dict={}, mode='d3', save_img="",
                               show=False, **kw):
 
@@ -985,21 +984,19 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
         input parameter
         df : panda dataframe on which you want to apply histogram
         colname : column name from dataframe in which histogram will apply
-        xaxis_label: label for x-axis
+        xlabel: label for x-axis
         yaxis_label: label for y-axis
         binsNumber: Number of bin in bistogram.
         binWidth : width of each bin in histogram
         title : title of histogram
-        cols_axe2_label : label for yaxis 2
         date_format : %m for moth , %d for day and %Y for Year.
-
         df        = data['housing.csv']
-        html_code = pd_plot_histogram_hcharts(df,colname="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='d3', save_img=False)
+        html_code = pd_plot_histogram_hcharts(df,colname="median_income",xlabel= "x-axis",yaxis_label="y-axis",cfg={}, mode='d3', save_img=False)
         # highcharts_show_chart(html_code)
     '''
     cc = Box(cfg)
     cc.title        = cc.get('title',    "My Title" ) if title is None else title
-    cc.xaxis_label  = xaxis_label
+    cc.xlabel  = xlabel
     cc.yaxis_label  = yaxis_label
 
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
@@ -1018,7 +1015,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
     title  = """{ text:'""" + cc.title +"""' }"""
 
     xAxis = """[{
-                title: { text:'""" + cc.xaxis_label + """'},
+                title: { text:'""" + cc.xlabel + """'},
                 alignTicks: false, opposite: false
             }]"""
 
@@ -1407,7 +1404,7 @@ def zz_pd_plot_histogram_highcharts_old(df, col, figsize=None,
     cc.title        = cc.get('title',    'Histogram' + col ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
     cc.subtitle     = cc.get('subtitle', '')
-    x_label         = col+'-bins'
+    xlabel     = col+'-bins'
     y_label         = col+'-frequency'
 
     #### Get data, calculate histogram and bar centers
