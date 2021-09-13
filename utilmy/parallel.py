@@ -39,7 +39,8 @@ def test_parallel():
 
     """testing the script for checking the list"""
     li_of_tuples = [["x", "y", "z"],["y", "z", "p"]]
-    print(multithread_run_list(function1=(fun_async, (li_of_tuples[0],)),function2=(fun_async, (li_of_tuples[1],)))== [("function1", ["x", "y", "z"]), ("function2", ["y", "z", "p"])])
+    print(multithread_run_list(function1=(fun_async, (li_of_tuples[0],)),function2=(fun_async, (li_of_tuples[1],)))== 
+    [("function1", ["x", "y", "z"]), ("function2", ["y", "z", "p"])])
 
     #### testing script for multiproc_run
 
@@ -48,7 +49,8 @@ def test_parallel():
     ["ywzspsd"], ["ydzfpf"], []])
 
     #### TEST applying groupby
-    df = pd.DataFrame(data={'result':[5, 8, 1, 7, 0, 3, 2, 9, 4, 6], 'user_id':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9], 'value':[27, 14, 26, 19, 28, 9, 11, 1, 26, 18],'data_chunk':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9]})
+    df = pd.DataFrame(data={'result':[5, 8, 1, 7, 0, 3, 2, 9, 4, 6], 'user_id':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9], 'value'
+    :[27, 14, 26, 19, 28, 9, 11, 1, 26, 18],'data_chunk':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9]})
     expected_df = df.copy()
     expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
     result = pd_groupby_parallel(df.groupby("user_id"), func=group_function, int=5)
