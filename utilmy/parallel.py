@@ -43,14 +43,12 @@ def test_parallel():
         ["x", "y", "z"],
         ["y", "z", "p"],
     ]
-    if (
-        parallel.multithread_run_list(
+    res =( multithread_run_list(
             function1=(fun_async, (li_of_tuples[0],)),
-            function2=(fun_async, (li_of_tuples[1],)),
-        )
-        == [("function1", ["x", "y", "z"]), ("function2", ["y", "z", "p"])]
-    ):
-        dic["multithread_run_list"] = "correct test"
+            function2=(fun_async, (li_of_tuples[1],)),)
+        == [("function1", ["x", "y", "z"]), ("function2", ["y", "z", "p"])]    )
+
+    dic["multithread_run_list"] = res
 
     ### testing
     ####
@@ -62,7 +60,7 @@ def test_parallel():
         ("yw", "zs", "psd"),
         ("yd", "zf", "pf"),
     ]
-    if parallel.multiproc_run(
+    if multiproc_run(
         fun_async, li_of_tuples, n_pool=2, start_delay=0.1, verbose=True
     ) == [["xyz"], ["yzp"], ["ywzspsd"], ["ydzfpf"], []]:
         dic["multiproc_run_test"] = "correct test"
@@ -82,7 +80,7 @@ def test_parallel():
 
     expected_df = df.copy()
     expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
-    result = parallel.pd_groupby_parallel(
+    result = pd_groupby_parallel(
         df.groupby("user_id"), func=group_function, int=1
     )
     if expected_df.equals(result):

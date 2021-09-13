@@ -408,9 +408,9 @@ class htmlDoc(object):
         custom_id = str(random.randint(9999,999999))
         # self.head += "\n" + js_code.js_hidden  # Hidden  javascript
         self.html += "\n" + f"<div id='div{custom_id}' style='{css}'>{x}</div>"
-        button = """<button id="{btn_id}">Toggle</button>""".format(btn_id="btn"+custom_id)
+        button     = """<button id="{btn_id}">Toggle</button>""".format(btn_id="btn"+custom_id)
         self.html += "\n" + f"{button}"        
-        js = """function toggle() {{
+        js         = """function toggle() {{
                 if (document.getElementById("{div_id}").style.visibility === "visible") {{
                   document.getElementById("{div_id}").style.visibility = "hidden"
                 }} else {{
