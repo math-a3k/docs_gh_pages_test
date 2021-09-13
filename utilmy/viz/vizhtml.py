@@ -56,21 +56,16 @@ def test_getdata(verbose=True):
 def test1():
     ####  Test Datatable
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
-
     # check add css
-    css = """.intro { background-color: yellow;}
-    """
+    css = """.intro { background-color: yellow;} """
     doc.add_css(css)
-
     # test create table
     df = test_getdata()['titanic.csv']
     doc.h1(" Table test ")
     doc.table(df, use_datatable=True, table_id="test", custom_css_class='intro')
-
     doc.print()
     doc.save(dir_out="testdata/test_viz_table.html")
     doc.open_browser()  # Open myfile.html
-
 
 
 def test2():
@@ -80,35 +75,23 @@ def test2():
       vi.test2()
     """
     data = test_getdata()
-
     doc = htmlDoc(title='Weather report', dir_out="", cfg={} )
     doc.h1(' Weather report')
-    doc.hr() ; doc.br()
+    doc.hr()
 
     # create time series chart. mode highcharts
     doc.h2('Plot of weather data') 
-    doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],
-                      coldate     =  'Date',
-                      date_format =  '%m/%d/%Y',
-                      cols_axe1   =  ['Temperature'],
-                      cols_axe2   =  ["Rainfall"],
-                      # x_label=     'Date', 
-                      # axe1_label=  "Temperature",
-                      # axe2_label=  "Rainfall", 
-                     title =      "Weather",
-                     cfg={},             
-                     mode='highcharts'
-                     )
-
-    doc.hr() ; doc.br()
+    doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate=  'Date',date_format =  '%m/%d/%Y',
+                      col_y1   =  ['Temperature'],col_y2   =  ["Rainfall"],
+                      # x_label='Date',  axe1_label=  "Temperature", axe2_label=  "Rainfall", 
+                     title = "Weather",cfg={}, mode='highcharts')
+    doc.hr() 
     doc.h3('Weather data') 
     doc.table(data['weatherdata.csv'].iloc[:10 : ], use_datatable=True )
-
 
     # create histogram chart. mode highcharts
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
                        xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
-
 
      # Testing with example data sets (Titanic)
     cfg = {"title" : "Titanic", 'figsize' : (20, 7)}
@@ -116,22 +99,17 @@ def test2():
     # create scatter chart. mode highcharts
     doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
                          collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                         figsize=(20,7),
-                         cfg=cfg, mode='highcharts',                         
-                         )
+                         figsize=(20,7),cfg=cfg, mode='highcharts')
 
     doc.save('viz_test3_all_graphs.html')
     doc.open_browser()
     html1 = doc.get_html()
-    # print(html1)
     # html_show(html1)
 
 
 def test3(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata()
-    dft  = data['titanic.csv']
-    df   = data['housing.csv']
     df2  = data['sales.csv']
     from box import Box
     cfg = Box({})
@@ -148,18 +126,16 @@ def test3(verbose=True):
     doc.h1('My title')  # h1
     doc.sep()
     doc.br()  # <br>
-
     doc.tag('<h2> My graph title </h2>')
-    doc.plot_scatter(dft, colx='Age', coly='Fare',
+    doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
                      collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
                      cfg=cfg.scatter, mode='matplot', save_img='')
     doc.hr()  # doc.sep() line separator
-
     # for df2_i in df2_list:
     #      print(df2_i)
     #      col2 =df2_i.columns
     #      # doc.h3(f" plot title: {df2_i['category'].values[0]}")
-    #      doc.plot_tseries(df2_i, coldate= col2[0], cols_axe1= col2[1],   cfg = cfg.tseries, mode='highcharts')
+    #      doc.plot_tseries(df2_i, coldate= col2[0], col_y1= col2[1],   cfg = cfg.tseries, mode='highcharts')
 
     doc.tag('<h2> My histo title </h2>')
     doc.plot_histogram(df2,col='Unit Cost',mode='matplot', save_img="")
@@ -170,45 +146,37 @@ def test3(verbose=True):
 
 def test4():
     data = test_getdata()
-    dft  = data['titanic.csv']
-    df   = data['housing.csv']
-    df2  = data['sales.csv']
     from box import Box
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
     cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
     cfg.histo   = {"title": 'ok'}
     cfg.use_datatable = True
-    df = test_getdata()['titanic.csv']
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
     # table
     doc.h1(" Table test ")
-    doc.table(df, use_datatable=True, table_id="test", custom_css_class='intro')
+    doc.table(data['titanic.csv'], use_datatable=True, table_id="test", custom_css_class='intro')
     doc.hr()
     # histogram
     doc.h1(" histo test ")
-    doc.plot_histogram(df2,col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
+    doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
     doc.hr()
     #  scatter plot
     doc.tag('<h2> Scater Plot </h2>')
-    doc.plot_scatter(dft, colx='Age', coly='Fare',
+    doc.plot_scatter( data['titanic.csv'], colx='Age', coly='Fare',
                      collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
                      cfg=cfg.scatter, mode='matplot', save_img='')
     doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
                          collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                         figsize=(20,7),
-                         cfg=cfg, mode='highcharts',                         
-                         )
+                         figsize=(20,7),cfg=cfg, mode='highcharts',)
     
     # create time series chart. mode highcharts
     doc.h2('Plot of weather data') 
     doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
-                      cols_axe1   =  ['Temperature'],cols_axe2   =  ["Rainfall"],
-                      # x_label=     'Date', 
-                      # axe1_label=  "Temperature",
-                      # axe2_label=  "Rainfall", 
-                     title =      "Weather",cfg={},mode='highcharts')
+                      col_y1   =  ['Temperature'],col_y2   =  ["Rainfall"],
+                      # x_label=     'Date', axe1_label=  "Temperature", axe2_label=  "Rainfall", 
+                     title ="Weather",cfg={},mode='highcharts')
     doc.hr()
     # plot network
     doc.h1(" plot network test ")
@@ -220,38 +188,26 @@ def test4():
     html1 = doc.get_html()
     
 def test_scatter_and_histogram_matplot():
-
   data = test_getdata()
-
-  dft  = data['titanic.csv']
-  df   = data['housing.csv']
-  df2  = data['sales.csv']
   cfg = Box({})
   cfg.tseries = {"title": 'ok'}
   cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
   cfg.histo   = {"title": 'ok'}
   cfg.use_datatable = True
 
-  df = pd.DataFrame([[1, 2]])
-  df2_list = [df, df, df]
-
   doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
   doc.h1('My title')  # h1
   doc.sep()
   doc.br()  # <br>
 
-  doc.tag('<h2> My graph title </h2>')
-  doc.plot_scatter(dft, colx='Age', coly='Fare',
+  doc.tag('<h2> Test Histogram and Scatter </h2>')
+  doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
                     cfg=cfg.scatter, mode='matplot', save_img='')
   doc.hr()  # doc.sep() line separator
-
-
-  doc.plot_histogram(df2,col='Unit Cost',mode='matplot', save_img="")
-
+  doc.plot_histogram(data['sales.csv'],col='Unit Cost',mode='matplot', save_img="")
   doc.save(dir_out="myfile.html")
-  doc.open_browser()  # Open myfile.html
-
+  doc.open_browser()  # Open myfile.html-
 
 def test_pd_plot_network():
   df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
@@ -262,47 +218,35 @@ def test_pd_plot_network():
 def test_cssname(verbose=True,css_name="A4_size"):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata()
-    dft  = data['titanic.csv']
-    df   = data['housing.csv']
-    df2  = data['sales.csv']
     from box import Box
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
     cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
     cfg.histo   = {"title": 'ok'}
     cfg.use_datatable = True
-
-    df = pd.DataFrame([[1, 2]])
-    df2_list = [df, df, df]
-    print(df2_list)
     doc = htmlDoc(dir_out="", title="hello",css_name=css_name, format='myxxxx', cfg=cfg)
 
     doc.h1('My title')  # h1
     doc.sep()
     doc.br()  # <br>
 
-    doc.tag('<h2> My graph title </h2>')
-    doc.plot_scatter(dft, colx='Age', coly='Fare',
+    doc.tag('<h2> Test Cssname </h2>')
+    doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
                      collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
                      cfg=cfg.scatter, mode='matplot', save_img='')
     doc.hr()  # doc.sep() line separator
 
-
-
     # test create table
     df = test_getdata()['titanic.csv']
     doc.h1(" Table test ")
-    doc.table(df[0:10], use_datatable=True, table_id="test", custom_css_class='intro')
-
-    
+    doc.table(data['housing.csv'][0:10], use_datatable=True, table_id="test", custom_css_class='intro')
 
     doc.tag('<h2> My histo title </h2>')
-    doc.plot_histogram(df2,col='Unit Cost',mode='matplot', save_img="")
-    doc.plot_histogram(df2,col='Unit Price',cfg =  cfg.histo,title="Price", mode='matplot', save_img="")
+    doc.plot_histogram(data['sales.csv'],col='Unit Cost',mode='matplot', save_img="")
+    doc.plot_histogram(data['sales.csv'],col='Unit Price',cfg =  cfg.histo,title="Price", mode='matplot', save_img="")
 
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
-
 
 def help():
 
@@ -459,7 +403,7 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_tseries(self, df:pd.DataFrame, coldate, cols_axe1: list, cols_axe2=None,
+    def plot_tseries(self, df:pd.DataFrame, coldate, col_y1: list, col_y2=None,
                      title: str="", figsize: tuple=(14,7),  nsample: int= 10000,
                      x_label=None, axe1_label=None,  axe2_label=None,
                      date_format: str='%m/%d/%Y',
@@ -468,14 +412,14 @@ class htmlDoc(object):
         """Create html time series chart.
         Args:
             df:         pd Dataframe
-            cols_axe1: list of column for axis 1
-            cols_axe2: list of column for axis 2
+            col_y1: list of column for y-axis 1
+            col_y2: list of column for axis 2
             ...
             mode:       matplot or highcharts
         """
         html_code = ''
         if mode == 'matplot':
-            fig       = pd_plot_tseries_matplot(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2,
+            fig       = pd_plot_tseries_matplot(df, coldate, col_y1=col_y1, col_y2=col_y2,
                                                    figsize=figsize, title=title,
                                                    x_label=x_label, axe1_label=axe1_label, axe2_label=axe2_label,
                                                    cfg=cfg, mode=mode, save_img=save_img,
@@ -484,7 +428,7 @@ class htmlDoc(object):
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
-            html_code = pd_plot_tseries_highcharts(df, coldate, cols_axe1=cols_axe1, cols_axe2=cols_axe2,
+            html_code = pd_plot_tseries_highcharts(df, coldate, col_y1=col_y1, col_y2=col_y2,
                                                    date_format='%m/%d/%Y',
                                                    figsize=figsize, title=title,
                                                    x_label=x_label, axe1_label=axe1_label, axe2_label=axe2_label,
@@ -776,7 +720,7 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,colormap:str='RdYlBu
 
 
 
-def pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str=None, cols_axe1: list = [], cols_axe2: list = [],
+def pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str=None, col_y1: list = [], col_y2: list = [],
                             figsize: tuple =(8, 4), spacing=0.1, **kw):
     """
     """
@@ -786,12 +730,12 @@ def pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str=None, cols_axe1: lis
 
     plt.figure(figsize=figsize)
     # Get default color style from pandas - can be changed to any other color list
-    if cols_axe1 is None:
-        cols_axe1 = df.columns
-    if len(cols_axe1) == 0:
+    if col_y1 is None:
+        col_y1 = df.columns
+    if len(col_y1) == 0:
         return
     colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(
-        num_colors=len(cols_axe1 + cols_axe2))
+        num_colors=len(col_y1 + col_y2))
 
     # Displays subplot's pair in case of plot_type defined as `pair`
     if plot_type == 'pair':
@@ -801,27 +745,27 @@ def pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str=None, cols_axe1: lis
         return html_code
 
     # First axis
-    ax = df.loc[:, cols_axe1[0]].plot(
-        label=cols_axe1[0], color=colors[0], **kw)
-    ax.set_ylabel(ylabel=cols_axe1[0])
+    ax = df.loc[:, col_y1[0]].plot(
+        label=col_y1[0], color=colors[0], **kw)
+    ax.set_ylabel(ylabel=col_y1[0])
     ##  lines, labels = ax.get_legend_handles_labels()
     lines, labels = [], []
 
-    i1 = len(cols_axe1)
-    for n in range(1, len(cols_axe1)):
-        df.loc[:, cols_axe1[n]].plot(
-            ax=ax, label=cols_axe1[n], color=colors[(n) % len(colors)], **kw)
+    i1 = len(col_y1)
+    for n in range(1, len(col_y1)):
+        df.loc[:, col_y1[n]].plot(
+            ax=ax, label=col_y1[n], color=colors[(n) % len(colors)], **kw)
         line, label = ax.get_legend_handles_labels()
         lines += line
         labels += label
 
-    for n in range(0, len(cols_axe2)):
+    for n in range(0, len(col_y2)):
         # Multiple y-axes
         ax_new = ax.twinx()
         ax_new.spines['right'].set_position(('axes', 1 + spacing * (n - 1)))
-        df.loc[:, cols_axe2[n]].plot(
-            ax=ax_new, label=cols_axe2[n], color=colors[(i1 + n) % len(colors)], **kw)
-        ax_new.set_ylabel(ylabel=cols_axe2[n])
+        df.loc[:, col_y2[n]].plot(
+            ax=ax_new, label=col_y2[n], color=colors[(i1 + n) % len(colors)], **kw)
+        ax_new.set_ylabel(ylabel=col_y2[n])
 
         # Proper legend position
         line, label = ax_new.get_legend_handles_labels()
@@ -959,7 +903,7 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
 
 def pd_plot_tseries_highcharts(df,
                               coldate:str=None, date_format:str='%m/%d/%Y',
-                              cols_axe1:list =[],     cols_axe2:list =[],
+                              col_y1:list =[],     col_y2:list =[],
                               figsize:tuple =  None, title:str=None,
                               x_label:str=None,  axe1_label:str=None, axe2_label:str=None,
                               cfg:dict={}, mode='d3', save_img="", **kw)-> str:
@@ -967,8 +911,8 @@ def pd_plot_tseries_highcharts(df,
         function to return highchart json cord for time_series.
         input parameter
         df : panda dataframe on which you want to apply time_series
-        cols_axe1: column name for y-axis one
-        cols_axe2: column name for y-axis second
+        col_y1: column name for y-axis one
+        col_y2: column name for y-axis second
         x_label : label of x-axis
         cols_axe1_label : label for yaxis 1
         cols_axe2_label : label for yaxis 2
@@ -980,13 +924,13 @@ def pd_plot_tseries_highcharts(df,
     cc = Box(cfg)
     cc.coldate      = 'date'  if coldate is None else coldate
     cc.x_label      = coldate if x_label is None else x_label
-    cc.axe1_label   = "_".join(cols_axe1)      if axe1_label is None else axe1_label
-    cc.axe2_label   = "_".join(cols_axe2)      if axe2_label is None else axe2_label
+    cc.axe1_label   = "_".join(col_y1)      if axe1_label is None else axe1_label
+    cc.axe2_label   = "_".join(col_y2)      if axe2_label is None else axe2_label
     cc.title        = cc.get('title',    str(axe1_label) + " vs " + str(coldate) ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
     cc.subtitle     = cc.get('subtitle', '')
-    cc.cols_axe1    = cols_axe1
-    cc.cols_axe2    = cols_axe2
+    cc.col_y1    = col_y1
+    cc.col_y2    = col_y2
     df[cc.coldate]     = pd.to_datetime(df[cc.coldate],format=date_format)
 
     #########################################################
@@ -1016,11 +960,11 @@ def pd_plot_tseries_highcharts(df,
     }
     H.set_dict_options(options)
 
-    for col_name in cc.cols_axe1:
+    for col_name in cc.col_y1:
       data = [[df[cc.coldate][i] , float(df[col_name][i]) ] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name,yAxis=1)
 
-    for col_name in cc.cols_axe2:
+    for col_name in cc.col_y2:
       data = [[df[cc.coldate][i] , float(df[col_name][i])] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name, yAxis=0, )
 
