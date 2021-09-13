@@ -24,8 +24,6 @@ def test_parallel():
         fun_async, li_of_tuples, n_pool=2, start_delay=0.1, verbose=True
     ):
         dic["multithread_run_test"] = "correct test"
-    else:
-        dic["multithread_run_test"] = "Incorrect test"
 
     ##### 2nd test for multithread run list
 
