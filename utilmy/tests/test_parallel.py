@@ -1,21 +1,18 @@
+from utilmy.tests.conftest import apply_func, fun_async, group_function
 from utilmy import parallel
 
 
 counter = 0
+dic = {
+    "multithread_run_test": "Incorrect test",
+    "multithread_run_list": "Incorrect test",
+    "multiproc_run_test": "Incorrect test",
+    "pd_groupby_parallel_test": "Incorrect test",
+    "pd_apply_parallel_test": "Incorrect test",
+}
 
 
-def fun_async(xlist):
-    print(counter, " Thread ", "Got: ", xlist)
-    list = []
-    for x in xlist:
-        stdr = ""
-        for y in x:
-            stdr += y
-        list.append(stdr)
-    return list
-
-
-def test_multithread_run():
+def test_parallel():
     "testing script for multithread_run"
     li_of_tuples = [
         ("x", "y", "z"),
@@ -23,27 +20,34 @@ def test_multithread_run():
         ("yw", "zs", "psd"),
         ("yd", "zf", "pf"),
     ]
-    assert [["xyz", "ywzspsd"], ["yzp", "ydzfpf"]] == parallel.multithread_run(
+    if [["xyz", "ywzspsd"], ["yzp", "ydzfpf"]] == parallel.multithread_run(
         fun_async, li_of_tuples, n_pool=2, start_delay=0.1, verbose=True
-    )
+    ):
+        dic["multithread_run_test"] = "correct test"
+    else:
+        dic["multithread_run_test"] = "Incorrect test"
 
+    ##### 2nd test for multithread run list
 
-def test_multithread_run_list():
+    #####
+
     """testing the script for checking the list"""
     li_of_tuples = [
         ["x", "y", "z"],
         ["y", "z", "p"],
     ]
-    assert (
+    if (
         parallel.multithread_run_list(
             function1=(fun_async, (li_of_tuples[0],)),
             function2=(fun_async, (li_of_tuples[1],)),
         )
         == [("function1", ["x", "y", "z"]), ("function2", ["y", "z", "p"])]
-    )
+    ):
+        dic["multithread_run_list"] = "correct test"
 
+    ### testing
+    ####
 
-def test_multiproc_run():
     "testing script for multiproc_run"
     li_of_tuples = [
         ("x", "y", "z"),
@@ -51,19 +55,13 @@ def test_multiproc_run():
         ("yw", "zs", "psd"),
         ("yd", "zf", "pf"),
     ]
-    assert parallel.multiproc_run(
+    if parallel.multiproc_run(
         fun_async, li_of_tuples, n_pool=2, start_delay=0.1, verbose=True
-    ) == [["xyz"], ["yzp"], ["ywzspsd"], ["ydzfpf"], []]
+    ) == [["xyz"], ["yzp"], ["ywzspsd"], ["ydzfpf"], []]:
+        dic["multiproc_run_test"] = "correct test"
 
-
-def group_function(name, group):
-    # Inverse cumulative sum
-
-    group["inv_sum"] = group.iloc[::-1]["value"].cumsum()[::-1].shift(-1).fillna(0)
-    return group
-
-
-def test_pd_groupby_parallel():
+    ####
+    #### TEST applying groupby
     """
     test for applying groupby in pandas
     """
@@ -80,14 +78,11 @@ def test_pd_groupby_parallel():
     result = parallel.pd_groupby_parallel(
         df.groupby("user_id"), func=group_function, int=1
     )
-    assert expected_df.equals(result)
+    if expected_df.equals(result):
+        dic["pd_groupby_parallel_test"] = "correct test"
 
+    ### next test
 
-def apply_func(x):
-    return x ** 2
-
-
-def test_pd_apply_parallel():
     """
     test for applying groupby in pandas
     """
@@ -105,4 +100,11 @@ def test_pd_apply_parallel():
     result = parallel.pd_apply_parallel(
         df=df, colsgroup=["A" "B"], fun_apply=apply_func, npool=4
     )
-    assert expected_df.equals(result)
+    if expected_df.equals(result):
+        dic["pd_apply_parallel_test"] = "correct test"
+
+    return dic
+
+
+if __name__ == "__main__":
+    print(test_parallel())
