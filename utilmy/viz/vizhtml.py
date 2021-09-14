@@ -52,7 +52,6 @@ def test_getdata(verbose=True):
     print(data.keys() )
     return data
 
-
 def test1():
     ####  Test Datatable
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
@@ -66,7 +65,6 @@ def test1():
     doc.print()
     doc.save(dir_out="testdata/test_viz_table.html")
     doc.open_browser()  # Open myfile.html
-
 
 def test2():
     """
@@ -83,7 +81,7 @@ def test2():
     doc.h2('Plot of weather data') 
     doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate=  'Date',date_format =  '%m/%d/%Y',
                       coly1   =  ['Temperature'],coly2   =  ["Rainfall"],
-                      # xlabel='Date',  y1_label=  "Temperature", y2_label=  "Rainfall", 
+                      # xlabel='Date',  y1label=  "Temperature", y2label=  "Rainfall", 
                      title = "Weather",cfg={}, mode='highcharts')
     doc.hr() 
     doc.h3('Weather data') 
@@ -105,7 +103,6 @@ def test2():
     doc.open_browser()
     html1 = doc.get_html()
     # html_show(html1)
-
 
 def test3(verbose=True):
     # pip install box-python    can use .key or ["mykey"]  for dict
@@ -175,7 +172,7 @@ def test4():
     doc.h2('Plot of weather data') 
     doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
                       coly1   =  ['Temperature'],coly2   =  ["Rainfall"],
-                      # xlabel=     'Date', y1_label=  "Temperature", y2_label=  "Rainfall", 
+                      # xlabel=     'Date', y1label=  "Temperature", y2label=  "Rainfall", 
                      title ="Weather",cfg={},mode='highcharts')
     doc.hr()
     # plot network
@@ -333,7 +330,6 @@ class htmlDoc(object):
         with open(self.dir_out, mode='w') as fp:
             fp.write(full)
 
-
     def open_browser(self):
         if os.name == 'nt':
             os.system(f'start chrome "file:///{self.dir_out}" ')
@@ -363,7 +359,6 @@ class htmlDoc(object):
               }}
               document.getElementById('{btn_id}').addEventListener('click', toggle);""".format(btn_id="btn"+custom_id,
                 div_id="div"+custom_id)
-
         self.add_js(js)
 
 
@@ -404,10 +399,11 @@ class htmlDoc(object):
 
 
     def plot_tseries(self, df:pd.DataFrame, coldate, coly1: list, coly2=None,
-                     title: str="", figsize: tuple=(14,7),  nsample: int= 10000,
-                     xlabel=None, y1_label=None,  y2_label=None,
-                     date_format: str='%m/%d/%Y',
-                     plot_type="",spacing=0.1,
+                     title: str="", xlabel=None, y1label=None,  y2label=None,                      
+                     figsize: tuple=(14,7),  plot_type="", spacing=0.1,
+
+                     date_format: str='%m/%d/%Y', nsample: int= 10000,
+                     
                      cfg: dict = {}, mode: str='matplot', save_img="",  **kw):
         """Create html time series chart.
         Args:
@@ -422,7 +418,7 @@ class htmlDoc(object):
             fig       = pd_plot_tseries_matplot(df, coldate, coly1=coly1, coly2=coly2,
                                                    date_format='%m/%d/%Y',
 
-                                                   title=title, xlabel=xlabel, y1_label=y1_label, y2_label=y2_label,
+                                                   title=title, xlabel=xlabel, y1label=y1label, y2label=y2label,
                                                    figsize=figsize,  spacing=spacing,
 
                                                    cfg=cfg, mode=mode, save_img=save_img, verbose=True )
@@ -432,7 +428,7 @@ class htmlDoc(object):
             html_code = pd_plot_tseries_highcharts(df, coldate, coly1=coly1, coly2=coly2,
                                                    date_format='%m/%d/%Y',
 
-                                                   title=title, xlabel=xlabel, y1_label=y1_label, y2_label=y2_label,
+                                                   title=title, xlabel=xlabel, y1label=y1label, y2label=y2label,
                                                    figsize=figsize,  spacing=spacing,
 
                                                    cfg=cfg, mode=mode, save_img=save_img, verbose=True  )
@@ -440,11 +436,11 @@ class htmlDoc(object):
 
 
     def plot_histogram(self, df:pd.DataFrame, col,
-                       xlabel: str=None,ylabel: str=None,
-                       title: str='', figsize: tuple=(14,7),
-                       colormap:str = 'RdYlBu', 
-                       nsample=10000,nbin=10,
-                       q5=0.005, q95=0.95,cfg: dict = {}, 
+                       title: str='', xlabel: str=None, ylabel: str=None,
+                       
+                       figsize: tuple=(14,7), colormap:str = 'RdYlBu', 
+                       nsample=10000,
+                       nbin=10, q5=0.005, q95=0.95,cfg: dict = {}, 
                        mode: str='matplot', save_img="",  **kw):
         """Create html histogram chart.
         Args:
@@ -472,10 +468,11 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-
     def plot_scatter(self, df:pd.DataFrame, colx, coly,
-                     title: str='', figsize: tuple=(14,7), nsample: int=10000,
-                     collabel=None, colclass1=None, colclass2=None, colclass3=None,
+                     collabel=None, colclass1=None, colclass2=None, colclass3=None,                     
+                     title: str='',                      
+                     figsize: tuple=(14,7), 
+                     nsample: int=10000,
                      cfg: dict = {}, mode: str='matplot', save_img='',  **kw):
         """Create html scatter chart.
         Args:
@@ -497,8 +494,7 @@ class htmlDoc(object):
             html_code = pd_plot_scatter_highcharts(df, colx= colx, coly=coly,
                                                    colclass1=colclass1, colclass2=colclass2, colclass3=colclass3,
                                                    nsample=nsample,
-                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=False
-                                                   )
+                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=False )
 
         self.html += "\n\n" + html_code
 
@@ -509,7 +505,7 @@ class htmlDoc(object):
       self.html += "\n\n" + html_code
 
 
-    def pd_plot_network(self, df:pd.DataFrame, cola: str='col_node1',colweight:str="weight",
+    def pd_plot_network(self, df:pd.DataFrame, cola:    str='col_node1', colweight:str="weight",
                         colb: str='col_node2', coledge: str='col_edge'):
         html_code = pd_plot_network(df, cola=cola, colb=colb,colweight=colweight, coledge=coledge)
         self.html += "\n\n" + html_code
@@ -910,7 +906,7 @@ def pd_plot_tseries_highcharts(df,
                               coldate:str=None, date_format:str='%m/%d/%Y',
                               coly1:list =[],     coly2:list =[],
                               figsize:tuple =  None, title:str=None,
-                              xlabel:str=None,  y1_label:str=None, y2_label:str=None,
+                              xlabel:str=None,  y1label:str=None, y2label:str=None,
                               cfg:dict={}, mode='d3', save_img="", **kw)-> str:
     '''
         function to return highchart json cord for time_series.
@@ -919,8 +915,8 @@ def pd_plot_tseries_highcharts(df,
         coly1: column name for y-axis one
         coly2: column name for y-axis second
         xlabel : label of x-axis
-        cols_y1_label : label for yaxis 1
-        cols_y2_label : label for yaxis 2
+        cols_y1label : label for yaxis 1
+        cols_y2label : label for yaxis 2
         date_format : %m for moth , %d for day and %Y for Year.
     '''
 
@@ -929,9 +925,9 @@ def pd_plot_tseries_highcharts(df,
     cc = Box(cfg)
     cc.coldate      = 'date'  if coldate is None else coldate
     cc.xlabel      = coldate if xlabel is None else xlabel
-    cc.y1_label   = "_".join(coly1)      if y1_label is None else y1_label
-    cc.y2_label   = "_".join(coly2)      if y2_label is None else y2_label
-    cc.title        = cc.get('title',    str(y1_label) + " vs " + str(coldate) ) if title is None else title
+    cc.y1label   = "_".join(coly1)      if y1label is None else y1label
+    cc.y2label   = "_".join(coly2)      if y2label is None else y2label
+    cc.title        = cc.get('title',    str(y1label) + " vs " + str(coldate) ) if title is None else title
     cc.figsize      = cc.get('figsize', (25, 15) )    if figsize is None else figsize
     cc.subtitle     = cc.get('subtitle', '')
     cc.coly1    = coly1
@@ -947,11 +943,11 @@ def pd_plot_tseries_highcharts(df,
         'subtitle': {  'text': cc.subtitle },
         'xAxis': [{'type': 'datetime', 'title': { 'text': cc.xlabel } }],
         'yAxis': [{'labels': {'style': {  'color': 'Highcharts.getOptions().colors[2]' } }, 
-                   'title' : {'text': cc.y2_label,
+                   'title' : {'text': cc.y2label,
                    'style' : {   'color': 'Highcharts.getOptions().colors[2]' } }, 'opposite': True }, 
         {
             'gridLineWidth': 0,
-            'title':  {'text': cc.y1_label, 'style': { 'color': 'Highcharts.getOptions().colors[0]'}},
+            'title':  {'text': cc.y1label, 'style': { 'color': 'Highcharts.getOptions().colors[0]'}},
             'labels': {'style': { 'color': 'Highcharts.getOptions().colors[0]'} }
 
         }],
@@ -995,7 +991,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
         binsNumber: Number of bin in bistogram.
         binWidth : width of each bin in histogram
         title : title of histogram
-        cols_y2_label : label for yaxis 2
+        cols_y2label : label for yaxis 2
         date_format : %m for moth , %d for day and %Y for Year.
 
         df        = data['housing.csv']
