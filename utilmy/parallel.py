@@ -56,7 +56,7 @@ def test_parallel():
     ### pd_apply_parallel2
     df = pd.DataFrame({"A": [0, 1, 2, 3, 4],   "B": [100, 200, 300, 400, 500],})
     expected_df = pd.DataFrame({"A": [0, 1, 4, 9, 16], "B": [10000, 40000, 90000, 160000, 250000]})
-    result = pd_apply_parallel2(df=df, colsgroup=["A" "B"], fun_apply=apply_func, npool=4)
+    result = pd_groupby_parallel2(df=df, colsgroup=["A" "B"], fun_apply=apply_func, npool=4)
     print(expected_df.equals(result))
 
 
@@ -73,7 +73,7 @@ def pd_groupby_parallel(groupby_df,func=None,npool: int = 5,**kw,):
     """
     import pandas as pd
 
-    num_cpus = multiprocessing.cpu_count() - 1 if npool == -1 else n_cpu
+    num_cpus = multiprocessing.cpu_count() - 1 if npool == -1 else npool
     with multiprocessing.Pool(num_cpus) as pool:
         queue  = multiprocessing.Manager().Queue()
         result = pool.starmap_async(func, [(name, group) for name, group in groupby_df])
@@ -87,7 +87,7 @@ def pd_groupby_parallel(groupby_df,func=None,npool: int = 5,**kw,):
 
 
 
-def pd_groupby_parallel2(df,colsgroup=None,fun_apply=None,npool=5,start_delay=0.01,):
+def pd_groupby_parallel2(df,colsgroup=None,fun_apply=None,npool=5,start_delay=0.01, verbose=0):
     """Pandas parallel apply"""
     import pandas as pd, numpy as np, time, gc
 
@@ -103,7 +103,7 @@ def pd_groupby_parallel2(df,colsgroup=None,fun_apply=None,npool=5,start_delay=0.
     #### Pool execute #################################################
     import multiprocessing as mp
     # pool     = multiprocessing.Pool(processes=npool)
-    pool       = mp.pool.ThreadPool(processes=n_pool)
+    pool       = mp.pool.ThreadPool(processes=npool)
     job_list   = []
     input_list = [[] * npool]
 
@@ -114,7 +114,7 @@ def pd_groupby_parallel2(df,colsgroup=None,fun_apply=None,npool=5,start_delay=0.
         time.sleep(start_delay)
         log("starts", i)
         job_list.append(pool.apply_async(f2, (inputi,)))
-        if verbose:
+        if verbose>0:
             log(i, dfi.shape)
 
     ##### Aggregate results ##########################################
@@ -191,7 +191,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     import multiprocessing
 
     pool = multiprocessing.Pool(processes=npool)
-    # pool   = mp.pool.ThreadPool(processes=n_pool)
+    # pool   = mp.pool.ThreadPool(processes=npool)
     job_list = []
     for i in range(npool):
         time.sleep(start_delay)
@@ -212,10 +212,6 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     return res_list
 
 
-def log_result(result):
-    # This is called whenever foo_pool(i) returns a result.
-    # result_list is modified only by the main process, not the pool workers.
-    result_list.append(result)
 
 
 def multithread_run(fun_async, input_list: list, npool=2, start_delay=0.1, verbose=True, **kw):
@@ -225,10 +221,18 @@ def multithread_run(fun_async, input_list: list, npool=2, start_delay=0.1, verbo
             hdfs.upload(x[0], x[1])
     """
     import time
+
+
+    result_list = []
+    def log_result(result):
+        # This is called whenever foo_pool(i) returns a result.
+        # result_list is modified only by the main process, not the pool workers.
+        result_list.append(result)
+
     #### Input xi #######################################
     xi_list = [[] for t in range(npool)]
     for i, xi in enumerate(input_list):
-        jj = i % n_pool
+        jj = i % npool
         xi_list[jj].append(tuple(xi))
     if verbose:
         for j in range(len(xi_list)):
@@ -240,7 +244,7 @@ def multithread_run(fun_async, input_list: list, npool=2, start_delay=0.1, verbo
     # pool     = multiprocessing.Pool(processes=3)
     pool = mp.pool.ThreadPool(processes=npool)
     job_list = []
-    for i in range(n_pool):
+    for i in range(npool):
         time.sleep(start_delay)
         log("starts", i)
         job_list.append(pool.apply_async(fun_async, (xi_list[i],), callback=log_result))
@@ -248,7 +252,7 @@ def multithread_run(fun_async, input_list: list, npool=2, start_delay=0.1, verbo
             log(i, xi_list[i])
 
     res_list = []
-    for i in range(n_pool):
+    for i in range(npool):
         if i >= len(job_list):
             break
         res_list.append(job_list[i].get())
