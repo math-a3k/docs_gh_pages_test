@@ -612,7 +612,7 @@ def pd_plot_scatter_get_data(df0:pd.DataFrame,colx: str=None, coly: str=None, co
 
 def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, collabel: str=None,
                             colclass1: str=None, colclass2: str=None,
-                            cfg: dict = {}, mode='d3', save_path: str='', verbose=True  **kw)-> str:
+                            cfg: dict = {}, mode='d3', save_path: str='', verbose=True,  **kw)-> str:
     
     cc           = Box(cfg)
     cc.figsize   = cc.get('figsize', (25, 15))  # Dict type default values
