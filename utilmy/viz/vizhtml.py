@@ -611,7 +611,8 @@ def pd_plot_scatter_get_data(df0:pd.DataFrame,colx: str=None, coly: str=None, co
 
 
 def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, collabel: str=None,
-                            colclass1: str=None, colclass2: str=None, cfg: dict = {}, mode='d3', save_path: str='',  **kw)-> str:
+                            colclass1: str=None, colclass2: str=None,
+                            cfg: dict = {}, mode='d3', save_path: str='', verbose=True  **kw)-> str:
     
     cc           = Box(cfg)
     cc.figsize   = cc.get('figsize', (25, 15))  # Dict type default values
@@ -683,7 +684,7 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
 
 
 def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,colormap:str='RdYlBu', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
-                              save_img: str="",xlabel: str=None,ylabel: str=None, **kw):
+                              save_img: str="",xlabel: str=None,ylabel: str=None, verbose=True, **kw):
     """
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -726,7 +727,7 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,colormap:str='RdYlBu
 
 
 def pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str=None, coly1: list = [], coly2: list = [],
-                            figsize: tuple =(8, 4), spacing=0.1, **kw):
+                            figsize: tuple =(8, 4), spacing=0.1, verbose=True, **kw):
     """
     """
     from pandas import plotting
@@ -911,7 +912,7 @@ def pd_plot_tseries_highcharts(df,
                               coly1:list =[],     coly2:list =[],
                               figsize:tuple =  None, title:str=None,
                               xlabel:str=None,  y1label:str=None, y2label:str=None,
-                              cfg:dict={}, mode='d3', save_img="", **kw)-> str:
+                              cfg:dict={}, mode='d3', save_img="", verbose=True, **kw)-> str:
     '''
         function to return highchart json cord for time_series.
         input parameter
@@ -984,7 +985,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
                               binsNumber=None, binWidth=None,
                               title:str="", xaxis_label:str= "x-axis", yaxis_label:str="y-axis",
                               cfg:dict={}, mode='d3', save_img="",
-                              show=False, **kw):
+                              show=False, verbose=True, **kw):
 
     ''' function to return highchart json code for histogram.
         input parameter
