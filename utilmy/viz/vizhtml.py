@@ -267,12 +267,15 @@ def help():
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_page"):
+    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_page",
+                 verbose=True, **kw):
         """
            Generate HTML page to display graph/Table.
            Combine pages together.
         """
         import mpld3
+
+        self.verbose     = verbose
         self.fig_to_html = mpld3.fig_to_html
         cfg          = {} if cfg is None else cfg
         self.cc      = Box(cfg)  # Config dict
@@ -421,7 +424,7 @@ class htmlDoc(object):
                                                    title=title, xlabel=xlabel, y1label=y1label, y2label=y2label,
                                                    figsize=figsize,  spacing=spacing,
 
-                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=True )
+                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=self.verbose )
             html_code = mpld3.fig_to_html(fig)
 
         elif mode == 'highcharts':
@@ -431,7 +434,7 @@ class htmlDoc(object):
                                                    title=title, xlabel=xlabel, y1label=y1label, y2label=y2label,
                                                    figsize=figsize,  spacing=spacing,
 
-                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=True  )
+                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=self.verbose  )
         self.html += "\n\n" + html_code
 
 
@@ -455,7 +458,7 @@ class htmlDoc(object):
                                                   title=title, xlabel= xlabel, ylabel=ylabel,
                                                   colormap=colormap, nsample=nsample,
                                                   nbin=nbin, q5=q5, q95=q95,
-                                                  cfg=cfg, mode=mode, save_img=save_img, verbose=False  )
+                                                  cfg=cfg, mode=mode, save_img=save_img, verbose=self.verbose  )
             html_code = self.fig_to_html(fig)
 
         elif mode == 'highcharts':
@@ -464,7 +467,7 @@ class htmlDoc(object):
                                                      title=title, xlabel=xlabel, ylabel=ylabel,
                                                      colormap=colormap, nsample=nsample,
 
-                                                     cfg=cfg,mode=mode,save_img=save_img, verbose=False  )
+                                                     cfg=cfg,mode=mode,save_img=save_img, verbose=self.verbose  )
         self.html += "\n\n" + html_code
 
 
@@ -473,7 +476,7 @@ class htmlDoc(object):
                      title: str='',                      
                      figsize: tuple=(14,7), 
                      nsample: int=10000,
-                     cfg: dict = {}, mode: str='matplot', save_img='',  **kw):
+                     cfg: dict = {}, mode: str='matplot', save_img='', **kw):
         """Create html scatter chart.
         Args:
             df:         pd Dataframe
@@ -488,13 +491,14 @@ class htmlDoc(object):
                                                 collabel=collabel,
                                                 colclass1=colclass1, colclass2=colclass2, colclass3=colclass3,
                                                 nsample=nsample,
-                                                cfg=cfg, mode=mode, save_img=save_img, verbose=False )
+                                                cfg=cfg, mode=mode, save_img=save_img, verbose= self.verbose )
 
         elif mode == 'highcharts':
             html_code = pd_plot_scatter_highcharts(df, colx= colx, coly=coly,
+                                                   collabel=collabel,
                                                    colclass1=colclass1, colclass2=colclass2, colclass3=colclass3,
                                                    nsample=nsample,
-                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=False )
+                                                   cfg=cfg, mode=mode, save_img=save_img, verbose=self.verbose )
 
         self.html += "\n\n" + html_code
 
