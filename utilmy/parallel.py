@@ -218,9 +218,7 @@ def log_result(result):
     result_list.append(result)
 
 
-def multithread_run(
-    fun_async, input_list: list, npool=2, start_delay=0.1, verbose=True, **kw
-):
+def multithread_run(fun_async, input_list: list, npool=2, start_delay=0.1, verbose=True, **kw):
     """input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
       for x in xlist :
