@@ -421,7 +421,7 @@ class htmlDoc(object):
         if mode == 'matplot':
             fig       = pd_plot_tseries_matplot(df, coldate, col_y1=col_y1, col_y2=col_y2,
                                                    figsize=figsize, title=title,
-                                                   xlabel=xlabel, col_y1_label=col_y1_label, col_y2_label=col_y2_label,
+                                                   xlabel=xlabel, col_y1_label=col_y1_clabel, col_y2_label=col_y2_label,
                                                    cfg=cfg, mode=mode, save_img=save_img,
                                                    spacing=spacing
                                                   )
@@ -976,7 +976,7 @@ def pd_plot_tseries_highcharts(df,coldate:str=None, date_format:str='%m/%d/%Y',
 
 def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
                               binsNumber=None, binWidth=None,
-                              title:str="", xlabel:str= "x-axis", yaxis_label:str="y-axis",
+                              title:str="", xlabel:str= "x-axis", ylabel:str="y-axis",
                               cfg:dict={}, mode='d3', save_img="",
                               show=False, **kw):
 
@@ -985,7 +985,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
         df : panda dataframe on which you want to apply histogram
         colname : column name from dataframe in which histogram will apply
         xlabel: label for x-axis
-        yaxis_label: label for y-axis
+        ylabel: label for y-axis
         binsNumber: Number of bin in bistogram.
         binWidth : width of each bin in histogram
         title : title of histogram
@@ -997,7 +997,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
     cc = Box(cfg)
     cc.title        = cc.get('title',    "My Title" ) if title is None else title
     cc.xlabel  = xlabel
-    cc.yaxis_label  = yaxis_label
+    cc.ylabel  = ylabel
 
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
     data         = df[colname].values.tolist()
@@ -1020,7 +1020,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
             }]"""
 
     yAxis = """[{
-                title: { text:'""" + cc.yaxis_label + """'}, opposite: false
+                title: { text:'""" + cc.ylabel + """'}, opposite: false
             }] """
 
     append_series1 = """[{
