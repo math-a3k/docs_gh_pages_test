@@ -38,7 +38,6 @@ def test_parallel():
     ##### 2nd test for multithread run list
 
     """testing the script for checking the list"""
-<<<<<<< HEAD
     li_of_tuples = [
         ["x", "y", "z"],
         ["y", "z", "p"],
@@ -71,13 +70,12 @@ def test_parallel():
     test for applying groupby in pandas
     """
     import pandas as pd
-=======
+
     li_of_tuples = [["x", "y", "z"],["y", "z", "p"]]
     print(multithread_run_list(function1=(fun_async, (li_of_tuples[0],)),function2=(fun_async, (li_of_tuples[1],)))== [("function1", ["x", "y", "z"]), ("function2", ["y", "z", "p"])])
 
-    #### testing script for multiproc_run
->>>>>>> ecdbd4f1de44d21252c075c9262384c41e954a9d
 
+    #### testing script for multiproc_run
     li_of_tuples = [("x", "y", "z"),("y", "z", "p"),("yw", "zs", "psd"),("yd", "zf", "pf"),]
     print(multiproc_run(fun_async, li_of_tuples, n_pool=2, start_delay=0.1, verbose=True)== [["xyz"], ["yzp"], ["ywzspsd"], ["ydzfpf"], []])
 
@@ -85,18 +83,10 @@ def test_parallel():
     df = pd.DataFrame(data={'result':[5, 8, 1, 7, 0, 3, 2, 9, 4, 6], 'user_id':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9], 'value':[27, 14, 26, 19, 28, 9, 11, 1, 26, 18],'data_chunk':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9]})
     expected_df = df.copy()
     expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
-<<<<<<< HEAD
-    result = pd_groupby_parallel(
-        df.groupby("user_id"), func=group_function, int=1
-    )
-    if expected_df.equals(result):
-        dic["pd_groupby_parallel_test"] = "correct test"
 
-    ### next test
-=======
+
     result = pd_groupby_parallel(df.groupby("user_id"), func=group_function, int=1)
     print(expected_df.equals(result))
->>>>>>> ecdbd4f1de44d21252c075c9262384c41e954a9d
 
     # groupby parallel2
     result = pd_groupby_parallel(df.groupby("user_id"), func=group_function, int=1)
@@ -107,6 +97,7 @@ def test_parallel():
     expected_df = pd.DataFrame({"A": [0, 1, 4, 9, 16], "B": [10000, 40000, 90000, 160000, 250000]})
     result = pd_apply_parallel(df=df, colsgroup=["A" "B"], fun_apply=apply_func, npool=4)
     print(expected_df.equals(result))
+
 
 
 def pd_groupby_parallel(groupby_df,func=None,n_cpu: int = 1,**kw,):
