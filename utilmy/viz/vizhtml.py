@@ -705,7 +705,7 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,colormap:str='RdYlBu
     fig = plt.figure()
 
     if nsample < 0:
-        dfi.hist(bins=2)
+        n, bins, patches = plt.hist(dfi, bins=np.arange(q0, q1,  (q1 - q0) / nbin))
         # dfi.hist(bins=np.arange(q0, q1,  (q1 - q0) / nbin))
     else:
         n, bins, patches = plt.hist(dfi.sample(n=nsample, replace=True), bins=np.arange(q0, q1,  (q1 - q0) / nbin))
