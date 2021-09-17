@@ -71,10 +71,17 @@ jobs:
       run: |
           mkdir -p    /home/runner/work/log_tmp/
           # pip install -e .
-          chmod -R 777 . &&  python  test.py
+          chmod -R 777 . &&  python test.py   test_all
           # chmod -R 777 . && cd utilmy && python  test.py  test1
 
 
+    ################################################################
+    - name: test_viz_vizhtml  
+      run:  python test.py   test_viz_vizhtml
+
+
+
+          
     ########  Runs All test       
     - name: log_gitcommit
       run: |
