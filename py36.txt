@@ -23,6 +23,7 @@ python-highcharts
 mpld3 
 pandas-highcharts
 pretty-html-table
+networkx
 #####################
 
 ########################################################
