@@ -268,13 +268,31 @@ def test_text_pdcluster():
    
 def test_viz_vizhtml():
    from utilmy.viz import vizhtml as vi
+   import re
    log("Visualization ")
    log(" from utilmy.viz import vizhtml as vi     ")
    vi.test1()
-   #vi.test2()
-   #vi.test3()
-   #test_scatter_and_histogram_matplot()
-   
+   vi.test2()
+   vi.test3()
+   vi.test4()
+   vi.test_scatter_and_histogram_matplot()
+   vi.test_pd_plot_network()
+   vi.test_cssname()
+   doc = vi.htmlDoc(title='test', cfg={},css_name="border" )
+   doc.h1('testing h1','text-align:center;')
+   doc.p('testing paragraph')
+   doc.hr()
+   doc.br()
+   doc.hidden('Testing hidden')
+   doc.tag('<marquee>Testing tag with marquee tag</marquee>')
+   html_code = doc.get_html()
+   def extract_text(tag: str,content: str):
+            reg_str = "<" + tag + ".*>\s*((?:.|\n)*?)</" + tag + ">"
+            extracted = re.findall(reg_str, content)[0]
+            return extracted
+   assert extract_text('h1',html_code) == 'testing h1'
+   assert extract_text('p',html_code) == 'testing paragraph'
+   assert extract_text('div',html_code) == 'Testing hidden'
    
    
    
