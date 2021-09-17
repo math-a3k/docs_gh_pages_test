@@ -7,13 +7,13 @@ rebound-cli  ## stackoverflow
 pysnooper   ### Debugger show lines of code step by step
 snoop
 scipy
-######################
+########################################################
 #### utilmy.text
 datasketch  ### lSH
 rapidfuzz
 editdistance
 
-######################
+########################################################
 #### utilmy.viz.html
 tqdm
 python-box
@@ -25,6 +25,6 @@ pandas-highcharts
 pretty-html-table
 #####################
 
-######################
+########################################################
 #### utilmy.docs
 stdlib_list
