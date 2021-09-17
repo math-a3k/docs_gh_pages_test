@@ -143,26 +143,22 @@ def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
     
     
 
-def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, 
-                 fun_apply=None, #### apply function for each sub   
+                 fun_apply=None,npool=1, max_file=-1, #### apply function for each sub   
                  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
     :return:
     """
-    import glob, gc,  pandas as pd, os
+    import glob, gc,  pandas as pd, os, time
+    n_pool = npool ## alias
     def log(*s, **kw):
       print(*s, flush=True, **kw)
     readers = {
           ".pkl"     : pd.read_pickle,
           ".parquet" : pd.read_parquet,
-          ".tsv"     : pd.read_csv,
-          ".csv"     : pd.read_csv,
-          ".txt"     : pd.read_csv,
-          ".zip"     : pd.read_csv,
-          ".gzip"    : pd.read_csv,
-          ".gz"      : pd.read_csv,
+          ".tsv"     : pd.read_csv, ".csv"     : pd.read_csv, ".txt"     : pd.read_csv, ".zip"     : pd.read_csv, ".gzip"    : pd.read_csv, ".gz"      : pd.read_csv,
           # ".orc"     : pd.read_orc,
     }
 
@@ -175,6 +171,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
       else :          file_list.append( pi )
 
     file_list = sorted(list(set(file_list)))
+    file_list = file_list if max_file == -1 else file_list[:file_max]
     n_file    = len(file_list)
     if verbose: log(file_list)
 
@@ -182,7 +179,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
     def fun_async(filei):
         dfall = pd.DataFrame()
         for filei in file_list :
-
+            if verbose: log(filei)
             ext  = os.path.splitext(filei)[1]
             if ext == None or ext == '': ext ='.parquet'
 
@@ -213,15 +210,13 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         time.sleep(6)    
         
     #### Pool execute ###################################
-    from multiprocessing.pool import ThreadPool
+    import multiprocessing.pool as ThreadPool
     # pool     = multiprocessing.Pool(processes=3)  
     pool     = ThreadPool(processes=n_pool)
     job_list = []
     for i in range(n_pool):
-         time.sleep(start_delay)
          if verbose : log('starts', i)   
          job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
-         if verbose : log(i, xi_list[i] )
 
     dfall  = pd.DataFrame()
     for i in range(n_pool):
@@ -233,8 +228,12 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         log(i, 'thread finished')
 
     pool.terminate() ; pool.join()  ; pool = None
-    log( 'shape', df.shape )
+    log( 'shape', dfall.shape )
     return dfall 
+
+
+
+
 
     
     
