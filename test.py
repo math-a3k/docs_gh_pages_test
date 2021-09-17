@@ -143,7 +143,6 @@ def test_utilmy_session():
 def test_docs_cli():
     """
       from utilmy.docs.generate_doc import run_markdown, run_table
-
     """
     cmd = "doc-gen  --repo_dir utilmy/      --doc_dir docs/"
     os.system(cmd)
@@ -277,11 +276,39 @@ def test_viz_vizhtml():
    vi.test4()
    vi.test_scatter_and_histogram_matplot()
    vi.test_pd_plot_network()
-   vi.test_cssname()  
+   vi.test_cssname()
+   doc = vi.htmlDoc(title='test', cfg={},css_name="border" )
+   doc.h1('testing h1','text-align:center;')
+   doc.p('testing paragraph')
+   doc.hr()
+   doc.br()
+   doc.hidden('Testing hidden')
+   doc.tag('<marquee>Testing tag with marquee tag</marquee>')
+   html_code = doc.get_html()
+   def extract_text(tag: str,content: str):
+            reg_str = "<" + tag + ".*>\s*((?:.|\n)*?)</" + tag + ">"
+            extracted = re.findall(reg_str, content)[0]
+            return extracted
+   assert extract_text('h1',html_code) == 'testing h1'
+   assert extract_text('p',html_code) == 'testing paragraph'
+   assert extract_text('div',html_code) == 'Testing hidden'
    
    
+def test_all():
+    test_utilmy_pd_os_session()
+    test_decorators_os()
+    # test_tabular_test()
+    test_text_similarity()
+    test_docs_cli()
+
 #########################################################################################   
 if __name__ == "__main__":
+    import fire
+    fire.Fire()    
+    #### python test.py   test_all
+    #### python test.py   test_viz_vizhtml      
+      
+"""   
     test_utilmy_pd_os_session()
     test_decorators_os()
     # test_tabular_test()
@@ -289,8 +316,4 @@ if __name__ == "__main__":
     test_docs_cli()
       
     test_viz_vizhtml()   
-
-
-
-
-
+"""
