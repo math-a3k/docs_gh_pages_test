@@ -24,6 +24,7 @@ mpld3
 pandas-highcharts
 pretty-html-table
 networkx
+pyvis
 #####################
 
 ########################################################
