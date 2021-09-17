@@ -143,7 +143,7 @@ def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
     
     
 
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, 
                  fun_apply=None,npool=1, max_file=-1, #### apply function for each sub   
                  **kw):
