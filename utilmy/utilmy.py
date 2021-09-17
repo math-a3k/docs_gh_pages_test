@@ -213,9 +213,9 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         time.sleep(6)    
         
     #### Pool execute ###################################
-    import multiprocessing as mp
+    from multiprocessing.pool import ThreadPool
     # pool     = multiprocessing.Pool(processes=3)  
-    pool     = mp.pool.ThreadPool(processes=n_pool)
+    pool     = ThreadPool(processes=n_pool)
     job_list = []
     for i in range(n_pool):
          time.sleep(start_delay)
