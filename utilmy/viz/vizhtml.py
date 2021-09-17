@@ -52,7 +52,7 @@ def test_getdata(verbose=True):
     print(data.keys() )
     return data
 
-def test1():
+def test1(verbose=False):
     ####  Test Datatable
     doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
     # check add css
@@ -62,17 +62,17 @@ def test1():
     df = test_getdata()['titanic.csv']
     doc.h1(" Table test ")
     doc.table(df, use_datatable=True, table_id="test", custom_css_class='intro')
-    doc.print()
+    if verbose: doc.print()
     doc.save(dir_out="testdata/test_viz_table.html")
     doc.open_browser()  # Open myfile.html
 
-def test2():
+def test2(verbose=False):
     """
       # pip install --upgrade utilmy
       from util.viz import vizhtml as vi
       vi.test2()
     """
-    data = test_getdata()
+    data = test_getdata(verbose=False)
     doc = htmlDoc(title='Weather report', dir_out="", cfg={} )
     doc.h1(' Weather report')
     doc.hr()
@@ -104,9 +104,9 @@ def test2():
     html1 = doc.get_html()
     # html_show(html1)
 
-def test3(verbose=True):
+def test3(verbose=False):
     # pip install box-python    can use .key or ["mykey"]  for dict
-    data = test_getdata()
+    data = test_getdata(verbose=False)
     df2  = data['sales.csv']
     from box import Box
     cfg = Box({})
@@ -141,8 +141,8 @@ def test3(verbose=True):
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
-def test4():
-    data = test_getdata()
+def test4(verbose=False):
+    data = test_getdata(verbose=False)
     from box import Box
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
@@ -184,8 +184,8 @@ def test4():
     doc.open_browser()
     html1 = doc.get_html()
     
-def test_scatter_and_histogram_matplot():
-  data = test_getdata()
+def test_scatter_and_histogram_matplot(verbose=False):
+  data = test_getdata(verbose=False)
   cfg = Box({})
   cfg.tseries = {"title": 'ok'}
   cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
@@ -206,15 +206,14 @@ def test_scatter_and_histogram_matplot():
   doc.save(dir_out="myfile.html")
   doc.open_browser()  # Open myfile.html-
 
-def test_pd_plot_network():
+def test_pd_plot_network(verbose=False):
   df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
   html_code = pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
-  print(html_code)
+  if verbose: print(html_code)
 
-
-def test_cssname(verbose=True,css_name="A4_size"):
+def test_cssname(verbose=False,css_name="A4_size"):
     # pip install box-python    can use .key or ["mykey"]  for dict
-    data = test_getdata()
+    data = test_getdata(verbose=False)
     from box import Box
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
