@@ -295,10 +295,21 @@ def test_viz_vizhtml():
    assert extract_text('div',html_code) == 'Testing hidden'
    
    
-   
-   
+def test_all():
+    test_utilmy_pd_os_session()
+    test_decorators_os()
+    # test_tabular_test()
+    test_text_similarity()
+    test_docs_cli()
+
 #########################################################################################   
 if __name__ == "__main__":
+    import fire
+    fire.Fire()    
+    #### python test.py   test_all
+    #### python test.py   test_viz_vizhtml      
+      
+"""   
     test_utilmy_pd_os_session()
     test_decorators_os()
     # test_tabular_test()
@@ -306,7 +317,7 @@ if __name__ == "__main__":
     test_docs_cli()
       
     test_viz_vizhtml()   
-
+"""
 
 
 
