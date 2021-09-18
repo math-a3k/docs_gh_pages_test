@@ -284,7 +284,7 @@ def test_parallel():
    from utilmy import parallel as par
    log("from utilmy import parallel as par ")
    par.test1()
-   par.test2()
+   # par.test2()
    
 
 

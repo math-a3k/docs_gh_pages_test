@@ -76,31 +76,33 @@ def test2():
         return x
 
     def fun_async(xlist):
+        s = 0
         for x in xlist:
-            x[0]+x[1]
+            s = x[0]+x[1]
+        return s
 
     def test_print(x):
         print(x)
 
     freeze_support()
     log("pd_groupby_parallel")
-    s   = pickle.dumps(addition)
-    f   = pickle.loads(s)
+    #s   = pickle.dumps(addition)
+    #f   = pickle.loads(s)
     df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
-    res = pd_groupby_parallel(df.groupby(df.index), f)
+    res = pd_groupby_parallel(df.groupby(df.index), addition )
     log(res)
 
     log("pd_groupby_parallel2")
-    s   = pickle.dumps(addition1)
-    f   = pickle.loads(s)
+    #s   = pickle.dumps(addition1)
+    # f   = pickle.loads(s)
     df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
 
-    res = pd_groupby_parallel2(df,['A'], f)
+    res = pd_groupby_parallel2(df,['A'], addition )
     log(res)
 
 
     log("pd_apply_parallel")
-    res = pd_apply_parallel(df,['A'], f)
+    res = pd_apply_parallel(df,['A'], addition)
     log(res)
 
 
