@@ -126,7 +126,7 @@ def test2():
 def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, 
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, 
                  fun_apply=None,npool=1, max_file=-1, #### apply function for each sub
-                ,verbose=False,   
+                 verbose=False,
                  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
@@ -448,9 +448,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 
-    pool.terminate();
-    pool.join();
-    pool = None
+    pool.terminate(); pool.join(); pool = None
     log('n_processed', len(res_list))
     return res_list
 
@@ -490,9 +488,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 
-    pool.terminate();
-    pool.join();
-    pool = None
+    pool.terminate(); pool.join(); pool = None
     log('n_processed', len(res_list))
     return res_list
 
