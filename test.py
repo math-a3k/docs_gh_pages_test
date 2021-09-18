@@ -279,6 +279,15 @@ def test_viz_vizhtml():
    vi.test_cssname()
    
    
+
+def test_parallel():
+   from utilmy import parallel as par
+   log("from utilmy import parallel as par ")
+   par.test1()
+   par.test2()
+   
+
+
 def test_all():
     test_utilmy_pd_os_session()
     test_decorators_os()

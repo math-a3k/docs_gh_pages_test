@@ -80,6 +80,9 @@ jobs:
       run:  python test.py   test_viz_vizhtml
 
 
+    - name: test_parallel  
+      run:  python test.py   test_parallel
+
 
           
     ########  Runs All test       
