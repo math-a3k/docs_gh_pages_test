@@ -72,7 +72,7 @@ def test2(verbose=False):
       from util.viz import vizhtml as vi
       vi.test2()
     """
-    data = test_getdata(verbose=False)
+    data = test_getdata(verbose=verbose)
     doc = htmlDoc(title='Weather report', dir_out="", cfg={} )
     doc.h1(' Weather report')
     doc.hr()
@@ -106,7 +106,7 @@ def test2(verbose=False):
 
 def test3(verbose=False):
     # pip install box-python    can use .key or ["mykey"]  for dict
-    data = test_getdata(verbose=False)
+    data = test_getdata(verbose=verbose)
     df2  = data['sales.csv']
     from box import Box
     cfg = Box({})
@@ -142,7 +142,7 @@ def test3(verbose=False):
     doc.open_browser()  # Open myfile.html
 
 def test4(verbose=False):
-    data = test_getdata(verbose=False)
+    data = test_getdata(verbose=verbose)
     from box import Box
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
@@ -185,7 +185,7 @@ def test4(verbose=False):
     html1 = doc.get_html()
     
 def test_scatter_and_histogram_matplot(verbose=False):
-  data = test_getdata(verbose=False)
+  data = test_getdata(verbose=verbose)
   cfg = Box({})
   cfg.tseries = {"title": 'ok'}
   cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
@@ -206,14 +206,14 @@ def test_scatter_and_histogram_matplot(verbose=False):
   doc.save(dir_out="myfile.html")
   doc.open_browser()  # Open myfile.html-
 
-def test_pd_plot_network(verbose=False):
+def test_pd_plot_network(verbose=verbose):
   df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
   html_code = pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
   if verbose: print(html_code)
 
-def test_cssname(verbose=False,css_name="A4_size"):
+def test_cssname(verbose=verbose,css_name="A4_size"):
     # pip install box-python    can use .key or ["mykey"]  for dict
-    data = test_getdata(verbose=False)
+    data = test_getdata(verbose=verbose)
     from box import Box
     cfg = Box({})
     cfg.tseries = {"title": 'ok'}
