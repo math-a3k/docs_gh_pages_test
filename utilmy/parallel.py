@@ -34,8 +34,6 @@ def test1():
             list.append(stdr)
         return list
 
-
-
     def apply_func(x):
        return x ** 2
 
@@ -125,9 +123,10 @@ def test2():
 
 
 ########################################################################################################
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, 
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, 
-                 fun_apply=None,npool=1, max_file=-1, #### apply function for each sub   
+                 fun_apply=None,npool=1, max_file=-1, #### apply function for each sub
+                ,verbose=False,   
                  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
@@ -330,56 +329,53 @@ def pd_groupby_parallel(groupby_df, func=None,
     return pd.concat(got)
 
 
-def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, start_delay=0.01,verbose=False ):
-    """ Pandas parallel apply
+
+def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, verbose=False, **kw ):
+    """ Pandas parallel groupby apply
 
     """
     import pandas as pd, numpy as np, time, gc
 
-    dfg = df.groupby(colsgroup)  ### Need to get the splits
-
     def f2(df_list):
         dfiall = None
         for dfi in df_list:
-            dfi = dfi.apply(fun_apply)
+            dfi    = dfi.apply(fun_apply)
             dfiall = pd.concat((dfiall, dfi)) if dfiall is None else dfi
-            del dfi;
-            gc.collect()
+            del dfi;  gc.collect()
         return dfiall
 
-        #### Pool execute #################################################
-
+    #### Pool execute #################################################
     import multiprocessing as mp
     # pool     = multiprocessing.Pool(processes=npool)
     pool = mp.pool.ThreadPool(processes=npool)
-    job_list = []
 
+    
+    ### Need to get the groupby splits
+    dfg        = df.groupby(colsgroup)  
     input_list = [[]*1]*npool
     for i, dfi in enumerate(dfg):
         input_list[i % npool].append(dfg)
 
-    for i, inputi in enumerate(input_list):
-        time.sleep(start_delay)
-        log('starts', i)
-        job_list.append(pool.apply_async(f2, (inputi,)))
-        if verbose: log(i, dfi.shape)
 
-        ##### Aggregate results ##########################################
+    job_list = []
+    for i, inputi_list in enumerate(input_list):
+        if verbose: log(i, len(inputi_list))
+        job_list.append(pool.apply_async(f2, (inputi_list,)))
+
+    ##### Aggregate results ##########################################
     dfall = None
-    for i in range(npool):
-        if i >= len(job_list): break
-        dfi = job_list[i].get()
+    for i in range(len(job_list)):
+        dfi   = job_list[i].get()
         dfall = pd.concat((dfall, dfi)) if dfall is not None else dfi
-        del dfi
-        log(i, 'job finished')
+        del dfi ; gc.collect()
+        if verbose : log(i, 'job finished')
 
-    pool.terminate();
-    pool.join();
-    pool = None
+    pool.terminate(); pool.join(); pool = None
     return dfall
 
 
-def pd_apply_parallel(df, colsgroup=None, fun_apply=None, npool=5, start_delay=0.01,verbose=True ):
+
+def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
     """ Pandas parallel apply
 
     """
@@ -397,12 +393,10 @@ def pd_apply_parallel(df, colsgroup=None, fun_apply=None, npool=5, start_delay=0
     job_list = []
 
     for i in range(npool):
-        time.sleep(start_delay)
-        log('starts', i)
-        i2 = i + 2 if i == npool - 1 else i + 1
+        i2  = 3*(i + 2) if i == npool - 1 else i + 1
         dfi = df.iloc[i * size:(i2 * size), :]
-        job_list.append(pool.apply_async(f2, (dfi,)))
-        if verbose: log(i, dfi.shape)
+        job_list.append( pool.apply_async(f2, (dfi,)) )
+        if verbose: log('start', i, dfi.shape)
 
     dfall = None
     for i in range(npool):
