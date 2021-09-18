@@ -218,14 +218,9 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
   def log(*s, **kw):
       print(*s, flush=True, **kw)
   readers = {
-          ".pkl"     : pd.read_pickle,
-          ".parquet" : pd.read_parquet,
-          ".tsv"     : pd.read_csv,
-          ".csv"     : pd.read_csv,
-          ".txt"     : pd.read_csv,
-          ".zip"     : pd.read_csv,
-          ".gzip"    : pd.read_csv,
-          ".gz"      : pd.read_csv,
+          ".pkl"     : pd.read_pickle, ".parquet" : pd.read_parquet,
+          ".tsv"     : pd.read_csv, ".csv"     : pd.read_csv, ".txt"     : pd.read_csv, ".zip"     : pd.read_csv,
+          ".gzip"    : pd.read_csv, ".gz"      : pd.read_csv,
    }
   from multiprocessing.pool import ThreadPool
 
