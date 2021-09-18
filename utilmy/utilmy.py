@@ -488,7 +488,7 @@ def config_load(config_path:str = None,
     Returns: dict config
     """
     import json, yaml
-    from pathlib import Path
+    import pathlib
 
     path_default        = pathlib.Path.home() / ".mygenerator" if path_default is None else path_default
     config_path_default = path_default / "config.yaml"
@@ -1298,9 +1298,7 @@ def print_everywhere():
     
     from snoop import pp
     pp(myvariable)
-    
-    
-    
+        
     """
     import snoop
     snoop.install()  ### can be used anywhere"
