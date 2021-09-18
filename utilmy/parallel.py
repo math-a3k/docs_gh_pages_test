@@ -62,6 +62,193 @@ def test_parallel():
 
 
 ########################################################################################################
+
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, 
+                 fun_apply=None,npool=1, max_file=-1, #### apply function for each sub   
+                 **kw):
+    """  Read file in parallel from disk : very Fast
+    :param path_glob: list of pattern, or sep by ";"
+    :return:
+    """
+    import glob, gc,  pandas as pd, os, time
+    n_pool = npool ## alias
+    def log(*s, **kw):
+      print(*s, flush=True, **kw)
+    readers = {
+          ".pkl"     : pd.read_pickle,
+          ".parquet" : pd.read_parquet,
+          ".tsv"     : pd.read_csv, ".csv"     : pd.read_csv, ".txt"     : pd.read_csv, ".zip"     : pd.read_csv, ".gzip"    : pd.read_csv, ".gz"      : pd.read_csv,
+          # ".orc"     : pd.read_orc,
+    }
+
+    #### File  ###########################################################
+    if isinstance(path_glob, list):  path_glob = ";".join(path_glob)
+    path_glob  = path_glob.split(";")
+    file_list  = []
+    for pi in path_glob :
+      if "*" in pi :  file_list.extend( sorted( glob.glob(pi) ) )
+      else :          file_list.append( pi )
+
+    file_list = sorted(list(set(file_list)))
+    file_list = file_list if max_file == -1 else file_list[:file_max]
+    n_file    = len(file_list)
+    if verbose: log(file_list)
+
+    #######################################################################
+    def fun_async(filei):
+        dfall = pd.DataFrame()
+        for filei in file_list :
+            if verbose: log(filei)
+            ext  = os.path.splitext(filei)[1]
+            if ext == None or ext == '': ext ='.parquet'
+
+            pd_reader_obj = readers.get(ext, None)
+            if pd_reader_obj == None: continue
+
+            dfi = pd_reader_obj(filei)
+
+            # if dtype_reduce is not None:      dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+            if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
+            if cols is not None :             dfi = dfi[cols]
+            if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
+            if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
+            if fun_apply is not None  :       dfi = dfi.apply(lambda  x : fun_apply(x), axis=1)
+
+            dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
+        return dfall
+
+    #### Input xi #######################################
+    xi_list = [ []  for t in range(n_pool) ]
+    for i, xi in enumerate(file_list) :
+        jj = i % n_pool
+        xi_list[jj].append( tuple(xi) )
+    
+    if verbose :
+        for j in range( len(xi_list) ):
+            print('thread ', j, len(xi_list[j]))
+        time.sleep(6)    
+        
+    #### Pool execute ###################################
+    from multiprocessing.pool import ThreadPool
+    # pool     = multiprocessing.Pool(processes=3)  
+    pool     = ThreadPool(processes=n_pool)
+    job_list = []
+    for i in range(n_pool):
+         if verbose : log('starts', i)   
+         job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
+
+    dfall  = pd.DataFrame()
+    for i in range(n_pool):
+        if i >= len(job_list): break
+        dfi = job_list[ i].get() 
+        dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
+        #log("Len", n_pool*j + i, len(dfall))
+        del dfi; gc.collect()
+        log(i, 'thread finished')
+
+    pool.terminate() ; pool.join()  ; pool = None
+    log( 'shape', dfall.shape )
+    return dfall 
+
+
+
+
+
+    
+    
+    
+    
+    
+
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
+  """  Read file in parallel from disk : very Fast
+  :param path_glob: list of pattern, or sep by ";"
+  :return:
+  """
+  import glob, gc,  pandas as pd, os
+  def log(*s, **kw):
+      print(*s, flush=True, **kw)
+  readers = {
+          ".pkl"     : pd.read_pickle,
+          ".parquet" : pd.read_parquet,
+          ".tsv"     : pd.read_csv,
+          ".csv"     : pd.read_csv,
+          ".txt"     : pd.read_csv,
+          ".zip"     : pd.read_csv,
+          ".gzip"    : pd.read_csv,
+          ".gz"      : pd.read_csv,
+   }
+  from multiprocessing.pool import ThreadPool
+
+  #### File
+  if isinstance(path_glob, list):  path_glob = ";".join(path_glob)
+  path_glob  = path_glob.split(";")
+  file_list = []
+  for pi in path_glob :
+      if "*" in pi :
+        file_list.extend( sorted( glob.glob(pi) ) )
+      else :
+        file_list.append( pi )
+
+
+  file_list = sorted(list(set(file_list)))
+  n_file    = len(file_list)
+  if verbose: log(file_list)
+
+  #### Pool count
+  if n_pool < 1 :  n_pool = 1
+  if n_file <= 0:  m_job  = 0
+  elif n_file <= 2:
+    m_job  = n_file
+    n_pool = 1
+  else  :
+    m_job  = 1 + n_file // n_pool  if n_file >= 3 else 1
+  if verbose : log(n_file,  n_file // n_pool )
+
+  pool   = ThreadPool(processes=n_pool)
+  dfall  = pd.DataFrame()
+  for j in range(0, m_job ) :
+      if verbose : log("Pool", j, end=",")
+      job_list = []
+      for i in range(n_pool):
+         if n_pool*j + i >= n_file  : break
+         filei         = file_list[n_pool*j + i]
+         ext           = os.path.splitext(filei)[1]
+         if ext == None or ext == '':
+           continue
+
+         pd_reader_obj = readers[ext]
+         if pd_reader_obj == None:
+           continue
+
+         ### TODO : use with kewyword arguments
+         job_list.append( pool.apply_async(pd_reader_obj, (filei, )))
+         if verbose : log(j, filei)
+
+      for i in range(n_pool):
+        if i >= len(job_list): break
+        dfi   = job_list[ i].get()
+
+        # if dtype_reduce is not None: dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+        if col_filter is not None :  dfi = dfi[ dfi[col_filter] == col_filter_val ]
+        if cols is not None :        dfi = dfi[cols]
+        if nrows > 0        :        dfi = dfi.iloc[:nrows,:]
+        if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
+        gc.collect()
+
+        dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
+        #log("Len", n_pool*j + i, len(dfall))
+        del dfi; gc.collect()
+                
+  pool.terminate()
+  pool.join()  
+  pool = None          
+  if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
+  return dfall
+
+
 def pd_groupby_parallel(groupby_df,func=None,npool: int = 5,**kw,):
     """Performs a Pandas groupby operation in parallel.
     pd.core.groupby.DataFrameGroupBy
