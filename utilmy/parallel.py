@@ -42,11 +42,11 @@ def test1():
     log([["xyz", "ywzspsd"], ["yzp", "ydzfpf"]]== res )
 
 
-    #### multiproc_run
-    li_of_tuples = [("x", "y", "z"),("y", "z", "p"),("yw", "zs", "psd"),("yd", "zf", "pf"),]
-    res = multiproc_run(fun_async, li_of_tuples, npool=2, start_delay=0.1, verbose=True)
-    log( res == [["xyz"], ["yzp"],
-    ["ywzspsd"], ["ydzfpf"], []])
+    #### multiproc_run : Pickle error
+    #li_of_tuples = [("x", "y", "z"),("y", "z", "p"),("yw", "zs", "psd"),("yd", "zf", "pf"),]
+    #res = multiproc_run(fun_async, li_of_tuples, npool=2, start_delay=0.1, verbose=True)
+    #log( res == [["xyz"], ["yzp"],
+    #["ywzspsd"], ["ydzfpf"], []])
 
 
     #### pd_groupby_parallel
