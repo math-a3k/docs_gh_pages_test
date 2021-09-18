@@ -6,11 +6,11 @@
 """
 from multiprocessing.pool import ThreadPool
 from threading import Thread
-import itertools, time, multiprocessing, pandas as pd, numpy as np
+import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle
 from typing import Callable, Tuple, Union
 
 #################################################################################################
-def log(*s): log(*s, flush=True)
+def log(*s): print(*s, flush=True)
 
 
 
@@ -79,8 +79,8 @@ def test2():
         for x in xlist:
             x[0]+x[1]
 
-    def test_log(x):
-        log(x)
+    def test_print(x):
+        print(x)
 
     freeze_support()
     log("pd_groupby_parallel")
@@ -148,7 +148,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
       else :          file_list.append( pi )
 
     file_list = sorted(list(set(file_list)))
-    file_list = file_list if max_file == -1 else file_list[:file_max]
+    file_list = file_list if max_file == -1 else file_list[:max_file]
     n_file    = len(file_list)
     if verbose: log(file_list)
 
