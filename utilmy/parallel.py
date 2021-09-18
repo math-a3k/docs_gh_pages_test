@@ -1,4 +1,8 @@
 # coding=utf-8
+"""
+    ### python parallel.py test_parallel
+
+"""
 from multiprocessing.pool import ThreadPool
 from threading import Thread
 import itertools
@@ -8,7 +12,6 @@ from typing import Callable, Tuple, Union
 
 #################################################################################################
 def log(*s): print(*s, flush=True)
-
 
 
 #################################################################################################
@@ -62,7 +65,6 @@ def test_parallel():
 
 
 ########################################################################################################
-
 def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, 
                  fun_apply=None,npool=1, max_file=-1, #### apply function for each sub   
@@ -151,15 +153,6 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
     log( 'shape', dfall.shape )
     return dfall 
 
-
-
-
-
-    
-    
-    
-    
-    
 
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
@@ -318,14 +311,12 @@ def pd_groupby_parallel2(df,colsgroup=None,fun_apply=None,npool=5,start_delay=0.
     return dfall
 
 
-def pd_apply_parallel(df, colsgroup=None, fun_apply=None, npool=5, start_delay=0.01, verbose=True):
+def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True):
     """Pandas parallel apply"""
     import pandas as pd, numpy as np, time, gc
 
     def f2(df):
         return df.apply(fun_apply, axis=1)
-
-    size = int(len(df) // npool)
 
     #### Pool execute ###################################
     import multiprocessing as mp
@@ -333,28 +324,26 @@ def pd_apply_parallel(df, colsgroup=None, fun_apply=None, npool=5, start_delay=0
     pool     = mp.pool.ThreadPool(processes=npool)
     job_list = []
 
-    for i in range(npool):
-        time.sleep(start_delay)
-        log("starts", i)
-        i2 = i + 2 if i == npool - 1 else i + 1
-        dfi = df.iloc[i * size : (i2 * size), :]
+    size = int(len(df) // npool)
+    for i in range(0, npool):
+        i2  = 3*(i + 2) if i == npool-1  else i + 1
+        dfi = df.iloc[i*size : (i2 * size), :]
+        if verbose : log("starts", i, dfi.shape)        
         job_list.append(pool.apply_async(f2, (dfi,)))
-        if verbose:
-            log(i, dfi.shape)
 
     dfall = None
-    for i in range(npool):
-        if i >= len(job_list):
-            break
-        dfi = job_list[i].get()
+    for i in range(len(job_list)):
+        dfi   = job_list[i].get()
         dfall = pd.concat((dfall, dfi)) if dfall is not None else dfi
-        del dfi
-        log(i, "job finished")
+        del dfi; gc.collect()
+        if verbose: log(i, "job finished")
 
     pool.terminate() ; pool.join() ; pool = None
     return dfall
 
 
+#################################################################################################
+#################################################################################################
 def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose=True, **kw):
     """Multiprocessing execute
     input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
@@ -399,8 +388,6 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     return res_list
 
 
-
-
 def multithread_run(fun_async, input_list: list, npool=2, start_delay=0.1, verbose=True, **kw):
     """input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
@@ -408,7 +395,6 @@ def multithread_run(fun_async, input_list: list, npool=2, start_delay=0.1, verbo
             hdfs.upload(x[0], x[1])
     """
     import time
-
 
     result_list = []
     def log_result(result):
@@ -479,7 +465,10 @@ def multithread_run_list(**kwargs):
     return results
 
 
+############################################################################################################
 if __name__ == '__main__':
-    test_parallel()
+    import fire; fire.Fire()
+    ### python parallel.py test_parallel
+    
 
 
