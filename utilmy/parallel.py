@@ -108,7 +108,7 @@ def test2():
 
     list = [(1,2,3), (1,2,3)]
     log("multiproc_run")
-    multiproc_run(fun_async,list)
+    # multiproc_run(fun_async,list)
 
     log("multithread_run")
     multithread_run(fun_async,list)
