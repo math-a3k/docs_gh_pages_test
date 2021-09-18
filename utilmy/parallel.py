@@ -16,10 +16,8 @@ def log(*s): log(*s, flush=True)
 
 #################################################################################################
 def pd_random(nrows=1000, ncols= 5):
-    return pd.DataFrame( np.random.randint(0, 10, 
-                       size    = (nrows, ncols)), 
-                       columns = [ str(i) for in in range(ncols) ] 
-                     )
+    return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )
+
 
 def test1():
     def fun_async(xlist):
