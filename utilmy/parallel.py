@@ -19,6 +19,11 @@ def pd_random(nrows=1000, ncols= 5):
     return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )
 
 
+
+def test_fun_apply(name, group):         # Inverse cumulative sum
+       group["inv_sum"] = group.iloc[::-1]["value"].cumsum()[::-1].shift(-1).fillna(0)
+       return group
+
 def test1():
     def fun_async(xlist):
         list = []
@@ -29,9 +34,7 @@ def test1():
             list.append(stdr)
         return list
 
-    def group_function(name, group):         # Inverse cumulative sum
-       group["inv_sum"] = group.iloc[::-1]["value"].cumsum()[::-1].shift(-1).fillna(0)
-       return group
+
 
     def apply_func(x):
        return x ** 2
@@ -55,7 +58,7 @@ def test1():
                             'value'  :[27, 14, 26, 19, 28, 9, 11, 1, 26, 18],'data_chunk':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9]})
     expected_df = df.copy()
     expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
-    result = pd_groupby_parallel(df.groupby("user_id"), func=group_function, npool=5)
+    result = pd_groupby_parallel(df.groupby("user_id"), func=test_fun_apply, npool=5)
     log(expected_df.equals(result))
 
 
