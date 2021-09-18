@@ -242,21 +242,20 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
   return dfall
 
 
-def pd_groupby_parallel(groupby_df,func=None,npool: int = 5,**kw,):
+def pd_groupby_parallel(groupby_df, fun_apply=None, npool: int = 5, **kw,):
     """Performs a Pandas groupby operation in parallel.
-    pd.core.groupby.DataFrameGroupBy
-    Example usage:
+    df: pd.core.groupby.DataFrameGroupBy
+    Usage:
         import pandas as pd
         df = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
         df.groupby(df.groupby('A'), lambda row: row['B'].sum())
-    Authors: Tamas Nagy and Douglas Myers-Turnbull
     """
-    import pandas as pd
+    import pandas as pd, time
 
     num_cpus = multiprocessing.cpu_count() - 1 if npool == -1 else npool
     with multiprocessing.Pool(num_cpus) as pool:
         queue  = multiprocessing.Manager().Queue()
-        result = pool.starmap_async(func, [(name, group) for name, group in groupby_df])
+        result = pool.starmap_async(fun_apply, [(name, group) for name, group in groupby_df])
         cycler = itertools.cycle("\|/―")
         while not result.ready():
             log( "Percent complete: {:.0%} {}".format( queue.qsize() / len(groupby_df), next(cycler) ))
