@@ -1,23 +1,27 @@
 # coding=utf-8
 """
-    ### python parallel.py test1
-    ### python parallel.py test1
+    python parallel.py test1
+    python parallel.py test2
 
 """
 from multiprocessing.pool import ThreadPool
 from threading import Thread
-import itertools
-import time
-import multiprocessing
+import itertools, time, multiprocessing, pandas as pd, numpy as np
 from typing import Callable, Tuple, Union
 
 #################################################################################################
 def log(*s): log(*s, flush=True)
 
 
+
 #################################################################################################
+def pd_random(nrows=1000, ncols= 5):
+    return pd.DataFrame( np.random.randint(0, 10, 
+                       size    = (nrows, ncols)), 
+                       columns = [ str(i) for in in range(ncols) ] 
+                     )
+
 def test1():
-    import pandas as pd
     def fun_async(xlist):
         list = []
         for x in xlist:
@@ -85,32 +89,34 @@ def test2():
     s   = pickle.dumps(addition)
     f   = pickle.loads(s)
     df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
-    res = cpd.pd_groupby_parallel(df.groupby(df.index), f)
+    res = pd_groupby_parallel(df.groupby(df.index), f)
     log(res)
 
     log("pd_groyupby_parallel2")
-    s  = pickle.dumps(addition1)
-    f  = pickle.loads(s)
-    df = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
+    s   = pickle.dumps(addition1)
+    f   = pickle.loads(s)
+    df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
 
-    res = cpd.pd_groyupby_parallel2(df,['A'], f)
+    res = pd_groupby_parallel2(df,['A'], f)
     log(res)
 
 
     log("pd_apply_parallel")
-    res = cpd.pd_apply_parallel(df,['A'], f)
+    res = pd_apply_parallel(df,['A'], f)
     log(res)
+
 
     list = [(1,2,3), (1,2,3)]
     log("multiproc_run")
-    cpd.multiproc_run(fun_async,list)
+    multiproc_run(fun_async,list)
+
     log("multithread_run")
-    cpd.multithread_run(fun_async,list)
+    multithread_run(fun_async,list)
 
     log("multithread_run_list")
-    cpd.multithread_run_list(function1=(test_print, ("some text",)),
-                          function2=(test_print, ("bbbbb",)),
-                          function3=(test_print, ("ccccc",)))
+    multithread_run_list(function1=(test_print, ("some text",)),
+                             function2=(test_print, ("bbbbb",)),
+                             function3=(test_print, ("ccccc",)))
 
 
 
@@ -298,8 +304,6 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
 
 
-
-
 ############################################################################################################
 def pd_groupby_parallel(groupby_df, func=None,
                         n_cpu: int = 1, **kw,
@@ -329,7 +333,7 @@ def pd_groupby_parallel(groupby_df, func=None,
     return pd.concat(got)
 
 
-def pd_groyupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, start_delay=0.01,verbose=False ):
+def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, start_delay=0.01,verbose=False ):
     """ Pandas parallel apply
 
     """
