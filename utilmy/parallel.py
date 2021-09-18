@@ -90,7 +90,7 @@ def test2():
     res = pd_groupby_parallel(df.groupby(df.index), f)
     log(res)
 
-    log("pd_groyupby_parallel2")
+    log("pd_groupby_parallel2")
     s   = pickle.dumps(addition1)
     f   = pickle.loads(s)
     df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
@@ -130,8 +130,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
     """
     import glob, gc,  pandas as pd, os, time
     n_pool = npool ## alias
-    def log(*s, **kw):
-      log(*s, flush=True, **kw)
+    def log(*s, **kw):  print(*s, flush=True, **kw)
     readers = {
           ".pkl"     : pd.read_pickle,
           ".parquet" : pd.read_parquet,
@@ -217,7 +216,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
   """
   import glob, gc,  pandas as pd, os
   def log(*s, **kw):
-      log(*s, flush=True, **kw)
+      print(*s, flush=True, **kw)
   readers = {
           ".pkl"     : pd.read_pickle,
           ".parquet" : pd.read_parquet,
