@@ -1,6 +1,7 @@
 # coding=utf-8
 """
-    ### python parallel.py test_parallel
+    ### python parallel.py test1
+    ### python parallel.py test1
 
 """
 from multiprocessing.pool import ThreadPool
