@@ -206,12 +206,12 @@ def test_scatter_and_histogram_matplot(verbose=False):
   doc.save(dir_out="myfile.html")
   doc.open_browser()  # Open myfile.html-
 
-def test_pd_plot_network(verbose=verbose):
+def test_pd_plot_network(verbose=False):
   df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
   html_code = pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
   if verbose: print(html_code)
 
-def test_cssname(verbose=verbose,css_name="A4_size"):
+def test_cssname(verbose=False,css_name="A4_size"):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata(verbose=verbose)
     from box import Box
