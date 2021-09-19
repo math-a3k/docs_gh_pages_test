@@ -6,17 +6,37 @@ All related to distributed compute and atomic read/write
 
 
 """
+import os, sys, socket, platform, time, gc
+
+###############################################################################################
+def log2(*s):
+    print(*s, flush=True)
 
 
 def log_mem(*s):
     try:
         # print(*s, "\n", flush=True)
         import psutil
-        log2('mem check', str(psutil.virtual_memory())) 
+        log2('mem check', str(psutil.virtual_memory()))
         # print(s)
     except:
-        pass    
-    
+        pass
+
+
+###############################################################################################
+def save(dd, to_file="", verbose=False):
+  import pickle, os
+  os.makedirs(os.path.dirname(to_file), exist_ok=True)
+  pickle.dump(dd, open(to_file, mode="wb") , protocol=pickle.HIGHEST_PROTOCOL)
+  #if verbose : os_file_check(to_file)
+
+
+def load(to_file=""):
+  import pickle
+  dd =   pickle.load(open(to_file, mode="rb"))
+  return dd
+
+
 
 
 def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
@@ -97,10 +117,10 @@ class IndexLock(object):
         return fall
     
             
-    def put(self, val="", ntry=5, plock="tmp/plock.lock"):    
+    def put(self, val="", ntry=100, plock="tmp/plock.lock"):
         ### Need locking mechanism Common File to check for Check + Write locking.
-        ntry = 1
-        while ntry < ntry :
+        i = 1
+        while i < ntry :
             try :
                 lock_fd = os_lock_acquireLock(self.plock)
 
@@ -110,15 +130,15 @@ class IndexLock(object):
                 if val in set(fall) :  return False
 
                 with open(self.findex, mode='a') as fp:
-                    fp.write( fpath.strip() + "\n" )
+                    fp.write( val.strip() + "\n" )
 
                 os_lock_releaseLock(lock_fd)
                 return True
 
             except :
-                print("file lock waiting", ntry)
-                time.sleep(5*ntry*ntry)
-                ntry += 1
+                print("file lock waiting", i)
+                time.sleep(5*i*i)
+                i += 1
             
 
                         
