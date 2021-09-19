@@ -256,8 +256,8 @@ def help():
     ss = ss + help_get_codesource(test_pd_plot_network) + suffix
     ss = ss + help_get_codesource(test_cssname ) + suffix
 
-    ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()  )
-    
+    ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()) + suffix
+    ss = ss + "colormap_list : \n\n " + str(get_colormap_list(get_list = True)) 
     print(ss)
 
 
@@ -1300,7 +1300,7 @@ if __name__ == "__main__":
 
 
 
-def get_colormap_list():
+def get_colormap_list(get_list = False):
   cmaps = {}
   cmaps['uniform_sequential'] = [
             'viridis', 'plasma', 'inferno', 'magma', 'cividis']
@@ -1319,6 +1319,7 @@ def get_colormap_list():
   cmaps['qualitative'] = ['Pastel1', 'Pastel2', 'Paired', 'Accent',
                         'Dark2', 'Set1', 'Set2', 'Set3',
                         'tab10', 'tab20', 'tab20b', 'tab20c']
+  if get_list : return cmaps
   gradient = np.linspace(0, 1, 256)
   gradient = np.vstack((gradient, gradient))
 
