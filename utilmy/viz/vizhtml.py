@@ -1300,7 +1300,7 @@ if __name__ == "__main__":
 
 
 
-def get_colors_schema_list():
+def get_colormap_list():
   cmaps = {}
   cmaps['uniform_sequential'] = [
             'viridis', 'plasma', 'inferno', 'magma', 'cividis']
