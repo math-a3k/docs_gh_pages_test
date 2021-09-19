@@ -256,10 +256,10 @@ def help():
     ss = ss + help_get_codesource(test_pd_plot_network) + suffix
     ss = ss + help_get_codesource(test_cssname ) + suffix
 
-    ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()  )
-    
+    ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()) + suffix
+    ss = ss + "colormap_list : \n\n "
     print(ss)
-
+    get_colormap_list()
 
 
     
@@ -1300,7 +1300,7 @@ if __name__ == "__main__":
 
 
 
-def get_colors_schema_list():
+def get_colormap_list():
   cmaps = {}
   cmaps['uniform_sequential'] = [
             'viridis', 'plasma', 'inferno', 'magma', 'cividis']
