@@ -257,9 +257,8 @@ def help():
     ss = ss + help_get_codesource(test_cssname ) + suffix
 
     ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()) + suffix
-    ss = ss + "colormap_list : \n\n "
+    ss = ss + "colormap_list : \n\n "  + str(    get_colormap_list() )  + suffix
     print(ss)
-    get_colormap_list()
 
 
     

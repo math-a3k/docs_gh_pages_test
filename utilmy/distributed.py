@@ -24,50 +24,6 @@ def log_mem(*s):
 
 
 ###############################################################################################
-def save(dd, to_file="", verbose=False):
-  import pickle, os
-  os.makedirs(os.path.dirname(to_file), exist_ok=True)
-  pickle.dump(dd, open(to_file, mode="wb") , protocol=pickle.HIGHEST_PROTOCOL)
-  #if verbose : os_file_check(to_file)
-
-
-def load(to_file=""):
-  import pickle
-  dd =   pickle.load(open(to_file, mode="rb"))
-  return dd
-
-
-
-
-def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
-    from pytz import timezone
-    from datetime import datetime
-    # Current time in UTC
-    now_utc = datetime.now(timezone('UTC'))
-    # Convert to US/Pacific time zone
-    now_pacific = now_utc.astimezone(timezone('Asia/Tokyo'))
-    return now_pacific.strftime(fmt)
-
-def sleep_random(nmax=5):
-    import random, time
-    time.sleep( random.randrange(nmax) )
-
-       
-def load_serialize(name):
-     global pcache
-     #import diskcache as dc
-     log2("loading ", pcache)
-     cache = load(pcache)  
-     return cache
-     # return {'a' : {'b': 2}}
-    
-def save_serialize(name, value):
-     global pcache
-     #import diskcache as dc
-     log2("inserting ", pcache)          
-     save(value, pcache) 
-
-
 def os_lock_acquireLock(plock):
     import fcntl
     ''' acquire exclusive lock file access '''
@@ -88,9 +44,9 @@ def os_lock_execute(fun_run, pars, ntry=5, plock="tmp/plock.lock"):
     ntry = 1
     while ntry < ntry :
         try :
-            lock_fd = acquireLock(plock)
+            lock_fd = os_lock_acquireLock(plock)
             fun_run(pars)                      
-            releaseLock(lock_fd)
+            os_lock_releaseLock(lock_fd)
             break
         except :
             log2("file lock waiting", ntry)
@@ -101,7 +57,7 @@ def os_lock_execute(fun_run, pars, ntry=5, plock="tmp/plock.lock"):
 
 class IndexLock(object):
     """
-    
+      Keep a Global Index of processed files.
       INDEX = IndexLock(findex, plock)
     
     """
@@ -141,6 +97,53 @@ class IndexLock(object):
                 i += 1
             
 
-                        
+
+
+
+
+def save(dd, to_file="", verbose=False):
+  import pickle, os
+  os.makedirs(os.path.dirname(to_file), exist_ok=True)
+  pickle.dump(dd, open(to_file, mode="wb") , protocol=pickle.HIGHEST_PROTOCOL)
+  #if verbose : os_file_check(to_file)
+
+
+def load(to_file=""):
+  import pickle
+  dd =   pickle.load(open(to_file, mode="rb"))
+  return dd
+
+
+
+
+def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
+    from pytz import timezone
+    from datetime import datetime
+    # Current time in UTC
+    now_utc = datetime.now(timezone('UTC'))
+    # Convert to US/Pacific time zone
+    now_pacific = now_utc.astimezone(timezone('Asia/Tokyo'))
+    return now_pacific.strftime(fmt)
+
+def sleep_random(nmax=5):
+    import random, time
+    time.sleep( random.randrange(nmax) )
+
+
+def load_serialize(name):
+     global pcache
+     #import diskcache as dc
+     log2("loading ", pcache)
+     cache = load(pcache)
+     return cache
+     # return {'a' : {'b': 2}}
+
+def save_serialize(name, value):
+     global pcache
+     #import diskcache as dc
+     log2("inserting ", pcache)
+     save(value, pcache)
+
+
   
   
