@@ -1,7 +1,13 @@
 # coding=utf-8
 """
-    python parallel.py test1
-    python parallel.py test2
+    python parallel.py test0
+
+
+
+    #  python parallel.py test2
+
+
+
 
 """
 from multiprocessing.pool import ThreadPool
@@ -23,6 +29,43 @@ def pd_random(nrows=1000, ncols= 5):
 def test_fun_apply(name, group):         # Inverse cumulative sum
        group["inv_sum"] = group.iloc[::-1]["value"].cumsum()[::-1].shift(-1).fillna(0)
        return group
+
+
+
+def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
+       df_group['1sum'] = df_group['1'].sum()
+       return df_group
+
+
+def test0():
+
+    df  = pd_random(5*10**6, ncols=3)
+
+    ###########  pd_groupby_parallel  ######################################
+    colsgroup = ['0']
+    t0 = time.time()
+    df1 = df.groupby(colsgroup).apply(lambda dfi : test_fun_sum(dfi ) )
+    df1 = df1.sort_values( list(df1.columns))
+    log(df1, time.time() - t0)
+
+    t0 = time.time()
+    df2 = pd_groupby_parallel(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
+    df2 = df2.sort_values( list(df2.columns))
+    log(df2, time.time() - t0)
+
+    log( 'pd_groupby_parallel: ' , df1.equals(df2))
+
+
+    ###########  pd_groupby_parallel2  ######################################
+    t0 = time.time()
+    df2 = pd_groupby_parallel2(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
+    df2 = df2.sort_values( list(df2.columns))
+    log(df2, time.time() - t0)
+
+    log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
+
+
+
 
 def test1():
     def fun_async(xlist):
@@ -56,7 +99,7 @@ def test1():
                             'value'  :[27, 14, 26, 19, 28, 9, 11, 1, 26, 18],'data_chunk':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9]})
     expected_df = df.copy()
     expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
-    result = pd_groupby_parallel(df.groupby("user_id"), func=test_fun_apply, npool=5)
+    result = pd_groupby_parallel(df.groupby("user_id"), fun_apply=test_fun_apply, npool=5)
     log(expected_df.equals(result))
 
 
@@ -301,8 +344,8 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
 
 ############################################################################################################
-def pd_groupby_parallel(groupby_df, func=None,
-                        n_cpu: int = 1, **kw,
+def pd_groupby_parallel(df, colsgroup=None, fun_apply=None,
+                        npool: int = 1, **kw,
                         ):
     """Performs a Pandas groupby operation in parallel.
     pd.core.groupby.DataFrameGroupBy
@@ -314,18 +357,21 @@ def pd_groupby_parallel(groupby_df, func=None,
     """
     import pandas as pd
     from functools import partial
+
+    groupby_df = df.groupby(colsgroup)
+
     start = time.time()
-    n_cpu = int(multiprocessing.cpu_count()) - 1
-    log("\nUsing {} CPUs in parallel...".format(n_cpu))
-    with multiprocessing.Pool(n_cpu) as pool:
+    npool = int(multiprocessing.cpu_count()) - 1
+    log("\nUsing {} CPUs in parallel...".format(npool))
+    with multiprocessing.Pool(npool) as pool:
         queue = multiprocessing.Manager().Queue()
-        result = pool.starmap_async(func, [(name, group) for name, group in groupby_df])
+        result = pool.starmap_async(fun_apply, [(group, name) for name, group in groupby_df])
         cycler = itertools.cycle('\|/―')
         while not result.ready():
             log("Percent complete: {:.0%} {}".format(queue.qsize() / len(groupby_df), next(cycler)))
             time.sleep(0.4)
         got = result.get()
-    log("\nProcessed {} rows in {:.1f}s".format(len(groupby_df), time.time() - start))
+    # log("\nProcessed {} rows in {:.1f}s".format(len(groupby_df), time.time() - start))
     return pd.concat(got)
 
 
@@ -339,7 +385,7 @@ def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
     def f2(df_list):
         dfiall = None
         for dfi in df_list:
-            dfi    = dfi.apply(fun_apply)
+            dfi    = dfi.apply( lambda dfi : fun_apply(dfi) )
             dfiall = pd.concat((dfiall, dfi)) if dfiall is None else dfi
             del dfi;  gc.collect()
         return dfiall
