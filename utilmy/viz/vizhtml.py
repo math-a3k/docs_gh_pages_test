@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 HELP= """ Converter python Graph ---> HTML page
+
+https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=Rrho08zYe6Gj
+
+https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=2zMKv6MXOJJu
+
+
 !pip install python-box python-highcharts  mpld3 pandas-highcharts fire  pretty-html-table matplotlib ipython
 !pip install utilmy 
 !
