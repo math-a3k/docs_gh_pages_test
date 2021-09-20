@@ -1,6 +1,10 @@
 """
 All related to distributed compute and atomic read/write
 
+   Thread Safe
+   Process Safe
+   Lock Mechanism
+
 
 
 
@@ -24,34 +28,40 @@ def log_mem(*s):
 
 
 ###############################################################################################
-def os_lock_acquireLock(plock):
+def os_lock_acquireLock(plock:str="tmp/plock.lock"):
+    ''' acquire exclusive lock file access, return the locker
+
+    '''
     import fcntl
-    ''' acquire exclusive lock file access '''
+    os.makedirs(os.path.dirname( os.path.abspath(plock)  ))
     locked_file_descriptor = open( plock, 'w+')
     fcntl.flock(locked_file_descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
     return locked_file_descriptor
 
 
 def os_lock_releaseLock(locked_file_descriptor):
-    import fcntl
     ''' release exclusive lock file access '''
+    import fcntl
     fcntl.flock(locked_file_descriptor, fcntl.LOCK_UN)
     # locked_file_descriptor.close()
 
     
-def os_lock_execute(fun_run, pars, ntry=5, plock="tmp/plock.lock"):    
-    ### Need locking mechanism Common File to check for locking.
-    ntry = 1
-    while ntry < ntry :
+def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock"):
+    """ Run a function in an atomic way :
+         Write on disk  exclusively on COMMON File.
+
+    """
+    i = 0
+    while i < ntry :
         try :
             lock_fd = os_lock_acquireLock(plock)
-            fun_run(pars)                      
+            fun_run(fun_args)
             os_lock_releaseLock(lock_fd)
             break
         except :
-            log2("file lock waiting", ntry)
-            time.sleep(20*ntry)
-            ntry += 1
+            log2("file lock waiting", 20*i, 'sec')
+            time.sleep(20*i)
+            i += 1
 
 
 
@@ -92,13 +102,26 @@ class IndexLock(object):
                 return True
 
             except :
-                print("file lock waiting", i)
+                log2("file lock waiting", i)
                 time.sleep(5*i*i)
                 i += 1
             
 
 
+################################################################################################
+def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
+    from pytz import timezone
+    from datetime import datetime
+    # Current time in UTC
+    now_utc = datetime.now(timezone('UTC'))
+    # Convert to US/Pacific time zone
+    now_pacific = now_utc.astimezone(timezone('Asia/Tokyo'))
+    return now_pacific.strftime(fmt)
 
+
+def time_sleep_random(nmax=5):
+    import random, time
+    time.sleep( random.randrange(nmax) )
 
 
 def save(dd, to_file="", verbose=False):
@@ -112,22 +135,6 @@ def load(to_file=""):
   import pickle
   dd =   pickle.load(open(to_file, mode="rb"))
   return dd
-
-
-
-
-def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
-    from pytz import timezone
-    from datetime import datetime
-    # Current time in UTC
-    now_utc = datetime.now(timezone('UTC'))
-    # Convert to US/Pacific time zone
-    now_pacific = now_utc.astimezone(timezone('Asia/Tokyo'))
-    return now_pacific.strftime(fmt)
-
-def sleep_random(nmax=5):
-    import random, time
-    time.sleep( random.randrange(nmax) )
 
 
 def load_serialize(name):
