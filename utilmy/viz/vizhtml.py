@@ -1,4 +1,5 @@
-""" Converter python Graph ---> HTML
+# -*- coding: utf-8 -*-
+HELP= """ Converter python Graph ---> HTML page
 !pip install python-box python-highcharts  mpld3 pandas-highcharts fire  pretty-html-table matplotlib ipython
 !pip install utilmy 
 !
@@ -7,6 +8,10 @@ https://try2explore.com/questions/10109123
 https://mpld3.github.io/examples/index.html
 https://notebook.community/johnnycakes79/pyops/dashboard/pandas-highcharts-examples
 https://datatables.net/
+
+
+https://www.highcharts.com/docs/getting-started/how-to-set-options
+
 """
 import os, sys, random, numpy as np, pandas as pd, fire
 from datetime import datetime
@@ -19,13 +24,30 @@ import matplotlib.pyplot as plt
 import mpld3
 
 
-#################################################################################################
+############################################################################################
 def log(*s):
     print(*s, flush=True)
 
 
-###################################################################################
-#### Example usage ################################################################
+############################################################################################
+#### Test and Example usage ################################################################
+def help():
+    suffix = "\n\n\n ##############################\n"
+    ss  = "from utilmy.vi.vizhtml import * \n\n"
+    ss += "data = test_getdata() \n\n "
+    ss += help_get_codesource(test1) + suffix
+    ss += help_get_codesource(test2) + suffix
+    ss += help_get_codesource(test3) + suffix
+    ss += help_get_codesource(test_scatter_and_histogram_matplot) + suffix
+    ss += help_get_codesource(test_pd_plot_network) + suffix
+    ss += help_get_codesource(test_cssname ) + suffix
+
+    ss +=  "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()) + suffix
+    ss +=  "colormap_list : \n\n " + str(colormap_get_names()) + suffix
+    ss +=  HELP
+    print(ss)
+
+
 def test_getdata(verbose=True):
     """data = test_get_data()
     df   = data['housing.csv']
@@ -244,24 +266,7 @@ def test_cssname(verbose=False,css_name="A4_size"):
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
-def help():
 
-    suffix = "\n\n\n ##############################\n"
-    ss = "from utilmy.vi.vizhtml import * \n\n"
-    ss = ss + "data = test_getdata() \n\n "
-    ss = ss + help_get_codesource(test1) + suffix
-    ss = ss + help_get_codesource(test2) + suffix
-    ss = ss + help_get_codesource(test3) + suffix
-    ss = ss + help_get_codesource(test_scatter_and_histogram_matplot) + suffix
-    ss = ss + help_get_codesource(test_pd_plot_network) + suffix
-    ss = ss + help_get_codesource(test_cssname ) + suffix
-
-    ss = ss + "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()) + suffix
-    ss = ss + "colormap_list : \n\n "  + str(    get_colormap_list() )  + suffix
-    print(ss)
-
-
-    
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
@@ -605,9 +610,6 @@ def pd_plot_scatter_get_data(df0:pd.DataFrame,colx: str=None, coly: str=None, co
 
 
 
-
-
-
 def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, collabel: str=None,
                             colclass1: str=None, colclass2: str=None,
                             cfg: dict = {}, mode='d3', save_path: str='', verbose=True,  **kw)-> str:
@@ -794,11 +796,6 @@ def mpld3_server_start():
 
 ############################################################################################################################
 ############################################################################################################################
-highcharts_doc ="""
-https://www.highcharts.com/docs/getting-started/how-to-set-options
-"""
-
-
 def pd_plot_highcharts(df):
     """
     # Basic line plot
@@ -1106,6 +1103,54 @@ def images_to_html(dir_input="*.png",  title="", verbose=False):
     return html
 
 
+def colormap_get_names():
+  cmaps = {}
+  cmaps['uniform_sequential'] = [
+            'viridis', 'plasma', 'inferno', 'magma', 'cividis']
+  cmaps['sequential'] = [
+            'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
+            'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
+            'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
+  cmaps['sequential_2'] = [
+            'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone', 'pink',
+            'spring', 'summer', 'autumn', 'winter', 'cool', 'Wistia',
+            'hot', 'afmhot', 'gist_heat', 'copper']
+  cmaps['diverging'] = [
+            'PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
+            'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic']
+  cmaps['cyclic'] = ['twilight', 'twilight_shifted', 'hsv']
+  cmaps['qualitative'] = ['Pastel1', 'Pastel2', 'Paired', 'Accent',
+                        'Dark2', 'Set1', 'Set2', 'Set3',
+                        'tab10', 'tab20', 'tab20b', 'tab20c']
+  gradient = np.linspace(0, 1, 256)
+  gradient = np.vstack((gradient, gradient))
+
+
+  def plot_color_gradients(cmap_category, cmap_list):
+      # Create figure and adjust figure height to number of colormaps
+      nrows = len(cmap_list)
+      figh = 0.35 + 0.15 + (nrows + (nrows - 1) * 0.1) * 0.22
+      fig, axs = plt.subplots(nrows=nrows + 1, figsize=(6.4, figh))
+      fig.subplots_adjust(top=1 - 0.35 / figh, bottom=0.15 / figh,
+                          left=0.2, right=0.99)
+      axs[0].set_title(cmap_category + ' colormaps', fontsize=14)
+
+      for ax, name in zip(axs, cmap_list):
+          ax.imshow(gradient, aspect='auto', cmap=plt.get_cmap(name))
+          ax.text(-0.01, 0.5, name, va='center', ha='right', fontsize=10,
+                  transform=ax.transAxes)
+
+      # Turn off *all* ticks & spines, not just the ones with colormaps.
+      for ax in axs:
+          ax.set_axis_off()
+
+
+  for cmap_category, cmap_list in cmaps.items():
+      plot_color_gradients(cmap_category, cmap_list)
+
+  plt.show()
+
+
 ############################################################################################################################
 ############################################################################################################################
 def pd_plot_network(df:pd.DataFrame, cola: str='col_node1', 
@@ -1250,8 +1295,6 @@ CSS_TEMPLATE.a3d = CSS_TEMPLATE.base + """
 
 
 
-
-
 ###################################################################################################
 ######### JScript #################################################################################
 js_code = Box({})  # List of javascript code
@@ -1299,52 +1342,6 @@ if __name__ == "__main__":
 
 
 
-def get_colormap_list():
-  cmaps = {}
-  cmaps['uniform_sequential'] = [
-            'viridis', 'plasma', 'inferno', 'magma', 'cividis']
-  cmaps['sequential'] = [
-            'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
-            'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
-            'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
-  cmaps['sequential_2'] = [
-            'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone', 'pink',
-            'spring', 'summer', 'autumn', 'winter', 'cool', 'Wistia',
-            'hot', 'afmhot', 'gist_heat', 'copper']
-  cmaps['diverging'] = [
-            'PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
-            'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic']
-  cmaps['cyclic'] = ['twilight', 'twilight_shifted', 'hsv']
-  cmaps['qualitative'] = ['Pastel1', 'Pastel2', 'Paired', 'Accent',
-                        'Dark2', 'Set1', 'Set2', 'Set3',
-                        'tab10', 'tab20', 'tab20b', 'tab20c']
-  gradient = np.linspace(0, 1, 256)
-  gradient = np.vstack((gradient, gradient))
-
-
-  def plot_color_gradients(cmap_category, cmap_list):
-      # Create figure and adjust figure height to number of colormaps
-      nrows = len(cmap_list)
-      figh = 0.35 + 0.15 + (nrows + (nrows - 1) * 0.1) * 0.22
-      fig, axs = plt.subplots(nrows=nrows + 1, figsize=(6.4, figh))
-      fig.subplots_adjust(top=1 - 0.35 / figh, bottom=0.15 / figh,
-                          left=0.2, right=0.99)
-      axs[0].set_title(cmap_category + ' colormaps', fontsize=14)
-
-      for ax, name in zip(axs, cmap_list):
-          ax.imshow(gradient, aspect='auto', cmap=plt.get_cmap(name))
-          ax.text(-0.01, 0.5, name, va='center', ha='right', fontsize=10,
-                  transform=ax.transAxes)
-
-      # Turn off *all* ticks & spines, not just the ones with colormaps.
-      for ax in axs:
-          ax.set_axis_off()
-
-
-  for cmap_category, cmap_list in cmaps.items():
-      plot_color_gradients(cmap_category, cmap_list)
-
-  plt.show()
 
 
 def zz_css_get_template(css_name:str= "A4_size"):
@@ -1381,9 +1378,6 @@ def zz_css_get_template(css_name:str= "A4_size"):
             padding: 5px;} 
         """
     return css_code
-
-
-
 
 
 
