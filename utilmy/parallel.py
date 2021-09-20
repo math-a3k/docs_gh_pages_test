@@ -30,8 +30,6 @@ def test_fun_apply(name, group):         # Inverse cumulative sum
        group["inv_sum"] = group.iloc[::-1]["value"].cumsum()[::-1].shift(-1).fillna(0)
        return group
 
-
-
 def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
        df_group['1sum'] = df_group['1'].sum()
        return df_group
@@ -39,7 +37,7 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 def test0():
 
-    df  = pd_random(5*10**6, ncols=3)
+    df  = pd_random(1*10**6, ncols=3)
 
     ###########  pd_groupby_parallel  ######################################
     colsgroup = ['0']
@@ -52,16 +50,22 @@ def test0():
     df2 = pd_groupby_parallel(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
     log(df2, time.time() - t0)
-
     log( 'pd_groupby_parallel: ' , df1.equals(df2))
 
 
-    ###########  pd_groupby_parallel2  ######################################
+    ###########  pd_groupby_parallel3  ###########################################
     t0 = time.time()
     df2 = pd_groupby_parallel2(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
     log(df2, time.time() - t0)
+    log( 'pd_groupby_parallel3 : ' , df1.equals(df2))
 
+
+    ###########  pd_groupby_parallel2  : Buggy one ###############################
+    t0 = time.time()
+    df2 = pd_groupby_parallel3(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
+    df2 = df2.sort_values( list(df2.columns))
+    log(df2, time.time() - t0)
     log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
 
 
@@ -344,7 +348,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
 
 ############################################################################################################
-def pd_groupby_parallel(df, colsgroup=None, fun_apply=None,
+def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None,
                         npool: int = 1, **kw,
                         ):
     """Performs a Pandas groupby operation in parallel.
@@ -376,7 +380,35 @@ def pd_groupby_parallel(df, colsgroup=None, fun_apply=None,
 
 
 
-def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, verbose=False, **kw ):
+def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, npool=4):
+    """
+    Use of multi-thread on group by apply when order is not important
+
+    """
+    import pandas as pd
+    import concurrent.futures
+
+    dfGrouped = df.groupby(colsgroup)
+
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
+        futures = []
+        for name, group in dfGrouped:
+            futures.append(executor.submit(fun_apply, group))
+
+        del dfGrouped; gc.collect()
+
+        df_out = pd.DataFrame()
+        for future in concurrent.futures.as_completed(futures):
+            dfr    = future.result()
+            df_out = pd.concat(( df_out, dfr ))
+            del dfr; gc.collect()
+
+    return df_out
+
+
+
+def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=False, **kw ):
     """ Pandas parallel groupby apply
 
     """
@@ -421,32 +453,6 @@ def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
 
 
 
-
-def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=4):
-    """
-    Use of multi-thread on group by apply when order is not important
-
-    """
-    import pandas as pd
-    import concurrent.futures
-
-    dfGrouped = df.groupby(colsgroup)
-
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
-        futures = []
-        for name, group in dfGrouped:
-            futures.append(executor.submit(fun_apply, group))
-
-        del dfGrouped; gc.collect()
-
-        df_out = pd.DataFrame()
-        for future in concurrent.futures.as_completed(futures):
-            dfr    = future.result()
-            df_out = pd.concat(( df_out, dfr ))
-            del dfr; gc.collect()
-
-    return df_out
 
 
 
