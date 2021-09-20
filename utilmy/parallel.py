@@ -26,8 +26,8 @@ def pd_random(nrows=1000, ncols= 5):
 
 
 
-def test_fun_apply(name, group):         # Inverse cumulative sum
-       group["inv_sum"] = group.iloc[::-1]["value"].cumsum()[::-1].shift(-1).fillna(0)
+def test_fun_sum_inv(group, name=None):         # Inverse cumulative sum
+       group["inv_sum"] = group.iloc[::-1]["1"].cumsum()[::-1].shift(-1).fillna(0)
        return group
 
 def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
@@ -42,12 +42,12 @@ def test0():
     ###########  pd_groupby_parallel  ######################################
     colsgroup = ['0']
     t0 = time.time()
-    df1 = df.groupby(colsgroup).apply(lambda dfi : test_fun_sum(dfi ) )
+    df1 = df.groupby(colsgroup).apply(lambda dfi : test_fun_sum_inv(dfi ) )
     df1 = df1.sort_values( list(df1.columns))
     log(df1, time.time() - t0)
 
     t0 = time.time()
-    df2 = pd_groupby_parallel(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
+    df2 = pd_groupby_parallel(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
     log(df2, time.time() - t0)
     log( 'pd_groupby_parallel: ' , df1.equals(df2))
@@ -55,7 +55,7 @@ def test0():
 
     ###########  pd_groupby_parallel3  ###########################################
     t0 = time.time()
-    df2 = pd_groupby_parallel2(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
+    df2 = pd_groupby_parallel2(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
     log(df2, time.time() - t0)
     log( 'pd_groupby_parallel3 : ' , df1.equals(df2))
@@ -63,7 +63,7 @@ def test0():
 
     ###########  pd_groupby_parallel2  : Buggy one ###############################
     t0 = time.time()
-    df2 = pd_groupby_parallel3(df, colsgroup, fun_apply= test_fun_sum, npool=4 )
+    df2 = pd_groupby_parallel3(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
     log(df2, time.time() - t0)
     log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
