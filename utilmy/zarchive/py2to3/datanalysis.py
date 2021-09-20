@@ -913,9 +913,9 @@ kde = sm.nonparametric.KDEMultivariate()  # ... you already did this
 u = np.random.random()
 
 # 1-d root-finding
-def func(x):
+def fun_apply(x):
     return kde.cdf([x]) - u
-sample_x = brentq(func, -99999999, 99999999)  # read brentq-docs about these constants
+sample_x = brentq(fun_apply, -99999999, 99999999)  # read brentq-docs about these constants
                                               # constants need to be sign-changing for the function
   '''
 

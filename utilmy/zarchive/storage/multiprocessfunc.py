@@ -449,16 +449,16 @@ from functools import partial
 from itertools import repeat
 from multiprocessing import Pool, freeze_support
 
-def func(a, b):
+def fun_apply(a, b):
     return a + b
 
 def main():
     a_args = [1,2,3]
     second_arg = 1
     with Pool() as pool:
-        L = pool.starmap(func, [(1, 1), (2, 1), (3, 1)])
-        M = pool.starmap(func, zip(a_args, repeat(second_arg)))
-        N = pool.map(partial(func, b=second_arg), a_args)
+        L = pool.starmap(fun_apply, [(1, 1), (2, 1), (3, 1)])
+        M = pool.starmap(fun_apply, zip(a_args, repeat(second_arg)))
+        N = pool.map(partial(fun_apply, b=second_arg), a_args)
         assert L == M == N
 
 if __name__=="__main__":
@@ -865,7 +865,7 @@ pymotw          :    26
 end             :    26
 daemon          :    22
 now             :    21
-func            :    20
+fun_apply            :    20
 
 
 

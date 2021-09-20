@@ -1047,7 +1047,7 @@ def os_file_norm_paths(paths, marker="*"):
         return sorted(glob.glob(files_pattern))
 
     def _norm_paths_itr(paths, marker="*"):
-        """Iterator version of :func:`norm_paths`.
+        """Iterator version of :fun_apply:`norm_paths`.
      """
         for path in paths:
             if os_folder_is_path(path):

@@ -85,18 +85,18 @@ Unpacking dictionaries
 
 ** unpacks dictionaries.
 
-func(a=1, b=2, c=3)
+fun_apply(a=1, b=2, c=3)
 is the same as
 
 args = {'a': 1, 'b': 2, 'c':3}
-func(**args)
+fun_apply(**args)
 It's useful if you have to construct parameters:
 
 args = {'name': person.name}
 if hasattr(person, "address"):
     args["address"] = person.address
-func(**args)  # either expanded to func(name=person.name) or
-              #                    func(name=person.name, address=person.address)
+fun_apply(**args)  # either expanded to fun_apply(name=person.name) or
+              #                    fun_apply(name=person.name, address=person.address)
 Packing parameters of a function
 
 def setstyle(**styles):
@@ -1166,7 +1166,7 @@ solver1.next()  #One generation evolution
 
 def np_runsolver(name1, niter):
 
-pfi= copy.deepcopy( get_class_that_defined_method(solver1.func) )
+pfi= copy.deepcopy( get_class_that_defined_method(solver1.fun_apply) )
 
 obj_getclass_property(pfi) 
 

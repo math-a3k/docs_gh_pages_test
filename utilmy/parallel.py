@@ -6,7 +6,7 @@
 """
 from multiprocessing.pool import ThreadPool
 from threading import Thread
-import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle
+import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc
 from typing import Callable, Tuple, Union
 
 #################################################################################################
@@ -372,6 +372,44 @@ def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
 
     pool.terminate(); pool.join(); pool = None
     return dfall
+
+
+
+
+def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=4):
+    """
+    Use of multi-thread on group by apply when order is not important
+
+    """
+    import pandas as pd
+    import concurrent.futures
+
+    dfGrouped = df.groupby(colsgroup)
+
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
+        futures = []
+        for name, group in dfGrouped:
+            futures.append(executor.submit(fun_apply, group))
+
+        del dfGrouped; gc.collect()
+
+        df_out = pd.DataFrame()
+        for future in concurrent.futures.as_completed(futures):
+            dfr    = future.result()
+            df_out = pd.concat(( df_out, dfr ))
+            del dfr; gc.collect()
+
+    return df_out
+
+
+
+
+
+
+
+
+
 
 
 
