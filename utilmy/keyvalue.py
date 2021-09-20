@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" Interface for Key Value store.
+HELP= """ Interface for Key Value store.
 
 pip install diskcache
 
@@ -24,6 +24,15 @@ def log(*s):
         
 def log2(*s):
     if random.random() > 0.999 : print(*s, flush=True)
+
+
+def help():
+    ss  = ""
+
+
+    ss += HELP
+    print(ss)
+
 
 
 #####################################################################################    
