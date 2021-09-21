@@ -33,7 +33,7 @@ def os_lock_acquireLock(plock:str="tmp/plock.lock"):
 
     '''
     import fcntl
-    os.makedirs(os.path.dirname( os.path.abspath(plock)  ))
+    os.makedirs(os.path.dirname(os.path.abspath(plock)), exist_ok=True)
     locked_file_descriptor = open( plock, 'w+')
     fcntl.flock(locked_file_descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
     return locked_file_descriptor
@@ -58,11 +58,12 @@ def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock"):
             fun_run(fun_args)
             os_lock_releaseLock(lock_fd)
             break
-        except :
-            log2("file lock waiting", 20*i, 'sec')
-            time.sleep(20*i)
+        except Exception as e:
+            # log2(e)
+            # reduce sleep time
+            log2("file lock waiting", 20, 'sec')
+            time.sleep(20)
             i += 1
-
 
 
 class IndexLock(object):
@@ -77,7 +78,7 @@ class IndexLock(object):
         self.plock = plock
         
         
-    def get(self, val="", ntry=5, plock="tmp/plock.lock"):    
+    def get(self):    
         with open(self.findex, mode='r') as fp:
             fall = fp.readlines()  
         return fall
@@ -101,9 +102,11 @@ class IndexLock(object):
                 os_lock_releaseLock(lock_fd)
                 return True
 
-            except :
-                log2("file lock waiting", i)
-                time.sleep(5*i*i)
+            except Exception as e:
+                # reduce waiting time
+                log2(f"file lock waiting {i}s")
+                # time.sleep(5*i*i)
+                time.sleep(i)
                 i += 1
             
 
@@ -154,3 +157,95 @@ def save_serialize(name, value):
 
   
   
+
+
+################################################################################################
+# Test functions
+def test1_check_funtions_working():
+    """Check that list function is working.
+    os_lock_releaseLock, os_lock_releaseLock, os_lock_execute
+
+    Basic test on only 1 thread
+    """
+    # test function
+    def running(fun_args):
+        print(f'Function running with arg: {fun_args}')
+    
+    # test that os_lock_execute is working
+    os_lock_execute(running, 'Test_args', plock='tmp/plock.lock')
+    os_lock_execute(running, [1, 2, 3], plock='tmp/plock.lock')
+
+
+def test2_check_funtions_thread():
+    """Check that list function is working.
+    os_lock_releaseLock, os_lock_releaseLock, os_lock_execute
+    Multi threads
+
+    How the test work.
+    - Create and run 5 threads. These threads try to access and use 1 function `running`
+    with os_lock_execute. So in one 1, only 1 thread can access and use this function.
+    """
+    import threading
+    
+    # define test function
+    def running(fun_args):
+        print(f'Function running in thread: {fun_args} START')
+        time.sleep(fun_args*3)
+        print(f'Function running in thread: {fun_args} END')
+
+    # define test thread
+    def thread_running(number):
+        print(f'Thread {number} START')
+        os_lock_execute(running, number, plock='tmp/plock2.lock')
+        print(f'Thread {number} sleeping in {number*3}s')
+        time.sleep(number*3)
+        print(f'Thread {number} END')
+
+    # Create thread
+    for i in range(5):
+        t = threading.Thread(target=thread_running, args=(i+1, ))
+        t.start()
+
+
+def test3_check_class_thread():
+    """Check that class IndexLock is working
+    Multi threads
+
+    How the test work.
+    - The test will create the INDEX with the file using plock
+    - Create 100 threads that try to write data to this INDEX file lock
+    - This test will make sure with this INDEX file log
+        only 1 thread can access and put data to this file.
+        Others will waiting to acquire key after thread release it.
+    """
+    import threading
+
+    file_name = "test.txt"
+    file_lock = "tmp/plock3.lock"
+
+    INDEX = IndexLock(file_name, file_lock)
+
+    #1. Create test file
+    with open(file_name, mode='w+') as fp:
+        pass
+
+    # define test thread
+    def thread_running(number):
+        print(f'Thread {number} START')
+        INDEX.put(f'Thread {number}')
+        print(f'Thread {number} END')
+
+    # Create thread
+    for i in range(100):
+        t = threading.Thread(target=thread_running, args=(i+1, ))
+        t.start()
+
+
+def test_all():
+    test1_check_funtions_working()
+    test2_check_funtions_thread()
+    test3_check_class_thread()
+
+
+if __name__ == '__main__':
+    test_all()
