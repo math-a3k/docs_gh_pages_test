@@ -41,9 +41,11 @@ def test():
     """    
 
 
-    """
-    pass
-
+    """    
+    df = pd_random()
+    
+    diskcache_save2(df, colkey, colvalue, db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
+                    sqlmode= 'fast', verbose=True)    
 
     
     
@@ -88,7 +90,7 @@ def db_size(db_dir= None):
     for fi in flist:
         print(fi.replace(db_dir,""), len( diskcache_load(fi, verbose=0) ))
             
-
+    
 
 
 
