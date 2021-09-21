@@ -15,9 +15,8 @@ https://pypi.org/project/panel-highcharts/#description
 https://mpld3.github.io/examples/networkxd3forcelayout.html
 
 """
-import random, os, sys, numpy as np, pandas as pd
+import random, os, numpy as np, pandas as pd
 from datetime import datetime
-from typing import List
 
 import matplotlib.pyplot as plt
 import mpld3
@@ -26,12 +25,9 @@ from scipy.cluster.hierarchy import ward, dendrogram
 from sklearn.cluster import KMeans
 from sklearn.manifold import MDS
 from sklearn.metrics.pairwise import cosine_similarity
-from tqdm import tqdm
-
-from box import Box 
 
 ##################################################################################################################
-from utilmy.viz.toptoolbar import TopToolbar
+from viz.zarchive.toptoolbar import TopToolbar
 # from toptoolbar import TopToolbar
 
 
@@ -96,7 +92,7 @@ class vizEmbedding:
             
         if mode == 'umap' :
             y_label = None
-            from umap import UMAP, AlignedUMAP, ParametricUMAP
+            from umap import UMAP
             clf = UMAP( set_op_mix_ratio=0.25, ## Preserve outlier
                         densmap=False, dens_lambda=5.0,          ## Preserve density
                         n_components= ndim,

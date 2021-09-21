@@ -1,4 +1,5 @@
-"""
+HELP="""
+pip install datasketch
 
 https://github.com/topics/hypothesis-testing?l=python&o=desc&s=stars
 
@@ -7,20 +8,47 @@ https://pypi.org/project/pysie/#description
 
 
 """
-import os
-import sys
-import pandas as pd
-import numpy as np
+import os,sys,  pandas as pd, numpy as np
 from typing import List
 
-
 def log(*s):
-    print(s)
+    print(s, flush=True)
+
+
+def help():
+    ss  = ""
+    ss += HELP
+    print(ss)
+
+
+def help_get_codesource(func):
+    """ Extract code source from func name"""
+    import inspect
+    try:
+        lines_to_skip = len(func.__doc__.split('\n'))
+    except AttributeError:
+        lines_to_skip = 0
+    lines = inspect.getsourcelines(func)[0]
+    return ''.join( lines[lines_to_skip+1:] )
 
 
 #############################################################################
-#############################################################################
+def test_lsh():
 
+    ll = ['aa bb cc', 'a b c', 'cc bb cc']
+    column_name = "sentence"
+    threshold = 0.7
+    num_perm = 10
+    num_items = 100000
+
+    df = pd.DataFrame(ll, columns=[column_name])
+    df1 = pd_text_getcluster(
+        df.head(num_items), column_name, threshold, num_perm)
+    print(df1)
+
+
+
+#############################################################################
 def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10):
     '''
     For each of the entry create a hash function
@@ -78,7 +106,7 @@ def pd_text_getcluster(df, col, threshold, num_perm):
     return df
 
 
-def pd_similarity(df: pd.DataFrame, cols=[], algo='') -> pd.DataFrame:
+def pd_text_similarity(df: pd.DataFrame, cols=[], algo='') -> pd.DataFrame:
     '''
         Return similarities between two columns with 
         python's SequenceMatcher algorithm
@@ -112,20 +140,19 @@ def pd_similarity(df: pd.DataFrame, cols=[], algo='') -> pd.DataFrame:
             is_junk = None
             similarity_score = SequenceMatcher(is_junk, col1, col2).ratio()
         return similarity_score
-    df['score'] = df.apply(lambda x: find_similarity(
-        x[cols[0]], x[cols[1]]), axis=1)
+
+    df['score'] = df.apply(lambda x: find_similarity( x[cols[0]], x[cols[1]]), axis=1)
     return df
 
 
-def test_lsh():
 
-    ll = ['aa bb cc', 'a b c', 'cc bb cc']
-    column_name = "sentence"
-    threshold = 0.7
-    num_perm = 10
-    num_items = 100000
 
-    df = pd.DataFrame(ll, columns=[column_name])
-    df1 = pd_text_getcluster(
-        df.head(num_items), column_name, threshold, num_perm)
-    print(df1)
+
+
+###################################################################################################
+if __name__ == "__main__":
+    import fire ;
+    fire.Fire()
+
+
+

@@ -57,7 +57,7 @@ Repo: ./
 | <a name='utilmy/text.py' href='.//utilmy/text.py'>utilmy/text.py</a> | function | <a href='.//utilmy/text.py#L17'>log</a> | print<br> |
 | <a name='utilmy/text.py' href='.//utilmy/text.py'>utilmy/text.py</a> | function | <a href='.//utilmy/text.py#L24'>pd_text_hash_create_lsh</a> | MinHashLSH<br>enumerate<br>sentence.split<br>MinHash<br>set<br>v.update<br>hash_lines.append<br>lsh.insert<br> |
 | <a name='utilmy/text.py' href='.//utilmy/text.py'>utilmy/text.py</a> | function | <a href='.//utilmy/text.py#L53'>pd_text_getcluster</a> | pd_text_hash_create_lsh<br>enumerate<br>lsh.query<br>list<br> |
-| <a name='utilmy/text.py' href='.//utilmy/text.py'>utilmy/text.py</a> | function | <a href='.//utilmy/text.py#L81'>pd_similarity</a> | len<br>Exception<br>find_similarity<br>fuzz.ratio<br>editdistance.eval<br>SequenceMatcher<br>df.apply<br> |
+| <a name='utilmy/text.py' href='.//utilmy/text.py'>utilmy/text.py</a> | function | <a href='.//utilmy/text.py#L81'>pd_text_similarity</a> | len<br>Exception<br>find_similarity<br>fuzz.ratio<br>editdistance.eval<br>SequenceMatcher<br>df.apply<br> |
 | <a name='utilmy/text.py' href='.//utilmy/text.py'>utilmy/text.py</a> | function | <a href='.//utilmy/text.py#L120'>test_lsh</a> | pd.DataFrame<br>pd_text_getcluster<br>df.head<br>print<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L6'>log</a> | print<br>log2<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L9'>log2</a> | print<br> |

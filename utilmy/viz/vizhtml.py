@@ -1322,8 +1322,7 @@ x.onclick = function() {
 ###################################################################################################
 ###################################################################################################
 def help_get_codesource(func):
-    """ Using the magic method __doc__, we KNOW the size of the docstring.
-        We then, just substract this from the total length of the function
+    """ Extract code source from func name
     """
     import inspect
     try:

@@ -250,7 +250,7 @@ def test_text_similarity():
 
     cols = ['name','pet_name']
     sample_df = pd.DataFrame(zip(list1, list2), columns=cols)
-    original_value = text.pd_similarity(sample_df, cols)['score']
+    original_value = text.pd_text_similarity(sample_df, cols)['score']
 
     check_similarity = lambda *x: SequenceMatcher(None, *x[0]).ratio()
     

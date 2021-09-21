@@ -21,7 +21,7 @@ uri,name,type,n_variable,n_words,n_words_unique,n_characters,avg_char_per_word,n
 ./test.py:test_decorators_os,test_decorators_os,function,28,58,46,726,12.52,0,0,['*args'],[None],[None],155,[],"['test_print', 'print', 'multithread_run_list', 'profiled_sum', 'sum', 'profiler_context', 'profiler_start', 'profiler_stop', 'dummy_func', 'time.sleep', 'method', 'DummyClass', 'a.method']",13
 ./test.py:pd_generate_data,pd_generate_data,function,19,66,49,467,7.08,0,0,"['ncols', 'nrows']","[None, None]","['7', '100']",209,"['    """"""\n', '    Generate sample data for function testing\n', '    categorical features for anova test\n', '    """"""\n']","['random.random', 'range', 'pd.DataFrame', 'np.where']",4
 ./test.py:test_tabular_test,test_tabular_test,function,10,16,16,182,11.38,0,0,[],[],[],227,"['        """"""\n', '        ANOVA test\n', '        """"""\n']","['pd_generate_data', 'test_anova', 'test_normality2', 'test_plot_qqplot']",4
-./test.py:test_text_similarity,test_text_similarity,function,21,45,39,522,11.6,0,0,[],[],[],242,[],"['pd.DataFrame', 'text.pd_similarity', 'SequenceMatcher', 'pd.Series', 'check_similarity', 'assert_series_equal']",6
+./test.py:test_text_similarity,test_text_similarity,function,21,45,39,522,11.6,0,0,[],[],[],242,[],"['pd.DataFrame', 'text.pd_text_similarity', 'SequenceMatcher', 'pd.Series', 'check_similarity', 'assert_series_equal']",6
 ./test.py:test_text_pdcluster,test_text_pdcluster,function,5,6,6,59,9.83,0,0,[],[],[],262,[],['test_lsh'],1
 ./dsa2/core_deploy.py:load_arguments,load_arguments,function,6,18,14,243,13.5,0,0,[],[],[],16,"['    """"""\n', '    Get arguments from command line.\n', '    """"""\n']","['argparse.ArgumentParser', 'p.add_argument', 'p.parse_args']",3
 ./dsa2/core_run.py:get_global_pars,get_global_pars,function,9,26,23,303,11.65,0,0,['config_uri'],[None],"['""""']",38,[],"['log', 'print', 'load_function_uri', 'model_dict_fun']",4
@@ -179,7 +179,7 @@ uri,name,type,n_variable,n_words,n_words_unique,n_characters,avg_char_per_word,n
 ./utilmy/text.py:log,log,function,1,1,1,8,8.0,0,0,['*s'],[None],[None],17,[],['print'],1
 ./utilmy/text.py:pd_text_hash_create_lsh,pd_text_hash_create_lsh,function,22,32,29,327,10.22,2,0,"['df', 'col', 'sep', 'threshold', 'num_perm']","[None, None, None, None, None]","[None, None, '"" ""', '0.7', '10']",24,"[""    '''\n"", '    For each of the entry create a hash function\n', ""    '''\n""]","['MinHashLSH', 'enumerate', 'sentence.split', 'MinHash', 'set', 'v.update', 'hash_lines.append', 'lsh.insert']",8
 ./utilmy/text.py:pd_text_getcluster,pd_text_getcluster,function,16,37,32,367,9.92,1,1,"['df', 'col', 'threshold', 'num_perm']","[None, None, None, None]","[None, None, None, None]",53,"[""    '''\n"", '    For each of the hash function find a cluster and assign unique id to the dataframe cluster_id\n', ""    '''\n""]","['pd_text_hash_create_lsh', 'enumerate', 'lsh.query', 'list']",4
-./utilmy/text.py:pd_similarity,pd_similarity,function,20,65,51,548,8.43,1,3,"['df', 'cols', 'algo']","[' pd.DataFrame', None, None]","[None, '[]', ""''""]",81,"[""    '''\n"", '        Return similarities between two columns with \n', ""        python's SequenceMatcher algorithm\n"", '\n', '        Args:\n', '            df (pd.DataFrame): Pandas Dataframe.\n', '            algo (String)    : rapidfuzz | editdistance \n', '            cols (list[str]) : List of of columns name (2 columns)\n', '\n', '        Returns:\n', '            pd.DataFrame\n', '\n', ""    '''\n""]","['len', 'Exception', 'find_similarity', 'fuzz.ratio', 'editdistance.eval', 'SequenceMatcher', 'df.apply']",7
+./utilmy/text.py:pd_text_similarity,pd_text_similarity,function,20,65,51,548,8.43,1,3,"['df', 'cols', 'algo']","[' pd.DataFrame', None, None]","[None, '[]', ""''""]",81,"[""    '''\n"", '        Return similarities between two columns with \n', ""        python's SequenceMatcher algorithm\n"", '\n', '        Args:\n', '            df (pd.DataFrame): Pandas Dataframe.\n', '            algo (String)    : rapidfuzz | editdistance \n', '            cols (list[str]) : List of of columns name (2 columns)\n', '\n', '        Returns:\n', '            pd.DataFrame\n', '\n', ""    '''\n""]","['len', 'Exception', 'find_similarity', 'fuzz.ratio', 'editdistance.eval', 'SequenceMatcher', 'df.apply']",7
 ./utilmy/text.py:test_lsh,test_lsh,function,10,28,27,222,7.93,0,0,[],[],[],120,[],"['pd.DataFrame', 'pd_text_getcluster', 'df.head', 'print']",4
 ./utilmy/utilmy.py:log,log,function,3,10,9,76,7.6,0,1,['*s'],[None],[None],6,[],"['print', 'log2']",2
 ./utilmy/utilmy.py:log2,log2,function,2,6,6,32,5.33,0,1,"['*s', 'verbose']","[None, None]","[None, '1']",9,[],['print'],1
@@ -3246,27 +3246,27 @@ Name: uri, dtype: object12: 0                               ./utilmy/tabular.py:
 Name: uri, dtype: object0: 0                        ./utilmy/text.py:log
 1    ./utilmy/text.py:pd_text_hash_create_lsh
 2         ./utilmy/text.py:pd_text_getcluster
-3              ./utilmy/text.py:pd_similarity
+3              ./utilmy/text.py:pd_text_similarity
 4                   ./utilmy/text.py:test_lsh
 Name: uri, dtype: object1: 0                        ./utilmy/text.py:log
 1    ./utilmy/text.py:pd_text_hash_create_lsh
 2         ./utilmy/text.py:pd_text_getcluster
-3              ./utilmy/text.py:pd_similarity
+3              ./utilmy/text.py:pd_text_similarity
 4                   ./utilmy/text.py:test_lsh
 Name: uri, dtype: object2: 0                        ./utilmy/text.py:log
 1    ./utilmy/text.py:pd_text_hash_create_lsh
 2         ./utilmy/text.py:pd_text_getcluster
-3              ./utilmy/text.py:pd_similarity
+3              ./utilmy/text.py:pd_text_similarity
 4                   ./utilmy/text.py:test_lsh
 Name: uri, dtype: object3: 0                        ./utilmy/text.py:log
 1    ./utilmy/text.py:pd_text_hash_create_lsh
 2         ./utilmy/text.py:pd_text_getcluster
-3              ./utilmy/text.py:pd_similarity
+3              ./utilmy/text.py:pd_text_similarity
 4                   ./utilmy/text.py:test_lsh
 Name: uri, dtype: object4: 0                        ./utilmy/text.py:log
 1    ./utilmy/text.py:pd_text_hash_create_lsh
 2         ./utilmy/text.py:pd_text_getcluster
-3              ./utilmy/text.py:pd_similarity
+3              ./utilmy/text.py:pd_text_similarity
 4                   ./utilmy/text.py:test_lsh
 Name: uri, dtype: object0: 0                  ./utilmy/utilmy.py:log
 1                 ./utilmy/utilmy.py:log2

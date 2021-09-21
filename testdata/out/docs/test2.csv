@@ -69,7 +69,7 @@ uri, type, function, detail
 ./test.py:test_tabular_test, function, test_normality2, test_normality2
 ./test.py:test_tabular_test, function, test_plot_qqplot, test_plot_qqplot
 ./test.py:test_text_similarity, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
-./test.py:test_text_similarity, function, text.pd_similarity, [CLASS] [SIDE PACKAGE]: text:pd_similarity
+./test.py:test_text_similarity, function, text.pd_text_similarity, [CLASS] [SIDE PACKAGE]: text:pd_text_similarity
 ./test.py:test_text_similarity, function, SequenceMatcher, SequenceMatcher
 ./test.py:test_text_similarity, function, pd.Series, [CLASS] [SIDE PACKAGE]: pd:Series
 ./test.py:test_text_similarity, function, check_similarity, check_similarity
@@ -268,13 +268,13 @@ uri, type, function, detail
 ./utilmy/text.py:pd_text_getcluster, function, enumerate, [built-In]:enumerate
 ./utilmy/text.py:pd_text_getcluster, function, lsh.query, [CLASS] [SIDE PACKAGE]: lsh:query
 ./utilmy/text.py:pd_text_getcluster, function, list, [built-In]:list
-./utilmy/text.py:pd_similarity, function, len, [built-In]:len
-./utilmy/text.py:pd_similarity, function, Exception, Exception
-./utilmy/text.py:pd_similarity, function, find_similarity, find_similarity
-./utilmy/text.py:pd_similarity, function, fuzz.ratio, [CLASS] [SIDE PACKAGE]: fuzz:ratio
-./utilmy/text.py:pd_similarity, function, editdistance.eval, [CLASS] [SIDE PACKAGE]: editdistance:eval
-./utilmy/text.py:pd_similarity, function, SequenceMatcher, SequenceMatcher
-./utilmy/text.py:pd_similarity, function, df.apply, [CLASS] [SIDE PACKAGE]: df:apply
+./utilmy/text.py:pd_text_similarity, function, len, [built-In]:len
+./utilmy/text.py:pd_text_similarity, function, Exception, Exception
+./utilmy/text.py:pd_text_similarity, function, find_similarity, find_similarity
+./utilmy/text.py:pd_text_similarity, function, fuzz.ratio, [CLASS] [SIDE PACKAGE]: fuzz:ratio
+./utilmy/text.py:pd_text_similarity, function, editdistance.eval, [CLASS] [SIDE PACKAGE]: editdistance:eval
+./utilmy/text.py:pd_text_similarity, function, SequenceMatcher, SequenceMatcher
+./utilmy/text.py:pd_text_similarity, function, df.apply, [CLASS] [SIDE PACKAGE]: df:apply
 ./utilmy/text.py:test_lsh, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./utilmy/text.py:test_lsh, function, pd_text_getcluster, pd_text_getcluster
 ./utilmy/text.py:test_lsh, function, df.head, [CLASS] [SIDE PACKAGE]: df:head

@@ -1,13 +1,36 @@
-# pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
-import os, sys, time, datetime,inspect, json, yaml, gc
+HELP= """
 
+
+
+"""
+import os, sys, time, datetime,inspect, json, yaml, gc
 
 def log(*s):
     print(*s, flush=True)
 
 def log2(*s, verbose=1):
     if verbose >0 : print(*s, flush=True)
+
+
+def help():
+    ss  = ""
+
+
+    ss += HELP
+    print(ss)
+
+
+def help_get_codesource(func):
+    """ Extract code source from func name"""
+    import inspect
+    try:
+        lines_to_skip = len(func.__doc__.split('\n'))
+    except AttributeError:
+        lines_to_skip = 0
+    lines = inspect.getsourcelines(func)[0]
+    return ''.join( lines[lines_to_skip+1:] )
+
 
 
 ###################################################################################################
@@ -108,7 +131,6 @@ def to_float(x):
         return float(x)
     except :
         return float("NaN")
-
 
 def to_int(x):
     try :
@@ -234,7 +256,6 @@ def config_load(config_path:str = None,
 
 
 
-
 def global_verbosity(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
     """ Get global verbosity
@@ -308,31 +329,10 @@ def git_current_hash(mode='full'):
 
 ######################################################################################################
 ###### Plot ##########################################################################################
-def plot_to_html(dir_input="*.png", out_file="graph.html", title="", verbose=False):
-    """
-      plot_to_html( model_path + "/graph_shop_17_past/*.png" , model_path + "shop_17.html" )
+from utilmy.viz.vizhtml import (
+  images_to_html   ### folder of images to HTML
 
-    """
-    import matplotlib.pyplot as plt
-    import base64
-    from io import BytesIO
-    import glob
-    html = f'<html><body><h2>{title}</h2>'
-    flist = glob.glob(dir_input)
-    flist.sorted()
-    for fp in flist :
-        if verbose : print(fp,end=",")
-        with open(fp, mode="rb" ) as fp2 :
-            tmpfile =fp2.read()
-        encoded = base64.b64encode( tmpfile ) .decode('utf-8')
-        html =  html + f'<p><img src=\'data:image/png;base64,{encoded}\'> </p>\n'
-    html = html + "</body></html>"
-    with open(out_file,'w') as f:
-        f.write(html)
-
-
-
-
+)
 
 
 
@@ -406,7 +406,6 @@ class Session(object) :
              print(filename, e)
 
 
-
 def save(dd, to_file="", verbose=False):
   import pickle, os
   os.makedirs(os.path.dirname(to_file), exist_ok=True)
@@ -424,70 +423,22 @@ def load(to_file=""):
 
 ###################################################################################################
 ###### Debug ######################################################################################
-def print_everywhere():
-    """
-    https://github.com/alexmojaki/snoop
-    """
-    txt ="""
-    import snoop; snoop.install()  ### can be used anywhere
-    
-    @snoop
-    def myfun():
-    
-    from snoop import pp
-    pp(myvariable)
-        
-    """
-    import snoop
-    snoop.install()  ### can be used anywhere"
-    print("Decaorator @snoop ")
-    
-    
-def log10(*s, nmax=60):
-    """ Display variable name, type when showing,  pip install varname
-    
-    """
-    from varname import varname, nameof
-    for x in s :
-        print(nameof(x, frame=2), ":", type(x), "\n",  str(x)[:nmax], "\n")
-        
-    
-def log5(*s):
-    """    ### Equivalent of print, but more :  https://github.com/gruns/icecream
-    pip install icrecream
-    ic()  --->  ic| example.py:4 in foo()
-    ic(var)  -->   ic| d['key'][1]: 'one'
-    
-    """
-    from icecream import ic
-    return ic(*s)
-    
-    
-def log_trace(msg="", dump_path="", globs=None):
-    print(msg)
-    import pdb;
-    pdb.set_trace()
+from utilmy.debug import (
+    print_everywhere,
+
+    log10,
+    log_trace,  ###(msg="", dump_path="", globs=None)  Debug with full trace message
 
 
-def profiler_start():
-    ### Code profiling
-    from pyinstrument import Profiler
-    global profiler
-    profiler = Profiler()
-    profiler.start()
-
-
-def profiler_stop():
-    global profiler
-    profiler.stop()
-    print(profiler.output_text(unicode=True, color=True))
-
+    profiler_start,
+    profiler_stop
+)
 
 
 
 ###################################################################################################
 if __name__ == "__main__":
-    import fire
+    import fire ;
     fire.Fire()
 
 

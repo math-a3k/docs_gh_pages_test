@@ -38883,7 +38883,7 @@ plot_price(price_normalize100(ret_open1[157, 86:86+twindow-1])-100,px-100   )
     </details>
     <details>
         <summary>
-        function | <a name='utilmy/text.py:pd_similarity' href='.//utilmy/text.py#L81'>pd_similarity</a>
+        function | <a name='utilmy/text.py:pd_text_similarity' href='.//utilmy/text.py#L81'>pd_text_similarity</a>
         </summary>
         <ul>
         <li>Args:</li>
