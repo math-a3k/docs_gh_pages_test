@@ -10,14 +10,14 @@ db_path : Single DB storage
 
 
 """
-import os, glob, sys, math, string, time, json, logging, functools, random,   scipy,  yaml, operator, gc
+import os, glob, sys, math, string, time, json, logging, functools, random, yaml, operator, gc
 from pathlib import Path; from collections import defaultdict, OrderedDict ;  
-import diskcache as dc
-
 # from utilmy import  to_file, date_now_jp
 from box import Box
 
+import diskcache as dc
 
+#####################################################################################    
 def log(*s):
     print(*s, flush=True)
         
@@ -36,17 +36,38 @@ def help():
 
 
 #####################################################################################    
-#####################################################################################            
+#####################################################################################
+def pd_random(nrows=1000, ncols= 5):
+    return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )
+
 def test():
     """    
 
 
     """    
-    df = pd_random(10**6, ncols=2)
-    
-    diskcache_save2(df, colkey, colvalue, db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
-                    sqlmode= 'fast', verbose=True)    
+    n = 10**6
+    df      = pd_random(n, ncols=2)    
+    df['0'] = [  str(x) for x in np.arange(0, len(df)) ]
+    df['1'] = [  'xxxxx' + str(x) for x in np.arange(0, len(df)) ]
 
+    
+    log('##### multithread insert  commit ##################################')    
+    t0 = time.time()
+    diskcache_save2(df, colkey='0', colvalue='1', db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
+                    sqlmode= 'fast', verbose=True)    
+    log(n, time.time()-t0)
+    
+    
+    log('##### multithread insert commit  ##################################')    
+    t0 = time.time()
+    diskcache_save2(df, colkey='0', colvalue='1', db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
+                    sqlmode= 'commit', verbose=True)    
+    log(n, time.time()-t0)
+
+    
+    
+    
+    
     
     
     
@@ -222,7 +243,7 @@ def diskcache_get(cache, key, defaultval=None):
 
 
 def diskcache_config(db_path=None, task='commit'):
-    """ .open "/data/workspaces/takos01/cpa/db/e"    python prepro.py diskcache_config 
+    """ .open "//e"    python prepro.py diskcache_config 
     https://sqlite.org/wal.html
     
     PRAGMA journal_mode = DELETE;   (You can switch it back afterwards.)
