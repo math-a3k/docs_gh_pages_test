@@ -1,15 +1,25 @@
-# pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
+HELP="""
+https://github.com/uqfoundation/pox/tree/master/pox
+
+
+"""
 import os, sys, time, datetime,inspect, json, yaml, gc
 
-
+#################################################################
 def log(*s):
     print(*s, flush=True)
 
 def log2(*s, verbose=1):
     if verbose >0 : print(*s, flush=True)
 
+def help():
+    ss = HELP
+    print(ss)
 
+    
+        
+################################################################3#        
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
