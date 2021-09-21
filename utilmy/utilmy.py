@@ -55,7 +55,7 @@ from utilmy.keyvalue import  (
 
 
 ###################################################################################################
-###### Pandas #####################################################################################
+###### Parallel #####################################################################################
 from utilmy.parallel import (
     multithread_run,
     multiproc_run
@@ -63,6 +63,9 @@ from utilmy.parallel import (
 
 
 
+
+###################################################################################################
+####### Base tyoe #################################################################################
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
@@ -113,7 +116,6 @@ def to_int(x):
     except :
         return float("NaN")
 
-
 def is_int(x):
     try :
         int(x)
@@ -132,9 +134,46 @@ def is_float(x):
 
 
 ########################################################################################################
+
+
+
 ##### OS, cofnfig ######################################################################################
-def config_load(config_path:str = None, 
-                path_default:str=None, 
+from utilmy.oos import(
+    os_getsize,
+    os_path_split,
+    os_file_check,
+    os_file_replacestring,
+    os_walk,
+    z_os_search_fast,
+    os_search_content,
+    os_get_function_name,
+    os_variable_exist,
+    os_variable_init,
+    os_import,
+    os_variable_check,
+    os_clean_memory,
+    os_system_list,
+    os_to_file,
+    os_platform_os,
+    os_platform_ip,
+    os_memory,
+    os_sleep_cpu,
+    os_cpu,
+    os_ram_object,
+    os_copy,
+    os_removedirs,
+    os_getcwd,
+    os_system,
+    os_makedirs
+)
+
+
+
+
+################################################################################################
+################################################################################################
+def config_load(config_path:str = None,
+                path_default:str=None,
                 config_default:dict=None):
     """Load Config file into a dict  from .json or .yaml file
     TODO .cfg file
@@ -167,7 +206,7 @@ def config_load(config_path:str = None,
         config_path = config_path_default
     else :
         config_path = pathlib.Path(config_path)
-        
+
     try:
         log("loading config", config_path)
         if ".yaml" in config_path :
@@ -195,405 +234,7 @@ def config_load(config_path:str = None,
 
 
 
-def os_getsize(start_path = '.'):
-    total_size = 0
-    for dirpath, dirnames, filenames in os.walk(start_path):
-        for f in filenames:
-            fp = os.path.join(dirpath, f)
-            # skip if it is symbolic link
-            if not os.path.islink(fp):
-                total_size += os.path.getsize(fp)
 
-    return total_size
-
-
-def os_path_split(fpath:str=""):
-    #### Get path split
-    fpath = fpath.replace("\\", "/")
-    if fpath[-1] == "/":
-        fpath = fpath[:-1]
-
-    parent = "/".join(fpath.split("/")[:-1])
-    fname  = fpath.split("/")[-1]
-    if "." in fname :
-        ext = ".".join(fname.split(".")[1:])
-    else :
-        ext = ""
-
-    return parent, fname, ext
-
-
-
-def os_file_replacestring(findstr, replacestr, some_dir, pattern="*.*", dirlevel=1):
-    """ #fil_replacestring_files("logo.png", "logonew.png", r"D:/__Alpaca__details/aiportfolio",
-        pattern="*.html", dirlevel=5  )
-    """
-    def os_file_replacestring1(find_str, rep_str, file_path):
-        """replaces all find_str by rep_str in file file_path"""
-        import fileinput
-
-        file1 = fileinput.FileInput(file_path, inplace=True, backup=".bak")
-        for line in file1:
-            line = line.replace(find_str, rep_str)
-            sys.stdout.write(line)
-        file1.close()
-        print(("OK: " + format(file_path)))
-
-
-    list_file = os_walk(some_dir, pattern=pattern, dirlevel=dirlevel)
-    list_file = list_file['file']
-    for file1 in list_file:
-        os_file_replacestring1(findstr, replacestr, file1)
-
-
-def os_walk(path, pattern="*", dirlevel=50):
-    """ dirlevel=0 : root directory
-        dirlevel=1 : 1 path below
-
-    """
-    import fnmatch, os, numpy as np
-
-    matches = {'file':[], 'dir':[]}
-    dir1    = path.replace("\\", "/").rstrip("/")
-    num_sep = dir1.count("/")
-
-    for root, dirs, files in os.walk(dir1):
-        root = root.replace("\\", "/")
-        for fi in files :
-            if root.count("/") > num_sep + dirlevel: continue 
-            matches['file'].append(os.path.join(root, fi).replace("\\","/"))
-
-        for di in dirs :
-            if root.count("/") > num_sep + dirlevel: continue 
-            matches['dir'].append(os.path.join(root, di).replace("\\","/") + "/")
-
-    ### Filter files
-    matches['file'] = [ t for t in fnmatch.filter(matches['file'], pattern) ] 
-    return  matches
-
-
-
-def z_os_search_fast(fname, texts=None, mode="regex/str"):
-    import re
-    if texts is None:
-        texts = ["myword"]
-
-    res = []  # url:   line_id, match start, line
-    enc = "utf-8"
-    fname = os.path.abspath(fname)
-    try:
-        if mode == "regex":
-            texts = [(text, re.compile(text.encode(enc))) for text in texts]
-            for lineno, line in enumerate(open(fname, "rb")):
-                for text, textc in texts:
-                    found = re.search(textc, line)
-                    if found is not None:
-                        try:
-                            line_enc = line.decode(enc)
-                        except UnicodeError:
-                            line_enc = line
-                        res.append((text, fname, lineno + 1, found.start(), line_enc))
-
-        elif mode == "str":
-            texts = [(text, text.encode(enc)) for text in texts]
-            for lineno, line in enumerate(open(fname, "rb")):
-                for text, textc in texts:
-                    found = line.find(textc)
-                    if found > -1:
-                        try:
-                            line_enc = line.decode(enc)
-                        except UnicodeError:
-                            line_enc = line
-                        res.append((text, fname, lineno + 1, found, line_enc))
-
-    except IOError as xxx_todo_changeme:
-        (_errno, _strerror) = xxx_todo_changeme.args
-        print("permission denied errors were encountered")
-
-    except re.error:
-        print("invalid regular expression")
-
-    return res
-
-
-
-def os_search_content(srch_pattern=None, mode="str", dir1="", file_pattern="*.*", dirlevel=1):
-    """  search inside the files
-
-    """
-    import pandas as pd
-    if srch_pattern is None:
-        srch_pattern = ["from ", "import "]
-
-    list_all = os_walk(dir1, pattern=file_pattern, dirlevel=dirlevel)
-    ll = []
-    for f in list_all["fullpath"]:
-        ll = ll + z_os_search_fast(f, texts=srch_pattern, mode=mode)
-    df = pd.DataFrame(ll, columns=["search", "filename", "lineno", "pos", "line"])
-    return df
-
-
-def os_get_function_name():
-    ### Get ane,
-    import sys, socket
-    ss = str(os.getpid()) # + "-" + str( socket.gethostname())
-    ss = ss + "," + str(__name__)
-    try :
-        ss = ss + "," + __class__.__name__
-    except :
-        ss = ss + ","
-    ss = ss + "," + str(  sys._getframe(1).f_code.co_name)
-    return ss
-
-
-def os_variable_init(ll, globs):
-    for x in ll :
-        try :
-          globs[x]
-        except :
-          globs[x] = None
-
-
-def os_import(mod_name="myfile.config.model", globs=None, verbose=True):
-    ### Import in Current Python Session a module   from module import *
-    ### from mod_name import *
-    module = __import__(mod_name, fromlist=['*'])
-    if hasattr(module, '__all__'):
-        all_names = module.__all__
-    else:
-        all_names = [name for name in dir(module) if not name.startswith('_')]
-
-    all_names2 = []
-    no_list    = ['os', 'sys' ]
-    for t in all_names :
-        if t not in no_list :
-          ### Mot yet loaded in memory  , so cannot use Global
-          #x = str( globs[t] )
-          #if '<class' not in x and '<function' not in x and  '<module' not in x :
-          all_names2.append(t)
-    all_names = all_names2
-
-    if verbose :
-      print("Importing: ")
-      for name in all_names :
-         print( f"{name}=None", end=";")
-      print("")
-    globs.update({name: getattr(module, name) for name in all_names})
-
-
-def os_variable_exist(x ,globs, msg="") :
-    x_str = str(globs.get(x, None))
-    if "None" in x_str:
-        log("Using default", x)
-        return False
-    else :
-        log("Using ", x)
-        return True
-
-
-def os_variable_check(ll, globs=None, do_terminate=True):
-  import sys
-  for x in ll :
-      try :
-         a = globs[x]
-         if a is None : raise Exception("")
-      except :
-          log("####### Vars Check,  Require: ", x  , "Terminating")
-          if do_terminate:
-                 sys.exit(0)
-
-
-def os_clean_memory( varlist , globx):
-  for x in varlist :
-    try :
-       del globx[x]
-       gc.collect()
-    except : pass
-
-
-def os_system_list(ll, logfile=None, sleep_sec=10):
-   ### Execute a sequence of cmd
-   import time, sys
-   n = len(ll)
-   for ii,x in enumerate(ll):
-        try :
-          log(x)
-          if sys.platform == 'win32' :
-             cmd = f" {x}   "
-          else :
-             cmd = f" {x}   2>&1 | tee -a  {logfile} " if logfile is not None else  x
-
-          os.system(cmd)
-
-          # tx= sum( [  ll[j][0] for j in range(ii,n)  ]  )
-          # log(ii, n, x,  "remaining time", tx / 3600.0 )
-          #log('Sleeping  ', x[0])
-          time.sleep(sleep_sec)
-        except Exception as e:
-            log(e)
-
-
-def os_file_check(fp):
-   import os, time
-   try :
-       log(fp,  os.stat(fp).st_size*0.001, time.ctime(os.path.getmtime(fp)) )
-   except :
-       log(fp, "Error File Not exist")
-
-
-def os_to_file( txt="", filename="ztmp.txt",  mode='a'):
-    with open(filename, mode=mode) as fp:
-        fp.write(txt + "\n")
-
-
-def os_platform_os():
-    #### get linux or windows
-    return sys.platform
-
-
-def os_cpu():
-    ### Nb of cpus cores
-    return os.cpu_count()
-
-
-def os_platform_ip():
-    ### IP
-    pass
-
-
-def os_memory():
-    """ Get node total memory and memory usage in linux
-    """
-    with open('/proc/meminfo', 'r') as mem:
-        ret = {}
-        tmp = 0
-        for i in mem:
-            sline = i.split()
-            if str(sline[0]) == 'MemTotal:':
-                ret['total'] = int(sline[1])
-            elif str(sline[0]) in ('MemFree:', 'Buffers:', 'Cached:'):
-                tmp += int(sline[1])
-        ret['free'] = tmp
-        ret['used'] = int(ret['total']) - int(ret['free'])
-    return ret
-
-
-def os_sleep_cpu(priority=300, cpu_min=50, sleep=10):
-    #### Sleep until CPU becomes normal usage
-    import psutil, time
-
-    aux = psutil.cpu_percent()
-    while aux > cpu_min:
-        #print("CPU:", aux, time.time())
-        time.sleep(priority)
-        aux = psutil.cpu_percent()
-        time.sleep(sleep)
-        aux = 0.5 * (aux + psutil.cpu_percent())
-    return aux
-
-
-def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
-    """ deep_getsizeof(df_pd, set())
-    Find the memory footprint of a Python object
-    The sys.getsizeof function does a shallow size of only. It counts each
-    object inside a container as pointer only regardless of how big it
-    """
-    from collections import Mapping, Container
-    from sys import getsizeof
-
-    _ = hint
-
-    d = os_ram_object
-    if id(o) in ids:
-        return 0
-
-    r = getsizeof(o)
-    ids.add(id(o))
-
-    if isinstance(o, str) or isinstance(0, str):
-        r = r
-
-    if isinstance(o, Mapping):
-        r = r + sum(d(k, ids) + d(v, ids) for k, v in o.items())
-
-    if isinstance(o, Container):
-        r = r + sum(d(x, ids) for x in o)
-
-    return r * 0.0000001
-
-
-
-def os_copy(src, dst, overwrite=False, exclude=""):
-    import shutil
-    def ignore_pyc_files(dirname, filenames):
-        return [name for name in filenames if name.endswith('.pyc')]
-
-
-    patterns = exclude.split(";")
-    os.makedirs(dst, exist_ok=True)
-    shutil.copytree(src, dst, ignore = shutil.ignore_patterns(*patterns))
-
-
-
-def os_removedirs(path):
-    """  issues with no empty Folder
-    # Delete everything reachable from the directory named in 'top',
-    # assuming there are no symbolic links.
-    # CAUTION:  This is dangerous!  For example, if top == '/', it could delete all your disk files.
-    """
-    if len(path) < 3 :
-        print("cannot delete root folder")
-        return False
-
-    import os
-    for root, dirs, files in os.walk(path, topdown=False):
-        for name in files:
-            try :
-              os.remove(os.path.join(root, name))
-            except :
-              pass
-        for name in dirs:
-            try :
-              os.rmdir(os.path.join(root, name))
-            except: pass
-    try :
-      os.rmdir(path)
-    except: pass
-    return True
-
-
-def os_getcwd():
-    ## This is for Windows Path normalized As Linux /
-    root = os.path.abspath(os.getcwd()).replace("\\", "/") + "/"
-    return  root
-
-
-def os_system(cmd, doprint=False):
-  """ get values
-       os_system( f"   ztmp ",  doprint=True)
-  """
-  import subprocess
-  try :
-    p          = subprocess.run( cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, )
-    mout, merr = p.stdout.decode('utf-8'), p.stderr.decode('utf-8')
-    if doprint:
-      l = mout  if len(merr) < 1 else mout + "\n\nbash_error:\n" + merr
-      print(l)
-
-    return mout, merr
-  except Exception as e :
-    print( f"Error {cmd}, {e}")
-
-
-def os_makedirs(dir_or_file):
-    if os.path.isfile(dir_or_file) or "." in dir_or_file.split("/")[-1] :
-        os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
-    else :
-        os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
-
-
-################################################################################################
-################################################################################################
 def global_verbosity(cur_path, path_relative="/../../config.json",
                    default=5, key='verbosity',):
     """ Get global verbosity
@@ -632,174 +273,13 @@ def global_verbosity(cur_path, path_relative="/../../config.json",
 
 
 
-
-
-
-
 ######################################################################################################
 ######## External IO #################################################################################
-def hdfs_put(from_dir="", to_dir="",  verbose=True, n_pool=25, dirlevel=50,  **kw):
-    """ 
-     hdfs_put LocalFile into HDFS in multi-thread
-    from_dir = "hdfs://nameservice1/user/
-    to_dir   = "data/"
-    
-    """
-    import glob, gc,os, time, pyarrow as pa
-    from multiprocessing.pool import ThreadPool
-
-    def log(*s, **kw):
-      print(*s, flush=True)
-    
-    #### File ############################################   
-    hdfs      = pa.hdfs.connect()  
-    hdfs.mkdir(to_dir  )  
-
-    from utilmy import os_walk    
-    dd = os_walk(from_dir, dirlevel= dirlevel, pattern="*") 
-    fdirs, file_list = dd['dir'], dd['file']
-    file_list = sorted(list(set(file_list)))
-    n_file    = len(file_list)
-    log('Files', n_file)
-
-    file_list2 = [] 
-    for i, filei in enumerate(file_list) :
-        file_list2.append( (filei,   to_dir + filei.replace(from_dir,"")   )  )
-
-
-    ##### Create Target dirs  ###########################
-    fdirs = [ t.replace(from_dir,"") for t in fdirs]
-    for di in fdirs :
-        hdfs.mkdir(to_dir + "/" + di )   
-
-    #### Input xi #######################################    
-    xi_list = [ []  for t in range(n_pool) ]     
-    for i, xi in enumerate(file_list2) :
-        jj = i % n_pool 
-        xi_list[jj].append( xi )
-        
-    #### function #######################################
-    def fun_async(xlist):
-      for x in xlist :   
-         try :
-           with open(x[0], mode='rb') as f:
-                hdfs.upload(x[1], f,)                        
-         except :
-            try :
-               time.sleep(60)
-               with open(x[0], mode='rb') as f:
-                  hdfs.upload(x[1], f,)  
-            except : print('error', x[1])
-                  
-    #### Pool execute ###################################
-    pool     = ThreadPool(processes=n_pool)
-    job_list = []
-    for i in range(n_pool):
-         job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
-         if verbose : log(i, xi_list[i] )
-
-    res_list = []            
-    for i in range(n_pool):
-        if i >= len(job_list): break
-        res_list.append( job_list[ i].get() )
-        log(i, 'job finished')
-
-
-    pool.terminate() ; pool.join()  ;  pool = None          
-    log('n_processed', len(res_list) )
-    
-
-
-
-def hdfs_walk(path="hdfs://nameservice1/user/", dirlevel=3, hdfs=None):   ### python  prepro.py hdfs_walk 
-    import pyarrow as pa
-    hdfs = pa.hdfs.connect() if hdfs is None else hdfs
-    path = "hdfs://nameservice1/" + path if 'hdfs://' not in path else path   
-         
-    def os_walk(fdirs):
-        flist3 = []
-        for diri  in fdirs :
-            flist3.extend( [ t for t in hdfs.ls(diri) ]  )
-        fdirs3 = [ t   for t in flist3 if hdfs.isdir(t) ]  
-        return flist3, fdirs3
-    
-    flist0, fdirs0   = os_walk([path])
-    fdirs = fdirs0
-    for i in range(dirlevel):
-       flisti, fdiri = os_walk(fdirs)     
-       flist0 =  list(set(flist0  + flisti ))
-       fdirs0 =  list(set(fdirs0  + fdiri ))
-       fdirs  = fdiri    
-    return {'file': flist0, 'dir': fdirs0}
-    
-    
-    
-def hdfs_get(from_dir="", to_dir="",  verbose=True, n_pool=20,   **kw):
-    """ 
-    import fastcounter
-    counter = fastcounter.FastWriteCounter,()
-    counter.increment(1)    
-    cnt.value
-    """
-    import glob, gc,os, time
-    from multiprocessing.pool import ThreadPool
-
-    def log(*s, **kw):
-      print(*s, flush=True, **kw)
-    
-    #### File ############################################
-    os.makedirs(to_dir, exist_ok=True)    
-    import pyarrow as pa
-    hdfs      = pa.hdfs.connect()  
-    # file_list = [ t for t in hdfs.ls(from_dir) ] 
-    file_list = hdfs_walk(from_dir, dirlevel=10)['file']
-    
-
-    def fun_async(xlist):
-      for x in xlist :   
-         try :
-            hdfs.download(x[0], x[1])
-            # ktot = ktot + 1   ### Not thread safe
-         except :
-            try :
-               time.sleep(60)
-               hdfs.download(x[0], x[1])
-               # ktot = ktot + 1
-            except : pass
-            
-    ######################################################    
-    file_list = sorted(list(set(file_list)))
-    n_file    = len(file_list)
-    log('Files', n_file)
-    if verbose: log(file_list)
-
-    xi_list = [ []  for t in range(n_pool) ]     
-    for i, filei in enumerate(file_list) :
-        jj = i % n_pool 
-        xi_list[jj].append( (filei,   to_dir + "/" + filei.split("/")[-1]   )  )
-        
-    #### Pool count
-    pool     = ThreadPool(processes=n_pool)
-    job_list = []
-    for i in range(n_pool):
-         job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
-         if verbose : log(i, xi_list[i] )
-
-    res_list = []            
-    for i in range(n_pool):
-        if i >= len(job_list): break
-        res_list.append( job_list[ i].get() )
-        log(i, 'job finished')
-
-    pool.terminate()  ;  pool.join()  ; pool = None          
-    log('n_processed', len(res_list) )
-    log('n files', len(os.listdir(to_dir)) )
-
-
-    
-    
-    
-
+from utilmy.io import (
+ hdfs_put,
+ hdfs_get,
+ hdfs_walk
+)
 
 
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-"""
+HELP="""
     python parallel.py test0
 
 
@@ -10,13 +10,23 @@
 
 
 """
+import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc
 from multiprocessing.pool import ThreadPool
 from threading import Thread
-import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc
+
 from typing import Callable, Tuple, Union
 
 #################################################################################################
-def log(*s): print(*s, flush=True)
+def log(*s):
+    print(*s, flush=True)
+
+
+def help():
+    ss  = ""
+    ss += HELP
+    print(ss)
+
+
 
 
 
