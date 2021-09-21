@@ -42,7 +42,7 @@ def test():
 
 
     """    
-    df = pd_random()
+    df = pd_random(10**6, ncols=2)
     
     diskcache_save2(df, colkey, colvalue, db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
                     sqlmode= 'fast', verbose=True)    
