@@ -6,3 +6,7 @@ def plot_map(center:list,zoom=3)->folium.folium.Map:
     m = folium.Map(location=center, zoom_start=zoom)
     folium.LayerControl().add_to(m)
     return m
+
+# todo 
+#   adding plot_choropleth_map
+#   adding plot_geocoded_adderess 
