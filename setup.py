@@ -40,16 +40,14 @@ def get_current_githash():
 githash = get_current_githash()
 
 
-long_description =  f"""
-
-```
+#####################################################################################
+ss1 = """
 Utils
 
 git hash : https://github.com/arita37/myutil/tree/{githash}
-
-
-```
 """
+
+long_description = f""" ``` """ + ss1 +  """```"""
 
 
 

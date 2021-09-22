@@ -45,6 +45,15 @@ One liner utilities
  docs all      --repo_dir yourpath  --out_dir docs/ 
  
  
+ 
+ 
+https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=Rrho08zYe6Gj
+
+
+https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=2zMKv6MXOJJu
+
+
+ 
  ```
  
 
