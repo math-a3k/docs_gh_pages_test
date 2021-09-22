@@ -11,7 +11,7 @@ import importlib, os, yaml
 from pathlib import Path
 from typing import Union
 from box import Box
-from pydantic import BaseModel
+
 
 
 #########################################################################################################
@@ -48,6 +48,7 @@ def test_pydanticgenrator():
 
 
 def test4():
+    from pydantic import BaseModel
     cfg_dict = config_load("config.yaml")
     pydantic_model = convert_dict_to_pydantic(cfg_dict, "pydantic_config_val.yaml")
     assert isinstance(pydantic_model, BaseModel)
@@ -298,6 +299,8 @@ if __name__ == "__main__":
 
 def zzz_config_load_validate(config_path: str, schema_path: str, silent: bool = False
                              ) -> Union[Box, None]:
+
+    import yamale
     schema = yamale.make_schema(schema_path)
     data = yamale.make_data(config_path)
 

@@ -15,7 +15,7 @@ def log2(*s, verbose=1):
 def help():
     from utilmy import help_create
 
-    ss  = help_create("utilmy.nnumpy", prefix= [ 'test'])  #### Merge test code
+    ss  = help_create("utilmy.nnumpy", prefixs= [ 'test'])  #### Merge test code
     ss += HELP
     print(ss)
 
