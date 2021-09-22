@@ -7,14 +7,9 @@
 
 
 """
-import importlib
-import os
+import importlib, os, yaml
 from pathlib import Path
 from typing import Union
-
-import fire
-import yamale
-import yaml
 from box import Box
 from pydantic import BaseModel
 
@@ -28,13 +23,64 @@ def loge(*s):
     print(*s, flush=True)
 
 
+
+#########################################################################################################
+#########################################################################################################
+def test_yamlschema():
+    cfg_dict = config_load("config.yaml")
+    isok     = config_isvalid_yamlschema(cfg_dict, "config_val.yaml")
+    log(isok)
+
+
+def test_pydanticgenrator():
+    from datamodel_code_generator import InputFileType
+    # generating from json file
+    pydantic_model_generator(
+        Path("config.json"), InputFileType.Json, Path("pydantic_model_json.py")
+    )
+    assert Path("pydantic_model_json.py").exists(), "File does not exist"
+
+    # generating from yaml file
+    pydantic_model_generator(
+        Path("config.yaml"), InputFileType.Yaml, Path("pydantic_model_yaml.py")
+    )
+    assert Path("pydantic_model_yaml.py").exists(), "File does not exist"
+
+
+def test4():
+    cfg_dict = config_load("config.yaml")
+    pydantic_model = convert_dict_to_pydantic(cfg_dict, "pydantic_config_val.yaml")
+    assert isinstance(pydantic_model, BaseModel)
+
+
+def test_example():
+    ss = """
+        string: ok
+        regex:  abcd
+        number: 6.7
+        integer: 3
+        boolean: True
+        list: [1,2,3]
+        enum: 'one'
+        map:
+        null:
+        date:
+        nest:
+            integer: 7
+            nest:
+                string: "ok"
+
+    """
+    return ss
+
+
 #########################################################################################################
 def config_load(
-        config_path: str = None,
-        path_default: str = None,
+        config_path:    str  = None,
+        path_default:   str  = None,
         config_default: dict = None,
-        save_default: bool = False,
-        to_dataclass: bool = True,
+        save_default:   bool = False,
+        to_dataclass:   bool = True,
 ) -> Union[dict, Box]:
     """Load Config file into a dict
     1) load config_path
@@ -110,6 +156,7 @@ def config_isvalid_yamlschema(config_dict: dict, schema_path: str = 'config_val.
         silent:
     Returns: True/False
     """
+    import yamale
     schema = yamale.make_schema(schema_path)
 
     try:
@@ -135,6 +182,7 @@ def config_isvalid_pydantic(config_dict: dict,
         silent:
     Returns: True/False
     """
+    import yamale
     try:
         return True
 
@@ -195,58 +243,57 @@ def pydantic_model_generator(
         )
 
 
+
+
 #########################################################################################################
-#########################################################################################################
-def test_yamlschema():
-    cfg_dict = config_load("config.yaml")
-    isok = config_isvalid_yamlschema(cfg_dict, "config_val.yaml")
-    log(isok)
 
+def global_verbosity(cur_path, path_relative="/../../config.json",
+                   default=5, key='verbosity',):
+    """ Get global verbosity
+    verbosity = global_verbosity(__file__, "/../../config.json", default=5 )
 
-def test_pydanticgenrator():
-    from datamodel_code_generator import InputFileType
-    # generating from json file
-    pydantic_model_generator(
-        Path("config.json"), InputFileType.Json, Path("pydantic_model_json.py")
-    )
-    assert Path("pydantic_model_json.py").exists(), "File does not exist"
+    verbosity = global_verbosity("repo_root", "config/config.json", default=5 )
 
-    # generating from yaml file
-    pydantic_model_generator(
-        Path("config.yaml"), InputFileType.Yaml, Path("pydantic_model_yaml.py")
-    )
-    assert Path("pydantic_model_yaml.py").exists(), "File does not exist"
-
-
-def test4():
-    cfg_dict = config_load("config.yaml")
-    pydantic_model = convert_dict_to_pydantic(cfg_dict, "pydantic_config_val.yaml")
-    assert isinstance(pydantic_model, BaseModel)
-
-
-def test_example():
-    ss = """
-string: ok
-regex:  abcd
-number: 6.7
-integer: 3
-boolean: True
-list: [1,2,3]
-enum: 'one'
-map:
-null:
-date:
-nest:
-    integer: 7
-    nest:
-        string: "ok"
-
+    :param cur_path:
+    :param path_relative:
+    :param key:
+    :param default:
+    :return:
     """
-    return ss
+    import utilmy, json
+    try   :
+      if 'repo_root' == cur_path  :
+          cur_path =  utilmy.git_repo_root()
+
+      if '.json' in path_relative :
+         dd = json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))
+
+      elif '.yaml' in path_relative or '.yml' in path_relative :
+         import yaml
+         dd = yaml.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))
+
+      else :
+          raise Exception( path_relative + " not supported ")
+      verbosity = int(dd[key])
+
+    except Exception as e :
+      verbosity = default
+      #raise Exception(f"{e}")
+    return verbosity
+
+
+
+
+
 
 
 if __name__ == "__main__":
+    import fire
     fire.Fire()
+
+
+
+
 
 
 def zzz_config_load_validate(config_path: str, schema_path: str, silent: bool = False

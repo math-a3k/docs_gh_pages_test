@@ -14,8 +14,12 @@ def log2(*s, verbose=1):
 
 
 def help():
-    ss  = ""
+    ss     = ""
+    suffix = "\n\n\n###############################"
 
+    funlist = [ globals()[t] for t in globals().keys() if 'test_' in t ]
+    for f in funlist:
+        ss += help_get_codesource(f) + suffix
 
     ss += HELP
     print(ss)
@@ -30,6 +34,36 @@ def help_get_codesource(func):
         lines_to_skip = 0
     lines = inspect.getsourcelines(func)[0]
     return ''.join( lines[lines_to_skip+1:] )
+
+
+def import_function(fun_name=None, module_name=None):
+    import importlib
+
+    if isinstance(module_name, str):
+       module1 = importlib.import_module(module_name)
+       func = getattr(module1, fun_name)
+    else :
+       func = globals()[fun_name]
+
+    return func
+
+
+
+
+def help_create(modulename='utilmy.nnumpy', prefixs=None):
+    """
+       Extract code source from test code
+    """
+    import importlib
+    prefixs = ['test']
+    module1 = importlib.import_module(modulename)
+    ll      = dir(module1)
+    ll  = [ t for t in ll if prefixs[0] in t]
+    ss  = ""
+    for fname in ll :
+        fun = import_function(fname, modulename)
+        ss += help_get_codesource(fun)
+    return ss
 
 
 
@@ -88,74 +122,21 @@ from utilmy.parallel import (
 
 
 ###################################################################################################
-####### Base tyoe #################################################################################
-class dict_to_namespace(object):
-    #### Dict to namespace
-    def __init__(self, d):
-        self.__dict__ = d
+####### Numpy compute #############################################################################
+from utilmy.nnumpy import (
 
+    dict_to_namespace,
+    to_dict,
+    to_timeunix,
+    to_datetime,
+    np_list_intersection,
+    np_add_remove,
+    to_float,
+    to_int,
+    is_int,
+    is_float
 
-def to_dict(**kw):
-  ## return dict version of the params
-  return kw
-
-
-def to_timeunix(datex="2018-01-16"):
-  if isinstance(datex, str)  :
-     return int(time.mktime(datetime.datetime.strptime(datex, "%Y-%m-%d").timetuple()) * 1000)
-
-  if isinstance(datex, datetime)  :
-     return int(time.mktime( datex.timetuple()) * 1000)
-
-
-def to_datetime(x) :
-  import pandas as pd
-  return pd.to_datetime( str(x) )
-
-
-def np_list_intersection(l1, l2) :
-  return [x for x in l1 if x in l2]
-
-
-def np_add_remove(set_, to_remove, to_add):
-    # a function that removes list of elements and adds an element from a set
-    result_temp = set_.copy()
-    for element in to_remove:
-        result_temp.remove(element)
-    result_temp.add(to_add)
-    return result_temp
-
-
-def to_float(x):
-    try :
-        return float(x)
-    except :
-        return float("NaN")
-
-def to_int(x):
-    try :
-        return int(x)
-    except :
-        return float("NaN")
-
-def is_int(x):
-    try :
-        int(x)
-        return True
-    except :
-        return False    
-
-def is_float(x):
-    try :
-        float(x)
-        return True
-    except :
-        return False   
-
-
-
-
-########################################################################################################
+)
 
 
 
@@ -193,105 +174,13 @@ from utilmy.oos import(
 
 
 ################################################################################################
-################################################################################################
-def config_load(config_path:str = None,
-                path_default:str=None,
-                config_default:dict=None):
-    """Load Config file into a dict  from .json or .yaml file
-    TODO .cfg file
-    1) load config_path
-    2) If not, load default from HOME USER
-    3) If not, create default on in python code
-    Args:
-        config_path: path of config or 'default' tag value
-    Returns: dict config
-    """
-    import json, yaml
-    import pathlib
-
-    path_default        = pathlib.Path.home() / ".mygenerator" if path_default is None else path_default
-    config_path_default = path_default / "config.yaml"
-    if config_default is None :
-        config_default = {
-            "current_dataset": "mnist",
-            "datasets": {
-                "mnist": {
-                    "url": "/mnist_png.tar.gz",
-                    "path": str(path_default / "mnist_png" / "training"),
-                }
-            },
-        }
-
-    #####################################################################
-    if config_path is None or config_path == "default":
-        log(f"Using config: {config_path_default}")
-        config_path = config_path_default
-    else :
-        config_path = pathlib.Path(config_path)
-
-    try:
-        log("loading config", config_path)
-        if ".yaml" in config_path :
-            cfg = yaml.load(config_path.read_text(), Loader=yaml.Loader)
-            dd = {}
-            for x in cfg :   ### Map to dict
-                for key,val in x.items():
-                   dd[key] = val
-            return cfg
-
-        if ".json" in config_path :
-           return json.load(config_path.read_text())
-
-    except Exception as e:
-        log(f"Cannot read yaml/json file {config_path}", e)
+########  Configuration  #######################################################################
+from utilmy.configs.util_config import (
+ config_load,
+ global_verbosity
 
 
-    log("#### Using default configuration")
-    log(config_default)
-    log(f"Creating config file in {config_path_default}")
-    os.makedirs(path_default, exist_ok=True)
-    with open(config_path_default, mode="w") as fp:
-        yaml.dump(config_default, fp)
-    return config_default
-
-
-
-def global_verbosity(cur_path, path_relative="/../../config.json",
-                   default=5, key='verbosity',):
-    """ Get global verbosity
-    verbosity = global_verbosity(__file__, "/../../config.json", default=5 )
-
-    verbosity = global_verbosity("repo_root", "config/config.json", default=5 )
-
-    :param cur_path:
-    :param path_relative:
-    :param key:
-    :param default:
-    :return:
-    """
-    try   :
-      if 'repo_root' == cur_path  :
-          cur_path =  git_repo_root()
-
-      if '.json' in path_relative :
-         dd = json.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))
-
-      elif '.yaml' in path_relative or '.yml' in path_relative :
-         import yaml
-         dd = yaml.load(open(os.path.dirname(os.path.abspath(cur_path)) + path_relative , mode='r'))
-
-      else :
-          raise Exception( path_relative + " not supported ")
-      verbosity = int(dd[key])
-
-    except Exception as e :
-      verbosity = default
-      #raise Exception(f"{e}")
-    return verbosity
-
-
-
-
+)
 
 
 ######################################################################################################
