@@ -187,11 +187,10 @@ from utilmy.io import (
 
 ######################################################################################################
 ###### Plot ##########################################################################################
-from utilmy.viz.vizhtml import (
-  images_to_html,   ### folder of images to HTML
-  test_getdata
-
-)
+#from utilmy.viz.vizhtml import (
+#  images_to_html,   ### folder of images to HTML
+#  test_getdata
+# )
 
 
 
