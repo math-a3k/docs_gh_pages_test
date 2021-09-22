@@ -14,13 +14,8 @@ def log2(*s, verbose=1):
 
 
 def help():
-    ss     = ""
     suffix = "\n\n\n###############################"
-
-    funlist = [ globals()[t] for t in globals().keys() if 'test_' in t ]
-    for f in funlist:
-        ss += help_get_codesource(f) + suffix
-
+    ss     = help_create(modulename='utilmy', prefixs=None) + suffix
     ss += HELP
     print(ss)
 
@@ -46,8 +41,6 @@ def import_function(fun_name=None, module_name=None):
        func = globals()[fun_name]
 
     return func
-
-
 
 
 def help_create(modulename='utilmy.nnumpy', prefixs=None):
@@ -192,6 +185,28 @@ from utilmy.io import (
 )
 
 
+######################################################################################################
+###### Plot ##########################################################################################
+from utilmy.viz.vizhtml import (
+  images_to_html   ### folder of images to HTML
+
+)
+
+
+
+###################################################################################################
+###### Debug ######################################################################################
+from utilmy.debug import (
+    print_everywhere,
+
+    log10,
+    log_trace,  ###(msg="", dump_path="", globs=None)  Debug with full trace message
+
+
+    profiler_start,
+    profiler_stop
+)
+
 
 
 ######################################################################################################
@@ -213,15 +228,6 @@ def git_current_hash(mode='full'):
    label = label.decode('utf-8')
    return label
 
-
-
-
-######################################################################################################
-###### Plot ##########################################################################################
-from utilmy.viz.vizhtml import (
-  images_to_html   ### folder of images to HTML
-
-)
 
 
 
@@ -310,18 +316,8 @@ def load(to_file=""):
 
 
 
-###################################################################################################
-###### Debug ######################################################################################
-from utilmy.debug import (
-    print_everywhere,
-
-    log10,
-    log_trace,  ###(msg="", dump_path="", globs=None)  Debug with full trace message
 
 
-    profiler_start,
-    profiler_stop
-)
 
 
 
