@@ -75,9 +75,9 @@ cc.kloop_img = 2* cc.kloop
 
 
 #### Paths data  #####################
-cc.root = '/data/workspaces/noelkevin01/img/data/'
+cc.root = '/img/data/'
 cc.root3   = ""
-cc.data_train = "/data/workspaces/noelkevin01/img/data/fashion/train_npz/small/"
+cc.data_train = "/img/data/fashion/train_npz/small/"
 
 cc.path_img_all   = cc.root + "fashion/train_nobg_256/"
 cc.path_img_train = cc.root + "fashion/train_nobg_256/"
@@ -967,7 +967,7 @@ class RealCustomDataGenerator(tf.keras.utils.Sequence):
 ########################################################################
 """
 Auto Augmentation :
-   data/workspaces/noelkevin01/img/models/fashion/dcf_vae/auto_config
+   data/img/models/fashion/dcf_vae/auto_config
 
 """    
 from albumentations import (
@@ -1318,9 +1318,7 @@ class SprinklesTransform(ImageOnlyTransform):
 
         return self.sprinkles(image).numpy()
 
-
-    
-
+  
 train_transforms = Compose([
     Resize(image_size, image_size, p=1),
     HorizontalFlip(p=0.5),
