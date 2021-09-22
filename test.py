@@ -260,14 +260,14 @@ def test_text_similarity():
       
 
 def test_text_pdcluster():
-       from utilmy.text import pd_text_getcluster, test_lsh
-       test_lsh()
+    from utilmy.text import text as txt
+    log(txt.pd_text_getcluster )
+    txt.test_lsh()
 
    
    
 def test_viz_vizhtml():
    from utilmy.viz import vizhtml as vi
-   import re
    log("Visualization ")
    log(" from utilmy.viz import vizhtml as vi     ")
    vi.test1()
@@ -281,13 +281,19 @@ def test_viz_vizhtml():
    
 
 def test_parallel():
-   from utilmy import parallel as par
+   from utilmy import parallel as m
    log("from utilmy import parallel as par ")
    # par.test1()
    # par.test2()
    
+   
+def test_distributed():
+   from utilmy import distributed as m
+   log("from utilmy import distributed as m ")
+   m.test_all()
 
-
+   
+   
 def test_all():
     test_utilmy_pd_os_session()
     test_decorators_os()
@@ -295,6 +301,7 @@ def test_all():
     test_text_similarity()
     test_docs_cli()
 
+      
 #########################################################################################   
 if __name__ == "__main__":
     import fire
