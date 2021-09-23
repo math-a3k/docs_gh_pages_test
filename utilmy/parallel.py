@@ -38,9 +38,9 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 def test_run(list_vars, const_var=1):
     print(f'Var: {list_vars}')
     print(f'Start function: {list_vars[0][0]}')
-    time.sleep(list_vars[0][1])
+    time.sleep(2)
     print(f'End function: {list_vars[0][0]}')
-    return list_vars[0][2]*2
+    return list_vars[0][0]*2
 
 
 def test_run_multithread(thread_name, num, string):
@@ -95,14 +95,17 @@ def test0():
     ########### multiproc_run #####################################################
     log(f"Start multiproc_run")
     t0 = time.time()
-    input_list = [
-        [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
-    ]
-    res = multiproc_run(test_run, input_list, len(input_list))
+    input_list = [ [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
+    res = multiproc_run(test_run, input_list, n_pool = len(input_list))
     log(time.time() - t0)
     log( 'multiproc_run : ' , res)
 
-
+    
+    #### Input variable of single function is a Big LIST
+    input_list = [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]
+    res = multiproc_run(test_run, input_list, n_pool = len(input_list))
+    
+    
     ########### multithread_run ####################################################
     log(f"Start multithread_run")
     t0 = time.time()
