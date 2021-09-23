@@ -126,6 +126,7 @@ def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
   if ext == ".csv"  or ext == ".txt" :
       df.to_csv(filei, **kw)
 
+  if verbose: log(filei)      
   #if check == "check" :
   #  os_file_check( filei )
 
