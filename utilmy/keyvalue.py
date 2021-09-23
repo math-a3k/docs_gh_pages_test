@@ -42,8 +42,6 @@ def pd_random(nrows=1000, ncols= 5):
 
 def test():
     """    
-
-
     """    
     n = 10**6
     df      = pd_random(n, ncols=2)    
@@ -56,13 +54,31 @@ def test():
     diskcache_save2(df, colkey='0', colvalue='1', db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
                     sqlmode= 'fast', verbose=True)    
     log(n, time.time()-t0)
+    diskcache_config(db_path="./dbcache.db", task='fast')
     
-    
-    log('##### multithread insert commit  ##################################')    
+    log('##### multithread insedsddaart commit  ##################################')    
     t0 = time.time()
     diskcache_save2(df, colkey='0', colvalue='1', db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
                     sqlmode= 'commit', verbose=True)    
     log(n, time.time()-t0)
+
+    diskcache_config(db_path="./dbcache.db", task='commit')
+
+    # loading data from disk
+    cache = diskcache_load(db_path_or_object="./dbcache.db")
+
+    # reading data
+    t0 = time.time()
+    data = diskcache_getall(cache)
+    log("time taken in reading data", time.time()-t0)
+    all_keys = diskcache_getkeys(cache)
+
+    # checkinh store data
+    for i in range(10):
+      print(diskcache_get(cache, (n*i)//10))
+      assert(diskcache_get(cache, (n*i)//10) == "xxxxx"+str((n*i)//10))
+      
+
 
     
     
@@ -234,7 +250,7 @@ def diskcache_getall(cache, limit=1000000000):
     return v
 
 def diskcache_get(cache, key, defaultval=None):
-    ss = f'SELECT value FROM Cache WHERE key={key} LIMIT 1'
+    ss = f'SELECT value FROM Cache WHERE key="{key}" LIMIT 1'
     v  = cache._sql( ss ).fetchall()    
     if len(v) > 0 :
         return v[0][0]

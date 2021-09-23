@@ -25,9 +25,12 @@ from typing import List
 from tqdm import tqdm
 from box import Box
 
-# Converting python --> HTML
-import matplotlib.pyplot as plt
-import mpld3
+try :
+   # Converting python --> HTML
+   import matplotlib.pyplot as plt
+   import mpld3
+except :
+   print(" pip install python-box python-highcharts  mpld3 pandas-highcharts  pretty-html-table matplotlib ipython")
 
 
 ############################################################################################
