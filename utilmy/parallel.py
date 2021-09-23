@@ -46,7 +46,7 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
-def running(list_vars):
+def test_run(list_vars):
     print(f'Var: {list_vars}')
     print(f'Start function: {list_vars[0][0]}')
     time.sleep(list_vars[0][1])
@@ -54,14 +54,14 @@ def running(list_vars):
     return list_vars[0][2]*2
 
 
-def run_multithread(thread_name, num, string):
+def test_run_multithread(thread_name, num, string):
     print(f'Var: {thread_name}, {num}, {string}')
     print(f'Start thread: {thread_name}')
     time.sleep(num)
     print(f'End thread: {thread_name}')
     return string*2
 
-def run_another_multithread(thread_name, arg):
+def test_run_another_multithread(thread_name, arg):
     print(f'Var: {thread_name}, {arg}')
     print(f'Start thread: {thread_name}')
     time.sleep(10)
@@ -109,7 +109,7 @@ def test0():
     input_list = [
         [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
     ]
-    res = multiproc_run(running, input_list, len(input_list))
+    res = multiproc_run(test_run, input_list, len(input_list))
     log(time.time() - t0)
     log( 'multiproc_run : ' , res)
 
@@ -120,7 +120,7 @@ def test0():
     input_list = [
         (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
     ]
-    res = multithread_run(running, input_list, len(input_list))
+    res = multithread_run(test_run, input_list, len(input_list))
     log(time.time() - t0)
     log( 'multithread_run : ' , res)
 
@@ -129,11 +129,11 @@ def test0():
     log(f"Start multithread_run_list")
     t0 = time.time()
     res = multithread_run_list(
-        thread1=(run_multithread, ["Thread1", 5, "test"]),
-        thread2=(run_multithread, ["Thread2", 6, "1234"]),
-        thread3=(run_multithread, ["Thread3", 7, "zxc"]),
-        thread4=(run_multithread, ["Thread4", 8, "test"]),
-        thread_another=(run_another_multithread, ["Thread_diff", "rtyr"]),
+        thread1=(test_run_multithread, ["Thread1", 5, "test"]),
+        thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
+        thread3=(test_run_multithread, ["Thread3", 7, "zxc"]),
+        thread4=(test_run_multithread, ["Thread4", 8, "test"]),
+        thread_another=(test_run_another_multithread, ["Thread_diff", "rtyr"]),
         )
     log(time.time() - t0)
     log( 'multithread_run_list : ' , res)
