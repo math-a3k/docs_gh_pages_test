@@ -1,14 +1,7 @@
 # coding=utf-8
 HELP="""
     python parallel.py test0
-
-
-
     #  python parallel.py test2
-
-
-
-
 """
 import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc
 from multiprocessing.pool import ThreadPool
@@ -27,13 +20,9 @@ def help():
     print(ss)
 
 
-
-
-
 #################################################################################################
 def pd_random(nrows=1000, ncols= 5):
     return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )
-
 
 
 def test_fun_sum_inv(group, name=None):         # Inverse cumulative sum
@@ -46,7 +35,7 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
-def test_run(list_vars):
+def test_run(list_vars, const_var=1):
     print(f'Var: {list_vars}')
     print(f'Start function: {list_vars[0][0]}')
     time.sleep(list_vars[0][1])
@@ -139,107 +128,12 @@ def test0():
     log( 'multithread_run_list : ' , res)
 
 
-def test1():
-    def fun_async(xlist):
-        list = []
-        for x in xlist:
-            stdr = ""
-            for y in x:
-                stdr += y
-            list.append(stdr)
-        return list
-
-    def apply_func(x):
-       return x ** 2
-
-    #### multithread_run
-    li_of_tuples = [("x", "y", "z"),("y", "z", "p"),("yw", "zs", "psd"),("yd", "zf", "pf")]
-    res =  multithread_run(fun_async, li_of_tuples, npool=2, start_delay=0.1, verbose=True)
-    log([["xyz", "ywzspsd"], ["yzp", "ydzfpf"]]== res )
-
-
-    #### multiproc_run : Pickle error
-    #li_of_tuples = [("x", "y", "z"),("y", "z", "p"),("yw", "zs", "psd"),("yd", "zf", "pf"),]
-    #res = multiproc_run(fun_async, li_of_tuples, npool=2, start_delay=0.1, verbose=True)
-    #log( res == [["xyz"], ["yzp"],
-    #["ywzspsd"], ["ydzfpf"], []])
-
-
-    #### pd_groupby_parallel
-    df = pd.DataFrame(data={'result':[5, 8, 1, 7, 0, 3, 2, 9, 4, 6],
-                            'user_id':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9],
-                            'value'  :[27, 14, 26, 19, 28, 9, 11, 1, 26, 18],'data_chunk':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9]})
-    expected_df = df.copy()
-    expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
-    result = pd_groupby_parallel(df.groupby("user_id"), fun_apply=test_fun_apply, npool=5)
-    log(expected_df.equals(result))
-
-
-    ### pd_apply_parallel2
-    df = pd.DataFrame({"A": [0, 1, 2, 3, 4],   "B": [100, 200, 300, 400, 500],})
-    expected_df = pd.DataFrame({"A": [0, 1, 4, 9, 16], "B": [10000, 40000, 90000, 160000, 250000]})
-    result = pd_groupby_parallel2(df=df, colsgroup=["A" "B"], fun_apply=apply_func, npool=4)
-    log(expected_df.equals(result))
-
-
-
-def test2():
-    from multiprocessing import freeze_support
-    def addition(x,y):
-        return x+y
-
-    def addition1(x):
-        return x
-
-    def fun_async(xlist):
-        s = 0
-        for x in xlist:
-            s = x[0]+x[1]
-        return s
-
-    def test_print(x):
-        print(x)
-
-    freeze_support()
-    log("pd_groupby_parallel")
-    #s   = pickle.dumps(addition)
-    #f   = pickle.loads(s)
-    df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
-    res = pd_groupby_parallel(df.groupby(df.index), addition )
-    log(res)
-
-    log("pd_groupby_parallel2")
-    #s   = pickle.dumps(addition1)
-    # f   = pickle.loads(s)
-    df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
-
-    res = pd_groupby_parallel2(df,['A'], addition )
-    log(res)
-
-
-    log("pd_apply_parallel")
-    res = pd_apply_parallel(df,['A'], addition)
-    log(res)
-
-
-    list = [(1,2,3), (1,2,3)]
-    log("multiproc_run")
-    # multiproc_run(fun_async,list)
-
-    log("multithread_run")
-    multithread_run(fun_async,list)
-
-    log("multithread_run_list")
-    multithread_run_list(function1=(test_print, ("some text",)),
-                             function2=(test_print, ("bbbbb",)),
-                             function3=(test_print, ("ccccc",)))
-
 
 
 
 ########################################################################################################
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, 
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, 
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1,
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
                  fun_apply=None,npool=1, max_file=-1, #### apply function for each sub
                  verbose=False,
                  **kw):
@@ -298,25 +192,25 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, c
     for i, xi in enumerate(file_list) :
         jj = i % n_pool
         xi_list[jj].append( tuple(xi) )
-    
+
     if verbose :
         for j in range( len(xi_list) ):
             log('thread ', j, len(xi_list[j]))
-        time.sleep(6)    
-        
+        time.sleep(6)
+
     #### Pool execute ###################################
     from multiprocessing.pool import ThreadPool
-    # pool     = multiprocessing.Pool(processes=3)  
+    # pool     = multiprocessing.Pool(processes=3)
     pool     = ThreadPool(processes=n_pool)
     job_list = []
     for i in range(n_pool):
-         if verbose : log('starts', i)   
+         if verbose : log('starts', i)
          job_list.append( pool.apply_async(fun_async, (xi_list[i], )))
 
     dfall  = pd.DataFrame()
     for i in range(n_pool):
         if i >= len(job_list): break
-        dfi = job_list[ i].get() 
+        dfi = job_list[ i].get()
         dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
         #log("Len", n_pool*j + i, len(dfall))
         del dfi; gc.collect()
@@ -324,10 +218,10 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, c
 
     pool.terminate() ; pool.join()  ; pool = None
     log( 'shape', dfall.shape )
-    return dfall 
+    return dfall
 
 
-def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, 
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
@@ -402,10 +296,10 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
         #log("Len", n_pool*j + i, len(dfall))
         del dfi; gc.collect()
-                
+
   pool.terminate()
-  pool.join()  
-  pool = None          
+  pool.join()
+  pool = None
   if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
   return dfall
 
@@ -451,7 +345,6 @@ def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None,
 def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, npool=4):
     """
     Use of multi-thread on group by apply when order is not important
-
     """
     import pandas as pd
     import concurrent.futures
@@ -478,7 +371,6 @@ def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, npool=4):
 
 def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=False, **kw ):
     """ Pandas parallel groupby apply
-
     """
     import pandas as pd, numpy as np, time, gc
 
@@ -495,9 +387,9 @@ def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
     # pool     = multiprocessing.Pool(processes=npool)
     pool = mp.pool.ThreadPool(processes=npool)
 
-    
+
     ### Need to get the groupby splits
-    dfg        = df.groupby(colsgroup)  
+    dfg        = df.groupby(colsgroup)
     input_list = [[]*1]*npool
     for i, dfi in enumerate(dfg):
         input_list[i % npool].append(dfg)
@@ -521,21 +413,8 @@ def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
     """ Pandas parallel apply
-
     """
     import pandas as pd, numpy as np, time, gc
 
@@ -570,15 +449,43 @@ def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
     return dfall
 
 
-def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose=True, **kw):
+
+############################################################################################################
+def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, **kw):
     """  Multiprocessing execute
     input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
       for x in xlist :
             download.upload(x[0], x[1])
+
+          def f(i, n):
+       return i * i + 2*n
+    ..
+     from itertools import repeat
+     N = 10000
+    
+     from pathos.pools import ProcessPool as Pool
+     pool = Pool()
+    
+     ans = pool.map(f, xrange(1000), repeat(20))
+     ans[:10]
+    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+    
+     # this also works
+     ans = pool.map(lambda x: f(x, 20), xrange(1000))
+     ans[:10]
+    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+
     """
-    import time
+    import time, functools
+
     #### Input xi #######################################
+    if not isinstance(input_list[0], list ) :
+         input_list = [  (t,) for t in input_list]  ## Must be a list of list
+
+    if input_fixed is not None:
+        fun_async = functools.partial(fun_async, **input_fixed)
+
     xi_list = [[] for t in range(npool)]
     for i, xi in enumerate(input_list):
         jj = i % npool
@@ -586,12 +493,12 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
 
     if verbose:
         for j in range(len(xi_list)):
-            log('thread ', j, len(xi_list[j]))
+            log('proc ', j, len(xi_list[j]))
         # time.sleep(6)
 
     #### Pool execute ###################################
     import multiprocessing as mp
-    pool = multiprocessing.Pool(processes=npool)
+    pool = mp.Pool(processes=npool)
     # pool     = mp.pool.ThreadPool(processes=n_pool)
     job_list = []
     for i in range(npool):
@@ -611,13 +518,23 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     return res_list
 
 
-def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, **kw):
+def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, **kw):
     """  input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
       for x in xlist :
             hdfs.upload(x[0], x[1])
+            
+    input_fixed = {'const_var' : 1 }        
     """
-    import time
+    import time, functools
+
+    #### Input xi #######################################
+    if not isinstance(input_list[0], list ) :
+         input_list = [  (t,) for t in input_list]  ## Must be a list of lis
+
+    if input_fixed is not None:
+        fun_async = functools.partial(fun_async, **input_fixed)
+
     #### Input xi #######################################
     xi_list = [[] for t in range(n_pool)]
     for i, xi in enumerate(input_list):
@@ -649,6 +566,11 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     pool.terminate(); pool.join(); pool = None
     log('n_processed', len(res_list))
     return res_list
+
+
+
+
+
 
 
 def multithread_run_list(**kwargs):
@@ -688,6 +610,103 @@ def multithread_run_list(**kwargs):
 if __name__ == '__main__':
     import fire; fire.Fire()
     ### python parallel.py test1
-    
 
 
+
+
+
+
+def ztest1():
+    def fun_async(xlist):
+        list = []
+        for x in xlist:
+            stdr = ""
+            for y in x:
+                stdr += y
+            list.append(stdr)
+        return list
+
+    def apply_func(x):
+       return x ** 2
+
+    #### multithread_run
+    li_of_tuples = [("x", "y", "z"),("y", "z", "p"),("yw", "zs", "psd"),("yd", "zf", "pf")]
+    res =  multithread_run(fun_async, li_of_tuples, npool=2, start_delay=0.1, verbose=True)
+    log([["xyz", "ywzspsd"], ["yzp", "ydzfpf"]]== res )
+
+
+    #### multiproc_run : Pickle error
+    #li_of_tuples = [("x", "y", "z"),("y", "z", "p"),("yw", "zs", "psd"),("yd", "zf", "pf"),]
+    #res = multiproc_run(fun_async, li_of_tuples, npool=2, start_delay=0.1, verbose=True)
+    #log( res == [["xyz"], ["yzp"],
+    #["ywzspsd"], ["ydzfpf"], []])
+
+
+    #### pd_groupby_parallel
+    df = pd.DataFrame(data={'result':[5, 8, 1, 7, 0, 3, 2, 9, 4, 6],
+                            'user_id':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9],
+                            'value'  :[27, 14, 26, 19, 28, 9, 11, 1, 26, 18],'data_chunk':[1, 1, 2, 3, 4, 4, 5, 8, 9, 9]})
+    expected_df = df.copy()
+    expected_df["inv_sum"] = [14.0, 0.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0, 18.0, 0.0]
+    result = pd_groupby_parallel(df.groupby("user_id"), fun_apply=test_fun_apply, npool=5)
+    log(expected_df.equals(result))
+
+
+    ### pd_apply_parallel2
+    df = pd.DataFrame({"A": [0, 1, 2, 3, 4],   "B": [100, 200, 300, 400, 500],})
+    expected_df = pd.DataFrame({"A": [0, 1, 4, 9, 16], "B": [10000, 40000, 90000, 160000, 250000]})
+    result = pd_groupby_parallel2(df=df, colsgroup=["A" "B"], fun_apply=apply_func, npool=4)
+    log(expected_df.equals(result))
+
+
+
+def ztest2():
+    from multiprocessing import freeze_support
+    def addition(x,y):
+        return x+y
+
+    def addition1(x):
+        return x
+
+    def fun_async(xlist):
+        s = 0
+        for x in xlist:
+            s = x[0]+x[1]
+        return s
+
+    def test_print(x):
+        print(x)
+
+    freeze_support()
+    log("pd_groupby_parallel")
+    #s   = pickle.dumps(addition)
+    #f   = pickle.loads(s)
+    df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
+    res = pd_groupby_parallel(df.groupby(df.index), addition )
+    log(res)
+
+    log("pd_groupby_parallel2")
+    #s   = pickle.dumps(addition1)
+    # f   = pickle.loads(s)
+    df  = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
+
+    res = pd_groupby_parallel2(df,['A'], addition )
+    log(res)
+
+
+    log("pd_apply_parallel")
+    res = pd_apply_parallel(df,['A'], addition)
+    log(res)
+
+
+    list = [(1,2,3), (1,2,3)]
+    log("multiproc_run")
+    # multiproc_run(fun_async,list)
+
+    log("multithread_run")
+    multithread_run(fun_async,list)
+
+    log("multithread_run_list")
+    multithread_run_list(function1=(test_print, ("some text",)),
+                             function2=(test_print, ("bbbbb",)),
+                             function3=(test_print, ("ccccc",)))
