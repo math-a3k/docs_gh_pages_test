@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
 HELP= """ Interface for Key Value store.
 
+2 type of storage on disk
+
+    pandas parquet file    as  colkey, colvalue,  1) load pandas in RAM   2) Convert the pandas --> Dict  colkey: colval  
+        Perf is 100 nano sec read/write  but high RAM Usage
+    
+    Save into diskcache  directly as colkey: colval
+        Perf is 100 micro read/write  and writ is slow,  Low RAM usage
+
+
+
+
 pip install diskcache
 
 db_dir : root storage of all db
@@ -56,7 +67,7 @@ def test():
     log(n, time.time()-t0)
     diskcache_config(db_path="./dbcache.db", task='fast')
     
-    log('##### multithread insedsddaart commit  ##################################')    
+    log('##### multithread insert commit  ##################################')    
     t0 = time.time()
     diskcache_save2(df, colkey='0', colvalue='1', db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
                     sqlmode= 'commit', verbose=True)    
@@ -64,16 +75,17 @@ def test():
 
     diskcache_config(db_path="./dbcache.db", task='commit')
 
+    
     # loading data from disk
     cache = diskcache_load(db_path_or_object="./dbcache.db")
 
     # reading data
     t0 = time.time()
     data = diskcache_getall(cache)
-    log("time taken in reading data", time.time()-t0)
+    log("time taken in reading", time.time()-t0)
     all_keys = diskcache_getkeys(cache)
 
-    # checkinh store data
+    log("# checkinh store data")
     for i in range(10):
       print(diskcache_get(cache, (n*i)//10))
       assert(diskcache_get(cache, (n*i)//10) == "xxxxx"+str((n*i)//10))
@@ -88,7 +100,7 @@ def test():
     
     
 ########################################################################################################    
-########################################################################################################
+##########  Database Class #############################################################################
 def db_init(db_dir:str="path"):
     """
       db = Box({    
@@ -129,10 +141,81 @@ def db_size(db_dir= None):
             
     
 
+    
+def db_merge():   ### python prepro.py  db_merge    2>&1 | tee -a zlog_prepro.py  &
+     #### merge 2 dataframe    
+     colkey = 'item_tag_vran'    
+        
+     df1 = pd_read_file( dir_rec+  "/emb//map_idx_13311813.parquet" ) 
+     log(df1 )  ### 13 mio
+        
+     df2 = pd_read_file( dir_rec+  "/map/*" , n_pool=15, verbose=True)
+     log(df2)   ### 130 mio
+
+        
+     df1 = df1.rename(columns= {'id': colkey})           
+     df2 = df2.drop_duplicates(colkey)
+     df1 = df1.drop_duplicates(colkey)
+     log(df2)
+            
+     # df1 = df1.iloc[:1000,:]   ; df2 = df2.iloc[:10000, :]
+     df1 = df1.merge(df2, on= 'item_tag_vran', how='left' )   
+     del df2; gc.collect()
+        
+     log(df1)   
+     pd_to_file(df1, dir_rec + "/db_pandas/map_idx_13311813_siid.parquet" )   
+        
+     
+        
+        
+def db_create_dict_pandas(df=None, cols=None, colsu=None):   ####  python prepro.py  db_create_dict_pandas &
+    ### Load many files and  drop_duplicate on colkey and save as parquet files.
+    dirin  =  "/ic/**.parquet"  
+    dirout =  "/map/" + dirin.split("/")[-2] +"/"
+    
+    cols  = [ 'shop_id', 'item_id', 'item_tag_vran'   ]
+    colsu = [ 'item_tag_vran'   ]
+    
+    tag   = "siid_itemtag"
+    
+    os.makedirs( dirout, exist_ok=True)    
+    flist = sorted(glob.glob(dirin))
+    fi2   = []; kk =0
+    for fi in flist :        
+        fi2.append(fi)
+        if len(fi2) < 20 and fi != flist[-1] : continue
+        log(fi2)    
+        df  = pd_read_file( fi2, cols= cols, drop_duplicates=colsu,
+                            n_pool=20, verbose=False)
+        log(df.shape)
+        fi2=[]
+                
+        df         = df.drop_duplicates(colsu)        
+        df['siid'] = df.apply(lambda x : f"{int(x['shop_id'])}_{int(x['item_id'])}"  , axis=1)
+        del df['shop_id'] ; del df['item_id']
+        
+        pd_to_file(df, dirout + f"/df_map_{tag}_{kk}.parquet", show=1 )    
+        kk = kk + 1
+
+        
+def db_load_dict(df, colkey, colval, verbose=True):
+    ### load Pandas dataframe and convert into dict   colkey --> colval
+    if isinstance(df, str):
+       dirin = df
+       log('loading', df)
+       df = pd_read_file(dirin, cols= [colkey, colval ], n_pool=3, verbose=True)
+    
+    df = df.drop_duplicates(colkey)    
+    df = df.set_index(colkey)
+    df = df[[ colval ]].to_dict()
+    df = df[colval] ### dict
+    if verbose: log('Dict Loaded', len(df))
+    return df
+    
 
 
 ########################################################################################################
-########################################################################################################
+########DiskCache Utilities ############################################################################
 def diskcache_load( db_path_or_object="", size_limit=100000000000, verbose=True ):    
     """ val = cache[mykey]
     """
