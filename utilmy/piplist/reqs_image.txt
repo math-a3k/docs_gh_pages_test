@@ -16,3 +16,8 @@ six==1.16.0
 tifffile==2021.4.8
 validators==0.18.2
 wincertstore==0.2
+folium==0.12.1
+python-box==5.4.1
+diskcache==5.2.1
+tqdm==4.62.3
+mpld3==0.5.5
