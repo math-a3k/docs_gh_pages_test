@@ -35,9 +35,10 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
-def test_run(list_vars, const_var=1):
-    print(f'Var: {list_vars}')
-    print(f'Start function: {list_vars[0][0]}')
+def test_run(list_vars, const=1):
+    log(f'Var: {list_vars}')
+    log('Fixed Const: ', const)
+    log(f'Start function: {list_vars[0][0]}')
     time.sleep(2)
     print(f'End function: {list_vars[0][0]}')
     return list_vars[0][0]*2
@@ -46,14 +47,14 @@ def test_run(list_vars, const_var=1):
 def test_run_multithread(thread_name, num, string):
     print(f'Var: {thread_name}, {num}, {string}')
     print(f'Start thread: {thread_name}')
-    time.sleep(num)
+    time.sleep(3)
     print(f'End thread: {thread_name}')
     return string*2
 
-def test_run_another_multithread(thread_name, arg):
+def test_run_multithread2(thread_name, arg):
     print(f'Var: {thread_name}, {arg}')
     print(f'Start thread: {thread_name}')
-    time.sleep(10)
+    time.sleep(7)
     print(f'End thread: {thread_name}')
     return arg
 
@@ -100,10 +101,13 @@ def test0():
     log(time.time() - t0)
     log( 'multiproc_run : ' , res)
 
-    
     #### Input variable of single function is a Big LIST
     input_list = [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]
     res = multiproc_run(test_run, input_list, n_pool = len(input_list))
+    
+    #### Input variable of single function is a Big LIST
+    input_list = [ "path1", "path2",  "path2", ]
+    res = multiproc_run(test_run, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
     
     
     ########### multithread_run ####################################################
@@ -125,7 +129,7 @@ def test0():
         thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
         thread3=(test_run_multithread, ["Thread3", 7, "zxc"]),
         thread4=(test_run_multithread, ["Thread4", 8, "test"]),
-        thread_another=(test_run_another_multithread, ["Thread_diff", "rtyr"]),
+        thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
         )
     log(time.time() - t0)
     log( 'multithread_run_list : ' , res)
@@ -478,6 +482,8 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
      ans = pool.map(lambda x: f(x, 20), xrange(1000))
      ans[:10]
     [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+    
+    input_fixed = {'const': 555}
 
     """
     import time, functools
@@ -486,7 +492,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
          input_list = [  (t,) for t in input_list]  ## Must be a list of list
 
-    if input_fixed is not None:
+    if input_fixed is not None:  #### Fixed keywword variable
         fun_async = functools.partial(fun_async, **input_fixed)
 
     xi_list = [[] for t in range(npool)]
