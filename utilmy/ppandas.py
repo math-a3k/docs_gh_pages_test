@@ -111,22 +111,24 @@ def pd_filter(df, filter_dict="shop_id=11, l1_genre_id>600, l2_genre_id<80311," 
     return df
 
 
-def pd_to_file(df, filei,  check="check", verbose=True,   **kw):
+def pd_to_file(df, filei,  check=0, verbose=True, show='shape',   **kw):
   import os, gc
   from pathlib import Path
   parent = Path(filei).parent
   os.makedirs(parent, exist_ok=True)
   ext  = os.path.splitext(filei)[1]
-  if ext == ".pkl" :
-      df.to_pickle(filei, **kw)
+  if   ext == ".pkl" :       df.to_pickle(filei,  **kw)
+  elif ext == ".parquet" :   df.to_parquet(filei, **kw)
+  elif ext in [".csv" ,".txt"] :  df.to_csv(filei, **kw)        
+  else :
+      log('No Extension, using parquet')
+      df.to_parquet(filei + ".parquet", **kw)
 
-  if ext == ".parquet" :
-      df.to_parquet(filei, **kw)
-
-  if ext == ".csv"  or ext == ".txt" :
-      df.to_csv(filei, **kw)
-
-  #if check == "check" :
+  if verbose in [True, 1] :  log(filei)        
+  if show == 'shape':        log(df.shape)
+  if show in [1, True] :     log(df)
+     
+  if check in [1, True, "check"] : log('Exist', os.path.isfile(filei))
   #  os_file_check( filei )
 
   # elif check =="checkfull" :
