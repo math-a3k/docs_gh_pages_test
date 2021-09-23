@@ -1,1 +1,1 @@
-from .util_map import plot_map
+from .util_map import *
