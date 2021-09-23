@@ -45,6 +45,30 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
        return df_group
 
 
+# the funtion for test multi process
+def running(list_vars):
+    print(f'Var: {list_vars}')
+    print(f'Start function: {list_vars[0][0]}')
+    time.sleep(list_vars[0][1])
+    print(f'End function: {list_vars[0][0]}')
+    return list_vars[0][2]*2
+
+
+def run_multithread(thread_name, num, string):
+    print(f'Var: {thread_name}, {num}, {string}')
+    print(f'Start thread: {thread_name}')
+    time.sleep(num)
+    print(f'End thread: {thread_name}')
+    return string*2
+
+def run_another_multithread(thread_name, arg):
+    print(f'Var: {thread_name}, {arg}')
+    print(f'Start thread: {thread_name}')
+    time.sleep(10)
+    print(f'End thread: {thread_name}')
+    return arg
+
+
 def test0():
 
     df  = pd_random(1*10**6, ncols=3)
@@ -79,6 +103,40 @@ def test0():
     log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
 
 
+    ########### multiproc_run #####################################################
+    log(f"Start multiproc_run")
+    t0 = time.time()
+    input_list = [
+        [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
+    ]
+    res = multiproc_run(running, input_list, len(input_list))
+    log(time.time() - t0)
+    log( 'multiproc_run : ' , res)
+
+
+    ########### multithread_run ####################################################
+    log(f"Start multithread_run")
+    t0 = time.time()
+    input_list = [
+        (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
+    ]
+    res = multithread_run(running, input_list, len(input_list))
+    log(time.time() - t0)
+    log( 'multithread_run : ' , res)
+
+
+    ########### multithread_run_list ################################################
+    log(f"Start multithread_run_list")
+    t0 = time.time()
+    res = multithread_run_list(
+        thread1=(run_multithread, ["Thread1", 5, "test"]),
+        thread2=(run_multithread, ["Thread2", 6, "1234"]),
+        thread3=(run_multithread, ["Thread3", 7, "zxc"]),
+        thread4=(run_multithread, ["Thread4", 8, "test"]),
+        thread_another=(run_another_multithread, ["Thread_diff", "rtyr"]),
+        )
+    log(time.time() - t0)
+    log( 'multithread_run_list : ' , res)
 
 
 def test1():
@@ -529,7 +587,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     if verbose:
         for j in range(len(xi_list)):
             log('thread ', j, len(xi_list[j]))
-        time.sleep(6)
+        # time.sleep(6)
 
     #### Pool execute ###################################
     import multiprocessing as mp
@@ -569,7 +627,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     if verbose:
         for j in range(len(xi_list)):
             log('thread ', j, len(xi_list[j]))
-        time.sleep(6)
+        # time.sleep(6)
 
     #### Pool execute ###################################
     import multiprocessing as mp
@@ -609,6 +667,7 @@ def multithread_run_list(**kwargs):
 
     list_of_threads = []
     for thread in kwargs.values():
+        # print(thread)
         t = ThreadWithResult(target=thread[0], args=thread[1])
         list_of_threads.append(t)
 
