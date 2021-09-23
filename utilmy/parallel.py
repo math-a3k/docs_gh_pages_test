@@ -480,7 +480,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     import time, functools
 
     #### Input xi #######################################
-    if not isinstance(input_list[0], list ) :
+    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
          input_list = [  (t,) for t in input_list]  ## Must be a list of list
 
     if input_fixed is not None:
@@ -529,7 +529,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     import time, functools
 
     #### Input xi #######################################
-    if not isinstance(input_list[0], list ) :
+    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
          input_list = [  (t,) for t in input_list]  ## Must be a list of lis
 
     if input_fixed is not None:
