@@ -517,8 +517,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
         if verbose: log(i, xi_list[i])
 
     res_list = []
-    for i in range(npool):
-        if i >= len(job_list): break
+    for i in range(len(job_list)):
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 
@@ -567,8 +566,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
         if verbose: log(i, xi_list[i])
 
     res_list = []
-    for i in range(n_pool):
-        if i >= len(job_list): break
+    for i in range(len(job_list)):
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 
