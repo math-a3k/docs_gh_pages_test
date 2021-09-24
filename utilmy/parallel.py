@@ -63,7 +63,7 @@ def test0():
 
     df  = pd_random(1*10**6, ncols=3)
 
-    ###########  pd_groupby_parallel  ######################################
+    log("\n\n###########  pd_groupby_parallel  #############################################")
     colsgroup = ['0']
     t0 = time.time()
     df1 = df.groupby(colsgroup).apply(lambda dfi : test_fun_sum_inv(dfi ) )
@@ -77,7 +77,7 @@ def test0():
     log( 'pd_groupby_parallel: ' , df1.equals(df2))
 
 
-    ###########  pd_groupby_parallel3  ###########################################
+    log("\n\n###########  pd_groupby_parallel3  ###########################################")
     t0 = time.time()
     df2 = pd_groupby_parallel2(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
@@ -85,7 +85,7 @@ def test0():
     log( 'pd_groupby_parallel3 : ' , df1.equals(df2))
 
 
-    ###########  pd_groupby_parallel2  : Buggy one ###############################
+    log("\n\n###########  pd_groupby_parallel2  : Buggy one #################################")
     t0 = time.time()
     df2 = pd_groupby_parallel3(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
@@ -93,36 +93,31 @@ def test0():
     log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
 
 
-    ########### multiproc_run #####################################################
-    log(f"Start multiproc_run")
+    log("\n\n########### multiproc_run #####################################################")
     t0 = time.time()
     input_list = [ [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
     res = multiproc_run(test_run, input_list, n_pool = len(input_list))
     log(time.time() - t0)
     log( 'multiproc_run : ' , res)
 
-    #### Input variable of single function is a Big LIST
+    log("\n\n#### Input variable of single function is a Big LIST  ")
     input_list = [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]
     res = multiproc_run(test_run, input_list, n_pool = len(input_list))
     
-    #### Input variable of single function is a Big LIST
+    log("\n\n#### Input variable of single function is a Big LIST  ")
     input_list = [ "path1", "path2",  "path2", ]
     res = multiproc_run(test_run, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
     
     
-    ########### multithread_run ####################################################
-    log(f"Start multithread_run")
+    log("\n\n########### multithread_run ####################################################")
     t0 = time.time()
-    input_list = [
-        (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
-    ]
+    input_list = [  (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
     res = multithread_run(test_run, input_list, len(input_list))
     log(time.time() - t0)
     log( 'multithread_run : ' , res)
 
 
-    ########### multithread_run_list ################################################
-    log(f"Start multithread_run_list")
+    log("\n\n########### multithread_run_list ################################################")
     t0 = time.time()
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
