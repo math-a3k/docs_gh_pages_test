@@ -113,10 +113,10 @@ def test0():
     res = multiproc_run(test_run2, input_list, n_pool = len(input_list))
     
     log("\n\n#### Input list variable and input_fixed")
-    input_list = [ [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
-    res = multiproc_run(test_run, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
-    
-    
+    input_list = [ "path1", "path2", "path2", ]
+    res = multiproc_run(test_run2, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
+
+
     log("\n\n########### multithread_run ####################################################")
     t0 = time.time()
     input_list = [  (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
