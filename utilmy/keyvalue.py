@@ -101,6 +101,21 @@ def test():
     
 ########################################################################################################    
 ##########  Database Class #############################################################################
+class DB(Object):
+    
+    def __init__(path):
+        pass
+    
+    def get_db():
+        ## get list of db from the folder, size
+        
+    def reset_wal():
+        ## clean temp files
+        
+        
+        
+        
+        
 def db_init(db_dir:str="path"):
     """
       db = Box({    
