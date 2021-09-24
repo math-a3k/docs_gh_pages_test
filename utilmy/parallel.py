@@ -35,25 +35,34 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
-def test_run(list_vars, const_var=1):
-    print(f'Var: {list_vars}')
-    print(f'Start function: {list_vars[0][0]}')
-    time.sleep(list_vars[0][1])
+def test_run(list_vars, const=1):
+    log(f'Var: {list_vars}')
+    log('Fixed Const: ', const)
+    log(f'Start function: {list_vars[0][0]}')
+    time.sleep(2)
     print(f'End function: {list_vars[0][0]}')
-    return list_vars[0][2]*2
+    return list_vars[0][0]*2
+
+# the funtion for test multi process
+def test_run2(list_vars, const=1):
+    # the function just show whatere in list_vars it got
+    log(f'Var: {list_vars}')
+    log('Fixed Const: ', const)
+    time.sleep(2)
+    return const
 
 
 def test_run_multithread(thread_name, num, string):
     print(f'Var: {thread_name}, {num}, {string}')
     print(f'Start thread: {thread_name}')
-    time.sleep(num)
+    time.sleep(3)
     print(f'End thread: {thread_name}')
     return string*2
 
-def test_run_another_multithread(thread_name, arg):
+def test_run_multithread2(thread_name, arg):
     print(f'Var: {thread_name}, {arg}')
     print(f'Start thread: {thread_name}')
-    time.sleep(10)
+    time.sleep(7)
     print(f'End thread: {thread_name}')
     return arg
 
@@ -62,7 +71,7 @@ def test0():
 
     df  = pd_random(1*10**6, ncols=3)
 
-    ###########  pd_groupby_parallel  ######################################
+    log("\n\n###########  pd_groupby_parallel  #############################################")
     colsgroup = ['0']
     t0 = time.time()
     df1 = df.groupby(colsgroup).apply(lambda dfi : test_fun_sum_inv(dfi ) )
@@ -76,7 +85,7 @@ def test0():
     log( 'pd_groupby_parallel: ' , df1.equals(df2))
 
 
-    ###########  pd_groupby_parallel3  ###########################################
+    log("\n\n###########  pd_groupby_parallel3  ###########################################")
     t0 = time.time()
     df2 = pd_groupby_parallel2(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
@@ -84,7 +93,7 @@ def test0():
     log( 'pd_groupby_parallel3 : ' , df1.equals(df2))
 
 
-    ###########  pd_groupby_parallel2  : Buggy one ###############################
+    log("\n\n###########  pd_groupby_parallel2  : Buggy one #################################")
     t0 = time.time()
     df2 = pd_groupby_parallel3(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
@@ -92,37 +101,38 @@ def test0():
     log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
 
 
-    ########### multiproc_run #####################################################
-    log(f"Start multiproc_run")
+    log("\n\n########### multiproc_run #####################################################")
     t0 = time.time()
-    input_list = [
-        [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
-    ]
-    res = multiproc_run(test_run, input_list, len(input_list))
+    input_list = [ [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
+    res = multiproc_run(test_run, input_list, n_pool = len(input_list))
     log(time.time() - t0)
     log( 'multiproc_run : ' , res)
 
+    log("\n\n#### Input variable of single function is a Big LIST  ")
+    input_list = [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]
+    res = multiproc_run(test_run2, input_list, n_pool = len(input_list))
+    
+    log("\n\n#### Input list variable and input_fixed")
+    input_list = [ "path1", "path2", "path2", ]
+    res = multiproc_run(test_run2, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
 
-    ########### multithread_run ####################################################
-    log(f"Start multithread_run")
+
+    log("\n\n########### multithread_run ####################################################")
     t0 = time.time()
-    input_list = [
-        (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"]
-    ]
+    input_list = [  (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
     res = multithread_run(test_run, input_list, len(input_list))
     log(time.time() - t0)
     log( 'multithread_run : ' , res)
 
 
-    ########### multithread_run_list ################################################
-    log(f"Start multithread_run_list")
+    log("\n\n########### multithread_run_list ################################################")
     t0 = time.time()
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
         thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
         thread3=(test_run_multithread, ["Thread3", 7, "zxc"]),
         thread4=(test_run_multithread, ["Thread4", 8, "test"]),
-        thread_another=(test_run_another_multithread, ["Thread_diff", "rtyr"]),
+        thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
         )
     log(time.time() - t0)
     log( 'multithread_run_list : ' , res)
@@ -475,6 +485,8 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
      ans = pool.map(lambda x: f(x, 20), xrange(1000))
      ans[:10]
     [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+    
+    input_fixed = {'const': 555}
 
     """
     import time, functools
@@ -483,7 +495,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
          input_list = [  (t,) for t in input_list]  ## Must be a list of list
 
-    if input_fixed is not None:
+    if input_fixed is not None:  #### Fixed keywword variable
         fun_async = functools.partial(fun_async, **input_fixed)
 
     xi_list = [[] for t in range(npool)]
@@ -508,8 +520,7 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
         if verbose: log(i, xi_list[i])
 
     res_list = []
-    for i in range(npool):
-        if i >= len(job_list): break
+    for i in range(len(job_list)):
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 
@@ -558,8 +569,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
         if verbose: log(i, xi_list[i])
 
     res_list = []
-    for i in range(n_pool):
-        if i >= len(job_list): break
+    for i in range(len(job_list)):
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 

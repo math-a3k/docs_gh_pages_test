@@ -52,7 +52,9 @@ def plot_topojson(topojson_path:str,json_object_name:str,center:list=[18,32],zoo
 #     geojson = shp.to_file("file.json", driver="GeoJSON")
 #     plot_geojson(geojson,center,zoom)
 
-def plot_choropleth_map(center:list, zoom:int, geojson:str, csv:str, geojson_mutual_column:str, csv_mutual_column:str, choropleth_data_column:str, legend_title:str='Legend' ,color:str='PuBu'):
+
+def plot_choropleth_map(center:list, zoom:int, geojson:str, csv:str, geojson_mutual_column:str, csv_mutual_column:str, 
+                        choropleth_data_column:str, legend_title:str='Legend' ,color:str='PuBu'):
     if geojson=='' :
         print('empty path for geojson data')
         return
@@ -63,20 +65,18 @@ def plot_choropleth_map(center:list, zoom:int, geojson:str, csv:str, geojson_mut
     data_read = pd_read_file(csv)
     m = folium.Map(location=center, zoom_start=zoom)
     c = folium.Choropleth(
-    geo_data=geojson,
-    name="choropleth",
-    data=data_read,
-    columns=[f"{csv_mutual_column}", f"{choropleth_data_column}"],
-    key_on=f"feature.{geojson_mutual_column}",
-    fill_color=f"{color}",
-    fill_opacity=0.7,
-    line_opacity=0.2,
-    legend_name=f"{legend_title}",
-)
+                geo_data=geojson,
+                name="choropleth",
+                data=data_read,
+                columns=[f"{csv_mutual_column}", f"{choropleth_data_column}"],
+                key_on=f"feature.{geojson_mutual_column}",
+                fill_color=f"{color}",
+                fill_opacity=0.7,
+                line_opacity=0.2,
+                legend_name=f"{legend_title}",
+    )
     c.add_to(m)
     return m
-
-
 
 ##################### Tests #####################    
 
