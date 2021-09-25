@@ -55,7 +55,7 @@ def pd_random(nrows=1000, ncols= 5):
 def test():
     """    
     """    
-    n = 10**6
+    n = 10**4
     df      = pd_random(n, ncols=2)    
     df['0'] = [  str(x) for x in np.arange(0, len(df)) ]
     df['1'] = [  'xxxxx' + str(x) for x in np.arange(0, len(df)) ]
@@ -176,22 +176,23 @@ class DB(object):
     def remove(self, db_path):
         self.path_list = [ t for t in self.path_list  if t != db_path ]
 
-    def list(self,):
+    def list(self, show=True):
         ## get list of db from the folder, size
         flist = []
         for path in self.path_list :
            flist = flist + glob.glob(path +"/*")
 
-        for folder in flist :
-            size_mb = os_path_size(folder)
-            print(folder, size_mb)
+        if show :
+            for folder in flist :
+                size_mb = os_path_size(folder)
+                print(folder, size_mb)
 
         return flist
 
+
     def info(self,):
         ## get list of db from the folder, size
-
-        flist = glob.glob(self.path +"/*")
+        flist = self.list()
 
         for folder in flist :
             size_mb = os_path_size(folder)
@@ -225,7 +226,7 @@ class DB(object):
         for pathi in flist:
             dbi = diskcache_load(pathi)
             res = diskcache_getall(dbi, limit=n)
-            log(pathi, res, "\n\n")
+            log(pathi, str(res), "\n\n")
 
 
 
@@ -258,8 +259,8 @@ def os_path_size(folder=None):
 
 
         
-def db_init(db_dir:str="path"):
-    """
+def db_init(db_dir:str="path", globs=None):
+    """ Initialize in the Global Space Name  globs= globals(), DB
       db = Box({    
           'db_itemtag_items_path'  :  f"{db_dir}/map_sampling_itemtag_siid.cache",     
           'db_itemid_itemtag_path' :  f"{db_dir}/map_itemid_itemtag.cache",    
@@ -274,7 +275,7 @@ def db_init(db_dir:str="path"):
         log(name)  #, len(globals()[ name ] ))
 
         ### Global Access
-        globals()[ name ] = diskcache_load(path)
+        globs[ name ] = diskcache_load(path)
      
         
 
