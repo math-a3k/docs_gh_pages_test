@@ -193,7 +193,7 @@ def test_pdreadfile():
    df2 = pd_read_file("data/parquet/fab*.*", n_pool=1000 )
    assert len(df2) == 2 * n0, f"df1 {len(df2) }, original {n0}"
 
-   
+
 
 
 
