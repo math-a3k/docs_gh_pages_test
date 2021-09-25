@@ -157,7 +157,7 @@ def test0():
 
 
 ########################################################################################################
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1,
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
                  fun_apply=None,npool=1, max_file=-1, #### apply function for each sub
                  verbose=False,
@@ -202,7 +202,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, c
 
             dfi = pd_reader_obj(filei)
 
-            # if dtype_reduce is not None:      dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+            # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
             if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
             if cols is not None :             dfi = dfi[cols]
             if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
@@ -246,7 +246,8 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, c
     return dfall
 
 
-def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1,
+
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
