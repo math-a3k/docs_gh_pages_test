@@ -93,12 +93,7 @@ def test():
       
 
 
-    
-    
-    
-    
-    
-    
+
     
 ########################################################################################################    
 ##########  Database Class #############################################################################
@@ -106,12 +101,19 @@ class DB(object):
     """
     DB == collection of diskcache tables on disk.
        A table == a folder on disk
-      
+
+      root_path/mytable1/
+      root_path/mytable2/
+      root_path/mytable3/
+      root_path/mytable4/
+      root_path/mytable5/
+
+
     
     """
     
-    def __init__(self, path):
-        self.path = path
+    def __init__(self, root_path):
+        self.path = root_path
     
     def db_list(self,):
         ## get list of db from the folder, size
@@ -129,17 +131,23 @@ class DB(object):
 
         for folder in flist :
             size_mb = " size folder"
-            dbi  = diskcache_load(folder)
-            nkeys = diskcache_keycount(dbi)
-            print(folder, size_mb, nkeys)
+
+            if os.path.isfile(f"{folder}/cache.db"):
+                dbi   = diskcache_load(folder)
+                nkeys = diskcache_keycount(dbi)
+                print(folder, size_mb, nkeys)
+            else :
+                print(folder, size_mb)
 
 
     def reset_wal(self,):
         ## clean temp files
         pass
         
-        
-        
+
+def os_folder_size(path):
+    return 1
+
         
 def db_init(db_dir:str="path"):
     """
