@@ -135,7 +135,7 @@ from utilmy.nnumpy import (
 
 ##### OS, cofnfig ######################################################################################
 from utilmy.oos import(
-    os_getsize,
+    os_path_size,
     os_path_split,
     os_file_check,
     os_file_replacestring,
