@@ -97,10 +97,51 @@ def test():
     
 ########################################################################################################    
 ##########  Database Class #############################################################################
+def db_cli():
+    """
+      Command line for db access.
+      Need a global config file.... set manuaklly
+      https://pypi.org/project/qurcol/
+
+    """
+    import argparse
+    p   = argparse.ArgumentParser()
+    add = p.add_argument
+
+    add('task', metavar='task', type=str, nargs=1, help='list/info/check')
+    add("val",   metavar='val', type=str, nargs=1, help='list/info/check')
+
+    #### Extra Options
+
+
+
+    args = p.parse_args()
+
+    task =  args.task[0]
+    val  =  args.val[0]
+
+
+    #########################################################################
+    db = DB(config_path= os.environ['db_diskcacheconfig'])  ##### Need to set
+
+    if task == 'help':  print(HELP)
+    if task == 'setconfig':
+        os_environ_set('db_diskcache_config', val)
+
+
+    if task == 'list':   db.list()
+    if task == 'info':   db.info()
+    if task == 'check':  db.check()
+    else :
+        log('list,info')
+
+
+
+
 class DB(object):
     """
-    DB == collection of diskcache tables on disk.
-       A table == a folder on disk
+      DB == collection of diskcache tables on disk.
+         A table == a folder on disk
 
       root_path/mytable1/
       root_path/mytable2/
@@ -108,29 +149,52 @@ class DB(object):
       root_path/mytable4/
       root_path/mytable5/
 
-
+     {
+       'db_paths' : [ 'root1', 'root2'   ]
+     }
     
     """
-    
-    def __init__(self, root_path):
-        self.path = root_path
-    
-    def db_list(self,):
-        ## get list of db from the folder, size
+    def __init__(self, config_dict=None, config_path=None):
 
-        flist = glob.glob(self.path +"/*")
+        if config_dict is not None :
+           self.config_dict = config_dict
+
+        elif config_path is not None :
+           self.config_dict = json.load(open(config_path, mode='r'))
+           self.config_path = config_path
+
+        else :
+            self.config_path = os.environ.get('db_diskcache_config', os.getcwd().replace("\\", "/"))
+            self.config_dict = json.load(open(self.config_path, mode='r'))
+
+        self.path_list = config_dict('db_paths', [])
+
+
+    def add(self, db_path):
+        self.path_list = list(set(self.path_list + db_path))
+
+    def remove(self, db_path):
+        self.path_list = [ t for t in self.path_list  if t != db_path ]
+
+    def list(self,):
+        ## get list of db from the folder, size
+        flist = []
+        for path in self.path_list :
+           flist = flist + glob.glob(path +"/*")
 
         for folder in flist :
-            size_mb = " size folder"
+            size_mb = os_path_size(folder)
             print(folder, size_mb)
 
-    def db_info(self,):
+        return flist
+
+    def info(self,):
         ## get list of db from the folder, size
 
         flist = glob.glob(self.path +"/*")
 
         for folder in flist :
-            size_mb = " size folder"
+            size_mb = os_path_size(folder)
 
             if os.path.isfile(f"{folder}/cache.db"):
                 dbi   = diskcache_load(folder)
@@ -139,14 +203,59 @@ class DB(object):
             else :
                 print(folder, size_mb)
 
-
-    def reset_wal(self,):
-        ## clean temp files
+    def clean(self,):
+        ## clean temp files for each diskcache db
         pass
-        
 
-def os_folder_size(path):
-    return 1
+
+    def check(self, db_path=None):
+        """
+           Check Sqlite cache.db if file is fine
+
+        """
+        pass
+
+
+    def show(self, db_path=None, n=4):
+        """
+           show content for each table
+
+        """
+        flist = self.list()
+        for pathi in flist:
+            dbi = diskcache_load(pathi)
+            res = diskcache_getall(dbi, limit=n)
+            log(pathi, res, "\n\n")
+
+
+
+
+def os_environ_set(name, value):
+    """
+    https://stackoverflow.com/questions/716011/why-cant-environmental-variables-set-in-python-persist
+
+    """
+    cmd = """
+    
+    
+    """
+
+
+def os_path_size(folder=None):
+    """
+       Get the size of a folder in bytes
+    """
+    import os
+    if folder is None:
+        folder = os.getcwd()
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(folder):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            total_size += os.path.getsize(fp)
+    return total_size
+
+
 
         
 def db_init(db_dir:str="path"):
