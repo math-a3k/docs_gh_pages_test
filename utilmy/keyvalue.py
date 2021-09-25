@@ -22,8 +22,9 @@ db_path : Single DB storage
 
 """
 import os, glob, sys, math, string, time, json, logging, functools, random, yaml, operator, gc
+import pandas as pd, numpy as np
 from pathlib import Path; from collections import defaultdict, OrderedDict ;  
-# from utilmy import  to_file, date_now_jp
+from utilmy import   pd_read_file, pd_to_file
 from box import Box
 
 import diskcache as dc
@@ -101,7 +102,7 @@ def test():
     
 ########################################################################################################    
 ##########  Database Class #############################################################################
-class DB(Object):
+class DB(object):
     """
     DB == collection of diskcache tables on disk.
        A table == a folder on disk
@@ -109,15 +110,17 @@ class DB(Object):
     
     """
     
-    def __init__(path):
+    def __init__(self, path):
         pass
     
-    def get_db():
+    def get_db(self,):
         ## get list of db from the folder, size
-        
-    def reset_wal():
+        pass
+
+
+    def reset_wal(self,):
         ## clean temp files
-        
+        pass
         
         
         
@@ -165,7 +168,8 @@ def db_size(db_dir= None):
     
 def db_merge():   ### python prepro.py  db_merge    2>&1 | tee -a zlog_prepro.py  &
      #### merge 2 dataframe    
-     colkey = 'item_tag_vran'    
+     colkey = 'item_tag_vran'
+     dir_rec = ""
         
      df1 = pd_read_file( dir_rec+  "/emb//map_idx_13311813.parquet" ) 
      log(df1 )  ### 13 mio
