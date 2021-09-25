@@ -20,7 +20,12 @@ python-box
 matplotlib
 python-highcharts
 python-highcharts  
-mpld3 
+mpld3
+geopandas 
+fiona
+pyproj
+rtree
+shapely
 pandas-highcharts
 pretty-html-table
 networkx
