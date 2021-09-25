@@ -37,7 +37,8 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 # the funtion for test multi process
 def test_run(list_vars, const=1, const2=1):
     import random
-    log(f'Var: {list_vars[0]}')
+    #log(f'Var: {list_vars[0]}')
+    log(f'Var: {list_vars}')
     log('Fixed Const: ', const)
     sleep_time = random.randint(3,10)
     log(f"Start sleep {sleep_time}")
