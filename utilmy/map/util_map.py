@@ -1,3 +1,8 @@
+HELP = """
+  pip install folium
+  pip install geopandas
+"""
+
 import json
 import requests
 from utilmy import pd_read_file
@@ -123,7 +128,6 @@ def plot_choropleth_map_use_case():
 
 # todo 
 #   adding tests and docs to plot_choropleth_map
-#   adding GeoJSON.
 #   adding Vector Data (shp)
 #   adding raster data. 
 #   adding plot_geocoded_adderess 
