@@ -111,11 +111,27 @@ class DB(object):
     """
     
     def __init__(self, path):
-        pass
+        self.path = path
     
-    def get_db(self,):
+    def db_list(self,):
         ## get list of db from the folder, size
-        pass
+
+        flist = glob.glob(self.path +"/*")
+
+        for folder in flist :
+            size_mb = " size folder"
+            print(folder, size_mb)
+
+    def db_info(self,):
+        ## get list of db from the folder, size
+
+        flist = glob.glob(self.path +"/*")
+
+        for folder in flist :
+            size_mb = " size folder"
+            dbi  = diskcache_load(folder)
+            nkeys = diskcache_keycount(dbi)
+            print(folder, size_mb, nkeys)
 
 
     def reset_wal(self,):
@@ -345,8 +361,15 @@ def diskcache_save2(df, colkey, colvalue, db_path="./dbcache.db", size_limit=100
     
 def diskcache_getkeys(cache):
     cache = diskcache_load( cache, size_limit=100000000000, verbose=False )
-    
+
     v = cache._sql('SELECT key FROM Cache').fetchall()
+    v = [ t[0] for t in v]
+    return v
+
+def diskcache_keycount(cache):
+    cache = diskcache_load( cache, size_limit=100000000000, verbose=False )
+
+    v = cache._sql('SELECT countt(key) FROM Cache').fetchall()
     v = [ t[0] for t in v]
     return v
 

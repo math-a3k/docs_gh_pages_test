@@ -1,6 +1,11 @@
 HELP = """
-  pip install folium
-  pip install geopandas
+  pip install folium geopandas
+
+# should be used in a web run env as jupyter notebook to see the actual map. 
+
+
+# remember, you can't re-render folium map, if you have already plotted map
+# you can't add json to it, https://github.com/python-visualization/folium/issues/906 
 
 
 
@@ -29,9 +34,7 @@ def help():
 
 
 ################################################################################
-##################### Use cases ################################################    
-# should be used in a web run env as jupyter notebook to see the actual map. 
-
+##################### Use cases ################################################
 # plot_map
 def test_plot_map_use_case():
     plot_map([15,34],12)
@@ -57,12 +60,7 @@ def test_plot_choropleth_map_use_case():
 
 
 
-
-    
-#################### Main ######################  # 
-# remember, you can't re-render folium map, if you have already plotted map
-# you can't add json to it, https://github.com/python-visualization/folium/issues/906 
-
+#################### Main ########################################################
 def plot_map(center:list=[18,32],zoom:int=2)->folium.Map:
 
     #folium will catch value errors for invalid numbers, no try block needed
@@ -117,6 +115,15 @@ def plot_choropleth_map(center:list, zoom:int, geojson:str, csv:str, geojson_mut
     )
     c.add_to(m)
     return m
+
+
+
+###################################################################################################
+if __name__ == "__main__":
+    import fire
+    fire.Fire()
+    # test2()
+
 
 
 
