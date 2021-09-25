@@ -3,7 +3,7 @@ HELP="""
     python parallel.py test0
     #  python parallel.py test2
 """
-import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc
+import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc, os
 from multiprocessing.pool import ThreadPool
 from threading import Thread
 
@@ -153,6 +153,47 @@ def test0():
     log( 'multithread_run_list : ' , res)
 
 
+
+def test_pdreadfile():
+   ##### pd_read_file
+   # from utilmy import pd_read_file
+   import pandas as pd, random
+   ncols = 7
+   nrows = 100
+   ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+   # Required for it to be detected in Session's globals()
+   global df
+   df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
+   n0 = len(df)
+   s0 = df.values.sum()
+   os.makedirs("data/parquet/", exist_ok= True)
+
+   ##### m_job , n_pool tests  ##############################
+   ncopy = 20
+   for i in range(0, ncopy) :
+      df.to_csv( f"data/parquet/ppf_{i}.csv.gz",  compression='gzip' , index=False)
+
+   df1 = pd_read_file("data/parquet/ppf*.gz", verbose=True, n_pool= 7 )
+
+   assert len(df1) == ncopy * n0,         f"df1 {len(df1) }, original {n0}"
+   assert round(df1.values.sum(), 5) == round(ncopy * s0,5), f"df1 {df1.values.sum()}, original {ncopy*s0}"
+
+
+   ####################################################
+   df.to_csv( "data/parquet/fa0b2.csv.gz",   compression='gzip' , index=False)
+   df.to_csv( "data/parquet/fab03.csv.gz",   compression='gzip' , index=False)
+   df.to_csv( "data/parquet/fabc04.csv.gz",  compression='gzip' , index=False)
+   df.to_csv( "data/parquet/fa0bc05.csv.gz", compression='gzip' , index=False)
+
+   df1 = pd_read_file("data/parquet/fab*.*", verbose=True)
+   assert len(df1) == 2 * n0, f"df1 {len(df1) }, original {n0}"
+
+
+   ##### Stresss n_pool
+   df2 = pd_read_file("data/parquet/fab*.*", n_pool=1000 )
+   assert len(df2) == 2 * n0, f"df1 {len(df2) }, original {n0}"
+
+   
 
 
 
