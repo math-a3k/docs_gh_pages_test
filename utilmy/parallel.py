@@ -35,21 +35,14 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
-def test_run(list_vars, const=1):
-    log(f'Var: {list_vars}')
+def test_run(list_vars, const=1, const2=1):
+    import random
+    log(f'Var: {list_vars[0]}')
     log('Fixed Const: ', const)
-    log(f'Start function: {list_vars[0][0]}')
-    time.sleep(2)
-    print(f'End function: {list_vars[0][0]}')
-    return list_vars[0][0]*2
-
-# the funtion for test multi process
-def test_run2(list_vars, const=1):
-    # the function just show whatere in list_vars it got
-    log(f'Var: {list_vars}')
-    log('Fixed Const: ', const)
-    time.sleep(2)
-    return const
+    sleep_time = random.randint(3,10)
+    log(f"Start sleep {sleep_time}")
+    time.sleep(sleep_time)
+    return const*const2
 
 
 def test_run_multithread(thread_name, num, string):
@@ -58,6 +51,7 @@ def test_run_multithread(thread_name, num, string):
     time.sleep(3)
     print(f'End thread: {thread_name}')
     return string*2
+
 
 def test_run_multithread2(thread_name, arg):
     print(f'Var: {thread_name}, {arg}')
@@ -110,19 +104,39 @@ def test0():
 
     log("\n\n#### Input variable of single function is a Big LIST  ")
     input_list = [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]
-    res = multiproc_run(test_run2, input_list, n_pool = len(input_list))
+    res = multiproc_run(test_run, input_list, n_pool = len(input_list))
     
     log("\n\n#### Input list variable and input_fixed")
     input_list = [ "path1", "path2", "path2", ]
-    res = multiproc_run(test_run2, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
+    res = multiproc_run(test_run, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
+
+
+    # the list of input will be used for multiproc_run, multithread_run testing
+    input_list = [
+        (12, 23, 45, 56),                                                                           # number
+        ([1,2], [3,4], [5,6], ),                                                                    # list number
+        ( [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"], ),  # list number and string
+        ("Hello", "World", "test", "path", ),                                                       # string
+        ({"test": 1}, ),                                                                            # dict 1 thread
+        ({"test": 1}, {"var1": 1, "var2": "string"}, ),                                             # dict multi thread
+    ]
+
+    log("\n\n########### multiproc_run ####################################################")
+    for input in input_list:
+        log(f"\n\n########### multiproc_run with input list: {input}")
+        t0 = time.time()
+        res = multiproc_run(test_run, input, npool=len(input), input_fixed=  {'const': 555, 'const2': 1})
+        log(time.time() - t0)
+        log( 'multiproc_run : ' , res)
 
 
     log("\n\n########### multithread_run ####################################################")
-    t0 = time.time()
-    input_list = [  (1,2, "Hello"), [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
-    res = multithread_run(test_run, input_list, len(input_list))
-    log(time.time() - t0)
-    log( 'multithread_run : ' , res)
+    for input in input_list:
+        log(f"\n\n########### multithread_run with input list: {input}")
+        t0 = time.time()
+        res = multithread_run(test_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
+        log(time.time() - t0)
+        log( 'multithread_run : ' , res)
 
 
     log("\n\n########### multithread_run_list ################################################")
@@ -490,7 +504,6 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
 
     """
     import time, functools
-
     #### Input xi #######################################
     if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
          input_list = [  (t,) for t in input_list]  ## Must be a list of list
