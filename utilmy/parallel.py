@@ -37,8 +37,7 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 # the funtion for test multi process
 def test_run(list_vars, const=1, const2=1):
     import random
-    #log(f'Var: {list_vars[0]}')
-    log(f'Var: {list_vars}')
+    log(f'Var: {list_vars[0]}')
     log('Fixed Const: ', const)
     sleep_time = random.randint(3,10)
     log(f"Start sleep {sleep_time}")
@@ -99,17 +98,17 @@ def test0():
     log("\n\n########### multiproc_run #####################################################")
     t0 = time.time()
     input_list = [ [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
-    res = multiproc_run(test_run, input_list, n_pool = len(input_list))
+    res = multiproc_run(test_run, input_list, n_pool=len(input_list))
     log(time.time() - t0)
     log( 'multiproc_run : ' , res)
 
     log("\n\n#### Input variable of single function is a Big LIST  ")
     input_list = [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]
-    res = multiproc_run(test_run, input_list, n_pool = len(input_list))
+    res = multiproc_run(test_run, input_list, n_pool=len(input_list))
     
     log("\n\n#### Input list variable and input_fixed")
     input_list = [ "path1", "path2", "path2", ]
-    res = multiproc_run(test_run, input_list, n_pool = len(input_list), input_fixed=  {'const': 555} )
+    res = multiproc_run(test_run, input_list, n_pool=len(input_list), input_fixed=  {'const': 555} )
 
 
     # the list of input will be used for multiproc_run, multithread_run testing
@@ -126,7 +125,7 @@ def test0():
     for input in input_list:
         log(f"\n\n########### multiproc_run with input list: {input}")
         t0 = time.time()
-        res = multiproc_run(test_run, input, npool=len(input), input_fixed=  {'const': 555, 'const2': 1})
+        res = multiproc_run(test_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
         log(time.time() - t0)
         log( 'multiproc_run : ' , res)
 
@@ -518,7 +517,7 @@ def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
 
 
 ############################################################################################################
-def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, **kw):
+def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, **kw):
     """  Multiprocessing execute
     input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
@@ -554,9 +553,9 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
     if input_fixed is not None:  #### Fixed keywword variable
         fun_async = functools.partial(fun_async, **input_fixed)
 
-    xi_list = [[] for t in range(npool)]
+    xi_list = [[] for t in range(n_pool)]
     for i, xi in enumerate(input_list):
-        jj = i % npool
+        jj = i % n_pool
         xi_list[jj].append(tuple(xi))
 
     if verbose:
@@ -566,10 +565,10 @@ def multiproc_run(fun_async, input_list: list, npool=5, start_delay=0.1, verbose
 
     #### Pool execute ###################################
     import multiprocessing as mp
-    pool = mp.Pool(processes=npool)
+    pool = mp.Pool(processes=n_pool)
     # pool     = mp.pool.ThreadPool(processes=n_pool)
     job_list = []
-    for i in range(npool):
+    for i in range(n_pool):
         time.sleep(start_delay)
         log('starts', i)
         job_list.append(pool.apply_async(fun_async, (xi_list[i],)))
