@@ -441,10 +441,10 @@ def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
     import pandas as pd, numpy as np, time, gc
 
     def f2(df_list):
-        dfiall = None
+        dfiall = pd.DataFrame()
         for dfi in df_list:
             dfi    = dfi.apply( lambda dfi : fun_apply(dfi) )
-            dfiall = pd.concat((dfiall, dfi)) if dfiall is None else dfi
+            dfiall = pd.concat((dfiall, dfi)) 
             del dfi;  gc.collect()
         return dfiall
 
@@ -457,7 +457,7 @@ def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
     ### Need to get the groupby splits
     dfg        = df.groupby(colsgroup)
     input_list = [[]*1]*npool
-    for i, dfi in enumerate(dfg):
+    for i, name, dfi in enumerate(dfg):
         input_list[i % npool].append(dfi)
 
 
