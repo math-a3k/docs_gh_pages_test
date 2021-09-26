@@ -197,9 +197,9 @@ def test_pdreadfile():
 
 
 ########################################################################################################
-def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1,
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, npool=None
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
-                 fun_apply=None,npool=1, max_file=-1, #### apply function for each sub
+                 fun_apply=None, max_file=-1, #### apply function for each sub
                  verbose=False,
                  **kw):
     """  Read file in parallel from disk : very Fast
@@ -207,7 +207,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, co
     :return:
     """
     import glob, gc,  pandas as pd, os, time
-    n_pool = npool ## alias
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
     def log(*s, **kw):  print(*s, flush=True, **kw)
     readers = {
           ".pkl"     : pd.read_pickle,
@@ -287,13 +287,14 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, co
 
 
 
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1,
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
   :return:
   """
   import glob, gc,  pandas as pd, os
+  n_pool = npool if isinstance(npool, int)  else n_pool ## alias    
   def log(*s, **kw):
       print(*s, flush=True, **kw)
   readers = {
@@ -408,10 +409,11 @@ def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None,
 
 
 
-def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, npool=4):
+def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, n_pool=4, npool=None):
     """
     Use of multi-thread on group by apply when order is not important
     """
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
     import pandas as pd
     import concurrent.futures
 
@@ -516,7 +518,7 @@ def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
 
 
 ############################################################################################################
-def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, **kw):
+def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
     """  Multiprocessing execute
     input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
@@ -545,6 +547,7 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
 
     """
     import time, functools
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
     #### Input xi #######################################
     if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
          input_list = [  (t,) for t in input_list]  ## Must be a list of list
@@ -583,16 +586,17 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
     return res_list
 
 
-def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, **kw):
+def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
     """  input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
     def fun_async(xlist):
       for x in xlist :
             hdfs.upload(x[0], x[1])
             
     input_fixed = {'const_var' : 1 }        
-    """
+    """    
     import time, functools
-
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
+    
     #### Input xi #######################################
     if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
          input_list = [  (t,) for t in input_list]  ## Must be a list of lis
