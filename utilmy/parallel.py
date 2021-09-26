@@ -453,11 +453,10 @@ def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
     # pool     = multiprocessing.Pool(processes=npool)
     pool = mp.pool.ThreadPool(processes=npool)
 
-
     ### Need to get the groupby splits
     dfg        = df.groupby(colsgroup)
     input_list = [[]*1]*npool
-    for i, name, dfi in enumerate(dfg):
+    for i, (name, dfi) in enumerate(dfg):
         input_list[i % npool].append(dfi)
 
 
