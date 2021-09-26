@@ -197,7 +197,7 @@ def test_pdreadfile():
 
 
 ########################################################################################################
-def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, npool=None,
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
                  fun_apply=None, max_file=-1, #### apply function for each sub
                  verbose=False,
@@ -287,7 +287,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, co
 
 
 
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, npool=None,
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
   """  Read file in parallel from disk : very Fast
   :param path_glob: list of pattern, or sep by ";"
