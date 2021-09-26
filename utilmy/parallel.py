@@ -207,7 +207,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, co
     :return:
     """
     import glob, gc,  pandas as pd, os, time
-    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
+    n_pool = npool if npool is not None  else n_pool ## alias
     def log(*s, **kw):  print(*s, flush=True, **kw)
     readers = {
           ".pkl"     : pd.read_pickle,
