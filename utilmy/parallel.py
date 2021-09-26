@@ -458,7 +458,7 @@ def pd_groupby_parallel3(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
     dfg        = df.groupby(colsgroup)
     input_list = [[]*1]*npool
     for i, dfi in enumerate(dfg):
-        input_list[i % npool].append(dfg)
+        input_list[i % npool].append(dfi)
 
 
     job_list = []
