@@ -99,6 +99,7 @@ def test0():
 
     log("\n\n###########  pd_apply_parallel  :  ############################################")
     t0 = time.time()
+    df = df.iloc[:1000,:]
     df1['s1'] = df.apply( lambda x : test_sum(x), axis=1)
     df2['s1'] = pd_apply_parallel(df, fun_apply= test_fun_sum, npool=4 )   ### Failed due to groupby part
     df2 = df2.sort_values( list(df2.columns))
@@ -139,7 +140,7 @@ def test0():
     for input in input_list:
         log(f"\n\n########### multiproc_run with input list: {input}")
         t0 = time.time()
-        res = multiproc_run(test_fun_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
+        res = multiproc_run(test_fun_run, input, n_pool=3, input_fixed=  {'const': 555, 'const2': 1})
         log(time.time() - t0)
         log( 'multiproc_run : ' , res)
 
@@ -148,7 +149,7 @@ def test0():
     for input in input_list:
         log(f"\n\n########### multithread_run with input list: {input}")
         t0 = time.time()
-        res = multithread_run(test_fun_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
+        res = multithread_run(test_fun_run, input, n_pool=3, input_fixed=  {'const': 555, 'const2': 1})
         log(time.time() - t0)
         log( 'multithread_run : ' , res)
 
