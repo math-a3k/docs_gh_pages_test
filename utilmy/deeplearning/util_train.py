@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 """ watch nvidia-smi
 python train8aa.py  
-
-
 Focus on reconstruction
-
 """
 import os, pandas as pd, time, numpy as np,sys
 from pprint import pprint as print2
@@ -386,7 +383,6 @@ def pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot=True):
    """ dfi_onehot = pd_get_dummies( df, cols_cat = ['articleType'  ], cat_dict= cc.labels_map, only_onehot= False)
       dfi_onehot.sum()
       dfi_onehot.dtypes
-
    """ 
    dfall      =  None
    #cols_cat   = list(cat_dict.keys() )
@@ -529,7 +525,6 @@ def make_decoder():
     """
     ValueError: Dimensions must be equal, but are 3 and 4
     for '{{node sub}} = Sub[T=DT_FLOAT](x, sequential_1/conv2d_transpose_3/Relu)' with input shapes: [8,256,256,3], [8,256,256,4].
-
     """
     #Functionally define the different layer types
     Input = tf.keras.layers.InputLayer
@@ -656,10 +651,8 @@ https://www.tensorflow.org/tutorials/distribute/custom_training
 # global batch size.
 #  loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
 #      from_logits=True,
-
 @tf.function
 tfa.losses.triplet_semihard_loss
-
 for speed up
 """
 
@@ -968,7 +961,6 @@ class RealCustomDataGenerator(tf.keras.utils.Sequence):
 """
 Auto Augmentation :
    data/img/models/fashion/dcf_vae/auto_config
-
 """    
 from albumentations import (
     Compose, HorizontalFlip, CLAHE, HueSaturationValue,
@@ -1194,9 +1186,7 @@ log('# Reloaded', model2)
 
 
 """
-
 gender ['men', 'women', 'boys', 'girls', 'unisex', 'other']
-
 masterCategory ['apparel', 'accessories', 'footwear', 'personal care', 'free items'
  'sporting goods', 'home', 'other']
  
@@ -1245,13 +1235,7 @@ baseColour ['navy blue', 'blue', 'silver', 'black', 'grey', 'green', 'purple', '
  'burgundy', 'coffee brown', 'grey melange', 'rust', 'rose', 'lime green'
  'mauve', 'turquoise blue', 'metallic', 'mustard', 'taupe', 'nude'
  'mushroom brown', 'fluorescent green', 'other']
-
-
  
-
-
-
-
 N ids 15841
 N images 44441
 Total valid images: 15841
@@ -1264,8 +1248,6 @@ articleType         141
 baseColour           46
 season                4
 usage                 8
-
-
 """
 class StepDecay(LearningRateDecay):
     def __init__(self, init_lr=0.01, factor=0.25, drop_every=5):
@@ -1338,21 +1320,3 @@ test_transforms = Compose([
     Resize(image_size, image_size, p=1),
     ToFloat(max_value=255)
 ])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

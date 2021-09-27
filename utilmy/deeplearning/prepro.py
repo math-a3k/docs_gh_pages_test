@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-
-
 """
 import os,sys,glob,time,gc,copy
 os.environ['MPLCONFIGDIR'] = "/tmp/"
@@ -170,7 +168,6 @@ def create_train_npz():
     
 def image_resize(out_dir=""):
     """     python prepro.py  image_resize
-
           image white color padded
     
     """
@@ -219,7 +216,6 @@ def image_resize(out_dir=""):
 
 def image_check():
     """     python prepro.py  image_check 
-
           image white color padded
     
     """    
@@ -335,7 +331,6 @@ def image_remove_bg(in_dir="", out_dir="", level=1):
     
     
         python prepro.py rembg  --in_dir  /data/workspaces/noelkevin01/img/data/bing/v4     --out_dir  /data/workspaces/noelkevin01/img/data/bing/v4_nobg &>> /data/workspaces/noelkevin01/img/data/zlog_rembg.py  &
-
         rembg  -ae 15 -p  /data/workspaces/noelkevin01/img/data/fashion/test2/  /data/workspaces/noelkevin01/img/data/fashion/test_nobg/  
         
         mkdir /data/workspaces/noelkevin01/img/data/fashion/train_nobg/  
@@ -461,16 +456,11 @@ def os_path_check(path, n=5):
 def image_face_blank(in_dir="", level = "/*", 
                      out_dir=f"", npool=30):
     """  Remove face
-
      python prepro.py  image_face_blank
      
      python prepro.py  image_face_blank  --in_dir img/data/fashion/test_nobg   --out_dir img/data/fashion/test_nobg_noface
-
      python prepro.py  image_face_blank  --in_dir img/data/fashion/train_nobg   --out_dir img/data/fashion/train_nobg_noface
-
-
       five elements are [xmin, ymin, xmax, ymax, detection_confidence]
-
     """
     import cv2, glob
     import face_detection
@@ -760,10 +750,7 @@ def topk_export():     #### python prepro.py  topk_export
                      id gender masterCategory subCategory  ... masterCategory_pred subCategory_pred articleType_pred  baseColour_pred
 0     cn3357-01_1-11.png  women        apparel     topwear  ...                   1                1               32                4
 1      cs6481-01_1-4.png   kids          shoes       shoes  ...                   5               20              151                7
-
-
      hdfs dfs -put  /data/workspaces/noelkevin01/img/models/fashion/dcf_vae/m_train9pred/res/m_train9b_g3_-img_train_r2p2_200k_clean_nobg_256_256-500000-cache_best_best_good_epoch_313/fashion_emb_500k/                /user/scoupon/zexport/z/
-
     """
     dir_in  = "/data/workspaces/noelkevin01/img/models/fashion/dcf_vae/m_train9pred/res/m_train9b_g3_-img_train_r2p2_200k_clean_nobg_256_256-500000-cache_best_best_good_epoch_313/*.parquet" 
     dir_out = "/data/workspaces/noelkevin01/img/models/fashion/dcf_vae/m_train9pred/res/m_train9b_g3_-img_train_r2p2_200k_clean_nobg_256_256-500000-cache_best_best_good_epoch_313/fashion_emb_500k/"
@@ -787,7 +774,6 @@ def topk_export():     #### python prepro.py  topk_export
 def data_add_onehot(dfref, img_dir, labels_col) :      
     """
        id, uri, cat1, cat2, .... , cat1_onehot
-
     """
     import glob
     fpaths   = glob.glob(img_dir )
@@ -941,8 +927,6 @@ def down_ichiba()  :
 def down_page(query, out_dir="query1", genre_en='', id0="", cat="", npage=1) :
     """
         python prepro.py down_page  'メンズファッション+トップス+ポロシャツ'    --out_dir men_fashion_topshirts_blue  
-
-
     """
     import time, os, json, csv, requests, sys, urllib
     from bs4 import BeautifulSoup as bs
@@ -1027,13 +1011,7 @@ def down_page(query, out_dir="query1", genre_en='', id0="", cat="", npage=1) :
 
 """
 tar -zcf /data/workspaces/noelkevin01/img/data/rakuten/women.tar.gz  /data/workspaces/noelkevin01/img/data/rakuten/women/
-
-
 cp -R /data/workspaces/noelkevin01/img/data/fashion/train_npz/small/img_train_nobg_256_256-100000.cache/    /dev/shm/
-
-
-
-
 """        
 
 def check_tf():
@@ -1054,26 +1032,17 @@ if __name__ == "__main__":
 
     
 """
-
 1. You are using nvidia-gpu
 2. You are using conda environment (Anaconda)
 Step I: Find out if the tensorflow is able to see the GPU
 Command:
-
 import tensorflow as tf
 print( tf.config.list_physical_devices())
-
-
-
 $ nvcc -V
-
-
 conda install cudnn=8.2.1=cuda11.3_0
  
  
 $ conda install tensorflow-gpu
-
-
  linux-64/cudnn-8.2.1-cuda11.3_0.tar.bz2
  
  
@@ -1086,20 +1055,10 @@ $ conda install tensorflow-gpu
 
 
 """
-
 https://drive.google.com/file/d/1Jf2XOJb078Mu75oUCJjBfxM36TGZ8SFv/view?usp=sharing
-
 gdown 
-
-
-
 gdown --id  1Jf2XOJb078Mu75oUCJjBfxM36TGZ8SFv   -O /data/workspaces/noelkevin01/img/data/fashion/fashion_data.zip
-
-
 unzip -o -qq  /data/workspaces/noelkevin01/img/data/fashion/fashion_data.zip  -d  /data/workspaces/noelkevin01/img/data/fashion/
-
-
-
     subCategory
 1   Topwear
 2   Bottomwear
@@ -1117,8 +1076,6 @@ unzip -o -qq  /data/workspaces/noelkevin01/img/data/fashion/fashion_data.zip  -d
 14  Bags
 15  Flip Flops
 16  Topwear
-
-
 """
 
 
@@ -1127,8 +1084,6 @@ Resize((384, 384), interpolation=Image.BICUBIC),
 CenterCrop((224, 224)),
 ToTensor(),
 Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-
-
 pose = Image.fromarray(cv2.cvtColor(canvas, cv2.COLOR_BGR2RGB)).resize((self.opt.load_size, self.opt.load_size), resample=Image.NEAREST)
 params = get_params(self.opt, pose.size)
 transform_label = get_transform(self.opt, params, method=Image.NEAREST, normalize=False)
@@ -1141,7 +1096,6 @@ im_dist = np.clip((im_dist / 3), 0, 255).astype(np.uint8)
 tensor_dist = transform_img(Image.fromarray(im_dist))
 tensors_dist = tensor_dist if e == 1 else torch.cat([tensors_dist, tensor_dist])
 e += 1
-
 """
 
 
@@ -1192,14 +1146,4 @@ def prepro_images2(image_paths):
 
 ### '''prepro Data'''
 #List of paths to each image file
-
-
-
-
-
-
-
-
-
-
 
