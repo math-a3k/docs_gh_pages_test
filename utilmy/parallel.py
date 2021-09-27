@@ -42,7 +42,7 @@ def test_fun_run(list_vars, const=1, const2=1):
     sleep_time = random.randint(1,5)
     log(f"Start sleep {sleep_time}")
     time.sleep(sleep_time)
-    return const*const2
+    return f"{const*const2} {str(list_vars[0])}"
 
 
 def test_run_multithread(thread_name, num, string):
@@ -150,7 +150,9 @@ def test0():
         log( 'multiproc_run : ' , res)
         log("########### Validation for multiproc_run response")
         for index in range(len(input)):
-            assert res[index] == test_fun_run([(input[index], )], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
+            # convert to tuple if input type is list
+            input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
+            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
 
 
 
@@ -167,7 +169,9 @@ def test0():
         log( 'multithread_run : ' , res)
         log("########### Validation for multithread_run response")
         for index in range(len(input)):
-            assert res[index] == test_fun_run([(input[index], )], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
+            # convert to tuple if input type is list
+            input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
+            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
 
 
 
