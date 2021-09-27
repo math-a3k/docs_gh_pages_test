@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ -*- coding: utf-8 -*-
 import io
 import os
 from typing import Union
@@ -159,7 +159,6 @@ class CustomDataGenerator_img(Sequence):
         """    
            df_label format :
                id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-
         """
         self.image_dir   = img_dir
         self.class_list  = class_list
@@ -205,7 +204,6 @@ class CustomDataGenerator_img(Sequence):
 def data_add_onehot(dfref, img_dir, labels_col) :      
     """
        id, uri, cat1, cat2, .... , cat1_onehot
-
     """
     import glob
     fpaths   = glob.glob(img_dir )
@@ -557,4 +555,3 @@ def image_read(filepath_or_buffer: Union[str, io.BytesIO]):
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             
     return image  
-
