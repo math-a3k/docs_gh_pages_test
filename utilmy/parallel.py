@@ -35,7 +35,7 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
-def test_run(list_vars, const=1, const2=1):
+def test_fun_run(list_vars, const=1, const2=1):
     import random
     log(f'Var: {list_vars[0]}')
     log('Fixed Const: ', const)
@@ -60,6 +60,8 @@ def test_run_multithread2(thread_name, arg):
     print(f'End thread: {thread_name}')
     return arg
 
+def test_sum(x):
+    return x['0'] + x['1']
 
 def test0():
 
@@ -95,7 +97,17 @@ def test0():
     log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
 
 
+    log("\n\n###########  pd_apply_parallel  :  ############################################")
+    t0 = time.time()
+    df1['s1'] = df.apply( lambda x : test_sum(x), axis=1)
+    df2['s1'] = pd_apply_parallel(df, fun_apply= test_fun_sum, npool=4 )   ### Failed due to groupby part
+    df2 = df2.sort_values( list(df2.columns))
+    log(df2, time.time() - t0)
+    log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
+
+
     log("\n\n########### multiproc_run #####################################################")
+    """
     t0 = time.time()
     input_list = [ [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
     res = multiproc_run(test_run, input_list, n_pool=len(input_list))
@@ -109,23 +121,25 @@ def test0():
     log("\n\n#### Input list variable and input_fixed")
     input_list = [ "path1", "path2", "path2", ]
     res = multiproc_run(test_run, input_list, n_pool=len(input_list), input_fixed=  {'const': 555} )
-
+    """
 
     # the list of input will be used for multiproc_run, multithread_run testing
     input_list = [
+        [ "path1", "path2", "path2", ],
         (12, 23, 45, 56),                                                                           # number
         ([1,2], [3,4], [5,6], ),                                                                    # list number
         ( [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"], ),  # list number and string
         ("Hello", "World", "test", "path", ),                                                       # string
         ({"test": 1}, ),                                                                            # dict 1 thread
-        ({"test": 1}, {"var1": 1, "var2": "string"}, ),                                             # dict multi thread
+        ({"test": 1}, {"var1": 1, "var2": "string"}, ),
+        [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]# dict multi thread
     ]
 
     log("\n\n########### multiproc_run ####################################################")
     for input in input_list:
         log(f"\n\n########### multiproc_run with input list: {input}")
         t0 = time.time()
-        res = multiproc_run(test_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
+        res = multiproc_run(test_fun_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
         log(time.time() - t0)
         log( 'multiproc_run : ' , res)
 
@@ -134,7 +148,7 @@ def test0():
     for input in input_list:
         log(f"\n\n########### multithread_run with input list: {input}")
         t0 = time.time()
-        res = multithread_run(test_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
+        res = multithread_run(test_fun_run, input, n_pool=len(input), input_fixed=  {'const': 555, 'const2': 1})
         log(time.time() - t0)
         log( 'multithread_run : ' , res)
 
@@ -198,14 +212,12 @@ def test_pdreadfile():
 
 #############################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None, input_fixed=None,  **kw):
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None,  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
     :return:
     """
-    import glob, gc,  pandas as pd, os, functools
-    from multiprocessing.pool import ThreadPool
-
+    import glob, gc,  pandas as pd, os
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias    
     def log(*s, **kw):
         print(*s, flush=True, **kw)
@@ -214,16 +226,18 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
             ".tsv"     : pd.read_csv, ".csv"     : pd.read_csv, ".txt"     : pd.read_csv, ".zip"     : pd.read_csv,
             ".gzip"    : pd.read_csv, ".gz"      : pd.read_csv,
      }
+    from multiprocessing.pool import ThreadPool
 
-    #### File  ######################################################
+    #### File
     if isinstance(path_glob, list):  path_glob = ";".join(path_glob)
-    path_glob = path_glob.split(";")
+    path_glob  = path_glob.split(";")
     file_list = []
     for pi in path_glob :
         if "*" in pi :
           file_list.extend( sorted( glob.glob(pi) ) )
         else :
           file_list.append( pi )
+
 
     file_list = sorted(list(set(file_list)))
     file_list = file_list[:nfile]
@@ -240,14 +254,14 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
       m_job  = 1 + n_file // n_pool  if n_file >= 3 else 1
     if verbose : log(n_file,  n_file // n_pool )
 
-    ### TODO : use with kewyword arguments #########################
+    ### TODO : use with kewyword arguments
+    pd_reader_obj2 = None
+
     def fun_async(filei):
         ext  = os.path.splitext(filei)[1]
         if ext is None or ext == '': ext ='.parquet'
 
         pd_reader_obj = readers.get(ext, None)
-        if input_fixed is not None:
-           pd_reader_obj = functools.partial(pd_reader_obj, **input_fixed)
 
         dfi = pd_reader_obj(filei)
 
