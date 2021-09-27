@@ -39,7 +39,7 @@ def test_fun_run(list_vars, const=1, const2=1):
     import random
     log(f'Var: {list_vars[0]}')
     log('Fixed Const: ', const)
-    sleep_time = random.randint(3,10)
+    sleep_time = random.randint(1,5)
     log(f"Start sleep {sleep_time}")
     time.sleep(sleep_time)
     return const*const2
@@ -98,6 +98,7 @@ def test0():
 
 
     log("\n\n###########  pd_apply_parallel  :  ############################################")
+
     t0 = time.time()
     df = df.iloc[:1000,:]
     df1['s1'] = df.apply( lambda x : test_sum(x), axis=1)
@@ -105,6 +106,7 @@ def test0():
     #df2 = df2.sort_values( list(df2.columns))
     #log(df2, time.time() - t0)
     #log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
+
 
 
     log("\n\n########### multiproc_run #####################################################")
@@ -126,32 +128,47 @@ def test0():
 
     # the list of input will be used for multiproc_run, multithread_run testing
     input_list = [
-        [ "path1", "path2", "path2", ],
-        (12, 23, 45, 56),                                                                           # number
+        [ "path1", "path2", "path2", ],                                                             # String
+        (12, 23, 45, 56, ),                                                                         # number
         ([1,2], [3,4], [5,6], ),                                                                    # list number
         ( [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"], ),  # list number and string
         ("Hello", "World", "test", "path", ),                                                       # string
         ({"test": 1}, ),                                                                            # dict 1 thread
-        ({"test": 1}, {"var1": 1, "var2": "string"}, ),
-        [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]# dict multi thread
+        ({"test": 1}, {"var1": 1, "var2": "string"}, ),                                             # dict multi thread
+        [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]             #
     ]
 
     log("\n\n########### multiproc_run ####################################################")
+    i = 0
     for input in input_list:
+        i += 1
         log(f"\n\n########### multiproc_run with input list: {input}")
+        input_fixed={'const': 50, 'const2': i}
         t0 = time.time()
-        res = multiproc_run(test_fun_run, input, n_pool=3, input_fixed=  {'const': 555, 'const2': 1})
+        res = multiproc_run(test_fun_run, input, n_pool=len(input), input_fixed=input_fixed)
         log(time.time() - t0)
         log( 'multiproc_run : ' , res)
+        log("########### Validation for multiproc_run response")
+        for index in range(len(input)):
+            assert res[index] == test_fun_run([(input[index], )], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
+
+
 
 
     log("\n\n########### multithread_run ####################################################")
+    i = 0
     for input in input_list:
+        i += 1
         log(f"\n\n########### multithread_run with input list: {input}")
+        input_fixed={'const': 50, 'const2': i}
         t0 = time.time()
-        res = multithread_run(test_fun_run, input, n_pool=3, input_fixed=  {'const': 555, 'const2': 1})
+        res = multithread_run(test_fun_run, input, n_pool=len(input), input_fixed=input_fixed)
         log(time.time() - t0)
         log( 'multithread_run : ' , res)
+        log("########### Validation for multithread_run response")
+        for index in range(len(input)):
+            assert res[index] == test_fun_run([(input[index], )], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
+
 
 
     log("\n\n########### multithread_run_list ################################################")
