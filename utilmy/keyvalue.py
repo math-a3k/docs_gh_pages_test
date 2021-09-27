@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
 HELP= """ Interface for Key Value store.
 
+2 type of storage on disk
+
+    pandas parquet file    as  colkey, colvalue,  1) load pandas in RAM   2) Convert the pandas --> Dict  colkey: colval  
+        Perf is 100 nano sec read/write  but high RAM Usage
+    
+    Save into diskcache  directly as colkey: colval
+        Perf is 100 micro read/write  and writ is slow,  Low RAM usage
+
+
+
+
 pip install diskcache
 
 db_dir : root storage of all db
@@ -11,8 +22,9 @@ db_path : Single DB storage
 
 """
 import os, glob, sys, math, string, time, json, logging, functools, random, yaml, operator, gc
+import pandas as pd, numpy as np
 from pathlib import Path; from collections import defaultdict, OrderedDict ;  
-# from utilmy import  to_file, date_now_jp
+from utilmy.utilmy import   pd_read_file, pd_to_file
 from box import Box
 
 import diskcache as dc
@@ -43,7 +55,7 @@ def pd_random(nrows=1000, ncols= 5):
 def test():
     """    
     """    
-    n = 10**6
+    n = 10**4
     df      = pd_random(n, ncols=2)    
     df['0'] = [  str(x) for x in np.arange(0, len(df)) ]
     df['1'] = [  'xxxxx' + str(x) for x in np.arange(0, len(df)) ]
@@ -56,7 +68,7 @@ def test():
     log(n, time.time()-t0)
     diskcache_config(db_path="./dbcache.db", task='fast')
     
-    log('##### multithread insedsddaart commit  ##################################')    
+    log('##### multithread insert commit  ##################################')    
     t0 = time.time()
     diskcache_save2(df, colkey='0', colvalue='1', db_path="./dbcache.db", size_limit=100000000000, timeout=10, shards=1, npool=10,
                     sqlmode= 'commit', verbose=True)    
@@ -64,33 +76,191 @@ def test():
 
     diskcache_config(db_path="./dbcache.db", task='commit')
 
+    
     # loading data from disk
     cache = diskcache_load(db_path_or_object="./dbcache.db")
 
     # reading data
     t0 = time.time()
     data = diskcache_getall(cache)
-    log("time taken in reading data", time.time()-t0)
+    log("time taken in reading", time.time()-t0)
     all_keys = diskcache_getkeys(cache)
 
-    # checkinh store data
+    log("# checkinh store data")
     for i in range(10):
       print(diskcache_get(cache, (n*i)//10))
       assert(diskcache_get(cache, (n*i)//10) == "xxxxx"+str((n*i)//10))
       
 
 
-    
-    
-    
-    
-    
-    
+
     
 ########################################################################################################    
-########################################################################################################
-def db_init(db_dir:str="path"):
+##########  Database Class #############################################################################
+def db_cli():
     """
+      Command line for db access.
+      Need a global config file.... set manuaklly
+      https://pypi.org/project/qurcol/
+
+    """
+    import argparse
+    p   = argparse.ArgumentParser()
+    add = p.add_argument
+
+    add('task', metavar='task', type=str, nargs=1, help='list/info/check')
+    add("val",   metavar='val', type=str, nargs=1, help='list/info/check')
+
+    #### Extra Options
+
+
+
+    args = p.parse_args()
+
+    task =  args.task[0]
+    val  =  args.val[0]
+
+
+    #########################################################################
+    db = DB(config_path= os.environ['db_diskcacheconfig'])  ##### Need to set
+
+    if task == 'help':  print(HELP)
+    if task == 'setconfig':
+        os_environ_set('db_diskcache_config', val)
+
+
+    if task == 'list':   db.list()
+    if task == 'info':   db.info()
+    if task == 'check':  db.check()
+    else :
+        log('list,info')
+
+
+
+
+class DB(object):
+    """
+      DB == collection of diskcache tables on disk.
+         A table == a folder on disk
+
+      root_path/mytable1/
+      root_path/mytable2/
+      root_path/mytable3/
+      root_path/mytable4/
+      root_path/mytable5/
+
+     {
+       'db_paths' : [ 'root1', 'root2'   ]
+     }
+    
+    """
+    def __init__(self, config_dict=None, config_path=None):
+
+        if config_dict is not None :
+           self.config_dict = config_dict
+
+        elif config_path is not None :
+           self.config_dict = json.load(open(config_path, mode='r'))
+           self.config_path = config_path
+
+        else :
+            self.config_path = os.environ.get('db_diskcache_config', os.getcwd().replace("\\", "/"))
+            self.config_dict = json.load(open(self.config_path, mode='r'))
+
+        self.path_list = config_dict('db_paths', [])
+
+
+    def add(self, db_path):
+        self.path_list = list(set(self.path_list + db_path))
+
+    def remove(self, db_path):
+        self.path_list = [ t for t in self.path_list  if t != db_path ]
+
+    def list(self, show=True):
+        ## get list of db from the folder, size
+        flist = []
+        for path in self.path_list :
+           flist = flist + glob.glob(path +"/*")
+
+        if show :
+            for folder in flist :
+                size_mb = os_path_size(folder)
+                print(folder, size_mb)
+
+        return flist
+
+
+    def info(self,):
+        ## get list of db from the folder, size
+        flist = self.list()
+
+        for folder in flist :
+            size_mb = os_path_size(folder)
+
+            if os.path.isfile(f"{folder}/cache.db"):
+                dbi   = diskcache_load(folder)
+                nkeys = diskcache_keycount(dbi)
+                print(folder, size_mb, nkeys)
+            else :
+                print(folder, size_mb)
+
+    def clean(self,):
+        ## clean temp files for each diskcache db
+        pass
+
+
+    def check(self, db_path=None):
+        """
+           Check Sqlite cache.db if file is fine
+
+        """
+        pass
+
+
+    def show(self, db_path=None, n=4):
+        """
+           show content for each table
+
+        """
+        flist = self.list()
+        for pathi in flist:
+            dbi = diskcache_load(pathi)
+            res = diskcache_getall(dbi, limit=n)
+            log(pathi, str(res), "\n\n")
+
+
+
+
+def os_environ_set(name, value):
+    """
+    https://stackoverflow.com/questions/716011/why-cant-environmental-variables-set-in-python-persist
+
+    """
+    cmd = """
+    
+    
+    """
+
+
+def os_path_size(folder=None):
+    """
+       Get the size of a folder in bytes
+    """
+    import os
+    if folder is None:
+        folder = os.getcwd()
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(folder):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            total_size += os.path.getsize(fp)
+    return total_size
+
+
+
+        
+def db_init(db_dir:str="path", globs=None):
+    """ Initialize in the Global Space Name  globs= globals(), DB
       db = Box({    
           'db_itemtag_items_path'  :  f"{db_dir}/map_sampling_itemtag_siid.cache",     
           'db_itemid_itemtag_path' :  f"{db_dir}/map_itemid_itemtag.cache",    
@@ -105,7 +275,7 @@ def db_init(db_dir:str="path"):
         log(name)  #, len(globals()[ name ] ))
 
         ### Global Access
-        globals()[ name ] = diskcache_load(path)
+        globs[ name ] = diskcache_load(path)
      
         
 
@@ -129,10 +299,82 @@ def db_size(db_dir= None):
             
     
 
+    
+def db_merge():   ### python prepro.py  db_merge    2>&1 | tee -a zlog_prepro.py  &
+     #### merge 2 dataframe    
+     colkey = 'item_tag_vran'
+     dir_rec = ""
+        
+     df1 = pd_read_file( dir_rec+  "/emb//map_idx_13311813.parquet" ) 
+     log(df1 )  ### 13 mio
+        
+     df2 = pd_read_file( dir_rec+  "/map/*" , n_pool=15, verbose=True)
+     log(df2)   ### 130 mio
+
+        
+     df1 = df1.rename(columns= {'id': colkey})           
+     df2 = df2.drop_duplicates(colkey)
+     df1 = df1.drop_duplicates(colkey)
+     log(df2)
+            
+     # df1 = df1.iloc[:1000,:]   ; df2 = df2.iloc[:10000, :]
+     df1 = df1.merge(df2, on= 'item_tag_vran', how='left' )   
+     del df2; gc.collect()
+        
+     log(df1)   
+     pd_to_file(df1, dir_rec + "/db_pandas/map_idx_13311813_siid.parquet" )   
+        
+     
+        
+        
+def db_create_dict_pandas(df=None, cols=None, colsu=None):   ####  python prepro.py  db_create_dict_pandas &
+    ### Load many files and  drop_duplicate on colkey and save as parquet files.
+    dirin  =  "/ic/**.parquet"  
+    dirout =  "/map/" + dirin.split("/")[-2] +"/"
+    
+    cols  = [ 'shop_id', 'item_id', 'item_tag_vran'   ]
+    colsu = [ 'item_tag_vran'   ]
+    
+    tag   = "siid_itemtag"
+    
+    os.makedirs( dirout, exist_ok=True)    
+    flist = sorted(glob.glob(dirin))
+    fi2   = []; kk =0
+    for fi in flist :        
+        fi2.append(fi)
+        if len(fi2) < 20 and fi != flist[-1] : continue
+        log(fi2)    
+        df  = pd_read_file( fi2, cols= cols, drop_duplicates=colsu,
+                            n_pool=20, verbose=False)
+        log(df.shape)
+        fi2=[]
+                
+        df         = df.drop_duplicates(colsu)        
+        df['siid'] = df.apply(lambda x : f"{int(x['shop_id'])}_{int(x['item_id'])}"  , axis=1)
+        del df['shop_id'] ; del df['item_id']
+        
+        pd_to_file(df, dirout + f"/df_map_{tag}_{kk}.parquet", show=1 )    
+        kk = kk + 1
+
+        
+def db_load_dict(df, colkey, colval, verbose=True):
+    ### load Pandas dataframe and convert into dict   colkey --> colval
+    if isinstance(df, str):
+       dirin = df
+       log('loading', df)
+       df = pd_read_file(dirin, cols= [colkey, colval ], n_pool=3, verbose=True)
+    
+    df = df.drop_duplicates(colkey)    
+    df = df.set_index(colkey)
+    df = df[[ colval ]].to_dict()
+    df = df[colval] ### dict
+    if verbose: log('Dict Loaded', len(df))
+    return df
+    
 
 
 ########################################################################################################
-########################################################################################################
+########DiskCache Utilities ############################################################################
 def diskcache_load( db_path_or_object="", size_limit=100000000000, verbose=True ):    
     """ val = cache[mykey]
     """
@@ -237,8 +479,15 @@ def diskcache_save2(df, colkey, colvalue, db_path="./dbcache.db", size_limit=100
     
 def diskcache_getkeys(cache):
     cache = diskcache_load( cache, size_limit=100000000000, verbose=False )
-    
+
     v = cache._sql('SELECT key FROM Cache').fetchall()
+    v = [ t[0] for t in v]
+    return v
+
+def diskcache_keycount(cache):
+    cache = diskcache_load( cache, size_limit=100000000000, verbose=False )
+
+    v = cache._sql('SELECT countt(key) FROM Cache').fetchall()
     v = [ t[0] for t in v]
     return v
 

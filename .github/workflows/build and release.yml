@@ -7,10 +7,12 @@ on:
   # but only for the main branch
   push:
     branches:
-      - main
+#- main
+
   pull_request:
     branches:
-      - main
+#- main
+
 jobs:
   build:
 
