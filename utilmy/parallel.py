@@ -653,6 +653,20 @@ def multithread_run_list(**kwargs):
 
 
 
+def multiproc_tochunk(flist, npool=2 ):
+    ll = [] 
+    chunk = len(flist) // npool
+    for i in range( npool ) :
+         i2 = i+1 if i < npool-1 else 3*(i+1)
+         ll.append( flist[i*chunk:i2*chunk] )        
+    log(len(ll), str(ll)[:100])   
+    return ll
+
+
+
+
+
+
 
 
 ###############################################################################################################
