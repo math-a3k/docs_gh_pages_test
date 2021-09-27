@@ -33,6 +33,36 @@ def help_get_codesource(func):
 
 
 #############################################################################
+
+def test():
+
+  column_name = "question1"
+  threshold = 0.7
+  num_perm = 10
+  num_items = 100000
+
+  url = "https://raw.githubusercontent.com/AlexAdvent/utilmy-data/main/text_question.csv"
+  df = pd.read_csv(url)
+  print(df.head())
+
+  df1 = pd_text_getcluster(
+        df.head(num_items), column_name, threshold, num_perm)
+  print(df1.head())
+
+  df2 = pd_text_similarity(df, cols=['question1','question2'])
+  matched = df.loc[df['score'] >= 0.8]
+  print("match using SequenceMatcher is",matched.shape[0])
+  print(matched.head())
+
+  df2 = pd_text_similarity(df, cols=['question1','question2'],algo="rapidfuzz")
+  matched = df.loc[df['score'] >= 80]
+  print("match using rapidfuzz is",matched.shape[0])
+
+  df2 = pd_text_similarity(df, cols=['question1','question2'],algo="editdistance")
+  matched = df.loc[df['score'] >= 80]
+  print("match using editdistance is",matched.shape[0])
+
+
 def test_lsh():
 
     ll = ['aa bb cc', 'a b c', 'cc bb cc']
@@ -45,7 +75,6 @@ def test_lsh():
     df1 = pd_text_getcluster(
         df.head(num_items), column_name, threshold, num_perm)
     print(df1)
-
 
 
 #############################################################################
