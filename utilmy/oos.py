@@ -378,20 +378,19 @@ def os_memory():
     return ret
 
 
-def os_sleep_cpu(cpu_min=50, sleep=10, interval=None, verbose=True):
+def os_sleep_cpu(cpu_min=30, sleep=10, interval=5, msg= "", verbose=True):
     #### Sleep until CPU becomes normal usage
     import psutil, time
-    aux = psutil.cpu_percent()
-    aux = psutil.cpu_percent()  ### Need to call 2 times
+    aux = psutil.cpu_percent(interval=interval)  ### Need to call 2 times
     while aux > cpu_min:
         ui = psutil.cpu_percent(interval=interval)
         aux = 0.5 * (aux +  ui)
-        if verbose : log( 'Sleeping', sleep, ' Usage', aux )
+        if verbose : log( 'Sleep sec', sleep, ' Usage %', aux, ui, msg )
         time.sleep(sleep)        
     return aux
 
 
-def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
+def os_sizeof(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
     """ deep_getsizeof(df_pd, set())
     Find the memory footprint of a Python object
     The sys.getsizeof function does a shallow size of only. It counts each
@@ -402,7 +401,7 @@ def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
 
     _ = hint
 
-    d = os_ram_object
+    d = os_sizeof
     if id(o) in ids:
         return 0
 
