@@ -233,7 +233,73 @@ def test_pdreadfile():
 
 
 #############################################################################################################
+
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None,   **kw):
+    """  Read file in parallel from disk : very Fast
+    :param path_glob: list of pattern, or sep by ";"
+    :return:
+    """
+    import glob, gc,  pandas as pd, os
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
+
+    def log(*s, **kw):  print(*s, flush=True, **kw)
+    readers = {
+            ".pkl"     : pd.read_pickle, ".parquet" : pd.read_parquet,
+            ".tsv"     : pd.read_csv, ".csv"     : pd.read_csv, ".txt"     : pd.read_csv, ".zip"     : pd.read_csv,
+            ".gzip"    : pd.read_csv, ".gz"      : pd.read_csv,
+     }
+
+    #### File
+    if isinstance(path_glob, list):  path_glob = ";".join(path_glob)
+    path_glob = path_glob.split(";")
+    file_list = []
+    for pi in path_glob :
+        if "*" in pi : file_list.extend( sorted( glob.glob(pi) ) )
+        else :         file_list.append( pi )
+
+    file_list = sorted(list(set(file_list)))
+    file_list = file_list[:nfile]
+    if verbose: log(file_list)
+
+    ### TODO : use with kewyword arguments
+    def fun_async(filei):
+        ext  = os.path.splitext(filei)[1]
+        if ext is None or ext == '': ext ='.parquet'
+
+        pd_reader_obj = readers.get(ext, None)
+        dfi = pd_reader_obj(filei)
+        #dfi = pd_reader_obj(filei, **kw)
+
+        # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+        if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
+        if cols is not None :             dfi = dfi[cols]
+        if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
+        if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
+        if fun_apply is not None  :       dfi = dfi.apply(lambda  x : fun_apply(x), axis=1)
+        return dfi
+
+    ### Parallel run #################################
+    import concurrent.futures
+    dfall  = pd.DataFrame()
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=n_pool) as executor:
+        futures = []
+        for i,fi in enumerate(file_list) :
+            if verbose : log("Pool", i, end=",")
+            futures.append( executor.submit(fun_async, fi ))
+
+        for future in concurrent.futures.as_completed(futures):
+          dfi   = future.result()
+          dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
+          del dfi; gc.collect()
+
+    return dfall      
+
+
+
+
+def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None,  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
@@ -321,7 +387,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
 
 
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, npool=None,
+def pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
