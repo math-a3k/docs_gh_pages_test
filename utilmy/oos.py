@@ -381,13 +381,12 @@ def os_memory():
 def os_sleep_cpu(cpu_min=50, sleep=10, interval=None, verbose=True):
     #### Sleep until CPU becomes normal usage
     import psutil, time
-
     aux = psutil.cpu_percent()
     aux = psutil.cpu_percent()  ### Need to call 2 times
     while aux > cpu_min:
         ui = psutil.cpu_percent(interval=interval)
         aux = 0.5 * (aux +  ui)
-        if verbose : log( 'Sleeping', sleep)
+        if verbose : log( 'Sleeping', sleep, ' Usage', aux )
         time.sleep(sleep)        
     return aux
 
