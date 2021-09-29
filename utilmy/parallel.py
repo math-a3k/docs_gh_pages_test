@@ -632,7 +632,7 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
     for i in range(n_pool):
         time.sleep(start_delay)
         log('starts', i)
-        job_list.append(pool.apply_async(fun_async, (xi_list[i],)))
+        job_list.append(pool.apply_async(fun_async, xi_list[i] ))
         if verbose: log(i, xi_list[i])
 
     res_list = []
@@ -682,7 +682,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     for i in range(n_pool):
         time.sleep(start_delay)
         log('starts', i)
-        job_list.append(pool.apply_async(fun_async, (xi_list[i],)))
+        job_list.append(pool.apply_async(fun_async, xi_list[i] ))
         if verbose: log(i, xi_list[i])
 
     res_list = []
