@@ -35,6 +35,16 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
+def test_fun_sum2(list_vars, const=1, const2=1):    
+    si = 0
+    if not isinstance(list_vars, list)    :  list_vars = [ list_vars]
+    elif not isinstance(list_vars, tuple) :  list_vars = [ list_vars]
+        
+    for xi in list_vars :
+        si = si + int(xi)
+    return si        
+
+
 def test_fun_run(list_vars, const=1, const2=1):
     import random
     log(f'Var: {list_vars[0]}')
@@ -110,21 +120,17 @@ def test0():
 
 
     log("\n\n########### multiproc_run #####################################################")
-    """
     t0 = time.time()
-    input_list = [ [1,2, "Hello"], [2,4, "World"], [3,4, "Thread3"], [4,5, "Thread4"], [5,2, "Thread5"] ]
-    res = multiproc_run(test_run, input_list, n_pool=len(input_list))
-    log(time.time() - t0)
-    log( 'multiproc_run : ' , res)
+    input_list = [ [1,1,], [2,2, ], [3,3, ], [4,4,], [5,5, ], [6,6, ], [7,7, ],  ]
+    res = multiproc_run(test_fun_sum2, input_list, n_pool= 3 )
+    log( 'multiproc_run : ' , time.time() - t0, res, )
 
-    log("\n\n#### Input variable of single function is a Big LIST  ")
-    input_list = [ [ [  "pa_1", "pa_2" ] ], [ [  "pb_1", "pb_2" ] ],  [ [  "pc_1", "pc_2" ] ], ]
-    res = multiproc_run(test_run, input_list, n_pool=len(input_list))
-    
-    log("\n\n#### Input list variable and input_fixed")
-    input_list = [ "path1", "path2", "path2", ]
-    res = multiproc_run(test_run, input_list, n_pool=len(input_list), input_fixed=  {'const': 555} )
-    """
+    t0 = time.time()
+    input_list = [ i for i in range(0, 67) ]
+    res = multiproc_run(test_fun_sum2, input_list, n_pool= 5 )
+    log( 'multiproc_run : ' , time.time() - t0, res, )
+
+
 
     # the list of input will be used for multiproc_run, multithread_run testing
     input_list = [
@@ -605,7 +611,7 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
     xi_list = [[] for t in range(n_pool)]
     for i, xi in enumerate(input_list):
         jj = i % n_pool
-        xi_list[jj].append(tuple(xi))
+        xi_list[jj].append( xi )  ### xi is already a tuple
 
     if verbose:
         for j in range(len(xi_list)):
@@ -655,7 +661,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     xi_list = [[] for t in range(n_pool)]
     for i, xi in enumerate(input_list):
         jj = i % n_pool
-        xi_list[jj].append(tuple(xi))
+        xi_list[jj].append( xi )  ### xi is already a tuple
 
     if verbose:
         for j in range(len(xi_list)):
