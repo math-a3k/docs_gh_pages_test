@@ -45,10 +45,10 @@ def test_fun_sum2(list_vars, const=1, const2=1):
 
 
 def test_fun_run(list_vars, const=1, const2=1):
-    import random
-    log(f'Var: {list_vars[0][0]}')
+    ### multithread
+    log(f'Var: {list_vars[0]}')
     log('Fixed Const: ', const)
-    return f"{const*const2} {str(list_vars[0][0])}"
+    return f"{const*const2} {str(list_vars[0])}"
 
 
 def test_run_multithread(thread_name, num, string):
@@ -147,7 +147,8 @@ def test0():
         log("########### Validation for multiproc_run response")
         for index in range(len(input)):
             # convert to tuple if input type is list
-            input_index =  (input[index], ) if type(input[index]) is not list else tuple(input[index])
+            input_index = input[index]
+            # input_index =  (input[index], ) if type(input[index]) is not list else tuple(input[index])
             assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), \
                 f"[FAILED], { res[index] }, {input_index}"
 
@@ -164,8 +165,10 @@ def test0():
         log("########### Validation for multithread_run response")
         for index in range(len(input)):
             # convert to tuple if input type is list
-            input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
-            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
+            input_index = input[index]
+            # input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
+            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), \
+                f"[FAILED], { res[index] }, {input_index}"
 
 
     log("\n\n########### multithread_run_list ################################################")
@@ -411,8 +414,8 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
     import time, functools
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias
     #### Input xi #######################################
-    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
-         input_list = [  (t,) for t in input_list]  ## Must be a list of list
+    #if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
+    #     input_list = [  (t,) for t in input_list]  ## Must be a list of list
 
     if input_fixed is not None:  #### Fixed keywword variable
         fun_async = functools.partial(fun_async, **input_fixed)
@@ -459,8 +462,8 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias
 
     #### Input xi #######################################
-    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
-         input_list = [  (t,) for t in input_list]  ## Must be a list of lis
+    #if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
+    #     input_list = [  (t,) for t in input_list]  ## Must be a list of lis
 
     if input_fixed is not None:
         fun_async = functools.partial(fun_async, **input_fixed)
