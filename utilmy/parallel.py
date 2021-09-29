@@ -58,13 +58,8 @@ def test_run_multithread(thread_name, num, string):
     return string*2
 
 
-def test_run_multithread2(thread_name, arg):
-    print(f'Var: {thread_name}, {arg}')
-    print(f'Start thread: {thread_name}')
-    print(f'End thread: {thread_name}')
-    return arg
-
 def test_sum(x):
+    ## pd_apply_parallel
     return  x['0'] + x['1']
 
 
@@ -165,14 +160,14 @@ def test0():
         for index in range(len(input)):
             # convert to tuple if input type is list
             input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
-            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
+            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), \
+                f"[FAILED], { res[index] }, {input_index}"
 
 
     log("\n\n########### multithread_run_list ################################################")
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
-        thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
-        thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
+        thread_another=(test_run_multithread, ["Thread_diff", "rtyr"]),
         )
     log( 'multithread_run_list : ' , res)
 
@@ -222,7 +217,6 @@ def test_pdreadfile():
 
 
 #############################################################################################################
-
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None,   **kw):
     """  Read file in parallel from disk : very Fast
@@ -249,6 +243,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
     file_list = sorted(list(set(file_list)))
     file_list = file_list[:nfile]
+    # file_list = [fi for fi in file_list if  os.path.isfile(fi) ]
     if verbose: log(file_list)
 
     ### TODO : use with kewyword arguments ###############
