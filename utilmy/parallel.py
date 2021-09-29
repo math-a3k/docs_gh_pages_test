@@ -272,8 +272,12 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
         pd_reader_obj = readers.get(ext, None)
         # dfi = pd_reader_obj(filei)
-        dfi = pd_reader_obj(filei, **kw)
-
+        try :
+           dfi = pd_reader_obj(filei, **kw)
+        except Exception as e:
+           log('Error', filei, e) 
+           return pd.DataFrame()
+    
         # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
         if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
         if cols is not None :             dfi = dfi[cols]
