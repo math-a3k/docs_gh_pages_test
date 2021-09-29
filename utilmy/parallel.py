@@ -107,7 +107,6 @@ def test0():
 
 
     log("\n\n###########  pd_apply_parallel  :  ############################################")
-
     t0 = time.time()
     df = df.iloc[:1000,:]
     df1['s1'] = df.apply( lambda x : test_sum(x), axis=1)
@@ -122,12 +121,12 @@ def test0():
     t0 = time.time()
     input_list = [ [1,1,], [2,2, ], [3,3, ], [4,4,], [5,5, ], [6,6, ], [7,7, ],  ]
     res = multiproc_run(test_fun_sum2, input_list, n_pool= 3 )
-    log( 'multiproc_run : ' , time.time() - t0, res,   sum(res) == sum([ sum(t) for t in input_list])  )
+    log( 'multiproc_run : ' , time.time() - t0, res, len(res) ==3,  sum(res) == sum([ sum(t) for t in input_list])  )
 
     t0 = time.time()
     input_list = [ i for i in range(0, 67) ]
-    res = multiproc_run(test_fun_sum2, input_list, n_pool= 5 )
-    log( 'multiproc_run : ' , time.time() - t0, res, )
+    res = multiproc_run(test_fun_sum2, input_list, n_pool= 7 )
+    log( 'multiproc_run : ' , time.time() - t0, res, len(res)==5,  sum(res) == sum([ sum(t) for t in input_list])  )
 
 
 
@@ -157,7 +156,7 @@ def test0():
         for index in range(len(input)):
             # convert to tuple if input type is list
             input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
-            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
+            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), f"[FAILED], { res[index] }, {input_index}"
 
 
 
