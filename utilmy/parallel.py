@@ -48,16 +48,14 @@ def test_fun_run(list_vars, const=1, const2=1):
     import random
     log(f'Var: {list_vars[0]}')
     log('Fixed Const: ', const)
-    sleep_time = random.randint(1,5)
-    log(f"Start sleep {sleep_time}")
-    time.sleep(sleep_time)
+    log(f"Start sleep 1")
     return f"{const*const2} {str(list_vars[0])}"
 
 
 def test_run_multithread(thread_name, num, string):
     print(f'Var: {thread_name}, {num}, {string}')
     print(f'Start thread: {thread_name}')
-    time.sleep(3)
+    time.sleep(0.1)
     print(f'End thread: {thread_name}')
     return string*2
 
@@ -65,15 +63,16 @@ def test_run_multithread(thread_name, num, string):
 def test_run_multithread2(thread_name, arg):
     print(f'Var: {thread_name}, {arg}')
     print(f'Start thread: {thread_name}')
-    time.sleep(7)
+    time.sleep(0.1)
     print(f'End thread: {thread_name}')
     return arg
 
 def test_sum(x):
-    return x['0'] + x['1']
+    return  x['0'] + x['1']
+
 
 def test0():
-    df  = pd_random(1*10**6, ncols=3)
+    df  = pd_random(1*10**5, ncols=3)
 
     log("\n\n###########  pd_groupby_parallel  #############################################")
     colsgroup = ['0']
@@ -85,16 +84,14 @@ def test0():
     t0 = time.time()
     df2 = pd_groupby_parallel(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
-    log(df2, time.time() - t0)
-    log( 'pd_groupby_parallel: ' , df1.equals(df2))
+    log( 'pd_groupby_parallel: ' , df1.equals(df2), df2, time.time() - t0)
 
 
     log("\n\n###########  pd_groupby_parallel2  ###########################################")
     t0 = time.time()
     df2 = pd_groupby_parallel2(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )
     df2 = df2.sort_values( list(df2.columns))
-    log(df2, time.time() - t0)
-    log( 'pd_groupby_parallel3 : ' , df1.equals(df2))
+    log( 'pd_groupby_parallel3 : ' , df1.equals(df2), df2, time.time() - t0)
 
 
     log("\n\n###########  pd_groupby_parallel3  : Buggy one #################################")
@@ -106,26 +103,28 @@ def test0():
 
     log("\n\n###########  pd_apply_parallel  :  ############################################")
     t0 = time.time()
-    df = df.iloc[:1000,:]
-    df1['s1'] = df.apply( lambda x : test_sum(x), axis=1)
-    #df2['s1'] = pd_apply_parallel(df, fun_apply= test_fun_sum, npool=4 )   ### Failed due to groupby part
-    #df2 = df2.sort_values( list(df2.columns))
-    #log(df2, time.time() - t0)
-    #log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
+    df = df.iloc[:1037,:]
+    df1 = df.copy()  ; df2 = df.copy()
 
+    df1['s1'] = df.apply( lambda x : test_sum(x), axis=1)
+    df2['s1'] = pd_apply_parallel(df, fun_apply= test_sum, npool=7 )   ### Failed due to groupby part
+    df2 = df2.sort_index() ; df1 = df1.sort_index()
+    log( 'pd_groupby_parallel2 : ' ,  df1, df2, time.time() - t0 )
+    assert df1.equals(df2), 'unequal pd_apply_parallel'
 
 
     log("\n\n########### multiproc_run Sum ############################################")
-    t0 = time.time()
+    npool =3
     input_list = [ [1,1,], [2,2, ], [3,3, ], [4,4,], [5,5, ], [6,6, ], [7,7, ],  ]
-    res = multiproc_run(test_fun_sum2, input_list, n_pool= 3 )
-    log( 'multiproc_run : ' , time.time() - t0, res, len(res) ==3,  sum(res) == sum([ sum(t) for t in input_list])  )
+    res = multiproc_run(test_fun_sum2, input_list, n_pool= npool )
+    log( 'multiproc_run : ' , res,  )
+    assert len(res) == npool and  sum(res) == sum([ sum(t) for t in input_list]), 'failed multiproc_run'
 
-    t0 = time.time()
+    npool= 7
     input_list = [ i for i in range(0, 67) ]
-    res = multiproc_run(test_fun_sum2, input_list, n_pool= 7 )
-    log( 'multiproc_run : ' , time.time() - t0, res)
-    log( len(res)==5,  sum(res) == sum([ t for t in input_list])  )
+    res = multiproc_run(test_fun_sum2, input_list, n_pool= npool )
+    log( 'multiproc_run : ' ,  res)
+    assert len(res) == npool and  sum(res) == sum([ t for t in input_list]), 'failed multiproc_run'
 
 
 
@@ -147,9 +146,7 @@ def test0():
         i += 1
         log(f"\n\n########### multiproc_run with input list: {input}")
         input_fixed={'const': 50, 'const2': i}
-        t0 = time.time()
         res = multiproc_run(test_fun_run, input, n_pool=len(input), input_fixed=input_fixed)
-        log(time.time() - t0)
         log( 'multiproc_run : ' , res)
         log("########### Validation for multiproc_run response")
         for index in range(len(input)):
@@ -165,9 +162,7 @@ def test0():
         i += 1
         log(f"\n\n########### multithread_run with input list: {input}")
         input_fixed={'const': 50, 'const2': i}
-        t0 = time.time()
         res = multithread_run(test_fun_run, input, n_pool=len(input), input_fixed=input_fixed)
-        log(time.time() - t0)
         log( 'multithread_run : ' , res)
         log("########### Validation for multithread_run response")
         for index in range(len(input)):
@@ -177,14 +172,11 @@ def test0():
 
 
     log("\n\n########### multithread_run_list ################################################")
-    t0 = time.time()
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
         thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
-        thread3=(test_run_multithread, ["Thread3", 7, "zxc"]),
         thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
         )
-    log(time.time() - t0)
     log( 'multithread_run_list : ' , res)
 
 
@@ -535,7 +527,6 @@ def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, n_pool=4, npool=None
 
 
 
-
 def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
     """ Pandas parallel apply
     """
@@ -544,33 +535,30 @@ def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
     def f2(df):
         return df.apply(fun_apply, axis=1)
 
-    size = int(len(df) // npool)
+    if npool == 1 : return f2(df)
+
 
     #### Pool execute ###################################
-    import multiprocessing as mp
-    # pool     = multiprocessing.Pool(processes=npool)
-    pool = mp.pool.ThreadPool(processes=npool)
-    job_list = []
+    import concurrent.futures
+    size = int(len(df) // npool)
 
-    for i in range(npool):
-        i2  = 3*(i + 2) if i == npool - 1 else i + 1
-        dfi = df.iloc[i * size:(i2 * size), :]
-        job_list.append( pool.apply_async(f2, (dfi,)) )
-        if verbose: log('start', i, dfi.shape)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
+        futures = []
+        for i in range(npool):
+            i2  = 3*(i + 2) if i == npool - 1 else i + 1
+            dfi = df.iloc[i*size:(i2*size), :]
+            futures.append( executor.submit(f2, dfi,) )
+            if verbose: log('start', i, dfi.shape)
+            del dfi
 
-    dfall = None
-    for i in range(npool):
-        if i >= len(job_list): break
-        dfi = job_list[i].get()
-        dfall = pd.concat((dfall, dfi)) if dfall is not None else dfi
-        del dfi
-        log(i, 'job finished')
+        dfall = None
+        for future in concurrent.futures.as_completed(futures):
+            dfi = future.result()
+            dfall = pd.concat((dfall, dfi)) if dfall is not None else dfi
+            del dfi
+            log(i, 'job finished')
 
-    pool.terminate();
-    pool.join();
-    pool = None
     return dfall
-
 
 
 ############################################################################################################
@@ -732,14 +720,20 @@ def multiproc_tochunk(flist, npool=2 ):
     return ll
 
 
-
-
-
-
-
-
 ###############################################################################################################
-def pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, npool=None,
+
+
+
+
+############################################################################################################
+if __name__ == '__main__':
+    import fire; fire.Fire()
+    ### python parallel.py test1
+
+
+
+
+def zz_pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
                  fun_apply=None, max_file=-1, #### apply function for each sub
                  verbose=False,
@@ -830,7 +824,7 @@ def pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None,  nrows=-1, c
 
 
 
-def pd_groupby_parallel5(df, colsgroup=None, fun_apply=None, npool=5, verbose=False, **kw ):
+def zz_pd_groupby_parallel5(df, colsgroup=None, fun_apply=None, npool=5, verbose=False, **kw ):
     """ Pandas parallel groupby apply
     """
     import pandas as pd, numpy as np, time, gc
@@ -839,7 +833,7 @@ def pd_groupby_parallel5(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
         dfiall = pd.DataFrame()
         for dfi in df_list:
             dfi    = dfi.apply( lambda dfi : fun_apply(dfi) )
-            dfiall = pd.concat((dfiall, dfi)) 
+            dfiall = pd.concat((dfiall, dfi))
             del dfi;  gc.collect()
         return dfiall
 
@@ -870,18 +864,6 @@ def pd_groupby_parallel5(df, colsgroup=None, fun_apply=None, npool=5, verbose=Fa
 
     pool.terminate(); pool.join(); pool = None
     return dfall
-
-
-
-
-
-############################################################################################################
-if __name__ == '__main__':
-    import fire; fire.Fire()
-    ### python parallel.py test1
-
-
-
 
 
 
