@@ -36,16 +36,11 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 # the funtion for test multi process
 def test_fun_sum2(list_vars, const=1, const2=1):    
-    # list_vars = list_vars[0]
     log( list_vars )  
-
-    si = 0
-    #if   not isinstance(list_vars, list)  :  list_vars = [ list_vars]
-    #elif not isinstance(list_vars, tuple) :  list_vars = [ list_vars]
-                
+    si = 0                
     for xi in list_vars :
         log(xi)
-        si = si + sum(xi) if isinstance(xi, list) else si + xi
+        si = si + xi if isinstance(xi, int) else si + sum(xi)
     return si        
 
 
@@ -123,11 +118,11 @@ def test0():
 
 
 
-    log("\n\n########### multiproc_run #####################################################")
+    log("\n\n########### multiproc_run Sum ############################################")
     t0 = time.time()
     input_list = [ [1,1,], [2,2, ], [3,3, ], [4,4,], [5,5, ], [6,6, ], [7,7, ],  ]
     res = multiproc_run(test_fun_sum2, input_list, n_pool= 3 )
-    log( 'multiproc_run : ' , time.time() - t0, res, )
+    log( 'multiproc_run : ' , time.time() - t0, res,   sum(res) == sum([ sum(t) for t in input_list])  )
 
     t0 = time.time()
     input_list = [ i for i in range(0, 67) ]
