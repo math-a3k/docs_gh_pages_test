@@ -156,7 +156,6 @@ def test0():
 
 
 
-
     log("\n\n########### multithread_run ####################################################")
     i = 0
     for input in input_list:
@@ -174,14 +173,12 @@ def test0():
             assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
 
 
-
     log("\n\n########### multithread_run_list ################################################")
     t0 = time.time()
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
         thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
         thread3=(test_run_multithread, ["Thread3", 7, "zxc"]),
-        thread4=(test_run_multithread, ["Thread4", 8, "test"]),
         thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
         )
     log(time.time() - t0)
@@ -262,14 +259,14 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
     file_list = file_list[:nfile]
     if verbose: log(file_list)
 
-    ### TODO : use with kewyword arguments
+    ### TODO : use with kewyword arguments ###############
     def fun_async(filei):
         ext  = os.path.splitext(filei)[1]
         if ext is None or ext == '': ext ='.parquet'
 
         pd_reader_obj = readers.get(ext, None)
-        dfi = pd_reader_obj(filei)
-        #dfi = pd_reader_obj(filei, **kw)
+        # dfi = pd_reader_obj(filei)
+        dfi = pd_reader_obj(filei, **kw)
 
         # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
         if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
@@ -282,11 +279,10 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
     ### Parallel run #################################
     import concurrent.futures
     dfall  = pd.DataFrame()
-
     with concurrent.futures.ThreadPoolExecutor(max_workers=n_pool) as executor:
         futures = []
         for i,fi in enumerate(file_list) :
-            if verbose : log("Pool", i, end=",")
+            if verbose : log("file ", i, end=",")
             futures.append( executor.submit(fun_async, fi ))
 
         for future in concurrent.futures.as_completed(futures):
