@@ -172,7 +172,7 @@ def test0():
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
         thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
-        thread_another=(test_run_multithread, ["Thread_diff", "rtyr"]),
+        thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
         )
     log( 'multithread_run_list : ' , res)
 
@@ -397,19 +397,15 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
     ..
      from itertools import repeat
      N = 10000
-
      from pathos.pools import ProcessPool as Pool
      pool = Pool()
-
      ans = pool.map(f, xrange(1000), repeat(20))
      ans[:10]
     [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
-
      # this also works
      ans = pool.map(lambda x: f(x, 20), xrange(1000))
      ans[:10]
     [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
-
     input_fixed = {'const': 555}
     """
     import time, functools
@@ -457,7 +453,6 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     def fun_async(xlist):
       for x in xlist :
             hdfs.upload(x[0], x[1])
-
     input_fixed = {'const_var' : 1 }
     """
     import time, functools
