@@ -58,6 +58,12 @@ def test_run_multithread(thread_name, num, string):
     return string*2
 
 
+def test_run_multithread2(thread_name, arg):
+    print(f'Var: {thread_name}, {arg}')
+    print(f'Start thread: {thread_name}')
+    print(f'End thread: {thread_name}')
+    return arg
+
 def test_sum(x):
     return  x['0'] + x['1']
 
