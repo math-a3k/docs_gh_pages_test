@@ -46,16 +46,14 @@ def test_fun_sum2(list_vars, const=1, const2=1):
 
 def test_fun_run(list_vars, const=1, const2=1):
     import random
-    log(f'Var: {list_vars[0]}')
+    log(f'Var: {list_vars[0][0]}')
     log('Fixed Const: ', const)
-    log(f"Start sleep 1")
-    return f"{const*const2} {str(list_vars[0])}"
+    return f"{const*const2} {str(list_vars[0][0])}"
 
 
 def test_run_multithread(thread_name, num, string):
     print(f'Var: {thread_name}, {num}, {string}')
     print(f'Start thread: {thread_name}')
-    time.sleep(0.1)
     print(f'End thread: {thread_name}')
     return string*2
 
@@ -63,7 +61,6 @@ def test_run_multithread(thread_name, num, string):
 def test_run_multithread2(thread_name, arg):
     print(f'Var: {thread_name}, {arg}')
     print(f'Start thread: {thread_name}')
-    time.sleep(0.1)
     print(f'End thread: {thread_name}')
     return arg
 
@@ -102,14 +99,13 @@ def test0():
 
 
     log("\n\n###########  pd_apply_parallel  :  ############################################")
-    t0 = time.time()
     df = df.iloc[:1037,:]
     df1 = df.copy()  ; df2 = df.copy()
 
     df1['s1'] = df.apply( lambda x : test_sum(x), axis=1)
     df2['s1'] = pd_apply_parallel(df, fun_apply= test_sum, npool=7 )   ### Failed due to groupby part
     df2 = df2.sort_index() ; df1 = df1.sort_index()
-    log( 'pd_groupby_parallel2 : ' ,  df1, df2, time.time() - t0 )
+    log( 'pd_groupby_parallel2 : ' ,  df1, df2,)
     assert df1.equals(df2), 'unequal pd_apply_parallel'
 
 
@@ -151,8 +147,9 @@ def test0():
         log("########### Validation for multiproc_run response")
         for index in range(len(input)):
             # convert to tuple if input type is list
-            input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
-            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), f"[FAILED], { res[index] }, {input_index}"
+            input_index =  (input[index], ) if type(input[index]) is not list else tuple(input[index])
+            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), \
+                f"[FAILED], { res[index] }, {input_index}"
 
 
 
