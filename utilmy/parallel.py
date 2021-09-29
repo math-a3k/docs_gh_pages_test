@@ -58,12 +58,6 @@ def test_run_multithread(thread_name, num, string):
     return string*2
 
 
-def test_run_multithread2(thread_name, arg):
-    print(f'Var: {thread_name}, {arg}')
-    print(f'Start thread: {thread_name}')
-    print(f'End thread: {thread_name}')
-    return arg
-
 def test_sum(x):
     return  x['0'] + x['1']
 
@@ -172,7 +166,7 @@ def test0():
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
         thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
-        thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
+        thread_another=(test_run_multithread, ["Thread_diff", "rtyr"]),
         )
     log( 'multithread_run_list : ' , res)
 
