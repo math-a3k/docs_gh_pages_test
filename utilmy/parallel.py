@@ -35,13 +35,13 @@ def test_fun_sum(df_group, name=None):         # Inverse cumulative sum
 
 
 # the funtion for test multi process
-def test_fun_sum2(list_vars, const=1, const2=1):    
-    log( list_vars )  
-    si = 0                
+def test_fun_sum2(list_vars, const=1, const2=1):
+    log( list_vars )
+    si = 0
     for xi in list_vars :
         log(xi)
         si = si + xi if isinstance(xi, int) else si + sum(xi)
-    return si        
+    return si
 
 
 def test_fun_run(list_vars, const=1, const2=1):
@@ -58,8 +58,13 @@ def test_run_multithread(thread_name, num, string):
     return string*2
 
 
+def test_run_multithread2(thread_name, arg):
+    print(f'Var: {thread_name}, {arg}')
+    print(f'Start thread: {thread_name}')
+    print(f'End thread: {thread_name}')
+    return arg
+
 def test_sum(x):
-    ## pd_apply_parallel
     return  x['0'] + x['1']
 
 
@@ -160,14 +165,14 @@ def test0():
         for index in range(len(input)):
             # convert to tuple if input type is list
             input_index = (input[index], ) if type(input[index]) is not list else tuple(input[index])
-            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), \
-                f"[FAILED], { res[index] }, {input_index}"
+            assert res[index] == test_fun_run([input_index], const=input_fixed['const'], const2=input_fixed['const2']), "[FAILED], output response is not correct"
 
 
     log("\n\n########### multithread_run_list ################################################")
     res = multithread_run_list(
         thread1=(test_run_multithread, ["Thread1", 5, "test"]),
-        thread_another=(test_run_multithread, ["Thread_diff", "rtyr"]),
+        thread2=(test_run_multithread, ["Thread2", 6, "1234"]),
+        thread_another=(test_run_multithread2, ["Thread_diff", "rtyr"]),
         )
     log( 'multithread_run_list : ' , res)
 
@@ -217,8 +222,10 @@ def test_pdreadfile():
 
 
 #############################################################################################################
-def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None,   **kw):
+def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True,
+                 n_pool=1, npool=None,
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
+                 fun_apply=None,   **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
     :return:
@@ -243,7 +250,6 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
     file_list = sorted(list(set(file_list)))
     file_list = file_list[:nfile]
-    # file_list = [fi for fi in file_list if  os.path.isfile(fi) ]
     if verbose: log(file_list)
 
     ### TODO : use with kewyword arguments ###############
@@ -256,9 +262,9 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
         try :
            dfi = pd_reader_obj(filei, **kw)
         except Exception as e:
-           log('Error', filei, e) 
+           log('Error', filei, e)
            return pd.DataFrame()
-    
+
         # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
         if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
         if cols is not None :             dfi = dfi[cols]
@@ -281,7 +287,281 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
           dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
           del dfi; gc.collect()
 
-    return dfall      
+    return dfall
+
+
+
+
+############################################################################################################
+def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None,
+                        npool: int = 1, **kw,
+                        ):
+    """Performs a Pandas groupby operation in parallel.
+    pd.core.groupby.DataFrameGroupBy
+    Example usage:
+        import pandas as pd
+        df = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
+        df.groupby(df.groupby('A'), lambda row: row['B'].sum())
+    Authors: Tamas Nagy and Douglas Myers-Turnbull
+    """
+    import pandas as pd
+    from functools import partial
+
+    groupby_df = df.groupby(colsgroup)
+
+    start = time.time()
+    npool = int(multiprocessing.cpu_count()) - 1
+    log("\nUsing {} CPUs in parallel...".format(npool))
+    with multiprocessing.Pool(npool) as pool:
+        queue = multiprocessing.Manager().Queue()
+        result = pool.starmap_async(fun_apply, [(group, name) for name, group in groupby_df])
+        cycler = itertools.cycle('\|/―')
+        while not result.ready():
+            log("Percent complete: {:.0%} {}".format(queue.qsize() / len(groupby_df), next(cycler)))
+            time.sleep(0.4)
+        got = result.get()
+    # log("\nProcessed {} rows in {:.1f}s".format(len(groupby_df), time.time() - start))
+    return pd.concat(got)
+
+
+def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, n_pool=4, npool=None):
+    """
+    Use of multi-thread on group by apply when order is not important
+    """
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
+    import pandas as pd
+    import concurrent.futures
+
+    dfGrouped = df.groupby(colsgroup)
+
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
+        futures = []
+        for name, group in dfGrouped:
+            futures.append(executor.submit(fun_apply, group))
+
+        del dfGrouped; gc.collect()
+
+        df_out = pd.DataFrame()
+        for future in concurrent.futures.as_completed(futures):
+            dfr    = future.result()
+            df_out = pd.concat(( df_out, dfr ))
+            del dfr; gc.collect()
+
+    return df_out
+
+
+def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
+    """ Pandas parallel apply
+    """
+    import pandas as pd, numpy as np, time, gc
+
+    def f2(df):
+        return df.apply(fun_apply, axis=1)
+
+    if npool == 1 : return f2(df)
+
+
+    #### Pool execute ###################################
+    import concurrent.futures
+    size = int(len(df) // npool)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
+        futures = []
+        for i in range(npool):
+            i2  = 3*(i + 2) if i == npool - 1 else i + 1
+            dfi = df.iloc[i*size:(i2*size), :]
+            futures.append( executor.submit(f2, dfi,) )
+            if verbose: log('start', i, dfi.shape)
+            del dfi
+
+        dfall = None
+        for future in concurrent.futures.as_completed(futures):
+            dfi = future.result()
+            dfall = pd.concat((dfall, dfi)) if dfall is not None else dfi
+            del dfi
+            log(i, 'job finished')
+
+    return dfall
+
+
+############################################################################################################
+def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
+    """  Multiprocessing execute
+    input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
+    def fun_async(xlist):
+      for x in xlist :
+            download.upload(x[0], x[1])
+          def f(i, n):
+       return i * i + 2*n
+    ..
+     from itertools import repeat
+     N = 10000
+
+     from pathos.pools import ProcessPool as Pool
+     pool = Pool()
+
+     ans = pool.map(f, xrange(1000), repeat(20))
+     ans[:10]
+    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+
+     # this also works
+     ans = pool.map(lambda x: f(x, 20), xrange(1000))
+     ans[:10]
+    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+
+    input_fixed = {'const': 555}
+    """
+    import time, functools
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
+    #### Input xi #######################################
+    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
+         input_list = [  (t,) for t in input_list]  ## Must be a list of list
+
+    if input_fixed is not None:  #### Fixed keywword variable
+        fun_async = functools.partial(fun_async, **input_fixed)
+
+    xi_list = [[] for t in range(n_pool)]
+    for i, xi in enumerate(input_list):
+        jj = i % n_pool
+        xi_list[jj].append( xi )  ### xi is already a tuple
+
+    if verbose:
+        for j in range(len(xi_list)):
+            log('proc ', j, len(xi_list[j]))
+        # time.sleep(6)
+
+    #### Pool execute ###################################
+    import multiprocessing as mp
+    pool = mp.Pool(processes=n_pool)
+    # pool     = mp.pool.ThreadPool(processes=n_pool)
+    job_list = []
+    for i in range(n_pool):
+        time.sleep(start_delay)
+        log('starts', i)
+        job_list.append(pool.apply_async(fun_async, (xi_list[i],) ))
+        if verbose: log(i, xi_list[i])
+
+    res_list = []
+    for i in range(len(job_list)):
+        res_list.append(job_list[i].get())
+        log(i, 'job finished')
+
+    pool.terminate(); pool.join(); pool = None
+    log('n_processed', len(res_list))
+    return res_list
+
+
+def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
+    """  input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
+    def fun_async(xlist):
+      for x in xlist :
+            hdfs.upload(x[0], x[1])
+
+    input_fixed = {'const_var' : 1 }
+    """
+    import time, functools
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
+
+    #### Input xi #######################################
+    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
+         input_list = [  (t,) for t in input_list]  ## Must be a list of lis
+
+    if input_fixed is not None:
+        fun_async = functools.partial(fun_async, **input_fixed)
+
+    #### Input xi #######################################
+    xi_list = [[] for t in range(n_pool)]
+    for i, xi in enumerate(input_list):
+        jj = i % n_pool
+        xi_list[jj].append( xi )  ### xi is already a tuple
+
+    if verbose:
+        for j in range(len(xi_list)):
+            log('thread ', j, len(xi_list[j]))
+        # time.sleep(6)
+
+    #### Pool execute ###################################
+    import multiprocessing as mp
+    # pool     = multiprocessing.Pool(processes=3)
+    pool = mp.pool.ThreadPool(processes=n_pool)
+    job_list = []
+    for i in range(n_pool):
+        time.sleep(start_delay)
+        log('starts', i)
+        job_list.append(pool.apply_async(fun_async, (xi_list[i],) ))
+        if verbose: log(i, xi_list[i])
+
+    res_list = []
+    for i in range(len(job_list)):
+        res_list.append(job_list[i].get())
+        log(i, 'job finished')
+
+    pool.terminate(); pool.join(); pool = None
+    log('n_processed', len(res_list))
+    return res_list
+
+
+def multiproc_tochunk(flist, npool=2 ):
+    ll = []
+    chunk = len(flist) // npool
+    for i in range( npool ) :
+         i2 = i+1 if i < npool-1 else 3*(i+1)
+         ll.append( flist[i*chunk:i2*chunk] )
+    log(len(ll), str(ll)[:100])
+    return ll
+
+
+
+def multithread_run_list(**kwargs):
+    """ Creating n number of threads:  1 thread per function,    starting them and waiting for their subsequent completion
+    os_multithread(function1=(test_print, ("some text",)),
+                          function2=(test_print, ("bbbbb",)),
+                          function3=(test_print, ("ccccc",)))
+    """
+
+    class ThreadWithResult(Thread):
+        def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, *, daemon=None):
+            def function():
+                self.result = target(*args, **kwargs)
+
+            super().__init__(group=group, target=function, name=name, daemon=daemon)
+
+    list_of_threads = []
+    for thread in kwargs.values():
+        # print(thread)
+        t = ThreadWithResult(target=thread[0], args=thread[1])
+        list_of_threads.append(t)
+
+    for thread in list_of_threads:
+        thread.start()
+
+    results = []
+    for thread, keys in zip(list_of_threads, kwargs.keys()):
+        thread.join()
+        results.append((keys, thread.result))
+
+    return results
+
+
+###############################################################################################################
+
+
+
+
+############################################################################################################
+if __name__ == '__main__':
+    import fire; fire.Fire()
+    ### python parallel.py test1
+
+
+
+
+
+
+
+
+
 
 
 
@@ -293,7 +573,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
     :return:
     """
     import glob, gc,  pandas as pd, os
-    n_pool = npool if isinstance(npool, int)  else n_pool ## alias    
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
     def log(*s, **kw):
         print(*s, flush=True, **kw)
     readers = {
@@ -346,7 +626,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
         if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
         if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
         if fun_apply is not None  :       dfi = dfi.apply(lambda  x : fun_apply(x), axis=1)
-        return dfi 
+        return dfi
 
     pool   = ThreadPool(processes=n_pool)
     dfall  = pd.DataFrame()
@@ -356,7 +636,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
         for i in range(n_pool):
            if n_pool*j + i >= n_file  : break
 
-           filei         = file_list[n_pool*j + i]           
+           filei         = file_list[n_pool*j + i]
            job_list.append( pool.apply_async(fun_async, (filei, )))
            if verbose : log(j, filei)
 
@@ -381,7 +661,7 @@ def pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
     :return:
     """
     import glob, gc,  pandas as pd, os
-    n_pool = npool if isinstance(npool, int)  else n_pool ## alias    
+    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
     def log(*s, **kw):
         print(*s, flush=True, **kw)
     readers = {
@@ -456,272 +736,6 @@ def pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
     pool = None
     if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
     return dfall
-
-
-############################################################################################################
-def pd_groupby_parallel2(df, colsgroup=None, fun_apply=None,
-                        npool: int = 1, **kw,
-                        ):
-    """Performs a Pandas groupby operation in parallel.
-    pd.core.groupby.DataFrameGroupBy
-    Example usage:
-        import pandas as pd
-        df = pd.DataFrame({'A': [0, 1], 'B': [100, 200]})
-        df.groupby(df.groupby('A'), lambda row: row['B'].sum())
-    Authors: Tamas Nagy and Douglas Myers-Turnbull
-    """
-    import pandas as pd
-    from functools import partial
-
-    groupby_df = df.groupby(colsgroup)
-
-    start = time.time()
-    npool = int(multiprocessing.cpu_count()) - 1
-    log("\nUsing {} CPUs in parallel...".format(npool))
-    with multiprocessing.Pool(npool) as pool:
-        queue = multiprocessing.Manager().Queue()
-        result = pool.starmap_async(fun_apply, [(group, name) for name, group in groupby_df])
-        cycler = itertools.cycle('\|/―')
-        while not result.ready():
-            log("Percent complete: {:.0%} {}".format(queue.qsize() / len(groupby_df), next(cycler)))
-            time.sleep(0.4)
-        got = result.get()
-    # log("\nProcessed {} rows in {:.1f}s".format(len(groupby_df), time.time() - start))
-    return pd.concat(got)
-
-
-
-def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, n_pool=4, npool=None):
-    """
-    Use of multi-thread on group by apply when order is not important
-    """
-    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
-    import pandas as pd
-    import concurrent.futures
-
-    dfGrouped = df.groupby(colsgroup)
-
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
-        futures = []
-        for name, group in dfGrouped:
-            futures.append(executor.submit(fun_apply, group))
-
-        del dfGrouped; gc.collect()
-
-        df_out = pd.DataFrame()
-        for future in concurrent.futures.as_completed(futures):
-            dfr    = future.result()
-            df_out = pd.concat(( df_out, dfr ))
-            del dfr; gc.collect()
-
-    return df_out
-
-
-
-def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
-    """ Pandas parallel apply
-    """
-    import pandas as pd, numpy as np, time, gc
-
-    def f2(df):
-        return df.apply(fun_apply, axis=1)
-
-    if npool == 1 : return f2(df)
-
-
-    #### Pool execute ###################################
-    import concurrent.futures
-    size = int(len(df) // npool)
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
-        futures = []
-        for i in range(npool):
-            i2  = 3*(i + 2) if i == npool - 1 else i + 1
-            dfi = df.iloc[i*size:(i2*size), :]
-            futures.append( executor.submit(f2, dfi,) )
-            if verbose: log('start', i, dfi.shape)
-            del dfi
-
-        dfall = None
-        for future in concurrent.futures.as_completed(futures):
-            dfi = future.result()
-            dfall = pd.concat((dfall, dfi)) if dfall is not None else dfi
-            del dfi
-            log(i, 'job finished')
-
-    return dfall
-
-
-############################################################################################################
-def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
-    """  Multiprocessing execute
-    input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
-    def fun_async(xlist):
-      for x in xlist :
-            download.upload(x[0], x[1])
-          def f(i, n):
-       return i * i + 2*n
-    ..
-     from itertools import repeat
-     N = 10000
-    
-     from pathos.pools import ProcessPool as Pool
-     pool = Pool()
-    
-     ans = pool.map(f, xrange(1000), repeat(20))
-     ans[:10]
-    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
-    
-     # this also works
-     ans = pool.map(lambda x: f(x, 20), xrange(1000))
-     ans[:10]
-    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
-    
-    input_fixed = {'const': 555}
-    """
-    import time, functools
-    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
-    #### Input xi #######################################
-    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
-         input_list = [  (t,) for t in input_list]  ## Must be a list of list
-
-    if input_fixed is not None:  #### Fixed keywword variable
-        fun_async = functools.partial(fun_async, **input_fixed)
-
-    xi_list = [[] for t in range(n_pool)]
-    for i, xi in enumerate(input_list):
-        jj = i % n_pool
-        xi_list[jj].append( xi )  ### xi is already a tuple
-
-    if verbose:
-        for j in range(len(xi_list)):
-            log('proc ', j, len(xi_list[j]))
-        # time.sleep(6)
-
-    #### Pool execute ###################################
-    import multiprocessing as mp
-    pool = mp.Pool(processes=n_pool)
-    # pool     = mp.pool.ThreadPool(processes=n_pool)
-    job_list = []
-    for i in range(n_pool):
-        time.sleep(start_delay)
-        log('starts', i)
-        job_list.append(pool.apply_async(fun_async, (xi_list[i],) ))
-        if verbose: log(i, xi_list[i])
-
-    res_list = []
-    for i in range(len(job_list)):
-        res_list.append(job_list[i].get())
-        log(i, 'job finished')
-
-    pool.terminate(); pool.join(); pool = None
-    log('n_processed', len(res_list))
-    return res_list
-
-
-def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
-    """  input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
-    def fun_async(xlist):
-      for x in xlist :
-            hdfs.upload(x[0], x[1])
-            
-    input_fixed = {'const_var' : 1 }        
-    """    
-    import time, functools
-    n_pool = npool if isinstance(npool, int)  else n_pool ## alias
-    
-    #### Input xi #######################################
-    if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
-         input_list = [  (t,) for t in input_list]  ## Must be a list of lis
-
-    if input_fixed is not None:
-        fun_async = functools.partial(fun_async, **input_fixed)
-
-    #### Input xi #######################################
-    xi_list = [[] for t in range(n_pool)]
-    for i, xi in enumerate(input_list):
-        jj = i % n_pool
-        xi_list[jj].append( xi )  ### xi is already a tuple
-
-    if verbose:
-        for j in range(len(xi_list)):
-            log('thread ', j, len(xi_list[j]))
-        # time.sleep(6)
-
-    #### Pool execute ###################################
-    import multiprocessing as mp
-    # pool     = multiprocessing.Pool(processes=3)
-    pool = mp.pool.ThreadPool(processes=n_pool)
-    job_list = []
-    for i in range(n_pool):
-        time.sleep(start_delay)
-        log('starts', i)
-        job_list.append(pool.apply_async(fun_async, (xi_list[i],) ))
-        if verbose: log(i, xi_list[i])
-
-    res_list = []
-    for i in range(len(job_list)):
-        res_list.append(job_list[i].get())
-        log(i, 'job finished')
-
-    pool.terminate(); pool.join(); pool = None
-    log('n_processed', len(res_list))
-    return res_list
-
-
-def multithread_run_list(**kwargs):
-    """ Creating n number of threads:  1 thread per function,    starting them and waiting for their subsequent completion
-    os_multithread(function1=(test_print, ("some text",)),
-                          function2=(test_print, ("bbbbb",)),
-                          function3=(test_print, ("ccccc",)))
-    """
-
-    class ThreadWithResult(Thread):
-        def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, *, daemon=None):
-            def function():
-                self.result = target(*args, **kwargs)
-
-            super().__init__(group=group, target=function, name=name, daemon=daemon)
-
-    list_of_threads = []
-    for thread in kwargs.values():
-        # print(thread)
-        t = ThreadWithResult(target=thread[0], args=thread[1])
-        list_of_threads.append(t)
-
-    for thread in list_of_threads:
-        thread.start()
-
-    results = []
-    for thread, keys in zip(list_of_threads, kwargs.keys()):
-        thread.join()
-        results.append((keys, thread.result))
-
-    return results
-
-
-
-def multiproc_tochunk(flist, npool=2 ):
-    ll = [] 
-    chunk = len(flist) // npool
-    for i in range( npool ) :
-         i2 = i+1 if i < npool-1 else 3*(i+1)
-         ll.append( flist[i*chunk:i2*chunk] )        
-    log(len(ll), str(ll)[:100])   
-    return ll
-
-
-###############################################################################################################
-
-
-
-
-############################################################################################################
-if __name__ == '__main__':
-    import fire; fire.Fire()
-    ### python parallel.py test1
-
 
 
 
