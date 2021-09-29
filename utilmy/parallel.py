@@ -41,7 +41,7 @@ def test_fun_sum2(list_vars, const=1, const2=1):
     elif not isinstance(list_vars, tuple) :  list_vars = [ list_vars]
         
     for xi in list_vars :
-        si = si + int(xi)
+        si = si + sum(xi) if isinstance(xi, list) else si + xi
     return si        
 
 
