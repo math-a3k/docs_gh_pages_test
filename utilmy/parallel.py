@@ -73,7 +73,6 @@ def test_sum(x):
     return x['0'] + x['1']
 
 def test0():
-
     df  = pd_random(1*10**6, ncols=3)
 
     log("\n\n###########  pd_groupby_parallel  #############################################")
@@ -102,8 +101,7 @@ def test0():
     t0 = time.time()
     # df2 = pd_groupby_parallel3(df, colsgroup, fun_apply= test_fun_sum_inv, npool=4 )   ### Failed due to groupby part
     df2 = df2.sort_values( list(df2.columns))
-    log(df2, time.time() - t0)
-    log( 'pd_groupby_parallel2 : ' , df1.equals(df2))
+    log( 'pd_groupby_parallel2 : ' , df1.equals(df2), df2, time.time() - t0)
 
 
     log("\n\n###########  pd_apply_parallel  :  ############################################")
@@ -126,7 +124,8 @@ def test0():
     t0 = time.time()
     input_list = [ i for i in range(0, 67) ]
     res = multiproc_run(test_fun_sum2, input_list, n_pool= 7 )
-    log( 'multiproc_run : ' , time.time() - t0, res, len(res)==5,  sum(res) == sum([ sum(t) for t in input_list])  )
+    log( 'multiproc_run : ' , time.time() - t0, res)
+    log( len(res)==5,  sum(res) == sum([ t for t in input_list])  )
 
 
 
