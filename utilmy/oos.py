@@ -178,9 +178,11 @@ def os_copy_safe(dirin=None, dirout=None, nlevel=10, nfile=100000, cmd_fallback=
     flist = [] ; dirinj = dirin        
     for j in range(nlevel): 
         dirinj = dirinj + "/*"
-        flist  = flist + glob.glob(dirinj )
-    flist = flist[:nfile]    
+        tmp = glob.glob(dirinj )
+        if len(tmp) < 1 : break
+        flist  = flist + tmp        
         
+    flist = flist[:nfile]            
     log('n files', len(flist))
     kk = 1 ; ntry = 0
     for i in range(0, len(flist)) :
@@ -190,7 +192,7 @@ def os_copy_safe(dirin=None, dirout=None, nlevel=10, nfile=100000, cmd_fallback=
              kk = kk + 1
              if kk > nfile   : return 1   
              if kk % 50 == 0 : time.sleep(0.5)             
-             if kk % 10 : log(fi2)
+             if kk % 10 :      log(i, fi2)
              os.makedirs(os.path.dirname(fi2), exist_ok=True)
              try :
                 shutil.copy(fi, fi2)
@@ -201,9 +203,10 @@ def os_copy_safe(dirin=None, dirout=None, nlevel=10, nfile=100000, cmd_fallback=
                 log(cmd_fallback)
                 os.system(cmd_fallback)
                 time.sleep(10)
-                i = i - 1
+                i    = i - 1
                 ntry = ntry + 1
-            
+
+                
 def z_os_search_fast(fname, texts=None, mode="regex/str"):
     import re
     if texts is None:
