@@ -39,7 +39,6 @@ from albumentations import (
     Cutout, # (num_holes=8, max_h_size=8, max_w_size=8, fill_value=0, always_apply=False, p=0.5
 )
 
-  
 
 #####################################################################################
 #################################SETTINGS############################################
@@ -184,24 +183,24 @@ cc.cutout_color = 0
 ##########disk caching#########################
 db_path    = cc.data_train + f"/{cc.dname}"
 db_path    = "/dev/shm/img_train_nobg_256_256-100000.cache"
-# db_path    = "/dev/shm/img_train_nobg_256_256-100000.cache"
+# # db_path    = "/dev/shm/img_train_nobg_256_256-100000.cache"
 
 
 img_cache  = dc.Cache(db_path )
-print2(cc )
-print(db_path , len(img_cache))
-if len(list(img_cache)) < 20000: 
-   sys.exit(0)
+# print2(cc )
+# print(db_path , len(img_cache))
+# if len(list(img_cache)) < 20000: 
+#    sys.exit(0)
 
 
-##### Output
+# ##### Output
 model_dir     = cc.model_dir
 model_dir2    = model_dir + f"/m_{tag}-{cc.dname}/"
 cc.model_dir2 = model_dir2
 os.makedirs(model_dir2, exist_ok=True)
 
 
-time.sleep(3) 
+# time.sleep(3) 
 
 
 ################################################################################
@@ -262,7 +261,6 @@ def image_resize_pad(img,size=(256,256), padColor=0 ):
        resize and keep into the target Box
      
      """
-
      h, w = img.shape[:2]
      sh, sw = size
 
@@ -439,9 +437,6 @@ def label_get_data():
     time.sleep(10)    
     return df
 
-# df = label_get_data()
-# ### Fitlered   ##################################################
-# df = df[  ['id'] + cc.labels_cols ]
 
 #### Filter label values  #######################################
 def pd_category_filter(df, category_map):
@@ -460,27 +455,6 @@ def pd_category_filter(df, category_map):
     # class_dict = {ci : df[ci].nunique() for ci in category_map }
     # colcat     = 
     return df
-
-# df = pd_category_filter(df, cc.labels_map)
-# log(df)
-#### Split into  #################################################
-# shuffled  = df.sample(frac=1)
-# n         = df.shape[0]
-# num_train = int(0.97 * n)
-# num_val   = n - num_train
-
-# df_train  = df.iloc[:num_train, :]
-# df_val    = df.iloc[num_train:, :]
-
-# df_train.to_csv(cc.path_label_train,  index=False)
-# df_val.to_csv(  cc.path_label_val,    index=False)
-
-# #### test
-# # pathi       = cc.path_img_all  + "/10004.png"
-# # image_dataset = [ np.array(  cv2.cvtColor( cv2.imread(pathi), cv2.COLOR_BGR2RGB)  ) ]
-
-# for x in [ 'articleType', 'baseColour' ]:
-#     print(df_train.groupby(x).agg({'id': 'count'})) ; time.sleep(4)
 
 
 def image_load(pathi, mode='cache'):
@@ -1794,7 +1768,7 @@ def os_path_copy(in_dir, path, ext="*.py"):
     else:
       shutil.copy2(f, os.path.join(path, os.path.basename(f)))  
 
-os_path_copy(in_dir= cc.code_source  , path= cc.model_dir2 + "/code/")
+# os_path_copy(in_dir= cc.code_source  , path= cc.model_dir2 + "/code/")
 
 
 ######## 1-5) Transform, Dataset
@@ -1813,31 +1787,6 @@ class SprinklesTransform(ImageOnlyTransform):
         return self.sprinkles(image).numpy()
 
   
-
-image_size =  64
-train_transforms = Compose([
-    Resize(image_size, image_size, p=1),
-    HorizontalFlip(p=0.5),
-    RandomContrast(limit=0.2, p=0.5),
-    RandomGamma(gamma_limit=(80, 120), p=0.5),
-    RandomBrightness(limit=0.2, p=0.5),
-    HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
-                       val_shift_limit=10, p=.9),
-    ShiftScaleRotate(
-        shift_limit=0.0625, scale_limit=0.1,
-        rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8),
-    ToFloat(max_value=255),
-    SprinklesTransform(num_holes=10, side_length=10, p=0.5),
-])
-
-test_transforms = Compose([
-    Resize(image_size, image_size, p=1),
-    ToFloat(max_value=255)
-])
-
-
-
- 
 
 ##############################################################################################
 #########################################MODEL TRAINING#######################################
@@ -1947,6 +1896,16 @@ def loss_schedule(mode="step", epoch=1):
 
 
 cc.loss= {}
+
+###### Loss definition ##########################################################
+####  reduction=tf.keras.losses.Reduction.NONE  for distributed GPU
+clf_loss_global    =  tf.keras.losses.BinaryCrossentropy()
+### Classification distance
+triplet_loss_global = tfa.losses.TripletSemiHardLoss( margin=  1.0,    distance_metric='L2',    name= 'triplet',)
+recons_loss_global = tf.keras.losses.MeanAbsoluteError()  # reduction="sum"
+percep_loss_global = tf.keras.losses.MeanSquaredError()
+
+
 def perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
                              y_label_heads=None, y_pred_heads=None, clf_loss_fn=None):
     ### log( 'x_recon.shae',  x_recon.shape )
@@ -1995,6 +1954,7 @@ def perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
     else :
         loss_all = loss_vae * cc.loss.ww_vae  +  loss_percep * cc.loss.ww_percep
     return loss_all
+
 
 
 class StepDecay(LearningRateDecay):
@@ -2228,23 +2188,6 @@ percep_model = tf.keras.applications.EfficientNetB2(
 )
 
 
-###### Loss definition ##########################################################
-####  reduction=tf.keras.losses.Reduction.NONE  for distributed GPU
-clf_loss_global    =  tf.keras.losses.BinaryCrossentropy()
-
-### Classification distance
-triplet_loss_global = tfa.losses.TripletSemiHardLoss( margin=  1.0,    distance_metric='L2',    name= 'triplet',)
-
-
-###  tf.keras.losses.Huber( delta= 0.6) , 
-# rec_loss_global = tf.keras.losses.MeanSquaredError()
-# recons_loss_global = tf.keras.losses.Huber( delta= 0.6) 
-# percep_loss_global = tf.keras.losses.Huber( delta= 0.6) 
-# recons_loss_global = tf.keras.losses.MeanSquaredError()
-# percep_loss_global = tf.keras.losses.MeanSquaredError()
-
-recons_loss_global = tf.keras.losses.MeanAbsoluteError()  # reduction="sum"
-percep_loss_global = tf.keras.losses.MeanSquaredError()
 
 """
 https://www.tensorflow.org/tutorials/distribute/custom_training
@@ -2585,6 +2528,7 @@ dd.best_loss    = 100000000.0
 config_save(cc,path= cc.model_dir2 +"info.json")
 log2("\n\n#########################################################")
 log2(cc)
+
 for epoch in range(epoch0, num_epochs):
     log2(f"Epoch {epoch+1}/{num_epochs}, in {kbatch} kbatches ")
     if dostop: break
@@ -2633,93 +2577,26 @@ for epoch in range(epoch0, num_epochs):
                valid_image_original(x_val, path=model_dir2 + "/check/",
                                     tag=f'e{epoch+1}_b{batch_idx+1}', y_labels=y_val_true, n_sample=15)
 
-            dd.val_accuracy = metric_accuracy(y_val, y_pred_head, class_dict= cc.labels_map)
+            dd.val_accuracy = metric_accuracy_val(y_val, y_pred_head, class_dict= cc.labels_map)
             log2(dd.val_accuracy, cc.loss )
 
               
-log('Final valid_loss', str(valid_loss_hist)[:200])
+# log('Final valid_loss', str(valid_loss_hist)[:200])
 
 
-"""## Save the model"""
-log("\nSaving Model")
-os.makedirs(model_dir, exist_ok=True)
-tf.saved_model.save(model, model_dir2)
-model.save_weights( model_dir2 + f'/model_keras_weights.h5')
-log(model_dir2)
+# """## Save the model"""
+# log("\nSaving Model")
+# os.makedirs(model_dir, exist_ok=True)
+# tf.saved_model.save(model, model_dir2)
+# model.save_weights( model_dir2 + f'/model_keras_weights.h5')
+# log(model_dir2)
 
 
-"""## Reload the model"""
-log('\nReload Model')
-model2 = DFC_VAE(latent_dim, class_dict= cc.labels_count)
-input_shape = (batch_size, xdim, ydim, cdim)   ### x_train = x_train.reshape(-1, 28, 28, 1)
-model2.build(input_shape)
-model2.load_weights( model_dir2 + f'/model_keras_weights.h5')
-log('# Reloaded', model2)
-# log('rerun eval', validation_step(x_val, model2))
-
-
-
-"""
-gender ['men', 'women', 'boys', 'girls', 'unisex', 'other']
-masterCategory ['apparel', 'accessories', 'footwear', 'personal care', 'free items'
- 'sporting goods', 'home', 'other']
- 
-subCategory ['topwear', 'bottomwear', 'watches', 'socks', 'shoes', 'belts', 'flip flops'
- 'bags', 'innerwear', 'sandal', 'shoe accessories', 'fragrance', 'jewellery'
- 'lips', 'saree', 'eyewear', 'scarves', 'dress', 'loungewear and nightwear'
- 'wallets', 'apparel set', 'headwear', 'mufflers', 'skin care', 'makeup'
- 'free gifts', 'ties', 'accessories', 'nails', 'beauty accessories'
- 'water bottle', 'skin', 'eyes', 'bath and body', 'gloves'
- 'sports accessories', 'cufflinks', 'sports equipment', 'stoles', 'hair'
- 'perfumes', 'home furnishing', 'umbrellas', 'wristbands', 'other', 'vouchers']
- 
- 
-articleType ['shirts', 'jeans', 'watches', 'track pants', 'tshirts', 'socks', 'casual shoes'
- 'belts', 'flip flops', 'handbags', 'tops', 'bra', 'sandals', 'shoe accessories'
- 'sweatshirts', 'deodorant', 'formal shoes', 'bracelet', 'lipstick', 'flats'
- 'kurtas', 'waistcoat', 'sports shoes', 'shorts', 'briefs', 'sarees'
- 'perfume and body mist', 'heels', 'sunglasses', 'innerwear vests', 'pendant'
- 'laptop bag', 'scarves', 'dresses', 'night suits', 'skirts', 'wallets'
- 'blazers', 'ring', 'kurta sets', 'clutches', 'shrug', 'backpacks', 'caps'
- 'trousers', 'earrings', 'camisoles', 'boxers', 'jewellery set', 'dupatta'
- 'capris', 'lip gloss', 'bath robe', 'mufflers', 'tunics', 'jackets', 'trunk'
- 'lounge pants', 'face wash and cleanser', 'necklace and chains'
- 'duffel bag', 'sports sandals', 'foundation and primer', 'sweaters'
- 'free gifts', 'trolley bag', 'tracksuits', 'swimwear', 'shoe laces'
- 'fragrance gift set', 'bangle', 'nightdress', 'ties', 'baby dolls', 'leggings'
- 'highlighter and blush', 'travel accessory', 'kurtis', 'mobile pouch'
- 'messenger bag', 'lip care', 'nail polish', 'eye cream', 'accessory gift set'
- 'beauty accessory', 'jumpsuit', 'kajal and eyeliner', 'water bottle'
- 'suspenders', 'face moisturisers', 'lip liner', 'robe', 'salwar and dupatta'
- 'patiala', 'stockings', 'eyeshadow', 'headband', 'tights', 'nail essentials'
- 'churidar', 'lounge tshirts', 'face scrub and exfoliator', 'lounge shorts'
- 'gloves', 'wristbands', 'tablet sleeve', 'ties and cufflinks', 'footballs'
- 'compact', 'stoles', 'shapewear', 'nehru jackets', 'salwar', 'cufflinks'
- 'jeggings', 'hair colour', 'concealer', 'rompers', 'sunscreen', 'booties'
- 'mask and peel', 'waist pouch', 'hair accessory', 'body lotion', 'rucksacks'
- 'basketballs', 'lehenga choli', 'clothing set', 'mascara', 'cushion covers'
- 'key chain', 'rain jacket', 'toner', 'lip plumper', 'umbrellas'
- 'face serum and gel', 'other', 'hat', 'mens grooming kit', 'makeup remover'
- 'body wash and scrub', 'ipad']
- 
-baseColour ['navy blue', 'blue', 'silver', 'black', 'grey', 'green', 'purple', 'white'
- 'beige', 'brown', 'bronze', 'teal', 'copper', 'pink', 'off white', 'maroon'
- 'red', 'khaki', 'orange', 'yellow', 'charcoal', 'gold', 'steel', 'tan', 'multi'
- 'magenta', 'lavender', 'sea green', 'cream', 'peach', 'olive', 'skin'
- 'burgundy', 'coffee brown', 'grey melange', 'rust', 'rose', 'lime green'
- 'mauve', 'turquoise blue', 'metallic', 'mustard', 'taupe', 'nude'
- 'mushroom brown', 'fluorescent green', 'other']
- 
-N ids 15841
-N images 44441
-Total valid images: 15841
-(17719, 8)
-id                15841
-gender                5
-masterCategory        7
-subCategory          45
-articleType         141
-baseColour           46
-season                4
-usage                 8
-"""
+# """## Reload the model"""
+# log('\nReload Model')
+# model2 = DFC_VAE(latent_dim, class_dict= cc.labels_count)
+# input_shape = (batch_size, xdim, ydim, cdim)   ### x_train = x_train.reshape(-1, 28, 28, 1)
+# model2.build(input_shape)
+# model2.load_weights( model_dir2 + f'/model_keras_weights.h5')
+# log('# Reloaded', model2)
+# # log('rerun eval', validation_step(x_val, model2))
