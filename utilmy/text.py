@@ -82,28 +82,37 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=
     '''
     For each of the entry create a hash function
     '''
-    
+    from datasketch import MinHash, MinHashLSH
+    lsh = None
+
     if npool > 1 and len(df) > 20000 :
         chunk = 20000
-        from utilmy.parallel import multiproc_run
+        from utilmy.parallel import multithread_run
         nchunk  = 1 + len(df) // chunk
-        df_list = [  df.iloc[i*chunk:(i+1)*chunk, :] for in in range(0, nchunk ) ]
-        res = multiproc_run(pd_text_hash_create_lsh, df_list, sep, threshold, num_perm, npool=1)
+        df_list = [  df.iloc[i*chunk:(i+1)*chunk, :] for i in range(0, nchunk ) ]
+
+        # Create LSH
+        lsh = MinHashLSH(threshold=threshold, num_perm=num_perm)   #### Global lsh
+
+        res = multithread_run(pd_text_hash_create_lsh, df_list, sep, threshold, num_perm, npool=1)
+
+        hash_lines = []
+        for xi in res :
+            hash_lines.extend(xi[0])
+
         res = sum(res, [])  ### flatten the list
-        return res
+        return hash_lines, lsh
         
         
     if len(df) < 1 :
         return [],[]
-    
-    from datasketch import MinHash, MinHashLSH
-    # Create LSH
-    lsh = MinHashLSH(threshold=threshold, num_perm=num_perm)
+
+    if lsh is None :
+       lsh = MinHashLSH(threshold=threshold, num_perm=num_perm)
 
     # Intialize list
     hash_lines = []
-
-    ll = df[col].values
+    ll         = df[col].values
     for index, sentence in enumerate(ll):
 
         # Get tokens of individual elements
@@ -115,7 +124,6 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=
         for j in set(tokens):
             v.update(j.encode('utf8'))
 
-        # Append
         hash_lines.append(v)
         lsh.insert(str(index), v)
     return hash_lines, lsh
