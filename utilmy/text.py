@@ -78,10 +78,24 @@ def test_lsh():
 
 
 #############################################################################
-def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10):
+def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=1):
     '''
     For each of the entry create a hash function
     '''
+    
+    if npool > 1 and len(df) > 20000 :
+        chunk = 20000
+        from utilmy.parallel import multiproc_run
+        nchunk  = 1 + len(df) // chunk
+        df_list = [  df.iloc[i*chunk:(i+1)*chunk, :] for in in range(0, nchunk ) ]
+        res = multiproc_run(pd_text_hash_create_lsh, df_list, sep, threshold, num_perm, npool=1)
+        res = sum(res, [])  ### flatten the list
+        return res
+        
+        
+    if len(df) < 1 :
+        return [],[]
+    
     from datasketch import MinHash, MinHashLSH
     # Create LSH
     lsh = MinHashLSH(threshold=threshold, num_perm=num_perm)
@@ -125,7 +139,7 @@ def pd_text_getcluster(df, col, threshold, num_perm):
         if ind in all_cluster_ids:
             continue
 
-        x_duplicate = lsh.query(i)
+        x_duplicate     = lsh.query(i)
         x_duplicate_int = list(map(int, x_duplicate))
         # print(x_duplicate_int)
         df.at[x_duplicate_int, 'cluster_id'] = cluster_count
