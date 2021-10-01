@@ -568,7 +568,7 @@ if __name__ == '__main__':
 
 
 
-def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
+def z_pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None,  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
@@ -656,7 +656,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
 
 
 
-def pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, npool=None,
+def z_pd_read_file3(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, concat_sort=True, n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
