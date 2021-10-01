@@ -125,7 +125,7 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=
     return hash_lines, lsh
 
 
-def pd_text_getcluster(df:pd.DataFrame, col:str='col', threshold, num_perm:int=5, npool=1, chunk = 100000):
+def pd_text_getcluster(df:pd.DataFrame, col:str='col', threshold=0.5, num_perm:int=5, npool=1, chunk = 100000):
     '''
     For each of the hash function find a cluster and assign unique id to the dataframe cluster_id
     '''
