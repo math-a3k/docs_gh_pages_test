@@ -100,9 +100,7 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=
         for xi in res :
             hash_lines.extend(xi[0])
 
-        res = sum(res, [])  ### flatten the list
         return hash_lines, lsh
-        
         
     if len(df) < 1 :
         return [],[]
