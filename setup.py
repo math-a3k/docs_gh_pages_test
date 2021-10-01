@@ -41,8 +41,12 @@ githash = get_current_githash()
 
 
 #####################################################################################
-ss1 = """
+ss1 = f"""
 Utils
+
+https://packagegalaxy.com/python/utilmy
+
+
 
 git hash : https://github.com/arita37/myutil/tree/{githash}
 """
