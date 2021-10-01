@@ -71,12 +71,12 @@ def test_create_webmap():
 
 def test_add_geojson_to_map(geojson_map:str='http://enjalot.github.io/wwsd/data/world/world-110m.geojson'):
     map = webMap()
-    map.create_map()
+    map.create_map(open_new_tab=False)
     add_geojson_to_webmap(geojson_map,map)
 
 def test_add_topojson_to_map(topojson_path:str="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"):
     map = webMap()
-    map.create_map()
+    map.create_map(open_new_tab=False)
     add_topojson_to_webmap(topojson_path,map)
 
     
@@ -341,13 +341,13 @@ class webMap():
         self.out_dir = ''
         self.map_js = ''
 
-    def load_document(self,rewrite=False):
+    def load_document(self,rewrite=False,open_new_tab=True):
         self.htmlDoc.add_js(self.map_js) if rewrite==False else self.htmlDoc.rewrite_js(self.map_js)
         self.htmlDoc.save(self.out_dir)
-        self.htmlDoc.browse()
+        if open_new_tab:self.htmlDoc.browse()
 
     
-    def create_map(self,center:list=[18,32],zoom:int=3,tile:str='',dir:str=''):
+    def create_map(self,center:list=[18,32],zoom:int=3,tile:str='',dir:str='',open_new_tab=True):
         """
             creates a new web map stored in html file with all it's configurations
 
@@ -375,7 +375,7 @@ class webMap():
         
         self.out_dir = dir
         self.map_js = js
-        self.load_document()
+        self.load_document(open_new_tab=open_new_tab)
 
     def add_geojson(self,geojson_path):
         """
@@ -466,17 +466,14 @@ class webMap():
 if __name__ == "__main__":
     import fire
     fire.Fire()
-    #test_create_webmap()
-    #test_add_geojson_to_map()
-    #test_add_topojson_to_map()
-
 
 
 
 
 
 # todo 
-#   adding tests and docs to plot_choropleth_map
+#   adding web choropleth_map and heat map
+#   remove folium and it's dependencies
 #   adding Vector Data (shp)
 #   adding raster data. 
 #   adding plot_geocoded_adderess 
