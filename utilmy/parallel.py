@@ -417,8 +417,11 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
     #if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
     #     input_list = [  (t,) for t in input_list]  ## Must be a list of list
 
+    if len(input_list) < 1 : return []
+
     if input_fixed is not None:  #### Fixed keywword variable
         fun_async = functools.partial(fun_async, **input_fixed)
+
 
     xi_list = [[] for t in range(n_pool)]
     for i, xi in enumerate(input_list):
@@ -464,6 +467,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
     #### Input xi #######################################
     #if not isinstance(input_list[0], list ) and not isinstance(input_list[0], tuple ) :
     #     input_list = [  (t,) for t in input_list]  ## Must be a list of lis
+    if len(input_list) < 1 : return []
 
     if input_fixed is not None:
         fun_async = functools.partial(fun_async, **input_fixed)
