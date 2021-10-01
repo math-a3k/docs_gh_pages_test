@@ -33,7 +33,6 @@ def help_get_codesource(func):
 
 
 #############################################################################
-
 def test():
 
   column_name = "question1"
@@ -47,7 +46,7 @@ def test():
 
   df1 = pd_text_getcluster(
         df.head(num_items), column_name, threshold, num_perm)
-  print(df1.head())
+  log(df1.head())
 
   df2 = pd_text_similarity(df, cols=['question1','question2'])
   matched = df.loc[df['score'] >= 0.8]
@@ -78,7 +77,7 @@ def test_lsh():
 
 
 #############################################################################
-def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=1):
+def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=1, chunk = 20000):
     '''
     For each of the entry create a hash function
     '''
@@ -86,7 +85,6 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=
     lsh = None
 
     if npool > 1 and len(df) > 20000 :
-        chunk = 20000
         from utilmy.parallel import multithread_run
         nchunk  = 1 + len(df) // chunk
         df_list = [  df.iloc[i*chunk:(i+1)*chunk, :] for i in range(0, nchunk ) ]
@@ -94,7 +92,7 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=
         # Create LSH
         lsh = MinHashLSH(threshold=threshold, num_perm=num_perm)   #### Global lsh
 
-        res = multithread_run(pd_text_hash_create_lsh, df_list, sep, threshold, num_perm, npool=1)
+        res = multithread_run(pd_text_hash_create_lsh, df_list, npool=1)
 
         hash_lines = []
         for xi in res :
@@ -127,12 +125,21 @@ def pd_text_hash_create_lsh(df, col, sep=" ", threshold=0.7, num_perm=10, npool=
     return hash_lines, lsh
 
 
-def pd_text_getcluster(df, col, threshold, num_perm):
+def pd_text_getcluster(df:pd.DataFrame, col:str='col', threshold, num_perm:int=5, npool=1, chunk = 100000):
     '''
     For each of the hash function find a cluster and assign unique id to the dataframe cluster_id
     '''
     # MAster cluster ids
     all_cluster_ids = []
+    if len(df)< 1 : return df
+
+    if npool > 1 and len(df) > 200000 :
+        from utilmy.parallel import multithread_run
+        nchunk  = 1 + len(df) // chunk
+        df_list = [  df.iloc[i*chunk:(i+1)*chunk, :] for i in range(0, nchunk ) ]
+        res     = multithread_run(pd_text_getcluster, df_list, npool=1)
+        df      = pd.concat(res)
+        return df
 
     # REturn from hash list
     hash_lines, lsh = pd_text_hash_create_lsh(
@@ -141,7 +148,6 @@ def pd_text_getcluster(df, col, threshold, num_perm):
     # For each local hash find the cluster ids and assign to the dataframe and return dataframe
     cluster_count = 1
     for ind, i in enumerate(hash_lines):
-
         if ind in all_cluster_ids:
             continue
 
@@ -149,7 +155,7 @@ def pd_text_getcluster(df, col, threshold, num_perm):
         x_duplicate_int = list(map(int, x_duplicate))
         # print(x_duplicate_int)
         df.at[x_duplicate_int, 'cluster_id'] = cluster_count
-        cluster_count += 1
+        cluster_count   += 1
         all_cluster_ids += x_duplicate_int
 
     return df
