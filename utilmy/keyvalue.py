@@ -24,7 +24,7 @@ db_path : Single DB storage
 import os, glob, sys, math, string, time, json, logging, functools, random, yaml, operator, gc
 import pandas as pd, numpy as np
 from pathlib import Path; from collections import defaultdict, OrderedDict ;  
-from utilmy import   pd_read_file, pd_to_file
+from utilmy.utilmy import   pd_read_file, pd_to_file
 from box import Box
 
 import diskcache as dc
@@ -55,7 +55,7 @@ def pd_random(nrows=1000, ncols= 5):
 def test():
     """    
     """    
-    n = 10**6
+    n = 10**4
     df      = pd_random(n, ncols=2)    
     df['0'] = [  str(x) for x in np.arange(0, len(df)) ]
     df['1'] = [  'xxxxx' + str(x) for x in np.arange(0, len(df)) ]
@@ -93,40 +93,174 @@ def test():
       
 
 
-    
-    
-    
-    
-    
-    
+
     
 ########################################################################################################    
 ##########  Database Class #############################################################################
+def db_cli():
+    """
+      Command line for db access.
+      Need a global config file.... set manuaklly
+      https://pypi.org/project/qurcol/
+
+    """
+    import argparse
+    p   = argparse.ArgumentParser()
+    add = p.add_argument
+
+    add('task', metavar='task', type=str, nargs=1, help='list/info/check')
+    add("val",   metavar='val', type=str, nargs=1, help='list/info/check')
+
+    #### Extra Options
+
+
+
+    args = p.parse_args()
+
+    task =  args.task[0]
+    val  =  args.val[0]
+
+
+    #########################################################################
+    db = DB(config_path= os.environ['db_diskcacheconfig'])  ##### Need to set
+
+    if task == 'help':  print(HELP)
+    if task == 'setconfig':
+        os_environ_set('db_diskcache_config', val)
+
+
+    if task == 'list':   db.list()
+    if task == 'info':   db.info()
+    if task == 'check':  db.check()
+    else :
+        log('list,info')
+
+
+
+
 class DB(object):
     """
-    DB == collection of diskcache tables on disk.
-       A table == a folder on disk
-      
+      DB == collection of diskcache tables on disk.
+         A table == a folder on disk
+
+      root_path/mytable1/
+      root_path/mytable2/
+      root_path/mytable3/
+      root_path/mytable4/
+      root_path/mytable5/
+
+     {
+       'db_paths' : [ 'root1', 'root2'   ]
+     }
     
     """
-    
-    def __init__(self, path):
-        pass
-    
-    def get_db(self,):
+    def __init__(self, config_dict=None, config_path=None):
+
+        if config_dict is not None :
+           self.config_dict = config_dict
+
+        elif config_path is not None :
+           self.config_dict = json.load(open(config_path, mode='r'))
+           self.config_path = config_path
+
+        else :
+            self.config_path = os.environ.get('db_diskcache_config', os.getcwd().replace("\\", "/"))
+            self.config_dict = json.load(open(self.config_path, mode='r'))
+
+        self.path_list = config_dict('db_paths', [])
+
+
+    def add(self, db_path):
+        self.path_list = list(set(self.path_list + db_path))
+
+    def remove(self, db_path):
+        self.path_list = [ t for t in self.path_list  if t != db_path ]
+
+    def list(self, show=True):
         ## get list of db from the folder, size
+        flist = []
+        for path in self.path_list :
+           flist = flist + glob.glob(path +"/*")
+
+        if show :
+            for folder in flist :
+                size_mb = os_path_size(folder)
+                print(folder, size_mb)
+
+        return flist
+
+
+    def info(self,):
+        ## get list of db from the folder, size
+        flist = self.list()
+
+        for folder in flist :
+            size_mb = os_path_size(folder)
+
+            if os.path.isfile(f"{folder}/cache.db"):
+                dbi   = diskcache_load(folder)
+                nkeys = diskcache_keycount(dbi)
+                print(folder, size_mb, nkeys)
+            else :
+                print(folder, size_mb)
+
+    def clean(self,):
+        ## clean temp files for each diskcache db
         pass
 
 
-    def reset_wal(self,):
-        ## clean temp files
+    def check(self, db_path=None):
+        """
+           Check Sqlite cache.db if file is fine
+
+        """
         pass
-        
-        
-        
-        
-def db_init(db_dir:str="path"):
+
+
+    def show(self, db_path=None, n=4):
+        """
+           show content for each table
+
+        """
+        flist = self.list()
+        for pathi in flist:
+            dbi = diskcache_load(pathi)
+            res = diskcache_getall(dbi, limit=n)
+            log(pathi, str(res), "\n\n")
+
+
+
+
+def os_environ_set(name, value):
     """
+    https://stackoverflow.com/questions/716011/why-cant-environmental-variables-set-in-python-persist
+
+    """
+    cmd = """
+    
+    
+    """
+
+
+def os_path_size(folder=None):
+    """
+       Get the size of a folder in bytes
+    """
+    import os
+    if folder is None:
+        folder = os.getcwd()
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(folder):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            total_size += os.path.getsize(fp)
+    return total_size
+
+
+
+        
+def db_init(db_dir:str="path", globs=None):
+    """ Initialize in the Global Space Name  globs= globals(), DB
       db = Box({    
           'db_itemtag_items_path'  :  f"{db_dir}/map_sampling_itemtag_siid.cache",     
           'db_itemid_itemtag_path' :  f"{db_dir}/map_itemid_itemtag.cache",    
@@ -141,7 +275,7 @@ def db_init(db_dir:str="path"):
         log(name)  #, len(globals()[ name ] ))
 
         ### Global Access
-        globals()[ name ] = diskcache_load(path)
+        globs[ name ] = diskcache_load(path)
      
         
 
@@ -345,8 +479,15 @@ def diskcache_save2(df, colkey, colvalue, db_path="./dbcache.db", size_limit=100
     
 def diskcache_getkeys(cache):
     cache = diskcache_load( cache, size_limit=100000000000, verbose=False )
-    
+
     v = cache._sql('SELECT key FROM Cache').fetchall()
+    v = [ t[0] for t in v]
+    return v
+
+def diskcache_keycount(cache):
+    cache = diskcache_load( cache, size_limit=100000000000, verbose=False )
+
+    v = cache._sql('SELECT countt(key) FROM Cache').fetchall()
     v = [ t[0] for t in v]
     return v
 

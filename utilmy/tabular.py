@@ -1,4 +1,4 @@
-"""
+HELP="""
 
 https://github.com/topics/hypothesis-testing?l=python&o=desc&s=stars
 
@@ -15,7 +15,29 @@ def log(*s):
 
 #############################################################################
 #############################################################################
+def y_adjustment():
+    """
+       Adjustment of log, exp transfrmation for yt= y + error
+       https://www.inovex.de/de/blog/honey-i-shrunk-the-target-variable/
+       
+       log(y) = u =sigma**2
+    
+    """
+    def adjuter_log(y_true, y_pred_log, error_func, **kwargs):
+        """Determine correction delta for exp transformation"""
+        def cost_func(delta):
+            return error_func(np.exp(delta + y_pred_log), y_true)
+        res = sp.optimize.minimize(cost_func, 0., **kwargs)
+        if res.success:
+            return res.x
+        else:
+            raise RuntimeError(f"Finding correction term failed!\n{res}")
 
+
+            
+            
+    
+    
 def test_anova(df, col1, col2):
     """
     ANOVA test two categorical features

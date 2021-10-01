@@ -95,12 +95,12 @@ from utilmy.ppandas import (
 
 #########################################################################################################
 ##### Utils numpy, list #################################################################################
-from utilmy.keyvalue import  (
-   diskcache_load,
-   diskcache_save,
-   diskcache_save2,
-   db_init, db_size, db_flush
-)
+#from utilmy.keyvalue import  (
+#   diskcache_load,
+#   diskcache_save,
+#   diskcache_save2,
+#   db_init, db_size, db_flush
+#)
 
 
 
@@ -135,7 +135,7 @@ from utilmy.nnumpy import (
 
 ##### OS, cofnfig ######################################################################################
 from utilmy.oos import(
-    os_getsize,
+    os_path_size,
     os_path_split,
     os_file_check,
     os_file_replacestring,
@@ -155,7 +155,7 @@ from utilmy.oos import(
     os_memory,
     os_sleep_cpu,
     os_cpu,
-    os_ram_object,
+    # os_ram_object,
     os_copy,
     os_removedirs,
     os_getcwd,
@@ -178,7 +178,7 @@ from utilmy.configs.util_config import (
 
 ######################################################################################################
 ######## External IO #################################################################################
-from utilmy.io import (
+from utilmy.iio import (
  hdfs_put,
  hdfs_get,
  hdfs_walk

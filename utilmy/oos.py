@@ -92,9 +92,9 @@ def is_float(x):
 
 
 ##### OS, cofnfig ######################################################################################
-def os_getsize(start_path = '.'):
+def os_path_size(path = '.'):
     total_size = 0
-    for dirpath, dirnames, filenames in os.walk(start_path):
+    for dirpath, dirnames, filenames in os.walk(path):
         for f in filenames:
             fp = os.path.join(dirpath, f)
             # skip if it is symbolic link
@@ -102,6 +102,7 @@ def os_getsize(start_path = '.'):
                 total_size += os.path.getsize(fp)
 
     return total_size
+
 
 
 def os_path_split(fpath:str=""):
@@ -169,7 +170,43 @@ def os_walk(path, pattern="*", dirlevel=50):
     return  matches
 
 
+def os_copy_safe(dirin=None, dirout=None, nlevel=10, nfile=100000, cmd_fallback=""):  
+    """ Copy Safely/slowly between drive    
+    
+    """
+    import shutil, time, os, glob       
+    flist = [] ; dirinj = dirin        
+    for j in range(nlevel): 
+        dirinj = dirinj + "/*"
+        tmp = glob.glob(dirinj )
+        if len(tmp) < 1 : break
+        flist  = flist + tmp        
+        
+    flist = flist[:nfile]            
+    log('n files', len(flist))
+    kk = 1 ; ntry = 0
+    for i in range(0, len(flist)) :
+        fi  = flist[i]
+        fi2 = fi.replace(dirin, dirout)
+        if not os.path.isfile(fi2) and os.path.isfile(fi) :
+             kk = kk + 1
+             if kk > nfile   : return 1   
+             if kk % 50 == 0 : time.sleep(0.5)             
+             if kk % 10 :      log(i, fi2)
+             os.makedirs(os.path.dirname(fi2), exist_ok=True)
+             try :
+                shutil.copy(fi, fi2)
+                ntry = 0
+             except Exception as e:
+                log(e)
+                time.sleep(10)
+                log(cmd_fallback)
+                os.system(cmd_fallback)
+                time.sleep(10)
+                i    = i - 1
+                ntry = ntry + 1
 
+                
 def z_os_search_fast(fname, texts=None, mode="regex/str"):
     import re
     if texts is None:
@@ -375,21 +412,19 @@ def os_memory():
     return ret
 
 
-def os_sleep_cpu(priority=300, cpu_min=50, sleep=10):
+def os_sleep_cpu(cpu_min=30, sleep=10, interval=5, msg= "", verbose=True):
     #### Sleep until CPU becomes normal usage
     import psutil, time
-
-    aux = psutil.cpu_percent()
+    aux = psutil.cpu_percent(interval=interval)  ### Need to call 2 times
     while aux > cpu_min:
-        #print("CPU:", aux, time.time())
-        time.sleep(priority)
-        aux = psutil.cpu_percent()
-        time.sleep(sleep)
-        aux = 0.5 * (aux + psutil.cpu_percent())
+        ui = psutil.cpu_percent(interval=interval)
+        aux = 0.5 * (aux +  ui)
+        if verbose : log( 'Sleep sec', sleep, ' Usage %', aux, ui, msg )
+        time.sleep(sleep)        
     return aux
 
 
-def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
+def os_sizeof(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
     """ deep_getsizeof(df_pd, set())
     Find the memory footprint of a Python object
     The sys.getsizeof function does a shallow size of only. It counts each
@@ -400,7 +435,7 @@ def os_ram_object(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
 
     _ = hint
 
-    d = os_ram_object
+    d = os_sizeof
     if id(o) in ids:
         return 0
 
