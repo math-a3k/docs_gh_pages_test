@@ -10,6 +10,11 @@
 One liner utilities
 
 
+# Index of all functions
+
+   https://github.com/arita37/myutil/blob/main/docs/doc_index.py
+
+
 # Looking for contributors
 
    This package is looking for contributors.
@@ -56,10 +61,6 @@ https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scroll
  
  ```
  
-
-# Index of all functions
-
-   https://github.com/arita37/myutil/blob/main/docs/doc_index.py
 
 # Misc
  ```
