@@ -101,7 +101,7 @@ jobs:
     - name: Auto-Commit
       continue-on-error: true
       id: auto_commmit
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: stefanzweifel/git-auto-commit-action@v4.8.0
       with:
           # Optional, but recommended
           # Defaults to "Apply automatic changes"
