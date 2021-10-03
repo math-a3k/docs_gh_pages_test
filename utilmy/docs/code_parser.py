@@ -907,6 +907,7 @@ def _clean_data(array):
     """Remove empty lines and comment lines start with #
     """
     response = array.copy()
+
     for line in array:
         if _remove_empty_line(line) or _remmove_commemt_line(line):
             response.remove(line)
@@ -924,7 +925,7 @@ def _clean_data(array):
                     detect_block = True
                     response.remove(line)
             # detect block string
-            elif re.search(r'\s+=\s+"""', line) or re.search(r'\s+\+\s+"""', line):
+            elif re.search(r'\s+=\s+"""', line) or re.search(r'\s+\+\s+"""', line) or re.search(r'="""', line):
                 detect_block = True
                 not_remove = True
                 # print("re.search: ", line)
