@@ -18,8 +18,12 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-   
+    #- uses: actions/checkout@v1
+    #  ref: ${{ github.head_ref }
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        
     - name: Set up Python 3.6.*
       uses: actions/setup-python@v1
       with:
@@ -93,9 +97,9 @@ jobs:
            ls .
            
     ######### Git pull main branch ####################################################           
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.head_ref }}
+    #- uses: actions/checkout@v2
+    #  with:
+    #    ref: ${{ github.head_ref }}
 
 
     ########  Generate Docs     
