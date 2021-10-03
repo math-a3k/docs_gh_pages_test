@@ -47,6 +47,9 @@ utilmy/graph.py
 
 utilmy/keyvalue.py
 -------------------------functions----------------------
+os_environ_set(name, value)
+os_path_size(folder = None)
+db_init(db_dir:str = "path", globs = None)
 db_flush(db_dir)
 db_size(db_dir =  None)
 db_merge()
@@ -61,6 +64,15 @@ diskcache_getall(cache, limit = 1000000000)
 diskcache_get(cache)
 diskcache_config(db_path = None, task = 'commit')
 
+-------------------------methods----------------------
+DBlist.__init__(self, config_dict = None, config_path = None)
+DBlist.add(self, db_path)
+DBlist.remove(self, db_path)
+DBlist.list(self, show = True)
+DBlist.info(self, )
+DBlist.clean(self, )
+DBlist.check(self, db_path = None)
+DBlist.show(self, db_path = None, n = 4)
 
 
 utilmy/util_default.py
