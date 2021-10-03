@@ -38,7 +38,7 @@ from stdlib_list import stdlib_list
 
 
 
-stdlib_libraries = stdlib_list(platform.python_version()[:-2])
+stdlib_libraries = stdlib_list(platform.python_version()[:3])
 # print(stdlib_libraries)
 list_built_in = [
     "abs", "delattr", "hash", "memoryview", "set", "all", "dict",
