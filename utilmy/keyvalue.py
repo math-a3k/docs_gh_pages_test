@@ -137,8 +137,71 @@ def db_cli():
 
 
 
+class DBcass():
+    pass
 
-class DB(object):
+    
+
+    
+    
+
+class DBkeyvalue(object):
+    """ Interface for mutiple key-value stores
+      diskcache::path/path
+      cassandra::keyspace.table;servers;login:pass
+      S3
+
+    """
+    def __init__(self, db_uri="", **kw):
+       self.db_uri  = db_uri        
+       self.db_type = db_uri.split("::")[0]
+       self.db      = None
+       self.db_pars = kw
+       
+       if self.db_type in [ 'cassandra', 'couchbase'  ] :  
+           self.bucket  = db_uri.split("::")[1].split(";")[0]
+           self.host    = db_uri.split("::")[1].split(";")[1]
+           self.login   = db_uri.split("::")[1].split(";")[2].split(":")[0]
+           self.passw   = db_uri.split("::")[1].split(";")[2].split(":")[1]
+
+
+       if self.db_type == "diskcache":
+           self.db = diskcache_load(db_uri, **kw)
+
+       if self.db_type == "couchbase":
+           pass
+
+       if self.db_type == "cassandra":
+            self.db = DBcass()
+
+       else :
+           log('Not defined', db_uri)
+           raise Exception('No db defined', db_uri)    
+
+
+    def get(self, key, val_default=None):
+        return self.db.get(key, val_default)
+
+
+    def set(self, key, val):
+        self.db.set(key, val)
+
+
+    def getkeys(self, key, val_default=None):
+        pass
+
+    def getmulti(self, key_list, val_default=None):
+        pass
+
+    def setmulti(self, ddict, val_default=None):
+        pass
+        
+        
+
+        
+        
+        
+class DBlist(object):
     """
       DB == collection of diskcache tables on disk.
          A table == a folder on disk
