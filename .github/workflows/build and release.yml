@@ -98,6 +98,11 @@ jobs:
       run: |
            docs all      --repo_dir utilmy/  --out_dir docs/            
 
+    ######### Auto Commit ####################################################
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+
     - name: Auto-Commit
       continue-on-error: true
       id: auto_commmit
