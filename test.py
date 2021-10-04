@@ -26,8 +26,7 @@ def pd_random(ncols=7, nrows=100):
 
 
 def pd_generate_data(ncols=7, nrows=100):
-    """
-    Generate sample data for function testing
+    """ Generate sample data for function testing
     categorical features for anova test
     """
     np.random.seed(444) 

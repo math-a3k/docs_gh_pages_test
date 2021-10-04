@@ -3,7 +3,6 @@ HELP = """
 
 # should be used in a web run env as jupyter notebook to see the actual map. 
 
-
 # remember, you can't re-render folium map, if you have already plotted map
 # you can't add json to it, https://github.com/python-visualization/folium/issues/906 
 
@@ -33,12 +32,6 @@ def help():
     ss += HELP
     print(ss)
           
-
-
-# to kevin, runing tests requires these classes to be defined first, thus they are defined before tests
-
-
-
 
 
 ################################################################################
@@ -181,6 +174,9 @@ def plot_choropleth_webmap():
 
 def plot_heatWebMap():
     pass
+
+
+
 
 class HTMLDoc(object):
     def __init__(self,title:str='index.html') -> None:
@@ -329,10 +325,15 @@ class HTMLDoc(object):
         with open(path,'w') as f:
             f.write(htmlDoc)
 
+
     def browse(self):
         import webbrowser as wb  # this is a built-in module
         browsed_file = f"file:///{self.out_url}"
         wb.open(browsed_file, new=0) # cannot control fully the behavior of the browser, see:https://stackoverflow.com/questions/1997327/python-webbrowser-open-setting-new-0-to-open-in-the-same-browser-window-does
+
+
+
+# from utilmy.viz.vizhtml import HTMLDoc
 
 class webMap():
     def __init__(self,title:str='map.html') -> None:
@@ -461,7 +462,8 @@ class webMap():
     """.format(topojson_path=topojson_path)
         self.map_js+=topojson_js        
         self.load_document(rewrite=True)
-        
+
+
 # ###################################################################################################
 if __name__ == "__main__":
     import fire

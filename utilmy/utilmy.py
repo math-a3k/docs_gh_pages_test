@@ -4,7 +4,7 @@ HELP= """
 
 
 """
-import os, sys, time, datetime,inspect, json, yaml, gc
+import os, sys, time, datetime,inspect, json, yaml, gc, random
 
 def log(*s):
     print(*s, flush=True)
@@ -57,6 +57,54 @@ def help_create(modulename='utilmy.nnumpy', prefixs=None):
         fun = import_function(fname, modulename)
         ss += help_get_codesource(fun)
     return ss
+
+
+def pd_random(ncols=7, nrows=100):
+   import pandas as pd
+   ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+   df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
+   return df
+
+
+def pd_generate_data(ncols=7, nrows=100):
+    """ Generate sample data for function testing
+    categorical features for anova test
+    """
+    import numpy as np, pandas as pd
+    np.random.seed(444)
+    numerical    = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+    df = pd.DataFrame(numerical, columns = [str(i) for i in range(0,ncols)])
+    df['cat1']= np.random.choice(  a=[0, 1],  size=100,  p=[0.7, 0.3]  )
+    df['cat2']= np.random.choice(  a=[4, 5, 6],  size=100,  p=[0.5, 0.3, 0.2]  )
+    df['cat1']= np.where( df['cat1'] == 4,'low',np.where(df['cat1'] == 5, 'High','V.High'))
+    return df
+
+
+def pd_getdata(verbose=True):
+    """data = test_get_data()
+    df   = data['housing.csv']
+    df.head(3)
+    https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data
+    """
+    import pandas as pd
+    flist = [
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/titanic.csv',
+        'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
+        'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/stock_data.csv',
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/cars.csv',
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/sales.csv',
+        'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/weatherdata.csv'
+    ]
+    data = {}
+    for url in flist :
+       fname =  url.split("/")[-1]
+       print( "\n", "\n", url, )
+       df = pd.read_csv(url)
+       data[fname] = df
+       if verbose: print(df)
+       # df.to_csv(fname , index=False)
+    print(data.keys() )
+    return data
 
 
 
