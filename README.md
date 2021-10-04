@@ -4,8 +4,6 @@
 [     https://pypi.org/project/utilmy/#history ](https://pypi.org/project/utilmy/#history)
 
 
-
-
 # myutil
 One liner utilities
 
@@ -43,14 +41,8 @@ One liner utilities
 
 
 # Usage
- ```
- #### Generate automatic docs/stats
- docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
  
- docs all      --repo_dir yourpath  --out_dir docs/ 
- 
- 
- 
+ https://colab.research.google.com/drive/12rpbgH3WYcQq3jtl9vzEYeVdu9a9GOM_
  
 https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=Rrho08zYe6Gj
 
@@ -59,7 +51,6 @@ https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scroll
 
 
  
- ```
  
 
 # Misc
@@ -104,4 +95,16 @@ BENCHMARKS_REQUIRE = [
     "torch==1.6.0",
     "transformers==3.0.2",
 ]
+
+
+
+ #### Generate automatic docs/stats
+ docs markdown --repo_url  https://github.com/arita37/spacefusion.git   --out_dir docs/
+ 
+ docs all      --repo_dir yourpath  --out_dir docs/ 
+ 
+ 
+ 
+ 
+ 
 ```
