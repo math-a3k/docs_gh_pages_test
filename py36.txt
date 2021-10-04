@@ -1,4 +1,5 @@
 fire
+python-box
 numpy
 pandas
 pyinstrument  ### code profile
@@ -16,9 +17,7 @@ editdistance
 ########################################################
 #### utilmy.viz.html
 tqdm
-python-box
 matplotlib
-python-highcharts
 python-highcharts  
 mpld3
 geopandas 
@@ -26,7 +25,6 @@ fiona
 pyproj
 rtree
 shapely
-pandas-highcharts
 pretty-html-table
 networkx
 pyvis
