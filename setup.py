@@ -22,7 +22,7 @@ print("version", version)
 ##### Requirements ###################################################################
 #with open('install/reqs_image.txt') as fp:
 #    install_requires = fp.read()
-install_requires = ['pyyaml', 'stdlib_list']
+install_requires = ['pyyaml', 'stdlib_list', 'python-box' ]
 
 
 
