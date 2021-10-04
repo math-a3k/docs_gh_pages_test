@@ -4,8 +4,6 @@
 [     https://pypi.org/project/utilmy/#history ](https://pypi.org/project/utilmy/#history)
 
 
-
-
 # myutil
 One liner utilities
 
@@ -43,8 +41,6 @@ One liner utilities
 
 
 # Usage
- ```
-
  
  https://colab.research.google.com/drive/12rpbgH3WYcQq3jtl9vzEYeVdu9a9GOM_
  
@@ -55,7 +51,6 @@ https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scroll
 
 
  
- ```
  
 
 # Misc
