@@ -73,17 +73,20 @@ Repo: ./
 | <a name='utilmy/util_default.py' href='.//utilmy/util_default.py'>utilmy/util_default.py</a> | function | <a href='.//utilmy/util_default.py#L164'>to_file</a> | open<br>fp.write<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L34'>import_function</a> | isinstance<br>importlib.import_module<br>getattr<br>globals<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L46'>help_create</a> | importlib.import_module<br>dir<br>import_function<br>help_get_codesource<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L214'>git_repo_root</a> | os_system<br>mout.split<br>len<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L224'>git_current_hash</a> | subprocess.check_output<br>label.decode<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L304'>save</a> | os.makedirs<br>pickle.dump<br>open<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L311'>load</a> | pickle.load<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | class | <a href='.//utilmy/utilmy.py#L236'>Session</a> |  |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L242'>Session:__init__</a> | os.makedirs<br>print<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L248'>Session:show</a> | glob.glob<br>print<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L253'>Session:save</a> | os.makedirs<br>self.save_session<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L259'>Session:load</a> | print<br>self.load_session<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L266'>Session:save_session</a> | os.makedirs<br>globs.items<br>x.startswith<br>str<br>pd.to_pickle<br>save<br>print<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L289'>Session:load_session</a> | print<br>os.walk<br>x.replace<br>load<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L62'>pd_random</a> | random.random<br>range<br>pd.DataFrame<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L69'>pd_generate_data</a> | random.random<br>range<br>pd.DataFrame<br>np.where<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L83'>pd_getdata</a> | url.split<br>print<br>pd.read_csv<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L262'>git_repo_root</a> | os_system<br>mout.split<br>len<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L272'>git_current_hash</a> | subprocess.check_output<br>label.decode<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L352'>save</a> | os.makedirs<br>pickle.dump<br>open<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L359'>load</a> | pickle.load<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | class | <a href='.//utilmy/utilmy.py#L284'>Session</a> |  |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L290'>Session:__init__</a> | os.makedirs<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L296'>Session:show</a> | glob.glob<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L301'>Session:save</a> | os.makedirs<br>self.save_session<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L307'>Session:load</a> | print<br>self.load_session<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L314'>Session:save_session</a> | os.makedirs<br>globs.items<br>x.startswith<br>str<br>pd.to_pickle<br>save<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L337'>Session:load_session</a> | print<br>os.walk<br>x.replace<br>load<br> |
 | <a name='utilmy/adatasets.py' href='.//utilmy/adatasets.py'>utilmy/adatasets.py</a> | function | <a href='.//utilmy/adatasets.py#L13'>log</a> | print<br>log2<br> |
 | <a name='utilmy/adatasets.py' href='.//utilmy/adatasets.py'>utilmy/adatasets.py</a> | function | <a href='.//utilmy/adatasets.py#L16'>log2</a> | print<br> |
 | <a name='utilmy/adatasets.py' href='.//utilmy/adatasets.py'>utilmy/adatasets.py</a> | function | <a href='.//utilmy/adatasets.py#L21'>dataset_classifier_XXXXX</a> |  |

@@ -69,17 +69,20 @@ utilmy/util_default.py:os_extract_archive,os_extract_archive,function,19,63,47,6
 utilmy/util_default.py:to_file,to_file,function,3,7,7,51,7.29,0,0,"['s', 'filep']","[None, None]","[None, None]",164,[],"['open', 'fp.write']",2
 utilmy/utilmy.py:import_function,import_function,function,9,16,14,164,10.25,0,1,"['fun_name', 'module_name']","[None, None]","['None', 'None']",34,[],"['isinstance', 'importlib.import_module', 'getattr', 'globals']",4
 utilmy/utilmy.py:help_create,help_create,function,16,34,25,218,6.41,2,1,"['modulename', 'prefixs']","[None, None]","[""'utilmy.nnumpy'"", 'None']",46,"['    """"""\n', '       Extract code source from test code\n', '    """"""\n']","['importlib.import_module', 'dir', 'import_function', 'help_get_codesource']",4
-utilmy/utilmy.py:git_repo_root,git_repo_root,function,7,23,19,142,6.17,0,1,[],[],[],214,[],"['os_system', 'mout.split', 'len']",3
-utilmy/utilmy.py:git_current_hash,git_current_hash,function,6,12,10,123,10.25,0,0,['mode'],[None],"[""'full'""]",224,[],"['subprocess.check_output', 'label.decode']",2
-utilmy/utilmy.py:save,save,function,5,10,10,140,14.0,0,0,"['dd', 'to_file', 'verbose']","[None, None, None]","[None, '""""', 'False']",304,[],"['os.makedirs', 'pickle.dump', 'open']",3
-utilmy/utilmy.py:load,load,function,5,7,6,61,8.71,0,0,['to_file'],[None],"['""""']",311,[],['pickle.load'],1
-utilmy/utilmy.py:Session,Session,class,42,178,114,1402,7.88,3,2,[],[],[],236,[],[],0
-utilmy/utilmy.py:Session:__init__,Session:__init__,method,5,7,7,113,16.14,0,0,"['self', 'dir_session', '']","[None, None, None]","[None, '""ztmp/session/""', None]",242,[],"['os.makedirs', 'print']",2
-utilmy/utilmy.py:Session:show,Session:show,method,5,7,7,62,8.86,0,0,['self'],[None],[None],248,[],"['glob.glob', 'print']",2
-utilmy/utilmy.py:Session:save,Session:save,method,4,8,8,146,18.25,0,0,"['self', 'name', 'glob', 'tag']","[None, None, None, None]","[None, None, 'None', '""""']",253,[],"['os.makedirs', 'self.save_session']",2
-utilmy/utilmy.py:Session:load,Session:load,method,4,9,9,126,14.0,0,0,"['self', 'name', 'glob', 'tag']","[None, None, 'dict', None]","[None, None, 'None', '""""']",259,[],"['print', 'self.load_session']",2
-utilmy/utilmy.py:Session:save_session,Session:save_session,method,19,82,58,516,6.29,1,2,"['self', 'folder', 'globs', 'tag']","[None, None, None, None]","[None, None, None, '""""']",266,[],"['os.makedirs', 'globs.items', 'x.startswith', 'str', 'pd.to_pickle', 'save', 'print']",7
-utilmy/utilmy.py:Session:load_session,Session:load_session,method,11,33,28,208,6.3,2,0,"['self', 'folder', 'globs']","[None, None, None]","[None, None, 'None']",289,"['      """"""\n', '      """"""\n']","['print', 'os.walk', 'x.replace', 'load']",4
+utilmy/utilmy.py:pd_random,pd_random,function,8,28,21,145,5.18,0,0,"['ncols', 'nrows']","[None, None]","['7', '100']",62,[],"['random.random', 'range', 'pd.DataFrame']",3
+utilmy/utilmy.py:pd_generate_data,pd_generate_data,function,15,56,43,392,7.0,0,0,"['ncols', 'nrows']","[None, None]","['7', '100']",69,"['    """""" Generate sample data for function testing\n', '    categorical features for anova test\n', '    """"""\n']","['random.random', 'range', 'pd.DataFrame', 'np.where']",4
+utilmy/utilmy.py:pd_getdata,pd_getdata,function,14,38,34,669,17.61,1,1,['verbose'],[None],['True'],83,"['    """"""data = test_get_data()\n', ""    df   = data['housing.csv']\n"", '    df.head(3)\n', '    https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data\n', '    """"""\n']","['url.split', 'print', 'pd.read_csv']",3
+utilmy/utilmy.py:git_repo_root,git_repo_root,function,7,23,19,142,6.17,0,1,[],[],[],262,[],"['os_system', 'mout.split', 'len']",3
+utilmy/utilmy.py:git_current_hash,git_current_hash,function,6,12,10,123,10.25,0,0,['mode'],[None],"[""'full'""]",272,[],"['subprocess.check_output', 'label.decode']",2
+utilmy/utilmy.py:save,save,function,5,10,10,140,14.0,0,0,"['dd', 'to_file', 'verbose']","[None, None, None]","[None, '""""', 'False']",352,[],"['os.makedirs', 'pickle.dump', 'open']",3
+utilmy/utilmy.py:load,load,function,5,7,6,61,8.71,0,0,['to_file'],[None],"['""""']",359,[],['pickle.load'],1
+utilmy/utilmy.py:Session,Session,class,42,178,114,1402,7.88,3,2,[],[],[],284,[],[],0
+utilmy/utilmy.py:Session:__init__,Session:__init__,method,5,7,7,113,16.14,0,0,"['self', 'dir_session', '']","[None, None, None]","[None, '""ztmp/session/""', None]",290,[],"['os.makedirs', 'print']",2
+utilmy/utilmy.py:Session:show,Session:show,method,5,7,7,62,8.86,0,0,['self'],[None],[None],296,[],"['glob.glob', 'print']",2
+utilmy/utilmy.py:Session:save,Session:save,method,4,8,8,146,18.25,0,0,"['self', 'name', 'glob', 'tag']","[None, None, None, None]","[None, None, 'None', '""""']",301,[],"['os.makedirs', 'self.save_session']",2
+utilmy/utilmy.py:Session:load,Session:load,method,4,9,9,126,14.0,0,0,"['self', 'name', 'glob', 'tag']","[None, None, 'dict', None]","[None, None, 'None', '""""']",307,[],"['print', 'self.load_session']",2
+utilmy/utilmy.py:Session:save_session,Session:save_session,method,19,82,58,516,6.29,1,2,"['self', 'folder', 'globs', 'tag']","[None, None, None, None]","[None, None, None, '""""']",314,[],"['os.makedirs', 'globs.items', 'x.startswith', 'str', 'pd.to_pickle', 'save', 'print']",7
+utilmy/utilmy.py:Session:load_session,Session:load_session,method,11,33,28,208,6.3,2,0,"['self', 'folder', 'globs']","[None, None, None]","[None, None, 'None']",337,"['      """"""\n', '      """"""\n']","['print', 'os.walk', 'x.replace', 'load']",4
 utilmy/adatasets.py:log,log,function,3,11,7,84,7.64,0,2,['*s'],[None],[None],13,[],"['print', 'log2']",2
 utilmy/adatasets.py:log2,log2,function,2,5,5,35,7.0,0,1,['*s'],[None],[None],16,[],['print'],1
 utilmy/adatasets.py:dataset_classifier_XXXXX,dataset_classifier_XXXXX,function,10,22,19,118,5.36,0,0,"['nrows', '**kw']","[None, None]","['500', None]",21,"['    """"""\n', '\n', '    """"""\n']",[],0

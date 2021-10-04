@@ -93,6 +93,9 @@ utilmy/utilmy.py
 -------------------------functions----------------------
 import_function(fun_name = None, module_name = None)
 help_create(modulename = 'utilmy.nnumpy', prefixs = None)
+pd_random(ncols = 7, nrows = 100)
+pd_generate_data(ncols = 7, nrows = 100)
+pd_getdata(verbose = True)
 git_repo_root()
 git_current_hash(mode = 'full')
 save(dd, to_file = "", verbose = False)
