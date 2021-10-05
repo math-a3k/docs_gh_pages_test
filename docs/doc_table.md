@@ -408,6 +408,8 @@ Repo: ./
 | <a name='utilmy/images.py' href='.//utilmy/images.py'>utilmy/images.py</a> | function | <a href='.//utilmy/images.py#L24'>read_image</a> | isinstance<br>hasattr<br>np.asarray<br>cv2.imdecode<br>validators.url<br>read<br>filepath_or_buffer.endswith<br>tifffile.imread<br>cv2.imread<br>cv2.cvtColor<br> |
 | <a name='utilmy/images.py' href='.//utilmy/images.py'>utilmy/images.py</a> | function | <a href='.//utilmy/images.py#L53'>visualize_in_row</a> | len<br>plt.figure<br>enumerate<br>plt.subplot<br>plt.xticks<br>plt.yticks<br>plt.title<br>plt.imshow<br>plt.show<br> |
 | <a name='utilmy/images.py' href='.//utilmy/images.py'>utilmy/images.py</a> | function | <a href='.//utilmy/images.py#L68'>maintain_aspect_ratio_resize</a> | float<br>int<br>cv2.resize<br> |
+| <a name='utilmy/data.py' href='.//utilmy/data.py'>utilmy/data.py</a> | function | <a href='.//utilmy/data.py#L21'>log</a> | print<br> |
+| <a name='utilmy/data.py' href='.//utilmy/data.py'>utilmy/data.py</a> | function | <a href='.//utilmy/data.py#L25'>help</a> | print<br> |
 | <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L12'>log</a> | print<br> |
 | <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L18'>y_adjustment</a> | adjuter_log<br>cost_func<br>error_func<br>RuntimeError<br> |
 | <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L41'>test_anova</a> | edu_frame.groupby<br>groups.keys<br>globals<br>lg.append<br>dfd=len<br>print<br>stats.f_oneway<br>dfn=len<br> |
