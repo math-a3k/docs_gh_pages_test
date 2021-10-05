@@ -219,7 +219,7 @@ def pd_dtype_count_unique(df, col_continuous=[]):
     def gef_is_continuous(data, dtype):
         """ Returns true if data was sampled from a continuous variables, and false
         """
-        if dtype == "Object":
+        if str(dtype) == "object":
             return False
 
         observed = data[~np.isnan(data)]  # not consider missing values for this.
