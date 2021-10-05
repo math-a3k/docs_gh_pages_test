@@ -79,10 +79,53 @@ def test_utilmy():
 #########################################################################################
 def test_ppandas():
     from utilmy import ppandas as m
+    from utilmy import os_makedirs
+    os_makedirs("save_files")
 
-    df = pd_random(7, 100)
 
-    m.pd_plot_multi(df, cols_axe1=['0', '1'])
+    df1 = pd_random(100)
+    df2 = pd_random(100)
+    df3 = pd.DataFrame({"a":[1,1,2,2,2]})
+    df_str = pd.DataFrame({"a": ["A", "B", "B", "C", "C"],
+                        "b": [1, 2, 3, 4, 5]})
+
+
+    m.pd_plot_histogram(df1["a"],path_save="save_files/histogram")
+
+    f = os.path.exists(os.path.abspath("save_files/histogram.png"))
+    assert f == True, "save_files/histogram.png"
+
+    m.pd_merge(df1, df2, on="b")
+
+    df = m.pd_filter(df3, filter_dict="a>1")
+    assert df.shape[0] == 3, "not filtered properly"
+
+    m.pd_to_file(df1, "save_files/file.csv")
+    m.pd_sample_strat(df1, col="a", n=10)
+
+    bins = m.pd_col_bins(df1, "a", 5)
+    assert len(np.unique(bins)) == 5, "bins not formed"
+
+    m.pd_dtype_reduce(df1)
+    m.pd_dtype_count_unique(df1)
+
+    df = m.pd_dtype_to_category(df_str, col_exclude=["b"], treshold=0.7)
+    assert df.dtypes["a"] == "category", "Columns was not converted to category"
+
+    m.pd_dtype_getcontinuous(df_str,cols_exclude=["a"])
+    m.pd_add_noise(df1,level=0.01,cols_exclude=["a"])
+
+    m.pd_cols_unique_count(df_str)
+    m.pd_del(df_str,cols=["a"])
+
+    # ax = m.pd_plot_multi(df1,plot_type='pair',cols_axe1=['a','b'])
+    
+    # a = pd.DataFrame({"a":[1,2,3,4,5]})
+    # b = pd.DataFrame({"b":[1,2,3,4,5]})
+    # cartesian_df = m.pd_cartesian(a,b)
+
+    m.pd_show(df_str)
+
 
 
 
