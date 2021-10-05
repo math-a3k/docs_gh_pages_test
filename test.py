@@ -124,7 +124,7 @@ def test_ppandas():
     # b = pd.DataFrame({"b":[1,2,3,4,5]})
     # cartesian_df = m.pd_cartesian(a,b)
 
-    m.pd_show(df_str)
+    # m.pd_show(df_str)
 
 
 
