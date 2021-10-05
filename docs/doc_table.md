@@ -101,50 +101,51 @@ Repo: ./
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L10'>log</a> | print<br>log2<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L13'>log2</a> | print<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L16'>help</a> | print<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L29'>to_dict</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L34'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L42'>to_datetime</a> | pd.to_datetime<br>str<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L47'>np_list_intersection</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L51'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L60'>to_float</a> | float<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L67'>to_int</a> | int<br>float<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L74'>is_int</a> | int<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L81'>is_float</a> | float<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L95'>os_path_size</a> | os.walk<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L108'>os_path_split</a> | fpath.replace<br>fpath.split<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L125'>os_file_replacestring</a> | os_file_replacestring1<br>fileinput.FileInput<br>line.replace<br>file1.close<br>print<br>format<br>os_walk<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L147'>os_walk</a> | path.replace<br>dir1.count<br>os.walk<br>root.replace<br>root.count<br>fnmatch.filter<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L173'>os_copy_safe</a> | range<br>glob.glob<br>len<br>log<br>fi.replace<br>time.sleep<br>os.makedirs<br>shutil.copy<br>os.system<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L210'>z_os_search_fast</a> | re.compile<br>enumerate<br>re.search<br>line.decode<br>res.append<br>found.start<br>text.encode<br>line.find<br>print<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L254'>os_search_content</a> | os_walk<br>z_os_search_fast<br>pd.DataFrame<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L270'>os_get_function_name</a> | str<br>socket.gethostname<br>sys._getframe<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L283'>os_variable_init</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L291'>os_import</a> | __import__<br>hasattr<br>dir<br>name.startswith<br>all_names2.append<br>print<br>globs.update<br>getattr<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L318'>os_variable_exist</a> | str<br>log<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L328'>os_variable_check</a> | Exception<br>log<br>sys.exit<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L340'>os_clean_memory</a> | gc.collect<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L348'>os_system_list</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L370'>os_file_check</a> | log<br>os.stat<br>time.ctime<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L378'>os_to_file</a> | open<br>fp.write<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L383'>os_platform_os</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L388'>os_cpu</a> | os.cpu_count<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L393'>os_platform_ip</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L398'>os_memory</a> | open<br>i.split<br>str<br>int<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L415'>os_sleep_cpu</a> | psutil.cpu_percent<br>log<br>time.sleep<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L427'>os_sizeof</a> | id<br>getsizeof<br>ids.add<br>isinstance<br>sum<br>d<br>o.items<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L458'>os_copy</a> | range<br>glob.glob<br>len<br>log<br>fi.replace<br>time.sleep<br>os.makedirs<br>shutil.copy<br>os.system<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L470'>os_removedirs</a> | len<br>print<br>os.walk<br>os.remove<br>os.rmdir<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L497'>os_getcwd</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L503'>os_system</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L520'>os_makedirs</a> | dir_or_file.split<br>os.makedirs<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L531'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L550'>log10</a> | print<br>type<br>str<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L559'>log5</a> | ic<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L570'>log_trace</a> | print<br>pdb.set_trace<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L576'>profiler_start</a> | Profiler<br>profiler.start<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L584'>profiler_stop</a> | profiler.stop<br>print<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | class | <a href='.//utilmy/oos.py#L23'>dict_to_namespace</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | method | <a href='.//utilmy/oos.py#L25'>dict_to_namespace:__init__</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L22'>test</a> | os_makedirs<br>os.system<br>os_removedirs<br>os_system<br>log<br>os_platform_os<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L59'>to_dict</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L64'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L72'>to_datetime</a> | pd.to_datetime<br>str<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L77'>np_list_intersection</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L81'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L90'>to_float</a> | float<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L97'>to_int</a> | int<br>float<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L104'>is_int</a> | int<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L111'>is_float</a> | float<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L125'>os_path_size</a> | os.walk<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L138'>os_path_split</a> | fpath.replace<br>fpath.split<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L155'>os_file_replacestring</a> | os_file_replacestring1<br>fileinput.FileInput<br>line.replace<br>file1.close<br>print<br>format<br>os_walk<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L177'>os_walk</a> | path.replace<br>dir1.count<br>os.walk<br>root.replace<br>root.count<br>fnmatch.filter<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L203'>os_copy_safe</a> | range<br>glob.glob<br>len<br>log<br>fi.replace<br>time.sleep<br>os.makedirs<br>shutil.copy<br>os.system<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L240'>z_os_search_fast</a> | re.compile<br>enumerate<br>re.search<br>line.decode<br>res.append<br>found.start<br>text.encode<br>line.find<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L284'>os_search_content</a> | os_walk<br>z_os_search_fast<br>pd.DataFrame<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L300'>os_get_function_name</a> | str<br>socket.gethostname<br>sys._getframe<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L313'>os_variable_init</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L321'>os_import</a> | __import__<br>hasattr<br>dir<br>name.startswith<br>all_names2.append<br>print<br>globs.update<br>getattr<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L348'>os_variable_exist</a> | str<br>log<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L358'>os_variable_check</a> | Exception<br>log<br>sys.exit<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L370'>os_clean_memory</a> | gc.collect<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L378'>os_system_list</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L400'>os_file_check</a> | log<br>os.stat<br>time.ctime<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L408'>os_to_file</a> | open<br>fp.write<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L413'>os_platform_os</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L418'>os_cpu</a> | os.cpu_count<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L423'>os_platform_ip</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L428'>os_memory</a> | open<br>i.split<br>str<br>int<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L445'>os_sleep_cpu</a> | psutil.cpu_percent<br>log<br>time.sleep<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L457'>os_sizeof</a> | id<br>getsizeof<br>ids.add<br>isinstance<br>sum<br>d<br>o.items<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L488'>os_copy</a> | range<br>glob.glob<br>len<br>log<br>fi.replace<br>time.sleep<br>os.makedirs<br>shutil.copy<br>os.system<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L500'>os_removedirs</a> | len<br>print<br>os.walk<br>os.remove<br>os.rmdir<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L527'>os_getcwd</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L533'>os_system</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L550'>os_makedirs</a> | dir_or_file.split<br>os.makedirs<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L561'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L580'>log10</a> | print<br>type<br>str<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L589'>log5</a> | ic<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L600'>log_trace</a> | print<br>pdb.set_trace<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L606'>profiler_start</a> | Profiler<br>profiler.start<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L614'>profiler_stop</a> | profiler.stop<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | class | <a href='.//utilmy/oos.py#L53'>dict_to_namespace</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | method | <a href='.//utilmy/oos.py#L55'>dict_to_namespace:__init__</a> |  |
 | <a name='utilmy/distributed.py' href='.//utilmy/distributed.py'>utilmy/distributed.py</a> | function | <a href='.//utilmy/distributed.py#L16'>log2</a> | print<br> |
 | <a name='utilmy/distributed.py' href='.//utilmy/distributed.py'>utilmy/distributed.py</a> | function | <a href='.//utilmy/distributed.py#L20'>log_mem</a> | log2<br>str<br> |
 | <a name='utilmy/distributed.py' href='.//utilmy/distributed.py'>utilmy/distributed.py</a> | function | <a href='.//utilmy/distributed.py#L33'>test1_functions</a> | running<br>print<br>os_lock_execute<br> |
@@ -218,28 +219,28 @@ Repo: ./
 | <a name='utilmy/data.py' href='.//utilmy/data.py'>utilmy/data.py</a> | function | <a href='.//utilmy/data.py#L25'>help</a> | print<br> |
 | <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L12'>log</a> | print<br> |
 | <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L18'>y_adjustment</a> | adjuter_log<br>cost_func<br>error_func<br>RuntimeError<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L41'>test_anova</a> | edu_frame.groupby<br>groups.keys<br>globals<br>lg.append<br>dfd=len<br>print<br>stats.f_oneway<br>dfn=len<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L70'>test_normality2</a> | shapiro<br>print<br>normaltest<br>anderson<br>range<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L117'>test_plot_qqplot</a> | plt.subplots<br>fig.suptitle<br>sns.boxplot<br>sns.histplot<br>sm.qqplot<br>print<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L134'>test_heteroscedacity</a> | Linear<br>pd.DataFrame<br>len<br>het_breuschpagan<br>het_white<br>dict<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L155'>test_normality</a> | shapiro<br>print<br>normaltest<br>anderson<br>range<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L180'>test_mutualinfo</a> | pd.DataFrame<br>pd_colnum_tocat<br>mutual_info_classif<br>dict<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L196'>test_hypothesis</a> | print<br>ChiSquareContingency<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L215'>estimator_std_normal</a> | len<br>np.var<br>np.sqrt<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L227'>estimator_boostrap_bayes</a> | bayes_mvs<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L233'>estimator_bootstrap</a> | bs.bootstrap<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L248'>pd_train_test_split_time</a> | list<br>df.sort_values<br>log<br>df.groupby<br>len<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L262'>pd_to_scipy_sparse_matrix</a> | lil_matrix<br>enumerate<br>arr.tocsr<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L278'>pd_stat_correl_pair</a> | list<br>target_corr.append<br>pd.DataFrame<br>len<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L299'>pd_stat_pandas_profile</a> | print<br>df.profile_report<br>profile.to_file<br>profile.get_rejected_variables<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L311'>pd_stat_distribution_colnum</a> | df.sample<br>getstat<br>str<br>len<br>pd.DataFrame<br>pd.concat<br>print<br>np.arange<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L351'>pd_stat_histogram</a> | np.histogram<br>pd.DataFrame<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L366'>np_col_extractname</a> | len<br>colnew.append<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L389'>np_list_remove</a> | cols.remove<br>cols3.append<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L414'>pd_stat_shift_trend_changes</a> | target_diffs.fillna<br>target_diffs.divide<br>target_diffs_norm.diff<br>target_diffs_lvl2.fillna<br>int<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L438'>pd_stat_shift_trend_correlation</a> | df.merge<br>pd.isnull<br>len<br>np.corrcoef<br>print<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L469'>pd_stat_shift_changes</a> | type<br>list<br>features_list.remove<br>ignored.append<br>pd_colnum_tocat_stat<br>pd_stat_shift_trend_correlation<br>pd_stat_shift_changes<br>stats_all.append<br>pd.DataFrame<br>len<br>print<br>str<br> |
-| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L514'>np_conv_to_one_col</a> | row2string<br>sep_char.join<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L42'>test_anova</a> | edu_frame.groupby<br>groups.keys<br>globals<br>lg.append<br>dfd=len<br>print<br>stats.f_oneway<br>dfn=len<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L71'>test_normality2</a> | shapiro<br>print<br>normaltest<br>anderson<br>range<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L118'>test_plot_qqplot</a> | plt.subplots<br>fig.suptitle<br>sns.boxplot<br>sns.histplot<br>sm.qqplot<br>print<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L135'>test_heteroscedacity</a> | Linear<br>pd.DataFrame<br>len<br>het_breuschpagan<br>het_white<br>dict<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L156'>test_normality</a> | shapiro<br>print<br>normaltest<br>anderson<br>range<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L181'>test_mutualinfo</a> | pd.DataFrame<br>pd_colnum_tocat<br>mutual_info_classif<br>dict<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L197'>test_hypothesis</a> | print<br>ChiSquareContingency<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L216'>estimator_std_normal</a> | len<br>np.var<br>np.sqrt<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L228'>estimator_boostrap_bayes</a> | bayes_mvs<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L234'>estimator_bootstrap</a> | bs.bootstrap<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L249'>pd_train_test_split_time</a> | list<br>df.sort_values<br>log<br>df.groupby<br>len<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L263'>pd_to_scipy_sparse_matrix</a> | lil_matrix<br>enumerate<br>arr.tocsr<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L279'>pd_stat_correl_pair</a> | list<br>target_corr.append<br>pd.DataFrame<br>len<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L300'>pd_stat_pandas_profile</a> | print<br>df.profile_report<br>profile.to_file<br>profile.get_rejected_variables<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L312'>pd_stat_distribution_colnum</a> | df.sample<br>getstat<br>str<br>len<br>pd.DataFrame<br>pd.concat<br>print<br>np.arange<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L352'>pd_stat_histogram</a> | np.histogram<br>pd.DataFrame<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L367'>np_col_extractname</a> | len<br>colnew.append<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L390'>np_list_remove</a> | cols.remove<br>cols3.append<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L415'>pd_stat_shift_trend_changes</a> | target_diffs.fillna<br>target_diffs.divide<br>target_diffs_norm.diff<br>target_diffs_lvl2.fillna<br>int<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L439'>pd_stat_shift_trend_correlation</a> | df.merge<br>pd.isnull<br>len<br>np.corrcoef<br>print<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L470'>pd_stat_shift_changes</a> | type<br>list<br>features_list.remove<br>ignored.append<br>pd_colnum_tocat_stat<br>pd_stat_shift_trend_correlation<br>pd_stat_shift_changes<br>stats_all.append<br>pd.DataFrame<br>len<br>print<br>str<br> |
+| <a name='utilmy/tabular.py' href='.//utilmy/tabular.py'>utilmy/tabular.py</a> | function | <a href='.//utilmy/tabular.py#L515'>np_conv_to_one_col</a> | row2string<br>sep_char.join<br> |
 | <a name='utilmy/debug.py' href='.//utilmy/debug.py'>utilmy/debug.py</a> | function | <a href='.//utilmy/debug.py#L18'>log</a> | print<br> |
 | <a name='utilmy/debug.py' href='.//utilmy/debug.py'>utilmy/debug.py</a> | function | <a href='.//utilmy/debug.py#L22'>help</a> | print<br> |
 | <a name='utilmy/debug.py' href='.//utilmy/debug.py'>utilmy/debug.py</a> | function | <a href='.//utilmy/debug.py#L29'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
