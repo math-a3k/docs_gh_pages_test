@@ -23,22 +23,22 @@ uri, type, function, detail
 ./test.py:pd_random, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
 ./test.py:test_utilmy_plot, function, pd_random, pd_random
 ./test.py:test_utilmy_plot, function, pd_plot_multi, pd_plot_multi
-./test.py:test_utilmy_pd_os_session, function, random.random, [CLASS] [STDLIB]: random:random
-./test.py:test_utilmy_pd_os_session, function, range, [built-In]:range
-./test.py:test_utilmy_pd_os_session, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
-./test.py:test_utilmy_pd_os_session, function, len, [built-In]:len
-./test.py:test_utilmy_pd_os_session, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
-./test.py:test_utilmy_pd_os_session, function, df.to_csv, [CLASS] [SIDE PACKAGE]: df:to_csv
-./test.py:test_utilmy_pd_os_session, function, pd_read_file, pd_read_file
-./test.py:test_utilmy_pd_os_session, function, round, [built-In]:round
-./test.py:test_utilmy_pd_os_session, function, print, [built-In]:print
-./test.py:test_utilmy_pd_os_session, function, git_repo_root, git_repo_root
-./test.py:test_utilmy_pd_os_session, function, os_makedirs, os_makedirs
-./test.py:test_utilmy_pd_os_session, function, os.system, [CLASS] [STDLIB]: os:system
-./test.py:test_utilmy_pd_os_session, function, os_removedirs, os_removedirs
-./test.py:test_utilmy_pd_os_session, function, os_system, os_system
-./test.py:test_utilmy_pd_os_session, function, os_platform_os, os_platform_os
-./test.py:test_utilmy_pd_os_session, function, global_verbosity, global_verbosity
+./test.py:test_utilmy, function, random.random, [CLASS] [STDLIB]: random:random
+./test.py:test_utilmy, function, range, [built-In]:range
+./test.py:test_utilmy, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame
+./test.py:test_utilmy, function, len, [built-In]:len
+./test.py:test_utilmy, function, os.makedirs, [CLASS] [STDLIB]: os:makedirs
+./test.py:test_utilmy, function, df.to_csv, [CLASS] [SIDE PACKAGE]: df:to_csv
+./test.py:test_utilmy, function, pd_read_file, pd_read_file
+./test.py:test_utilmy, function, round, [built-In]:round
+./test.py:test_utilmy, function, print, [built-In]:print
+./test.py:test_utilmy, function, git_repo_root, git_repo_root
+./test.py:test_utilmy, function, os_makedirs, os_makedirs
+./test.py:test_utilmy, function, os.system, [CLASS] [STDLIB]: os:system
+./test.py:test_utilmy, function, os_removedirs, os_removedirs
+./test.py:test_utilmy, function, os_system, os_system
+./test.py:test_utilmy, function, os_platform_os, os_platform_os
+./test.py:test_utilmy, function, global_verbosity, global_verbosity
 ./test.py:test_utilmy_session, function, Session, Session
 ./test.py:test_utilmy_session, function, sess.save, [CLASS] [SIDE PACKAGE]: sess:save
 ./test.py:test_utilmy_session, function, globals, [built-In]:globals
@@ -47,19 +47,19 @@ uri, type, function, detail
 ./test.py:test_utilmy_session, function, glob.glob, [CLASS] [STDLIB]: glob:glob
 ./test.py:test_utilmy_session, function, sess.load, [CLASS] [SIDE PACKAGE]: sess:load
 ./test.py:test_docs_cli, function, os.system, [CLASS] [STDLIB]: os:system
-./test.py:test_decorators_os, function, test_print, test_print
-./test.py:test_decorators_os, function, print, [built-In]:print
-./test.py:test_decorators_os, function, os_multithread, os_multithread
-./test.py:test_decorators_os, function, profiled_sum, profiled_sum
-./test.py:test_decorators_os, function, sum, [built-In]:sum
-./test.py:test_decorators_os, function, profiler_context, profiler_context
-./test.py:test_decorators_os, function, profiler_start, profiler_start
-./test.py:test_decorators_os, function, profiler_stop, profiler_stop
-./test.py:test_decorators_os, function, dummy_func, dummy_func
-./test.py:test_decorators_os, function, time.sleep, [CLASS] [STDLIB]: time:sleep
-./test.py:test_decorators_os, function, method, method
-./test.py:test_decorators_os, function, DummyClass, DummyClass
-./test.py:test_decorators_os, function, a.method, [CLASS] [SIDE PACKAGE]: a:method
+./test.py:test_decorators, function, test_print, test_print
+./test.py:test_decorators, function, print, [built-In]:print
+./test.py:test_decorators, function, os_multithread, os_multithread
+./test.py:test_decorators, function, profiled_sum, profiled_sum
+./test.py:test_decorators, function, sum, [built-In]:sum
+./test.py:test_decorators, function, profiler_context, profiler_context
+./test.py:test_decorators, function, profiler_start, profiler_start
+./test.py:test_decorators, function, profiler_stop, profiler_stop
+./test.py:test_decorators, function, dummy_func, dummy_func
+./test.py:test_decorators, function, time.sleep, [CLASS] [STDLIB]: time:sleep
+./test.py:test_decorators, function, method, method
+./test.py:test_decorators, function, DummyClass, DummyClass
+./test.py:test_decorators, function, a.method, [CLASS] [SIDE PACKAGE]: a:method
 ./test.py:pd_generate_data, function, random.random, [CLASS] [STDLIB]: random:random
 ./test.py:pd_generate_data, function, range, [built-In]:range
 ./test.py:pd_generate_data, function, pd.DataFrame, [CLASS] [SIDE PACKAGE]: pd:DataFrame

@@ -1,90 +1,42 @@
+# -*- coding: utf-8 -*-
 """
-    #### python test.py   test_all
-    #### python test.py   test_viz_vizhtml      
-      
-  
-    test_utilmy_pd_os_session()
-    test_decorators_os()
-    # test_tabular_test()
-    test_text_similarity()
-    test_docs_cli()
-      
-    test_viz_vizhtml()   
+python test.py   test_all
+python test.py   test_viz_vizhtml
+
+
+Rules to follow :
+   Put import only inside the function.
+
+   def  test_{pythonfilename.py}() :
+       from utilmy import parallel as m
+       Put all the test  below
+       n.myfun()
+
+
+
 
 """
 # -*- coding: utf-8 -*-
-import os, sys, time, datetime,inspect, random
-import pandas as pd, random, numpy as np
-from utilmy.oos import os_file_replacestring, os_import, os_search_content, os_walk, to_dict, to_float, to_timeunix
-from utilmy.ppandas import pd_cartesian, pd_merge, pd_sample_strat
+import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
 
-from utilmy.utils import logger_setup 
 
 def log(*s):
    print(*s, flush=True)
 
-def pd_random(ncols=7, nrows=100):
-   ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
-   df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
-   return df
 
-
-def pd_generate_data(ncols=7, nrows=100):
-    """ Generate sample data for function testing
-    categorical features for anova test
-    """
-    np.random.seed(444) 
-    numerical    = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
-    df = pd.DataFrame(numerical, columns = [str(i) for i in range(0,ncols)])
-    df['cat1']= np.random.choice(  a=[0, 1],  size=100,  p=[0.7, 0.3]  ) 
-    df['cat2']= np.random.choice(  a=[4, 5, 6],  size=100,  p=[0.5, 0.3, 0.2]  ) 
-    df['cat1']= np.where( df['cat1'] == 4,'low',np.where(df['cat1'] == 5, 'High','V.High'))
-    return df
+from utilmy import pd_random, pd_generate_data
 
 
 
 #########################################################################################
 #########################################################################################
-def test_utilmy_plot():
-    from utilmy import pd_plot_multi
-    df = pd_random(7, 100)  
-    pd_plot_multi(df, cols_axe1=['0', '1'])
-
-
-def test_utilmy_pd_os_session():
-   from utilmy import (pd_show, git_current_hash, )
+def test_utilmy():
 
    ###################################################################################
-   from utilmy import git_repo_root
+   from utilmy import git_repo_root, git_current_hash
    print(git_repo_root())
    assert not git_repo_root() == None, "err git repo"
 
-
-   ###################################################################################
-   from utilmy import os_makedirs, os_system, os_removedirs
-   os_makedirs('ztmp/ztmp2/myfile.txt')
-   os_makedirs('ztmp/ztmp3/ztmp4')
-   os_makedirs('/tmp/one/two')
-   os_makedirs('/tmp/myfile')
-   os_makedirs('/tmp/one/../mydir/')
-   os_makedirs('./tmp/test')
-   os.system("ls ztmp")
-
-   path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
-   for p in path:
-       f = os.path.exists(os.path.abspath(p))
-       assert  f == True, "path " + p
-
-   rev_stat = os_removedirs("ztmp/ztmp2")
-   assert not rev_stat == False, "cannot delete root folder"
-
-   res = os_system( f" ls . ",  doprint=True)
-   print(res)
-   res = os_system( f" ls . ",  doprint=False)
-
-   from utilmy import os_platform_os
-   assert os_platform_os() == sys.platform
-   
 
    ###################################################################################
    from utilmy import global_verbosity
@@ -98,15 +50,16 @@ def test_utilmy_pd_os_session():
    gverbosity =global_verbosity(__file__, "config.json", 40,)
    assert gverbosity == verbosity, "incorrect verbosity "
 
-   
-      
-def test_utilmy_session():   
+
+   ###################################################################################
    from utilmy import Session
    sess = Session("ztmp/session")
-   sess.save('mysess', globals(), '01')
-   os.system("ls ztmp/session")
 
-   sess.save('mysess', globals(), '02')
+   global mydf
+   mydf = pd_generate_data()
+
+   sess.save('mysess', glob=globals(), tag='01')
+   os.system("ls ztmp/session")
    sess.show()
 
    import glob
@@ -115,14 +68,55 @@ def test_utilmy_session():
        t = os.path.exists(os.path.abspath(f))
        assert  t == True, "session path not created "
 
-       pickle_created = os.path.exists(os.path.abspath(f + "/df.pkl"))
+       pickle_created = os.path.exists(os.path.abspath(f + "/mydf.pkl"))
        assert  pickle_created == True, "Pickle file not created"
 
    sess.load('mysess')
-   sess.load('mysess', None, '02')
+   sess.load('mysess', tag='01')
 
-   
 
+
+
+
+#########################################################################################
+def test_ppandas():
+    from utilmy import ppandas as m
+
+    df = pd_random(7, 100)
+
+    m.pd_plot_multi(df, cols_axe1=['0', '1'])
+
+
+def test_oos():
+    from utilmy import oos as m
+
+    from utilmy.oos import os_makedirs, os_system, os_removedirs
+    os_makedirs('ztmp/ztmp2/myfile.txt')
+    os_makedirs('ztmp/ztmp3/ztmp4')
+    os_makedirs('/tmp/one/two')
+    os_makedirs('/tmp/myfile')
+    os_makedirs('/tmp/one/../mydir/')
+    os_makedirs('./tmp/test')
+    os.system("ls ztmp")
+
+    path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
+    for p in path:
+       f = os.path.exists(os.path.abspath(p))
+       assert  f == True, "path " + p
+
+    rev_stat = os_removedirs("ztmp/ztmp2")
+    assert not rev_stat == False, "cannot delete root folder"
+
+    res = os_system( f" ls . ",  doprint=True)
+    log(res)
+    res = os_system( f" ls . ",  doprint=False)
+
+    from utilmy import os_platform_os
+    assert os_platform_os() == sys.platform
+
+
+#########################################################################################
+#########################################################################################
 def test_docs_cli():
     """  from utilmy.docs.generate_doc import run_markdown, run_table
     """
@@ -130,11 +124,13 @@ def test_docs_cli():
     os.system(cmd)
     os.system('ls docs/')
    
-   
+
+
+
 
 #########################################################################################
 #########################################################################################
-def test_decorators_os(*args):      
+def test_decorators(*args):
     from utilmy.decorators import profiler_decorator, profiler_context
 
     @profiler_decorator
@@ -174,20 +170,22 @@ def test_decorators_os(*args):
 #######################################################################################
 #######################################################################################
 def test_tabular():
-        """
-        ANOVA test
-        """
-        from utilmy.tabular import test_anova, test_normality2,test_plot_qqplot
-        df = pd_generate_data(7, 100)
-        test_anova(df, 'cat1', 'cat2')
-        test_normality2(df, '0', "Shapiro")
-        test_plot_qqplot(df, '1')
+    """
+    ANOVA test
+    """
+    from utilmy import tabular as m
+    df = pd_generate_data(7, 100)
+    m.test_anova(df, 'cat1', 'cat2')
+    m.test_normality2(df, '0', "Shapiro")
+    m.test_plot_qqplot(df, '1')
+
+
 
 
         
 #########################################################################################
 #########################################################################################
-def test_text_similarity():
+def test_text():
     from utilmy import text
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
@@ -204,15 +202,16 @@ def test_text_similarity():
     output_value = pd.Series(sample_df.apply(lambda x: check_similarity(x[[*cols]]), axis=1), name="score")
 
     assert_series_equal(original_value, output_value, check_names=False)
+
+
+    from utilmy import text as m
+    log(m.pd_text_getcluster )
+    m.test_lsh()
       
 
-def test_text_pdcluster():
-    from utilmy.text import text as txt
-    log(txt.pd_text_getcluster )
-    txt.test_lsh()
 
-   
-   
+
+#########################################################################################
 def test_viz_vizhtml():
    from utilmy.viz import vizhtml as vi
    log("Visualization ")
@@ -241,13 +240,9 @@ def test_distributed():
    m.test_all()
 
    
-   
-
-
+  
 #######################################################################################
 ##     UTILS.py
-######################################################################################
-
 def test_utils():
     """
     #### python test.py   test_utils
@@ -285,8 +280,6 @@ def test_utils():
 
 ###########################################################################
 ## ppandas.py
-#######################################################################################################
-
 def test_ppandas():
     def test_pd_random():
         from utilmy.ppandas import  pd_random
@@ -304,8 +297,6 @@ def test_ppandas():
 
 ################################################################################################
 ## oos.py
-################################################################################################
-
 def test_oos():
     """
     #### python test.py   test_oos
@@ -497,13 +488,11 @@ def test_oos():
 
 
 
-
-
 def test_all():
-    test_utilmy_pd_os_session()
-    test_decorators_os()
+    test_utilmy()
+    test_decorators()
     # test_tabular_test()
-    test_text_similarity()
+    test_text()
     test_docs_cli()
 
     ################

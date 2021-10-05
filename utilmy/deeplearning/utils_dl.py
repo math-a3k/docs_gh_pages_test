@@ -7,35 +7,24 @@ import cv2
 import numpy as np
 import tifffile.tifffile
 from typing import Union
-from pathlib import Path
 import tensorflow as tf, tensorflow_addons as tfa
 from tensorflow.keras import layers, regularizers
 from tensorflow.python.keras.utils.data_utils import Sequence    
-import matplotlib.pyplot as plt
-import scipy.stats ; from scipy.stats import norm
-from PIL import Image ; from tqdm import tqdm
-from sklearn import manifold
+from PIL import Image 
 from utilmy import pd_read_file
-# from tf_sprinkles import Sprinkles
-from madgrad import MadGrad
-from sklearn.preprocessing import OneHotEncoder
 from albumentations.core.transforms_interface import ImageOnlyTransform
 from skimage import morphology
 from sklearn.metrics import accuracy_score
-import pandas as pd, numpy as np
-from pprint import pprint as print2
 from box import Box
-import sys, glob, time, gc, copy, math, string, json, logging, functools, random, matplotlib, scipy, h5py, yaml
-from ztext_detector import detect_text_regions
+import sys, glob, time, copy, json, functools
 import diskcache as dc
 from importall import *
+import pandas as pd
 from albumentations import (
-    Compose, HorizontalFlip, CLAHE, HueSaturationValue,
-    RandomBrightness, RandomContrast, RandomGamma,
+    Compose, HorizontalFlip, 
     ToFloat, ShiftScaleRotate, Resize,
     GridDistortion, ElasticTransform,OpticalDistortion,
     ToGray,
-    Equalize, # histogram (mode='cv', by_channels=True, mask=None, mask_params=(), always_apply=False, p=0.5)
     Cutout, # (num_holes=8, max_h_size=8, max_w_size=8, fill_value=0, always_apply=False, p=0.5
 )
 
@@ -229,6 +218,23 @@ def log2(*s):
 ##################################PREPROCESSING########################################
 #######################################################################################
 
+def prepro_image(image_path):
+    mean   = [0.5]
+    std    = [0.5]  
+    try :
+        # fname      = str(image_path).split("/")[-1]    
+        # id1        = fname.split(".")[0]
+        # print(image_path)
+        image = image_read(image_path)
+        image = image_resize_pad(image, (xdim,ydim), padColor=0)
+        image = image_center_crop(image, (xdim,ydim))
+        image = (image / 255)
+        image = (image-mean) /std  # Normalize the image to mean and std
+        image = image.astype('float32')
+        return image, image_path 
+    except :
+        return [], ""
+
 
 def prepro_images(image_paths, nmax=10000000):
   images = [] 
@@ -290,7 +296,7 @@ def image_resize_pad(img,size=(256,256), padColor=0 ):
          pad_left, pad_right = 0, 0
 
      # set pad color
-     if len(img.shape) is 3 and not isinstance(padColor, (list, tuple, np.ndarray)): # color image but only one color provided
+     if len(img.shape) == 3 and not isinstance(padColor, (list, tuple, np.ndarray)): # color image but only one color provided
          padColor = [padColor]*3
 
      # scale and pad
@@ -299,26 +305,6 @@ def image_resize_pad(img,size=(256,256), padColor=0 ):
 
      return scaled_img
    
-
-
-def prepro_image0(image_path):
-    mean   = [0.5]
-    std    = [0.5]  
-    try :
-        fname      = str(image_path).split("/")[-1]    
-        id1        = fname.split(".")[0]
-        # print(image_path)
-
-        image = image_read(image_path)
-        image = image_resize_pad(image, (xdim,ydim), padColor=0)
-        image = image_center_crop(image, (xdim,ydim))
-        image = (image / 255)
-        image = (image-mean) /std  # Normalize the image to mean and std
-        image = image.astype('float32')
-        return image, image_path 
-    except :
-        return [], ""
-
 
     
 def prepro_images_multi(image_paths, npool=30, prepro_image=None):
@@ -445,7 +431,7 @@ def pd_category_filter(df, category_map):
              return s.lower()
         return 'aaother'
 
-    colcat = list(category_map.keys())
+    # colcat = list(category_map.keys())
     cols   = ['id'] + list(category_map.keys())
     df     = df[cols]
     for col, values in category_map.items():
@@ -630,7 +616,7 @@ class CustomDataGenerator_img(Sequence):
 ###############################IMAGE FUNCTIONS########################################
 ######################################################################################
 
-os.makedirs(model_dir2 + f"/debug/", exist_ok=True)
+os.makedirs(model_dir2 + "/debug/", exist_ok=True)
 # def image_check(name, img, renorm=False):
 #     img  = img[:, :, ::-1]    
 #     if renorm :
@@ -664,10 +650,10 @@ def image_resize(out_dir=""):
           image white color padded
     
     """
-    import cv2, gc, diskcache
+    import cv2
     
-    in_dir   = data_dir + "/train_nobg"
-    out_dir  = data_dir + "/train_nobg_256/"
+    in_dir   = cc.root + "/train_nobg" # replace data_dir with root path
+    out_dir  = cc.root + "/train_nobg_256/"
     
     nmax     =  500000000
     global xdim, ydim
@@ -681,7 +667,7 @@ def image_resize(out_dir=""):
     def prepro_image3b(img_path):
         try :
             fname        = str(img_path).split("/")[-1]    
-            id1          = fname.split(".")[0]
+            # id1          = fname.split(".")[0]
             img_path_new = out_dir + "/" + fname
 
             img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)  
@@ -745,7 +731,7 @@ def image_check():
     
     """    
     #print( 'nf files', len(glob.glob("/data/workspaces/noelkevin01/img/data/fashion/train_nobg_256/*")) )
-    nmax =  100000
+    # nmax =  100000
     global xdim, ydim
     xdim= 64
     ydim= 64
@@ -760,7 +746,7 @@ def image_check():
     log('loading', fname)
     
     import diskcache as dc
-    db_path = data_train + fname
+    db_path = cc.data_train + fname
     cache   = dc.Cache(db_path)
     
     lkey = list(cache)
@@ -771,7 +757,7 @@ def image_check():
     #idlist = df['id']
         
     log('### writing on disk  ######################################')
-    dir_check = data_train + "/zcheck/"
+    dir_check = cc.data_train + "/zcheck/"
     os.makedirs(dir_check, exist_ok=True)
     for i, key in enumerate(cache) :
         if i > 10: break
@@ -900,7 +886,7 @@ def image_create_cache():
     #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache  
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     ####   sleep 56000  && python prepro.py  image_create_cache       
-    import cv2, gc, diskcache
+    import cv2, diskcache
     nmax =  1000000 #  0000
     global xdim, ydim
     xdim= 256
@@ -909,7 +895,7 @@ def image_create_cache():
     log("### Sub-Category  ################################################################")
     # in_dir   = data_dir + '/fashion_data/images/'
     # in_dir   = data_dir + "/train_nobg_256/"
-    in_dir   = data_dir + "/../gsp/v1000k_clean_nobg/"
+    in_dir   = cc.root + "/../gsp/v1000k_clean_nobg/"
     
     image_list = sorted(list(glob.glob(  f'/{in_dir}/*/*.*')))
     image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ]
@@ -925,8 +911,8 @@ def image_create_cache():
                 
     def prepro_image2b(image_path):
         try :
-            fname      = str(image_path).split("/")[-1]    
-            id1        = fname.split(".")[0]
+            # fname      = str(image_path).split("/")[-1]    
+            # id1        = fname.split(".")[0]
             # print(image_path)
 
             image = cv2.imread(image_path)
@@ -985,7 +971,7 @@ def image_create_cache():
     for i,key in enumerate(cache):
        if i > 3 : break 
        x0 = cache[key] 
-       cv2.imwrite( data_train + f"/check_{i}.png", x0 )
+       cv2.imwrite( cc.data_train + f"/check_{i}.png", x0 )
        print(key, x0.shape, str(x0)[:50]  )
 
 
@@ -1054,10 +1040,11 @@ def image_face_blank(in_dir="", level = "/*",
 def image_text_blank(in_dir, out_dir, level="/*"):
     """
         Not working well
-        python prepro.py  image_text_blank  --in_dir img/data/fashion/ztest   --out_dir img/data/fashion/ztest_noface
-        
+        python prepro.py  image_text_blank  --in_dir img/data/fashion/ztest   --out_dir img/data/fashion/ztest_noface  
     
     """
+    from ztext_detector import detect_text_regions
+    
     in_dir  = "/data/workspaces/noelkevin01/" + in_dir
     out_dir = "/data/workspaces/noelkevin01/" + out_dir
 
@@ -1099,7 +1086,7 @@ def image_text_blank(in_dir, out_dir, level="/*"):
       try :
           log(fp)  
           img   = cv2.imread(fp)
-          im    = img[:, :, ::-1]
+          # im    = img[:, :, ::-1]
                         
           areas = detect_text_regions(img)
                                        
@@ -1172,7 +1159,7 @@ def image_read(filepath_or_buffer: Union[str, io.BytesIO]):
 
 
 
-def image_save():
+def image_save(out_dir):
     ##### Write some sample images  ########################
     import diskcache as dc
     db_path = "/data/workspaces/noelkevin01/img/data/fashion/train_npz/small/img_train_r2p2_70k_clean_nobg_256_256-100000.cache"
@@ -1182,7 +1169,7 @@ def image_save():
     log('### writing on disk  ######################################')
     dir_check = out_dir + f"/{xname}/"
     os.makedirs(dir_check, exist_ok=True)
-    for i, key in enumerate(img_list) :
+    for i, key in enumerate(cache) :
         if i > 10: break       
         img = cache[key]
         img = img[:, :, ::-1]
@@ -1198,7 +1185,7 @@ def image_save():
 
 def create_train_npz():
     
-    import cv2, gc
+    import gc
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     #### data_dir = pathlib.Path(data_img)
     nmax =  100000
@@ -1210,7 +1197,7 @@ def create_train_npz():
     log(tag)
 
 
-    df    = pd.read_csv( data_label  +"/preproed_df.csv")
+    df    = pd.read_csv( cc.data_label  +"/preproed_df.csv")
     # flist = set(list(df[ (df['subCategory'] == 'Watches') & (df.gender == 'Women')   ]['id'].values))
     # flist = set(list(df[ (df['subCategory'] == 'Topwear') & (df.gender == 'Women')   ]['id'].values))
     flist = set(list(df['id'].values))
@@ -1219,7 +1206,7 @@ def create_train_npz():
 
 
     log("#### Train  ######################################################################")
-    image_list = sorted(list(glob.glob( data_dir + '/train_nobg/*.*')))
+    image_list = sorted(list(glob.glob( cc.root + '/train_nobg/*.*')))
     image_list = image_list[:nmax]
     log('Size Before', len(image_list))
 
@@ -1228,14 +1215,14 @@ def create_train_npz():
     log('Size After', len(image_list))
 
     images, labels = prepro_images_multi(image_list, prepro_image= prepro_image)
-    log5( images )
+    log3( images )
     train_images = np.array(images)
     train_label  = np.array(labels)
     del images, labels ; gc.collect
 
 
     log("#### Test  #######################################################################")
-    image_list = sorted(list(glob.glob( data_dir + '/test_nobg/*.*')))
+    image_list = sorted(list(glob.glob( cc.root + '/test_nobg/*.*')))
     image_list = image_list[:nmax]
     # log( image_list )
 
@@ -1249,7 +1236,7 @@ def create_train_npz():
 
 
     log("#### Save train, test ###########################################################")
-    np.savez_compressed( data_train + f"/train_test{tag}.npz", 
+    np.savez_compressed( cc.data_train + f"/train_test{tag}.npz", 
                          train = train_images, 
                          test  = test_images,
 
@@ -1260,18 +1247,17 @@ def create_train_npz():
                        )
 
     log('size', len(test_images))
-    log(data_train + f"/train_test{tag}.npz" )
+    log(cc.data_train + f"/train_test{tag}.npz" )
 
-    image_check_npz(data_train + f"/train_test{tag}.npz" ,  
+    image_check_npz(cc.data_train + f"/train_test{tag}.npz" ,  
                                  keys = None, 
-                                 path = data_train + "/zcheck/", 
+                                 path = cc.data_train + "/zcheck/", 
                                  tag  = tag , n_sample=3
                               )
 
 
 def create_train_parquet():
     
-    import cv2, gc
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     #### data_dir = pathlib.Path(data_img)
     nmax =  100000
@@ -1283,7 +1269,7 @@ def create_train_parquet():
     log(tag)
 
 
-    df    = pd.read_csv( data_label  +"/preproed_df.csv")
+    df    = pd.read_csv( cc.data_label  +"/preproed_df.csv")
     # flist = set(list(df[ (df['subCategory'] == 'Watches') & (df.gender == 'Women')   ]['id'].values))
     # flist = set(list(df[ (df['subCategory'] == 'Topwear') & (df.gender == 'Women')   ]['id'].values))
     flist = set(list(df['id'].values))
@@ -1292,7 +1278,7 @@ def create_train_parquet():
 
 
     log("#### Train  ######################################################################")
-    image_list = sorted(list(glob.glob( data_dir + '/train_nobg/*.*')))
+    image_list = sorted(list(glob.glob( cc.root + '/train_nobg/*.*')))
     image_list = image_list[:nmax]
     log('Size Before', len(image_list))
 
@@ -1306,12 +1292,12 @@ def create_train_parquet():
     df2['id']  = df2['uri'].apply(lambda x : int(x.split("/")[-1].split(".")[0])  ) 
     df2        = df2.merge(df, on='id', how='left')    
     df2['img'] = images
-    df2.to_parquet( data_train + f"/train_{tag}.parquet" )    
+    df2.to_parquet( cc.data_train + f"/train_{tag}.parquet" )    
     log(df2)    
         
 
     log("#### Test  #######################################################################")
-    image_list = sorted(list(glob.glob( data_dir + '/test_nobg/*.*')))
+    image_list = sorted(list(glob.glob( cc.data_dir + '/test_nobg/*.*')))
     image_list = image_list[:nmax]
     # log( image_list )
 
@@ -1326,7 +1312,7 @@ def create_train_parquet():
     df2['id']  = df2['uri'].apply(lambda x : int(x.split("/")[-1].split(".")[0])  ) 
     df2['img'] = images
     df2        = df2.merge(df, on='id', how='left')    
-    df2.to_parquet( data_train + f"/test_{tag}.parquet" )  
+    df2.to_parquet( cc.data_train + f"/test_{tag}.parquet" )  
 
 
     log("#### Save train, test ###########################################################")
@@ -1483,7 +1469,7 @@ def topk(topk=100, dname=None, pattern="df_*", filter1=None):
             log(str(img_list)[:30])
 
             log('### Writing images on disk  ###########################################')
-            import diskcache as dc
+            # import diskcache as dc
             # db_path = "/data/workspaces/noelkevin01/img/data/fashion/train_npz/small/img_train_r2p2_70k_clean_nobg_256_256-100000.cache"
             db_path = "/dev/shm/train_npz/small//img_train_r2p2_1000k_clean_nobg_256_256-1000000.cache"            
             cache   = dc.Cache(db_path)
@@ -1579,8 +1565,8 @@ def test():
        python prepro.py test
        
     """
-    dfref      = pd.read_csv( data_label  +"/prepro_df.csv")
-    img_dir    = data_dir + '/train/*'
+    dfref      = pd.read_csv( cc.data_label  +"/prepro_df.csv")
+    img_dir    = cc.data_dir + '/train/*'
     labels_col = [ 'gender', 'masterCategory', 'subCategory', 'articleType' ]
     
     df = data_add_onehot(dfref, img_dir, labels_col)     
@@ -1814,7 +1800,7 @@ def save_best(model, model_dir2, curr_loss, best_loss, counter, epoch, dd):
 def save_model_state(model, model_dir2):
     """Save the model"""
     os.makedirs(model_dir2 , exist_ok=True)
-    model.save_weights( model_dir2 + f'/model_keras_weights.h5')
+    model.save_weights( model_dir2 + '/model_keras_weights.h5')
 
 
 def train_stop(counter, patience):
@@ -1830,7 +1816,7 @@ def model_reload(model_reload_name, cc,):
     model2      = DFC_VAE(latent_dim= cc.latent_dim, class_dict= cc.labels_count )
     input_shape = (batch_size, xdim, ydim, cdim)   ### x_train = x_train.reshape(-1, 28, 28, 1)
     model2.build(input_shape)
-    model2.load_weights( model_reload_name + f'/model_keras_weights.h5')
+    model2.load_weights( model_reload_name + '/model_keras_weights.h5')
     return model2
 
 

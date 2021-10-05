@@ -18,8 +18,38 @@ def help():
     print(ss)
 
     
-        
-################################################################3#        
+################################################################3#
+def test():
+    ### python oos.py test
+    from utilmy.oos import os_makedirs, os_system, os_removedirs
+    os_makedirs('ztmp/ztmp2/myfile.txt')
+    os_makedirs('ztmp/ztmp3/ztmp4')
+    os_makedirs('/tmp/one/two')
+    os_makedirs('/tmp/myfile')
+    os_makedirs('/tmp/one/../mydir/')
+    os_makedirs('./tmp/test')
+    os.system("ls ztmp")
+
+    path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
+    for p in path:
+       f = os.path.exists(os.path.abspath(p))
+       assert  f == True, "path " + p
+
+    rev_stat = os_removedirs("ztmp/ztmp2")
+    assert not rev_stat == False, "cannot delete root folder"
+
+    res = os_system( f" ls . ",  doprint=True)
+    log(res)
+    res = os_system( f" ls . ",  doprint=False)
+
+    from utilmy import os_platform_os
+    assert os_platform_os() == sys.platform
+
+
+
+
+
+################################################################3#
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):

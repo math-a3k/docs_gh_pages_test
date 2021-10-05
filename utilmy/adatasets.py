@@ -199,7 +199,7 @@ def fetch_dataset(url_dataset, path_target=None, file_target=None):
 
     if "github.com" in url_dataset:
         """
-                # https://github.com/arita37/dsa2_data/raw/main/input/titanic/train/features.zip
+             # https://github.com/arita37/dsa2_data/raw/main/input/titanic/train/features.zip
               https://github.com/arita37/dsa2_data/raw/main/input/titanic/train/features.zip            
               https://raw.githubusercontent.com/arita37/dsa2_data/main/input/titanic/train/features.csv            
               https://raw.githubusercontent.com/arita37/dsa2_data/tree/main/input/titanic/train/features.zip             
