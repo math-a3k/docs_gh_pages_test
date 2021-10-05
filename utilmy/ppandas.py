@@ -36,6 +36,8 @@ def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsi
     # Get default color style from pandas - can be changed to any other color list
     if cols_axe1 is None: cols_axe1 = df.columns
     if len(cols_axe1) == 0: return
+    
+    # _get_standard_colors is not an attribute of _matplotlib this code might require some changes
     colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
     
     # Displays subplot's pair in case of plot_type defined as `pair`
