@@ -1,7 +1,9 @@
-# pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
-import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
+HELP= """
 
+
+"""
+import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
 
 def log(*s):
     print(*s, flush=True)
@@ -72,6 +74,30 @@ def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsi
     return ax
 
 
+def pd_plot_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -1, show=False, clear=True) :
+    ### Plot histogram
+    from matplotlib import pyplot as plt
+    import numpy as np, os, time
+    q0 = dfi.quantile(q5)
+    q1 = dfi.quantile(q95)
+
+    if nsample < 0 :
+        dfi.hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
+    else :
+        dfi.sample(n=nsample, replace=True ).hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
+    plt.title( path_save.split("/")[-1] )
+
+    if show :
+      plt.show()
+
+    if path_save is not None :
+      os.makedirs(os.path.dirname(path_save), exist_ok=True)
+      plt.savefig( path_save )
+      print(path_save )
+    if clear :
+        # time.sleep(5)
+        plt.close()
+
 
 def pd_filter(df, filter_dict="shop_id=11, l1_genre_id>600, l2_genre_id<80311," , verbose=False) :
     """
@@ -139,7 +165,6 @@ def pd_to_file(df, filei,  check=0, verbose=True, show='shape',   **kw):
   gc.collect()
 
 
-
 def pd_sample_strat(df, col, n):
   ### Stratified sampling
   # n   = min(n, df[col].value_counts().min())
@@ -158,31 +183,6 @@ def pd_cartesian(df1, df2) :
   df3 = pd.merge(df1, df2,on='xxx')[ col1 + col2 ]
   del df3['xxx']
   return df3
-
-
-def pd_plot_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -1, show=False, clear=True) :
-    ### Plot histogram
-    from matplotlib import pyplot as plt
-    import numpy as np, os, time
-    q0 = dfi.quantile(q5)
-    q1 = dfi.quantile(q95)
-
-    if nsample < 0 :
-        dfi.hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
-    else :
-        dfi.sample(n=nsample, replace=True ).hist( bins=np.arange( q0, q1,  (  q1 - q0 ) /nbin  ) )
-    plt.title( path_save.split("/")[-1] )
-
-    if show :
-      plt.show()
-
-    if path_save is not None :
-      os.makedirs(os.path.dirname(path_save), exist_ok=True)
-      plt.savefig( path_save )
-      print(path_save )
-    if clear :
-        # time.sleep(5)
-        plt.close()
 
 
 def pd_col_bins(df, col, nbins=5):
@@ -399,55 +399,7 @@ def is_float(x):
 
 
 ########################################################################################################
-##### OS, cofnfig ######################################################################################
 
-
-
-###################################################################################################
-###### Debug ######################################################################################
-def print_everywhere():
-    """
-    https://github.com/alexmojaki/snoop
-    """
-    txt ="""
-    import snoop; snoop.install()  ### can be used anywhere
-    
-    @snoop
-    def myfun():
-    
-    from snoop import pp
-    pp(myvariable)
-        
-    """
-    import snoop
-    snoop.install()  ### can be used anywhere"
-    print("Decaorator @snoop ")
-    
-    
-def log10(*s, nmax=60):
-    """ Display variable name, type when showing,  pip install varname
-    
-    """
-    from varname import varname, nameof
-    for x in s :
-        print(nameof(x, frame=2), ":", type(x), "\n",  str(x)[:nmax], "\n")
-        
-    
-def log5(*s):
-    """    ### Equivalent of print, but more :  https://github.com/gruns/icecream
-    pip install icrecream
-    ic()  --->  ic| example.py:4 in foo()
-    ic(var)  -->   ic| d['key'][1]: 'one'
-    
-    """
-    from icecream import ic
-    return ic(*s)
-    
-    
-def log_trace(msg="", dump_path="", globs=None):
-    print(msg)
-    import pdb;
-    pdb.set_trace()
 
 
 
