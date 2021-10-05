@@ -74,8 +74,8 @@ def pd_generate_data(ncols=7, nrows=100):
     np.random.seed(444)
     numerical    = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
     df = pd.DataFrame(numerical, columns = [str(i) for i in range(0,ncols)])
-    df['cat1']= np.random.choice(  a=[0, 1],  size=100,  p=[0.7, 0.3]  )
-    df['cat2']= np.random.choice(  a=[4, 5, 6],  size=100,  p=[0.5, 0.3, 0.2]  )
+    df['cat1']= np.random.choice(  a=[0, 1],  size=nrows,  p=[0.7, 0.3]  )
+    df['cat2']= np.random.choice(  a=[4, 5, 6],  size=nrows,  p=[0.5, 0.3, 0.2]  )
     df['cat1']= np.where( df['cat1'] == 4,'low',np.where(df['cat1'] == 5, 'High','V.High'))
     return df
 
@@ -122,11 +122,11 @@ from utilmy.ppandas import (
     pd_random,
     pd_merge,
     pd_plot_multi,
+    pd_plot_histogram,
     pd_filter,
     pd_to_file,
     pd_sample_strat,
     pd_cartesian,
-    pd_plot_histogram,
     pd_col_bins,
     pd_dtype_reduce,
     pd_dtype_count_unique,
