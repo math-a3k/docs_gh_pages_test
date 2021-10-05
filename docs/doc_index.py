@@ -131,6 +131,7 @@ utilmy/oos.py
 log(*s)
 log2(*s, verbose = 1)
 help()
+test()
 to_dict(**kw)
 to_timeunix(datex = "2018-01-16")
 to_datetime(x)
