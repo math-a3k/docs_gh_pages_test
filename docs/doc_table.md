@@ -3,23 +3,23 @@ Repo: ./
 
 | file | type | name  | List functions |
 | ------- | --- | --- | -------------- |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L243'>pd_dtype_to_category</a> | isinstance<br>df.select_dtypes<br>len<br>float<br>pd.to_datetime<br>print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L262'>pd_dtype_getcontinuous</a> | len<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L278'>pd_del</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L287'>pd_add_noise</a> | pd.DataFrame<br>pd_dtype_getcontinuous<br>print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L301'>pd_cols_unique_count</a> | len<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L319'>pd_show</a> | os_makedirs<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L339'>to_dict</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L344'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L352'>to_datetime</a> | pd.to_datetime<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L357'>np_list_intersection</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L361'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L370'>to_float</a> | float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L377'>to_int</a> | int<br>float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L384'>is_int</a> | int<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L391'>is_float</a> | float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | class | <a href='.//utilmy/ppandas.py#L333'>dict_to_namespace</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | method | <a href='.//utilmy/ppandas.py#L335'>dict_to_namespace:__init__</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L246'>pd_dtype_to_category</a> | isinstance<br>df.select_dtypes<br>len<br>float<br>pd.to_datetime<br>print<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L265'>pd_dtype_getcontinuous</a> | len<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L281'>pd_del</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L290'>pd_add_noise</a> | pd.DataFrame<br>pd_dtype_getcontinuous<br>print<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L304'>pd_cols_unique_count</a> | len<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L322'>pd_show</a> | os_makedirs<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L343'>to_dict</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L348'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L356'>to_datetime</a> | pd.to_datetime<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L361'>np_list_intersection</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L365'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L374'>to_float</a> | float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L381'>to_int</a> | int<br>float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L388'>is_int</a> | int<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L395'>is_float</a> | float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | class | <a href='.//utilmy/ppandas.py#L337'>dict_to_namespace</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | method | <a href='.//utilmy/ppandas.py#L339'>dict_to_namespace:__init__</a> |  |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L18'>log</a> | logger.info<br>log2<br>logger.debug<br>logw<br>logger.warning<br>loge<br>logger.error<br>logger_setup<br>logger.configure<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L22'>log2</a> | logger.debug<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L26'>logw</a> | logger.warning<br> |

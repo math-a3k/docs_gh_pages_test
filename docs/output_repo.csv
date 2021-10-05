@@ -1,21 +1,21 @@
 uri,name,type,n_variable,n_words,n_words_unique,n_characters,avg_char_per_word,n_loop,n_ifthen,arg_name,arg_type,arg_value,line,docs,list_functions,n_functions
-utilmy/ppandas.py:pd_dtype_to_category,pd_dtype_to_category,function,15,36,29,350,9.72,1,3,"['df', 'col_exclude', 'treshold']","[None, None, None]","[None, None, '0.5']",243,"['  """"""\n', '    Convert string to category\n', '  """"""\n']","['isinstance', 'df.select_dtypes', 'len', 'float', 'pd.to_datetime', 'print']",6
-utilmy/ppandas.py:pd_dtype_getcontinuous,pd_dtype_getcontinuous,function,10,43,29,261,6.07,1,2,"['df', 'cols_exclude', 'nsample']","[None, 'list', None]","[None, '[]', '-1']",262,[],"['len', 'str']",2
-utilmy/ppandas.py:pd_del,pd_del,function,6,13,13,50,3.85,1,0,"['df', 'cols']","[None, 'list']","[None, None]",278,[],[],0
-utilmy/ppandas.py:pd_add_noise,pd_add_noise,function,18,41,33,295,7.2,1,1,"['df', 'level', 'cols_exclude']","[None, None, 'list']","[None, '0.05', '[]']",287,[],"['pd.DataFrame', 'pd_dtype_getcontinuous', 'print']",3
-utilmy/ppandas.py:pd_cols_unique_count,pd_cols_unique_count,function,10,43,29,261,6.07,1,2,"['df', 'cols_exclude', 'nsample']","[None, 'list', None]","[None, '[]', '-1']",301,[],"['len', 'str']",2
-utilmy/ppandas.py:pd_show,pd_show,function,6,10,10,116,11.6,0,0,"['df', 'nrows', 'reader', '**kw']","[None, None, None, None]","[None, '100', ""'notepad.exe'"", None]",319,"['    """""" Show from Dataframe\n', '    """"""\n']",['os_makedirs'],1
-utilmy/ppandas.py:to_dict,to_dict,function,2,2,2,8,4.0,0,0,['**kw'],[None],[None],339,[],[],0
-utilmy/ppandas.py:to_timeunix,to_timeunix,function,2,16,12,187,11.69,0,2,['datex'],[None],"['""2018-01-16""']",344,[],"['isinstance', 'int', 'datex.timetuple']",3
-utilmy/ppandas.py:to_datetime,to_datetime,function,5,8,8,45,5.62,0,0,['x'],[None],[None],352,[],"['pd.to_datetime', 'str']",2
-utilmy/ppandas.py:np_list_intersection,np_list_intersection,function,4,10,8,24,2.4,1,1,"['l1', 'l2']","[None, None]","[None, None]",357,[],[],0
-utilmy/ppandas.py:np_add_remove,np_add_remove,function,7,10,9,116,11.6,1,0,"['set_', 'to_remove', 'to_add']","[None, None, None]","[None, None, None]",361,[],"['set_.copy', 'result_temp.remove', 'result_temp.add']",3
-utilmy/ppandas.py:to_float,to_float,function,1,8,6,46,5.75,0,0,['x'],[None],[None],370,[],['float'],1
-utilmy/ppandas.py:to_int,to_int,function,1,8,6,44,5.5,0,0,['x'],[None],[None],377,[],"['int', 'float']",2
-utilmy/ppandas.py:is_int,is_int,function,1,9,7,42,4.67,0,0,['x'],[None],[None],384,[],['int'],1
-utilmy/ppandas.py:is_float,is_float,function,1,9,7,44,4.89,0,0,['x'],[None],[None],391,[],['float'],1
-utilmy/ppandas.py:dict_to_namespace,dict_to_namespace,class,3,5,5,36,7.2,0,0,[],[],[],333,[],[],0
-utilmy/ppandas.py:dict_to_namespace:__init__,dict_to_namespace:__init__,method,2,2,2,15,7.5,0,0,"['self', 'd']","[None, None]","[None, None]",335,[],[],0
+utilmy/ppandas.py:pd_dtype_to_category,pd_dtype_to_category,function,15,36,29,350,9.72,1,3,"['df', 'col_exclude', 'treshold']","[None, None, None]","[None, None, '0.5']",246,"['  """"""\n', '    Convert string to category\n', '  """"""\n']","['isinstance', 'df.select_dtypes', 'len', 'float', 'pd.to_datetime', 'print']",6
+utilmy/ppandas.py:pd_dtype_getcontinuous,pd_dtype_getcontinuous,function,10,43,29,261,6.07,1,2,"['df', 'cols_exclude', 'nsample']","[None, 'list', None]","[None, '[]', '-1']",265,[],"['len', 'str']",2
+utilmy/ppandas.py:pd_del,pd_del,function,6,13,13,50,3.85,1,0,"['df', 'cols']","[None, 'list']","[None, None]",281,[],[],0
+utilmy/ppandas.py:pd_add_noise,pd_add_noise,function,18,41,33,295,7.2,1,1,"['df', 'level', 'cols_exclude']","[None, None, 'list']","[None, '0.05', '[]']",290,[],"['pd.DataFrame', 'pd_dtype_getcontinuous', 'print']",3
+utilmy/ppandas.py:pd_cols_unique_count,pd_cols_unique_count,function,10,43,29,261,6.07,1,2,"['df', 'cols_exclude', 'nsample']","[None, 'list', None]","[None, '[]', '-1']",304,[],"['len', 'str']",2
+utilmy/ppandas.py:pd_show,pd_show,function,8,14,13,144,10.29,0,0,"['df', 'nrows', 'reader', '**kw']","[None, None, None, None]","[None, '100', ""'notepad.exe'"", None]",322,"['    """""" Show from Dataframe\n', '    """"""\n']",['os_makedirs'],1
+utilmy/ppandas.py:to_dict,to_dict,function,2,2,2,8,4.0,0,0,['**kw'],[None],[None],343,[],[],0
+utilmy/ppandas.py:to_timeunix,to_timeunix,function,2,16,12,187,11.69,0,2,['datex'],[None],"['""2018-01-16""']",348,[],"['isinstance', 'int', 'datex.timetuple']",3
+utilmy/ppandas.py:to_datetime,to_datetime,function,5,8,8,45,5.62,0,0,['x'],[None],[None],356,[],"['pd.to_datetime', 'str']",2
+utilmy/ppandas.py:np_list_intersection,np_list_intersection,function,4,10,8,24,2.4,1,1,"['l1', 'l2']","[None, None]","[None, None]",361,[],[],0
+utilmy/ppandas.py:np_add_remove,np_add_remove,function,7,10,9,116,11.6,1,0,"['set_', 'to_remove', 'to_add']","[None, None, None]","[None, None, None]",365,[],"['set_.copy', 'result_temp.remove', 'result_temp.add']",3
+utilmy/ppandas.py:to_float,to_float,function,1,8,6,46,5.75,0,0,['x'],[None],[None],374,[],['float'],1
+utilmy/ppandas.py:to_int,to_int,function,1,8,6,44,5.5,0,0,['x'],[None],[None],381,[],"['int', 'float']",2
+utilmy/ppandas.py:is_int,is_int,function,1,9,7,42,4.67,0,0,['x'],[None],[None],388,[],['int'],1
+utilmy/ppandas.py:is_float,is_float,function,1,9,7,44,4.89,0,0,['x'],[None],[None],395,[],['float'],1
+utilmy/ppandas.py:dict_to_namespace,dict_to_namespace,class,3,5,5,36,7.2,0,0,[],[],[],337,[],[],0
+utilmy/ppandas.py:dict_to_namespace:__init__,dict_to_namespace:__init__,method,2,2,2,15,7.5,0,0,"['self', 'd']","[None, None]","[None, None]",339,[],[],0
 utilmy/utils.py:log,log,function,10,39,25,357,9.15,0,0,['*s'],[None],[None],18,[],"['logger.info', 'log2', 'logger.debug', 'logw', 'logger.warning', 'loge', 'logger.error', 'logger_setup', 'logger.configure']",9
 utilmy/utils.py:log2,log2,function,1,5,5,39,7.8,0,0,['*s'],[None],[None],22,[],['logger.debug'],1
 utilmy/utils.py:logw,logw,function,1,5,5,41,8.2,0,0,['*s'],[None],[None],26,[],['logger.warning'],1
