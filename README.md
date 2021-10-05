@@ -5,7 +5,7 @@
 
 
 # myutil
-One liner utilities
+    One liner utilities
 
 
 # Index of all functions
@@ -16,8 +16,11 @@ One liner utilities
 # Looking for contributors
 
    This package is looking for contributors.
-   Documentation is here:  https://github.com/arita37/myutil/issues/9
+   Documentation is here:  
    
+       https://github.com/arita37/myutil/issues/9
+   
+       https://github.com/arita37/myutil/blob/main/docs/doc_index.py
  
 
 
@@ -27,31 +30,31 @@ One liner utilities
 
 
 
-# Install
-
-    pip install utilmy 
-
+# Install for dev
     git clone  https://github.com/arita37/myutil.git
+    git checkout newbranch
     cd myutil
     pip install -e .
 
     
     
 
-
-
 # Usage
  
- https://colab.research.google.com/drive/12rpbgH3WYcQq3jtl9vzEYeVdu9a9GOM_
+  https://colab.research.google.com/drive/12rpbgH3WYcQq3jtl9vzEYeVdu9a9GOM_
  
-https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=Rrho08zYe6Gj
+  https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=Rrho08zYe6Gj
 
-
-https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=2zMKv6MXOJJu
+  https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=2zMKv6MXOJJu
 
 
  
  
+
+
+
+
+
 
 # Misc
  ```
