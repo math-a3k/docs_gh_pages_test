@@ -3,24 +3,24 @@ Repo: ./
 
 | file | type | name  | List functions |
 | ------- | --- | --- | -------------- |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L208'>pd_dtype_count_unique</a> | gef_is_continuous<br>np.sum<br>np.round<br>len<br>min<br>any<br>list<br>n=min<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L247'>pd_dtype_to_category</a> | isinstance<br>df.select_dtypes<br>len<br>float<br>pd.to_datetime<br>print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L266'>pd_dtype_getcontinuous</a> | len<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L282'>pd_del</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L291'>pd_add_noise</a> | pd.DataFrame<br>pd_dtype_getcontinuous<br>print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L305'>pd_cols_unique_count</a> | len<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L323'>pd_show</a> | os_makedirs<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L343'>to_dict</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L348'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L356'>to_datetime</a> | pd.to_datetime<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L361'>np_list_intersection</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L365'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L374'>to_float</a> | float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L381'>to_int</a> | int<br>float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L388'>is_int</a> | int<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L395'>is_float</a> | float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | class | <a href='.//utilmy/ppandas.py#L337'>dict_to_namespace</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | method | <a href='.//utilmy/ppandas.py#L339'>dict_to_namespace:__init__</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L213'>pd_dtype_count_unique</a> | gef_is_continuous<br>str<br>np.sum<br>np.round<br>len<br>min<br>any<br>list<br>n=min<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L252'>pd_dtype_to_category</a> | isinstance<br>df.select_dtypes<br>len<br>float<br>pd.to_datetime<br>print<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L271'>pd_dtype_getcontinuous</a> | len<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L287'>pd_del</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L296'>pd_add_noise</a> | pd.DataFrame<br>pd_dtype_getcontinuous<br>print<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L310'>pd_cols_unique_count</a> | len<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L328'>pd_show</a> | os_makedirs<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L349'>to_dict</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L354'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L362'>to_datetime</a> | pd.to_datetime<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L367'>np_list_intersection</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L371'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L380'>to_float</a> | float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L387'>to_int</a> | int<br>float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L394'>is_int</a> | int<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L401'>is_float</a> | float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | class | <a href='.//utilmy/ppandas.py#L343'>dict_to_namespace</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | method | <a href='.//utilmy/ppandas.py#L345'>dict_to_namespace:__init__</a> |  |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L18'>log</a> | logger.info<br>log2<br>logger.debug<br>logw<br>logger.warning<br>loge<br>logger.error<br>logger_setup<br>logger.configure<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L22'>log2</a> | logger.debug<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L26'>logw</a> | logger.warning<br> |
