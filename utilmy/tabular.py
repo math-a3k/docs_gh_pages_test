@@ -23,6 +23,7 @@ def y_adjustment():
        log(y) = u =sigma**2
     
     """
+    import scipy as sp
     def adjuter_log(y_true, y_pred_log, error_func, **kwargs):
         """Determine correction delta for exp transformation"""
         def cost_func(delta):
