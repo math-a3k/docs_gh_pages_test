@@ -12,6 +12,9 @@ Rules to follow :
 """
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
+from scipy.stats.stats import mode
+
+from utilmy.tabular import test_heteroscedacity, test_mutualinfo
 
 
 def log(*s):
@@ -439,7 +442,6 @@ def test_oos():
         log(os_memory())
         log(os_getcwd())
         os_sleep_cpu(cpu_min=30, sleep=10, interval=5, verbose=True)
-
         os_makedirs("./tmp/test")
         with open("./tmp/test/os_utils_test.txt", 'w') as file:
             file.write("Dummy file to test os utils")
@@ -489,32 +491,78 @@ def test_tabular():
     #### python test.py   test_tabular
     """
     import pandas as pd
+    from sklearn.tree import DecisionTreeRegressor
+    from sklearn.model_selection import train_test_split
+    model = DecisionTreeRegressor(random_state=1)
+
     df = pd.read_csv("./tmp/test/crop.data.csv")
+    y = df.fertilizer
+    X = df[["yield","density","block"]]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50, random_state=42)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
     
-    def test_anova_test():
+    def test():
         from utilmy.tabular import test_anova
         log("Testing anova ...")
-        test_anova(df,"yield","fertilizer")
-    
-    def test_normality_test():
+        #test_anova(df,"yield","fertilizer")
         log("Testing normality...")
         from utilmy.tabular import test_normality2, test_normality
         test_normality2(df,"yield","Shapiro")
         log(test_normality(df["yield"]))
         
-    def test_plot_test():
         log("Testing plot...")
         from utilmy.tabular import test_plot_qqplot
         test_plot_qqplot(df,"yield")
 
-    def test_heteroscedacity_test():
         log("Testing heteroscedacity...")
         from utilmy.tabular import test_heteroscedacity
+        log(test_heteroscedacity(y_test,y_pred))
     
+        log("Testing test_mutualinfo()...")
+        from utilmy.tabular import test_mutualinfo
+        #test_mutualinfo(y_pred,X_test,colname="yield")
+    
+        log("Testing hypothesis_test()...")
+        from utilmy.tabular import test_hypothesis
+        log(test_hypothesis(X_train, X_test,"chisquare"))
 
-    #test_anova()
-    #test_normality_test()
-    test_plot_test()
+    def test_estimator():
+        log("Testing estimators()...")
+        from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
+        log(estimator_std_normal(y_pred))
+        log(estimator_boostrap_bayes(y_pred))
+        #log(estimator_bootstrap(y_pred))
+    
+    def test_pd_utils():
+        log("Testing pd_utils ...")
+        from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
+            pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
+            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+        pd_train_test_split_time(df, coltime="block")
+        pd_to_scipy_sparse_matrix(df)
+        pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"])
+        #pd_stat_pandas_profile(df,savefile="./tmp/test/report.html", title="Pandas profile")
+        pd_stat_distribution_colnum(df, nrows=len(df))
+        #pd_stat_histogram(df, bins=50, coltarget="yield")
+        #pd_stat_shift_trend_changes(df,"density","block")
+        #pd_stat_shift_trend_correlation(X_train, X_test,"yield","block")
+        #pd_stat_shift_changes(df,"yield", features_list=["density","block"])
+    
+    def test_np_utils():
+        log("Testing np_utils ...")
+        from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
+        import numpy as np
+        arr = np.array([[1, 2, 3], [4, 5, 6]])
+        np_col_extractname(["aa_","bb-","cc"])
+        np_list_remove(arr,[1,2,3], mode="exact")
+        np_conv_to_one_col(arr)
+
+
+    test()
+    test_estimator()
+    test_pd_utils()
+    test_np_utils()
 
 
 
