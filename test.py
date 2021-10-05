@@ -90,11 +90,8 @@ def test_ppandas():
                         "b": [1, 2, 3, 4, 5]})
 
 
-    m.pd_plot_histogram(df1["a"],path_save="save_files/histogram")
-
-    f = os.path.exists(os.path.abspath("save_files/histogram.png"))
-    assert f == True, "save_files/histogram.png"
-
+    m.pd_plot_histogram(df1["a"],path_save="tmp/histogram")
+   
     m.pd_merge(df1, df2, on="b")
 
     df = m.pd_filter(df3, filter_dict="a>1")
