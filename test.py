@@ -68,13 +68,11 @@ def test_utilmy():
    from utilmy import Session
    sess = Session("ztmp/session")
 
-
+   global mydf
    mydf = pd_generate_data()
 
-   sess.save('mysess', globals(), '01')
+   sess.save('mysess', glob=globals(), tag='01')
    os.system("ls ztmp/session")
-
-   sess.save('mysess', globals(), '02')
    sess.show()
 
    import glob
@@ -87,7 +85,7 @@ def test_utilmy():
        assert  pickle_created == True, "Pickle file not created"
 
    sess.load('mysess')
-   sess.load('mysess', None, '02')
+   sess.load('mysess', tag='01')
 
 
 
