@@ -97,14 +97,14 @@ def test_ppandas():
     df = m.pd_filter(df3, filter_dict="a>1")
     assert df.shape[0] == 3, "not filtered properly"
 
-    m.pd_to_file(df1, "save_files/file.csv")
+    m.pd_to_file(df1, "tmp/file.csv")
     m.pd_sample_strat(df1, col="a", n=10)
 
     bins = m.pd_col_bins(df1, "a", 5)
     assert len(np.unique(bins)) == 5, "bins not formed"
 
     m.pd_dtype_reduce(df1)
-    m.pd_dtype_count_unique(df1)
+    m.pd_dtype_count_unique(df1,col_continuous=['b'])
 
     df = m.pd_dtype_to_category(df_str, col_exclude=["b"], treshold=0.7)
     assert df.dtypes["a"] == "category", "Columns was not converted to category"
@@ -117,11 +117,11 @@ def test_ppandas():
 
     # ax = m.pd_plot_multi(df1,plot_type='pair',cols_axe1=['a','b'])
     
-    # a = pd.DataFrame({"a":[1,2,3,4,5]})
-    # b = pd.DataFrame({"b":[1,2,3,4,5]})
-    # cartesian_df = m.pd_cartesian(a,b)
+    a = pd.DataFrame({"a":[1,2,3,4,5]})
+    b = pd.DataFrame({"b":[1,2,3,4,5]})
+    cartesian_df = m.pd_cartesian(a,b)
 
-    # m.pd_show(df_str)
+    m.pd_show(df_str)
 
 
 
