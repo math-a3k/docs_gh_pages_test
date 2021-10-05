@@ -15,10 +15,10 @@ uri,name,type,n_variable,n_words,n_words_unique,n_characters,avg_char_per_word,n
 ./setup.py:get_current_githash,get_current_githash,function,6,14,11,123,8.79,0,0,[],[],[],33,[],"['subprocess.check_output', 'label.decode']",2
 ./test.py:pd_random,pd_random,function,9,29,22,152,5.24,0,0,"['ncols', 'nrows']","[None, None]","['7', '100']",8,[],"['random.random', 'range', 'pd.DataFrame']",3
 ./test.py:test_utilmy_plot,test_utilmy_plot,function,6,10,10,87,8.7,0,0,[],[],[],19,[],"['pd_random', 'pd_plot_multi']",2
-./test.py:test_utilmy_pd_os_session,test_utilmy_pd_os_session,function,48,241,148,2263,9.39,2,0,[],[],[],25,[],"['random.random', 'range', 'pd.DataFrame', 'len', 'os.makedirs', 'df.to_csv', 'pd_read_file', 'round', 'print', 'git_repo_root', 'os_makedirs', 'os.system', 'os_removedirs', 'os_system', 'os_platform_os', 'global_verbosity']",16
+./test.py:test_utilmy,test_utilmy,function,48,241,148,2263,9.39,2,0,[],[],[],25,[],"['random.random', 'range', 'pd.DataFrame', 'len', 'os.makedirs', 'df.to_csv', 'pd_read_file', 'round', 'print', 'git_repo_root', 'os_makedirs', 'os.system', 'os_removedirs', 'os_system', 'os_platform_os', 'global_verbosity']",16
 ./test.py:test_utilmy_session,test_utilmy_session,function,17,48,40,459,9.56,1,0,[],[],[],118,[],"['Session', 'sess.save', 'globals', 'os.system', 'sess.show', 'glob.glob', 'sess.load']",7
 ./test.py:test_docs_cli,test_docs_cli,function,2,9,9,80,8.89,0,0,[],[],[],142,"['    """"""\n', '      from utilmy.docs.generate_doc import run_markdown, run_table\n', '\n', '    """"""\n']",['os.system'],1
-./test.py:test_decorators_os,test_decorators_os,function,28,58,46,726,12.52,0,0,['*args'],[None],[None],155,[],"['test_print', 'print', 'multithread_run_list', 'profiled_sum', 'sum', 'profiler_context', 'profiler_start', 'profiler_stop', 'dummy_func', 'time.sleep', 'method', 'DummyClass', 'a.method']",13
+./test.py:test_decorators,test_decorators,function,28,58,46,726,12.52,0,0,['*args'],[None],[None],155,[],"['test_print', 'print', 'multithread_run_list', 'profiled_sum', 'sum', 'profiler_context', 'profiler_start', 'profiler_stop', 'dummy_func', 'time.sleep', 'method', 'DummyClass', 'a.method']",13
 ./test.py:pd_generate_data,pd_generate_data,function,19,66,49,467,7.08,0,0,"['ncols', 'nrows']","[None, None]","['7', '100']",209,"['    """"""\n', '    Generate sample data for function testing\n', '    categorical features for anova test\n', '    """"""\n']","['random.random', 'range', 'pd.DataFrame', 'np.where']",4
 ./test.py:test_tabular_test,test_tabular_test,function,10,16,16,182,11.38,0,0,[],[],[],227,"['        """"""\n', '        ANOVA test\n', '        """"""\n']","['pd_generate_data', 'test_anova', 'test_normality2', 'test_plot_qqplot']",4
 ./test.py:test_text_similarity,test_text_similarity,function,21,45,39,522,11.6,0,0,[],[],[],242,[],"['pd.DataFrame', 'text.pd_text_similarity', 'SequenceMatcher', 'pd.Series', 'check_similarity', 'assert_series_equal']",6
@@ -1157,100 +1157,100 @@ Name: uri, dtype: object5: 0       ./run_pipy.py:Version:__init__
 Name: uri, dtype: object0: 0    ./setup.py:get_current_githash
 Name: uri, dtype: object0: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object1: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object2: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object3: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object4: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object5: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object6: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object7: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object8: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity
 9          ./test.py:test_text_pdcluster
 Name: uri, dtype: object9: 0                    ./test.py:pd_random
 1             ./test.py:test_utilmy_plot
-2    ./test.py:test_utilmy_pd_os_session
+2    ./test.py:test_utilmy
 3          ./test.py:test_utilmy_session
 4                ./test.py:test_docs_cli
-5           ./test.py:test_decorators_os
+5           ./test.py:test_decorators
 6             ./test.py:pd_generate_data
 7            ./test.py:test_tabular_test
 8         ./test.py:test_text_similarity

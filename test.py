@@ -67,6 +67,10 @@ def test_utilmy():
    ###################################################################################
    from utilmy import Session
    sess = Session("ztmp/session")
+
+
+   mydf = pd_generate_data(10, 7)
+
    sess.save('mysess', globals(), '01')
    os.system("ls ztmp/session")
 
@@ -79,7 +83,7 @@ def test_utilmy():
        t = os.path.exists(os.path.abspath(f))
        assert  t == True, "session path not created "
 
-       pickle_created = os.path.exists(os.path.abspath(f + "/df.pkl"))
+       pickle_created = os.path.exists(os.path.abspath(f + "/mydf.pkl"))
        assert  pickle_created == True, "Pickle file not created"
 
    sess.load('mysess')
