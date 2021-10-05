@@ -181,7 +181,10 @@ def pd_cartesian(df1, df2) :
   df1['xxx'] = 1
   df2['xxx'] = 1
   df3 = pd.merge(df1, df2,on='xxx')[ col1 + col2 ]
-  del df3['xxx']
+  try:
+        del df3['xxx']
+  except:pass
+
   return df3
 
 
@@ -320,6 +323,7 @@ def pd_show(df, nrows=100, reader='notepad.exe', **kw):
     """ Show from Dataframe
     """
     import pandas as pd
+    from utilmy import os_makedirs
     fpath = 'ztmp/ztmp_dataframe.csv'
     os_makedirs(fpath)
     df.iloc[:nrows,:].to_csv(fpath, sep=",", mode='w')
