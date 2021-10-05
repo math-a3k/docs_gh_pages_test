@@ -36,6 +36,8 @@ def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsi
     # Get default color style from pandas - can be changed to any other color list
     if cols_axe1 is None: cols_axe1 = df.columns
     if len(cols_axe1) == 0: return
+    
+    # _get_standard_colors is not an attribute of _matplotlib this code might require some changes
     colors = getattr(getattr(plotting, '_matplotlib').style, '_get_standard_colors')(num_colors=len(cols_axe1 + cols_axe2))
     
     # Displays subplot's pair in case of plot_type defined as `pair`
@@ -181,7 +183,10 @@ def pd_cartesian(df1, df2) :
   df1['xxx'] = 1
   df2['xxx'] = 1
   df3 = pd.merge(df1, df2,on='xxx')[ col1 + col2 ]
-  del df3['xxx']
+  try:
+        del df3['xxx']
+  except:pass
+
   return df3
 
 
@@ -220,7 +225,7 @@ def pd_dtype_count_unique(df, col_continuous=[]):
     def gef_is_continuous(data, dtype):
         """ Returns true if data was sampled from a continuous variables, and false
         """
-        if dtype == "Object":
+        if str(dtype) == "object":
             return False
 
         observed = data[~np.isnan(data)]  # not consider missing values for this.
@@ -324,6 +329,7 @@ def pd_show(df, nrows=100, reader='notepad.exe', **kw):
     """ Show from Dataframe
     """
     import pandas as pd
+    from utilmy import os_makedirs
     fpath = 'ztmp/ztmp_dataframe.csv'
     os_makedirs(fpath)
     df.iloc[:nrows,:].to_csv(fpath, sep=",", mode='w')
