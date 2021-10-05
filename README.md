@@ -48,6 +48,22 @@
   https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=2zMKv6MXOJJu
 
 
+ ```
+   #### Save current python session on disk.
+   from utilmy import Session
+   sess = Session("ztmp/session")
+   sess.save('mysess', globals(), '01')
+   os.system("ls ztmp/session")
+
+   sess.save('mysess', globals(), '02')
+   sess.show()
+
+
+   sess.load('mysess')
+   sess.load('mysess', None, '02')
+   
+   
+ ```
  
  
 
