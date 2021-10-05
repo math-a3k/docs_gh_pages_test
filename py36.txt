@@ -8,6 +8,7 @@ rebound-cli  ## stackoverflow
 pysnooper   ### Debugger show lines of code step by step
 snoop
 scipy
+loguru
 ########################################################
 #### utilmy.text
 datasketch  ### lSH

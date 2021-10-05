@@ -87,34 +87,6 @@ def test_ppandas():
     m.pd_plot_multi(df, cols_axe1=['0', '1'])
 
 
-def test_oos():
-    from utilmy import oos as m
-
-    from utilmy.oos import os_makedirs, os_system, os_removedirs
-    os_makedirs('ztmp/ztmp2/myfile.txt')
-    os_makedirs('ztmp/ztmp3/ztmp4')
-    os_makedirs('/tmp/one/two')
-    os_makedirs('/tmp/myfile')
-    os_makedirs('/tmp/one/../mydir/')
-    os_makedirs('./tmp/test')
-    os.system("ls ztmp")
-
-    path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
-    for p in path:
-       f = os.path.exists(os.path.abspath(p))
-       assert  f == True, "path " + p
-
-    rev_stat = os_removedirs("ztmp/ztmp2")
-    assert not rev_stat == False, "cannot delete root folder"
-
-    res = os_system( f" ls . ",  doprint=True)
-    log(res)
-    res = os_system( f" ls . ",  doprint=False)
-
-    from utilmy import os_platform_os
-    assert os_platform_os() == sys.platform
-
-
 #########################################################################################
 #########################################################################################
 def test_docs_cli():
@@ -171,7 +143,6 @@ def test_decorators(*args):
 #######################################################################################
 def test_tabular():
     """
-    ANOVA test
     """
     from utilmy import tabular as m
     df = pd_generate_data(7, 100)
@@ -248,7 +219,7 @@ def test_utils():
     #### python test.py   test_utils
     """
     def test_logs(): 
-        from utilmy.utils import log,log2, logw, loge
+        from utilmy.utils import log,log2, logw, loge, logger_setup
         print("testing logs utils........")
         logger_setup()
         log("simple log ")
@@ -302,6 +273,35 @@ def test_oos():
     #### python test.py   test_oos
     """
     log("Testing oos.py............................")
+    from utilmy import oos as m
+
+    from utilmy.oos import os_makedirs, os_system, os_removedirs
+    os_makedirs('ztmp/ztmp2/myfile.txt')
+    os_makedirs('ztmp/ztmp3/ztmp4')
+    os_makedirs('/tmp/one/two')
+    os_makedirs('/tmp/myfile')
+    os_makedirs('/tmp/one/../mydir/')
+    os_makedirs('./tmp/test')
+    os.system("ls ztmp")
+
+    path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
+    for p in path:
+       f = os.path.exists(os.path.abspath(p))
+       assert  f == True, "path " + p
+
+    rev_stat = os_removedirs("ztmp/ztmp2")
+    assert not rev_stat == False, "cannot delete root folder"
+
+    ############################################################
+    res = os_system( f" ls . ",  doprint=True)
+    log(res)
+    res = os_system( f" ls . ",  doprint=False)
+
+    from utilmy import os_platform_os
+    assert os_platform_os() == sys.platform
+
+
+    ############################################################
     def test_log():
         from utilmy.oos import log, log2, log5
         log("Testing logs ...")
