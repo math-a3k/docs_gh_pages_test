@@ -17,6 +17,7 @@ import os, sys, time, datetime,inspect, random
 import pandas as pd, random, numpy as np
 from utilmy.oos import os_file_replacestring, os_import, os_search_content, os_walk, to_dict, to_float, to_timeunix
 from utilmy.ppandas import pd_cartesian, pd_merge, pd_sample_strat
+from utilmy.tabular import test_plot_qqplot
 
 from utilmy.utils import logger_setup 
 
@@ -495,6 +496,37 @@ def test_oos():
     os_system_test()
 
 
+########################################################################################################
+## tabular.py
+########################################################################################################
+
+
+def test_tabular():
+    """
+    #### python test.py   test_tabular
+    """
+    import pandas as pd
+    df = pd.read_csv("./tmp/test/crop.data.csv")
+    
+    def test_anova_test():
+        from utilmy.tabular import test_anova
+        log("Testing anova ...")
+        test_anova(df,"yield","fertilizer")
+    
+    def test_normality_test():
+        log("Testing normality...")
+        from utilmy.tabular import test_normality2, test_normality
+        test_normality2(df,"yield","Shapiro")
+        log(test_normality(df["yield"]))
+        
+    def test_plot_test():
+        log("Testing plot...")
+        from utilmy.tabular import test_plot_qqplot
+        test_plot_qqplot(df,"yield")
+
+    #test_anova()
+    #test_normality_test()
+    test_plot_test()
 
 
 
