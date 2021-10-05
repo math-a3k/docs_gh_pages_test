@@ -3,19 +3,6 @@ Repo: ./
 
 | file | type | name  | List functions |
 | ------- | --- | --- | -------------- |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L6'>log</a> | print<br>log2<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L9'>log2</a> | print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L15'>pd_random</a> | pd.DataFrame<br>columns=list<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L21'>pd_merge</a> | list<br>df1.join<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L27'>pd_plot_multi</a> | plt.figure<br>len<br>getattr<br>df.plot<br>plt.show<br>ax.set_ylabel<br>range<br>ax.get_legend_handles_labels<br>ax.twinx<br>ax_new.set_ylabel<br>ax_new.get_legend_handles_labels<br>ax.legend<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L76'>pd_filter</a> | isinstance<br>filter_dict.items<br>filter_dict.split<br>x_convert<br>str<br>dict<br>float<br>x.strip<br>print<br>len<br>x.split<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L114'>pd_to_file</a> | Path<br>os.makedirs<br>df.to_pickle<br>df.to_parquet<br>df.to_csv<br>log<br>gc.collect<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L143'>pd_sample_strat</a> | df.groupby<br>x.sample<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L151'>pd_cartesian</a> | list<br>pd.merge<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L163'>pd_plot_histogram</a> | dfi.quantile<br>dfi.hist<br>dfi.sample<br>plt.title<br>path_save.split<br>plt.show<br>os.makedirs<br>plt.savefig<br>print<br>plt.close<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L188'>pd_col_bins</a> | pd.qcut<br>np.arange<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L195'>pd_dtype_reduce</a> | np.dtype<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L204'>pd_dtype_count_unique</a> | gef_is_continuous<br>np.sum<br>np.round<br>len<br>min<br>any<br>list<br>n=min<br> |
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L243'>pd_dtype_to_category</a> | isinstance<br>df.select_dtypes<br>len<br>float<br>pd.to_datetime<br>print<br> |
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L262'>pd_dtype_getcontinuous</a> | len<br>str<br> |
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L278'>pd_del</a> |  |
@@ -31,10 +18,6 @@ Repo: ./
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L377'>to_int</a> | int<br>float<br> |
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L384'>is_int</a> | int<br> |
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L391'>is_float</a> | float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L408'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L427'>log10</a> | print<br>type<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L436'>log5</a> | ic<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L447'>log_trace</a> | print<br>pdb.set_trace<br> |
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | class | <a href='.//utilmy/ppandas.py#L333'>dict_to_namespace</a> |  |
 | <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | method | <a href='.//utilmy/ppandas.py#L335'>dict_to_namespace:__init__</a> |  |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L18'>log</a> | logger.info<br>log2<br>logger.debug<br>logw<br>logger.warning<br>loge<br>logger.error<br>logger_setup<br>logger.configure<br> |

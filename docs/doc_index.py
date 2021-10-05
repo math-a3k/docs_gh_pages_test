@@ -5,19 +5,6 @@ utilmy/nnumpy.py
 
 utilmy/ppandas.py
 -------------------------functions----------------------
-log(*s)
-log2(*s, verbose = 1)
-pd_random(nrows = 100)
-pd_merge(df1, df2, on = None, colkeep = None)
-pd_plot_multi(df, plot_type = None, cols_axe1:list = [], cols_axe2:list = [], figsize = (8, 4)
-pd_filter(df, filter_dict = "shop_id=11, l1_genre_id>600, l2_genre_id<80311,", verbose = False)
-pd_to_file(df, filei, check = 0, verbose = True, show = 'shape', **kw)
-pd_sample_strat(df, col, n)
-pd_cartesian(df1, df2)
-pd_plot_histogram(dfi, path_save = None, nbin = 20.0, q5 = 0.005, q95 = 0.995, nsample =  -1, show = False, clear = True)
-pd_col_bins(df, col, nbins = 5)
-pd_dtype_reduce(dfm, int0  = 'int32', float0  =  'float32')
-pd_dtype_count_unique(df, col_continuous = [])
 pd_dtype_to_category(df, col_exclude, treshold = 0.5)
 pd_dtype_getcontinuous(df, cols_exclude:list = [], nsample = -1)
 pd_del(df, cols:list)
@@ -33,10 +20,6 @@ to_float(x)
 to_int(x)
 is_int(x)
 is_float(x)
-print_everywhere()
-log10(*s, nmax = 60)
-log5(*s)
-log_trace(msg = "", dump_path = "", globs = None)
 
 -------------------------methods----------------------
 dict_to_namespace.__init__(self, d)
