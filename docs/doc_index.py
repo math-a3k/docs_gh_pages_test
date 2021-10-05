@@ -480,6 +480,10 @@ maintain_aspect_ratio_resize(image, width = None, height = None, inter = cv2.INT
 
 
 utilmy/data.py
+-------------------------functions----------------------
+log(*s)
+help()
+
 
 
 utilmy/tabular.py
