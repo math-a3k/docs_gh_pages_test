@@ -5,6 +5,7 @@ utilmy/nnumpy.py
 
 utilmy/ppandas.py
 -------------------------functions----------------------
+pd_dtype_count_unique(df, col_continuous = [])
 pd_dtype_to_category(df, col_exclude, treshold = 0.5)
 pd_dtype_getcontinuous(df, cols_exclude:list = [], nsample = -1)
 pd_del(df, cols:list)
