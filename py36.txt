@@ -8,6 +8,11 @@ rebound-cli  ## stackoverflow
 pysnooper   ### Debugger show lines of code step by step
 snoop
 scipy
+loguru
+########################################################
+#### utilmy.utils
+wget
+
 ########################################################
 #### utilmy.text
 datasketch  ### lSH
@@ -28,7 +33,10 @@ shapely
 pretty-html-table
 networkx
 pyvis
-#####################
+#############################################################################
+#### utilmy.text
+wget
+
 
 ########################################################
 #### utilmy.docs
