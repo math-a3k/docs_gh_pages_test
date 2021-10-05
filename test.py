@@ -481,7 +481,6 @@ def test_oos():
     os_utils_test()
     os_system_test()
 
-########################################################################################################
 ## tabular.py
 ########################################################################################################
 
@@ -565,6 +564,109 @@ def test_tabular():
     test_np_utils()
 
 
+## adatasets.py
+########################################################################################################
+
+def test_adatasets():
+    """
+    #### python test.py   test_adatasets
+    """
+    def test():
+        log("Testing  ...")
+        from utilmy.adatasets import test_dataset_classification_fake, test_dataset_classification_petfinder, test_dataset_classifier_covtype,\
+            test_dataset_regression_fake,dataset_classifier_pmlb
+        test_dataset_regression_fake(nrows=500, n_features=17)
+        test_dataset_classification_fake(nrows=10)
+        test_dataset_classification_petfinder(nrows=10)
+        test_dataset_classifier_covtype(nrows=10)
+        dataset_classifier_pmlb(name="test")
+    
+    def test_pd_utils():
+        import pandas as pd
+        from utilmy.adatasets import pd_train_test_split,pd_train_test_split2, fetch_dataset
+        fetch_dataset("https://github.com/arita37/dsa2_data/raw/main/input/titanic/train/features.zip",path_target="./tmp/test")
+        df = pd.read_csv("./tmp/test/crop.data.csv")
+        pd_train_test_split(df)
+        pd_train_test_split2(df, "block")
+
+    test()
+    test_pd_utils()
+
+## dates.py
+########################################################################################################
+
+def test_dates():
+    """
+    #### python test.py   test_dates
+    """
+    def test():
+        log("Testing  ...")
+        import pandas as pd
+        from utilmy.dates import date_generate,date_weekyear_excel,date_weekday_excel,date_is_holiday,\
+            date_now,pd_date_split
+        date_ = date_generate(start='2021-01-01', ndays=100)
+        date_weekyear_excel('20210317')
+        date_weekday_excel('20210317')
+        #date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
+        #date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
+        df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
+        df['Gender'] = random_genders(10)
+        df['Birthdate'] = random_dates(start=pd.to_datetime('1940-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
+        #pd_date_split(df,coldate="Birthdate")
+    
+    def random_dates(start, end, size):
+        # Unix timestamp is in nanoseconds by default, so divide it by
+        # 24*60*60*10**9 to convert to days.
+        divide_by = 24 * 60 * 60 * 10**9
+        start_u = start.value // divide_by
+        end_u = end.value // divide_by
+        return pd.to_datetime(np.random.randint(start_u, end_u, size), unit="D")
+    def random_genders(size, p=None):
+        """Generate n-length ndarray of genders."""
+        if not p:
+            # default probabilities
+            p = (0.49, 0.49, 0.01, 0.01)
+        gender = ("M", "F", "O", "")
+        return np.random.choice(gender, size=size, p=p)
+    test()
+
+## decorators.py
+########################################################################################################
+
+def test_decorators():
+    """
+    #### python test.py   test_decorators
+    """
+    from utilmy.decorators import thread_decorator, timeout_decorator, profiler_context,profiler_decorator, profiler_decorator_base
+
+    @thread_decorator
+    def thread_decorator_test():
+        log("thread decorator")
+
+
+    @profiler_decorator_base
+    def profiler_decorator_base_test():
+        log("profiler decorator")
+
+    @timeout_decorator(10)
+    def timeout_decorator_test():
+        log("timeout decorator")
+
+    @profiler_decorator
+    def profiler_decorator_test():
+        log("profiler  decorator")
+    
+    with profiler_context() as profiler:
+        log("profiler context")
+    
+    profiler_decorator_test()
+    profiler_decorator_base_test()
+    timeout_decorator_test()
+    thread_decorator_test()
+    profiler_context_test()
+
+
+
 
 def test_all():
     test_utilmy()
@@ -575,6 +677,11 @@ def test_all():
 
     ################
     test_utils()
+    test_oos()
+    test_tabular()
+    test_adatasets()
+    test_dates()
+    test_decorators()
 
       
 #########################################################################################   
