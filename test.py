@@ -291,6 +291,7 @@ def test_all():
     test_utilmy()
     test_decorators()
     # test_tabular_test()
+    test_ppandas()  
     test_text()
     test_docs_cli()
 
