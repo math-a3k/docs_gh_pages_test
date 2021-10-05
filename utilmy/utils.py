@@ -9,7 +9,7 @@ import tarfile
 import zipfile
 from typing import Optional, Union
 
-import wget
+
 import yaml
 from loguru import logger
 
@@ -104,6 +104,7 @@ def dataset_donwload(url, path_target):
     Returns:
 
     """
+    import wget
     log(f"Donwloading mnist dataset in {path_target}")
     os.makedirs(path_target, exist_ok=True)
     wget.download(url, path_target)
