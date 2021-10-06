@@ -74,8 +74,8 @@ def test_utilmy():
 
 
 
-
-#########################################################################################
+###########################################################################
+## ppandas.py
 def test_ppandas():
     from utilmy import ppandas as m
     from utilmy import os_makedirs
@@ -123,7 +123,7 @@ def test_ppandas():
     m.pd_show(df_str)
 
 
-)
+
 
 #########################################################################################
 #########################################################################################
@@ -134,10 +134,6 @@ def test_docs_cli():
     os.system(cmd)
     os.system('ls docs/')
    
-
-
-
-
 
 
 
@@ -237,20 +233,8 @@ def test_utils():
     os_extract_archive_test()
     to_file_test()
 
-###########################################################################
-## ppandas.py
-def test_ppandas():
-    def test_pd_random():
-        from utilmy.ppandas import  pd_random
-        return pd_random(nrows=100)
 
-    def test_pd_merge():
-        df1 = test_pd_random()
-        df2 = test_pd_random()
-        pd_merge(df1,df2,on = None, colkeep = None)
-    
-    #test_pd_random()
-    #test_pd_merge()
+
         
 
 
