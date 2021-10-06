@@ -132,6 +132,7 @@ def test_dataset_classification_fake(nrows=500):
 
 def test_dataset_classification_petfinder(nrows=1000):
     # Dense features
+    import wget
     colnum = ['PhotoAmt', 'Fee','Age' ]
 
     # Sparse features
