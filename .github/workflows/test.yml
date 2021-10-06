@@ -1,4 +1,4 @@
-name: Build and Test , Package PyPI
+name: Test only
 
 ###  https://github.com/arita37/awesome-actions#static-analysis
 
@@ -7,11 +7,11 @@ on:
   # but only for the main branch
   push:
     branches:
-    - main
+    # - main
 
   pull_request:
     branches:
-    - main
+    # - main
 
 jobs:
   build:
@@ -96,69 +96,4 @@ jobs:
       run: |
            ls .
            
-    ######### Git pull main branch ####################################################           
-    #- uses: actions/checkout@v2
-    #  with:
-    #    ref: ${{ github.head_ref }}
 
-
-    ########  Generate Docs     
-    - name: docs_generate
-      continue-on-error: true
-      run: |
-           docs all      --repo_dir utilmy/  --out_dir docs/            
-
-
-    - name: Auto-Commit
-      continue-on-error: true
-      id: auto_commmit
-      uses: stefanzweifel/git-auto-commit-action@v4.8.0
-      with:
-          # Optional, but recommended
-          # Defaults to "Apply automatic changes"
-          commit_message: Auto Docs
-
-          # Optional branch name where commit should be pushed to.
-          # Defaults to the current branch.
-          # branch: main
-
-          # Optional. Used by `git-commit`.
-          # See https://git-scm.com/docs/git-commit#_options
-          commit_options: '--no-verify --signoff'
-
-          # Optional glob pattern of files which should be added to the commit
-          file_pattern: docs/*.* 
-
-          # Optional local file path to the repository
-          # Defaults to the root of the repository
-          repository: .
-
-
-
-# This Job will upload a Python Package using Twine when a release is created
-  deploy:
-    needs : [build] # List of dependent Jobs 
-    if: success()   # check if all previous (needs) dependent jobs were successfull  then only execute
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install setuptools wheel twine
-
-    - name: Build and publish
-      #env:
-      #  TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-      #  TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-      run: |
-        # echo "$TWINE_USERNAME"
-        python run_pipy.py
-        python setup.py sdist bdist_wheel
-        twine upload dist/*  --username ${{ secrets.PYPI_USERNAME }}     --password ${{ secrets.PYPI_PASSWORD }}  --skip-existing   --repository-url https://upload.pypi.org/legacy/  --verbose   
