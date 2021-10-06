@@ -45,7 +45,162 @@ def test():
     from utilmy import os_platform_os
     assert os_platform_os() == sys.platform
 
+def test_oos():
+    """
+    """
+    log("Testing oos.py............................")
 
+    os_makedirs('ztmp/ztmp2/myfile.txt')
+    os_makedirs('ztmp/ztmp3/ztmp4')
+    os_makedirs('/tmp/one/two')
+    os_makedirs('/tmp/myfile')
+    os_makedirs('/tmp/one/../mydir/')
+    os_makedirs('./tmp/test')
+    os.system("ls ztmp")
+
+    path = ["/tmp/", "ztmp/ztmp3/ztmp4", "/tmp/", "./tmp/test","/tmp/one/../mydir/"]
+    for p in path:
+       f = os.path.exists(os.path.abspath(p))
+       assert  f == True, "path " + p
+
+    rev_stat = os_removedirs("ztmp/ztmp2")
+    assert not rev_stat == False, "cannot delete root folder"
+
+    ############################################################
+    res = os_system( f" ls . ",  doprint=True)
+    log(res)
+    res = os_system( f" ls . ",  doprint=False)
+
+    from utilmy import os_platform_os
+    assert os_platform_os() == sys.platform
+
+
+    ############################################################
+    def test_log():
+        log("Testing logs ...")
+        log2("log2")
+        log5("log5")
+    
+    
+    def int_float_test():
+        log("Testing int/float ..")
+        int_ = 1
+        float_ = 1.1
+        is_int(int_)
+        is_float(float_)
+        to_float(int_)
+        to_int(float_)
+    
+    def os_path_size_test():
+        log("Testing os_path_size() ..")
+        size_ = os_path_size()
+        log("total size", size_)
+    
+    def os_path_split_test():
+        log("Testing os_path_split() ..")
+        result_ = os_path_split("test/tmp/test.txt")
+        log("result", result_)
+    
+    def os_file_replacestring_test():
+        log("Testing os_file_replacestring() ..")
+        with open("./testdata/tmp/test/os_file_test.txt", 'a') as file:
+            file.write("Dummy text to test replace string")
+
+        os_file_replacestring("text", "text_replace", "./testdata/tmp/test/")
+        
+    def os_walk_test():
+        log("Testing os_walk() ..")
+        import os
+        cwd = os.getcwd()
+        log(os_walk(cwd))
+    
+    def os_copy_safe_test():
+        log("Testing os_copy_safe() ..")
+        os_copy_safe("./testdata/tmp/test", "./testdata/tmp/test_copy/")
+    
+    def z_os_search_fast_test():
+        log("Testing z_os_search_fast() ..")
+        with open("./testdata/tmp/test/os_search_test.txt", 'a') as file:
+            file.write("Dummy text to test fast search string")
+        res = z_os_search_fast("./testdata/tmp/test/os_search_test.txt", ["Dummy"],mode="regex")
+        print(res)
+    
+    def os_search_content_test():
+        log("Testing os_search_content() ..")
+        with open("./testdata/tmp/test/os_search_content_test.txt", 'a') as file:
+            file.write("Dummy text to test fast search string")
+        import os
+        cwd = os.getcwd()
+        '''TODO: for f in list_all["fullpath"]:
+            KeyError: 'fullpath'
+        res = os_search_content(srch_pattern= "Dummy text",dir1=os.path.join(cwd ,"tmp/test/"))
+        log(res)
+        '''
+    
+    def os_get_function_name_test():
+        log("Testing os_get_function_name() ..")
+        log(os_get_function_name())
+    
+    def os_variables_test():
+        log("Testing os_variables_test ..")
+        ll = ["test_var"]
+        globs = {}
+        os_variable_init(ll,globs)
+        os_variable_exist("test_var",globs)
+        os_variable_check("other_var",globs,do_terminate=False)
+        os_import(mod_name="pandas", globs=globs)
+        os_clean_memory(["test_var"], globs)
+        log(os_variable_exist("test_var",globs))
+
+    def os_system_list_test():
+        log("Testing os_system_list() ..")
+        cmd = ["pwd","whoami"]
+        os_system_list(cmd, sleep_sec=0)
+    
+    def os_file_check_test():
+        log("Testing os_file_check()")
+        os_to_file(txt="test text to write to file",filename="./testdata/tmp/test/file_test.txt", mode="a")
+        os_file_check("./testdata/tmp/test/file_test.txt")
+    
+    def os_utils_test():
+        log("Testing os utils...")
+        from utilmy import pd_random
+        log(os_platform_os())
+        log(os_cpu())
+        log(os_memory())
+        log(os_getcwd())
+        os_sleep_cpu(cpu_min=30, sleep=1, interval=5, verbose=True)
+        os_makedirs("./testdata/tmp/test")
+        with open("./testdata/tmp/test/os_utils_test.txt", 'w') as file:
+            file.write("Dummy file to test os utils")
+            
+        os_makedirs("./testdata/tmp/test/os_test")
+
+        #os_copy(os.path.join(os_getcwd(), "tmp/test"), os.path.join(os_getcwd(), "tmp/test/os_test"))
+        os_removedirs("./testdata/tmp/test/os_test")
+        pd_df = pd_random()
+        log(os_sizeof(pd_df, set()))
+
+    def os_system_test():
+        log("Testing os_system()...")
+        os_system("whoami", doprint=True)
+
+
+    test_log()
+    int_float_test()
+    os_path_size_test()
+    os_path_split_test()
+    os_file_replacestring_test()
+    os_walk_test()
+    os_copy_safe_test()
+    z_os_search_fast_test()
+    os_search_content_test()
+    os_get_function_name_test()
+    os_variables_test()
+    os_system_list_test()
+    os_file_check_test()
+    os_utils_test()
+    os_system_test()
 
 
 

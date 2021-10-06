@@ -11,6 +11,28 @@ https://pypi.org/project/pysie/#description
 import os,sys,  pandas as pd, numpy as np
 from typing import List
 
+
+def test_text():
+    from difflib import SequenceMatcher
+    from pandas._testing import assert_series_equal
+
+    list1 = ['dog', 'cat']
+    list2 = ['doggy', 'cat']
+
+    cols = ['name','pet_name']
+    sample_df = pd.DataFrame(zip(list1, list2), columns=cols)
+    original_value = pd_text_similarity(sample_df, cols)['score']
+
+    check_similarity = lambda *x: SequenceMatcher(None, *x[0]).ratio()
+    
+    output_value = pd.Series(sample_df.apply(lambda x: check_similarity(x[[*cols]]), axis=1), name="score")
+
+    assert_series_equal(original_value, output_value, check_names=False)
+
+    log(pd_text_getcluster )
+    test_lsh()
+      
+
 def log(*s):
     print(s, flush=True)
 

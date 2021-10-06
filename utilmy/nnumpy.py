@@ -6,6 +6,24 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc
 
+def test_nnumpy():
+    """
+    """
+
+    def test():
+        log("Testing nnumpy ...")
+        to_dict(kw=[1,2,3])
+        to_timeunix(datex="2020-10-06")
+        to_datetime("10/05/2021")
+        l1 = [1,2,3]
+        l2 = [3,4,1]
+        result = np_list_intersection(l1,l2)
+        set_ = {1,2,3,4,5}
+        result = np_add_remove(set_,[1,2],6)
+        log("np_add_remove",result)
+    test()
+    
+
 def log(*s):
     print(*s, flush=True)
 

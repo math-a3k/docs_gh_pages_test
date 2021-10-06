@@ -9,6 +9,113 @@ https://pypi.org/project/pysie/#description
 """
 import os, sys, pandas as pd, numpy as np
 
+def test_tabular():
+    """
+    #### python test.py   test_tabular
+    """
+    import pandas as pd
+    from utilmy import pd_random, pd_generate_data
+    from sklearn.tree import DecisionTreeRegressor
+    from sklearn.model_selection import train_test_split
+    model = DecisionTreeRegressor(random_state=1)
+
+    df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
+    y = df.fertilizer
+    X = df[["yield","density","block"]]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50, random_state=42)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    
+    def test():
+        log("Testing normality...")
+        from utilmy.tabular import  test_normality
+        test_normality(df["yield"])
+        
+
+        log("Testing heteroscedacity...")
+        from utilmy.tabular import test_heteroscedacity
+        log(test_heteroscedacity(y_test,y_pred))
+    
+        log("Testing test_mutualinfo()...")
+        from utilmy.tabular import test_mutualinfo
+        df1 = pd_generate_data(7, 100)
+        '''TODO: import needed
+        NameError: name 'pd_colnum_tocat' is not defined
+        test_mutualinfo(df1["0"],df1[["1","2","3"]],colname="test")
+        '''
+    
+        log("Testing hypothesis_test()...")
+        from utilmy.tabular import test_hypothesis
+        log(test_hypothesis(X_train, X_test,"chisquare"))
+
+    def custom_stat(values, axis=1):
+        #stat_val = np.mean(np.asmatrix(values),axis=axis)
+        # # stat_val = np.std(np.asmatrix(values),axis=axis)p.mean
+        stat_val = np.sqrt(np.mean(np.asmatrix(values*values),axis=axis))
+        return stat_val
+
+    def test_estimator():
+        log("Testing estimators()...")
+        from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
+        log(estimator_std_normal(y_pred))
+        log(estimator_boostrap_bayes(y_pred))
+        '''TODO: need to check this one
+        estimator_bootstrap(y_pred, custom_stat=custom_stat(y_pred))
+        '''
+
+       
+    
+    def test_pd_utils():
+        log("Testing pd_utils ...")
+        from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
+            pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
+            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+        pd_train_test_split_time(df, coltime="block")
+        pd_to_scipy_sparse_matrix(df)
+        '''TODO: git test failling here'''
+        #log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
+        '''
+        TODO: AttributeError: 'DataFrame' object has no attribute 'profile_report'
+        pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
+        '''
+        
+        pd_stat_distribution_colnum(df, nrows=len(df))
+
+        '''TODO: KeyError: 'freqall
+        pd_stat_histogram(df, bins=50, coltarget="yield")
+        '''
+        ''' TODO: error KeyError: 'colname_mean' , why we appending '_mean' on colname 
+        pd_stat_shift_trend_changes(df,"density","block")
+        '''
+        X_train["yield"] =  X_train["yield"].astype('category')
+        X_test["yield"] =  X_test["yield"].astype('category')
+        '''TODO: KeyError: "['block_mean'] not in index
+        pd_stat_shift_trend_correlation(X_train, X_test,"yield","block")
+        '''
+
+        '''TODO: TypeError: pd_colnum_tocat_stat() got an unexpected keyword argument 'colname'
+        pd_stat_shift_changes(df,"yield", features_list=["density","block"])
+        '''
+    
+    def test_np_utils():
+        log("Testing np_utils ...")
+        from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
+        import numpy as np
+        arr = np.array([[1, 2, 3], [4, 5, 6]])
+        np_col_extractname(["aa_","bb-","cc"])
+        np_list_remove(arr,[1,2,3], mode="exact")
+        np_conv_to_one_col(arr)
+
+    df = pd_generate_data(7, 100)
+    test_anova(df, 'cat1', 'cat2')
+    test_normality2(df, '0', "Shapiro")
+    test_plot_qqplot(df, '1')
+
+    test()
+    test_estimator()
+    test_pd_utils()
+    test_np_utils()
+
 def log(*s):
     print(s)
 

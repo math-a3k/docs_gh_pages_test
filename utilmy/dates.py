@@ -1,6 +1,42 @@
 # pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, json, yaml, gc
+import numpy as np
+import pandas as pd
+
+
+def test_dates():
+    """
+    """
+    def test():
+        log("Testing dates.py ...")
+        date_ = date_generate(start='2021-01-01', ndays=100)
+        date_weekyear_excel('20210317')
+        date_weekday_excel('20210317')
+        #TODO:
+        #date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
+        #date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
+        df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
+        df['Gender'] = random_genders(10)
+        df['Birthdate'] = random_dates(start=pd.to_datetime('1940-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
+        # TODO:
+        #pd_date_split(df,coldate="Birthdate")
+    
+    def random_dates(start, end, size):
+        # Unix timestamp is in nanoseconds by default, so divide it by
+        # 24*60*60*10**9 to convert to days.
+        divide_by = 24 * 60 * 60 * 10**9
+        start_u = start.value // divide_by
+        end_u = end.value // divide_by
+        return pd.to_datetime(np.random.randint(start_u, end_u, size), unit="D")
+    def random_genders(size, p=None):
+        """Generate n-length ndarray of genders."""
+        if not p:
+            # default probabilities
+            p = (0.49, 0.49, 0.01, 0.01)
+        gender = ("M", "F", "O", "")
+        return np.random.choice(gender, size=size, p=p)
+    test()
 
 
 def log(*s):
