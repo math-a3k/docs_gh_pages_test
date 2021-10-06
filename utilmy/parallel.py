@@ -15,8 +15,10 @@ def log(*s):
 
 
 def help():
+    from utilmy import help_create
     ss  = ""
     ss += HELP
+    ss += help_create("utilmy.parallel")
     print(ss)
 
 
