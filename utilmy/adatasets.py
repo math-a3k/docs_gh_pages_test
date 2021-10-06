@@ -1,8 +1,8 @@
 # pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
-import os, sys, time, datetime,inspect, json, pandas as pd, numpy as np, wget
-from sklearn.model_selection import train_test_split
+import os, sys, time, datetime,inspect, json, pandas as pd, numpy as np
 from pathlib import Path
+
 
 from utilmy import (os_makedirs, os_system, global_verbosity, git_current_hash, git_repo_root
                            )
@@ -34,6 +34,7 @@ def dataset_classifier_XXXXX(nrows=500, **kw):
 
 ####################################################################################################
 def pd_train_test_split(df, coly=None):
+    from sklearn.model_selection import train_test_split
     X,y = df.drop(coly), df[[coly]]
     X_train_full, X_test, y_train_full, y_test = train_test_split(X, y, test_size=0.05, random_state=2021)
     X_train, X_valid, y_train, y_valid         = train_test_split(X_train_full, y_train_full, random_state=2021)
@@ -42,6 +43,7 @@ def pd_train_test_split(df, coly=None):
 
 
 def pd_train_test_split2(df, coly):
+    from sklearn.model_selection import train_test_split
     log2(df.dtypes)
     X,y = df.drop(coly,  axis=1), df[coly]
     log2('y', np.sum(y[y==1]) , X.head(3))
