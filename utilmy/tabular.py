@@ -9,9 +9,10 @@ https://pypi.org/project/pysie/#description
 """
 import os, sys, pandas as pd, numpy as np
 
-from utilmy import  pd_generate_data
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
+
+from utilmy.utilmy import pd_generate_data
 
 
 def test0():
