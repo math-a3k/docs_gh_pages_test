@@ -9,6 +9,7 @@ pysnooper   ### Debugger show lines of code step by step
 snoop
 scipy
 loguru
+arrow
 ########################################################
 #### utilmy.utils
 wget
@@ -46,3 +47,9 @@ stdlib_list
 ########################################################
 #### utilmy.keyvalue
 diskcache
+
+
+########################################################
+#### utilmy.adatasets
+scikit-learn
+pmlb
