@@ -198,6 +198,10 @@ def pd_col_bins(df, col, nbins=5):
 
 
 def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
+    """ Reduce dtype
+
+
+    """
     import numpy as np
     for c in dfm.columns :
         if dfm[c].dtype ==  np.dtype(np.int32) :       dfm[c] = dfm[c].astype( int0 )
