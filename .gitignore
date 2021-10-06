@@ -130,3 +130,5 @@ dmypy.json
 /ztmp
 /.idea
 /data
+/docs/output_repo.csv
+/docs/doc_main.md
