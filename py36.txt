@@ -8,6 +8,7 @@ rebound-cli  ## stackoverflow
 pysnooper   ### Debugger show lines of code step by step
 snoop
 scipy
+seaborn
 loguru
 arrow
 ########################################################
@@ -54,3 +55,8 @@ diskcache
 #### utilmy.adatasets
 scikit-learn
 pmlb
+
+###############################
+## tabular
+statsmodels
+hypothetical
