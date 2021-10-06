@@ -10,18 +10,13 @@ Rules to follow :
        Put all the test  below
        n.myfun()
 """
-# -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
-from scipy.stats.stats import mode
-
-from utilmy.tabular import test_heteroscedacity, test_mutualinfo
+#from scipy.stats.stats import mode
+from utilmy import pd_random, pd_generate_data
 
 
 def log(*s):
    print(*s, flush=True)
-
-
-from utilmy import pd_random, pd_generate_data
 
 
 
