@@ -435,7 +435,7 @@ def test_oos():
     def os_system_test():
         log("Testing os_system()...")
         from utilmy.oos import os_system
-        os_system("sudo service nginx restart", doprint=True)
+        os_system("whoami", doprint=True)
 
 
     test_log()

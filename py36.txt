@@ -55,3 +55,7 @@ diskcache
 #### utilmy.adatasets
 scikit-learn
 pmlb
+
+###############################
+## tabular
+statsmodels
