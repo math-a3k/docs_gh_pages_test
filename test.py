@@ -23,29 +23,35 @@ def log(*s):
 #########################################################################################
 #########################################################################################
 def test_utilmy():
+   import utilmy as m
 
    ###################################################################################
-   from utilmy import git_repo_root, git_current_hash
-   print(git_repo_root())
-   assert not git_repo_root() == None, "err git repo"
+   log("\n##### git_repo_root  ")
+   log(m.git_repo_root())
+   assert not m.git_repo_root() == None, "err git repo"
+
+
+   log("\n##### Doc generator: help_create  ")
+   for name in [ 'utilmy.parallel', 'utilmy.utilmy', 'utilmy.ppandas'  ]:
+      log("\n#############", name,"\n", m.help_create(name))
 
 
    ###################################################################################
-   from utilmy import global_verbosity
-   print('verbosity', global_verbosity(__file__, "config.json", 40,))
-   print('verbosity', global_verbosity('../', "config.json", 40,))
-   print('verbosity', global_verbosity(__file__))
+   log("\n##### global_verbosity  ")
+   print('verbosity', m.global_verbosity(__file__, "config.json", 40,))
+   print('verbosity', m.global_verbosity('../', "config.json", 40,))
+   print('verbosity', m.global_verbosity(__file__))
 
    verbosity = 40
-   gverbosity = global_verbosity(__file__)
+   gverbosity = m.global_verbosity(__file__)
    assert gverbosity == 5, "incorrect default verbosity"
-   gverbosity =global_verbosity(__file__, "config.json", 40,)
+   gverbosity =m.global_verbosity(__file__, "config.json", 40,)
    assert gverbosity == verbosity, "incorrect verbosity "
 
 
    ###################################################################################
-   from utilmy import Session
-   sess = Session("ztmp/session")
+   log("\n##### Session  ")
+   sess = m.Session("ztmp/session")
 
    global mydf
    mydf = pd_generate_data()
