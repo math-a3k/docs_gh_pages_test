@@ -702,7 +702,7 @@ def test_all():
     #test_utils()
     # test_oos()
     #test_tabular()
-    test_adatasets()
+    # test_adatasets()
     test_dates()
     #test_decorators()
 
