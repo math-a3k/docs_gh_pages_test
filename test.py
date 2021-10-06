@@ -300,44 +300,6 @@ def test_oos():
         log2("log2")
         log5("log5")
     
-    def profiler_test():
-        log("Tesing profiler ....")
-        from utilmy.oos import profiler_start, profiler_stop
-        profiler_start()
-        profiler_stop()
-    
-    def to_dict_test():
-        log("Testing to_dict() ...")
-        from utilmy.oos import to_dict
-        params = "hello world"
-        log("to_dict",to_dict(kw =params))
-    
-    def to_timeunix_test():
-        log("Testing to_timeuinx() ..")
-        from utilmy.oos import to_timeunix
-        timeunix = to_timeunix()
-        log("timeunix",timeunix)
-    
-    def to_datetime_test():
-        log("Testing to_datetime() ..")
-        from utilmy.oos import to_datetime
-        datetime = to_datetime("10/05/2021")
-        log("datetime",datetime)
-
-    def np_list_intersection_test():
-        log("Testing np_list_intersection() ..")
-        from utilmy.oos import np_list_intersection
-        l1 = [1,2,3]
-        l2 = [3,4,1]
-        result = np_list_intersection(l1,l2)
-        log("np_list_intersection",result)
-        
-    def np_add_remove_test():
-        log("Testing np_add_remove() ..")
-        from utilmy.oos import np_add_remove
-        set_ = {1,2,3,4,5}
-        result = np_add_remove(set_,[1,2],6)
-        log("np_add_remove",result)
     
     def int_float_test():
         log("Testing int/float ..")
@@ -458,12 +420,6 @@ def test_oos():
 
 
     test_log()
-    profiler_test()
-    to_dict_test()
-    to_timeunix_test()
-    to_datetime_test()
-    np_list_intersection_test()
-    np_add_remove_test()
     int_float_test()
     os_path_size_test()
     os_path_split_test()
@@ -501,13 +457,9 @@ def test_tabular():
     
     def test():
         log("Testing normality...")
-        from utilmy.tabular import test_normality2, test_normality
-        test_normality2(df,"yield","Shapiro")
-        log(test_normality(df["yield"]))
+        from utilmy.tabular import  test_normality
+        test_normality(df["yield"])
         
-        log("Testing plot...")
-        from utilmy.tabular import test_plot_qqplot
-        test_plot_qqplot(df,"yield")
 
         log("Testing heteroscedacity...")
         from utilmy.tabular import test_heteroscedacity
@@ -652,14 +604,7 @@ def test_nnumpy():
 
     def test():
         log("Testing nnumpy ...")
-        from utilmy.nnumpy import to_dict,to_timeunix,to_datetime,np_list_intersection,np_add_remove,\
-            is_float,to_float,is_int,to_int
-        int_ = 1
-        float_ = 1.1
-        is_int(int_)
-        is_float(float_)
-        to_float(int_)
-        to_int(float_)
+        from utilmy.nnumpy import to_dict,to_timeunix,to_datetime,np_list_intersection,np_add_remove
         to_dict(kw=[1,2,3])
         to_timeunix(datex="2020-10-06")
         to_datetime("10/05/2021")
@@ -735,18 +680,11 @@ def test_decorators():
     def timeout_decorator_test():
         log("timeout decorator")
 
-    @profiler_decorator
-    def profiler_decorator_test():
-        log("profiler  decorator")
     
-    with profiler_context() as profiler:
-        log("profiler context")
     
-    profiler_decorator_test()
     profiler_decorator_base_test()
     timeout_decorator_test()
     thread_decorator_test()
-    # profiler_context_test()
 
 
 def test_decorators2(*args):
