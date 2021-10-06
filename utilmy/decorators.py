@@ -2,69 +2,13 @@ from threading import Thread
 import cProfile, pstats, io, os, errno, signal, time
 from functools import wraps
 from contextlib import contextmanager
-
 from utilmy.debug import log
 
 
 
-def test_decorators():
-    """
-    """
-
-    @thread_decorator
-    def thread_decorator_test():
-        log("thread decorator")
 
 
-    @profiler_decorator_base
-    def profiler_decorator_base_test():
-        log("profiler decorator")
 
-    @timeout_decorator(10)
-    def timeout_decorator_test():
-        log("timeout decorator")
-
-    
-    
-    profiler_decorator_base_test()
-    timeout_decorator_test()
-    thread_decorator_test()
-
-
-def test_decorators2(*args):
-    from utilmy.decorators import profiler_decorator, profiler_context
-
-    @profiler_decorator
-    def profiled_sum():
-       return sum(range(100000))
-
-    profiled_sum()
-
-    with profiler_context():
-       x = sum(range(1000000))
-       print(x)
-
-
-    from utilmy import profiler_start, profiler_stop
-    profiler_start()
-    print(sum(range(1000000)))
-    profiler_stop()
-
-
-    ###################################################################################
-    from utilmy.decorators import timer_decorator
-    @timer_decorator
-    def dummy_func():
-       time.sleep(2)
-
-    class DummyClass:
-       @timer_decorator
-       def method(self):
-           time.sleep(3)
-
-    dummy_func()
-    a = DummyClass()
-    a.method()
 
 ########################################################################################################################
 ########################################################################################################################
@@ -196,3 +140,33 @@ def profiler_decorator_base(fnc):
     return inner
 
 
+
+def test0():
+    with profiler_context():
+        x = sum(range(1000000))
+        print(x)
+    from utilmy import profiler_start, profiler_stop
+    profiler_start()
+    print(sum(range(1000000)))
+    profiler_stop()
+
+@thread_decorator
+def thread_decorator_test():
+    log("thread decorator")
+
+@profiler_decorator_base
+def profiler_decorator_base_test():
+    log("profiler decorator")
+
+@timeout_decorator(10)
+def timeout_decorator_test():
+    log("timeout decorator")
+
+
+@profiler_decorator
+def profiled_sum():
+    return sum(range(100000))
+
+@timer_decorator
+def dummy_func():
+    time.sleep(2)

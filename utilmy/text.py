@@ -12,7 +12,7 @@ import os,sys,  pandas as pd, numpy as np
 from typing import List
 
 
-def test_text():
+def test():
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
 

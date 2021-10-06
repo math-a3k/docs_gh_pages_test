@@ -50,7 +50,8 @@ def test():
     pd_cartesian(a,b)
 
     pd_show(df_str)
-
+    
+def test2():
     l1 = [1,2,3]
     l2 = [2,3,4]
     l  = np_list_intersection(l1,l2)

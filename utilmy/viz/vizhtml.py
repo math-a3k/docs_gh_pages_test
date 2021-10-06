@@ -25,16 +25,6 @@ from typing import List
 from tqdm import tqdm
 from box import Box
 
-def test():
-   log("Visualization ")
-   log(" from utilmy.viz import vizhtml as vi     ")
-   test1()
-   test2()
-   test3()
-   test4()
-   test_scatter_and_histogram_matplot()
-   test_pd_plot_network()
-   test_cssname()
 
 try :
    # Converting python --> HTML
