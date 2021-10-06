@@ -1,23 +1,20 @@
+
 # -*- coding: utf-8 -*-
 """
 python test.py   test_all
 python test.py   test_viz_vizhtml
-
-
 Rules to follow :
    Put import only inside the function.
-
    def  test_{pythonfilename.py}() :
        from utilmy import parallel as m
        Put all the test  below
        n.myfun()
-
-
-
-
 """
 # -*- coding: utf-8 -*-
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
+from scipy.stats.stats import mode
+
+from utilmy.tabular import test_heteroscedacity, test_mutualinfo
 
 
 def log(*s):
@@ -485,7 +482,6 @@ def test_oos():
         log(os_memory())
         log(os_getcwd())
         os_sleep_cpu(cpu_min=30, sleep=10, interval=5, verbose=True)
-
         os_makedirs("./tmp/test")
         with open("./tmp/test/os_utils_test.txt", 'w') as file:
             file.write("Dummy file to test os utils")
@@ -525,6 +521,190 @@ def test_oos():
     os_utils_test()
     os_system_test()
 
+## tabular.py
+########################################################################################################
+
+
+def test_tabular():
+    """
+    #### python test.py   test_tabular
+    """
+    import pandas as pd
+    from sklearn.tree import DecisionTreeRegressor
+    from sklearn.model_selection import train_test_split
+    model = DecisionTreeRegressor(random_state=1)
+
+    df = pd.read_csv("./tmp/test/crop.data.csv")
+    y = df.fertilizer
+    X = df[["yield","density","block"]]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50, random_state=42)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    
+    def test():
+        from utilmy.tabular import test_anova
+        log("Testing anova ...")
+        #test_anova(df,"yield","fertilizer")
+        log("Testing normality...")
+        from utilmy.tabular import test_normality2, test_normality
+        test_normality2(df,"yield","Shapiro")
+        log(test_normality(df["yield"]))
+        
+        log("Testing plot...")
+        from utilmy.tabular import test_plot_qqplot
+        test_plot_qqplot(df,"yield")
+
+        log("Testing heteroscedacity...")
+        from utilmy.tabular import test_heteroscedacity
+        log(test_heteroscedacity(y_test,y_pred))
+    
+        log("Testing test_mutualinfo()...")
+        from utilmy.tabular import test_mutualinfo
+        #test_mutualinfo(y_pred,X_test,colname="yield")
+    
+        log("Testing hypothesis_test()...")
+        from utilmy.tabular import test_hypothesis
+        log(test_hypothesis(X_train, X_test,"chisquare"))
+
+    def test_estimator():
+        log("Testing estimators()...")
+        from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
+        log(estimator_std_normal(y_pred))
+        log(estimator_boostrap_bayes(y_pred))
+        #log(estimator_bootstrap(y_pred))
+    
+    def test_pd_utils():
+        log("Testing pd_utils ...")
+        from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
+            pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
+            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+        pd_train_test_split_time(df, coltime="block")
+        pd_to_scipy_sparse_matrix(df)
+        pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"])
+        #pd_stat_pandas_profile(df,savefile="./tmp/test/report.html", title="Pandas profile")
+        pd_stat_distribution_colnum(df, nrows=len(df))
+        #pd_stat_histogram(df, bins=50, coltarget="yield")
+        #pd_stat_shift_trend_changes(df,"density","block")
+        #pd_stat_shift_trend_correlation(X_train, X_test,"yield","block")
+        #pd_stat_shift_changes(df,"yield", features_list=["density","block"])
+    
+    def test_np_utils():
+        log("Testing np_utils ...")
+        from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
+        import numpy as np
+        arr = np.array([[1, 2, 3], [4, 5, 6]])
+        np_col_extractname(["aa_","bb-","cc"])
+        np_list_remove(arr,[1,2,3], mode="exact")
+        np_conv_to_one_col(arr)
+
+
+    test()
+    test_estimator()
+    test_pd_utils()
+    test_np_utils()
+
+
+## adatasets.py
+########################################################################################################
+
+def test_adatasets():
+    """
+    #### python test.py   test_adatasets
+    """
+    def test():
+        log("Testing  ...")
+        from utilmy.adatasets import test_dataset_classification_fake, test_dataset_classification_petfinder, test_dataset_classifier_covtype,\
+            test_dataset_regression_fake,dataset_classifier_pmlb
+        test_dataset_regression_fake(nrows=500, n_features=17)
+        test_dataset_classification_fake(nrows=10)
+        test_dataset_classification_petfinder(nrows=10)
+        test_dataset_classifier_covtype(nrows=10)
+        dataset_classifier_pmlb(name="test")
+    
+    def test_pd_utils():
+        import pandas as pd
+        from utilmy.adatasets import pd_train_test_split,pd_train_test_split2, fetch_dataset
+        fetch_dataset("https://github.com/arita37/dsa2_data/raw/main/input/titanic/train/features.zip",path_target="./tmp/test")
+        df = pd.read_csv("./tmp/test/crop.data.csv")
+        pd_train_test_split(df)
+        pd_train_test_split2(df, "block")
+
+    test()
+    test_pd_utils()
+
+## dates.py
+########################################################################################################
+
+def test_dates():
+    """
+    #### python test.py   test_dates
+    """
+    def test():
+        log("Testing  ...")
+        import pandas as pd
+        from utilmy.dates import date_generate,date_weekyear_excel,date_weekday_excel,date_is_holiday,\
+            date_now,pd_date_split
+        date_ = date_generate(start='2021-01-01', ndays=100)
+        date_weekyear_excel('20210317')
+        date_weekday_excel('20210317')
+        #date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
+        #date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
+        df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
+        df['Gender'] = random_genders(10)
+        df['Birthdate'] = random_dates(start=pd.to_datetime('1940-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
+        #pd_date_split(df,coldate="Birthdate")
+    
+    def random_dates(start, end, size):
+        # Unix timestamp is in nanoseconds by default, so divide it by
+        # 24*60*60*10**9 to convert to days.
+        divide_by = 24 * 60 * 60 * 10**9
+        start_u = start.value // divide_by
+        end_u = end.value // divide_by
+        return pd.to_datetime(np.random.randint(start_u, end_u, size), unit="D")
+    def random_genders(size, p=None):
+        """Generate n-length ndarray of genders."""
+        if not p:
+            # default probabilities
+            p = (0.49, 0.49, 0.01, 0.01)
+        gender = ("M", "F", "O", "")
+        return np.random.choice(gender, size=size, p=p)
+    test()
+
+## decorators.py
+########################################################################################################
+
+def test_decorators():
+    """
+    #### python test.py   test_decorators
+    """
+    from utilmy.decorators import thread_decorator, timeout_decorator, profiler_context,profiler_decorator, profiler_decorator_base
+
+    @thread_decorator
+    def thread_decorator_test():
+        log("thread decorator")
+
+
+    @profiler_decorator_base
+    def profiler_decorator_base_test():
+        log("profiler decorator")
+
+    @timeout_decorator(10)
+    def timeout_decorator_test():
+        log("timeout decorator")
+
+    @profiler_decorator
+    def profiler_decorator_test():
+        log("profiler  decorator")
+    
+    with profiler_context() as profiler:
+        log("profiler context")
+    
+    profiler_decorator_test()
+    profiler_decorator_base_test()
+    timeout_decorator_test()
+    thread_decorator_test()
+    profiler_context_test()
+
 
 
 
@@ -538,11 +718,14 @@ def test_all():
 
     ################
     test_utils()
+    test_oos()
+    test_tabular()
+    test_adatasets()
+    test_dates()
+    test_decorators()
 
       
 #########################################################################################   
 if __name__ == "__main__":
     import fire
-    fire.Fire()    
-
-
+    fire.Fire() 
