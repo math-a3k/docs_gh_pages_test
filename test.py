@@ -90,14 +90,14 @@ def test_ppandas():
                            "b": [1, 2, 3, 4, 5]})
 
 
-    m.pd_plot_histogram(df1["a"],path_save="tmp/histogram")
+    m.pd_plot_histogram(df1["a"],path_save="testdata/ppandas/histogram")
    
     m.pd_merge(df1, df2, on="b")
 
     df = m.pd_filter(df3, filter_dict="a>1")
     assert df.shape[0] == 3, "not filtered properly"
 
-    m.pd_to_file(df1, "tmp/file.csv")
+    m.pd_to_file(df1, "testdata/ppandas/file.csv")
     m.pd_sample_strat(df1, col="a", n=10)
 
     bins = m.pd_col_bins(df1, "a", 5)
