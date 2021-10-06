@@ -115,13 +115,34 @@ def test_ppandas():
     m.pd_cols_unique_count(df_str)
     m.pd_del(df_str,cols=["a"])
 
+    # pd_plot_multi function needs to be fixed before writing test case
     # ax = m.pd_plot_multi(df1,plot_type='pair',cols_axe1=['a','b'])
     
     a = pd.DataFrame({"a":[1,2,3,4,5]})
     b = pd.DataFrame({"b":[1,2,3,4,5]})
-    cartesian_df = m.pd_cartesian(a,b)
+    m.pd_cartesian(a,b)
 
     m.pd_show(df_str)
+
+    l1 = [1,2,3]
+    l2 = [2,3,4]
+    l  = m.np_list_intersection(l1,l2)
+    assert len(l) == 2, "Intersection failed"
+
+    l = m.np_add_remove(set(l1),[1,2],4)
+    assert l == set([3,4]), "Add remove failed"
+
+    a = m.to_timeunix(datex="2018-01-16")
+    assert a == 1516041000000, "time unix failed"
+    a = m.to_timeunix(datetime.datetime(2018,1,16))
+    assert a == 1516041000000, "time unix failed"
+    m.to_datetime("2018-01-16")
+
+
+
+
+
+
 
 
 

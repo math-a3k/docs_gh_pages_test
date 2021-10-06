@@ -355,7 +355,7 @@ def to_timeunix(datex="2018-01-16"):
   if isinstance(datex, str)  :
      return int(time.mktime(datetime.datetime.strptime(datex, "%Y-%m-%d").timetuple()) * 1000)
 
-  if isinstance(datex, datetime)  :
+  if isinstance(datex, datetime.datetime)  :
      return int(time.mktime( datex.timetuple()) * 1000)
 
 
