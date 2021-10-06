@@ -7,11 +7,17 @@ on:
   # but only for the main branch
   push:
     branches:
-    # - main
+# - main
+
+    branches-ignore:
+      - main
 
   pull_request:
     branches:
-    # - main
+# - main
+
+    branches-ignore:
+      - main
 
 jobs:
   build:
@@ -39,12 +45,10 @@ jobs:
       with:
         path: /opt/hostedtoolcache/Python/
         key: ${{ runner.os }}-pipenv-${{ hashFiles('**py36.txt') }}
-          
 
     #- name: Install numpy
     #  if: steps.cache-pipenv.outputs.cache-hit != 'true'
     #  run: pip install numpy==1.18.2   pillow==6.2.1  scipy
-      
 
     - name: Install repo requirements  1
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
@@ -73,16 +77,18 @@ jobs:
         
         
     ########  Runs All test
-    - name: run_all
+    - name: setup
       run: |
           mkdir -p    /home/runner/work/log_tmp/
-          # pip install -e .
-          chmod -R 777 . &&  python test.py   test_all
-          # chmod -R 777 . && cd utilmy && python  test.py  test1
+          chmod -R 777 .
 
 
     ################################################################
-    - name: test_viz_vizhtml  
+    - name: test_all
+      run:   python test.py   test_all
+
+
+    - name: test_viz_vizhtml
       run:  python test.py   test_viz_vizhtml
 
 
