@@ -80,7 +80,7 @@ def test_utilmy():
 def test_ppandas():
     from utilmy import ppandas as m
     from utilmy import os_makedirs
-    os_makedirs("tmp/save_files/")
+    os_makedirs("testdata/ppandas")
 
 
     df1 = pd_random(100)
