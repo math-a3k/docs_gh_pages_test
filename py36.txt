@@ -10,9 +10,11 @@ snoop
 scipy
 seaborn
 loguru
+arrow
 ########################################################
 #### utilmy.utils
 wget
+psutil
 
 ########################################################
 #### utilmy.text
@@ -47,3 +49,9 @@ stdlib_list
 ########################################################
 #### utilmy.keyvalue
 diskcache
+
+
+########################################################
+#### utilmy.adatasets
+scikit-learn
+pmlb
