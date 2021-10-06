@@ -74,19 +74,19 @@ def test_utilmy():
 
 
 
-
-#########################################################################################
+###########################################################################
+## ppandas.py
 def test_ppandas():
     from utilmy import ppandas as m
     from utilmy import os_makedirs
-    os_makedirs("save_files")
+    os_makedirs("tmp/save_files/")
 
 
     df1 = pd_random(100)
     df2 = pd_random(100)
     df3 = pd.DataFrame({"a":[1,1,2,2,2]})
     df_str = pd.DataFrame({"a": ["A", "B", "B", "C", "C"],
-                        "b": [1, 2, 3, 4, 5]})
+                           "b": [1, 2, 3, 4, 5]})
 
 
     m.pd_plot_histogram(df1["a"],path_save="tmp/histogram")
@@ -124,6 +124,7 @@ def test_ppandas():
 
 
 
+
 #########################################################################################
 #########################################################################################
 def test_docs_cli():
@@ -133,60 +134,6 @@ def test_docs_cli():
     os.system(cmd)
     os.system('ls docs/')
    
-
-
-
-
-#########################################################################################
-#########################################################################################
-def test_decorators(*args):
-    from utilmy.decorators import profiler_decorator, profiler_context
-
-    @profiler_decorator
-    def profiled_sum():
-       return sum(range(100000))
-
-    profiled_sum()
-
-    with profiler_context():
-       x = sum(range(1000000))
-       print(x)
-
-
-    from utilmy import profiler_start, profiler_stop
-    profiler_start()
-    print(sum(range(1000000)))
-    profiler_stop()
-
-
-    ###################################################################################
-    from utilmy.decorators import timer_decorator
-    @timer_decorator
-    def dummy_func():
-       time.sleep(2)
-
-    class DummyClass:
-       @timer_decorator
-       def method(self):
-           time.sleep(3)
-
-    dummy_func()
-    a = DummyClass()
-    a.method()
-      
-      
-   
-#######################################################################################
-#######################################################################################
-def test_tabular():
-    """
-    """
-    from utilmy import tabular as m
-    df = pd_generate_data(7, 100)
-    m.test_anova(df, 'cat1', 'cat2')
-    m.test_normality2(df, '0', "Shapiro")
-    m.test_plot_qqplot(df, '1')
-
 
 
 
@@ -286,20 +233,8 @@ def test_utils():
     os_extract_archive_test()
     to_file_test()
 
-###########################################################################
-## ppandas.py
-def test_ppandas():
-    def test_pd_random():
-        from utilmy.ppandas import  pd_random
-        return pd_random(nrows=100)
-    
-    def test_pd_merge():
-        df1 = test_pd_random()
-        df2 = test_pd_random()
-        pd_merge(df1,df2,on = None, colkeep = None)
-    
-    #test_pd_random()
-    #test_pd_merge()
+
+
         
 
 
@@ -604,6 +539,22 @@ def test_tabular():
     test_np_utils()
 
 
+
+#######################################################################################
+#######################################################################################
+def test_tabular2():
+    """
+    """
+    from utilmy import tabular as m
+    df = pd_generate_data(7, 100)
+    m.test_anova(df, 'cat1', 'cat2')
+    m.test_normality2(df, '0', "Shapiro")
+    m.test_plot_qqplot(df, '1')
+
+
+
+
+
 ## adatasets.py
 ########################################################################################################
 
@@ -703,11 +654,47 @@ def test_decorators():
     profiler_decorator_base_test()
     timeout_decorator_test()
     thread_decorator_test()
-    profiler_context_test()
+    # profiler_context_test()
+
+
+def test_decorators2(*args):
+    from utilmy.decorators import profiler_decorator, profiler_context
+
+    @profiler_decorator
+    def profiled_sum():
+       return sum(range(100000))
+
+    profiled_sum()
+
+    with profiler_context():
+       x = sum(range(1000000))
+       print(x)
+
+
+    from utilmy import profiler_start, profiler_stop
+    profiler_start()
+    print(sum(range(1000000)))
+    profiler_stop()
+
+
+    ###################################################################################
+    from utilmy.decorators import timer_decorator
+    @timer_decorator
+    def dummy_func():
+       time.sleep(2)
+
+    class DummyClass:
+       @timer_decorator
+       def method(self):
+           time.sleep(3)
+
+    dummy_func()
+    a = DummyClass()
+    a.method()
 
 
 
-
+#########################################################################################
 def test_all():
     test_utilmy()
     test_decorators()
@@ -725,7 +712,7 @@ def test_all():
     test_decorators()
 
       
-#########################################################################################   
+#########################################################################################
 if __name__ == "__main__":
     import fire
     fire.Fire() 
