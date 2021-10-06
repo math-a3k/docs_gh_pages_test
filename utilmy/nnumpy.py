@@ -80,18 +80,20 @@ def to_int(x):
         return float("NaN")
 
 def is_int(x):
-    try :
-        int(x)
+# Variable check = int
+    if type(x)==int:
         return True
-    except :
-        return False    
+    else:
+        return False
+
 
 def is_float(x):
-    try :
-        float(x)
+# Variable Check = float
+
+    if type(x) == float:
         return True
-    except :
-        return False   
+    else: 
+        return False
 
 
 
