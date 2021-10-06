@@ -49,21 +49,22 @@ jobs:
     - name: Install repo requirements  1
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: |
-           pip install -r  py36.txt
-           
-    - name: Install repo requirements   2
-      if: steps.cache-pipenv.outputs.cache-hit != 'true'
-      run:  |
-        ls .
-        #pip install -r install/requirements_fake.txt
-    #- name: Install repo
-    #  run: pip install -e . -r install/py36.txt  --no-deps
-
+           pip install -r  py36_min.txt
 
 
     - name: Install utilmy
       run:  |
         pip install -e .
+
+           
+    - name: Install repo requirements   2
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run:  |
+        ls .
+        pip install -r  py36.txt
+        #pip install -r install/requirements_fake.txt
+
+
 
 
     - name: test_import
@@ -76,9 +77,7 @@ jobs:
     - name: run_all
       run: |
           mkdir -p    /home/runner/work/log_tmp/
-          # pip install -e .
           chmod -R 777 . &&  python test.py   test_all
-          # chmod -R 777 . && cd utilmy && python  test.py  test1
 
 
     ################################################################
