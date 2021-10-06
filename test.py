@@ -80,7 +80,7 @@ def test_utilmy():
 def test_ppandas():
     from utilmy import ppandas as m
     from utilmy import os_makedirs
-    os_makedirs("tmp/save_files/")
+    os_makedirs("testdata/ppandas")
 
 
     df1 = pd_random(100)
@@ -90,14 +90,14 @@ def test_ppandas():
                            "b": [1, 2, 3, 4, 5]})
 
 
-    m.pd_plot_histogram(df1["a"],path_save="tmp/histogram")
+    m.pd_plot_histogram(df1["a"],path_save="testdata/ppandas/histogram")
    
     m.pd_merge(df1, df2, on="b")
 
     df = m.pd_filter(df3, filter_dict="a>1")
     assert df.shape[0] == 3, "not filtered properly"
 
-    m.pd_to_file(df1, "tmp/file.csv")
+    m.pd_to_file(df1, "testdata/ppandas/file.csv")
     m.pd_sample_strat(df1, col="a", n=10)
 
     bins = m.pd_col_bins(df1, "a", 5)
@@ -115,13 +115,32 @@ def test_ppandas():
     m.pd_cols_unique_count(df_str)
     m.pd_del(df_str,cols=["a"])
 
+    # pd_plot_multi function needs to be fixed before writing test case
     # ax = m.pd_plot_multi(df1,plot_type='pair',cols_axe1=['a','b'])
     
     a = pd.DataFrame({"a":[1,2,3,4,5]})
     b = pd.DataFrame({"b":[1,2,3,4,5]})
-    cartesian_df = m.pd_cartesian(a,b)
+    m.pd_cartesian(a,b)
 
     m.pd_show(df_str)
+
+    l1 = [1,2,3]
+    l2 = [2,3,4]
+    l  = m.np_list_intersection(l1,l2)
+    assert len(l) == 2, "Intersection failed"
+
+    l = m.np_add_remove(set(l1),[1,2],4)
+    assert l == set([3,4]), "Add remove failed"
+
+    m.to_timeunix(datex="2018-01-16")
+    m.to_timeunix(datetime.datetime(2018,1,16))
+    m.to_datetime("2018-01-16")
+
+
+
+
+
+
 
 
 
