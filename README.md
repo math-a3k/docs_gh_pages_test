@@ -8,21 +8,17 @@
     One liner utilities
 
 
-# Index of all functions
+# HELP !!!
 
    https://github.com/arita37/myutil/blob/main/docs/doc_index.py
 
+   https://github.com/arita37/myutil/issues/127
+   
 
 # Looking for contributors
 
-   This package is looking for contributors.
-   Documentation is here:  
-   
-       https://github.com/arita37/myutil/issues/9
-   
-       https://github.com/arita37/myutil/blob/main/docs/doc_index.py
- 
-
+   This package is looking for contributors. 
+    
 
 # myutil
     https://pypi.org/project/utilmy/#history
