@@ -10,8 +10,14 @@ from threading import Thread
 from typing import Callable, Tuple, Union
 
 #################################################################################################
+verbose = 0
+
 def log(*s):
     print(*s, flush=True)
+
+
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
 
 
 def help():
@@ -22,6 +28,7 @@ def help():
     print(ss)
 
 
+#################################################################################################
 #################################################################################################
 def pd_random(nrows=1000, ncols= 5):
     return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )

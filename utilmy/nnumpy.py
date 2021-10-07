@@ -7,6 +7,24 @@ HELP= """
 import os, sys, time, datetime,inspect, json, yaml, gc
 
 
+###################################################################################################
+verbose = 0
+
+def log(*s):
+    print(*s, flush=True)
+
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
+
+def help():
+    from utilmy import help_create
+    ss  = help_create("utilmy.nnumpy", prefixs= [ 'test'])  #### Merge test code
+    ss += HELP
+    print(ss)
+
+
+
+###################################################################################################
 def test0():
     log("Testing nnumpy ...")
     to_dict(kw=[1,2,3])
@@ -20,26 +38,6 @@ def test1():
     set_ = {1,2,3,4,5}
     result = np_add_remove(set_,[1,2],6)
     log("np_add_remove",result)
-    
-
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s, verbose=1):
-    if verbose >0 : print(*s, flush=True)
-
-def help():
-    from utilmy import help_create
-
-    ss  = help_create("utilmy.nnumpy", prefixs= [ 'test'])  #### Merge test code
-    ss += HELP
-    print(ss)
-
-
-
-###################################################################################################
-def test():
-    pass
 
 
 

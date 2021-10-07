@@ -7,16 +7,22 @@ https://github.com/uqfoundation/pox/tree/master/pox
 import os, sys, time, datetime,inspect, json, yaml, gc
 
 #################################################################
+verbose = 0
+
 def log(*s):
     print(*s, flush=True)
 
-def log2(*s, verbose=1):
-    if verbose >0 : print(*s, flush=True)
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
 
 def help():
-    ss = HELP
+    from utilmy import help_create
+    ss  = help_create("utilmy.nnumpy", prefixs= [ 'test'])  #### Merge test code
+    ss += HELP
     print(ss)
 
+
+#################################################################
 def test0(): 
     os_makedirs('ztmp/ztmp2/myfile.txt')
     os_makedirs('ztmp/ztmp3/ztmp4')
@@ -101,7 +107,9 @@ def test5():
     log(os_sizeof(pd_df, set()))
 
 
-################################################################3#
+
+########################################################################################################
+########################################################################################################
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
@@ -167,10 +175,6 @@ def is_float(x):
     except :
         return False   
 
-
-
-
-########################################################################################################
 
 
 ##### OS, cofnfig ######################################################################################
