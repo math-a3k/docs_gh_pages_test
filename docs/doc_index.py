@@ -525,6 +525,15 @@ DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
 utilmy/deeplearning/__init__.py
 
 
+utilmy/deeplearning/util_topk.py
+-------------------------functions----------------------
+topk_predict()
+topk()
+topk_nearest_vector(x0, vector_list, topk = 3)
+topk_export()
+
+
+
 utilmy/deeplearning/zz_prepro.py
 -------------------------functions----------------------
 log(*s)
@@ -536,17 +545,7 @@ create_train_npz()
 image_resize(out_dir = "")
 image_check()
 create_train_parquet()
-image_remove_bg(in_dir = "", out_dir = "", level = 1)
-image_create_cache()
-os_path_check(path, n = 5)
-image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
-image_text_blank(in_dir, out_dir, level = "/*")
 model_deletes(dry = 0)
-image_save()
-topk_predict()
-topk()
-topk_nearest_vector(x0, vector_list, topk = 3)
-topk_export()
 data_add_onehot(dfref, img_dir, labels_col)
 test()
 unzip(in_dir, out_dir)
@@ -579,6 +578,12 @@ image_merge(image_list, n_dim, padding_size, max_height, total_width)
 image_remove_extra_padding(img, inverse = False, removedot = True)
 image_resize(img, size = (256, 256)
 image_read(filepath_or_buffer: Union[str, io.BytesIO])
+image_remove_bg(in_dir = "", out_dir = "", level = 1)
+image_create_cache()
+os_path_check(path, n = 5)
+image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
+image_text_blank(in_dir, out_dir, level = "/*")
+image_save(out_dir, name = "cache1")
 
 
 
