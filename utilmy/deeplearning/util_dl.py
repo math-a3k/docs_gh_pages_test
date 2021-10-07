@@ -82,6 +82,13 @@ def tensorboard_log(pars_dict:dict=None,  writer=None,  verbose=True):
 
 
 
+        
+def tf_check():
+    #### python prepro.py check_tf 
+    import tensorflow as tf
+    print( tf.config.list_physical_devices())
+
+
     
 def gpu_usage(): 
     
