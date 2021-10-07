@@ -670,8 +670,15 @@ utilmy/deeplearning/util_loss.py
 log(*s)
 metric_accuracy(y_test, y_pred, dd)
 clf_loss_macro_soft_f1(y, y_hat)
+learning_rate_schedule(mode = "step", epoch = 1, cc = None)
+loss_schedule(mode = "step", epoch = 1)
+perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
 perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
 
+-------------------------methods----------------------
+LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
+StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
+StepDecay.__call__(self, epoch)
 
 
 utilmy/deeplearning/util_datagenerator.py
