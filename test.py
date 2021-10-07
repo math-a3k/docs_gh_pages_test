@@ -11,16 +11,15 @@ Rules to follow :
        n.myfun()
 """
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
-#from scipy.stats.stats import mode
 from utilmy import pd_random, pd_generate_data
 
 
+#########################################################################################
 def log(*s):
    print(*s, flush=True)
 
 
 
-#########################################################################################
 #########################################################################################
 def test_utilmy():
    import utilmy as m
@@ -75,8 +74,7 @@ def test_utilmy():
 
 
 
-###########################################################################
-## ppandas.py
+##########################################################################################
 def test_ppandas():
     from utilmy import ppandas as m
     from utilmy import os_makedirs
@@ -140,12 +138,6 @@ def test_ppandas():
 
 
 
-
-
-
-
-
-#########################################################################################
 #########################################################################################
 def test_docs_cli():
     """  from utilmy.docs.generate_doc import run_markdown, run_table
@@ -158,7 +150,6 @@ def test_docs_cli():
 
 
         
-#########################################################################################
 #########################################################################################
 def test_text():
     from utilmy import text
@@ -199,8 +190,10 @@ def test_viz_vizhtml():
    vi.test_pd_plot_network()
    vi.test_cssname()
    
-   
 
+
+
+#########################################################################################
 def test_parallel():
    from utilmy import parallel as m
    log("from utilmy import parallel")
@@ -208,7 +201,8 @@ def test_parallel():
    m.test0()
    # par.test2()
    
-   
+
+#########################################################################################
 def test_distributed():
    from utilmy import distributed as m
    log("from utilmy import distributed as m ")
@@ -217,7 +211,6 @@ def test_distributed():
    
   
 #######################################################################################
-##     UTILS.py
 def test_utils():
     """
     #### python test.py   test_utils
@@ -255,11 +248,7 @@ def test_utils():
 
 
 
-        
-
-
-################################################################################################
-## oos.py
+########################################################################################################
 def test_oos():
     """
     #### python test.py   test_oos
@@ -435,10 +424,9 @@ def test_oos():
     os_utils_test()
     os_system_test()
 
-## tabular.py
+
+
 ########################################################################################################
-
-
 def test_tabular():
     """
     #### python test.py   test_tabular
@@ -545,8 +533,6 @@ def test_tabular():
 
 
 
-#######################################################################################
-#######################################################################################
 def test_tabular2():
     """
     """
@@ -561,11 +547,7 @@ def test_tabular2():
 
 
 
-
-
-## adatasets.py
 ########################################################################################################
-
 def test_adatasets():
     """
     #### python test.py   test_adatasets
@@ -597,9 +579,8 @@ def test_adatasets():
     test_pd_utils()
 
 
-## nnumpy.py
-########################################################################################################
 
+########################################################################################################
 def test_nnumpy():
     """
     #### python test.py   test_nnumpy
@@ -621,9 +602,7 @@ def test_nnumpy():
 
 
 
-## dates.py
 ########################################################################################################
-
 def test_dates():
     """
     #### python test.py   test_dates
@@ -661,9 +640,9 @@ def test_dates():
         return np.random.choice(gender, size=size, p=p)
     test()
 
-## decorators.py
-########################################################################################################
 
+
+########################################################################################################
 def test_decorators():
     """
     #### python test.py   test_decorators
@@ -688,6 +667,7 @@ def test_decorators():
     profiler_decorator_base_test()
     timeout_decorator_test()
     thread_decorator_test()
+
 
 
 def test_decorators2(*args):
@@ -751,3 +731,6 @@ def test_all():
 if __name__ == "__main__":
     import fire
     fire.Fire() 
+
+
+

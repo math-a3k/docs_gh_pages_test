@@ -55,7 +55,7 @@ jobs:
     - name: Install utilmy
       run:  |
         pip install -e .
-        python -c "import utilmy"  
+        python -c "import utilmy"
 
            
     - name: Install repo requirements   2
