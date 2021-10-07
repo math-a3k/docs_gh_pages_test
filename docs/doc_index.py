@@ -1,15 +1,5 @@
 
 
-utilmy/images.py
--------------------------functions----------------------
-log(*s)
-deps()
-read_image(filepath_or_buffer: typing.Union[str, io.BytesIO])
-visualize_in_row(**images)
-maintain_aspect_ratio_resize(image, width = None, height = None, inter = cv2.INTER_AREA)
-
-
-
 utilmy/graph.py
 
 
@@ -346,6 +336,16 @@ pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
 
 
 
+utilmy/images/util_image.py
+-------------------------functions----------------------
+log(*s)
+deps()
+read_image(filepath_or_buffer: typing.Union[str, io.BytesIO])
+visualize_in_row(**images)
+maintain_aspect_ratio_resize(image, width = None, height = None, inter = cv2.INTER_AREA)
+
+
+
 utilmy/docs/code_parser.py
 -------------------------functions----------------------
 export_stats_pertype(in_path:str = None, type:str = None, out_path:str = None)
@@ -428,73 +428,7 @@ run_cli()
 
 
 
-utilmy/deeplearning/prepro.py
--------------------------functions----------------------
-log(*s)
-prepro_images(image_paths, nmax = 10000000)
-prepro_image0(image_path)
-prepro_images_multi(image_paths, npool = 30, prepro_image = None)
-run_multiprocess(myfun, list_args, npool = 10, **kwargs)
-create_train_npz()
-image_resize(out_dir = "")
-image_check()
-create_train_parquet()
-image_remove_bg(in_dir = "", out_dir = "", level = 1)
-image_create_cache()
-os_path_check(path, n = 5)
-image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
-image_text_blank(in_dir, out_dir, level = "/*")
-model_deletes(dry = 0)
-image_save()
-topk_predict()
-topk()
-topk_nearest_vector(x0, vector_list, topk = 3)
-topk_export()
-data_add_onehot(dfref, img_dir, labels_col)
-test()
-unzip(in_dir, out_dir)
-gzip()
-predict(name = None)
-folder_size()
-gpu_usage()
-gpu_free()
-down_ichiba()
-down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
-check_tf()
-prepro_images2(image_paths)
-
-
-
-utilmy/deeplearning/util_layers.py
--------------------------functions----------------------
-log(*s)
-log2(*s)
-help()
-make_encoder(n_outputs = 1)
-make_decoder()
-make_classifier(class_dict)
-
--------------------------methods----------------------
-DFC_VAE.__init__(self, latent_dim, class_dict)
-DFC_VAE.encode(self, x)
-DFC_VAE.reparameterize(self, z_mean, z_logsigma)
-DFC_VAE.decode(self, z, apply_sigmoid = False)
-DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
-
-
-utilmy/deeplearning/utils_dl.py
--------------------------functions----------------------
-log(*s)
-log2(*s)
-help()
-test()
-tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
-gpu_usage()
-gpu_free()
-
-
-
-utilmy/deeplearning/utils_dl2.py
+utilmy/deeplearning/zz_utils_dl2.py
 -------------------------functions----------------------
 np_remove_duplicates(seq)
 clean1(ll)
@@ -591,53 +525,41 @@ DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
 utilmy/deeplearning/__init__.py
 
 
-utilmy/deeplearning/util_train.py
+utilmy/deeplearning/zz_prepro.py
 -------------------------functions----------------------
-np_remove_duplicates(seq)
-clean1(ll)
-log3(*s)
-log2(*s)
 log(*s)
-config_save(cc, path)
-os_path_copy(in_dir, path, ext = "*.py")
-metric_accuracy(y_val, y_pred_head, class_dict)
-valid_image_original(img_list, path, tag, y_labels, n_sample = None)
-valid_image_check(img_list, path = "", tag = "", y_labels = "", n_sample = 3, renorm = True)
-save_best(model, model_dir2, curr_loss, best_loss, counter, epoch, dd)
-save_model_state(model, model_dir2)
-train_stop(counter, patience)
-model_reload(model_reload_name, cc, )
-image_check(name, img, renorm = False)
-pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot = True)
-make_encoder(n_outputs = 1)
-make_decoder()
-make_classifier(class_dict)
-learning_rate_schedule(mode = "step", epoch = 1, cc = None)
-loss_schedule(mode = "step", epoch = 1)
-perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
-label_get_data()
-pd_category_filter(df, category_map)
-image_load(pathi, mode = 'cache')
-train_step(x, model, y_label_list = None)
-validation_step(x, model, y_label_list = None)
-metric_accuracy2(y_test, y_pred, dd)
+prepro_images(image_paths, nmax = 10000000)
+prepro_image0(image_path)
+prepro_images_multi(image_paths, npool = 30, prepro_image = None)
+run_multiprocess(myfun, list_args, npool = 10, **kwargs)
+create_train_npz()
+image_resize(out_dir = "")
+image_check()
+create_train_parquet()
+image_remove_bg(in_dir = "", out_dir = "", level = 1)
+image_create_cache()
+os_path_check(path, n = 5)
+image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
+image_text_blank(in_dir, out_dir, level = "/*")
+model_deletes(dry = 0)
+image_save()
+topk_predict()
+topk()
+topk_nearest_vector(x0, vector_list, topk = 3)
+topk_export()
+data_add_onehot(dfref, img_dir, labels_col)
+test()
+unzip(in_dir, out_dir)
+gzip()
+predict(name = None)
+folder_size()
+gpu_usage()
+gpu_free()
+down_ichiba()
+down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
+check_tf()
+prepro_images2(image_paths)
 
--------------------------methods----------------------
-LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
-DFC_VAE.__init__(self, latent_dim, class_dict)
-DFC_VAE.encode(self, x)
-DFC_VAE.reparameterize(self, z_mean, z_logsigma)
-DFC_VAE.decode(self, z, apply_sigmoid = False)
-DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
-RealCustomDataGenerator.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None, shuffle = False, img_suffix = ".png")
-RealCustomDataGenerator._load_data(self, label_path)
-RealCustomDataGenerator.on_epoch_end(self)
-RealCustomDataGenerator.__len__(self)
-RealCustomDataGenerator.__getitem__(self, idx)
-StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
-StepDecay.__call__(self, epoch)
-SprinklesTransform.__init__(self, num_holes = 100, side_length = 10, always_apply = False, p = 1.0)
-SprinklesTransform.apply(self, image, **params)
 
 
 utilmy/deeplearning/util_image.py
@@ -665,39 +587,16 @@ image_read(filepath_or_buffer: Union[str, io.BytesIO])
 
 
 
-utilmy/deeplearning/util_loss.py
+utilmy/deeplearning/util_dl.py
 -------------------------functions----------------------
 log(*s)
-metric_accuracy(y_test, y_pred, dd)
-clf_loss_macro_soft_f1(y, y_hat)
-learning_rate_schedule(mode = "step", epoch = 1, cc = None)
-loss_schedule(mode = "step", epoch = 1)
-perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
-perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
+log2(*s)
+help()
+test()
+tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
+gpu_usage()
+gpu_free()
 
--------------------------methods----------------------
-LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
-StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
-StepDecay.__call__(self, epoch)
-
-
-utilmy/deeplearning/util_datagenerator.py
--------------------------functions----------------------
-log(*s)
-data_get_sample(batch_size, x_train, labels_val)
-data_to_y_onehot_list(df, dfref, labels_col)
-data_add_onehot(dfref, img_dir, labels_col)
-
--------------------------methods----------------------
-CustomDataGenerator.__init__(self, x, y, batch_size = 32, augmentations = None)
-CustomDataGenerator.__len__(self)
-CustomDataGenerator.__getitem__(self, idx)
-CustomDataGenerator_img.__init__(self, img_dir, label_path, class_list, split = 'train', batch_size = 8, transforms = None)
-CustomDataGenerator_img.on_epoch_end(self)
-CustomDataGenerator_img.__len__(self)
-CustomDataGenerator_img.__getitem__(self, idx)
-SprinklesTransform.__init__(self, num_holes = 30, side_length = 5, always_apply = False, p = 1.0)
-SprinklesTransform.apply(self, image, **params)
 
 
 utilmy/configs/__init__.py
@@ -2117,6 +2016,88 @@ sql_postgres_pivot()
 sql_mysql_insert_excel()
 sql_pivotable(dbcon, ss = 'select  ')
 
+
+
+utilmy/deeplearning/torch/util_train.py
+
+
+utilmy/deeplearning/keras/util_layers.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+help()
+make_encoder(n_outputs = 1)
+make_decoder()
+make_classifier(class_dict)
+
+-------------------------methods----------------------
+DFC_VAE.__init__(self, latent_dim, class_dict)
+DFC_VAE.encode(self, x)
+DFC_VAE.reparameterize(self, z_mean, z_logsigma)
+DFC_VAE.decode(self, z, apply_sigmoid = False)
+DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
+
+
+utilmy/deeplearning/keras/util_train.py
+-------------------------functions----------------------
+np_remove_duplicates(seq)
+clean1(ll)
+log3(*s)
+log2(*s)
+log(*s)
+config_save(cc, path)
+os_path_copy(in_dir, path, ext = "*.py")
+metric_accuracy(y_val, y_pred_head, class_dict)
+valid_image_original(img_list, path, tag, y_labels, n_sample = None)
+valid_image_check(img_list, path = "", tag = "", y_labels = "", n_sample = 3, renorm = True)
+save_best(model, model_dir2, curr_loss, best_loss, counter, epoch, dd)
+save_model_state(model, model_dir2)
+train_stop(counter, patience)
+model_reload(model_reload_name, cc, )
+image_check(name, img, renorm = False)
+pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot = True)
+label_get_data()
+pd_category_filter(df, category_map)
+train_step(x, model, y_label_list = None)
+validation_step(x, model, y_label_list = None)
+
+-------------------------methods----------------------
+LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
+
+
+utilmy/deeplearning/keras/util_loss.py
+-------------------------functions----------------------
+log(*s)
+metric_accuracy(y_test, y_pred, dd)
+clf_loss_macro_soft_f1(y, y_hat)
+learning_rate_schedule(mode = "step", epoch = 1, cc = None)
+loss_schedule(mode = "step", epoch = 1)
+perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
+perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
+
+-------------------------methods----------------------
+LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
+StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
+StepDecay.__call__(self, epoch)
+
+
+utilmy/deeplearning/keras/util_datagenerator.py
+-------------------------functions----------------------
+log(*s)
+data_get_sample(batch_size, x_train, labels_val)
+data_to_y_onehot_list(df, dfref, labels_col)
+data_add_onehot(dfref, img_dir, labels_col)
+
+-------------------------methods----------------------
+CustomDataGenerator.__init__(self, x, y, batch_size = 32, augmentations = None)
+CustomDataGenerator.__len__(self)
+CustomDataGenerator.__getitem__(self, idx)
+CustomDataGenerator_img.__init__(self, img_dir, label_path, class_list, split = 'train', batch_size = 8, transforms = None)
+CustomDataGenerator_img.on_epoch_end(self)
+CustomDataGenerator_img.__len__(self)
+CustomDataGenerator_img.__getitem__(self, idx)
+SprinklesTransform.__init__(self, num_holes = 30, side_length = 5, always_apply = False, p = 1.0)
+SprinklesTransform.apply(self, image, **params)
 
 
 utilmy/viz/zarchive/__init__.py
