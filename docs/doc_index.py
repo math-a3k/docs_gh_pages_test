@@ -553,11 +553,6 @@ unzip(in_dir, out_dir)
 gzip()
 predict(name = None)
 folder_size()
-gpu_usage()
-gpu_free()
-down_ichiba()
-down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
-check_tf()
 prepro_images2(image_paths)
 
 
@@ -594,8 +589,10 @@ log2(*s)
 help()
 test()
 tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
+tf_check()
 gpu_usage()
 gpu_free()
+down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
 
 
 
