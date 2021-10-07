@@ -465,6 +465,23 @@ prepro_images2(image_paths)
 
 
 
+utilmy/deeplearning/util_layers.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+help()
+make_encoder(n_outputs = 1)
+make_decoder()
+make_classifier(class_dict)
+
+-------------------------methods----------------------
+DFC_VAE.__init__(self, latent_dim, class_dict)
+DFC_VAE.encode(self, x)
+DFC_VAE.reparameterize(self, z_mean, z_logsigma)
+DFC_VAE.decode(self, z, apply_sigmoid = False)
+DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
+
+
 utilmy/deeplearning/utils_dl.py
 -------------------------functions----------------------
 log(*s)
@@ -472,6 +489,8 @@ log2(*s)
 help()
 test()
 tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
+gpu_usage()
+gpu_free()
 
 
 
@@ -651,6 +670,7 @@ utilmy/deeplearning/util_loss.py
 log(*s)
 metric_accuracy(y_test, y_pred, dd)
 clf_loss_macro_soft_f1(y, y_hat)
+perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
 
 
 
