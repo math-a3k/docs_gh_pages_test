@@ -30,20 +30,24 @@ from box import Box
 import diskcache as dc
 
 #####################################################################################    
+verbose = 0
+
 def log(*s):
     print(*s, flush=True)
-        
-        
+
+
 def log2(*s):
-    if random.random() > 0.999 : print(*s, flush=True)
+    if verbose >1 : print(*s, flush=True)
+
 
 
 def help():
+    from utilmy import help_create
     ss  = ""
-
-
     ss += HELP
+    ss += help_create("utilmy.keyvalue")
     print(ss)
+
 
 
 

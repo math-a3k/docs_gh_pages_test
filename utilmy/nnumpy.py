@@ -7,11 +7,30 @@ HELP= """
 import os, sys, time, datetime,inspect, json, yaml, gc
 
 
+###################################################################################################
+verbose = 0
+
+def log(*s):
+    print(*s, flush=True)
+
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
+
+def help():
+    from utilmy import help_create
+    ss  = help_create("utilmy.nnumpy", prefixs= [ 'test'])  #### Merge test code
+    ss += HELP
+    print(ss)
+
+
+
+###################################################################################################
 def test0():
     log("Testing nnumpy ...")
     to_dict(kw=[1,2,3])
     to_timeunix(datex="2020-10-06")
     to_datetime("10/05/2021")
+
 
 def test1():
     l1 = [1,2,3]
@@ -20,26 +39,6 @@ def test1():
     set_ = {1,2,3,4,5}
     result = np_add_remove(set_,[1,2],6)
     log("np_add_remove",result)
-    
-
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s, verbose=1):
-    if verbose >0 : print(*s, flush=True)
-
-def help():
-    from utilmy import help_create
-
-    ss  = help_create("utilmy.nnumpy", prefixs= [ 'test'])  #### Merge test code
-    ss += HELP
-    print(ss)
-
-
-
-###################################################################################################
-def test():
-    pass
 
 
 
@@ -83,31 +82,32 @@ def np_add_remove(set_, to_remove, to_add):
     return result_temp
 
 
-def to_float(x):
+def to_float(x, valdef=-1):
     try :
         return float(x)
     except :
-        return float("NaN")
+        return valdef
 
-def to_int(x):
+def to_int(x, valdef=-1):
     try :
         return int(x)
     except :
-        return float("NaN")
+        return -1
+
 
 def is_int(x):
-# Variable check = int
-    if type(x)==int:
+    try :
+        int(x)
         return True
-    else:
+    except:
         return False
 
 
 def is_float(x):
-# Variable Check = float
-    if type(x) == float:
+    try :
+        float(x)
         return True
-    else: 
+    except:
         return False
 
 
@@ -116,7 +116,7 @@ def is_float(x):
 
 ###################################################################################################
 if __name__ == "__main__":
-    import fire ;
+    import fire
     fire.Fire()
 
 
