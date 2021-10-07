@@ -523,7 +523,256 @@ def image_read(filepath_or_buffer: Union[str, io.BytesIO]):
 
 
 
+ 
+    
 
+def image_remove_bg(in_dir="", out_dir="", level=1):
+    """ #### remove background
+    
+         source activate py38 &&  sleep 5 && python prepro.py   image_remove_bg  
+    
+    
+        python prepro.py rembg  --in_dir  /data/workspaces/noelkevin01/img/data/bing/v4     --out_dir  /data/workspaces/noelkevin01/img/data/bing/v4_nobg &>> /data/workspaces/noelkevin01/img/data/zlog_rembg.py  &
+
+        rembg  -ae 15 -p  /data/workspaces/noelkevin01/img/data/fashion/test2/  /data/workspaces/noelkevin01/img/data/fashion/test_nobg/  
+        
+        mkdir /data/workspaces/noelkevin01/img/data/fashion/train_nobg/  
+        
+    """    
+    in_dir  = "/data/workspaces/noelkevin01/img/data/gsp/v1000k_clean/"
+    out_dir = "/data/workspaces/noelkevin01/img/data/gsp/v1000k_clean_nobg/"
+
+    
+    fpaths = glob.glob(in_dir + "/*")
+    log( str(fpaths)[:10] )
+    for fp in fpaths : 
+        if "." not in fp.split("/")[-1] :             
+            fp_out = fp.replace(in_dir, out_dir)
+            os.makedirs(fp_out, exist_ok=True)
+            cmd = f"rembg   -p {fp}  {fp_out} "    #### no adjustment -ae 15
+            log(cmd)
+            try :
+               os.system( cmd )
+            except : pass         
+
+
+def image_create_cache():
+    #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache  
+    #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
+    ####   sleep 56000  && python prepro.py  image_create_cache       
+    import cv2, gc, diskcache
+    nmax =  1000000 #  0000
+    global xdim, ydim
+    xdim= 256
+    ydim= 256
+
+    log("### Sub-Category  ################################################################")
+    # in_dir   = data_dir + '/fashion_data/images/'
+    # in_dir   = data_dir + "/train_nobg_256/"
+    in_dir   = data_dir + "/../gsp/v1000k_clean_nobg/"
+    
+    image_list = sorted(list(glob.glob(  f'/{in_dir}/*/*.*')))
+    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ]
+    log('N images', len(image_list))
+    # tag   = "-women_topwear"
+    tag      = "train_r2p2_1000k_clean_nobg"
+    tag      = f"{tag}_{xdim}_{ydim}-{nmax}"
+    # db_path  = data_train + f"/img_{tag}.cache"
+    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache"
+    
+    log(in_dir)
+    log(db_path)
+                
+    def prepro_image2b(image_path):
+        try :
+            fname      = str(image_path).split("/")[-1]    
+            id1        = fname.split(".")[0]
+            # print(image_path)
+
+            image = cv2.imread(image_path)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  
+            # image = util_image.image_resize_pad(image, (xdim,ydim), padColor=255)
+            image = util_image.image_center_crop(image, (245, 245))
+
+            # image = image.astype('float32')
+            return image, image_path 
+            #return [1], "1"
+        
+        except :
+            try :
+               # image = image.astype('float32')
+               # cache[ fname ] =  image        ### not uulti thread write
+               return image, image_path
+               # return [1], "1"
+            except :
+               return [],""
+    
+    log("#### Converting  ############################################################")
+    image_list = image_list[:nmax]
+    log('Size Before', len(image_list))
+
+    import diskcache as dc
+    #  from diskcache import FanoutCache  ### too much space
+    # che = FanoutCache( db_path, shards=4, size_limit=int(60e9), timeout=9999999 )
+    cache = dc.Cache(db_path, size_limit=int(100e9), timeout=9999999 )
+
+    log("#### Load  #################################################################")       
+    images, labels = prepro_images_multi(image_list, prepro_image= prepro_image2b, npool=32 )
+    
+    
+    import asyncio
+    async def set_async(key, val):
+        loop = asyncio.get_running_loop()
+        future = loop.run_in_executor(None, cache.set, key, val)
+        result = await future
+        return result
+
+    # asyncio.run(set_async('test-key', 'test-value'))
+
+    
+    log(str(images)[:500],  str(labels)[:500],  )
+    log("#### Saving disk  #################################################################")           
+    for path, img in zip(labels, images) : 
+       key = os.path.abspath(path)
+       key = key.split("/")[-1] 
+       cache[ key ] =  img
+       # asyncio.run(set_async( key , img ))   ##only python 3.7
+    
+    
+    print('size cache', len(cache),)
+    print( db_path )
+    
+    for i,key in enumerate(cache):
+       if i > 3 : break 
+       x0 = cache[key] 
+       cv2.imwrite( data_train + f"/check_{i}.png", x0 )
+       print(key, x0.shape, str(x0)[:50]  )
+             
+        
+def os_path_check(path, n=5):
+    from utilmy import os_system
+    print('top files', os_system( f"ls -U   '{path}' | head -{n}") )
+    print('nfiles', os_system( f"ls -1q  '{path}' | wc -l") )
+               
+
+
+def image_face_blank(in_dir="", level = "/*", 
+                     out_dir=f"", npool=30):
+    """  Remove face
+
+     python prepro.py  image_face_blank
+     
+     python prepro.py  image_face_blank  --in_dir img/data/fashion/test_nobg   --out_dir img/data/fashion/test_nobg_noface
+
+     python prepro.py  image_face_blank  --in_dir img/data/fashion/train_nobg   --out_dir img/data/fashion/train_nobg_noface
+
+
+      five elements are [xmin, ymin, xmax, ymax, detection_confidence]
+
+    """
+    import cv2, glob
+    import face_detection
+
+    #in_dir  = "/data/workspaces/noelkevin01/" + in_dir
+    #out_dir = "/data/workspaces/noelkevin01/" + out_dir
+    npool    = 30
+    in_dir   = "/data/workspaces/noelkevin01/img/data/gsp/v70k_clean_nobg/"
+    out_dir  = "/data/workspaces/noelkevin01/img/data/gsp/v70k_clean_nobg_noface/"
+    fpaths   = glob.glob(in_dir + "/*/*" )
+    
+    # fpaths   = [  t for t in fpath if "/-1" not in fpaths ]
+    # fpaths   = fpaths[:60]
+    
+    detector = face_detection.build_detector( "RetinaNetMobileNetV1", 
+                            confidence_threshold=.5, nms_iou_threshold=.3)
+
+    log(str(fpaths)[:60])
+
+    def myfun(fp):
+      try :
+          log(fp)  
+          img   = cv2.imread(fp)
+          im    = img[:, :, ::-1]
+          areas = detector.detect(im)
+
+          ### list of areas where face is detected.
+          for (x0, y0, x1, y1, proba) in areas:  
+             x0,y0, x1, y1     = int(x0), int(y0), int(x1), int(y1)
+             img[y0:y1, x0:x1] = 0
+
+          fout = fp.replace(in_dir, out_dir)    
+          os.makedirs( os.path.dirname(fout), exist_ok=True)
+          cv2.imwrite( fout, img )
+      except : pass        
+
+
+    #for fp in fpaths :
+    #  myfun(fp)
+
+    from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
+    pool = Pool(npool) 
+    res  = pool.map(myfun, fpaths)      
+    pool.close()
+    pool.join()     
+        
+    
+    
+def image_text_blank(in_dir, out_dir, level="/*"):
+    """
+        Not working well
+        python prepro.py  image_text_blank  --in_dir img/data/fashion/ztest   --out_dir img/data/fashion/ztest_noface
+        
+    
+    """
+    import cv2, glob
+    from ztext_detector import detect_text_regions
+    
+    in_dir  = "/data/workspaces/noelkevin01/" + in_dir
+    out_dir = "/data/workspaces/noelkevin01/" + out_dir
+
+    fpaths  = glob.glob(in_dir + level )
+    log(str(fpaths)[:60])
+    for fp in fpaths :
+      try :
+          log(fp)  
+          img   = cv2.imread(fp)
+          im    = img[:, :, ::-1]
+                        
+          areas = detect_text_regions(img)
+                                       
+          ### list of areas where is detected.
+          for (x0, y0, x1, y1) in areas:  
+             x0,y0, x1, y1     = int(x0), int(y0), int(x1), int(y1)
+             img[y0:y1, x0:x1] = 0
+
+          fout = fp.replace(in_dir, out_dir)    
+          os.makedirs( os.path.dirname(fout), exist_ok=True)
+          cv2.imwrite( fout, img )
+      except : pass
+    
+
+def image_save():
+    ##### Write some sample images  ########################
+    import diskcache as dc
+    db_path = "/data/workspaces/noelkevin01/img/data/fashion/train_npz/small/img_train_r2p2_70k_clean_nobg_256_256-100000.cache"
+    cache   = dc.Cache(db_path)
+    print('Nimages', len(cache) )
+
+    log('### writing on disk  ######################################')
+    dir_check = out_dir + f"/{xname}/"
+    os.makedirs(dir_check, exist_ok=True)
+    for i, key in enumerate(img_list) :
+        if i > 10: break       
+        img = cache[key]
+        img = img[:, :, ::-1]
+        key2 = key.split("/")[-1]
+        cv2.imwrite( dir_check + f"/{i}_{key2}"  , img)            
+    log( dir_check ) 
+
+
+    
+    
+    
 
 
 
