@@ -325,11 +325,6 @@ def test_oos():
     
     def os_file_replacestring_test():
         log("Testing os_file_replacestring() ..")
-        from utilmy.oos import os_file_replacestring
-        with open("./testdata/tmp/test/os_file_test.txt", 'a') as file:
-            file.write("Dummy text to test replace string")
-
-        os_file_replacestring("text", "text_replace", "./testdata/tmp/test/")
         
     def os_walk_test():
         log("Testing os_walk() ..")
@@ -407,6 +402,11 @@ def test_oos():
             file.write("Dummy file to test os utils")
             
         os_makedirs("./testdata/tmp/test/os_test")
+        from utilmy.oos import os_file_replacestring
+        with open("./testdata/tmp/test/os_test/os_file_test.txt", 'a') as file:
+            file.write("Dummy text to test replace string")
+
+        os_file_replacestring("text", "text_replace", "./testdata/tmp/test/os_test/")
 
         #os_copy(os.path.join(os_getcwd(), "tmp/test"), os.path.join(os_getcwd(), "tmp/test/os_test"))
         os_removedirs("./testdata/tmp/test/os_test")
