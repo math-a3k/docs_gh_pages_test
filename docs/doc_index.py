@@ -5,6 +5,7 @@ utilmy/nnumpy.py
 
 utilmy/ppandas.py
 -------------------------functions----------------------
+pd_dtype_count_unique(df, col_continuous = [])
 pd_dtype_to_category(df, col_exclude, treshold = 0.5)
 pd_dtype_getcontinuous(df, cols_exclude:list = [], nsample = -1)
 pd_del(df, cols:list)
@@ -30,6 +31,8 @@ utilmy/graph.py
 
 utilmy/utils.py
 -------------------------functions----------------------
+test0()
+test1()
 log(*s)
 log2(*s)
 logw(*s)
@@ -95,6 +98,8 @@ Session.load_session(self, folder, globs = None)
 
 utilmy/adatasets.py
 -------------------------functions----------------------
+test0()
+test1()
 log(*s)
 log2(*s)
 dataset_classifier_XXXXX(nrows = 500, **kw)
@@ -112,9 +117,13 @@ fetch_dataset(url_dataset, path_target = None, file_target = None)
 utilmy/oos.py
 -------------------------functions----------------------
 log(*s)
-log2(*s, verbose = 1)
+log2(*s)
 help()
-test()
+test0()
+test1()
+test2()
+test4()
+test5()
 to_dict(**kw)
 to_timeunix(datex = "2018-01-16")
 to_datetime(x)
@@ -164,7 +173,9 @@ dict_to_namespace.__init__(self, d)
 
 utilmy/distributed.py
 -------------------------functions----------------------
+log(*s)
 log2(*s)
+help()
 log_mem(*s)
 test1_functions()
 test2_funtions_thread()
@@ -189,6 +200,7 @@ IndexLock.put(self, val = "", ntry = 100, plock = "tmp/plock.lock")
 utilmy/parallel.py
 -------------------------functions----------------------
 log(*s)
+log2(*s)
 help()
 pd_random(nrows = 1000, ncols =  5)
 test_fun_sum_inv(group, name = None)
@@ -222,6 +234,7 @@ utilmy/__init__.py
 
 utilmy/text.py
 -------------------------functions----------------------
+test()
 log(*s)
 help()
 help_get_codesource(func)
@@ -233,14 +246,11 @@ pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
 
 
 
-utilmy/deeplearning.py
--------------------------functions----------------------
-tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
-
-
-
 utilmy/dates.py
 -------------------------functions----------------------
+test()
+random_dates(start, end, size)
+random_genders(size, p = None)
 log(*s)
 pd_date_split(df, coldate  =   'time_key', prefix_col  = "", verbose = False)
 date_now(fmt="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S %Z%z", add_days = 0, timezone = 'Asia/Tokyo')
@@ -273,6 +283,9 @@ help()
 
 utilmy/tabular.py
 -------------------------functions----------------------
+test0()
+test1()
+test3()
 log(*s)
 y_adjustment()
 test_anova(df, col1, col2)
@@ -321,6 +334,12 @@ timer_decorator(func)
 profiler_context()
 profiler_decorator(func)
 profiler_decorator_base(fnc)
+test0()
+thread_decorator_test()
+profiler_decorator_base_test()
+timeout_decorator_test()
+profiled_sum()
+dummy_func()
 
 
 
@@ -1809,6 +1828,9 @@ SprinklesTransform.__init__(self, num_holes = 30, side_length = 5, always_apply 
 SprinklesTransform.apply(self, image, **params)
 
 
+utilmy/deeplearning/__init__.py
+
+
 utilmy/deeplearning/prepro.py
 -------------------------functions----------------------
 log(*s)
@@ -1895,17 +1917,43 @@ SprinklesTransform.__init__(self, num_holes = 100, side_length = 10, always_appl
 SprinklesTransform.apply(self, image, **params)
 
 
+utilmy/deeplearning/util_logs.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
+
+
+
 utilmy/deeplearning/utils_dl.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+help()
+test()
+tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
+prepro_image(image_path:str, xdim = 1, ydim = 1)
+prepro_images(image_paths, nmax = 10000000)
+image_center_crop(img, dim)
+prepro_images_multi(image_paths, npool = 30, prepro_image = None)
+image_resize_pad(img, size = (256, 256)
+image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
+image_read(filepath_or_buffer: Union[str, io.BytesIO])
+image_save_tocache(out_dir, name = "cache1")
+
+
+
+utilmy/deeplearning/utils_dl2.py
 -------------------------functions----------------------
 np_remove_duplicates(seq)
 clean1(ll)
 log(*s)
 log3(*s)
 log2(*s)
+prepro_image(image_path)
 prepro_images(image_paths, nmax = 10000000)
 image_center_crop(img, dim)
 image_resize_pad(img, size = (256, 256)
-prepro_image0(image_path)
 prepro_images_multi(image_paths, npool = 30, prepro_image = None)
 run_multiprocess(myfun, list_args, npool = 10, **kwargs)
 pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot = True)
@@ -1926,7 +1974,7 @@ os_path_check(path, n = 5)
 image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
 image_text_blank(in_dir, out_dir, level = "/*")
 image_read(filepath_or_buffer: Union[str, io.BytesIO])
-image_save()
+image_save(out_dir)
 create_train_npz()
 create_train_parquet()
 model_deletes(dry = 0)
