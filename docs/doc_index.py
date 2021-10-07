@@ -646,14 +646,17 @@ image_read(filepath_or_buffer: Union[str, io.BytesIO])
 
 
 
-utilmy/deeplearning/util_loss_layers.py
+utilmy/deeplearning/util_loss.py
 -------------------------functions----------------------
 log(*s)
 metric_accuracy(y_test, y_pred, dd)
 clf_loss_macro_soft_f1(y, y_hat)
-save_best(model, model_dir2, valid_loss, best_loss, counter)
-save_model_state(model, model_dir2)
-train_stop(counter, patience)
+
+
+
+utilmy/deeplearning/util_datagenerator.py
+-------------------------functions----------------------
+log(*s)
 data_get_sample(batch_size, x_train, labels_val)
 data_to_y_onehot_list(df, dfref, labels_col)
 data_add_onehot(dfref, img_dir, labels_col)
