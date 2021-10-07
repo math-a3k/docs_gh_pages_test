@@ -48,15 +48,20 @@
    #### Save current python session on disk.
    from utilmy import Session
    sess = Session("ztmp/session")
-   sess.save('mysess', globals(), '01')
+   
+   aabb = 'ok'
+   
+   
+   
+   
+   sess.save('mysess', globals(),)
    os.system("ls ztmp/session")
-
-   sess.save('mysess', globals(), '02')
    sess.show()
-
-
-   sess.load('mysess')
-   sess.load('mysess', None, '02')
+   
+   del aabb
+   sess.load('mysess', )
+   print(aabb)
+   
    
    
  ```
