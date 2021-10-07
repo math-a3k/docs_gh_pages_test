@@ -88,8 +88,6 @@ jobs:
     - name: test_ppandas
       run: python test.py test_ppandas
     
-    - name: test_ppandas
-      run: python test.py test_ppandas
     
     - name: test_docs_cli 
       run: python test.py test_docs_cli
