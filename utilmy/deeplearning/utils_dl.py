@@ -1,26 +1,14 @@
 # -*- coding: utf-8 -*-
 HELP="""
 
- utils in Keras
+utils in DL
 
 """
 import os,io, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
 from typing import Union
-
-
-os.environ['MPLCONFIGDIR'] = "/tmp/"
-
-import io
-import tensorflow as tf, tensorflow_addons as tfa
-from tensorflow.keras import layers, regularizers
-from tensorflow.python.keras.utils.data_utils import Sequence    
-from sklearn.metrics import accuracy_score
 from box import Box
 import diskcache as dc
 
-
-
-from utilmy import pd_read_file
 
 
 ################################################################################################
@@ -36,8 +24,7 @@ def log2(*s):
 
 def help():
     from utilmy import help_create
-    ss  = ""
-    ss += HELP
+    ss  = HELP
     ss += help_create("utilmy.deeplearning.util_dl")
     print(ss)
 
@@ -92,9 +79,6 @@ def tensorboard_log(pars_dict:dict=None,  writer=None,  verbose=True):
 
     writer.close()
     return writer
-
-
-
 
 
 
