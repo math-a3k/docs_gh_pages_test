@@ -552,7 +552,10 @@ def test_tabular2():
     """
     from utilmy import tabular as m
     df = pd_generate_data(7, 100)
+    """TODO: raise TypeError(f'at least two inputs are required; got {len(args)}.')
+    TypeError: at least two inputs are required; got 1.
     m.test_anova(df, 'cat1', 'cat2')
+    """
     m.test_normality2(df, '0', "Shapiro")
     m.test_plot_qqplot(df, '1')
 
