@@ -480,6 +480,14 @@ image_resize_pad(img, size = (256, 256)
 image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
 image_read(filepath_or_buffer: Union[str, io.BytesIO])
 image_save_tocache(out_dir, name = "cache1")
+image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
+padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
+image_center_crop(img, dim)
+image_resize_pad(img, size = (256, 256)
+image_merge(image_list, n_dim, padding_size, max_height, total_width)
+image_remove_extra_padding(img, inverse = False, removedot = True)
+image_resize(img, size = (256, 256)
+image_read(filepath_or_buffer: Union[str, io.BytesIO])
 
 
 
@@ -629,15 +637,7 @@ SprinklesTransform.__init__(self, num_holes = 100, side_length = 10, always_appl
 SprinklesTransform.apply(self, image, **params)
 
 
-utilmy/deeplearning/util_logs.py
--------------------------functions----------------------
-log(*s)
-log2(*s)
-tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
-
-
-
-utilmy/deeplearning/utils.py
+utilmy/deeplearning/util_loss_layers.py
 -------------------------functions----------------------
 log(*s)
 metric_accuracy(y_test, y_pred, dd)
@@ -648,14 +648,6 @@ train_stop(counter, patience)
 data_get_sample(batch_size, x_train, labels_val)
 data_to_y_onehot_list(df, dfref, labels_col)
 data_add_onehot(dfref, img_dir, labels_col)
-image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
-padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
-image_center_crop(img, dim)
-image_resize_pad(img, size = (256, 256)
-image_merge(image_list, n_dim, padding_size, max_height, total_width)
-image_remove_extra_padding(img, inverse = False, removedot = True)
-image_resize(img, size = (256, 256)
-image_read(filepath_or_buffer: Union[str, io.BytesIO])
 
 -------------------------methods----------------------
 CustomDataGenerator.__init__(self, x, y, batch_size = 32, augmentations = None)
