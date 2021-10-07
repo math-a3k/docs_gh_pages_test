@@ -111,7 +111,8 @@ def test3_index():
 
 
 def test_all():
-    test1_funtions()
+    #test1_funtions()
+    test1_functions()
     test2_funtions_thread()
     test3_index()
       
