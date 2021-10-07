@@ -98,7 +98,38 @@ def tensorboard_log(pars_dict:dict=None,  writer=None,  verbose=True):
 
 
 
+    
+def gpu_usage(): 
+    
+   cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv"
 
+   from utilmy import os_system    
+   res = os_system(cmd)
+   print(res)
+        
+   ## cmd = "nvidia-smi --query-gpu=utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv"
+   ## cmd2= " nvidia-smi --query-gpu=timestamp,name,pci.bus_id,driver_version,pstate,pcie.link.gen.max,pcie.link.gen.current,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv  "
+    
+    
+def gpu_free():  
+    cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv  "
+    from utilmy import os_system    
+    ss = os_system(cmd)
+
+    # ss   = ('pci.bus_id, utilization.gpu [%]\n00000000:01:00.0, 37 %\n00000000:02:00.0, 0 %\n00000000:03:00.0, 0 %\n00000000:04:00.0, 89 %\n', '')
+    ss   = ss[0]
+    ss   = ss.split("\n")
+    ss   = [ x.split(",") for x in ss[1:] if len(x) > 4 ]
+    print(ss)
+    deviceid_free = []
+    for ii, t in enumerate(ss) :
+        if  " 0 %"  in t[1]:
+            deviceid_free.append( ii )
+    print( deviceid_free )        
+    return deviceid_free
+            
+            
+            
 
 
 
