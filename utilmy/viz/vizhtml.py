@@ -25,6 +25,7 @@ from typing import List
 from tqdm import tqdm
 from box import Box
 
+
 try :
    # Converting python --> HTML
    import matplotlib.pyplot as plt

@@ -17,11 +17,7 @@ def help():
     ss = HELP
     print(ss)
 
-    
-################################################################3#
-def test():
-    ### python oos.py test
-    from utilmy.oos import os_makedirs, os_system, os_removedirs
+def test0(): 
     os_makedirs('ztmp/ztmp2/myfile.txt')
     os_makedirs('ztmp/ztmp3/ztmp4')
     os_makedirs('/tmp/one/two')
@@ -41,12 +37,68 @@ def test():
     res = os_system( f" ls . ",  doprint=True)
     log(res)
     res = os_system( f" ls . ",  doprint=False)
-
-    from utilmy import os_platform_os
     assert os_platform_os() == sys.platform
 
+def test1():
+    int_ = 1
+    float_ = 1.1
+    is_int(int_)
+    is_float(float_)
+    to_float(int_)
+    to_int(float_)
 
+def test2():
+    size_ = os_path_size()
+    log("total size", size_)
+    result_ = os_path_split("test/tmp/test.txt")
+    log("result", result_)
+    with open("./testdata/tmp/test/os_file_test.txt", 'a') as file:
+        file.write("Dummy text to test replace string")
 
+    os_file_replacestring("text", "text_replace", "./testdata/tmp/test/")
+    os_copy_safe("./testdata/tmp/test", "./testdata/tmp/test_copy/")
+
+    with open("./testdata/tmp/test/os_search_test.txt", 'a') as file:
+        file.write("Dummy text to test fast search string")
+    res = z_os_search_fast("./testdata/tmp/test/os_search_test.txt", ["Dummy"],mode="regex")
+
+    with open("./testdata/tmp/test/os_search_content_test.txt", 'a') as file:
+        file.write("Dummy text to test fast search string")
+    cwd = os.getcwd()
+    '''TODO: for f in list_all["fullpath"]:
+        KeyError: 'fullpath'
+    res = os_search_content(srch_pattern= "Dummy text",dir1=os.path.join(cwd ,"tmp/test/"))
+    log(res)
+    '''
+
+def test4():
+    log(os_get_function_name())
+    cwd = os.getcwd()
+    log(os_walk(cwd))
+    cmd = ["pwd","whoami"]
+    os_system_list(cmd, sleep_sec=0)
+    ll = ["test_var"]
+    globs = {}
+    os_variable_init(ll,globs)
+    os_variable_exist("test_var",globs)
+    os_variable_check("other_var",globs,do_terminate=False)
+    os_import(mod_name="pandas", globs=globs)
+    os_clean_memory(["test_var"], globs)
+    log(os_variable_exist("test_var",globs))
+    
+    os_to_file(txt="test text to write to file",filename="./testdata/tmp/test/file_test.txt", mode="a")
+    os_file_check("./testdata/tmp/test/file_test.txt")
+
+def test5():
+    log("Testing os utils...")
+    from utilmy import pd_random
+    log(os_platform_os())
+    log(os_cpu())
+    log(os_memory())
+    log(os_getcwd())
+    os_sleep_cpu(cpu_min=30, sleep=1, interval=5, verbose=True)
+    pd_df = pd_random()
+    log(os_sizeof(pd_df, set()))
 
 
 ################################################################3#

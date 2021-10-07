@@ -7,6 +7,26 @@ from pathlib import Path
 from utilmy import (os_makedirs, os_system, global_verbosity, git_current_hash, git_repo_root
                            )
 
+def test0():
+    log("Testing  ...")
+    test_dataset_regression_fake(nrows=500, n_features=17)
+    test_dataset_classification_fake(nrows=10)
+    test_dataset_classification_petfinder(nrows=10)
+    test_dataset_classifier_covtype(nrows=10)
+    '''TODO:
+    dataset_classifier_pmlb(name=2)
+    '''
+    
+def test1():
+    fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
+    df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
+    ''' TODO : need to add axis on df.drop()
+    KeyError: "['block'] not found in axis"
+    pd_train_test_split(df,"block")
+    '''
+    pd_train_test_split2(df, "block")
+
+    
 ####################################################################################################
 verbosity = 3
 

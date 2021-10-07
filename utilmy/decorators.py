@@ -2,6 +2,10 @@ from threading import Thread
 import cProfile, pstats, io, os, errno, signal, time
 from functools import wraps
 from contextlib import contextmanager
+from utilmy.debug import log
+
+
+
 
 
 
@@ -136,3 +140,33 @@ def profiler_decorator_base(fnc):
     return inner
 
 
+
+def test0():
+    with profiler_context():
+        x = sum(range(1000000))
+        print(x)
+    from utilmy import profiler_start, profiler_stop
+    profiler_start()
+    print(sum(range(1000000)))
+    profiler_stop()
+
+@thread_decorator
+def thread_decorator_test():
+    log("thread decorator")
+
+@profiler_decorator_base
+def profiler_decorator_base_test():
+    log("profiler decorator")
+
+@timeout_decorator(10)
+def timeout_decorator_test():
+    log("timeout decorator")
+
+
+@profiler_decorator
+def profiled_sum():
+    return sum(range(100000))
+
+@timer_decorator
+def dummy_func():
+    time.sleep(2)

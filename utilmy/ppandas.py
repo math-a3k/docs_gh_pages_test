@@ -5,6 +5,66 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
 
+def test():
+    from utilmy import os_makedirs
+    os_makedirs("testdata/ppandas")
+
+
+    df1 = pd_random(100)
+    df2 = pd_random(100)
+    df3 = pd.DataFrame({"a":[1,1,2,2,2]})
+    df_str = pd.DataFrame({"a": ["A", "B", "B", "C", "C"],
+                           "b": [1, 2, 3, 4, 5]})
+
+
+    pd_plot_histogram(df1["a"],path_save="testdata/ppandas/histogram")
+   
+    pd_merge(df1, df2, on="b")
+
+    df = pd_filter(df3, filter_dict="a>1")
+    assert df.shape[0] == 3, "not filtered properly"
+
+    pd_to_file(df1, "testdata/ppandas/file.csv")
+    pd_sample_strat(df1, col="a", n=10)
+
+    bins = pd_col_bins(df1, "a", 5)
+    assert len(np.unique(bins)) == 5, "bins not formed"
+
+    pd_dtype_reduce(df1)
+    pd_dtype_count_unique(df1,col_continuous=['b'])
+
+    df = pd_dtype_to_category(df_str, col_exclude=["b"], treshold=0.7)
+    assert df.dtypes["a"] == "category", "Columns was not converted to category"
+
+    pd_dtype_getcontinuous(df_str,cols_exclude=["a"])
+    pd_add_noise(df1,level=0.01,cols_exclude=["a"])
+
+    pd_cols_unique_count(df_str)
+    pd_del(df_str,cols=["a"])
+
+    # pd_plot_multi function needs to be fixed before writing test case
+    # ax = m.pd_plot_multi(df1,plot_type='pair',cols_axe1=['a','b'])
+    
+    a = pd.DataFrame({"a":[1,2,3,4,5]})
+    b = pd.DataFrame({"b":[1,2,3,4,5]})
+    pd_cartesian(a,b)
+
+    pd_show(df_str)
+    
+def test2():
+    l1 = [1,2,3]
+    l2 = [2,3,4]
+    l  = np_list_intersection(l1,l2)
+    assert len(l) == 2, "Intersection failed"
+
+    l = np_add_remove(set(l1),[1,2],4)
+    assert l == set([3,4]), "Add remove failed"
+
+    to_timeunix(datex="2018-01-16")
+    to_timeunix(datetime.datetime(2018,1,16))
+    to_datetime("2018-01-16")
+    
+
 def log(*s):
     print(*s, flush=True)
 
