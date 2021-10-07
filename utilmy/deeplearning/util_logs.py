@@ -2,6 +2,16 @@
 
 
 
+verbose = 0
+
+def log(*s):
+    print(*s, flush=True)
+
+
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
+
+
 
 def tensorboard_log(pars_dict:dict=None,  writer=None,  verbose=True):
     """

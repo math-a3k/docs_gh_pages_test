@@ -77,6 +77,7 @@ def test_sum(x):
     return  x['0'] + x['1']
 
 
+s
 def test0():
     df  = pd_random(1*10**5, ncols=3)
 
