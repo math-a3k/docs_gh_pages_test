@@ -98,12 +98,14 @@ jobs:
     - name: test_distributed
       run: python test.py test_distributed
 
-    - name: test_utils
-      run: python test.py test_utils
+    
 
     - name: test_oos 
       run: python test.py test_oos
 
+    - name: test_utils
+      run: python test.py test_utils
+      
     - name: test_tabular
       run: python test.py test_tabular
 

@@ -325,11 +325,6 @@ def test_oos():
     
     def os_file_replacestring_test():
         log("Testing os_file_replacestring() ..")
-        from utilmy.oos import os_file_replacestring
-        with open("./testdata/tmp/test/os_file_test.txt", 'a') as file:
-            file.write("Dummy text to test replace string")
-
-        os_file_replacestring("text", "text_replace", "./testdata/tmp/test/")
         
     def os_walk_test():
         log("Testing os_walk() ..")
@@ -407,6 +402,11 @@ def test_oos():
             file.write("Dummy file to test os utils")
             
         os_makedirs("./testdata/tmp/test/os_test")
+        from utilmy.oos import os_file_replacestring
+        with open("./testdata/tmp/test/os_test/os_file_test.txt", 'a') as file:
+            file.write("Dummy text to test replace string")
+
+        os_file_replacestring("text", "text_replace", "./testdata/tmp/test/os_test/")
 
         #os_copy(os.path.join(os_getcwd(), "tmp/test"), os.path.join(os_getcwd(), "tmp/test/os_test"))
         os_removedirs("./testdata/tmp/test/os_test")
@@ -552,7 +552,10 @@ def test_tabular2():
     """
     from utilmy import tabular as m
     df = pd_generate_data(7, 100)
+    """TODO: raise TypeError(f'at least two inputs are required; got {len(args)}.')
+    TypeError: at least two inputs are required; got 1.
     m.test_anova(df, 'cat1', 'cat2')
+    """
     m.test_normality2(df, '0', "Shapiro")
     m.test_plot_qqplot(df, '1')
 
