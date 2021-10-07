@@ -472,22 +472,6 @@ log2(*s)
 help()
 test()
 tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
-prepro_image(image_path:str, xdim = 1, ydim = 1)
-prepro_images(image_paths, nmax = 10000000)
-image_center_crop(img, dim)
-prepro_images_multi(image_paths, npool = 30, prepro_image = None)
-image_resize_pad(img, size = (256, 256)
-image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
-image_read(filepath_or_buffer: Union[str, io.BytesIO])
-image_save_tocache(out_dir, name = "cache1")
-image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
-padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
-image_center_crop(img, dim)
-image_resize_pad(img, size = (256, 256)
-image_merge(image_list, n_dim, padding_size, max_height, total_width)
-image_remove_extra_padding(img, inverse = False, removedot = True)
-image_resize(img, size = (256, 256)
-image_read(filepath_or_buffer: Union[str, io.BytesIO])
 
 
 
@@ -635,6 +619,31 @@ StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 StepDecay.__call__(self, epoch)
 SprinklesTransform.__init__(self, num_holes = 100, side_length = 10, always_apply = False, p = 1.0)
 SprinklesTransform.apply(self, image, **params)
+
+
+utilmy/deeplearning/util_image.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+help()
+test()
+prepro_image(image_path:str, xdim = 1, ydim = 1)
+prepro_images(image_paths, nmax = 10000000)
+image_center_crop(img, dim)
+prepro_images_multi(image_paths, npool = 30, prepro_image = None)
+image_resize_pad(img, size = (256, 256)
+image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
+image_read(filepath_or_buffer: Union[str, io.BytesIO])
+image_save_tocache(out_dir, name = "cache1")
+image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
+padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
+image_center_crop(img, dim)
+image_resize_pad(img, size = (256, 256)
+image_merge(image_list, n_dim, padding_size, max_height, total_width)
+image_remove_extra_padding(img, inverse = False, removedot = True)
+image_resize(img, size = (256, 256)
+image_read(filepath_or_buffer: Union[str, io.BytesIO])
+
 
 
 utilmy/deeplearning/util_loss_layers.py
