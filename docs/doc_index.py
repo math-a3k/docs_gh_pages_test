@@ -336,13 +336,53 @@ pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
 
 
 
+utilmy/images/util_exceptions.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+logw(*s)
+loge(*s)
+logger_setup()
+config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
+dataset_donwload(url, path_target)
+dataset_get_path(cfg: dict)
+os_extract_archive(file_path, path = ".", archive_format = "auto")
+to_file(s, filep)
+
+
+
 utilmy/images/util_image.py
+-------------------------functions----------------------
+padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
+image_merge(image_list, n_dim, padding_size, max_height, total_width)
+image_remove_extra_padding(img, inverse = False, removedot = True)
+image_resize(image, width = None, height = None, inter = cv2.INTER_AREA)
+image_read(filepath_or_buffer: Union[str, io.BytesIO])
+
+
+
+utilmy/images/util_image1.py
 -------------------------functions----------------------
 log(*s)
 deps()
 read_image(filepath_or_buffer: typing.Union[str, io.BytesIO])
 visualize_in_row(**images)
 maintain_aspect_ratio_resize(image, width = None, height = None, inter = cv2.INTER_AREA)
+
+
+
+utilmy/images/utils.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+logw(*s)
+loge(*s)
+logger_setup()
+config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
+dataset_donwload(url, path_target)
+dataset_get_path(cfg: dict)
+os_extract_archive(file_path, path = ".", archive_format = "auto")
+to_file(s, filep)
 
 
 
