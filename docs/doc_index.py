@@ -1951,6 +1951,17 @@ DFC_VAE.decode(self, z, apply_sigmoid = False)
 DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
 
 
+utilmy/deeplearning/keras/nsl_graph_loss.py
+-------------------------functions----------------------
+create_fake_neighbor(x, max_neighbors)
+map_func(x_batch, y_batch, neighbors, neighbor_weights)
+train_step(x, y, model, loss_fn, optimizer)
+test_step(x, y, model, loss_fn)
+train_step(x, y, model, loss_fn, optimizer)
+test_step(x, y, model, loss_fn)
+
+
+
 utilmy/deeplearning/keras/util_train.py
 -------------------------functions----------------------
 np_remove_duplicates(seq)
@@ -1977,6 +1988,26 @@ validation_step(x, model, y_label_list = None)
 
 -------------------------methods----------------------
 LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
+
+
+utilmy/deeplearning/keras/vq_vae2.py
+-------------------------functions----------------------
+encoder_Base(latent_dim)
+get_vqvae_layer_hierarchical(latent_dim = 16, num_embeddings = 64)
+plot_original_reconstructed(orig, rec)
+
+-------------------------methods----------------------
+Quantizer.__init__(self, number_of_embeddings, embedding_dimensions, beta = 0.25, **kwargs)
+Quantizer.call(self, x)
+Quantizer.get_code_indices(self, flattened_inputs)
+VQ_VAE_Trainer_2.__init__(self, train_variance, latent_dim = 16, number_of_embeddings = 128, **kwargs)
+VQ_VAE_Trainer_2.metrics(self)
+VQ_VAE_Trainer_2.train_step(self, x)
+PixelConvLayer.__init__(self, mask_type, **kwargs)
+PixelConvLayer.build(self, input_shape)
+PixelConvLayer.call(self, inputs)
+ResidualBlock.__init__(self, filters, **kwargs)
+ResidualBlock.call(self, inputs)
 
 
 utilmy/deeplearning/keras/util_loss.py
