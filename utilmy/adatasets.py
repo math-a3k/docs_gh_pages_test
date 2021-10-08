@@ -55,7 +55,7 @@ def dataset_classifier_XXXXX(nrows=500, **kw):
 ####################################################################################################
 def pd_train_test_split(df, coly=None):
     from sklearn.model_selection import train_test_split
-    X,y = df.drop(coly), df[[coly]]
+    X,y = df.drop(coly,axis=1), df[[coly]]
     X_train_full, X_test, y_train_full, y_test = train_test_split(X, y, test_size=0.05, random_state=2021)
     X_train, X_valid, y_train, y_valid         = train_test_split(X_train_full, y_train_full, random_state=2021)
     return X_train, X_valid, y_train, y_valid, X_test, y_test
@@ -82,8 +82,11 @@ def dataset_classifier_pmlb(name='', return_X_y=False):
     pars = {}
 
     X,y = fetch_data(ds, return_X_y=  True)
-    X['coly'] = y
-    return X, pars
+    colnum = list(range(X.shape[1]))
+    df = pd.DataFrame(X,columns=colnum)
+    df['coly'] = y
+    pars = {"colnum":colnum,"coly":y}
+    return df, pars
 
 
 def test_dataset_classifier_covtype(nrows=500):
