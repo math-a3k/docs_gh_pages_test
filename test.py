@@ -490,9 +490,8 @@ def test_tabular():
         '''TODO: git test failling here'''
         # log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
 
-        """TODO: Just install pandas_profiling into package
         pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
-        """
+
 
         pd_stat_distribution_colnum(df, nrows=len(df))
 
@@ -608,10 +607,7 @@ def test_dates():
         date_weekyear_excel('20210317')
         date_weekday_excel('20210317')
 
-        """TODO
-        install holiday package into the package 
         date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
-        """
         
         date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
         df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
