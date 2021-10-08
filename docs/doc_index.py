@@ -1867,7 +1867,7 @@ StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 StepDecay.__call__(self, epoch)
 
 
-utilmy/deeplearning/keras/util_datagenerator.py
+utilmy/deeplearning/keras/util_dataloader.py
 -------------------------functions----------------------
 log(*s)
 data_get_sample(batch_size, x_train, labels_val)
