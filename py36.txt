@@ -55,6 +55,11 @@ diskcache
 #### utilmy.adatasets
 scikit-learn
 pmlb
+pandas_profiling
+
+########################################################
+#### utilmy.dates
+holidays
 
 ###############################
 ## tabular
