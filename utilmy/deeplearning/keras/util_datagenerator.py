@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-import io
-import os
+import io,  os
 from typing import Union
 
 import cv2
@@ -10,7 +9,6 @@ from skimage import morphology
 
 
 
-###################################################################################################
 ###################################################################################################
 def log(*s):
     print(*s, flush=True)
@@ -57,7 +55,34 @@ def data_to_y_onehot_list(df, dfref, labels_col) :
     return labels_val, labels_cnt
     
     
-    
+
+
+def data_add_onehot(dfref, img_dir, labels_col) :
+    """
+       id, uri, cat1, cat2, .... , cat1_onehot
+    """
+    import glob
+    fpaths   = glob.glob(img_dir )
+    fpaths   = [ fi for fi in fpaths if "." in fi.split("/")[-1] ]
+    log(str(fpaths)[:100])
+
+    df         = pd.DataFrame(fpaths, columns=['uri'])
+    log(df.head(1).T)
+    df['id']   = df['uri'].apply(lambda x : x.split("/")[-1].split(".")[0]    )
+    df['id']   = df['id'].apply( lambda x: int(x) )
+    df         = df.merge(dfref, on='id', how='left')
+
+    # labels_col = [  'gender', 'masterCategory', 'subCategory', 'articleType' ]
+    for ci in labels_col :
+      dfi_1hot           = pd.get_dummies(df, columns=[ci])  ### OneHot
+      dfi_1hot           = dfi_1hot[[ t for t in dfi_1hot.columns if ci in t   ]]  ## keep only OneHot
+      df[ci + "_onehot"] = dfi_1hot.apply( lambda x : ','.join([   str(t) for t in x  ]), axis=1)
+      #####  0,0,1,0 format   log(dfi_1hot)
+
+    return df
+
+
+
 
 #################################################################################    
 from tensorflow.python.keras.utils.data_utils import Sequence    
@@ -134,34 +159,7 @@ class CustomDataGenerator_img(Sequence):
 
 
 
-def data_add_onehot(dfref, img_dir, labels_col) :      
-    """
-       id, uri, cat1, cat2, .... , cat1_onehot
-    """
-    import glob
-    fpaths   = glob.glob(img_dir )
-    fpaths   = [ fi for fi in fpaths if "." in fi.split("/")[-1] ]
-    log(str(fpaths)[:100])
-
-    df         = pd.DataFrame(fpaths, columns=['uri'])
-    log(df.head(1).T)
-    df['id']   = df['uri'].apply(lambda x : x.split("/")[-1].split(".")[0]    ) 
-    df['id']   = df['id'].apply( lambda x: int(x) )
-    df         = df.merge(dfref, on='id', how='left') 
-
-    # labels_col = [  'gender', 'masterCategory', 'subCategory', 'articleType' ] 
-    for ci in labels_col :  
-      dfi_1hot           = pd.get_dummies(df, columns=[ci])  ### OneHot
-      dfi_1hot           = dfi_1hot[[ t for t in dfi_1hot.columns if ci in t   ]]  ## keep only OneHot      
-      df[ci + "_onehot"] = dfi_1hot.apply( lambda x : ','.join([   str(t) for t in x  ]), axis=1)
-      #####  0,0,1,0 format   log(dfi_1hot)
-        
-    return df
                             
-                            
-                            
-                            
-###############################################################################
 ###############################################################################
 from albumentations.core.transforms_interface import ImageOnlyTransform
 import tensorflow as tf

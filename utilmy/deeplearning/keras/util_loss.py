@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 import io, os, numpy as np
 from typing import Union
-
-
-
-###################################################################################################
-###################################################################################################
-from importall import *
 from sklearn.metrics import accuracy_score
 
 
+
+###################################################################################################
 def log(*s):
     print(*s, flush=True)
 
-    
-    
+
+
+
+###################################################################################################
 def metric_accuracy(y_test, y_pred, dd):
    test_accuracy = {} 
    for k,(ytruei, ypredi) in enumerate(zip(y_test, y_pred)) : 
@@ -51,11 +49,6 @@ def clf_loss_macro_soft_f1(y, y_hat):
     return macro_cost
     
 
-    
-    
-    
-    
-    
     
 
 class LearningRateDecay:
@@ -206,60 +199,3 @@ if cc.schedule_type == 'step':
     
     
     
-    
-    
-    
-
-    cc.loss= {}
-def perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
-                             y_label_heads=None, y_pred_heads=None, clf_loss_fn=None):
-    ### log( 'x_recon.shae',  x_recon.shape )
-    ### VAE Loss  :  Mean Square : 0.054996297 0.046276666   , Huber: 0.0566 
-    ### m = 0.00392156862  # 1/255
-    ###   recons_loss = tf.reduce_mean( tf.reduce_mean(tf.abs(x-x_recon), axis=(1,2,3)) )
-    ###   recons_loss = tf.reduce_mean( tf.reduce_mean(tf.square(x-x_recon), axis=(1,2,3) ) )    ## MSE error
-    #     recons_loss = tf.reduce_mean( tf.square(x-x_recon), axis=(1,2,3) )     ## MSE error    
-    recons_loss = recons_loss_global(x, x_recon)
-    latent_loss = tf.reduce_mean( 0.5 * tf.reduce_sum(tf.exp(z_logsigma) + tf.square(z_mean) - 1.0 - z_logsigma, axis=1) )
-    loss_vae    = kl_weight*latent_loss + recons_loss
-
-    
-    ### Efficient Head Loss : Input Need to Scale into 0-255, output is [0,1], 1280 vector :  0.5819792 0.5353247 
-    ### https://stackoverflow.com/questions/65452099/keras-efficientnet-b0-use-input-values-between-0-and-255
-    ### loss_percep = tf.reduce_mean(tf.square(  tf.subtract(tf.stop_gradient(percep_model(x * 255.0 )), percep_model(x_recon * 255.0  )  )))
-    loss_percep = percep_loss_global( tf.stop_gradient(percep_model(x * 255.0 )),   percep_model(x_recon * 255.0  )  )
-    
-    
-    #### Update  cc.loss  weights
-    loss_schedule(mode="step", epoch=epoch)
-
-        
-    ### Triplet Loss: ####################################################################################################
-    loss_triplet = 0.0 
-    if cc.loss.ww_triplet > 0.0 :   ### 1.9  (*4)     5.6 (*1)
-        ### `y_true` to be provided as 1-D integer `Tensor` with shape `[batch_size]  
-        ### `y_pred` must be 2-D float `Tensor` of l2 normalized embedding vectors.
-        z1     = tf.math.l2_normalize(z_mean, axis=1)  # L2 normalize embeddings
-        loss_triplet = 6*triplet_loss_global(y_true= tf.keras.backend.argmax(y_label_heads[0], axis = -1) ,   y_pred=z1)  + 4*triplet_loss_global(y_true= tf.keras.backend.argmax(y_label_heads[2], axis = -1) ,   y_pred=z1)  +  2 * triplet_loss_global(y_true= tf.keras.backend.argmax(y_label_heads[3], axis = -1) ,   y_pred=z1)   +  triplet_loss_global(y_true= tf.keras.backend.argmax(y_label_heads[4], axis = -1) ,   y_pred=z1)  
-
-    
-    ####  Classifier Loss :   2.8920667 2.6134858 
-    ####  {'gender': 0.8566666, 'masterCategory': 0.99, 'subCategory': 0.9166, 'articleType': 0.7, 'baseColour': 0.5633333 }
-    if y_label_heads is not None:
-        loss_clf = []
-        for i in range(len(y_pred_heads)):
-            head_loss = clf_loss_fn(y_label_heads[i], y_pred_heads[i])
-            loss_clf.append(head_loss * cc.loss.ww_clf_head[i] )
-        loss_clf = tf.reduce_mean(loss_clf)
-        
-        ####     0.05    ,  0.5                              2.67
-        loss_all = loss_vae * cc.loss.ww_vae  +  loss_percep * cc.loss.ww_percep +  loss_clf * cc.loss.ww_clf  + loss_triplet * cc.loss.ww_triplet
-        #  loss_all = loss_triplet 
-        #### 0.20  
-    else :
-        loss_all = loss_vae * cc.loss.ww_vae  +  loss_percep * cc.loss.ww_percep
-    return loss_all
-
-
-
-
