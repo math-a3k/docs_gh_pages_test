@@ -713,6 +713,16 @@ z_logger_custom_1()
 
 
 
+utilmy/spark/setup.py
+
+
+utilmy/spark/main.py
+-------------------------functions----------------------
+spark_init(config:dict)
+main()
+
+
+
 utilmy/excel/xlvba.py
 -------------------------functions----------------------
 load_csv(csvfile)
@@ -2108,6 +2118,100 @@ utilmy/viz/zarchive/__init__.py
 utilmy/viz/zarchive/toptoolbar.py
 -------------------------methods----------------------
 TopToolbar.__init__(self)
+
+
+utilmy/spark/src/util_models.py
+-------------------------functions----------------------
+TimeSeriesSplit(df_m:pyspark.sql.DataFrame, splitRatio:float, sparksession:object)
+Train(spark, df_m:pyspark.sql.DataFrame, features:list, regressor:str, path:str = None, conf_model:dict = None)
+Predict(spark, df_m:pyspark.sql.DataFrame, features:list, regressor:str, path:str = None, conf_model:dict = None)
+os_makedirs(path:str)
+
+
+
+utilmy/spark/src/__init__.py
+
+
+utilmy/spark/src/utils.py
+-------------------------functions----------------------
+logger_setdefault()
+log()
+log2(*s)
+log3(*s)
+log()
+log_sample(*s)
+config_load(config_path:str)
+spark_check(df:pyspark.sql.DataFrame, conf:dict = None, path:str = "", nsample:int = 10, save = True, verbose = True, returnval = False)
+
+-------------------------methods----------------------
+to_namespace.__init__(self, d)
+
+
+utilmy/spark/script/hadoopVersion.py
+
+
+utilmy/spark/script/pysparkTest.py
+-------------------------functions----------------------
+inside(p)
+
+
+
+utilmy/spark/tests/test_functions.py
+-------------------------functions----------------------
+test_getall_families_from_useragent(spark_session: SparkSession)
+
+
+
+utilmy/spark/tests/__init__.py
+
+
+utilmy/spark/tests/test_table_user_session_log.py
+-------------------------functions----------------------
+test_table_user_session_log_run(spark_session: SparkSession)
+test_table_user_session_log(spark_session: SparkSession)
+test_table_usersession_log_stats(spark_session: SparkSession, config: dict)
+
+
+
+utilmy/spark/tests/test_table_volume_predict.py
+-------------------------functions----------------------
+test_preprocess(spark_session: SparkSession, config: dict)
+
+
+
+utilmy/spark/tests/test_table_user_session_stats.py
+-------------------------functions----------------------
+test_table_user_session_stats_run(spark_session: SparkSession)
+test_table_user_session_stats(spark_session: SparkSession)
+test_table_user_session_stats_ip(spark_session: SparkSession, config: dict)
+
+
+
+utilmy/spark/tests/test_common.py
+-------------------------functions----------------------
+assert_equal_spark_df_sorted(expected_sorted_df: DataFrame, actual_sorted_df: DataFrame, df_name: str)
+assert_equal_spark_df(expected_sorted_df: DataFrame, actual_sorted_df: DataFrame, df_name: str)
+assert_equal_spark_df_schema(expected_schema: [tuple], actual_schema: [tuple], df_name: str)
+
+
+
+utilmy/spark/tests/conftest.py
+-------------------------functions----------------------
+config()
+spark_session(config: dict)
+
+
+
+utilmy/spark/tests/test_utils.py
+-------------------------functions----------------------
+test_spark_check(spark_session: SparkSession, config: dict)
+
+
+
+utilmy/spark/tests/test_table_user_log.py
+-------------------------functions----------------------
+test_table_user_log_run(spark_session: SparkSession, config: dict)
+
 
 
 utilmy/zarchive/py3/util.py
@@ -3675,6 +3779,54 @@ df_to_geojson(df, col_properties, lat = 'latitude', lon = 'longitude')
 utilmy/zarchive/py2to3/rstatpy.py
 -------------------------functions----------------------
 stl(data, ns, np = None, nt = None, nl = None, isdeg = 0, itdeg = 1, ildeg = 1, nsjump = None, ntjump = None, nljump = None, ni = 2, no = 0, fulloutput = False)
+
+
+
+utilmy/spark/src/functions/GetFamiliesFromUserAgent.py
+-------------------------functions----------------------
+getall_families_from_useragent(ua_string)
+
+
+
+utilmy/spark/src/tables/table_predict_volume.py
+-------------------------functions----------------------
+run(spark:SparkSession, config_path: str = 'config.yaml')
+preprocess(spark, conf, check = True)
+model_train(df:object, conf_model:dict, verbose:bool = True)
+model_predict(df:pd.DataFrame, conf_model:dict, verbose:bool = True)
+
+
+
+utilmy/spark/src/tables/table_user_session_stats.py
+-------------------------functions----------------------
+run(spark:SparkSession, config_name: str = 'config.yaml')
+
+
+
+utilmy/spark/src/tables/table_user_session_log.py
+-------------------------functions----------------------
+run(spark:SparkSession, config_name = 'config.yaml')
+
+
+
+utilmy/spark/src/tables/table_predict_url_unique.py
+-------------------------functions----------------------
+run(spark:SparkSession, config_path: str = 'config.yaml', mode:str = 'train,pred')
+preprocess(spark, conf, check = True)
+
+
+
+utilmy/spark/src/tables/table_user_log.py
+-------------------------functions----------------------
+run(spark:SparkSession, config_name:str)
+create_userid(userlogDF:pyspark.sql.DataFrame)
+
+
+
+utilmy/spark/src/tables/table_predict_session_length.py
+-------------------------functions----------------------
+run(spark:SparkSession, config_path: str = 'config.yaml', mode:str = 'train,pred')
+preprocess(spark, conf, check = True)
 
 
 
