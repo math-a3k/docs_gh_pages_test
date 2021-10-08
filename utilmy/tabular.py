@@ -13,6 +13,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 
 from utilmy.utilmy import pd_generate_data
+from utilmy.zarchive.zzarchive.zutil_features import pd_colnum_tocat, pd_colnum_tocat_stat
 
 
 def test0():
@@ -366,10 +367,11 @@ def pd_stat_pandas_profile(df, savefile="report.html", title="Pandas Profile"):
         #Pandas-Profiling 2.0.0
         df.profile_report()
     """
+    from pandas_profiling import ProfileReport
     print("start profiling")
     profile = df.profile_report(title=title)
     profile.to_file(output_file=savefile)
-    colexclude = profile.get_rejected_variables(threshold=0.98)
+    colexclude = profile.get_rejected_variables()
     return colexclude
 
 
@@ -553,8 +555,8 @@ def pd_stat_shift_changes(df, target_col, features_list=0, bins=10, df_test=0):
         if df[colname].dtype == 'O' or colname == target_col:
             ignored.append(colname)
         else:
-            cuts, df_grouped = pd_colnum_tocat_stat(df=df, colname=colname, target_col=target_col, bins=bins)
-            trend_changes    = pd_stat_shift_trend_correlation(df=df_grouped, colname=colname, target_col=target_col)
+            cuts, df_grouped = pd_colnum_tocat_stat(df=df,feature=colname, target_col=target_col, bins=bins)
+            trend_changes    = pd_stat_shift_trend_correlation(df=df_grouped,df_test=df_test, colname=colname, target_col=target_col)
             if has_test:
                 df_test            = pd_colnum_tocat_stat(df=df_test.reset_index(drop=True), colname=colname,
                                                           target_col  = target_col, bins=bins, cuts=cuts)

@@ -456,11 +456,9 @@ def test_tabular():
         log("Testing test_mutualinfo()...")
         from utilmy.tabular import test_mutualinfo
         df1 = pd_generate_data(7, 100)
-        '''TODO: import needed
-        NameError: name 'pd_colnum_tocat' is not defined
+
         test_mutualinfo(df1["0"],df1[["1","2","3"]],colname="test")
-        '''
-    
+
         log("Testing hypothesis_test()...")
         from utilmy.tabular import test_hypothesis
         log(test_hypothesis(X_train, X_test,"chisquare"))
@@ -490,20 +488,20 @@ def test_tabular():
         pd_train_test_split_time(df, coltime="block")
         pd_to_scipy_sparse_matrix(df)
         '''TODO: git test failling here'''
-        #log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
-        '''
-        TODO: AttributeError: 'DataFrame' object has no attribute 'profile_report'
+        # log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
+
         pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
-        '''
-        
+
         pd_stat_distribution_colnum(df, nrows=len(df))
 
         '''TODO: KeyError: 'freqall
         pd_stat_histogram(df, bins=50, coltarget="yield")
         '''
+
         ''' TODO: error KeyError: 'colname_mean' , why we appending '_mean' on colname 
         pd_stat_shift_trend_changes(df,"density","block")
         '''
+
         X_train["yield"] =  X_train["yield"].astype('category')
         X_test["yield"] =  X_test["yield"].astype('category')
         '''TODO: KeyError: "['block_mean'] not in index
@@ -538,10 +536,7 @@ def test_tabular2():
     """
     from utilmy import tabular as m
     df = pd_generate_data(7, 100)
-    """TODO: raise TypeError(f'at least two inputs are required; got {len(args)}.')
-    TypeError: at least two inputs are required; got 1.
-    m.test_anova(df, 'cat1', 'cat2')
-    """
+    m.test_anova(df,'cat1','cat2')
     m.test_normality2(df, '0', "Shapiro")
     m.test_plot_qqplot(df, '1')
 
@@ -560,19 +555,14 @@ def test_adatasets():
         test_dataset_classification_fake(nrows=10)
         test_dataset_classification_petfinder(nrows=10)
         test_dataset_classifier_covtype(nrows=10)
-        '''TODO:
         dataset_classifier_pmlb(name=2)
-        '''
     
     def test_pd_utils():
         import pandas as pd
         from utilmy.adatasets import pd_train_test_split,pd_train_test_split2, fetch_dataset
         fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
         df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
-        ''' TODO : need to add axis on df.drop()
-        KeyError: "['block'] not found in axis"
         pd_train_test_split(df,"block")
-        '''
         pd_train_test_split2(df, "block")
 
     test()
@@ -615,14 +605,18 @@ def test_dates():
         date_ = date_generate(start='2021-01-01', ndays=100)
         date_weekyear_excel('20210317')
         date_weekday_excel('20210317')
-        #TODO:
-        #date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
-        #date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
+        date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
+        date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
         df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
         df['Gender'] = random_genders(10)
         df['Birthdate'] = random_dates(start=pd.to_datetime('1940-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
-        # TODO:
-        #pd_date_split(df,coldate="Birthdate")
+        
+        """
+        TODO;
+        name 'merge1' is not defined
+        pd_date_split(df,coldate="Birthdate")
+        """
+        
     
     def random_dates(start, end, size):
         # Unix timestamp is in nanoseconds by default, so divide it by

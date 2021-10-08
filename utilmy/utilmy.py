@@ -76,7 +76,7 @@ def pd_generate_data(ncols=7, nrows=100):
     df = pd.DataFrame(numerical, columns = [str(i) for i in range(0,ncols)])
     df['cat1']= np.random.choice(  a=[0, 1],  size=nrows,  p=[0.7, 0.3]  )
     df['cat2']= np.random.choice(  a=[4, 5, 6],  size=nrows,  p=[0.5, 0.3, 0.2]  )
-    df['cat1']= np.where( df['cat1'] == 4,'low',np.where(df['cat1'] == 5, 'High','V.High'))
+    df['cat1']= np.where( df['cat1'] == 0,'low',np.where(df['cat1'] == 1, 'High','V.High'))
     return df
 
 

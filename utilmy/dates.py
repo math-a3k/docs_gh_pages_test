@@ -69,14 +69,14 @@ def pd_date_split(df, coldate =  'time_key', prefix_col ="", verbose=False ):
 
 
 def date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo'):
-    from pytz import timezone
-    from datetime import datetime
+    from pytz import timezone as timz
+    import datetime
     # Current time in UTC
-    now_utc = datetime.now(timezone('UTC'))
+    now_utc = datetime.datetime.now(timz('UTC'))
     now_new = now_utc+ datetime.timedelta(days=add_days)
 
     # Convert to US/Pacific time zone
-    now_pacific = now_new.astimezone(timezone(timezone))
+    now_pacific = now_new.astimezone(timz(timezone))
     return now_pacific.strftime(fmt)
 
 
@@ -87,7 +87,7 @@ def date_is_holiday(array):
     """
     import holidays , numpy as np
     jp_holidays = holidays.CountryHoliday('JP')
-    return np.array( [ 1 if x.astype('M8[D]').astype('O') in jp_holidays else 0 for x in array]  )
+    return np.array( [ 1 if x in jp_holidays else 0 for x in array]  )
 
 
 def date_weekmonth2(d):
