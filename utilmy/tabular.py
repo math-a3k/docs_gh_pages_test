@@ -79,7 +79,7 @@ def log(*s):
 
 #############################################################################
 #############################################################################
-def y_adjustment():
+def y_adjuster_log(y_true, y_pred_log, error_func, **kwargs):
     """
        Adjustment of log, exp transfrmation for yt= y + error
        https://www.inovex.de/de/blog/honey-i-shrunk-the-target-variable/
@@ -88,15 +88,15 @@ def y_adjustment():
     
     """
     import scipy as sp
-    def adjuter_log(y_true, y_pred_log, error_func, **kwargs):
-        """Determine correction delta for exp transformation"""
-        def cost_func(delta):
-            return error_func(np.exp(delta + y_pred_log), y_true)
-        res = sp.optimize.minimize(cost_func, 0., **kwargs)
-        if res.success:
-            return res.x
-        else:
-            raise RuntimeError(f"Finding correction term failed!\n{res}")
+
+    def cost_func(delta):
+        return error_func(np.exp(delta + y_pred_log), y_true)
+
+    res = sp.optimize.minimize(cost_func, 0., **kwargs)
+    if res.success:
+        return res.x
+    else:
+        raise RuntimeError(f"Finding correction term failed!\n{res}")
 
 
             
