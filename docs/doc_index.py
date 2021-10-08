@@ -786,6 +786,90 @@ template_copy(name, out_dir)
 
 
 
+utilmy/prepro/prepro.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+log3(*s)
+log4(*s, n = 0, m = 1)
+log4_pd(name, df, *s)
+_pd_colnum(df, col, pars)
+_pd_colnum_fill_na_median(df, col, pars)
+prepro_load(prefix, pars)
+prepro_save(prefix, pars, df_new, cols_new, prepro)
+pd_col_atemplate(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_coly_clean(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_coly(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_normalize(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_quantile_norm(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_bin(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_binto_onehot(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_to_onehot(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_bin(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcross(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_coldate(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_encoder_generic(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_minhash(df: pd.DataFrame, col: list = None, pars: dict = None)
+os_convert_topython_code(txt)
+save_json(js, pfile, mode = 'a')
+pd_col_genetic_transform(df: pd.DataFrame, col: list = None, pars: dict = None)
+test()
+
+
+
+utilmy/prepro/prepro_tseries.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+log3(*s)
+logd(*s, n = 0, m = 0)
+pd_prepro_custom(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_prepro_custom2(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_date(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_groupby(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_onehot(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_autoregressive(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_rolling(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_lag(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_difference(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_tsfresh_features(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_deltapy_generic(df: pd.DataFrame, cols: list = None, pars: dict = None)
+test_get_sampledata(url="https = "https://github.com/firmai/random-assets-two/raw/master/numpy/tsla.csv")
+test_deltapy_all()
+test_prepro_v1()
+test_deltapy_get_method(df)
+test_deltapy_all2()
+m5_dataset()
+
+
+
+utilmy/prepro/run_feature_profile.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 0)
+run_profile(path_data = None, path_output = "data/out/ztmp/", n_sample = 5000)
+
+
+
+utilmy/prepro/prepro_text.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 1)
+logs(*s)
+log_pd(df, *s, n = 0, m = 1)
+pd_coltext_clean(df, col, stopwords =  None, pars = None)
+pd_coltext_wordfreq(df, col, stopwords, ntoken = 100)
+nlp_get_stopwords()
+pd_coltext(df, col, stopwords =  None, pars = None)
+pd_coltext_universal_google(df, col, pars = {})
+
+
+
+utilmy/prepro/prepro_rec.py
+-------------------------functions----------------------
+_preprocess_criteo(df, **kw)
+_preprocess_movielens(df, **kw)
+
+
+
 utilmy/zarchive/_HELP.py
 -------------------------functions----------------------
 os_compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
