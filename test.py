@@ -607,7 +607,12 @@ def test_dates():
         date_ = date_generate(start='2021-01-01', ndays=100)
         date_weekyear_excel('20210317')
         date_weekday_excel('20210317')
+
+        """TODO
+        install holiday package into the package 
         date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
+        """
+        
         date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
         df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
         df['Gender'] = random_genders(10)
