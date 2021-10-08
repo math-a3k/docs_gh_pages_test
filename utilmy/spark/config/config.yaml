@@ -1,0 +1,97 @@
+- sparkconfig:
+    maxrecordfile                      : 50000
+
+    #spark.master                      : 'yarn'
+    spark.master                       : 'local[1]'   # 'spark://virtual:7077'
+    spark.app.name                     : 'logprocess'
+    spark.driver.maxResultSize         : '10g'
+    spark.driver.memory                : '10g'
+    spark.driver.port                  : '45975'
+    #spark.eventLog.enabled             : 'true'
+    #spark.executor.cores               : 5
+    #spark.executor.id                  : 'driver'
+    #spark.executor.instances           : 2
+    spark.executor.memory              : '10g'
+    #spark.kryoserializer.buffer.max    : '2000mb'
+    spark.rdd.compress                 : 'True'
+    spark.serializer                   : 'org.apache.spark.serializer.KryoSerializer'
+    #spark.serializer.objectStreamReset : 100
+    spark.sql.shuffle.partitions       : 8
+    spark.sql.session.timeZone         : "UTC"    
+    # spark.sql.catalogImplementation  : 'hive'
+    #spark.sql.warehouse.dir           : '/user/myuser/warehouse'
+    #spark.sql.warehouse.dir           : '/tmp'    
+    spark.submit.deployMode            : 'client'
+
+
+
+
+##########################################################################
+- FilePaths:
+    rawlog_path                 : "data/2015_07_22_mktplace_shop_web_log_sample.log.gz"
+    #rawlog_path                : "data/small/log_sample.log.gz"
+    check_path                  : 'output/full/check/'
+
+    
+    ### Addon logs
+    userlog_path                : "output/full/tables/userlog"
+    userlogstats_path           : "output/full/tables/userlogstats"
+
+
+    ### Logs by user_session
+    usersession_path            : "output/full/tables/usersession"
+    usersessionstats_path       : "output/full/tables/usersessionstats"
+    usersessionstats_aggtotal   : "output/full/tables/usersessionstats_aggtotal"
+    usersessionstats_per_ip     : "output/full/tables/usersessionstats_perip"
+
+    ### Prediction Volume
+    volume_sessionDF_pred       : "output/full/tables/volume_sessionDF_pred"
+
+
+    ### Prediction session length
+    model_path                  : "output/test/models/"
+    usersessionlength_pred_path : "output/test/tables/usersessionlength_pred"
+
+    ### Prediction unique URL
+    usersession_nurl_pred_path  : "output/test/tables/usersession_nurl_pred"
+
+
+
+
+##########################################################################
+- session:
+    dt_min : "2015-01-01"
+    dt_max : "2030-01-01"
+    hour   : -1
+
+
+##########################################################################
+- volume_pred:
+    model_path : "output/full/models/volume_pred_v1/"
+    pred_path  : "output/full/tables/volume_pred"
+    model_name : 'max_volume'
+    model_pars:
+        niter     : 1
+
+
+##########################################################################
+- sessionlength_pred:
+    model_path : "output/full/models/"
+    pred_path  : "output/full/tables/usersessionlength_pred"
+    regressor  : 'LinearRegression'
+    model_pars:
+        niter     : 1
+
+
+##########################################################################
+- uniqueurl_pred:
+    model_path : "output/full/models/"
+    pred_path  : "output/full/tables/usersession_nurl_pred"
+    regressor  : 'LinearRegression'
+    model_pars :
+    niter      : 1
+
+
+
+
+

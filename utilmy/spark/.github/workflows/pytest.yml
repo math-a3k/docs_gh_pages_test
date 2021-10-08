@@ -1,0 +1,27 @@
+name: Spark_pytest
+
+on:
+  push:
+    branches:
+      - main
+      - test
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Start containers
+        run: docker-compose up -d --build
+
+      - run: docker-compose exec -T spark python3 script/hadoopVersion.py
+
+      - run: docker-compose exec -T spark python3 script/pysparkTest.py       
+
+      - run: docker-compose exec -T spark pytest  --html=output/tests/report.html --self-contained-html  tests/   
+
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose down

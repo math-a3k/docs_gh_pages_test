@@ -1,0 +1,73 @@
+- sparkconfig:
+    maxrecordfile                      : 50000
+    #spark.master                      : 'yarn'
+    spark.master                       : 'local[1]'   # 'spark://virtual:7077'
+    spark.app.name                     : 'logprocess'
+    spark.driver.maxResultSize         : '5g'
+    spark.driver.memory                : '5g'
+    spark.driver.port                  : '45975'
+    #spark.eventLog.enabled             : 'true'
+    #spark.executor.cores               : 5
+    #spark.executor.id                  : 'driver'
+    #spark.executor.instances           : 2
+    spark.executor.memory              : '10g'
+    #spark.kryoserializer.buffer.max    : '2000mb'
+    spark.rdd.compress                 : 'True'
+    spark.serializer                   : 'org.apache.spark.serializer.KryoSerializer'
+    #spark.serializer.objectStreamReset : 100
+    spark.sql.shuffle.partitions       : 8
+    spark.sql.session.timeZone         : "UTC"    
+    # spark.sql.catalogImplementation  : 'hive'
+    #spark.sql.warehouse.dir           : '/user/myuser/warehouse'
+    #spark.sql.warehouse.dir           : '/tmp'    
+    spark.submit.deployMode            : 'client'
+
+
+
+
+- FilePaths:
+    rawlog_path               : "data/test/log_sample.log.gz"
+
+    check_path                : 'output/test_unit/check/'
+    
+    ### Addon logs
+    userlog_path              : "output/test_unit/tables/userlog"
+    userlogstats_path         : "output/test_unit/tables/userlogstats"
+
+
+    ### Logs by user_session
+    usersession_path          : "output/test_unit/tables/usersession"
+    usersessionstats_path     : "output/test_unit/tables/usersessionstats"
+    usersessionstats_aggtotal : "output/test_unit/tables/usersessionstats_aggtotal"
+    usersessionstats_per_ip   : "output/test_unit/tables/usersessionstats_perip"
+    volume_sessionDF_pred     : "output/test_unit/tables/volume_sessionDF_pred"
+
+
+
+- session:
+    dt_min : "2015-01-01"
+    dt_max : "2030-01-01"
+    hour   : -1
+
+
+
+#######################################################a####################################
+- Test:
+    test_config_file                   : 'config/config_test.yaml'
+
+    expected_userlog_path              : "data/test_unit_expected/userlog"
+    expected_usersession_path          : "data/test_unit_expected/usersession"
+    expected_usersessionstats_path     : "data/test_unit_expected/usersessionstats"
+    expected_usersessionstats_aggtotal : "data/test_unit_expected/usersessionstats_aggtotal"
+    expected_usersessionstats_per_ip   : "data/test_unit_expected/usersessionstats_perip"
+    expected_predict_volume_path       : "data/test_unit_expected/predict_volume"
+
+
+    ### unit test temp output
+    spark_check_temp_full_output       : "output/test_unit/sparkcheck_temp/full"
+    spark_check_temp_partial_output    : "output/test_unit/sparkcheck_temp/partial"
+    spark_check_temp_empty_output      : "output/test_unit/sparkcheck_temp/empty"
+
+
+
+

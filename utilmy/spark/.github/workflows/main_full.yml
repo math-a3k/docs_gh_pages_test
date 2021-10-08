@@ -1,0 +1,29 @@
+name: Spark_full
+
+on:
+  push:
+    branches:
+      - main
+      - test
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Start containers
+        run: docker-compose up -d --build
+
+
+
+      - name: Full Run
+        # continue-on-error: true
+        run: docker-compose exec -T spark python main.py  --config_path  config/config.yaml       
+
+
+
+      - name: Stop containers
+        if: always()
+
+        run: docker-compose down
