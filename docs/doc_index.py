@@ -455,6 +455,14 @@ test()
 
 utilmy/deeplearning/util_topk.py
 -------------------------functions----------------------
+convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
+faiss_create_index(df_or_path = None, col = 'emb', dir_out = "", db_type  =  "IVF4096,Flat", nfile = 1000, emb_dim = 200)
+faiss_topk(df = None, root = None, colid = 'id', colemb = 'emb', faiss_index = None, topk = 200, npool = 1, nrows = 10**7, nfile = 1000)
+np_matrix_to_str(m, map_dict)
+np_matrix_to_str2(m, map_dict)
+np_matrix_to_str_sim(m)
+np_str_to_array(vv, l2_norm = True, mdim  =  200)
+simscore_cosinus_calc(embs, words)
 topk()
 topk_export()
 topk_nearest_vector(x0, vector_list, topk = 3)
