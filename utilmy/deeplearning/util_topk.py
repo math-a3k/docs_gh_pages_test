@@ -8,6 +8,36 @@ TopK nearest  neighbor
 
 
 
+def simscore_cosinus_calc(embs, words):
+    """
+    
+      Calculation
+    
+    """
+    from sklearn.metrics.pairwise import cosine_similarity    
+    dfsim = []
+    for i in  range(0, len(nwords) -1) :
+        vi = embs[i,:]
+        normi = np.sqrt(np.dot(vi,vi))
+        for j in range(i+1, len(nwords) ) :
+            # simij = cosine_similarity( embs[i,:].reshape(1, -1) , embs[j,:].reshape(1, -1)     )
+            vj = embs[j,:]
+            normj = np.sqrt(np.dot(vj, vj))
+            simij = np.dot( vi ,  vj  ) / (normi * normj)
+            dfsim.append([ nwords[i], nwords[j],  simij   ])
+            # dfsim2.append([ nwords[i], nwords[j],  simij[0][0]  ])
+    
+    dfsim  = pd.DataFrame(dfsim, columns= ['l3_genre_a', 'l3_genre_b', 'sim_score' ] )   
+
+    ### Add symmetric part      
+    dfsim3 = copy.deepcopy(dfsim)
+    dfsim3.columns = ['l3_genre_b', 'l3_genre_a', 'sim_score' ]
+    dfsim          = pd.concat(( dfsim, dfsim3 ))
+    return dfsim
+
+
+
+
 
 def faiss_create_index(df_or_path=None, col='emb', dir_out="",  db_type = "IVF4096,Flat", nfile=1000, emb_dim=200):
     """
