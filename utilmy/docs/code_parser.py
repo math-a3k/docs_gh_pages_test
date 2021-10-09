@@ -126,6 +126,7 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
     flist = flist + glob.glob(root +"/*/*/*/*.py")
     flist = flist + glob.glob(root +"/*/*/*/*/*.py")
 
+    flist.sort()
     header = False
     # print(flist)
     for i in range(len(flist)):
@@ -182,7 +183,7 @@ def export_stats_perrepo(in_path:str=None, out_path:str=None, repo_name:str=None
                 df['uri']   = df['uri'].apply(lambda x : x.replace(f'{repo_name}/',''))
             if type == 'csv':
                 if not header:
-                    df.to_csv(f'{out_path}', mode='a', header=True, index=False)
+                    df.to_csv(f'{out_path}', mode='w+', header=True, index=False)
                     header = True
                 else:
                     df.to_csv(f'{out_path}', mode='a', header=False, index=False)
@@ -382,7 +383,10 @@ def get_list_function_name(file_path):
             info['function_name'] = re_response.group(1)
             info['line'] = all_lines.index(line)+1
             list_functions.append(info)
-    return list_functions
+    # print(list_functions)
+    newlist  = (sorted(list_functions, key=lambda d: d['function_name']))
+    # print(newlist)
+    return newlist
 
 
 def get_list_class_name(file_path):
@@ -407,7 +411,7 @@ def get_list_class_name(file_path):
             info['class_name'] = re_response.group(1)
             info['line'] = all_lines.index(line)+1
             list_classes.append(info)
-    return list_classes
+    return sorted(list_classes, key=lambda d: d['class_name']) 
 
 
 def get_list_class_methods(file_path):
@@ -438,6 +442,7 @@ def get_list_class_methods(file_path):
                 info['method_name'] = re_response.group(1)
                 info['line'] = all_lines.index(line)+1
                 class_info["listMethods"].append(info)
+        class_info["listMethods"] = sorted(class_info["listMethods"], key=lambda d: d['method_name']) 
         list_names.append(class_info)
     return list_names
 
@@ -754,7 +759,7 @@ def get_stats(df:pd.DataFrame, file_path:str):
             'n_loop', 'n_ifthen', 'arg_name', 'arg_type', 'arg_value',
             'line', 'docs', 'list_functions', 'n_functions']
 
-    df = df[cols]
+    df = df[cols].sort_values('name')
     # print(df)
     # df.to_csv('functions_stats.csv', index=False)
     return df
