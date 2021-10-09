@@ -1,9 +1,9 @@
 
 
-utilmy/__init__.py
+.\utilmy\__init__.py
 
 
-utilmy/adatasets.py
+.\utilmy\adatasets.py
 -------------------------functions----------------------
 dataset_classifier_XXXXX(nrows = 500, **kw)
 dataset_classifier_pmlb(name = '', return_X_y = False)
@@ -21,10 +21,10 @@ test_dataset_regression_fake(nrows = 500, n_features = 17)
 
 
 
-utilmy/configs/__init__.py
+.\utilmy\configs\__init__.py
 
 
-utilmy/configs/test.py
+.\utilmy\configs\test.py
 -------------------------functions----------------------
 create_fixtures_data(tmp_path)
 test_validate_yaml_failed_silent(tmp_path)
@@ -33,7 +33,7 @@ test_validate_yaml_types_failed(tmp_path)
 
 
 
-utilmy/configs/util_config.py
+.\utilmy\configs\util_config.py
 -------------------------functions----------------------
 config_isvalid_pydantic(config_dict: dict, pydanctic_schema: str  =  'config_py.yaml', silent: bool  =  False)
 config_isvalid_yamlschema(config_dict: dict, schema_path: str  =  'config_val.yaml', silent: bool  =  False)
@@ -52,14 +52,14 @@ zzz_config_load_validate(config_path: str, schema_path: str, silent: bool  =  Fa
 
 
 
-utilmy/data.py
+.\utilmy\data.py
 -------------------------functions----------------------
 help()
 log(*s)
 
 
 
-utilmy/dates.py
+.\utilmy\dates.py
 -------------------------functions----------------------
 date_generate(start = '2018-01-01', ndays = 100)
 date_is_holiday(array)
@@ -77,7 +77,7 @@ test()
 
 
 
-utilmy/debug.py
+.\utilmy\debug.py
 -------------------------functions----------------------
 help()
 log(*s)
@@ -90,7 +90,7 @@ profiler_stop()
 
 
 
-utilmy/decorators.py
+.\utilmy\decorators.py
 -------------------------functions----------------------
 dummy_func()
 profiled_sum()
@@ -107,10 +107,10 @@ timer_decorator(func)
 
 
 
-utilmy/deeplearning/__init__.py
+.\utilmy\deeplearning\__init__.py
 
 
-utilmy/deeplearning/keras/nsl_graph_loss.py
+.\utilmy\deeplearning\keras\nsl_graph_loss.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
 map_func(x_batch, y_batch, neighbors, neighbor_weights)
@@ -121,7 +121,7 @@ train_step(x, y, model, loss_fn, optimizer)
 
 
 
-utilmy/deeplearning/keras/template_train.py
+.\utilmy\deeplearning\keras\template_train.py
 -------------------------functions----------------------
 clean1(ll)
 config_save(cc, path)
@@ -150,7 +150,7 @@ validation_step(x, model, y_label_list = None)
 LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
 
 
-utilmy/deeplearning/keras/util_dataloader.py
+.\utilmy\deeplearning\keras\util_dataloader.py
 -------------------------functions----------------------
 data_add_onehot(dfref, img_dir, labels_col)
 data_get_sample(batch_size, x_train, labels_val)
@@ -169,7 +169,7 @@ SprinklesTransform.__init__(self, num_holes = 30, side_length = 5, always_apply 
 SprinklesTransform.apply(self, image, **params)
 
 
-utilmy/deeplearning/keras/util_layers.py
+.\utilmy\deeplearning\keras\util_layers.py
 -------------------------functions----------------------
 help()
 log(*s)
@@ -186,7 +186,7 @@ DFC_VAE.encode(self, x)
 DFC_VAE.reparameterize(self, z_mean, z_logsigma)
 
 
-utilmy/deeplearning/keras/util_loss.py
+.\utilmy\deeplearning\keras\util_loss.py
 -------------------------functions----------------------
 clf_loss_macro_soft_f1(y, y_hat)
 learning_rate_schedule(mode = "step", epoch = 1, cc = None)
@@ -201,7 +201,7 @@ StepDecay.__call__(self, epoch)
 StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 
 
-utilmy/deeplearning/keras/util_train.py
+.\utilmy\deeplearning\keras\util_train.py
 -------------------------functions----------------------
 clean1(ll)
 config_save(cc, path)
@@ -229,7 +229,7 @@ validation_step(x, model, y_label_list = None)
 LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
 
 
-utilmy/deeplearning/keras/vq_vae2.py
+.\utilmy\deeplearning\keras\vq_vae2.py
 -------------------------functions----------------------
 encoder_Base(latent_dim)
 get_vqvae_layer_hierarchical(latent_dim = 16, num_embeddings = 64)
@@ -249,10 +249,10 @@ VQ_VAE_Trainer_2.metrics(self)
 VQ_VAE_Trainer_2.train_step(self, x)
 
 
-utilmy/deeplearning/torch/util_train.py
+.\utilmy\deeplearning\torch\util_train.py
 
 
-utilmy/deeplearning/util_dl.py
+.\utilmy\deeplearning\util_dl.py
 -------------------------functions----------------------
 down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
 gpu_free()
@@ -266,7 +266,7 @@ tf_check()
 
 
 
-utilmy/deeplearning/util_image.py
+.\utilmy\deeplearning\util_image.py
 -------------------------functions----------------------
 help()
 image_center_crop(img, dim)
@@ -297,7 +297,7 @@ test()
 
 
 
-utilmy/deeplearning/util_topk.py
+.\utilmy\deeplearning\util_topk.py
 -------------------------functions----------------------
 topk()
 topk_export()
@@ -306,7 +306,7 @@ topk_predict()
 
 
 
-utilmy/deeplearning/zz_prepro.py
+.\utilmy\deeplearning\zz_prepro.py
 -------------------------functions----------------------
 create_train_npz()
 create_train_parquet()
@@ -328,7 +328,7 @@ unzip(in_dir, out_dir)
 
 
 
-utilmy/deeplearning/zz_utils_dl2.py
+.\utilmy\deeplearning\zz_utils_dl2.py
 -------------------------functions----------------------
 check_tf()
 clean1(ll)
@@ -422,7 +422,7 @@ StepDecay.__call__(self, epoch)
 StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 
 
-utilmy/distributed.py
+.\utilmy\distributed.py
 -------------------------functions----------------------
 date_now(fmt = "%Y-%m-%d %H =  "%Y-%m-%d %H:%M:%S %Z%z")
 help()
@@ -448,17 +448,17 @@ IndexLock.get(self)
 IndexLock.put(self, val = "", ntry = 100, plock = "tmp/plock.lock")
 
 
-utilmy/docs/__init__.py
+.\utilmy\docs\__init__.py
 
 
-utilmy/docs/cli.py
+.\utilmy\docs\cli.py
 -------------------------functions----------------------
 os_remove(filepath)
 run_cli()
 
 
 
-utilmy/docs/code_parser.py
+.\utilmy\docs\code_parser.py
 -------------------------functions----------------------
 _clean_data(array)
 _get_all_line(file_path)
@@ -502,7 +502,7 @@ write_to_file(uri, type, list_functions, list_classes, list_imported, dict_funct
 
 
 
-utilmy/docs/generate_doc.py
+.\utilmy\docs\generate_doc.py
 -------------------------functions----------------------
 markdown_create_file(list_info, prefix = '')
 markdown_create_function(uri, name, type, args_name, args_type, args_value, start_line, list_docs, prefix = "")
@@ -516,7 +516,7 @@ test()
 
 
 
-utilmy/docs/test.py
+.\utilmy\docs\test.py
 -------------------------functions----------------------
 calculateBuyPrice(enter, profit)
 calculateSellPrice(enter, profit)
@@ -530,7 +530,7 @@ update_price()
 
 
 
-utilmy/excel/xlvba.py
+.\utilmy\excel\xlvba.py
 -------------------------functions----------------------
 invokenumpy()
 invokesklearn()
@@ -539,13 +539,13 @@ loaddf()
 
 
 
-utilmy/graph.py
+.\utilmy\graph.py
 
 
-utilmy/iio.py
+.\utilmy\iio.py
 
 
-utilmy/images/util_exceptions.py
+.\utilmy\images\util_exceptions.py
 -------------------------functions----------------------
 config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
 dataset_donwload(url, path_target)
@@ -560,7 +560,7 @@ to_file(s, filep)
 
 
 
-utilmy/images/util_image.py
+.\utilmy\images\util_image.py
 -------------------------functions----------------------
 image_merge(image_list, n_dim, padding_size, max_height, total_width)
 image_read(filepath_or_buffer: Union[str, io.BytesIO])
@@ -570,7 +570,7 @@ padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding
 
 
 
-utilmy/images/util_image1.py
+.\utilmy\images\util_image1.py
 -------------------------functions----------------------
 deps()
 log(*s)
@@ -580,7 +580,7 @@ visualize_in_row(**images)
 
 
 
-utilmy/images/utils.py
+.\utilmy\images\utils.py
 -------------------------functions----------------------
 config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
 dataset_donwload(url, path_target)
@@ -595,7 +595,7 @@ to_file(s, filep)
 
 
 
-utilmy/keyvalue.py
+.\utilmy\keyvalue.py
 -------------------------functions----------------------
 db_create_dict_pandas(df = None, cols = None, colsu = None)
 db_flush(db_dir)
@@ -625,10 +625,10 @@ DBlist.remove(self, db_path)
 DBlist.show(self, db_path = None, n = 4)
 
 
-utilmy/logs/__init__.py
+.\utilmy\logs\__init__.py
 
 
-utilmy/logs/test_log.py
+.\utilmy\logs\test_log.py
 -------------------------functions----------------------
 test1()
 test2()
@@ -639,7 +639,7 @@ test_server()
 LoggingStreamHandler.handle(self)
 
 
-utilmy/logs/util_log.py
+.\utilmy\logs\util_log.py
 -------------------------functions----------------------
 log(log_config_path: str  =  None, log_template: str  =  "default", **kwargs)
 log2(*s)
@@ -655,10 +655,10 @@ z_logger_stdout_override()
 
 
 
-utilmy/nnumpy.py
+.\utilmy\nnumpy.py
 
 
-utilmy/oos.py
+.\utilmy\oos.py
 -------------------------functions----------------------
 help()
 is_float(x)
@@ -715,7 +715,7 @@ z_os_search_fast(fname, texts = None, mode = "regex/str")
 dict_to_namespace.__init__(self, d)
 
 
-utilmy/parallel.py
+.\utilmy\parallel.py
 -------------------------functions----------------------
 help()
 log(*s)
@@ -747,7 +747,7 @@ zz_pd_read_file3(path_glob = "*.pkl", ignore_index = True, cols = None, nrows = 
 
 
 
-utilmy/ppandas.py
+.\utilmy\ppandas.py
 -------------------------functions----------------------
 is_float(x)
 is_int(x)
@@ -770,7 +770,7 @@ to_timeunix(datex = "2018-01-16")
 dict_to_namespace.__init__(self, d)
 
 
-utilmy/prepro/prepro.py
+.\utilmy\prepro\prepro.py
 -------------------------functions----------------------
 _pd_colnum(df, col, pars)
 _pd_colnum_fill_na_median(df, col, pars)
@@ -801,14 +801,14 @@ test()
 
 
 
-utilmy/prepro/prepro_rec.py
+.\utilmy\prepro\prepro_rec.py
 -------------------------functions----------------------
 _preprocess_criteo(df, **kw)
 _preprocess_movielens(df, **kw)
 
 
 
-utilmy/prepro/prepro_text.py
+.\utilmy\prepro\prepro_text.py
 -------------------------functions----------------------
 log(*s, n = 0, m = 1)
 log_pd(df, *s, n = 0, m = 1)
@@ -821,7 +821,7 @@ pd_coltext_wordfreq(df, col, stopwords, ntoken = 100)
 
 
 
-utilmy/prepro/prepro_tseries.py
+.\utilmy\prepro\prepro_tseries.py
 -------------------------functions----------------------
 log(*s)
 log2(*s)
@@ -847,56 +847,56 @@ test_prepro_v1()
 
 
 
-utilmy/prepro/run_feature_profile.py
+.\utilmy\prepro\run_feature_profile.py
 -------------------------functions----------------------
 log(*s, n = 0, m = 0)
 run_profile(path_data = None, path_output = "data/out/ztmp/", n_sample = 5000)
 
 
 
-utilmy/spark/main.py
+.\utilmy\spark\main.py
 -------------------------functions----------------------
 main()
 spark_init(config:dict)
 
 
 
-utilmy/spark/script/hadoopVersion.py
+.\utilmy\spark\script\hadoopVersion.py
 
 
-utilmy/spark/script/pysparkTest.py
+.\utilmy\spark\script\pysparkTest.py
 -------------------------functions----------------------
 inside(p)
 
 
 
-utilmy/spark/setup.py
+.\utilmy\spark\setup.py
 
 
-utilmy/spark/src/__init__.py
+.\utilmy\spark\src\__init__.py
 
 
-utilmy/spark/src/functions/GetFamiliesFromUserAgent.py
+.\utilmy\spark\src\functions\GetFamiliesFromUserAgent.py
 -------------------------functions----------------------
 getall_families_from_useragent(ua_string)
 
 
 
-utilmy/spark/src/tables/table_predict_session_length.py
+.\utilmy\spark\src\tables\table_predict_session_length.py
 -------------------------functions----------------------
 preprocess(spark, conf, check = True)
 run(spark:SparkSession, config_path: str = 'config.yaml', mode:str = 'train,pred')
 
 
 
-utilmy/spark/src/tables/table_predict_url_unique.py
+.\utilmy\spark\src\tables\table_predict_url_unique.py
 -------------------------functions----------------------
 preprocess(spark, conf, check = True)
 run(spark:SparkSession, config_path: str = 'config.yaml', mode:str = 'train,pred')
 
 
 
-utilmy/spark/src/tables/table_predict_volume.py
+.\utilmy\spark\src\tables\table_predict_volume.py
 -------------------------functions----------------------
 model_predict(df:pd.DataFrame, conf_model:dict, verbose:bool = True)
 model_train(df:object, conf_model:dict, verbose:bool = True)
@@ -905,26 +905,26 @@ run(spark:SparkSession, config_path: str = 'config.yaml')
 
 
 
-utilmy/spark/src/tables/table_user_log.py
+.\utilmy\spark\src\tables\table_user_log.py
 -------------------------functions----------------------
 create_userid(userlogDF:pyspark.sql.DataFrame)
 run(spark:SparkSession, config_name:str)
 
 
 
-utilmy/spark/src/tables/table_user_session_log.py
+.\utilmy\spark\src\tables\table_user_session_log.py
 -------------------------functions----------------------
 run(spark:SparkSession, config_name = 'config.yaml')
 
 
 
-utilmy/spark/src/tables/table_user_session_stats.py
+.\utilmy\spark\src\tables\table_user_session_stats.py
 -------------------------functions----------------------
 run(spark:SparkSession, config_name: str = 'config.yaml')
 
 
 
-utilmy/spark/src/util_models.py
+.\utilmy\spark\src\util_models.py
 -------------------------functions----------------------
 Predict(spark, df_m:pyspark.sql.DataFrame, features:list, regressor:str, path:str = None, conf_model:dict = None)
 TimeSeriesSplit(df_m:pyspark.sql.DataFrame, splitRatio:float, sparksession:object)
@@ -933,7 +933,7 @@ os_makedirs(path:str)
 
 
 
-utilmy/spark/src/utils.py
+.\utilmy\spark\src\utils.py
 -------------------------functions----------------------
 config_load(config_path:str)
 log()
@@ -948,17 +948,17 @@ spark_check(df:pyspark.sql.DataFrame, conf:dict = None, path:str = "", nsample:i
 to_namespace.__init__(self, d)
 
 
-utilmy/spark/tests/__init__.py
+.\utilmy\spark\tests\__init__.py
 
 
-utilmy/spark/tests/conftest.py
+.\utilmy\spark\tests\conftest.py
 -------------------------functions----------------------
 config()
 spark_session(config: dict)
 
 
 
-utilmy/spark/tests/test_common.py
+.\utilmy\spark\tests\test_common.py
 -------------------------functions----------------------
 assert_equal_spark_df(expected_sorted_df: DataFrame, actual_sorted_df: DataFrame, df_name: str)
 assert_equal_spark_df_schema(expected_schema: [tuple], actual_schema: [tuple], df_name: str)
@@ -966,19 +966,19 @@ assert_equal_spark_df_sorted(expected_sorted_df: DataFrame, actual_sorted_df: Da
 
 
 
-utilmy/spark/tests/test_functions.py
+.\utilmy\spark\tests\test_functions.py
 -------------------------functions----------------------
 test_getall_families_from_useragent(spark_session: SparkSession)
 
 
 
-utilmy/spark/tests/test_table_user_log.py
+.\utilmy\spark\tests\test_table_user_log.py
 -------------------------functions----------------------
 test_table_user_log_run(spark_session: SparkSession, config: dict)
 
 
 
-utilmy/spark/tests/test_table_user_session_log.py
+.\utilmy\spark\tests\test_table_user_session_log.py
 -------------------------functions----------------------
 test_table_user_session_log(spark_session: SparkSession)
 test_table_user_session_log_run(spark_session: SparkSession)
@@ -986,7 +986,7 @@ test_table_usersession_log_stats(spark_session: SparkSession, config: dict)
 
 
 
-utilmy/spark/tests/test_table_user_session_stats.py
+.\utilmy\spark\tests\test_table_user_session_stats.py
 -------------------------functions----------------------
 test_table_user_session_stats(spark_session: SparkSession)
 test_table_user_session_stats_ip(spark_session: SparkSession, config: dict)
@@ -994,19 +994,19 @@ test_table_user_session_stats_run(spark_session: SparkSession)
 
 
 
-utilmy/spark/tests/test_table_volume_predict.py
+.\utilmy\spark\tests\test_table_volume_predict.py
 -------------------------functions----------------------
 test_preprocess(spark_session: SparkSession, config: dict)
 
 
 
-utilmy/spark/tests/test_utils.py
+.\utilmy\spark\tests\test_utils.py
 -------------------------functions----------------------
 test_spark_check(spark_session: SparkSession, config: dict)
 
 
 
-utilmy/tabular.py
+.\utilmy\tabular.py
 -------------------------functions----------------------
 estimator_boostrap_bayes(err, alpha = 0.05, )
 estimator_bootstrap(err, custom_stat = None, alpha = 0.05, n_iter = 10000)
@@ -1038,10 +1038,10 @@ y_adjuster_log(y_true, y_pred_log, error_func, **kwargs)
 
 
 
-utilmy/templates/__init__.py
+.\utilmy\templates\__init__.py
 
 
-utilmy/templates/cli.py
+.\utilmy\templates\cli.py
 -------------------------functions----------------------
 run_cli()
 template_copy(name, out_dir)
@@ -1049,10 +1049,10 @@ template_show()
 
 
 
-utilmy/templates/templist/pypi_package/mygenerator/__init__.py
+.\utilmy\templates\templist\pypi_package\mygenerator\__init__.py
 
 
-utilmy/templates/templist/pypi_package/mygenerator/dataset.py
+.\utilmy\templates\templist\pypi_package\mygenerator\dataset.py
 -------------------------functions----------------------
 dataset_build_meta_mnist(path: Optional[Union[str, pathlib.Path]]  =  None, get_image_fn = None, meta = None, image_suffix = "*.png", **kwargs, )
 
@@ -1073,14 +1073,14 @@ PhoneNlpDataset.__len__(self)
 PhoneNlpDataset.get_phone_number(self, idx, islocal = False)
 
 
-utilmy/templates/templist/pypi_package/mygenerator/pipeline.py
+.\utilmy\templates\templist\pypi_package\mygenerator\pipeline.py
 -------------------------functions----------------------
 run_generate_numbers_sequence(sequence: str, min_spacing: int  =  1, max_spacing: int  =  10, image_width: int  =  280, ### image_widthoutput_path: str  =  "./", config_file: str  =  "config/config.yaml", )
 run_generate_phone_numbers(num_images: int  =  10, min_spacing: int  =  1, max_spacing: int  =  10, image_width: int  =  280, output_path: str  =  "./", config_file: str  =  "config/config.yaml", )
 
 
 
-utilmy/templates/templist/pypi_package/mygenerator/transform.py
+.\utilmy\templates\templist\pypi_package\mygenerator\transform.py
 -------------------------methods----------------------
 CharToImages.__init__(self, font: dataset.ImageDataset)
 CharToImages.fit(self, ds: dataset.NlpDataset)
@@ -1104,7 +1104,7 @@ TextToImage.fit_transform(self, ds: dataset.NlpDataset)
 TextToImage.transform(self, ds: dataset.NlpDataset)
 
 
-utilmy/templates/templist/pypi_package/mygenerator/util_exceptions.py
+.\utilmy\templates\templist\pypi_package\mygenerator\util_exceptions.py
 -------------------------functions----------------------
 config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
 dataset_donwload(url, path_target)
@@ -1119,7 +1119,7 @@ to_file(s, filep)
 
 
 
-utilmy/templates/templist/pypi_package/mygenerator/util_image.py
+.\utilmy\templates\templist\pypi_package\mygenerator\util_image.py
 -------------------------functions----------------------
 image_merge(image_list, n_dim, padding_size, max_height, total_width)
 image_read(filepath_or_buffer: Union[str, io.BytesIO])
@@ -1129,7 +1129,7 @@ padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding
 
 
 
-utilmy/templates/templist/pypi_package/mygenerator/utils.py
+.\utilmy\templates\templist\pypi_package\mygenerator\utils.py
 -------------------------functions----------------------
 config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
 dataset_donwload(url, path_target)
@@ -1144,7 +1144,7 @@ to_file(s, filep)
 
 
 
-utilmy/templates/templist/pypi_package/mygenerator/validate.py
+.\utilmy\templates\templist\pypi_package\mygenerator\validate.py
 -------------------------functions----------------------
 image_padding_get(img, threshold = 0, inverse = True)
 image_padding_load(img_path, threshold = 15)
@@ -1153,7 +1153,7 @@ run_image_padding_validate(min_spacing: int  =  1, max_spacing: int  =  1, image
 
 
 
-utilmy/templates/templist/pypi_package/run_pipy.py
+.\utilmy\templates\templist\pypi_package\run_pipy.py
 -------------------------functions----------------------
 ask(question, ans = 'yes')
 get_current_githash()
@@ -1171,22 +1171,22 @@ Version.parse(cls, string)
 Version.stringify(self)
 
 
-utilmy/templates/templist/pypi_package/setup.py
+.\utilmy\templates\templist\pypi_package\setup.py
 -------------------------functions----------------------
 get_current_githash()
 
 
 
-utilmy/templates/templist/pypi_package/tests/__init__.py
+.\utilmy\templates\templist\pypi_package\tests\__init__.py
 
 
-utilmy/templates/templist/pypi_package/tests/conftest.py
+.\utilmy\templates\templist\pypi_package\tests\conftest.py
 
 
-utilmy/templates/templist/pypi_package/tests/test_common.py
+.\utilmy\templates\templist\pypi_package\tests\test_common.py
 
 
-utilmy/templates/templist/pypi_package/tests/test_dataset.py
+.\utilmy\templates\templist\pypi_package\tests\test_dataset.py
 -------------------------functions----------------------
 test_image_dataset_get_image_only()
 test_image_dataset_get_label_list()
@@ -1196,19 +1196,19 @@ test_nlp_dataset_len()
 
 
 
-utilmy/templates/templist/pypi_package/tests/test_import.py
+.\utilmy\templates\templist\pypi_package\tests\test_import.py
 -------------------------functions----------------------
 test_import()
 
 
 
-utilmy/templates/templist/pypi_package/tests/test_pipeline.py
+.\utilmy\templates\templist\pypi_package\tests\test_pipeline.py
 -------------------------functions----------------------
 test_generate_phone_numbers(tmp_path)
 
 
 
-utilmy/templates/templist/pypi_package/tests/test_transform.py
+.\utilmy\templates\templist\pypi_package\tests\test_transform.py
 -------------------------functions----------------------
 create_font_files(font_dir)
 test_chars_to_images_transform()
@@ -1218,7 +1218,7 @@ test_text_to_image_transform(tmp_path)
 
 
 
-utilmy/templates/templist/pypi_package/tests/test_util_image.py
+.\utilmy\templates\templist\pypi_package\tests\test_util_image.py
 -------------------------functions----------------------
 create_blank_image(width, height, rgb_color = (0, 0, 0)
 test_image_merge()
@@ -1228,13 +1228,13 @@ test_image_resize()
 
 
 
-utilmy/templates/templist/pypi_package/tests/test_validate.py
+.\utilmy\templates\templist\pypi_package\tests\test_validate.py
 -------------------------functions----------------------
 test_image_padding_get()
 
 
 
-utilmy/text.py
+.\utilmy\text.py
 -------------------------functions----------------------
 help()
 help_get_codesource(func)
@@ -1248,10 +1248,10 @@ test_lsh()
 
 
 
-utilmy/tseries/util_tseries.py
+.\utilmy\tseries\util_tseries.py
 
 
-utilmy/utilmy.py
+.\utilmy\utilmy.py
 -------------------------functions----------------------
 git_current_hash(mode = 'full')
 git_repo_root()
@@ -1272,7 +1272,7 @@ Session.save_session(self, folder, globs, tag = "")
 Session.show(self)
 
 
-utilmy/utils.py
+.\utilmy\utils.py
 -------------------------functions----------------------
 config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
 dataset_donwload(url, path_target)
@@ -1288,10 +1288,10 @@ to_file(s, filep)
 
 
 
-utilmy/viz/__init__.py
+.\utilmy\viz\__init__.py
 
 
-utilmy/viz/embedding.py
+.\utilmy\viz\embedding.py
 -------------------------functions----------------------
 embedding_load_parquet(path = "df.parquet", nmax  =  500)
 embedding_load_word2vec(model_vector_path = "model.vec", nmax  =  500)
@@ -1308,10 +1308,10 @@ vizEmbedding.draw_hiearchy(self)
 vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/")
 
 
-utilmy/viz/util_map.py
+.\utilmy\viz\util_map.py
 
 
-utilmy/viz/vizhtml.py
+.\utilmy\viz\vizhtml.py
 -------------------------functions----------------------
 colormap_get_names()
 help_get_codesource(func)
@@ -1339,15 +1339,15 @@ zz_test_get_random_data(n = 100)
 mpld3_TopToolbar.__init__(self)
 
 
-utilmy/viz/zarchive/__init__.py
+.\utilmy\viz\zarchive\__init__.py
 
 
-utilmy/viz/zarchive/toptoolbar.py
+.\utilmy\viz\zarchive\toptoolbar.py
 -------------------------methods----------------------
 TopToolbar.__init__(self)
 
 
-utilmy/zarchive/_HELP.py
+.\utilmy\zarchive\_HELP.py
 -------------------------functions----------------------
 fun_cython(a)
 fun_python(a)
@@ -1358,13 +1358,13 @@ set_rc_version(rcfile, target_version)
 
 
 
-utilmy/zarchive/__init__.py
+.\utilmy\zarchive\__init__.py
 
 
-utilmy/zarchive/alldata.py
+.\utilmy\zarchive\alldata.py
 
 
-utilmy/zarchive/allmodule.py
+.\utilmy\zarchive\allmodule.py
 -------------------------functions----------------------
 pprint(table1, tablefmt = "simple")
 pprint2(x)
@@ -1374,10 +1374,10 @@ str_to_utf8(x)
 
 
 
-utilmy/zarchive/allmodule_fin.py
+.\utilmy\zarchive\allmodule_fin.py
 
 
-utilmy/zarchive/coke_functions.py
+.\utilmy\zarchive\coke_functions.py
 -------------------------functions----------------------
 date_diffend(t)
 date_diffsecond(str_t1, str_t0, fmt='YYYY-MM-DD HH = 'YYYY-MM-DD HH:mm:SS')
@@ -1396,7 +1396,7 @@ year(s)
 
 
 
-utilmy/zarchive/datanalysis.py
+.\utilmy\zarchive\datanalysis.py
 -------------------------functions----------------------
 col_feature_importance(Xcol, Ytarget)
 col_pair_correl(Xcol, Ytarget)
@@ -1476,7 +1476,7 @@ sk_stateRule.eval(self, idrule, t, ktrig = 0)
 sk_stateRule.help()
 
 
-utilmy/zarchive/excel.py
+.\utilmy\zarchive\excel.py
 -------------------------functions----------------------
 add_one(data)
 double_sum(x, y)
@@ -1486,7 +1486,7 @@ npdot()
 
 
 
-utilmy/zarchive/fast.py
+.\utilmy\zarchive\fast.py
 -------------------------functions----------------------
 _compute_overlaps(u, v)
 cosine(u, v)
@@ -1511,7 +1511,7 @@ year(s)
 
 
 
-utilmy/zarchive/fast_parallel.py
+.\utilmy\zarchive\fast_parallel.py
 -------------------------functions----------------------
 task_find_best(tasks, n_top = 5)
 task_parallel_job_01(name, param, datadict)
@@ -1520,7 +1520,7 @@ task_summary(tasks)
 
 
 
-utilmy/zarchive/filelock.py
+.\utilmy\zarchive\filelock.py
 -------------------------methods----------------------
 FileLock.__del__(self)
 FileLock.__enter__(self)
@@ -1533,7 +1533,7 @@ FileLock.purge(self)
 FileLock.release(self)
 
 
-utilmy/zarchive/function_custom.py
+.\utilmy\zarchive\function_custom.py
 -------------------------functions----------------------
 fun_obj(vv, ext)
 getweight(ww, size = (9, 3)
@@ -1545,13 +1545,13 @@ mapping_risk_ww_v01(risk, wwmat, ww2)
 
 
 
-utilmy/zarchive/geospatial.py
+.\utilmy\zarchive\geospatial.py
 
 
-utilmy/zarchive/global01.py
+.\utilmy\zarchive\global01.py
 
 
-utilmy/zarchive/kagglegym.py
+.\utilmy\zarchive\kagglegym.py
 -------------------------functions----------------------
 make()
 r_score(y_true, y_pred, sample_weight = None, multioutput = None)
@@ -1564,7 +1564,7 @@ Environment.step(self, target)
 Observation.__init__(self, train, target, features)
 
 
-utilmy/zarchive/linux.py
+.\utilmy\zarchive\linux.py
 -------------------------functions----------------------
 VS_build(self, lib_to_build)
 VS_start(self, version)
@@ -1659,7 +1659,7 @@ textvect_topanda(vv, fileout = "")
 
 
 
-utilmy/zarchive/multiprocessfunc.py
+.\utilmy\zarchive\multiprocessfunc.py
 -------------------------functions----------------------
 bm_generator(bm, dt, n, type1)
 func(val, lock)
@@ -1679,14 +1679,14 @@ res_shared2()
 
 
 
-utilmy/zarchive/multithread.py
+.\utilmy\zarchive\multithread.py
 -------------------------functions----------------------
 multithread_run(fun_async, input_list:list, n_pool = 5, start_delay = 0.1, verbose = True, **kw)
 multithread_run_list(**kwargs)
 
 
 
-utilmy/zarchive/portfolio.py
+.\utilmy\zarchive\portfolio.py
 -------------------------functions----------------------
 _date_align(dateref, datei, tmax, closei)
 _notnone(x)
@@ -1830,7 +1830,7 @@ searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different
 searchSimilarity.staticmethod(self, x)
 
 
-utilmy/zarchive/portfolio_withdate.py
+.\utilmy\zarchive\portfolio_withdate.py
 -------------------------functions----------------------
 _date_align(dateref, datei, tmax, closei)
 _notnone(x)
@@ -1992,7 +1992,7 @@ searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different
 searchSimilarity.staticmethod(self, x)
 
 
-utilmy/zarchive/py2to3/_HELP.py
+.\utilmy\zarchive\py2to3\_HELP.py
 -------------------------functions----------------------
 fun_cython(a)
 fun_python(a)
@@ -2003,13 +2003,13 @@ set_rc_version(rcfile, target_version)
 
 
 
-utilmy/zarchive/py2to3/__init__.py
+.\utilmy\zarchive\py2to3\__init__.py
 
 
-utilmy/zarchive/py2to3/alldata.py
+.\utilmy\zarchive\py2to3\alldata.py
 
 
-utilmy/zarchive/py2to3/allmodule.py
+.\utilmy\zarchive\py2to3\allmodule.py
 -------------------------functions----------------------
 pprint(table1, tablefmt = "simple")
 pprint2(x)
@@ -2019,10 +2019,10 @@ str_to_utf8(x)
 
 
 
-utilmy/zarchive/py2to3/allmodule_fin.py
+.\utilmy\zarchive\py2to3\allmodule_fin.py
 
 
-utilmy/zarchive/py2to3/coke_functions.py
+.\utilmy\zarchive\py2to3\coke_functions.py
 -------------------------functions----------------------
 date_diffend(t)
 date_diffsecond(str_t1, str_t0, fmt='YYYY-MM-DD HH = 'YYYY-MM-DD HH:mm:SS')
@@ -2041,7 +2041,7 @@ year(s)
 
 
 
-utilmy/zarchive/py2to3/datanalysis.py
+.\utilmy\zarchive\py2to3\datanalysis.py
 -------------------------functions----------------------
 col_feature_importance(Xcol, Ytarget)
 col_pair_correl(Xcol, Ytarget)
@@ -2118,7 +2118,7 @@ sk_stateRule.eval(self, idrule, t, ktrig = 0)
 sk_stateRule.help()
 
 
-utilmy/zarchive/py2to3/excel.py
+.\utilmy\zarchive\py2to3\excel.py
 -------------------------functions----------------------
 add_one(data)
 double_sum(x, y)
@@ -2128,7 +2128,7 @@ npdot()
 
 
 
-utilmy/zarchive/py2to3/fast.py
+.\utilmy\zarchive\py2to3\fast.py
 -------------------------functions----------------------
 _compute_overlaps(u, v)
 cosine(u, v)
@@ -2153,7 +2153,7 @@ year(s)
 
 
 
-utilmy/zarchive/py2to3/fast_parallel.py
+.\utilmy\zarchive\py2to3\fast_parallel.py
 -------------------------functions----------------------
 task_find_best(tasks, n_top = 5)
 task_parallel_job_01(name, param, datadict)
@@ -2162,7 +2162,7 @@ task_summary(tasks)
 
 
 
-utilmy/zarchive/py2to3/filelock.py
+.\utilmy\zarchive\py2to3\filelock.py
 -------------------------methods----------------------
 FileLock.__del__(self)
 FileLock.__enter__(self)
@@ -2175,7 +2175,7 @@ FileLock.purge(self)
 FileLock.release(self)
 
 
-utilmy/zarchive/py2to3/function_custom.py
+.\utilmy\zarchive\py2to3\function_custom.py
 -------------------------functions----------------------
 fun_obj(vv, ext)
 getweight(ww, size = (9, 3)
@@ -2187,13 +2187,13 @@ mapping_risk_ww_v01(risk, wwmat, ww2)
 
 
 
-utilmy/zarchive/py2to3/geospatial.py
+.\utilmy\zarchive\py2to3\geospatial.py
 
 
-utilmy/zarchive/py2to3/global01.py
+.\utilmy\zarchive\py2to3\global01.py
 
 
-utilmy/zarchive/py2to3/kagglegym.py
+.\utilmy\zarchive\py2to3\kagglegym.py
 -------------------------functions----------------------
 make()
 r_score(y_true, y_pred, sample_weight = None, multioutput = None)
@@ -2206,7 +2206,7 @@ Environment.step(self, target)
 Observation.__init__(self, train, target, features)
 
 
-utilmy/zarchive/py2to3/linux.py
+.\utilmy\zarchive\py2to3\linux.py
 -------------------------functions----------------------
 VS_build(self, lib_to_build)
 VS_start(self, version)
@@ -2301,7 +2301,7 @@ textvect_topanda(vv, fileout = "")
 
 
 
-utilmy/zarchive/py2to3/multiprocessfunc.py
+.\utilmy\zarchive\py2to3\multiprocessfunc.py
 -------------------------functions----------------------
 bm_generator(bm, dt, n, type1)
 func(val, lock)
@@ -2321,7 +2321,7 @@ res_shared2()
 
 
 
-utilmy/zarchive/py2to3/portfolio.py
+.\utilmy\zarchive\py2to3\portfolio.py
 -------------------------functions----------------------
 _date_align(dateref, datei, tmax, closei)
 _notnone(x)
@@ -2465,7 +2465,7 @@ searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different
 searchSimilarity.staticmethod(self, x)
 
 
-utilmy/zarchive/py2to3/portfolio_withdate.py
+.\utilmy\zarchive\py2to3\portfolio_withdate.py
 -------------------------functions----------------------
 _date_align(dateref, datei, tmax, closei)
 _notnone(x)
@@ -2627,7 +2627,7 @@ searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different
 searchSimilarity.staticmethod(self, x)
 
 
-utilmy/zarchive/py2to3/report.py
+.\utilmy\zarchive\py2to3\report.py
 -------------------------functions----------------------
 map_show()
 xl_create_pdf()
@@ -2636,13 +2636,13 @@ xl_save_report(report, outfile)
 
 
 
-utilmy/zarchive/py2to3/rstatpy.py
+.\utilmy\zarchive\py2to3\rstatpy.py
 -------------------------functions----------------------
 stl(data, ns, np = None, nt = None, nl = None, isdeg = 0, itdeg = 1, ildeg = 1, nsjump = None, ntjump = None, nljump = None, ni = 2, no = 0, fulloutput = False)
 
 
 
-utilmy/zarchive/py2to3/util_min.py
+.\utilmy\zarchive\py2to3\util_min.py
 -------------------------functions----------------------
 a_get_pythonversion()
 a_isanaconda()
@@ -2685,7 +2685,7 @@ z_key_splitinto_dir_name(keyname)
 
 
 
-utilmy/zarchive/py2to3/util_ml.py
+.\utilmy\zarchive\py2to3\util_ml.py
 -------------------------functions----------------------
 create_adam_optimizer(learning_rate, momentum)
 create_bias_variable(name, shape)
@@ -2705,13 +2705,13 @@ TextLoader.preprocess(self, input_file, vocab_file, tensor_file)
 TextLoader.reset_batch_pointer(self)
 
 
-utilmy/zarchive/py2to3/utilgeo.py
+.\utilmy\zarchive\py2to3\utilgeo.py
 -------------------------functions----------------------
 df_to_geojson(df, col_properties, lat = 'latitude', lon = 'longitude')
 
 
 
-utilmy/zarchive/py3/util.py
+.\utilmy\zarchive\py3\util.py
 -------------------------functions----------------------
 a_autoreload()
 a_cleanmemory()
@@ -2978,7 +2978,7 @@ testclass.__init__(self, x)
 testclass.z_autotest(self)
 
 
-utilmy/zarchive/report.py
+.\utilmy\zarchive\report.py
 -------------------------functions----------------------
 map_show()
 xl_create_pdf()
@@ -2987,28 +2987,28 @@ xl_save_report(report, outfile)
 
 
 
-utilmy/zarchive/rstatpy.py
+.\utilmy\zarchive\rstatpy.py
 -------------------------functions----------------------
 stl(data, ns, np = None, nt = None, nl = None, isdeg = 0, itdeg = 1, ildeg = 1, nsjump = None, ntjump = None, nljump = None, ni = 2, no = 0, fulloutput = False)
 
 
 
-utilmy/zarchive/storage/aapackage_gen/34/Working Copy of util34.py
+.\utilmy\zarchive\storage\aapackage_gen\34\Working Copy of util34.py
 -------------------------functions----------------------
 getmodule_doc(module1, fileout = '')
 
 
 
-utilmy/zarchive/storage/aapackage_gen/34/global01.py
+.\utilmy\zarchive\storage\aapackage_gen\34\global01.py
 
 
-utilmy/zarchive/storage/aapackage_gen/34/util34.py
+.\utilmy\zarchive\storage\aapackage_gen\34\util34.py
 -------------------------functions----------------------
 getmodule_doc(module1, fileout = '')
 
 
 
-utilmy/zarchive/storage/aapackage_gen/codeanalysis.py
+.\utilmy\zarchive\storage\aapackage_gen\codeanalysis.py
 -------------------------functions----------------------
 dedent()
 describe(obj)
@@ -3027,28 +3027,28 @@ wi2(*args)
 
 
 
-utilmy/zarchive/storage/aapackage_gen/global01.py
+.\utilmy\zarchive\storage\aapackage_gen\global01.py
 
 
-utilmy/zarchive/storage/aapackage_gen/old/Working Copy of util34.py
+.\utilmy\zarchive\storage\aapackage_gen\old\Working Copy of util34.py
 -------------------------functions----------------------
 getmodule_doc(module1, fileout = '')
 
 
 
-utilmy/zarchive/storage/aapackage_gen/old/util27.py
+.\utilmy\zarchive\storage\aapackage_gen\old\util27.py
 -------------------------functions----------------------
 getmodule_doc(module1, fileout = '')
 
 
 
-utilmy/zarchive/storage/aapackage_gen/old/util34.py
+.\utilmy\zarchive\storage\aapackage_gen\old\util34.py
 -------------------------functions----------------------
 getmodule_doc(module1, fileout = '')
 
 
 
-utilmy/zarchive/storage/aapackage_gen/old/utils27.py
+.\utilmy\zarchive\storage\aapackage_gen\old\utils27.py
 -------------------------functions----------------------
 acf(data)
 comoment(xx, yy, nsample, kx, ky)
@@ -3068,7 +3068,7 @@ unique_rows(a)
 
 
 
-utilmy/zarchive/storage/aapackage_gen/old/utils34.py
+.\utilmy\zarchive\storage\aapackage_gen\old\utils34.py
 -------------------------functions----------------------
 acf(data)
 comoment(xx, yy, nsample, kx, ky)
@@ -3088,13 +3088,13 @@ unique_rows(a)
 
 
 
-utilmy/zarchive/storage/aapackage_gen/util.py
+.\utilmy\zarchive\storage\aapackage_gen\util.py
 -------------------------functions----------------------
 getmodule_doc(module1, fileout = '')
 
 
 
-utilmy/zarchive/storage/aapackagedev/random.py
+.\utilmy\zarchive\storage\aapackagedev\random.py
 -------------------------functions----------------------
 Plot2D_random_save(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph, )
 Plot2D_random_show(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph)
@@ -3127,16 +3127,16 @@ testdensity2d2(nsample, totdim, bin01, nbasset, process01 = lognormal_process2d,
 
 
 
-utilmy/zarchive/storage/alldata.py
+.\utilmy\zarchive\storage\alldata.py
 
 
-utilmy/zarchive/storage/allmodule.py
+.\utilmy\zarchive\storage\allmodule.py
 -------------------------functions----------------------
 aa_isanaconda()
 
 
 
-utilmy/zarchive/storage/benchmarktest.py
+.\utilmy\zarchive\storage\benchmarktest.py
 -------------------------functions----------------------
 payoff1(pricepath)
 payoff2(pricepath)
@@ -3145,7 +3145,7 @@ payoffeuro1(st)
 
 
 
-utilmy/zarchive/storage/codeanalysis.py
+.\utilmy\zarchive\storage\codeanalysis.py
 -------------------------functions----------------------
 dedent()
 describe(obj)
@@ -3165,10 +3165,10 @@ wi2(*args)
 
 
 
-utilmy/zarchive/storage/dbcheck.py
+.\utilmy\zarchive\storage\dbcheck.py
 
 
-utilmy/zarchive/storage/derivatives.py
+.\utilmy\zarchive\storage\derivatives.py
 -------------------------functions----------------------
 CRR_option_value(S0, K, T, r, vol, otype, M = 4)
 N(d)
@@ -3237,7 +3237,7 @@ timegrid(timestep, maturityyears)
 
 
 
-utilmy/zarchive/storage/dl_utils.py
+.\utilmy\zarchive\storage\dl_utils.py
 -------------------------functions----------------------
 feats_len(fname)
 file_len(fname)
@@ -3253,7 +3253,7 @@ save_weights(file, tuple_weights)
 
 
 
-utilmy/zarchive/storage/excel.py
+.\utilmy\zarchive\storage\excel.py
 -------------------------functions----------------------
 add_one(data)
 double_sum(x, y)
@@ -3263,13 +3263,13 @@ npdot()
 
 
 
-utilmy/zarchive/storage/global01.py
+.\utilmy\zarchive\storage\global01.py
 
 
-utilmy/zarchive/storage/installNewPackage.py
+.\utilmy\zarchive\storage\installNewPackage.py
 
 
-utilmy/zarchive/storage/java.py
+.\utilmy\zarchive\storage\java.py
 -------------------------functions----------------------
 compileJAVA(javafile)
 compileJAVAtext(classname, javatxt, path1 = "")
@@ -3293,7 +3293,7 @@ writeText(text, filename)
 
 
 
-utilmy/zarchive/storage/multiprocessfunc.py
+.\utilmy\zarchive\storage\multiprocessfunc.py
 -------------------------functions----------------------
 bm_generator(bm, dt, n, type1)
 func(val, lock)
@@ -3313,7 +3313,7 @@ res_shared2()
 
 
 
-utilmy/zarchive/storage/panda_util.py
+.\utilmy\zarchive\storage\panda_util.py
 -------------------------functions----------------------
 array_toexcel(vv, wk, r1)subset = 'rownum', take_last=True)level=0))a) = True)level=0))a):)
 csv_topanda(filein1, filename, tablen = 'data', lineterminator=",")
@@ -3337,7 +3337,7 @@ unique_rows(a)
 
 
 
-utilmy/zarchive/storage/portfolio.py
+.\utilmy\zarchive\storage\portfolio.py
 -------------------------functions----------------------
 _date_align(dateref, datei, tmax, closei)
 _notnone(x)
@@ -3493,7 +3493,7 @@ searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different
 searchSimilarity.staticmethod(self, x)
 
 
-utilmy/zarchive/storage/rec_data.py
+.\utilmy\zarchive\storage\rec_data.py
 -------------------------functions----------------------
 _build_interaction_matrix(rows, cols, data)
 _download_movielens(dest_path)
@@ -3508,7 +3508,7 @@ get_triplets(mat)
 
 
 
-utilmy/zarchive/storage/rec_metrics.py
+.\utilmy\zarchive\storage\rec_metrics.py
 -------------------------functions----------------------
 full_auc(model, ground_truth)
 precision_at_k(model, ground_truth, k, user_features = None, item_features = None)
@@ -3516,7 +3516,7 @@ predict(model, uid, pids)
 
 
 
-utilmy/zarchive/storage/sobol.py
+.\utilmy\zarchive\storage\sobol.py
 -------------------------functions----------------------
 Plot2D_random_save(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph, )
 Plot2D_random_show(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph)
@@ -3549,7 +3549,7 @@ testdensity2d2(nsample, totdim, bin01, nbasset, process01 = lognormal_process2d,
 
 
 
-utilmy/zarchive/storage/stateprocessor.py
+.\utilmy\zarchive\storage\stateprocessor.py
 -------------------------functions----------------------
 and2(tuple1)
 ff(x, symfull = symfull)
@@ -3566,7 +3566,7 @@ store_patternstate(tree, sym1, theme, symfull = symfull)
 
 
 
-utilmy/zarchive/storage/symbolicmath.py
+.\utilmy\zarchive\storage\symbolicmath.py
 -------------------------functions----------------------
 EEvarbrownian(ff1d)
 EEvarbrownian2d(ff)
@@ -3605,7 +3605,7 @@ taylor2(ff, x0, n)
 
 
 
-utilmy/zarchive/storage/technical_indicator.py
+.\utilmy\zarchive\storage\technical_indicator.py
 -------------------------functions----------------------
 ACCDIST(df, n)
 ADX(df, n, n_ADX)
@@ -3662,7 +3662,7 @@ supportmaxmin1(df1)
 
 
 
-utilmy/zarchive/storage/testmulti.py
+.\utilmy\zarchive\storage\testmulti.py
 -------------------------functions----------------------
 mc01()
 mc02()
@@ -3675,7 +3675,7 @@ test01()
 
 
 
-utilmy/zarchive/storage/theano_imdb.py
+.\utilmy\zarchive\storage\theano_imdb.py
 -------------------------functions----------------------
 get_dataset_file(dataset, default_dataset, origin)
 load_data(path = "imdb.pkl", n_words = 100000, valid_portion = 0.1, maxlen = None, sort_by_len = True)
@@ -3683,7 +3683,7 @@ prepare_data(seqs, labels, maxlen = None)
 
 
 
-utilmy/zarchive/storage/theano_lstm.py
+.\utilmy\zarchive\storage\theano_lstm.py
 -------------------------functions----------------------
 _p(pp, name)
 adadelta(lr, tparams, grads, x, mask, y, cost)
@@ -3709,7 +3709,7 @@ zipp(params, tparams)
 
 
 
-utilmy/zarchive/util.py
+.\utilmy\zarchive\util.py
 -------------------------functions----------------------
 a_autoreload()
 a_cleanmemory()
@@ -3934,7 +3934,7 @@ testclass.__init__(self, x)
 testclass.z_autotest(self)
 
 
-utilmy/zarchive/util_aws.py
+.\utilmy\zarchive\util_aws.py
 -------------------------functions----------------------
 aws_accesskey_get(access = '', key = '')
 aws_conn_create(region = "ap-northeast-2", access = '', key = '')
@@ -3979,7 +3979,7 @@ aws_ec2_ssh.sftp_walk(self, remotepath)
 aws_ec2_ssh.write_command(self, text, remotefile)
 
 
-utilmy/zarchive/util_min.py
+.\utilmy\zarchive\util_min.py
 -------------------------functions----------------------
 a_get_pythonversion()
 a_isanaconda()
@@ -4022,7 +4022,7 @@ z_key_splitinto_dir_name(keyname)
 
 
 
-utilmy/zarchive/util_ml.py
+.\utilmy\zarchive\util_ml.py
 -------------------------functions----------------------
 create_adam_optimizer(learning_rate, momentum)
 create_bias_variable(name, shape)
@@ -4042,7 +4042,7 @@ TextLoader.preprocess(self, input_file, vocab_file, tensor_file)
 TextLoader.reset_batch_pointer(self)
 
 
-utilmy/zarchive/util_sql.py
+.\utilmy\zarchive\util_sql.py
 -------------------------functions----------------------
 sql_create_dbengine(type1 = '', dbname = '', login = '', password = '', url = 'localhost', port = 5432)
 sql_delete_table(name, dbengine)
@@ -4060,7 +4060,7 @@ sql_query(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', d
 
 
 
-utilmy/zarchive/util_web.py
+.\utilmy\zarchive\util_web.py
 -------------------------functions----------------------
 web_getjson_fromurl(url)
 web_getlink_fromurl(url)
@@ -4075,13 +4075,13 @@ web_sendurl(url1)
 
 
 
-utilmy/zarchive/utilgeo.py
+.\utilmy\zarchive\utilgeo.py
 -------------------------functions----------------------
 df_to_geojson(df, col_properties, lat = 'latitude', lon = 'longitude')
 
 
 
-utilmy/zarchive/zzarchive/zutil.py
+.\utilmy\zarchive\zzarchive\zutil.py
 -------------------------functions----------------------
 _os_file_search_fast(fname, texts = None, mode = "regex/str")
 a_cleanmemory()
@@ -4280,7 +4280,7 @@ z_key_splitinto_dir_name(keyname)
 
 
 
-utilmy/zarchive/zzarchive/zutil_features.py
+.\utilmy\zarchive\zzarchive\zutil_features.py
 -------------------------functions----------------------
 col_extractname(col_onehot)
 col_remove(cols, colsremove, mode = "exact")
