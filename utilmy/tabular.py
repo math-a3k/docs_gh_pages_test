@@ -9,9 +9,6 @@ https://pypi.org/project/pysie/#description
 """
 import os, sys, pandas as pd, numpy as np
 
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.model_selection import train_test_split
-
 from utilmy.utilmy import pd_generate_data
 from utilmy.zarchive.zzarchive.zutil_features import pd_colnum_tocat, pd_colnum_tocat_stat
 
@@ -27,6 +24,9 @@ def test0():
     '''
 
 def test1():
+    from sklearn.tree import DecisionTreeRegressor
+    from sklearn.model_selection import train_test_split
+
     df = pd.read_csv("../testdata/tmp/test/crop.data.csv")
     model = DecisionTreeRegressor(random_state=1)
     y = df.fertilizer
