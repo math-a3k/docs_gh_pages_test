@@ -1,0 +1,10 @@
+#############3# Optional 
+# pyro-ppl
+# pyod
+#tensorflow_text>=2.0.0rc0
+#sdv==0.6.1
+mlflow==1.13.1
+optuna-dashboard
+fastapi
+pydantic
+uvicorn

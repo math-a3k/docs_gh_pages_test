@@ -1,0 +1,33 @@
+lightgbm 
+optuna
+pandas
+scikit-learn 
+scipy 
+matplotlib
+pyarrow
+fire
+tqdm
+gplearn
+numba==0.50.1
+umap
+#cycler==0.10.0
+#joblib==0.16.0
+#kiwisolver==1.2.0
+#llvmlite==0.33.0
+#matplotlib==3.3.0
+#Pillow==7.2.0
+#pyparsing
+#python-dateutil==2.8.1
+#pytz==2020.1
+#############3# Optional 
+# pyro-ppl
+# pyod
+tensorflow_text>=2.0.0rc0
+#sdv==0.6.1
+mlflow==1.13.1
+mljar-supervised
+#explainerdashboard
+# petastorm
+pandas-profiling
+category_encoders
+imblearn

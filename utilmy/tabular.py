@@ -101,8 +101,7 @@ def y_adjuster_log(y_true, y_pred_log, error_func, **kwargs):
 
 
             
-            
-    
+
     
 def test_anova(df, col1, col2):
     """

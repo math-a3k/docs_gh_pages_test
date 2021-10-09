@@ -1,0 +1,75 @@
+{ 
+    "vision":{
+
+        "model_pars": {
+            "max_trials": 10,
+            "model_name":"vision"
+        },
+
+        "data_pars" :{
+            "dataset": "MNIST",
+            "data_path": "dataset/vision/",
+            "validation_split":0.2
+        },
+
+        "compute_pars": {
+            "epochs":2
+        },
+
+        "out_pars": {
+            "checkpointdir": "ztest/model_keras/autokeras/"
+        
+        }
+    },
+
+"text":{
+
+        "model_pars": {
+            "max_trials": 10,
+            "model_name":"text"
+        },
+
+        "data_pars" :{
+            "dataset": "IMDB",
+            "data_path": "dataset/nlp/",
+            "num_words" : 1000,
+            "validation_split":0.2
+        },
+
+        "compute_pars": {
+            "epochs":2
+           
+        },
+
+        "out_pars": {
+            "checkpointdir": "ztest/model_keras/autokeras/"
+        
+        }
+    },
+
+"tabular_classifier":{
+
+        "model_pars": {
+            "max_trials": 10,
+            "model_name":"tabular_classifier"
+        },
+
+        "data_pars" :{
+            "dataset": "Titanic Survival Prediction",
+            "train_data_path": "dataset/tabular/autokeras_titanic_train.csv",
+            "test_data_path": "dataset/tabular/autokeras_titanic_eval.csv",
+            "validation_split":0.2
+        },
+
+        "compute_pars": {
+            "epochs":2
+            
+        },
+
+        "out_pars": {
+            "checkpointdir": "ztest/model_keras/autokeras/"
+        
+        }
+    }
+
+}
