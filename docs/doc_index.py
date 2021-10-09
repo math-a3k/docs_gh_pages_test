@@ -4498,3 +4498,2391 @@ test_get_classification_data(name = None)
 
 -------------------------methods----------------------
 dict2.__init__(self, d)
+
+
+utilmy/zml/__init__.py
+
+
+utilmy/zml/core_deploy.py
+-------------------------functions----------------------
+load_arguments()
+
+
+
+utilmy/zml/core_run.py
+-------------------------functions----------------------
+check(config='outlier_predict.py = 'outlier_predict.py::titanic_lightgbm')
+data_profile(config = '')
+data_profile2(config = '')
+deploy()
+get_config_path(config = '')
+get_global_pars(config_uri = "")
+hyperparam_wrapper(config_full = "", ntrials = 2, n_sample = 5000, debug = 1, path_output          =  "data/output/titanic1/", path_optuna_storage  =  'data/output/optuna_hyper/optunadb.db', metric_name = 'accuracy_score', mdict_range = None)
+log(*s)
+predict(config = '', nsample = None)
+preprocess(config = '', nsample = None)
+train(config = '', nsample = None)
+train_sampler(config = '', nsample = None)
+transform(config = '', nsample = None)
+
+
+
+utilmy/zml/core_test.py
+-------------------------functions----------------------
+json_load(path)
+log_info_repo(arg = None)
+log_remote_push(name = None)
+log_remote_start(arg = None)
+log_separator(space = 140)
+os_bash(cmd)
+os_file_current_path()
+os_system(cmd, dolog = 1, prefix = "", dateformat='+%Y-%m-%d_%H = '+%Y-%m-%d_%H:%M:%S,%3N')
+to_logfile(prefix = "", dateformat='+%Y-%m-%d_%H = '+%Y-%m-%d_%H:%M:%S,%3N')
+
+
+
+utilmy/zml/datasketch_hashing.py
+-------------------------functions----------------------
+create_hash(df, column_name, threshold, num_perm)
+find_clusters(df, column_name, threshold, num_perm)
+
+
+
+utilmy/zml/example/classifier/classifier_adfraud.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/classifier/classifier_airline.py
+-------------------------functions----------------------
+airline_lightgbm(path_model_out = "")
+check()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/classifier/classifier_bankloan.py
+-------------------------functions----------------------
+bank_lightgbm()
+check()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/classifier/classifier_cardiff.py
+-------------------------functions----------------------
+cardif_lightgbm(path_model_out = "")
+check()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/classifier/classifier_income.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+income_status_lightgbm(path_model_out = "")
+
+
+
+utilmy/zml/example/classifier/classifier_multi.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+multi_lightgbm()
+
+
+
+utilmy/zml/example/classifier/classifier_optuna.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+titanic_lightoptuna()
+
+
+
+utilmy/zml/example/classifier/classifier_sentiment.py
+-------------------------functions----------------------
+check()
+data_profile(path_data_train = "", path_model = "", n_sample =  5000)
+global_pars_update(model_dict, data_name, config_name)
+os_get_function_name()
+predict(config = None, nsample = None)
+preprocess(config = None, nsample = None)
+run_all()
+sentiment_bayesian_pyro(path_model_out = "")
+sentiment_elasticnetcv(path_model_out = "")
+sentiment_lightgbm(path_model_out = "")
+train(config = None, nsample = None)
+
+
+
+utilmy/zml/example/classifier_mlflow.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+pd_col_myfun(df = None, col = None, pars = {})
+titanic_lightgbm()
+
+
+
+utilmy/zml/example/click/online_shopping.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+online_lightgbm()
+
+
+
+utilmy/zml/example/click/outlier_predict.py
+-------------------------functions----------------------
+check()
+data_profile(path_data_train = "", path_model = "", n_sample =  5000)
+global_pars_update(model_dict, data_name, config_name)
+os_get_function_name()
+titanic_pyod(path_model_out = "")
+
+
+
+utilmy/zml/example/click/test_online_shopping.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+online_lightgbm()
+pd_col_myfun(df = None, col = None, pars = {})
+
+
+
+utilmy/zml/example/regress/regress_airbnb.py
+-------------------------functions----------------------
+airbnb_elasticnetcv(path_model_out = "")
+airbnb_lightgbm(path_model_out = "")
+global_pars_update(model_dict, data_name, config_name)
+y_norm(y, inverse = True, mode = 'boxcox')
+
+
+
+utilmy/zml/example/regress/regress_boston.py
+-------------------------functions----------------------
+boston_causalnex(path_model_out = "")
+boston_lightgbm(path_model_out = "")
+global_pars_update(model_dict, data_name, config_name)
+y_norm(y, inverse = True, mode = 'boxcox')
+
+
+
+utilmy/zml/example/regress/regress_house.py
+-------------------------functions----------------------
+check()
+data_profile()
+global_pars_update(model_dict, data_name, config_name)
+house_price_elasticnetcv(path_model_out = "")
+house_price_lightgbm(path_model_out = "")
+predict()
+preprocess()
+run_all()
+train()
+y_norm(y, inverse = True, mode = 'boxcox')
+
+
+
+utilmy/zml/example/regress/regress_salary.py
+-------------------------functions----------------------
+check()
+global_pars_update(model_dict, data_name, config_name)
+salary_bayesian_pyro(path_model_out = "")
+salary_elasticnetcv(path_model_out = "")
+salary_glm(path_model_out = "")
+salary_lightgbm(path_model_out = "")
+y_norm(y, inverse = True, mode = 'boxcox')
+
+
+
+utilmy/zml/example/svd/benchmark_mf.py
+-------------------------functions----------------------
+daal4py_als(A, k)
+daal4py_svd(A, k)
+factorize(S, num_factors, lambda_reg = 1e-5, num_iterations = 20, init_std = 0.01, verbose = False, dtype = 'float32', recompute_factors = recompute_factors, *args, **kwargs)
+gensim_svd(A, k)
+implicit_mf(A, k)
+iter_rows(S)
+linear_surplus_confidence_matrix(B, alpha)
+log_surplus_confidence_matrix(B, alpha, epsilon)
+nmf_1(A, k)
+nmf_2(A, k)
+nmf_3(A, k)
+nmf_4(A, k)
+nmf_5(A, k)
+recompute_factors(Y, S, lambda_reg, dtype = 'float32')
+recompute_factors_bias(Y, S, lambda_reg, dtype = 'float32')
+scipy_svd(A, K)
+sklearn_randomized_svd(A, k)
+sklearn_truncated_arpack_svd(A, k)
+sklearn_truncated_randomized_svd(A, k)
+sparsesvd_svd(A, k)
+time_ns()
+time_reps(func, params, reps)
+wmf(A, k)
+
+-------------------------methods----------------------
+ImplicitMF.__init__(self, counts, num_factors = 40, num_iterations = 30, reg_param = 0.8)
+ImplicitMF.iteration(self, user, fixed_vecs)
+ImplicitMF.train_model(self)
+
+
+utilmy/zml/example/svd/benchmark_mf0.py
+-------------------------functions----------------------
+factorize(S, num_factors, lambda_reg = 1e-5, num_iterations = 20, init_std = 0.01, verbose = False, dtype = 'float32', recompute_factors = recompute_factors, *args, **kwargs)
+gensim_svd(A, k)
+implicit_mf(A, k)
+iter_rows(S)
+linear_surplus_confidence_matrix(B, alpha)
+log_surplus_confidence_matrix(B, alpha, epsilon)
+nmf_1(A, k)
+nmf_2(A, k)
+nmf_3(A, k)
+nmf_4(A, k)
+nmf_5(A, k)
+recompute_factors(Y, S, lambda_reg, dtype = 'float32')
+recompute_factors_bias(Y, S, lambda_reg, dtype = 'float32')
+scipy_svd(A, K)
+sklearn_randomized_svd(A, k)
+sklearn_truncated_arpack_svd(A, k)
+sklearn_truncated_randomized_svd(A, k)
+sparsesvd_svd(A, k)
+time_ns()
+time_reps(func, params, reps)
+wmf(A, k)
+
+-------------------------methods----------------------
+ImplicitMF.__init__(self, counts, num_factors = 40, num_iterations = 30, reg_param = 0.8)
+ImplicitMF.iteration(self, user, fixed_vecs)
+ImplicitMF.train_model(self)
+
+
+utilmy/zml/example/test.py
+-------------------------functions----------------------
+check()
+data_profile(path_data_train = "", path_model = "", n_sample =  5000)
+global_pars_update(model_dict, data_name, config_name)
+os_get_function_name()
+predict(config = None, nsample = None)
+preprocess(config = None, nsample = None)
+run_all()
+titanic1(path_model_out = "")
+train(config = None, nsample = None)
+
+
+
+utilmy/zml/example/test_automl.py
+-------------------------functions----------------------
+config1()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/test_features.py
+-------------------------functions----------------------
+config1(path_model_out = "")
+config2(path_model_out = "")
+config3(path_model_out = "")
+config4(path_model_out = "")
+config9(path_model_out = "")
+global_pars_update(model_dict, data_name, config_name)
+pd_col_amyfun(df: pd.DataFrame, col: list = None, pars: dict = None)
+
+
+
+utilmy/zml/example/test_hyperopt.py
+-------------------------functions----------------------
+global_pars_update(model_dict, data_name, config_name)
+hyperparam(config_full = "", ntrials = 2, n_sample = 5000, debug = 1, path_output          =  "data/output/titanic1/", path_optuna_storage  =  'data/output/optuna_hyper/optunadb.db')
+hyperparam_wrapper(config_full = "", ntrials = 2, n_sample = 5000, debug = 1, path_output          =  "data/output/titanic1/", path_optuna_storage  =  'data/output/optuna_hyper/optunadb.db', metric_name = 'accuracy_score', mdict_range = None)
+post_process_fun(y)
+pre_process_fun(y)
+titanic1(path_model_out = "")
+
+
+
+utilmy/zml/example/test_keras_vaemdn.py
+-------------------------functions----------------------
+config_sampler()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/test_keras_vaemdn2.py
+-------------------------functions----------------------
+config1()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/test_mkeras.py
+-------------------------functions----------------------
+config1()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/test_mkeras_dense.py
+-------------------------functions----------------------
+config1()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/titanic_gefs.py
+-------------------------functions----------------------
+config1()
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/example/tseries/tseries_m5sales.py
+-------------------------functions----------------------
+custom_generate_feature_all(input_path  =  data_path, out_path = ".", input_raw_path  = ".", auxiliary_csv_path  =  None, coldrop  =  None, colindex  =  None, merge_cols_mapping  =  None, coldate  =  None, colcat  =  None, colid  =  None, coly  =  None, max_rows  =  10)
+custom_get_colsname(colid, coly)
+custom_rawdata_merge(out_path = 'out/', max_rows = 10)
+featurestore_filter_features(mode  = "random", colid  =  None, coly  =  None)
+featurestore_generate_feature(dir_in, dir_out, my_fun_features, features_group_name, input_raw_path  =  None, auxiliary_csv_path  =  None, coldrop  =  None, index_cols  =  None, merge_cols_mapping  =  None, colcat  =  None, colid = None, coly  =  None, coldate  =  None, max_rows  =  5, step_wise_saving  =  False)
+featurestore_get_feature_fromcolname(path, selected_cols, colid)
+featurestore_get_filelist_fromcolname(selected_cols, colid)
+featurestore_get_filename(file_name, path)
+featurestore_meta_update(featnames, filename, colcat)
+pd_col_tocat(df, nan_cols, colcat)
+pd_merge(df_list, cols_join)
+pd_ts_tsfresh(df, input_raw_path, dir_out, features_group_name, auxiliary_csv_path, drop_cols, index_cols, merge_cols_mapping, cat_cols  =  None, id_cols  =  None, dep_col  =  None, coldate  =  None, max_rows  =  10)
+pd_tsfresh_m5data(df_sales, dir_out, features_group_name, drop_cols, df_calendar, index_cols, merge_cols_mapping, id_cols)
+pd_tsfresh_m5data_sales(df_sales, dir_out, features_group_name, drop_cols, df_calendar, index_cols, merge_cols_mapping, id_cols)
+run_train(input_path  = "data/input/tseries/tseries_m5/raw", out_path = data_path, do_generate_raw = True, do_generate_feature = True, do_train = False, max_rows  =  10)
+train(input_path, n_experiments  =  3, colid  =  None, coly  =  None)
+
+-------------------------methods----------------------
+FeatureStore.__init__(self)
+
+
+utilmy/zml/example/tseries/tseries_retail.py
+-------------------------functions----------------------
+custom_generate_feature_all(input_path  =  data_path, out_path = ".", input_raw_path  = ".", auxiliary_csv_path  =  None, coldrop  =  None, colindex  =  None, merge_cols_mapping  =  None, coldate  =  None, colcat  =  None, colid  =  None, coly  =  None, max_rows  =  10)
+custom_get_colsname(colid, coly)
+custom_rawdata_merge(out_path = 'out/', max_rows = 10)
+featurestore_filter_features(mode  = "random", colid  =  None, coly  =  None)
+featurestore_generate_feature(dir_in, dir_out, my_fun_features, features_group_name, input_raw_path  =  None, auxiliary_csv_path  =  None, coldrop  =  None, index_cols  =  None, merge_cols_mapping  =  None, colcat  =  None, colid = None, coly  =  None, coldate  =  None, max_rows  =  5, step_wise_saving  =  False)
+featurestore_get_feature_fromcolname(path, selected_cols, colid)
+featurestore_get_filelist_fromcolname(selected_cols, colid)
+featurestore_get_filename(file_name, path)
+featurestore_meta_update(featnames, filename, colcat)
+pd_col_tocat(df, nan_cols, colcat)
+pd_merge(df_list, cols_join)
+run_train(input_path  = "data/input/tseries/retail/raw", out_path = data_path, do_generate_raw = True, do_generate_feature = True, do_train = False, max_rows  =  10)
+train(input_path, n_experiments  =  3, colid  =  None, coly  =  None)
+
+-------------------------methods----------------------
+FeatureStore.__init__(self)
+
+
+utilmy/zml/example/tseries/tseries_sales.py
+-------------------------functions----------------------
+custom_generate_feature_all(input_path  =  data_path, out_path = ".", input_raw_path  = ".", auxiliary_csv_path  =  None, coldrop  =  None, colindex  =  None, merge_cols_mapping  =  None, coldate  =  None, colcat  =  None, colid  =  None, coly  =  None, max_rows  =  10)
+custom_get_colsname(colid, coly)
+custom_rawdata_merge(out_path = 'out/', max_rows = 10)
+featurestore_filter_features(mode  = "random", colid  =  None, coly  =  None)
+featurestore_generate_feature(dir_in, dir_out, my_fun_features, features_group_name, input_raw_path  =  None, auxiliary_csv_path  =  None, coldrop  =  None, index_cols  =  None, merge_cols_mapping  =  None, colcat  =  None, colid = None, coly  =  None, coldate  =  None, max_rows  =  5, step_wise_saving  =  False)
+featurestore_get_feature_fromcolname(path, selected_cols, colid)
+featurestore_get_filelist_fromcolname(selected_cols, colid)
+featurestore_get_filename(file_name, path)
+featurestore_meta_update(featnames, filename, colcat)
+pd_col_tocat(df, nan_cols, colcat)
+pd_merge(df_list, cols_join)
+run_generate_train_data(input_path  = "data/input/tseries/retail/raw", out_path = data_path, do_generate_raw = True, do_generate_feature = True, do_train = False, max_rows  =  10)
+
+-------------------------methods----------------------
+FeatureStore.__init__(self)
+
+
+utilmy/zml/example/zfraud.py
+-------------------------functions----------------------
+global_pars_update(model_dict, data_name, config_name)
+
+
+
+utilmy/zml/source/bin/__init__.py
+
+
+utilmy/zml/source/bin/auto_feature_AFEM/AFE.py
+-------------------------functions----------------------
+timer(func)
+
+-------------------------methods----------------------
+BasePath.__init__(self, pathstype, name = None)
+BasePath._inversepathstype(self)
+BasePath.getinversepathstype(self)
+BasePath.getlastentityid(self)
+BasePath.getpathentities(self)
+BasePath.getpathname(self)
+BasePath.getpathstype(self)
+Entity.__init__(self, entity_id, dataframe, index, time_index = None, variable_types = None)
+Entity.getcolumns(self, columns)
+Entity.getfeatname(self)
+Entity.getfeattype(self, featname)
+Entity.merge(self, features, path, how = 'right')
+EntitySet.__init__(self, name)
+EntitySet._pathstype(self, paths)
+EntitySet._search_path(self, shortpaths, targetnode, maxdepth, max_famous_son)
+EntitySet.addrelationship(self, entityA, entityB, keyA, keyB)
+EntitySet.collectiontransform(self, path, target)
+EntitySet.draw(self)
+EntitySet.entity_from_dataframe(self, entity_id, dataframe, index, time_index = None, variable_types = None)
+EntitySet.getentity(self, entityid)
+EntitySet.search_path(self, targetnode, maxdepth, max_famous_son)
+Function.__init__(self, arg)
+Generator.__init__(self, es)
+Generator._layer(self, path, start_part = None, start_part_id = None)
+Generator.add_compute_series(self, compute_series, start_part = None)
+Generator.aggregate(self, path, function, iftimeuse  =  True, winsize = 'all', lagsize = 'last')
+Generator.collect_agg(self, inputs)
+Generator.defaultfunc(self, path)
+Generator.layer(self, path, start_part = None, start_part_id = None)
+Generator.layer_sequencal_agg(self, path, es, ngroups  =  None, njobs = 1)
+Generator.layers(self, paths, start_part = None, start_part_id = None)
+Generator.pathcompunation(self, pathsfunc)
+Generator.pathcompute(self, cs, ngroups = 'auto', njobs = 1)
+Generator.pathfilter(self, path, function, start_part = None, start_part_id = None)
+Generator.reload_data(self, es)
+Generator.singlepathcompunation(self, pathstype, targetfeatures, functionset)
+Generator.transform(self, path, featurenames, function)
+Path.__init__(self, pathstype, df, firstindex, start_time_index, lastindex, last_time_index, name = None, start_part_id = None)
+Path.getfirstkey(self)
+Path.getlastkey(self)
+Path.getlasttimeindex(self)
+Path.getpathdetail(self)
+Path.getstartpartname(self)
+Path.getstarttimeindex(self)
+
+
+utilmy/zml/source/bin/auto_feature_AFEM/__init__.py
+
+
+utilmy/zml/source/bin/column_encoder.py
+-------------------------methods----------------------
+MinHashEncoder.__init__(self, n_components, ngram_range = (2, 4)
+MinHashEncoder.fit(self, X, y = None)
+MinHashEncoder.get_unique_ngrams(self, string, ngram_range)
+MinHashEncoder.minhash(self, string, n_components, ngram_range)
+MinHashEncoder.transform(self, X)
+OneHotEncoderRemoveOne.__init__(self, n_values = None, categorical_features = None, categories = "auto", sparse = True, dtype = np.float64, handle_unknown = "error", )
+OneHotEncoderRemoveOne.transform(self, X, y = None)
+PasstroughEncoder.__init__(self, passthrough = True)
+PasstroughEncoder.fit(self, X, y = None)
+PasstroughEncoder.transform(self, X)
+
+
+utilmy/zml/source/bin/deltapy/__init__.py
+
+
+utilmy/zml/source/bin/deltapy/extract.py
+-------------------------functions----------------------
+_embed_seq(X, Tau, D)
+_embed_seq(X, Tau, D)
+_embed_seq(X, Tau, D)
+_estimate_friedrich_coefficients(x, m, r)
+_hjorth_mobility(epochs)
+_roll(a, shift)
+abs_energy(x)
+ar_coefficient(x, param=[{"coeff" = [{"coeff": 5, "k": 5}])
+augmented_dickey_fuller(x, param=[{"attr" = [{"attr": "teststat"}])
+binned_entropy(x, max_bins = 10)
+c3(x, lag = 3)
+cad_prob(cads, param = cad_param)
+cid_ce(x, normalize)
+count_above_mean(x)
+detrended_fluctuation_analysis(epochs)
+fft_coefficient(x, param = [{"coeff" =  [{"coeff": 10, "attr": "real"}])
+find_freq(serie, param = freq_param)
+fisher_information(epochs, param = fisher_param)
+flux_perc(magnitude)
+get_length_sequences_where(x)
+gskew(x)
+has_duplicate_max(x)
+higuchi_fractal_dimension(epochs, param = hig_param)
+hjorth_complexity(epochs)
+hurst_exponent(epochs)
+index_mass_quantile(x, param=[{"q" = [{"q": 0.3}])
+kurtosis(x)
+largest_lyauponov_exponent(epochs, param = lyaup_param)
+last_location_of_maximum(x)
+length(x)
+linear_trend_timewise(x, param= [{"attr" =  [{"attr": "pvalue"}])
+longest_strike_below_mean(x)
+max_langevin_fixed_point(x, r = 3, m = 30)
+mean_abs_change(x)
+mean_second_derivative_central(x)
+number_cwt_peaks(x, param = cwt_param)
+partial_autocorrelation(x, param=[{"lag" = [{"lag": 1}])
+percent_amplitude(x, param  = perc_param)
+petrosian_fractal_dimension(epochs)
+range_cum_s(magnitude)
+set_property(key, value)
+spkt_welch_density(x, param=[{"coeff" = [{"coeff": 5}])
+stetson_k(x)
+stetson_mean(x, param = stestson_param)
+structure_func(time, param = struct_param)
+svd_entropy(epochs, param = svd_param)
+symmetry_looking(x, param=[{"r" = [{"r": 0.2}])
+var_index(time, param = var_index_param)
+variance_larger_than_standard_deviation(x)
+whelch_method(data, param = whelch_param)
+willison_amplitude(X, param = will_param)
+wozniak(magnitude, param = woz_param)
+zero_crossing_derivative(epochs, param = zero_param)
+
+
+
+utilmy/zml/source/bin/deltapy/interact.py
+-------------------------functions----------------------
+autoregression(df, drop = None, settings={"autoreg_lag" = {"autoreg_lag":4})
+decision_tree_disc(df, cols, depth = 4)
+genetic_feat(df, num_gen = 20, num_comp = 10)
+haversine_distance(row, lon = "Open", lat = "Close")
+lowess(df, cols, y, f = 2. / 3., iter = 3)
+muldiv(df, feature_list)
+quantile_normalize(df, drop)
+tech(df)
+
+
+
+utilmy/zml/source/bin/deltapy/mapper.py
+-------------------------functions----------------------
+a_chi(df, drop = None, lags = 1, sample_steps = 2)
+cross_lag(df, drop = None, lags = 1, components = 4)
+encoder_dataset(df, drop = None, dimesions = 20)
+feature_agg(df, drop = None, components = 4)
+lle_feat(df, drop = None, components = 4)
+neigh_feat(df, drop, neighbors = 6)
+pca_feature(df, memory_issues = False, mem_iss_component = False, variance_or_components = 0.80, n_components = 5, drop_cols = None, non_linear = True)
+
+
+
+utilmy/zml/source/bin/deltapy/transform.py
+-------------------------functions----------------------
+bkb(df, cols)
+butter_lowpass(cutoff, fs = 20, order = 5)
+butter_lowpass_filter(df, cols, cutoff, fs = 20, order = 5)
+fast_fracdiff(x, cols, d)
+fft_feat(df, cols)
+harmonicradar_cw(df, cols, fs, fc)
+infer_seasonality(train, index = 0)
+initial_seasonal_components(series, slen)
+initial_trend(series, slen)
+instantaneous_phases(df, cols)
+kalman_feat(df, cols)
+modify(df, cols)
+multiple_lags(df, start = 1, end = 3, columns = None)
+multiple_rolling(df, windows  =  [1, 2], functions = ["mean", "std"], columns = None)
+naive_dec(df, columns, freq = 2)
+operations(df, features)
+outlier_detect(data, col, threshold = 1, method = "IQR")
+perd_feat(df, cols)
+prophet_feat(df, cols, date, freq, train_size = 150)
+robust_scaler(df, drop = None, quantile_range = (25, 75)
+saw(df, cols)
+standard_scaler(df, drop)
+triple_exponential_smoothing(df, cols, slen, alpha, beta, gamma, n_preds)
+windsorization(data, col, para, strategy = 'both')
+
+
+
+utilmy/zml/source/bin/hunga_bunga/__init__.py
+-------------------------methods----------------------
+HungaBungaZeroKnowledge.__init__(self, brain = False, test_size  =  0.2, n_splits  =  5, random_state = None, upsample = True, scoring = None, verbose = True, normalize_x  =  True, n_jobs  = cpu_count()
+HungaBungaZeroKnowledge.fit(self, X, y)
+HungaBungaZeroKnowledge.predict(self, x)
+
+
+utilmy/zml/source/bin/hunga_bunga/classification.py
+-------------------------functions----------------------
+run_all_classifiers(x, y, small  =  True, normalize_x  =  True, n_jobs = cpu_count()
+
+-------------------------methods----------------------
+HungaBungaClassifier.__init__(self, brain = False, test_size  =  0.2, n_splits  =  5, random_state = None, upsample = True, scoring = None, verbose = False, normalize_x  =  True, n_jobs  = cpu_count()
+HungaBungaClassifier.fit(self, x, y)
+HungaBungaClassifier.predict(self, x)
+
+
+utilmy/zml/source/bin/hunga_bunga/core.py
+-------------------------functions----------------------
+cv_clf(x, y, test_size  =  0.2, n_splits  =  5, random_state = None, doesUpsample  =  True)
+cv_reg(x, test_size  =  0.2, n_splits  =  5, random_state = None)
+main_loop(models_n_params, x, y, isClassification, test_size  =  0.2, n_splits  =  5, random_state = None, upsample = True, scoring = None, verbose = True, n_jobs  = cpu_count()
+timeit(klass, params, x, y)
+upsample_indices_clf(inds, y)
+
+-------------------------methods----------------------
+GridSearchCVProgressBar._get_param_iterator(self)
+RandomizedSearchCVProgressBar._get_param_iterator(self)
+
+
+utilmy/zml/source/bin/hunga_bunga/params.py
+
+
+utilmy/zml/source/bin/hunga_bunga/regression.py
+-------------------------functions----------------------
+gen_reg_data(x_mu = 10., x_sigma = 1., num_samples = 100, num_features = 3, y_formula = sum, y_sigma = 1.)
+run_all_regressors(x, y, small  =  True, normalize_x  =  True, n_jobs = cpu_count()
+
+-------------------------methods----------------------
+HungaBungaRegressor.__init__(self, brain = False, test_size  =  0.2, n_splits  =  5, random_state = None, upsample = True, scoring = None, verbose = False, normalize_x  =  True, n_jobs  = cpu_count()
+HungaBungaRegressor.fit(self, x, y)
+HungaBungaRegressor.predict(self, x)
+
+
+utilmy/zml/source/models/akeras/Autokeras.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_dataset(data_pars)
+get_dataset_imbd(data_pars)
+get_dataset_titanic(data_pars)
+get_params(param_pars = None, **kw)
+load(load_pars, config_mode = "test")
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+save(model, session = None, save_pars = None, config_mode = "test")
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+test_single(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zml/source/models/akeras/__init__.py
+
+
+utilmy/zml/source/models/akeras/armdn.py
+
+
+utilmy/zml/source/models/akeras/charcnn.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, save_pars = None, session = None)
+str_to_indexes(s)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+tokenize(data, num_of_classes = 4)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/akeras/charcnn_zhang.py
+-------------------------functions----------------------
+evaluate(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+fit(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = {}, out_pars = {}, compute_pars = {}, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/akeras/deepctr.py
+-------------------------functions----------------------
+_config_process(config)
+_preprocess_criteo(df, **kw)
+_preprocess_movielens(df, **kw)
+config_load(data_path, file_default, config_mode)
+fit(model, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+get_dataset(data_pars = None, **kw)
+get_params(choice = "", data_path = "dataset/", config_mode = "test", **kwargs)
+metrics(ypred, ytrue = None, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+predict(model, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+reset_model()
+test(data_path = "dataset/", pars_choice = 0, **kwargs)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zml/source/models/akeras/namentity_crm_bilstm.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars)
+get_params(param_pars = {}, **kw)
+load(load_pars)
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zml/source/models/akeras/preprocess.py
+-------------------------functions----------------------
+_preprocess_criteo(df, **kw)
+_preprocess_movielens(df, **kw)
+_preprocess_none(df, **kw)
+get_dataset(**kw)
+log(*s, n = 0, m = 1)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+test(data_path = "dataset/", pars_choice = 0)
+
+
+
+utilmy/zml/source/models/akeras/textcnn.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/akeras/util.py
+-------------------------functions----------------------
+_config_process(data_path, config_mode = "test")
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(**kw)
+load(path)
+log(*s, n = 0, m = 1)
+metrics(ypred, data_pars, compute_pars = None, out_pars = None, **kwargs)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+predict(model, data_pars, compute_pars = None, out_pars = None, **kwargs)
+save(model, path)
+
+-------------------------methods----------------------
+Model_empty.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/atorch/__init__.py
+
+
+utilmy/zml/source/models/atorch/matchZoo.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_data_loader(model_name, preprocessor, preprocess_pars, raw_data)
+get_dataset(_model, preprocessor, _preprocessor_pars, data_pars)
+get_glove_embedding_matrix(term_index, dimension)
+get_params(param_pars = None, **kw)
+get_raw_dataset(data_info, **args)
+get_task(model_pars, task)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+save(model, session = None, save_pars = None)
+test_train(data_path, pars_choice, model_name)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zml/source/models/atorch/textcnn.py
+-------------------------functions----------------------
+_get_device()
+_train(m, device, train_itr, optimizer, epoch, max_epoch)
+_valid(m, device, test_itr)
+analyze_datainfo_paths(data_info)
+clean_str(string)
+create_data_iterator(batch_size, tabular_train, tabular_valid, d)
+create_tabular_dataset(data_info, **args)
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+fit(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_data_file()
+get_dataset(data_pars = None, out_pars = None, **kwargs)
+get_params(param_pars = None, **kw)
+load(load_pars =  None)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, return_ytrue = 1)
+save(model, session = None, save_pars = None)
+split_train_valid(data_info, **args)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+TextCNN.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+TextCNN.forward(self, x)
+TextCNN.rebuild_embed(self, vocab_built)
+
+
+utilmy/zml/source/models/atorch/torch_ctr.py
+-------------------------functions----------------------
+customModel()
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+get_params(param_pars = {}, **kw)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+predict(Xpred = None, data_pars = {}, compute_pars = None, out_pars = {}, **kw)
+preprocess(prepro_pars)
+reset()
+save(path = None, info = None)
+test(config = '')
+test2(config = '')
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/atorch/torchhub.py
+-------------------------functions----------------------
+_get_device()
+_train(m, device, train_itr, criterion, optimizer, epoch, max_epoch, imax = 1)
+_valid(m, device, test_itr, criterion, imax = 1)
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = None, **kw)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, imax  =  1, return_ytrue = 1)
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+test2(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zml/source/models/atorch/transformer_sentence.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+fit2(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, model = None, **kw)
+get_params(param_pars, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+predict2(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zml/source/models/atorch/util_data.py
+
+
+utilmy/zml/source/models/atorch/util_transformer.py
+-------------------------functions----------------------
+_truncate_seq_pair(tokens_a, tokens_b, max_length)
+convert_example_to_feature(example_row, pad_token = 0, sequence_a_segment_id = 0, sequence_b_segment_id = 1, cls_token_segment_id = 1, pad_token_segment_id = 0, mask_padding_with_zero = True, sep_token_extra = False)
+convert_examples_to_features(examples, label_list, max_seq_length, tokenizer, output_mode, cls_token_at_end = False, sep_token_extra = False, pad_on_left = False, cls_token = '[CLS]', sep_token = '[SEP]', pad_token = 0, sequence_a_segment_id = 0, sequence_b_segment_id = 1, cls_token_segment_id = 1, pad_token_segment_id = 0, mask_padding_with_zero = True, ) - 2))
+
+-------------------------methods----------------------
+BinaryProcessor._create_examples(self, lines, set_type)
+BinaryProcessor.get_dev_examples(self, data_dir)
+BinaryProcessor.get_labels(self)
+BinaryProcessor.get_train_examples(self, data_dir)
+DataProcessor._read_tsv(cls, input_file, quotechar = None)
+DataProcessor.get_dev_examples(self, data_dir)
+DataProcessor.get_labels(self)
+DataProcessor.get_train_examples(self, data_dir)
+InputExample.__init__(self, guid, text_a, text_b = None, label = None)
+InputFeatures.__init__(self, input_ids, input_mask, segment_ids, label_id)
+TransformerDataReader.__init__(self, **args)
+TransformerDataReader.compute(self, input_tmp)
+TransformerDataReader.get_data(self)
+
+
+utilmy/zml/source/models/dataset.py
+-------------------------functions----------------------
+eval_dict(src, dst = {})
+fIt_(dataset_url, training_iterations, batch_size, evaluation_interval)
+get_dataset_split_for_model_petastorm(Xtrain, ytrain = None, pars:dict = None)
+log(*s)
+main()
+pack_features_vector(features, labels)
+pack_features_vector(features, labels)
+pack_features_vector(features, labels)
+python_hello_world(dataset_url='file = 'file:///tmp/external_dataset')
+pytorch_hello_world(dataset_url='file = 'file:///tmp/external_dataset')
+tensorflow_hello_world(dataset_url='file = 'file:///tmp/external_dataset')
+test1()
+train_and_test(dataset_url, training_iterations, batch_size, evaluation_interval)
+
+-------------------------methods----------------------
+dictEval.__init__(self)
+dictEval.eval_dict(self, src, dst = {})
+dictEval.pandas_create(self, key2, path, )
+dictEval.reset(self)
+dictEval.tf_dataset_create(self, key2, path_pattern, batch_size = 32, **kw)
+
+
+utilmy/zml/source/models/keras_deepctr.py
+-------------------------functions----------------------
+eval(data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+get_xy_dataset(data_sample = None)
+get_xy_fd(use_neg = False, hash_flag = False, use_session = False)
+get_xy_random(X, y, cols_family = {})
+get_xy_random2(X, y, cols_family = {})
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "", load_weight = False)
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+preprocess(prepro_pars)
+reset()
+save(path = None, save_weight = False)
+test(config = '')
+test_helper(model_name, model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zml/source/models/keras_widedeep.py
+-------------------------functions----------------------
+ModelCustom2()
+WideDeep_sparse(model_pars2)
+fit(data_pars = None, compute_pars = None, out_pars = None)
+get_dataset_split(data_pars = None, task_type = "train", **kw)
+get_dataset_split_for_model_pandastuple(Xtrain, ytrain = None, data_pars = None, )
+get_dataset_split_for_model_petastorm(Xtrain, ytrain = None, pars:dict = None)
+get_dataset_split_for_model_tfsparse(Xtrain, ytrain = None, pars:dict = None)
+init(*kw, **kwargs)
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+model_summary(path = "ztmp/")
+predict(Xpred = None, data_pars = None, compute_pars = None, out_pars = None)
+reset()
+save(path = None, info = None)
+test(config = '', n_sample  =  100)
+test2(config = '')
+test_helper(model_pars, data_pars, compute_pars)
+zz_Modelsparse2()
+zz_WideDeep_dense(model_pars2)
+zz_get_dataset(data_pars = None, task_type = "train", **kw)
+zz_get_dataset2(data_pars = None, task_type = "train", **kw)
+zz_get_dataset_tuple_keras(pattern, batch_size, mode = tf.estimator.ModeKeys.TRAIN, truncate = None)
+zz_input_template_feed_keras_model(Xtrain, cols_type_received, cols_ref, **kw)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, )
+tf_FeatureColumns.__init__(self, dataframe = None)
+tf_FeatureColumns.bucketized_columns(self, columnsBoundaries)
+tf_FeatureColumns.categorical_columns(self, indicator_column_names, colcat_nunique = None, output = False)
+tf_FeatureColumns.crossed_feature_columns(self, columns_crossed, nameOfLayer, bucket_size = 10)
+tf_FeatureColumns.data_to_tensorflow(self, df, target, model = 'sparse', shuffle_train = False, shuffle_test = False, shuffle_val = False, batch_size = 32, test_split = 0.2, colnum = [], colcat = [])
+tf_FeatureColumns.data_to_tensorflow_split(self, df, target, model = 'sparse', shuffle_train = False, shuffle_test = False, shuffle_val = False, batch_size = 32, test_split = 0.2, colnum = [], colcat = [])
+tf_FeatureColumns.df_to_dataset(self, dataframe, target, shuffle = True, batch_size = 32)
+tf_FeatureColumns.df_to_dataset_dense(self, dataframe, target, shuffle = True, batch_size = 32)
+tf_FeatureColumns.embeddings_columns(self, coldim_dict)
+tf_FeatureColumns.get_features(self)
+tf_FeatureColumns.hashed_columns(self, hashed_columns_dict)
+tf_FeatureColumns.numeric_columns(self, columnsName)
+tf_FeatureColumns.split_sparse_data(self, df, shuffle_train = False, shuffle_test = False, shuffle_val = False, batch_size = 32, test_split = 0.2, colnum = [], colcat = [])
+tf_FeatureColumns.transform_output(self, featureColumn)
+
+
+utilmy/zml/source/models/keras_widedeep_dense.py
+-------------------------functions----------------------
+Modelcustom(n_wide_cross, n_wide, n_deep, n_feat = 8, m_EMBEDDING = 10, loss = 'mse', metric  =  'mean_squared_error')
+evaluate(Xy_pred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref)
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+get_dataset_tuple_keras(Xtrain, cols_type_received, cols_ref, **kw)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(config = '')
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_bayesian_numpyro.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+get_params(param_pars = {}, **kw)
+init(*kw, **kwargs)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = {}, compute_pars = None, out_pars = {}, **kw)
+preprocess(prepro_pars)
+reset()
+reset()
+save(path = None, info = None)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_bayesian_pyro.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+model_class_loader(m_name = 'BayesianRegression', class_list:list = None)
+predict(Xpred = None, data_pars = {}, compute_pars = None, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(nrows = 500)
+test_dataset_regress_fake(nrows = 500)
+y_norm(y, inverse = True, mode = 'boxcox')
+
+-------------------------methods----------------------
+BayesianRegression.__init__(self, X_dim:int = 17, y_dim:int = 1)
+BayesianRegression.forward(self, x, y = None)
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_encoder.py
+-------------------------functions----------------------
+decode(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+fit(data_pars: dict = None, compute_pars: dict = None, out_pars: dict = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref, split = False)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref, split = False)
+init(*kw, **kwargs)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log(*s)
+log2(*s)
+log2(*s)
+log3(*s)
+log3(*s)
+pd_autoencoder(df, col, pars)
+pd_covariate_shift_adjustment()
+pd_export(df, col, pars)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+reset()
+reset()
+save(path = None, info = None)
+test(nrows = 500)
+test_dataset_classi_fake(nrows = 500)
+test_helper(model_pars, data_pars, compute_pars)
+transform(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_gefs.py
+-------------------------functions----------------------
+adult(data)
+australia(data)
+bank(data)
+cmc(data)
+credit(data)
+electricity(data)
+eval(data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+gef_get_stats(data, ncat = None)
+gef_is_continuous(data)
+gef_normalize_data(data, maxv, minv)
+gef_standardize_data(data, mean, std)
+german(data)
+get_data(data_pars = None, task_type = "train", **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+get_dummies(data)
+init(*kw, **kwargs)
+is_continuous(v_array)
+learncats(data, classcol = None, continuous_ids = [])
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+pd_colcat_get_catcount(df, colcat, coly, continuous_ids = None)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+segment(data)
+test(n_sample  =  100)
+test2()
+test_converion()
+test_helper(model_pars, data_pars, compute_pars)
+train_test_split(data, ncat, train_ratio = 0.7, prep = 'std')
+train_test_split2(data, ncat, train_ratio = 0.7, prep = 'std')
+vowel(data)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_numpyro.py
+-------------------------functions----------------------
+init(*kw, **kwargs)
+log(*s)
+log2(*s)
+log3(*s)
+metrics(y: pd.Series, yhat: pd.Series)
+require_fitted(f)
+reset()
+
+-------------------------methods----------------------
+AlreadyFittedError.__init__(self, model)
+BaseModel.__init__(self, rng_seed: int  =  None)
+BaseModel.__repr__(self)
+BaseModel.fit(self, df: pd.DataFrame, sampler: str  =  "NUTS", rng_key: np.ndarray  =  None, sampler_kwargs: typing.Dict[str, typing.Any]  =  None, **mcmc_kwargs, )
+BaseModel.formula(self)
+BaseModel.from_dict(cls, data: typing.Dict[str, typing.Any], **model_kw)
+BaseModel.grouped_metrics(self, df: pd.DataFrame, groupby: typing.Union[str, typing.List[str]], aggfunc: typing.Callable  =  onp.sum, aggerrs: bool  =  True, )
+BaseModel.likelihood_func(self, yhat)
+BaseModel.link(x)
+BaseModel.metrics(self, df: pd.DataFrame, aggerrs: bool  =  True)
+BaseModel.model(self, df: pd.DataFrame)
+BaseModel.num_chains(self)
+BaseModel.num_samples(self)
+BaseModel.predict(self, df: pd.DataFrame, ci: bool  =  False, ci_interval: float  =  0.9, aggfunc: typing.Union[str, typing.Callable]  =  "mean", )
+BaseModel.preprocess_config_dict(cls, config: dict)
+BaseModel.sample_posterior_predictive(self, df: pd.DataFrame, hdpi: bool  =  False, hdpi_interval: float  =  0.9, rng_key: np.ndarray  =  None, )
+BaseModel.samples_df(self)
+BaseModel.samples_flat(self)
+BaseModel.split_rand_key(self, n: int  =  1)
+BaseModel.to_json(self)
+BaseModel.transform(cls, df: pd.DataFrame)
+Bernoulli.likelihood_func(self, probs)
+Bernoulli.link(x)
+IncompleteFeature.__init__(self, name, key)
+IncompleteModel.__init__(self, model, attribute)
+IncompleteSamples.__init__(self, name)
+Normal.likelihood_func(self, yhat)
+Normal.link(x)
+NotFittedError.__init__(self, func = None)
+NumpyEncoder.default(self, obj)
+Poisson.likelihood_func(self, yhat)
+Poisson.link(x)
+ShabadooException.__str__(self)
+
+
+utilmy/zml/source/models/model_outlier.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, ytrain = None, data_pars = None, )
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_dataset_split_for_model_pandastuple(Xtrain, ytrain = None, data_pars = None, )
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_sampler.py
+-------------------------functions----------------------
+eval(data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(data_pars: dict = None, compute_pars: dict = None, out_pars: dict = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref, split = False)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref, split = False)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test()
+test2(n_sample  =  1000)
+test_helper(model_pars, data_pars, compute_pars)
+transform(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+zz_pd_augmentation_sdv(df, col = None, pars = {})
+zz_pd_covariate_shift_adjustment()
+zz_pd_sample_imblearn(df = None, col = None, pars = None)
+zz_test()
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_sklearn.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, ytrain = None, data_pars = None, )
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_dataset_split_for_model_pandastuple(Xtrain, ytrain = None, data_pars = None, )
+get_params(deep = False)
+get_params_sklearn(deep = False)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+model_automl()
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(n_sample           =  1000)
+zz_eval(data_pars = None, compute_pars = None, out_pars = None, **kw)
+zz_preprocess(prepro_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_tseries.py
+-------------------------functions----------------------
+LighGBM_recursive(lightgbm_pars= {'objective' =  {'objective':'quantile', 'alpha': 0.5}, forecaster_pars = {'window_length' =  {'window_length': 4})
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+predict_forward(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(nrows = 10000, coly = None, coldate = None, colcat = None)
+test2(nrows = 1000, file_path = None, coly = None, coldate = None, colcat = None)
+test_dataset_tseries(nrows = 10000, coly = None, coldate = None, colcat = None)
+time_train_test_split(df, test_size  =  0.4, cols = None, coltime  = "time_key", sort = True, minsize = 5, n_sample = 5, verbose = False)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/model_vaem.py
+-------------------------functions----------------------
+decode2(data_decode, scaling_factor, list_discrete, records_d, plot = False)
+encode2(data_decode, list_discrete, records_d, fast_plot)
+init(*kw, **kwargs)
+load_data(filePath, categories, cat_col, num_cols, discrete_cols, targetCol, nsample, delimiter)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+p_vae_active_learning(Data_train_compressed, Data_train, mask_train, Data_test, mask_test_compressed, mask_test, cat_dims, dim_flt, dic_var_type, args, list_discrete, records_d, estimation_method = 1)
+reset()
+save(path = '', info = None)
+save_model2(model, output_dir)
+test()
+train_p_vae(stage, x_train, Data_train, mask_train, epochs, latent_dim, cat_dims, dim_flt, batch_size, p, K, iteration, list_discrete, records_d, args)
+
+-------------------------methods----------------------
+Model_custom.__init__(self)
+Model_custom.decode(self)
+Model_custom.encode(self)
+Model_custom.fit(self,filePath, categories,cat_cols,num_cols,discrete_cols,targetCol,nsample  =  -1,delimiter=',',plot=False)
+
+
+utilmy/zml/source/models/model_vaemdn.py
+-------------------------functions----------------------
+AUTOENCODER_BASIC(X_input_dim, loss_type = "CosineSimilarity", lr = 0.01, epsilon = 1e-3, decay = 1e-4, optimizer = 'adam', encodingdim  =  50, dim_list = "50,25,10")
+AUTOENCODER_MULTIMODAL(input_shapes = [10], hidden_dims = [128, 64, 8], output_activations = ['sigmoid', 'relu'], loss  =  ['bernoulli_divergence', 'poisson_divergence'], optimizer = 'adam')
+VAEMDN(model_pars)
+benchmark(config = '', dmin = 5, dmax = 6)
+decode(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, index  =  0, **kw)
+encode(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, model_class = 'VAEMDN', **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, model_class = 'VAEMDN', **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+get_label(encoder, x_train, dummy_train, class_num = 5, batch_size = 256)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "", model_class = 'VAEMDN')
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, model_class = 'VAEMDN', **kw)
+reset()
+sampling(args)
+save(path = None, info = None)
+test(n_rows = 100)
+test2(n_sample           =  1000)
+test3(n_sample  =  1000)
+test4()
+test_dataset_correlation(n_rows = 100)
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/optuna_lightgbm.py
+-------------------------functions----------------------
+benchmark()
+benchmark_helper(train_df, test_df)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+os_makedirs(dir_or_file)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(nrows = 500)
+test_dataset_classi_fake(nrows = 500)
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/repo/functions.py
+-------------------------functions----------------------
+fit(vae, x_train, epochs = 1, batch_size = 256)
+get_dataset(state_num = 10, time_len = 50000, signal_dimension = 15, CNR = 1, window_len = 11, half_window_len = 5)
+get_model(original_dim, class_num = 5, intermediate_dim = 64, intermediate_dim_2 = 16, latent_dim = 3, batch_size = 256, Lambda1 = 1, Lambda2 = 200, Alpha = 0.075)
+load(model, path)
+sampling(args)
+save(model)
+test(self, encoder, x_train, dummy_train, class_num = 5, batch_size = 256)
+
+
+
+utilmy/zml/source/models/repo/model_rec.py
+-------------------------functions----------------------
+eval(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars, task_type = "train")
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+init(*kw, **kwargs)
+load_info(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+os_makedirs(dir_or_file)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(n_sample           =  1000)
+test_helper(model_pars, data_pars, compute_pars)
+train_test_split2(df, coly)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, global_pars = None)
+
+
+utilmy/zml/source/models/repo/model_rec_ease.py
+-------------------------functions----------------------
+eval(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars, task_type = "train")
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_dataset_sampler(data_pars)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+init(*kw, **kwargs)
+init_dataset(data_pars)
+load_info(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+os_makedirs(dir_or_file)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(n_sample           =  1000)
+test_helper(model_pars, data_pars, compute_pars)
+train_test_split2(df, coly)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, global_pars = None)
+
+
+utilmy/zml/source/models/torch_ease.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kwargs)
+init(*kw, **kwargs)
+load_info(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+os_makedirs(dir_or_file)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(nrows = 1000)
+test_dataset_goodbooks(nrows = 1000)
+test_helper(model_pars, data_pars, compute_pars)
+train_test_split2(df, coly)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/torch_rectorch.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train")
+init(*kw, **kwargs)
+load_info(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+make_rand_sparse_dataset(n_rows = 1000, )
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(n_sample           =  1000)
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/torch_rvae.py
+-------------------------functions----------------------
+compute_metrics(model, X, dataset_obj, args, epoch, losses_save, logit_pi_prev, X_clean, target_errors, mode)
+decode(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+encode(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+eval(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars, task_type = "train")
+init(*kw, **kwargs)
+load_info(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(nrows = 1000)
+test_helper(m)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, global_pars = None)
+RVAE.__init__(self, args)
+RVAE._get_dataset_obj(self)
+RVAE._save_to_csv(self, X_data, X_data_clean, target_errors, attributes, losses_save, dataset_obj, path_output, args, epoch, mode = 'train')
+RVAE.decode(self, z)
+RVAE.encode(self, x_data, one_hot_categ = False, masking = False, drop_mask = [], in_aux_samples = [])
+RVAE.fit(self)
+RVAE.forward(self, x_data, n_epoch = None, one_hot_categ = False, masking = False, drop_mask = [], in_aux_samples = [])
+RVAE.get_inputs(self, x_data, one_hot_categ = False, masking = False, drop_mask = [], in_aux_samples = [])
+RVAE.loss_function(self, input_data, p_params, q_params, q_samples, clean_comp_only = False, data_eval_clean = False)
+RVAE.predict(self, x_data, n_epoch = None, one_hot_categ = False, masking = False, drop_mask = [], in_aux_samples = [])
+RVAE.reparameterize(self, q_params, eps_samples = None)
+RVAE.sample_normal(self, q_params_z, eps = None)
+RVAE.save(self)
+
+
+utilmy/zml/source/models/torch_tabular.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref = None)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref = None)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+log3(*s)
+predict(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+reset()
+save(path = None, info = None)
+test(n_sample  =  100)
+test2(nrows = 10000)
+test3(n_sample  =  100)
+test_helper(m, X_valid)
+train_test_split2(df, coly)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/util_models.py
+-------------------------functions----------------------
+log(*s)
+test_dataset_classi_fake(nrows = 500)
+test_dataset_classifier_covtype(nrows = 500)
+test_dataset_petfinder(nrows = 1000)
+test_dataset_regress_fake(nrows = 500)
+tf_data_create_sparse(cols_type_received:dict =  {'cols_sparse' : ['col1', 'col2'], 'cols_num'    : ['cola', 'colb']}, cols_ref:list =   [ 'col_sparse', 'col_num'  ], Xtrain:pd.DataFrame = None, **kw)
+tf_data_file_to_dataset(pattern, batch_size, mode = tf.estimator.ModeKeys.TRAIN, truncate = None)
+tf_data_pandas_to_dataset(training_df, colsX, coly)
+
+
+
+utilmy/zml/source/models/ztmp2/keras_widedeep_2.py
+-------------------------functions----------------------
+ModelCustom2()
+Modelcustom(n_wide_cross, n_wide, n_deep, n_feat = 8, m_EMBEDDING = 10, loss = 'mse', metric  =  'mean_squared_error')
+Modelsparse2()
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref)
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+get_dataset_tuple_keras(pattern, batch_size, mode = tf.estimator.ModeKeys.TRAIN, truncate = None)
+init(*kw, **kwargs)
+input_template_feed_keras(Xtrain, cols_type_received, cols_ref, **kw)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(config = '')
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/ztmp2/keras_widedeep_old.py
+-------------------------functions----------------------
+Modelcustom(n_wide_cross, n_wide, n_feat = 8, m_EMBEDDING = 10, loss = 'mse', metric  =  'mean_squared_error')
+eval(data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_params(deep = False)
+get_params_sklearn(deep = False)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+predict(Xpred = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+preprocess(prepro_pars)
+reset()
+save(path = None)
+test(config = '')
+test2(config = '')
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/ztmp2/model_vaem.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+init(*kw, **kwargs)
+load_dataset()seed  =  3000"./data/bank/bankmarketing_train.csv")bank_raw.info())label_column="y")matrix1, ["job"])matrix1, ["marital"])matrix1, ["education"])matrix1, ["default"])matrix1, ["housing"])matrix1, ["loan"])matrix1, ["contact"])matrix1, ["month"])matrix1, ["day_of_week"])matrix1, ["poutcome"])matrix1, ["y"])(matrix1.values).astype(float))[0, :]max_Data  =  0.7min_Data = 0.3[0, 1, 2, 3, 4, 5, 6, 7])[8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])[8, 9])np.in1d(list_flt, list_discrete).nonzero()[0])list_cat)list_flt)>0 and len(list_cat)>0)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+save(path = None, info = None)
+test(config = '')
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/ztmp2/model_vaem3.py
+-------------------------functions----------------------
+decode2(data_decode, scaling_factor, list_discrete, records_d, plot = False, args = None)
+encode2(data_decode, list_discrete, records_d, fast_plot)
+init(*kw, **kwargs)
+load_data(filePath, categories, cat_col, num_cols, discrete_cols, targetCol, nsample, delimiter)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+p_vae_active_learning(Data_train_comp, Data_train, mask_train, Data_test, mask_test_comp, mask_test, cat_dims, dim_flt, dic_var_type, args, list_discrete, records_d, estimation_method = 1)
+reset()
+save(model, output_dir)
+save_model2(model, output_dir)
+train_p_vae(stage, x_train, Data_train, mask_train, epochs, latent_dim, cat_dims, dim_flt, batch_size, p, K, iteration, list_discrete, records_d, args)
+
+-------------------------methods----------------------
+Model.__init__(self)
+Model.decode(self, plot = False, args = None)
+Model.encode(self, plot = False, args = None)
+Model.fit(self, p)
+
+
+utilmy/zml/source/models/ztmp2/modelsVaem.py
+-------------------------functions----------------------
+decode2(data_decode, scaling_factor, list_discrete, records_d, plot = False)
+encode2(data_decode, list_discrete, records_d, fast_plot)
+init(*kw, **kwargs)
+load_data(filePath, categories, cat_col, num_cols, discrete_cols, targetCol, nsample, delimiter)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+p_vae_active_learning(Data_train_compressed, Data_train, mask_train, Data_test, mask_test_compressed, mask_test, cat_dims, dim_flt, dic_var_type, args, list_discrete, records_d, estimation_method = 1)
+reset()
+save(model, output_dir)
+save_model2(model, output_dir)
+train_p_vae(stage, x_train, Data_train, mask_train, epochs, latent_dim, cat_dims, dim_flt, batch_size, p, K, iteration, list_discrete, records_d, args)
+
+-------------------------methods----------------------
+Model.__init__(self)
+Model.decode(self)
+Model.encode(self)
+Model.fit(self,filePath, categories,cat_cols,num_cols,discrete_cols,targetCol,nsample  =  -1,delimiter=',',plot=False)
+
+
+utilmy/zml/source/models/ztmp2/torch_rvae2.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+predict(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+reset()
+save(path = None, info = None)
+test(nrows = 1000)
+test2(nrow = 10000)
+test_dataset_1(nrows = 1000)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/models/ztmp2/torch_tabular2.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+get_dataset2(data_pars = None, task_type = "train", **kw)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+log2(*s)
+predict(Xpred = None, data_pars: dict = {}, compute_pars: dict = {}, out_pars: dict = {}, **kw)
+reset()
+save(path = None, info = None)
+test(nrows = 1000)
+test2(nrows = 10000)
+test3()
+test_dataset_covtype(nrows = 1000)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zml/source/prepro.py
+-------------------------functions----------------------
+_pd_colnum(df, col, pars)
+_pd_colnum_fill_na_median(df, col, pars)
+log(*s)
+log2(*s)
+log3(*s)
+log4(*s, n = 0, m = 1)
+log4_pd(name, df, *s)
+os_convert_topython_code(txt)
+pd_col_atemplate(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_col_genetic_transform(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_bin(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_encoder_generic(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_minhash(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcat_to_onehot(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colcross(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_coldate(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_bin(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_binto_onehot(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_normalize(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_colnum_quantile_norm(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_coly(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_coly_clean(df: pd.DataFrame, col: list = None, pars: dict = None)
+prepro_load(prefix, pars)
+prepro_save(prefix, pars, df_new, cols_new, prepro)
+save_json(js, pfile, mode = 'a')
+test()
+
+
+
+utilmy/zml/source/prepro_rec.py
+-------------------------functions----------------------
+_preprocess_criteo(df, **kw)
+_preprocess_movielens(df, **kw)
+
+
+
+utilmy/zml/source/prepro_text.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 1)
+log_pd(df, *s, n = 0, m = 1)
+logs(*s)
+nlp_get_stopwords()
+pd_coltext(df, col, stopwords =  None, pars = None)
+pd_coltext_clean(df, col, stopwords =  None, pars = None)
+pd_coltext_universal_google(df, col, pars = {})
+pd_coltext_wordfreq(df, col, stopwords, ntoken = 100)
+
+
+
+utilmy/zml/source/prepro_tseries.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+log3(*s)
+logd(*s, n = 0, m = 0)
+m5_dataset()
+pd_prepro_custom(df: pd.DataFrame, col: list = None, pars: dict = None)
+pd_prepro_custom2(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_autoregressive(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_date(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_deltapy_generic(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_difference(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_groupby(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_lag(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_onehot(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_rolling(df: pd.DataFrame, cols: list = None, pars: dict = None)
+pd_ts_tsfresh_features(df: pd.DataFrame, cols: list = None, pars: dict = None)
+test_deltapy_all()
+test_deltapy_all2()
+test_deltapy_get_method(df)
+test_get_sampledata(url="https = "https://github.com/firmai/random-assets-two/raw/master/numpy/tsla.csv")
+test_prepro_v1()
+
+
+
+utilmy/zml/source/run_feature_profile.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 0)
+run_profile(path_data = None, path_output = "data/out/ztmp/", n_sample = 5000)
+
+
+
+utilmy/zml/source/run_hyperopt.py
+-------------------------functions----------------------
+eval_dict(src, dst = {})
+log(*s)
+run_hyper_optuna(obj_fun, pars_dict_init, pars_dict_range, engine_pars, ntrials = 3)
+test_hyper()
+test_hyper2()
+test_hyper3()
+
+
+
+utilmy/zml/source/run_inference.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+log3(*s)
+map_model(model_name="model_sklearn = "model_sklearn:MyClassModel")
+model_dict_load(model_dict, config_path, config_name, verbose = True)
+predict(model_dict, dfX, cols_family, post_process_fun = None)
+run_data_check(path_data, path_data_ref, path_model, path_output, sample_ratio = 0.5)
+run_predict(config_name, config_path, n_sample = -1, path_data = None, path_output = None, pars = {}, model_dict = None, return_mode = 'file')
+run_predict_batch(config_name, config_path, n_sample = -1, path_data = None, path_output = None, pars = {}, model_dict = None, return_mode = 'file')
+
+
+
+utilmy/zml/source/run_inpection.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 0)
+model_dict_load(model_dict, config_path, config_name, verbose = True)
+save_features(df, name, path)
+
+
+
+utilmy/zml/source/run_mlflow.py
+-------------------------functions----------------------
+register(run_name, params, metrics, signature, model_class, tracking_uri= "sqlite =  "sqlite:///local.db")
+
+
+
+utilmy/zml/source/run_preprocess.py
+-------------------------functions----------------------
+load_features(name, path)
+log(*s)
+log2(*s)
+log3(*s)
+log_pd(df, *s, n = 0, m = 1)
+model_dict_load(model_dict, config_path, config_name, verbose = True)
+preprocess(path_train_X = "", path_train_y = "", path_pipeline_export = "", cols_group = None, n_sample = 5000, preprocess_pars = {}, path_features_store = None)
+preprocess_batch(path_train_X = "", path_train_y = "", path_pipeline_export = "", cols_group = None, n_sample = 5000, preprocess_pars = {}, path_features_store = None)
+preprocess_inference(df, path_pipeline = "data/pipeline/pipe_01/", preprocess_pars = {}, cols_group = None)
+preprocess_load(path_train_X = "", path_train_y = "", path_pipeline_export = "", cols_group = None, n_sample = 5000, preprocess_pars = {}, path_features_store = None)
+run_preprocess(config_name, config_path, n_sample = 5000, mode = 'run_preprocess', model_dict = Nonemodel_dict, config_path, config_name, verbose = True)m = model_dict['global_pars']path_data         = m['path_data_preprocess']'path_data_prepro_X', path_data + "/features.zip") # ### Can be a list of zip or parquet files'path_data_prepro_y', path_data + "/target.zip")   # ### Can be a list of zip or parquet filespath_output          =  m['path_train_output']'path_pipeline', path_output + "/pipeline/" )'path_features_store', path_output + '/features_store/' )  #path_data_train replaced with path_output, because preprocessed files are stored there'path_check_out', path_output + "/check/" )path_output)"#### load input column family  ###################################################")cols_group = model_dict['data_pars']['cols_input_type']  ### the model config file"#### Preprocess  #################################################################")preprocess_pars = model_dict['model_pars']['pre_process_pars']if mode == "run_preprocess"  =  model_dict['data_pars']['cols_input_type']  ### the model config file"#### Preprocess  #################################################################")preprocess_pars = model_dict['model_pars']['pre_process_pars']if mode == "run_preprocess" :)
+save_features(df, name, path = None)
+
+
+
+utilmy/zml/source/run_sampler.py
+-------------------------functions----------------------
+log(*s)
+log2(*s)
+log3(*s)
+map_model(model_name)
+model_dict_load(model_dict, config_path, config_name, verbose = True)
+run_train(config_name, config_path = "source/config_model.py", n_sample = 5000, mode = "run_preprocess", model_dict = None, return_mode = 'file', **kw)
+run_transform(config_name, config_path, n_sample = 1, path_data = None, path_output = None, pars = {}, model_dict = None, return_mode = "")
+save_features(df, name, path)
+train(model_dict, dfX, cols_family, post_process_fun)
+transform(model_name, path_model, dfX, cols_family, model_dict)
+
+
+
+utilmy/zml/source/run_train.py
+-------------------------functions----------------------
+cols_validate(model_dict)
+data_split(dfX, data_pars, model_path, colsX, coly)
+log(*s)
+log2(*s)
+log3(*s)
+map_model(model_name)
+mlflow_register(dfXy, model_dict: dict, stats: dict, mlflow_pars:dict)
+model_dict_load(model_dict, config_path, config_name, verbose = True)
+run_model_check(path_output, scoring)
+run_train(config_name, config_path = "source/config_model.py", n_sample = 5000, mode = "run_preprocess", model_dict = None, return_mode = 'file', **kw)
+save_features(df, name, path)
+train(model_dict, dfX, cols_family, post_process_fun)
+
+
+
+utilmy/zml/source/util.py
+-------------------------functions----------------------
+create_appid(filename)
+create_logfilename(filename)
+create_uniqueid()
+download_dtopbox(data_pars)
+download_googledrive(file_list=[ {  "fileid" = [ {  "fileid": "1-K72L8aQPsl2qt_uBF-kzbai3TYG6Qg4", "path_target":  "data/input/download/test.json"}], **kw)
+load_dataset_generator(data_pars)
+log(*s, n = 0, m = 1, **kw)
+logger_handler_console(formatter = None)
+logger_handler_file(isrotate = False, rotate_time = "midnight", formatter = None, log_file_used = None)
+logger_setup(logger_name = None, log_file = None, formatter = 'FORMATTER_0', isrotate = False, isconsole_output = True, logging_level = 'info', )
+logger_setup2(name = __name__, level = None)
+pd_to_keyvalue_dict(dfa, colkey =  [ "shop_id", "l2_genre_id" ], col_list = 'item_id', to_file = "")
+pd_to_scipy_sparse_matrix(df)
+test_log()
+tf_dataset(dataset_pars)
+
+-------------------------methods----------------------
+Downloader.__init__(self, url)
+Downloader._transform_dropbox_url(self)
+Downloader._transform_gdrive_url(self)
+Downloader._transform_github_url(self)
+Downloader.adjust_url(self)
+Downloader.clean_netloc(self)
+Downloader.download(self, filepath = '')
+Downloader.get_filename(self, headers)
+dict2.__init__(self, d)
+dictLazy.__getitem__(self, key)
+dictLazy.__init__(self, *args, **kw)
+dictLazy.__iter__(self)
+dictLazy.__len__(self)
+logger_class.__init__(self, config_file = None, verbose = True)
+logger_class.debug(self, *s, level = 1)
+logger_class.load_config(self, config_file_path = None)
+logger_class.log(self, *s, level = 1)
+
+
+utilmy/zml/source/util_feature.py
+-------------------------functions----------------------
+col_extractname(col_onehot)
+col_remove(cols, colsremove, mode = "exact")
+estimator_boostrap_bayes(err, alpha = 0.05, )
+estimator_bootstrap(err, custom_stat = None, alpha = 0.05, n_iter = 10000)
+estimator_std_normal(err, alpha = 0.05, )
+feature_correlation_cat(df, colused)
+feature_importance_perm(clf, Xtrain, ytrain, cols, n_repeats = 8, scoring = 'neg_root_mean_squared_error', show_graph = 1)
+feature_selection_multicolinear(df, threshold = 1.0)
+fetch_dataset(url_dataset, path_target = None, file_target = None)
+fetch_spark_koalas(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
+load(name, path)
+load_dataset(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
+load_features(name, path)
+load_function_uri(uri_name="myfolder/myfile.py = "myfolder/myfile.py::myFunction")
+log(*s, n = 0, m = 1, **kw)
+log2(*s, **kw)
+log3(*s, **kw)
+metrics_eval(metric_list = ["mean_squared_error"], ytrue = None, ypred = None, ypred_proba = None, return_dict = False)
+np_conv_to_one_col(np_array, sep_char = "_")
+os_get_function_name()
+os_getcwd()
+pa_read_file(path =   'folder_parquet/', cols = None, n_rows = 1000, file_start = 0, file_end = 100000, verbose = 1, )
+pa_write_file(df, path =   'folder_parquet/', cols = None, n_rows = 1000, partition_cols = None, overwrite = True, verbose = 1, filesystem  =  'hdfs')
+params_check(pars, check_list, name = "")
+pd_col_fillna(dfref, colname = None, method = "frequent", value = None, colgroupby = None, return_val = "dataframe,param", )
+pd_col_filter(df, filter_val = None, iscol = 1)
+pd_col_merge_onehot(df, colname)
+pd_col_to_num(df, colname = None, default = np.nan)
+pd_col_to_onehot(dfref, colname = None, colonehot = None, return_val = "dataframe,column")
+pd_colcat_mapping(df, colname)
+pd_colcat_mergecol(df, col_list, x0, colid = "easy_id")
+pd_colcat_toint(dfref, colname, colcat_map = None, suffix = None)
+pd_colcat_tonum(df, colcat = "all", drop_single_label = False, drop_fact_dict = True)
+pd_colnum_normalize(df0, colname, pars, suffix = "_norm", return_val = 'dataframe,param')
+pd_colnum_tocat(df, colname = None, colexclude = None, colbinmap = None, bins = 5, suffix = "_bin", method = "uniform", na_value = -1, return_val = "dataframe,param", params={"KMeans_n_clusters" = {"KMeans_n_clusters": 8, "KMeans_init": 'k-means++', "KMeans_n_init": 10,"KMeans_max_iter": 300, "KMeans_tol": 0.0001, "KMeans_precompute_distances": 'auto',"KMeans_verbose": 0, "KMeans_random_state": None,"KMeans_copy_x": True, "KMeans_n_jobs": None, "KMeans_algorithm": 'auto'})
+pd_colnum_tocat_stat(df, feature, target_col, bins, cuts = 0)
+pd_feature_generate_cross(df, cols, cols_cross_input = None, pct_threshold = 0.2, m_combination = 2)
+pd_pipeline_apply(df, pipeline)
+pd_read_file(path_glob = "*.pkl", ignore_index = True, cols = None, verbose = False, nrows = -1, concat_sort = True, n_pool = 1, drop_duplicates = None, col_filter = None, col_filter_val = None, **kw)
+pd_stat_correl_pair(df, coltarget = None, colname = None)
+pd_stat_dataset_shift(dftrain, dftest, colused, nsample = 10000, buckets = 5, axis = 0)
+pd_stat_datashift_psi(expected, actual, buckettype = 'bins', buckets = 10, axis = 0)
+pd_stat_distribution_colnum(df, nrows = 2000, verbose = False)
+pd_stat_histogram(df, bins = 50, coltarget = "diff")
+pd_stat_pandas_profile(df, savefile = "report.html", title = "Pandas Profile")
+pd_stat_shift_changes(df, target_col, features_list = 0, bins = 10, df_test = 0)
+pd_stat_shift_trend_changes(df, feature, target_col, threshold = 0.03)
+pd_stat_shift_trend_correlation(df, df_test, colname, target_col)
+save(df, name, path = None)
+save_features(df, name, path = None)
+save_list(path, name_list, glob)
+test_get_classification_data(name = None)
+test_heteroscedacity(y, y_pred, pred_value_only = 1)
+test_mutualinfo(error, Xtest, colname = None, bins = 5)
+test_normality(error, distribution = "norm", test_size_limit = 5000)
+
+-------------------------methods----------------------
+dict2.__init__(self, d)
+
+
+utilmy/zml/source/utils/__init__.py
+
+
+utilmy/zml/source/utils/metrics.py
+
+
+utilmy/zml/source/utils/util.py
+-------------------------functions----------------------
+create_appid(filename)
+create_logfilename(filename)
+create_uniqueid()
+load(filename = "/folder1/keyname", isabsolutpath = 0, encoding1 = "utf-8")
+load_arguments(config_file = None, arg_list = None)
+logger_handler_console(formatter = None)
+logger_handler_file(isrotate = False, rotate_time = "midnight", formatter = None, log_file_used = None)
+logger_setup(logger_name = None, log_file = None, formatter = FORMATTER_1, isrotate = False, isconsole_output = True, logging_level = logging.DEBUG, )
+logger_setup2(name = __name__, level = None)
+os_make_dirs(filename)
+printlog(s = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "", s7 = "", s8 = "", s9 = "", s10 = "", app_id = "", logfile = None, iswritelog = True, )
+save(variable_list, folder, globals_main = None)
+save_all(variable_list, folder, globals_main = None)
+sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
+writelog(m = "", f = None)
+
+
+
+utilmy/zml/source/utils/util_autofeature.py
+-------------------------functions----------------------
+create_model_name(save_folder, model_name)
+data_loader(file_name = 'dataset/GOOG-year.csv')
+load_arguments(config_file =  None)
+optim_(modelname = "model_dl.1_lstm.py", pars =  {}, df  =  None, optim_engine = "optuna", optim_method = "normal/prune", save_folder = "model_save/", log_folder = "logs/", ntrials = 2)
+optim_optuna(modelname = "model_dl.1_lstm.py", pars =  {}, df  =  None, optim_method = "normal/prune", save_folder = "/mymodel/", log_folder = "", ntrials = 2)
+test_all()
+test_fast()
+
+
+
+utilmy/zml/source/utils/util_automl.py
+-------------------------functions----------------------
+import_(abs_module_path, class_name = None)
+model_auto_automlgs(filepath= [ "train.csv", "test.csv" ],colX=None, coly=None,do="predict",outfolder="aaserialize/",model_type="regressor/classifier",params={ "csv_seprator"  =  [ "train.csv", "test.csv" ],colX=None, coly=None,do="predict",outfolder="aaserialize/",model_type="regressor/classifier",params={ "csv_seprator" : ",", "train_size" : 0.5, "score_metric" : "accuracy","n_folds": 3, "n_step": 10},param_space =  {'est__strategy':{"search":"choice",                         "space":["LightGBM"]},'est__n_estimators':{"search":"choice",                     "space":[150]},'est__colsample_bytree':{"search":"uniform",                "space":[0.8,0.95]},'est__subsample':{"search":"uniform",                       "space":[0.8,0.95]},'est__max_depth':{"search":"choice",                        "space":[5,6,7,8,9]},'est__learning_rate':{"search":"choice",                    "space":[0.07]}},generation=1,population_size=5,verbosity=2,)
+model_auto_mlbox(filepath= [ "train.csv", "test.csv" ],colX=None, coly=None,do="predict",outfolder="aaserialize/",model_type="regressor/classifier",params={ "csv_seprator"  =  [ "train.csv", "test.csv" ],colX=None, coly=None,do="predict",outfolder="aaserialize/",model_type="regressor/classifier",params={ "csv_seprator" : ",", "train_size" : 0.5, "score_metric" : "accuracy","n_folds": 3, "n_step": 10},param_space =  {'est__strategy':{"search":"choice",                         "space":["LightGBM"]},'est__n_estimators':{"search":"choice",                     "space":[150]},'est__colsample_bytree':{"search":"uniform",                "space":[0.8,0.95]},'est__subsample':{"search":"uniform",                       "space":[0.8,0.95]},'est__max_depth':{"search":"choice",                        "space":[5,6,7,8,9]},'est__learning_rate':{"search":"choice",                    "space":[0.07]}},generation=1,population_size=5,verbosity=2,)
+model_auto_tpot(df, colX, coly, outfolder = "aaserialize/", model_type = "regressor/classifier", train_size = 0.5, generation = 1, population_size = 5, verbosity = 2, )
+
+-------------------------methods----------------------
+dict2.__init__(self, d)
+
+
+utilmy/zml/source/utils/util_credit.py
+-------------------------functions----------------------
+fun_get_segmentlimit(x, l1)
+model_logistic_score(clf, df1, cols, coltarget, outype = "score")
+np_drop_duplicates(l1)
+pd_num_segment_limit(df, col_score = "scoress", coldefault = "y", ntotal_default = 491, def_list = None, nblock = 20.0)
+split_train(X, y, split_ratio = 0.8)
+split_train2(df1, ntrain = 10000, ntest = 100000, colused = None, coltarget = None, nratio = 0.4)
+split_train_test(X, y, split_ratio = 0.8)
+ztest()
+
+
+
+utilmy/zml/source/utils/util_csv.py
+-------------------------functions----------------------
+csv_analysis()
+csv_bigcompute()
+csv_col_get_dict_categoryfreq(dircsv, filepattern = "*.csv", category_cols = [], maxline = -1, fileencoding = "utf-8")
+csv_col_schema_toexcel(dircsv = "", filepattern = "*.csv", outfile = ".xlsx", returntable = 1, maxrow = 5000000, maxcol_pertable = 90, maxstrlen = "U80", )
+csv_dtypes_getdict(df = None, csvfile = None)
+csv_fast_processing()
+csv_pivotable(dircsv = "", filepattern = "*.csv", fileh5 = ".h5", leftX = "col0", topY = "col2", centerZ = "coli", mapreduce = "sum", chunksize = 500000, tablename = "df", )
+csv_row_mapreduce(dircsv = "", outfile = "", type_mapreduce = "sum", nrow = 1000000, chunk = 5000000)
+csv_row_reduce_line(fromfile, tofile, condfilter, catval_tokeep, header = True, maxline = -1)
+csv_row_reduce_line_manual(file_category, file_transact, file_reduced)
+db_getdata()
+db_meta_add("", []), schema = None, df_table_uri = None, df_table_columns = None)
+db_meta_find(ALLDB, query = "", filter_db = [], filter_table = [], filter_column = [])
+db_sql()
+isnull(x)
+str_to_unicode(x, encoding = "utf-8")
+xl_get_rowcol(ws, i0, j0, imax, jmax)
+xl_setstyle(file1)
+xl_val(ws, colj, rowi)
+
+
+
+utilmy/zml/source/utils/util_date.py
+-------------------------functions----------------------
+dateime_daytime(datetimex)
+datenumpy_todatetime(tt, islocaltime = True)
+datestring_todatetime(datelist, fmt="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S")
+datetime_quarter(datetimex)
+datetime_to_milisec(datelist)
+datetime_toint(datelist)
+datetime_tointhour(datelist)
+datetime_tonumpydate(t, islocaltime = True)
+datetime_tostring(datelist, fmt="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S")
+datetime_weekday(datelist)
+datetime_weekday_fast(dateval)
+np_dict_tolist(dd)
+np_dict_tostr_key(dd)
+np_dict_tostr_val(dd)
+pd_datestring_split(dfref, coldate, fmt="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S", return_val = "split")
+
+
+
+utilmy/zml/source/utils/util_deep.py
+-------------------------functions----------------------
+tf_to_dot(graph)
+
+
+
+utilmy/zml/source/utils/util_import.py
+-------------------------methods----------------------
+dict2.__init__(self, d)
+
+
+utilmy/zml/source/utils/util_metric.py
+-------------------------functions----------------------
+average_precision(r)
+dcg_at_k(r, k, method = 0)
+mean_average_precision(rs)
+mean_reciprocal_rank(rs)
+ndcg_at_k(r, k, method = 0)
+precision_at_k(r, k)
+r_precision(r)
+
+
+
+utilmy/zml/source/utils/util_model.py
+-------------------------functions----------------------
+import_(abs_module_path, class_name = None)
+model_catboost_classifier(Xtrain, Ytrain, Xcolname = None, pars={"learning_rate" = {"learning_rate": 0.1, "iterations": 1000, "random_seed": 0, "loss_function": "MultiClass", }, isprint = 0, )
+model_lightgbm_kfold(df, colname = None, num_folds = 2, stratified = False, colexclude = None, debug = False)
+pd_dim_reduction(df, colname, colprefix = "colsvd", method = "svd", dimpca = 2, model_pretrain = None, return_val = "dataframe,param", )
+sk_cluster(Xmat, method = "kmode", ), kwds={"metric" = {"metric": "euclidean", "min_cluster_size": 150, "min_samples": 3}, isprint = 1, preprocess={"norm" = {"norm": False}, )
+sk_error(ypred, ytrue, method = "r2", sample_weight = None, multioutput = None)
+sk_feature_concept_shift(df)
+sk_feature_covariate_shift(dftrain, dftest, colname, nsample = 10000)
+sk_feature_evaluation(clf, df, kbest = 30, colname_best = None, dfy = None)
+sk_feature_impt(clf, colname, model_type = "logistic")
+sk_feature_prior_shift()
+sk_feature_selection(clf, method = "f_classif", colname = None, kbest = 50, Xtrain = None, ytrain = None)
+sk_metric_roc_auc(y_test, ytest_pred, ytest_proba)
+sk_metric_roc_auc_multiclass(n_classes = 3, y_test = None, y_test_pred = None, y_predict_proba = None)
+sk_metric_roc_optimal_cutoff(ytest, ytest_proba)
+sk_metrics_eval(clf, Xtest, ytest, cv = 1, metrics = ["f1_macro", "accuracy", "precision_macro", "recall_macro"])
+sk_model_ensemble_weight(model_list, acclevel, maxlevel = 0.88)
+sk_model_eval(clf, istrain = 1, Xtrain = None, ytrain = None, Xval = None, yval = None)
+sk_model_eval_classification(clf, istrain = 1, Xtrain = None, ytrain = None, Xtest = None, ytest = None)
+sk_model_eval_classification_cv(clf, X, y, test_size = 0.5, ncv = 1, method = "random")
+sk_model_eval_regression(clf, istrain = 1, Xtrain = None, ytrain = None, Xval = None, yval = None)
+sk_model_votingpredict(estimators, voting, ww, X_test)
+sk_params_search_best(clf, X, y, 0, 1, 5)}, method = "gridsearch", param_search={"scorename" = {"scorename": "r2", "cv": 5, "population_size": 5, "generations_number": 3}, )
+sk_score_get(name = "r2")
+sk_showconfusion(Y, Ypred, isprint = True)
+sk_showmetrics(y_test, ytest_pred, ytest_proba, target_names = ["0", "1"], return_stat = 0)
+
+-------------------------methods----------------------
+dict2.__init__(self, d)
+model_template1.__init__(self, alpha = 0.5, low_y_cut = -0.09, high_y_cut = 0.09, ww0 = 0.95)
+model_template1.fit(self, X, Y = None)
+model_template1.predict(self, X, y = None, ymedian = None)
+model_template1.score(self, X, Ytrue = None, ymedian = None)
+
+
+utilmy/zml/source/utils/util_optim.py
+-------------------------functions----------------------
+create_model_name(save_folder, model_name)
+data_loader(file_name = 'dataset/GOOG-year.csv')
+load_arguments(config_file =  None)
+optim(modelname = "model_dl.1_lstm.py", pars =  {}, df  =  None, optim_engine = "optuna", optim_method = "normal/prune", save_folder = "model_save/", log_folder = "logs/", ntrials = 2)
+optim_optuna(modelname = "model_dl.1_lstm.py", pars =  {}, df  =  None, optim_method = "normal/prune", save_folder = "/mymodel/", log_folder = "", ntrials = 2)
+test_all()
+test_fast()
+
+
+
+utilmy/zml/source/utils/util_pipeline.py
+-------------------------functions----------------------
+pd_grid_search(full_pipeline, X, y)
+pd_pipeline(bin_cols, text_col, X, y)
+
+
+
+utilmy/zml/source/utils/util_plot.py
+-------------------------functions----------------------
+pd_colnum_tocat_stat(input_data, feature, target_col, bins, cuts = 0)
+pd_stat_distribution_trend_correlation(grouped, grouped_test, feature, target_col)
+plot_XY(xx, yy, zcolor = None, tsize = None, labels = None, title = "", xlabel = "", ylabel = "", zcolor_label = "", 8, 6), dpi = 75, savefile = "", color_dot = "Blues", doreturn = 0, )
+plot_XY_plotly(xx, yy, towhere = "url")
+plot_XY_seaborn(X, Y, Zcolor = None)
+plot_Y(Yval, typeplot = ".b", tsize = None, labels = None, title = "", xlabel = "", ylabel = "", zcolor_label = "", 8, 6), dpi = 75, savefile = "", color_dot = "Blues", doreturn = 0, )
+plot_cluster_2D(X_2dim, target_class, target_names)
+plot_cluster_hiearchy(Xmat_dist, p = 30, truncate_mode = None, color_threshold = None, get_leaves = True, orientation = "top", labels = None, count_sort = False, distance_sort = False, show_leaf_counts = True, do_plot = 1, no_labels = False, leaf_font_size = None, leaf_rotation = None, leaf_label_func = None, show_contracted = False, link_color_func = None, ax = None, above_threshold_color = "b", annotate_above = 0, )
+plot_cluster_pca(Xmat, Xcluster_label = None, metric = "euclidean", dimpca = 2, whiten = True, isprecompute = False, savefile = "", doreturn = 1, )
+plot_cluster_tsne(Xmat, Xcluster_label = None, metric = "euclidean", perplexity = 50, ncomponent = 2, savefile = "", isprecompute = False, returnval = True, )
+plot_col_correl_matrix(df, cols, annot = True, size = 30)
+plot_col_correl_target(df, cols, coltarget, nb_to_show = 10, ascending = False)
+plot_col_distribution(df, col_include = None, col_exclude = None, pars={"binsize" = {"binsize": 20})
+plot_col_univariate(input_data, feature, target_col, trend_correlation = None)
+plot_cols_with_NaNs(df, nb_to_show)
+plot_distance_heatmap(Xmat_dist, Xcolname)
+plot_distribution_density(Xsample, kernel = "gaussian", N = 10, bandwith = 1 / 10.0)
+plot_pair(df, Xcolname = None, Ycoltarget = None)
+plot_plotly()
+plot_univariate_histogram(feature, data, target_col, bins = 10, data_test = 0)
+plot_univariate_plots(data, target_col, features_list = 0, bins = 10, data_test = 0)
+plotbar(df, colname, figsize = (20, 10)
+plotxy(12, 10), title = "feature importance", savefile = "myfile.png")
+
+
+
+utilmy/zml/source/utils/util_sql.py
+-------------------------functions----------------------
+sql_create_dbengine(type1 = "", dbname = "", login = "", password = "", url = "localhost", port = 5432)
+sql_delete_table(name, dbengine)
+sql_get_dbschema(dburl="sqlite = "sqlite:///aapackage/store/yahoo.db", dbengine = None, isprint = 0)
+sql_insert_csv(csvfile, dbtable, dbengine, col_drop = [])
+sql_insert_csv2(csvfile = "", dbtable = "", columns = [], dbengine = None, nrows = 10000)
+sql_insert_df(df, dbtable, dbengine, col_drop = ["id"], verbose = 1)
+sql_insert_excel(file1 = ".xls", dbengine = None, dbtype = "")
+sql_mysql_insert_excel()
+sql_pivotable(dbcon, ss = "select  ")
+sql_postgres_create_table(mytable = "", database = "", username = "", password = "")
+sql_postgres_pivot()
+sql_postgres_query_to_csv(sqlr = "SELECT ticker,shortratio,sector1_id, FROM stockfundamental", csv_out = "")
+sql_query(sqlr = "SELECT ticker,shortratio,sector1_id, FROM stockfundamental", dbengine = None, output = "df", dburl="sqlite = "sqlite:///aaserialize/store/finviz.db", )
+
+
+
+utilmy/zml/source/utils/util_stat.py
+-------------------------functions----------------------
+np_conditional_entropy(x, y)
+np_correl_cat_cat_cramers_v(x, y)
+np_correl_cat_cat_theils_u(x, y)
+np_correl_cat_num_ratio(cat_array, num_array)
+np_transform_pca(X, dimpca = 2, whiten = True)
+pd_num_correl_associations(df, colcat = None, mark_columns = False, theil_u = False, plot = True, return_results = False, **kwargs)
+sk_distribution_kernel_bestbandwidth(X, kde)
+sk_distribution_kernel_sample(kde = None, n = 1)
+stat_hypothesis_test_permutation(df, variable, classes, repetitions)
+
+-------------------------methods----------------------
+dict2.__init__(self, d)
+
+
+utilmy/zml/source/utils/util_text.py
+-------------------------functions----------------------
+coltext_lemmatizer(text)
+coltext_stemmer(text, sep = " ")
+coltext_stemporter(text)
+coltext_stopwords(text, stopwords = None, sep = " ")
+get_stopwords(lang)
+pd_coltext_clean(dfref, colname, stopwords)
+pd_coltext_clean_advanced(dfref, colname, fromword, toword)
+pd_coltext_countvect(df, coltext, word_tokeep = None, word_minfreq = 1, return_val = "dataframe,param")
+pd_coltext_encoder(df)
+pd_coltext_fillna(df, colname, val = "")
+pd_coltext_hashing(df, coltext, n_features = 20)
+pd_coltext_minhash(dfref, colname, n_component = 2, model_pretrain_dict = None, return_val = "dataframe,param")
+pd_coltext_tdidf(df, coltext, word_tokeep = None, word_minfreq = 1, return_val = "dataframe,param")
+pd_coltext_tdidf_multi(df, coltext, coltext_freq, ntoken = 100, word_tokeep_dict = None, stopwords = None, return_val = "dataframe,param", )
+pd_coltext_wordfreq(df, coltext, sep = " ")
+pd_fromdict(ddict, colname)
+
+
+
+utilmy/zml/source/utils/util_text_embedding.py
+-------------------------functions----------------------
+test_MDVEncoder()
+
+-------------------------methods----------------------
+AdHocIndependentPDF.__init__(self, fisher_kernel = True, dtype = np.float64, ngram_range = (2, 4)
+AdHocIndependentPDF.fit(self, X, y = None)
+AdHocIndependentPDF.transform(self, X)
+AdHocNgramsMultinomialMixture.__init__(self, n_iters = 10, fisher_kernel = True, ngram_range = (2, 4)
+AdHocNgramsMultinomialMixture._e_step(self, D, unqD, X, unqX, theta, beta)
+AdHocNgramsMultinomialMixture._m_step(self, D, _doc_topic_posterior)
+AdHocNgramsMultinomialMixture.fit(self, X, y = None)
+AdHocNgramsMultinomialMixture.transform(self, X)
+ColumnEncoder.__init__(self, encoder_name, reduction_method = None, 2, 4), categories = "auto", dtype = np.float64, handle_unknown = "ignore", clf_type = None, n_components = None, )
+ColumnEncoder._get_most_frequent(self, X)
+ColumnEncoder.fit(self, X, y = None)
+ColumnEncoder.get_feature_names(self)
+ColumnEncoder.transform(self, X)
+DimensionalityReduction.__init__(self, method_name = None, n_components = None, column_names = None)
+DimensionalityReduction.fit(self, X, y = None)
+DimensionalityReduction.transform(self, X)
+MDVEncoder.__init__(self, clf_type)
+MDVEncoder.fit(self, X, y = None)
+MDVEncoder.transform(self, X)
+NgramNaiveFisherKernel.__init__(self, 2, 4), categories = "auto", dtype = np.float64, handle_unknown = "ignore", hashing_dim = None, n_prototypes = None, random_state = None, n_jobs = None, )
+NgramNaiveFisherKernel._ngram_presence_fisher_kernel(self, strings, cats)
+NgramNaiveFisherKernel._ngram_presence_fisher_kernel2(self, strings, cats)
+NgramNaiveFisherKernel.fit(self, X, y = None)
+NgramNaiveFisherKernel.transform(self, X)
+NgramsMultinomialMixture.__init__(self, n_topics = 10, max_iters = 100, fisher_kernel = True, beta_init_type = None, max_mean_change_tol = 1e-5, 2, 4), )
+NgramsMultinomialMixture._e_step(self, D, unqD, X, unqX, theta, beta)
+NgramsMultinomialMixture._get_most_frequent(self, X)
+NgramsMultinomialMixture._m_step(self, D, _doc_topic_posterior)
+NgramsMultinomialMixture._max_mean_change(self, last_beta, beta)
+NgramsMultinomialMixture.fit(self, X, y = None)
+NgramsMultinomialMixture.transform(self, X)
+PasstroughEncoder.__init__(self, passthrough = True)
+PasstroughEncoder.fit(self, X, y = None)
+PasstroughEncoder.transform(self, X)
+PretrainedBert.fit(self, X, y = None)
+PretrainedBert.transform(self, X: list)
+PretrainedFastText.__init__(self, n_components, language = "english")
+PretrainedFastText.fit(self, X, y = None)
+PretrainedFastText.transform(self, X)
+PretrainedGensim.__get_word_embedding(self, word, model)
+PretrainedGensim.__word_forms(self, word)
+PretrainedGensim.fit(self, X, y = None)
+PretrainedGensim.transform(self, X: dict)
+PretrainedWord2Vec.__init__(self, n_components = None, language = "english", model_path = None, bert_args={'bert_model' = {'bert_model': None, 'bert_dataset_name': None, 'oov': 'sum', 'ctx': None})
+PretrainedWord2Vec.fit(self, X, y = None)
+PretrainedWord2Vec.transform(self, X)
+
+
+utilmy/zml/source/utils/ztest.py
+-------------------------methods----------------------
+dict2.__init__(self, d)
+
+
+utilmy/zml/titanic_classifier.py
+-------------------------functions----------------------
+check()
+config1()
+global_pars_update(model_dict, data_name, config_name)
+pd_col_myfun(df = None, col = None, pars = {})
+
+
+
+utilmy/zml/toutlier.py
+-------------------------functions----------------------
+global_pars_update(model_dict, data_name, config_name, dir_data = None, dir_input_tr = None, dir_input_te = None)
+post_process_fun(y)
+pre_process_fun(y)
+
+
+
+utilmy/zml/tsampler.py
+-------------------------functions----------------------
+config_sampler()
+global_pars_update(model_dict, data_name, config_name)
+log(*s)
+test_batch(nsample = 1000)
+
+
+
+utilmy/zml/tseries.py
+-------------------------functions----------------------
+config1()
+global_pars_update(model_dict, data_name, config_name)
+pd_dsa2_custom(df: pd.DataFrame, col: list = None, pars: dict = None)
+
+
+
+utilmy/zml/zgitutil.py
+-------------------------functions----------------------
+_filter_on_size(size = 0, f = files)
+_run(*args)
+add(size = 10000000)
+commit(mylist)
+main()
+path_leaf(path)
+
+
+
+utilmy/zml/ztemplate.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(Xtrain, cols_type_received, cols_ref)
+get_dataset_tuple(Xtrain, cols_type_received, cols_ref)
+init(*kw, **kwargs)
+load_model(path = "")
+load_model(path = "")
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+predict(Xpred = None, data_pars = None, compute_pars = {}, out_pars = {}, **kw)
+reset()
+reset()
+save(path = None, info = None)
+save(path = None, info = None)
+test(config = '')
+test_helper(model_pars, data_pars, compute_pars)
+
+-------------------------methods----------------------
+MY_MODEL_CLASS.__init__(cpars)
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
