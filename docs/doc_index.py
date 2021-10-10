@@ -934,6 +934,9 @@ to_timeunix(datex = "2018-01-16")
 dict_to_namespace.__init__(self, d)
 
 
+utilmy/prepro/__init__.py
+
+
 utilmy/prepro/prepro.py
 -------------------------functions----------------------
 _pd_colnum(df, col, pars)
@@ -1018,1056 +1021,66 @@ run_profile(path_data = None, path_output = "data/out/ztmp/", n_sample = 5000)
 
 
 
-utilmy/recs/contrib/azureml_designer_modules/entries/map_entry.py
-
-
-utilmy/recs/contrib/azureml_designer_modules/entries/ndcg_entry.py
-
-
-utilmy/recs/contrib/azureml_designer_modules/entries/precision_at_k_entry.py
-
-
-utilmy/recs/contrib/azureml_designer_modules/entries/recall_at_k_entry.py
-
-
-utilmy/recs/contrib/azureml_designer_modules/entries/score_sar_entry.py
+utilmy/prepro/util_feature.py
 -------------------------functions----------------------
-joblib_loader(load_from_dir, model_spec)
+col_extractname(col_onehot)
+col_remove(cols, colsremove, mode = "exact")
+estimator_boostrap_bayes(err, alpha = 0.05, )
+estimator_bootstrap(err, custom_stat = None, alpha = 0.05, n_iter = 10000)
+estimator_std_normal(err, alpha = 0.05, )
+feature_correlation_cat(df, colused)
+feature_importance_perm(clf, Xtrain, ytrain, cols, n_repeats = 8, scoring = 'neg_root_mean_squared_error', show_graph = 1)
+feature_selection_multicolinear(df, threshold = 1.0)
+fetch_dataset(url_dataset, path_target = None, file_target = None)
+fetch_spark_koalas(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
+load(name, path)
+load_dataset(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
+load_features(name, path)
+load_function_uri(uri_name="myfolder/myfile.py = "myfolder/myfile.py::myFunction")
+log(*s, n = 0, m = 1, **kw)
+log2(*s, **kw)
+log3(*s, **kw)
+metrics_eval(metric_list = ["mean_squared_error"], ytrue = None, ypred = None, ypred_proba = None, return_dict = False)
+np_conv_to_one_col(np_array, sep_char = "_")
+os_get_function_name()
+os_getcwd()
+pa_read_file(path =   'folder_parquet/', cols = None, n_rows = 1000, file_start = 0, file_end = 100000, verbose = 1, )
+pa_write_file(df, path =   'folder_parquet/', cols = None, n_rows = 1000, partition_cols = None, overwrite = True, verbose = 1, filesystem  =  'hdfs')
+params_check(pars, check_list, name = "")
+pd_col_fillna(dfref, colname = None, method = "frequent", value = None, colgroupby = None, return_val = "dataframe,param", )
+pd_col_filter(df, filter_val = None, iscol = 1)
+pd_col_merge_onehot(df, colname)
+pd_col_to_num(df, colname = None, default = np.nan)
+pd_col_to_onehot(dfref, colname = None, colonehot = None, return_val = "dataframe,column")
+pd_colcat_mapping(df, colname)
+pd_colcat_mergecol(df, col_list, x0, colid = "easy_id")
+pd_colcat_toint(dfref, colname, colcat_map = None, suffix = None)
+pd_colcat_tonum(df, colcat = "all", drop_single_label = False, drop_fact_dict = True)
+pd_colnum_normalize(df0, colname, pars, suffix = "_norm", return_val = 'dataframe,param')
+pd_colnum_tocat(df, colname = None, colexclude = None, colbinmap = None, bins = 5, suffix = "_bin", method = "uniform", na_value = -1, return_val = "dataframe,param", params={"KMeans_n_clusters" = {"KMeans_n_clusters": 8, "KMeans_init": 'k-means++', "KMeans_n_init": 10,"KMeans_max_iter": 300, "KMeans_tol": 0.0001, "KMeans_precompute_distances": 'auto',"KMeans_verbose": 0, "KMeans_random_state": None,"KMeans_copy_x": True, "KMeans_n_jobs": None, "KMeans_algorithm": 'auto'})
+pd_colnum_tocat_stat(df, feature, target_col, bins, cuts = 0)
+pd_feature_generate_cross(df, cols, cols_cross_input = None, pct_threshold = 0.2, m_combination = 2)
+pd_pipeline_apply(df, pipeline)
+pd_read_file(path_glob = "*.pkl", ignore_index = True, cols = None, verbose = False, nrows = -1, concat_sort = True, n_pool = 1, drop_duplicates = None, col_filter = None, col_filter_val = None, **kw)
+pd_stat_correl_pair(df, coltarget = None, colname = None)
+pd_stat_dataset_shift(dftrain, dftest, colused, nsample = 10000, buckets = 5, axis = 0)
+pd_stat_datashift_psi(expected, actual, buckettype = 'bins', buckets = 10, axis = 0)
+pd_stat_distribution_colnum(df, nrows = 2000, verbose = False)
+pd_stat_histogram(df, bins = 50, coltarget = "diff")
+pd_stat_pandas_profile(df, savefile = "report.html", title = "Pandas Profile")
+pd_stat_shift_changes(df, target_col, features_list = 0, bins = 10, df_test = 0)
+pd_stat_shift_trend_changes(df, feature, target_col, threshold = 0.03)
+pd_stat_shift_trend_correlation(df, df_test, colname, target_col)
+save(df, name, path = None)
+save_features(df, name, path = None)
+save_list(path, name_list, glob)
+test_get_classification_data(name = None)
+test_heteroscedacity(y, y_pred, pred_value_only = 1)
+test_mutualinfo(error, Xtest, colname = None, bins = 5)
+test_normality(error, distribution = "norm", test_size_limit = 5000)
 
 -------------------------methods----------------------
-ScoreSARModule.__init__(self, model, input_data)
-ScoreSARModule.input_data(self)
-ScoreSARModule.model(self)
-ScoreSARModule.predict_ratings(self, items_to_predict, normalize)
-ScoreSARModule.recommend_items(self, ranking_metric, top_k, sort_top_k, remove_seen, normalize)
-
-
-utilmy/recs/contrib/azureml_designer_modules/entries/stratified_splitter_entry.py
-
-
-utilmy/recs/contrib/azureml_designer_modules/entries/train_sar_entry.py
--------------------------functions----------------------
-joblib_dumper(data, file_name = None)
-
-
-
-utilmy/recs/contrib/sarplus/python/setup.py
--------------------------methods----------------------
-get_pybind_include.__init__(self, user = False)
-get_pybind_include.__str__(self)
-
-
-utilmy/recs/docs/source/conf.py
-
-
-utilmy/recs/examples/04_model_select_and_optimize/train_scripts/svd_training.py
--------------------------functions----------------------
-main()
-svd_training(args)
-
-
-
-utilmy/recs/examples/04_model_select_and_optimize/train_scripts/wide_deep_training.py
--------------------------functions----------------------
-_log(metric, value)
-
-
-
-utilmy/recs/examples/06_benchmarks/benchmark_utils.py
--------------------------functions----------------------
-predict_als(model, test)
-predict_fastai(model, test)
-predict_svd(model, test)
-prepare_metrics_als(train, test)
-prepare_metrics_fastai(train, test)
-prepare_training_als(train, test)
-prepare_training_cornac(train, test)
-prepare_training_fastai(train, test)
-prepare_training_lightgcn(train, test)
-prepare_training_ncf(train, test)
-prepare_training_sar(train, test)
-prepare_training_svd(train, test)
-ranking_metrics_pyspark(test, predictions, k = DEFAULT_K)
-ranking_metrics_python(test, predictions, k = DEFAULT_K)
-rating_metrics_pyspark(test, predictions)
-rating_metrics_python(test, predictions)
-recommend_k_als(model, test, train, top_k = DEFAULT_K, remove_seen = True)
-recommend_k_cornac(model, test, train, top_k = DEFAULT_K, remove_seen = True)
-recommend_k_fastai(model, test, train, top_k = DEFAULT_K, remove_seen = True)
-recommend_k_lightgcn(model, test, train, top_k = DEFAULT_K, remove_seen = True)
-recommend_k_ncf(model, test, train, top_k = DEFAULT_K, remove_seen = True)
-recommend_k_sar(model, test, train, top_k = DEFAULT_K, remove_seen = True)
-recommend_k_svd(model, test, train, top_k = DEFAULT_K, remove_seen = True)
-train_als(params, data)
-train_bivae(params, data)
-train_bpr(params, data)
-train_fastai(params, data)
-train_lightgcn(params, data)
-train_ncf(params, data)
-train_sar(params, data)
-train_svd(params, data)
-
-
-
-utilmy/recs/recommenders/__init__.py
-
-
-utilmy/recs/recommenders/datasets/__init__.py
-
-
-utilmy/recs/recommenders/datasets/amazon_reviews.py
--------------------------functions----------------------
-_create_instance(reviews_file, meta_file)
-_create_item2cate(instance_file)
-_create_vocab(train_file, user_vocab, item_vocab, cate_vocab)
-_data_generating(input_file, train_file, valid_file, test_file, min_sequence = 1)
-_data_generating_no_history_expanding(input_file, train_file, valid_file, test_file, min_sequence = 1)
-_data_processing(input_file)
-_download_reviews(name, dest_path)
-_extract_reviews(file_path, zip_path)
-_get_sampled_data(instance_file, sample_rate)
-_meta_preprocessing(meta_readfile)
-_negative_sampling_offline(instance_input_file, valid_file, test_file, valid_neg_nums = 4, test_neg_nums = 49)
-_reviews_preprocessing(reviews_readfile)
-data_preprocessing(reviews_file, meta_file, train_file, valid_file, test_file, user_vocab, item_vocab, cate_vocab, sample_rate = 0.01, valid_num_ngs = 4, test_num_ngs = 9, is_history_expanding = True, )
-download_and_extract(name, dest_path)
-
-
-
-utilmy/recs/recommenders/datasets/cosmos_cli.py
--------------------------functions----------------------
-find_collection(client, dbid, id)
-find_database(client, id)
-read_collection(client, dbid, id)
-read_database(client, id)
-
-
-
-utilmy/recs/recommenders/datasets/covid_utils.py
--------------------------functions----------------------
-clean_dataframe(df)
-get_public_domain_text(df, container_name, azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", )
-load_pandas_df(azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", container_name = "covid19temp", metadata_filename = "metadata.csv", )
-remove_duplicates(df, cols)
-remove_nan(df, cols)
-retrieve_text(entry, container_name, azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", )
-
-
-
-utilmy/recs/recommenders/datasets/criteo.py
--------------------------functions----------------------
-download_criteo(size = "sample", work_directory = ".")
-extract_criteo(size, compressed_file, path = None)
-get_spark_schema(header = DEFAULT_HEADER)
-load_pandas_df(size = "sample", local_cache_path = None, header = DEFAULT_HEADER)
-load_spark_df(spark, size = "sample", header = DEFAULT_HEADER, local_cache_path = None, dbfs_datapath="dbfs = "dbfs:/FileStore/dac", dbutils = None, )
-
-
-
-utilmy/recs/recommenders/datasets/download_utils.py
--------------------------functions----------------------
-download_path(path = None)
-maybe_download(url, filename = None, work_directory = ".", expected_bytes = None)
-unzip_file(zip_src, dst_dir, clean_zip_file = False)
-
-
-
-utilmy/recs/recommenders/datasets/mind.py
--------------------------functions----------------------
-_newsample(nnn, ratio)
-_read_news(filepath, news_words, news_entities, tokenizer)
-download_and_extract_glove(dest_path)
-download_mind(size = "small", dest_path = None)
-extract_mind(train_zip, valid_zip, train_folder = "train", valid_folder = "valid", clean_zip_file = True, )
-generate_embeddings(data_path, news_words, news_entities, train_entities, valid_entities, max_sentence = 10, word_embedding_dim = 100, )
-get_train_input(session, train_file_path, npratio = 4)
-get_user_history(train_history, valid_history, user_history_path)
-get_valid_input(session, valid_file_path)
-get_words_and_entities(train_news, valid_news)
-load_glove_matrix(path_emb, word_dict, word_embedding_dim)
-read_clickhistory(path, filename)
-word_tokenize(sent)
-
-
-
-utilmy/recs/recommenders/datasets/movielens.py
--------------------------functions----------------------
-_get_schema(header, schema)
-_load_item_df(size, item_datapath, movie_col, title_col, genres_col, year_col)
-_maybe_download_and_extract(size, dest_path)
-download_movielens(size, dest_path)
-extract_movielens(size, rating_path, item_path, zip_path)
-load_item_df(size = "100k", local_cache_path = None, movie_col = DEFAULT_ITEM_COL, title_col = None, genres_col = None, year_col = None, )
-load_pandas_df(size = "100k", header = None, local_cache_path = None, title_col = None, genres_col = None, year_col = None, )
-load_spark_df(spark, size = "100k", header = None, schema = None, local_cache_path = None, dbutils = None, title_col = None, genres_col = None, year_col = None, )
-
--------------------------methods----------------------
-_DataFormat.__init__(self, sep, path, has_header = False, item_sep = None, item_path = None, item_has_header = False, )
-_DataFormat.has_header(self)
-_DataFormat.item_has_header(self)
-_DataFormat.item_path(self)
-_DataFormat.item_separator(self)
-_DataFormat.path(self)
-_DataFormat.separator(self)
-
-
-utilmy/recs/recommenders/datasets/pandas_df_utils.py
--------------------------functions----------------------
-filter_by(df, filter_by_df, filter_by_cols)
-has_columns(df, columns)
-has_same_base_dtype(df_1, df_2, columns = None)
-lru_cache_df(maxsize, typed = False)
-negative_feedback_sampler(df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_label = DEFAULT_LABEL_COL, col_feedback = "feedback", ratio_neg_per_user = 1, pos_value = 1, neg_value = 0, seed = 42, )
-user_item_pairs(user_df, item_df, user_col = DEFAULT_USER_COL, item_col = DEFAULT_ITEM_COL, user_item_filter_df = None, shuffle = True, seed = None, )
-
--------------------------methods----------------------
-LibffmConverter.__init__(self, filepath = None)
-LibffmConverter.fit(self, df, col_rating = DEFAULT_RATING_COL)
-LibffmConverter.fit_transform(self, df, col_rating = DEFAULT_RATING_COL)
-LibffmConverter.get_params(self)
-LibffmConverter.transform(self, df)
-PandasHash.__eq__(self, other)
-PandasHash.__hash__(self)
-PandasHash.__init__(self, pandas_object)
-
-
-utilmy/recs/recommenders/datasets/python_splitters.py
--------------------------functions----------------------
-_do_stratification(data, ratio = 0.75, min_rating = 1, filter_by = "user", is_random = True, seed = 42, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
-numpy_stratified_split(X, ratio = 0.75, seed = 42)
-python_chrono_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
-python_random_split(data, ratio = 0.75, seed = 42)
-python_stratified_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, seed = 42, )
-
-
-
-utilmy/recs/recommenders/datasets/spark_splitters.py
--------------------------functions----------------------
-_do_stratification_spark(data, ratio = 0.75, min_rating = 1, filter_by = "user", is_partitioned = True, is_random = True, seed = 42, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
-spark_chrono_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, no_partition = False, )
-spark_random_split(data, ratio = 0.75, seed = 42)
-spark_stratified_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, seed = 42, )
-spark_timestamp_split(data, ratio = 0.75, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
-
-
-
-utilmy/recs/recommenders/datasets/sparse.py
--------------------------methods----------------------
-AffinityMatrix.__init__(self, df, items_list = None, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_pred = DEFAULT_PREDICTION_COL, save_path = None, )
-AffinityMatrix._gen_index(self)
-AffinityMatrix.gen_affinity_matrix(self)
-AffinityMatrix.map_back_sparse(self, X, kind)
-
-
-utilmy/recs/recommenders/datasets/split_utils.py
--------------------------functions----------------------
-_get_column_name(name, col_user, col_item)
-min_rating_filter_pandas(data, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
-min_rating_filter_spark(data, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
-process_split_ratio(ratio)
-split_pandas_data_with_ratios(data, ratios, seed = 42, shuffle = False)
-
-
-
-utilmy/recs/recommenders/datasets/wikidata.py
--------------------------functions----------------------
-find_wikidata_id(name, limit = 1, session = None)
-get_session(session = None)
-query_entity_description(entity_id, session = None)
-query_entity_links(entity_id, session = None)
-read_linked_entities(data)
-search_wikidata(names, extras = None, describe = True, verbose = False)
-
-
-
-utilmy/recs/recommenders/evaluation/__init__.py
-
-
-utilmy/recs/recommenders/evaluation/python_evaluation.py
--------------------------functions----------------------
-_check_column_dtypes(func)
-_check_column_dtypes_diversity_serendipity(func)
-_check_column_dtypes_novelty_coverage(func)
-_get_cooccurrence_similarity(train_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
-_get_cosine_similarity(train_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
-_get_intralist_similarity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
-_get_item_feature_similarity(item_feature_df, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
-_get_pairwise_items(df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
-auc(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-catalog_coverage(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
-distributional_coverage(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
-diversity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
-exp_var(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-get_top_k_items(dataframe, col_user = DEFAULT_USER_COL, col_rating = DEFAULT_RATING_COL, k = DEFAULT_K)
-historical_item_novelty(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
-logloss(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-mae(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-map_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
-merge_ranking_true_pred(rating_true, rating_pred, col_user, col_item, col_rating, col_prediction, relevancy_method, k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
-merge_rating_true_pred(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-ndcg_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
-novelty(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
-precision_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
-recall_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
-rmse(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-rsquared(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
-user_diversity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
-user_item_serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
-user_serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
-
-
-
-utilmy/recs/recommenders/evaluation/spark_evaluation.py
--------------------------functions----------------------
-_get_relevant_items_by_threshold(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, threshold = DEFAULT_THRESHOLD, )
-_get_relevant_items_by_timestamp(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, col_prediction = DEFAULT_PREDICTION_COL, k = DEFAULT_K, )
-_get_top_k_items(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, k = DEFAULT_K, )
-
--------------------------methods----------------------
-SparkDiversityEvaluation.__init__(self, train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_relevance = None, )
-SparkDiversityEvaluation._get_cooccurrence_similarity(self, n_partitions)
-SparkDiversityEvaluation._get_cosine_similarity(self, n_partitions = 200)
-SparkDiversityEvaluation._get_intralist_similarity(self, df)
-SparkDiversityEvaluation._get_item_feature_similarity(self, n_partitions)
-SparkDiversityEvaluation._get_pairwise_items(self, df)
-SparkDiversityEvaluation.catalog_coverage(self)
-SparkDiversityEvaluation.distributional_coverage(self)
-SparkDiversityEvaluation.diversity(self)
-SparkDiversityEvaluation.historical_item_novelty(self)
-SparkDiversityEvaluation.novelty(self)
-SparkDiversityEvaluation.serendipity(self)
-SparkDiversityEvaluation.sim_cos(v1, v2)
-SparkDiversityEvaluation.user_diversity(self)
-SparkDiversityEvaluation.user_item_serendipity(self)
-SparkDiversityEvaluation.user_serendipity(self)
-SparkRankingEvaluation.__init__(self, rating_true, rating_pred, k = DEFAULT_K, relevancy_method = "top_k", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, threshold = DEFAULT_THRESHOLD, )
-SparkRankingEvaluation._calculate_metrics(self)
-SparkRankingEvaluation.map_at_k(self)
-SparkRankingEvaluation.ndcg_at_k(self)
-SparkRankingEvaluation.precision_at_k(self)
-SparkRankingEvaluation.recall_at_k(self)
-SparkRatingEvaluation.__init__(self, rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
-SparkRatingEvaluation.exp_var(self)
-SparkRatingEvaluation.mae(self)
-SparkRatingEvaluation.rmse(self)
-SparkRatingEvaluation.rsquared(self)
-
-
-utilmy/recs/recommenders/models/__init__.py
-
-
-utilmy/recs/recommenders/models/cornac/__init__.py
-
-
-utilmy/recs/recommenders/models/cornac/cornac_utils.py
--------------------------functions----------------------
-predict(model, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, )
-predict_ranking(model, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, remove_seen = False, )
-
-
-
-utilmy/recs/recommenders/models/deeprec/__init__.py
-
-
-utilmy/recs/recommenders/models/deeprec/deeprec_utils.py
--------------------------functions----------------------
-cal_metric(labels, preds, metrics)
-check_nn_config(f_config)
-check_type(config)
-create_hparams(flags)
-dcg_score(y_true, y_score, k = 10)
-download_deeprec_resources(azure_container_url, data_path, remote_resource_name)
-flat_config(config)
-hit_score(y_true, y_score, k = 10)
-load_dict(filename)
-load_yaml(filename)
-mrr_score(y_true, y_score)
-ndcg_score(y_true, y_score, k = 10)
-prepare_hparams(yaml_file = None, **kwargs)
-
-
-
-utilmy/recs/recommenders/models/fastai/__init__.py
-
-
-utilmy/recs/recommenders/models/fastai/fastai_utils.py
--------------------------functions----------------------
-cartesian_product(*arrays)
-hide_fastai_progress_bar()
-score(learner, test_df, user_col = cc.DEFAULT_USER_COL, item_col = cc.DEFAULT_ITEM_COL, prediction_col = cc.DEFAULT_PREDICTION_COL, top_k = None, )
-
-
-
-utilmy/recs/recommenders/models/geoimc/__init__.py
-
-
-utilmy/recs/recommenders/models/geoimc/geoimc_algorithm.py
--------------------------methods----------------------
-IMCProblem.__init__(self, dataPtr, lambda1 = 1e-2, rank = 10)
-IMCProblem._computeLoss_csrmatrix(a, b, cd, indices, indptr, residual_global)
-IMCProblem._cost(self, params, residual_global)
-IMCProblem._egrad(self, params, residual_global)
-IMCProblem._loadTarget(self, )
-IMCProblem._optimize(self, max_opt_time, max_opt_iter, verbosity)
-IMCProblem.reset(self)
-IMCProblem.solve(self, *args)
-
-
-utilmy/recs/recommenders/models/geoimc/geoimc_data.py
--------------------------methods----------------------
-DataPtr.__init__(self, data, entities)
-DataPtr.get_data(self)
-DataPtr.get_entity(self, of = "row")
-Dataset.__init__(self, name, features_dim = 0, normalize = False, target_transform = "")
-Dataset.generate_train_test_data(self, data, test_ratio = 0.3)
-Dataset.normalize(self)
-Dataset.reduce_dims(self)
-ML_100K.__init__(self, **kwargs)
-ML_100K._load_item_features(self, path)
-ML_100K._load_user_features(self, path)
-ML_100K._read_from_file(self, path)
-ML_100K.df2coo(self, df)
-ML_100K.load_data(self, path)
-
-
-utilmy/recs/recommenders/models/geoimc/geoimc_predict.py
--------------------------methods----------------------
-Inferer.__init__(self, method = "dot", k = 10, transformation = "")
-Inferer._get_method(self, k)
-Inferer.infer(self, dataPtr, W, **kwargs)
-PlainScalarProduct.__init__(self, X, Y, **kwargs)
-PlainScalarProduct.sim(self, **kwargs)
-
-
-utilmy/recs/recommenders/models/geoimc/geoimc_utils.py
--------------------------functions----------------------
-length_normalize(matrix)
-mean_center(matrix)
-reduce_dims(matrix, target_dim)
-
-
-
-utilmy/recs/recommenders/models/lightfm/__init__.py
-
-
-utilmy/recs/recommenders/models/lightfm/lightfm_utils.py
--------------------------functions----------------------
-compare_metric(df_list, metric = "prec", stage = "test")
-model_perf_plots(df)
-prepare_all_predictions(data, uid_map, iid_map, interactions, model, num_threads, user_features = None, item_features = None, )
-prepare_test_df(test_idx, uids, iids, uid_map, iid_map, weights)
-similar_items(item_id, item_features, model, N = 10)
-similar_users(user_id, user_features, model, N = 10)
-track_model_metrics(model, train_interactions, test_interactions, k = 10, no_epochs = 100, no_threads = 8, show_plot = True, **kwargs)
-
-
-
-utilmy/recs/recommenders/models/lightgbm/__init__.py
-
-
-utilmy/recs/recommenders/models/lightgbm/lightgbm_utils.py
--------------------------functions----------------------
-unpackbits(x, num_bits)
-
--------------------------methods----------------------
-NumEncoder.__init__(self, cate_cols, nume_cols, label_col, threshold = 10, thresrate = 0.99)
-NumEncoder.fit_transform(self, df)
-NumEncoder.transform(self, df)
-
-
-utilmy/recs/recommenders/models/ncf/__init__.py
-
-
-utilmy/recs/recommenders/models/ncf/dataset.py
--------------------------methods----------------------
-Dataset.__init__(self, train, test = None, n_neg = 4, n_neg_test = 100, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, binary = True, seed = None, )
-Dataset._data_processing(self, train, test, binary)
-Dataset._init_test_data(self)
-Dataset._init_train_data(self)
-Dataset._reindex(self, df, binary)
-Dataset.negative_sampling(self)
-Dataset.test_loader(self)
-Dataset.train_loader(self, batch_size, shuffle = True)
-
-
-utilmy/recs/recommenders/models/ncf/ncf_singlenode.py
--------------------------methods----------------------
-NCF.__init__(self, n_users, n_items, model_type = "NeuMF", n_factors = 8, layer_sizes = [16, 8, 4], n_epochs = 50, batch_size = 64, learning_rate = 5e-3, verbose = 1, seed = None, )
-NCF._create_model(self, )
-NCF._load_neumf(self, gmf_dir, mlp_dir, alpha)
-NCF._predict(self, user_input, item_input)
-NCF.fit(self, data)
-NCF.load(self, gmf_dir = None, mlp_dir = None, neumf_dir = None, alpha = 0.5)
-NCF.predict(self, user_input, item_input, is_list = False)
-NCF.save(self, dir_name)
-
-
-utilmy/recs/recommenders/models/newsrec/__init__.py
-
-
-utilmy/recs/recommenders/models/newsrec/newsrec_utils.py
--------------------------functions----------------------
-check_nn_config(f_config)
-check_type(config)
-create_hparams(flags)
-get_mind_data_set(type)
-newsample(news, ratio)
-prepare_hparams(yaml_file = None, **kwargs)
-word_tokenize(sent)
-
-
-
-utilmy/recs/recommenders/models/rbm/__init__.py
-
-
-utilmy/recs/recommenders/models/rbm/rbm.py
--------------------------methods----------------------
-RBM.__init__(self, hidden_units = 500, keep_prob = 0.7, init_stdv = 0.1, learning_rate = 0.004, minibatch_size = 100, training_epoch = 20, display_epoch = 10, sampling_protocol = [50, 70, 80, 90, 100], debug = False, with_metrics = False, seed = 42, )
-RBM.accuracy(self, vp)
-RBM.batch_training(self, num_minibatches)
-RBM.binomial_sampling(self, pr)
-RBM.data_pipeline(self)
-RBM.display_metrics(self, Rmse_train, precision_train, precision_test)
-RBM.eval_out(self)
-RBM.fit(self, xtr, xtst)
-RBM.free_energy(self, x)
-RBM.generate_graph(self)
-RBM.gibbs_protocol(self, i)
-RBM.gibbs_sampling(self)
-RBM.init_gpu(self)
-RBM.init_metrics(self)
-RBM.init_parameters(self)
-RBM.init_training_session(self, xtr)
-RBM.losses(self, vv)
-RBM.multinomial_distribution(self, phi)
-RBM.multinomial_sampling(self, pr)
-RBM.placeholder(self)
-RBM.predict(self, x, maps)
-RBM.recommend_k_items(self, x, top_k = 10, remove_seen = True)
-RBM.rmse(self, vp)
-RBM.sample_hidden_units(self, vv)
-RBM.sample_visible_units(self, h)
-RBM.time(self)
-RBM.train_test_precision(self, xtst)
-
-
-utilmy/recs/recommenders/models/rlrmc/RLRMCalgorithm.py
--------------------------methods----------------------
-RLRMCalgorithm.__init__(self, rank, C, model_param, initialize_flag = "random", max_time = 1000, maxiter = 100, seed = 42, )
-RLRMCalgorithm._computeLoss_csrmatrix(a, b, cd, indices, indptr, residual_global)
-RLRMCalgorithm._cost(self, weights, entries_train_csr_data, entries_train_csr_indices, entries_train_csr_indptr, residual_global, )
-RLRMCalgorithm._egrad(self, weights, entries_train_csr_indices, entries_train_csr_indptr, residual_global, )
-RLRMCalgorithm._init_train(self, entries_train_csr)
-RLRMCalgorithm._my_stats(self, weights, given_stats, stats, residual_global, entries_validation_csr_data = None, entries_validation_csr_indices = None, entries_validation_csr_indptr = None, residual_validation_global = None, )
-RLRMCalgorithm.fit(self, RLRMCdata, verbosity = 0)
-RLRMCalgorithm.fit_and_evaluate(self, RLRMCdata, verbosity = 0)
-RLRMCalgorithm.predict(self, user_input, item_input, low_memory = False)
-
-
-utilmy/recs/recommenders/models/rlrmc/RLRMCdataset.py
--------------------------methods----------------------
-RLRMCdataset.__init__(self, train, validation = None, test = None, mean_center = True, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
-RLRMCdataset._data_processing(self, train, validation = None, test = None, mean_center = True)
-RLRMCdataset._reindex(self, df)
-
-
-utilmy/recs/recommenders/models/rlrmc/__init__.py
-
-
-utilmy/recs/recommenders/models/rlrmc/conjugate_gradient_ms.py
--------------------------methods----------------------
-ConjugateGradientMS.__init__(self, beta_type = BetaTypes.HestenesStiefel, orth_value = np.inf, linesearch = None, *args, **kwargs)
-ConjugateGradientMS.solve(self, problem, x = None, reuselinesearch = False, compute_stats = None)
-
-
-utilmy/recs/recommenders/models/sar/__init__.py
-
-
-utilmy/recs/recommenders/models/sar/sar_singlenode.py
--------------------------methods----------------------
-SARSingleNode.__init__(self, col_user = constants.DEFAULT_USER_COL, col_item = constants.DEFAULT_ITEM_COL, col_rating = constants.DEFAULT_RATING_COL, col_timestamp = constants.DEFAULT_TIMESTAMP_COL, col_prediction = constants.DEFAULT_PREDICTION_COL, similarity_type = JACCARD, time_decay_coefficient = 30, time_now = None, timedecay_formula = False, threshold = 1, normalize = False, )
-SARSingleNode.compute_affinity_matrix(self, df, rating_col)
-SARSingleNode.compute_coocurrence_matrix(self, df)
-SARSingleNode.compute_time_decay(self, df, decay_column)
-SARSingleNode.fit(self, df)
-SARSingleNode.get_item_based_topk(self, items, top_k = 10, sort_top_k = True)
-SARSingleNode.get_popularity_based_topk(self, top_k = 10, sort_top_k = True)
-SARSingleNode.predict(self, test)
-SARSingleNode.recommend_k_items(self, test, top_k = 10, sort_top_k = True, remove_seen = False)
-SARSingleNode.score(self, test, remove_seen = False)
-SARSingleNode.set_index(self, df)
-
-
-utilmy/recs/recommenders/models/surprise/__init__.py
-
-
-utilmy/recs/recommenders/models/surprise/surprise_utils.py
--------------------------functions----------------------
-compute_ranking_predictions(algo, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, remove_seen = False, )
-predict(algo, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, )
-surprise_trainset_to_df(trainset, col_user = "uid", col_item = "iid", col_rating = "rating")
-
-
-
-utilmy/recs/recommenders/models/tfidf/__init__.py
-
-
-utilmy/recs/recommenders/models/tfidf/tfidf_utils.py
--------------------------methods----------------------
-TfidfRecommender.__clean_text(self, text, for_BERT = False, verbose = False)
-TfidfRecommender.__create_full_recommendation_dictionary(self, df_clean)
-TfidfRecommender.__get_single_item_info(self, metadata, rec_id)
-TfidfRecommender.__init__(self, id_col, tokenization_method = "scibert")
-TfidfRecommender.__make_clickable(self, address)
-TfidfRecommender.__organize_results_as_tabular(self, df_clean, k)
-TfidfRecommender.clean_dataframe(self, df, cols_to_clean, new_col_name = "cleaned_text")
-TfidfRecommender.fit(self, tf, vectors_tokenized)
-TfidfRecommender.get_stop_words(self)
-TfidfRecommender.get_tokens(self)
-TfidfRecommender.get_top_k_recommendations(self, metadata, query_id, cols_to_keep = [], verbose = True)
-TfidfRecommender.recommend_top_k_items(self, df_clean, k = 5)
-TfidfRecommender.tokenize_text(1, 3), min_df = 0)
-
-
-utilmy/recs/recommenders/models/vae/__init__.py
-
-
-utilmy/recs/recommenders/models/vae/multinomial_vae.py
--------------------------methods----------------------
-AnnealingCallback.__init__(self, beta, anneal_cap, total_anneal_steps)
-AnnealingCallback.get_data(self)
-AnnealingCallback.on_batch_end(self, epoch, logs = {})
-AnnealingCallback.on_epoch_end(self, epoch, logs = {})
-AnnealingCallback.on_train_begin(self, logs = {})
-LossHistory.on_epoch_end(self, epoch, logs = {})
-LossHistory.on_train_begin(self, logs = {})
-Metrics.__init__(self, model, val_tr, val_te, mapper, k, save_path = None)
-Metrics.get_data(self)
-Metrics.on_epoch_end(self, batch, logs = {})
-Metrics.on_train_begin(self, logs = {})
-Metrics.recommend_k_items(self, x, k, remove_seen = True)
-Mult_VAE.__init__(self, n_users, original_dim, intermediate_dim = 200, latent_dim = 70, n_epochs = 400, batch_size = 100, k = 100, verbose = 1, drop_encoder = 0.5, drop_decoder = 0.5, beta = 1.0, annealing = False, anneal_cap = 1.0, seed = None, save_path = None, )
-Mult_VAE._create_model(self)
-Mult_VAE._get_vae_loss(self, x, x_bar)
-Mult_VAE._take_sample(self, args)
-Mult_VAE.display_metrics(self)
-Mult_VAE.fit(self, x_train, x_valid, x_val_tr, x_val_te, mapper)
-Mult_VAE.get_optimal_beta(self)
-Mult_VAE.ndcg_per_epoch(self)
-Mult_VAE.nn_batch_generator(self, x_train)
-Mult_VAE.recommend_k_items(self, x, k, remove_seen = True)
-
-
-utilmy/recs/recommenders/models/vae/standard_vae.py
--------------------------methods----------------------
-AnnealingCallback.__init__(self, beta, anneal_cap, total_anneal_steps)
-AnnealingCallback.get_data(self)
-AnnealingCallback.on_batch_end(self, epoch, logs = {})
-AnnealingCallback.on_epoch_end(self, epoch, logs = {})
-AnnealingCallback.on_train_begin(self, logs = {})
-LossHistory.on_epoch_end(self, epoch, logs = {})
-LossHistory.on_train_begin(self, logs = {})
-Metrics.__init__(self, model, val_tr, val_te, mapper, k, save_path = None)
-Metrics.get_data(self)
-Metrics.on_epoch_end(self, batch, logs = {})
-Metrics.on_train_begin(self, logs = {})
-Metrics.recommend_k_items(self, x, k, remove_seen = True)
-StandardVAE.__init__(self, n_users, original_dim, intermediate_dim = 200, latent_dim = 70, n_epochs = 400, batch_size = 100, k = 100, verbose = 1, drop_encoder = 0.5, drop_decoder = 0.5, beta = 1.0, annealing = False, anneal_cap = 1.0, seed = None, save_path = None, )
-StandardVAE._create_model(self)
-StandardVAE._get_vae_loss(self, x, x_bar)
-StandardVAE._take_sample(self, args)
-StandardVAE.display_metrics(self)
-StandardVAE.fit(self, x_train, x_valid, x_val_tr, x_val_te, mapper)
-StandardVAE.get_optimal_beta(self)
-StandardVAE.ndcg_per_epoch(self)
-StandardVAE.nn_batch_generator(self, x_train)
-StandardVAE.recommend_k_items(self, x, k, remove_seen = True)
-
-
-utilmy/recs/recommenders/models/vowpal_wabbit/__init__.py
-
-
-utilmy/recs/recommenders/models/vowpal_wabbit/vw.py
--------------------------methods----------------------
-VW.__del__(self)
-VW.__init__(self, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, col_prediction = DEFAULT_PREDICTION_COL, **kwargs, )
-VW.fit(self, df)
-VW.parse_test_params(self, params)
-VW.parse_train_params(self, params)
-VW.predict(self, df)
-VW.to_vw_cmd(params)
-VW.to_vw_file(self, df, train = True)
-
-
-utilmy/recs/recommenders/models/wide_deep/__init__.py
-
-
-utilmy/recs/recommenders/models/wide_deep/wide_deep_utils.py
--------------------------functions----------------------
-_build_deep_columns(user_ids, item_ids, user_dim, item_dim, item_feat_col = None, item_feat_shape = 1)
-_build_wide_columns(user_ids, item_ids, hash_bucket_size = 1000)
-build_feature_columns(users, items, user_col = DEFAULT_USER_COL, item_col = DEFAULT_ITEM_COL, item_feat_col = None, crossed_feat_dim = 1000, user_dim = 8, item_dim = 8, item_feat_shape = None, model_type = "wide_deep", )
-build_model(model_dir = MODEL_DIR, ), ), linear_optimizer = "Ftrl", dnn_optimizer = "Adagrad", 128, 128), dnn_dropout = 0.0, dnn_batch_norm = True, log_every_n_iter = 1000, save_checkpoints_steps = 10000, seed = None, )
-
-
-
-utilmy/recs/recommenders/tuning/__init__.py
-
-
-utilmy/recs/recommenders/tuning/nni/__init__.py
-
-
-utilmy/recs/recommenders/tuning/nni/ncf_training.py
--------------------------functions----------------------
-_update_metrics(metrics_dict, metric, params, result)
-get_params()
-main(params)
-ncf_training(params)
-
-
-
-utilmy/recs/recommenders/tuning/nni/ncf_utils.py
--------------------------functions----------------------
-combine_metrics_dicts(*metrics)
-compute_test_results(model, train, test, rating_metrics, ranking_metrics)
-
-
-
-utilmy/recs/recommenders/tuning/nni/nni_utils.py
--------------------------functions----------------------
-check_experiment_status(wait = WAITING_TIME, max_retries = MAX_RETRIES)
-check_metrics_written(wait = WAITING_TIME, max_retries = MAX_RETRIES)
-check_stopped(wait = WAITING_TIME, max_retries = MAX_RETRIES)
-get_experiment_status(status_url = NNI_STATUS_URL)
-get_trials(optimize_mode)
-start_nni(config_path, wait = WAITING_TIME, max_retries = MAX_RETRIES)
-stop_nni()
-
-
-
-utilmy/recs/recommenders/tuning/nni/svd_training.py
--------------------------functions----------------------
-get_params()
-main(params)
-svd_training(params)
-
-
-
-utilmy/recs/recommenders/tuning/parameter_sweep.py
--------------------------functions----------------------
-generate_param_grid(params)
-
-
-
-utilmy/recs/recommenders/utils/__init__.py
-
-
-utilmy/recs/recommenders/utils/constants.py
-
-
-utilmy/recs/recommenders/utils/general_utils.py
--------------------------functions----------------------
-get_number_processors()
-get_physical_memory()
-invert_dictionary(dictionary)
-
-
-
-utilmy/recs/recommenders/utils/gpu_utils.py
--------------------------functions----------------------
-clear_memory_all_gpus()
-get_cuda_version(unix_path = DEFAULT_CUDA_PATH_LINUX)
-get_cudnn_version()
-get_gpu_info()
-get_number_gpus()
-
-
-
-utilmy/recs/recommenders/utils/k8s_utils.py
--------------------------functions----------------------
-nodes_to_replicas(n_cores_per_node, n_nodes = 3, cpu_cores_per_replica = 0.1)
-qps_to_replicas(target_qps, processing_time, max_qp_replica = 1, target_utilization = 0.7)
-replicas_to_qps(num_replicas, processing_time, max_qp_replica = 1, target_utilization = 0.7)
-
-
-
-utilmy/recs/recommenders/utils/notebook_memory_management.py
--------------------------functions----------------------
-pre_run_cell()
-start_watching_memory()
-stop_watching_memory()
-watch_memory()
-
-
-
-utilmy/recs/recommenders/utils/notebook_utils.py
--------------------------functions----------------------
-is_databricks()
-is_jupyter()
-
-
-
-utilmy/recs/recommenders/utils/plot.py
--------------------------functions----------------------
-line_graph(values, labels, x_guides = None, x_name = None, y_name = None, x_min_max = None, y_min_max = None, legend_loc = None, subplot = None, 5, 5), )
-
-
-
-utilmy/recs/recommenders/utils/python_utils.py
--------------------------functions----------------------
-binarize(a, threshold)
-exponential_decay(value, max_val, half_life)
-get_top_k_scored_items(scores, top_k, sort_top_k = False)
-jaccard(cooccurrence)
-lift(cooccurrence)
-rescale(data, new_min = 0, new_max = 1, data_min = None, data_max = None)
-
-
-
-utilmy/recs/recommenders/utils/spark_utils.py
--------------------------functions----------------------
-start_or_get_spark(app_name = "Sample", url = "local[*]", memory = "10g", config = None, packages = None, jars = None, repository = None, )
-
-
-
-utilmy/recs/recommenders/utils/tf_utils.py
--------------------------functions----------------------
-_dataset(x, y = None, batch_size = 128, num_epochs = 1, shuffle = False, seed = None)
-build_optimizer(name, lr = 0.001, **kwargs)
-evaluation_log_hook(estimator, logger, true_df, y_col, eval_df, every_n_iter = 10000, model_dir = None, batch_size = 256, eval_fns = None, **eval_kwargs)
-export_model(model, train_input_fn, eval_input_fn, tf_feat_cols, base_dir)
-pandas_input_fn(df, feat_name_type)
-pandas_input_fn_for_saved_model(df, feat_name_type)
-
--------------------------methods----------------------
-MetricsLogger.__init__(self)
-MetricsLogger.get_log(self)
-MetricsLogger.log(self, metric, value)
-_TrainLogHook.__init__(self, estimator, logger, true_df, y_col, eval_df, every_n_iter = 10000, model_dir = None, batch_size = 256, eval_fns = None, **eval_kwargs)
-_TrainLogHook._log(self, tag, value)
-_TrainLogHook.after_run(self, run_context, run_values)
-_TrainLogHook.before_run(self, run_context)
-_TrainLogHook.begin(self)
-_TrainLogHook.end(self, session)
-
-
-utilmy/recs/recommenders/utils/timer.py
--------------------------methods----------------------
-Timer.__enter__(self)
-Timer.__exit__(self, *args)
-Timer.__init__(self)
-Timer.__str__(self)
-Timer.interval(self)
-Timer.start(self)
-Timer.stop(self)
-
-
-utilmy/recs/setup.py
-
-
-utilmy/recs/tests/__init__.py
-
-
-utilmy/recs/tests/ci/run_pytest.py
--------------------------functions----------------------
-create_arg_parser()
-
-
-
-utilmy/recs/tests/ci/submit_azureml_pytest.py
--------------------------functions----------------------
-create_arg_parser()
-create_experiment(workspace, experiment_name)
-create_run_config(cpu_cluster, docker_proc_type, conda_env_file)
-setup_persistent_compute_target(workspace, cluster_name, vm_size, max_nodes)
-setup_workspace(workspace_name, subscription_id, resource_group, cli_auth, location)
-submit_experiment_to_azureml(test, test_folder, test_markers, junitxml, run_config, experiment)
-
-
-
-utilmy/recs/tests/conftest.py
--------------------------functions----------------------
-affinity_matrix(test_specs)
-criteo_first_row()
-deeprec_config_path()
-deeprec_resource_path()
-demo_usage_data(header, sar_settings)
-demo_usage_data_spark(spark, demo_usage_data, header)
-header()
-kernel_name()
-mind_resource_path(deeprec_resource_path)
-notebooks()
-output_notebook()
-pandas_dummy(header)
-pandas_dummy_timestamp(pandas_dummy, header)
-path_notebooks()
-python_dataset_ncf(test_specs_ncf)
-sar_settings()
-spark(tmp_path_factory, app_name = "Sample", url = "local[*]")
-test_specs()
-test_specs_ncf()
-tmp(tmp_path_factory)
-train_test_dummy_timestamp(pandas_dummy_timestamp)
-
-
-
-utilmy/recs/tests/integration/__init__.py
-
-
-utilmy/recs/tests/integration/examples/__init__.py
-
-
-utilmy/recs/tests/integration/examples/test_notebooks_gpu.py
--------------------------functions----------------------
-test_cornac_bivae_integration(notebooks, output_notebook, kernel_name, size, expected_values)
-test_dkn_quickstart_integration(notebooks, output_notebook, kernel_name)
-test_fastai_integration(notebooks, output_notebook, kernel_name, size, epochs, expected_values)
-test_gpu_vm()
-test_lightgcn_deep_dive_integration(notebooks, output_notebook, kernel_name, yaml_file, data_path, size, epochs, batch_size, expected_values, seed, )
-test_lstur_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
-test_naml_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
-test_ncf_deep_dive_integration(notebooks, output_notebook, kernel_name, size, epochs, batch_size, expected_values, seed, )
-test_ncf_integration(notebooks, output_notebook, kernel_name, size, epochs, expected_values, seed)
-test_npa_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
-test_nrms_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
-test_slirec_quickstart_integration(notebooks, output_notebook, kernel_name, yaml_file, data_path, epochs, batch_size, expected_values, seed, )
-test_wide_deep_integration(notebooks, output_notebook, kernel_name, size, steps, expected_values, seed, tmp)
-test_xdeepfm_integration(notebooks, output_notebook, kernel_name, syn_epochs, criteo_epochs, expected_values, seed, )
-
-
-
-utilmy/recs/tests/integration/examples/test_notebooks_pyspark.py
--------------------------functions----------------------
-test_als_pyspark_integration(notebooks, output_notebook, kernel_name)
-test_mmlspark_lightgbm_criteo_integration(notebooks, output_notebook, kernel_name)
-
-
-
-utilmy/recs/tests/integration/examples/test_notebooks_python.py
--------------------------functions----------------------
-test_baseline_deep_dive_integration(notebooks, output_notebook, kernel_name, size, expected_values)
-test_cornac_bpr_integration(notebooks, output_notebook, kernel_name, size, expected_values)
-test_geoimc_integration(notebooks, output_notebook, kernel_name, expected_values)
-test_nni_tuning_svd(notebooks, output_notebook, kernel_name, tmp)
-test_sar_single_node_integration(notebooks, output_notebook, kernel_name, size, expected_values)
-test_surprise_svd_integration(notebooks, output_notebook, kernel_name, size, expected_values)
-test_vw_deep_dive_integration(notebooks, output_notebook, kernel_name, size, expected_values)
-test_wikidata_integration(notebooks, output_notebook, kernel_name, tmp)
-test_xlearn_fm_integration(notebooks, output_notebook, kernel_name)
-
-
-
-utilmy/recs/tests/integration/recommenders/__init__.py
-
-
-utilmy/recs/tests/smoke/__init__.py
-
-
-utilmy/recs/tests/smoke/examples/__init__.py
-
-
-utilmy/recs/tests/smoke/examples/test_notebooks_gpu.py
--------------------------functions----------------------
-test_cornac_bivae_smoke(notebooks, output_notebook, kernel_name)
-test_fastai_smoke(notebooks, output_notebook, kernel_name)
-test_gpu_vm()
-test_lstur_smoke(notebooks, output_notebook, kernel_name)
-test_naml_smoke(notebooks, output_notebook, kernel_name)
-test_ncf_deep_dive_smoke(notebooks, output_notebook, kernel_name)
-test_ncf_smoke(notebooks, output_notebook, kernel_name)
-test_npa_smoke(notebooks, output_notebook, kernel_name)
-test_nrms_smoke(notebooks, output_notebook, kernel_name)
-test_wide_deep_smoke(notebooks, output_notebook, kernel_name, tmp)
-test_xdeepfm_smoke(notebooks, output_notebook, kernel_name)
-
-
-
-utilmy/recs/tests/smoke/examples/test_notebooks_pyspark.py
--------------------------functions----------------------
-test_als_pyspark_smoke(notebooks, output_notebook, kernel_name)
-test_mmlspark_lightgbm_criteo_smoke(notebooks, output_notebook, kernel_name)
-
-
-
-utilmy/recs/tests/smoke/examples/test_notebooks_python.py
--------------------------functions----------------------
-test_baseline_deep_dive_smoke(notebooks, output_notebook, kernel_name)
-test_cornac_bpr_smoke(notebooks, output_notebook, kernel_name)
-test_lightgbm_quickstart_smoke(notebooks, output_notebook, kernel_name)
-test_mind_utils(notebooks, output_notebook, kernel_name, tmp)
-test_sar_single_node_smoke(notebooks, output_notebook, kernel_name)
-test_surprise_svd_smoke(notebooks, output_notebook, kernel_name)
-test_vw_deep_dive_smoke(notebooks, output_notebook, kernel_name)
-
-
-
-utilmy/recs/tests/smoke/recommenders/__init__.py
-
-
-utilmy/recs/tests/unit/__init__.py
-
-
-utilmy/recs/tests/unit/examples/__init__.py
-
-
-utilmy/recs/tests/unit/examples/test_notebooks_gpu.py
--------------------------functions----------------------
-test_dkn_quickstart(notebooks, output_notebook, kernel_name)
-test_fastai(notebooks, output_notebook, kernel_name)
-test_gpu_vm()
-test_ncf(notebooks, output_notebook, kernel_name)
-test_ncf_deep_dive(notebooks, output_notebook, kernel_name)
-test_wide_deep(notebooks, output_notebook, kernel_name, tmp)
-test_xdeepfm(notebooks, output_notebook, kernel_name)
-
-
-
-utilmy/recs/tests/unit/examples/test_notebooks_pyspark.py
--------------------------functions----------------------
-test_als_deep_dive_runs(notebooks, output_notebook, kernel_name)
-test_als_pyspark_runs(notebooks, output_notebook, kernel_name)
-test_data_split_runs(notebooks, output_notebook, kernel_name)
-test_evaluation_diversity_runs(notebooks, output_notebook, kernel_name)
-test_evaluation_runs(notebooks, output_notebook, kernel_name)
-test_mmlspark_lightgbm_criteo_runs(notebooks, output_notebook, kernel_name)
-test_spark_tuning(notebooks, output_notebook, kernel_name)
-
-
-
-utilmy/recs/tests/unit/examples/test_notebooks_python.py
--------------------------functions----------------------
-test_baseline_deep_dive_runs(notebooks, output_notebook, kernel_name)
-test_cornac_deep_dive_runs(notebooks, output_notebook, kernel_name)
-test_lightgbm(notebooks, output_notebook, kernel_name)
-test_rlrmc_quickstart_runs(notebooks, output_notebook, kernel_name)
-test_sar_deep_dive_runs(notebooks, output_notebook, kernel_name)
-test_sar_single_node_runs(notebooks, output_notebook, kernel_name)
-test_surprise_deep_dive_runs(notebooks, output_notebook, kernel_name)
-test_template_runs(notebooks, output_notebook, kernel_name)
-test_vw_deep_dive_runs(notebooks, output_notebook, kernel_name)
-test_wikidata_runs(notebooks, output_notebook, kernel_name, tmp)
-
-
-
-utilmy/recs/tests/unit/recommenders/__init__.py
-
-
-utilmy/recs/tools/__init__.py
-
-
-utilmy/recs/tools/databricks_install.py
--------------------------functions----------------------
-create_egg(), local_eggname = "Recommenders.egg", overwrite = False, )
-dbfs_file_exists(api_client, dbfs_path)
-prepare_for_operationalization(cluster_id, api_client, dbfs_path, overwrite, spark_version)
-
-
-
-utilmy/recs/tools/generate_conda_file.py
-
-
-utilmy/recs/tools/generate_requirements_txt.py
+dict2.__init__(self, d)
 
 
 utilmy/spark/main.py
@@ -2561,2995 +1574,6 @@ utilmy/viz/zarchive/__init__.py
 utilmy/viz/zarchive/toptoolbar.py
 -------------------------methods----------------------
 TopToolbar.__init__(self)
-
-
-utilmy/zarchive/_HELP.py
--------------------------functions----------------------
-fun_cython(a)
-fun_python(a)
-os_VS_build(self, lib_to_build)
-os_VS_start(self, version)
-os_compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
-set_rc_version(rcfile, target_version)
-
-
-
-utilmy/zarchive/__init__.py
-
-
-utilmy/zarchive/alldata.py
-
-
-utilmy/zarchive/allmodule.py
--------------------------functions----------------------
-pprint(table1, tablefmt = "simple")
-pprint2(x)
-str_convert_beforeprint(x)
-str_to_unicode(x, encoding = 'utf-8')
-str_to_utf8(x)
-
-
-
-utilmy/zarchive/allmodule_fin.py
-
-
-utilmy/zarchive/coke_functions.py
--------------------------functions----------------------
-date_diffend(t)
-date_diffsecond(str_t1, str_t0, fmt='YYYY-MM-DD HH = 'YYYY-MM-DD HH:mm:SS')
-date_diffstart(t)
-day(s)
-daytime(d)
-hour(s)
-month(s)
-np_dict_tolist(dd)
-np_dict_tostr_key(dd)
-np_dict_tostr_val(dd)
-pd_date_splitall(df, coldate = 'purchased_at')
-season(d)
-weekday(s, fmt = 'YYYY-MM-DD', i0 = 0, i1 = 10)
-year(s)
-
-
-
-utilmy/zarchive/datanalysis.py
--------------------------functions----------------------
-col_feature_importance(Xcol, Ytarget)
-col_pair_correl(Xcol, Ytarget)
-col_pair_interaction(Xcol, Ytarget)
-col_study_getcategorydict_freq(catedict)
-col_study_summary(Xmat = [0.0, 0.0], Xcolname = ['col1', 'col2'], Xcolselect = [9, 9], isprint = 0)
-csv_analysis()
-csv_bigcompute()
-csv_col_get_dict_categoryfreq(dircsv, filepattern = "*.csv", category_cols = [], maxline = -1, fileencoding = "utf-8")
-csv_col_schema_toexcel(dircsv = "", filepattern = '*.csv', outfile = '.xlsx', returntable = 1, maxrow = 5000000, maxcol_pertable = 90, maxstrlen = 'U80')
-csv_dtypes_getdict(df = None, csvfile = None)
-csv_fast_processing()
-csv_pivotable(dircsv = "", filepattern = '*.csv', fileh5 = '.h5', leftX = 'col0', topY = 'col2', centerZ = 'coli', mapreduce = 'sum', chunksize =  500000, tablename = 'df')
-csv_row_mapreduce(dircsv = "", outfile = "", type_mapreduce = 'sum', nrow = 1000000, chunk =  5000000)
-csv_row_reduce_line(fromfile, tofile, condfilter, catval_tokeep, header = True, maxline = -1)
-csv_row_reduce_line_manual(file_category, file_transact, file_reduced)
-db_getdata()
-db_meta_add(metadb, dbname, new_table = ('', [])
-db_meta_find(ALLDB, query = '', filter_db = [], filter_table = [], filter_column = [])
-db_sql()
-isnull(x)
-optim_is_pareto_efficient(Xmat_cost, epsilon =  0.01, ret_boolean = 1)
-pd_checkpoint()
-pd_col_pair_plot(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
-pd_col_study_distribution_show(df, col_include = None, col_exclude = None, pars={'binsize' = {'binsize':20})
-pd_describe(df)
-pd_filter_column(df_client_product, filter_val = [], iscol = 1)
-pd_missing_show()
-pd_stack_dflist(df_list)
-pd_validation_struct()
-plot_XY(xx, yy, zcolor = None, tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
-plot_XY_plotly(xx, yy, towhere = 'url')
-plot_XY_seaborn(X, Y, Zcolor = None)
-plot_Y(Yval, typeplot = '.b', tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
-plot_cluster_2D(X_2dim, target_class, target_names)
-plot_cluster_hiearchy(Xmat_dist, p = 30, truncate_mode = None, color_threshold = None, get_leaves = True, orientation = 'top', labels = None, count_sort = False, distance_sort = False, show_leaf_counts = True, do_plot = 1, no_labels = False, leaf_font_size = None, leaf_rotation = None, leaf_label_func = None, show_contracted = False, link_color_func = None, ax = None, above_threshold_color = 'b', annotate_above = 0)
-plot_cluster_pca(Xmat, Xcluster_label = None, metric = 'euclidean', dimpca = 2, whiten = True, isprecompute = False, savefile = '', doreturn = 1)
-plot_cluster_tsne(Xmat, Xcluster_label = None, metric = 'euclidean', perplexity = 50, ncomponent = 2, savefile = '', isprecompute = False, returnval = True)
-plot_col_pair(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
-plot_distance_heatmap(Xmat_dist, Xcolname)
-plot_distribution_density(Xsample, kernel = 'gaussian', N = 10, bandwith = 1 / 10.0)
-sk_catboost_classifier(Xtrain, Ytrain, Xcolname = None, pars= {"learning_rate" =  {"learning_rate":0.1, "iterations":1000, "random_seed":0, "loss_function": "MultiClass" }, isprint = 0)
-sk_catboost_regressor()
-sk_cluster(Xmat, metric = 'jaccard')
-sk_cluster_algo_custom(Xmat, algorithm, args, kwds, returnval = 1)
-sk_cluster_distance_pair(Xmat, metric = 'jaccard')
-sk_correl_rank(correl = [[1, 0], [0, 1]])
-sk_distribution_kernel_bestbandwidth(kde)
-sk_distribution_kernel_sample(kde = None, n = 1)
-sk_error_r2(Ypred, y_true, sample_weight = None, multioutput = None)
-sk_error_rmse(Ypred, Ytrue)
-sk_feature_importance(clfrf, feature_name)
-sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
-sk_model_auto_tpot(Xmat, y, outfolder = 'aaserialize/', model_type = 'regressor/classifier', train_size = 0.5, generation = 1, population_size = 5, verbosity = 2)
-sk_optim_de(obj_fun, bounds, maxiter = 1, name1 = '', solver1 = None, isreset = 1, popsize = 15)
-sk_params_search_best(Xmat, Ytarget, model1, param_grid={'alpha' = {'alpha':  np.linspace(0, 1, 5) }, method = 'gridsearch', param_search= {'scoretype' =  {'scoretype':'r2', 'cv':5, 'population_size':5, 'generations_number':3 })
-sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
-sk_tree(Xtrain, Ytrain, nbtree, maxdepth, isprint1 = 1, njobs = 1)
-sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
-sk_votingpredict(estimators, voting, ww, X_test)
-str_to_unicode(x, encoding = 'utf-8')
-tf_transform_catlabel_toint(Xmat)
-tf_transform_pca(Xmat, dimpca = 2, whiten = True)
-xl_get_rowcol(ws, i0, j0, imax, jmax)
-xl_getschema(dirxl = "", filepattern = '*.xlsx', dirlevel = 1, outfile = '.xlsx')
-xl_setstyle(file1)
-xl_val(ws, colj, rowi)
-
--------------------------methods----------------------
-sk_model_template1.__init__(self, alpha = 0.5, low_y_cut = -0.09, high_y_cut = 0.09, ww0 = 0.95)
-sk_model_template1.fit(self, X, Y = None)
-sk_model_template1.predict(self, X, y = None, ymedian = None)
-sk_model_template1.score(self, X, Ytrue = None, ymedian = None)
-sk_stateRule.__init__(self, state, trigger, colname = [])
-sk_stateRule.addrule(self, rulefun, name = '', desc = '')
-sk_stateRule.eval(self, idrule, t, ktrig = 0)
-sk_stateRule.help()
-
-
-utilmy/zarchive/excel.py
--------------------------functions----------------------
-add_one(data)
-double_sum(x, y)
-get_workbook_name()
-matrix_mult(x, y)
-npdot()
-
-
-
-utilmy/zarchive/fast.py
--------------------------functions----------------------
-_compute_overlaps(u, v)
-cosine(u, v)
-cross(vec1, vec2)
-day(s)
-daytime(d)
-distance_jaccard(u, v)
-distance_jaccard2(u, v)
-distance_jaccard_X(X)
-drawdown_calc_fast(price)
-fastStrptime(val, format)
-hour(s)
-log_exp_sum2(a, b)
-mean(x)
-month(s)
-norm(vec)
-rmse(y, yhat)
-season(d)
-std(x)
-weekday(s)
-year(s)
-
-
-
-utilmy/zarchive/fast_parallel.py
--------------------------functions----------------------
-task_find_best(tasks, n_top = 5)
-task_parallel_job_01(name, param, datadict)
-task_progress(tasks)
-task_summary(tasks)
-
-
-
-utilmy/zarchive/filelock.py
--------------------------methods----------------------
-FileLock.__del__(self)
-FileLock.__enter__(self)
-FileLock.__exit__(self, type, value, traceback)
-FileLock.__init__(self, protected_file_path, timeout = None, delay = 1, lock_file_contents = None)
-FileLock.acquire(self, blocking = True)
-FileLock.available(self)
-FileLock.locked(self)
-FileLock.purge(self)
-FileLock.release(self)
-
-
-utilmy/zarchive/function_custom.py
--------------------------functions----------------------
-fun_obj(vv, ext)
-getweight(ww, size = (9, 3)
-mapping_calc_risk_elvis_v03(ss, tr, t, riskout)
-mapping_calc_risk_v00(self, ss, tr, t, risk0)
-mapping_calc_risk_v01(ss, tr, t, risk0)
-mapping_calc_risk_v02(ss, tr, t, risk0)
-mapping_risk_ww_v01(risk, wwmat, ww2)
-
-
-
-utilmy/zarchive/geospatial.py
-
-
-utilmy/zarchive/global01.py
-
-
-utilmy/zarchive/kagglegym.py
--------------------------functions----------------------
-make()
-r_score(y_true, y_pred, sample_weight = None, multioutput = None)
-
--------------------------methods----------------------
-Environment.__init__(self)
-Environment.__str__(self)
-Environment.reset(self)
-Environment.step(self, target)
-Observation.__init__(self, train, target, features)
-
-
-utilmy/zarchive/linux.py
--------------------------functions----------------------
-VS_build(self, lib_to_build)
-VS_start(self, version)
-aa_cleanmemory()
-aa_getmodule_doc(module1, fileout = '')
-aa_isanaconda()
-acf(data)
-and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
-comoment(xx, yy, nsample, kx, ky)
-compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
-date_add_bdays(from_date, add_days)
-date_as_float(dt)
-date_diffindays(intdate1, intdate2)
-date_finddateid(date1, dateref)
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_now(i = 0)
-date_remove_bdays(from_date, add_days)
-datediff_inyear(startdate, enddate)
-dateint_todatetime(datelist1)
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_toint(datelist1)
-datestring_toint(datelist1)
-datetime_toint(datelist1)
-datetime_tostring(datelist1)
-datetime_tostring(datelist1)
-find(item, vec)
-findhigher(x, vec)
-findlower(x, vec)
-finds(itemlist, vec)
-findx(item, vec)
-isfloat(value)
-isint(x)
-load_session(name = 'test_20160815')
-np_cleanmatrix(m)
-np_find(item, vec)
-np_find_maxpos(values)
-np_find_maxpos_2nd(numbers)
-np_find_minpos(values)
-np_findfirst(item, vec)
-np_findlocalmax(v, trig)
-np_findlocalmax2(v, trig)
-np_findlocalmin(v, trig)
-np_findlocalmin2(v, trig)
-np_interpolate_nan(y)
-np_ma(vv, n)
-np_memory_array_adress(x)
-np_remove_zeros(vv, axis1 = 1)
-np_sort(arr, colid, asc = True)
-np_sortbycol(arr, colid, asc = True)
-np_sortbycolumn(arr, colid, asc = True)
-np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
-np_uniquerows(a)
-numexpr_topanda(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-numexpr_vect_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-pd_addcolumn(df1, name1 = 'new')
-pd_array_todataframe(price, symbols = None, date1 = None, dotranspose = False)
-pd_changeencoding(data, cols)
-pd_create_colmap_nametoid(df)
-pd_createdf(val1, col1 = None, idx1 = None)
-pd_csv_topanda(filein1, filename, tablen = 'data')
-pd_dataframe_toarray(df)
-pd_date_intersection(qlist)
-pd_extract_col_idx_val(df)
-pd_getpanda_tonumpy(filename, nsize, tablen = 'data')
-pd_getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
-pd_insertcolumn(df, colname, vec)
-pd_insertrows(df, rowval, index1 = None)
-pd_load_panda2vec(filenameh5, store_id = 'data')
-pd_remove_row(df, row_list_index = [23, 45])
-pd_removecolumn(df1, name1)
-pd_replacevalues(df, matrix)
-pd_resetindex(df)
-pd_save_vectopanda(vv, filenameh5)
-pd_split_col_idx_val(df)
-pd_storeadddf(df, dfname, dbfile='F = 'F:\temp_pandas.h5')
-pd_storedumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
-plotsave(xx, yy, title1 = "")
-plotshow(xx, yy, title1 = "")
-save_session(name = '')
-set_rc_version(rcfile, target_version)
-sk_cluster_kmeans(x, nbcluster = 5, isplot = True)
-sk_featureimportance(clfrf, feature_name)
-sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
-sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
-sk_tree(Xtrain, Ytrain, nbtree, maxdepth, print1)
-sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
-sk_votingpredict(estimators, voting, ww, X_test)
-sort(arr, colid, asc = 1)
-sortcol(arr, colid, asc = 1)
-textvect_topanda(vv, fileout = "")
-
-
-
-utilmy/zarchive/multiprocessfunc.py
--------------------------functions----------------------
-bm_generator(bm, dt, n, type1)
-func(val, lock)
-init2(d)
-init_global1(l, r)
-integratene(its)
-integratenp(its, nchunk)
-integratenp2(its, nchunk)
-list_append(count, id, out_list)
-merge(d2)
-multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky, nbasset, n, price, type1 = 0, strike = 0, cp = 1)
-multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky, nbasset, n, price)
-ne_sin(x)
-np_sin(value)
-parzen_estimation(x_samples, point_x, h)
-res_shared2()
-
-
-
-utilmy/zarchive/multithread.py
--------------------------functions----------------------
-multithread_run(fun_async, input_list:list, n_pool = 5, start_delay = 0.1, verbose = True, **kw)
-multithread_run_list(**kwargs)
-
-
-
-utilmy/zarchive/portfolio.py
--------------------------functions----------------------
-_date_align(dateref, datei, tmax, closei)
-_notnone(x)
-_reshape(x)
-array_todataframe(price, symbols = None, date1 = None)
-calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
-calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
-calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
-causality_y1_y2(price2, price1, maxlag)
-cointegration(x, y)
-correl_fast(xn, y, nx)
-correl_reducebytrigger(correl2, trigger)
-correlation_mat(Xmat, type1 = "robust", type2 = "correl")
-data_jpsector()
-date_align(array1, dateref)
-date_alignfromdateref(array1, dateref)
-date_earningquater(t1)
-date_extract_dailyopenclosetime(spdateref1, market = 'us')
-date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
-date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
-date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
-date_finddateid(date1, dateref)
-date_is_3rdfriday(s)
-date_option_expiry(date)
-datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
-folio_concenfactor2(ww, masset = 12)
-folio_cost_turnover(wwall, bsk, dateref, costbp)
-folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
-folio_fixedunitprice(price, fixedww, costpa = 0.0)
-folio_fixedweightprice(price, fixedww, costpa = 0.0)
-folio_fixedweightret(ret, fixedww)
-folio_histogram(close)
-folio_inverseetf(price, costpa = 0.0)
-folio_leverageetf(price, lev = 1.0, costpa = 0.0)
-folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
-folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
-folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
-folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
-folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
-folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
-folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
-folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
-get(close, timelag)
-getdiff_fromquotes(close, timelag)
-getlogret_fromquotes(close, timelag = 1)
-getprice_fromret(ret, normprice = 100)
-getret_fromquotes(close, timelag = 1)
-isfloat(value)
-isint(x)
-load_asset_fromfile(file1)
-max_withposition(values)
-min_withposition(values)
-norm_fast(y, ny)
-np_distance_l1(x, y, wwerr)
-np_distance_l1(x, y, wwerr)
-np_similarity(x, y, wwerr = [], type1 = 0)
-np_similarity(x, y, wwerr = [], type1 = 0)
-pd_dataframe_toarray(df)
-pd_transform_asset(q0, q1, type1 = "spread")
-plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
-plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
-plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
-plot_priceintraday(data)
-price_normalize100(ret, normprice = 100)
-price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
-reg_slope(close, dateref, tlag, type1 = 'elasticv')
-regression(yreturn, xreturn, type1 = "elasticv")
-regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
-regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
-regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
-rolling_cointegration(x, y)
-rsk_calc_all_TA(df = 'panda_dataframe')
-save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
-similarity_correl(ret_close2, funargs)
-sk_cov_fromcorrel(correl, ret_close1)
-ta_highbandtrend1(close2, type1 = 0)
-volhisto_fromprice(price, t, volrange, axis = 0)
-volhisto_fromret(retbsk, t, volrange, axis = 0)
-volhistorolling_fromprice(price, volrange)
-
--------------------------methods----------------------
-folioCalc.__init__(self, sym, close, dateref)
-folioCalc._regimecalc(self, t, wwextra)
-folioCalc._weightcalc_constant(self, ww2, t)
-folioCalc._weightcalc_generic(self, wwvec, t)
-folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
-folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
-folioCalc.getweight(self)
-folioCalc.help(self)
-folioCalc.multiperiod_ww(self, t)
-folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioCalc.set_symclose(self, sym, close, dateref)
-folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioOptimizationF.__init__(self, sym, close, dateref)
-folioOptimizationF._loss_obj(self, ww2, wwpenalty)
-folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
-folioOptimizationF._objective_criteria(self, bsk)
-folioOptimizationF._regimecalc(self, t, wwextra)
-folioOptimizationF._weightcalc_constant(self, ww2, t)
-folioOptimizationF._weightcalc_generic(self, wwvec, t)
-folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
-folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
-folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioOptimizationF.calcbasket_obj(self, wwvec)
-folioOptimizationF.calcbasket_obj2(self, wwvec)
-folioOptimizationF.getweight(self)
-folioOptimizationF.help(self)
-folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
-folioOptimizationF.multiperiod_ww(self, t)
-folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioOptimizationF.set_symclose(self, sym, close, dateref)
-folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioRiskIndicator.__init__(self, sym, close, dateref)
-folioRiskIndicator._regimecalc(self, t, wwextra)
-folioRiskIndicator._weightcalc_generic(self, wwvec, t)
-folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
-folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
-folioRiskIndicator.set_symclose(self, sym, close, dateref)
-folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-index.__init__(self, id1, sym, ww, tstart)
-index.__init__(self, id1, sym, ww, tstart)
-index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
-index._wwpct_rebal(self, wwpct_actual, t, trebal)
-index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
-index.calc_baskettable_unit()
-index.close(self)
-index.help(self)
-index.updatehisto(self)
-searchSimilarity.__generate_return__(self, nlag)
-searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
-searchSimilarity.__overweight__(self, px)
-searchSimilarity.export_results()
-searchSimilarity.get_rankresult(self, filetosave = '')
-searchSimilarity.launch_search(self)
-searchSimilarity.load_quotes_fromdb(self, picklefile = '')
-searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
-searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
-searchSimilarity.staticmethod(self, x)
-
-
-utilmy/zarchive/portfolio_withdate.py
--------------------------functions----------------------
-_date_align(dateref, datei, tmax, closei)
-_notnone(x)
-_reshape(x)
-array_todataframe(price, symbols = None, date1 = None)
-calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
-calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
-calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
-causality_y1_y2(price2, price1, maxlag)
-cointegration(x, y)
-correl_fast(xn, y, nx)
-correl_reducebytrigger(correl2, trigger)
-correlation_mat(Xmat, type1 = "robust", type2 = "correl")
-data_jpsector()
-date_add_bdays(from_date, add_days)
-date_align(array1, dateref)
-date_alignfromdateref(array1, dateref)
-date_as_float(dt)
-date_diffindays(intdate1, intdate2)
-date_earningquater(t1)
-date_extract_dailyopenclosetime(spdateref1, market = 'us')
-date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
-date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
-date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
-date_finddateid(date1, dateref)
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
-date_is_3rdfriday(s)
-date_option_expiry(date)
-date_removetimezone(datelist)
-date_todatetime(tlist)
-datediff_inyear(startdate, enddate)
-dateint_todatetime(datelist1)
-dateint_tostring(datelist1, format1 = '%b-%y')
-datenumpy_todatetime(tt, islocaltime = True)
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_toint(datelist1)
-datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
-datetime_todate(tt)
-datetime_toint(datelist1)
-datetime_tointhour(datelist1)
-datetime_tonumpypdate(t, islocaltime = True)
-datetime_tostring(tt)
-folio_concenfactor2(ww, masset = 12)
-folio_cost_turnover(wwall, bsk, dateref, costbp)
-folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
-folio_fixedunitprice(price, fixedww, costpa = 0.0)
-folio_fixedweightprice(price, fixedww, costpa = 0.0)
-folio_fixedweightret(ret, fixedww)
-folio_histogram(close)
-folio_inverseetf(price, costpa = 0.0)
-folio_leverageetf(price, lev = 1.0, costpa = 0.0)
-folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
-folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
-folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
-folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
-folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
-folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
-folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
-folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
-get(close, timelag)
-getdiff_fromquotes(close, timelag)
-getlogret_fromquotes(close, timelag = 1)
-getprice_fromret(ret, normprice = 100)
-getret_fromquotes(close, timelag = 1)
-isfloat(value)
-isint(x)
-load_asset_fromfile(file1)
-max_withposition(values)
-min_withposition(values)
-norm_fast(y, ny)
-np_distance_l1(x, y, wwerr)
-np_distance_l1(x, y, wwerr)
-np_similarity(x, y, wwerr = [], type1 = 0)
-np_similarity(x, y, wwerr = [], type1 = 0)
-pd_dataframe_toarray(df)
-pd_transform_asset(q0, q1, type1 = "spread")
-plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
-plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
-plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
-plot_priceintraday(data)
-price_normalize100(ret, normprice = 100)
-price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
-reg_slope(close, dateref, tlag, type1 = 'elasticv')
-regression(yreturn, xreturn, type1 = "elasticv")
-regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
-regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
-regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
-rolling_cointegration(x, y)
-rsk_calc_all_TA(df = 'panda_dataframe')
-save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
-similarity_correl(ret_close2, funargs)
-sk_cov_fromcorrel(correl, ret_close1)
-ta_highbandtrend1(close2, type1 = 0)
-volhisto_fromprice(price, t, volrange, axis = 0)
-volhisto_fromret(retbsk, t, volrange, axis = 0)
-volhistorolling_fromprice(price, volrange)
-
--------------------------methods----------------------
-folioCalc.__init__(self, sym, close, dateref)
-folioCalc._regimecalc(self, t, wwextra)
-folioCalc._weightcalc_constant(self, ww2, t)
-folioCalc._weightcalc_generic(self, wwvec, t)
-folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
-folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
-folioCalc.getweight(self)
-folioCalc.help(self)
-folioCalc.multiperiod_ww(self, t)
-folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioCalc.set_symclose(self, sym, close, dateref)
-folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioOptimizationF.__init__(self, sym, close, dateref)
-folioOptimizationF._loss_obj(self, ww2, wwpenalty)
-folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
-folioOptimizationF._objective_criteria(self, bsk)
-folioOptimizationF._regimecalc(self, t, wwextra)
-folioOptimizationF._weightcalc_constant(self, ww2, t)
-folioOptimizationF._weightcalc_generic(self, wwvec, t)
-folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
-folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
-folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioOptimizationF.calcbasket_obj(self, wwvec)
-folioOptimizationF.calcbasket_obj2(self, wwvec)
-folioOptimizationF.getweight(self)
-folioOptimizationF.help(self)
-folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
-folioOptimizationF.multiperiod_ww(self, t)
-folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioOptimizationF.set_symclose(self, sym, close, dateref)
-folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioRiskIndicator.__init__(self, sym, close, dateref)
-folioRiskIndicator._regimecalc(self, t, wwextra)
-folioRiskIndicator._weightcalc_generic(self, wwvec, t)
-folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
-folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
-folioRiskIndicator.set_symclose(self, sym, close, dateref)
-folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-index.__init__(self, id1, sym, ww, tstart)
-index.__init__(self, id1, sym, ww, tstart)
-index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
-index._wwpct_rebal(self, wwpct_actual, t, trebal)
-index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
-index.calc_baskettable_unit()
-index.close(self)
-index.help(self)
-index.updatehisto(self)
-searchSimilarity.__generate_return__(self, nlag)
-searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
-searchSimilarity.__overweight__(self, px)
-searchSimilarity.export_results()
-searchSimilarity.get_rankresult(self, filetosave = '')
-searchSimilarity.launch_search(self)
-searchSimilarity.load_quotes_fromdb(self, picklefile = '')
-searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
-searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
-searchSimilarity.staticmethod(self, x)
-
-
-utilmy/zarchive/py2to3/_HELP.py
--------------------------functions----------------------
-fun_cython(a)
-fun_python(a)
-os_VS_build(self, lib_to_build)
-os_VS_start(self, version)
-os_compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
-set_rc_version(rcfile, target_version)
-
-
-
-utilmy/zarchive/py2to3/__init__.py
-
-
-utilmy/zarchive/py2to3/alldata.py
-
-
-utilmy/zarchive/py2to3/allmodule.py
--------------------------functions----------------------
-pprint(table1, tablefmt = "simple")
-pprint2(x)
-str_convert_beforeprint(x)
-str_to_unicode(x, encoding = 'utf-8')
-str_to_utf8(x)
-
-
-
-utilmy/zarchive/py2to3/allmodule_fin.py
-
-
-utilmy/zarchive/py2to3/coke_functions.py
--------------------------functions----------------------
-date_diffend(t)
-date_diffsecond(str_t1, str_t0, fmt='YYYY-MM-DD HH = 'YYYY-MM-DD HH:mm:SS')
-date_diffstart(t)
-day(s)
-daytime(d)
-hour(s)
-month(s)
-np_dict_tolist(dd)
-np_dict_tostr_key(dd)
-np_dict_tostr_val(dd)
-pd_date_splitall(df, coldate = 'purchased_at')
-season(d)
-weekday(s, fmt = 'YYYY-MM-DD', i0 = 0, i1 = 10)
-year(s)
-
-
-
-utilmy/zarchive/py2to3/datanalysis.py
--------------------------functions----------------------
-col_feature_importance(Xcol, Ytarget)
-col_pair_correl(Xcol, Ytarget)
-col_pair_interaction(Xcol, Ytarget)
-col_pair_plot(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
-col_study_distribution_show(df, col_include = None, col_exclude = None, pars={'binsize' = {'binsize':20})
-col_study_getcategorydict_freq(catedict)
-col_study_summary(Xmat = [0.0, 0.0], Xcolname = ['col1', 'col2'], Xcolselect = [9, 9], isprint = 0)
-csv_analysis()
-csv_bigcompute()
-csv_col_get_dict_categoryfreq(dircsv, filepattern = "*.csv", category_cols = [], maxline = -1, fileencoding = "utf-8")
-csv_col_schema_toexcel(dircsv = "", filepattern = '*.csv', outfile = '.xlsx', returntable = 1, maxrow = 5000000, maxcol_pertable = 90, maxstrlen = 'U80')
-csv_dtypes_getdict(df = None, csvfile = None)
-csv_fast_processing()
-csv_pivotable(dircsv = "", filepattern = '*.csv', fileh5 = '.h5', leftX = 'col0', topY = 'col2', centerZ = 'coli', mapreduce = 'sum', chunksize =  500000, tablename = 'df')
-csv_row_mapreduce(dircsv = "", outfile = "", type_mapreduce = 'sum', chunk =  5000000)
-csv_row_reduce_line(fromfile, tofile, condfilter, catval_tokeep, maxline = -1)
-csv_row_reduce_line_manual(file_category, file_transact, file_reduced)
-db_getdata()
-db_meta_add(metadb, dbname, new_table = ('', [])
-db_meta_find(ALLDB, query = '', filter_db = [], filter_table = [], filter_column = [])
-db_sql()
-isnull(x)
-optim_is_pareto_efficient(Xmat_cost, epsilon =  0.01, ret_boolean = 1)
-pd_checkpoint()
-pd_filter_column(df_client_product, filter_val = [], iscol = 1)
-pd_missing_show()
-pd_stack_dflist(df_list)
-pd_validation_struct()
-plot_XY(xx, yy, zcolor = None, tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
-plot_XY_plotly(xx, yy, towhere = 'url')
-plot_XY_seaborn(X, Y, Zcolor = None)
-plot_Y(Yval, typeplot = '.b', tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
-plot_cluster_2D(X_2dim, target_class, target_names)
-plot_cluster_hiearchy(Xmat_dist, p = 30, truncate_mode = None, color_threshold = None, get_leaves = True, orientation = 'top', labels = None, count_sort = False, distance_sort = False, show_leaf_counts = True, no_plot = False, no_labels = False, leaf_font_size = None, leaf_rotation = None, leaf_label_func = None, show_contracted = False, link_color_func = None, ax = None, above_threshold_color = 'b')
-plot_cluster_pca(Xmat, Xcluster_label = None, metric = 'euclidean', dimpca = 2, whiten = True, isprecompute = False, savefile = '', doreturn = 1)
-plot_cluster_tsne(Xmat, Xcluster_label = None, metric = 'euclidean', perplexity = 50, ncomponent = 2, savefile = '', isprecompute = False, returnval = True)
-plot_col_pair(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
-plot_distance_heatmap(Xmat_dist, Xcolname)
-plot_distribution_density(Xsample, kernel = 'gaussian', N = 10, bandwith = 1 / 10.0)
-sk_cluster(Xmat, metric = 'jaccard')
-sk_cluster_algo_custom(Xmat, algorithm, args, kwds, returnval = 1)
-sk_cluster_distance_pair(Xmat, metric = 'jaccard')
-sk_correl_rank(correl = [[1, 0], [0, 1]])
-sk_distribution_kernel_bestbandwidth(kde)
-sk_distribution_kernel_sample(kde = None, n = 1)
-sk_error_r2(Ypred, y_true, sample_weight = None, multioutput = None)
-sk_error_rmse(Ypred, Ytrue)
-sk_feature_importance(clfrf, feature_name)
-sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
-sk_model_auto_tpot(Xmat, y, outfolder = 'aaserialize/', model_type = 'regressor/classifier', train_size = 0.5, generation = 1, population_size = 5, verbosity = 2)
-sk_optim_de(obj_fun, bounds, maxiter = 1, name1 = '', solver1 = None, isreset = 1, popsize = 15)
-sk_params_search_best(Xmat, Ytarget, model1, param_grid={'alpha' = {'alpha':  np.linspace(0, 1, 5) }, method = 'gridsearch', param_search= {'scoretype' =  {'scoretype':'r2', 'cv':5, 'population_size':5, 'generations_number':3 })
-sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
-sk_tree(Xtrain, Ytrain, nbtree, maxdepth, isprint1 = 1, njobs = 1)
-sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
-sk_votingpredict(estimators, voting, ww, X_test)
-str_to_unicode(x, encoding = 'utf-8')
-tf_transform_catlabel_toint(Xmat)
-tf_transform_pca(Xmat, dimpca = 2, whiten = True)
-xl_get_rowcol(ws, i0, j0, imax, jmax)
-xl_getschema(dirxl = "", filepattern = '*.xlsx', dirlevel = 1, outfile = '.xlsx')
-xl_setstyle(file1)
-xl_val(ws, colj, rowi)
-
--------------------------methods----------------------
-sk_model_template1.__init__(self, alpha = 0.5, low_y_cut = -0.09, high_y_cut = 0.09, ww0 = 0.95)
-sk_model_template1.fit(self, X, Y = None)
-sk_model_template1.predict(self, X, y = None, ymedian = None)
-sk_model_template1.score(self, X, Ytrue = None, ymedian = None)
-sk_stateRule.__init__(self, state, trigger, colname = [])
-sk_stateRule.addrule(self, rulefun, name = '', desc = '')
-sk_stateRule.eval(self, idrule, t, ktrig = 0)
-sk_stateRule.help()
-
-
-utilmy/zarchive/py2to3/excel.py
--------------------------functions----------------------
-add_one(data)
-double_sum(x, y)
-get_workbook_name()
-matrix_mult(x, y)
-npdot()
-
-
-
-utilmy/zarchive/py2to3/fast.py
--------------------------functions----------------------
-_compute_overlaps(u, v)
-cosine(u, v)
-cross(vec1, vec2)
-day(s)
-daytime(d)
-distance_jaccard(u, v)
-distance_jaccard2(u, v)
-distance_jaccard_X(X)
-drawdown_calc_fast(price)
-fastStrptime(val, format)
-hour(s)
-log_exp_sum2(a, b)
-mean(x)
-month(s)
-norm(vec)
-rmse(y, yhat)
-season(d)
-std(x)
-weekday(s)
-year(s)
-
-
-
-utilmy/zarchive/py2to3/fast_parallel.py
--------------------------functions----------------------
-task_find_best(tasks, n_top = 5)
-task_parallel_job_01(name, param, datadict)
-task_progress(tasks)
-task_summary(tasks)
-
-
-
-utilmy/zarchive/py2to3/filelock.py
--------------------------methods----------------------
-FileLock.__del__(self)
-FileLock.__enter__(self)
-FileLock.__exit__(self, type, value, traceback)
-FileLock.__init__(self, protected_file_path, timeout = None, delay = 1, lock_file_contents = None)
-FileLock.acquire(self, blocking = True)
-FileLock.available(self)
-FileLock.locked(self)
-FileLock.purge(self)
-FileLock.release(self)
-
-
-utilmy/zarchive/py2to3/function_custom.py
--------------------------functions----------------------
-fun_obj(vv, ext)
-getweight(ww, size = (9, 3)
-mapping_calc_risk_elvis_v03(ss, tr, t, riskout)
-mapping_calc_risk_v00(self, ss, tr, t, risk0)
-mapping_calc_risk_v01(ss, tr, t, risk0)
-mapping_calc_risk_v02(ss, tr, t, risk0)
-mapping_risk_ww_v01(risk, wwmat, ww2)
-
-
-
-utilmy/zarchive/py2to3/geospatial.py
-
-
-utilmy/zarchive/py2to3/global01.py
-
-
-utilmy/zarchive/py2to3/kagglegym.py
--------------------------functions----------------------
-make()
-r_score(y_true, y_pred, sample_weight = None, multioutput = None)
-
--------------------------methods----------------------
-Environment.__init__(self)
-Environment.__str__(self)
-Environment.reset(self)
-Environment.step(self, target)
-Observation.__init__(self, train, target, features)
-
-
-utilmy/zarchive/py2to3/linux.py
--------------------------functions----------------------
-VS_build(self, lib_to_build)
-VS_start(self, version)
-aa_cleanmemory()
-aa_getmodule_doc(module1, fileout = '')
-aa_isanaconda()
-acf(data)
-and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
-comoment(xx, yy, nsample, kx, ky)
-compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
-date_add_bdays(from_date, add_days)
-date_as_float(dt)
-date_diffindays(intdate1, intdate2)
-date_finddateid(date1, dateref)
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_now(i = 0)
-date_remove_bdays(from_date, add_days)
-datediff_inyear(startdate, enddate)
-dateint_todatetime(datelist1)
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_toint(datelist1)
-datestring_toint(datelist1)
-datetime_toint(datelist1)
-datetime_tostring(datelist1)
-datetime_tostring(datelist1)
-find(item, vec)
-findhigher(x, vec)
-findlower(x, vec)
-finds(itemlist, vec)
-findx(item, vec)
-isfloat(value)
-isint(x)
-load_session(name = 'test_20160815')
-np_cleanmatrix(m)
-np_find(item, vec)
-np_find_maxpos(values)
-np_find_maxpos_2nd(numbers)
-np_find_minpos(values)
-np_findfirst(item, vec)
-np_findlocalmax(v, trig)
-np_findlocalmax2(v, trig)
-np_findlocalmin(v, trig)
-np_findlocalmin2(v, trig)
-np_interpolate_nan(y)
-np_ma(vv, n)
-np_memory_array_adress(x)
-np_remove_zeros(vv, axis1 = 1)
-np_sort(arr, colid, asc = True)
-np_sortbycol(arr, colid, asc = True)
-np_sortbycolumn(arr, colid, asc = True)
-np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
-np_uniquerows(a)
-numexpr_topanda(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-numexpr_vect_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-pd_addcolumn(df1, name1 = 'new')
-pd_array_todataframe(price, symbols = None, date1 = None, dotranspose = False)
-pd_changeencoding(data, cols)
-pd_create_colmap_nametoid(df)
-pd_createdf(val1, col1 = None, idx1 = None)
-pd_csv_topanda(filein1, filename, tablen = 'data')
-pd_dataframe_toarray(df)
-pd_date_intersection(qlist)
-pd_extract_col_idx_val(df)
-pd_getpanda_tonumpy(filename, nsize, tablen = 'data')
-pd_getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
-pd_insertcolumn(df, colname, vec)
-pd_insertrows(df, rowval, index1 = None)
-pd_load_panda2vec(filenameh5, store_id = 'data')
-pd_remove_row(df, row_list_index = [23, 45])
-pd_removecolumn(df1, name1)
-pd_replacevalues(df, matrix)
-pd_resetindex(df)
-pd_save_vectopanda(vv, filenameh5)
-pd_split_col_idx_val(df)
-pd_storeadddf(df, dfname, dbfile='F = 'F:\temp_pandas.h5')
-pd_storedumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
-plotsave(xx, yy, title1 = "")
-plotshow(xx, yy, title1 = "")
-save_session(name = '')
-set_rc_version(rcfile, target_version)
-sk_cluster_kmeans(x, nbcluster = 5, isplot = True)
-sk_featureimportance(clfrf, feature_name)
-sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
-sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
-sk_tree(Xtrain, Ytrain, nbtree, maxdepth, print1)
-sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
-sk_votingpredict(estimators, voting, ww, X_test)
-sort(arr, colid, asc = 1)
-sortcol(arr, colid, asc = 1)
-textvect_topanda(vv, fileout = "")
-
-
-
-utilmy/zarchive/py2to3/multiprocessfunc.py
--------------------------functions----------------------
-bm_generator(bm, dt, n, type1)
-func(val, lock)
-init2(d)
-init_global1(l, r)
-integratene(its)
-integratenp(its, nchunk)
-integratenp2(its, nchunk)
-list_append(count, id, out_list)
-merge(d2)
-multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky, nbasset, n, price, type1 = 0, strike = 0, cp = 1)
-multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky, nbasset, n, price)
-ne_sin(x)
-np_sin(value)
-parzen_estimation(x_samples, point_x, h)
-res_shared2()
-
-
-
-utilmy/zarchive/py2to3/portfolio.py
--------------------------functions----------------------
-_date_align(dateref, datei, tmax, closei)
-_notnone(x)
-_reshape(x)
-array_todataframe(price, symbols = None, date1 = None)
-calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
-calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
-calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
-causality_y1_y2(price2, price1, maxlag)
-cointegration(x, y)
-correl_fast(xn, y, nx)
-correl_reducebytrigger(correl2, trigger)
-correlation_mat(Xmat, type1 = "robust", type2 = "correl")
-data_jpsector()
-date_align(array1, dateref)
-date_alignfromdateref(array1, dateref)
-date_earningquater(t1)
-date_extract_dailyopenclosetime(spdateref1, market = 'us')
-date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
-date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
-date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
-date_finddateid(date1, dateref)
-date_is_3rdfriday(s)
-date_option_expiry(date)
-datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
-folio_concenfactor2(ww, masset = 12)
-folio_cost_turnover(wwall, bsk, dateref, costbp)
-folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
-folio_fixedunitprice(price, fixedww, costpa = 0.0)
-folio_fixedweightprice(price, fixedww, costpa = 0.0)
-folio_fixedweightret(ret, fixedww)
-folio_histogram(close)
-folio_inverseetf(price, costpa = 0.0)
-folio_leverageetf(price, lev = 1.0, costpa = 0.0)
-folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
-folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
-folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
-folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
-folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
-folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
-folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
-folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
-get(close, timelag)
-getdiff_fromquotes(close, timelag)
-getlogret_fromquotes(close, timelag = 1)
-getprice_fromret(ret, normprice = 100)
-getret_fromquotes(close, timelag = 1)
-isfloat(value)
-isint(x)
-load_asset_fromfile(file1)
-max_withposition(values)
-min_withposition(values)
-norm_fast(y, ny)
-np_distance_l1(x, y, wwerr)
-np_distance_l1(x, y, wwerr)
-np_similarity(x, y, wwerr = [], type1 = 0)
-np_similarity(x, y, wwerr = [], type1 = 0)
-pd_dataframe_toarray(df)
-pd_transform_asset(q0, q1, type1 = "spread")
-plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
-plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
-plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
-plot_priceintraday(data)
-price_normalize100(ret, normprice = 100)
-price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
-reg_slope(close, dateref, tlag, type1 = 'elasticv')
-regression(yreturn, xreturn, type1 = "elasticv")
-regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
-regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
-regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
-rolling_cointegration(x, y)
-rsk_calc_all_TA(df = 'panda_dataframe')
-save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
-similarity_correl(ret_close2, funargs)
-sk_cov_fromcorrel(correl, ret_close1)
-ta_highbandtrend1(close2, type1 = 0)
-volhisto_fromprice(price, t, volrange, axis = 0)
-volhisto_fromret(retbsk, t, volrange, axis = 0)
-volhistorolling_fromprice(price, volrange)
-
--------------------------methods----------------------
-folioCalc.__init__(self, sym, close, dateref)
-folioCalc._regimecalc(self, t, wwextra)
-folioCalc._weightcalc_constant(self, ww2, t)
-folioCalc._weightcalc_generic(self, wwvec, t)
-folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
-folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
-folioCalc.getweight(self)
-folioCalc.help(self)
-folioCalc.multiperiod_ww(self, t)
-folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioCalc.set_symclose(self, sym, close, dateref)
-folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioOptimizationF.__init__(self, sym, close, dateref)
-folioOptimizationF._loss_obj(self, ww2, wwpenalty)
-folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
-folioOptimizationF._objective_criteria(self, bsk)
-folioOptimizationF._regimecalc(self, t, wwextra)
-folioOptimizationF._weightcalc_constant(self, ww2, t)
-folioOptimizationF._weightcalc_generic(self, wwvec, t)
-folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
-folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
-folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioOptimizationF.calcbasket_obj(self, wwvec)
-folioOptimizationF.calcbasket_obj2(self, wwvec)
-folioOptimizationF.getweight(self)
-folioOptimizationF.help(self)
-folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
-folioOptimizationF.multiperiod_ww(self, t)
-folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioOptimizationF.set_symclose(self, sym, close, dateref)
-folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioRiskIndicator.__init__(self, sym, close, dateref)
-folioRiskIndicator._regimecalc(self, t, wwextra)
-folioRiskIndicator._weightcalc_generic(self, wwvec, t)
-folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
-folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
-folioRiskIndicator.set_symclose(self, sym, close, dateref)
-folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-index.__init__(self, id1, sym, ww, tstart)
-index.__init__(self, id1, sym, ww, tstart)
-index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
-index._wwpct_rebal(self, wwpct_actual, t, trebal)
-index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
-index.calc_baskettable_unit()
-index.close(self)
-index.help(self)
-index.updatehisto(self)
-searchSimilarity.__generate_return__(self, nlag)
-searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
-searchSimilarity.__overweight__(self, px)
-searchSimilarity.export_results()
-searchSimilarity.get_rankresult(self, filetosave = '')
-searchSimilarity.launch_search(self)
-searchSimilarity.load_quotes_fromdb(self, picklefile = '')
-searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
-searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
-searchSimilarity.staticmethod(self, x)
-
-
-utilmy/zarchive/py2to3/portfolio_withdate.py
--------------------------functions----------------------
-_date_align(dateref, datei, tmax, closei)
-_notnone(x)
-_reshape(x)
-array_todataframe(price, symbols = None, date1 = None)
-calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
-calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
-calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
-causality_y1_y2(price2, price1, maxlag)
-cointegration(x, y)
-correl_fast(xn, y, nx)
-correl_reducebytrigger(correl2, trigger)
-correlation_mat(Xmat, type1 = "robust", type2 = "correl")
-data_jpsector()
-date_add_bdays(from_date, add_days)
-date_align(array1, dateref)
-date_alignfromdateref(array1, dateref)
-date_as_float(dt)
-date_diffindays(intdate1, intdate2)
-date_earningquater(t1)
-date_extract_dailyopenclosetime(spdateref1, market = 'us')
-date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
-date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
-date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
-date_finddateid(date1, dateref)
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
-date_is_3rdfriday(s)
-date_option_expiry(date)
-date_removetimezone(datelist)
-date_todatetime(tlist)
-datediff_inyear(startdate, enddate)
-dateint_todatetime(datelist1)
-dateint_tostring(datelist1, format1 = '%b-%y')
-datenumpy_todatetime(tt, islocaltime = True)
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_toint(datelist1)
-datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
-datetime_todate(tt)
-datetime_toint(datelist1)
-datetime_tointhour(datelist1)
-datetime_tonumpypdate(t, islocaltime = True)
-datetime_tostring(tt)
-folio_concenfactor2(ww, masset = 12)
-folio_cost_turnover(wwall, bsk, dateref, costbp)
-folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
-folio_fixedunitprice(price, fixedww, costpa = 0.0)
-folio_fixedweightprice(price, fixedww, costpa = 0.0)
-folio_fixedweightret(ret, fixedww)
-folio_histogram(close)
-folio_inverseetf(price, costpa = 0.0)
-folio_leverageetf(price, lev = 1.0, costpa = 0.0)
-folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
-folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
-folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
-folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
-folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
-folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
-folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
-folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
-get(close, timelag)
-getdiff_fromquotes(close, timelag)
-getlogret_fromquotes(close, timelag = 1)
-getprice_fromret(ret, normprice = 100)
-getret_fromquotes(close, timelag = 1)
-isfloat(value)
-isint(x)
-load_asset_fromfile(file1)
-max_withposition(values)
-min_withposition(values)
-norm_fast(y, ny)
-np_distance_l1(x, y, wwerr)
-np_distance_l1(x, y, wwerr)
-np_similarity(x, y, wwerr = [], type1 = 0)
-np_similarity(x, y, wwerr = [], type1 = 0)
-pd_dataframe_toarray(df)
-pd_transform_asset(q0, q1, type1 = "spread")
-plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
-plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
-plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
-plot_priceintraday(data)
-price_normalize100(ret, normprice = 100)
-price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
-reg_slope(close, dateref, tlag, type1 = 'elasticv')
-regression(yreturn, xreturn, type1 = "elasticv")
-regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
-regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
-regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
-rolling_cointegration(x, y)
-rsk_calc_all_TA(df = 'panda_dataframe')
-save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
-similarity_correl(ret_close2, funargs)
-sk_cov_fromcorrel(correl, ret_close1)
-ta_highbandtrend1(close2, type1 = 0)
-volhisto_fromprice(price, t, volrange, axis = 0)
-volhisto_fromret(retbsk, t, volrange, axis = 0)
-volhistorolling_fromprice(price, volrange)
-
--------------------------methods----------------------
-folioCalc.__init__(self, sym, close, dateref)
-folioCalc._regimecalc(self, t, wwextra)
-folioCalc._weightcalc_constant(self, ww2, t)
-folioCalc._weightcalc_generic(self, wwvec, t)
-folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
-folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
-folioCalc.getweight(self)
-folioCalc.help(self)
-folioCalc.multiperiod_ww(self, t)
-folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioCalc.set_symclose(self, sym, close, dateref)
-folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioOptimizationF.__init__(self, sym, close, dateref)
-folioOptimizationF._loss_obj(self, ww2, wwpenalty)
-folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
-folioOptimizationF._objective_criteria(self, bsk)
-folioOptimizationF._regimecalc(self, t, wwextra)
-folioOptimizationF._weightcalc_constant(self, ww2, t)
-folioOptimizationF._weightcalc_generic(self, wwvec, t)
-folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
-folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
-folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioOptimizationF.calcbasket_obj(self, wwvec)
-folioOptimizationF.calcbasket_obj2(self, wwvec)
-folioOptimizationF.getweight(self)
-folioOptimizationF.help(self)
-folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
-folioOptimizationF.multiperiod_ww(self, t)
-folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
-folioOptimizationF.set_symclose(self, sym, close, dateref)
-folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-folioRiskIndicator.__init__(self, sym, close, dateref)
-folioRiskIndicator._regimecalc(self, t, wwextra)
-folioRiskIndicator._weightcalc_generic(self, wwvec, t)
-folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
-folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
-folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
-folioRiskIndicator.set_symclose(self, sym, close, dateref)
-folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
-index.__init__(self, id1, sym, ww, tstart)
-index.__init__(self, id1, sym, ww, tstart)
-index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
-index._wwpct_rebal(self, wwpct_actual, t, trebal)
-index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
-index.calc_baskettable_unit()
-index.close(self)
-index.help(self)
-index.updatehisto(self)
-searchSimilarity.__generate_return__(self, nlag)
-searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
-searchSimilarity.__overweight__(self, px)
-searchSimilarity.export_results()
-searchSimilarity.get_rankresult(self, filetosave = '')
-searchSimilarity.launch_search(self)
-searchSimilarity.load_quotes_fromdb(self, picklefile = '')
-searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
-searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
-searchSimilarity.staticmethod(self, x)
-
-
-utilmy/zarchive/py2to3/report.py
--------------------------functions----------------------
-map_show()
-xl_create_pdf()
-xl_create_pivot(infile, index_list = ["Manager", "Rep", "Product"], value_list = ["Price", "Quantity"])
-xl_save_report(report, outfile)
-
-
-
-utilmy/zarchive/py2to3/rstatpy.py
--------------------------functions----------------------
-stl(data, ns, np = None, nt = None, nl = None, isdeg = 0, itdeg = 1, ildeg = 1, nsjump = None, ntjump = None, nljump = None, ni = 2, no = 0, fulloutput = False)
-
-
-
-utilmy/zarchive/py2to3/util_min.py
--------------------------functions----------------------
-a_get_pythonversion()
-a_isanaconda()
-isexist(a)
-isfloat(x)
-isint(x)
-load(folder = '/folder1/keyname', isabsolutpath = 0)
-os_file_exist(file1)
-os_file_getname(path)
-os_file_getpath(path)
-os_file_gettext(file1)
-os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
-os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
-os_file_read(file1)
-os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
-os_file_replacestring1(findStr, repStr, filePath)
-os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
-os_file_size(file1)
-os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
-os_folder_create(directory)
-os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
-os_path_append(p1, p2 = None, p3 = None, p4 = None)
-os_path_change(path1)
-os_path_current()
-os_path_norm(pth)
-os_print_tofile(vv, file1, mode1 = 'a')
-os_split_dir_file(dirfile)
-os_wait_cpu(priority = 300, cpu_min = 50)
-os_zip_checkintegrity(filezip1)
-os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
-os_zipfile(folderin, folderzipname, iscompress = True)
-os_zipfolder(dir_tozip = '/zdisks3/output', zipname = '/zdisk3/output.zip', dir_prefix = None, iscompress = True)
-py_importfromfile(modulename, dir1)
-py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
-py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
-py_save_obj(obj, folder = '/folder1/keyname', isabsolutpath = 0)
-save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
-save_test(folder = '/folder1/keyname', isabsolutpath = 0)
-z_key_splitinto_dir_name(keyname)
-
-
-
-utilmy/zarchive/py2to3/util_ml.py
--------------------------functions----------------------
-create_adam_optimizer(learning_rate, momentum)
-create_bias_variable(name, shape)
-create_weight_variable(name, shape)
-parse_args(ppa = None, args =  {})
-parse_args2(ppa = None)
-tf_check()
-tf_global_variables_initializer(sess = None)
-visualize_result()
-
--------------------------methods----------------------
-TextLoader.__init__(self, data_dir, batch_size, seq_length)
-TextLoader.create_batches(self)
-TextLoader.load_preprocessed(self, vocab_file, tensor_file)
-TextLoader.next_batch(self)
-TextLoader.preprocess(self, input_file, vocab_file, tensor_file)
-TextLoader.reset_batch_pointer(self)
-
-
-utilmy/zarchive/py2to3/utilgeo.py
--------------------------functions----------------------
-df_to_geojson(df, col_properties, lat = 'latitude', lon = 'longitude')
-
-
-
-utilmy/zarchive/py3/util.py
--------------------------functions----------------------
-a_autoreload()
-a_cleanmemory()
-a_get_platform()
-a_info_conda_jupyter()
-a_isanaconda()
-a_module_codesample(module_str = 'pandas')
-a_module_doc(module_str = 'pandas')
-a_module_generatedoc(module_str = "pandas", fileout = '')
-a_run_ipython(cmd1)
-a_start_log(id1 = '', folder = 'aaserialize/log/')
-aa_unicode_ascii_utf8_issue()
-aws_accesskey_get(access = '', key = '')
-aws_conn_create(region = "ap-northeast-2", access = '', key = '')
-aws_conn_do(action = '', region = "ap-northeast-2")
-aws_conn_getallregions(conn = None)
-aws_conn_getinfo(conn)
-aws_ec2_allocate_elastic_ip(instance_id, region = "ap-northeast-2")
-aws_ec2_create_con(contype = 'sftp/ssh', host = 'ip', port = 22, username = 'ubuntu', keyfilepath = '', password = '', keyfiletype = 'RSA', isprint = 1)
-aws_ec2_python_script(script_path, args1, host)
-aws_s3_file_read(filepath, isbinary = 1)
-aws_s3_folder_printtall(bucket_name = 'zdisk')
-aws_s3_getbucketconn(s3dir)
-aws_s3_getfrom_s3(froms3dir = 'task01/', todir = '', bucket_name = 'zdisk')
-aws_s3_puto_s3(fromdir_file = 'dir/file.zip', todir = 'bucket/folder1/folder2')
-aws_s3_url_split(url)
-date_add_bday(from_date, add_days)
-date_add_bdays(from_date, add_days)
-date_allinfo()
-date_convert(t1, fromtype, totype)
-date_diffinbday(intd2, intd1)
-date_diffinday(intdate1, intdate2)
-date_diffinyear(startdate, enddate)
-date_finddateid(date1, dateref)
-date_gencalendar(start = '2010-01-01', end = '2010-01-15', country = 'us')
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
-date_holiday()
-date_now(i = 0)
-date_nowtime(type1 = 'str', format1= "%Y-%m-%d %H =  "%Y-%m-%d %H:%M:%S:%f")
-date_remove_bdays(from_date, add_days)
-date_tofloat(dt)
-dateint_todatetime(datelist1)
-datenumpy_todatetime(tt, islocaltime = True)
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_toint(datelist1)
-datetime_toint(datelist1)
-datetime_tonumpydate(t, islocaltime = True)
-datetime_tostring(datelist1)
-find(xstring, list_string)
-find_fuzzy(xstring, list_string)
-findhigher(x, vec)
-findlower(x, vec)
-findnone(vec)
-finds(itemlist, vec)
-findx(item, vec)
-gc_map_dict_to_bq_schema(source_dict, schema, dest_dict)
-googledrive_get()
-googledrive_list()
-googledrive_put()
-isexist(a)
-isfloat(x)
-isint(x)
-load(folder = '/folder1/keyname', isabsolutpath = 0)
-max_kpos(arr, kth)
-min_kpos(arr, kth)
-np_acf(data)
-np_addcolumn(arr, nbcol)
-np_addrow(arr, nbrow)
-np_and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
-np_cleanmatrix(m)
-np_comoment(xx, yy, nsample, kx, ky)
-np_dict_tolist(dd, withkey = 0)
-np_dict_tostr_key(dd)
-np_dict_tostr_val(dd)
-np_dictordered_create()
-np_enumerate2(vec_1d)
-np_find(item, vec)
-np_find_maxpos(values)
-np_find_maxpos_2nd(numbers)
-np_find_minpos(values)
-np_findfirst(item, vec)
-np_findlocalmax(v, trig)
-np_findlocalmax2(v, trig)
-np_findlocalmin(v, trig)
-np_findlocalmin2(v, trig)
-np_int_tostr(i)
-np_interpolate_nan(y)
-np_list_flatten(seq)
-np_list_tofreqdict(l1, wweight = [])
-np_list_unique(seq)
-np_ma(vv, n)
-np_memory_array_adress(x)
-np_mergelist(x0, x1)
-np_minimize(fun_obj, x0 = [0.0], argext = (0, 0)
-np_minimizeDE(fun_obj, bounds, name1, solver = None)
-np_nan_helper(y)
-np_numexpr_tohdfs(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-np_numexpr_vec_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-np_pivotable_create(table, left, top, value)
-np_pivottable_count(mylist)
-np_remove_NA_INF_2d(X)
-np_remove_zeros(vv, axis1 = 1)
-np_removelist(x0, xremove = [])
-np_sort(arr, colid, asc = 1)
-np_sort(arr, colid, asc = 1)
-np_sortbycol(arr, colid, asc = True)
-np_sortbycolumn(arr, colid, asc = True)
-np_sortcol(arr, colid, asc = 1)
-np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
-np_torecarray(arr, colname)
-np_transform2d_int_1d(m2d, onlyhalf = False)
-np_uniquerows(a)
-obj_getclass_of_method(meth)
-obj_getclass_property(pfi)
-os_config_getfile(file1)
-os_config_setfile(dict_params, outfile, mode1 = 'w+')
-os_csv_process(file1)
-os_extracttext_allfile(nfile, dir1, pattern1 = "*.html", htmltag = 'p', deepness = 2)
-os_file_exist(file1)
-os_file_getname(path)
-os_file_getpath(path)
-os_file_gettext(file1)
-os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
-os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
-os_file_read(file1)
-os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
-os_file_replacestring1(findStr, repStr, filePath)
-os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
-os_file_size(file1)
-os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
-os_folder_create(directory)
-os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
-os_gui_popup_show(txt)
-os_path_append(p1, p2 = None, p3 = None, p4 = None)
-os_path_change(path1)
-os_path_current()
-os_path_norm(pth)
-os_print_tofile(vv, file1, mode1 = 'a')
-os_process_2()
-os_process_run(cmd_list = ['program', 'arg1', 'arg2'], capture_output = False)
-os_processify_fun(func)
-os_split_dir_file(dirfile)
-os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
-pd_addcol(df1, name1 = 'new')
-pd_applyfun_col(df, newcol, ff, use_colname = "all/[colname]")
-pd_array_todataframe(array, colname = None, index1 = None, dotranspose = False)
-pd_cleanquote(q)
-pd_create_colmapdict_nametoint(df)
-pd_createdf(array1, col1 = None, idx1 = None)
-pd_csv_randomread(filename, nsample = 10000, filemaxline = -1, dtype = None)
-pd_dataframe_toarray(df)
-pd_date_intersection(qlist)
-pd_df_todict(df, colkey = 'table', excludekey = [''], onlyfirstelt =  True)
-pd_dtypes(df, columns = [], targetype = 'category')
-pd_dtypes_totype2(df, columns = [], targetype = 'category')
-pd_dtypes_type1_totype2(df, fromtype = str, targetype = str)
-pd_extract_col_idx_val(df)
-pd_extract_col_uniquevalue_tocsv(df, colname = '', csvfile = '')
-pd_find(df, regex_pattern = '*', col_restrict = [], isnumeric = False, doreturnposition = False)
-pd_h5_addtable(df, tablename, dbfile='F = 'F:\temp_pandas.h5')
-pd_h5_cleanbeforesave(df)
-pd_h5_dumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
-pd_h5_fromcsv_tohdfs(dircsv = 'dir1/dir2/', filepattern = '*.csv', tofilehdfs = 'file1.h5', tablename = 'df', col_category = [], dtype0 = None, encoding = 'utf-8', chunksize =  2000000, mode = 'a', format = 'table', complib = None)
-pd_h5_load(filenameh5='E = 'E:/_data/_data_outlier.h5', table_id = 'data', exportype = "pandas", rowstart = -1, rowend = -1, cols = [])
-pd_h5_save(df, filenameh5='E = 'E:/_data/_data_outlier.h5', key = 'data')
-pd_h5_tableinfo(filenameh5, table)
-pd_info(df, doreturn = 1)
-pd_info_memsize(df, memusage = 0)
-pd_insertcol(df, colname, vec)
-pd_insertdatecol(df_insider, format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
-pd_insertrow(df, rowval, index1 = None, isreset = 1)
-pd_is_categorical(z)
-pd_np_toh5file(numpyarr, fileout = "file.h5", table1 = 'data')
-pd_removecol(df1, name1)
-pd_removerow(df, row_list_index = [23, 45])
-pd_replacevalues(df, matrix)
-pd_resetindex(df)
-pd_selectrow(df, **conditions)
-pd_split_col_idx_val(df)
-pd_splitdf_inlist(df, colid, type1 = "dict")
-pd_str_encoding_change(df, cols, fromenc = 'iso-8859-1', toenc = 'utf-8')
-pd_str_isascii(x)
-pd_str_unicode_tostr(df, targetype = str)
-plot_XY(xx, yy, zcolor = None, tsize = None, title1 = '', xlabel = '', ylabel = '', figsize = (8, 6)
-plot_heatmap(frame, ax = None, cmap = None, vmin = None, vmax = None, interpolation = 'nearest')
-print_topdf()
-py_importfromfile(modulename, dir1)
-py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
-py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
-py_save_obj(obj1, keyname)
-py_save_obj_dill(obj1, keyname)
-read_funding_data(path)
-read_funding_data(path)
-read_funding_data(path)
-save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
-save_test(folder = '/folder1/keyname', isabsolutpath = 0)
-session_guispyder_load(filename)
-session_guispyder_save(filename)
-session_load(name = 'test_20160815')
-session_load_function(name = 'test_20160815')
-session_save(name = 'test')
-session_save_function(name = 'test')
-session_spyder_showall()
-sql_create_dbengine(type1 = '', dbname = '', login = '', password = '', url = 'localhost', port = 5432)
-sql_delete_table(name, dbengine)
-sql_get_dbschema(dburl='sqlite = 'sqlite:///aapackage/store/yahoo.db', dbengine = None, isprint = 0)
-sql_getdate()
-sql_insert_csv(csvfile, dbtable, dbengine, col_drop = [])
-sql_insert_csv2(csvfile = '', dbtable = '', columns = [], dbengine = None, nrows =  10000)
-sql_insert_df(df, dbtable, dbengine, col_drop = ['id'], verbose = 1)
-sql_insert_excel(file1 = '.xls', dbengine = None, dbtype = '')
-sql_mysql_insert_excel()
-sql_pivotable(dbcon, ss = 'select  ')
-sql_postgres_create_table(mytable = '', database = '', username = '', password = '')
-sql_postgres_pivot()
-sql_postgres_query_to_csv(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', csv_out = '')
-sql_query(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', dbengine = None, output = 'df', dburl='sqlite = 'sqlite:///aaserialize/store/finviz.db')
-str_empty_string_array(x, y = 1)
-str_empty_string_array_numpy(nx, ny = 1)
-str_is_az09char(x)
-str_is_azchar(x)
-str_isfloat(value)
-str_make_unicode(input, errors = 'replace')
-str_match_fuzzy(xstring, list_string)
-str_parse_stringcalendar(cal)
-str_reindent(s, numSpaces)
-str_split2(delimiters, string, maxsplit = 0)
-str_split_pattern(sep2, ll, maxsplit = 0)
-str_to_unicode(x, encoding = 'utf-8')
-str_to_utf8(x)
-web_getjson_fromurl(url)
-web_getlink_fromurl(url)
-web_getrawhtml(url1)
-web_gettext_fromhtml(file1, htmltag = 'p')
-web_gettext_fromurl(url, htmltag = 'p')
-web_importio_todataframe(apiurl1, isurl = 1)
-web_restapi_toresp(apiurl1)
-web_send_email(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
-web_send_email_tls(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
-web_sendurl(url1)
-z_key_splitinto_dir_name(keyname)
-ztest_processify()
-
--------------------------methods----------------------
-FundingRecord.__str__(self)
-FundingRecord.parse(klass, row)
-aws_ec2_ssh.__init__(self, hostname, username = 'ubuntu', key_file = None, password = None)
-aws_ec2_ssh._help_ssh(self)
-aws_ec2_ssh.cmd2(self, cmd1)
-aws_ec2_ssh.command(self, cmd)
-aws_ec2_ssh.command_list(self, cmdlist)
-aws_ec2_ssh.get(self, remotefile, localfile)
-aws_ec2_ssh.get_all(self, remotepath, localpath)
-aws_ec2_ssh.jupyter_kill(self)
-aws_ec2_ssh.jupyter_start(self)
-aws_ec2_ssh.listdir(self, remotedir)
-aws_ec2_ssh.put(self, localfile, remotefile)
-aws_ec2_ssh.put_all(self, localpath, remotepath)
-aws_ec2_ssh.python_script(self, script_path, args1)
-aws_ec2_ssh.sftp_walk(self, remotepath)
-aws_ec2_ssh.write_command(self, text, remotefile)
-testclass.__init__(self, x)
-testclass.z_autotest(self)
-
-
-utilmy/zarchive/report.py
--------------------------functions----------------------
-map_show()
-xl_create_pdf()
-xl_create_pivot(infile, index_list = ["Manager", "Rep", "Product"], value_list = ["Price", "Quantity"])
-xl_save_report(report, outfile)
-
-
-
-utilmy/zarchive/rstatpy.py
--------------------------functions----------------------
-stl(data, ns, np = None, nt = None, nl = None, isdeg = 0, itdeg = 1, ildeg = 1, nsjump = None, ntjump = None, nljump = None, ni = 2, no = 0, fulloutput = False)
-
-
-
-utilmy/zarchive/storage/aapackage_gen/34/Working Copy of util34.py
--------------------------functions----------------------
-getmodule_doc(module1, fileout = '')
-
-
-
-utilmy/zarchive/storage/aapackage_gen/34/global01.py
-
-
-utilmy/zarchive/storage/aapackage_gen/34/util34.py
--------------------------functions----------------------
-getmodule_doc(module1, fileout = '')
-
-
-
-utilmy/zarchive/storage/aapackage_gen/codeanalysis.py
--------------------------functions----------------------
-dedent()
-describe(obj)
-describe2(module)
-describe_builtin(obj)
-describe_builtin2(obj, name1)
-describe_func(obj, method = False)
-describe_func2(obj, method = False, name1 = '')
-describe_klass(obj)
-describe_klass2(obj, name1 = '')
-getmodule_doc(module1, file1 = 'moduledoc.txt')
-indent()
-printinfile(vv, file1)
-wi(*args)
-wi2(*args)
-
-
-
-utilmy/zarchive/storage/aapackage_gen/global01.py
-
-
-utilmy/zarchive/storage/aapackage_gen/old/Working Copy of util34.py
--------------------------functions----------------------
-getmodule_doc(module1, fileout = '')
-
-
-
-utilmy/zarchive/storage/aapackage_gen/old/util27.py
--------------------------functions----------------------
-getmodule_doc(module1, fileout = '')
-
-
-
-utilmy/zarchive/storage/aapackage_gen/old/util34.py
--------------------------functions----------------------
-getmodule_doc(module1, fileout = '')
-
-
-
-utilmy/zarchive/storage/aapackage_gen/old/utils27.py
--------------------------functions----------------------
-acf(data)
-comoment(xx, yy, nsample, kx, ky)
-convertcsv_topanda(filein1, filename, tablen = 'data')
-getpanda_tonumpy(filename, nsize, tablen = 'data')
-getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
-load_frompanda(filenameh5)
-numexpr_topanda(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-numexpr_vect_calc(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-parsePDF(url)
-plotsave(xx, yy, title1 = "")
-plotshow(xx, yy, title1 = "")
-remove_zeros(vv, axis1 = 1)
-save_topanda(vv, filenameh5)
-sort_array(vv)
-unique_rows(a)
-
-
-
-utilmy/zarchive/storage/aapackage_gen/old/utils34.py
--------------------------functions----------------------
-acf(data)
-comoment(xx, yy, nsample, kx, ky)
-convertcsv_topanda(filein1, filename, tablen = 'data')
-getpanda_tonumpy(filename, nsize, tablen = 'data')
-getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
-load_frompanda(filenameh5)
-numexpr_topanda(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-numexpr_vect_calc(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-parsePDF(url)
-plotsave(xx, yy, title1 = "")
-plotshow(xx, yy, title1 = "")
-remove_zeros(vv, axis1 = 1)
-save_topanda(vv, filenameh5)
-sort_array(vv)
-unique_rows(a)
-
-
-
-utilmy/zarchive/storage/aapackage_gen/util.py
--------------------------functions----------------------
-getmodule_doc(module1, fileout = '')
-
-
-
-utilmy/zarchive/storage/aapackagedev/random.py
--------------------------functions----------------------
-Plot2D_random_save(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph, )
-Plot2D_random_show(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph)
-acf(data)
-binary_process(a, z, k)
-call_process(a, z, k)
-comoment(xx, yy, nsample, kx, ky)
-convert_csv2hd5f(filein1, filename)
-doublecheck_outlier(fileoutlier, ijump, nsample = 4000, trigger1 = 0.1, )fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5'fileoutlier, 'data')    #from filevv5 =  pdf.values   #to numpy vectordel pdfistartx= 0; istarty= 0nsample= 4000trigger1=  0.1crrmax = 250000kk=0(crrmax, 4), dtype = 'int')  #empty listvv5)[0]0, kkmax1, 1) :  #Decrasing: dimy0 to dimmindimx =  vv5[kk, 0];   dimy =  vv5[kk, 1]y0= dimy * ijump + istartyym= dimy* ijump + nsample + istartyyyu1= yy1[y0 =  dimy * ijump + istartyym= dimy* ijump + nsample + istartyyyu1= yy1[y0:ym];   yyu2= yy2[y0:ym];   yyu3= yy3[y0:ym]x0= dimx * ijump + istartxxm= dimx* ijump + nsample + istartxxxu1= yy1[x0:xm];   xxu2= yy2[x0:xm];   xxu3= yy3[x0:xm]"sum( xxu3 * yyu1)") / (nsample) # X3.Y moments"sum( xxu1 * yyu3)") / (nsample)"sum( xxu2 * yyu2)") / (nsample)abs(c22) > trigger1)  :)
-getdvector(dimmax, istart, idimstart)
-getoutlier_fromrandom(filename, jmax1, imax1, isamplejum, nsample, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
-getoutlier_fromrandom_fast(filename, jmax1, imax1, isamplejum, nsample, trigger1 = 0.28, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
-getrandom_tonumpy(filename, nbdim, nbsample)
-lognormal_process2d(a1, z1, a2, z2, k)
-numexpr_vect_calc(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-outlier_clean(vv2)
-overwrite_data(fileoutlier, vv2)
-pathScheme_(T, n, zz)
-pathScheme_bb(T, n, zz)
-pathScheme_std(T, n, zz)
-permute(yy, kmax)
-permute2(xx, yy, kmax)
-plot_outlier(fileoutlier, kk)fileoutlier, 'data')    #from filevv =  df.values   #to numpy vectordel dfxx= vv[kk, 0]yy =  vv[kk, 1]xx, yy, s = 1 )[00, 1000, 00, 1000])nsample)+'sampl D_'+str(dimx)+' X D_'+str(dimy)tit1)'_img/'+tit1+'_outlier.jpg', dpi = 100))yy, kmax))
-plotdensity(nsample, totdim, bin01, tit0, Ti = -1)
-plotdensity2(nsample, totdim, bin01, tit0, process01, vol = 0.25, tt = 5, Ti = -1)
-pricing01(totdim, nsample, a, strike, process01, aa = 0.25, itmax = -1, tt = 10)
-testdensity(nsample, totdim, bin01, Ti = -1)
-testdensity2d(nsample, totdim, bin01, nbasset)
-testdensity2d2(nsample, totdim, bin01, nbasset, process01 = lognormal_process2d, a1 = 0.25, a2 = 0.25, kk = 1)
-
-
-
-utilmy/zarchive/storage/alldata.py
-
-
-utilmy/zarchive/storage/allmodule.py
--------------------------functions----------------------
-aa_isanaconda()
-
-
-
-utilmy/zarchive/storage/benchmarktest.py
--------------------------functions----------------------
-payoff1(pricepath)
-payoff2(pricepath)
-payoffeuro1(st)
-payoffeuro1(st)
-
-
-
-utilmy/zarchive/storage/codeanalysis.py
--------------------------functions----------------------
-dedent()
-describe(obj)
-describe2(module, type1 = 0)
-describe_builtin(obj)
-describe_builtin2(obj, name1)
-describe_func(obj, method = False)
-describe_func2(obj, method = False, name1 = '')
-describe_func3(obj, method = False, name1 = '')
-describe_klass(obj)
-describe_klass2(obj, name1 = '')
-getmodule_doc(module1, file2 = '')
-indent()
-printinfile(vv, file2)
-wi(*args)
-wi2(*args)
-
-
-
-utilmy/zarchive/storage/dbcheck.py
-
-
-utilmy/zarchive/storage/derivatives.py
--------------------------functions----------------------
-CRR_option_value(S0, K, T, r, vol, otype, M = 4)
-N(d)
-brownian_logret(mu, vol, timegrid)
-brownian_process(s0, vol, timegrid)
-bs(S0, K, t, T, r, d, vol)
-bsbinarycall(S0, K, t, T, r, d, vol)
-bscall(S0, K, t, T, r, d, vol)
-bsdelta(St, K, t, T, r, d, vol, cp1)
-bsdvd(St, K, t, T, r, d, vol, cp)
-bsgamma(St, K, t, T, r, d, vol, cp)
-bsgammaspot(St, K, t, T, r, d, vol, cp)
-bsput(S0, K, t, T, r, d, vol)
-bsrho(St, K, t, T, r, d, vol, cp)
-bsstrikedelta(s0, K, t, T, r, d, vol, cp1)
-bsstrikegamma(s0, K, t, T, r, d, vol)
-bstheta(St, K, t, T, r, d, vol, cp)
-bsvanna(St, K, t, T, r, d, vol, cp)
-bsvega(St, K, t, T, r, d, vol, cp)
-bsvolga(St, K, t, T, r, d, vol, cp)
-d1f(St, K, t, T, r, d, vol)
-d2f(St, K, t, T, r, d, vol)
-dN(d)
-dN2d(x, y)
-gbm_logret(mu, vol, timegrid)
-gbm_process(s0, mu, vol, timegrid)
-gbm_process2(s0, mu, vol, timegrid)
-gbm_process_euro(s0, mu, vol, timegrid)
-gbmjump_logret(s0, mu, vol, lamda, jump_mu, jump_vol, timegrid)
-gbmjump_process(s0, mu, vol, lamda, jump_mu, jump_vol, timegrid)
-gdelta(St, K, t, T, r, d, vol, pv)
-generateall_multigbm1(process, ww, s0, mu, vol, corrmatrix, timegrid, nbsimul, nproc = -1, type1 = -1, strike = 0.0, cp = 1)
-generateallmultigbmfast(process, s0, mu, vol, corrmatrix, timegrid, nbsimul, type1)
-generateallmultigbmfast2(process, s0, mu, vol, corrmatrix, timegrid, nbsimul, type1)
-generateallmultiprocess(process, s0, mu, vol, corrmatrix, timegrid, nbsimul)
-generateallprocess(process, params01, timegrid1, nbsimul)
-generateallprocess_gbmeuro(process, params01, timegrid1, nbsimul)
-genmatrix(ni, nj, gg)
-gensymmatrix(ni, nj, pp)
-getbrowniandata(nbasset, step, simulk)
-getpv(discount, payoff, allpriceprocess)
-ggamma(St, K, t, T, r, d, vol, pv)
-gtheta(St, K, t, T, r, d, vol, pv)
-gvega(St, K, t, T, r, d, vol, pv)
-jump_process(lamda, jumps_mu, jumps_vol, timegrid)
-lgnormalmoment1(ww, fft, vol, corr, tt)
-lgnormalmoment2(ww, fft, vol, corr, tt)
-lgnormalmoment3(ww, fft, vol, corr, tt)
-lgnormalmoment4(ww, fft, vol, corr, tt)
-loadbrownian(nbasset, step, nbsimul)
-logret_to_price(s0, log_ret)
-logret_to_ret(log_returns)
-multibrownian_logret(mu, vol, corrmatrix, timegrid)
-multigbm_logret(mu, vol, corrmatrix, timegrid)
-multigbm_process(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
-multigbm_processfast(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
-multigbm_processfast2(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
-multigbm_processfast3(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
-multilogret_to_price(s0, log_ret)
-plot_greeks(function, greek)
-plot_greeks(function, greek)
-plot_values(function)
-savebrownian(nbasset, step, nbsimul)
-solve_momentmatch3(ww, b0, fft, vol, corr, tt)
-timegrid(timestep, maturityyears)
-
-
-
-utilmy/zarchive/storage/dl_utils.py
--------------------------functions----------------------
-feats_len(fname)
-file_len(fname)
-get_all_data(file)
-get_batch_data(file, index, size)
-get_xy(line)
-init_weight(hidden1, hidden2, acti_type)
-log(msg, file = "")
-log_p(msg, file = "")
-logfile(msg, file)
-save_prediction(file, prediction)
-save_weights(file, tuple_weights)
-
-
-
-utilmy/zarchive/storage/excel.py
--------------------------functions----------------------
-add_one(data)
-double_sum(x, y)
-get_workbook_name()
-matrix_mult(x, y)
-npdot()
-
-
-
-utilmy/zarchive/storage/global01.py
-
-
-utilmy/zarchive/storage/installNewPackage.py
-
-
-utilmy/zarchive/storage/java.py
--------------------------functions----------------------
-compileJAVA(javafile)
-compileJAVAtext(classname, javatxt, path1 = "")
-directorygetalltext(dir1, filetype1 = "*.*", withMeta = 0, fileout = "")
-directorygetalltext2(dir1, filetype1 = "*.*", type1 = 0, fileout = "")
-execute_javamain(java_file)
-getfpdffulltext(pdfile1)
-getfulltext(file1, withMeta = 0)
-importFolderJAR(dir1 = "", dirlevel = 1)
-importFromMaven()
-importJAR(path1 = "", path2 = "", path3 = "", path4 = "")
-inspectJAR(dir1)
-java_print(x)
-javaerror(jpJavaException)
-launchPDFbox()
-launchTIKA()
-listallfile(some_dir, pattern = "*.*", dirlevel = 1)
-loadSingleton(class1)
-showLoadedClass()
-writeText(text, filename)
-
-
-
-utilmy/zarchive/storage/multiprocessfunc.py
--------------------------functions----------------------
-bm_generator(bm, dt, n, type1)
-func(val, lock)
-init2(d)
-init_global1(l, r)
-integratene(its)
-integratenp(its, nchunk)
-integratenp2(its, nchunk)
-list_append(count, id, out_list)
-merge(d2)
-multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky, nbasset, n, price, type1 = 0, strike = 0, cp = 1)
-multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky, nbasset, n, price)
-ne_sin(x)
-np_sin(value)
-parzen_estimation(x_samples, point_x, h)
-res_shared2()
-
-
-
-utilmy/zarchive/storage/panda_util.py
--------------------------functions----------------------
-array_toexcel(vv, wk, r1)subset = 'rownum', take_last=True)level=0))a) = True)level=0))a):)
-csv_topanda(filein1, filename, tablen = 'data', lineterminator=",")
-database_topanda()
-df_topanda(vv, filenameh5, colname = 'data')
-excel_topanda(filein, fileout)
-excel_topandas(filein, fileout)
-folder_topanda()
-getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
-load_frompanda(filenameh5, colname = "data")
-numexpr_topanda(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-numpy_topanda(vv, fileout = "", colname = "data")
-panda_todabatase()
-panda_toexcel()
-panda_tofolder()
-panda_tonumpy(filename, nsize, tablen = 'data')
-remove_zeros()
-sort_array()
-sqlquery_topanda()
-unique_rows(a)
-
-
-
-utilmy/zarchive/storage/portfolio.py
--------------------------functions----------------------
-_date_align(dateref, datei, tmax, closei)
-_notnone(x)
-_reshape(x)
-array_todataframe(price, symbols = None, date1 = None)
-calc_optimal_weight(args, bounds, maxiter = 1)
-calc_print_correlrank(close2, symjp1, nlag, refindexname, toprank2 = 5, customnameid = [], customnameid2 = [])
-calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
-calc_statestock(close2, dateref, symfull)
-calcbasket_obj(wwvec, *data)
-calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
-causality_y1_y2(price2, price1, maxlag)
-cointegration(x, y)
-correl_fast(xn, y, nx)
-correl_rankbystock(stkid = [2, 5, 6], correl = [[1, 0], [0, 1]])
-correl_reducebytrigger(correl2, trigger)
-correlation_mat(matx, type1 = "robust", type2 = "correl")
-data_jpsector()
-dataframe_toarray(df)
-date_add_bdays(from_date, add_days)
-date_align(array1, dateref)
-date_alignfromdateref(array1, dateref)
-date_as_float(dt)
-date_diffindays(intdate1, intdate2)
-date_earningquater(t1)
-date_extract_dailyopenclosetime(spdateref1, market = 'us')
-date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
-date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
-date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
-date_finddateid(date1, dateref)
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
-date_is_3rdfriday(s)
-date_option_expiry(date)
-date_removetimezone(datelist)
-date_todatetime(tlist)
-datediff_inyear(startdate, enddate)
-dateint_todatetime(datelist1)
-dateint_tostring(datelist1, format1 = '%b-%y')
-datenumpy_todatetime(tt, islocaltime = True)
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_toint(datelist1)
-datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
-datetime_todate(tt)
-datetime_toint(datelist1)
-datetime_tointhour(datelist1)
-datetime_tonumpypdate(t, islocaltime = True)
-datetime_tostring(datelist1)
-fitness(p)
-folio_cost_turnover(wwall, bsk, dateref)
-folio_fixedweightprice(price, fixedww, costpa = 0.0)
-folio_fixedweightret(ret, fixedww)
-folio_inverseetf(price, costpa = 0.0)
-folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
-folio_riskpa(ret, targetvol = 0.1, volrange = 90)
-folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
-generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
-get_price2book(symbol)
-getdiff_fromquotes(close, timelag)
-getlogret_fromquotes(close, timelag = 1)
-getprice_fromret(ret, normprice = 100)
-getret_fromquotes(close, timelag = 1)
-imp_close_dateref(sym01, sdate = 20100101, edate = 20160628, datasource = '', typeprice = "close")
-imp_csvquote_topanda(file1, filenameh5, dfname = 'sym1', fromzone = 'Japan', tozone = 'UTC')
-imp_errorticker(symbols, start = "20150101", end = "20160101")
-imp_findticker(tickerlist, sym01, symname)
-imp_finviz()
-imp_finviz_financials()
-imp_finviz_news()
-imp_getcsvname(name1, date1, inter, tframe)
-imp_googleIntradayQuoteSave(name1, date1, inter, tframe, dircsv)
-imp_googleQuoteList(symbols, date1, date2, inter = 23400, tframe = 2000, dircsv = '', intraday1 = True)
-imp_googleQuoteSave(name1, date1, date2, dircsv)
-imp_numpyclose_frompandas(dbfile, symlist = [], t0 = 20010101, t1 = 20010101, priceid = "close", maxasset = 2500, tmax2 = 2000)
-imp_panda_checkquote(quotes)
-imp_panda_cleanquotes(df, datefilter)
-imp_panda_db_dumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
-imp_panda_getListquote(symbols, close1 = 'close', start='12/18/2015 00 = '12/18/2015 00:00:00+00:00', end='3/1/2016 00 = '3/1/2016 00:00:00+00:00', freq = '0d0h10min', filepd= 'E =  'E:\_data\stock\intraday_google.h5', tozone = 'Japan', fillna = True, interpo = True)
-imp_panda_getquote(filenameh5, dfname = "data")
-imp_panda_insertfoldercsv(dircsv, filepd= r'E =  r'E:\_data\stock\intraday_google.h5', fromtimezone = 'Japan', tozone = 'UTC')
-imp_panda_removeDuplicate(filepd=  'E =   'E:\_data\stock\intraday_google.h5')
-imp_panda_storecopy()
-imp_pd_merge_database(filepdfrom, filepdto)
-imp_quote_tohdfs(sym, qqlist, filenameh5, fromzone = 'Japan', tozone = 'UTC')
-imp_quotes_errordate(quotes, dateref)
-imp_quotes_fromtxt(stocklist01, filedir='E = 'E:/_data/stock/daily/20160610/jp', startdate = 20150101, endate = 20160616)
-imp_screening_addrecommend(string1, dbname = 'stock_recommend')
-imp_yahoo_financials_url(ticker_symbol, statement = "is", quarterly = False)
-imp_yahoo_periodic_figure(soup, yahoo_figure)
-imp_yahooticker(symbols, start = "20150101", end = "20160101", type1 = 1)
-isfloat(value)
-isint(x)
-load_asset_fromfile(file1)
-max_withposition(values)
-min_withposition(values)
-norm_fast(y, ny)
-np_countretsign(x)
-np_distance_l1(x, y, wwerr)
-np_similarity(x, y, wwerr = [], type1 = 0)
-np_trendtest(x, alpha  =  0.05)
-objective_criteria(bsk, criteria, date1 = None)
-pd_filterbydate(df, dtref = None, start='2016-06-06 00 = '2016-06-06 00:00:00', end='2016-06-14 00 = '2016-06-14 00:00:00', freq = '0d0h05min', timezone = 'Japan')
-pd_transform_asset(q0, q1, type1 = "spread")
-plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
-plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
-plot_priceintraday(data)
-price_normalize100(ret, normprice = 100)
-price_normalize_1d(ret, normprice = 100, dtype1 =  np.float16)
-regression(yreturn, xreturn, type1 = "elasticv")
-regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
-regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
-regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
-rolling_cointegration(x, y)
-rsk_calc_all_TA(df = 'panda_dataframe')
-save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
-similarity_correl(ret_close2, funargs)
-sk_cov_fromcorrel(correl, ret_close1)
-ta_highbandtrend1(close2, type1 = 0)
-ta_lowbandtrend1(close2, type1 = 0)
-volhisto_fromprice(price, t, volrange, axis = 0)
-volhisto_fromret(retbsk, t, volrange, axis = 0)
-
--------------------------methods----------------------
-Quote.__init__(self)
-Quote.__repr__(self)
-Quote.append(self, dt, open_, high, low, close, volume)
-Quote.read_csv(self, filename)
-Quote.to_csv(self)
-Quote.write_csv(self, filename)
-googleIntradayQuote.__init__(self, symbol, interval_seconds = 300, num_days = 5)
-googleQuote.__init__(self, symbol, start_date, end_date = datetime.date.today()
-index.__init__(self, id1, sym, ww, tstart)
-index._objective_criteria(self, bsk)
-index._statecalc(self)
-index._weightcalc_constant(self, ww2, t)
-index._weightcalc_generic(self, wwvec, t)
-index._weightcalc_regime2(self, wwvec, t)
-index.calc_optimal_weight(self, maxiter = 1)
-index.calcbasket_obj(self, wwvec)
-index.close()
-index.help()
-index.updatehisto()
-searchSimilarity.__generate_return__(self, nlag)
-searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
-searchSimilarity.__overweight__(self, px)
-searchSimilarity.export_results(self, filename)
-searchSimilarity.get_rankresult(self, filetosave = '')
-searchSimilarity.launch_search(self)
-searchSimilarity.load_quotes_fromdb(self, picklefile = '')
-searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
-searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
-searchSimilarity.staticmethod(self, x)
-
-
-utilmy/zarchive/storage/rec_data.py
--------------------------functions----------------------
-_build_interaction_matrix(rows, cols, data)
-_download_movielens(dest_path)
-_get_movie_raw_metadata()
-_get_movielens_path()
-_get_raw_movielens_data()
-_parse(data)
-get_dense_triplets(uids, pids, nids, num_users, num_items)
-get_movielens_data()
-get_movielens_item_metadata(use_item_ids)
-get_triplets(mat)
-
-
-
-utilmy/zarchive/storage/rec_metrics.py
--------------------------functions----------------------
-full_auc(model, ground_truth)
-precision_at_k(model, ground_truth, k, user_features = None, item_features = None)
-predict(model, uid, pids)
-
-
-
-utilmy/zarchive/storage/sobol.py
--------------------------functions----------------------
-Plot2D_random_save(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph, )
-Plot2D_random_show(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph)
-acf(data)
-binary_process(a, z, k)
-call_process(a, z, k)
-comoment(xx, yy, nsample, kx, ky)
-convert_csv2hd5f(filein1, filename)
-doublecheck_outlier(fileoutlier, ijump, nsample = 4000, trigger1 = 0.1, )
-getdvector(dimmax, istart, idimstart)
-getoutlier_fromrandom(filename, jmax1, imax1, isamplejum, nsample, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
-getoutlier_fromrandom_fast(filename, jmax1, imax1, isamplejum, nsample, trigger1 = 0.28, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
-getrandom_tonumpy(filename, nbdim, nbsample)
-lognormal_process2d(a1, z1, a2, z2, k)
-numexpr_vect_calc(filename, i0, imax, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-outlier_clean(vv2)
-overwrite_data(fileoutlier, vv2)
-pathScheme_(T, n, zz)
-pathScheme_bb(T, n, zz)
-pathScheme_std(T, n, zz)
-permute(yy, kmax)
-permute2(xx, yy, kmax)
-plot_outlier(fileoutlier, kk)
-plotdensity(nsample, totdim, bin01, tit0, Ti = -1)
-plotdensity2(nsample, totdim, bin01, tit0, process01, vol = 0.25, tt = 5, Ti = -1)
-pricing01(totdim, nsample, a, strike, process01, aa = 0.25, itmax = -1, tt = 10)
-testdensity(nsample, totdim, bin01, Ti = -1)
-testdensity2d(nsample, totdim, bin01, nbasset)
-testdensity2d2(nsample, totdim, bin01, nbasset, process01 = lognormal_process2d, a1 = 0.25, a2 = 0.25, kk = 1)
-
-
-
-utilmy/zarchive/storage/stateprocessor.py
--------------------------functions----------------------
-and2(tuple1)
-ff(x, symfull = symfull)
-gap(close, t0, t1, lag)
-get_stocklist(clf, s11, initial, show1 = 1)
-get_treeselect(stk, s1 = s1, xnewdata = None, newsample = 5, show1 = 1, nbtree = 5, depthtree = 10)
-load_patternstate(name1)
-perf(close, t0, t1)
-printn(ss, symfull = symfull, s1 = s1)
-process_stock(stkstr, show1 = 1)
-show(ll, s1 = s1)
-sort(x, col, asc)
-store_patternstate(tree, sym1, theme, symfull = symfull)
-
-
-
-utilmy/zarchive/storage/symbolicmath.py
--------------------------functions----------------------
-EEvarbrownian(ff1d)
-EEvarbrownian2d(ff)
-N(x)
-bs(s0, K, t, T, r, d, vol)
-bsbinarycall(s0, K, t, T, r, d, vol)
-bscall(s0, K, t, T, r, d, vol)
-bsdelta(St, K, t, T, r, d, vol, cp1)
-bsdvd(St, K, t, T, r, d, vol, cp)
-bsgamma(St, K, t, T, r, d, vol, cp)
-bsgammaspot(St, K, t, T, r, d, vol, cp)
-bsput(s0, K, t, T, r, d, vol)
-bsrho(St, K, t, T, r, d, vol, cp)
-bsstrikedelta(s0, K, t, T, r, d, vol, cp1)
-bsstrikegamma(s0, K, t, T, r, d, vol)
-bstheta(St, K, t, T, r, d, vol, cp)
-bsvanna(St, K, t, T, r, d, vol, cp)
-bsvega(St, K, t, T, r, d, vol, cp)
-bsvolga(St, K, t, T, r, d, vol, cp)
-d1f(St, K, t, T, r, d, vol)
-d1xf(St, K, t, T, r, d, vol)
-d2f(St, K, t, T, r, d, vol)
-d2xf(St, K, t, T, r, d, vol)
-dN(x)
-decomposecorrel(m1)
-diffn(ff, x0, kk)
-dnn(x, y, p)
-dnn2(x, y, p)
-factorpoly(pp)
-lagrangian2d(ll)
-nn(x)
-nn2(x, y, p)
-print2(a0, a1 = '', a2 = '', a3 = '', a4 = '', a5 = '', a6 = '', a7 = '', a8 = '')
-spp()
-taylor2(ff, x0, n)
-
-
-
-utilmy/zarchive/storage/technical_indicator.py
--------------------------functions----------------------
-ACCDIST(df, n)
-ADX(df, n, n_ADX)
-ATR(df, n)
-BBANDS(df, n)
-CCI(df, n)
-COPP(df, n)
-Chaikin(df)
-DONCH(df, n)
-EMA(df, n)
-EOM(df, n)
-FORCE(df, n)
-KELCH(df, n)
-KST(df, r1, r2, r3, r4, n1, n2, n3, n4)
-MA(df, n)
-MACD(df, n_fast, n_slow)
-MFI(df, n)
-MOM(df, n)
-MassI(df)
-OBV(df, n)
-PPSR(df)
-RET(df, n)
-RMI(df, n = 14, m = 10)
-ROC(df, n)
-RSI(df, n = 14)
-RWI(df, nn, nATR)
-STDDEV(df, n)
-STO(df)
-STOK(df)
-TRIX(df, n)
-TSI(df, r, s)
-ULTOSC(df)
-Vortex(df, n)
-date_earningquater(t1)
-date_option_expiry(date)
-distance(df, tk, tkname)
-distance_day(df, tk, tkname)
-findhigher(item, vec)
-findlower(item, vec)
-linearreg(a, *args)
-nbday_high(df, n)
-nbday_high(df, n)
-nbday_low(df, n)
-nbtime_reachtop(df, n, trigger = 0.005)
-np_find(item, vec)
-np_find_maxpos(values)
-np_find_minpos(values)
-np_findlocalmax(v)
-np_findlocalmin(v)
-np_sortbycolumn(arr, colid, asc = True)
-optionexpiry_dist(df)
-qearning_dist(df)
-supportmaxmin1(df1)
-
-
-
-utilmy/zarchive/storage/testmulti.py
--------------------------functions----------------------
-mc01()
-mc02()
-multiprocess(processes, samples, x, widths)
-random_tree(Data)
-random_tree(Data)
-serial(samples, x, widths)
-test01()
-test01()
-
-
-
-utilmy/zarchive/storage/theano_imdb.py
--------------------------functions----------------------
-get_dataset_file(dataset, default_dataset, origin)
-load_data(path = "imdb.pkl", n_words = 100000, valid_portion = 0.1, maxlen = None, sort_by_len = True)
-prepare_data(seqs, labels, maxlen = None)
-
-
-
-utilmy/zarchive/storage/theano_lstm.py
--------------------------functions----------------------
-_p(pp, name)
-adadelta(lr, tparams, grads, x, mask, y, cost)
-build_model(tparams, options)
-dropout_layer(state_before, use_noise, trng)
-get_dataset(name)
-get_layer(name)
-get_minibatches_idx(n, minibatch_size, shuffle = False)
-init_params(options)
-init_tparams(params)
-load_params(path, params)
-lstm_layer(tparams, state_below, options, prefix = 'lstm', mask = None)
-numpy_floatX(data)
-ortho_weight(ndim)
-param_init_lstm(options, params, prefix = 'lstm')
-pred_error(f_pred, prepare_data, data, iterator, verbose = False)
-pred_probs(f_pred_prob, prepare_data, data, iterator, verbose = False)
-rmsprop(lr, tparams, grads, x, mask, y, cost)
-sgd(lr, tparams, grads, x, mask, y, cost)
-train_lstm(dim_proj = 128, # word embeding dimension and LSTM number of hidden units.patience = 10, # Number of epoch to wait before early stop if no progressmax_epochs = 5000, # The maximum number of epoch to rundispFreq = 10, # Display to stdout the training progress every N updatesdecay_c = 0., # Weight decay for the classifier applied to the U weights.not used for adadelta and rmsprop)n_words = 10000, # Vocabulary sizeprobably need momentum and decaying learning rate).encoder = 'lstm', # TODO: can be removed must be lstm.saveto = 'lstm_model.npz', # The best model will be saved therevalidFreq = 370, # Compute the validation error after this number of update.saveFreq = 1110, # Save the parameters after every saveFreq updatesmaxlen = 100, # Sequence longer then this get ignoredbatch_size = 16, # The batch size during training.valid_batch_size = 64, # The batch size used for validation/test set.dataset = 'imdb', noise_std = 0., use_dropout = True, # if False slightly faster, but worst test errorreload_model = None, # Path to a saved model we want to start from.test_size = -1, # If >0, we keep only this number of test example.)
-unzip(zipped)
-zipp(params, tparams)
-
-
-
-utilmy/zarchive/util.py
--------------------------functions----------------------
-a_autoreload()
-a_cleanmemory()
-a_info_conda_jupyter()
-a_isanaconda()
-a_module_codesample(module_str = 'pandas')
-a_module_doc(module_str = 'pandas')
-a_module_generatedoc(module_str = "pandas", fileout = '')
-a_run_ipython(cmd1)
-a_start_log(id1 = '', folder = 'aaserialize/log/')
-aa_unicode_ascii_utf8_issue()
-date_add_bday(from_date, add_days)
-date_add_bdays(from_date, add_days)
-date_allinfo()
-date_convert(t1, fromtype, totype)
-date_diffinbday(intd2, intd1)
-date_diffinday(intdate1, intdate2)
-date_diffinyear(startdate, enddate)
-date_finddateid(date1, dateref)
-date_gencalendar(start = '2010-01-01', end = '2010-01-15', country = 'us')
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
-date_holiday()
-date_now(i = 0)
-date_nowtime(type1 = 'str', format1= "%Y-%m-%d %H =  "%Y-%m-%d %H:%M:%S:%f")
-date_remove_bdays(from_date, add_days)
-date_tofloat(dt)
-dateint_todatetime(datelist1)
-datenumpy_todatetime(tt, islocaltime = True)
-datestring_todatetime(datelist1, format1 =  "%Y%m%d")
-datestring_toint(datelist1)
-datetime_toint(datelist1)
-datetime_tonumpydate(t, islocaltime = True)
-datetime_tostring(datelist1)
-find(item, vec)
-findhigher(x, vec)
-findlower(x, vec)
-findnone(vec)
-finds(itemlist, vec)
-findx(item, vec)
-googledrive_get()
-googledrive_list()
-googledrive_put()
-isexist(a)
-isfloat(x)
-isint(x)
-load(folder = '/folder1/keyname', isabsolutpath = 0)
-max_kpos(arr, kth)
-min_kpos(arr, kth)
-np_acf(data)
-np_addcolumn(arr, nbcol)
-np_addrow(arr, nbrow)
-np_and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
-np_cleanmatrix(m)
-np_comoment(xx, yy, nsample, kx, ky)
-np_dict_tolist(dd, withkey = 0)
-np_dict_tostr_key(dd)
-np_dict_tostr_val(dd)
-np_dictordered_create()
-np_enumerate2(vec_1d)
-np_find(item, vec)
-np_find_maxpos(values)
-np_find_maxpos_2nd(numbers)
-np_find_minpos(values)
-np_findfirst(item, vec)
-np_findlocalmax(v, trig)
-np_findlocalmax2(v, trig)
-np_findlocalmin(v, trig)
-np_findlocalmin2(v, trig)
-np_int_tostr(i)
-np_interpolate_nan(y)
-np_list_flatten(seq)
-np_list_tofreqdict(l1, wweight = [])
-np_list_unique(seq)
-np_ma(vv, n)
-np_map_dict_to_bq_schema(source_dict, schema, dest_dict)
-np_memory_array_adress(x)
-np_mergelist(x0, x1)
-np_minimize(fun_obj, x0 = [0.0], argext = (0, 0)
-np_minimizeDE(fun_obj, bounds, name1, maxiter = 10, popsize = 5, solver = None)
-np_nan_helper(y)
-np_numexpr_tohdfs(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-np_numexpr_vec_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
-np_pivotable_create(table, left, top, value)
-np_pivottable_count(mylist)
-np_remove_NA_INF_2d(X)
-np_remove_zeros(vv, axis1 = 1)
-np_removelist(x0, xremove = [])
-np_sort(arr, colid, asc = 1)
-np_sort(arr, colid, asc = 1)
-np_sortbycol(arr, colid, asc = True)
-np_sortbycolumn(arr, colid, asc = True)
-np_sortcol(arr, colid, asc = 1)
-np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
-np_torecarray(arr, colname)
-np_transform2d_int_1d(m2d, onlyhalf = False)
-np_uniquerows(a)
-obj_getclass_of_method(meth)
-obj_getclass_property(pfi)
-os_config_getfile(file1)
-os_config_setfile(dict_params, outfile, mode1 = 'w+')
-os_csv_process(file1)
-os_file_are_same_file_types(paths)
-os_file_exist(file1)
-os_file_extracttext(output_file, dir1, pattern1 = "*.html", htmltag = 'p', deepness = 2)
-os_file_get_file_extension(file_path)
-os_file_get_path_from_stream(maybe_stream)
-os_file_getname(path)
-os_file_getpath(path)
-os_file_gettext(file1)
-os_file_isame(file1, file2)
-os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
-os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
-os_file_norm_paths(paths, marker = '*')
-os_file_normpath(path)
-os_file_read(file1)
-os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
-os_file_replace(source_file_path, pattern, substring)
-os_file_replacestring1(findStr, repStr, filePath)
-os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
-os_file_size(file1)
-os_file_try_to_get_extension(path_or_strm)
-os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
-os_folder_create(directory)
-os_folder_is_path(path_or_stream)
-os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
-os_gui_popup_show(txt)
-os_path_append(p1, p2 = None, p3 = None, p4 = None)
-os_path_change(path1)
-os_path_current()
-os_path_norm(pth)
-os_print_tofile(vv, file1, mode1 = 'a')
-os_process_2()
-os_process_run(cmd_list = ['program', 'arg1', 'arg2'], capture_output = False)
-os_processify_fun(func)
-os_split_dir_file(dirfile)
-os_wait_cpu(priority = 300, cpu_min = 50)
-os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
-pd_applyfun_col(df, newcol, ff, use_colname = "all/[colname]")
-pd_array_todataframe(array, colname = None, index1 = None, dotranspose = False)
-pd_col_addfrom_dfmap(df, dfmap, colkey, colval, df_colused, df_colnew, exceptval = -1, inplace =  True)
-pd_create_colmapdict_nametoint(df)
-pd_createdf(array1, col1 = None, idx1 = None)
-pd_csv_randomread(filename, nsample = 10000, filemaxline = -1, dtype = None)
-pd_dataframe_toarray(df)
-pd_date_intersection(qlist)
-pd_df_todict(df1, colkey = 'table', excludekey = [''], onlyfirstelt =  True)
-pd_df_todict2(df1, colkey = 'table', excludekey = [''], onlyfirstelt =  True)
-pd_dtypes(df, columns = [], targetype = 'category')
-pd_dtypes_totype2(df, columns = [], targetype = 'category')
-pd_dtypes_type1_totype2(df, fromtype = str, targetype = str)
-pd_extract_col_idx_val(df)
-pd_extract_col_uniquevalue_tocsv(df, colname = '', csvfile = '')
-pd_find(df, regex_pattern = '*', col_restrict = [], isnumeric = False, doreturnposition = False)
-pd_h5_addtable(df, tablename, dbfile='F = 'F:\temp_pandas.h5')
-pd_h5_cleanbeforesave(df)
-pd_h5_dumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
-pd_h5_fromcsv_tohdfs(dircsv = 'dir1/dir2/', filepattern = '*.csv', tofilehdfs = 'file1.h5', tablename = 'df', col_category = [], dtype0 = None, encoding = 'utf-8', chunksize =  2000000, mode = 'a', format = 'table', complib = None)
-pd_h5_load(filenameh5='E = 'E:/_data/_data_outlier.h5', table_id = 'data', exportype = "pandas", rowstart = -1, rowend = -1, cols = [])
-pd_h5_save(df, filenameh5='E = 'E:/_data/_data_outlier.h5', key = 'data')
-pd_h5_tableinfo(filenameh5, table)
-pd_info(df, doreturn = 1)
-pd_info_memsize(df, memusage = 0)
-pd_insertdatecol(df_insider, format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
-pd_insertrow(df, rowval, index1 = None, isreset = 1)
-pd_is_categorical(z)
-pd_np_toh5file(numpyarr, fileout = "file.h5", table1 = 'data')
-pd_removecol(df1, name1)
-pd_removerow(df, row_list_index = [23, 45])
-pd_replacevalues(df, matrix)
-pd_resetindex(df)
-pd_row_findlast(df, colid = 0, emptyrowid = None)
-pd_row_select(df, **conditions)
-pd_split_col_idx_val(df)
-pd_splitdf_inlist(df, colid, type1 = "dict")
-pd_str_encoding_change(df, cols, fromenc = 'iso-8859-1', toenc = 'utf-8')
-pd_str_isascii(x)
-pd_str_unicode_tostr(df, targetype = str)
-plot_XY(xx, yy, zcolor = None, tsize = None, title1 = '', xlabel = '', ylabel = '', figsize = (8, 6)
-plot_heatmap(frame, ax = None, cmap = None, vmin = None, vmax = None, interpolation = 'nearest')
-print_topdf()
-py_exception_print()
-py_importfromfile(modulename, dir1)
-py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
-py_log_write(LOGFILE, prefix)
-py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
-py_save_obj(obj1, keyname = '', otherfolder = 0)
-py_save_obj_dill(obj1, keyname = '', otherfolder = 0)
-read_funding_data(path)
-read_funding_data(path)
-read_funding_data(path)
-save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
-save_test(folder = '/folder1/keyname', isabsolutpath = 0)
-session_guispyder_load(filename)
-session_guispyder_save(filename)
-session_load(name = 'test_20160815')
-session_load_function(name = 'test_20160815')
-session_save(name = 'test')
-session_save_function(name = 'test')
-session_spyder_showall()
-sql_getdate()
-str_empty_string_array(x, y = 1)
-str_empty_string_array_numpy(nx, ny = 1)
-str_is_az09char(x)
-str_is_azchar(x)
-str_isfloat(value)
-str_make_unicode(input, errors = 'replace')
-str_match_fuzzy(xstring, list_string)
-str_parse_stringcalendar(cal)
-str_reindent(s, numSpaces)
-str_split2(delimiters, string, maxsplit = 0)
-str_split_pattern(sep2, ll, maxsplit = 0)
-str_to_unicode(x, encoding = 'utf-8')
-str_to_utf8(x)
-z_key_splitinto_dir_name(keyname)
-ztest_processify()
-
--------------------------methods----------------------
-FundingRecord.__str__(self)
-FundingRecord.parse(klass, row)
-testclass.__init__(self, x)
-testclass.z_autotest(self)
-
-
-utilmy/zarchive/util_aws.py
--------------------------functions----------------------
-aws_accesskey_get(access = '', key = '')
-aws_conn_create(region = "ap-northeast-2", access = '', key = '')
-aws_conn_do(action = '', region = "ap-northeast-2")
-aws_conn_getallregions(conn = None)
-aws_conn_getinfo(conn)
-aws_credentials(account = None)
-aws_ec2_allocate_elastic_ip(con, instance_id = "", elastic_ip = '', region = "ap-northeast-2")
-aws_ec2_cmd_ssh(cmdlist =   ["ls " ], host = 'ip', doreturn = 0, ssh = None, username = 'ubuntu', keyfilepath = '')
-aws_ec2_create_con(contype = 'sftp/ssh', host = 'ip', port = 22, username = 'ubuntu', keyfilepath = '', password = '', keyfiletype = 'RSA', isprint = 1)
-aws_ec2_get_id(ipadress = '', instance_id = '')
-aws_ec2_get_instanceid(con, ip_address)
-aws_ec2_printinfo(instance = None, ipadress = "", instance_id = "")
-aws_ec2_python_script(script_path, args1, host)
-aws_ec2_res_start(con, region, key_name, ami_id, inst_type = "cx2.2", min_count  = 1, max_count  = 1, pars= {"security_group" =  {"security_group": [""], "disk_size": 25, "disk_type": "ssd", "volume_type": "gp2"})
-aws_ec2_res_stop(con, ipadress = "", instance_id = "")
-aws_ec2_spot_start(con, region, key_name = "ecsInstanceRole", inst_type = "cx2.2", ami_id = "", pricemax = 0.15, elastic_ip = '', pars= {"security_group" =  {"security_group": [""], "disk_size": 25, "disk_type": "ssd", "volume_type": "gp2"})
-aws_ec2_spot_stop(con, ipadress = "", instance_id = "")
-aws_s3_file_read(bucket1, filepath, isbinary = 1)
-aws_s3_folder_printtall(bucket_name = 'zdisk')
-aws_s3_getbucketconn(s3dir)
-aws_s3_getfrom_s3(froms3dir = 'task01/', todir = '', bucket_name = 'zdisk')
-aws_s3_puto_s3(fromdir_file = 'dir/file.zip', todir = 'bucket/folder1/folder2')
-aws_s3_url_split(url)
-ztest_01()
-
--------------------------methods----------------------
-aws_ec2_ssh.__init__(self, hostname, username = 'ubuntu', key_file = None, password = None)
-aws_ec2_ssh._help_ssh(self)
-aws_ec2_ssh.cmd2(self, cmd1)
-aws_ec2_ssh.command(self, cmd)
-aws_ec2_ssh.command_list(self, cmdlist)
-aws_ec2_ssh.get(self, remotefile, localfile)
-aws_ec2_ssh.get_all(self, remotepath, localpath)
-aws_ec2_ssh.jupyter_kill(self)
-aws_ec2_ssh.jupyter_start(self)
-aws_ec2_ssh.listdir(self, remotedir)
-aws_ec2_ssh.put(self, localfile, remotefile)
-aws_ec2_ssh.put_all(self, localpath, remotepath)
-aws_ec2_ssh.python_script(self, script_path, args1)
-aws_ec2_ssh.sftp_walk(self, remotepath)
-aws_ec2_ssh.write_command(self, text, remotefile)
-
-
-utilmy/zarchive/util_min.py
--------------------------functions----------------------
-a_get_pythonversion()
-a_isanaconda()
-isexist(a)
-isfloat(x)
-isint(x)
-load(folder = '/folder1/keyname', isabsolutpath = 0)
-os_file_exist(file1)
-os_file_getname(path)
-os_file_getpath(path)
-os_file_gettext(file1)
-os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
-os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
-os_file_read(file1)
-os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
-os_file_replacestring1(findStr, repStr, filePath)
-os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
-os_file_size(file1)
-os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
-os_folder_create(directory)
-os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
-os_path_append(p1, p2 = None, p3 = None, p4 = None)
-os_path_change(path1)
-os_path_current()
-os_path_norm(pth)
-os_print_tofile(vv, file1, mode1 = 'a')
-os_split_dir_file(dirfile)
-os_wait_cpu(priority = 300, cpu_min = 50)
-os_zip_checkintegrity(filezip1)
-os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
-os_zipfile(folderin, folderzipname, iscompress = True)
-os_zipfolder(dir_tozip = '/zdisks3/output', zipname = '/zdisk3/output.zip', dir_prefix = None, iscompress = True)
-py_importfromfile(modulename, dir1)
-py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
-py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
-py_save_obj(obj, folder = '/folder1/keyname', isabsolutpath = 0)
-save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
-save_test(folder = '/folder1/keyname', isabsolutpath = 0)
-z_key_splitinto_dir_name(keyname)
-
-
-
-utilmy/zarchive/util_ml.py
--------------------------functions----------------------
-create_adam_optimizer(learning_rate, momentum)
-create_bias_variable(name, shape)
-create_weight_variable(name, shape)
-parse_args(ppa = None, args =  {})
-parse_args2(ppa = None)
-tf_check()
-tf_global_variables_initializer(sess = None)
-visualize_result()
-
--------------------------methods----------------------
-TextLoader.__init__(self, data_dir, batch_size, seq_length)
-TextLoader.create_batches(self)
-TextLoader.load_preprocessed(self, vocab_file, tensor_file)
-TextLoader.next_batch(self)
-TextLoader.preprocess(self, input_file, vocab_file, tensor_file)
-TextLoader.reset_batch_pointer(self)
-
-
-utilmy/zarchive/util_sql.py
--------------------------functions----------------------
-sql_create_dbengine(type1 = '', dbname = '', login = '', password = '', url = 'localhost', port = 5432)
-sql_delete_table(name, dbengine)
-sql_get_dbschema(dburl='sqlite = 'sqlite:///aapackage/store/yahoo.db', dbengine = None, isprint = 0)
-sql_insert_csv(csvfile, dbtable, dbengine, col_drop = [])
-sql_insert_csv2(csvfile = '', dbtable = '', columns = [], dbengine = None, nrows =  10000)
-sql_insert_df(df, dbtable, dbengine, col_drop = ['id'], verbose = 1)
-sql_insert_excel(file1 = '.xls', dbengine = None, dbtype = '')
-sql_mysql_insert_excel()
-sql_pivotable(dbcon, ss = 'select  ')
-sql_postgres_create_table(mytable = '', database = '', username = '', password = '')
-sql_postgres_pivot()
-sql_postgres_query_to_csv(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', csv_out = '')
-sql_query(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', dbengine = None, output = 'df', dburl='sqlite = 'sqlite:///aaserialize/store/finviz.db')
-
-
-
-utilmy/zarchive/util_web.py
--------------------------functions----------------------
-web_getjson_fromurl(url)
-web_getlink_fromurl(url)
-web_getrawhtml(url1)
-web_gettext_fromhtml(file1, htmltag = 'p')
-web_gettext_fromurl(url, htmltag = 'p')
-web_importio_todataframe(apiurl1, isurl = 1)
-web_restapi_toresp(apiurl1)
-web_send_email(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
-web_send_email_tls(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
-web_sendurl(url1)
-
-
-
-utilmy/zarchive/utilgeo.py
--------------------------functions----------------------
-df_to_geojson(df, col_properties, lat = 'latitude', lon = 'longitude')
-
-
-
-utilmy/zarchive/zzarchive/zutil.py
--------------------------functions----------------------
-_os_file_search_fast(fname, texts = None, mode = "regex/str")
-a_cleanmemory()
-a_help()
-a_info_conda_jupyter()
-a_run_cmd(cmd1)
-a_run_ipython(cmd1)
-a_start_log(id1 = "", folder = "aaserialize/log/")
-aa_unicode_ascii_utf8_issue()
-date_add_bday(from_date, add_days)
-date_add_bdays(from_date, add_days)
-date_allinfo()
-date_diffinbday(intd2, intd1)
-date_diffinday(intdate1, intdate2)
-date_finddateid(date1, dateref)
-date_gencalendar(start = "2010-01-01", end = "2010-01-15", country = "us")
-date_generatedatetime(start = "20100101", nbday = 10, end = "")
-date_holiday()
-date_now(i = 0)
-date_nowtime(type1 = "str", format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
-date_remove_bdays(from_date, add_days)
-dateint_todatetime(datelist1)
-datenumpy_todatetime(tt, islocaltime = True)
-datestring_todatetime(datelist1, format1 = "%Y%m%d")
-datestring_toint(datelist1)
-datetime_toint(datelist1)
-datetime_tonumpydate(t, islocaltime = True)
-datetime_tostring(datelist1)
-find(xstring, list_string)
-find_fuzzy(xstring, list_string)
-findhigher(x, vec)
-findlower(x, vec)
-findnone(vec)
-finds(itemlist, vec)
-findx(item, vec)
-isanaconda()
-isfloat(x)
-isint(x)
-load(folder = "/folder1/keyname", isabsolutpath = 0)
-np_addcolumn(arr, nbcol)
-np_addrow(arr, nbrow)
-np_and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
-np_cleanmatrix(m)
-np_dict_tolist(dd, withkey = 0)
-np_dict_tostr_key(dd)
-np_dict_tostr_val(dd)
-np_dictordered_create()
-np_enumerate2(vec_1d)
-np_find(item, vec)
-np_find_maxpos(values)
-np_find_maxpos_2nd(numbers)
-np_find_minpos(values)
-np_findfirst(item, vec)
-np_findlocalmax(v, trig)
-np_findlocalmax2(v, trig)
-np_findlocalmin(v, trig)
-np_findlocalmin2(v, trig)
-np_int_tostr(i)
-np_interpolate_nan(y)
-np_list_flatten(seq)
-np_list_tofreqdict(l1, wweight = None)
-np_list_unique(seq)
-np_ma(vv, n)
-np_max_kpos(arr, kth)
-np_memory_array_adress(x)
-np_mergelist(x0, x1)
-np_min_kpos(arr, kth)
-np_minimize(fun_obj, x0 = None, argext = (0, 0)
-np_minimize_de(fun_obj, bounds, name1, maxiter = 10, popsize = 5, solver = None)
-np_nan_helper(y)
-np_numexpr_vec_calc()
-np_pivotable_create(table, left, top, value)
-np_pivottable_count(mylist)
-np_remove_na_inf_2d(x)
-np_remove_zeros(vv, axis1 = 1)
-np_removelist(x0, xremove = None)
-np_sort(arr, colid, asc = 1)
-np_sortbycol(arr, colid, asc = True)
-np_sortbycolumn(arr, colid, asc = True)
-np_sortcol(arr, colid, asc = 1)
-np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
-np_torecarray(arr, colname)
-np_transform2d_int_1d(m2d, onlyhalf = False)
-np_uniquerows(a)
-os_config_getfile(file1)
-os_config_setfile(dict_params, outfile, mode1 = "w+")
-os_csv_process(file1)
-os_file_are_same_file_types(paths)
-os_file_exist(file1)
-os_file_extracttext(output_file, dir1, pattern1 = "*.html", htmltag = "p", deepness = 2)
-os_file_get_extension(file_path)
-os_file_get_path_from_stream(maybe_stream)
-os_file_getname(path)
-os_file_getpath(path)
-os_file_gettext(file1)
-os_file_isame(file1, file2)
-os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
-os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
-os_file_norm_paths(paths, marker = "*")
-os_file_normpath(path)
-os_file_read(file1)
-os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
-os_file_replace(source_file_path, pattern, substring)
-os_file_replacestring1(find_str, rep_str, file_path)
-os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
-os_file_search_content(srch_pattern = None, mode = "str", dir1 = "", file_pattern = "*.*", dirlevel = 1)
-os_file_size(file1)
-os_file_try_to_get_extension(path_or_strm)
-os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
-os_folder_create(directory)
-os_folder_is_path(path_or_stream)
-os_folder_robocopy(from_folder = "", to_folder = "", my_log="H = "H:/robocopy_log.txt")
-os_gui_popup_show(txt)
-os_path_append(p1, p2 = None, p3 = None, p4 = None)
-os_path_change(path1)
-os_path_current()
-os_path_norm(pth)
-os_platform()
-os_print_tofile(vv, file1, mode1 = "a")
-os_process_2()
-os_process_run(cmd_list, capture_output = False)
-os_split_dir_file(dirfile)
-os_wait_cpu(priority = 300, cpu_min = 50)
-os_zip_checkintegrity(filezip1)
-os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = "zdisk/test", isprint = 1)
-os_zipfile(folderin, folderzipname, iscompress = True)
-os_zipfolder(dir_tozip = "/zdisks3/output", zipname = "/zdisk3/output.zip", dir_prefix = True, iscompress=Trueimport shutil_ = iscompressdir_tozip = dir_tozip if dir_tozip[-1] != "/" else dir_tozip[ = Trueimport shutil_ = iscompressdir_tozip = dir_tozip if dir_tozip[-1] != "/" else dir_tozip[:-1]if dir_prefix:)
-pd_applyfun_col(df, newcol, ff, use_colname = "all/[colname]")
-pd_array_todataframe(array, colname = None, index1 = None, dotranspose = False)
-pd_col_addfrom_dfmap(df, dfmap, colkey, colval, df_colused, df_colnew, exceptval = -1, inplace = Truedfmap, colkey = colkey, colval=colval)rowi) = colval)rowi):)
-pd_create_colmapdict_nametoint(df)
-pd_createdf(array1, col1 = None, idx1 = None)
-pd_csv_randomread(filename, nsample = 10000, filemaxline = -1, dtype = None)
-pd_dataframe_toarray(df)
-pd_date_intersection(qlist)
-pd_df_todict(df, colkey = "table", excludekey = ("", )
-pd_df_todict2(df, colkey = "table", excludekey = ("", )
-pd_dtypes(df, columns = ()
-pd_dtypes_totype2(df, columns = ()
-pd_dtypes_type1_totype2(df, fromtype = str, targetype = str)
-pd_extract_col_idx_val(df)
-pd_extract_col_uniquevalue_tocsv(df, colname = "", csvfile = "")
-pd_find(df, regex_pattern = "*", col_restrict = None, isnumeric = False, doreturnposition = False)
-pd_h5_addtable(df, tablename, dbfile="F = "F:\temp_pandas.h5")
-pd_h5_cleanbeforesave(df)
-pd_h5_dumpinfo(dbfile=r"E = r"E:\_data\stock\intraday_google.h5")
-pd_h5_fromcsv_tohdfs(dircsv = "dir1/dir2/", filepattern = "*.csv", tofilehdfs = "file1.h5", tablename = "df", ), dtype0 = None, encoding = "utf-8", chunksize = 2000000, mode = "a", form = "table", complib = None, )
-pd_h5_load(filenameh5="E = "E:/_data/_data_outlier.h5", table_id = "data", exportype = "pandas", rowstart = -1, rowend = -1, ), )
-pd_h5_save(df, filenameh5="E = "E:/_data/_data_outlier.h5", key = "data")
-pd_h5_tableinfo(filenameh5, table)
-pd_info(df, doreturn = 1)
-pd_info_memsize(df, memusage = 0)
-pd_insertdatecol(df, col, format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
-pd_insertrow(df, rowval, index1 = None, isreset = 1)
-pd_is_categorical(z)
-pd_np_toh5file(numpyarr, fileout = "file.h5", table1 = "data")
-pd_removecol(df1, name1)
-pd_removerow(df, row_list_index = (23, 45)
-pd_replacevalues(df, matrix)
-pd_resetindex(df)
-pd_row_findlast(df, colid = 0, emptyrowid = None)
-pd_row_select(df, **conditions)
-pd_split_col_idx_val(df)
-pd_splitdf_inlist(df, colid, type1 = "dict")
-pd_str_encoding_change(df, cols, fromenc = "iso-8859-1", toenc = "utf-8")
-pd_str_isascii(x)
-pd_str_unicode_tostr(df, targetype = str)
-pd_toexcel(df, outfile = "file.xlsx", sheet_name = "sheet1", append = 1, returnfile = 1)
-pd_toexcel_many(outfile = "file1.xlsx", df1 = None, df2 = None, df3 = None, df4 = None, df5 = None, df6 = Nonedf1, outfile, sheet_name="df1")if df2 is not None = "df1")if df2 is not None:)
-print_object_tofile(vv, txt, file1="d = "d:/regression_output.py")
-print_progressbar(iteration, total, prefix = "", suffix = "", decimals = 1, bar_length = 100)
-py_autoreload()
-py_importfromfile(modulename, dir1)
-py_load_obj(folder = "/folder1/keyname", isabsolutpath = 0, encoding1 = "utf-8")
-py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
-py_save_obj(obj1, keyname = "", otherfolder = 0)
-py_save_obj_dill(obj1, keyname = "", otherfolder = 0)
-save(obj, folder = "/folder1/keyname", isabsolutpath = 0)
-save_test(folder = "/folder1/keyname", isabsolutpath = 0)
-session_load_function(name = "test_20160815")
-session_save_function(name = "test")
-str_empty_string_array(x, y = 1)
-str_empty_string_array_numpy(nx, ny = 1)
-str_is_az09char(x)
-str_is_azchar(x)
-str_isfloat(value)
-str_make_unicode(input_str, errors = "replace")
-str_match_fuzzy(xstring, list_string)
-str_parse_stringcalendar(cal)
-str_reindent(s, num_spaces)
-str_split2(delimiters, string, maxsplit = 0)
-str_split_pattern(sep2, ll, maxsplit = 0)
-str_to_unicode(x, encoding = "utf-8")
-str_to_utf8(x)
-z_key_splitinto_dir_name(keyname)
-
-
-
-utilmy/zarchive/zzarchive/zutil_features.py
--------------------------functions----------------------
-col_extractname(col_onehot)
-col_remove(cols, colsremove, mode = "exact")
-feature_correlation_cat(df, colused)
-feature_importance_perm(clf, Xtrain, ytrain, cols, n_repeats = 8, scoring = 'neg_root_mean_squared_error', show_graph = 1)
-feature_selection_multicolinear(df, threshold = 1.0)
-fetch_dataset(url_dataset, path_target = None, file_target = None)
-fetch_spark_koalas(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
-load(name, path)
-load_dataset(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
-load_features(name, path)
-load_function_uri(uri_name="myfolder/myfile.py = "myfolder/myfile.py::myFunction")
-log(*s, n = 0, m = 1, **kw)
-log2(*s, **kw)
-log3(*s, **kw)
-metrics_eval(metric_list = ["mean_squared_error"], ytrue = None, ypred = None, ypred_proba = None, return_dict = False)
-np_conv_to_one_col(np_array, sep_char = "_")
-os_get_function_name()
-os_getcwd()
-pa_read_file(path =   'folder_parquet/', cols = None, n_rows = 1000, file_start = 0, file_end = 100000, verbose = 1, )
-pa_write_file(df, path =   'folder_parquet/', cols = None, n_rows = 1000, partition_cols = None, overwrite = True, verbose = 1, filesystem  =  'hdfs')
-params_check(pars, check_list, name = "")
-pd_col_fillna(dfref, colname = None, method = "frequent", value = None, colgroupby = None, return_val = "dataframe,param", )
-pd_col_filter(df, filter_val = None, iscol = 1)
-pd_col_merge_onehot(df, colname)
-pd_col_to_num(df, colname = None, default = np.nan)
-pd_col_to_onehot(dfref, colname = None, colonehot = None, return_val = "dataframe,column")
-pd_colcat_mapping(df, colname)
-pd_colcat_mergecol(df, col_list, x0, colid = "easy_id")
-pd_colcat_toint(dfref, colname, colcat_map = None, suffix = None)
-pd_colcat_tonum(df, colcat = "all", drop_single_label = False, drop_fact_dict = True)
-pd_colnum_normalize(df0, colname, pars, suffix = "_norm", return_val = 'dataframe,param')
-pd_colnum_tocat(df, colname = None, colexclude = None, colbinmap = None, bins = 5, suffix = "_bin", method = "uniform", na_value = -1, return_val = "dataframe,param", params={"KMeans_n_clusters" = {"KMeans_n_clusters": 8, "KMeans_init": 'k-means++', "KMeans_n_init": 10,"KMeans_max_iter": 300, "KMeans_tol": 0.0001, "KMeans_precompute_distances": 'auto',"KMeans_verbose": 0, "KMeans_random_state": None,"KMeans_copy_x": True, "KMeans_n_jobs": None, "KMeans_algorithm": 'auto'})
-pd_colnum_tocat_stat(df, feature, target_col, bins, cuts = 0)
-pd_feature_generate_cross(df, cols, cols_cross_input = None, pct_threshold = 0.2, m_combination = 2)
-pd_pipeline_apply(df, pipeline)
-pd_read_file(path_glob = "*.pkl", ignore_index = True, cols = None, verbose = False, nrows = -1, concat_sort = True, n_pool = 1, drop_duplicates = None, col_filter = None, col_filter_val = None, **kw)
-pd_stat_correl_pair(df, coltarget = None, colname = None)
-pd_stat_dataset_shift(dftrain, dftest, colused, nsample = 10000, buckets = 5, axis = 0)
-pd_stat_datashift_psi(expected, actual, buckettype = 'bins', buckets = 10, axis = 0)
-pd_stat_distribution_colnum(df, nrows = 2000, verbose = False)
-pd_stat_histogram(df, bins = 50, coltarget = "diff")
-pd_stat_pandas_profile(df, savefile = "report.html", title = "Pandas Profile")
-pd_stat_shift_changes(df, target_col, features_list = 0, bins = 10, df_test = 0)
-pd_stat_shift_trend_changes(df, feature, target_col, threshold = 0.03)
-pd_stat_shift_trend_correlation(df, df_test, colname, target_col)
-save(df, name, path = None)
-save_features(df, name, path = None)
-save_list(path, name_list, glob)
-test_get_classification_data(name = None)
-
--------------------------methods----------------------
-dict2.__init__(self, d)
 
 
 utilmy/zml/__init__.py
@@ -7938,3 +3962,4044 @@ test_helper(model_pars, data_pars, compute_pars)
 MY_MODEL_CLASS.__init__(cpars)
 Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
 Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zrecs/contrib/azureml_designer_modules/entries/map_entry.py
+
+
+utilmy/zrecs/contrib/azureml_designer_modules/entries/ndcg_entry.py
+
+
+utilmy/zrecs/contrib/azureml_designer_modules/entries/precision_at_k_entry.py
+
+
+utilmy/zrecs/contrib/azureml_designer_modules/entries/recall_at_k_entry.py
+
+
+utilmy/zrecs/contrib/azureml_designer_modules/entries/score_sar_entry.py
+-------------------------functions----------------------
+joblib_loader(load_from_dir, model_spec)
+
+-------------------------methods----------------------
+ScoreSARModule.__init__(self, model, input_data)
+ScoreSARModule.input_data(self)
+ScoreSARModule.model(self)
+ScoreSARModule.predict_ratings(self, items_to_predict, normalize)
+ScoreSARModule.recommend_items(self, ranking_metric, top_k, sort_top_k, remove_seen, normalize)
+
+
+utilmy/zrecs/contrib/azureml_designer_modules/entries/stratified_splitter_entry.py
+
+
+utilmy/zrecs/contrib/azureml_designer_modules/entries/train_sar_entry.py
+-------------------------functions----------------------
+joblib_dumper(data, file_name = None)
+
+
+
+utilmy/zrecs/contrib/sarplus/python/setup.py
+-------------------------methods----------------------
+get_pybind_include.__init__(self, user = False)
+get_pybind_include.__str__(self)
+
+
+utilmy/zrecs/docs/source/conf.py
+
+
+utilmy/zrecs/examples/04_model_select_and_optimize/train_scripts/svd_training.py
+-------------------------functions----------------------
+main()
+svd_training(args)
+
+
+
+utilmy/zrecs/examples/04_model_select_and_optimize/train_scripts/wide_deep_training.py
+-------------------------functions----------------------
+_log(metric, value)
+
+
+
+utilmy/zrecs/examples/06_benchmarks/benchmark_utils.py
+-------------------------functions----------------------
+predict_als(model, test)
+predict_fastai(model, test)
+predict_svd(model, test)
+prepare_metrics_als(train, test)
+prepare_metrics_fastai(train, test)
+prepare_training_als(train, test)
+prepare_training_cornac(train, test)
+prepare_training_fastai(train, test)
+prepare_training_lightgcn(train, test)
+prepare_training_ncf(train, test)
+prepare_training_sar(train, test)
+prepare_training_svd(train, test)
+ranking_metrics_pyspark(test, predictions, k = DEFAULT_K)
+ranking_metrics_python(test, predictions, k = DEFAULT_K)
+rating_metrics_pyspark(test, predictions)
+rating_metrics_python(test, predictions)
+recommend_k_als(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_cornac(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_fastai(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_lightgcn(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_ncf(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_sar(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_svd(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+train_als(params, data)
+train_bivae(params, data)
+train_bpr(params, data)
+train_fastai(params, data)
+train_lightgcn(params, data)
+train_ncf(params, data)
+train_sar(params, data)
+train_svd(params, data)
+
+
+
+utilmy/zrecs/recommenders/__init__.py
+
+
+utilmy/zrecs/recommenders/datasets/__init__.py
+
+
+utilmy/zrecs/recommenders/datasets/amazon_reviews.py
+-------------------------functions----------------------
+_create_instance(reviews_file, meta_file)
+_create_item2cate(instance_file)
+_create_vocab(train_file, user_vocab, item_vocab, cate_vocab)
+_data_generating(input_file, train_file, valid_file, test_file, min_sequence = 1)
+_data_generating_no_history_expanding(input_file, train_file, valid_file, test_file, min_sequence = 1)
+_data_processing(input_file)
+_download_reviews(name, dest_path)
+_extract_reviews(file_path, zip_path)
+_get_sampled_data(instance_file, sample_rate)
+_meta_preprocessing(meta_readfile)
+_negative_sampling_offline(instance_input_file, valid_file, test_file, valid_neg_nums = 4, test_neg_nums = 49)
+_reviews_preprocessing(reviews_readfile)
+data_preprocessing(reviews_file, meta_file, train_file, valid_file, test_file, user_vocab, item_vocab, cate_vocab, sample_rate = 0.01, valid_num_ngs = 4, test_num_ngs = 9, is_history_expanding = True, )
+download_and_extract(name, dest_path)
+
+
+
+utilmy/zrecs/recommenders/datasets/cosmos_cli.py
+-------------------------functions----------------------
+find_collection(client, dbid, id)
+find_database(client, id)
+read_collection(client, dbid, id)
+read_database(client, id)
+
+
+
+utilmy/zrecs/recommenders/datasets/covid_utils.py
+-------------------------functions----------------------
+clean_dataframe(df)
+get_public_domain_text(df, container_name, azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", )
+load_pandas_df(azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", container_name = "covid19temp", metadata_filename = "metadata.csv", )
+remove_duplicates(df, cols)
+remove_nan(df, cols)
+retrieve_text(entry, container_name, azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", )
+
+
+
+utilmy/zrecs/recommenders/datasets/criteo.py
+-------------------------functions----------------------
+download_criteo(size = "sample", work_directory = ".")
+extract_criteo(size, compressed_file, path = None)
+get_spark_schema(header = DEFAULT_HEADER)
+load_pandas_df(size = "sample", local_cache_path = None, header = DEFAULT_HEADER)
+load_spark_df(spark, size = "sample", header = DEFAULT_HEADER, local_cache_path = None, dbfs_datapath="dbfs = "dbfs:/FileStore/dac", dbutils = None, )
+
+
+
+utilmy/zrecs/recommenders/datasets/download_utils.py
+-------------------------functions----------------------
+download_path(path = None)
+maybe_download(url, filename = None, work_directory = ".", expected_bytes = None)
+unzip_file(zip_src, dst_dir, clean_zip_file = False)
+
+
+
+utilmy/zrecs/recommenders/datasets/mind.py
+-------------------------functions----------------------
+_newsample(nnn, ratio)
+_read_news(filepath, news_words, news_entities, tokenizer)
+download_and_extract_glove(dest_path)
+download_mind(size = "small", dest_path = None)
+extract_mind(train_zip, valid_zip, train_folder = "train", valid_folder = "valid", clean_zip_file = True, )
+generate_embeddings(data_path, news_words, news_entities, train_entities, valid_entities, max_sentence = 10, word_embedding_dim = 100, )
+get_train_input(session, train_file_path, npratio = 4)
+get_user_history(train_history, valid_history, user_history_path)
+get_valid_input(session, valid_file_path)
+get_words_and_entities(train_news, valid_news)
+load_glove_matrix(path_emb, word_dict, word_embedding_dim)
+read_clickhistory(path, filename)
+word_tokenize(sent)
+
+
+
+utilmy/zrecs/recommenders/datasets/movielens.py
+-------------------------functions----------------------
+_get_schema(header, schema)
+_load_item_df(size, item_datapath, movie_col, title_col, genres_col, year_col)
+_maybe_download_and_extract(size, dest_path)
+download_movielens(size, dest_path)
+extract_movielens(size, rating_path, item_path, zip_path)
+load_item_df(size = "100k", local_cache_path = None, movie_col = DEFAULT_ITEM_COL, title_col = None, genres_col = None, year_col = None, )
+load_pandas_df(size = "100k", header = None, local_cache_path = None, title_col = None, genres_col = None, year_col = None, )
+load_spark_df(spark, size = "100k", header = None, schema = None, local_cache_path = None, dbutils = None, title_col = None, genres_col = None, year_col = None, )
+
+-------------------------methods----------------------
+_DataFormat.__init__(self, sep, path, has_header = False, item_sep = None, item_path = None, item_has_header = False, )
+_DataFormat.has_header(self)
+_DataFormat.item_has_header(self)
+_DataFormat.item_path(self)
+_DataFormat.item_separator(self)
+_DataFormat.path(self)
+_DataFormat.separator(self)
+
+
+utilmy/zrecs/recommenders/datasets/pandas_df_utils.py
+-------------------------functions----------------------
+filter_by(df, filter_by_df, filter_by_cols)
+has_columns(df, columns)
+has_same_base_dtype(df_1, df_2, columns = None)
+lru_cache_df(maxsize, typed = False)
+negative_feedback_sampler(df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_label = DEFAULT_LABEL_COL, col_feedback = "feedback", ratio_neg_per_user = 1, pos_value = 1, neg_value = 0, seed = 42, )
+user_item_pairs(user_df, item_df, user_col = DEFAULT_USER_COL, item_col = DEFAULT_ITEM_COL, user_item_filter_df = None, shuffle = True, seed = None, )
+
+-------------------------methods----------------------
+LibffmConverter.__init__(self, filepath = None)
+LibffmConverter.fit(self, df, col_rating = DEFAULT_RATING_COL)
+LibffmConverter.fit_transform(self, df, col_rating = DEFAULT_RATING_COL)
+LibffmConverter.get_params(self)
+LibffmConverter.transform(self, df)
+PandasHash.__eq__(self, other)
+PandasHash.__hash__(self)
+PandasHash.__init__(self, pandas_object)
+
+
+utilmy/zrecs/recommenders/datasets/python_splitters.py
+-------------------------functions----------------------
+_do_stratification(data, ratio = 0.75, min_rating = 1, filter_by = "user", is_random = True, seed = 42, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+numpy_stratified_split(X, ratio = 0.75, seed = 42)
+python_chrono_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+python_random_split(data, ratio = 0.75, seed = 42)
+python_stratified_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, seed = 42, )
+
+
+
+utilmy/zrecs/recommenders/datasets/spark_splitters.py
+-------------------------functions----------------------
+_do_stratification_spark(data, ratio = 0.75, min_rating = 1, filter_by = "user", is_partitioned = True, is_random = True, seed = 42, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+spark_chrono_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, no_partition = False, )
+spark_random_split(data, ratio = 0.75, seed = 42)
+spark_stratified_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, seed = 42, )
+spark_timestamp_split(data, ratio = 0.75, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+
+
+
+utilmy/zrecs/recommenders/datasets/sparse.py
+-------------------------methods----------------------
+AffinityMatrix.__init__(self, df, items_list = None, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_pred = DEFAULT_PREDICTION_COL, save_path = None, )
+AffinityMatrix._gen_index(self)
+AffinityMatrix.gen_affinity_matrix(self)
+AffinityMatrix.map_back_sparse(self, X, kind)
+
+
+utilmy/zrecs/recommenders/datasets/split_utils.py
+-------------------------functions----------------------
+_get_column_name(name, col_user, col_item)
+min_rating_filter_pandas(data, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+min_rating_filter_spark(data, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+process_split_ratio(ratio)
+split_pandas_data_with_ratios(data, ratios, seed = 42, shuffle = False)
+
+
+
+utilmy/zrecs/recommenders/datasets/wikidata.py
+-------------------------functions----------------------
+find_wikidata_id(name, limit = 1, session = None)
+get_session(session = None)
+query_entity_description(entity_id, session = None)
+query_entity_links(entity_id, session = None)
+read_linked_entities(data)
+search_wikidata(names, extras = None, describe = True, verbose = False)
+
+
+
+utilmy/zrecs/recommenders/evaluation/__init__.py
+
+
+utilmy/zrecs/recommenders/evaluation/python_evaluation.py
+-------------------------functions----------------------
+_check_column_dtypes(func)
+_check_column_dtypes_diversity_serendipity(func)
+_check_column_dtypes_novelty_coverage(func)
+_get_cooccurrence_similarity(train_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_cosine_similarity(train_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_intralist_similarity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_item_feature_similarity(item_feature_df, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_pairwise_items(df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+auc(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+catalog_coverage(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
+distributional_coverage(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
+diversity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+exp_var(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+get_top_k_items(dataframe, col_user = DEFAULT_USER_COL, col_rating = DEFAULT_RATING_COL, k = DEFAULT_K)
+historical_item_novelty(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+logloss(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+mae(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+map_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+merge_ranking_true_pred(rating_true, rating_pred, col_user, col_item, col_rating, col_prediction, relevancy_method, k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+merge_rating_true_pred(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+ndcg_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+novelty(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
+precision_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+recall_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+rmse(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+rsquared(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+user_diversity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+user_item_serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+user_serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+
+
+
+utilmy/zrecs/recommenders/evaluation/spark_evaluation.py
+-------------------------functions----------------------
+_get_relevant_items_by_threshold(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, threshold = DEFAULT_THRESHOLD, )
+_get_relevant_items_by_timestamp(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, col_prediction = DEFAULT_PREDICTION_COL, k = DEFAULT_K, )
+_get_top_k_items(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, k = DEFAULT_K, )
+
+-------------------------methods----------------------
+SparkDiversityEvaluation.__init__(self, train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_relevance = None, )
+SparkDiversityEvaluation._get_cooccurrence_similarity(self, n_partitions)
+SparkDiversityEvaluation._get_cosine_similarity(self, n_partitions = 200)
+SparkDiversityEvaluation._get_intralist_similarity(self, df)
+SparkDiversityEvaluation._get_item_feature_similarity(self, n_partitions)
+SparkDiversityEvaluation._get_pairwise_items(self, df)
+SparkDiversityEvaluation.catalog_coverage(self)
+SparkDiversityEvaluation.distributional_coverage(self)
+SparkDiversityEvaluation.diversity(self)
+SparkDiversityEvaluation.historical_item_novelty(self)
+SparkDiversityEvaluation.novelty(self)
+SparkDiversityEvaluation.serendipity(self)
+SparkDiversityEvaluation.sim_cos(v1, v2)
+SparkDiversityEvaluation.user_diversity(self)
+SparkDiversityEvaluation.user_item_serendipity(self)
+SparkDiversityEvaluation.user_serendipity(self)
+SparkRankingEvaluation.__init__(self, rating_true, rating_pred, k = DEFAULT_K, relevancy_method = "top_k", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, threshold = DEFAULT_THRESHOLD, )
+SparkRankingEvaluation._calculate_metrics(self)
+SparkRankingEvaluation.map_at_k(self)
+SparkRankingEvaluation.ndcg_at_k(self)
+SparkRankingEvaluation.precision_at_k(self)
+SparkRankingEvaluation.recall_at_k(self)
+SparkRatingEvaluation.__init__(self, rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+SparkRatingEvaluation.exp_var(self)
+SparkRatingEvaluation.mae(self)
+SparkRatingEvaluation.rmse(self)
+SparkRatingEvaluation.rsquared(self)
+
+
+utilmy/zrecs/recommenders/models/__init__.py
+
+
+utilmy/zrecs/recommenders/models/cornac/__init__.py
+
+
+utilmy/zrecs/recommenders/models/cornac/cornac_utils.py
+-------------------------functions----------------------
+predict(model, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, )
+predict_ranking(model, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, remove_seen = False, )
+
+
+
+utilmy/zrecs/recommenders/models/deeprec/__init__.py
+
+
+utilmy/zrecs/recommenders/models/deeprec/deeprec_utils.py
+-------------------------functions----------------------
+cal_metric(labels, preds, metrics)
+check_nn_config(f_config)
+check_type(config)
+create_hparams(flags)
+dcg_score(y_true, y_score, k = 10)
+download_deeprec_resources(azure_container_url, data_path, remote_resource_name)
+flat_config(config)
+hit_score(y_true, y_score, k = 10)
+load_dict(filename)
+load_yaml(filename)
+mrr_score(y_true, y_score)
+ndcg_score(y_true, y_score, k = 10)
+prepare_hparams(yaml_file = None, **kwargs)
+
+
+
+utilmy/zrecs/recommenders/models/fastai/__init__.py
+
+
+utilmy/zrecs/recommenders/models/fastai/fastai_utils.py
+-------------------------functions----------------------
+cartesian_product(*arrays)
+hide_fastai_progress_bar()
+score(learner, test_df, user_col = cc.DEFAULT_USER_COL, item_col = cc.DEFAULT_ITEM_COL, prediction_col = cc.DEFAULT_PREDICTION_COL, top_k = None, )
+
+
+
+utilmy/zrecs/recommenders/models/geoimc/__init__.py
+
+
+utilmy/zrecs/recommenders/models/geoimc/geoimc_algorithm.py
+-------------------------methods----------------------
+IMCProblem.__init__(self, dataPtr, lambda1 = 1e-2, rank = 10)
+IMCProblem._computeLoss_csrmatrix(a, b, cd, indices, indptr, residual_global)
+IMCProblem._cost(self, params, residual_global)
+IMCProblem._egrad(self, params, residual_global)
+IMCProblem._loadTarget(self, )
+IMCProblem._optimize(self, max_opt_time, max_opt_iter, verbosity)
+IMCProblem.reset(self)
+IMCProblem.solve(self, *args)
+
+
+utilmy/zrecs/recommenders/models/geoimc/geoimc_data.py
+-------------------------methods----------------------
+DataPtr.__init__(self, data, entities)
+DataPtr.get_data(self)
+DataPtr.get_entity(self, of = "row")
+Dataset.__init__(self, name, features_dim = 0, normalize = False, target_transform = "")
+Dataset.generate_train_test_data(self, data, test_ratio = 0.3)
+Dataset.normalize(self)
+Dataset.reduce_dims(self)
+ML_100K.__init__(self, **kwargs)
+ML_100K._load_item_features(self, path)
+ML_100K._load_user_features(self, path)
+ML_100K._read_from_file(self, path)
+ML_100K.df2coo(self, df)
+ML_100K.load_data(self, path)
+
+
+utilmy/zrecs/recommenders/models/geoimc/geoimc_predict.py
+-------------------------methods----------------------
+Inferer.__init__(self, method = "dot", k = 10, transformation = "")
+Inferer._get_method(self, k)
+Inferer.infer(self, dataPtr, W, **kwargs)
+PlainScalarProduct.__init__(self, X, Y, **kwargs)
+PlainScalarProduct.sim(self, **kwargs)
+
+
+utilmy/zrecs/recommenders/models/geoimc/geoimc_utils.py
+-------------------------functions----------------------
+length_normalize(matrix)
+mean_center(matrix)
+reduce_dims(matrix, target_dim)
+
+
+
+utilmy/zrecs/recommenders/models/lightfm/__init__.py
+
+
+utilmy/zrecs/recommenders/models/lightfm/lightfm_utils.py
+-------------------------functions----------------------
+compare_metric(df_list, metric = "prec", stage = "test")
+model_perf_plots(df)
+prepare_all_predictions(data, uid_map, iid_map, interactions, model, num_threads, user_features = None, item_features = None, )
+prepare_test_df(test_idx, uids, iids, uid_map, iid_map, weights)
+similar_items(item_id, item_features, model, N = 10)
+similar_users(user_id, user_features, model, N = 10)
+track_model_metrics(model, train_interactions, test_interactions, k = 10, no_epochs = 100, no_threads = 8, show_plot = True, **kwargs)
+
+
+
+utilmy/zrecs/recommenders/models/lightgbm/__init__.py
+
+
+utilmy/zrecs/recommenders/models/lightgbm/lightgbm_utils.py
+-------------------------functions----------------------
+unpackbits(x, num_bits)
+
+-------------------------methods----------------------
+NumEncoder.__init__(self, cate_cols, nume_cols, label_col, threshold = 10, thresrate = 0.99)
+NumEncoder.fit_transform(self, df)
+NumEncoder.transform(self, df)
+
+
+utilmy/zrecs/recommenders/models/ncf/__init__.py
+
+
+utilmy/zrecs/recommenders/models/ncf/dataset.py
+-------------------------methods----------------------
+Dataset.__init__(self, train, test = None, n_neg = 4, n_neg_test = 100, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, binary = True, seed = None, )
+Dataset._data_processing(self, train, test, binary)
+Dataset._init_test_data(self)
+Dataset._init_train_data(self)
+Dataset._reindex(self, df, binary)
+Dataset.negative_sampling(self)
+Dataset.test_loader(self)
+Dataset.train_loader(self, batch_size, shuffle = True)
+
+
+utilmy/zrecs/recommenders/models/ncf/ncf_singlenode.py
+-------------------------methods----------------------
+NCF.__init__(self, n_users, n_items, model_type = "NeuMF", n_factors = 8, layer_sizes = [16, 8, 4], n_epochs = 50, batch_size = 64, learning_rate = 5e-3, verbose = 1, seed = None, )
+NCF._create_model(self, )
+NCF._load_neumf(self, gmf_dir, mlp_dir, alpha)
+NCF._predict(self, user_input, item_input)
+NCF.fit(self, data)
+NCF.load(self, gmf_dir = None, mlp_dir = None, neumf_dir = None, alpha = 0.5)
+NCF.predict(self, user_input, item_input, is_list = False)
+NCF.save(self, dir_name)
+
+
+utilmy/zrecs/recommenders/models/newsrec/__init__.py
+
+
+utilmy/zrecs/recommenders/models/newsrec/newsrec_utils.py
+-------------------------functions----------------------
+check_nn_config(f_config)
+check_type(config)
+create_hparams(flags)
+get_mind_data_set(type)
+newsample(news, ratio)
+prepare_hparams(yaml_file = None, **kwargs)
+word_tokenize(sent)
+
+
+
+utilmy/zrecs/recommenders/models/rbm/__init__.py
+
+
+utilmy/zrecs/recommenders/models/rbm/rbm.py
+-------------------------methods----------------------
+RBM.__init__(self, hidden_units = 500, keep_prob = 0.7, init_stdv = 0.1, learning_rate = 0.004, minibatch_size = 100, training_epoch = 20, display_epoch = 10, sampling_protocol = [50, 70, 80, 90, 100], debug = False, with_metrics = False, seed = 42, )
+RBM.accuracy(self, vp)
+RBM.batch_training(self, num_minibatches)
+RBM.binomial_sampling(self, pr)
+RBM.data_pipeline(self)
+RBM.display_metrics(self, Rmse_train, precision_train, precision_test)
+RBM.eval_out(self)
+RBM.fit(self, xtr, xtst)
+RBM.free_energy(self, x)
+RBM.generate_graph(self)
+RBM.gibbs_protocol(self, i)
+RBM.gibbs_sampling(self)
+RBM.init_gpu(self)
+RBM.init_metrics(self)
+RBM.init_parameters(self)
+RBM.init_training_session(self, xtr)
+RBM.losses(self, vv)
+RBM.multinomial_distribution(self, phi)
+RBM.multinomial_sampling(self, pr)
+RBM.placeholder(self)
+RBM.predict(self, x, maps)
+RBM.recommend_k_items(self, x, top_k = 10, remove_seen = True)
+RBM.rmse(self, vp)
+RBM.sample_hidden_units(self, vv)
+RBM.sample_visible_units(self, h)
+RBM.time(self)
+RBM.train_test_precision(self, xtst)
+
+
+utilmy/zrecs/recommenders/models/rlrmc/RLRMCalgorithm.py
+-------------------------methods----------------------
+RLRMCalgorithm.__init__(self, rank, C, model_param, initialize_flag = "random", max_time = 1000, maxiter = 100, seed = 42, )
+RLRMCalgorithm._computeLoss_csrmatrix(a, b, cd, indices, indptr, residual_global)
+RLRMCalgorithm._cost(self, weights, entries_train_csr_data, entries_train_csr_indices, entries_train_csr_indptr, residual_global, )
+RLRMCalgorithm._egrad(self, weights, entries_train_csr_indices, entries_train_csr_indptr, residual_global, )
+RLRMCalgorithm._init_train(self, entries_train_csr)
+RLRMCalgorithm._my_stats(self, weights, given_stats, stats, residual_global, entries_validation_csr_data = None, entries_validation_csr_indices = None, entries_validation_csr_indptr = None, residual_validation_global = None, )
+RLRMCalgorithm.fit(self, RLRMCdata, verbosity = 0)
+RLRMCalgorithm.fit_and_evaluate(self, RLRMCdata, verbosity = 0)
+RLRMCalgorithm.predict(self, user_input, item_input, low_memory = False)
+
+
+utilmy/zrecs/recommenders/models/rlrmc/RLRMCdataset.py
+-------------------------methods----------------------
+RLRMCdataset.__init__(self, train, validation = None, test = None, mean_center = True, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+RLRMCdataset._data_processing(self, train, validation = None, test = None, mean_center = True)
+RLRMCdataset._reindex(self, df)
+
+
+utilmy/zrecs/recommenders/models/rlrmc/__init__.py
+
+
+utilmy/zrecs/recommenders/models/rlrmc/conjugate_gradient_ms.py
+-------------------------methods----------------------
+ConjugateGradientMS.__init__(self, beta_type = BetaTypes.HestenesStiefel, orth_value = np.inf, linesearch = None, *args, **kwargs)
+ConjugateGradientMS.solve(self, problem, x = None, reuselinesearch = False, compute_stats = None)
+
+
+utilmy/zrecs/recommenders/models/sar/__init__.py
+
+
+utilmy/zrecs/recommenders/models/sar/sar_singlenode.py
+-------------------------methods----------------------
+SARSingleNode.__init__(self, col_user = constants.DEFAULT_USER_COL, col_item = constants.DEFAULT_ITEM_COL, col_rating = constants.DEFAULT_RATING_COL, col_timestamp = constants.DEFAULT_TIMESTAMP_COL, col_prediction = constants.DEFAULT_PREDICTION_COL, similarity_type = JACCARD, time_decay_coefficient = 30, time_now = None, timedecay_formula = False, threshold = 1, normalize = False, )
+SARSingleNode.compute_affinity_matrix(self, df, rating_col)
+SARSingleNode.compute_coocurrence_matrix(self, df)
+SARSingleNode.compute_time_decay(self, df, decay_column)
+SARSingleNode.fit(self, df)
+SARSingleNode.get_item_based_topk(self, items, top_k = 10, sort_top_k = True)
+SARSingleNode.get_popularity_based_topk(self, top_k = 10, sort_top_k = True)
+SARSingleNode.predict(self, test)
+SARSingleNode.recommend_k_items(self, test, top_k = 10, sort_top_k = True, remove_seen = False)
+SARSingleNode.score(self, test, remove_seen = False)
+SARSingleNode.set_index(self, df)
+
+
+utilmy/zrecs/recommenders/models/surprise/__init__.py
+
+
+utilmy/zrecs/recommenders/models/surprise/surprise_utils.py
+-------------------------functions----------------------
+compute_ranking_predictions(algo, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, remove_seen = False, )
+predict(algo, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, )
+surprise_trainset_to_df(trainset, col_user = "uid", col_item = "iid", col_rating = "rating")
+
+
+
+utilmy/zrecs/recommenders/models/tfidf/__init__.py
+
+
+utilmy/zrecs/recommenders/models/tfidf/tfidf_utils.py
+-------------------------methods----------------------
+TfidfRecommender.__clean_text(self, text, for_BERT = False, verbose = False)
+TfidfRecommender.__create_full_recommendation_dictionary(self, df_clean)
+TfidfRecommender.__get_single_item_info(self, metadata, rec_id)
+TfidfRecommender.__init__(self, id_col, tokenization_method = "scibert")
+TfidfRecommender.__make_clickable(self, address)
+TfidfRecommender.__organize_results_as_tabular(self, df_clean, k)
+TfidfRecommender.clean_dataframe(self, df, cols_to_clean, new_col_name = "cleaned_text")
+TfidfRecommender.fit(self, tf, vectors_tokenized)
+TfidfRecommender.get_stop_words(self)
+TfidfRecommender.get_tokens(self)
+TfidfRecommender.get_top_k_recommendations(self, metadata, query_id, cols_to_keep = [], verbose = True)
+TfidfRecommender.recommend_top_k_items(self, df_clean, k = 5)
+TfidfRecommender.tokenize_text(1, 3), min_df = 0)
+
+
+utilmy/zrecs/recommenders/models/vae/__init__.py
+
+
+utilmy/zrecs/recommenders/models/vae/multinomial_vae.py
+-------------------------methods----------------------
+AnnealingCallback.__init__(self, beta, anneal_cap, total_anneal_steps)
+AnnealingCallback.get_data(self)
+AnnealingCallback.on_batch_end(self, epoch, logs = {})
+AnnealingCallback.on_epoch_end(self, epoch, logs = {})
+AnnealingCallback.on_train_begin(self, logs = {})
+LossHistory.on_epoch_end(self, epoch, logs = {})
+LossHistory.on_train_begin(self, logs = {})
+Metrics.__init__(self, model, val_tr, val_te, mapper, k, save_path = None)
+Metrics.get_data(self)
+Metrics.on_epoch_end(self, batch, logs = {})
+Metrics.on_train_begin(self, logs = {})
+Metrics.recommend_k_items(self, x, k, remove_seen = True)
+Mult_VAE.__init__(self, n_users, original_dim, intermediate_dim = 200, latent_dim = 70, n_epochs = 400, batch_size = 100, k = 100, verbose = 1, drop_encoder = 0.5, drop_decoder = 0.5, beta = 1.0, annealing = False, anneal_cap = 1.0, seed = None, save_path = None, )
+Mult_VAE._create_model(self)
+Mult_VAE._get_vae_loss(self, x, x_bar)
+Mult_VAE._take_sample(self, args)
+Mult_VAE.display_metrics(self)
+Mult_VAE.fit(self, x_train, x_valid, x_val_tr, x_val_te, mapper)
+Mult_VAE.get_optimal_beta(self)
+Mult_VAE.ndcg_per_epoch(self)
+Mult_VAE.nn_batch_generator(self, x_train)
+Mult_VAE.recommend_k_items(self, x, k, remove_seen = True)
+
+
+utilmy/zrecs/recommenders/models/vae/standard_vae.py
+-------------------------methods----------------------
+AnnealingCallback.__init__(self, beta, anneal_cap, total_anneal_steps)
+AnnealingCallback.get_data(self)
+AnnealingCallback.on_batch_end(self, epoch, logs = {})
+AnnealingCallback.on_epoch_end(self, epoch, logs = {})
+AnnealingCallback.on_train_begin(self, logs = {})
+LossHistory.on_epoch_end(self, epoch, logs = {})
+LossHistory.on_train_begin(self, logs = {})
+Metrics.__init__(self, model, val_tr, val_te, mapper, k, save_path = None)
+Metrics.get_data(self)
+Metrics.on_epoch_end(self, batch, logs = {})
+Metrics.on_train_begin(self, logs = {})
+Metrics.recommend_k_items(self, x, k, remove_seen = True)
+StandardVAE.__init__(self, n_users, original_dim, intermediate_dim = 200, latent_dim = 70, n_epochs = 400, batch_size = 100, k = 100, verbose = 1, drop_encoder = 0.5, drop_decoder = 0.5, beta = 1.0, annealing = False, anneal_cap = 1.0, seed = None, save_path = None, )
+StandardVAE._create_model(self)
+StandardVAE._get_vae_loss(self, x, x_bar)
+StandardVAE._take_sample(self, args)
+StandardVAE.display_metrics(self)
+StandardVAE.fit(self, x_train, x_valid, x_val_tr, x_val_te, mapper)
+StandardVAE.get_optimal_beta(self)
+StandardVAE.ndcg_per_epoch(self)
+StandardVAE.nn_batch_generator(self, x_train)
+StandardVAE.recommend_k_items(self, x, k, remove_seen = True)
+
+
+utilmy/zrecs/recommenders/models/vowpal_wabbit/__init__.py
+
+
+utilmy/zrecs/recommenders/models/vowpal_wabbit/vw.py
+-------------------------methods----------------------
+VW.__del__(self)
+VW.__init__(self, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, col_prediction = DEFAULT_PREDICTION_COL, **kwargs, )
+VW.fit(self, df)
+VW.parse_test_params(self, params)
+VW.parse_train_params(self, params)
+VW.predict(self, df)
+VW.to_vw_cmd(params)
+VW.to_vw_file(self, df, train = True)
+
+
+utilmy/zrecs/recommenders/models/wide_deep/__init__.py
+
+
+utilmy/zrecs/recommenders/models/wide_deep/wide_deep_utils.py
+-------------------------functions----------------------
+_build_deep_columns(user_ids, item_ids, user_dim, item_dim, item_feat_col = None, item_feat_shape = 1)
+_build_wide_columns(user_ids, item_ids, hash_bucket_size = 1000)
+build_feature_columns(users, items, user_col = DEFAULT_USER_COL, item_col = DEFAULT_ITEM_COL, item_feat_col = None, crossed_feat_dim = 1000, user_dim = 8, item_dim = 8, item_feat_shape = None, model_type = "wide_deep", )
+build_model(model_dir = MODEL_DIR, ), ), linear_optimizer = "Ftrl", dnn_optimizer = "Adagrad", 128, 128), dnn_dropout = 0.0, dnn_batch_norm = True, log_every_n_iter = 1000, save_checkpoints_steps = 10000, seed = None, )
+
+
+
+utilmy/zrecs/recommenders/tuning/__init__.py
+
+
+utilmy/zrecs/recommenders/tuning/nni/__init__.py
+
+
+utilmy/zrecs/recommenders/tuning/nni/ncf_training.py
+-------------------------functions----------------------
+_update_metrics(metrics_dict, metric, params, result)
+get_params()
+main(params)
+ncf_training(params)
+
+
+
+utilmy/zrecs/recommenders/tuning/nni/ncf_utils.py
+-------------------------functions----------------------
+combine_metrics_dicts(*metrics)
+compute_test_results(model, train, test, rating_metrics, ranking_metrics)
+
+
+
+utilmy/zrecs/recommenders/tuning/nni/nni_utils.py
+-------------------------functions----------------------
+check_experiment_status(wait = WAITING_TIME, max_retries = MAX_RETRIES)
+check_metrics_written(wait = WAITING_TIME, max_retries = MAX_RETRIES)
+check_stopped(wait = WAITING_TIME, max_retries = MAX_RETRIES)
+get_experiment_status(status_url = NNI_STATUS_URL)
+get_trials(optimize_mode)
+start_nni(config_path, wait = WAITING_TIME, max_retries = MAX_RETRIES)
+stop_nni()
+
+
+
+utilmy/zrecs/recommenders/tuning/nni/svd_training.py
+-------------------------functions----------------------
+get_params()
+main(params)
+svd_training(params)
+
+
+
+utilmy/zrecs/recommenders/tuning/parameter_sweep.py
+-------------------------functions----------------------
+generate_param_grid(params)
+
+
+
+utilmy/zrecs/recommenders/utils/__init__.py
+
+
+utilmy/zrecs/recommenders/utils/constants.py
+
+
+utilmy/zrecs/recommenders/utils/general_utils.py
+-------------------------functions----------------------
+get_number_processors()
+get_physical_memory()
+invert_dictionary(dictionary)
+
+
+
+utilmy/zrecs/recommenders/utils/gpu_utils.py
+-------------------------functions----------------------
+clear_memory_all_gpus()
+get_cuda_version(unix_path = DEFAULT_CUDA_PATH_LINUX)
+get_cudnn_version()
+get_gpu_info()
+get_number_gpus()
+
+
+
+utilmy/zrecs/recommenders/utils/k8s_utils.py
+-------------------------functions----------------------
+nodes_to_replicas(n_cores_per_node, n_nodes = 3, cpu_cores_per_replica = 0.1)
+qps_to_replicas(target_qps, processing_time, max_qp_replica = 1, target_utilization = 0.7)
+replicas_to_qps(num_replicas, processing_time, max_qp_replica = 1, target_utilization = 0.7)
+
+
+
+utilmy/zrecs/recommenders/utils/notebook_memory_management.py
+-------------------------functions----------------------
+pre_run_cell()
+start_watching_memory()
+stop_watching_memory()
+watch_memory()
+
+
+
+utilmy/zrecs/recommenders/utils/notebook_utils.py
+-------------------------functions----------------------
+is_databricks()
+is_jupyter()
+
+
+
+utilmy/zrecs/recommenders/utils/plot.py
+-------------------------functions----------------------
+line_graph(values, labels, x_guides = None, x_name = None, y_name = None, x_min_max = None, y_min_max = None, legend_loc = None, subplot = None, 5, 5), )
+
+
+
+utilmy/zrecs/recommenders/utils/python_utils.py
+-------------------------functions----------------------
+binarize(a, threshold)
+exponential_decay(value, max_val, half_life)
+get_top_k_scored_items(scores, top_k, sort_top_k = False)
+jaccard(cooccurrence)
+lift(cooccurrence)
+rescale(data, new_min = 0, new_max = 1, data_min = None, data_max = None)
+
+
+
+utilmy/zrecs/recommenders/utils/spark_utils.py
+-------------------------functions----------------------
+start_or_get_spark(app_name = "Sample", url = "local[*]", memory = "10g", config = None, packages = None, jars = None, repository = None, )
+
+
+
+utilmy/zrecs/recommenders/utils/tf_utils.py
+-------------------------functions----------------------
+_dataset(x, y = None, batch_size = 128, num_epochs = 1, shuffle = False, seed = None)
+build_optimizer(name, lr = 0.001, **kwargs)
+evaluation_log_hook(estimator, logger, true_df, y_col, eval_df, every_n_iter = 10000, model_dir = None, batch_size = 256, eval_fns = None, **eval_kwargs)
+export_model(model, train_input_fn, eval_input_fn, tf_feat_cols, base_dir)
+pandas_input_fn(df, feat_name_type)
+pandas_input_fn_for_saved_model(df, feat_name_type)
+
+-------------------------methods----------------------
+MetricsLogger.__init__(self)
+MetricsLogger.get_log(self)
+MetricsLogger.log(self, metric, value)
+_TrainLogHook.__init__(self, estimator, logger, true_df, y_col, eval_df, every_n_iter = 10000, model_dir = None, batch_size = 256, eval_fns = None, **eval_kwargs)
+_TrainLogHook._log(self, tag, value)
+_TrainLogHook.after_run(self, run_context, run_values)
+_TrainLogHook.before_run(self, run_context)
+_TrainLogHook.begin(self)
+_TrainLogHook.end(self, session)
+
+
+utilmy/zrecs/recommenders/utils/timer.py
+-------------------------methods----------------------
+Timer.__enter__(self)
+Timer.__exit__(self, *args)
+Timer.__init__(self)
+Timer.__str__(self)
+Timer.interval(self)
+Timer.start(self)
+Timer.stop(self)
+
+
+utilmy/zrecs/setup.py
+
+
+utilmy/zrecs/tests/__init__.py
+
+
+utilmy/zrecs/tests/ci/run_pytest.py
+-------------------------functions----------------------
+create_arg_parser()
+
+
+
+utilmy/zrecs/tests/ci/submit_azureml_pytest.py
+-------------------------functions----------------------
+create_arg_parser()
+create_experiment(workspace, experiment_name)
+create_run_config(cpu_cluster, docker_proc_type, conda_env_file)
+setup_persistent_compute_target(workspace, cluster_name, vm_size, max_nodes)
+setup_workspace(workspace_name, subscription_id, resource_group, cli_auth, location)
+submit_experiment_to_azureml(test, test_folder, test_markers, junitxml, run_config, experiment)
+
+
+
+utilmy/zrecs/tests/conftest.py
+-------------------------functions----------------------
+affinity_matrix(test_specs)
+criteo_first_row()
+deeprec_config_path()
+deeprec_resource_path()
+demo_usage_data(header, sar_settings)
+demo_usage_data_spark(spark, demo_usage_data, header)
+header()
+kernel_name()
+mind_resource_path(deeprec_resource_path)
+notebooks()
+output_notebook()
+pandas_dummy(header)
+pandas_dummy_timestamp(pandas_dummy, header)
+path_notebooks()
+python_dataset_ncf(test_specs_ncf)
+sar_settings()
+spark(tmp_path_factory, app_name = "Sample", url = "local[*]")
+test_specs()
+test_specs_ncf()
+tmp(tmp_path_factory)
+train_test_dummy_timestamp(pandas_dummy_timestamp)
+
+
+
+utilmy/zrecs/tests/integration/__init__.py
+
+
+utilmy/zrecs/tests/integration/examples/__init__.py
+
+
+utilmy/zrecs/tests/integration/examples/test_notebooks_gpu.py
+-------------------------functions----------------------
+test_cornac_bivae_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_dkn_quickstart_integration(notebooks, output_notebook, kernel_name)
+test_fastai_integration(notebooks, output_notebook, kernel_name, size, epochs, expected_values)
+test_gpu_vm()
+test_lightgcn_deep_dive_integration(notebooks, output_notebook, kernel_name, yaml_file, data_path, size, epochs, batch_size, expected_values, seed, )
+test_lstur_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_naml_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_ncf_deep_dive_integration(notebooks, output_notebook, kernel_name, size, epochs, batch_size, expected_values, seed, )
+test_ncf_integration(notebooks, output_notebook, kernel_name, size, epochs, expected_values, seed)
+test_npa_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_nrms_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_slirec_quickstart_integration(notebooks, output_notebook, kernel_name, yaml_file, data_path, epochs, batch_size, expected_values, seed, )
+test_wide_deep_integration(notebooks, output_notebook, kernel_name, size, steps, expected_values, seed, tmp)
+test_xdeepfm_integration(notebooks, output_notebook, kernel_name, syn_epochs, criteo_epochs, expected_values, seed, )
+
+
+
+utilmy/zrecs/tests/integration/examples/test_notebooks_pyspark.py
+-------------------------functions----------------------
+test_als_pyspark_integration(notebooks, output_notebook, kernel_name)
+test_mmlspark_lightgbm_criteo_integration(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/zrecs/tests/integration/examples/test_notebooks_python.py
+-------------------------functions----------------------
+test_baseline_deep_dive_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_cornac_bpr_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_geoimc_integration(notebooks, output_notebook, kernel_name, expected_values)
+test_nni_tuning_svd(notebooks, output_notebook, kernel_name, tmp)
+test_sar_single_node_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_surprise_svd_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_vw_deep_dive_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_wikidata_integration(notebooks, output_notebook, kernel_name, tmp)
+test_xlearn_fm_integration(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/zrecs/tests/integration/recommenders/__init__.py
+
+
+utilmy/zrecs/tests/smoke/__init__.py
+
+
+utilmy/zrecs/tests/smoke/examples/__init__.py
+
+
+utilmy/zrecs/tests/smoke/examples/test_notebooks_gpu.py
+-------------------------functions----------------------
+test_cornac_bivae_smoke(notebooks, output_notebook, kernel_name)
+test_fastai_smoke(notebooks, output_notebook, kernel_name)
+test_gpu_vm()
+test_lstur_smoke(notebooks, output_notebook, kernel_name)
+test_naml_smoke(notebooks, output_notebook, kernel_name)
+test_ncf_deep_dive_smoke(notebooks, output_notebook, kernel_name)
+test_ncf_smoke(notebooks, output_notebook, kernel_name)
+test_npa_smoke(notebooks, output_notebook, kernel_name)
+test_nrms_smoke(notebooks, output_notebook, kernel_name)
+test_wide_deep_smoke(notebooks, output_notebook, kernel_name, tmp)
+test_xdeepfm_smoke(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/zrecs/tests/smoke/examples/test_notebooks_pyspark.py
+-------------------------functions----------------------
+test_als_pyspark_smoke(notebooks, output_notebook, kernel_name)
+test_mmlspark_lightgbm_criteo_smoke(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/zrecs/tests/smoke/examples/test_notebooks_python.py
+-------------------------functions----------------------
+test_baseline_deep_dive_smoke(notebooks, output_notebook, kernel_name)
+test_cornac_bpr_smoke(notebooks, output_notebook, kernel_name)
+test_lightgbm_quickstart_smoke(notebooks, output_notebook, kernel_name)
+test_mind_utils(notebooks, output_notebook, kernel_name, tmp)
+test_sar_single_node_smoke(notebooks, output_notebook, kernel_name)
+test_surprise_svd_smoke(notebooks, output_notebook, kernel_name)
+test_vw_deep_dive_smoke(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/zrecs/tests/smoke/recommenders/__init__.py
+
+
+utilmy/zrecs/tests/unit/__init__.py
+
+
+utilmy/zrecs/tests/unit/examples/__init__.py
+
+
+utilmy/zrecs/tests/unit/examples/test_notebooks_gpu.py
+-------------------------functions----------------------
+test_dkn_quickstart(notebooks, output_notebook, kernel_name)
+test_fastai(notebooks, output_notebook, kernel_name)
+test_gpu_vm()
+test_ncf(notebooks, output_notebook, kernel_name)
+test_ncf_deep_dive(notebooks, output_notebook, kernel_name)
+test_wide_deep(notebooks, output_notebook, kernel_name, tmp)
+test_xdeepfm(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/zrecs/tests/unit/examples/test_notebooks_pyspark.py
+-------------------------functions----------------------
+test_als_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_als_pyspark_runs(notebooks, output_notebook, kernel_name)
+test_data_split_runs(notebooks, output_notebook, kernel_name)
+test_evaluation_diversity_runs(notebooks, output_notebook, kernel_name)
+test_evaluation_runs(notebooks, output_notebook, kernel_name)
+test_mmlspark_lightgbm_criteo_runs(notebooks, output_notebook, kernel_name)
+test_spark_tuning(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/zrecs/tests/unit/examples/test_notebooks_python.py
+-------------------------functions----------------------
+test_baseline_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_cornac_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_lightgbm(notebooks, output_notebook, kernel_name)
+test_rlrmc_quickstart_runs(notebooks, output_notebook, kernel_name)
+test_sar_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_sar_single_node_runs(notebooks, output_notebook, kernel_name)
+test_surprise_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_template_runs(notebooks, output_notebook, kernel_name)
+test_vw_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_wikidata_runs(notebooks, output_notebook, kernel_name, tmp)
+
+
+
+utilmy/zrecs/tests/unit/recommenders/__init__.py
+
+
+utilmy/zrecs/tools/__init__.py
+
+
+utilmy/zrecs/tools/databricks_install.py
+-------------------------functions----------------------
+create_egg(), local_eggname = "Recommenders.egg", overwrite = False, )
+dbfs_file_exists(api_client, dbfs_path)
+prepare_for_operationalization(cluster_id, api_client, dbfs_path, overwrite, spark_version)
+
+
+
+utilmy/zrecs/tools/generate_conda_file.py
+
+
+utilmy/zrecs/tools/generate_requirements_txt.py
+
+
+utilmy/zzarchive/_HELP.py
+-------------------------functions----------------------
+fun_cython(a)
+fun_python(a)
+os_VS_build(self, lib_to_build)
+os_VS_start(self, version)
+os_compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
+set_rc_version(rcfile, target_version)
+
+
+
+utilmy/zzarchive/__init__.py
+
+
+utilmy/zzarchive/alldata.py
+
+
+utilmy/zzarchive/allmodule.py
+-------------------------functions----------------------
+pprint(table1, tablefmt = "simple")
+pprint2(x)
+str_convert_beforeprint(x)
+str_to_unicode(x, encoding = 'utf-8')
+str_to_utf8(x)
+
+
+
+utilmy/zzarchive/allmodule_fin.py
+
+
+utilmy/zzarchive/coke_functions.py
+-------------------------functions----------------------
+date_diffend(t)
+date_diffsecond(str_t1, str_t0, fmt='YYYY-MM-DD HH = 'YYYY-MM-DD HH:mm:SS')
+date_diffstart(t)
+day(s)
+daytime(d)
+hour(s)
+month(s)
+np_dict_tolist(dd)
+np_dict_tostr_key(dd)
+np_dict_tostr_val(dd)
+pd_date_splitall(df, coldate = 'purchased_at')
+season(d)
+weekday(s, fmt = 'YYYY-MM-DD', i0 = 0, i1 = 10)
+year(s)
+
+
+
+utilmy/zzarchive/datanalysis.py
+-------------------------functions----------------------
+col_feature_importance(Xcol, Ytarget)
+col_pair_correl(Xcol, Ytarget)
+col_pair_interaction(Xcol, Ytarget)
+col_study_getcategorydict_freq(catedict)
+col_study_summary(Xmat = [0.0, 0.0], Xcolname = ['col1', 'col2'], Xcolselect = [9, 9], isprint = 0)
+csv_analysis()
+csv_bigcompute()
+csv_col_get_dict_categoryfreq(dircsv, filepattern = "*.csv", category_cols = [], maxline = -1, fileencoding = "utf-8")
+csv_col_schema_toexcel(dircsv = "", filepattern = '*.csv', outfile = '.xlsx', returntable = 1, maxrow = 5000000, maxcol_pertable = 90, maxstrlen = 'U80')
+csv_dtypes_getdict(df = None, csvfile = None)
+csv_fast_processing()
+csv_pivotable(dircsv = "", filepattern = '*.csv', fileh5 = '.h5', leftX = 'col0', topY = 'col2', centerZ = 'coli', mapreduce = 'sum', chunksize =  500000, tablename = 'df')
+csv_row_mapreduce(dircsv = "", outfile = "", type_mapreduce = 'sum', nrow = 1000000, chunk =  5000000)
+csv_row_reduce_line(fromfile, tofile, condfilter, catval_tokeep, header = True, maxline = -1)
+csv_row_reduce_line_manual(file_category, file_transact, file_reduced)
+db_getdata()
+db_meta_add(metadb, dbname, new_table = ('', [])
+db_meta_find(ALLDB, query = '', filter_db = [], filter_table = [], filter_column = [])
+db_sql()
+isnull(x)
+optim_is_pareto_efficient(Xmat_cost, epsilon =  0.01, ret_boolean = 1)
+pd_checkpoint()
+pd_col_pair_plot(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
+pd_col_study_distribution_show(df, col_include = None, col_exclude = None, pars={'binsize' = {'binsize':20})
+pd_describe(df)
+pd_filter_column(df_client_product, filter_val = [], iscol = 1)
+pd_missing_show()
+pd_stack_dflist(df_list)
+pd_validation_struct()
+plot_XY(xx, yy, zcolor = None, tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
+plot_XY_plotly(xx, yy, towhere = 'url')
+plot_XY_seaborn(X, Y, Zcolor = None)
+plot_Y(Yval, typeplot = '.b', tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
+plot_cluster_2D(X_2dim, target_class, target_names)
+plot_cluster_hiearchy(Xmat_dist, p = 30, truncate_mode = None, color_threshold = None, get_leaves = True, orientation = 'top', labels = None, count_sort = False, distance_sort = False, show_leaf_counts = True, do_plot = 1, no_labels = False, leaf_font_size = None, leaf_rotation = None, leaf_label_func = None, show_contracted = False, link_color_func = None, ax = None, above_threshold_color = 'b', annotate_above = 0)
+plot_cluster_pca(Xmat, Xcluster_label = None, metric = 'euclidean', dimpca = 2, whiten = True, isprecompute = False, savefile = '', doreturn = 1)
+plot_cluster_tsne(Xmat, Xcluster_label = None, metric = 'euclidean', perplexity = 50, ncomponent = 2, savefile = '', isprecompute = False, returnval = True)
+plot_col_pair(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
+plot_distance_heatmap(Xmat_dist, Xcolname)
+plot_distribution_density(Xsample, kernel = 'gaussian', N = 10, bandwith = 1 / 10.0)
+sk_catboost_classifier(Xtrain, Ytrain, Xcolname = None, pars= {"learning_rate" =  {"learning_rate":0.1, "iterations":1000, "random_seed":0, "loss_function": "MultiClass" }, isprint = 0)
+sk_catboost_regressor()
+sk_cluster(Xmat, metric = 'jaccard')
+sk_cluster_algo_custom(Xmat, algorithm, args, kwds, returnval = 1)
+sk_cluster_distance_pair(Xmat, metric = 'jaccard')
+sk_correl_rank(correl = [[1, 0], [0, 1]])
+sk_distribution_kernel_bestbandwidth(kde)
+sk_distribution_kernel_sample(kde = None, n = 1)
+sk_error_r2(Ypred, y_true, sample_weight = None, multioutput = None)
+sk_error_rmse(Ypred, Ytrue)
+sk_feature_importance(clfrf, feature_name)
+sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
+sk_model_auto_tpot(Xmat, y, outfolder = 'aaserialize/', model_type = 'regressor/classifier', train_size = 0.5, generation = 1, population_size = 5, verbosity = 2)
+sk_optim_de(obj_fun, bounds, maxiter = 1, name1 = '', solver1 = None, isreset = 1, popsize = 15)
+sk_params_search_best(Xmat, Ytarget, model1, param_grid={'alpha' = {'alpha':  np.linspace(0, 1, 5) }, method = 'gridsearch', param_search= {'scoretype' =  {'scoretype':'r2', 'cv':5, 'population_size':5, 'generations_number':3 })
+sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
+sk_tree(Xtrain, Ytrain, nbtree, maxdepth, isprint1 = 1, njobs = 1)
+sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
+sk_votingpredict(estimators, voting, ww, X_test)
+str_to_unicode(x, encoding = 'utf-8')
+tf_transform_catlabel_toint(Xmat)
+tf_transform_pca(Xmat, dimpca = 2, whiten = True)
+xl_get_rowcol(ws, i0, j0, imax, jmax)
+xl_getschema(dirxl = "", filepattern = '*.xlsx', dirlevel = 1, outfile = '.xlsx')
+xl_setstyle(file1)
+xl_val(ws, colj, rowi)
+
+-------------------------methods----------------------
+sk_model_template1.__init__(self, alpha = 0.5, low_y_cut = -0.09, high_y_cut = 0.09, ww0 = 0.95)
+sk_model_template1.fit(self, X, Y = None)
+sk_model_template1.predict(self, X, y = None, ymedian = None)
+sk_model_template1.score(self, X, Ytrue = None, ymedian = None)
+sk_stateRule.__init__(self, state, trigger, colname = [])
+sk_stateRule.addrule(self, rulefun, name = '', desc = '')
+sk_stateRule.eval(self, idrule, t, ktrig = 0)
+sk_stateRule.help()
+
+
+utilmy/zzarchive/excel.py
+-------------------------functions----------------------
+add_one(data)
+double_sum(x, y)
+get_workbook_name()
+matrix_mult(x, y)
+npdot()
+
+
+
+utilmy/zzarchive/fast.py
+-------------------------functions----------------------
+_compute_overlaps(u, v)
+cosine(u, v)
+cross(vec1, vec2)
+day(s)
+daytime(d)
+distance_jaccard(u, v)
+distance_jaccard2(u, v)
+distance_jaccard_X(X)
+drawdown_calc_fast(price)
+fastStrptime(val, format)
+hour(s)
+log_exp_sum2(a, b)
+mean(x)
+month(s)
+norm(vec)
+rmse(y, yhat)
+season(d)
+std(x)
+weekday(s)
+year(s)
+
+
+
+utilmy/zzarchive/fast_parallel.py
+-------------------------functions----------------------
+task_find_best(tasks, n_top = 5)
+task_parallel_job_01(name, param, datadict)
+task_progress(tasks)
+task_summary(tasks)
+
+
+
+utilmy/zzarchive/filelock.py
+-------------------------methods----------------------
+FileLock.__del__(self)
+FileLock.__enter__(self)
+FileLock.__exit__(self, type, value, traceback)
+FileLock.__init__(self, protected_file_path, timeout = None, delay = 1, lock_file_contents = None)
+FileLock.acquire(self, blocking = True)
+FileLock.available(self)
+FileLock.locked(self)
+FileLock.purge(self)
+FileLock.release(self)
+
+
+utilmy/zzarchive/function_custom.py
+-------------------------functions----------------------
+fun_obj(vv, ext)
+getweight(ww, size = (9, 3)
+mapping_calc_risk_elvis_v03(ss, tr, t, riskout)
+mapping_calc_risk_v00(self, ss, tr, t, risk0)
+mapping_calc_risk_v01(ss, tr, t, risk0)
+mapping_calc_risk_v02(ss, tr, t, risk0)
+mapping_risk_ww_v01(risk, wwmat, ww2)
+
+
+
+utilmy/zzarchive/geospatial.py
+
+
+utilmy/zzarchive/global01.py
+
+
+utilmy/zzarchive/kagglegym.py
+-------------------------functions----------------------
+make()
+r_score(y_true, y_pred, sample_weight = None, multioutput = None)
+
+-------------------------methods----------------------
+Environment.__init__(self)
+Environment.__str__(self)
+Environment.reset(self)
+Environment.step(self, target)
+Observation.__init__(self, train, target, features)
+
+
+utilmy/zzarchive/linux.py
+-------------------------functions----------------------
+VS_build(self, lib_to_build)
+VS_start(self, version)
+aa_cleanmemory()
+aa_getmodule_doc(module1, fileout = '')
+aa_isanaconda()
+acf(data)
+and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
+comoment(xx, yy, nsample, kx, ky)
+compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
+date_add_bdays(from_date, add_days)
+date_as_float(dt)
+date_diffindays(intdate1, intdate2)
+date_finddateid(date1, dateref)
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_now(i = 0)
+date_remove_bdays(from_date, add_days)
+datediff_inyear(startdate, enddate)
+dateint_todatetime(datelist1)
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_toint(datelist1)
+datestring_toint(datelist1)
+datetime_toint(datelist1)
+datetime_tostring(datelist1)
+datetime_tostring(datelist1)
+find(item, vec)
+findhigher(x, vec)
+findlower(x, vec)
+finds(itemlist, vec)
+findx(item, vec)
+isfloat(value)
+isint(x)
+load_session(name = 'test_20160815')
+np_cleanmatrix(m)
+np_find(item, vec)
+np_find_maxpos(values)
+np_find_maxpos_2nd(numbers)
+np_find_minpos(values)
+np_findfirst(item, vec)
+np_findlocalmax(v, trig)
+np_findlocalmax2(v, trig)
+np_findlocalmin(v, trig)
+np_findlocalmin2(v, trig)
+np_interpolate_nan(y)
+np_ma(vv, n)
+np_memory_array_adress(x)
+np_remove_zeros(vv, axis1 = 1)
+np_sort(arr, colid, asc = True)
+np_sortbycol(arr, colid, asc = True)
+np_sortbycolumn(arr, colid, asc = True)
+np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
+np_uniquerows(a)
+numexpr_topanda(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+numexpr_vect_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+pd_addcolumn(df1, name1 = 'new')
+pd_array_todataframe(price, symbols = None, date1 = None, dotranspose = False)
+pd_changeencoding(data, cols)
+pd_create_colmap_nametoid(df)
+pd_createdf(val1, col1 = None, idx1 = None)
+pd_csv_topanda(filein1, filename, tablen = 'data')
+pd_dataframe_toarray(df)
+pd_date_intersection(qlist)
+pd_extract_col_idx_val(df)
+pd_getpanda_tonumpy(filename, nsize, tablen = 'data')
+pd_getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
+pd_insertcolumn(df, colname, vec)
+pd_insertrows(df, rowval, index1 = None)
+pd_load_panda2vec(filenameh5, store_id = 'data')
+pd_remove_row(df, row_list_index = [23, 45])
+pd_removecolumn(df1, name1)
+pd_replacevalues(df, matrix)
+pd_resetindex(df)
+pd_save_vectopanda(vv, filenameh5)
+pd_split_col_idx_val(df)
+pd_storeadddf(df, dfname, dbfile='F = 'F:\temp_pandas.h5')
+pd_storedumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
+plotsave(xx, yy, title1 = "")
+plotshow(xx, yy, title1 = "")
+save_session(name = '')
+set_rc_version(rcfile, target_version)
+sk_cluster_kmeans(x, nbcluster = 5, isplot = True)
+sk_featureimportance(clfrf, feature_name)
+sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
+sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
+sk_tree(Xtrain, Ytrain, nbtree, maxdepth, print1)
+sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
+sk_votingpredict(estimators, voting, ww, X_test)
+sort(arr, colid, asc = 1)
+sortcol(arr, colid, asc = 1)
+textvect_topanda(vv, fileout = "")
+
+
+
+utilmy/zzarchive/multiprocessfunc.py
+-------------------------functions----------------------
+bm_generator(bm, dt, n, type1)
+func(val, lock)
+init2(d)
+init_global1(l, r)
+integratene(its)
+integratenp(its, nchunk)
+integratenp2(its, nchunk)
+list_append(count, id, out_list)
+merge(d2)
+multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky, nbasset, n, price, type1 = 0, strike = 0, cp = 1)
+multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky, nbasset, n, price)
+ne_sin(x)
+np_sin(value)
+parzen_estimation(x_samples, point_x, h)
+res_shared2()
+
+
+
+utilmy/zzarchive/multithread.py
+-------------------------functions----------------------
+multithread_run(fun_async, input_list:list, n_pool = 5, start_delay = 0.1, verbose = True, **kw)
+multithread_run_list(**kwargs)
+
+
+
+utilmy/zzarchive/portfolio.py
+-------------------------functions----------------------
+_date_align(dateref, datei, tmax, closei)
+_notnone(x)
+_reshape(x)
+array_todataframe(price, symbols = None, date1 = None)
+calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
+calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
+calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
+causality_y1_y2(price2, price1, maxlag)
+cointegration(x, y)
+correl_fast(xn, y, nx)
+correl_reducebytrigger(correl2, trigger)
+correlation_mat(Xmat, type1 = "robust", type2 = "correl")
+data_jpsector()
+date_align(array1, dateref)
+date_alignfromdateref(array1, dateref)
+date_earningquater(t1)
+date_extract_dailyopenclosetime(spdateref1, market = 'us')
+date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
+date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
+date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
+date_finddateid(date1, dateref)
+date_is_3rdfriday(s)
+date_option_expiry(date)
+datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
+folio_concenfactor2(ww, masset = 12)
+folio_cost_turnover(wwall, bsk, dateref, costbp)
+folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
+folio_fixedunitprice(price, fixedww, costpa = 0.0)
+folio_fixedweightprice(price, fixedww, costpa = 0.0)
+folio_fixedweightret(ret, fixedww)
+folio_histogram(close)
+folio_inverseetf(price, costpa = 0.0)
+folio_leverageetf(price, lev = 1.0, costpa = 0.0)
+folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
+folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
+folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
+folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
+folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
+folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
+folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
+folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
+get(close, timelag)
+getdiff_fromquotes(close, timelag)
+getlogret_fromquotes(close, timelag = 1)
+getprice_fromret(ret, normprice = 100)
+getret_fromquotes(close, timelag = 1)
+isfloat(value)
+isint(x)
+load_asset_fromfile(file1)
+max_withposition(values)
+min_withposition(values)
+norm_fast(y, ny)
+np_distance_l1(x, y, wwerr)
+np_distance_l1(x, y, wwerr)
+np_similarity(x, y, wwerr = [], type1 = 0)
+np_similarity(x, y, wwerr = [], type1 = 0)
+pd_dataframe_toarray(df)
+pd_transform_asset(q0, q1, type1 = "spread")
+plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
+plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
+plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
+plot_priceintraday(data)
+price_normalize100(ret, normprice = 100)
+price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
+reg_slope(close, dateref, tlag, type1 = 'elasticv')
+regression(yreturn, xreturn, type1 = "elasticv")
+regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
+regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
+regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
+rolling_cointegration(x, y)
+rsk_calc_all_TA(df = 'panda_dataframe')
+save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
+similarity_correl(ret_close2, funargs)
+sk_cov_fromcorrel(correl, ret_close1)
+ta_highbandtrend1(close2, type1 = 0)
+volhisto_fromprice(price, t, volrange, axis = 0)
+volhisto_fromret(retbsk, t, volrange, axis = 0)
+volhistorolling_fromprice(price, volrange)
+
+-------------------------methods----------------------
+folioCalc.__init__(self, sym, close, dateref)
+folioCalc._regimecalc(self, t, wwextra)
+folioCalc._weightcalc_constant(self, ww2, t)
+folioCalc._weightcalc_generic(self, wwvec, t)
+folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
+folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
+folioCalc.getweight(self)
+folioCalc.help(self)
+folioCalc.multiperiod_ww(self, t)
+folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioCalc.set_symclose(self, sym, close, dateref)
+folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioOptimizationF.__init__(self, sym, close, dateref)
+folioOptimizationF._loss_obj(self, ww2, wwpenalty)
+folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
+folioOptimizationF._objective_criteria(self, bsk)
+folioOptimizationF._regimecalc(self, t, wwextra)
+folioOptimizationF._weightcalc_constant(self, ww2, t)
+folioOptimizationF._weightcalc_generic(self, wwvec, t)
+folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
+folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
+folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioOptimizationF.calcbasket_obj(self, wwvec)
+folioOptimizationF.calcbasket_obj2(self, wwvec)
+folioOptimizationF.getweight(self)
+folioOptimizationF.help(self)
+folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
+folioOptimizationF.multiperiod_ww(self, t)
+folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioOptimizationF.set_symclose(self, sym, close, dateref)
+folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioRiskIndicator.__init__(self, sym, close, dateref)
+folioRiskIndicator._regimecalc(self, t, wwextra)
+folioRiskIndicator._weightcalc_generic(self, wwvec, t)
+folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
+folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
+folioRiskIndicator.set_symclose(self, sym, close, dateref)
+folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+index.__init__(self, id1, sym, ww, tstart)
+index.__init__(self, id1, sym, ww, tstart)
+index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
+index._wwpct_rebal(self, wwpct_actual, t, trebal)
+index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
+index.calc_baskettable_unit()
+index.close(self)
+index.help(self)
+index.updatehisto(self)
+searchSimilarity.__generate_return__(self, nlag)
+searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
+searchSimilarity.__overweight__(self, px)
+searchSimilarity.export_results()
+searchSimilarity.get_rankresult(self, filetosave = '')
+searchSimilarity.launch_search(self)
+searchSimilarity.load_quotes_fromdb(self, picklefile = '')
+searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
+searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
+searchSimilarity.staticmethod(self, x)
+
+
+utilmy/zzarchive/portfolio_withdate.py
+-------------------------functions----------------------
+_date_align(dateref, datei, tmax, closei)
+_notnone(x)
+_reshape(x)
+array_todataframe(price, symbols = None, date1 = None)
+calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
+calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
+calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
+causality_y1_y2(price2, price1, maxlag)
+cointegration(x, y)
+correl_fast(xn, y, nx)
+correl_reducebytrigger(correl2, trigger)
+correlation_mat(Xmat, type1 = "robust", type2 = "correl")
+data_jpsector()
+date_add_bdays(from_date, add_days)
+date_align(array1, dateref)
+date_alignfromdateref(array1, dateref)
+date_as_float(dt)
+date_diffindays(intdate1, intdate2)
+date_earningquater(t1)
+date_extract_dailyopenclosetime(spdateref1, market = 'us')
+date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
+date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
+date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
+date_finddateid(date1, dateref)
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
+date_is_3rdfriday(s)
+date_option_expiry(date)
+date_removetimezone(datelist)
+date_todatetime(tlist)
+datediff_inyear(startdate, enddate)
+dateint_todatetime(datelist1)
+dateint_tostring(datelist1, format1 = '%b-%y')
+datenumpy_todatetime(tt, islocaltime = True)
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_toint(datelist1)
+datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
+datetime_todate(tt)
+datetime_toint(datelist1)
+datetime_tointhour(datelist1)
+datetime_tonumpypdate(t, islocaltime = True)
+datetime_tostring(tt)
+folio_concenfactor2(ww, masset = 12)
+folio_cost_turnover(wwall, bsk, dateref, costbp)
+folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
+folio_fixedunitprice(price, fixedww, costpa = 0.0)
+folio_fixedweightprice(price, fixedww, costpa = 0.0)
+folio_fixedweightret(ret, fixedww)
+folio_histogram(close)
+folio_inverseetf(price, costpa = 0.0)
+folio_leverageetf(price, lev = 1.0, costpa = 0.0)
+folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
+folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
+folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
+folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
+folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
+folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
+folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
+folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
+get(close, timelag)
+getdiff_fromquotes(close, timelag)
+getlogret_fromquotes(close, timelag = 1)
+getprice_fromret(ret, normprice = 100)
+getret_fromquotes(close, timelag = 1)
+isfloat(value)
+isint(x)
+load_asset_fromfile(file1)
+max_withposition(values)
+min_withposition(values)
+norm_fast(y, ny)
+np_distance_l1(x, y, wwerr)
+np_distance_l1(x, y, wwerr)
+np_similarity(x, y, wwerr = [], type1 = 0)
+np_similarity(x, y, wwerr = [], type1 = 0)
+pd_dataframe_toarray(df)
+pd_transform_asset(q0, q1, type1 = "spread")
+plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
+plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
+plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
+plot_priceintraday(data)
+price_normalize100(ret, normprice = 100)
+price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
+reg_slope(close, dateref, tlag, type1 = 'elasticv')
+regression(yreturn, xreturn, type1 = "elasticv")
+regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
+regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
+regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
+rolling_cointegration(x, y)
+rsk_calc_all_TA(df = 'panda_dataframe')
+save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
+similarity_correl(ret_close2, funargs)
+sk_cov_fromcorrel(correl, ret_close1)
+ta_highbandtrend1(close2, type1 = 0)
+volhisto_fromprice(price, t, volrange, axis = 0)
+volhisto_fromret(retbsk, t, volrange, axis = 0)
+volhistorolling_fromprice(price, volrange)
+
+-------------------------methods----------------------
+folioCalc.__init__(self, sym, close, dateref)
+folioCalc._regimecalc(self, t, wwextra)
+folioCalc._weightcalc_constant(self, ww2, t)
+folioCalc._weightcalc_generic(self, wwvec, t)
+folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
+folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
+folioCalc.getweight(self)
+folioCalc.help(self)
+folioCalc.multiperiod_ww(self, t)
+folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioCalc.set_symclose(self, sym, close, dateref)
+folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioOptimizationF.__init__(self, sym, close, dateref)
+folioOptimizationF._loss_obj(self, ww2, wwpenalty)
+folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
+folioOptimizationF._objective_criteria(self, bsk)
+folioOptimizationF._regimecalc(self, t, wwextra)
+folioOptimizationF._weightcalc_constant(self, ww2, t)
+folioOptimizationF._weightcalc_generic(self, wwvec, t)
+folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
+folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
+folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioOptimizationF.calcbasket_obj(self, wwvec)
+folioOptimizationF.calcbasket_obj2(self, wwvec)
+folioOptimizationF.getweight(self)
+folioOptimizationF.help(self)
+folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
+folioOptimizationF.multiperiod_ww(self, t)
+folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioOptimizationF.set_symclose(self, sym, close, dateref)
+folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioRiskIndicator.__init__(self, sym, close, dateref)
+folioRiskIndicator._regimecalc(self, t, wwextra)
+folioRiskIndicator._weightcalc_generic(self, wwvec, t)
+folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
+folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
+folioRiskIndicator.set_symclose(self, sym, close, dateref)
+folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+index.__init__(self, id1, sym, ww, tstart)
+index.__init__(self, id1, sym, ww, tstart)
+index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
+index._wwpct_rebal(self, wwpct_actual, t, trebal)
+index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
+index.calc_baskettable_unit()
+index.close(self)
+index.help(self)
+index.updatehisto(self)
+searchSimilarity.__generate_return__(self, nlag)
+searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
+searchSimilarity.__overweight__(self, px)
+searchSimilarity.export_results()
+searchSimilarity.get_rankresult(self, filetosave = '')
+searchSimilarity.launch_search(self)
+searchSimilarity.load_quotes_fromdb(self, picklefile = '')
+searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
+searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
+searchSimilarity.staticmethod(self, x)
+
+
+utilmy/zzarchive/py2to3/_HELP.py
+-------------------------functions----------------------
+fun_cython(a)
+fun_python(a)
+os_VS_build(self, lib_to_build)
+os_VS_start(self, version)
+os_compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
+set_rc_version(rcfile, target_version)
+
+
+
+utilmy/zzarchive/py2to3/__init__.py
+
+
+utilmy/zzarchive/py2to3/alldata.py
+
+
+utilmy/zzarchive/py2to3/allmodule.py
+-------------------------functions----------------------
+pprint(table1, tablefmt = "simple")
+pprint2(x)
+str_convert_beforeprint(x)
+str_to_unicode(x, encoding = 'utf-8')
+str_to_utf8(x)
+
+
+
+utilmy/zzarchive/py2to3/allmodule_fin.py
+
+
+utilmy/zzarchive/py2to3/coke_functions.py
+-------------------------functions----------------------
+date_diffend(t)
+date_diffsecond(str_t1, str_t0, fmt='YYYY-MM-DD HH = 'YYYY-MM-DD HH:mm:SS')
+date_diffstart(t)
+day(s)
+daytime(d)
+hour(s)
+month(s)
+np_dict_tolist(dd)
+np_dict_tostr_key(dd)
+np_dict_tostr_val(dd)
+pd_date_splitall(df, coldate = 'purchased_at')
+season(d)
+weekday(s, fmt = 'YYYY-MM-DD', i0 = 0, i1 = 10)
+year(s)
+
+
+
+utilmy/zzarchive/py2to3/datanalysis.py
+-------------------------functions----------------------
+col_feature_importance(Xcol, Ytarget)
+col_pair_correl(Xcol, Ytarget)
+col_pair_interaction(Xcol, Ytarget)
+col_pair_plot(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
+col_study_distribution_show(df, col_include = None, col_exclude = None, pars={'binsize' = {'binsize':20})
+col_study_getcategorydict_freq(catedict)
+col_study_summary(Xmat = [0.0, 0.0], Xcolname = ['col1', 'col2'], Xcolselect = [9, 9], isprint = 0)
+csv_analysis()
+csv_bigcompute()
+csv_col_get_dict_categoryfreq(dircsv, filepattern = "*.csv", category_cols = [], maxline = -1, fileencoding = "utf-8")
+csv_col_schema_toexcel(dircsv = "", filepattern = '*.csv', outfile = '.xlsx', returntable = 1, maxrow = 5000000, maxcol_pertable = 90, maxstrlen = 'U80')
+csv_dtypes_getdict(df = None, csvfile = None)
+csv_fast_processing()
+csv_pivotable(dircsv = "", filepattern = '*.csv', fileh5 = '.h5', leftX = 'col0', topY = 'col2', centerZ = 'coli', mapreduce = 'sum', chunksize =  500000, tablename = 'df')
+csv_row_mapreduce(dircsv = "", outfile = "", type_mapreduce = 'sum', chunk =  5000000)
+csv_row_reduce_line(fromfile, tofile, condfilter, catval_tokeep, maxline = -1)
+csv_row_reduce_line_manual(file_category, file_transact, file_reduced)
+db_getdata()
+db_meta_add(metadb, dbname, new_table = ('', [])
+db_meta_find(ALLDB, query = '', filter_db = [], filter_table = [], filter_column = [])
+db_sql()
+isnull(x)
+optim_is_pareto_efficient(Xmat_cost, epsilon =  0.01, ret_boolean = 1)
+pd_checkpoint()
+pd_filter_column(df_client_product, filter_val = [], iscol = 1)
+pd_missing_show()
+pd_stack_dflist(df_list)
+pd_validation_struct()
+plot_XY(xx, yy, zcolor = None, tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
+plot_XY_plotly(xx, yy, towhere = 'url')
+plot_XY_seaborn(X, Y, Zcolor = None)
+plot_Y(Yval, typeplot = '.b', tsize = None, labels = None, title = '', xlabel = '', ylabel = '', zcolor_label = '', figsize = (8, 6)
+plot_cluster_2D(X_2dim, target_class, target_names)
+plot_cluster_hiearchy(Xmat_dist, p = 30, truncate_mode = None, color_threshold = None, get_leaves = True, orientation = 'top', labels = None, count_sort = False, distance_sort = False, show_leaf_counts = True, no_plot = False, no_labels = False, leaf_font_size = None, leaf_rotation = None, leaf_label_func = None, show_contracted = False, link_color_func = None, ax = None, above_threshold_color = 'b')
+plot_cluster_pca(Xmat, Xcluster_label = None, metric = 'euclidean', dimpca = 2, whiten = True, isprecompute = False, savefile = '', doreturn = 1)
+plot_cluster_tsne(Xmat, Xcluster_label = None, metric = 'euclidean', perplexity = 50, ncomponent = 2, savefile = '', isprecompute = False, returnval = True)
+plot_col_pair(dfX, Xcolname_selectlist = None, dfY = None, Ycolname = None)
+plot_distance_heatmap(Xmat_dist, Xcolname)
+plot_distribution_density(Xsample, kernel = 'gaussian', N = 10, bandwith = 1 / 10.0)
+sk_cluster(Xmat, metric = 'jaccard')
+sk_cluster_algo_custom(Xmat, algorithm, args, kwds, returnval = 1)
+sk_cluster_distance_pair(Xmat, metric = 'jaccard')
+sk_correl_rank(correl = [[1, 0], [0, 1]])
+sk_distribution_kernel_bestbandwidth(kde)
+sk_distribution_kernel_sample(kde = None, n = 1)
+sk_error_r2(Ypred, y_true, sample_weight = None, multioutput = None)
+sk_error_rmse(Ypred, Ytrue)
+sk_feature_importance(clfrf, feature_name)
+sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
+sk_model_auto_tpot(Xmat, y, outfolder = 'aaserialize/', model_type = 'regressor/classifier', train_size = 0.5, generation = 1, population_size = 5, verbosity = 2)
+sk_optim_de(obj_fun, bounds, maxiter = 1, name1 = '', solver1 = None, isreset = 1, popsize = 15)
+sk_params_search_best(Xmat, Ytarget, model1, param_grid={'alpha' = {'alpha':  np.linspace(0, 1, 5) }, method = 'gridsearch', param_search= {'scoretype' =  {'scoretype':'r2', 'cv':5, 'population_size':5, 'generations_number':3 })
+sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
+sk_tree(Xtrain, Ytrain, nbtree, maxdepth, isprint1 = 1, njobs = 1)
+sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
+sk_votingpredict(estimators, voting, ww, X_test)
+str_to_unicode(x, encoding = 'utf-8')
+tf_transform_catlabel_toint(Xmat)
+tf_transform_pca(Xmat, dimpca = 2, whiten = True)
+xl_get_rowcol(ws, i0, j0, imax, jmax)
+xl_getschema(dirxl = "", filepattern = '*.xlsx', dirlevel = 1, outfile = '.xlsx')
+xl_setstyle(file1)
+xl_val(ws, colj, rowi)
+
+-------------------------methods----------------------
+sk_model_template1.__init__(self, alpha = 0.5, low_y_cut = -0.09, high_y_cut = 0.09, ww0 = 0.95)
+sk_model_template1.fit(self, X, Y = None)
+sk_model_template1.predict(self, X, y = None, ymedian = None)
+sk_model_template1.score(self, X, Ytrue = None, ymedian = None)
+sk_stateRule.__init__(self, state, trigger, colname = [])
+sk_stateRule.addrule(self, rulefun, name = '', desc = '')
+sk_stateRule.eval(self, idrule, t, ktrig = 0)
+sk_stateRule.help()
+
+
+utilmy/zzarchive/py2to3/excel.py
+-------------------------functions----------------------
+add_one(data)
+double_sum(x, y)
+get_workbook_name()
+matrix_mult(x, y)
+npdot()
+
+
+
+utilmy/zzarchive/py2to3/fast.py
+-------------------------functions----------------------
+_compute_overlaps(u, v)
+cosine(u, v)
+cross(vec1, vec2)
+day(s)
+daytime(d)
+distance_jaccard(u, v)
+distance_jaccard2(u, v)
+distance_jaccard_X(X)
+drawdown_calc_fast(price)
+fastStrptime(val, format)
+hour(s)
+log_exp_sum2(a, b)
+mean(x)
+month(s)
+norm(vec)
+rmse(y, yhat)
+season(d)
+std(x)
+weekday(s)
+year(s)
+
+
+
+utilmy/zzarchive/py2to3/fast_parallel.py
+-------------------------functions----------------------
+task_find_best(tasks, n_top = 5)
+task_parallel_job_01(name, param, datadict)
+task_progress(tasks)
+task_summary(tasks)
+
+
+
+utilmy/zzarchive/py2to3/filelock.py
+-------------------------methods----------------------
+FileLock.__del__(self)
+FileLock.__enter__(self)
+FileLock.__exit__(self, type, value, traceback)
+FileLock.__init__(self, protected_file_path, timeout = None, delay = 1, lock_file_contents = None)
+FileLock.acquire(self, blocking = True)
+FileLock.available(self)
+FileLock.locked(self)
+FileLock.purge(self)
+FileLock.release(self)
+
+
+utilmy/zzarchive/py2to3/function_custom.py
+-------------------------functions----------------------
+fun_obj(vv, ext)
+getweight(ww, size = (9, 3)
+mapping_calc_risk_elvis_v03(ss, tr, t, riskout)
+mapping_calc_risk_v00(self, ss, tr, t, risk0)
+mapping_calc_risk_v01(ss, tr, t, risk0)
+mapping_calc_risk_v02(ss, tr, t, risk0)
+mapping_risk_ww_v01(risk, wwmat, ww2)
+
+
+
+utilmy/zzarchive/py2to3/geospatial.py
+
+
+utilmy/zzarchive/py2to3/global01.py
+
+
+utilmy/zzarchive/py2to3/kagglegym.py
+-------------------------functions----------------------
+make()
+r_score(y_true, y_pred, sample_weight = None, multioutput = None)
+
+-------------------------methods----------------------
+Environment.__init__(self)
+Environment.__str__(self)
+Environment.reset(self)
+Environment.step(self, target)
+Observation.__init__(self, train, target, features)
+
+
+utilmy/zzarchive/py2to3/linux.py
+-------------------------functions----------------------
+VS_build(self, lib_to_build)
+VS_start(self, version)
+aa_cleanmemory()
+aa_getmodule_doc(module1, fileout = '')
+aa_isanaconda()
+acf(data)
+and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
+comoment(xx, yy, nsample, kx, ky)
+compileVSsolution(dir1, flags1 = "", type1 = "devenv", compilerdir = "")
+date_add_bdays(from_date, add_days)
+date_as_float(dt)
+date_diffindays(intdate1, intdate2)
+date_finddateid(date1, dateref)
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_now(i = 0)
+date_remove_bdays(from_date, add_days)
+datediff_inyear(startdate, enddate)
+dateint_todatetime(datelist1)
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_toint(datelist1)
+datestring_toint(datelist1)
+datetime_toint(datelist1)
+datetime_tostring(datelist1)
+datetime_tostring(datelist1)
+find(item, vec)
+findhigher(x, vec)
+findlower(x, vec)
+finds(itemlist, vec)
+findx(item, vec)
+isfloat(value)
+isint(x)
+load_session(name = 'test_20160815')
+np_cleanmatrix(m)
+np_find(item, vec)
+np_find_maxpos(values)
+np_find_maxpos_2nd(numbers)
+np_find_minpos(values)
+np_findfirst(item, vec)
+np_findlocalmax(v, trig)
+np_findlocalmax2(v, trig)
+np_findlocalmin(v, trig)
+np_findlocalmin2(v, trig)
+np_interpolate_nan(y)
+np_ma(vv, n)
+np_memory_array_adress(x)
+np_remove_zeros(vv, axis1 = 1)
+np_sort(arr, colid, asc = True)
+np_sortbycol(arr, colid, asc = True)
+np_sortbycolumn(arr, colid, asc = True)
+np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
+np_uniquerows(a)
+numexpr_topanda(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+numexpr_vect_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+pd_addcolumn(df1, name1 = 'new')
+pd_array_todataframe(price, symbols = None, date1 = None, dotranspose = False)
+pd_changeencoding(data, cols)
+pd_create_colmap_nametoid(df)
+pd_createdf(val1, col1 = None, idx1 = None)
+pd_csv_topanda(filein1, filename, tablen = 'data')
+pd_dataframe_toarray(df)
+pd_date_intersection(qlist)
+pd_extract_col_idx_val(df)
+pd_getpanda_tonumpy(filename, nsize, tablen = 'data')
+pd_getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
+pd_insertcolumn(df, colname, vec)
+pd_insertrows(df, rowval, index1 = None)
+pd_load_panda2vec(filenameh5, store_id = 'data')
+pd_remove_row(df, row_list_index = [23, 45])
+pd_removecolumn(df1, name1)
+pd_replacevalues(df, matrix)
+pd_resetindex(df)
+pd_save_vectopanda(vv, filenameh5)
+pd_split_col_idx_val(df)
+pd_storeadddf(df, dfname, dbfile='F = 'F:\temp_pandas.h5')
+pd_storedumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
+plotsave(xx, yy, title1 = "")
+plotshow(xx, yy, title1 = "")
+save_session(name = '')
+set_rc_version(rcfile, target_version)
+sk_cluster_kmeans(x, nbcluster = 5, isplot = True)
+sk_featureimportance(clfrf, feature_name)
+sk_gen_ensemble_weight(vv, acclevel, maxlevel = 0.88)
+sk_showconfusion(clfrf, X_train, Y_train, isprint = True)
+sk_tree(Xtrain, Ytrain, nbtree, maxdepth, print1)
+sk_tree_get_ifthen(tree, feature_names, target_names, spacer_base = " ")
+sk_votingpredict(estimators, voting, ww, X_test)
+sort(arr, colid, asc = 1)
+sortcol(arr, colid, asc = 1)
+textvect_topanda(vv, fileout = "")
+
+
+
+utilmy/zzarchive/py2to3/multiprocessfunc.py
+-------------------------functions----------------------
+bm_generator(bm, dt, n, type1)
+func(val, lock)
+init2(d)
+init_global1(l, r)
+integratene(its)
+integratenp(its, nchunk)
+integratenp2(its, nchunk)
+list_append(count, id, out_list)
+merge(d2)
+multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky, nbasset, n, price, type1 = 0, strike = 0, cp = 1)
+multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky, nbasset, n, price)
+ne_sin(x)
+np_sin(value)
+parzen_estimation(x_samples, point_x, h)
+res_shared2()
+
+
+
+utilmy/zzarchive/py2to3/portfolio.py
+-------------------------functions----------------------
+_date_align(dateref, datei, tmax, closei)
+_notnone(x)
+_reshape(x)
+array_todataframe(price, symbols = None, date1 = None)
+calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
+calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
+calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
+causality_y1_y2(price2, price1, maxlag)
+cointegration(x, y)
+correl_fast(xn, y, nx)
+correl_reducebytrigger(correl2, trigger)
+correlation_mat(Xmat, type1 = "robust", type2 = "correl")
+data_jpsector()
+date_align(array1, dateref)
+date_alignfromdateref(array1, dateref)
+date_earningquater(t1)
+date_extract_dailyopenclosetime(spdateref1, market = 'us')
+date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
+date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
+date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
+date_finddateid(date1, dateref)
+date_is_3rdfriday(s)
+date_option_expiry(date)
+datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
+folio_concenfactor2(ww, masset = 12)
+folio_cost_turnover(wwall, bsk, dateref, costbp)
+folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
+folio_fixedunitprice(price, fixedww, costpa = 0.0)
+folio_fixedweightprice(price, fixedww, costpa = 0.0)
+folio_fixedweightret(ret, fixedww)
+folio_histogram(close)
+folio_inverseetf(price, costpa = 0.0)
+folio_leverageetf(price, lev = 1.0, costpa = 0.0)
+folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
+folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
+folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
+folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
+folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
+folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
+folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
+folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
+get(close, timelag)
+getdiff_fromquotes(close, timelag)
+getlogret_fromquotes(close, timelag = 1)
+getprice_fromret(ret, normprice = 100)
+getret_fromquotes(close, timelag = 1)
+isfloat(value)
+isint(x)
+load_asset_fromfile(file1)
+max_withposition(values)
+min_withposition(values)
+norm_fast(y, ny)
+np_distance_l1(x, y, wwerr)
+np_distance_l1(x, y, wwerr)
+np_similarity(x, y, wwerr = [], type1 = 0)
+np_similarity(x, y, wwerr = [], type1 = 0)
+pd_dataframe_toarray(df)
+pd_transform_asset(q0, q1, type1 = "spread")
+plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
+plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
+plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
+plot_priceintraday(data)
+price_normalize100(ret, normprice = 100)
+price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
+reg_slope(close, dateref, tlag, type1 = 'elasticv')
+regression(yreturn, xreturn, type1 = "elasticv")
+regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
+regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
+regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
+rolling_cointegration(x, y)
+rsk_calc_all_TA(df = 'panda_dataframe')
+save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
+similarity_correl(ret_close2, funargs)
+sk_cov_fromcorrel(correl, ret_close1)
+ta_highbandtrend1(close2, type1 = 0)
+volhisto_fromprice(price, t, volrange, axis = 0)
+volhisto_fromret(retbsk, t, volrange, axis = 0)
+volhistorolling_fromprice(price, volrange)
+
+-------------------------methods----------------------
+folioCalc.__init__(self, sym, close, dateref)
+folioCalc._regimecalc(self, t, wwextra)
+folioCalc._weightcalc_constant(self, ww2, t)
+folioCalc._weightcalc_generic(self, wwvec, t)
+folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
+folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
+folioCalc.getweight(self)
+folioCalc.help(self)
+folioCalc.multiperiod_ww(self, t)
+folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioCalc.set_symclose(self, sym, close, dateref)
+folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioOptimizationF.__init__(self, sym, close, dateref)
+folioOptimizationF._loss_obj(self, ww2, wwpenalty)
+folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
+folioOptimizationF._objective_criteria(self, bsk)
+folioOptimizationF._regimecalc(self, t, wwextra)
+folioOptimizationF._weightcalc_constant(self, ww2, t)
+folioOptimizationF._weightcalc_generic(self, wwvec, t)
+folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
+folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
+folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioOptimizationF.calcbasket_obj(self, wwvec)
+folioOptimizationF.calcbasket_obj2(self, wwvec)
+folioOptimizationF.getweight(self)
+folioOptimizationF.help(self)
+folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
+folioOptimizationF.multiperiod_ww(self, t)
+folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioOptimizationF.set_symclose(self, sym, close, dateref)
+folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioRiskIndicator.__init__(self, sym, close, dateref)
+folioRiskIndicator._regimecalc(self, t, wwextra)
+folioRiskIndicator._weightcalc_generic(self, wwvec, t)
+folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
+folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
+folioRiskIndicator.set_symclose(self, sym, close, dateref)
+folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+index.__init__(self, id1, sym, ww, tstart)
+index.__init__(self, id1, sym, ww, tstart)
+index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
+index._wwpct_rebal(self, wwpct_actual, t, trebal)
+index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
+index.calc_baskettable_unit()
+index.close(self)
+index.help(self)
+index.updatehisto(self)
+searchSimilarity.__generate_return__(self, nlag)
+searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
+searchSimilarity.__overweight__(self, px)
+searchSimilarity.export_results()
+searchSimilarity.get_rankresult(self, filetosave = '')
+searchSimilarity.launch_search(self)
+searchSimilarity.load_quotes_fromdb(self, picklefile = '')
+searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
+searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
+searchSimilarity.staticmethod(self, x)
+
+
+utilmy/zzarchive/py2to3/portfolio_withdate.py
+-------------------------functions----------------------
+_date_align(dateref, datei, tmax, closei)
+_notnone(x)
+_reshape(x)
+array_todataframe(price, symbols = None, date1 = None)
+calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
+calcbasket_objext(RETURN, TMAX, riskind_i, wwmat, wwasset0, ww0, nbrange, criteria)
+calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
+causality_y1_y2(price2, price1, maxlag)
+cointegration(x, y)
+correl_fast(xn, y, nx)
+correl_reducebytrigger(correl2, trigger)
+correlation_mat(Xmat, type1 = "robust", type2 = "correl")
+data_jpsector()
+date_add_bdays(from_date, add_days)
+date_align(array1, dateref)
+date_alignfromdateref(array1, dateref)
+date_as_float(dt)
+date_diffindays(intdate1, intdate2)
+date_earningquater(t1)
+date_extract_dailyopenclosetime(spdateref1, market = 'us')
+date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
+date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
+date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
+date_finddateid(date1, dateref)
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
+date_is_3rdfriday(s)
+date_option_expiry(date)
+date_removetimezone(datelist)
+date_todatetime(tlist)
+datediff_inyear(startdate, enddate)
+dateint_todatetime(datelist1)
+dateint_tostring(datelist1, format1 = '%b-%y')
+datenumpy_todatetime(tt, islocaltime = True)
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_toint(datelist1)
+datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
+datetime_todate(tt)
+datetime_toint(datelist1)
+datetime_tointhour(datelist1)
+datetime_tonumpypdate(t, islocaltime = True)
+datetime_tostring(tt)
+folio_concenfactor2(ww, masset = 12)
+folio_cost_turnover(wwall, bsk, dateref, costbp)
+folio_createvolta_asset(close, vol = 0.12, volrange = 120, lev = 1.0)
+folio_fixedunitprice(price, fixedww, costpa = 0.0)
+folio_fixedweightprice(price, fixedww, costpa = 0.0)
+folio_fixedweightret(ret, fixedww)
+folio_histogram(close)
+folio_inverseetf(price, costpa = 0.0)
+folio_leverageetf(price, lev = 1.0, costpa = 0.0)
+folio_longshort_pct(long1, short1, ww = [1, -1], costpa = 0.0)
+folio_longshort_unit(long1, short1, ww = [1, -1], costpa = 0.0, tlag = 1, istable = 1, wwschedule = [])
+folio_longshort_unitfixed(long1, short1, nn = [1, -1], costpa = 0.0, tlag = 1, istable = 1)
+folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
+folio_perfreport_schedule(sym, dateref, close, wwind, t0, scheduleperiod = "1monthend")
+folio_riskpa(ret, targetvol = 0.1, volrange = 90, cap = 1.0)
+folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+folio_volta2(bsk, riskind, par, targetvol = 0.11, volrange =  90, cap = 1.5, floor = 0.0, costbp = 0.0005)
+folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
+get(close, timelag)
+getdiff_fromquotes(close, timelag)
+getlogret_fromquotes(close, timelag = 1)
+getprice_fromret(ret, normprice = 100)
+getret_fromquotes(close, timelag = 1)
+isfloat(value)
+isint(x)
+load_asset_fromfile(file1)
+max_withposition(values)
+min_withposition(values)
+norm_fast(y, ny)
+np_distance_l1(x, y, wwerr)
+np_distance_l1(x, y, wwerr)
+np_similarity(x, y, wwerr = [], type1 = 0)
+np_similarity(x, y, wwerr = [], type1 = 0)
+pd_dataframe_toarray(df)
+pd_transform_asset(q0, q1, type1 = "spread")
+plot_check(close, tt0i = 20140102, tt1i = 20160815, dateref = [], sym = [], tickperday = 120)
+plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
+plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
+plot_priceintraday(data)
+price_normalize100(ret, normprice = 100)
+price_normalize_1d(ret, normprice = 100, dtype1 =  np.float32)
+reg_slope(close, dateref, tlag, type1 = 'elasticv')
+regression(yreturn, xreturn, type1 = "elasticv")
+regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
+regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
+regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
+rolling_cointegration(x, y)
+rsk_calc_all_TA(df = 'panda_dataframe')
+save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
+similarity_correl(ret_close2, funargs)
+sk_cov_fromcorrel(correl, ret_close1)
+ta_highbandtrend1(close2, type1 = 0)
+volhisto_fromprice(price, t, volrange, axis = 0)
+volhisto_fromret(retbsk, t, volrange, axis = 0)
+volhistorolling_fromprice(price, volrange)
+
+-------------------------methods----------------------
+folioCalc.__init__(self, sym, close, dateref)
+folioCalc._regimecalc(self, t, wwextra)
+folioCalc._weightcalc_constant(self, ww2, t)
+folioCalc._weightcalc_generic(self, wwvec, t)
+folioCalc._weightcalc_regime(self, wwvec, wwextra, t)
+folioCalc.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps = 0.000, showdetail = 0)
+folioCalc.getweight(self)
+folioCalc.help(self)
+folioCalc.multiperiod_ww(self, t)
+folioCalc.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioCalc.set_symclose(self, sym, close, dateref)
+folioCalc.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioOptimizationF.__init__(self, sym, close, dateref)
+folioOptimizationF._loss_obj(self, ww2, wwpenalty)
+folioOptimizationF._mapping_calc_risk(self, ss, tr, t, risk0)
+folioOptimizationF._objective_criteria(self, bsk)
+folioOptimizationF._regimecalc(self, t, wwextra)
+folioOptimizationF._weightcalc_constant(self, ww2, t)
+folioOptimizationF._weightcalc_generic(self, wwvec, t)
+folioOptimizationF._weightcalc_regime(self, wwvec, wwextra, t)
+folioOptimizationF.calc_baskettable(self, wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000, showdetail = 0)
+folioOptimizationF.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioOptimizationF.calcbasket_obj(self, wwvec)
+folioOptimizationF.calcbasket_obj2(self, wwvec)
+folioOptimizationF.getweight(self)
+folioOptimizationF.help(self)
+folioOptimizationF.mapping_risk_ww(self, risk, wwmat, ww2 = self.wwasset0)
+folioOptimizationF.multiperiod_ww(self, t)
+folioOptimizationF.plot(self, wwvec = None, show1 = 1, tickperday = 60)
+folioOptimizationF.set_symclose(self, sym, close, dateref)
+folioOptimizationF.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+folioRiskIndicator.__init__(self, sym, close, dateref)
+folioRiskIndicator._regimecalc(self, t, wwextra)
+folioRiskIndicator._weightcalc_generic(self, wwvec, t)
+folioRiskIndicator._weightcalc_regime(self, wwvec, wwextra, t)
+folioRiskIndicator.calc_optimal_weight(self, maxiter = 1, name1 = '', isreset = 1, popsize = 15)
+folioRiskIndicator.calcrisk(self, wwvec = [], initval = 1)
+folioRiskIndicator.set_symclose(self, sym, close, dateref)
+folioRiskIndicator.setcriteria(self, lweight, lbounds, statedata, name, optimcrit, wwtype, nbregime, initperiod, riskid = "spprice", lfun = None)
+index.__init__(self, id1, sym, ww, tstart)
+index.__init__(self, id1, sym, ww, tstart)
+index._udpate_wwindpct(self, t, bskt, hedgecost, wwpct_actual, wwpct_th)
+index._wwpct_rebal(self, wwpct_actual, t, trebal)
+index.calc_baskettable_pct(self, type1 = "table", showdetail = 0)
+index.calc_baskettable_unit()
+index.close(self)
+index.help(self)
+index.updatehisto(self)
+searchSimilarity.__generate_return__(self, nlag)
+searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
+searchSimilarity.__overweight__(self, px)
+searchSimilarity.export_results()
+searchSimilarity.get_rankresult(self, filetosave = '')
+searchSimilarity.launch_search(self)
+searchSimilarity.load_quotes_fromdb(self, picklefile = '')
+searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
+searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
+searchSimilarity.staticmethod(self, x)
+
+
+utilmy/zzarchive/py2to3/report.py
+-------------------------functions----------------------
+map_show()
+xl_create_pdf()
+xl_create_pivot(infile, index_list = ["Manager", "Rep", "Product"], value_list = ["Price", "Quantity"])
+xl_save_report(report, outfile)
+
+
+
+utilmy/zzarchive/py2to3/rstatpy.py
+-------------------------functions----------------------
+stl(data, ns, np = None, nt = None, nl = None, isdeg = 0, itdeg = 1, ildeg = 1, nsjump = None, ntjump = None, nljump = None, ni = 2, no = 0, fulloutput = False)
+
+
+
+utilmy/zzarchive/py2to3/util_min.py
+-------------------------functions----------------------
+a_get_pythonversion()
+a_isanaconda()
+isexist(a)
+isfloat(x)
+isint(x)
+load(folder = '/folder1/keyname', isabsolutpath = 0)
+os_file_exist(file1)
+os_file_getname(path)
+os_file_getpath(path)
+os_file_gettext(file1)
+os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
+os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
+os_file_read(file1)
+os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
+os_file_replacestring1(findStr, repStr, filePath)
+os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
+os_file_size(file1)
+os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
+os_folder_create(directory)
+os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
+os_path_append(p1, p2 = None, p3 = None, p4 = None)
+os_path_change(path1)
+os_path_current()
+os_path_norm(pth)
+os_print_tofile(vv, file1, mode1 = 'a')
+os_split_dir_file(dirfile)
+os_wait_cpu(priority = 300, cpu_min = 50)
+os_zip_checkintegrity(filezip1)
+os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
+os_zipfile(folderin, folderzipname, iscompress = True)
+os_zipfolder(dir_tozip = '/zdisks3/output', zipname = '/zdisk3/output.zip', dir_prefix = None, iscompress = True)
+py_importfromfile(modulename, dir1)
+py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
+py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
+py_save_obj(obj, folder = '/folder1/keyname', isabsolutpath = 0)
+save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
+save_test(folder = '/folder1/keyname', isabsolutpath = 0)
+z_key_splitinto_dir_name(keyname)
+
+
+
+utilmy/zzarchive/py2to3/util_ml.py
+-------------------------functions----------------------
+create_adam_optimizer(learning_rate, momentum)
+create_bias_variable(name, shape)
+create_weight_variable(name, shape)
+parse_args(ppa = None, args =  {})
+parse_args2(ppa = None)
+tf_check()
+tf_global_variables_initializer(sess = None)
+visualize_result()
+
+-------------------------methods----------------------
+TextLoader.__init__(self, data_dir, batch_size, seq_length)
+TextLoader.create_batches(self)
+TextLoader.load_preprocessed(self, vocab_file, tensor_file)
+TextLoader.next_batch(self)
+TextLoader.preprocess(self, input_file, vocab_file, tensor_file)
+TextLoader.reset_batch_pointer(self)
+
+
+utilmy/zzarchive/py2to3/utilgeo.py
+-------------------------functions----------------------
+df_to_geojson(df, col_properties, lat = 'latitude', lon = 'longitude')
+
+
+
+utilmy/zzarchive/py3/util.py
+-------------------------functions----------------------
+a_autoreload()
+a_cleanmemory()
+a_get_platform()
+a_info_conda_jupyter()
+a_isanaconda()
+a_module_codesample(module_str = 'pandas')
+a_module_doc(module_str = 'pandas')
+a_module_generatedoc(module_str = "pandas", fileout = '')
+a_run_ipython(cmd1)
+a_start_log(id1 = '', folder = 'aaserialize/log/')
+aa_unicode_ascii_utf8_issue()
+aws_accesskey_get(access = '', key = '')
+aws_conn_create(region = "ap-northeast-2", access = '', key = '')
+aws_conn_do(action = '', region = "ap-northeast-2")
+aws_conn_getallregions(conn = None)
+aws_conn_getinfo(conn)
+aws_ec2_allocate_elastic_ip(instance_id, region = "ap-northeast-2")
+aws_ec2_create_con(contype = 'sftp/ssh', host = 'ip', port = 22, username = 'ubuntu', keyfilepath = '', password = '', keyfiletype = 'RSA', isprint = 1)
+aws_ec2_python_script(script_path, args1, host)
+aws_s3_file_read(filepath, isbinary = 1)
+aws_s3_folder_printtall(bucket_name = 'zdisk')
+aws_s3_getbucketconn(s3dir)
+aws_s3_getfrom_s3(froms3dir = 'task01/', todir = '', bucket_name = 'zdisk')
+aws_s3_puto_s3(fromdir_file = 'dir/file.zip', todir = 'bucket/folder1/folder2')
+aws_s3_url_split(url)
+date_add_bday(from_date, add_days)
+date_add_bdays(from_date, add_days)
+date_allinfo()
+date_convert(t1, fromtype, totype)
+date_diffinbday(intd2, intd1)
+date_diffinday(intdate1, intdate2)
+date_diffinyear(startdate, enddate)
+date_finddateid(date1, dateref)
+date_gencalendar(start = '2010-01-01', end = '2010-01-15', country = 'us')
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
+date_holiday()
+date_now(i = 0)
+date_nowtime(type1 = 'str', format1= "%Y-%m-%d %H =  "%Y-%m-%d %H:%M:%S:%f")
+date_remove_bdays(from_date, add_days)
+date_tofloat(dt)
+dateint_todatetime(datelist1)
+datenumpy_todatetime(tt, islocaltime = True)
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_toint(datelist1)
+datetime_toint(datelist1)
+datetime_tonumpydate(t, islocaltime = True)
+datetime_tostring(datelist1)
+find(xstring, list_string)
+find_fuzzy(xstring, list_string)
+findhigher(x, vec)
+findlower(x, vec)
+findnone(vec)
+finds(itemlist, vec)
+findx(item, vec)
+gc_map_dict_to_bq_schema(source_dict, schema, dest_dict)
+googledrive_get()
+googledrive_list()
+googledrive_put()
+isexist(a)
+isfloat(x)
+isint(x)
+load(folder = '/folder1/keyname', isabsolutpath = 0)
+max_kpos(arr, kth)
+min_kpos(arr, kth)
+np_acf(data)
+np_addcolumn(arr, nbcol)
+np_addrow(arr, nbrow)
+np_and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
+np_cleanmatrix(m)
+np_comoment(xx, yy, nsample, kx, ky)
+np_dict_tolist(dd, withkey = 0)
+np_dict_tostr_key(dd)
+np_dict_tostr_val(dd)
+np_dictordered_create()
+np_enumerate2(vec_1d)
+np_find(item, vec)
+np_find_maxpos(values)
+np_find_maxpos_2nd(numbers)
+np_find_minpos(values)
+np_findfirst(item, vec)
+np_findlocalmax(v, trig)
+np_findlocalmax2(v, trig)
+np_findlocalmin(v, trig)
+np_findlocalmin2(v, trig)
+np_int_tostr(i)
+np_interpolate_nan(y)
+np_list_flatten(seq)
+np_list_tofreqdict(l1, wweight = [])
+np_list_unique(seq)
+np_ma(vv, n)
+np_memory_array_adress(x)
+np_mergelist(x0, x1)
+np_minimize(fun_obj, x0 = [0.0], argext = (0, 0)
+np_minimizeDE(fun_obj, bounds, name1, solver = None)
+np_nan_helper(y)
+np_numexpr_tohdfs(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+np_numexpr_vec_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+np_pivotable_create(table, left, top, value)
+np_pivottable_count(mylist)
+np_remove_NA_INF_2d(X)
+np_remove_zeros(vv, axis1 = 1)
+np_removelist(x0, xremove = [])
+np_sort(arr, colid, asc = 1)
+np_sort(arr, colid, asc = 1)
+np_sortbycol(arr, colid, asc = True)
+np_sortbycolumn(arr, colid, asc = True)
+np_sortcol(arr, colid, asc = 1)
+np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
+np_torecarray(arr, colname)
+np_transform2d_int_1d(m2d, onlyhalf = False)
+np_uniquerows(a)
+obj_getclass_of_method(meth)
+obj_getclass_property(pfi)
+os_config_getfile(file1)
+os_config_setfile(dict_params, outfile, mode1 = 'w+')
+os_csv_process(file1)
+os_extracttext_allfile(nfile, dir1, pattern1 = "*.html", htmltag = 'p', deepness = 2)
+os_file_exist(file1)
+os_file_getname(path)
+os_file_getpath(path)
+os_file_gettext(file1)
+os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
+os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
+os_file_read(file1)
+os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
+os_file_replacestring1(findStr, repStr, filePath)
+os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
+os_file_size(file1)
+os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
+os_folder_create(directory)
+os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
+os_gui_popup_show(txt)
+os_path_append(p1, p2 = None, p3 = None, p4 = None)
+os_path_change(path1)
+os_path_current()
+os_path_norm(pth)
+os_print_tofile(vv, file1, mode1 = 'a')
+os_process_2()
+os_process_run(cmd_list = ['program', 'arg1', 'arg2'], capture_output = False)
+os_processify_fun(func)
+os_split_dir_file(dirfile)
+os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
+pd_addcol(df1, name1 = 'new')
+pd_applyfun_col(df, newcol, ff, use_colname = "all/[colname]")
+pd_array_todataframe(array, colname = None, index1 = None, dotranspose = False)
+pd_cleanquote(q)
+pd_create_colmapdict_nametoint(df)
+pd_createdf(array1, col1 = None, idx1 = None)
+pd_csv_randomread(filename, nsample = 10000, filemaxline = -1, dtype = None)
+pd_dataframe_toarray(df)
+pd_date_intersection(qlist)
+pd_df_todict(df, colkey = 'table', excludekey = [''], onlyfirstelt =  True)
+pd_dtypes(df, columns = [], targetype = 'category')
+pd_dtypes_totype2(df, columns = [], targetype = 'category')
+pd_dtypes_type1_totype2(df, fromtype = str, targetype = str)
+pd_extract_col_idx_val(df)
+pd_extract_col_uniquevalue_tocsv(df, colname = '', csvfile = '')
+pd_find(df, regex_pattern = '*', col_restrict = [], isnumeric = False, doreturnposition = False)
+pd_h5_addtable(df, tablename, dbfile='F = 'F:\temp_pandas.h5')
+pd_h5_cleanbeforesave(df)
+pd_h5_dumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
+pd_h5_fromcsv_tohdfs(dircsv = 'dir1/dir2/', filepattern = '*.csv', tofilehdfs = 'file1.h5', tablename = 'df', col_category = [], dtype0 = None, encoding = 'utf-8', chunksize =  2000000, mode = 'a', format = 'table', complib = None)
+pd_h5_load(filenameh5='E = 'E:/_data/_data_outlier.h5', table_id = 'data', exportype = "pandas", rowstart = -1, rowend = -1, cols = [])
+pd_h5_save(df, filenameh5='E = 'E:/_data/_data_outlier.h5', key = 'data')
+pd_h5_tableinfo(filenameh5, table)
+pd_info(df, doreturn = 1)
+pd_info_memsize(df, memusage = 0)
+pd_insertcol(df, colname, vec)
+pd_insertdatecol(df_insider, format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
+pd_insertrow(df, rowval, index1 = None, isreset = 1)
+pd_is_categorical(z)
+pd_np_toh5file(numpyarr, fileout = "file.h5", table1 = 'data')
+pd_removecol(df1, name1)
+pd_removerow(df, row_list_index = [23, 45])
+pd_replacevalues(df, matrix)
+pd_resetindex(df)
+pd_selectrow(df, **conditions)
+pd_split_col_idx_val(df)
+pd_splitdf_inlist(df, colid, type1 = "dict")
+pd_str_encoding_change(df, cols, fromenc = 'iso-8859-1', toenc = 'utf-8')
+pd_str_isascii(x)
+pd_str_unicode_tostr(df, targetype = str)
+plot_XY(xx, yy, zcolor = None, tsize = None, title1 = '', xlabel = '', ylabel = '', figsize = (8, 6)
+plot_heatmap(frame, ax = None, cmap = None, vmin = None, vmax = None, interpolation = 'nearest')
+print_topdf()
+py_importfromfile(modulename, dir1)
+py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
+py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
+py_save_obj(obj1, keyname)
+py_save_obj_dill(obj1, keyname)
+read_funding_data(path)
+read_funding_data(path)
+read_funding_data(path)
+save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
+save_test(folder = '/folder1/keyname', isabsolutpath = 0)
+session_guispyder_load(filename)
+session_guispyder_save(filename)
+session_load(name = 'test_20160815')
+session_load_function(name = 'test_20160815')
+session_save(name = 'test')
+session_save_function(name = 'test')
+session_spyder_showall()
+sql_create_dbengine(type1 = '', dbname = '', login = '', password = '', url = 'localhost', port = 5432)
+sql_delete_table(name, dbengine)
+sql_get_dbschema(dburl='sqlite = 'sqlite:///aapackage/store/yahoo.db', dbengine = None, isprint = 0)
+sql_getdate()
+sql_insert_csv(csvfile, dbtable, dbengine, col_drop = [])
+sql_insert_csv2(csvfile = '', dbtable = '', columns = [], dbengine = None, nrows =  10000)
+sql_insert_df(df, dbtable, dbengine, col_drop = ['id'], verbose = 1)
+sql_insert_excel(file1 = '.xls', dbengine = None, dbtype = '')
+sql_mysql_insert_excel()
+sql_pivotable(dbcon, ss = 'select  ')
+sql_postgres_create_table(mytable = '', database = '', username = '', password = '')
+sql_postgres_pivot()
+sql_postgres_query_to_csv(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', csv_out = '')
+sql_query(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', dbengine = None, output = 'df', dburl='sqlite = 'sqlite:///aaserialize/store/finviz.db')
+str_empty_string_array(x, y = 1)
+str_empty_string_array_numpy(nx, ny = 1)
+str_is_az09char(x)
+str_is_azchar(x)
+str_isfloat(value)
+str_make_unicode(input, errors = 'replace')
+str_match_fuzzy(xstring, list_string)
+str_parse_stringcalendar(cal)
+str_reindent(s, numSpaces)
+str_split2(delimiters, string, maxsplit = 0)
+str_split_pattern(sep2, ll, maxsplit = 0)
+str_to_unicode(x, encoding = 'utf-8')
+str_to_utf8(x)
+web_getjson_fromurl(url)
+web_getlink_fromurl(url)
+web_getrawhtml(url1)
+web_gettext_fromhtml(file1, htmltag = 'p')
+web_gettext_fromurl(url, htmltag = 'p')
+web_importio_todataframe(apiurl1, isurl = 1)
+web_restapi_toresp(apiurl1)
+web_send_email(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
+web_send_email_tls(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
+web_sendurl(url1)
+z_key_splitinto_dir_name(keyname)
+ztest_processify()
+
+-------------------------methods----------------------
+FundingRecord.__str__(self)
+FundingRecord.parse(klass, row)
+aws_ec2_ssh.__init__(self, hostname, username = 'ubuntu', key_file = None, password = None)
+aws_ec2_ssh._help_ssh(self)
+aws_ec2_ssh.cmd2(self, cmd1)
+aws_ec2_ssh.command(self, cmd)
+aws_ec2_ssh.command_list(self, cmdlist)
+aws_ec2_ssh.get(self, remotefile, localfile)
+aws_ec2_ssh.get_all(self, remotepath, localpath)
+aws_ec2_ssh.jupyter_kill(self)
+aws_ec2_ssh.jupyter_start(self)
+aws_ec2_ssh.listdir(self, remotedir)
+aws_ec2_ssh.put(self, localfile, remotefile)
+aws_ec2_ssh.put_all(self, localpath, remotepath)
+aws_ec2_ssh.python_script(self, script_path, args1)
+aws_ec2_ssh.sftp_walk(self, remotepath)
+aws_ec2_ssh.write_command(self, text, remotefile)
+testclass.__init__(self, x)
+testclass.z_autotest(self)
+
+
+utilmy/zzarchive/report.py
+-------------------------functions----------------------
+map_show()
+xl_create_pdf()
+xl_create_pivot(infile, index_list = ["Manager", "Rep", "Product"], value_list = ["Price", "Quantity"])
+xl_save_report(report, outfile)
+
+
+
+utilmy/zzarchive/rstatpy.py
+-------------------------functions----------------------
+stl(data, ns, np = None, nt = None, nl = None, isdeg = 0, itdeg = 1, ildeg = 1, nsjump = None, ntjump = None, nljump = None, ni = 2, no = 0, fulloutput = False)
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/34/Working Copy of util34.py
+-------------------------functions----------------------
+getmodule_doc(module1, fileout = '')
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/34/global01.py
+
+
+utilmy/zzarchive/storage/aapackage_gen/34/util34.py
+-------------------------functions----------------------
+getmodule_doc(module1, fileout = '')
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/codeanalysis.py
+-------------------------functions----------------------
+dedent()
+describe(obj)
+describe2(module)
+describe_builtin(obj)
+describe_builtin2(obj, name1)
+describe_func(obj, method = False)
+describe_func2(obj, method = False, name1 = '')
+describe_klass(obj)
+describe_klass2(obj, name1 = '')
+getmodule_doc(module1, file1 = 'moduledoc.txt')
+indent()
+printinfile(vv, file1)
+wi(*args)
+wi2(*args)
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/global01.py
+
+
+utilmy/zzarchive/storage/aapackage_gen/old/Working Copy of util34.py
+-------------------------functions----------------------
+getmodule_doc(module1, fileout = '')
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/old/util27.py
+-------------------------functions----------------------
+getmodule_doc(module1, fileout = '')
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/old/util34.py
+-------------------------functions----------------------
+getmodule_doc(module1, fileout = '')
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/old/utils27.py
+-------------------------functions----------------------
+acf(data)
+comoment(xx, yy, nsample, kx, ky)
+convertcsv_topanda(filein1, filename, tablen = 'data')
+getpanda_tonumpy(filename, nsize, tablen = 'data')
+getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
+load_frompanda(filenameh5)
+numexpr_topanda(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+numexpr_vect_calc(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+parsePDF(url)
+plotsave(xx, yy, title1 = "")
+plotshow(xx, yy, title1 = "")
+remove_zeros(vv, axis1 = 1)
+save_topanda(vv, filenameh5)
+sort_array(vv)
+unique_rows(a)
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/old/utils34.py
+-------------------------functions----------------------
+acf(data)
+comoment(xx, yy, nsample, kx, ky)
+convertcsv_topanda(filein1, filename, tablen = 'data')
+getpanda_tonumpy(filename, nsize, tablen = 'data')
+getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
+load_frompanda(filenameh5)
+numexpr_topanda(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+numexpr_vect_calc(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+parsePDF(url)
+plotsave(xx, yy, title1 = "")
+plotshow(xx, yy, title1 = "")
+remove_zeros(vv, axis1 = 1)
+save_topanda(vv, filenameh5)
+sort_array(vv)
+unique_rows(a)
+
+
+
+utilmy/zzarchive/storage/aapackage_gen/util.py
+-------------------------functions----------------------
+getmodule_doc(module1, fileout = '')
+
+
+
+utilmy/zzarchive/storage/aapackagedev/random.py
+-------------------------functions----------------------
+Plot2D_random_save(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph, )
+Plot2D_random_show(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph)
+acf(data)
+binary_process(a, z, k)
+call_process(a, z, k)
+comoment(xx, yy, nsample, kx, ky)
+convert_csv2hd5f(filein1, filename)
+doublecheck_outlier(fileoutlier, ijump, nsample = 4000, trigger1 = 0.1, )fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5'fileoutlier, 'data')    #from filevv5 =  pdf.values   #to numpy vectordel pdfistartx= 0; istarty= 0nsample= 4000trigger1=  0.1crrmax = 250000kk=0(crrmax, 4), dtype = 'int')  #empty listvv5)[0]0, kkmax1, 1) :  #Decrasing: dimy0 to dimmindimx =  vv5[kk, 0];   dimy =  vv5[kk, 1]y0= dimy * ijump + istartyym= dimy* ijump + nsample + istartyyyu1= yy1[y0 =  dimy * ijump + istartyym= dimy* ijump + nsample + istartyyyu1= yy1[y0:ym];   yyu2= yy2[y0:ym];   yyu3= yy3[y0:ym]x0= dimx * ijump + istartxxm= dimx* ijump + nsample + istartxxxu1= yy1[x0:xm];   xxu2= yy2[x0:xm];   xxu3= yy3[x0:xm]"sum( xxu3 * yyu1)") / (nsample) # X3.Y moments"sum( xxu1 * yyu3)") / (nsample)"sum( xxu2 * yyu2)") / (nsample)abs(c22) > trigger1)  :)
+getdvector(dimmax, istart, idimstart)
+getoutlier_fromrandom(filename, jmax1, imax1, isamplejum, nsample, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
+getoutlier_fromrandom_fast(filename, jmax1, imax1, isamplejum, nsample, trigger1 = 0.28, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
+getrandom_tonumpy(filename, nbdim, nbsample)
+lognormal_process2d(a1, z1, a2, z2, k)
+numexpr_vect_calc(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+outlier_clean(vv2)
+overwrite_data(fileoutlier, vv2)
+pathScheme_(T, n, zz)
+pathScheme_bb(T, n, zz)
+pathScheme_std(T, n, zz)
+permute(yy, kmax)
+permute2(xx, yy, kmax)
+plot_outlier(fileoutlier, kk)fileoutlier, 'data')    #from filevv =  df.values   #to numpy vectordel dfxx= vv[kk, 0]yy =  vv[kk, 1]xx, yy, s = 1 )[00, 1000, 00, 1000])nsample)+'sampl D_'+str(dimx)+' X D_'+str(dimy)tit1)'_img/'+tit1+'_outlier.jpg', dpi = 100))yy, kmax))
+plotdensity(nsample, totdim, bin01, tit0, Ti = -1)
+plotdensity2(nsample, totdim, bin01, tit0, process01, vol = 0.25, tt = 5, Ti = -1)
+pricing01(totdim, nsample, a, strike, process01, aa = 0.25, itmax = -1, tt = 10)
+testdensity(nsample, totdim, bin01, Ti = -1)
+testdensity2d(nsample, totdim, bin01, nbasset)
+testdensity2d2(nsample, totdim, bin01, nbasset, process01 = lognormal_process2d, a1 = 0.25, a2 = 0.25, kk = 1)
+
+
+
+utilmy/zzarchive/storage/alldata.py
+
+
+utilmy/zzarchive/storage/allmodule.py
+-------------------------functions----------------------
+aa_isanaconda()
+
+
+
+utilmy/zzarchive/storage/benchmarktest.py
+-------------------------functions----------------------
+payoff1(pricepath)
+payoff2(pricepath)
+payoffeuro1(st)
+payoffeuro1(st)
+
+
+
+utilmy/zzarchive/storage/codeanalysis.py
+-------------------------functions----------------------
+dedent()
+describe(obj)
+describe2(module, type1 = 0)
+describe_builtin(obj)
+describe_builtin2(obj, name1)
+describe_func(obj, method = False)
+describe_func2(obj, method = False, name1 = '')
+describe_func3(obj, method = False, name1 = '')
+describe_klass(obj)
+describe_klass2(obj, name1 = '')
+getmodule_doc(module1, file2 = '')
+indent()
+printinfile(vv, file2)
+wi(*args)
+wi2(*args)
+
+
+
+utilmy/zzarchive/storage/dbcheck.py
+
+
+utilmy/zzarchive/storage/derivatives.py
+-------------------------functions----------------------
+CRR_option_value(S0, K, T, r, vol, otype, M = 4)
+N(d)
+brownian_logret(mu, vol, timegrid)
+brownian_process(s0, vol, timegrid)
+bs(S0, K, t, T, r, d, vol)
+bsbinarycall(S0, K, t, T, r, d, vol)
+bscall(S0, K, t, T, r, d, vol)
+bsdelta(St, K, t, T, r, d, vol, cp1)
+bsdvd(St, K, t, T, r, d, vol, cp)
+bsgamma(St, K, t, T, r, d, vol, cp)
+bsgammaspot(St, K, t, T, r, d, vol, cp)
+bsput(S0, K, t, T, r, d, vol)
+bsrho(St, K, t, T, r, d, vol, cp)
+bsstrikedelta(s0, K, t, T, r, d, vol, cp1)
+bsstrikegamma(s0, K, t, T, r, d, vol)
+bstheta(St, K, t, T, r, d, vol, cp)
+bsvanna(St, K, t, T, r, d, vol, cp)
+bsvega(St, K, t, T, r, d, vol, cp)
+bsvolga(St, K, t, T, r, d, vol, cp)
+d1f(St, K, t, T, r, d, vol)
+d2f(St, K, t, T, r, d, vol)
+dN(d)
+dN2d(x, y)
+gbm_logret(mu, vol, timegrid)
+gbm_process(s0, mu, vol, timegrid)
+gbm_process2(s0, mu, vol, timegrid)
+gbm_process_euro(s0, mu, vol, timegrid)
+gbmjump_logret(s0, mu, vol, lamda, jump_mu, jump_vol, timegrid)
+gbmjump_process(s0, mu, vol, lamda, jump_mu, jump_vol, timegrid)
+gdelta(St, K, t, T, r, d, vol, pv)
+generateall_multigbm1(process, ww, s0, mu, vol, corrmatrix, timegrid, nbsimul, nproc = -1, type1 = -1, strike = 0.0, cp = 1)
+generateallmultigbmfast(process, s0, mu, vol, corrmatrix, timegrid, nbsimul, type1)
+generateallmultigbmfast2(process, s0, mu, vol, corrmatrix, timegrid, nbsimul, type1)
+generateallmultiprocess(process, s0, mu, vol, corrmatrix, timegrid, nbsimul)
+generateallprocess(process, params01, timegrid1, nbsimul)
+generateallprocess_gbmeuro(process, params01, timegrid1, nbsimul)
+genmatrix(ni, nj, gg)
+gensymmatrix(ni, nj, pp)
+getbrowniandata(nbasset, step, simulk)
+getpv(discount, payoff, allpriceprocess)
+ggamma(St, K, t, T, r, d, vol, pv)
+gtheta(St, K, t, T, r, d, vol, pv)
+gvega(St, K, t, T, r, d, vol, pv)
+jump_process(lamda, jumps_mu, jumps_vol, timegrid)
+lgnormalmoment1(ww, fft, vol, corr, tt)
+lgnormalmoment2(ww, fft, vol, corr, tt)
+lgnormalmoment3(ww, fft, vol, corr, tt)
+lgnormalmoment4(ww, fft, vol, corr, tt)
+loadbrownian(nbasset, step, nbsimul)
+logret_to_price(s0, log_ret)
+logret_to_ret(log_returns)
+multibrownian_logret(mu, vol, corrmatrix, timegrid)
+multigbm_logret(mu, vol, corrmatrix, timegrid)
+multigbm_process(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
+multigbm_processfast(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
+multigbm_processfast2(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
+multigbm_processfast3(s0, voldt, drift, upper_cholesky, nbasset, n, kk)
+multilogret_to_price(s0, log_ret)
+plot_greeks(function, greek)
+plot_greeks(function, greek)
+plot_values(function)
+savebrownian(nbasset, step, nbsimul)
+solve_momentmatch3(ww, b0, fft, vol, corr, tt)
+timegrid(timestep, maturityyears)
+
+
+
+utilmy/zzarchive/storage/dl_utils.py
+-------------------------functions----------------------
+feats_len(fname)
+file_len(fname)
+get_all_data(file)
+get_batch_data(file, index, size)
+get_xy(line)
+init_weight(hidden1, hidden2, acti_type)
+log(msg, file = "")
+log_p(msg, file = "")
+logfile(msg, file)
+save_prediction(file, prediction)
+save_weights(file, tuple_weights)
+
+
+
+utilmy/zzarchive/storage/excel.py
+-------------------------functions----------------------
+add_one(data)
+double_sum(x, y)
+get_workbook_name()
+matrix_mult(x, y)
+npdot()
+
+
+
+utilmy/zzarchive/storage/global01.py
+
+
+utilmy/zzarchive/storage/installNewPackage.py
+
+
+utilmy/zzarchive/storage/java.py
+-------------------------functions----------------------
+compileJAVA(javafile)
+compileJAVAtext(classname, javatxt, path1 = "")
+directorygetalltext(dir1, filetype1 = "*.*", withMeta = 0, fileout = "")
+directorygetalltext2(dir1, filetype1 = "*.*", type1 = 0, fileout = "")
+execute_javamain(java_file)
+getfpdffulltext(pdfile1)
+getfulltext(file1, withMeta = 0)
+importFolderJAR(dir1 = "", dirlevel = 1)
+importFromMaven()
+importJAR(path1 = "", path2 = "", path3 = "", path4 = "")
+inspectJAR(dir1)
+java_print(x)
+javaerror(jpJavaException)
+launchPDFbox()
+launchTIKA()
+listallfile(some_dir, pattern = "*.*", dirlevel = 1)
+loadSingleton(class1)
+showLoadedClass()
+writeText(text, filename)
+
+
+
+utilmy/zzarchive/storage/multiprocessfunc.py
+-------------------------functions----------------------
+bm_generator(bm, dt, n, type1)
+func(val, lock)
+init2(d)
+init_global1(l, r)
+integratene(its)
+integratenp(its, nchunk)
+integratenp2(its, nchunk)
+list_append(count, id, out_list)
+merge(d2)
+multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky, nbasset, n, price, type1 = 0, strike = 0, cp = 1)
+multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky, nbasset, n, price)
+ne_sin(x)
+np_sin(value)
+parzen_estimation(x_samples, point_x, h)
+res_shared2()
+
+
+
+utilmy/zzarchive/storage/panda_util.py
+-------------------------functions----------------------
+array_toexcel(vv, wk, r1)subset = 'rownum', take_last=True)level=0))a) = True)level=0))a):)
+csv_topanda(filein1, filename, tablen = 'data', lineterminator=",")
+database_topanda()
+df_topanda(vv, filenameh5, colname = 'data')
+excel_topanda(filein, fileout)
+excel_topandas(filein, fileout)
+folder_topanda()
+getrandom_tonumpy(filename, nbdim, nbsample, tablen = 'data')
+load_frompanda(filenameh5, colname = "data")
+numexpr_topanda(filename, i0 = 0, imax = 1000, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+numpy_topanda(vv, fileout = "", colname = "data")
+panda_todabatase()
+panda_toexcel()
+panda_tofolder()
+panda_tonumpy(filename, nsize, tablen = 'data')
+remove_zeros()
+sort_array()
+sqlquery_topanda()
+unique_rows(a)
+
+
+
+utilmy/zzarchive/storage/portfolio.py
+-------------------------functions----------------------
+_date_align(dateref, datei, tmax, closei)
+_notnone(x)
+_reshape(x)
+array_todataframe(price, symbols = None, date1 = None)
+calc_optimal_weight(args, bounds, maxiter = 1)
+calc_print_correlrank(close2, symjp1, nlag, refindexname, toprank2 = 5, customnameid = [], customnameid2 = [])
+calc_ranktable(close2, symjp1, nlag, refindex, funeval, funargs)
+calc_statestock(close2, dateref, symfull)
+calcbasket_obj(wwvec, *data)
+calcbasket_table(wwvec, ret, type1 = "table", wwtype = "constant", rebfreq = 1, costbps =  0.000)
+causality_y1_y2(price2, price1, maxlag)
+cointegration(x, y)
+correl_fast(xn, y, nx)
+correl_rankbystock(stkid = [2, 5, 6], correl = [[1, 0], [0, 1]])
+correl_reducebytrigger(correl2, trigger)
+correlation_mat(matx, type1 = "robust", type2 = "correl")
+data_jpsector()
+dataframe_toarray(df)
+date_add_bdays(from_date, add_days)
+date_align(array1, dateref)
+date_alignfromdateref(array1, dateref)
+date_as_float(dt)
+date_diffindays(intdate1, intdate2)
+date_earningquater(t1)
+date_extract_dailyopenclosetime(spdateref1, market = 'us')
+date_find_intradateid(datetimelist, stringdate = ['20160420223000'])
+date_find_kday_fromintradaydate(kintraday, intradaydate, dailydate)
+date_find_kintraday_fromdate(d1, intradaydate1, h1 = 9, m1 = 30)
+date_finddateid(date1, dateref)
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
+date_is_3rdfriday(s)
+date_option_expiry(date)
+date_removetimezone(datelist)
+date_todatetime(tlist)
+datediff_inyear(startdate, enddate)
+dateint_todatetime(datelist1)
+dateint_tostring(datelist1, format1 = '%b-%y')
+datenumpy_todatetime(tt, islocaltime = True)
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_toint(datelist1)
+datetime_convertzone1_tozone2(tt, fromzone = 'Japan', tozone = 'US/Eastern')
+datetime_todate(tt)
+datetime_toint(datelist1)
+datetime_tointhour(datelist1)
+datetime_tonumpypdate(t, islocaltime = True)
+datetime_tostring(datelist1)
+fitness(p)
+folio_cost_turnover(wwall, bsk, dateref)
+folio_fixedweightprice(price, fixedww, costpa = 0.0)
+folio_fixedweightret(ret, fixedww)
+folio_inverseetf(price, costpa = 0.0)
+folio_lowcorrelation(sym01, nstock, periodlist, dateref, close1, kbenchmark, badlist, costbppa = 0.02, showgraph = True)
+folio_riskpa(ret, targetvol = 0.1, volrange = 90)
+folio_volta(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+folio_voltarget(bsk, targetvol = 0.11, volrange =  90, expocap = 1.5)
+generate_sepvertical(asset1, tt, tmax, start = None, datebar = None)
+get_price2book(symbol)
+getdiff_fromquotes(close, timelag)
+getlogret_fromquotes(close, timelag = 1)
+getprice_fromret(ret, normprice = 100)
+getret_fromquotes(close, timelag = 1)
+imp_close_dateref(sym01, sdate = 20100101, edate = 20160628, datasource = '', typeprice = "close")
+imp_csvquote_topanda(file1, filenameh5, dfname = 'sym1', fromzone = 'Japan', tozone = 'UTC')
+imp_errorticker(symbols, start = "20150101", end = "20160101")
+imp_findticker(tickerlist, sym01, symname)
+imp_finviz()
+imp_finviz_financials()
+imp_finviz_news()
+imp_getcsvname(name1, date1, inter, tframe)
+imp_googleIntradayQuoteSave(name1, date1, inter, tframe, dircsv)
+imp_googleQuoteList(symbols, date1, date2, inter = 23400, tframe = 2000, dircsv = '', intraday1 = True)
+imp_googleQuoteSave(name1, date1, date2, dircsv)
+imp_numpyclose_frompandas(dbfile, symlist = [], t0 = 20010101, t1 = 20010101, priceid = "close", maxasset = 2500, tmax2 = 2000)
+imp_panda_checkquote(quotes)
+imp_panda_cleanquotes(df, datefilter)
+imp_panda_db_dumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
+imp_panda_getListquote(symbols, close1 = 'close', start='12/18/2015 00 = '12/18/2015 00:00:00+00:00', end='3/1/2016 00 = '3/1/2016 00:00:00+00:00', freq = '0d0h10min', filepd= 'E =  'E:\_data\stock\intraday_google.h5', tozone = 'Japan', fillna = True, interpo = True)
+imp_panda_getquote(filenameh5, dfname = "data")
+imp_panda_insertfoldercsv(dircsv, filepd= r'E =  r'E:\_data\stock\intraday_google.h5', fromtimezone = 'Japan', tozone = 'UTC')
+imp_panda_removeDuplicate(filepd=  'E =   'E:\_data\stock\intraday_google.h5')
+imp_panda_storecopy()
+imp_pd_merge_database(filepdfrom, filepdto)
+imp_quote_tohdfs(sym, qqlist, filenameh5, fromzone = 'Japan', tozone = 'UTC')
+imp_quotes_errordate(quotes, dateref)
+imp_quotes_fromtxt(stocklist01, filedir='E = 'E:/_data/stock/daily/20160610/jp', startdate = 20150101, endate = 20160616)
+imp_screening_addrecommend(string1, dbname = 'stock_recommend')
+imp_yahoo_financials_url(ticker_symbol, statement = "is", quarterly = False)
+imp_yahoo_periodic_figure(soup, yahoo_figure)
+imp_yahooticker(symbols, start = "20150101", end = "20160101", type1 = 1)
+isfloat(value)
+isint(x)
+load_asset_fromfile(file1)
+max_withposition(values)
+min_withposition(values)
+norm_fast(y, ny)
+np_countretsign(x)
+np_distance_l1(x, y, wwerr)
+np_similarity(x, y, wwerr = [], type1 = 0)
+np_trendtest(x, alpha  =  0.05)
+objective_criteria(bsk, criteria, date1 = None)
+pd_filterbydate(df, dtref = None, start='2016-06-06 00 = '2016-06-06 00:00:00', end='2016-06-14 00 = '2016-06-14 00:00:00', freq = '0d0h05min', timezone = 'Japan')
+pd_transform_asset(q0, q1, type1 = "spread")
+plot_price(asset, y2 = None, y3 = None, y4 = None, y5 = None, sym = None, savename1 = '', tickperday = 20, date1 = None, graphsize = (10, 5)
+plot_pricedate(date1, sym1, asset1, sym2 = None, bsk1 = None, verticaldate = None, savename1 = '', graphsize = (10, 5)
+plot_priceintraday(data)
+price_normalize100(ret, normprice = 100)
+price_normalize_1d(ret, normprice = 100, dtype1 =  np.float16)
+regression(yreturn, xreturn, type1 = "elasticv")
+regression_allstocks_vs_riskfactors(symstock, pricestock, symriskfac, priceriskfac, nlaglist)
+regression_fixedsymbolstock(sym, ret_close2, tsstart, tsample, ret_spy, spyclose, regonly = True)
+regression_getpricefromww(spyclose, ww01, regasset01, ret_close2, tstart, tlag = 1)
+rolling_cointegration(x, y)
+rsk_calc_all_TA(df = 'panda_dataframe')
+save_asset_tofile(file1, asset1, asset2 = None, asset3 = None, date1 = None, title1 = None)
+similarity_correl(ret_close2, funargs)
+sk_cov_fromcorrel(correl, ret_close1)
+ta_highbandtrend1(close2, type1 = 0)
+ta_lowbandtrend1(close2, type1 = 0)
+volhisto_fromprice(price, t, volrange, axis = 0)
+volhisto_fromret(retbsk, t, volrange, axis = 0)
+
+-------------------------methods----------------------
+Quote.__init__(self)
+Quote.__repr__(self)
+Quote.append(self, dt, open_, high, low, close, volume)
+Quote.read_csv(self, filename)
+Quote.to_csv(self)
+Quote.write_csv(self, filename)
+googleIntradayQuote.__init__(self, symbol, interval_seconds = 300, num_days = 5)
+googleQuote.__init__(self, symbol, start_date, end_date = datetime.date.today()
+index.__init__(self, id1, sym, ww, tstart)
+index._objective_criteria(self, bsk)
+index._statecalc(self)
+index._weightcalc_constant(self, ww2, t)
+index._weightcalc_generic(self, wwvec, t)
+index._weightcalc_regime2(self, wwvec, t)
+index.calc_optimal_weight(self, maxiter = 1)
+index.calcbasket_obj(self, wwvec)
+index.close()
+index.help()
+index.updatehisto()
+searchSimilarity.__generate_return__(self, nlag)
+searchSimilarity.__init__(self, filejpstock=r'E = r'E:/_data/stock/daily/20160616/jp', sym01 = ['7203'], symname = ['Toyota'], startdate =  20150101, enddate = 20160601, pricetype = "close")
+searchSimilarity.__overweight__(self, px)
+searchSimilarity.export_results(self, filename)
+searchSimilarity.get_rankresult(self, filetosave = '')
+searchSimilarity.launch_search(self)
+searchSimilarity.load_quotes_fromdb(self, picklefile = '')
+searchSimilarity.set_searchcriteria(self, name1 = '7203', date1 = 20160301, date2 = 20160601, nlag = 1, searchperiodstart = 20120101, typesearch = "pattern2", )
+searchSimilarity.show_comparison_graph(self, maxresult = 20, show_only_different_time = True, fromid = 0, fromend =  0, filenameout = '')
+searchSimilarity.staticmethod(self, x)
+
+
+utilmy/zzarchive/storage/rec_data.py
+-------------------------functions----------------------
+_build_interaction_matrix(rows, cols, data)
+_download_movielens(dest_path)
+_get_movie_raw_metadata()
+_get_movielens_path()
+_get_raw_movielens_data()
+_parse(data)
+get_dense_triplets(uids, pids, nids, num_users, num_items)
+get_movielens_data()
+get_movielens_item_metadata(use_item_ids)
+get_triplets(mat)
+
+
+
+utilmy/zzarchive/storage/rec_metrics.py
+-------------------------functions----------------------
+full_auc(model, ground_truth)
+precision_at_k(model, ground_truth, k, user_features = None, item_features = None)
+predict(model, uid, pids)
+
+
+
+utilmy/zzarchive/storage/sobol.py
+-------------------------functions----------------------
+Plot2D_random_save(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph, )
+Plot2D_random_show(dir1, title1, dimxmax, dimymax, dimstep, samplejump, nsamplegraph)
+acf(data)
+binary_process(a, z, k)
+call_process(a, z, k)
+comoment(xx, yy, nsample, kx, ky)
+convert_csv2hd5f(filein1, filename)
+doublecheck_outlier(fileoutlier, ijump, nsample = 4000, trigger1 = 0.1, )
+getdvector(dimmax, istart, idimstart)
+getoutlier_fromrandom(filename, jmax1, imax1, isamplejum, nsample, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
+getoutlier_fromrandom_fast(filename, jmax1, imax1, isamplejum, nsample, trigger1 = 0.28, fileoutlier=   'E =    'E:\_data\_QUASI_SOBOL_gaussian_outlier.h5')
+getrandom_tonumpy(filename, nbdim, nbsample)
+lognormal_process2d(a1, z1, a2, z2, k)
+numexpr_vect_calc(filename, i0, imax, expr, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+outlier_clean(vv2)
+overwrite_data(fileoutlier, vv2)
+pathScheme_(T, n, zz)
+pathScheme_bb(T, n, zz)
+pathScheme_std(T, n, zz)
+permute(yy, kmax)
+permute2(xx, yy, kmax)
+plot_outlier(fileoutlier, kk)
+plotdensity(nsample, totdim, bin01, tit0, Ti = -1)
+plotdensity2(nsample, totdim, bin01, tit0, process01, vol = 0.25, tt = 5, Ti = -1)
+pricing01(totdim, nsample, a, strike, process01, aa = 0.25, itmax = -1, tt = 10)
+testdensity(nsample, totdim, bin01, Ti = -1)
+testdensity2d(nsample, totdim, bin01, nbasset)
+testdensity2d2(nsample, totdim, bin01, nbasset, process01 = lognormal_process2d, a1 = 0.25, a2 = 0.25, kk = 1)
+
+
+
+utilmy/zzarchive/storage/stateprocessor.py
+-------------------------functions----------------------
+and2(tuple1)
+ff(x, symfull = symfull)
+gap(close, t0, t1, lag)
+get_stocklist(clf, s11, initial, show1 = 1)
+get_treeselect(stk, s1 = s1, xnewdata = None, newsample = 5, show1 = 1, nbtree = 5, depthtree = 10)
+load_patternstate(name1)
+perf(close, t0, t1)
+printn(ss, symfull = symfull, s1 = s1)
+process_stock(stkstr, show1 = 1)
+show(ll, s1 = s1)
+sort(x, col, asc)
+store_patternstate(tree, sym1, theme, symfull = symfull)
+
+
+
+utilmy/zzarchive/storage/symbolicmath.py
+-------------------------functions----------------------
+EEvarbrownian(ff1d)
+EEvarbrownian2d(ff)
+N(x)
+bs(s0, K, t, T, r, d, vol)
+bsbinarycall(s0, K, t, T, r, d, vol)
+bscall(s0, K, t, T, r, d, vol)
+bsdelta(St, K, t, T, r, d, vol, cp1)
+bsdvd(St, K, t, T, r, d, vol, cp)
+bsgamma(St, K, t, T, r, d, vol, cp)
+bsgammaspot(St, K, t, T, r, d, vol, cp)
+bsput(s0, K, t, T, r, d, vol)
+bsrho(St, K, t, T, r, d, vol, cp)
+bsstrikedelta(s0, K, t, T, r, d, vol, cp1)
+bsstrikegamma(s0, K, t, T, r, d, vol)
+bstheta(St, K, t, T, r, d, vol, cp)
+bsvanna(St, K, t, T, r, d, vol, cp)
+bsvega(St, K, t, T, r, d, vol, cp)
+bsvolga(St, K, t, T, r, d, vol, cp)
+d1f(St, K, t, T, r, d, vol)
+d1xf(St, K, t, T, r, d, vol)
+d2f(St, K, t, T, r, d, vol)
+d2xf(St, K, t, T, r, d, vol)
+dN(x)
+decomposecorrel(m1)
+diffn(ff, x0, kk)
+dnn(x, y, p)
+dnn2(x, y, p)
+factorpoly(pp)
+lagrangian2d(ll)
+nn(x)
+nn2(x, y, p)
+print2(a0, a1 = '', a2 = '', a3 = '', a4 = '', a5 = '', a6 = '', a7 = '', a8 = '')
+spp()
+taylor2(ff, x0, n)
+
+
+
+utilmy/zzarchive/storage/technical_indicator.py
+-------------------------functions----------------------
+ACCDIST(df, n)
+ADX(df, n, n_ADX)
+ATR(df, n)
+BBANDS(df, n)
+CCI(df, n)
+COPP(df, n)
+Chaikin(df)
+DONCH(df, n)
+EMA(df, n)
+EOM(df, n)
+FORCE(df, n)
+KELCH(df, n)
+KST(df, r1, r2, r3, r4, n1, n2, n3, n4)
+MA(df, n)
+MACD(df, n_fast, n_slow)
+MFI(df, n)
+MOM(df, n)
+MassI(df)
+OBV(df, n)
+PPSR(df)
+RET(df, n)
+RMI(df, n = 14, m = 10)
+ROC(df, n)
+RSI(df, n = 14)
+RWI(df, nn, nATR)
+STDDEV(df, n)
+STO(df)
+STOK(df)
+TRIX(df, n)
+TSI(df, r, s)
+ULTOSC(df)
+Vortex(df, n)
+date_earningquater(t1)
+date_option_expiry(date)
+distance(df, tk, tkname)
+distance_day(df, tk, tkname)
+findhigher(item, vec)
+findlower(item, vec)
+linearreg(a, *args)
+nbday_high(df, n)
+nbday_high(df, n)
+nbday_low(df, n)
+nbtime_reachtop(df, n, trigger = 0.005)
+np_find(item, vec)
+np_find_maxpos(values)
+np_find_minpos(values)
+np_findlocalmax(v)
+np_findlocalmin(v)
+np_sortbycolumn(arr, colid, asc = True)
+optionexpiry_dist(df)
+qearning_dist(df)
+supportmaxmin1(df1)
+
+
+
+utilmy/zzarchive/storage/testmulti.py
+-------------------------functions----------------------
+mc01()
+mc02()
+multiprocess(processes, samples, x, widths)
+random_tree(Data)
+random_tree(Data)
+serial(samples, x, widths)
+test01()
+test01()
+
+
+
+utilmy/zzarchive/storage/theano_imdb.py
+-------------------------functions----------------------
+get_dataset_file(dataset, default_dataset, origin)
+load_data(path = "imdb.pkl", n_words = 100000, valid_portion = 0.1, maxlen = None, sort_by_len = True)
+prepare_data(seqs, labels, maxlen = None)
+
+
+
+utilmy/zzarchive/storage/theano_lstm.py
+-------------------------functions----------------------
+_p(pp, name)
+adadelta(lr, tparams, grads, x, mask, y, cost)
+build_model(tparams, options)
+dropout_layer(state_before, use_noise, trng)
+get_dataset(name)
+get_layer(name)
+get_minibatches_idx(n, minibatch_size, shuffle = False)
+init_params(options)
+init_tparams(params)
+load_params(path, params)
+lstm_layer(tparams, state_below, options, prefix = 'lstm', mask = None)
+numpy_floatX(data)
+ortho_weight(ndim)
+param_init_lstm(options, params, prefix = 'lstm')
+pred_error(f_pred, prepare_data, data, iterator, verbose = False)
+pred_probs(f_pred_prob, prepare_data, data, iterator, verbose = False)
+rmsprop(lr, tparams, grads, x, mask, y, cost)
+sgd(lr, tparams, grads, x, mask, y, cost)
+train_lstm(dim_proj = 128, # word embeding dimension and LSTM number of hidden units.patience = 10, # Number of epoch to wait before early stop if no progressmax_epochs = 5000, # The maximum number of epoch to rundispFreq = 10, # Display to stdout the training progress every N updatesdecay_c = 0., # Weight decay for the classifier applied to the U weights.not used for adadelta and rmsprop)n_words = 10000, # Vocabulary sizeprobably need momentum and decaying learning rate).encoder = 'lstm', # TODO: can be removed must be lstm.saveto = 'lstm_model.npz', # The best model will be saved therevalidFreq = 370, # Compute the validation error after this number of update.saveFreq = 1110, # Save the parameters after every saveFreq updatesmaxlen = 100, # Sequence longer then this get ignoredbatch_size = 16, # The batch size during training.valid_batch_size = 64, # The batch size used for validation/test set.dataset = 'imdb', noise_std = 0., use_dropout = True, # if False slightly faster, but worst test errorreload_model = None, # Path to a saved model we want to start from.test_size = -1, # If >0, we keep only this number of test example.)
+unzip(zipped)
+zipp(params, tparams)
+
+
+
+utilmy/zzarchive/util.py
+-------------------------functions----------------------
+a_autoreload()
+a_cleanmemory()
+a_info_conda_jupyter()
+a_isanaconda()
+a_module_codesample(module_str = 'pandas')
+a_module_doc(module_str = 'pandas')
+a_module_generatedoc(module_str = "pandas", fileout = '')
+a_run_ipython(cmd1)
+a_start_log(id1 = '', folder = 'aaserialize/log/')
+aa_unicode_ascii_utf8_issue()
+date_add_bday(from_date, add_days)
+date_add_bdays(from_date, add_days)
+date_allinfo()
+date_convert(t1, fromtype, totype)
+date_diffinbday(intd2, intd1)
+date_diffinday(intdate1, intdate2)
+date_diffinyear(startdate, enddate)
+date_finddateid(date1, dateref)
+date_gencalendar(start = '2010-01-01', end = '2010-01-15', country = 'us')
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_getspecificdate(datelist, datetype1 = "yearend", outputype1 = "intdate", includelastdate = True, includefirstdate = False, )
+date_holiday()
+date_now(i = 0)
+date_nowtime(type1 = 'str', format1= "%Y-%m-%d %H =  "%Y-%m-%d %H:%M:%S:%f")
+date_remove_bdays(from_date, add_days)
+date_tofloat(dt)
+dateint_todatetime(datelist1)
+datenumpy_todatetime(tt, islocaltime = True)
+datestring_todatetime(datelist1, format1 =  "%Y%m%d")
+datestring_toint(datelist1)
+datetime_toint(datelist1)
+datetime_tonumpydate(t, islocaltime = True)
+datetime_tostring(datelist1)
+find(item, vec)
+findhigher(x, vec)
+findlower(x, vec)
+findnone(vec)
+finds(itemlist, vec)
+findx(item, vec)
+googledrive_get()
+googledrive_list()
+googledrive_put()
+isexist(a)
+isfloat(x)
+isint(x)
+load(folder = '/folder1/keyname', isabsolutpath = 0)
+max_kpos(arr, kth)
+min_kpos(arr, kth)
+np_acf(data)
+np_addcolumn(arr, nbcol)
+np_addrow(arr, nbrow)
+np_and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
+np_cleanmatrix(m)
+np_comoment(xx, yy, nsample, kx, ky)
+np_dict_tolist(dd, withkey = 0)
+np_dict_tostr_key(dd)
+np_dict_tostr_val(dd)
+np_dictordered_create()
+np_enumerate2(vec_1d)
+np_find(item, vec)
+np_find_maxpos(values)
+np_find_maxpos_2nd(numbers)
+np_find_minpos(values)
+np_findfirst(item, vec)
+np_findlocalmax(v, trig)
+np_findlocalmax2(v, trig)
+np_findlocalmin(v, trig)
+np_findlocalmin2(v, trig)
+np_int_tostr(i)
+np_interpolate_nan(y)
+np_list_flatten(seq)
+np_list_tofreqdict(l1, wweight = [])
+np_list_unique(seq)
+np_ma(vv, n)
+np_map_dict_to_bq_schema(source_dict, schema, dest_dict)
+np_memory_array_adress(x)
+np_mergelist(x0, x1)
+np_minimize(fun_obj, x0 = [0.0], argext = (0, 0)
+np_minimizeDE(fun_obj, bounds, name1, maxiter = 10, popsize = 5, solver = None)
+np_nan_helper(y)
+np_numexpr_tohdfs(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+np_numexpr_vec_calc(filename, expr, i0 = 0, imax = 1000, fileout='E = 'E:\_data\_QUASI_SOBOL_gaussian_xx3.h5')
+np_pivotable_create(table, left, top, value)
+np_pivottable_count(mylist)
+np_remove_NA_INF_2d(X)
+np_remove_zeros(vv, axis1 = 1)
+np_removelist(x0, xremove = [])
+np_sort(arr, colid, asc = 1)
+np_sort(arr, colid, asc = 1)
+np_sortbycol(arr, colid, asc = True)
+np_sortbycolumn(arr, colid, asc = True)
+np_sortcol(arr, colid, asc = 1)
+np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
+np_torecarray(arr, colname)
+np_transform2d_int_1d(m2d, onlyhalf = False)
+np_uniquerows(a)
+obj_getclass_of_method(meth)
+obj_getclass_property(pfi)
+os_config_getfile(file1)
+os_config_setfile(dict_params, outfile, mode1 = 'w+')
+os_csv_process(file1)
+os_file_are_same_file_types(paths)
+os_file_exist(file1)
+os_file_extracttext(output_file, dir1, pattern1 = "*.html", htmltag = 'p', deepness = 2)
+os_file_get_file_extension(file_path)
+os_file_get_path_from_stream(maybe_stream)
+os_file_getname(path)
+os_file_getpath(path)
+os_file_gettext(file1)
+os_file_isame(file1, file2)
+os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
+os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
+os_file_norm_paths(paths, marker = '*')
+os_file_normpath(path)
+os_file_read(file1)
+os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
+os_file_replace(source_file_path, pattern, substring)
+os_file_replacestring1(findStr, repStr, filePath)
+os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
+os_file_size(file1)
+os_file_try_to_get_extension(path_or_strm)
+os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
+os_folder_create(directory)
+os_folder_is_path(path_or_stream)
+os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
+os_gui_popup_show(txt)
+os_path_append(p1, p2 = None, p3 = None, p4 = None)
+os_path_change(path1)
+os_path_current()
+os_path_norm(pth)
+os_print_tofile(vv, file1, mode1 = 'a')
+os_process_2()
+os_process_run(cmd_list = ['program', 'arg1', 'arg2'], capture_output = False)
+os_processify_fun(func)
+os_split_dir_file(dirfile)
+os_wait_cpu(priority = 300, cpu_min = 50)
+os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
+pd_applyfun_col(df, newcol, ff, use_colname = "all/[colname]")
+pd_array_todataframe(array, colname = None, index1 = None, dotranspose = False)
+pd_col_addfrom_dfmap(df, dfmap, colkey, colval, df_colused, df_colnew, exceptval = -1, inplace =  True)
+pd_create_colmapdict_nametoint(df)
+pd_createdf(array1, col1 = None, idx1 = None)
+pd_csv_randomread(filename, nsample = 10000, filemaxline = -1, dtype = None)
+pd_dataframe_toarray(df)
+pd_date_intersection(qlist)
+pd_df_todict(df1, colkey = 'table', excludekey = [''], onlyfirstelt =  True)
+pd_df_todict2(df1, colkey = 'table', excludekey = [''], onlyfirstelt =  True)
+pd_dtypes(df, columns = [], targetype = 'category')
+pd_dtypes_totype2(df, columns = [], targetype = 'category')
+pd_dtypes_type1_totype2(df, fromtype = str, targetype = str)
+pd_extract_col_idx_val(df)
+pd_extract_col_uniquevalue_tocsv(df, colname = '', csvfile = '')
+pd_find(df, regex_pattern = '*', col_restrict = [], isnumeric = False, doreturnposition = False)
+pd_h5_addtable(df, tablename, dbfile='F = 'F:\temp_pandas.h5')
+pd_h5_cleanbeforesave(df)
+pd_h5_dumpinfo(dbfile='E = 'E:\_data\stock\intraday_google.h5')
+pd_h5_fromcsv_tohdfs(dircsv = 'dir1/dir2/', filepattern = '*.csv', tofilehdfs = 'file1.h5', tablename = 'df', col_category = [], dtype0 = None, encoding = 'utf-8', chunksize =  2000000, mode = 'a', format = 'table', complib = None)
+pd_h5_load(filenameh5='E = 'E:/_data/_data_outlier.h5', table_id = 'data', exportype = "pandas", rowstart = -1, rowend = -1, cols = [])
+pd_h5_save(df, filenameh5='E = 'E:/_data/_data_outlier.h5', key = 'data')
+pd_h5_tableinfo(filenameh5, table)
+pd_info(df, doreturn = 1)
+pd_info_memsize(df, memusage = 0)
+pd_insertdatecol(df_insider, format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
+pd_insertrow(df, rowval, index1 = None, isreset = 1)
+pd_is_categorical(z)
+pd_np_toh5file(numpyarr, fileout = "file.h5", table1 = 'data')
+pd_removecol(df1, name1)
+pd_removerow(df, row_list_index = [23, 45])
+pd_replacevalues(df, matrix)
+pd_resetindex(df)
+pd_row_findlast(df, colid = 0, emptyrowid = None)
+pd_row_select(df, **conditions)
+pd_split_col_idx_val(df)
+pd_splitdf_inlist(df, colid, type1 = "dict")
+pd_str_encoding_change(df, cols, fromenc = 'iso-8859-1', toenc = 'utf-8')
+pd_str_isascii(x)
+pd_str_unicode_tostr(df, targetype = str)
+plot_XY(xx, yy, zcolor = None, tsize = None, title1 = '', xlabel = '', ylabel = '', figsize = (8, 6)
+plot_heatmap(frame, ax = None, cmap = None, vmin = None, vmax = None, interpolation = 'nearest')
+print_topdf()
+py_exception_print()
+py_importfromfile(modulename, dir1)
+py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
+py_log_write(LOGFILE, prefix)
+py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
+py_save_obj(obj1, keyname = '', otherfolder = 0)
+py_save_obj_dill(obj1, keyname = '', otherfolder = 0)
+read_funding_data(path)
+read_funding_data(path)
+read_funding_data(path)
+save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
+save_test(folder = '/folder1/keyname', isabsolutpath = 0)
+session_guispyder_load(filename)
+session_guispyder_save(filename)
+session_load(name = 'test_20160815')
+session_load_function(name = 'test_20160815')
+session_save(name = 'test')
+session_save_function(name = 'test')
+session_spyder_showall()
+sql_getdate()
+str_empty_string_array(x, y = 1)
+str_empty_string_array_numpy(nx, ny = 1)
+str_is_az09char(x)
+str_is_azchar(x)
+str_isfloat(value)
+str_make_unicode(input, errors = 'replace')
+str_match_fuzzy(xstring, list_string)
+str_parse_stringcalendar(cal)
+str_reindent(s, numSpaces)
+str_split2(delimiters, string, maxsplit = 0)
+str_split_pattern(sep2, ll, maxsplit = 0)
+str_to_unicode(x, encoding = 'utf-8')
+str_to_utf8(x)
+z_key_splitinto_dir_name(keyname)
+ztest_processify()
+
+-------------------------methods----------------------
+FundingRecord.__str__(self)
+FundingRecord.parse(klass, row)
+testclass.__init__(self, x)
+testclass.z_autotest(self)
+
+
+utilmy/zzarchive/util_aws.py
+-------------------------functions----------------------
+aws_accesskey_get(access = '', key = '')
+aws_conn_create(region = "ap-northeast-2", access = '', key = '')
+aws_conn_do(action = '', region = "ap-northeast-2")
+aws_conn_getallregions(conn = None)
+aws_conn_getinfo(conn)
+aws_credentials(account = None)
+aws_ec2_allocate_elastic_ip(con, instance_id = "", elastic_ip = '', region = "ap-northeast-2")
+aws_ec2_cmd_ssh(cmdlist =   ["ls " ], host = 'ip', doreturn = 0, ssh = None, username = 'ubuntu', keyfilepath = '')
+aws_ec2_create_con(contype = 'sftp/ssh', host = 'ip', port = 22, username = 'ubuntu', keyfilepath = '', password = '', keyfiletype = 'RSA', isprint = 1)
+aws_ec2_get_id(ipadress = '', instance_id = '')
+aws_ec2_get_instanceid(con, ip_address)
+aws_ec2_printinfo(instance = None, ipadress = "", instance_id = "")
+aws_ec2_python_script(script_path, args1, host)
+aws_ec2_res_start(con, region, key_name, ami_id, inst_type = "cx2.2", min_count  = 1, max_count  = 1, pars= {"security_group" =  {"security_group": [""], "disk_size": 25, "disk_type": "ssd", "volume_type": "gp2"})
+aws_ec2_res_stop(con, ipadress = "", instance_id = "")
+aws_ec2_spot_start(con, region, key_name = "ecsInstanceRole", inst_type = "cx2.2", ami_id = "", pricemax = 0.15, elastic_ip = '', pars= {"security_group" =  {"security_group": [""], "disk_size": 25, "disk_type": "ssd", "volume_type": "gp2"})
+aws_ec2_spot_stop(con, ipadress = "", instance_id = "")
+aws_s3_file_read(bucket1, filepath, isbinary = 1)
+aws_s3_folder_printtall(bucket_name = 'zdisk')
+aws_s3_getbucketconn(s3dir)
+aws_s3_getfrom_s3(froms3dir = 'task01/', todir = '', bucket_name = 'zdisk')
+aws_s3_puto_s3(fromdir_file = 'dir/file.zip', todir = 'bucket/folder1/folder2')
+aws_s3_url_split(url)
+ztest_01()
+
+-------------------------methods----------------------
+aws_ec2_ssh.__init__(self, hostname, username = 'ubuntu', key_file = None, password = None)
+aws_ec2_ssh._help_ssh(self)
+aws_ec2_ssh.cmd2(self, cmd1)
+aws_ec2_ssh.command(self, cmd)
+aws_ec2_ssh.command_list(self, cmdlist)
+aws_ec2_ssh.get(self, remotefile, localfile)
+aws_ec2_ssh.get_all(self, remotepath, localpath)
+aws_ec2_ssh.jupyter_kill(self)
+aws_ec2_ssh.jupyter_start(self)
+aws_ec2_ssh.listdir(self, remotedir)
+aws_ec2_ssh.put(self, localfile, remotefile)
+aws_ec2_ssh.put_all(self, localpath, remotepath)
+aws_ec2_ssh.python_script(self, script_path, args1)
+aws_ec2_ssh.sftp_walk(self, remotepath)
+aws_ec2_ssh.write_command(self, text, remotefile)
+
+
+utilmy/zzarchive/util_min.py
+-------------------------functions----------------------
+a_get_pythonversion()
+a_isanaconda()
+isexist(a)
+isfloat(x)
+isint(x)
+load(folder = '/folder1/keyname', isabsolutpath = 0)
+os_file_exist(file1)
+os_file_getname(path)
+os_file_getpath(path)
+os_file_gettext(file1)
+os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
+os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
+os_file_read(file1)
+os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
+os_file_replacestring1(findStr, repStr, filePath)
+os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
+os_file_size(file1)
+os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
+os_folder_create(directory)
+os_folder_robocopy(from_folder = '', to_folder = '', my_log='H = 'H:/robocopy_log.txt')
+os_path_append(p1, p2 = None, p3 = None, p4 = None)
+os_path_change(path1)
+os_path_current()
+os_path_norm(pth)
+os_print_tofile(vv, file1, mode1 = 'a')
+os_split_dir_file(dirfile)
+os_wait_cpu(priority = 300, cpu_min = 50)
+os_zip_checkintegrity(filezip1)
+os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = 'zdisk/test', isprint = 1)
+os_zipfile(folderin, folderzipname, iscompress = True)
+os_zipfolder(dir_tozip = '/zdisks3/output', zipname = '/zdisk3/output.zip', dir_prefix = None, iscompress = True)
+py_importfromfile(modulename, dir1)
+py_load_obj(folder = '/folder1/keyname', isabsolutpath = 0, encoding1 = 'utf-8')
+py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
+py_save_obj(obj, folder = '/folder1/keyname', isabsolutpath = 0)
+save(obj, folder = '/folder1/keyname', isabsolutpath = 0)
+save_test(folder = '/folder1/keyname', isabsolutpath = 0)
+z_key_splitinto_dir_name(keyname)
+
+
+
+utilmy/zzarchive/util_ml.py
+-------------------------functions----------------------
+create_adam_optimizer(learning_rate, momentum)
+create_bias_variable(name, shape)
+create_weight_variable(name, shape)
+parse_args(ppa = None, args =  {})
+parse_args2(ppa = None)
+tf_check()
+tf_global_variables_initializer(sess = None)
+visualize_result()
+
+-------------------------methods----------------------
+TextLoader.__init__(self, data_dir, batch_size, seq_length)
+TextLoader.create_batches(self)
+TextLoader.load_preprocessed(self, vocab_file, tensor_file)
+TextLoader.next_batch(self)
+TextLoader.preprocess(self, input_file, vocab_file, tensor_file)
+TextLoader.reset_batch_pointer(self)
+
+
+utilmy/zzarchive/util_sql.py
+-------------------------functions----------------------
+sql_create_dbengine(type1 = '', dbname = '', login = '', password = '', url = 'localhost', port = 5432)
+sql_delete_table(name, dbengine)
+sql_get_dbschema(dburl='sqlite = 'sqlite:///aapackage/store/yahoo.db', dbengine = None, isprint = 0)
+sql_insert_csv(csvfile, dbtable, dbengine, col_drop = [])
+sql_insert_csv2(csvfile = '', dbtable = '', columns = [], dbengine = None, nrows =  10000)
+sql_insert_df(df, dbtable, dbengine, col_drop = ['id'], verbose = 1)
+sql_insert_excel(file1 = '.xls', dbengine = None, dbtype = '')
+sql_mysql_insert_excel()
+sql_pivotable(dbcon, ss = 'select  ')
+sql_postgres_create_table(mytable = '', database = '', username = '', password = '')
+sql_postgres_pivot()
+sql_postgres_query_to_csv(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', csv_out = '')
+sql_query(sqlr = 'SELECT ticker,shortratio,sector1_id, FROM stockfundamental', dbengine = None, output = 'df', dburl='sqlite = 'sqlite:///aaserialize/store/finviz.db')
+
+
+
+utilmy/zzarchive/util_web.py
+-------------------------functions----------------------
+web_getjson_fromurl(url)
+web_getlink_fromurl(url)
+web_getrawhtml(url1)
+web_gettext_fromhtml(file1, htmltag = 'p')
+web_gettext_fromurl(url, htmltag = 'p')
+web_importio_todataframe(apiurl1, isurl = 1)
+web_restapi_toresp(apiurl1)
+web_send_email(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
+web_send_email_tls(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465)
+web_sendurl(url1)
+
+
+
+utilmy/zzarchive/utilgeo.py
+-------------------------functions----------------------
+df_to_geojson(df, col_properties, lat = 'latitude', lon = 'longitude')
+
+
+
+utilmy/zzarchive/zzarchive/zutil.py
+-------------------------functions----------------------
+_os_file_search_fast(fname, texts = None, mode = "regex/str")
+a_cleanmemory()
+a_help()
+a_info_conda_jupyter()
+a_run_cmd(cmd1)
+a_run_ipython(cmd1)
+a_start_log(id1 = "", folder = "aaserialize/log/")
+aa_unicode_ascii_utf8_issue()
+date_add_bday(from_date, add_days)
+date_add_bdays(from_date, add_days)
+date_allinfo()
+date_diffinbday(intd2, intd1)
+date_diffinday(intdate1, intdate2)
+date_finddateid(date1, dateref)
+date_gencalendar(start = "2010-01-01", end = "2010-01-15", country = "us")
+date_generatedatetime(start = "20100101", nbday = 10, end = "")
+date_holiday()
+date_now(i = 0)
+date_nowtime(type1 = "str", format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
+date_remove_bdays(from_date, add_days)
+dateint_todatetime(datelist1)
+datenumpy_todatetime(tt, islocaltime = True)
+datestring_todatetime(datelist1, format1 = "%Y%m%d")
+datestring_toint(datelist1)
+datetime_toint(datelist1)
+datetime_tonumpydate(t, islocaltime = True)
+datetime_tostring(datelist1)
+find(xstring, list_string)
+find_fuzzy(xstring, list_string)
+findhigher(x, vec)
+findlower(x, vec)
+findnone(vec)
+finds(itemlist, vec)
+findx(item, vec)
+isanaconda()
+isfloat(x)
+isint(x)
+load(folder = "/folder1/keyname", isabsolutpath = 0)
+np_addcolumn(arr, nbcol)
+np_addrow(arr, nbrow)
+np_and1(x, y, x3 = None, x4 = None, x5 = None, x6 = None, x7 = None, x8 = None)
+np_cleanmatrix(m)
+np_dict_tolist(dd, withkey = 0)
+np_dict_tostr_key(dd)
+np_dict_tostr_val(dd)
+np_dictordered_create()
+np_enumerate2(vec_1d)
+np_find(item, vec)
+np_find_maxpos(values)
+np_find_maxpos_2nd(numbers)
+np_find_minpos(values)
+np_findfirst(item, vec)
+np_findlocalmax(v, trig)
+np_findlocalmax2(v, trig)
+np_findlocalmin(v, trig)
+np_findlocalmin2(v, trig)
+np_int_tostr(i)
+np_interpolate_nan(y)
+np_list_flatten(seq)
+np_list_tofreqdict(l1, wweight = None)
+np_list_unique(seq)
+np_ma(vv, n)
+np_max_kpos(arr, kth)
+np_memory_array_adress(x)
+np_mergelist(x0, x1)
+np_min_kpos(arr, kth)
+np_minimize(fun_obj, x0 = None, argext = (0, 0)
+np_minimize_de(fun_obj, bounds, name1, maxiter = 10, popsize = 5, solver = None)
+np_nan_helper(y)
+np_numexpr_vec_calc()
+np_pivotable_create(table, left, top, value)
+np_pivottable_count(mylist)
+np_remove_na_inf_2d(x)
+np_remove_zeros(vv, axis1 = 1)
+np_removelist(x0, xremove = None)
+np_sort(arr, colid, asc = 1)
+np_sortbycol(arr, colid, asc = True)
+np_sortbycolumn(arr, colid, asc = True)
+np_sortcol(arr, colid, asc = 1)
+np_stack(v1, v2 = None, v3 = None, v4 = None, v5 = None)
+np_torecarray(arr, colname)
+np_transform2d_int_1d(m2d, onlyhalf = False)
+np_uniquerows(a)
+os_config_getfile(file1)
+os_config_setfile(dict_params, outfile, mode1 = "w+")
+os_csv_process(file1)
+os_file_are_same_file_types(paths)
+os_file_exist(file1)
+os_file_extracttext(output_file, dir1, pattern1 = "*.html", htmltag = "p", deepness = 2)
+os_file_get_extension(file_path)
+os_file_get_path_from_stream(maybe_stream)
+os_file_getname(path)
+os_file_getpath(path)
+os_file_gettext(file1)
+os_file_isame(file1, file2)
+os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
+os_file_mergeall(nfile, dir1, pattern1, deepness = 2)
+os_file_norm_paths(paths, marker = "*")
+os_file_normpath(path)
+os_file_read(file1)
+os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
+os_file_replace(source_file_path, pattern, substring)
+os_file_replacestring1(find_str, rep_str, file_path)
+os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
+os_file_search_content(srch_pattern = None, mode = "str", dir1 = "", file_pattern = "*.*", dirlevel = 1)
+os_file_size(file1)
+os_file_try_to_get_extension(path_or_strm)
+os_folder_copy(src, dst, symlinks = False, pattern1 = "*.py", fun_file_toignore = None)
+os_folder_create(directory)
+os_folder_is_path(path_or_stream)
+os_folder_robocopy(from_folder = "", to_folder = "", my_log="H = "H:/robocopy_log.txt")
+os_gui_popup_show(txt)
+os_path_append(p1, p2 = None, p3 = None, p4 = None)
+os_path_change(path1)
+os_path_current()
+os_path_norm(pth)
+os_platform()
+os_print_tofile(vv, file1, mode1 = "a")
+os_process_2()
+os_process_run(cmd_list, capture_output = False)
+os_split_dir_file(dirfile)
+os_wait_cpu(priority = 300, cpu_min = 50)
+os_zip_checkintegrity(filezip1)
+os_zipextractall(filezip_or_dir = "folder1/*.zip", tofolderextract = "zdisk/test", isprint = 1)
+os_zipfile(folderin, folderzipname, iscompress = True)
+os_zipfolder(dir_tozip = "/zdisks3/output", zipname = "/zdisk3/output.zip", dir_prefix = True, iscompress=Trueimport shutil_ = iscompressdir_tozip = dir_tozip if dir_tozip[-1] != "/" else dir_tozip[ = Trueimport shutil_ = iscompressdir_tozip = dir_tozip if dir_tozip[-1] != "/" else dir_tozip[:-1]if dir_prefix:)
+pd_applyfun_col(df, newcol, ff, use_colname = "all/[colname]")
+pd_array_todataframe(array, colname = None, index1 = None, dotranspose = False)
+pd_col_addfrom_dfmap(df, dfmap, colkey, colval, df_colused, df_colnew, exceptval = -1, inplace = Truedfmap, colkey = colkey, colval=colval)rowi) = colval)rowi):)
+pd_create_colmapdict_nametoint(df)
+pd_createdf(array1, col1 = None, idx1 = None)
+pd_csv_randomread(filename, nsample = 10000, filemaxline = -1, dtype = None)
+pd_dataframe_toarray(df)
+pd_date_intersection(qlist)
+pd_df_todict(df, colkey = "table", excludekey = ("", )
+pd_df_todict2(df, colkey = "table", excludekey = ("", )
+pd_dtypes(df, columns = ()
+pd_dtypes_totype2(df, columns = ()
+pd_dtypes_type1_totype2(df, fromtype = str, targetype = str)
+pd_extract_col_idx_val(df)
+pd_extract_col_uniquevalue_tocsv(df, colname = "", csvfile = "")
+pd_find(df, regex_pattern = "*", col_restrict = None, isnumeric = False, doreturnposition = False)
+pd_h5_addtable(df, tablename, dbfile="F = "F:\temp_pandas.h5")
+pd_h5_cleanbeforesave(df)
+pd_h5_dumpinfo(dbfile=r"E = r"E:\_data\stock\intraday_google.h5")
+pd_h5_fromcsv_tohdfs(dircsv = "dir1/dir2/", filepattern = "*.csv", tofilehdfs = "file1.h5", tablename = "df", ), dtype0 = None, encoding = "utf-8", chunksize = 2000000, mode = "a", form = "table", complib = None, )
+pd_h5_load(filenameh5="E = "E:/_data/_data_outlier.h5", table_id = "data", exportype = "pandas", rowstart = -1, rowend = -1, ), )
+pd_h5_save(df, filenameh5="E = "E:/_data/_data_outlier.h5", key = "data")
+pd_h5_tableinfo(filenameh5, table)
+pd_info(df, doreturn = 1)
+pd_info_memsize(df, memusage = 0)
+pd_insertdatecol(df, col, format1="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S:%f")
+pd_insertrow(df, rowval, index1 = None, isreset = 1)
+pd_is_categorical(z)
+pd_np_toh5file(numpyarr, fileout = "file.h5", table1 = "data")
+pd_removecol(df1, name1)
+pd_removerow(df, row_list_index = (23, 45)
+pd_replacevalues(df, matrix)
+pd_resetindex(df)
+pd_row_findlast(df, colid = 0, emptyrowid = None)
+pd_row_select(df, **conditions)
+pd_split_col_idx_val(df)
+pd_splitdf_inlist(df, colid, type1 = "dict")
+pd_str_encoding_change(df, cols, fromenc = "iso-8859-1", toenc = "utf-8")
+pd_str_isascii(x)
+pd_str_unicode_tostr(df, targetype = str)
+pd_toexcel(df, outfile = "file.xlsx", sheet_name = "sheet1", append = 1, returnfile = 1)
+pd_toexcel_many(outfile = "file1.xlsx", df1 = None, df2 = None, df3 = None, df4 = None, df5 = None, df6 = Nonedf1, outfile, sheet_name="df1")if df2 is not None = "df1")if df2 is not None:)
+print_object_tofile(vv, txt, file1="d = "d:/regression_output.py")
+print_progressbar(iteration, total, prefix = "", suffix = "", decimals = 1, bar_length = 100)
+py_autoreload()
+py_importfromfile(modulename, dir1)
+py_load_obj(folder = "/folder1/keyname", isabsolutpath = 0, encoding1 = "utf-8")
+py_memorysize(o, ids, hint = " deep_getsizeof(df_pd, set()
+py_save_obj(obj1, keyname = "", otherfolder = 0)
+py_save_obj_dill(obj1, keyname = "", otherfolder = 0)
+save(obj, folder = "/folder1/keyname", isabsolutpath = 0)
+save_test(folder = "/folder1/keyname", isabsolutpath = 0)
+session_load_function(name = "test_20160815")
+session_save_function(name = "test")
+str_empty_string_array(x, y = 1)
+str_empty_string_array_numpy(nx, ny = 1)
+str_is_az09char(x)
+str_is_azchar(x)
+str_isfloat(value)
+str_make_unicode(input_str, errors = "replace")
+str_match_fuzzy(xstring, list_string)
+str_parse_stringcalendar(cal)
+str_reindent(s, num_spaces)
+str_split2(delimiters, string, maxsplit = 0)
+str_split_pattern(sep2, ll, maxsplit = 0)
+str_to_unicode(x, encoding = "utf-8")
+str_to_utf8(x)
+z_key_splitinto_dir_name(keyname)
+
+
+
+utilmy/zzarchive/zzarchive/zutil_features.py
+-------------------------functions----------------------
+col_extractname(col_onehot)
+col_remove(cols, colsremove, mode = "exact")
+feature_correlation_cat(df, colused)
+feature_importance_perm(clf, Xtrain, ytrain, cols, n_repeats = 8, scoring = 'neg_root_mean_squared_error', show_graph = 1)
+feature_selection_multicolinear(df, threshold = 1.0)
+fetch_dataset(url_dataset, path_target = None, file_target = None)
+fetch_spark_koalas(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
+load(name, path)
+load_dataset(path_data_x, path_data_y = '', colid = "jobId", n_sample = -1)
+load_features(name, path)
+load_function_uri(uri_name="myfolder/myfile.py = "myfolder/myfile.py::myFunction")
+log(*s, n = 0, m = 1, **kw)
+log2(*s, **kw)
+log3(*s, **kw)
+metrics_eval(metric_list = ["mean_squared_error"], ytrue = None, ypred = None, ypred_proba = None, return_dict = False)
+np_conv_to_one_col(np_array, sep_char = "_")
+os_get_function_name()
+os_getcwd()
+pa_read_file(path =   'folder_parquet/', cols = None, n_rows = 1000, file_start = 0, file_end = 100000, verbose = 1, )
+pa_write_file(df, path =   'folder_parquet/', cols = None, n_rows = 1000, partition_cols = None, overwrite = True, verbose = 1, filesystem  =  'hdfs')
+params_check(pars, check_list, name = "")
+pd_col_fillna(dfref, colname = None, method = "frequent", value = None, colgroupby = None, return_val = "dataframe,param", )
+pd_col_filter(df, filter_val = None, iscol = 1)
+pd_col_merge_onehot(df, colname)
+pd_col_to_num(df, colname = None, default = np.nan)
+pd_col_to_onehot(dfref, colname = None, colonehot = None, return_val = "dataframe,column")
+pd_colcat_mapping(df, colname)
+pd_colcat_mergecol(df, col_list, x0, colid = "easy_id")
+pd_colcat_toint(dfref, colname, colcat_map = None, suffix = None)
+pd_colcat_tonum(df, colcat = "all", drop_single_label = False, drop_fact_dict = True)
+pd_colnum_normalize(df0, colname, pars, suffix = "_norm", return_val = 'dataframe,param')
+pd_colnum_tocat(df, colname = None, colexclude = None, colbinmap = None, bins = 5, suffix = "_bin", method = "uniform", na_value = -1, return_val = "dataframe,param", params={"KMeans_n_clusters" = {"KMeans_n_clusters": 8, "KMeans_init": 'k-means++', "KMeans_n_init": 10,"KMeans_max_iter": 300, "KMeans_tol": 0.0001, "KMeans_precompute_distances": 'auto',"KMeans_verbose": 0, "KMeans_random_state": None,"KMeans_copy_x": True, "KMeans_n_jobs": None, "KMeans_algorithm": 'auto'})
+pd_colnum_tocat_stat(df, feature, target_col, bins, cuts = 0)
+pd_feature_generate_cross(df, cols, cols_cross_input = None, pct_threshold = 0.2, m_combination = 2)
+pd_pipeline_apply(df, pipeline)
+pd_read_file(path_glob = "*.pkl", ignore_index = True, cols = None, verbose = False, nrows = -1, concat_sort = True, n_pool = 1, drop_duplicates = None, col_filter = None, col_filter_val = None, **kw)
+pd_stat_correl_pair(df, coltarget = None, colname = None)
+pd_stat_dataset_shift(dftrain, dftest, colused, nsample = 10000, buckets = 5, axis = 0)
+pd_stat_datashift_psi(expected, actual, buckettype = 'bins', buckets = 10, axis = 0)
+pd_stat_distribution_colnum(df, nrows = 2000, verbose = False)
+pd_stat_histogram(df, bins = 50, coltarget = "diff")
+pd_stat_pandas_profile(df, savefile = "report.html", title = "Pandas Profile")
+pd_stat_shift_changes(df, target_col, features_list = 0, bins = 10, df_test = 0)
+pd_stat_shift_trend_changes(df, feature, target_col, threshold = 0.03)
+pd_stat_shift_trend_correlation(df, df_test, colname, target_col)
+save(df, name, path = None)
+save_features(df, name, path = None)
+save_list(path, name_list, glob)
+test_get_classification_data(name = None)
+
+-------------------------methods----------------------
+dict2.__init__(self, d)
