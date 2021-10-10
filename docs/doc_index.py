@@ -1018,6 +1018,1058 @@ run_profile(path_data = None, path_output = "data/out/ztmp/", n_sample = 5000)
 
 
 
+utilmy/recs/contrib/azureml_designer_modules/entries/map_entry.py
+
+
+utilmy/recs/contrib/azureml_designer_modules/entries/ndcg_entry.py
+
+
+utilmy/recs/contrib/azureml_designer_modules/entries/precision_at_k_entry.py
+
+
+utilmy/recs/contrib/azureml_designer_modules/entries/recall_at_k_entry.py
+
+
+utilmy/recs/contrib/azureml_designer_modules/entries/score_sar_entry.py
+-------------------------functions----------------------
+joblib_loader(load_from_dir, model_spec)
+
+-------------------------methods----------------------
+ScoreSARModule.__init__(self, model, input_data)
+ScoreSARModule.input_data(self)
+ScoreSARModule.model(self)
+ScoreSARModule.predict_ratings(self, items_to_predict, normalize)
+ScoreSARModule.recommend_items(self, ranking_metric, top_k, sort_top_k, remove_seen, normalize)
+
+
+utilmy/recs/contrib/azureml_designer_modules/entries/stratified_splitter_entry.py
+
+
+utilmy/recs/contrib/azureml_designer_modules/entries/train_sar_entry.py
+-------------------------functions----------------------
+joblib_dumper(data, file_name = None)
+
+
+
+utilmy/recs/contrib/sarplus/python/setup.py
+-------------------------methods----------------------
+get_pybind_include.__init__(self, user = False)
+get_pybind_include.__str__(self)
+
+
+utilmy/recs/docs/source/conf.py
+
+
+utilmy/recs/examples/04_model_select_and_optimize/train_scripts/svd_training.py
+-------------------------functions----------------------
+main()
+svd_training(args)
+
+
+
+utilmy/recs/examples/04_model_select_and_optimize/train_scripts/wide_deep_training.py
+-------------------------functions----------------------
+_log(metric, value)
+
+
+
+utilmy/recs/examples/06_benchmarks/benchmark_utils.py
+-------------------------functions----------------------
+predict_als(model, test)
+predict_fastai(model, test)
+predict_svd(model, test)
+prepare_metrics_als(train, test)
+prepare_metrics_fastai(train, test)
+prepare_training_als(train, test)
+prepare_training_cornac(train, test)
+prepare_training_fastai(train, test)
+prepare_training_lightgcn(train, test)
+prepare_training_ncf(train, test)
+prepare_training_sar(train, test)
+prepare_training_svd(train, test)
+ranking_metrics_pyspark(test, predictions, k = DEFAULT_K)
+ranking_metrics_python(test, predictions, k = DEFAULT_K)
+rating_metrics_pyspark(test, predictions)
+rating_metrics_python(test, predictions)
+recommend_k_als(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_cornac(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_fastai(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_lightgcn(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_ncf(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_sar(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+recommend_k_svd(model, test, train, top_k = DEFAULT_K, remove_seen = True)
+train_als(params, data)
+train_bivae(params, data)
+train_bpr(params, data)
+train_fastai(params, data)
+train_lightgcn(params, data)
+train_ncf(params, data)
+train_sar(params, data)
+train_svd(params, data)
+
+
+
+utilmy/recs/recommenders/__init__.py
+
+
+utilmy/recs/recommenders/datasets/__init__.py
+
+
+utilmy/recs/recommenders/datasets/amazon_reviews.py
+-------------------------functions----------------------
+_create_instance(reviews_file, meta_file)
+_create_item2cate(instance_file)
+_create_vocab(train_file, user_vocab, item_vocab, cate_vocab)
+_data_generating(input_file, train_file, valid_file, test_file, min_sequence = 1)
+_data_generating_no_history_expanding(input_file, train_file, valid_file, test_file, min_sequence = 1)
+_data_processing(input_file)
+_download_reviews(name, dest_path)
+_extract_reviews(file_path, zip_path)
+_get_sampled_data(instance_file, sample_rate)
+_meta_preprocessing(meta_readfile)
+_negative_sampling_offline(instance_input_file, valid_file, test_file, valid_neg_nums = 4, test_neg_nums = 49)
+_reviews_preprocessing(reviews_readfile)
+data_preprocessing(reviews_file, meta_file, train_file, valid_file, test_file, user_vocab, item_vocab, cate_vocab, sample_rate = 0.01, valid_num_ngs = 4, test_num_ngs = 9, is_history_expanding = True, )
+download_and_extract(name, dest_path)
+
+
+
+utilmy/recs/recommenders/datasets/cosmos_cli.py
+-------------------------functions----------------------
+find_collection(client, dbid, id)
+find_database(client, id)
+read_collection(client, dbid, id)
+read_database(client, id)
+
+
+
+utilmy/recs/recommenders/datasets/covid_utils.py
+-------------------------functions----------------------
+clean_dataframe(df)
+get_public_domain_text(df, container_name, azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", )
+load_pandas_df(azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", container_name = "covid19temp", metadata_filename = "metadata.csv", )
+remove_duplicates(df, cols)
+remove_nan(df, cols)
+retrieve_text(entry, container_name, azure_storage_account_name = "azureopendatastorage", azure_storage_sas_token = "", )
+
+
+
+utilmy/recs/recommenders/datasets/criteo.py
+-------------------------functions----------------------
+download_criteo(size = "sample", work_directory = ".")
+extract_criteo(size, compressed_file, path = None)
+get_spark_schema(header = DEFAULT_HEADER)
+load_pandas_df(size = "sample", local_cache_path = None, header = DEFAULT_HEADER)
+load_spark_df(spark, size = "sample", header = DEFAULT_HEADER, local_cache_path = None, dbfs_datapath="dbfs = "dbfs:/FileStore/dac", dbutils = None, )
+
+
+
+utilmy/recs/recommenders/datasets/download_utils.py
+-------------------------functions----------------------
+download_path(path = None)
+maybe_download(url, filename = None, work_directory = ".", expected_bytes = None)
+unzip_file(zip_src, dst_dir, clean_zip_file = False)
+
+
+
+utilmy/recs/recommenders/datasets/mind.py
+-------------------------functions----------------------
+_newsample(nnn, ratio)
+_read_news(filepath, news_words, news_entities, tokenizer)
+download_and_extract_glove(dest_path)
+download_mind(size = "small", dest_path = None)
+extract_mind(train_zip, valid_zip, train_folder = "train", valid_folder = "valid", clean_zip_file = True, )
+generate_embeddings(data_path, news_words, news_entities, train_entities, valid_entities, max_sentence = 10, word_embedding_dim = 100, )
+get_train_input(session, train_file_path, npratio = 4)
+get_user_history(train_history, valid_history, user_history_path)
+get_valid_input(session, valid_file_path)
+get_words_and_entities(train_news, valid_news)
+load_glove_matrix(path_emb, word_dict, word_embedding_dim)
+read_clickhistory(path, filename)
+word_tokenize(sent)
+
+
+
+utilmy/recs/recommenders/datasets/movielens.py
+-------------------------functions----------------------
+_get_schema(header, schema)
+_load_item_df(size, item_datapath, movie_col, title_col, genres_col, year_col)
+_maybe_download_and_extract(size, dest_path)
+download_movielens(size, dest_path)
+extract_movielens(size, rating_path, item_path, zip_path)
+load_item_df(size = "100k", local_cache_path = None, movie_col = DEFAULT_ITEM_COL, title_col = None, genres_col = None, year_col = None, )
+load_pandas_df(size = "100k", header = None, local_cache_path = None, title_col = None, genres_col = None, year_col = None, )
+load_spark_df(spark, size = "100k", header = None, schema = None, local_cache_path = None, dbutils = None, title_col = None, genres_col = None, year_col = None, )
+
+-------------------------methods----------------------
+_DataFormat.__init__(self, sep, path, has_header = False, item_sep = None, item_path = None, item_has_header = False, )
+_DataFormat.has_header(self)
+_DataFormat.item_has_header(self)
+_DataFormat.item_path(self)
+_DataFormat.item_separator(self)
+_DataFormat.path(self)
+_DataFormat.separator(self)
+
+
+utilmy/recs/recommenders/datasets/pandas_df_utils.py
+-------------------------functions----------------------
+filter_by(df, filter_by_df, filter_by_cols)
+has_columns(df, columns)
+has_same_base_dtype(df_1, df_2, columns = None)
+lru_cache_df(maxsize, typed = False)
+negative_feedback_sampler(df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_label = DEFAULT_LABEL_COL, col_feedback = "feedback", ratio_neg_per_user = 1, pos_value = 1, neg_value = 0, seed = 42, )
+user_item_pairs(user_df, item_df, user_col = DEFAULT_USER_COL, item_col = DEFAULT_ITEM_COL, user_item_filter_df = None, shuffle = True, seed = None, )
+
+-------------------------methods----------------------
+LibffmConverter.__init__(self, filepath = None)
+LibffmConverter.fit(self, df, col_rating = DEFAULT_RATING_COL)
+LibffmConverter.fit_transform(self, df, col_rating = DEFAULT_RATING_COL)
+LibffmConverter.get_params(self)
+LibffmConverter.transform(self, df)
+PandasHash.__eq__(self, other)
+PandasHash.__hash__(self)
+PandasHash.__init__(self, pandas_object)
+
+
+utilmy/recs/recommenders/datasets/python_splitters.py
+-------------------------functions----------------------
+_do_stratification(data, ratio = 0.75, min_rating = 1, filter_by = "user", is_random = True, seed = 42, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+numpy_stratified_split(X, ratio = 0.75, seed = 42)
+python_chrono_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+python_random_split(data, ratio = 0.75, seed = 42)
+python_stratified_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, seed = 42, )
+
+
+
+utilmy/recs/recommenders/datasets/spark_splitters.py
+-------------------------functions----------------------
+_do_stratification_spark(data, ratio = 0.75, min_rating = 1, filter_by = "user", is_partitioned = True, is_random = True, seed = 42, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+spark_chrono_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, no_partition = False, )
+spark_random_split(data, ratio = 0.75, seed = 42)
+spark_stratified_split(data, ratio = 0.75, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, seed = 42, )
+spark_timestamp_split(data, ratio = 0.75, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+
+
+
+utilmy/recs/recommenders/datasets/sparse.py
+-------------------------methods----------------------
+AffinityMatrix.__init__(self, df, items_list = None, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_pred = DEFAULT_PREDICTION_COL, save_path = None, )
+AffinityMatrix._gen_index(self)
+AffinityMatrix.gen_affinity_matrix(self)
+AffinityMatrix.map_back_sparse(self, X, kind)
+
+
+utilmy/recs/recommenders/datasets/split_utils.py
+-------------------------functions----------------------
+_get_column_name(name, col_user, col_item)
+min_rating_filter_pandas(data, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+min_rating_filter_spark(data, min_rating = 1, filter_by = "user", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+process_split_ratio(ratio)
+split_pandas_data_with_ratios(data, ratios, seed = 42, shuffle = False)
+
+
+
+utilmy/recs/recommenders/datasets/wikidata.py
+-------------------------functions----------------------
+find_wikidata_id(name, limit = 1, session = None)
+get_session(session = None)
+query_entity_description(entity_id, session = None)
+query_entity_links(entity_id, session = None)
+read_linked_entities(data)
+search_wikidata(names, extras = None, describe = True, verbose = False)
+
+
+
+utilmy/recs/recommenders/evaluation/__init__.py
+
+
+utilmy/recs/recommenders/evaluation/python_evaluation.py
+-------------------------functions----------------------
+_check_column_dtypes(func)
+_check_column_dtypes_diversity_serendipity(func)
+_check_column_dtypes_novelty_coverage(func)
+_get_cooccurrence_similarity(train_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_cosine_similarity(train_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_intralist_similarity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_item_feature_similarity(item_feature_df, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, )
+_get_pairwise_items(df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+auc(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+catalog_coverage(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
+distributional_coverage(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
+diversity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+exp_var(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+get_top_k_items(dataframe, col_user = DEFAULT_USER_COL, col_rating = DEFAULT_RATING_COL, k = DEFAULT_K)
+historical_item_novelty(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, )
+logloss(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+mae(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+map_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+merge_ranking_true_pred(rating_true, rating_pred, col_user, col_item, col_rating, col_prediction, relevancy_method, k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+merge_rating_true_pred(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+ndcg_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+novelty(train_df, reco_df, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL)
+precision_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+recall_at_k(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, relevancy_method = "top_k", k = DEFAULT_K, threshold = DEFAULT_THRESHOLD, )
+rmse(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+rsquared(rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+user_diversity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+user_item_serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+user_serendipity(train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_item_features = DEFAULT_ITEM_FEATURES_COL, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_sim = DEFAULT_SIMILARITY_COL, col_relevance = None, )
+
+
+
+utilmy/recs/recommenders/evaluation/spark_evaluation.py
+-------------------------functions----------------------
+_get_relevant_items_by_threshold(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, threshold = DEFAULT_THRESHOLD, )
+_get_relevant_items_by_timestamp(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, col_prediction = DEFAULT_PREDICTION_COL, k = DEFAULT_K, )
+_get_top_k_items(dataframe, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, k = DEFAULT_K, )
+
+-------------------------methods----------------------
+SparkDiversityEvaluation.__init__(self, train_df, reco_df, item_feature_df = None, item_sim_measure = DEFAULT_ITEM_SIM_MEASURE, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_relevance = None, )
+SparkDiversityEvaluation._get_cooccurrence_similarity(self, n_partitions)
+SparkDiversityEvaluation._get_cosine_similarity(self, n_partitions = 200)
+SparkDiversityEvaluation._get_intralist_similarity(self, df)
+SparkDiversityEvaluation._get_item_feature_similarity(self, n_partitions)
+SparkDiversityEvaluation._get_pairwise_items(self, df)
+SparkDiversityEvaluation.catalog_coverage(self)
+SparkDiversityEvaluation.distributional_coverage(self)
+SparkDiversityEvaluation.diversity(self)
+SparkDiversityEvaluation.historical_item_novelty(self)
+SparkDiversityEvaluation.novelty(self)
+SparkDiversityEvaluation.serendipity(self)
+SparkDiversityEvaluation.sim_cos(v1, v2)
+SparkDiversityEvaluation.user_diversity(self)
+SparkDiversityEvaluation.user_item_serendipity(self)
+SparkDiversityEvaluation.user_serendipity(self)
+SparkRankingEvaluation.__init__(self, rating_true, rating_pred, k = DEFAULT_K, relevancy_method = "top_k", col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, threshold = DEFAULT_THRESHOLD, )
+SparkRankingEvaluation._calculate_metrics(self)
+SparkRankingEvaluation.map_at_k(self)
+SparkRankingEvaluation.ndcg_at_k(self)
+SparkRankingEvaluation.precision_at_k(self)
+SparkRankingEvaluation.recall_at_k(self)
+SparkRatingEvaluation.__init__(self, rating_true, rating_pred, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_prediction = DEFAULT_PREDICTION_COL, )
+SparkRatingEvaluation.exp_var(self)
+SparkRatingEvaluation.mae(self)
+SparkRatingEvaluation.rmse(self)
+SparkRatingEvaluation.rsquared(self)
+
+
+utilmy/recs/recommenders/models/__init__.py
+
+
+utilmy/recs/recommenders/models/cornac/__init__.py
+
+
+utilmy/recs/recommenders/models/cornac/cornac_utils.py
+-------------------------functions----------------------
+predict(model, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, )
+predict_ranking(model, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, remove_seen = False, )
+
+
+
+utilmy/recs/recommenders/models/deeprec/__init__.py
+
+
+utilmy/recs/recommenders/models/deeprec/deeprec_utils.py
+-------------------------functions----------------------
+cal_metric(labels, preds, metrics)
+check_nn_config(f_config)
+check_type(config)
+create_hparams(flags)
+dcg_score(y_true, y_score, k = 10)
+download_deeprec_resources(azure_container_url, data_path, remote_resource_name)
+flat_config(config)
+hit_score(y_true, y_score, k = 10)
+load_dict(filename)
+load_yaml(filename)
+mrr_score(y_true, y_score)
+ndcg_score(y_true, y_score, k = 10)
+prepare_hparams(yaml_file = None, **kwargs)
+
+
+
+utilmy/recs/recommenders/models/fastai/__init__.py
+
+
+utilmy/recs/recommenders/models/fastai/fastai_utils.py
+-------------------------functions----------------------
+cartesian_product(*arrays)
+hide_fastai_progress_bar()
+score(learner, test_df, user_col = cc.DEFAULT_USER_COL, item_col = cc.DEFAULT_ITEM_COL, prediction_col = cc.DEFAULT_PREDICTION_COL, top_k = None, )
+
+
+
+utilmy/recs/recommenders/models/geoimc/__init__.py
+
+
+utilmy/recs/recommenders/models/geoimc/geoimc_algorithm.py
+-------------------------methods----------------------
+IMCProblem.__init__(self, dataPtr, lambda1 = 1e-2, rank = 10)
+IMCProblem._computeLoss_csrmatrix(a, b, cd, indices, indptr, residual_global)
+IMCProblem._cost(self, params, residual_global)
+IMCProblem._egrad(self, params, residual_global)
+IMCProblem._loadTarget(self, )
+IMCProblem._optimize(self, max_opt_time, max_opt_iter, verbosity)
+IMCProblem.reset(self)
+IMCProblem.solve(self, *args)
+
+
+utilmy/recs/recommenders/models/geoimc/geoimc_data.py
+-------------------------methods----------------------
+DataPtr.__init__(self, data, entities)
+DataPtr.get_data(self)
+DataPtr.get_entity(self, of = "row")
+Dataset.__init__(self, name, features_dim = 0, normalize = False, target_transform = "")
+Dataset.generate_train_test_data(self, data, test_ratio = 0.3)
+Dataset.normalize(self)
+Dataset.reduce_dims(self)
+ML_100K.__init__(self, **kwargs)
+ML_100K._load_item_features(self, path)
+ML_100K._load_user_features(self, path)
+ML_100K._read_from_file(self, path)
+ML_100K.df2coo(self, df)
+ML_100K.load_data(self, path)
+
+
+utilmy/recs/recommenders/models/geoimc/geoimc_predict.py
+-------------------------methods----------------------
+Inferer.__init__(self, method = "dot", k = 10, transformation = "")
+Inferer._get_method(self, k)
+Inferer.infer(self, dataPtr, W, **kwargs)
+PlainScalarProduct.__init__(self, X, Y, **kwargs)
+PlainScalarProduct.sim(self, **kwargs)
+
+
+utilmy/recs/recommenders/models/geoimc/geoimc_utils.py
+-------------------------functions----------------------
+length_normalize(matrix)
+mean_center(matrix)
+reduce_dims(matrix, target_dim)
+
+
+
+utilmy/recs/recommenders/models/lightfm/__init__.py
+
+
+utilmy/recs/recommenders/models/lightfm/lightfm_utils.py
+-------------------------functions----------------------
+compare_metric(df_list, metric = "prec", stage = "test")
+model_perf_plots(df)
+prepare_all_predictions(data, uid_map, iid_map, interactions, model, num_threads, user_features = None, item_features = None, )
+prepare_test_df(test_idx, uids, iids, uid_map, iid_map, weights)
+similar_items(item_id, item_features, model, N = 10)
+similar_users(user_id, user_features, model, N = 10)
+track_model_metrics(model, train_interactions, test_interactions, k = 10, no_epochs = 100, no_threads = 8, show_plot = True, **kwargs)
+
+
+
+utilmy/recs/recommenders/models/lightgbm/__init__.py
+
+
+utilmy/recs/recommenders/models/lightgbm/lightgbm_utils.py
+-------------------------functions----------------------
+unpackbits(x, num_bits)
+
+-------------------------methods----------------------
+NumEncoder.__init__(self, cate_cols, nume_cols, label_col, threshold = 10, thresrate = 0.99)
+NumEncoder.fit_transform(self, df)
+NumEncoder.transform(self, df)
+
+
+utilmy/recs/recommenders/models/ncf/__init__.py
+
+
+utilmy/recs/recommenders/models/ncf/dataset.py
+-------------------------methods----------------------
+Dataset.__init__(self, train, test = None, n_neg = 4, n_neg_test = 100, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, binary = True, seed = None, )
+Dataset._data_processing(self, train, test, binary)
+Dataset._init_test_data(self)
+Dataset._init_train_data(self)
+Dataset._reindex(self, df, binary)
+Dataset.negative_sampling(self)
+Dataset.test_loader(self)
+Dataset.train_loader(self, batch_size, shuffle = True)
+
+
+utilmy/recs/recommenders/models/ncf/ncf_singlenode.py
+-------------------------methods----------------------
+NCF.__init__(self, n_users, n_items, model_type = "NeuMF", n_factors = 8, layer_sizes = [16, 8, 4], n_epochs = 50, batch_size = 64, learning_rate = 5e-3, verbose = 1, seed = None, )
+NCF._create_model(self, )
+NCF._load_neumf(self, gmf_dir, mlp_dir, alpha)
+NCF._predict(self, user_input, item_input)
+NCF.fit(self, data)
+NCF.load(self, gmf_dir = None, mlp_dir = None, neumf_dir = None, alpha = 0.5)
+NCF.predict(self, user_input, item_input, is_list = False)
+NCF.save(self, dir_name)
+
+
+utilmy/recs/recommenders/models/newsrec/__init__.py
+
+
+utilmy/recs/recommenders/models/newsrec/newsrec_utils.py
+-------------------------functions----------------------
+check_nn_config(f_config)
+check_type(config)
+create_hparams(flags)
+get_mind_data_set(type)
+newsample(news, ratio)
+prepare_hparams(yaml_file = None, **kwargs)
+word_tokenize(sent)
+
+
+
+utilmy/recs/recommenders/models/rbm/__init__.py
+
+
+utilmy/recs/recommenders/models/rbm/rbm.py
+-------------------------methods----------------------
+RBM.__init__(self, hidden_units = 500, keep_prob = 0.7, init_stdv = 0.1, learning_rate = 0.004, minibatch_size = 100, training_epoch = 20, display_epoch = 10, sampling_protocol = [50, 70, 80, 90, 100], debug = False, with_metrics = False, seed = 42, )
+RBM.accuracy(self, vp)
+RBM.batch_training(self, num_minibatches)
+RBM.binomial_sampling(self, pr)
+RBM.data_pipeline(self)
+RBM.display_metrics(self, Rmse_train, precision_train, precision_test)
+RBM.eval_out(self)
+RBM.fit(self, xtr, xtst)
+RBM.free_energy(self, x)
+RBM.generate_graph(self)
+RBM.gibbs_protocol(self, i)
+RBM.gibbs_sampling(self)
+RBM.init_gpu(self)
+RBM.init_metrics(self)
+RBM.init_parameters(self)
+RBM.init_training_session(self, xtr)
+RBM.losses(self, vv)
+RBM.multinomial_distribution(self, phi)
+RBM.multinomial_sampling(self, pr)
+RBM.placeholder(self)
+RBM.predict(self, x, maps)
+RBM.recommend_k_items(self, x, top_k = 10, remove_seen = True)
+RBM.rmse(self, vp)
+RBM.sample_hidden_units(self, vv)
+RBM.sample_visible_units(self, h)
+RBM.time(self)
+RBM.train_test_precision(self, xtst)
+
+
+utilmy/recs/recommenders/models/rlrmc/RLRMCalgorithm.py
+-------------------------methods----------------------
+RLRMCalgorithm.__init__(self, rank, C, model_param, initialize_flag = "random", max_time = 1000, maxiter = 100, seed = 42, )
+RLRMCalgorithm._computeLoss_csrmatrix(a, b, cd, indices, indptr, residual_global)
+RLRMCalgorithm._cost(self, weights, entries_train_csr_data, entries_train_csr_indices, entries_train_csr_indptr, residual_global, )
+RLRMCalgorithm._egrad(self, weights, entries_train_csr_indices, entries_train_csr_indptr, residual_global, )
+RLRMCalgorithm._init_train(self, entries_train_csr)
+RLRMCalgorithm._my_stats(self, weights, given_stats, stats, residual_global, entries_validation_csr_data = None, entries_validation_csr_indices = None, entries_validation_csr_indptr = None, residual_validation_global = None, )
+RLRMCalgorithm.fit(self, RLRMCdata, verbosity = 0)
+RLRMCalgorithm.fit_and_evaluate(self, RLRMCdata, verbosity = 0)
+RLRMCalgorithm.predict(self, user_input, item_input, low_memory = False)
+
+
+utilmy/recs/recommenders/models/rlrmc/RLRMCdataset.py
+-------------------------methods----------------------
+RLRMCdataset.__init__(self, train, validation = None, test = None, mean_center = True, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, )
+RLRMCdataset._data_processing(self, train, validation = None, test = None, mean_center = True)
+RLRMCdataset._reindex(self, df)
+
+
+utilmy/recs/recommenders/models/rlrmc/__init__.py
+
+
+utilmy/recs/recommenders/models/rlrmc/conjugate_gradient_ms.py
+-------------------------methods----------------------
+ConjugateGradientMS.__init__(self, beta_type = BetaTypes.HestenesStiefel, orth_value = np.inf, linesearch = None, *args, **kwargs)
+ConjugateGradientMS.solve(self, problem, x = None, reuselinesearch = False, compute_stats = None)
+
+
+utilmy/recs/recommenders/models/sar/__init__.py
+
+
+utilmy/recs/recommenders/models/sar/sar_singlenode.py
+-------------------------methods----------------------
+SARSingleNode.__init__(self, col_user = constants.DEFAULT_USER_COL, col_item = constants.DEFAULT_ITEM_COL, col_rating = constants.DEFAULT_RATING_COL, col_timestamp = constants.DEFAULT_TIMESTAMP_COL, col_prediction = constants.DEFAULT_PREDICTION_COL, similarity_type = JACCARD, time_decay_coefficient = 30, time_now = None, timedecay_formula = False, threshold = 1, normalize = False, )
+SARSingleNode.compute_affinity_matrix(self, df, rating_col)
+SARSingleNode.compute_coocurrence_matrix(self, df)
+SARSingleNode.compute_time_decay(self, df, decay_column)
+SARSingleNode.fit(self, df)
+SARSingleNode.get_item_based_topk(self, items, top_k = 10, sort_top_k = True)
+SARSingleNode.get_popularity_based_topk(self, top_k = 10, sort_top_k = True)
+SARSingleNode.predict(self, test)
+SARSingleNode.recommend_k_items(self, test, top_k = 10, sort_top_k = True, remove_seen = False)
+SARSingleNode.score(self, test, remove_seen = False)
+SARSingleNode.set_index(self, df)
+
+
+utilmy/recs/recommenders/models/surprise/__init__.py
+
+
+utilmy/recs/recommenders/models/surprise/surprise_utils.py
+-------------------------functions----------------------
+compute_ranking_predictions(algo, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, remove_seen = False, )
+predict(algo, data, usercol = DEFAULT_USER_COL, itemcol = DEFAULT_ITEM_COL, predcol = DEFAULT_PREDICTION_COL, )
+surprise_trainset_to_df(trainset, col_user = "uid", col_item = "iid", col_rating = "rating")
+
+
+
+utilmy/recs/recommenders/models/tfidf/__init__.py
+
+
+utilmy/recs/recommenders/models/tfidf/tfidf_utils.py
+-------------------------methods----------------------
+TfidfRecommender.__clean_text(self, text, for_BERT = False, verbose = False)
+TfidfRecommender.__create_full_recommendation_dictionary(self, df_clean)
+TfidfRecommender.__get_single_item_info(self, metadata, rec_id)
+TfidfRecommender.__init__(self, id_col, tokenization_method = "scibert")
+TfidfRecommender.__make_clickable(self, address)
+TfidfRecommender.__organize_results_as_tabular(self, df_clean, k)
+TfidfRecommender.clean_dataframe(self, df, cols_to_clean, new_col_name = "cleaned_text")
+TfidfRecommender.fit(self, tf, vectors_tokenized)
+TfidfRecommender.get_stop_words(self)
+TfidfRecommender.get_tokens(self)
+TfidfRecommender.get_top_k_recommendations(self, metadata, query_id, cols_to_keep = [], verbose = True)
+TfidfRecommender.recommend_top_k_items(self, df_clean, k = 5)
+TfidfRecommender.tokenize_text(1, 3), min_df = 0)
+
+
+utilmy/recs/recommenders/models/vae/__init__.py
+
+
+utilmy/recs/recommenders/models/vae/multinomial_vae.py
+-------------------------methods----------------------
+AnnealingCallback.__init__(self, beta, anneal_cap, total_anneal_steps)
+AnnealingCallback.get_data(self)
+AnnealingCallback.on_batch_end(self, epoch, logs = {})
+AnnealingCallback.on_epoch_end(self, epoch, logs = {})
+AnnealingCallback.on_train_begin(self, logs = {})
+LossHistory.on_epoch_end(self, epoch, logs = {})
+LossHistory.on_train_begin(self, logs = {})
+Metrics.__init__(self, model, val_tr, val_te, mapper, k, save_path = None)
+Metrics.get_data(self)
+Metrics.on_epoch_end(self, batch, logs = {})
+Metrics.on_train_begin(self, logs = {})
+Metrics.recommend_k_items(self, x, k, remove_seen = True)
+Mult_VAE.__init__(self, n_users, original_dim, intermediate_dim = 200, latent_dim = 70, n_epochs = 400, batch_size = 100, k = 100, verbose = 1, drop_encoder = 0.5, drop_decoder = 0.5, beta = 1.0, annealing = False, anneal_cap = 1.0, seed = None, save_path = None, )
+Mult_VAE._create_model(self)
+Mult_VAE._get_vae_loss(self, x, x_bar)
+Mult_VAE._take_sample(self, args)
+Mult_VAE.display_metrics(self)
+Mult_VAE.fit(self, x_train, x_valid, x_val_tr, x_val_te, mapper)
+Mult_VAE.get_optimal_beta(self)
+Mult_VAE.ndcg_per_epoch(self)
+Mult_VAE.nn_batch_generator(self, x_train)
+Mult_VAE.recommend_k_items(self, x, k, remove_seen = True)
+
+
+utilmy/recs/recommenders/models/vae/standard_vae.py
+-------------------------methods----------------------
+AnnealingCallback.__init__(self, beta, anneal_cap, total_anneal_steps)
+AnnealingCallback.get_data(self)
+AnnealingCallback.on_batch_end(self, epoch, logs = {})
+AnnealingCallback.on_epoch_end(self, epoch, logs = {})
+AnnealingCallback.on_train_begin(self, logs = {})
+LossHistory.on_epoch_end(self, epoch, logs = {})
+LossHistory.on_train_begin(self, logs = {})
+Metrics.__init__(self, model, val_tr, val_te, mapper, k, save_path = None)
+Metrics.get_data(self)
+Metrics.on_epoch_end(self, batch, logs = {})
+Metrics.on_train_begin(self, logs = {})
+Metrics.recommend_k_items(self, x, k, remove_seen = True)
+StandardVAE.__init__(self, n_users, original_dim, intermediate_dim = 200, latent_dim = 70, n_epochs = 400, batch_size = 100, k = 100, verbose = 1, drop_encoder = 0.5, drop_decoder = 0.5, beta = 1.0, annealing = False, anneal_cap = 1.0, seed = None, save_path = None, )
+StandardVAE._create_model(self)
+StandardVAE._get_vae_loss(self, x, x_bar)
+StandardVAE._take_sample(self, args)
+StandardVAE.display_metrics(self)
+StandardVAE.fit(self, x_train, x_valid, x_val_tr, x_val_te, mapper)
+StandardVAE.get_optimal_beta(self)
+StandardVAE.ndcg_per_epoch(self)
+StandardVAE.nn_batch_generator(self, x_train)
+StandardVAE.recommend_k_items(self, x, k, remove_seen = True)
+
+
+utilmy/recs/recommenders/models/vowpal_wabbit/__init__.py
+
+
+utilmy/recs/recommenders/models/vowpal_wabbit/vw.py
+-------------------------methods----------------------
+VW.__del__(self)
+VW.__init__(self, col_user = DEFAULT_USER_COL, col_item = DEFAULT_ITEM_COL, col_rating = DEFAULT_RATING_COL, col_timestamp = DEFAULT_TIMESTAMP_COL, col_prediction = DEFAULT_PREDICTION_COL, **kwargs, )
+VW.fit(self, df)
+VW.parse_test_params(self, params)
+VW.parse_train_params(self, params)
+VW.predict(self, df)
+VW.to_vw_cmd(params)
+VW.to_vw_file(self, df, train = True)
+
+
+utilmy/recs/recommenders/models/wide_deep/__init__.py
+
+
+utilmy/recs/recommenders/models/wide_deep/wide_deep_utils.py
+-------------------------functions----------------------
+_build_deep_columns(user_ids, item_ids, user_dim, item_dim, item_feat_col = None, item_feat_shape = 1)
+_build_wide_columns(user_ids, item_ids, hash_bucket_size = 1000)
+build_feature_columns(users, items, user_col = DEFAULT_USER_COL, item_col = DEFAULT_ITEM_COL, item_feat_col = None, crossed_feat_dim = 1000, user_dim = 8, item_dim = 8, item_feat_shape = None, model_type = "wide_deep", )
+build_model(model_dir = MODEL_DIR, ), ), linear_optimizer = "Ftrl", dnn_optimizer = "Adagrad", 128, 128), dnn_dropout = 0.0, dnn_batch_norm = True, log_every_n_iter = 1000, save_checkpoints_steps = 10000, seed = None, )
+
+
+
+utilmy/recs/recommenders/tuning/__init__.py
+
+
+utilmy/recs/recommenders/tuning/nni/__init__.py
+
+
+utilmy/recs/recommenders/tuning/nni/ncf_training.py
+-------------------------functions----------------------
+_update_metrics(metrics_dict, metric, params, result)
+get_params()
+main(params)
+ncf_training(params)
+
+
+
+utilmy/recs/recommenders/tuning/nni/ncf_utils.py
+-------------------------functions----------------------
+combine_metrics_dicts(*metrics)
+compute_test_results(model, train, test, rating_metrics, ranking_metrics)
+
+
+
+utilmy/recs/recommenders/tuning/nni/nni_utils.py
+-------------------------functions----------------------
+check_experiment_status(wait = WAITING_TIME, max_retries = MAX_RETRIES)
+check_metrics_written(wait = WAITING_TIME, max_retries = MAX_RETRIES)
+check_stopped(wait = WAITING_TIME, max_retries = MAX_RETRIES)
+get_experiment_status(status_url = NNI_STATUS_URL)
+get_trials(optimize_mode)
+start_nni(config_path, wait = WAITING_TIME, max_retries = MAX_RETRIES)
+stop_nni()
+
+
+
+utilmy/recs/recommenders/tuning/nni/svd_training.py
+-------------------------functions----------------------
+get_params()
+main(params)
+svd_training(params)
+
+
+
+utilmy/recs/recommenders/tuning/parameter_sweep.py
+-------------------------functions----------------------
+generate_param_grid(params)
+
+
+
+utilmy/recs/recommenders/utils/__init__.py
+
+
+utilmy/recs/recommenders/utils/constants.py
+
+
+utilmy/recs/recommenders/utils/general_utils.py
+-------------------------functions----------------------
+get_number_processors()
+get_physical_memory()
+invert_dictionary(dictionary)
+
+
+
+utilmy/recs/recommenders/utils/gpu_utils.py
+-------------------------functions----------------------
+clear_memory_all_gpus()
+get_cuda_version(unix_path = DEFAULT_CUDA_PATH_LINUX)
+get_cudnn_version()
+get_gpu_info()
+get_number_gpus()
+
+
+
+utilmy/recs/recommenders/utils/k8s_utils.py
+-------------------------functions----------------------
+nodes_to_replicas(n_cores_per_node, n_nodes = 3, cpu_cores_per_replica = 0.1)
+qps_to_replicas(target_qps, processing_time, max_qp_replica = 1, target_utilization = 0.7)
+replicas_to_qps(num_replicas, processing_time, max_qp_replica = 1, target_utilization = 0.7)
+
+
+
+utilmy/recs/recommenders/utils/notebook_memory_management.py
+-------------------------functions----------------------
+pre_run_cell()
+start_watching_memory()
+stop_watching_memory()
+watch_memory()
+
+
+
+utilmy/recs/recommenders/utils/notebook_utils.py
+-------------------------functions----------------------
+is_databricks()
+is_jupyter()
+
+
+
+utilmy/recs/recommenders/utils/plot.py
+-------------------------functions----------------------
+line_graph(values, labels, x_guides = None, x_name = None, y_name = None, x_min_max = None, y_min_max = None, legend_loc = None, subplot = None, 5, 5), )
+
+
+
+utilmy/recs/recommenders/utils/python_utils.py
+-------------------------functions----------------------
+binarize(a, threshold)
+exponential_decay(value, max_val, half_life)
+get_top_k_scored_items(scores, top_k, sort_top_k = False)
+jaccard(cooccurrence)
+lift(cooccurrence)
+rescale(data, new_min = 0, new_max = 1, data_min = None, data_max = None)
+
+
+
+utilmy/recs/recommenders/utils/spark_utils.py
+-------------------------functions----------------------
+start_or_get_spark(app_name = "Sample", url = "local[*]", memory = "10g", config = None, packages = None, jars = None, repository = None, )
+
+
+
+utilmy/recs/recommenders/utils/tf_utils.py
+-------------------------functions----------------------
+_dataset(x, y = None, batch_size = 128, num_epochs = 1, shuffle = False, seed = None)
+build_optimizer(name, lr = 0.001, **kwargs)
+evaluation_log_hook(estimator, logger, true_df, y_col, eval_df, every_n_iter = 10000, model_dir = None, batch_size = 256, eval_fns = None, **eval_kwargs)
+export_model(model, train_input_fn, eval_input_fn, tf_feat_cols, base_dir)
+pandas_input_fn(df, feat_name_type)
+pandas_input_fn_for_saved_model(df, feat_name_type)
+
+-------------------------methods----------------------
+MetricsLogger.__init__(self)
+MetricsLogger.get_log(self)
+MetricsLogger.log(self, metric, value)
+_TrainLogHook.__init__(self, estimator, logger, true_df, y_col, eval_df, every_n_iter = 10000, model_dir = None, batch_size = 256, eval_fns = None, **eval_kwargs)
+_TrainLogHook._log(self, tag, value)
+_TrainLogHook.after_run(self, run_context, run_values)
+_TrainLogHook.before_run(self, run_context)
+_TrainLogHook.begin(self)
+_TrainLogHook.end(self, session)
+
+
+utilmy/recs/recommenders/utils/timer.py
+-------------------------methods----------------------
+Timer.__enter__(self)
+Timer.__exit__(self, *args)
+Timer.__init__(self)
+Timer.__str__(self)
+Timer.interval(self)
+Timer.start(self)
+Timer.stop(self)
+
+
+utilmy/recs/setup.py
+
+
+utilmy/recs/tests/__init__.py
+
+
+utilmy/recs/tests/ci/run_pytest.py
+-------------------------functions----------------------
+create_arg_parser()
+
+
+
+utilmy/recs/tests/ci/submit_azureml_pytest.py
+-------------------------functions----------------------
+create_arg_parser()
+create_experiment(workspace, experiment_name)
+create_run_config(cpu_cluster, docker_proc_type, conda_env_file)
+setup_persistent_compute_target(workspace, cluster_name, vm_size, max_nodes)
+setup_workspace(workspace_name, subscription_id, resource_group, cli_auth, location)
+submit_experiment_to_azureml(test, test_folder, test_markers, junitxml, run_config, experiment)
+
+
+
+utilmy/recs/tests/conftest.py
+-------------------------functions----------------------
+affinity_matrix(test_specs)
+criteo_first_row()
+deeprec_config_path()
+deeprec_resource_path()
+demo_usage_data(header, sar_settings)
+demo_usage_data_spark(spark, demo_usage_data, header)
+header()
+kernel_name()
+mind_resource_path(deeprec_resource_path)
+notebooks()
+output_notebook()
+pandas_dummy(header)
+pandas_dummy_timestamp(pandas_dummy, header)
+path_notebooks()
+python_dataset_ncf(test_specs_ncf)
+sar_settings()
+spark(tmp_path_factory, app_name = "Sample", url = "local[*]")
+test_specs()
+test_specs_ncf()
+tmp(tmp_path_factory)
+train_test_dummy_timestamp(pandas_dummy_timestamp)
+
+
+
+utilmy/recs/tests/integration/__init__.py
+
+
+utilmy/recs/tests/integration/examples/__init__.py
+
+
+utilmy/recs/tests/integration/examples/test_notebooks_gpu.py
+-------------------------functions----------------------
+test_cornac_bivae_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_dkn_quickstart_integration(notebooks, output_notebook, kernel_name)
+test_fastai_integration(notebooks, output_notebook, kernel_name, size, epochs, expected_values)
+test_gpu_vm()
+test_lightgcn_deep_dive_integration(notebooks, output_notebook, kernel_name, yaml_file, data_path, size, epochs, batch_size, expected_values, seed, )
+test_lstur_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_naml_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_ncf_deep_dive_integration(notebooks, output_notebook, kernel_name, size, epochs, batch_size, expected_values, seed, )
+test_ncf_integration(notebooks, output_notebook, kernel_name, size, epochs, expected_values, seed)
+test_npa_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_nrms_quickstart_integration(notebooks, output_notebook, kernel_name, epochs, seed, MIND_type, expected_values)
+test_slirec_quickstart_integration(notebooks, output_notebook, kernel_name, yaml_file, data_path, epochs, batch_size, expected_values, seed, )
+test_wide_deep_integration(notebooks, output_notebook, kernel_name, size, steps, expected_values, seed, tmp)
+test_xdeepfm_integration(notebooks, output_notebook, kernel_name, syn_epochs, criteo_epochs, expected_values, seed, )
+
+
+
+utilmy/recs/tests/integration/examples/test_notebooks_pyspark.py
+-------------------------functions----------------------
+test_als_pyspark_integration(notebooks, output_notebook, kernel_name)
+test_mmlspark_lightgbm_criteo_integration(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/recs/tests/integration/examples/test_notebooks_python.py
+-------------------------functions----------------------
+test_baseline_deep_dive_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_cornac_bpr_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_geoimc_integration(notebooks, output_notebook, kernel_name, expected_values)
+test_nni_tuning_svd(notebooks, output_notebook, kernel_name, tmp)
+test_sar_single_node_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_surprise_svd_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_vw_deep_dive_integration(notebooks, output_notebook, kernel_name, size, expected_values)
+test_wikidata_integration(notebooks, output_notebook, kernel_name, tmp)
+test_xlearn_fm_integration(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/recs/tests/integration/recommenders/__init__.py
+
+
+utilmy/recs/tests/smoke/__init__.py
+
+
+utilmy/recs/tests/smoke/examples/__init__.py
+
+
+utilmy/recs/tests/smoke/examples/test_notebooks_gpu.py
+-------------------------functions----------------------
+test_cornac_bivae_smoke(notebooks, output_notebook, kernel_name)
+test_fastai_smoke(notebooks, output_notebook, kernel_name)
+test_gpu_vm()
+test_lstur_smoke(notebooks, output_notebook, kernel_name)
+test_naml_smoke(notebooks, output_notebook, kernel_name)
+test_ncf_deep_dive_smoke(notebooks, output_notebook, kernel_name)
+test_ncf_smoke(notebooks, output_notebook, kernel_name)
+test_npa_smoke(notebooks, output_notebook, kernel_name)
+test_nrms_smoke(notebooks, output_notebook, kernel_name)
+test_wide_deep_smoke(notebooks, output_notebook, kernel_name, tmp)
+test_xdeepfm_smoke(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/recs/tests/smoke/examples/test_notebooks_pyspark.py
+-------------------------functions----------------------
+test_als_pyspark_smoke(notebooks, output_notebook, kernel_name)
+test_mmlspark_lightgbm_criteo_smoke(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/recs/tests/smoke/examples/test_notebooks_python.py
+-------------------------functions----------------------
+test_baseline_deep_dive_smoke(notebooks, output_notebook, kernel_name)
+test_cornac_bpr_smoke(notebooks, output_notebook, kernel_name)
+test_lightgbm_quickstart_smoke(notebooks, output_notebook, kernel_name)
+test_mind_utils(notebooks, output_notebook, kernel_name, tmp)
+test_sar_single_node_smoke(notebooks, output_notebook, kernel_name)
+test_surprise_svd_smoke(notebooks, output_notebook, kernel_name)
+test_vw_deep_dive_smoke(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/recs/tests/smoke/recommenders/__init__.py
+
+
+utilmy/recs/tests/unit/__init__.py
+
+
+utilmy/recs/tests/unit/examples/__init__.py
+
+
+utilmy/recs/tests/unit/examples/test_notebooks_gpu.py
+-------------------------functions----------------------
+test_dkn_quickstart(notebooks, output_notebook, kernel_name)
+test_fastai(notebooks, output_notebook, kernel_name)
+test_gpu_vm()
+test_ncf(notebooks, output_notebook, kernel_name)
+test_ncf_deep_dive(notebooks, output_notebook, kernel_name)
+test_wide_deep(notebooks, output_notebook, kernel_name, tmp)
+test_xdeepfm(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/recs/tests/unit/examples/test_notebooks_pyspark.py
+-------------------------functions----------------------
+test_als_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_als_pyspark_runs(notebooks, output_notebook, kernel_name)
+test_data_split_runs(notebooks, output_notebook, kernel_name)
+test_evaluation_diversity_runs(notebooks, output_notebook, kernel_name)
+test_evaluation_runs(notebooks, output_notebook, kernel_name)
+test_mmlspark_lightgbm_criteo_runs(notebooks, output_notebook, kernel_name)
+test_spark_tuning(notebooks, output_notebook, kernel_name)
+
+
+
+utilmy/recs/tests/unit/examples/test_notebooks_python.py
+-------------------------functions----------------------
+test_baseline_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_cornac_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_lightgbm(notebooks, output_notebook, kernel_name)
+test_rlrmc_quickstart_runs(notebooks, output_notebook, kernel_name)
+test_sar_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_sar_single_node_runs(notebooks, output_notebook, kernel_name)
+test_surprise_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_template_runs(notebooks, output_notebook, kernel_name)
+test_vw_deep_dive_runs(notebooks, output_notebook, kernel_name)
+test_wikidata_runs(notebooks, output_notebook, kernel_name, tmp)
+
+
+
+utilmy/recs/tests/unit/recommenders/__init__.py
+
+
+utilmy/recs/tools/__init__.py
+
+
+utilmy/recs/tools/databricks_install.py
+-------------------------functions----------------------
+create_egg(), local_eggname = "Recommenders.egg", overwrite = False, )
+dbfs_file_exists(api_client, dbfs_path)
+prepare_for_operationalization(cluster_id, api_client, dbfs_path, overwrite, spark_version)
+
+
+
+utilmy/recs/tools/generate_conda_file.py
+
+
+utilmy/recs/tools/generate_requirements_txt.py
+
+
 utilmy/spark/main.py
 -------------------------functions----------------------
 main()
