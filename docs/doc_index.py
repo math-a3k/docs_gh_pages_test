@@ -449,6 +449,18 @@ test()
 
 
 
+utilmy/deeplearning/util_similarity.py
+-------------------------functions----------------------
+__cast_left_and_right_to_tensors(left, right)
+__get_rows_counts(left, right)
+__get_tensor_reshaped_norm(tensor, reshape_shape)
+__get_tensor_sqr(tensor, reshape_shape, tile_shape)
+__tf_cdist_cos(left, right)
+__tf_cdist_euclidean(left, right)
+tf_cdist(left, right, metric = 'euclidean')
+
+
+
 utilmy/deeplearning/util_topk.py
 -------------------------functions----------------------
 convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
