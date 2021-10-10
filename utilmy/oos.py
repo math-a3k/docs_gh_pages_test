@@ -279,7 +279,7 @@ def os_copy_safe(dirin:str=None, dirout:str=None,  nlevel=5, nfile=50000, logdir
         fi  = flist[i]
         fi2 = fi.replace(dirin, dirout)
 
-        if not fi.isascii(): continue
+        # if not fi.isascii(): continue
 
         if not os.path.isfile(fi2) and os.path.isfile(fi) :
              kk = kk + 1
