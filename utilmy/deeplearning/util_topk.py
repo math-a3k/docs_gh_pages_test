@@ -1,13 +1,44 @@
+# -*- coding: utf-8 -*-
+HELP= """  nearest neighbor
+
+
+
 """
-TopK nearest  neighbor
+import os, glob, sys, math, string, time, json, logging, functools, random, yaml, operator, gc
+import pandas as pd, numpy as np
+from pathlib import Path; from collections import defaultdict, OrderedDict ;
+from box import Box
+
+try :
+   import diskcache as dc
+   import faiss
+except: pass
+
+from utilmy.utilmy import   pd_read_file, pd_to_file
+
+
+#####################################################################################
+verbose = 0
+
+def log(*s):
+    print(*s, flush=True)
+
+
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
+
+
+
+def help():
+    from utilmy import help_create
+    ss  = HELP
+    ss += help_create("utilmy.deepleaning.util_topk")
+    print(ss)
 
 
 
 
-"""
-
-
-
+#####################################################################################
 def simscore_cosinus_calc(embs, words):
     """
     
@@ -16,15 +47,15 @@ def simscore_cosinus_calc(embs, words):
     """
     from sklearn.metrics.pairwise import cosine_similarity    
     dfsim = []
-    for i in  range(0, len(nwords) -1) :
+    for i in  range(0, len(words) -1) :
         vi = embs[i,:]
         normi = np.sqrt(np.dot(vi,vi))
-        for j in range(i+1, len(nwords) ) :
+        for j in range(i+1, len(words) ) :
             # simij = cosine_similarity( embs[i,:].reshape(1, -1) , embs[j,:].reshape(1, -1)     )
             vj = embs[j,:]
             normj = np.sqrt(np.dot(vj, vj))
             simij = np.dot( vi ,  vj  ) / (normi * normj)
-            dfsim.append([ nwords[i], nwords[j],  simij   ])
+            dfsim.append([ words[i], words[j],  simij   ])
             # dfsim2.append([ nwords[i], nwords[j],  simij[0][0]  ])
     
     dfsim  = pd.DataFrame(dfsim, columns= ['l3_genre_a', 'l3_genre_b', 'sim_score' ] )   
@@ -37,8 +68,7 @@ def simscore_cosinus_calc(embs, words):
 
 
 
-
-
+#####################################################################################
 def faiss_create_index(df_or_path=None, col='emb', dir_out="",  db_type = "IVF4096,Flat", nfile=1000, emb_dim=200):
     """
       1 billion size vector creation
@@ -48,8 +78,8 @@ def faiss_create_index(df_or_path=None, col='emb', dir_out="",  db_type = "IVF40
     # nfile      = 1000
     emb_dim    = 200   
     
-    if df_or_path is None :  df_or_path = dir_cpa2 + "/emb/emb//ichiba_order_20210901b_itemtagb2/seq_1000000000/df/*.parquet"
-    dirout    =  "/".join( os.path.dirname(df_or_path).split("/")[:-1]) + "/faiss/"   #dir_cpa2 + "/emb/emb/ichiba_clk_202006_202012d_itemtagb_202009_12/seq_merge_2020_2021_pur/faiss/"
+    if df_or_path is None :  df_or_path = "/emb/emb//ichib000000000/df/*.parquet"
+    dirout    =  "/".join( os.path.dirname(df_or_path).split("/")[:-1]) + "/faiss/"
     os.makedirs(dirout, exist_ok=True) ; 
     log( 'dirout', dirout)    
     log('dirin',   df_or_path)  ; time.sleep(10)
@@ -283,12 +313,6 @@ def np_str_to_array(vv,  l2_norm=True,     mdim = 200):
 
 
 
-
-
-
-
-
-    
 def topk_predict():
     #### wrapper :      python prepro.py topk_predict 
     
@@ -426,7 +450,6 @@ def topk(topk=100, dname=None, pattern="df_*", filter1=None):
             log( dir_check )    
 
 
-    
         
 def topk_nearest_vector(x0, vector_list, topk=3) :
    """
@@ -438,6 +461,7 @@ def topk_nearest_vector(x0, vector_list, topk=3) :
    index.add(vector_list)
    dist, indice = index.search(x0, topk)
    return dist, indice
+
 
 
 def topk_export():     #### python prepro.py  topk_export  
@@ -467,11 +491,7 @@ def topk_export():     #### python prepro.py  topk_export
     log(dfi)        
  
     
-    
-    
-    
-    
-        
+
 def convert_txt_to_vector_parquet(dirin=None, dirout=None, skip=0, nmax=10**8):   ##   python prepro.py   create_vector_parquet  &
     #### FastText/ Word2Vec to parquet files    9808032 for purhase
     nmax = 10**8
