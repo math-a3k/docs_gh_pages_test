@@ -2,15 +2,23 @@ fire
 python-box
 numpy
 pandas
+scipy
+loguru
+
+
+########################################################
+#### utilmy.date
+arrow
+
+
+
+########################################################
+#### utilmy.debug
 pyinstrument  ### code profile
 icecream  ### debugger
 rebound-cli  ## stackoverflow
-pysnooper   ### Debugger show lines of code step by step
+pysnooper   ### Debugger show lines of code step by ste
 snoop
-scipy
-seaborn
-loguru
-arrow
 
 
 ########################################################
@@ -24,8 +32,10 @@ datasketch  ### lSH
 rapidfuzz
 editdistance
 
+
 ########################################################
 #### utilmy.viz.html
+seaborn
 tqdm
 matplotlib
 python-highcharts  
@@ -38,6 +48,8 @@ shapely
 pretty-html-table
 networkx
 pyvis
+
+
 #############################################################################
 #### utilmy.text
 wget
