@@ -303,6 +303,18 @@ StepDecay.__call__(self, epoch)
 StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 
 
+utilmy/deeplearning/keras/util_similarity.py
+-------------------------functions----------------------
+__cast_left_and_right_to_tensors(left, right)
+__get_rows_counts(left, right)
+__get_tensor_reshaped_norm(tensor, reshape_shape)
+__get_tensor_sqr(tensor, reshape_shape, tile_shape)
+__tf_cdist_cos(left, right)
+__tf_cdist_euclidean(left, right)
+tf_cdist(left, right, metric = 'euclidean')
+
+
+
 utilmy/deeplearning/keras/util_train.py
 -------------------------functions----------------------
 check_valid_image(img_list, path = "", tag = "", y_labels = "", n_sample = 3, renorm = True)
@@ -360,18 +372,6 @@ print_gpu_usage()
 tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
 test()
 tf_check()
-
-
-
-utilmy/deeplearning/util_similarity.py
--------------------------functions----------------------
-__cast_left_and_right_to_tensors(left, right)
-__get_rows_counts(left, right)
-__get_tensor_reshaped_norm(tensor, reshape_shape)
-__get_tensor_sqr(tensor, reshape_shape, tile_shape)
-__tf_cdist_cos(left, right)
-__tf_cdist_euclidean(left, right)
-tf_cdist(left, right, metric = 'euclidean')
 
 
 
