@@ -363,38 +363,6 @@ tf_check()
 
 
 
-utilmy/deeplearning/util_image.py
--------------------------functions----------------------
-help()
-image_cache_check(db_path:str = "db_images.cache", dirout:str = "tmp/", tag = "cache1")
-image_cache_save(image_path_list:str = "db_images.cache", db_dir:str = "tmp/", tag = "cache1")
-image_center_crop(img, dim)
-image_check(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
-image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
-image_create_cache()
-image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
-image_merge(image_list, n_dim, padding_size, max_height, total_width)
-image_padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
-image_read(filepath_or_buffer: Union[str, io.BytesIO])
-image_remove_bg(in_dir = "", out_dir = "", level = 1)
-image_remove_extra_padding(img, inverse = False, removedot = True)
-image_resize(img, size = (256, 256)
-image_resize2(image, width = None, height = None, inter = cv2.INTER_AREA)
-image_resize_pad(img, size = (256, 256)
-image_save()
-image_text_blank(in_dir, out_dir, level = "/*")
-log(*s)
-log2(*s)
-os_path_check(path, n = 5)
-prep_image(image_paths, nmax = 10000000)
-prep_images(image_paths, nmax = 10000000)
-prep_images2(image_paths)
-prep_images_multi(image_path_list:list, prepro_image_fun = None, npool = 1)
-run_multiprocess(myfun, list_args, npool = 10, **kwargs)
-test()
-
-
-
 utilmy/deeplearning/util_similarity.py
 -------------------------functions----------------------
 __cast_left_and_right_to_tensors(left, right)
@@ -567,11 +535,33 @@ to_file(s, filep)
 
 utilmy/images/util_image.py
 -------------------------functions----------------------
+help()
+image_cache_check(db_path:str = "db_images.cache", dirout:str = "tmp/", tag = "cache1")
+image_cache_save(image_path_list:str = "db_images.cache", db_dir:str = "tmp/", tag = "cache1")
+image_center_crop(img, dim)
+image_check(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
+image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
+image_create_cache()
+image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
 image_merge(image_list, n_dim, padding_size, max_height, total_width)
+image_padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
 image_read(filepath_or_buffer: Union[str, io.BytesIO])
+image_remove_bg(in_dir = "", out_dir = "", level = 1)
 image_remove_extra_padding(img, inverse = False, removedot = True)
-image_resize(image, width = None, height = None, inter = cv2.INTER_AREA)
-padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
+image_resize(img, size = (256, 256)
+image_resize2(image, width = None, height = None, inter = cv2.INTER_AREA)
+image_resize_pad(img, size = (256, 256)
+image_save()
+image_text_blank(in_dir, out_dir, level = "/*")
+log(*s)
+log2(*s)
+os_path_check(path, n = 5)
+prep_image(image_paths, nmax = 10000000)
+prep_images(image_paths, nmax = 10000000)
+prep_images2(image_paths)
+prep_images_multi(image_path_list:list, prepro_image_fun = None, npool = 1)
+run_multiprocess(myfun, list_args, npool = 10, **kwargs)
+test()
 
 
 
