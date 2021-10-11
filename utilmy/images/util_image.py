@@ -56,7 +56,7 @@ def prep_images(image_paths, nmax=10000000):
   images = []
   for i in range(len(image_paths)):
     if i > nmax : break
-    image =  prepro_image2b(image_paths[i] )
+    image =  prep_image(image_paths[i] )
     images.append(image)
   return images
 
