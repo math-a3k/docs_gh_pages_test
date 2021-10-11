@@ -60,8 +60,8 @@ def prepro_image(image_path: str, xdim:int=1, ydim:int=1):
 
 
 def prepro_images(image_path_list: list, prepro_image_fun=None, npool=1):
-    """ Parallel processing
-
+    """ 
+     Parallel processing
     """
     from multiprocessing.dummy import Pool  #### use threads for I/O bound tasks
 
@@ -421,13 +421,13 @@ def image_padding_generate(
 
 def image_merge(image_list, n_dim, padding_size, max_height, total_width):
     """
-    Args:
-        image_list:  list of image
-        n_dim:
-        padding_size: padding size max
-        max_height:   max height
-        total_width:  total width
-    Returns:
+     Args:
+         image_list:  list of image
+         n_dim:
+         padding_size: padding size max
+         max_height:   max height
+         total_width:  total width
+     Returns:
     """
     # create an empty array with a size large enough to contain all the images + padding between images
     if n_dim == 2:
