@@ -193,87 +193,9 @@ def print_log(*s):   #name changed
     """Log decorator"""
     print(*s, flush=True)
 
+from util_graph_loss import *;
+from util_loss import metric_accuracy,clf_loss_macro_soft_f1;
 
-  from util_loss import metric_accuracy,clf_loss_macro_soft_f1;
-
-def plot_original_images(test_sample):
-    fig1 = plt.figure(figsize=(8, 8))
-
-    for i in range(len(test_sample)):
-        plt.subplot(4, 4, i + 1)
-        plt.imshow(test_sample[i])
-        plt.axis('off')
-
-    print('Original Images:')
-    plt.show()
-
-
-def plot_reconstructed_images(model, test_sample):
-    """Plot reconstructed images"""
-    z_mean, z_logsigma, x_recon, _ = model.call(np.array(test_sample))
-
-    fig1 = plt.figure(figsize=(8, 8))
-
-    for i in range(x_recon.shape[0]):
-        plt.subplot(4, 4, i + 1)
-        plt.imshow(x_recon[i])
-        plt.axis('off')
-
-    print('\n Reconstructed Images (Perceptual):')
-    plt.show()
-
-
-def valid_image_check(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):    
-    """Assess image validity"""
-    os.makedirs(path, exist_ok=True)
-    if n_sample is not None and isinstance(n_sample, int):
-        img_list = img_list[:n_sample]
-        y_labels = [y[:n_sample].tolist() for y in y_labels]
-
-    for i in range(len(img_list)) :
-        img = img_list[i]
-        if not isinstance(img, np.ndarray) :
-            img = img.numpy()
-        
-        if renorm:     
-            img = (img * 0.5 + 0.5) * 255
-        
-        label_tag = 'label_{' + '-'.join([str(y[i]) for y in y_labels]) + '}'
-        save_path = f"{path}/img_{cc.tag}_nimg_{i}_{tag}_{label_tag}_recon.png"
-        img = img[:, :, ::-1]
-        cv2.imwrite(save_path, img)
-        img = None
-        
-
-def save_best(model, model_dir2, valid_loss, best_loss, counter):
-    """Save the best model"""
-    curr_loss = valid_loss
-    if curr_loss < best_loss:
-        save_model_state(model, model_dir2 + f'/best/')
-        # dd = {"pars" : [ learning_rate, latent_dim, num_epochs ]}
-        # json.dump(dd, open(model_dir2 +"/best/info.json" , mode='w'))
-        print(f"Model Saved | Loss impoved from {best_loss} -----> {curr_loss}")
-        best_loss = curr_loss
-        counter   = 0
-    else:
-        counter += 1    
-    return best_loss, counter    
-
-
-
-def save_model_state(model, model_dir2):
-    """Save the model"""
-    os.makedirs(model_dir2 , exist_ok=True)
-    model.save_weights( model_dir2 + f'/model_keras_weights.h5')
-
-
-def train_stop(counter, patience):
-    """Stop the training if meet the condition"""
-    if counter == patience :
-        log(f"Model not improved from {patience} epochs...............")
-        log("Training Finished..................")
-        return True
-    return False
 
 """## 1-3) Define VQ-VAE model"""
 
@@ -2532,7 +2454,7 @@ def custom_loss(y_true, y_pred):
     return keras.losses.BinaryCrossentropy()(y_true, y_pred)
 
 
-def build_model(input_shape, num_classes):
+def build_model_2(input_shape, num_classes):
     """Vanilla CNN"""
 
     base_model = tf.keras.Sequential([
@@ -2558,40 +2480,7 @@ def build_model(input_shape, num_classes):
     return model
 
 """Train the model (Data augmentation)"""
-
-@tf.function
-def train_step(x, y, model, loss_fn, optimizer):
-    """
-    """
-    with tf.GradientTape() as tape:
-        outputs = model(x, training=True)
-
-        all_losses = []
-        for y_true_head, y_pred_head in zip(y, outputs):
-            head_loss = loss_fn(y_true_head, y_pred_head)
-            all_losses.append(head_loss)
-        
-        loss = tf.reduce_mean(all_losses)
-    
-    grad = tape.gradient(loss, model.trainable_variables)
-    optimizer.apply_gradients(zip(grad, model.trainable_variables))
-    return loss, all_losses, outputs
-
-
-@tf.function
-def test_step(x, y, model, loss_fn):
-    """
-    """
-    with tf.GradientTape() as tape:
-        outputs = model(x, training=False)
-        
-        all_losses = []
-        for y_true_head, y_pred_head in zip(y, outputs):
-            head_loss = loss_fn(y_true_head, y_pred_head)
-            all_losses.append(head_loss)
-        
-        loss = tf.reduce_mean(all_losses)
-    return loss, all_losses, outputs
+from train_graph_loss import train_step, test_step;
 
 
 input_shape = (image_size, image_size, 3)

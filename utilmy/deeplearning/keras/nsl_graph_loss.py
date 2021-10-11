@@ -16,7 +16,7 @@ import tensorflow as tf
 import neural_structured_learning as nsl
 from neural_structured_learning.keras import layers as nsl_layers
 import neural_structured_learning.configs as nsl_configs
-from util_train import *
+#from util_train import *
 
 
 def create_fake_neighbor(x, max_neighbors):
@@ -92,7 +92,7 @@ optimizer     = tf.keras.optimizers.Adam(1e-3)
 
 for epoch in range(10):
     for i, (images, labels) in enumerate(train_ds):
-        outputs, total_loss, labeled_loss, graph_loss = train_step_opt(images, labels, base_model, cross_entropy, optimizer)
+        outputs, total_loss, labeled_loss, graph_loss = train_step(images, labels, base_model, cross_entropy, optimizer)
         y_pred   = np.argmax(outputs.numpy(), 1)
         accuracy = (y_pred == labels.numpy()).mean()
     print('[Epoch {:03d} iter {:04d}] Loss: {:.4f} - Labeled loss: {:.4f} - Graph loss: {:.4f} - Accuracy: {:.4f}'.format(
@@ -153,10 +153,64 @@ cross_entropy = tf.keras.losses.SparseCategoricalCrossentropy()
 optimizer = tf.keras.optimizers.Adam(1e-3)
 # adv_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
 #                    metrics=['acc'])
+@tf.function
+def train_step(x, y, model, loss_fn, optimizer):   #changed file
+    with tf.GradientTape() as tape_w:
+
+        # A separate GradientTape is needed for watching the input.
+        with tf.GradientTape() as tape_x:
+            tape_x.watch(x)
+            # Regular forward pass.
+            sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+            base_output  = model(sample_features, training=True)
+            labeled_loss = loss_fn(y, base_output)
+
+        has_nbr_inputs = nbr_weights is not None and nbr_features
+        if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+            # Use logits for regularization.
+            sample_logits = base_output
+            nbr_logits    = model(nbr_features, training=True)
+            graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+        else:
+            graph_loss = tf.constant(0, dtype=tf.float32)
+
+        scaled_graph_loss = graph_reg_config.multiplier * graph_loss
+
+        # Combines both losses. This could also be a weighted combination.
+        total_loss = labeled_loss + scaled_graph_loss
+
+    # Regular backward pass.
+    gradients = tape_w.gradient(total_loss,  model.trainable_variables)
+    optimizer.apply_gradients(zip(gradients, model.trainable_variables))
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
+
+
+@tf.function
+def test_step(x, y, model, loss_fn):   #changed file
+    # Regular forward pass.
+    sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+    base_output  = model(sample_features, training=False)
+    labeled_loss = loss_fn(y, base_output)
+
+    has_nbr_inputs = nbr_weights is not None and nbr_features
+    if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+        # Use logits for regularization.
+        sample_logits = base_output
+        nbr_logits    = model(nbr_features, training=False)
+        graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+    else:
+        graph_loss = tf.constant(0, dtype=tf.float32)
+
+    scaled_graph_loss = graph_reg_config.multiplier * graph_loss
+
+    # Combines both losses. This could also be a weighted combination.
+    total_loss = labeled_loss + scaled_graph_loss
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
+
 
 for epoch in range(10):
     for i, (images, labels) in enumerate(train_ds):
-        outputs, total_loss, labeled_loss, adv_loss = train_step_2(images, labels, base_model, cross_entropy, optimizer)
+        outputs, total_loss, labeled_loss, adv_loss = train_step(images, labels, base_model, cross_entropy, optimizer)
         y_pred = np.argmax(outputs.numpy(), 1)
         accuracy = (y_pred == labels.numpy()).mean()
     print('[Epoch {:03d} iter {:04d}] Loss: {:.4f} - Accuracy: {:.4f}'.format(
