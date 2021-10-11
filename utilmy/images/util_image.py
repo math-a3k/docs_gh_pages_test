@@ -15,6 +15,7 @@ import io, cv2,  tifffile.tifffile
 from PIL import Image
 from skimage import morphology
 import diskcache as dc
+import matplotlib
 
 try :
    from albumentations.core.transforms_interface import ImageOnlyTransform
@@ -55,13 +56,13 @@ def prep_images(image_paths, nmax=10000000):
   images = []
   for i in range(len(image_paths)):
     if i > nmax : break
-    image =  prepro_image(image_paths[i] )
+    image =  prepro_image2b(image_paths[i] )
     images.append(image)
   return images
 
 
 
-def prep_images2(image_paths):
+def prep_images2(image_paths, nmax=10000000):
     images = []
     original_first_image = None
     for i in range(len(image_paths)):
