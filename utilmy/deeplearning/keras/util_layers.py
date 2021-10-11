@@ -15,17 +15,7 @@ from utilmy import pd_read_file
 
 ################################################################################################
 verbose = 0
-
-def log(*s):  print(*s, flush=True)
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
-
-def help():
-    from utilmy import help_create
-    ss  = HELP
-    ss += help_create("utilmy.deeplearning.util_dl")
-    print(ss)
+from util_image import log,log2,help;
 
 
 
@@ -223,6 +213,42 @@ def make_classifier(class_dict):
 
     return clf
 
+
+def make_classifier_2(class_dict):
+    """ Supervised multi class
+            self.gender         = nn.Linear(self.inter_features, self.num_classes['gender'])
+            self.masterCategory = nn.Linear(self.inter_features, self.num_classes['masterCategory'])
+            self.subCategory    = nn.Linear(self.inter_features, self.num_classes['subCategory'])
+            self.articleType    = nn.Linear(self.inter_features, self.num_classes['articleType'])
+
+    """
+    Input = tf.keras.layers.InputLayer
+    Dense = functools.partial(tf.keras.layers.Dense, activation='relu',
+                              kernel_regularizer=tf.keras.regularizers.L1L2(l1=0.01, l2=0.001),
+                              bias_regularizer=regularizers.l2(1e-4),
+                              activity_regularizer=regularizers.l2(1e-5))
+    Reshape = tf.keras.layers.Reshape
+    BatchNormalization = tf.keras.layers.BatchNormalization
+
+    # if xdim == 64 :   #### 64 x 64 img
+    base_model = tf.keras.Sequential([
+        Input(input_shape=(latent_dim,)),
+        Dense(units=512),
+        layers.Dropout(0.10),
+        Dense(units=512),
+        layers.Dropout(0.10),
+        Dense(units=512),
+    ])
+
+    x = base_model.output
+    ## x = layers.Flatten()(x) already flatten
+
+    #### Multi-heads
+    outputs = [Dense(num_classes, activation='softmax', name=f'{class_name}_out')(x) for class_name, num_classes in
+               class_dict.items()]
+    clf = tf.keras.Model(name='clf', inputs=base_model.input, outputs=outputs)
+
+    return clf
 
 """## 1-4) Build loss function"""
 #### input is 0-255, do not normalize input

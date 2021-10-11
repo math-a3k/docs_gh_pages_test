@@ -18,6 +18,7 @@ import tensorflow_probability as tfp
 import tensorflow as tf
 from keras.layers.merge import concatenate
 
+
 class Quantizer(layers.Layer):
     def __init__(self, number_of_embeddings, embedding_dimensions, beta=0.25, **kwargs):
         super().__init__(**kwargs)
@@ -118,7 +119,7 @@ def get_vqvae_layer_hierarchical(latent_dim=16, num_embeddings=64):
   return keras.Model(encoder_A_inputs, decoder_B_outputs, name="decoder")
 
 
-def plot_original_reconstructed(orig, rec):
+def plot_original_reconst_img(orig, rec):   #name changed
     plt.subplot(1, 2, 1)
     plt.imshow(orig.squeeze() + 0.5)
     plt.title("Real Image")
@@ -222,6 +223,7 @@ num_residual_blocks = 2
 num_pixelcnn_layers = 2
 pixelcnn_input_shape = encoded_outputs.shape[1:-1]
 print(f"Input shape of the PixelCNN: {pixelcnn_input_shape}")
+
 
 # PixelCNN layer..
 class PixelConvLayer(layers.Layer):

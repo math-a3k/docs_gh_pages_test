@@ -14,20 +14,7 @@ import diskcache as dc
 ################################################################################################
 verbose = 0
 
-def log(*s):
-    print(*s, flush=True)
-
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
-
-
-def help():
-    from utilmy import help_create
-    ss  = HELP
-    ss += help_create("utilmy.deeplearning.util_dl")
-    print(ss)
-
+from util_image import help,log,log2
 
 
 ################################################################################################
@@ -90,7 +77,7 @@ def tf_check():
 
 
     
-def gpu_usage(): 
+def print_gpu_usage():
     
    cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv"
 
@@ -102,7 +89,7 @@ def gpu_usage():
    ## cmd2= " nvidia-smi --query-gpu=timestamp,name,pci.bus_id,driver_version,pstate,pcie.link.gen.max,pcie.link.gen.current,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv  "
     
     
-def gpu_free():  
+def print_available_gpus():
     cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv  "
     from utilmy import os_system    
     ss = os_system(cmd)
@@ -207,6 +194,165 @@ def down_page(query, out_dir="query1", genre_en='', id0="", cat="", npage=1) :
         page += 1
 
     print("Success", page-1, count)
+
+
+def create_train_npz():
+    import cv2, gc
+    #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
+    #### data_dir = pathlib.Path(data_img)
+    nmax = 100000
+
+    log("### Sub-Category  #################################################################")
+    # tag   = "-women_topwear"
+    tag = "-alllabel_nobg"
+    tag = tag + f"-{xdim}_{ydim}-{nmax}"
+    log(tag)
+
+    df = pd.read_csv(data_label + "/preproed_df.csv")
+    # flist = set(list(df[ (df['subCategory'] == 'Watches') & (df.gender == 'Women')   ]['id'].values))
+    # flist = set(list(df[ (df['subCategory'] == 'Topwear') & (df.gender == 'Women')   ]['id'].values))
+    flist = set(list(df['id'].values))
+    log('Label size', len(flist))
+    log(tag)
+
+    log("#### Train  ######################################################################")
+    image_list = sorted(list(glob.glob(data_dir + '/train_nobg/*.*')))
+    image_list = image_list[:nmax]
+    log('Size Before', len(image_list))
+
+    ### Filter out
+    image_list = [t for t in image_list if int(t.split("/")[-1].split(".")[0]) in flist]
+    log('Size After', len(image_list))
+
+    images, labels = prep_images_multi(image_list, prepro_image=prepro_image)
+    log5(images)
+    train_images = np.array(images)
+    train_label = np.array(labels)
+    del images, labels;
+    gc.collect
+
+    log("#### Test  #######################################################################")
+    image_list = sorted(list(glob.glob(data_dir + '/test_nobg/*.*')))
+    image_list = image_list[:nmax]
+    # log( image_list )
+
+    image_list = [t for t in image_list if int(t.split("/")[-1].split(".")[0]) in flist]
+    log('Size After', len(image_list))
+    images, labels = prepro_images_multi(image_list, prepro_image=prepro_image)
+    log(str(images)[:100])
+    test_images = np.array(images)
+    test_label = np.array(labels)
+    del images, labels;
+    gc.collect
+
+    log("#### Save train, test ###########################################################")
+    np.savez_compressed(data_train + f"/train_test{tag}.npz",
+                        train=train_images,
+                        test=test_images,
+
+                        train_label=train_label,
+                        test_label=test_label,
+
+                        df_master=df  ###Labels
+                        )
+
+    log('size', len(test_images))
+    log(data_train + f"/train_test{tag}.npz")
+
+    util_image.image_check_npz(data_train + f"/train_test{tag}.npz",
+                               keys=None,
+                               path=data_train + "/zcheck/",
+                               tag=tag, n_sample=3
+                               )
+
+
+def create_train_parquet():
+    import cv2, gc
+    #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
+    #### data_dir = pathlib.Path(data_img)
+    nmax = 100000
+
+    log("### Sub-Category  #################################################################")
+    # tag   = "-women_topwear"
+    tag = "-alllabel3_nobg"
+    tag = tag + f"-{xdim}_{ydim}-{nmax}"
+    log(tag)
+
+    df = pd.read_csv(data_label + "/preproed_df.csv")
+    # flist = set(list(df[ (df['subCategory'] == 'Watches') & (df.gender == 'Women')   ]['id'].values))
+    # flist = set(list(df[ (df['subCategory'] == 'Topwear') & (df.gender == 'Women')   ]['id'].values))
+    flist = set(list(df['id'].values))
+    log('Label size', len(flist))
+    log(tag)
+
+    log("#### Train  ######################################################################")
+    image_list = sorted(list(glob.glob(data_dir + '/train_nobg/*.*')))
+    image_list = image_list[:nmax]
+    log('Size Before', len(image_list))
+
+    ### Filter out
+    image_list = [t for t in image_list if int(t.split("/")[-1].split(".")[0]) in flist]
+    log('Size After', len(image_list))
+
+    images, labels = prepro_images_multi(image_list)
+
+    df2 = pd.DataFrame(labels, columns=['uri'])
+    df2['id'] = df2['uri'].apply(lambda x: int(x.split("/")[-1].split(".")[0]))
+    df2 = df2.merge(df, on='id', how='left')
+    df2['img'] = images
+    df2.to_parquet(data_train + f"/train_{tag}.parquet")
+    log(df2)
+
+    log("#### Test  #######################################################################")
+    image_list = sorted(list(glob.glob(data_dir + '/test_nobg/*.*')))
+    image_list = image_list[:nmax]
+    # log( image_list )
+
+    image_list = [t for t in image_list if int(t.split("/")[-1].split(".")[0]) in flist]
+
+    log('Size After', len(image_list))
+    images, labels = prepro_images_multi(image_list)
+    log(str(images)[:100])
+
+    df2 = pd.DataFrame(labels, columns=['uri'])
+    df2['id'] = df2['uri'].apply(lambda x: int(x.split("/")[-1].split(".")[0]))
+    df2['img'] = images
+    df2 = df2.merge(df, on='id', how='left')
+    df2.to_parquet(data_train + f"/test_{tag}.parquet")
+
+    log("#### Save train, test ###########################################################")
+    # img = df2['img'].values
+
+
+def model_deletes(dry=0):
+    """  ## Delete files on disk
+        python prepro.py model_deletes  --dry 0
+
+    """
+
+    path0 = "/data/workspaces/noelkevin01/img/models/fashion/dcf_vae/*"
+    fpath0 = glob.glob(path0)
+    # print(fpath0)
+
+    for path in fpath0:
+        print("\n", path)
+        try:
+            fpaths = glob.glob(path + "/best/*")
+            fpaths = [t for t in fpaths if 'epoch_' in t]
+            fpaths = sorted(fpaths, key=lambda x: int(x.split("/")[-1].split('_')[-1].split('.')[0]), reverse=True)
+            # print(fpaths)
+            fpaths = fpaths[4:]  ### Remove most recents
+            fpaths = [t for t in fpaths if int(t.split("/")[-1].split('_')[-1]) % 10 != 0]  ### _10, _20, _30
+
+            for fp in fpaths:
+                cmd = f"rm -rf '{fp}' "
+                print(cmd)
+                if dry > 0:
+                    os.system(cmd)
+            # sys.exit(0)
+        except Exception as e:
+            print(e)
+
 
 
 

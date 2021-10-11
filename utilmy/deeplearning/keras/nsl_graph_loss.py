@@ -16,6 +16,7 @@ import tensorflow as tf
 import neural_structured_learning as nsl
 from neural_structured_learning.keras import layers as nsl_layers
 import neural_structured_learning.configs as nsl_configs
+#from util_train import *
 
 
 def create_fake_neighbor(x, max_neighbors):
@@ -49,7 +50,7 @@ max_neighbors = 2
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-# Crate fake neighbors
+# Create fake neighbors
 neighbors_train, neighbor_train_weights = create_fake_neighbor(x_train, max_neighbors)
 neighbors_test, neighbor_test_weights   = create_fake_neighbor(x_test, max_neighbors)
 
@@ -87,60 +88,6 @@ regularizer        = nsl_layers.PairwiseDistance(graph_reg_config.distance_confi
 cross_entropy = tf.keras.losses.SparseCategoricalCrossentropy()
 optimizer     = tf.keras.optimizers.Adam(1e-3)
 
-
-@tf.function
-def train_step(x, y, model, loss_fn, optimizer):
-    with tf.GradientTape() as tape_w:
-
-        # A separate GradientTape is needed for watching the input.
-        with tf.GradientTape() as tape_x:
-            tape_x.watch(x)
-            # Regular forward pass.
-            sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
-            base_output  = model(sample_features, training=True)
-            labeled_loss = loss_fn(y, base_output)
-
-        has_nbr_inputs = nbr_weights is not None and nbr_features
-        if (has_nbr_inputs and graph_reg_config.multiplier > 0):
-            # Use logits for regularization.
-            sample_logits = base_output
-            nbr_logits    = model(nbr_features, training=True)
-            graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
-        else:
-            graph_loss = tf.constant(0, dtype=tf.float32)
-
-        scaled_graph_loss = graph_reg_config.multiplier * graph_loss
-
-        # Combines both losses. This could also be a weighted combination.
-        total_loss = labeled_loss + scaled_graph_loss
-
-    # Regular backward pass.
-    gradients = tape_w.gradient(total_loss,  model.trainable_variables)
-    optimizer.apply_gradients(zip(gradients, model.trainable_variables))
-    return base_output, total_loss, labeled_loss, scaled_graph_loss
-
-
-@tf.function
-def test_step(x, y, model, loss_fn):
-    # Regular forward pass.
-    sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
-    base_output  = model(sample_features, training=False)
-    labeled_loss = loss_fn(y, base_output)
-
-    has_nbr_inputs = nbr_weights is not None and nbr_features
-    if (has_nbr_inputs and graph_reg_config.multiplier > 0):
-        # Use logits for regularization.
-        sample_logits = base_output
-        nbr_logits    = model(nbr_features, training=False)
-        graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
-    else:
-        graph_loss = tf.constant(0, dtype=tf.float32)
-
-    scaled_graph_loss = graph_reg_config.multiplier * graph_loss
-
-    # Combines both losses. This could also be a weighted combination.
-    total_loss = labeled_loss + scaled_graph_loss
-    return base_output, total_loss, labeled_loss, scaled_graph_loss
 
 
 for epoch in range(10):
@@ -206,53 +153,59 @@ cross_entropy = tf.keras.losses.SparseCategoricalCrossentropy()
 optimizer = tf.keras.optimizers.Adam(1e-3)
 # adv_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
 #                    metrics=['acc'])
-
-
 @tf.function
-def train_step(x, y, model, loss_fn, optimizer):
+def train_step(x, y, model, loss_fn, optimizer):   #changed file
     with tf.GradientTape() as tape_w:
 
         # A separate GradientTape is needed for watching the input.
         with tf.GradientTape() as tape_x:
             tape_x.watch(x)
-
             # Regular forward pass.
-            outputs = model(x)
-            labeled_loss = loss_fn(y, outputs)
+            sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+            base_output  = model(sample_features, training=True)
+            labeled_loss = loss_fn(y, base_output)
 
-        # Calculates the adversarial loss. This will reuse labeled_loss and will
-        # consume tape_x.
-        adv_loss = nsl.keras.adversarial_loss(
-            x, y, model, loss_fn, labeled_loss=labeled_loss, gradient_tape=tape_x)
+        has_nbr_inputs = nbr_weights is not None and nbr_features
+        if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+            # Use logits for regularization.
+            sample_logits = base_output
+            nbr_logits    = model(nbr_features, training=True)
+            graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+        else:
+            graph_loss = tf.constant(0, dtype=tf.float32)
+
+        scaled_graph_loss = graph_reg_config.multiplier * graph_loss
 
         # Combines both losses. This could also be a weighted combination.
-        total_loss = labeled_loss + adv_loss
+        total_loss = labeled_loss + scaled_graph_loss
 
     # Regular backward pass.
-    gradients = tape_w.gradient(total_loss, model.trainable_variables)
+    gradients = tape_w.gradient(total_loss,  model.trainable_variables)
     optimizer.apply_gradients(zip(gradients, model.trainable_variables))
-    return outputs, total_loss, labeled_loss, adv_loss
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
 
 
 @tf.function
-def test_step(x, y, model, loss_fn):
-    # A separate GradientTape is needed for watching the input.
-    with tf.GradientTape() as tape_x:
-        tape_x.watch(x)
+def test_step(x, y, model, loss_fn):   #changed file
+    # Regular forward pass.
+    sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+    base_output  = model(sample_features, training=False)
+    labeled_loss = loss_fn(y, base_output)
 
-        # Regular forward pass.
-        outputs = model(x, training=False)
-        labeled_loss = loss_fn(y, outputs)
+    has_nbr_inputs = nbr_weights is not None and nbr_features
+    if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+        # Use logits for regularization.
+        sample_logits = base_output
+        nbr_logits    = model(nbr_features, training=False)
+        graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+    else:
+        graph_loss = tf.constant(0, dtype=tf.float32)
 
-    # Calculates the adversarial loss. This will reuse labeled_loss and will
-    # consume tape_x.
-    adv_loss = nsl.keras.adversarial_loss(
-        x, y, model, loss_fn, labeled_loss=labeled_loss, gradient_tape=tape_x)
+    scaled_graph_loss = graph_reg_config.multiplier * graph_loss
 
     # Combines both losses. This could also be a weighted combination.
-    total_loss = labeled_loss + adv_loss
-
-    return outputs, total_loss, labeled_loss, adv_loss
+    total_loss = labeled_loss + scaled_graph_loss
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
 
 
 for epoch in range(10):
