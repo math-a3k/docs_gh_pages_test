@@ -246,6 +246,101 @@ def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", t
 
 
 
+
+def image_create_cache():
+
+    #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache  
+    #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
+    ####   sleep 56000  && python prepro.py  image_create_cache       
+    import cv2, diskcache
+    nmax =  1000000 #  0000
+    global xdim, ydim
+    xdim= 256
+    ydim= 256
+
+    log("### Sub-Category  ################################################################")
+    # in_dir   = data_dir + '/fashion_data/images/'
+    # in_dir   = data_dir + "/train_nobg_256/"
+    in_dir   = cc.root + "/../gsp/v1000k_clean_nobg/"
+    
+    image_list = sorted(list(glob.glob(  f'/{in_dir}/*/*.*')))
+    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ]
+    log('N images', len(image_list))
+    # tag   = "-women_topwear"
+    tag      = "train_r2p2_1000k_clean_nobg"
+    tag      = f"{tag}_{xdim}_{ydim}-{nmax}"
+    # db_path  = data_train + f"/img_{tag}.cache"
+    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache"
+    
+    log(in_dir)
+    log(db_path)
+                
+    def prepro_image2b(image_path):
+        try :
+            # fname      = str(image_path).split("/")[-1]    
+            # id1        = fname.split(".")[0]
+            # print(image_path)
+
+            image = cv2.imread(image_path)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  
+            # image = util_image.image_resize_pad(image, (xdim,ydim), padColor=255)
+            image = image_center_crop(image, (245, 245))
+
+            # image = image.astype('float32')
+            return image, image_path 
+            #return [1], "1"
+        
+        except :
+            try :
+               # image = image.astype('float32')
+               # cache[ fname ] =  image        ### not uulti thread write
+               return image, image_path
+               # return [1], "1"
+            except :
+               return [],""
+    
+    log("#### Converting  ############################################################")
+    image_list = image_list[:nmax]
+    log('Size Before', len(image_list))
+
+    import diskcache as dc
+    #  from diskcache import FanoutCache  ### too much space
+    # che = FanoutCache( db_path, shards=4, size_limit=int(60e9), timeout=9999999 )
+    cache = dc.Cache(db_path, size_limit=int(100e9), timeout=9999999 )
+
+    log("#### Load  #################################################################")       
+    images, labels = prepro_images_multi(image_list, prepro_image= prepro_image2b, npool=32 )
+    
+    
+    import asyncio
+    async def set_async(key, val):
+        loop = asyncio.get_running_loop()
+        future = loop.run_in_executor(None, cache.set, key, val)
+        result = await future
+        return result
+
+    # asyncio.run(set_async('test-key', 'test-value'))
+
+    
+    log(str(images)[:500],  str(labels)[:500],  )
+    log("#### Saving disk  #################################################################")           
+    for path, img in zip(labels, images) : 
+       key = os.path.abspath(path)
+       key = key.split("/")[-1] 
+       cache[ key ] =  img
+       # asyncio.run(set_async( key , img ))   ##only python 3.7
+    
+    
+    print('size cache', len(cache),)
+    print( db_path )
+    
+    for i,key in enumerate(cache):
+       if i > 3 : break 
+       x0 = cache[key] 
+       cv2.imwrite( cc.data_train + f"/check_{i}.png", x0 )
+       print(key, x0.shape, str(x0)[:50]  )
+       
+       
 def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3,
                     renorm=True):    
     import cv2
