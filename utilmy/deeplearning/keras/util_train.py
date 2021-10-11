@@ -27,20 +27,20 @@ def np_remove_duplicates(seq):
     return [x for x in seq if not (x in seen or seen_add(x))]
 
 
-def clean1(ll):
+def clean_duplicates(ll):   #name changed
     v = [ t for t in ll if len(t) > 1 ]
     return  np_remove_duplicates(v)
 
 
 
 ### log  #############################################################################
-def log3(*s):
+def print_debug_info(*s):   #name changed
     if cc.verbosity >= 3:   
         print(*s, flush=True)
         with open(cc.model_dir2 + "/debug.py", mode='a') as fp:
             fp.write(str(s) + "\n")
 
-def log2(*s): 
+def print_log_info(*s):   #name changed
     print(*s, flush=True)
     with open(cc.model_dir2 + "/log.py", mode='a') as fp:
         fp.write(str(s) + "\n")
@@ -130,27 +130,7 @@ def metric_accuracy(y_val, y_pred_head, class_dict):
     return val_accuracies
 
 
-def valid_image_original(img_list, path, tag, y_labels, n_sample=None):
-    """Assess image validity"""
-    os.makedirs(path, exist_ok=True)
-    if n_sample is not None and isinstance(n_sample, int):
-        img_list = img_list[:n_sample]
-        y_labels = [y[:n_sample].tolist() for y in y_labels]
-
-    for i in range(len(img_list)) :
-        img = img_list[i]
-        if not isinstance(img, np.ndarray) :
-            img = img.numpy()
-
-        img       = img[:, :, ::-1]
-        img       = np.clip(img * 255, 0, 255).astype('uint8')
-        label_tag = 'label_{' + '-'.join([str(y[i]) for y in y_labels]) + '}'
-        save_path = f"{path}/img_{cc.tag}_nimg_{i}_{tag}_{label_tag}.png"
-        cv2.imwrite(save_path, img)
-        img = None
-
-
-def valid_image_check(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):
+def check_valid_image(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):
     """Assess image validity"""
     os.makedirs(path, exist_ok=True)
     if n_sample is not None and isinstance(n_sample, int):
@@ -172,7 +152,7 @@ def valid_image_check(img_list, path="", tag="", y_labels="", n_sample=3, renorm
         img = None
 
                     
-def save_best(model, model_dir2, curr_loss, best_loss, counter, epoch, dd):
+def save_best_model(model, model_dir2, curr_loss, best_loss, counter, epoch, dd):   #name changed
     """Save the best model"""
     # curr_loss = valid_loss
     if curr_loss < best_loss or (epoch % 5 == 0 and epoch > 0) :
@@ -262,7 +242,7 @@ class LearningRateDecay:
 
 #################################################################################################
 #### Code for generating custom data from the Kaggle dataset   ##################################
-def label_get_data():
+def get_custom_label_data():
     
     #### Labels  ##############################
     #df          = pd.read_csv(cc.path_label_raw)  #, error_bad_lines=False, warn_bad_lines=False)
@@ -333,6 +313,64 @@ def pd_category_filter(df, category_map):
 
 ###############################################################################################################
 ###############################################################################################################
+
+@tf.function
+def train_step_opt(x, y, model, loss_fn, optimizer):   #changed file
+    with tf.GradientTape() as tape_w:
+
+        # A separate GradientTape is needed for watching the input.
+        with tf.GradientTape() as tape_x:
+            tape_x.watch(x)
+            # Regular forward pass.
+            sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+            base_output  = model(sample_features, training=True)
+            labeled_loss = loss_fn(y, base_output)
+
+        has_nbr_inputs = nbr_weights is not None and nbr_features
+        if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+            # Use logits for regularization.
+            sample_logits = base_output
+            nbr_logits    = model(nbr_features, training=True)
+            graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+        else:
+            graph_loss = tf.constant(0, dtype=tf.float32)
+
+        scaled_graph_loss = graph_reg_config.multiplier * graph_loss
+
+        # Combines both losses. This could also be a weighted combination.
+        total_loss = labeled_loss + scaled_graph_loss
+
+    # Regular backward pass.
+    gradients = tape_w.gradient(total_loss,  model.trainable_variables)
+    optimizer.apply_gradients(zip(gradients, model.trainable_variables))
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
+
+
+@tf.function
+def test_step(x, y, model, loss_fn):   #changed file
+    # Regular forward pass.
+    sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+    base_output  = model(sample_features, training=False)
+    labeled_loss = loss_fn(y, base_output)
+
+    has_nbr_inputs = nbr_weights is not None and nbr_features
+    if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+        # Use logits for regularization.
+        sample_logits = base_output
+        nbr_logits    = model(nbr_features, training=False)
+        graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+    else:
+        graph_loss = tf.constant(0, dtype=tf.float32)
+
+    scaled_graph_loss = graph_reg_config.multiplier * graph_loss
+
+    # Combines both losses. This could also be a weighted combination.
+    total_loss = labeled_loss + scaled_graph_loss
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
+
+
+
+
 """## Train"""
 @tf.function
 def train_step(x, model, y_label_list=None):
