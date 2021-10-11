@@ -10,7 +10,7 @@ from skimage import morphology
 
 
 ###################################################################################################
-def log(*s):
+def print_log(*s):
     print(*s, flush=True)
 
     
@@ -18,7 +18,7 @@ def log(*s):
 
 
 #################################################################################    
-def data_get_sample(batch_size, x_train, labels_val):
+def get_data_sample(batch_size, x_train, labels_val):   #name changed
         #### 
         # i_select = 10
         # i_select = np.random.choice(np.arange(train_size), size=batch_size, replace=False)
@@ -38,7 +38,7 @@ def data_get_sample(batch_size, x_train, labels_val):
         return x, y_label_list 
 
 
-def data_to_y_onehot_list(df, dfref, labels_col) :      
+def to_OneHot(df, dfref, labels_col) :       #name changed
     df       = df.merge(dfref, on = 'id', how='left')
 
     
@@ -57,7 +57,7 @@ def data_to_y_onehot_list(df, dfref, labels_col) :
     
 
 
-def data_add_onehot(dfref, img_dir, labels_col) :
+def add_onehot(dfref, img_dir, labels_col) :   #name changed
     """
        id, uri, cat1, cat2, .... , cat1_onehot
     """
@@ -226,32 +226,6 @@ test_transforms = Compose([
     ToFloat(max_value=255)
 ])
 
-
-
-
-
-
-
-
-# train_data = CustomDataGenerator(x_train, y_train, augmentations=train_augments)
-# val_data   = CustomDataGenerator(x_train, y_train, augmentations=test_augments)
-
-
-# # Data Augmentation with built-in Keras functions
-# train_gen = keras.preprocessing.image.ImageDataGenerator(
-#     rotation_range=20,
-#     width_shift_range=20,
-#     height_shift_range=20,
-#     brightness_range=[0.2, 1.0],
-#     shear_range=20,
-#     horizontal_flip=True,
-#     rescale=1./255
-# )
-
-# test_gen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
-
-# train_data = train_gen.flow(x_train, y_train)
-# val_data   = test_gen.flow(x_val, y_val)
 
 
 
