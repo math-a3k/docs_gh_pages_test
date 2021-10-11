@@ -16,8 +16,7 @@ import scipy.stats ; from scipy.stats import norm
 
 from tqdm import tqdm
 from utilmy import pd_read_file
-
-
+from util_train import clean_duplicates as clean1
 
 
 cc = Box({})
@@ -174,15 +173,6 @@ def params_set2():
 
 
 ##### Labels
-def np_remove_duplicates(seq):
-    seen = set()
-    seen_add = seen.add
-    return [x for x in seq if not (x in seen or seen_add(x))]
-
-
-def clean1(ll):
-    v = [ t for t in ll if len(t) > 1 ]
-    return  np_remove_duplicates(v)
 
 
 cc.labels_map = {
@@ -256,19 +246,9 @@ os.makedirs(model_dir2, exist_ok=True)
 
 time.sleep(3) 
 ### log  #######################################################
-def log3(*s):
-    if cc.verbosity >= 3:   
-        print(*s, flush=True)
-        with open(cc.model_dir2 + "/debug.py", mode='a') as fp:
-            fp.write(str(s) + "\n")
 
-def log2(*s): 
-    print(*s, flush=True)
-    with open(cc.model_dir2 + "/log.py", mode='a') as fp:
-        fp.write(str(s) + "\n")
-
-        
-        
+from util_train import print_log_info, print_debug_info
+from util_train import *
 
 ########################################################################################################
 
@@ -311,136 +291,10 @@ if cc.compute_mode == "gpu" :
 
 ########################################################################################################
 ## 1) Define some helper functions ###############################################
-def log(*s):
-    """Log decorator"""
-    print(*s, flush=True)
 
-    
-def config_save(cc,path):   
-   import json 
-   #path1 = path +"/info.json"  #### model_dir2 +"/info.json" 
-   json.dump(  str(cc), open( path , mode='a'))
-   print(path)
-
-    
-def os_path_copy(in_dir, path, ext="*.py"):
-  """ Copy folder recursively 
-  """
-  import os, shutil, glob
-  file_list = glob.glob(in_dir + '/' + ext)
-  print(file_list)
-  os.makedirs(path, exist_ok=True)
-  for f in file_list:
-    if os.path.isdir(f):
-      shutil.copytree(f, os.path.join(path, os.path.basename(f)))
-    else:
-      shutil.copy2(f, os.path.join(path, os.path.basename(f)))  
 
 os_path_copy(in_dir= cc.code_source  , path= cc.model_dir2 + "/code/")
 
-
-def metric_accuracy(y_val, y_pred_head, class_dict):
-    # Val accuracy
-    val_accuracies = {class_name: 0. for class_name in class_dict}
-    for i, class_name in enumerate(class_dict):
-        y_pred = np.argmax(y_pred_head[i], 1)
-        y_true = np.argmax(y_val[i], 1)
-        val_accuracies[class_name] = (y_pred == y_true).mean()
-    print( f'\n {val_accuracies}')
-    return val_accuracies
-
-
-def valid_image_original(img_list, path, tag, y_labels, n_sample=None):
-    """Assess image validity"""
-    os.makedirs(path, exist_ok=True)
-    if n_sample is not None and isinstance(n_sample, int):
-        img_list = img_list[:n_sample]
-        y_labels = [y[:n_sample].tolist() for y in y_labels]
-
-    for i in range(len(img_list)) :
-        img = img_list[i]
-        if not isinstance(img, np.ndarray) :
-            img = img.numpy()
-
-        img       = img[:, :, ::-1]
-        img       = np.clip(img * 255, 0, 255).astype('uint8')
-        label_tag = 'label_{' + '-'.join([str(y[i]) for y in y_labels]) + '}'
-        save_path = f"{path}/img_{cc.tag}_nimg_{i}_{tag}_{label_tag}.png"
-        cv2.imwrite(save_path, img)
-        img = None
-
-
-def valid_image_check(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):
-    """Assess image validity"""
-    os.makedirs(path, exist_ok=True)
-    if n_sample is not None and isinstance(n_sample, int):
-        img_list = img_list[:n_sample]
-        y_labels = [y[:n_sample].tolist() for y in y_labels]
-
-    for i in range(len(img_list)) :
-        img = img_list[i]
-        if not isinstance(img, np.ndarray) :
-            img = img.numpy()
-
-        if renorm:
-            img = (img * 0.5 + 0.5) * 255
-
-        label_tag = 'label_{' + '-'.join([str(y[i]) for y in y_labels]) + '}'
-        save_path = f"{path}/img_{cc.tag}_nimg_{i}_{tag}_r_{label_tag}.png"
-        img       = img[:, :, ::-1]
-        cv2.imwrite(save_path, img)
-        img = None
-
-                    
-def save_best(model, model_dir2, curr_loss, best_loss, counter, epoch, dd):
-    """Save the best model"""
-    # curr_loss = valid_loss
-    if curr_loss < best_loss or (epoch % 5 == 0 and epoch > 0) :
-        save_model_state(model, model_dir2 + f'/best/epoch_{epoch}')
-        config_save(cc,model_dir2 + f"/best/epoch_{epoch}/info.json"  )
-        config_save(dd,model_dir2 + f"/best/epoch_{epoch}/metrics.json"  )
-        #json.dump(dd, open(, mode='w'))
-        print(f"Model Saved | Loss improved {best_loss} --> {curr_loss}")
-        best_loss = curr_loss
-        counter   = 0
-    else:
-        counter += 1
-              
-    # odel_delete(path= model_dir2 + "/best/" )          
-              
-    return best_loss, counter
-
-
-def save_model_state(model, model_dir2):
-    """Save the model"""
-    os.makedirs(model_dir2 , exist_ok=True)
-    model.save_weights( model_dir2 + f'/model_keras_weights.h5')
-
-
-def train_stop(counter, patience):
-    """Stop the training if meet the condition"""
-    if counter == patience :
-        log(f"Model not improved from {patience} epochs...............")
-        log("Training Finished..................")
-        return True
-    return False
-
-
-def model_reload(model_reload_name, cc,):    
-    model2      = DFC_VAE(latent_dim= cc.latent_dim, class_dict= cc.labels_count )
-    input_shape = (batch_size, xdim, ydim, cdim)   ### x_train = x_train.reshape(-1, 28, 28, 1)
-    model2.build(input_shape)
-    model2.load_weights( model_reload_name + f'/model_keras_weights.h5')
-    return model2
-
-
-os.makedirs(model_dir2 + f"/debug/", exist_ok=True)
-def image_check(name, img, renorm=False):
-    img  = img[:, :, ::-1]    
-    if renorm :
-        img = (img *0.5 +0.5) * 255.0        
-    cv2.imwrite( model_dir2 + f"/debug/{name}"  , img) 
-        
 
 def pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot=True):
    """ dfi_onehot = pd_get_dummies( df, cols_cat = ['articleType'  ], cat_dict= cc.labels_map, only_onehot= False)
@@ -472,11 +326,6 @@ def pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot=True):
 
    return dfall 
 
-class LearningRateDecay:
-    def plot(self, epochs, title="Learning Rate Schedule", path=None):
-        # compute the set of learning rates for each corresponding
-        # epoch
-        pass
 
 
     
@@ -539,23 +388,7 @@ df = label_get_data()
 ### Fitlered   ##################################################
 df = df[  ['id'] + cc.labels_cols ]
 
-#### Filter label values  #######################################
-def pd_category_filter(df, category_map):
-    def cat_filter(s, values):
-        if s.lower() in values:
-             return s.lower()
-        return 'aaother'
-
-    colcat = list(category_map.keys())
-    cols   = ['id'] + list(category_map.keys())
-    df     = df[cols]
-    for col, values in category_map.items():
-       df[col] = df[col].apply(cat_filter, args=(values,))
-       # print(df[col].unique())
-        
-    # class_dict = {ci : df[ci].nunique() for ci in category_map }
-    # colcat     = 
-    return df
+#duplicate ftn removed
 
 df = pd_category_filter(df, cc.labels_map)
 log(df)
