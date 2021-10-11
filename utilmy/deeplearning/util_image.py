@@ -390,6 +390,55 @@ def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3,
          except :
            pass     
     
+
+
+def image_resize(out_dir=""):
+    """     python prepro.py  image_resize
+          image white color padded
+    
+    """
+    import cv2
+    
+    in_dir   = cc.root + "/train_nobg" # replace data_dir with root path
+    out_dir  = cc.root + "/train_nobg_256/"
+    
+    nmax     =  500000000
+    global xdim, ydim
+    xdim= 256
+    ydim= 256  
+    padcolor = 0   ## 0 : black
+    
+    os.makedirs(out_dir, exist_ok= True)
+    log('target folder', out_dir); time.sleep(5)
+
+    def prepro_image3b(img_path):
+        try :
+            fname        = str(img_path).split("/")[-1]    
+            # id1          = fname.split(".")[0]
+            img_path_new = out_dir + "/" + fname
+
+            img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)  
+            img = image_resize_pad(img, (xdim,ydim), padColor=  padcolor)   ### 255 white, 0 for black
+            img = img[:, :, ::-1]
+            cv2.imwrite(img_path_new, img)        
+            # print(img_path_new)            
+            return [1], "1"
+        except Exception as e:
+            # print(image_path, e)
+            return [],""
+    
+    log("#### Process  ######################################################################")
+    image_list = sorted(list(glob.glob(  f'/{in_dir}/*.*')))
+    image_list = image_list[:nmax]
+    log('Size Before', len(image_list))
+    
+
+    log("#### Saving disk  #################################################################")        
+    images, labels = prepro_images_multi(image_list, prepro_image= prepro_image3b )
+    os_path_check(out_dir, n=5)
+
+
+    
     
     
 def image_padding_generate(
