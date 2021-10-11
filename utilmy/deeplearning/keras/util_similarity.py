@@ -57,4 +57,3 @@ def __get_tensor_reshaped_norm(tensor, reshape_shape):
     norm = tf.norm(tensor, axis=1)
     norm = tf.reshape(norm, reshape_shape)
     return norm
-
