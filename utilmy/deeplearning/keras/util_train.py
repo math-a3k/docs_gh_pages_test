@@ -119,7 +119,7 @@ def os_path_copy(in_dir, path, ext="*.py"):
 
 os_path_copy(in_dir= cc.code_source  , path= cc.model_dir2 + "/code/")
 
-from train_graph_loss import metric_accuracy;
+from utilmy.deeplearning.keras.train_graph_loss import metric_accuracy;
 
 
 def check_valid_image(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):
@@ -193,7 +193,7 @@ def image_check(name, img, renorm=False):
     cv2.imwrite( model_dir2 + f"/debug/{name}"  , img) 
 
 
-from util_loss import LearningRateDecay;
+from utilmy.deeplearning.keras.util_loss import LearningRateDecay;
 
 
 

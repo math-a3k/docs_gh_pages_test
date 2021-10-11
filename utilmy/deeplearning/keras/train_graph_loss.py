@@ -499,7 +499,7 @@ percep_model = tf.keras.applications.EfficientNetB0(
 )
 
 
-from train_vqvae_loss import *;
+from utilmy.deeplearning.keras.train_vqvae_loss import *;
 
 
 """# 3) Kaggle Fashion dataset
@@ -668,7 +668,7 @@ print('Total: ', df_train.subCategory.nunique())
 # sns.countplot(data=df_train, x='subCategory', order=df_train.subCategory.value_counts().iloc[:20].index)
 
 """## Data loader"""
-from util_dataloader import  RealCustomDataGenerator9;
+from utilmy.deeplearning.keras.util_dataloader import  RealCustomDataGenerator9;
 
 
 df = pd.read_csv(cc.path_label_train)

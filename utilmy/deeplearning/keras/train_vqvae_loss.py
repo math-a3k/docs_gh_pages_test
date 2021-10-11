@@ -193,8 +193,8 @@ def print_log(*s):   #name changed
     """Log decorator"""
     print(*s, flush=True)
 
-from util_graph_loss import *;
-from util_loss import metric_accuracy,clf_loss_macro_soft_f1;
+from utilmy.deeplearning.keras.util_graph_loss import *;
+from utilmy.deeplearning.keras.util_loss import metric_accuracy,clf_loss_macro_soft_f1;
 
 
 """## 1-3) Define VQ-VAE model"""
@@ -552,7 +552,7 @@ def make_decoder():
         ])
     return decoder
 
-from util_layers import make_classifier_2 as make_classifier
+from utilmy.deeplearning.keras.util_layers import make_classifier_2 as make_classifier
 
 """## 1-4) Build loss function"""
 
@@ -835,13 +835,13 @@ print('Total: ', df_train.subCategory.nunique())
 
 #plt.figure(figsize=(20, 10))
 # sns.countplot(data=df_train, x='subCategory', order=df_train.subCategory.value_counts().iloc[:20].index)
-from util_dataloader import RealCustomDataGenerator;
+from utilmy.deeplearning.keras.util_dataloader import RealCustomDataGenerator;
 
 df = pd.read_csv(cc.path_label_train )
 df = pd.concat((df,  pd.read_csv(cc.path_label_test )))
 df = pd.concat((df,  pd.read_csv(cc.path_label_val )))
 df = df.fillna('')
-print( df.dtypes )
+print(df.dtypes)
 
 for ci in df.columns :
     if 'id' not in ci:
@@ -1538,27 +1538,6 @@ val_data = CustomDataGenerator0(x_val, y_val, augmentations=test_transforms)
 log("Train Model")
 log('Number of training batches:', len(train_data))
 log('Number of test batches:', len(val_data))
-
-@tf.function
-def train_step(x, model, y_label_list=None):
-    with tf.GradientTape() as tape:
-        z_mean, z_logsigma, x_recon, out_classes = model(x, training=True)      #Forward pass through the VAE
-        loss = perceptual_loss_function(x, x_recon, z_mean, z_logsigma,
-            y_label_heads=y_label_list, 
-            y_pred_heads=out_classes, 
-            clf_loss_fn=clf_loss_crossentropy
-        )  
-
-    grads = tape.gradient(loss, model.trainable_variables)   #Calculate gradients
-    optimizer.apply_gradients(zip(grads, model.trainable_variables))
-    return loss
-
-
-@tf.function
-def validation_step(x, model):
-    z_mean, z_logsigma, x_recon, out_classes = model(x, training=False)  #Forward pass through the VAE
-    loss = perceptual_loss_function(x, x_recon, z_mean, z_logsigma)
-    return loss, x_recon, out_classes
 
 
 ##### Output
@@ -2480,7 +2459,7 @@ def build_model_2(input_shape, num_classes):
     return model
 
 """Train the model (Data augmentation)"""
-from train_graph_loss import train_step, test_step;
+from utilmy.deeplearning.keras.train_graph_loss import train_step, test_step;
 
 
 input_shape = (image_size, image_size, 3)
