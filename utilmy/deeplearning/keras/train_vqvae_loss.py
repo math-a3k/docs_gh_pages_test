@@ -194,41 +194,7 @@ def print_log(*s):   #name changed
     print(*s, flush=True)
 
 
-    
-def metric_accuracy(y_test, y_pred, dd):
-   test_accuracy = {} 
-   for k,(ytruei, ypredi) in enumerate(zip(y_test, y_pred)) : 
-       ytruei = np.argmax(ytruei,         axis=-1)
-       ypredi = np.argmax(ypredi.numpy(), axis=-1)
-       # log(ytruei, ypredi ) 
-       test_accuracy[ dd.labels_col[k] ] = accuracy_score(ytruei, ypredi )
-        
-   log('accuracy', test_accuracy)     
-   return test_accuracy 
-    
-
-
-def cal_macro_F1_score(y, y_hat):   #name changed
-    """Compute the macro soft F1-score as a cost.
-    Average (1 - soft-F1) across all labels.
-    Use probability values instead of binary predictions.
-    Args:
-        y (int32 Tensor): targets array of shape (BATCH_SIZE, N_LABELS)
-        y_hat (float32 Tensor): probability matrix of shape (BATCH_SIZE, N_LABELS)
-    Returns:
-        cost (scalar Tensor): value of the cost function for the batch
-    """
-    y     = tf.cast(y, tf.float32)
-    y_hat = tf.cast(y_hat, tf.float32)
-    tp    = tf.reduce_sum(y_hat * y, axis=0)
-    fp    = tf.reduce_sum(y_hat * (1 - y), axis=0)
-    fn    = tf.reduce_sum((1 - y_hat) * y, axis=0)
-    soft_f1 = 2*tp / (2*tp + fn + fp + 1e-16)
-    cost    = 1 - soft_f1 # reduce 1 - soft-f1 in order to increase soft-f1
-    macro_cost = tf.reduce_mean(cost) # average on all labels
-    
-    return macro_cost
-    
+  from util_loss import metric_accuracy,clf_loss_macro_soft_f1;
 
 def plot_original_images(test_sample):
     fig1 = plt.figure(figsize=(8, 8))
@@ -664,41 +630,7 @@ def make_decoder():
         ])
     return decoder
 
-
-def make_classifier(class_dict):
-    """ Supervised multi class
-            self.gender         = nn.Linear(self.inter_features, self.num_classes['gender'])
-            self.masterCategory = nn.Linear(self.inter_features, self.num_classes['masterCategory'])
-            self.subCategory    = nn.Linear(self.inter_features, self.num_classes['subCategory'])
-            self.articleType    = nn.Linear(self.inter_features, self.num_classes['articleType'])
-
-    """    
-    Input = tf.keras.layers.InputLayer
-    Dense = functools.partial(tf.keras.layers.Dense, activation='relu', 
-                                kernel_regularizer=tf.keras.regularizers.L1L2(l1=0.01, l2=0.001),
-                                bias_regularizer=regularizers.l2(1e-4), 
-                                activity_regularizer=regularizers.l2(1e-5))
-    Reshape = tf.keras.layers.Reshape
-    BatchNormalization = tf.keras.layers.BatchNormalization
-
-    # if xdim == 64 :   #### 64 x 64 img          
-    base_model = tf.keras.Sequential([
-        Input(input_shape=(latent_dim,)),
-        Dense(units=512),
-        layers.Dropout(0.10),         
-        Dense(units=512),
-        layers.Dropout(0.10), 
-        Dense(units=512),
-    ])
-
-    x = base_model.output
-    ## x = layers.Flatten()(x) already flatten
-    
-    #### Multi-heads
-    outputs = [Dense(num_classes, activation='softmax', name= f'{class_name}_out')(x) for class_name, num_classes in class_dict.items()]
-    clf = tf.keras.Model(name='clf', inputs=base_model.input , outputs=outputs)  
-
-    return clf
+from util_layers import make_classifier_2 as make_classifier
 
 """## 1-4) Build loss function"""
 
@@ -981,63 +913,7 @@ print('Total: ', df_train.subCategory.nunique())
 
 #plt.figure(figsize=(20, 10))
 # sns.countplot(data=df_train, x='subCategory', order=df_train.subCategory.value_counts().iloc[:20].index)
-
-"""## Data loader"""
-
-class RealCustomDataGenerator(tf.keras.utils.Sequence):
-    def __init__(self, image_dir, label_path, class_dict,
-                 split='train', batch_size=8, transforms=None, shuffle=True):
-        self.image_dir = image_dir
-        # self.labels = np.loadtxt(label_path, delimiter=' ', dtype=np.object)
-        self.class_dict = class_dict
-        self.image_ids, self.labels = self._load_data(label_path)
-        self.num_classes = len(class_dict)
-        self.batch_size = batch_size
-        self.transforms = transforms
-        self.shuffle = shuffle
-    
-    def _load_data(self, label_path):
-        df = pd.read_csv(label_path, error_bad_lines=False, warn_bad_lines=False)
-        keys = ['id'] + list(self.class_dict.keys())
-        df = df[keys]
-
-        # Get image ids
-        df = df.dropna()
-        image_ids = df['id'].tolist()
-        df = df.drop('id', axis=1)
-        labels = []
-        for col in self.class_dict:
-            categories = pd.get_dummies(df[col]).values
-            labels.append(categories)
-        return image_ids, labels
-
-    def on_epoch_end(self):
-        if self.shuffle:
-            np.random.seed(12)
-            indices = np.arange(len(self.image_ids))
-            np.random.shuffle(indices)
-            self.image_ids = self.image_ids[indices]
-            self.labels = [label[indices] for label in self.labels]
-
-    def __len__(self):
-        return int(np.ceil(len(self.image_ids) / float(self.batch_size)))
-
-    def __getitem__(self, idx):
-        batch_img_ids = self.image_ids[idx * self.batch_size:(idx + 1) * self.batch_size]
-        batch_x = []
-        for image_id in batch_img_ids:
-            # Load image
-            image = np.array(Image.open(os.path.join(self.image_dir, '%d.jpg' % image_id)).convert('RGB'))
-            batch_x.append(image)
-
-        batch_y = []
-        for y_head in self.labels:
-            batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size, :])
-        
-        if self.transforms is not None:
-            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
-        return (batch_x, *batch_y)
-
+from util_dataloader import RealCustomDataGenerator;
 
 df = pd.read_csv(cc.path_label_train )
 df = pd.concat((df,  pd.read_csv(cc.path_label_test )))

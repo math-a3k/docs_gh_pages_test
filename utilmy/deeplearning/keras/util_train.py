@@ -193,11 +193,7 @@ def image_check(name, img, renorm=False):
     cv2.imwrite( model_dir2 + f"/debug/{name}"  , img) 
 
 
-class LearningRateDecay:
-    def plot(self, epochs, title="Learning Rate Schedule", path=None):
-        # compute the set of learning rates for each corresponding
-        # epoch
-        pass
+from util_loss import LearningRateDecay;
 
 
 
