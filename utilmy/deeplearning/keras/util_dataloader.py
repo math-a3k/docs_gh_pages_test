@@ -13,11 +13,11 @@ from skimage import morphology
 def print_log(*s):
     print(*s, flush=True)
 
-    
 
 
 
-#################################################################################    
+
+#################################################################################
 def get_data_sample(batch_size, x_train, labels_val):   #name changed
         #### 
         # i_select = 10
@@ -227,10 +227,147 @@ test_transforms = Compose([
 ])
 
 
+class RealCustomDataGenerator(tf.keras.utils.Sequence):
+    def __init__(self, image_dir, label_path, class_dict,
+                 split='train', batch_size=8, transforms=None, shuffle=True):
+        self.image_dir = image_dir
+        # self.labels = np.loadtxt(label_path, delimiter=' ', dtype=np.object)
+        self.class_dict = class_dict
+        self.image_ids, self.labels = self._load_data(label_path)
+        self.num_classes = len(class_dict)
+        self.batch_size = batch_size
+        self.transforms = transforms
+        self.shuffle = shuffle
+
+    def _load_data(self, label_path):
+        df = pd.read_csv(label_path, error_bad_lines=False, warn_bad_lines=False)
+        keys = ['id'] + list(self.class_dict.keys())
+        df = df[keys]
+
+        # Get image ids
+        df = df.dropna()
+        image_ids = df['id'].tolist()
+        df = df.drop('id', axis=1)
+        labels = []
+        for col in self.class_dict:
+            categories = pd.get_dummies(df[col]).values
+            labels.append(categories)
+        return image_ids, labels
+
+    def on_epoch_end(self):
+        if self.shuffle:
+            np.random.seed(12)
+            indices = np.arange(len(self.image_ids))
+            np.random.shuffle(indices)
+            self.image_ids = self.image_ids[indices]
+            self.labels = [label[indices] for label in self.labels]
+
+    def __len__(self):
+        return int(np.ceil(len(self.image_ids) / float(self.batch_size)))
+
+    def __getitem__(self, idx):
+        batch_img_ids = self.image_ids[idx * self.batch_size:(idx + 1) * self.batch_size]
+        batch_x = []
+        for image_id in batch_img_ids:
+            # Load image
+            image = np.array(Image.open(os.path.join(self.image_dir, '%d.jpg' % image_id)).convert('RGB'))
+            batch_x.append(image)
+
+        batch_y = []
+        for y_head in self.labels:
+            batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size, :])
+
+        if self.transforms is not None:
+            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
+        return (idx, batch_x, *batch_y)
 
 
+def _byte_feature(value):
+    if not isinstance(value, (tuple, list)):
+        value = [value]
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=value))
 
 
+def _int64_feature(value):
+    if not isinstance(value, (tuple, list)):
+        value = [value]
+    return tf.train.Feature(int64_list=tf.train.Int64List(value=value))
+
+
+def _float_feature(value):
+    if not isinstance(value, (tuple, list)):
+        value = [value]
+    return tf.train.Feature(float_list=tf.train.FloatList(value=value))
+
+
+def build_tfrecord(x, tfrecord_out_path, max_records):
+    extractor = tf.keras.applications.ResNet50V2(
+        include_top=False, weights='imagenet',
+        input_shape=(xdim, ydim, cdim),
+        pooling='avg'
+    )
+    with tf.io.TFRecordWriter(tfrecord_out_path) as writer:
+        id_cnt = 0
+        for i, (_, images, *_) in enumerate(x):
+            if i > max_records:
+                break
+            batch_embedding = extractor(images, training=False).numpy().tolist()
+            for embedding in batch_embedding:
+                example = tf.train.Example(features=tf.train.Features(feature={
+                    'id': _byte_feature(str(id_cnt).encode('utf-8')),
+                    'embedding': _float_feature(embedding),
+                }))
+                writer.write(example.SerializeToString())
+                id_cnt += 1
+    return tfrecord_out_path
+
+
+class CustomDataGenerator_img(Sequence):
+    def __init__(self, img_dir, label_path, class_list,
+                 split='train', batch_size=8, transforms=None):
+        """
+           df_label format :
+               id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+        """
+        self.image_dir = img_dir
+        self.class_list = class_list
+        self.batch_size = batch_size
+        self.transforms = transforms
+
+        dfref = pd.read_csv(label_path)
+        self.labels = data_add_onehot(dfref, img_dir, class_list)
+
+    def on_epoch_end(self):
+        np.random.seed(12)
+        np.random.shuffle(self.labels)
+
+    def __len__(self):
+        return int(np.ceil(len(self.labels) / float(self.batch_size)))
+
+    def __getitem__(self, idx):
+        # Create batch targets
+        df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
+
+        batch_x = []
+        batch_y = []  # list of heads
+
+        for ii, x in df_batch.iterrows():
+            img = np.array(Image.open(x['uri']).convert('RGB'))
+            batch_x.append(img)
+
+        for ci in self.class_list:
+            v = [x.split(",") for x in df_batch[ci + "_onehot"]]
+            v = np.array([[int(t) for t in vlist] for vlist in v])
+            batch_y.append(v)
+
+        if self.transforms is not None:
+            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
+
+        return (batch_x, *batch_y)
+
+######################################################################################
+###############################IMAGE FUNCTIONS########################################
+######################################################################################
 
 
 

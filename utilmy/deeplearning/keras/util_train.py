@@ -11,6 +11,7 @@ from pathlib import Path
 import tensorflow as tf, tensorflow_addons as tfa
 from tensorflow.keras import layers, regularizers
 import scipy.stats ; from scipy.stats import norm
+from template_train import *
 
 
 from utilmy import pd_read_file
@@ -70,13 +71,13 @@ def tf_compute_set(cc:dict):
 
     if cc.compute_mode == "cpu_only":
         try:
-            log2("# Disable all GPUS")
+            print_log_info("# Disable all GPUS")
             tf.config.set_visible_devices([], 'GPU')
             visible_devices = tf.config.get_visible_devices()
             for device in visible_devices:
                 assert device.device_type != 'GPU'
         except Exception as e :
-            log2(e)
+            print_log_info(e)
             # Invalid device or cannot modify virtual devices once initialized.
             pass
 
@@ -118,16 +119,7 @@ def os_path_copy(in_dir, path, ext="*.py"):
 
 os_path_copy(in_dir= cc.code_source  , path= cc.model_dir2 + "/code/")
 
-
-def metric_accuracy(y_val, y_pred_head, class_dict):
-    # Val accuracy
-    val_accuracies = {class_name: 0. for class_name in class_dict}
-    for i, class_name in enumerate(class_dict):
-        y_pred = np.argmax(y_pred_head[i], 1)
-        y_true = np.argmax(y_val[i], 1)
-        val_accuracies[class_name] = (y_pred == y_true).mean()
-    print( f'\n {val_accuracies}')
-    return val_accuracies
+from train_graph_loss import metric_accuracy;
 
 
 def check_valid_image(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):
@@ -199,37 +191,7 @@ def image_check(name, img, renorm=False):
     if renorm :
         img = (img *0.5 +0.5) * 255.0        
     cv2.imwrite( model_dir2 + f"/debug/{name}"  , img) 
-        
 
-def pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot=True):
-   """ dfi_onehot = pd_get_dummies( df, cols_cat = ['articleType'  ], cat_dict= cc.labels_map, only_onehot= False)
-      dfi_onehot.sum()
-      dfi_onehot.dtypes
-   """ 
-   dfall      =  None
-   #cols_cat   = list(cat_dict.keys() )
-   cols_nocat = [ t for t in df.columns if t not in cols_cat   ]
-
-   for  coli in cols_cat :  # cat_dict.keys() :
-     if coli not in cat_dict : continue
-     # cat_list = [ coli + "_" + ci for ci in cat_dict[coli] ]
-     cat_list = [ ci for ci in cat_dict[coli] ]
-     df1      = df[coli].fillna('aaother')
-     dfi      = pd.get_dummies( df1.astype(pd.CategoricalDtype(categories= cat_list )))
-
-     dfi.columns = [ coli + "_" + ci for ci in dfi.columns ]
-     dfall    = dfi if dfall is None else pd.concat((dfall, dfi))
- 
-   print(df[ cols_nocat])
-   print(dfall)
-
-   if not only_onehot:
-      dfall = pd.concat((df[cols_nocat], dfall), axis=1)
-      for ci in dfall.columns :
-        if ci not in cols_nocat :
-            dfall[ci] = dfall[ci].astype('int8')
-
-   return dfall 
 
 class LearningRateDecay:
     def plot(self, epochs, title="Learning Rate Schedule", path=None):
@@ -315,7 +277,7 @@ def pd_category_filter(df, category_map):
 ###############################################################################################################
 
 @tf.function
-def train_step_opt(x, y, model, loss_fn, optimizer):   #changed file
+def train_step_2(x, y, model, loss_fn, optimizer):   #changed file
     with tf.GradientTape() as tape_w:
 
         # A separate GradientTape is needed for watching the input.
@@ -368,35 +330,6 @@ def test_step(x, y, model, loss_fn):   #changed file
     total_loss = labeled_loss + scaled_graph_loss
     return base_output, total_loss, labeled_loss, scaled_graph_loss
 
-
-
-
-"""## Train"""
-@tf.function
-def train_step(x, model, y_label_list=None):
-    with tf.GradientTape() as tape:
-        z_mean, z_logsigma, x_recon, out_classes = model(x, training=True, y_label_list= y_label_list)      #Forward pass through the VAE
-        
-        loss = perceptual_loss_function(x[0], x_recon, z_mean, z_logsigma,
-            y_label_heads = y_label_list,
-            y_pred_heads  = out_classes,
-            clf_loss_fn   = clf_loss_global
-        )
-
-    grads = tape.gradient(loss, model.trainable_variables)   #Calculate gradients
-    optimizer.apply_gradients(zip(grads, model.trainable_variables))
-    return loss
-
-
-@tf.function
-def validation_step(x, model, y_label_list=None):
-    z_mean, z_logsigma, x_recon, out_classes = model(x, training=False)  #Forward pass through the VAE
-    loss = perceptual_loss_function(x[0], x_recon, z_mean, z_logsigma,
-            y_label_heads = y_label_list, 
-            y_pred_heads  = out_classes, 
-            clf_loss_fn   = clf_loss_global
-        )
-    return loss, x_recon, out_classes
 
 
 

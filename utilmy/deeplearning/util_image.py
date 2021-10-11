@@ -50,12 +50,43 @@ def test():
     pass
 
 
+def prep_images(image_paths, nmax=10000000):
+  images = []
+  for i in range(len(image_paths)):
+    if i > nmax : break
+    image =  prepro_image(image_paths[i] )
+    images.append(image)
+  return images
 
 
+
+def prep_images2(image_paths):
+    images = []
+    original_first_image = None
+    for i in range(len(image_paths)):
+        if i > nmax: break
+
+        image_path = image_paths[i]
+        fname = str(image_path).split("/")[-1]
+        id1 = fname.split(".")[0]
+
+        if (i + 100) % 100 == 0: print(fname, id1)
+
+        image = matplotlib.image.imread(image_path)
+
+        if images == []:
+            temp = (image / 255)
+            original_first_image = temp.astype('float32')
+        resized_image = cv2.resize(image, dsize=(xdim, ydim), interpolation=cv2.INTER_CUBIC)
+
+        if resized_image.shape == (xdim, ydim, cdim):
+            resized_image = resized_image / 255
+            images.append(resized_image.astype('float32'))
+    return images, original_first_image
 
 
 ################################################################################################
-def prepro_image(image_path:str, xdim=1, ydim=1):
+def prep_image(image_path:str, xdim=1, ydim=1):
     mean   = [0.5]
     std    = [0.5]
     try :
@@ -74,7 +105,7 @@ def prepro_image(image_path:str, xdim=1, ydim=1):
 
 
 
-def prepro_images(image_path_list:list, prepro_image_fun=None, npool=1):
+def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
     """ Parallel processing
 
     """
@@ -97,6 +128,18 @@ def prepro_images(image_path_list:list, prepro_image_fun=None, npool=1):
 
 
 
+
+def run_multiprocess(myfun, list_args, npool=10, **kwargs):
+    """
+       res = run_multiprocess(prepro, image_paths, npool=10, )
+    """
+    from functools import partial
+    from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
+    pool = Pool(npool)
+    res  = pool.map( partial(myfun, **kwargs), list_args)
+    pool.close()
+    pool.join()
+    return res
 
 ################################################################################################
 def image_read(filepath_or_buffer: Union[str, io.BytesIO]):
@@ -245,6 +288,52 @@ def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", t
         cache[img_path] = img
 
 
+def image_resize(out_dir=""):
+    """     python prepro.py  image_resize
+
+          image white color padded
+
+    """
+    import cv2, gc, diskcache
+
+    in_dir = data_dir + "/train_nobg"
+    out_dir = data_dir + "/train_nobg_256/"
+
+    nmax = 500000000
+    global xdim, ydim
+    xdim = 256
+    ydim = 256
+    padcolor = 0  ## 0 : black
+
+    os.makedirs(out_dir, exist_ok=True)
+    log('target folder', out_dir);
+    time.sleep(5)
+
+    def prepro_image3b(img_path):
+        try:
+            fname = str(img_path).split("/")[-1]
+            id1 = fname.split(".")[0]
+            img_path_new = out_dir + "/" + fname
+
+            img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
+            img = util_image.image_resize_pad(img, (xdim, ydim), padColor=padcolor)  ### 255 white, 0 for black
+            img = img[:, :, ::-1]
+            cv2.imwrite(img_path_new, img)
+            # print(img_path_new)
+            return [1], "1"
+        except Exception as e:
+            # print(image_path, e)
+            return [], ""
+
+    log("#### Process  ######################################################################")
+    image_list = sorted(list(glob.glob(f'/{in_dir}/*.*')))
+    image_list = image_list[:nmax]
+    log('Size Before', len(image_list))
+
+    log("#### Saving disk  #################################################################")
+    images, labels = prepro_images_multi(image_list, prepro_image=prepro_image3b)
+    os_path_check(out_dir, n=5)
+
 
 def image_resize2(image, width=None, height=None, inter=cv2.INTER_AREA):
     """Resizes a image and maintains aspect ratio.
@@ -277,100 +366,6 @@ def image_resize2(image, width=None, height=None, inter=cv2.INTER_AREA):
     # Return the resized image
     return cv2.resize(image, dim, interpolation=inter)
 
-
-def image_create_cache():
-
-    #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache  
-    #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
-    ####   sleep 56000  && python prepro.py  image_create_cache       
-    import cv2, diskcache
-    nmax =  1000000 #  0000
-    global xdim, ydim
-    xdim= 256
-    ydim= 256
-
-    log("### Sub-Category  ################################################################")
-    # in_dir   = data_dir + '/fashion_data/images/'
-    # in_dir   = data_dir + "/train_nobg_256/"
-    in_dir   = cc.root + "/../gsp/v1000k_clean_nobg/"
-    
-    image_list = sorted(list(glob.glob(  f'/{in_dir}/*/*.*')))
-    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ]
-    log('N images', len(image_list))
-    # tag   = "-women_topwear"
-    tag      = "train_r2p2_1000k_clean_nobg"
-    tag      = f"{tag}_{xdim}_{ydim}-{nmax}"
-    # db_path  = data_train + f"/img_{tag}.cache"
-    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache"
-    
-    log(in_dir)
-    log(db_path)
-                
-    def prepro_image2b(image_path):
-        try :
-            # fname      = str(image_path).split("/")[-1]    
-            # id1        = fname.split(".")[0]
-            # print(image_path)
-
-            image = cv2.imread(image_path)
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  
-            # image = util_image.image_resize_pad(image, (xdim,ydim), padColor=255)
-            image = image_center_crop(image, (245, 245))
-
-            # image = image.astype('float32')
-            return image, image_path 
-            #return [1], "1"
-        
-        except :
-            try :
-               # image = image.astype('float32')
-               # cache[ fname ] =  image        ### not uulti thread write
-               return image, image_path
-               # return [1], "1"
-            except :
-               return [],""
-    
-    log("#### Converting  ############################################################")
-    image_list = image_list[:nmax]
-    log('Size Before', len(image_list))
-
-    import diskcache as dc
-    #  from diskcache import FanoutCache  ### too much space
-    # che = FanoutCache( db_path, shards=4, size_limit=int(60e9), timeout=9999999 )
-    cache = dc.Cache(db_path, size_limit=int(100e9), timeout=9999999 )
-
-    log("#### Load  #################################################################")       
-    images, labels = prepro_images_multi(image_list, prepro_image= prepro_image2b, npool=32 )
-    
-    
-    import asyncio
-    async def set_async(key, val):
-        loop = asyncio.get_running_loop()
-        future = loop.run_in_executor(None, cache.set, key, val)
-        result = await future
-        return result
-
-    # asyncio.run(set_async('test-key', 'test-value'))
-
-    
-    log(str(images)[:500],  str(labels)[:500],  )
-    log("#### Saving disk  #################################################################")           
-    for path, img in zip(labels, images) : 
-       key = os.path.abspath(path)
-       key = key.split("/")[-1] 
-       cache[ key ] =  img
-       # asyncio.run(set_async( key , img ))   ##only python 3.7
-    
-    
-    print('size cache', len(cache),)
-    print( db_path )
-    
-    for i,key in enumerate(cache):
-       if i > 3 : break 
-       x0 = cache[key] 
-       cv2.imwrite( cc.data_train + f"/check_{i}.png", x0 )
-       print(key, x0.shape, str(x0)[:50]  )
-       
        
 def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3,
                     renorm=True):    
@@ -391,55 +386,6 @@ def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3,
            pass     
     
 
-
-def image_resize(out_dir=""):
-    """     python prepro.py  image_resize
-          image white color padded
-    
-    """
-    import cv2
-    
-    in_dir   = cc.root + "/train_nobg" # replace data_dir with root path
-    out_dir  = cc.root + "/train_nobg_256/"
-    
-    nmax     =  500000000
-    global xdim, ydim
-    xdim= 256
-    ydim= 256  
-    padcolor = 0   ## 0 : black
-    
-    os.makedirs(out_dir, exist_ok= True)
-    log('target folder', out_dir); time.sleep(5)
-
-    def prepro_image3b(img_path):
-        try :
-            fname        = str(img_path).split("/")[-1]    
-            # id1          = fname.split(".")[0]
-            img_path_new = out_dir + "/" + fname
-
-            img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)  
-            img = image_resize_pad(img, (xdim,ydim), padColor=  padcolor)   ### 255 white, 0 for black
-            img = img[:, :, ::-1]
-            cv2.imwrite(img_path_new, img)        
-            # print(img_path_new)            
-            return [1], "1"
-        except Exception as e:
-            # print(image_path, e)
-            return [],""
-    
-    log("#### Process  ######################################################################")
-    image_list = sorted(list(glob.glob(  f'/{in_dir}/*.*')))
-    image_list = image_list[:nmax]
-    log('Size Before', len(image_list))
-    
-
-    log("#### Saving disk  #################################################################")        
-    images, labels = prepro_images_multi(image_list, prepro_image= prepro_image3b )
-    os_path_check(out_dir, n=5)
-
-
-    
-    
     
 def image_padding_generate(
     paddings_number: int = 1, min_padding: int = 1, max_padding: int = 1
@@ -517,39 +463,6 @@ def image_remove_extra_padding(img, inverse=False, removedot=True):
     x, y, w, h = cv2.boundingRect(coords)  # Find minimum spanning bounding box
     crop = img[y : y + h, x : x + w]  # Crop the image
     return crop
-
-
-#########################################################################################
-def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
-    """Resizes a image and maintains aspect ratio.
-    Args:
-        image:
-        width:
-        height:
-        inter:
-    Returns:
-    """
-    # Grab the image size and initialize dimensions
-    dim = None
-    (h, w) = image.shape[:2]
-
-    # Return original image if no need to resize
-    if width is None and height is None:
-        return image
-
-    # We are resizing height if width is none
-    if width is None:
-        # Calculate the ratio of the height and construct the dimensions
-        r = height / float(h)
-        dim = (int(w * r), height)
-    # We are resizing width if height is none
-    else:
-        # Calculate the ratio of the width and construct the dimensions
-        r = width / float(w)
-        dim = (width, int(h * r))
-
-    # Return the resized image
-    return cv2.resize(image, dim, interpolation=inter)
 
 
 def image_remove_bg(in_dir="", out_dir="", level=1):
@@ -775,6 +688,53 @@ def image_text_blank(in_dir, out_dir, level="/*"):
           os.makedirs( os.path.dirname(fout), exist_ok=True)
           cv2.imwrite( fout, img )
       except : pass
+
+
+def image_check():
+    """     python prepro.py  image_check
+
+          image white color padded
+
+    """
+    # print( 'nf files', len(glob.glob("/data/workspaces/noelkevin01/img/data/fashion/train_nobg_256/*")) )
+    nmax = 100000
+    global xdim, ydim
+    xdim = 64
+    ydim = 64
+
+    log("### Load  ##################################################")
+    # fname    = f"/img_all{tag}.cache"
+    # fname    = f"/img_fashiondata_64_64-100000.cache"
+    # fname = "img_train_nobg_256_256-100000.cache"
+    fname = "img_train_r2p2_40k_nobg_256_256-100000.cache"
+    fname = "img_train_r2p2_40k_nobg_256_256-100000.cache"
+
+    log('loading', fname)
+
+    import diskcache as dc
+    db_path = data_train + fname
+    cache = dc.Cache(db_path)
+
+    lkey = list(cache)
+    print('Nimages', len(lkey))
+
+    ### key check:
+    # df = pd_read_file("/data/workspaces/noelkevin01/img/data/fashion/csv/styles_df.csv" )
+    # idlist = df['id']
+
+    log('### writing on disk  ######################################')
+    dir_check = data_train + "/zcheck/"
+    os.makedirs(dir_check, exist_ok=True)
+    for i, key in enumerate(cache):
+        if i > 10: break
+        img = cache[key]
+        img = img[:, :, ::-1]
+        print(key)
+        key2 = key.split("/")[-1]
+        cv2.imwrite(dir_check + f"/{key2}", img)
+
+
+
     
 
 

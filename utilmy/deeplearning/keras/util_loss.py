@@ -26,7 +26,7 @@ def metric_accuracy(y_test, y_pred, dd):
     
 
 
-def clf_loss_macro_soft_f1(y, y_hat):
+def clf_loss_macro_soft_f1(y, y_hat):   #name
     """Compute the macro soft F1-score as a cost.
     Average (1 - soft-F1) across all labels.
     Use probability values instead of binary predictions.

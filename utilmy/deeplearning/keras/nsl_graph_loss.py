@@ -156,7 +156,7 @@ optimizer = tf.keras.optimizers.Adam(1e-3)
 
 for epoch in range(10):
     for i, (images, labels) in enumerate(train_ds):
-        outputs, total_loss, labeled_loss, adv_loss = train_step(images, labels, base_model, cross_entropy, optimizer)
+        outputs, total_loss, labeled_loss, adv_loss = train_step_2(images, labels, base_model, cross_entropy, optimizer)
         y_pred = np.argmax(outputs.numpy(), 1)
         accuracy = (y_pred == labels.numpy()).mean()
     print('[Epoch {:03d} iter {:04d}] Loss: {:.4f} - Accuracy: {:.4f}'.format(

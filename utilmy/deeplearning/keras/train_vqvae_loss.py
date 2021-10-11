@@ -189,7 +189,7 @@ import neural_structured_learning.configs as nsl_configs
 
 """## 1) Define some helper functions"""
 
-def log(*s):
+def print_log(*s):   #name changed
     """Log decorator"""
     print(*s, flush=True)
 
@@ -208,7 +208,7 @@ def metric_accuracy(y_test, y_pred, dd):
     
 
 
-def clf_loss_macro_soft_f1(y, y_hat):
+def cal_macro_F1_score(y, y_hat):   #name changed
     """Compute the macro soft F1-score as a cost.
     Average (1 - soft-F1) across all labels.
     Use probability values instead of binary predictions.

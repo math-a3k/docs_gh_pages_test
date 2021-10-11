@@ -226,6 +226,8 @@ pixelcnn_input_shape = encoded_outputs.shape[1:-1]
 print(f"Input shape of the PixelCNN: {pixelcnn_input_shape}")
 
 
+
+
 pixelcnn_inputs = keras.Input(shape=pixelcnn_input_shape, dtype=tf.int32)
 ohe = tf.one_hot(pixelcnn_inputs, vq_vae_trainer.number_of_embeddings)
 x = PixelConvLayer(

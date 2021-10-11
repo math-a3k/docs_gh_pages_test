@@ -19,22 +19,7 @@ from utilmy.utilmy import   pd_read_file, pd_to_file
 
 #####################################################################################
 verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
-
-
-
-def help():
-    from utilmy import help_create
-    ss  = HELP
-    ss += help_create("utilmy.deepleaning.util_topk")
-    print(ss)
-
+from util_image import log,log2,help;
 
 
 
@@ -533,7 +518,87 @@ def convert_txt_to_vector_parquet(dirin=None, dirout=None, skip=0, nmax=10**8): 
     pd_to_file(df, dirout2, show=1 )
     log('ntotal', ntot )
     return os.path.dirname(dirout2)
-    
-    
+
+
+def data_add_onehot(dfref, img_dir, labels_col):
+    """
+       id, uri, cat1, cat2, .... , cat1_onehot
+
+    """
+    import glob
+    fpaths = glob.glob(img_dir)
+    fpaths = [fi for fi in fpaths if "." in fi.split("/")[-1]]
+    log(str(fpaths)[:100])
+
+    df = pd.DataFrame(fpaths, columns=['uri'])
+    log(df.head(1).T)
+    df['id'] = df['uri'].apply(lambda x: x.split("/")[-1].split(".")[0])
+    df['id'] = df['id'].apply(lambda x: int(x))
+    df = df.merge(dfref, on='id', how='left')
+
+    # labels_col = [  'gender', 'masterCategory', 'subCategory', 'articleType' ]
+
+    for ci in labels_col:
+        dfi_1hot = pd.get_dummies(df, columns=[ci])  ### OneHot
+        dfi_1hot = dfi_1hot[[t for t in dfi_1hot.columns if ci in t]]  ## keep only OneHot
+        df[ci + "_onehot"] = dfi_1hot.apply(lambda x: ','.join([str(t) for t in x]), axis=1)
+        #####  0,0,1,0 format   log(dfi_1hot)
+
+    return df
+
+
+def test():
+    """
+       python prepro.py test
+
+    """
+    dfref = pd.read_csv(data_label + "/prepro_df.csv")
+    img_dir = data_dir + '/train/*'
+    labels_col = ['gender', 'masterCategory', 'subCategory', 'articleType']
+
+    df = data_add_onehot(dfref, img_dir, labels_col)
+    log(df.head(2).T)
+
+
+def unzip(in_dir, out_dir):
+    # !/usr/bin/env python3
+    import sys
+    import zipfile
+    with zipfile.ZipFile(in_dir, 'r') as zip_ref:
+        zip_ref.extractall(out_dir)
+
+
+def gzip():
+    #  python prepro.py gzip
+    import sys
+
+    # in_dir  = "/data/workspaces/noelkevin01/img/models/fashion/dcf_vae/m_train9a_g6_-img_train_nobg_256_256-100000.cache/check"
+
+    in_dir = "/data/workspaces/noelkevin01/img/models/fashion/dcf_vae/m_train9pred/res/m_train9b_g3_-img_train_r2p2_200k_clean_nobg_256_256-500000-cache_best_epoch_261/topk"
+
+    name = "_".join(in_dir.split("/")[-2:])
+
+    cmd = f"tar -czf /data/workspaces/noelkevin01/{name}.tar.gz   '{in_dir}/'   "
+    print(cmd)
+    os.system(cmd)
+
+
+def predict(name=None):
+    ###   python prepro.py  predict
+    if name is None:
+        name = "m_train9b_g3_-img_train_r2p2_70k_clean_nobg_256_256-100000.cache/best/epoch_90"
+    os.system(f" python train9pred.py  '{name}'   ")
+
+
+def folder_size():
+    os.system(" du -h --max-depth  13   /data/  | sort -hr  > /home/noelkevin01/folder_size.txt  ")
+
+
+if __name__ == "__main__":
+    import fire
+
+    fire.Fire()
+
+
     
     
