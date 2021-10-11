@@ -16,7 +16,7 @@ import scipy.stats ; from scipy.stats import norm
 
 from tqdm import tqdm
 from utilmy import pd_read_file
-from util_train import clean_duplicates as clean1
+from utilmy.deeplearning.keras.util_train import clean_duplicates as clean1
 
 
 cc = Box({})
@@ -247,8 +247,8 @@ os.makedirs(model_dir2, exist_ok=True)
 time.sleep(3) 
 ### log  #######################################################
 
-from util_train import print_log_info, print_debug_info
-from util_train import *
+from utilmy.deeplearning.keras.util_train import print_log_info, print_debug_info
+from utilmy.deeplearning.keras.util_train import *
 
 ########################################################################################################
 
