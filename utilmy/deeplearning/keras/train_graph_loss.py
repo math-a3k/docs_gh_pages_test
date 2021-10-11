@@ -499,108 +499,8 @@ percep_model = tf.keras.applications.EfficientNetB0(
 )
 
 
-def clf_loss_crossentropy(y_true, y_pred):
-    return tf.keras.losses.BinaryCrossentropy()(y_true, y_pred)
+from train_vqvae_loss import *;
 
-
-def perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005, 
-                             y_label_heads=None, y_pred_heads=None, clf_loss_fn=None):
-    ### log( 'x_recon.shae',  x_recon.shape )  
-    ### VAE Loss
-    reconstruction_loss = tf.reduce_mean(tf.reduce_mean(tf.abs(x-x_recon), axis=(1,2,3)))
-    latent_loss = 0.5 * tf.reduce_sum(tf.exp(z_logsigma) + tf.square(z_mean) - 1.0 - z_logsigma, axis=1)
-
-    ### Efficient Head Loss
-    perceptual_loss = tf.reduce_sum(tf.square(tf.subtract(tf.stop_gradient(percep_model(x)),percep_model(x_recon))))
-    loss_all = kl_weight*latent_loss + reconstruction_loss + 0.015*perceptual_loss  
-
-    ### Classifier Loss
-    loss_clf = [0.]
-    if y_label_heads is not None:
-        for i in range(len(y_pred_heads)):
-            head_loss = clf_loss_fn(y_label_heads[i], y_pred_heads[i])
-            loss_clf.append(head_loss)
-
-    loss_clf = tf.reduce_mean(loss_clf)
-    loss_all = loss_all + loss_clf * 0.01 
-
-    return loss_all
-
-"""Data Loader"""
-
-class SprinklesTransform(ImageOnlyTransform):
-    def __init__(self, num_holes=100, side_length=10, always_apply=False, p=1.0):
-        super(SprinklesTransform, self).__init__(always_apply, p)
-        self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)
-    
-    def apply(self, image, **params):
-        if isinstance(image, Image.Image):
-            image = tf.constant(np.array(image), dtype=tf.float32)
-        elif isinstance(image, np.ndarray):
-            image = tf.constant(image, dtype=tf.float32)
-
-        return self.sprinkles(image).numpy()
-
-
-class CustomDataGenerator0(tf.keras.utils.Sequence):
-    def __init__(self, x, y, batch_size=32, augmentations=None):
-        self.x = x
-        self.y = y
-        self.batch_size = batch_size
-        self.augment = augmentations
-
-    def __len__(self):
-        return int(np.ceil(len(self.x) / float(self.batch_size)))
-
-    def __getitem__(self, idx):
-        batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
-        batch_y = []
-        for y_head in self.y:
-            batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
-        
-        if self.augment is not None:
-            batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
-        return (batch_x, *batch_y)
-
-
-class CustomDataGenerator(tf.keras.utils.Sequence):
-    def __init__(self, image_dir, label_path, class_dict,
-                 split='train', batch_size=8, transforms=None):
-        self.image_dir = image_dir
-        self.labels = np.loadtxt(label_path, delimiter=' ', dtype=np.object)
-        self.class_dict = class_dict
-        self.num_classes = len(class_dict)
-        self.batch_size = batch_size
-        self.transforms = transforms
-    
-    def on_epoch_end(self):
-        np.random.seed(12)
-        np.random.shuffle(self.labels)
-
-    def __len__(self):
-        return int(np.ceil(len(self.labels) / float(self.batch_size)))
-
-    def __getitem__(self, idx):
-        batch_raw_labels = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
-        num_samples = len(batch_raw_labels)
-
-        # Create batch targets
-        batch_x = []
-        batch_y = [np.zeros((num_samples, num_labels), dtype='int32') for _, num_labels in self.class_dict.items()]
-        for sample in batch_raw_labels:
-            # Load image
-            image_filename = str(sample[0])
-            image = np.array(Image.open(os.path.join(self.image_dir, image_filename)).convert('RGB'))
-            batch_x.append(image)
-
-            # Create labels
-            class_id = int(sample[1])
-            label_id = list(map(int, sample[2:]))
-            batch_y[class_id][label_id] = 1
-        
-        if self.transforms is not None:
-            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
-        return (batch_x, *batch_y)
 
 """# 3) Kaggle Fashion dataset
 
@@ -617,11 +517,6 @@ os.system("unzip -qq raw_fashion_data.zip")
 import os
 import glob
 
-
-def apply_func(s, values):
-    if s.lower() in values:
-        return s.lower()
-    return 'other'
 
 
 df = pd.read_csv('raw_fashion_data/styles.csv', error_bad_lines=False, warn_bad_lines=False)
@@ -1160,16 +1055,6 @@ elif cc.schedule_type == "poly":
 # ==============================================================================
 
 
-def metric_accuracy(y_val, y_pred_head, class_dict):
-    # Val accuracy
-    val_accuracies = {class_name: 0. for class_name in class_dict}
-    for i, class_name in enumerate(class_dict):
-        y_pred = np.argmax(y_pred_head[i], 1)
-        y_true = np.argmax(y_val[i], 1)
-        val_accuracies[class_name] = (y_pred == y_true).mean()
-    print('\n %s\n' % val_accuracies)
-    return val_accuracies
-
 
 # Add layers
 nbr_features_layer = nsl_layers.NeighborFeatures(graph_reg_config.neighbor_config)
@@ -1358,7 +1243,7 @@ plt.imshow(images[0])
 plt.show()
 
 @tf.function
-def train_step(x, model, y_label_list=None):
+def train_step_2(x, model, y_label_list=None):
     with tf.GradientTape() as tape:
         z_mean, z_logsigma, x_recon, out_classes = model(x, training=True)      #Forward pass through the VAE
         loss = perceptual_loss_function(x, x_recon, z_mean, z_logsigma,
@@ -2352,26 +2237,6 @@ class SprinklesTransform(ImageOnlyTransform):
         return self.sprinkles(image).numpy()
 
 
-class CustomDataGenerator(tf.keras.utils.Sequence):
-    def __init__(self, x, y, batch_size=32, augmentations=None):
-        self.x = x
-        self.y = y
-        self.batch_size = batch_size
-        self.augment = augmentations
-
-    def __len__(self):
-        return int(np.ceil(len(self.x) / float(self.batch_size)))
-
-    def __getitem__(self, idx):
-        batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
-        batch_y = []
-        for y_head in self.y:
-            batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
-        
-        if self.augment is not None:
-            batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
-        return (batch_x, *batch_y)
-
 
 # # Data Augmentation with built-in Keras functions
 # train_gen = keras.preprocessing.image.ImageDataGenerator(
@@ -2417,58 +2282,8 @@ test_augments = Compose([
 train_data = CustomDataGenerator(x_train, y_train, augmentations=train_augments)
 val_data   = CustomDataGenerator(x_train, y_train, augmentations=test_augments)
 
-def custom_loss(y_true, y_pred):
-    return keras.losses.BinaryCrossentropy()(y_true, y_pred)
 
 
-def build_model(input_shape, num_classes):
-    """EfficientNet"""
-    base_model = EfficientNetB0(include_top=False,
-                                weights='imagenet',
-                                input_shape=input_shape)
-
-    # Freeze all layers
-    for layer in base_model.layers:
-        layer.trainable = False
-
-    x = base_model.output
-    x = layers.Flatten()(x)
-    
-    outputs = [layers.Dense(n_classes, activation='sigmoid')(x) for n_classes in num_classes]
-
-    model = keras.Model(name='EfficientNet',
-                        inputs=base_model.input,
-                        outputs=outputs)
-    return model
-
-def custom_loss(y_true, y_pred):
-    return keras.losses.BinaryCrossentropy()(y_true, y_pred)
-
-
-def build_model(input_shape, num_classes):
-    """Vanilla CNN"""
-
-    base_model = tf.keras.Sequential([
-        layers.InputLayer(input_shape),
-        layers.ZeroPadding2D((3, 3)),
-        layers.Conv2D(64, 7, 2, padding='same', activation='relu'),
-        layers.MaxPooling2D(pool_size=3, strides=(2, 2)),
-        layers.Conv2D(128, 3, padding='same', activation='relu'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(256, 3, padding='same', activation='relu'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(256, 3, padding='same', activation='relu'),
-        layers.MaxPooling2D((2, 2)),
-    ])
-    x = base_model.output
-    x = layers.Flatten()(x)
-    
-    outputs = [layers.Dense(n_classes, activation='sigmoid')(x) for n_classes in num_classes]
-
-    model = tf.keras.Model(name='EfficientNet',
-                        inputs=base_model.input,
-                        outputs=outputs)
-    return model
 
 """Train the model (Data augmentation)"""
 
