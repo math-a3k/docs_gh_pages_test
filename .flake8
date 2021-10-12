@@ -73,18 +73,11 @@ hang-closing = True
 #
 
 # Specify a list of codes to ignore.
-ignore =
-    E2,
-    E3,
-    E4,
-    E5,
-    E7,
-    W1,
-    W3,
-    W5,
-    W6,
+ignore =  E/W, C, E2, E3, E4, E5, E7, W1, W3, W5, W6,
+
+
 # Specify the list of error codes you wish Flake8 to report.
-# select =
+select = F
 #    E,
 #    W,
 #    F,
