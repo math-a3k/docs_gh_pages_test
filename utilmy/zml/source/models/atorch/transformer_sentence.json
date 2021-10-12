@@ -1,0 +1,60 @@
+{
+	"test": {
+       
+        "notes": "Using Yelp Reviews dataset",
+		"model_pars": {
+			"model_uri": "model_tch.transformer_sentence.py",
+			"embedding_model": "BERT",
+			"embedding_model_name": "bert-base-uncased"
+		},
+
+		"data_pars": {
+			"data_info": {},
+			"preprocessors": [
+				{
+					"name" :  "DataReader",
+                    "uri"  : "mlmodels.model_tch.util_transformer:TransformerDataReader",
+                    "args"  : {
+						"train": {
+							"uri"  : "sentence_transformers.readers:NLIDataReader",
+							"dataset": "dataset/text/AllNLI/train"
+						},
+						"test": {
+							"uri"  : "sentence_transformers.readers:STSBenchmarkDataReader",
+							"dataset": "dataset/text/stsbenchmark/val"
+						}
+					}
+				}
+			]
+		},
+
+
+		"compute_pars": {
+			"loss": "SoftmaxLoss",
+            "batch_size": 32,
+            "num_epochs": 1,
+            "evaluation_steps": 10,
+            "warmup_steps": 100
+		},
+
+		"out_pars": {
+			"path":"./output/transformer_sentence/",
+			"model_path":"./output/transformer_sentence/model.h5"
+		}
+	},
+
+
+	"prod": {
+
+		"model_pars": {},
+
+		"data_pars": {}
+
+
+	}
+
+
+
+	
+	
+}

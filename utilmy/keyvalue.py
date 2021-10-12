@@ -24,10 +24,15 @@ db_path : Single DB storage
 import os, glob, sys, math, string, time, json, logging, functools, random, yaml, operator, gc
 import pandas as pd, numpy as np
 from pathlib import Path; from collections import defaultdict, OrderedDict ;  
-from utilmy.utilmy import   pd_read_file, pd_to_file
 from box import Box
 
-import diskcache as dc
+
+try :
+   import diskcache as dc
+except: pass
+
+from utilmy.utilmy import   pd_read_file, pd_to_file
+
 
 #####################################################################################    
 verbose = 0
@@ -51,7 +56,6 @@ def help():
 
 
 
-#####################################################################################    
 #####################################################################################
 def pd_random(nrows=1000, ncols= 5):
     return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )
@@ -99,8 +103,7 @@ def test():
 
 
     
-########################################################################################################    
-##########  Database Class #############################################################################
+############## Database Class ##########################################################################################
 def db_cli():
     """
       Command line for db access.

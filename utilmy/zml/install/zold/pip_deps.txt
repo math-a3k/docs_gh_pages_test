@@ -1,0 +1,29 @@
+
+
+
+
+Need to install deps
+
+
+pip install zconda/pip/numpy-1.18.5+mkl-cp36-cp36m-win_amd64.whl
+
+pip install zconda/pip/scipy-1.5.4-cp36-cp36m-win_amd64.whl
+
+pip install zconda/pip/ujson-1.35-cp36-cp36m-win_amd64.whl
+
+ pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+
+
+pip install scikit-learn pandas seaborn matplotlib
+
+pip install lightgbm catboost
+
+pip install ipykernel==5.1.4  spyder-kernels==0.5.2
+
+
+pip install pyro
+
+
+pip install peak-engines
+
+

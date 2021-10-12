@@ -11,6 +11,7 @@ from pathlib import Path
 import tensorflow as tf, tensorflow_addons as tfa
 from tensorflow.keras import layers, regularizers
 import scipy.stats ; from scipy.stats import norm
+from template_train import *
 
 
 from utilmy import pd_read_file
@@ -27,20 +28,20 @@ def np_remove_duplicates(seq):
     return [x for x in seq if not (x in seen or seen_add(x))]
 
 
-def clean1(ll):
+def clean_duplicates(ll):   #name changed
     v = [ t for t in ll if len(t) > 1 ]
     return  np_remove_duplicates(v)
 
 
 
 ### log  #############################################################################
-def log3(*s):
+def print_debug_info(*s):   #name changed
     if cc.verbosity >= 3:   
         print(*s, flush=True)
         with open(cc.model_dir2 + "/debug.py", mode='a') as fp:
             fp.write(str(s) + "\n")
 
-def log2(*s): 
+def print_log_info(*s):   #name changed
     print(*s, flush=True)
     with open(cc.model_dir2 + "/log.py", mode='a') as fp:
         fp.write(str(s) + "\n")
@@ -70,13 +71,13 @@ def tf_compute_set(cc:dict):
 
     if cc.compute_mode == "cpu_only":
         try:
-            log2("# Disable all GPUS")
+            print_log_info("# Disable all GPUS")
             tf.config.set_visible_devices([], 'GPU')
             visible_devices = tf.config.get_visible_devices()
             for device in visible_devices:
                 assert device.device_type != 'GPU'
         except Exception as e :
-            log2(e)
+            print_log_info(e)
             # Invalid device or cannot modify virtual devices once initialized.
             pass
 
@@ -118,39 +119,10 @@ def os_path_copy(in_dir, path, ext="*.py"):
 
 os_path_copy(in_dir= cc.code_source  , path= cc.model_dir2 + "/code/")
 
-
-def metric_accuracy(y_val, y_pred_head, class_dict):
-    # Val accuracy
-    val_accuracies = {class_name: 0. for class_name in class_dict}
-    for i, class_name in enumerate(class_dict):
-        y_pred = np.argmax(y_pred_head[i], 1)
-        y_true = np.argmax(y_val[i], 1)
-        val_accuracies[class_name] = (y_pred == y_true).mean()
-    print( f'\n {val_accuracies}')
-    return val_accuracies
+from utilmy.deeplearning.keras.train_graph_loss import metric_accuracy;
 
 
-def valid_image_original(img_list, path, tag, y_labels, n_sample=None):
-    """Assess image validity"""
-    os.makedirs(path, exist_ok=True)
-    if n_sample is not None and isinstance(n_sample, int):
-        img_list = img_list[:n_sample]
-        y_labels = [y[:n_sample].tolist() for y in y_labels]
-
-    for i in range(len(img_list)) :
-        img = img_list[i]
-        if not isinstance(img, np.ndarray) :
-            img = img.numpy()
-
-        img       = img[:, :, ::-1]
-        img       = np.clip(img * 255, 0, 255).astype('uint8')
-        label_tag = 'label_{' + '-'.join([str(y[i]) for y in y_labels]) + '}'
-        save_path = f"{path}/img_{cc.tag}_nimg_{i}_{tag}_{label_tag}.png"
-        cv2.imwrite(save_path, img)
-        img = None
-
-
-def valid_image_check(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):
+def check_valid_image(img_list, path="", tag="", y_labels="", n_sample=3, renorm=True):
     """Assess image validity"""
     os.makedirs(path, exist_ok=True)
     if n_sample is not None and isinstance(n_sample, int):
@@ -172,7 +144,7 @@ def valid_image_check(img_list, path="", tag="", y_labels="", n_sample=3, renorm
         img = None
 
                     
-def save_best(model, model_dir2, curr_loss, best_loss, counter, epoch, dd):
+def save_best_model(model, model_dir2, curr_loss, best_loss, counter, epoch, dd):   #name changed
     """Save the best model"""
     # curr_loss = valid_loss
     if curr_loss < best_loss or (epoch % 5 == 0 and epoch > 0) :
@@ -219,50 +191,16 @@ def image_check(name, img, renorm=False):
     if renorm :
         img = (img *0.5 +0.5) * 255.0        
     cv2.imwrite( model_dir2 + f"/debug/{name}"  , img) 
-        
 
-def pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot=True):
-   """ dfi_onehot = pd_get_dummies( df, cols_cat = ['articleType'  ], cat_dict= cc.labels_map, only_onehot= False)
-      dfi_onehot.sum()
-      dfi_onehot.dtypes
-   """ 
-   dfall      =  None
-   #cols_cat   = list(cat_dict.keys() )
-   cols_nocat = [ t for t in df.columns if t not in cols_cat   ]
 
-   for  coli in cols_cat :  # cat_dict.keys() :
-     if coli not in cat_dict : continue
-     # cat_list = [ coli + "_" + ci for ci in cat_dict[coli] ]
-     cat_list = [ ci for ci in cat_dict[coli] ]
-     df1      = df[coli].fillna('aaother')
-     dfi      = pd.get_dummies( df1.astype(pd.CategoricalDtype(categories= cat_list )))
-
-     dfi.columns = [ coli + "_" + ci for ci in dfi.columns ]
-     dfall    = dfi if dfall is None else pd.concat((dfall, dfi))
- 
-   print(df[ cols_nocat])
-   print(dfall)
-
-   if not only_onehot:
-      dfall = pd.concat((df[cols_nocat], dfall), axis=1)
-      for ci in dfall.columns :
-        if ci not in cols_nocat :
-            dfall[ci] = dfall[ci].astype('int8')
-
-   return dfall 
-
-class LearningRateDecay:
-    def plot(self, epochs, title="Learning Rate Schedule", path=None):
-        # compute the set of learning rates for each corresponding
-        # epoch
-        pass
+from utilmy.deeplearning.keras.util_loss import LearningRateDecay;
 
 
 
 
 #################################################################################################
 #### Code for generating custom data from the Kaggle dataset   ##################################
-def label_get_data():
+def get_custom_label_data():
     
     #### Labels  ##############################
     #df          = pd.read_csv(cc.path_label_raw)  #, error_bad_lines=False, warn_bad_lines=False)
@@ -333,32 +271,61 @@ def pd_category_filter(df, category_map):
 
 ###############################################################################################################
 ###############################################################################################################
-"""## Train"""
-@tf.function
-def train_step(x, model, y_label_list=None):
-    with tf.GradientTape() as tape:
-        z_mean, z_logsigma, x_recon, out_classes = model(x, training=True, y_label_list= y_label_list)      #Forward pass through the VAE
-        
-        loss = perceptual_loss_function(x[0], x_recon, z_mean, z_logsigma,
-            y_label_heads = y_label_list,
-            y_pred_heads  = out_classes,
-            clf_loss_fn   = clf_loss_global
-        )
-
-    grads = tape.gradient(loss, model.trainable_variables)   #Calculate gradients
-    optimizer.apply_gradients(zip(grads, model.trainable_variables))
-    return loss
-
 
 @tf.function
-def validation_step(x, model, y_label_list=None):
-    z_mean, z_logsigma, x_recon, out_classes = model(x, training=False)  #Forward pass through the VAE
-    loss = perceptual_loss_function(x[0], x_recon, z_mean, z_logsigma,
-            y_label_heads = y_label_list, 
-            y_pred_heads  = out_classes, 
-            clf_loss_fn   = clf_loss_global
-        )
-    return loss, x_recon, out_classes
+def train_step_2(x, y, model, loss_fn, optimizer):   #changed file
+    with tf.GradientTape() as tape_w:
+
+        # A separate GradientTape is needed for watching the input.
+        with tf.GradientTape() as tape_x:
+            tape_x.watch(x)
+            # Regular forward pass.
+            sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+            base_output  = model(sample_features, training=True)
+            labeled_loss = loss_fn(y, base_output)
+
+        has_nbr_inputs = nbr_weights is not None and nbr_features
+        if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+            # Use logits for regularization.
+            sample_logits = base_output
+            nbr_logits    = model(nbr_features, training=True)
+            graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+        else:
+            graph_loss = tf.constant(0, dtype=tf.float32)
+
+        scaled_graph_loss = graph_reg_config.multiplier * graph_loss
+
+        # Combines both losses. This could also be a weighted combination.
+        total_loss = labeled_loss + scaled_graph_loss
+
+    # Regular backward pass.
+    gradients = tape_w.gradient(total_loss,  model.trainable_variables)
+    optimizer.apply_gradients(zip(gradients, model.trainable_variables))
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
+
+
+@tf.function
+def test_step(x, y, model, loss_fn):   #changed file
+    # Regular forward pass.
+    sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+    base_output  = model(sample_features, training=False)
+    labeled_loss = loss_fn(y, base_output)
+
+    has_nbr_inputs = nbr_weights is not None and nbr_features
+    if (has_nbr_inputs and graph_reg_config.multiplier > 0):
+        # Use logits for regularization.
+        sample_logits = base_output
+        nbr_logits    = model(nbr_features, training=False)
+        graph_loss    = regularizer(sources=sample_logits, targets=nbr_logits, weights=nbr_weights)
+    else:
+        graph_loss = tf.constant(0, dtype=tf.float32)
+
+    scaled_graph_loss = graph_reg_config.multiplier * graph_loss
+
+    # Combines both losses. This could also be a weighted combination.
+    total_loss = labeled_loss + scaled_graph_loss
+    return base_output, total_loss, labeled_loss, scaled_graph_loss
+
 
 
 

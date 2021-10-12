@@ -1,0 +1,79 @@
+fire==0.4.0
+lightgbm==2.3.0
+scikit-learn==0.23.2
+#pandas==0.25.3
+pandas
+#pandas-profiling==2.5.0
+pandas-profiling
+#scipy==1.3.1
+pyro-ppl==1.5.0
+optuna==1.1.0
+# fastparquet
+tqdm
+numba==0.50.1
+scipy>=0.19.1
+cloudpickle
+dill
+pyspark==2.4.0
+pyarrow>=0.10
+# koalas==1.7.0
+
+#####Tensorflow #####################################
+tensorflow_text>=2.0.0rc0
+keras==2.4.3
+
+#### Models
+pyod==0.8.0
+umap-learn
+imblearn
+sdv==0.7.0   ### 0.9.0 has bug...
+#ctgan==0.3.1.dev0 
+
+##### Features
+category_encoders
+gplearn
+sympy
+#featuretools==0.13.3
+#featuretools-sklearn-transformer==0.1.0
+#featuretools-tsfresh-primitives==0.2.1
+#featuretools-update-checker==1.0.2
+#numba==0.48.0
+
+#### NLP
+nltk
+
+
+#### Others
+# simpleneighbors[annoy]
+# cython
+#cycler==0.10.0
+#joblib
+#kiwisolver==1.2.0
+#llvmlite==0.33.0
+#Pillow==7.2.0
+#pyparsing
+#python-dateutil==2.8.1
+#pytz==2020.1
+# tqdm==4.48.0
+# mlflow==1.13.1
+# mljar-supervised
+# explainerdashboard
+# petastorm
+
+#### Time Series
+# pystan==2.19.1.1
+fbprophet==0.7.1  
+matrixprofile-ts  ### Use for tfresh
+
+
+### util
+wget
+pmlb==1.0.1.post3
+#utilmy==0.1.16174530
+utilmy
+adatasets
+pyinstrument
+
+#########################################
+# Successfully installed Mako-1.1.3 MarkupSafe-1.1.1 PrettyTable-0.7.2 Send2Trash-1.5.0 absl-py-0.11.0 alembic-1.4.3 argon2-cffi-20.1.0 astroid-2.4.2 astropy-4.1 astunparse-1.6.3 async-generator-1.10 attr-0.3.1 attrs-20.3.0 backcall-0.2.0 bleach-3.2.1 cachetools-4.2.0 certifi-2020.12.5 cffi-1.14.4 chardet-3.0.4 click-7.1.2 cliff-3.5.0 cloudpickle-1.6.0 cmd2-1.4.0 colorama-0.4.4 colorlog-4.6.2 confuse-1.0.0 contextvars-2.4 cycler-0.10.0 dask-2020.12.0 dataclasses-0.8 decorator-4.4.2 defusedxml-0.6.0 distributed-2020.12.0 entrypoints-0.3 featuretools-0.13.3 fire-0.3.1 flatbuffers-1.12 gast-0.3.3 google-auth-1.24.0 google-auth-oauthlib-0.4.2 google-pasta-0.2.0 grpcio-1.32.0 h5py-2.10.0 heapdict-1.0.1 htmlmin-0.1.12 idna-2.8 immutables-0.14 importlib-metadata-3.3.0 iniconfig-1.1.1 ipykernel-5.4.2 ipython-7.16.1 ipython-genutils-0.2.0 ipywidgets-7.5.1 isort-5.7.0 jedi-0.18.0 jinja2-2.11.1 joblib-1.0.0 jsonschema-3.2.0 jupyter-client-6.1.7 jupyter-core-4.7.0 jupyterlab-pygments-0.1.2 kaggle-1.5.6 keras-preprocessing-1.1.2 kiwisolver-1.3.1 lazy-object-proxy-1.4.3 lightgbm-2.3.0 llvmlite-0.33.0 markdown-3.3.3 matplotlib-3.3.3 mccabe-0.6.1 missingno-0.4.2 mistune-0.8.4 msgpack-1.0.2 nbclient-0.5.1 nbconvert-6.0.7 nbformat-5.0.8 nest-asyncio-1.4.3 networkx-2.5 nltk-3.5 notebook-6.1.6 numba-0.50.1 numpy-1.19.4 oauthlib-3.1.0 opt-einsum-3.3.0 optuna-1.1.0 packaging-20.8 pandas-0.25.3 pandas-profiling-2.5.0 pandocfilters-1.4.3 parso-0.8.1 pbr-5.5.1 pexpect-4.8.0 phik-0.9.9 pickleshare-0.7.5 pluggy-0.13.1 prometheus-client-0.9.0 prompt-toolkit-3.0.8 protobuf-3.14.0 psutil-5.8.0 ptyprocess-0.7.0 py-1.10.0 pyarrow-2.0.0 pyasn1-0.4.8 pyasn1-modules-0.2.8 pycparser-2.20 pygments-2.7.3 pylint-2.6.0 pyparsing-2.4.7 pyperclip-1.8.1 pyro-api-0.1.2 pyro-ppl-1.5.0 pyrsistent-0.17.3 pytest-6.2.1 pytest-pylint-0.18.0 python-dateutil-2.8.1 python-editor-1.0.4 python-slugify-4.0.1 pytz-2020.5 pyyaml-5.3.1 pyzmq-20.0.0 regex-2020.11.13 requests-2.22.0 requests-oauthlib-1.3.0 rsa-4.6 scikit-learn-0.23.2 scipy-1.5.4 seaborn-0.11.1 setuptools-51.1.1 six-1.15.0 sortedcontainers-2.3.0 sqlalchemy-1.3.22 stevedore-3.3.0 tangled-up-in-unicode-0.0.3 tblib-1.7.0 tensorboard-2.4.0 tensorboard-plugin-wit-1.7.0 tensorflow-2.4.0 tensorflow-estimator-2.4.0 tensorflow-hub-0.10.0 tensorflow-text-2.4.2 termcolor-1.1.0 terminado-0.9.1 testpath-0.4.4 text-unidecode-1.3 threadpoolctl-2.1.0 toml-0.10.2 toolz-0.11.1 torch-1.7.1 tornado-6.1 tqdm-4.42.0 traitlets-4.3.3 typed-ast-1.4.2 typing-extensions-3.7.4.3 urllib3-1.24.3 visions-0.2.2 wcwidth-0.2.5 webencodings-0.5.1 werkzeug-1.0.1 wheel-0.36.2 widgetsnbextension-3.5.1 wrapt-1.12.1 zict-2.0.0 zipp-3.4.0
+

@@ -49,15 +49,17 @@
    from utilmy import Session
    sess = Session("ztmp/session")
    
+   
    aabb = 'ok'
    
    
    
-   
+   ### Save Python sesison
    sess.save('mysess', globals(),)
-   os.system("ls ztmp/session")
    sess.show()
    
+   
+   ### Reload session
    del aabb
    sess.load('mysess', )
    print(aabb)

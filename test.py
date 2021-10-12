@@ -700,6 +700,40 @@ def test_decorators2(*args):
     a.method()
 
 
+def test_tf_cdist():
+    from scipy.spatial.distance import cdist
+    from tqdm import tqdm
+    from utilmy.deeplearning.keras.util_similarity import tf_cdist
+    import tensorflow as tf
+
+    eps = 1e-4
+    sim_num = 1000
+    left_rows_count_min, left_rows_count_max = 5, 20
+    right_rows_count_min, right_rows_count_max = 5, 20
+    dim_min, dim_max = 2, 5
+    metrics = ['euclidean', 'cosine']
+
+    log('tf_cdist test started.')
+    for _ in tqdm(range(sim_num)):
+        for metric in metrics:
+            left_rows_count = np.random.randint(
+                left_rows_count_min, left_rows_count_max, 1
+            )[0]
+            right_rows_count = np.random.randint(
+                right_rows_count_min, right_rows_count_max, 1
+            )[0]
+            dim = np.random.randint(dim_min, dim_max, 1)[0]
+            left_shape = (left_rows_count, dim)
+            right_shape = (right_rows_count, dim)
+            left = tf.random.uniform(left_shape)
+            right = tf.random.uniform(right_shape)
+            tf_dist_matrix = tf_cdist(left, right, metric)
+            tf_dist_matrix = tf_dist_matrix.numpy()
+            np_dist_matrix = cdist(left.numpy(), right.numpy(), metric)
+            diff = np.linalg.norm(tf_dist_matrix - np_dist_matrix)
+            assert diff < eps, f'Accuracy error occurred. Error value: {diff}'
+    log('tf_cdist test completed successfully.')
+
 
 #########################################################################################
 def test_all():
@@ -709,6 +743,7 @@ def test_all():
     test_ppandas()  
     test_text()
     test_docs_cli()
+    test_tf_cdist()
 
     ################
 

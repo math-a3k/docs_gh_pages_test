@@ -256,41 +256,50 @@ def os_walk(path, pattern="*", dirlevel=50):
     return  matches
 
 
-def os_copy_safe(dirin=None, dirout=None, nlevel=10, nfile=100000, cmd_fallback=""):  
-    """ Copy Safely/slowly between drive    
-    
+def os_copy_safe(dirin:str=None, dirout:str=None,  nlevel=5, nfile=50000, logdir="./", pattern="*", cmd_fallback=""):
     """
-    import shutil, time, os, glob       
-    flist = [] ; dirinj = dirin        
-    for j in range(nlevel): 
-        dirinj = dirinj + "/*"
-        tmp = glob.glob(dirinj )
-        if len(tmp) < 1 : break
-        flist  = flist + tmp        
-        
-    flist = flist[:nfile]            
-    log('n files', len(flist))
-    kk = 1 ; ntry = 0
+        Copy Safe between drives, remount drive when needed
+    """
+    import shutil, time, os, glob
+    if dirin is None :
+       dirin  = "/tmp/"
+       dirout = "/tmp"
+
+    flist = [] ; dirinj = dirin
+    for j in range(nlevel):
+        dirinj = dirinj + "/" + pattern
+        ztmp =  sorted( glob.glob(dirinj ) )
+        if len(ztmp) < 1 : break
+        flist  = flist + ztmp
+
+
+    log('n files', len(flist), dirinj, dirin )
+    kk = 1 ; ntry = 0 ;i =0
     for i in range(0, len(flist)) :
         fi  = flist[i]
         fi2 = fi.replace(dirin, dirout)
+
+        # if not fi.isascii(): continue
+
         if not os.path.isfile(fi2) and os.path.isfile(fi) :
              kk = kk + 1
-             if kk > nfile   : return 1   
-             if kk % 50 == 0 : time.sleep(0.5)             
-             if kk % 10 :      log(i, fi2)
+             if kk > nfile   : return 1
+             if kk % 50 == 0 : time.sleep(0.5)
+             if kk % 10 : log(fi2)
              os.makedirs(os.path.dirname(fi2), exist_ok=True)
              try :
                 shutil.copy(fi, fi2)
                 ntry = 0
+                # log(fi2)
              except Exception as e:
                 log(e)
                 time.sleep(10)
                 log(cmd_fallback)
                 os.system(cmd_fallback)
                 time.sleep(10)
-                i    = i - 1
+                i = i - 1
                 ntry = ntry + 1
+    log('Finished', i)
 
                 
 def z_os_search_fast(fname, texts=None, mode="regex/str"):

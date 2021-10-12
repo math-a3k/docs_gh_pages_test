@@ -2,15 +2,25 @@ fire
 python-box
 numpy
 pandas
+scipy
+loguru
+
+
+########################################################
+#### utilmy.date
+arrow
+
+
+
+########################################################
+#### utilmy.debug
 pyinstrument  ### code profile
 icecream  ### debugger
 rebound-cli  ## stackoverflow
-pysnooper   ### Debugger show lines of code step by step
+pysnooper   ### Debugger show lines of code step by ste
 snoop
-scipy
-seaborn
-loguru
-arrow
+
+
 ########################################################
 #### utilmy.utils
 wget
@@ -22,8 +32,10 @@ datasketch  ### lSH
 rapidfuzz
 editdistance
 
+
 ########################################################
 #### utilmy.viz.html
+seaborn
 tqdm
 matplotlib
 python-highcharts  
@@ -36,7 +48,9 @@ shapely
 pretty-html-table
 networkx
 pyvis
-#############################################################################
+
+
+#########################################################
 #### utilmy.text
 wget
 
@@ -65,3 +79,29 @@ holidays
 ## tabular
 statsmodels
 hypothetical
+
+
+
+
+
+
+
+########################################################
+#### utilmy.deeplearning
+faiss-cpu
+tensorflow-cpu==2.2.3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

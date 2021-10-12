@@ -1,0 +1,31 @@
+
+
+
+
+
+Transformation by category
+
+https://github.com/Automunge/AutoMunge#library-of-transformations
+Library of Transformations
+Library of Transformations Subheadings:
+Intro
+Numerical Set Normalizations
+Numerical Set Transformations
+Numercial Set Bins and Grainings
+Sequential Numerical Set Transformations
+Categorical Set Encodings
+Date-Time Data Normalizations
+Date-Time Data Bins
+Differential Privacy Noise Injections
+Misc. Functions
+String Parsing
+More Efficient String Parsing
+Multi-tier String Parsing
+List of Root Categories
+List of Suffix Appenders
+Other Reserved Strings
+Root Category Family Tree Definitions
+
+
+
+

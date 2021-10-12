@@ -1,0 +1,66 @@
+{
+        "test": {
+
+              "hypermodel_pars":   {
+              "learning_rate": {"type": "log_uniform", "init": 0.01,  "range" : [0.001, 0.1] }
+             },
+
+            "model_pars": {
+                "model_uri": "model_tch.torchhub",
+                "repo_uri": "facebookresearch/pytorch_GAN_zoo:hub",
+                "model": "PGAN",
+                "model_name" : "celebAHQ-512",
+
+
+                "num_classes": 1000,
+                "pretrained": 0,  "_comment": "0: False, 1: True",
+                "num_layers": 1,
+                "size": 6,
+                "size_layer": 128,
+                "output_size": 6,
+                "timestep": 4,
+                "epoch": 2
+            },
+
+            "data_pars" :{
+                "data_info": {
+                    "data_path": "dataset/vision/MNIST",
+                    "dataset":"MNIST",
+                    "data_type":"tch_dataset",
+                    "batch_size": 10,
+                    "train": true
+                },
+                "preprocessors": [
+				{
+					"name" :  "tch_dataset_start",
+                    "uri"  : "mlmodels.preprocess.generic:get_dataset_torch",
+                    "args"  : {
+                            "dataloader": "torchvision.datasets:MNIST",
+                            "to_image":   true,
+                            "transform":  {  "uri": "mlmodels.preprocess.image:torch_transform_mnist", 
+                                             "pass_data_pars": false, 
+                                             "arg": { "fixed_size" : 256, "path":"dataset/vision/MNIST/" } },
+                            "shuffle": true,
+                            "download" : true
+                            }
+				}]    
+            },
+
+
+            "compute_pars": {
+                "distributed": "mpi",
+                "max_batch_sample": 5,
+                "epochs": 2,
+                "learning_rate": 0.001
+            },
+            "out_pars": {
+                "checkpointdir": "ztest/model_tch/torchhub/pytorch_GAN_zoo/checkpoints/",
+                "path": "ztest/model_tch/torchhub/pytorch_GAN_zoo/"
+            }
+        },
+    
+        "prod": {
+            "model_pars": {},
+            "data_pars": {}
+        }
+    }

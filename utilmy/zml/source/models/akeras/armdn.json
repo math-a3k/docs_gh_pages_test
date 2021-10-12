@@ -1,0 +1,28 @@
+{
+  "test": {
+    "model_pars": {
+      "lstm_h_list": [300, 200, 24],
+      "last_lstm_neuron": 12,
+      "timesteps": 12,
+      "dropout_rate": 0.1,
+      "n_mixes": 3,
+      "dense_neuron": 10
+    },
+    "data_pars": {
+      "train": true,
+      "train_data_path": "dataset/timeseries/milk.csv",
+      "prediction_length": 12,
+      "col_Xinput": ["milk_production_pounds"],
+      "col_ytarget": "milk_production_pounds"
+    },
+    "compute_pars": {
+      "batch_size": 32,
+      "epochs": 10,
+      "learning_rate": 0.05,
+      "patience": 50
+    },
+    "out_pars": {
+      "outpath": "ztest/model_keras/armdn/"
+    }
+  }
+}

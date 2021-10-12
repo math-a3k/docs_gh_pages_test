@@ -132,3 +132,8 @@ dmypy.json
 /data
 /docs/output_repo.csv
 /docs/doc_main.md
+/utilmy/zml/source/models/repo/net_dnf_effective_deep_modeling_of_tabular_data/*.pdf
+/utilmy/zml/source/models/repo/net_dnf_effective_deep_modeling_of_tabular_data/__MACOSX/*.pdf
+/utilmy/.idea/inspectionProfiles
+/utilmy/.idea
+/utilmy/zml/source/bin/auto_feature_AFEM/*.pdf

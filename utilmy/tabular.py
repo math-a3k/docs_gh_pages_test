@@ -9,11 +9,10 @@ https://pypi.org/project/pysie/#description
 """
 import os, sys, pandas as pd, numpy as np
 
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.model_selection import train_test_split
-
 from utilmy.utilmy import pd_generate_data
-from utilmy.zarchive.zzarchive.zutil_features import pd_colnum_tocat, pd_colnum_tocat_stat
+from utilmy.prepro.util_feature import  pd_colnum_tocat, pd_colnum_tocat_stat
+
+
 
 
 def test0():
@@ -27,6 +26,9 @@ def test0():
     '''
 
 def test1():
+    from sklearn.tree import DecisionTreeRegressor
+    from sklearn.model_selection import train_test_split
+
     df = pd.read_csv("../testdata/tmp/test/crop.data.csv")
     model = DecisionTreeRegressor(random_state=1)
     y = df.fertilizer
@@ -46,10 +48,9 @@ def test1():
     pd_to_scipy_sparse_matrix(df)
     '''TODO: git test failling here'''
     #log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
-    '''
-    TODO: AttributeError: 'DataFrame' object has no attribute 'profile_report'
-    pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
-    '''
+
+    # pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
+
     pd_stat_distribution_colnum(df, nrows=len(df))
     '''TODO: KeyError: 'freqall
     pd_stat_histogram(df, bins=50, coltarget="yield")
@@ -101,8 +102,7 @@ def y_adjuster_log(y_true, y_pred_log, error_func, **kwargs):
 
 
             
-            
-    
+
     
 def test_anova(df, col1, col2):
     """
