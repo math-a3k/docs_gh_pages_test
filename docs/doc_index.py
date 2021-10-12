@@ -289,9 +289,13 @@ __cast_left_and_right_to_tensors(left, right)
 __get_rows_counts(left, right)
 __get_tensor_reshaped_norm(tensor, reshape_shape)
 __get_tensor_sqr(tensor, reshape_shape, tile_shape)
-__tf_cdist_cos(left, right)
-__tf_cdist_euclidean(left, right)
+help()
+log(*s)
+log2(*s)
+test_tf_cdist()
 tf_cdist(left, right, metric = 'euclidean')
+tf_cdist_cos(left, right)
+tf_cdist_euclidean(left, right)
 
 
 
