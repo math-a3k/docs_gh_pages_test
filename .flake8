@@ -8,6 +8,11 @@ jobs = auto
 
 ################### OUTPUT #################################
 
+########## Verbosity ##########
+
+# Increase the verbosity of Flake8’s output.
+verbose = 0
+
 
 ########## Formatting ##########
 
@@ -53,6 +58,13 @@ filename =
 
 ########## Options ##########
 
+# Report all errors, even if it is on the same line as a `# NOQA` comment.
+disable-noqa = False
+
+# Set the maximum length that any line (with some exceptions) may be.
+max-line-length = 140
+# Set the maximum allowed McCabe complexity value for a block of code.
+max-complexity = 10
 # Toggle whether pycodestyle should enforce matching the indentation of the opening bracket’s line.
 # incluences E131 and E133
 hang-closing = True
