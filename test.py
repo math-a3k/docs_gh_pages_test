@@ -410,19 +410,19 @@ def test_oos():
 
     test_log()
     int_float_test()
-    os_path_size_test()
-    os_path_split_test()
-    os_file_replacestring_test()
+    #os_path_size_test()
+    #os_path_split_test()
+    #os_file_replacestring_test()
     # os_walk_test()
     os_copy_safe_test()
     #z_os_search_fast_test()
     #os_search_content_test()
-    os_get_function_name_test()
-    os_variables_test()
-    os_system_list_test()
-    os_file_check_test()
-    os_utils_test()
-    os_system_test()
+    #os_get_function_name_test()
+    #os_variables_test()
+    #os_system_list_test()
+    #os_file_check_test()
+    #os_utils_test()
+    #os_system_test()
 
 
 
