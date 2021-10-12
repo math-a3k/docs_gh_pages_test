@@ -112,29 +112,17 @@ def date_weekyear2(dt) :
 
 
 def date_weekday_excel(x) :
- import arrow
- wday= arrow.get( str(x) , "YYYYMMDD").isocalendar()[2]
+ import datetime
+ date = datetime.datetime.strptime(x,"%Y%m%d")
+ wday = date.weekday()
  if wday != 7 : return wday+1
  else :    return 1
 
 
 def date_weekyear_excel(x) :
- import arrow
- dd= arrow.get( str(x) , "YYYYMMDD")
- wk1= dd.isocalendar()[1]
-
- # Excel Convention
- # dd0= arrow.get(  str(dd.year) + "0101", "YYYYMMDD")
- dd0_weekday= date_weekday_excel( dd.year *10000 + 101  )
- dd_limit= dd.year*10000 + 100 + (7-dd0_weekday+1) +1
-
- ddr= arrow.get( str(dd.year) + "0101" , "YYYYMMDD")
- # print dd_limit
- if    int(x) < dd_limit :
-    return 1
- else :
-     wk2= 2 + int(((dd-ddr ).days  - (7-dd0_weekday +1 ) )   /7.0 )
-     return wk2
+ import datetime
+ date = datetime.datetime.strptime(x,"%Y%m%d")
+ return date.isocalendar()[1]
 
 
 def date_generate(start='2018-01-01', ndays=100) :
