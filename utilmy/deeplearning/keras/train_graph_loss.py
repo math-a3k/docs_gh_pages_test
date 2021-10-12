@@ -9,8 +9,8 @@ Original file is located at
 # 0) Globals Params
 """
 
-!pip install python-box
-!pip install neural_structured_learning
+#!pip install python-box
+#!pip install neural_structured_learning
 
 """
 ### STORED All variables inside special dict cc
@@ -100,7 +100,7 @@ drive.mount('/content/drive/')
 
 """# 1) Common"""
 
-!nvidia-smi
+#!nvidia-smi
 
 """
 Actually, Google Colab automatically disconnects the notebook if we leave it idle for more than 30 minutes. 🕑
@@ -499,7 +499,7 @@ percep_model = tf.keras.applications.EfficientNetB0(
 )
 
 
-from train_vqvae_loss import *;
+from utilmy.deeplearning.keras.train_vqvae_loss import *;
 
 
 """# 3) Kaggle Fashion dataset
@@ -556,8 +556,8 @@ for col in df_train.columns:
 for col in df_val.columns:
     print(df_val[col].unique())
 
-!mkdir -p fashion_data
-!cp -r raw_fashion_data/images fashion_data
+#!mkdir -p fashion_data
+#!cp -r raw_fashion_data/images fashion_data
 df_train.to_csv('fashion_data/styles_train.csv', index=False)
 df_val.to_csv('fashion_data/styles_val.csv', index=False)
 
@@ -610,17 +610,17 @@ df_val = df.iloc[num_train:, :]
 # for col in df_val.columns:
 #     print(df_val[col].unique())
 
-!mkdir -p fashion_data
-!cp -r raw_fashion_data/images fashion_data
+#!mkdir -p fashion_data
+#!cp -r raw_fashion_data/images fashion_data
 df_train.to_csv('fashion_data/styles_train.csv', index=False)
 df_val.to_csv('fashion_data/styles_val.csv', index=False)
 
-!zip -r fashion_data.zip fashion_data
+#!zip -r fashion_data.zip fashion_data
 
 from google.colab import drive
 drive.mount('/content/drive')
 
-!cp fashion_data.zip /content/drive/MyDrive/v3/
+#!cp fashion_data.zip /content/drive/MyDrive/v3/
 
 """## Download the clean Kaggle dataset"""
 
@@ -630,8 +630,8 @@ drive.mount('/content/drive')
 # os.chdir('/content/')
 # os.system('gdown --id 1Jf2XOJb078Mu75oUCJjBfxM36TGZ8SFv -O fashion_data.zip')
 # os.system('unzip -qq fashion_data.zip')
-!cp {cc.root2}fashion_data.zip  /content/fashion_data.zip
-!unzip -o -qq  /content/fashion_data.zip   -d /content
+#!cp {cc.root2}fashion_data.zip  /content/fashion_data.zip
+#!unzip -o -qq  /content/fashion_data.zip   -d /content
 
 #### https://www.kaggle.com/paramaggarwal/fashion-product-images-dataset
 
@@ -668,7 +668,7 @@ print('Total: ', df_train.subCategory.nunique())
 # sns.countplot(data=df_train, x='subCategory', order=df_train.subCategory.value_counts().iloc[:20].index)
 
 """## Data loader"""
-from util_dataloader import  RealCustomDataGenerator9;
+from utilmy.deeplearning.keras.util_dataloader import  RealCustomDataGenerator9;
 
 
 df = pd.read_csv(cc.path_label_train)
@@ -1851,11 +1851,7 @@ def make_encoder(n_outputs = 1):
 
 
 def make_decoder():
-  """
-    ValueError: Dimensions must be equal, but are 3 and 4 
-    for '{{node sub}} = Sub[T=DT_FLOAT](x, sequential_1/conv2d_transpose_3/Relu)' with input shapes: [8,256,256,3], [8,256,256,4].
-
-  """    
+  
   #Functionally define the different layer types
   Input              = tf.keras.layers.InputLayer
 
@@ -1922,13 +1918,7 @@ def clf_loss_crossentropy(y_true, y_pred):
 
 
 def make_classifier(nclass_dict):
-  """ Supervised multi class
-        self.gender         = nn.Linear(self.inter_features, self.num_classes['gender'])
-        self.masterCategory = nn.Linear(self.inter_features, self.num_classes['masterCategory'])
-        self.subCategory    = nn.Linear(self.inter_features, self.num_classes['subCategory'])
-        self.articleType    = nn.Linear(self.inter_features, self.num_classes['articleType'])
-
-  """    
+   
   Input              = tf.keras.layers.InputLayer
   Dense              = functools.partial(tf.keras.layers.Dense, activation='relu', 
                                          kernel_regularizer   = tf.keras.regularizers.L1L2(l1=0.01, l2=0.001),
@@ -2043,11 +2033,7 @@ if cc.data_gen_name == 'album1':
 
 if cc.data_gen_name == 'direct':
     from util_train import CustomDataGenerator_img, train_transforms, test_transforms
-    """
-        def  __init__(self, image_dir, label_path, class_list,
-               split='train', batch_size=8, transforms=None)
-    
-    """
+   
     train_img_dir  = data_dir + '/train/*'
     test_img_dir   = data_dir + '/test/*'    
     label_file = data_label  +"/preprocessed_df.csv"

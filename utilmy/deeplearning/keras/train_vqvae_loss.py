@@ -9,15 +9,15 @@ Original file is located at
 # 0) Globals Params
 """
 
-!pip install python-box
-!pip install neural_structured_learning
+#!pip install python-box
+#!pip install neural_structured_learning
 
 """
 ### STORED All variables inside special dict cc
 
 
 """
-!pip install python-box
+#!pip install python-box
 import os
 import glob
 
@@ -102,7 +102,7 @@ drive.mount('/content/drive/')
 
 """# 1) Common"""
 
-!nvidia-smi
+#!nvidia-smi
 
 """
 Actually, Google Colab automatically disconnects the notebook if we leave it idle for more than 30 minutes. 🕑
@@ -193,8 +193,8 @@ def print_log(*s):   #name changed
     """Log decorator"""
     print(*s, flush=True)
 
-from util_graph_loss import *;
-from util_loss import metric_accuracy,clf_loss_macro_soft_f1;
+from utilmy.deeplearning.keras.util_graph_loss import *;
+from utilmy.deeplearning.keras.util_loss import metric_accuracy,clf_loss_macro_soft_f1;
 
 
 """## 1-3) Define VQ-VAE model"""
@@ -552,7 +552,7 @@ def make_decoder():
         ])
     return decoder
 
-from util_layers import make_classifier_2 as make_classifier
+from utilmy.deeplearning.keras.util_layers import make_classifier_2 as make_classifier
 
 """## 1-4) Build loss function"""
 
@@ -725,8 +725,8 @@ for col in df_train.columns:
 for col in df_val.columns:
     print(df_val[col].unique())
 
-!mkdir -p fashion_data
-!cp -r raw_fashion_data/images fashion_data
+#!mkdir -p fashion_data
+#!cp -r raw_fashion_data/images fashion_data
 df_train.to_csv('fashion_data/styles_train.csv', index=False)
 df_val.to_csv('fashion_data/styles_val.csv', index=False)
 
@@ -779,17 +779,17 @@ df_val = df.iloc[num_train:, :]
 # for col in df_val.columns:
 #     print(df_val[col].unique())
 
-!mkdir -p fashion_data
-!cp -r raw_fashion_data/images fashion_data
+#!mkdir -p fashion_data
+#!cp -r raw_fashion_data/images fashion_data
 df_train.to_csv('fashion_data/styles_train.csv', index=False)
 df_val.to_csv('fashion_data/styles_val.csv', index=False)
 
-!zip -r fashion_data.zip fashion_data
+#!zip -r fashion_data.zip fashion_data
 
 from google.colab import drive
 drive.mount('/content/drive')
 
-!cp fashion_data.zip /content/drive/MyDrive/v3/
+#!cp fashion_data.zip /content/drive/MyDrive/v3/
 
 """## Download the clean Kaggle dataset"""
 
@@ -799,8 +799,8 @@ drive.mount('/content/drive')
 # os.chdir('/content/')
 # os.system('gdown --id 1Jf2XOJb078Mu75oUCJjBfxM36TGZ8SFv -O fashion_data.zip')
 # os.system('unzip -qq fashion_data.zip')
-!cp {cc.root2}fashion_data.zip  /content/fashion_data.zip
-!unzip -o -qq  /content/fashion_data.zip   -d /content
+#!cp {cc.root2}fashion_data.zip  /content/fashion_data.zip
+#!unzip -o -qq  /content/fashion_data.zip   -d /content
 
 #### https://www.kaggle.com/paramaggarwal/fashion-product-images-dataset
 
@@ -835,13 +835,13 @@ print('Total: ', df_train.subCategory.nunique())
 
 #plt.figure(figsize=(20, 10))
 # sns.countplot(data=df_train, x='subCategory', order=df_train.subCategory.value_counts().iloc[:20].index)
-from util_dataloader import RealCustomDataGenerator;
+from utilmy.deeplearning.keras.util_dataloader import RealCustomDataGenerator;
 
 df = pd.read_csv(cc.path_label_train )
 df = pd.concat((df,  pd.read_csv(cc.path_label_test )))
 df = pd.concat((df,  pd.read_csv(cc.path_label_val )))
 df = df.fillna('')
-print( df.dtypes )
+print(df.dtypes)
 
 for ci in df.columns :
     if 'id' not in ci:
@@ -1539,27 +1539,6 @@ log("Train Model")
 log('Number of training batches:', len(train_data))
 log('Number of test batches:', len(val_data))
 
-@tf.function
-def train_step(x, model, y_label_list=None):
-    with tf.GradientTape() as tape:
-        z_mean, z_logsigma, x_recon, out_classes = model(x, training=True)      #Forward pass through the VAE
-        loss = perceptual_loss_function(x, x_recon, z_mean, z_logsigma,
-            y_label_heads=y_label_list, 
-            y_pred_heads=out_classes, 
-            clf_loss_fn=clf_loss_crossentropy
-        )  
-
-    grads = tape.gradient(loss, model.trainable_variables)   #Calculate gradients
-    optimizer.apply_gradients(zip(grads, model.trainable_variables))
-    return loss
-
-
-@tf.function
-def validation_step(x, model):
-    z_mean, z_logsigma, x_recon, out_classes = model(x, training=False)  #Forward pass through the VAE
-    loss = perceptual_loss_function(x, x_recon, z_mean, z_logsigma)
-    return loss, x_recon, out_classes
-
 
 ##### Output
 cc.dname = 'model_random'
@@ -1975,11 +1954,7 @@ def make_encoder(n_outputs = 1):
 
 
 def make_decoder():
-  """
-    ValueError: Dimensions must be equal, but are 3 and 4 
-    for '{{node sub}} = Sub[T=DT_FLOAT](x, sequential_1/conv2d_transpose_3/Relu)' with input shapes: [8,256,256,3], [8,256,256,4].
-
-  """    
+    
   #Functionally define the different layer types
   Input              = tf.keras.layers.InputLayer
 
@@ -2046,13 +2021,7 @@ def clf_loss_crossentropy(y_true, y_pred):
 
 
 def make_classifier(nclass_dict):
-  """ Supervised multi class
-        self.gender         = nn.Linear(self.inter_features, self.num_classes['gender'])
-        self.masterCategory = nn.Linear(self.inter_features, self.num_classes['masterCategory'])
-        self.subCategory    = nn.Linear(self.inter_features, self.num_classes['subCategory'])
-        self.articleType    = nn.Linear(self.inter_features, self.num_classes['articleType'])
-
-  """    
+  
   Input              = tf.keras.layers.InputLayer
   Dense              = functools.partial(tf.keras.layers.Dense, activation='relu', 
                                          kernel_regularizer   = tf.keras.regularizers.L1L2(l1=0.01, l2=0.001),
@@ -2167,12 +2136,7 @@ if cc.data_gen_name == 'album1':
 
 if cc.data_gen_name == 'direct':
     from util_train import CustomDataGenerator_img, train_transforms, test_transforms
-    """
-        def  __init__(self, image_dir, label_path, class_list,
-               split='train', batch_size=8, transforms=None)
-    
-    """
-    train_img_dir  = data_dir + '/train/*'
+    mg_dir  = data_dir + '/train/*'
     test_img_dir   = data_dir + '/test/*'    
     label_file = data_label  +"/preprocessed_df.csv"
     labels_col = [ 'gender', 'masterCategory', 'subCategory', 'articleType' ]
@@ -2480,7 +2444,7 @@ def build_model_2(input_shape, num_classes):
     return model
 
 """Train the model (Data augmentation)"""
-from train_graph_loss import train_step, test_step;
+from utilmy.deeplearning.keras.train_graph_loss import train_step, test_step;
 
 
 input_shape = (image_size, image_size, 3)

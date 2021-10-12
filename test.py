@@ -708,6 +708,20 @@ def test_decorators2(*args):
 
 
 
+
+
+
+########################################################################################################
+def test_deeplearning_keras():
+
+    from utilmy.deeplearning.keras import  util_similarity as m
+    m.test_tf_cdist()
+
+
+
+
+
+
 #########################################################################################
 def test_all():
     test_utilmy()
@@ -717,14 +731,18 @@ def test_all():
     test_text()
     test_docs_cli()
 
-    ################
 
+    ################
     test_oos()
     test_tabular()
     test_adatasets()
     test_dates()
     test_decorators()
     test_utils()
+
+
+    ################
+    test_deeplearning_keras()
 
 
       

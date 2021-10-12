@@ -77,9 +77,14 @@ hypothetical
 
 
 
+
+
+
+
 ########################################################
 #### utilmy.deeplearning
 faiss-cpu
+tensorflow-cpu==2.2.3
 
 
 

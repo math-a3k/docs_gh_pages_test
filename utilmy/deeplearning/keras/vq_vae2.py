@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1dsRcxGDtLIY_ZVeiyPyF_HQQrZlp19TP
 """
 
-!pip install -q tensorflow-probability
+#!pip install -q tensorflow-probability
 
 import numpy as np
 import matplotlib.pyplot as plt
