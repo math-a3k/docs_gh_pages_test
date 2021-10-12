@@ -85,15 +85,12 @@ hang-closing = True
 #
 
 # Specify a list of codes to ignore.
-ignore =  E/W, C, E2, E3, E4, E5, E7, W1, W3, W5, W6,
+ignore =  E/W, C, E2, E3, E4, E5, E7, W1, W3, W5, W6,F401,
+          F821,F841,F401
 
 
 # Specify the list of error codes you wish Flake8 to report.
-select = F
-#    E,
-#    W,
-#    F,
-#    C
+select = E9
 # Specify a list of mappings of files and the codes that should be ignored for the entirety of the
 # file.
 # per-file-ignores =
