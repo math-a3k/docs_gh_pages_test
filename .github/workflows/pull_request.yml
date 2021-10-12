@@ -1,17 +1,13 @@
-name: Build and Test , Package PyPI
+name: Pull Request Check 
 
 ###  https://github.com/arita37/awesome-actions#static-analysis
 
 on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
-  push:
+  pull_request:
     branches:
     - main
-
-#  pull_request:
-#    branches:
-#    - main
 
 jobs:
   build:
@@ -75,11 +71,13 @@ jobs:
         
         
     ########  Runs All test
-    - name: run_all
+    - name: setup test
       run: |
           mkdir -p    /home/runner/work/log_tmp/
-          chmod -R 777 . &&  python test.py   test_all
+          chmod -R 777 . 
 
+    - name: test_all
+      run: python test.py   test_all
 
     ################################################################
     - name: test_ppandas
@@ -132,8 +130,9 @@ jobs:
 
 
 
+
           
-    ########  Runs All test  #################      
+    ########  Runs All test       
     - name: log_gitcommit
       run: |
            ls .
@@ -144,38 +143,7 @@ jobs:
     #    ref: ${{ github.head_ref }}
 
 
-    ########  Generate Docs     
-    - name: docs_generate
-      continue-on-error: true
-      run: |
-           docs all      --repo_dir utilmy/  --out_dir docs/
-           rm -rf docs/doc_main.md
-           rm -rf docs/output_repo.csv
 
-
-    - name: Auto-Commit
-      continue-on-error: true
-      id: auto_commmit
-      uses: stefanzweifel/git-auto-commit-action@v4.8.0
-      with:
-          # Optional, but recommended
-          # Defaults to "Apply automatic changes"
-          commit_message: Auto Docs
-
-          # Optional branch name where commit should be pushed to.
-          # Defaults to the current branch.
-          # branch: main
-
-          # Optional. Used by `git-commit`.
-          # See https://git-scm.com/docs/git-commit#_options
-          commit_options: '--no-verify --signoff'
-
-          # Optional glob pattern of files which should be added to the commit
-          file_pattern: docs/*.* 
-
-          # Optional local file path to the repository
-          # Defaults to the root of the repository
-          repository: .
 
 
 
@@ -205,4 +173,3 @@ jobs:
         # echo "$TWINE_USERNAME"
         python run_pipy.py
         python setup.py sdist bdist_wheel
-        twine upload dist/*  --username ${{ secrets.PYPI_USERNAME }}     --password ${{ secrets.PYPI_PASSWORD }}  --skip-existing   --repository-url https://upload.pypi.org/legacy/  --verbose   
