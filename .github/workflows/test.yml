@@ -75,12 +75,12 @@ jobs:
            python -c "import os, pandas as pd; print(os)"
            python -c "import utilmy"        
         
-    - name: Install flake8
+    - name: Run flake8
       run:  |
-        pip install 
+        pip install flake8
+        flake8  --statistics  
     
-    - name: flake8
-      run: flake8
+
         
     ########  Runs All test
     - name: setup
