@@ -78,7 +78,7 @@ jobs:
     - name: run_all
       run: |
           mkdir -p    /home/runner/work/log_tmp/
-          chmod -R 777 . &&  python test.py   test_all
+          chmod -R 777 . 
 
 
     ################################################################
