@@ -36,14 +36,14 @@ Repo: ./
 | <a name='utilmy/configs/util_config.py' href='.//utilmy/configs/util_config.py'>utilmy/configs/util_config.py</a> | function | <a href='.//utilmy/configs/util_config.py#L300'>zzz_config_load_validate</a> | yamale.make_schema<br>yamale.make_data<br>yamale.validate<br>convert_yaml_to_box<br>print<br> |
 | <a name='utilmy/data.py' href='.//utilmy/data.py'>utilmy/data.py</a> | function | <a href='.//utilmy/data.py#L25'>help</a> | print<br> |
 | <a name='utilmy/data.py' href='.//utilmy/data.py'>utilmy/data.py</a> | function | <a href='.//utilmy/data.py#L21'>log</a> | print<br> |
-| <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L124'>date_generate</a> | relativedelta<br>range<br> |
+| <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L128'>date_generate</a> | relativedelta<br>range<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L83'>date_is_holiday</a> | holidays.CountryHoliday<br>np.array<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L71'>date_now</a> | datetime.timedelta<br>now_new.astimezone<br>now_pacific.strftime<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L114'>date_weekday_excel</a> | date.weekday<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L101'>date_weekmonth</a> | date_weekmonth<br>date_value.replace<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L93'>date_weekmonth2</a> |  |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L110'>date_weekyear2</a> | datetime.datetime<br> |
-| <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L120'>date_weekyear_excel</a> | date.isocalendar<br> |
+| <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L122'>date_weekyear_excel</a> | date.isocalendar<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L36'>log</a> | print<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L41'>pd_date_split</a> | df.drop_duplicates<br>pd.to_datetime<br>x.weekday<br>date_weekmonth<br>date_weekmonth2<br>x.isocalendar<br>date_weekyear2<br>df.apply<br>int<br>merge1<br>date_is_holiday<br>log<br> |
 | <a name='utilmy/dates.py' href='.//utilmy/dates.py'>utilmy/dates.py</a> | function | <a href='.//utilmy/dates.py#L23'>random_dates</a> | pd.to_datetime<br> |
