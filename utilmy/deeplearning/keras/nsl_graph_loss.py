@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/11BWemRJoxYmz3YpvX4MBxRomOu2IJQa6
 """
 
-!pip install neural_structured_learning
+#!pip install neural_structured_learning
 
 """# Graph regularization"""
 
