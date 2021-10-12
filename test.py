@@ -603,8 +603,8 @@ def test_dates():
         from utilmy.dates import date_generate,date_weekyear_excel,date_weekday_excel,date_is_holiday,\
             date_now,pd_date_split
         date_ = date_generate(start='2021-01-01', ndays=100)
-        date_weekday_excel(date_[0])
-        date_weekyear_excel(date_[1])
+        date_weekyear_excel('20210317')
+        date_weekday_excel('20210317')
         date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
         date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
         df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])

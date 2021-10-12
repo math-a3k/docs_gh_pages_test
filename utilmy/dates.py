@@ -111,13 +111,17 @@ def date_weekyear2(dt) :
  return ((dt - datetime.datetime(dt.year,1,1)).days // 7) + 1
 
 
-def date_weekday_excel(date) :
+def date_weekday_excel(x) :
+ import datetime
+ date = datetime.datetime.strptime(x,"%Y%m%d")
  wday = date.weekday()
  if wday != 7 : return wday+1
  else :    return 1
 
 
-def date_weekyear_excel(date) :
+def date_weekyear_excel(x) :
+ import datetime
+ date = datetime.datetime.strptime(x,"%Y%m%d")
  return date.isocalendar()[1]
 
 
