@@ -320,7 +320,7 @@ def test_oos():
         from utilmy.oos import os_walk
         import os
         cwd = os.getcwd()
-        log(os_walk(cwd))
+        # log(os_walk(cwd))
     
     def os_copy_safe_test():
         log("Testing os_copy_safe() ..")
@@ -743,6 +743,7 @@ def test_all():
 
     ################
     test_deeplearning_keras()
+
 
 
       
