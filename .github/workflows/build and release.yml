@@ -73,6 +73,7 @@ jobs:
         
 
     - name: Code Syntax Checker flake8
+      continue-on-error: true
       run:  |
         pip install --upgrade flake8
         flake8  --statistics   --count    --max-line-length 140
