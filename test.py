@@ -491,7 +491,7 @@ def test_tabular():
         '''TODO: git test failling here'''
         # log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
         
-        # pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
+        pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
         pd_stat_distribution_colnum(df, nrows=len(df))
         pd_stat_histogram(df, bins=50, coltarget="yield")
         _,df_grouped = get_grouped_data(df,"density","block",10)
