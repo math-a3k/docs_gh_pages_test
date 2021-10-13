@@ -1,0 +1,11 @@
+python==3.6.5
+pyarrow==0.14.0  
+pyspark==2.4.6
+py4j
+ua-parser==0.10.0
+pystan==2.19.1.1 
+fbprophet==0.6  
+ua-parser==0.10.0
+loguru
+pyyaml
+pytest-cov
