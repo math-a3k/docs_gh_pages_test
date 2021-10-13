@@ -1,0 +1,45 @@
+name: ztest
+
+###  https://github.com/arita37/awesome-actions#static-analysis
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - ztest
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    #- uses: actions/checkout@v1
+    #  ref: ${{ github.head_ref }
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        
+    - name: Set up Python 3.6.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6.*
+      
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+      
+  
+    - name: Install utilmy
+      run:  |
+        while true ;do pip install --upgrade utilmy  &&  pip uninstall utilmy    done 
+
+
+          
+    ########  Runs All test       
+    - name: log_gitcommit
+      run: |
+           ls .
+           
+
+
