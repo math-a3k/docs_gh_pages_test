@@ -47,10 +47,10 @@ exclude =
     utilmy/zml,
     utilmy/zzarchive,
     utilmy/zrecs,
-    */*/*zz*,
-    */*/*/*zz*,
-    */*/*/*/*zz*,
-    */*/*/*/*/*zz*,
+#    */*/*zz*,
+#    */*/*/*zz*,
+#    */*/*/*/*zz*,
+#    */*/*/*/*/*zz*,
     docs,
     scripts,
     testdata
@@ -58,6 +58,7 @@ exclude =
     
 # Provide a comma-separate list of glob patterns to include for checks.
 filename =
+    *.py,
     utilmy/*.py,
     utilmy/*/*.py,
     utilmy/*/*/*.py,
