@@ -75,7 +75,7 @@ jobs:
            python -c "import os, pandas as pd; print(os)"
            python -c "import utilmy"        
         
-    - name: Run flake8
+    - name: flake8 Python Syntax Error
       continue-on-error: true
       run:  |
         pip install flake8
