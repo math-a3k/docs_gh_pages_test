@@ -55,11 +55,11 @@ def pd_date_split(df, coldate =  'time_key', prefix_col ="", verbose=False ):
     df['weekyear2']     = df['date'].apply( lambda x : date_weekyear2( x )  )
     df['quarter']       = df.apply( lambda x :  int( x['month'] / 4.0) + 1 , axis=1  )
 
-    df['yearweek']      = df.apply(  lambda x :  merge1(  x['year']  , x['weekyeariso'] )  , axis=1  )
-    df['yearmonth']     = df.apply( lambda x : merge1( x['year'] ,  x['month'] )         , axis=1  )
-    df['yearquarter']   = df.apply( lambda x : merge1( x['year'] ,  x['quarter'] )         , axis=1  )
+    # df['yearweek']      = df.apply(  lambda x :  merge1(  x['year']  , x['weekyeariso'] )  , axis=1  )
+    # df['yearmonth']     = df.apply( lambda x : merge1( x['year'] ,  x['month'] )         , axis=1  )
+    # df['yearquarter']   = df.apply( lambda x : merge1( x['year'] ,  x['quarter'] )         , axis=1  )
 
-    df['isholiday']     = date_is_holiday( df['date'].values )
+    df['isholiday']     = date_is_holiday(df['date'])
 
     exclude = [ 'date', coldate]
     df.columns = [  prefix_col + x if not x in exclude else x for x in df.columns]
