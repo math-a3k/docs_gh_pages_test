@@ -426,7 +426,8 @@ def pd_stat_histogram(df, bins=50, coltarget="diff"):
         df[coltarget].values, bins=bins, range=None, normed=None, weights=None, density=None
     )
     hh2 = pd.DataFrame({"bins": hh[1][:-1], "freq": hh[0]})
-    hh2["density"] = hh2["freqall"] / hh2["freqall"].sum()
+    # hh2["density"] = hh2["freqall"] / hh2["freqall"].sum()
+    hh2["density"] = hh2["freq"] / hh2["freq"].sum()
     return hh2
 
 
@@ -488,9 +489,12 @@ def pd_stat_shift_trend_changes(df, feature, target_col, threshold=0.03):
     :return: number of trend chagnes for the feature
     """
     df                            = df.loc[df[feature] != 'Nulls', :].reset_index(drop=True)
-    target_diffs                  = df[target_col + '_mean'].diff()
+    # target_diffs                  = df[target_col + '_mean'].diff()
+    # target_diffs                  = target_diffs[~np.isnan(target_diffs)].reset_index(drop=True)
+    # max_diff                      = df[target_col + '_mean'].max() - df[target_col + '_mean'].min()
+    target_diffs                  = df[target_col].diff()
     target_diffs                  = target_diffs[~np.isnan(target_diffs)].reset_index(drop=True)
-    max_diff                      = df[target_col + '_mean'].max() - df[target_col + '_mean'].min()
+    max_diff                      = df[target_col].max() - df[target_col].min()
     target_diffs_mod              = target_diffs.fillna(0).abs()
     low_change                    = target_diffs_mod < threshold * max_diff
     target_diffs_norm             = target_diffs.divide(target_diffs_mod)
@@ -517,15 +521,23 @@ def pd_stat_shift_trend_correlation(df, df_test, colname, target_col):
     if df_test.loc[0, colname] != df.loc[0, colname]:
         df_test[colname]        = df_test[colname].cat.add_categories(df.loc[0, colname])
         df_test.loc[0, colname] = df.loc[0, colname]
-    df_test_train = df.merge(df_test[[colname, target_col + '_mean']], on=colname,
+    # df_test_train = df.merge(df_test[[colname, target_col + '_mean']], on=colname,
+    #                          how='left',
+    #                          suffixes=('', '_test'))
+    # nan_rows = pd.isnull(df_test_train[target_col + '_mean']) | pd.isnull(
+    #     df_test_train[target_col + '_mean_test'])
+    df_test_train = df.merge(df_test[[colname, target_col]], on=colname,
                              how='left',
                              suffixes=('', '_test'))
-    nan_rows = pd.isnull(df_test_train[target_col + '_mean']) | pd.isnull(
-        df_test_train[target_col + '_mean_test'])
+    nan_rows = pd.isnull(df_test_train[target_col]) | pd.isnull(
+        df_test_train[target_col + '_test'])
     df_test_train = df_test_train.loc[~nan_rows, :]
+    # if len(df_test_train) > 1:
+    #     trend_correlation = np.corrcoef(df_test_train[target_col + '_mean'],
+    #                                     df_test_train[target_col + '_mean_test'])[0, 1]
     if len(df_test_train) > 1:
-        trend_correlation = np.corrcoef(df_test_train[target_col + '_mean'],
-                                        df_test_train[target_col + '_mean_test'])[0, 1]
+        trend_correlation = np.corrcoef(df_test_train[target_col],
+                                        df_test_train[target_col + '_test'])[0, 1]
     else:
         trend_correlation = 0
         print("Only one bin created for " + colname + ". Correlation can't be calculated")

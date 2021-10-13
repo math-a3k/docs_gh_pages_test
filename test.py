@@ -489,27 +489,15 @@ def test_tabular():
         pd_train_test_split_time(df, coltime="block")
         pd_to_scipy_sparse_matrix(df)
         '''TODO: git test failling here'''
-        # log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
-
-        """TODO: Just install pandas_profiling into package
+        log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
         pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
-        """
-
         pd_stat_distribution_colnum(df, nrows=len(df))
-
-        '''TODO: KeyError: 'freqall
         pd_stat_histogram(df, bins=50, coltarget="yield")
-        '''
-
-        ''' TODO: error KeyError: 'colname_mean' , why we appending '_mean' on colname 
         pd_stat_shift_trend_changes(df,"density","block")
-        '''
 
         X_train["yield"] =  X_train["yield"].astype('category')
         X_test["yield"] =  X_test["yield"].astype('category')
-        '''TODO: KeyError: "['block_mean'] not in index
         pd_stat_shift_trend_correlation(X_train, X_test,"yield","block")
-        '''
 
         '''TODO: TypeError: pd_colnum_tocat_stat() got an unexpected keyword argument 'colname'
         pd_stat_shift_changes(df,"yield", features_list=["density","block"])
