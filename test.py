@@ -475,9 +475,7 @@ def test_tabular():
         from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
         log(estimator_std_normal(y_pred))
         log(estimator_boostrap_bayes(y_pred))
-        '''TODO: need to check this one
-        estimator_bootstrap(y_pred, custom_stat=custom_stat(y_pred))
-        '''
+        estimator_bootstrap(y_pred, custom_stat=custom_stat)
 
        
     
@@ -485,11 +483,13 @@ def test_tabular():
         log("Testing pd_utils ...")
         from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
             pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
-            pd_stat_shift_trend_correlation,pd_stat_shift_changes,pd_colnum_tocat_stat
+            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+        from utilmy.prepro.util_feature import pd_colnum_tocat_stat
+
         pd_train_test_split_time(df, coltime="block")
         pd_to_scipy_sparse_matrix(df)
         '''TODO: git test failling here'''
-        # log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
+        log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
         
         pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
         pd_stat_distribution_colnum(df, nrows=len(df))
