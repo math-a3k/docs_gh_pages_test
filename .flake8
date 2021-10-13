@@ -2,12 +2,10 @@
 [flake8]
 
 ################### PROGRAM ################################
-
 # Specify the number of subprocesses that Flake8 will use to run checks in parallel.
 jobs = auto
 
 ################### OUTPUT #################################
-
 ########## Verbosity ##########
 
 # Increase the verbosity of Flake8’s output.
@@ -15,7 +13,6 @@ verbose = 0
 
 
 ########## Formatting ##########
-
 # Select the formatter used to display errors to the user.
 format = default
 
@@ -28,7 +25,6 @@ statistics = True
 
 
 ########## Targets ##########
-
 # Redirect all output to the specified file.
 output-file = docs/flake8_log.py
 # Also print output to stdout if output-file has been configured.
@@ -36,7 +32,6 @@ tee = True
 
 
 ################### FILE PATTERNS ##########################
-
 # Provide a comma-separated list of glob patterns to exclude from checks.
 exclude =
     .git,
@@ -73,7 +68,6 @@ filename =
 
 ################### LINTING ################################
 ########## Options ##########
-
 # Report all errors, even if it is on the same line as a `# NOQA` comment.
 disable-noqa = False
 
@@ -88,7 +82,6 @@ hang-closing = True
 
 ########## Rules ##########
 # ERROR CODES
-#
 # E/W  - PEP8 errors/warnings (pycodestyle)
 # F    - linting errors (pyflakes)
 # C    - McCabe complexity error (mccabe)
@@ -155,7 +148,7 @@ hang-closing = True
 
 # Specify a list of codes to ignore.
 ignore =  E/W, C, E2, E3, E4, E5, E7, W1, W3, W5, W6,F401,
-          F821,F841,F401,F811,F541,F405
+          F821,F841,F401,F811,F541,F405,F403,F402
 
 
 # Specify the list of error codes you wish Flake8 to report.
