@@ -23,3 +23,8 @@
                                  ^
 1     E999 SyntaxError: invalid syntax
 1
+./utilmy/spark/src/utils.py:14:34: E999 SyntaxError: invalid syntax
+    cmd = "export LOGURU_FORMAT="{time} | <lvl>{message}</lvl>""
+                                 ^
+1     E999 SyntaxError: invalid syntax
+1
