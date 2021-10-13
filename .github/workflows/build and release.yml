@@ -66,16 +66,21 @@ jobs:
         #pip install -r install/requirements_fake.txt
 
 
-
-
     - name: test_import
       run: |
            python -c "import os, pandas as pd; print(os)"
            python -c "import utilmy"        
         
+
+    - name: Code Syntax Checker flake8
+      run:  |
+        pip install --upgrade flake8
+        flake8  --statistics   --count    --max-line-length 140
         
-    ########  Runs All test
-    - name: run_all
+        
+
+    ########  Runs All test  ######################################
+    - name: test_setup
       run: |
           mkdir -p    /home/runner/work/log_tmp/
           chmod -R 777 . 
