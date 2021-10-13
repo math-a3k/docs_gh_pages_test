@@ -76,24 +76,23 @@ jobs:
            python -c "import utilmy"        
         
     - name: Run flake8
+      continue-on-error: true
       run:  |
         pip install flake8
         flake8  --statistics   --count    --max-line-length 140
     
 
         
-    ########  Runs All test
-    - name: setup
+    ########  Runs All test  #########################################
+    - name: test setup
       run: |
           mkdir -p    /home/runner/work/log_tmp/
           chmod -R 777 .
 
 
     ################################################################
-
     - name: test_ppandas
       run: python test.py test_ppandas
-    
     
     - name: test_docs_cli 
       run: python test.py test_docs_cli
@@ -104,7 +103,6 @@ jobs:
     - name: test_distributed
       run: python test.py test_distributed
 
-    
 
     - name: test_oos 
       run: python test.py test_oos
