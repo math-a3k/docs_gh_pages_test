@@ -301,7 +301,44 @@ def os_copy_safe(dirin:str=None, dirout:str=None,  nlevel=5, nfile=50000, logdir
                 ntry = ntry + 1
     log('Finished', i)
 
-                
+
+    
+    def os_merge_safe(dirin_list=None, dirout=None, nlevel=5, nfile=5000, nrows=10**8,  cmd_fallback = "umount /mydrive/  && mount /mydrive/  ", sleep=0.3):
+        ### merge file in safe way
+        nrows = 10**8
+        flist = []
+        for fi in dirin_list :
+            flist = flist + glob.glob(fi)
+        log(flist); time.sleep(2)    
+        
+        os_makedirs(dirout)            
+        fout = open(dirout,'a')
+        for fi in flist :    
+            log(fi)             
+            ii   = 0
+            fin  = open(fi,'r')
+            while True:
+                try :
+                  ii = ii + 1
+                  if ii % 100000 == 0 : time.sleep(sleep)
+                  if ii > nrows : break      
+                  x = fin.readline()
+                  if not x: break        
+                  fout.write(x.strip()+"\n")
+                except Exception as e:
+                  log(e)
+                  os.system(cmd_fallback)
+                  time.sleep(10)
+                  fout.write(x.strip()+"\n") 
+            fin.close()    
+    
+    
+    
+    
+    
+    
+    
+    
 def z_os_search_fast(fname, texts=None, mode="regex/str"):
     import re
     if texts is None:
