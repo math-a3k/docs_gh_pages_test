@@ -55,11 +55,12 @@ def pd_date_split(df, coldate =  'time_key', prefix_col ="", verbose=False ):
     df['weekyear2']     = df['date'].apply( lambda x : date_weekyear2( x )  )
     df['quarter']       = df.apply( lambda x :  int( x['month'] / 4.0) + 1 , axis=1  )
 
-    df['yearweek']      = df.apply(  lambda x :  merge1(  x['year']  , x['weekyeariso'] )  , axis=1  )
-    df['yearmonth']     = df.apply( lambda x : merge1( x['year'] ,  x['month'] )         , axis=1  )
-    df['yearquarter']   = df.apply( lambda x : merge1( x['year'] ,  x['quarter'] )         , axis=1  )
+    """TODO: define merge1 here"""
+    # df['yearweek']      = df.apply(  lambda x :  merge1(  x['year']  , x['weekyeariso'] )  , axis=1  )
+    # df['yearmonth']     = df.apply( lambda x : merge1( x['year'] ,  x['month'] )         , axis=1  )
+    # df['yearquarter']   = df.apply( lambda x : merge1( x['year'] ,  x['quarter'] )         , axis=1  )
 
-    df['isholiday']     = date_is_holiday( df['date'].values )
+    df['isholiday']     = date_is_holiday(df['date'])
 
     exclude = [ 'date', coldate]
     df.columns = [  prefix_col + x if not x in exclude else x for x in df.columns]
@@ -83,7 +84,6 @@ def date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo'):
 def date_is_holiday(array):
     """
       is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
-
     """
     import holidays , numpy as np
     jp_holidays = holidays.CountryHoliday('JP')
@@ -136,7 +136,3 @@ def date_generate(start='2018-01-01', ndays=100) :
 if __name__ == "__main__":
     import fire
     fire.Fire()
-
-
-
-

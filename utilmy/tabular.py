@@ -426,7 +426,8 @@ def pd_stat_histogram(df, bins=50, coltarget="diff"):
         df[coltarget].values, bins=bins, range=None, normed=None, weights=None, density=None
     )
     hh2 = pd.DataFrame({"bins": hh[1][:-1], "freq": hh[0]})
-    hh2["density"] = hh2["freqall"] / hh2["freqall"].sum()
+    # hh2["density"] = hh2["freqall"] / hh2["freqall"].sum()
+    hh2["density"] = hh2["freq"] / hh2["freq"].sum()
     return hh2
 
 
@@ -478,6 +479,99 @@ def np_list_remove(cols, colsremove, mode="exact"):
 
 
 ####################################################################################################
+def get_grouped_data(input_data, feature, target_col, bins, cuts=0):
+    """
+    Bins continuous features into equal sample size buckets and 
+    returns the target mean in each bucket. Separates out nulls into 
+    another bucket.
+    
+    :param input_data: dataframe containg features and target column.
+    :param feature: feature column name.
+    :param target_col: target column.
+    :param bins: Number bins required.
+    :param cuts: if buckets of certain specific cuts are required. Used 
+    on test data to use cuts from train.
+    :return: If cuts are passed only grouped data is returned, else cuts 
+    and grouped data is returned.
+    """
+
+    input_data[feature] = input_data[feature].round(5)
+    has_null = pd.isnull(input_data[feature]).sum() > 0
+    if has_null == 1:
+        data_null = input_data[pd.isnull(input_data[feature])]
+        input_data = input_data[~pd.isnull(input_data[feature])]
+        input_data.reset_index(inplace=True, drop=True)
+
+    is_train = 0
+    if cuts == 0:
+        is_train = 1
+        prev_cut = min(input_data[feature]) - 1
+        cuts = [prev_cut]
+        reduced_cuts = 0
+        for i in range(1, bins + 1):
+            next_cut = np.percentile(input_data[feature], i * 100 / bins)
+            if (
+                next_cut > prev_cut + 0.000001
+            ):  # float numbers shold be compared with some threshold!
+                cuts.append(next_cut)
+            else:
+                reduced_cuts = reduced_cuts + 1
+            prev_cut = next_cut
+
+        # if reduced_cuts>0:
+            # print(
+            # 'Reduced the number of bins due to less variation in feature'
+            # )
+        
+        cut_series = pd.cut(input_data[feature], cuts)
+    else:
+        cut_series = pd.cut(input_data[feature], cuts)
+
+    grouped = input_data.groupby([cut_series], as_index=True).agg(
+        {target_col: [np.size, np.mean], feature: [np.mean]}
+    )
+    grouped.columns = [
+        "_".join(cols).strip() for cols in grouped.columns.values
+    ]
+    grouped[grouped.index.name] = grouped.index
+    grouped.reset_index(inplace=True, drop=True)
+    grouped = grouped[[feature] + list(grouped.columns[0:3])]
+    grouped = grouped.rename(
+        index=str, columns={target_col + "_size": "Samples_in_bin"}
+    )
+    grouped = grouped.reset_index(drop=True)
+    corrected_bin_name = (
+        "["
+        + str(round(min(input_data[feature]), 5))
+        + ", "
+        + str(grouped.loc[0, feature]).split(",")[1]
+    )
+    grouped[feature] = grouped[feature].astype("category")
+    grouped[feature] = grouped[feature].cat.add_categories(corrected_bin_name)
+    grouped.loc[0, feature] = corrected_bin_name
+
+    if has_null == 1:
+        grouped_null = grouped.loc[0:0, :].copy()
+        grouped_null[feature] = grouped_null[feature].astype("category")
+        grouped_null[feature] = grouped_null[feature].cat.add_categories(
+            "Nulls"
+        )
+        grouped_null.loc[0, feature] = "Nulls"
+        grouped_null.loc[0, "Samples_in_bin"] = len(data_null)
+        grouped_null.loc[0, target_col + "_mean"] = data_null[
+            target_col
+        ].mean()
+        grouped_null.loc[0, feature + "_mean"] = np.nan
+        grouped[feature] = grouped[feature].astype("str")
+        grouped = pd.concat([grouped_null, grouped], axis=0)
+        grouped.reset_index(inplace=True, drop=True)
+
+    grouped[feature] = grouped[feature].astype("str").astype("category")
+    if is_train == 1:
+        return (cuts, grouped)
+    else:
+        return grouped
+
 def pd_stat_shift_trend_changes(df, feature, target_col, threshold=0.03):
     """
     Calculates number of times the trend of feature wrt target changed direction.
@@ -522,6 +616,7 @@ def pd_stat_shift_trend_correlation(df, df_test, colname, target_col):
                              suffixes=('', '_test'))
     nan_rows = pd.isnull(df_test_train[target_col + '_mean']) | pd.isnull(
         df_test_train[target_col + '_mean_test'])
+
     df_test_train = df_test_train.loc[~nan_rows, :]
     if len(df_test_train) > 1:
         trend_correlation = np.corrcoef(df_test_train[target_col + '_mean'],
