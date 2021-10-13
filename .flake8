@@ -30,7 +30,7 @@ statistics = True
 ########## Targets ##########
 
 # Redirect all output to the specified file.
-output-file = .flake8.log
+output-file = docs/flake8_log.py
 # Also print output to stdout if output-file has been configured.
 tee = True
 
@@ -39,23 +39,38 @@ tee = True
 
 # Provide a comma-separated list of glob patterns to exclude from checks.
 exclude =
-    # git folder
     .git,
-    # python cache
     __pycache__,
-    # pytest cache
     .pytest_cache,
-    # mypy cache
     .mypy_cache,
-    # .github
-    .github
+    .github,
+    utilmy/zml,
+    utilmy/zzarchive,
+    utilmy/zrecs,
+    */*/*zz*,
+    */*/*/*zz*,
+    */*/*/*/*zz*,
+    */*/*/*.*/*zz*,
+    docs
+    scripts
+    testdata
+    
+    
 # Provide a comma-separate list of glob patterns to include for checks.
 filename =
-    *.py
+    utilmy/*.py,
+    utilmy/*/*.py,
+    utilmy/*/*/*.py,
+    utilmy/*/*/*/*.py,
+    utilmy/*/*/*/*/*.py,
+    utilmy/*/*/*/*/*/*.py,
+    utilmy/*/*/*/*/*/*/*.py,    
+    test.py,
+    setup.py
+
 
 
 ################### LINTING ################################
-
 ########## Options ##########
 
 # Report all errors, even if it is on the same line as a `# NOQA` comment.
@@ -69,8 +84,8 @@ max-complexity = 10
 # incluences E131 and E133
 hang-closing = True
 
-########## Rules ##########
 
+########## Rules ##########
 # ERROR CODES
 #
 # E/W  - PEP8 errors/warnings (pycodestyle)
@@ -90,7 +105,8 @@ ignore =  E/W, C, E2, E3, E4, E5, E7, W1, W3, W5, W6,F401,
 
 
 # Specify the list of error codes you wish Flake8 to report.
-select = E9
+select = F
+
 # Specify a list of mappings of files and the codes that should be ignored for the entirety of the
 # file.
 # per-file-ignores =
