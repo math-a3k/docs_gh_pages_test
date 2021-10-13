@@ -76,7 +76,7 @@ jobs:
       continue-on-error: true
       run:  |
         pip install --upgrade flake8
-        flake8  --statistics   --count    --max-line-length 140
+        flake8  --statistics   --count    --max-line-length 140   2>&1 | tee -a docs/flake8_syntax_error.py  
         
         
 
