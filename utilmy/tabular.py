@@ -355,7 +355,7 @@ def pd_stat_correl_pair(df, coltarget=None, colname=None):
     colname = colname if colname is not None else list(df.columns)
     target_corr = []
     for col in colname:
-        target_corr.append(pearsonr(df.loc[:,col].values, df.loc[:,coltarget].values)[0])
+        target_corr.append(pearsonr(df[col].astype('float64'), df[coltarget].astype('float64'))[0])
 
     df_correl = pd.DataFrame({"colx": [""] * len(colname), "coly": colname, "correl": target_corr})
     df_correl[coltarget] = colname
