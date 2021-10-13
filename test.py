@@ -606,7 +606,7 @@ def test_dates():
         date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
         df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
         df['Gender'] = random_genders(10)
-        df['Birthdate'] = random_dates(start=pd.to_datetime('1940-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
+        df['Birthdate'] = random_dates(start=pd.to_datetime('1950-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
         
         """
         TODO;
