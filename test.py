@@ -485,7 +485,7 @@ def test_tabular():
         log("Testing pd_utils ...")
         from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
             pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
-            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+            pd_stat_shift_trend_correlation,pd_stat_shift_changes,get_grouped_data
         pd_train_test_split_time(df, coltime="block")
         pd_to_scipy_sparse_matrix(df)
         '''TODO: git test failling here'''
@@ -494,15 +494,19 @@ def test_tabular():
         # pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
         pd_stat_distribution_colnum(df, nrows=len(df))
         pd_stat_histogram(df, bins=50, coltarget="yield")
-        pd_stat_shift_trend_changes(df,"density","block")
+        _,df_grouped = get_grouped_data(df,"density","block",10)
+        pd_stat_shift_trend_changes(df_grouped,"density","block")
 
-        X_train["yield"] =  X_train["yield"].astype('category')
-        X_test["yield"] =  X_test["yield"].astype('category')
-        pd_stat_shift_trend_correlation(X_train, X_test,"yield","block")
+        _, X_train_grouped =  get_grouped_data(X_train,"yield","block",10)
+        _, X_test_grouped =  get_grouped_data(X_test,"yield","block",10)
+        X_train_grouped["yield"] =  X_train_grouped["yield"].astype('category')
+        X_test_grouped["yield"] =  X_test_grouped["yield"].astype('category')
+        pd_stat_shift_trend_correlation(X_train_grouped, X_test_grouped,"yield","block")
 
         '''TODO: TypeError: pd_colnum_tocat_stat() got an unexpected keyword argument 'colname'
         pd_stat_shift_changes(df,"yield", features_list=["density","block"])
         '''
+
     
     def test_np_utils():
         log("Testing np_utils ...")
