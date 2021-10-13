@@ -76,6 +76,7 @@ jobs:
            python -c "import utilmy"        
         
     - name: Run flake8
+      continue-on-error: true
       run:  |
         pip install flake8
         flake8  --statistics   --count    --max-line-length 140
