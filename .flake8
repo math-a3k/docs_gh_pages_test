@@ -50,9 +50,9 @@ exclude =
     */*/*zz*,
     */*/*/*zz*,
     */*/*/*/*zz*,
-    */*/*/*.*/*zz*,
-    docs
-    scripts
+    */*/*/*/*/*zz*,
+    docs,
+    scripts,
     testdata
     
     
