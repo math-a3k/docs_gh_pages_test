@@ -485,7 +485,7 @@ def test_tabular():
         log("Testing pd_utils ...")
         from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
             pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
-            pd_stat_shift_trend_correlation,pd_stat_shift_changes,get_grouped_data
+            pd_stat_shift_trend_correlation,pd_stat_shift_changes,pd_colnum_tocat_stat
         pd_train_test_split_time(df, coltime="block")
         pd_to_scipy_sparse_matrix(df)
         '''TODO: git test failling here'''
@@ -494,16 +494,15 @@ def test_tabular():
         pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
         pd_stat_distribution_colnum(df, nrows=len(df))
         pd_stat_histogram(df, bins=50, coltarget="yield")
-        _,df_grouped = get_grouped_data(df,"density","block",10)
+        _,df_grouped = pd_colnum_tocat_stat(df,"density","block",10)
         pd_stat_shift_trend_changes(df_grouped,"density","block")
 
-        _, X_train_grouped =  get_grouped_data(X_train,"yield","block",10)
-        _, X_test_grouped =  get_grouped_data(X_test,"yield","block",10)
-        X_train_grouped["yield"] =  X_train_grouped["yield"].astype('category')
-        X_test_grouped["yield"] =  X_test_grouped["yield"].astype('category')
+        _, X_train_grouped =  pd_colnum_tocat_stat(X_train,"yield","block",10)
+        _, X_test_grouped =  pd_colnum_tocat_stat(X_test,"yield","block",10)
         pd_stat_shift_trend_correlation(X_train_grouped, X_test_grouped,"yield","block")
 
-        '''TODO: TypeError: pd_colnum_tocat_stat() got an unexpected keyword argument 'colname'
+        '''TODO: TypeError: pd_colnum_tocat_stat() got an unexpected keyword argument 'colname',
+        This function needs complete rewrite there are many bugs and logical errors.
         pd_stat_shift_changes(df,"yield", features_list=["density","block"])
         '''
 
@@ -608,12 +607,7 @@ def test_dates():
         df['Gender'] = random_genders(10)
         df['Birthdate'] = random_dates(start=pd.to_datetime('1950-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
         
-        """
-        TODO;
-        name 'merge1' is not defined
-        pd_date_split(df,coldate="Birthdate")
-        """
-        pd_date_split(df,coldate="Birthdate")
+        pd_date_split(df,coldate="Birthdate",sep="")
         
     
     def random_dates(start, end, size):
