@@ -5,7 +5,10 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
 
-def test():
+
+
+
+def test_all():
     from utilmy import os_makedirs
     os_makedirs("testdata/ppandas")
 
