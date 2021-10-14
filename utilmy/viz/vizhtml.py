@@ -58,6 +58,23 @@ def help():
     print(ss)
 
 
+      
+    
+      
+def test_all():
+   from utilmy.viz import vizhtml as vi
+   log("Visualization ")
+   log(" from utilmy.viz import vizhtml as vi     ")
+   vi.test1()
+   vi.test2()
+   vi.test3()
+   vi.test4()
+   vi.test_scatter_and_histogram_matplot()
+   vi.test_pd_plot_network()
+   vi.test_cssname()
+         
+          
+      
 def test_getdata(verbose=True):
     """data = test_get_data()
     df   = data['housing.csv']
