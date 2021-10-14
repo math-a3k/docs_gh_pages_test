@@ -20,126 +20,24 @@ from utilmy.tabular import pd_data_drift_detect
 def log(*s):
    print(*s, flush=True)
 
+def import_module(mname:str='utilmy.oos'):
+    import importlib
+    m = importlib.import_module(mname)
+    return m
 
-
+   
 #########################################################################################
 def test_utilmy():
-   import utilmy as m
-
-   ###################################################################################
-   log("\n##### git_repo_root  ")
-   log(m.git_repo_root())
-   assert not m.git_repo_root() == None, "err git repo"
-
-
-   log("\n##### Doc generator: help_create  ")
-   for name in [ 'utilmy.parallel', 'utilmy.utilmy', 'utilmy.ppandas'  ]:
-      log("\n#############", name,"\n", m.help_create(name))
-
-
-   ###################################################################################
-   log("\n##### global_verbosity  ")
-   print('verbosity', m.global_verbosity(__file__, "config.json", 40,))
-   print('verbosity', m.global_verbosity('../', "config.json", 40,))
-   print('verbosity', m.global_verbosity(__file__))
-
-   verbosity = 40
-   gverbosity = m.global_verbosity(__file__)
-   assert gverbosity == 5, "incorrect default verbosity"
-   gverbosity =m.global_verbosity(__file__, "config.json", 40,)
-   assert gverbosity == verbosity, "incorrect verbosity "
-
-
-   ###################################################################################
-   log("\n##### Session  ")
-   sess = m.Session("ztmp/session")
-
-   global mydf
-   mydf = pd_generate_data()
-
-   sess.save('mysess', glob=globals(), tag='01')
-   os.system("ls ztmp/session")
-   sess.show()
-
-   import glob
-   flist = glob.glob("ztmp/session/" + "/*")
-   for f in flist:
-       t = os.path.exists(os.path.abspath(f))
-       assert  t == True, "session path not created "
-
-       pickle_created = os.path.exists(os.path.abspath(f + "/mydf.pkl"))
-       assert  pickle_created == True, "Pickle file not created"
-
-   sess.load('mysess')
-   sess.load('mysess', tag='01')
-
-
-
+   from utilmy import utilmy as m
+   m.test_all()
+   
 
 ##########################################################################################
 def test_ppandas():
     from utilmy import ppandas as m
-    from utilmy import os_makedirs
-    os_makedirs("testdata/ppandas")
+    m.test_all()
 
-
-    df1 = pd_random(100)
-    df2 = pd_random(100)
-    df3 = pd.DataFrame({"a":[1,1,2,2,2]})
-    df_str = pd.DataFrame({"a": ["A", "B", "B", "C", "C"],
-                           "b": [1, 2, 3, 4, 5]})
-
-
-    m.pd_plot_histogram(df1["a"],path_save="testdata/ppandas/histogram")
    
-    m.pd_merge(df1, df2, on="b")
-
-    df = m.pd_filter(df3, filter_dict="a>1")
-    assert df.shape[0] == 3, "not filtered properly"
-
-    m.pd_to_file(df1, "testdata/ppandas/file.csv")
-    m.pd_sample_strat(df1, col="a", n=10)
-
-    bins = m.pd_col_bins(df1, "a", 5)
-    assert len(np.unique(bins)) == 5, "bins not formed"
-
-    m.pd_dtype_reduce(df1)
-    m.pd_dtype_count_unique(df1,col_continuous=['b'])
-
-    df = m.pd_dtype_to_category(df_str, col_exclude=["b"], treshold=0.7)
-    assert df.dtypes["a"] == "category", "Columns was not converted to category"
-
-    m.pd_dtype_getcontinuous(df_str,cols_exclude=["a"])
-    m.pd_add_noise(df1,level=0.01,cols_exclude=["a"])
-
-    m.pd_cols_unique_count(df_str)
-    m.pd_del(df_str,cols=["a"])
-
-    # pd_plot_multi function needs to be fixed before writing test case
-    # ax = m.pd_plot_multi(df1,plot_type='pair',cols_axe1=['a','b'])
-    
-    a = pd.DataFrame({"a":[1,2,3,4,5]})
-    b = pd.DataFrame({"b":[1,2,3,4,5]})
-    m.pd_cartesian(a,b)
-
-    m.pd_show(df_str)
-
-    l1 = [1,2,3]
-    l2 = [2,3,4]
-    l  = m.np_list_intersection(l1,l2)
-    assert len(l) == 2, "Intersection failed"
-
-    l = m.np_add_remove(set(l1),[1,2],4)
-    assert l == set([3,4]), "Add remove failed"
-
-    m.to_timeunix(datex="2018-01-16")
-    m.to_timeunix(datetime.datetime(2018,1,16))
-    m.to_datetime("2018-01-16")
-
-
-
-
-
 #########################################################################################
 def test_docs_cli():
     """  from utilmy.docs.generate_doc import run_markdown, run_table
@@ -148,10 +46,47 @@ def test_docs_cli():
     os.system(cmd)
     os.system('ls docs/')
    
+   
+########################################################################################################
+def test_adatasets():
+    """ #### python test.py   test_adatasets
+    """
+    from utilmy import adatasets as m
+    m.test_all()      
+
+
+########################################################################################################
+def test_nnumpy():
+    """#### python test.py   test_nnumpy
+    """
+    from utilmy import util_nnumpy as m
+    m.test_all()
 
 
 
-        
+########################################################################################################
+def test_dates():
+    #### python test.py   test_dates
+    from utilmy import util_dates as m
+    m.test_all()
+
+
+########################################################################################################
+def test_decorators():
+    #### python test.py   test_decorators
+    from utilmy import  util_decorators as m
+    m.test_tf_cdist()
+
+
+########################################################################################################
+def test_deeplearning_keras():
+    from utilmy.deeplearning.keras import  util_similarity as m
+    m.test_tf_cdist()
+
+
+
+   
+   
 #########################################################################################
 def test_text():
     from utilmy import text
@@ -433,55 +368,6 @@ def test_oos():
 def test_tabular():
    from utilmy import tabular as m
    m.test_all()
-
-   
-
-def test_tabular2():
-    """
-    """
-    from utilmy import tabular as m
-
-
-
-
-########################################################################################################
-def test_adatasets():
-    """ #### python test.py   test_adatasets
-    """
-    from utilmy import adatasets as m
-    m.test_all()      
-
-
-
-########################################################################################################
-def test_nnumpy():
-    """#### python test.py   test_nnumpy
-    """
-    from utilmy import util_nnumpy as m
-    m.test_all()
-
-
-
-########################################################################################################
-def test_dates():
-    #### python test.py   test_dates
-    from utilmy import util_dates as m
-    m.test_all()
-
-
-########################################################################################################
-def test_decorators():
-    #### python test.py   test_decorators
-    from utilmy import  util_decorators as m
-    m.test_tf_cdist()
-
-
-########################################################################################################
-def test_deeplearning_keras():
-    from utilmy.deeplearning.keras import  util_similarity as m
-    m.test_tf_cdist()
-
-
 
 
 
