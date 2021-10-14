@@ -24,8 +24,8 @@ from utilmy.prepro.util_feature import  pd_colnum_tocat, pd_colnum_tocat_stat
 
 
 
-
-def test_tabular():
+###############################################################################
+def test_all():
     """
     #### python test.py   test_tabular
     """
@@ -46,7 +46,13 @@ def test_tabular():
         from utilmy.tabular import  test_normality
         test_normality(df["yield"])
         
+        
+        df = pd_generate_data(7, 100)
+        m.test_anova(df,'cat1','cat2')
+        m.test_normality2(df, '0', "Shapiro")
+        m.test_plot_qqplot(df, '1')
 
+        
         log("Testing heteroscedacity...")
         from utilmy.tabular import test_heteroscedacity
         log(test_heteroscedacity(y_test,y_pred))
