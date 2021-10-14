@@ -630,6 +630,10 @@ def pd_data_drift_detect_alibi(
 
     cd, is_drift_preds = pd_data_drift_detect(X_train, X_test,'regressoruncertaintydrift','tensorflow',model=model)
 
+    from utilmy import import_function
+    myclass = import_function(fun_name='KSDrift', module_name='alibi_detect.cd')  
+    mdrift = myclass(df.values,p_val=p_val,**kwargs)
+    
     
     """
     methods = ['regressoruncertaintydrift','classifieruncertaintydrift','ksdrift',
@@ -643,23 +647,26 @@ def pd_data_drift_detect_alibi(
         
     assert method in methods, f"method is invalid, methods available {methods}"
 
+    #from utilmy import import_function
+    #mc = import_function(fun_name= method, module_name='alibi_detect.cd')  
+    #mdrift = myclass(df.values,p_val=p_val,**kwargs)
+    
+    
     if method == "regressoruncertaintydrift":
-        from alibi_detect.cd import RegressorUncertaintyDrift
-        mdrift = RegressorUncertaintyDrift(df.values,model=model,p_val=p_val,
-                                        backend=backend,**kwargs)
+        from alibi_detect.cd import RegressorUncertaintyDrift as mc
+        mdrift = mc(df.values,model=model,p_val=p_val, backend=backend,**kwargs)
     
     if method == 'classifieruncertaintydrift':
-        from alibi_detect.cd import ClassifierUncertaintyDrift
-        mdrift = ClassifierUncertaintyDrift(df.values,model=model,p_val=p_val,
-                                        backend=backend,preds_type='probs',**kwargs)
+        from alibi_detect.cd import ClassifierUncertaintyDrift as mc
+        mdrift = mc(df.values,model=model,p_val=p_val, backend=backend,preds_type='probs',**kwargs)
     
     if method == 'ksdrift':
-        from alibi_detect.cd import KSDrift
-        mdrift = KSDrift(df.values,p_val=p_val,**kwargs)
+        from alibi_detect.cd import KSDrift as mc
+        mdrift = mc(df.values,p_val=p_val,**kwargs)
     
     if method == 'mmddrift':
-        from alibi_detect.cd import MMDDrift
-        mdrift = MMDDrift(df.values,backend=backend,p_val=0.05,**kwargs)
+        from alibi_detect.cd import MMDDrift as mc
+        mdrift = mc(df.values,backend=backend,p_val=0.05,**kwargs)
 
     if method == 'learnedkerneldrift':
         from alibi_detect.cd import LearnedKernelDrift
@@ -674,28 +681,28 @@ def pd_data_drift_detect_alibi(
             mdrift = LearnedKernelDrift(df.values, kernel, backend=backend, p_val=p_val, **kwargs)
     
     if method == 'chisquaredrift':
-        from alibi_detect.cd import ChiSquareDrift
-        mdrift = ChiSquareDrift(df.values, p_val=p_val,**kwargs)
+        from alibi_detect.cd import ChiSquareDrift as mc
+        mdrift = mc(df.values, p_val=p_val,**kwargs)
     
     if method == 'tabulardrift':
-        from alibi_detect.cd import TabularDrift
-        mdrift = TabularDrift(df.values, p_val=p_val,**kwargs)
+        from alibi_detect.cd import TabularDrift as mc
+        mdrift = mc(df.values, p_val=p_val,**kwargs)
     
     if method == 'classifierdrift':
-        from alibi_detect.cd import ClassifierDrift
-        mdrift = ClassifierDrift(df.values, model, p_val=p_val,backend=backend,**kwargs)
+        from alibi_detect.cd import ClassifierDrift as mc
+        mdrift = mc(df.values, model, p_val=p_val,backend=backend,**kwargs)
     
     if method == 'spotthediffdrift':
-        from alibi_detect.cd import SpotTheDiffDrift
+        from alibi_detect.cd import SpotTheDiffDrift 
 
         if backend == 'tensorflow' and model is not None:
-            from alibi_detect.utils.tensorflow.kernels import DeepKernel
-            kernel = DeepKernel(model)
+            from alibi_detect.utils.tensorflow.kernels import DeepKernel as mc
+            kernel = mc(model)
             mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
 
         if backend == 'pytorch' and model is not None:
-            from alibi_detect.utils.pytorch.kernels import DeepKernel
-            kernel = DeepKernel(model)
+            from alibi_detect.utils.pytorch.kernels import DeepKernel as mc
+            kernel = mc(model)
             mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
         
         mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val)
