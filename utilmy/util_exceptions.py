@@ -49,50 +49,6 @@ logger_setup()
 
 ##########################################################################################
 ################### donwload  ############################################################
-def config_load(config_path: Optional[Union[str, pathlib.Path]] = None):
-    """Load Config file into a dict
-    1) load config_path
-    2) If not, load in HOME USER
-    3) If not, create default one
-    Args:
-        config_path: path of config or 'default' tag value
-    Returns: dict config
-    """
-    path_default = pathlib.Path.home() / ".mygenerator"
-    config_path_default = path_default / "config.yaml"
-
-    if config_path is None or config_path == "default":
-        logw(f"Using config: {config_path_default}")
-        config_path = config_path_default
-
-    try:
-        log2("loading config", config_path)
-        return yaml.load(config_path.read_text(), Loader=yaml.Loader)
-
-    except Exception as e:
-        logw(f"Cannot read yaml file {config_path}", e)
-
-    logw("#### Using default configuration")
-    config_default = {
-        "current_dataset": "mnist",
-        "datasets": {
-            "mnist": {
-                "url": "https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",
-                "path": str(path_default / "mnist_png" / "training"),
-            }
-        },
-    }
-    log2(config_default)
-
-    log(f"Creating config file in {config_path_default}")
-    os.makedirs(path_default, exist_ok=True)
-    with open(config_path_default, mode="w") as fp:
-        yaml.dump(config_default, fp)
-    return config_default
-
-
-##########################################################################################
-################### donwload  ############################################################
 def dataset_donwload(url, path_target):
     """Donwload on disk the tar.gz file
     Args:
