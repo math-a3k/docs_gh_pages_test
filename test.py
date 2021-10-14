@@ -13,6 +13,7 @@ Rules to follow :
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
 from tensorflow.python.ops.gen_array_ops import one_hot
 from utilmy import pd_random, pd_generate_data
+from utilmy.tabular import pd_data_drift_detect
 
 
 #########################################################################################
@@ -430,321 +431,53 @@ def test_oos():
 
 ########################################################################################################
 def test_tabular():
-    """
-    #### python test.py   test_tabular
-    """
-    import pandas as pd
-    from sklearn.tree import DecisionTreeRegressor
-    from sklearn.model_selection import train_test_split
-    model = DecisionTreeRegressor(random_state=1)
-
-    df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
-    y = df.fertilizer
-    X = df[["yield","density","block"]]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50, random_state=42)
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_test)
-    
-    def test():
-        log("Testing normality...")
-        from utilmy.tabular import  test_normality
-        test_normality(df["yield"])
-        
-
-        log("Testing heteroscedacity...")
-        from utilmy.tabular import test_heteroscedacity
-        log(test_heteroscedacity(y_test,y_pred))
-    
-        log("Testing test_mutualinfo()...")
-        from utilmy.tabular import test_mutualinfo
-        df1 = pd_generate_data(7, 100)
-
-        test_mutualinfo(df1["0"],df1[["1","2","3"]],colname="test")
-
-        log("Testing hypothesis_test()...")
-        from utilmy.tabular import test_hypothesis
-        log(test_hypothesis(X_train, X_test,"chisquare"))
-
-    def custom_stat(values, axis=1):
-        #stat_val = np.mean(np.asmatrix(values),axis=axis)
-        # # stat_val = np.std(np.asmatrix(values),axis=axis)p.mean
-        stat_val = np.sqrt(np.mean(np.asmatrix(values*values),axis=axis))
-        return stat_val
-
-    def test_estimator():
-        log("Testing estimators()...")
-        from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
-        log(estimator_std_normal(y_pred))
-        log(estimator_boostrap_bayes(y_pred))
-        estimator_bootstrap(y_pred, custom_stat=custom_stat)
-
-       
-    
-    def test_pd_utils():
-        log("Testing pd_utils ...")
-        from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
-            pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
-            pd_stat_shift_trend_correlation,pd_stat_shift_changes
-        from utilmy.prepro.util_feature import pd_colnum_tocat_stat
-
-        pd_train_test_split_time(df, coltime="block")
-        pd_to_scipy_sparse_matrix(df)
-        '''TODO: git test failling here
-        this bug is caused due to typecasting mismatch in the function.
-        However, even typecasting the arrays manually in the function is not solving
-        the problem.
-        '''
-        # log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
-        
-        pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
-        pd_stat_distribution_colnum(df, nrows=len(df))
-        pd_stat_histogram(df, bins=50, coltarget="yield")
-        _,df_grouped = pd_colnum_tocat_stat(df,"density","block",10)
-        pd_stat_shift_trend_changes(df_grouped,"density","block")
-
-        _, X_train_grouped =  pd_colnum_tocat_stat(X_train,"yield","block",10)
-        _, X_test_grouped =  pd_colnum_tocat_stat(X_test,"yield","block",10)
-        pd_stat_shift_trend_correlation(X_train_grouped, X_test_grouped,"yield","block")
-
-        '''TODO: TypeError: pd_colnum_tocat_stat() got an unexpected keyword argument 'colname',
-        This function needs complete rewrite there are many bugs and logical errors.
-        pd_stat_shift_changes(df,"yield", features_list=["density","block"])
-        '''
-
-    def test_drift_detect():
-        import tensorflow as tf
-        from tensorflow.keras.layers import Dense,InputLayer,Dropout
-        from utilmy.tabular import pd_data_drift_detect_alibi
-
-        input_size = X_train.shape[1]
-        output_size = y_train.nunique()
-        model = tf.keras.Sequential(
-            [
-                InputLayer(input_shape=(input_size)),
-                Dense(16,activation=tf.nn.relu),
-                Dropout(0.3),
-                Dense(1)
-            ]
-        )
-        model.compile(optimizer='adam',loss='mse')
-        model.fit(X_train,y_train,epochs=1)
-
-        pd_data_drift_detect_alibi(X_train,X_test,'regressoruncertaintydrift','tensorflow',model=model)
-        pd_data_drift_detect_alibi(X_train,X_test,'learnedkerneldrift','tensorflow',model=model)
-        pd_data_drift_detect_alibi(X_train,X_test,'spotthediffdrift','tensorflow',model=model)
-        pd_data_drift_detect_alibi(X_train,X_test,'spotthediffdrift','tensorflow')
-        pd_data_drift_detect_alibi(X_train,X_test,'ksdrift','tensorflow')
-        pd_data_drift_detect_alibi(X_train,X_test,'mmddrift','tensorflow')
-        pd_data_drift_detect_alibi(X_train,X_test,'chisquaredrift','tensorflow')
-        pd_data_drift_detect_alibi(X_train,X_test,'tabulardrift','tensorflow')
-
-        input_size = X_train.shape[1]
-        output_size = y_train.nunique()
-        model = tf.keras.Sequential(
-            [
-                InputLayer(input_shape=(input_size)),
-                Dense(16,activation=tf.nn.relu),
-                Dropout(0.3),
-                Dense(output_size,activation=tf.nn.softmax)
-            ]
-        )
-        model.compile(optimizer='adam',loss=tf.keras.losses.CategoricalCrossentropy())
-        model.fit(X_train,tf.one_hot(y_train,output_size),epochs=1)
-        pd_data_drift_detect_alibi(X_train,X_test,'classifieruncertaintydrift','tensorflow',model=model)
-    
-    def test_np_utils():
-        log("Testing np_utils ...")
-        from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
-        import numpy as np
-        arr = np.array([[1, 2, 3], [4, 5, 6]])
-        np_col_extractname(["aa_","bb-","cc"])
-        np_list_remove(arr,[1,2,3], mode="exact")
-        np_conv_to_one_col(arr)
+   from utilmy import tabular as m
+   m.test_all()
 
    
-
-
-    test()
-    test_estimator()
-    test_pd_utils()
-    # test_drift_detect()
-    test_np_utils()
-
-
 
 def test_tabular2():
     """
     """
     from utilmy import tabular as m
-    df = pd_generate_data(7, 100)
-    m.test_anova(df,'cat1','cat2')
-    m.test_normality2(df, '0', "Shapiro")
-    m.test_plot_qqplot(df, '1')
+
 
 
 
 ########################################################################################################
 def test_adatasets():
+    """ #### python test.py   test_adatasets
     """
-    #### python test.py   test_adatasets
-    """
-    def test():
-        log("Testing  ...")
-        from utilmy.adatasets import test_dataset_classification_fake, test_dataset_classification_petfinder, test_dataset_classifier_covtype,\
-            test_dataset_regression_fake,dataset_classifier_pmlb
-        test_dataset_regression_fake(nrows=500, n_features=17)
-        test_dataset_classification_fake(nrows=10)
-        test_dataset_classification_petfinder(nrows=10)
-        test_dataset_classifier_covtype(nrows=10)
-        dataset_classifier_pmlb(name=2)
-    
-    def test_pd_utils():
-        import pandas as pd
-        from utilmy.adatasets import pd_train_test_split,pd_train_test_split2, fetch_dataset
-        fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
-        df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
-        pd_train_test_split(df,"block")
-        pd_train_test_split2(df, "block")
-
-    test()
-    test_pd_utils()
+    from utilmy import adatasets as m
+    m.test_all()      
 
 
 
 ########################################################################################################
 def test_nnumpy():
+    """#### python test.py   test_nnumpy
     """
-    #### python test.py   test_nnumpy
-    """
-
-    def test():
-        log("Testing nnumpy ...")
-        from utilmy.nnumpy import to_dict,to_timeunix,to_datetime,np_list_intersection,np_add_remove
-        to_dict(kw=[1,2,3])
-        to_timeunix(datex="2020-10-06")
-        to_datetime("10/05/2021")
-        l1 = [1,2,3]
-        l2 = [3,4,1]
-        result = np_list_intersection(l1,l2)
-        set_ = {1,2,3,4,5}
-        result = np_add_remove(set_,[1,2],6)
-        log("np_add_remove",result)
-    test()
+    from utilmy import util_nnumpy as m
+    m.test_all()
 
 
 
 ########################################################################################################
 def test_dates():
-    """
     #### python test.py   test_dates
-    """
-    def test():
-        log("Testing dates.py ...")
-        import pandas as pd
-        from utilmy.dates import date_generate,date_weekyear_excel,date_weekday_excel,date_is_holiday,\
-            date_now,pd_date_split
-        date_ = date_generate(start='2021-01-01', ndays=100)
-        date_weekyear_excel('20210317')
-        date_weekday_excel('20210317')
-        date_is_holiday([ pd.to_datetime("2015/1/1") ] * 10)
-        
-        date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo')
-        df = pd.DataFrame(columns=[ 'Gender', 'Birthdate'])
-        df['Gender'] = random_genders(10)
-        df['Birthdate'] = random_dates(start=pd.to_datetime('1950-01-01'), end=pd.to_datetime('2008-01-01'), size=10)
-        
-        pd_date_split(df,coldate="Birthdate",sep="")
-        
-    
-    def random_dates(start, end, size):
-        # Unix timestamp is in nanoseconds by default, so divide it by
-        # 24*60*60*10**9 to convert to days.
-        divide_by = 24 * 60 * 60 * 10**9
-        start_u = start.value // divide_by
-        end_u = end.value // divide_by
-        return pd.to_datetime(np.random.randint(start_u, end_u, size), unit="D")
-    def random_genders(size, p=None):
-        """Generate n-length ndarray of genders."""
-        if not p:
-            # default probabilities
-            p = (0.49, 0.49, 0.01, 0.01)
-        gender = ("M", "F", "O", "")
-        return np.random.choice(gender, size=size, p=p)
-    test()
-
+    from utilmy import util_dates as m
+    m.test_all()
 
 
 ########################################################################################################
 def test_decorators():
-    """
     #### python test.py   test_decorators
-    """
-    from utilmy.decorators import thread_decorator, timeout_decorator, profiler_context,profiler_decorator, profiler_decorator_base
-
-    @thread_decorator
-    def thread_decorator_test():
-        log("thread decorator")
-
-
-    @profiler_decorator_base
-    def profiler_decorator_base_test():
-        log("profiler decorator")
-
-    @timeout_decorator(10)
-    def timeout_decorator_test():
-        log("timeout decorator")
-
-    
-    
-    profiler_decorator_base_test()
-    timeout_decorator_test()
-    thread_decorator_test()
-
-
-
-def test_decorators2(*args):
-    from utilmy.decorators import profiler_decorator, profiler_context
-
-    @profiler_decorator
-    def profiled_sum():
-       return sum(range(100000))
-
-    profiled_sum()
-
-    with profiler_context():
-       x = sum(range(1000000))
-       print(x)
-
-
-    from utilmy import profiler_start, profiler_stop
-    profiler_start()
-    print(sum(range(1000000)))
-    profiler_stop()
-
-
-    ###################################################################################
-    from utilmy.decorators import timer_decorator
-    @timer_decorator
-    def dummy_func():
-       time.sleep(2)
-
-    class DummyClass:
-       @timer_decorator
-       def method(self):
-           time.sleep(3)
-
-    dummy_func()
-    a = DummyClass()
-    a.method()
-
-
-
-
+    from utilmy import  util_decorators as m
+    m.test_tf_cdist()
 
 
 ########################################################################################################
 def test_deeplearning_keras():
-
     from utilmy.deeplearning.keras import  util_similarity as m
     m.test_tf_cdist()
 
@@ -782,6 +515,3 @@ def test_all():
 if __name__ == "__main__":
     import fire
     fire.Fire() 
-
-
-
