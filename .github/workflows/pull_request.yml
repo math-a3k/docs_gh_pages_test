@@ -104,9 +104,6 @@ jobs:
     - name: test_tabular
       run: python test.py test_tabular
 
-    - name: test_tabular2 
-      run: python test.py test_tabular2
-
     - name: test_adatasets
       run: python test.py test_adatasets
 
