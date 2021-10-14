@@ -11,6 +11,47 @@ from typing import Optional, Union
 import yaml
 from loguru import logger
 
+
+
+
+
+#####################################################################
+def test_all():
+    """
+    #### python test.py   test_utils
+    """
+    def test_logs(): 
+        from utilmy.utils import log,log2, logw, loge, logger_setup
+        print("testing logs utils........")
+        logger_setup()
+        log("simple log ")
+        log2("debug log")
+        logw("warning log")
+        loge("error log")
+    
+    def config_load_test():
+        from utilmy.utils import config_load
+        config_load()
+    
+    def dataset_download_test():
+        from utilmy.utils import dataset_donwload
+        dataset_donwload("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz", './testdata/tmp/test/dataset/')
+    
+    def os_extract_archive_test():
+        from utilmy.utils import os_extract_archive
+        os_extract_archive("./testdata/tmp/test/dataset/mnist_png.tar.gz","./testdata/tmp/test/dataset/archive/", archive_format = "auto")
+    
+    def to_file_test():
+        from utilmy.utils import to_file
+        to_file("to_file_test_str", "./testdata/tmp/test/to_file.txt")
+
+    test_logs()
+    config_load_test()
+    dataset_download_test()
+    os_extract_archive_test()
+    to_file_test()
+
+
 def test0(): 
     logger_setup()
     log("simple log ")
