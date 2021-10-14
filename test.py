@@ -65,7 +65,7 @@ def test_adatasets():
 def test_nnumpy():
     """#### python test.py   test_nnumpy
     """
-    from utilmy import util_nnumpy as m
+    from utilmy import nnumpy as m
     m.test_all()
 
 
@@ -73,14 +73,14 @@ def test_nnumpy():
 ########################################################################################################
 def test_dates():
     #### python test.py   test_dates
-    from utilmy import util_dates as m
+    from utilmy import dates as m
     m.test_all()
 
 
 ########################################################################################################
 def test_decorators():
     #### python test.py   test_decorators
-    from utilmy import  util_decorators as m
+    from utilmy import  decorators as m
     m.test_all()
 
 
@@ -126,7 +126,7 @@ def test_distributed():
 def test_utils():
     """ #### python test.py   test_utils
     """
-    from utilmy.utils import utils as m
+    from utilmy import utils as m
     m.test_all() 
          
 
