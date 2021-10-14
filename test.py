@@ -37,6 +37,31 @@ def test_utilmy():
    from utilmy import utilmy as m
    m.test_all()
    
+   
+   #####  Bug of test_all() ##############################################################################
+   log("\n##### Session  ")
+   sess = m.Session("ztmp/session")
+
+   global mydf
+   mydf = pd_generate_data()
+
+   sess.save('mysess', glob=globals(), tag='01')
+   os.system("ls ztmp/session")
+   sess.show()
+
+   import glob
+   flist = glob.glob("ztmp/session/" + "/*")
+   for f in flist:
+       t = os.path.exists(os.path.abspath(f))
+       assert  t == True, "session path not created "
+
+       pickle_created = os.path.exists(os.path.abspath(f + "/mydf.pkl"))
+       assert  pickle_created == True, "Pickle file not created"
+
+   sess.load('mysess')
+   sess.load('mysess', tag='01')
+
+   
 
 ##########################################################################################
 def test_ppandas():
