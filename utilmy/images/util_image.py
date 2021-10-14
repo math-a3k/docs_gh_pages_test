@@ -13,11 +13,12 @@ os.environ['MPLCONFIGDIR'] = "/tmp/"
 import io, cv2,  tifffile.tifffile
 from PIL import Image
 from skimage import morphology
-import diskcache as dc
+
 import matplotlib
 
 try :
    from albumentations.core.transforms_interface import ImageOnlyTransform
+   import diskcache as dc 
 
 except : pass
 
@@ -29,15 +30,13 @@ verbose = 0
 def log(*s):
     print(*s, flush=True)
 
-
 def log2(*s):
     if verbose >1 : print(*s, flush=True)
 
 
 def help():
     from utilmy import help_create
-    ss  = ""
-    ss += HELP
+    ss  = HELP
     ss += help_create("utilmy.deeplearning.util_image")
     print(ss)
 
@@ -140,7 +139,7 @@ def run_multiprocess(myfun, list_args, npool=10, **kwargs):
 
 
 ################################################################################################
-def image_create_cache():
+def image_cache_create():
     #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     ####   sleep 56000  && python prepro.py  image_create_cache
