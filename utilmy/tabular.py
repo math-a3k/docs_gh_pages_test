@@ -603,70 +603,87 @@ def np_conv_to_one_col(np_array, sep_char="_"):
     np_array_=np.apply_along_axis(row2string,1,np_array)
     return np_array_[:,None]
 
+
+
 #########################################################################
-def pd_data_drift_detect(df,method,backend,model=None,p_val=0.05,**kwargs):
-    """
-    returns various methods for detecting drift in the dataset
-    :param df: dfframe test dataset to check for drift
+def pd_data_drift_detect_alibi(
+    df:pd.DataFrame,      ### Reference dataset
+    df_new:pd.DataFrame,  ### Test dataset to be checked
+    method:str="'regressoruncertaintydrift','classifieruncertaintydrift','ksdrift','mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift', 'classifierdrift','spotthediffdrift'",
+    backend:str='tensorflow,pytorch',
+    model=None,  ### Pre-trained model
+    p_val=0.05,  **kwargs):
+    
+    """ Detecting drift in the dataset using alibi
+    https://docs.seldon.io/projects/alibi-detect/en/latest/api/modules.html
+    
+    :param df:    dfframe test dataset to check for drift
+    :param dfnew: dfframe test dataset to check for drift    
     :param backend: str "tensorflow" or "pytorch"
     :param model:  trained pytorch or tensorflow model.
-    :param p_val: float 
+    :param p_val: p value float 
 
     example:
     model = tf.keras.Sequential([InputLayer(input_shape=(input_size)),Dropout(0.3),Dense(1)])
     model.compile(optimizer='adam',loss='mse')
     model.fit(X_train,y_train,epochs=1)
 
-    cd = pd_data_drift_detect(X_test,'regressoruncertaintydrift','tensorflow',model=model)
-    preds = cd.predict(X_test)
-    """
+    cd, is_drift_preds = pd_data_drift_detect(X_train, X_test,'regressoruncertaintydrift','tensorflow',model=model)
 
+    
+    """
     methods = ['regressoruncertaintydrift','classifieruncertaintydrift','ksdrift',
                 'mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift',
                 'classifierdrift','spotthediffdrift']
-
-    assert method in methods, "method is invalid, methods available {}".format(methods)
+    
+    if len(method) > 20 :
+        log('Using KSDrift as default')
+        method = 'ksdrift'
+        backend = 'tensorflow'
+        
+    assert method in methods, f"method is invalid, methods available {methods}"
 
     if method == "regressoruncertaintydrift":
         from alibi_detect.cd import RegressorUncertaintyDrift
-        return RegressorUncertaintyDrift(df.values,model=model,p_val=p_val,
+        mdrift = RegressorUncertaintyDrift(df.values,model=model,p_val=p_val,
                                         backend=backend,**kwargs)
     
     if method == 'classifieruncertaintydrift':
         from alibi_detect.cd import ClassifierUncertaintyDrift
-        return ClassifierUncertaintyDrift(df.values,model=model,p_val=p_val,
+        mdrift = ClassifierUncertaintyDrift(df.values,model=model,p_val=p_val,
                                         backend=backend,preds_type='probs',**kwargs)
     
     if method == 'ksdrift':
         from alibi_detect.cd import KSDrift
-        return KSDrift(df.values,p_val=p_val,**kwargs)
+        mdrift = KSDrift(df.values,p_val=p_val,**kwargs)
     
     if method == 'mmddrift':
         from alibi_detect.cd import MMDDrift
-        return MMDDrift(df.values,backend=backend,p_val=0.05,**kwargs)
+        mdrift = MMDDrift(df.values,backend=backend,p_val=0.05,**kwargs)
 
     if method == 'learnedkerneldrift':
         from alibi_detect.cd import LearnedKernelDrift
         if backend == "tensforflow":
             from alibi_detect.utils.tensorflow.kernels import DeepKernel
             kernel = DeepKernel(model)
-            return LearnedKernelDrift(df.values, kernel, backend=backend, p_val=p_val, **kwargs)
+            mdrift = LearnedKernelDrift(df.values, kernel, backend=backend, p_val=p_val, **kwargs)
+            
         if backend == "pytorch":
             from alibi_detect.utils.pytorch.kernels import DeepKernel
             kernel = DeepKernel(model)
-            return LearnedKernelDrift(df.values, kernel, backend=backend, p_val=p_val, **kwargs)
+            mdrift = LearnedKernelDrift(df.values, kernel, backend=backend, p_val=p_val, **kwargs)
     
     if method == 'chisquaredrift':
         from alibi_detect.cd import ChiSquareDrift
-        return ChiSquareDrift(df.values, p_val=p_val,**kwargs)
+        mdrift = ChiSquareDrift(df.values, p_val=p_val,**kwargs)
     
     if method == 'tabulardrift':
         from alibi_detect.cd import TabularDrift
-        return TabularDrift(df.values, p_val=p_val,**kwargs)
+        mdrift = TabularDrift(df.values, p_val=p_val,**kwargs)
     
     if method == 'classifierdrift':
         from alibi_detect.cd import ClassifierDrift
-        return ClassifierDrift(df.values, model, p_val=p_val,backend=backend,**kwargs)
+        mdrift = ClassifierDrift(df.values, model, p_val=p_val,backend=backend,**kwargs)
     
     if method == 'spotthediffdrift':
         from alibi_detect.cd import SpotTheDiffDrift
@@ -674,11 +691,21 @@ def pd_data_drift_detect(df,method,backend,model=None,p_val=0.05,**kwargs):
         if backend == 'tensorflow' and model is not None:
             from alibi_detect.utils.tensorflow.kernels import DeepKernel
             kernel = DeepKernel(model)
-            return SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
+            mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
 
         if backend == 'pytorch' and model is not None:
             from alibi_detect.utils.pytorch.kernels import DeepKernel
             kernel = DeepKernel(model)
-            return SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
+            mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
         
-        return SpotTheDiffDrift(df.values,backend=backend,p_val=p_val)
+        mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val)
+
+        
+    is_drift_pvalue_scores = mdrift.predict(dfnew.values)
+    return mdrift, is_drift_pvalue_scores
+
+
+ 
+    
+    
+    
