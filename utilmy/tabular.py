@@ -8,7 +8,6 @@ https://pypi.org/project/pysie/#description
 
 """
 import os, sys, pandas as pd, numpy as np
-
 from utilmy.utilmy import pd_generate_data
 from utilmy.prepro.util_feature import  pd_colnum_tocat, pd_colnum_tocat_stat
 
@@ -593,3 +592,83 @@ def np_conv_to_one_col(np_array, sep_char="_"):
 
     np_array_=np.apply_along_axis(row2string,1,np_array)
     return np_array_[:,None]
+
+#########################################################################
+def pd_data_drift_detect(df,method,backend,model=None,p_val=0.05,**kwargs):
+    """
+    returns various methods for detecting drift in the dataset
+    :param df: dfframe test dataset to check for drift
+    :param backend: str "tensorflow" or "pytorch"
+    :param model:  trained pytorch or tensorflow model.
+    :param p_val: float 
+
+    example:
+    model = tf.keras.Sequential([InputLayer(input_shape=(input_size)),Dropout(0.3),Dense(1)])
+    model.compile(optimizer='adam',loss='mse')
+    model.fit(X_train,y_train,epochs=1)
+
+    cd = pd_data_drift_detect(X_test,'regressoruncertaintydrift','tensorflow',model=model)
+    preds = cd.predict(X_test)
+    """
+
+    methods = ['regressoruncertaintydrift','classifieruncertaintydrift','ksdrift',
+                'mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift',
+                'classifierdrift','spotthediffdrift']
+
+    assert method in methods, "method is invalid, methods available {}".format(methods)
+
+    if method == "regressoruncertaintydrift":
+        from alibi_detect.cd import RegressorUncertaintyDrift
+        return RegressorUncertaintyDrift(df.values,model=model,p_val=p_val,
+                                        backend=backend,**kwargs)
+    
+    if method == 'classifieruncertaintydrift':
+        from alibi_detect.cd import ClassifierUncertaintyDrift
+        return ClassifierUncertaintyDrift(df.values,model=model,p_val=p_val,
+                                        backend=backend,preds_type='probs',**kwargs)
+    
+    if method == 'ksdrift':
+        from alibi_detect.cd import KSDrift
+        return KSDrift(df.values,p_val=p_val,**kwargs)
+    
+    if method == 'mmddrift':
+        from alibi_detect.cd import MMDDrift
+        return MMDDrift(df.values,backend=backend,p_val=0.05,**kwargs)
+
+    if method == 'learnedkerneldrift':
+        from alibi_detect.cd import LearnedKernelDrift
+        if backend == "tensforflow":
+            from alibi_detect.utils.tensorflow.kernels import DeepKernel
+            kernel = DeepKernel(model)
+            return LearnedKernelDrift(df.values, kernel, backend=backend, p_val=p_val, **kwargs)
+        if backend == "pytorch":
+            from alibi_detect.utils.pytorch.kernels import DeepKernel
+            kernel = DeepKernel(model)
+            return LearnedKernelDrift(df.values, kernel, backend=backend, p_val=p_val, **kwargs)
+    
+    if method == 'chisquaredrift':
+        from alibi_detect.cd import ChiSquareDrift
+        return ChiSquareDrift(df.values, p_val=p_val,**kwargs)
+    
+    if method == 'tabulardrift':
+        from alibi_detect.cd import TabularDrift
+        return TabularDrift(df.values, p_val=p_val,**kwargs)
+    
+    if method == 'classifierdrift':
+        from alibi_detect.cd import ClassifierDrift
+        return ClassifierDrift(df.values, model, p_val=p_val,backend=backend,**kwargs)
+    
+    if method == 'spotthediffdrift':
+        from alibi_detect.cd import SpotTheDiffDrift
+
+        if backend == 'tensorflow' and model is not None:
+            from alibi_detect.utils.tensorflow.kernels import DeepKernel
+            kernel = DeepKernel(model)
+            return SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
+
+        if backend == 'pytorch' and model is not None:
+            from alibi_detect.utils.pytorch.kernels import DeepKernel
+            kernel = DeepKernel(model)
+            return SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
+        
+        return SpotTheDiffDrift(df.values,backend=backend,p_val=p_val)
