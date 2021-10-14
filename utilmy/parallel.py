@@ -13,7 +13,8 @@ from typing import Callable, Tuple, Union
 verbose = 0
 
 def log(*s, **kw):  print(*s, flush=True, **kw)
-def log2(*s, **kw):  if verbose >1 : print(*s, flush=True, **kw)
+def log2(*s, **kw):  
+    if verbose >1 : print(*s, flush=True, **kw)
 
 def help():
     from utilmy import help_create
