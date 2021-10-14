@@ -283,7 +283,6 @@ def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3, reno
 
 
 ##############################################################################
-
 def image_read(filepath_or_buffer: Union[str, io.BytesIO]):
     """
     Read a file into an image object
@@ -333,6 +332,62 @@ def image_save():
 
 
 
+################################################################
+def image_show_in_row(image_list:dict=None):
+    """ # helper function for data visualization
+    Plot images in one row.
+    
+    """
+    import matplotlib.pyplot as plt
+   
+    if isinstance(image_list, list): 
+         image_dict = {i:x for (i,x) in enumerate(image_list) }
+    else :
+         image_dict = image_list
+      
+    n = len(image_dict)
+    plt.figure(figsize=(16, 5))
+    for i, (name, image) in enumerate(image_dict.items()):
+        plt.subplot(1, n, i + 1)
+        plt.xticks([])
+        plt.yticks([])
+        plt.title(' '.join(name.split('_')).title())
+        plt.imshow(image)
+    plt.show()
+
+
+
+def image_resize_ratio(image, width=None, height=None, inter=cv2.INTER_AREA):
+    # Resizes a image and maintains aspect ratio
+    # Grab the image size and initialize dimensions
+    import cv2
+    dim = None
+    (h, w) = image.shape[:2]
+
+    # Return original image if no need to resize
+    if width is None and height is None:
+        return image
+
+    # We are resizing height if width is none
+    if width is None:
+        # Calculate the ratio of the height and construct the dimensions
+        r = height / float(h)
+        dim = (int(w * r), height)
+    # We are resizing width if height is none
+    else:
+        # Calculate the ratio of the width and construct the dimensions
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    # Return the resized image
+    return cv2.resize(image, dim, interpolation=inter)    
+    
+    
+    
+    
+    
+    
+    
 
 
 ############################################################################
