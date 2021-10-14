@@ -598,6 +598,21 @@ def np_conv_to_one_col(np_array, sep_char="_"):
 
 #########################################################################
 def pd_data_drift_detect(df,method,backend,model=None,p_val=0.05,**kwargs):
+    """
+    returns various methods for detecting drift in the dataset
+    :param df: dfframe test dataset to check for drift
+    :param backend: str "tensorflow" or "pytorch"
+    :param model:  trained pytorch or tensorflow model.
+    :param p_val: float 
+
+    example:
+    model = tf.keras.Sequential([InputLayer(input_shape=(input_size)),Dropout(0.3),Dense(1)])
+    model.compile(optimizer='adam',loss='mse')
+    model.fit(X_train,y_train,epochs=1)
+
+    cd = pd_data_drift_detect(X_test,'regressoruncertaintydrift','tensorflow',model=model)
+    preds = cd.predict(X_test)
+    """
 
     methods = ['regressoruncertaintydrift','classifieruncertaintydrift','ksdrift',
                 'mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift',
