@@ -14,6 +14,7 @@ pd_train_test_split(df, coly = None)
 pd_train_test_split2(df, coly)
 test0()
 test1()
+test_all()
 test_dataset_classification_fake(nrows = 500)
 test_dataset_classification_petfinder(nrows = 1000)
 test_dataset_classifier_covtype(nrows = 500)
@@ -73,7 +74,7 @@ log(*s)
 pd_date_split(df, coldate  =   'time_key', prefix_col  = "", sep = "/", verbose = False)
 random_dates(start, end, size)
 random_genders(size, p = None)
-test()
+test_all()
 
 
 
@@ -99,6 +100,9 @@ profiler_decorator(func)
 profiler_decorator_base(fnc)
 profiler_decorator_base_test()
 test0()
+test_all()
+test_decorators()
+test_decorators2()
 thread_decorator(func)
 thread_decorator_test()
 timeout_decorator(seconds = 10, error_message = os.strerror(errno.ETIME)
@@ -597,6 +601,21 @@ z_logger_stdout_override()
 
 
 utilmy/nnumpy.py
+-------------------------functions----------------------
+is_float(x)
+is_int(x)
+np_add_remove(set_, to_remove, to_add)
+np_list_intersection(l1, l2)
+test0()
+test1()
+to_datetime(x)
+to_dict(**kw)
+to_float(x, valdef = -1)
+to_int(x, valdef = -1)
+to_timeunix(datex = "2018-01-16")
+
+-------------------------methods----------------------
+dict_to_namespace.__init__(self, d)
 
 
 utilmy/oos.py
@@ -645,6 +664,7 @@ test1()
 test2()
 test4()
 test5()
+test_all()
 to_datetime(x)
 to_dict(**kw)
 to_float(x)
@@ -1024,7 +1044,7 @@ log(*s)
 np_col_extractname(col_onehot)
 np_conv_to_one_col(np_array, sep_char = "_")
 np_list_remove(cols, colsremove, mode = "exact")
-pd_data_drift_detect(df, method, backend, model = None, p_val = 0.05, **kwargs)
+pd_data_drift_detect_alibi(df:pd.DataFrame, ### Reference datasetdf_new:pd.DataFrame, ### Test dataset to be checkedmethod:str = "'regressoruncertaintydrift','classifieruncertaintydrift','ksdrift','mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift', 'classifierdrift','spotthediffdrift'", backend:str = 'tensorflow,pytorch', model = None, ### Pre-trained modelp_val = 0.05, **kwargs)
 pd_stat_correl_pair(df, coltarget = None, colname = None)
 pd_stat_distribution_colnum(df, nrows = 2000, verbose = False)
 pd_stat_histogram(df, bins = 50, coltarget = "diff")
@@ -1037,6 +1057,7 @@ pd_train_test_split_time(df, test_period  =  40, cols = None, coltime  = "time_k
 test0()
 test1()
 test3()
+test_all()
 test_anova(df, col1, col2)
 test_heteroscedacity(y, y_pred, pred_value_only = 1)
 test_hypothesis(df_obs, df_ref, method = '', **kw)
@@ -1254,6 +1275,7 @@ pd_text_hash_create_lsh(df, col, sep = " ", threshold = 0.7, num_perm = 10, npoo
 pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
 test()
 test()
+test_all()
 test_lsh()
 
 
@@ -1284,6 +1306,7 @@ pd_generate_data(ncols = 7, nrows = 100)
 pd_getdata(verbose = True)
 pd_random(ncols = 7, nrows = 100)
 save(dd, to_file = "", verbose = False)
+test_all()
 
 -------------------------methods----------------------
 Session.__init__(self, dir_session = "ztmp/session/", )
@@ -1306,6 +1329,7 @@ logw(*s)
 os_extract_archive(file_path, path = ".", archive_format = "auto")
 test0()
 test1()
+test_all()
 to_file(s, filep)
 
 
