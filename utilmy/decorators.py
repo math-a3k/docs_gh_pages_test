@@ -6,6 +6,69 @@ from utilmy.debug import log
 
 
 
+def test_all():
+    test_decorators()	
+    test_decorators2()
+
+def test_decorators():
+    """
+    #### python test.py   test_decorators
+    """
+    from utilmy.decorators import thread_decorator, timeout_decorator, profiler_context,profiler_decorator, profiler_decorator_base
+
+    @thread_decorator
+    def thread_decorator_test():
+        log("thread decorator")
+
+
+    @profiler_decorator_base
+    def profiler_decorator_base_test():
+        log("profiler decorator")
+
+    @timeout_decorator(10)
+    def timeout_decorator_test():
+        log("timeout decorator")
+
+    profiler_decorator_base_test()
+    timeout_decorator_test()
+    thread_decorator_test()
+
+
+
+def test_decorators2():
+    from utilmy.decorators import profiler_decorator, profiler_context
+
+    @profiler_decorator
+    def profiled_sum():
+       return sum(range(100000))
+
+    profiled_sum()
+
+    with profiler_context():
+       x = sum(range(1000000))
+       print(x)
+
+
+    from utilmy import profiler_start, profiler_stop
+    profiler_start()
+    print(sum(range(1000000)))
+    profiler_stop()
+
+
+    ###################################################################################
+    from utilmy.decorators import timer_decorator
+    @timer_decorator
+    def dummy_func():
+       time.sleep(2)
+
+    class DummyClass:
+       @timer_decorator
+       def method(self):
+           time.sleep(3)
+
+    dummy_func()
+    a = DummyClass()
+    a.method()
 
 
 
