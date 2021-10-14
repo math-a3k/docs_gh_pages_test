@@ -108,6 +108,61 @@ def pd_getdata(verbose=True):
 
 
 
+
+###################################################################################################
+###### Test #####################################################################################
+def test_all():
+   import utilmy as m
+
+   ###################################################################################
+   log("\n##### git_repo_root  ")
+   log(m.git_repo_root())
+   assert not m.git_repo_root() == None, "err git repo"
+
+
+   log("\n##### Doc generator: help_create  ")
+   for name in [ 'utilmy.parallel', 'utilmy.utilmy', 'utilmy.ppandas'  ]:
+      log("\n#############", name,"\n", m.help_create(name))
+
+
+   ###################################################################################
+   log("\n##### global_verbosity  ")
+   print('verbosity', m.global_verbosity(__file__, "config.json", 40,))
+   print('verbosity', m.global_verbosity('../', "config.json", 40,))
+   print('verbosity', m.global_verbosity(__file__))
+
+   verbosity = 40
+   gverbosity = m.global_verbosity(__file__)
+   assert gverbosity == 5, "incorrect default verbosity"
+   gverbosity =m.global_verbosity(__file__, "config.json", 40,)
+   assert gverbosity == verbosity, "incorrect verbosity "
+
+
+   ###################################################################################
+   log("\n##### Session  ")
+   sess = m.Session("ztmp/session")
+
+   global mydf
+   mydf = pd_generate_data()
+
+   sess.save('mysess', glob=globals(), tag='01')
+   os.system("ls ztmp/session")
+   sess.show()
+
+   import glob
+   flist = glob.glob("ztmp/session/" + "/*")
+   for f in flist:
+       t = os.path.exists(os.path.abspath(f))
+       assert  t == True, "session path not created "
+
+       pickle_created = os.path.exists(os.path.abspath(f + "/mydf.pkl"))
+       assert  pickle_created == True, "Pickle file not created"
+
+   sess.load('mysess')
+   sess.load('mysess', tag='01')
+
+
+
 ###################################################################################################
 ###### Pandas #####################################################################################
 from utilmy.parallel import (

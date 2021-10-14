@@ -6,7 +6,8 @@ import pandas as pd
 
 
 
-def test():
+
+def test_all():
     log("Testing dates.py ...")
     date_ = date_generate(start='2021-01-01', ndays=100)
     date_weekyear_excel('20210317')

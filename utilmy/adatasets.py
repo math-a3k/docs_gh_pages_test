@@ -3,9 +3,37 @@
 import os, sys, time, datetime,inspect, json, pandas as pd, numpy as np
 from pathlib import Path
 
-
 from utilmy import (os_makedirs, os_system, global_verbosity, git_current_hash, git_repo_root
                            )
+
+
+##############################################################################################
+def test_all():
+    """
+    #### python test.py   test_adatasets
+    """
+    def test():
+        log("Testing  ...")
+        from utilmy.adatasets import test_dataset_classification_fake, test_dataset_classification_petfinder, test_dataset_classifier_covtype,\
+            test_dataset_regression_fake,dataset_classifier_pmlb
+        test_dataset_regression_fake(nrows=500, n_features=17)
+        test_dataset_classification_fake(nrows=10)
+        test_dataset_classification_petfinder(nrows=10)
+        test_dataset_classifier_covtype(nrows=10)
+        dataset_classifier_pmlb(name=2)
+    
+    def test_pd_utils():
+        import pandas as pd
+        from utilmy.adatasets import pd_train_test_split,pd_train_test_split2, fetch_dataset
+        fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
+        df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
+        pd_train_test_split(df,"block")
+        pd_train_test_split2(df, "block")
+
+    test()
+    test_pd_utils()
+
+
 
 def test0():
     log("Testing  ...")

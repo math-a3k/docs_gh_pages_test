@@ -25,6 +25,24 @@ def help():
 
 
 ###################################################################################################
+def test_all():
+    """#### python test.py   test_nnumpy
+    """
+    def test():
+        log("Testing nnumpy ...")
+        from utilmy.nnumpy import to_dict,to_timeunix,to_datetime,np_list_intersection,np_add_remove
+        to_dict(kw=[1,2,3])
+        to_timeunix(datex="2020-10-06")
+        to_datetime("10/05/2021")
+        l1 = [1,2,3]
+        l2 = [3,4,1]
+        result = np_list_intersection(l1,l2)
+        set_ = {1,2,3,4,5}
+        result = np_add_remove(set_,[1,2],6)
+        log("np_add_remove",result)
+    test()
+    
+    
 def test0():
     log("Testing nnumpy ...")
     to_dict(kw=[1,2,3])
