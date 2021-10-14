@@ -82,7 +82,7 @@ def test_dates():
 def test_decorators():
     #### python test.py   test_decorators
     from utilmy import  util_decorators as m
-    m.test_tf_cdist()
+    m.test_all()
 
 
 ########################################################################################################
