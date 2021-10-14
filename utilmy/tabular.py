@@ -708,7 +708,7 @@ def pd_data_drift_detect_alibi(
         mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val)
 
         
-    is_drift_pvalue_scores = mdrift.predict(dfnew.values)
+    is_drift_pvalue_scores = mdrift.predict(df_new.values)
     return mdrift, is_drift_pvalue_scores
 
 

@@ -515,7 +515,7 @@ def test_tabular():
     def test_drift_detect():
         import tensorflow as tf
         from tensorflow.keras.layers import Dense,InputLayer,Dropout
-        from utilmy.tabular import pd_data_drift_detect
+        from utilmy.tabular import pd_data_drift_detect_alibi
 
         input_size = X_train.shape[1]
         output_size = y_train.nunique()
@@ -530,14 +530,14 @@ def test_tabular():
         model.compile(optimizer='adam',loss='mse')
         model.fit(X_train,y_train,epochs=1)
 
-        pd_data_drift_detect(X_test,'regressoruncertaintydrift','tensorflow',model=model)
-        pd_data_drift_detect(X_test,'learnedkerneldrift','tensorflow',model=model)
-        pd_data_drift_detect(X_test,'spotthediffdrift','tensorflow',model=model)
-        pd_data_drift_detect(X_test,'spotthediffdrift','tensorflow')
-        pd_data_drift_detect(X_test,'ksdrift','tensorflow')
-        pd_data_drift_detect(X_test,'mmddrift','tensorflow')
-        pd_data_drift_detect(X_test,'chisquaredrift','tensorflow')
-        pd_data_drift_detect(X_test,'tabulardrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train,X_test,'regressoruncertaintydrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train,X_test,'learnedkerneldrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train,X_test,'spotthediffdrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train,X_test,'spotthediffdrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train,X_test,'ksdrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train,X_test,'mmddrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train,X_test,'chisquaredrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train,X_test,'tabulardrift','tensorflow')
 
         input_size = X_train.shape[1]
         output_size = y_train.nunique()
@@ -551,7 +551,7 @@ def test_tabular():
         )
         model.compile(optimizer='adam',loss=tf.keras.losses.CategoricalCrossentropy())
         model.fit(X_train,tf.one_hot(y_train,output_size),epochs=1)
-        pd_data_drift_detect(X_test,'classifieruncertaintydrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train,X_test,'classifieruncertaintydrift','tensorflow',model=model)
     
     def test_np_utils():
         log("Testing np_utils ...")
