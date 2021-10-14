@@ -139,6 +139,7 @@ def test_all():
 
 
    ###################################################################################
+   """
    log("\n##### Session  ")
    sess = m.Session("ztmp/session")
 
@@ -160,6 +161,7 @@ def test_all():
 
    sess.load('mysess')
    sess.load('mysess', tag='01')
+   """
 
 
 
