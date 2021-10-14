@@ -11,10 +11,14 @@ Rules to follow :
        n.myfun()
 """
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
-from tensorflow.python.ops.gen_array_ops import one_hot
-from utilmy import pd_random, pd_generate_data
-from utilmy.tabular import pd_data_drift_detect
 
+#### Only for testing
+from utilmy import pd_random, pd_generate_data
+
+
+#### NEVER IMPORT HERE  !!!!
+# from utilmy.tabular import pd_data_drift_detect
+# from tensorflow.python.ops.gen_array_ops import one_hot
 
 #########################################################################################
 def log(*s):
@@ -25,6 +29,10 @@ def import_module(mname:str='utilmy.oos'):
     m = importlib.import_module(mname)
     return m
 
+   
+   
+   
+   
    
 #########################################################################################
 def test_utilmy():
@@ -83,35 +91,11 @@ def test_deeplearning_keras():
     from utilmy.deeplearning.keras import  util_similarity as m
     m.test_tf_cdist()
 
-
-
-   
    
 #########################################################################################
 def test_text():
-    from utilmy import text
-    from difflib import SequenceMatcher
-    from pandas._testing import assert_series_equal
-
-    list1 = ['dog', 'cat']
-    list2 = ['doggy', 'cat']
-
-    cols = ['name','pet_name']
-    sample_df = pd.DataFrame(zip(list1, list2), columns=cols)
-    original_value = text.pd_text_similarity(sample_df, cols)['score']
-
-    check_similarity = lambda *x: SequenceMatcher(None, *x[0]).ratio()
-    
-    output_value = pd.Series(sample_df.apply(lambda x: check_similarity(x[[*cols]]), axis=1), name="score")
-
-    assert_series_equal(original_value, output_value, check_names=False)
-
-
     from utilmy import text as m
-    log(m.pd_text_getcluster )
-    m.test_lsh()
-      
-
+    m.test_all()  
 
 
 #########################################################################################
@@ -127,8 +111,6 @@ def test_viz_vizhtml():
    vi.test_pd_plot_network()
    vi.test_cssname()
    
-
-
 
 #########################################################################################
 def test_parallel():
@@ -149,41 +131,11 @@ def test_distributed():
   
 #######################################################################################
 def test_utils():
+    """ #### python test.py   test_utils
     """
-    #### python test.py   test_utils
-    """
-    def test_logs(): 
-        from utilmy.utils import log,log2, logw, loge, logger_setup
-        print("testing logs utils........")
-        logger_setup()
-        log("simple log ")
-        log2("debug log")
-        logw("warning log")
-        loge("error log")
-    
-    def config_load_test():
-        from utilmy.utils import config_load
-        config_load()
-    
-    def dataset_download_test():
-        from utilmy.utils import dataset_donwload
-        dataset_donwload("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz", './testdata/tmp/test/dataset/')
-    
-    def os_extract_archive_test():
-        from utilmy.utils import os_extract_archive
-        os_extract_archive("./testdata/tmp/test/dataset/mnist_png.tar.gz","./testdata/tmp/test/dataset/archive/", archive_format = "auto")
-    
-    def to_file_test():
-        from utilmy.utils import to_file
-        to_file("to_file_test_str", "./testdata/tmp/test/to_file.txt")
-
-    test_logs()
-    config_load_test()
-    dataset_download_test()
-    os_extract_archive_test()
-    to_file_test()
-
-
+    from utilmy.utils import utils as m
+    m.test_all() 
+         
 
 ########################################################################################################
 def test_oos():
