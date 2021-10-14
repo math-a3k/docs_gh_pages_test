@@ -11,7 +11,7 @@ def logger_setdefault():
     Returns:
     """
     # Linux / OSX
-    cmd = "export LOGURU_FORMAT="{time} | <lvl>{message}</lvl>""
+    cmd = "export LOGURU_FORMAT='{time} | <lvl>{message}</lvl>'"
 
     # Windows
     cmd = 'setx LOGURU_DEBUG_COLOR "<green>"'
