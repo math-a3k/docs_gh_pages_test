@@ -13,7 +13,6 @@ Rules to follow :
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
 from tensorflow.python.ops.gen_array_ops import one_hot
 from utilmy import pd_random, pd_generate_data
-from utilmy.tabular import pd_data_drift_detect
 
 
 #########################################################################################
