@@ -13,8 +13,9 @@ import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as n
 
 
 
+
 #### NEVER IMPORT HERE  !!!!
-### from utilmy import pd_random, pd_generate_data
+# from utilmy import pd_random, pd_generate_data
 # from utilmy.tabular import pd_data_drift_detect
 # from tensorflow.python.ops.gen_array_ops import one_hot
 
@@ -28,7 +29,25 @@ def import_module(mname:str='utilmy.oos'):
     return m
 
    
-   
+def pd_random(ncols=7, nrows=100):
+   import pandas as pd
+   ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+   df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
+   return df
+
+
+def pd_generate_data(ncols=7, nrows=100):
+    """ Generate sample data for function testing
+    categorical features for anova test
+    """
+    import numpy as np, pandas as pd
+    np.random.seed(444)
+    numerical    = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
+    df = pd.DataFrame(numerical, columns = [str(i) for i in range(0,ncols)])
+    df['cat1']= np.random.choice(  a=[0, 1],  size=nrows,  p=[0.7, 0.3]  )
+    df['cat2']= np.random.choice(  a=[4, 5, 6],  size=nrows,  p=[0.5, 0.3, 0.2]  )
+    df['cat1']= np.where( df['cat1'] == 0,'low',np.where(df['cat1'] == 1, 'High','V.High'))
+    return df   
    
    
    
@@ -36,6 +55,31 @@ def import_module(mname:str='utilmy.oos'):
 def test_utilmy():
    from utilmy import utilmy as m
    m.test_all()
+   
+   
+   #####  Bug of test_all() ##############################################################################
+   log("\n##### Session  ")
+   sess = m.Session("ztmp/session")
+
+   global mydf
+   mydf = pd_generate_data()
+
+   sess.save('mysess', glob=globals(), tag='01')
+   os.system("ls ztmp/session")
+   sess.show()
+
+   import glob
+   flist = glob.glob("ztmp/session/" + "/*")
+   for f in flist:
+       t = os.path.exists(os.path.abspath(f))
+       assert  t == True, "session path not created "
+
+       pickle_created = os.path.exists(os.path.abspath(f + "/mydf.pkl"))
+       assert  pickle_created == True, "Pickle file not created"
+
+   sess.load('mysess')
+   sess.load('mysess', tag='01')
+
    
 
 ##########################################################################################
@@ -65,7 +109,7 @@ def test_adatasets():
 def test_nnumpy():
     """#### python test.py   test_nnumpy
     """
-    from utilmy import util_nnumpy as m
+    from utilmy import nnumpy as m
     m.test_all()
 
 
@@ -73,14 +117,14 @@ def test_nnumpy():
 ########################################################################################################
 def test_dates():
     #### python test.py   test_dates
-    from utilmy import util_dates as m
+    from utilmy import dates as m
     m.test_all()
 
 
 ########################################################################################################
 def test_decorators():
     #### python test.py   test_decorators
-    from utilmy import  util_decorators as m
+    from utilmy import  decorators as m
     m.test_all()
 
 
@@ -126,7 +170,7 @@ def test_distributed():
 def test_utils():
     """ #### python test.py   test_utils
     """
-    from utilmy.utils import utils as m
+    from utilmy import utils as m
     m.test_all() 
          
 
