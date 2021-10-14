@@ -8,9 +8,6 @@ https://pypi.org/project/pysie/#description
 
 """
 import os, sys, pandas as pd, numpy as np
-from alibi_detect.utils.tensorflow import kernels
-from alibi_detect.cd import mmd
-
 from utilmy.utilmy import pd_generate_data
 from utilmy.prepro.util_feature import  pd_colnum_tocat, pd_colnum_tocat_stat
 
