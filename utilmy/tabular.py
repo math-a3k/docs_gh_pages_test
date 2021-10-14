@@ -43,14 +43,14 @@ def test_all():
     
     def test():
         log("Testing normality...")
-        from utilmy.tabular import  test_normality
+        import utilmy.tabular as m
         test_normality(df["yield"])
         
         
-        df = pd_generate_data(7, 100)
-        m.test_anova(df,'cat1','cat2')
-        m.test_normality2(df, '0', "Shapiro")
-        m.test_plot_qqplot(df, '1')
+        df1 = pd_generate_data(7, 100)
+        m.test_anova(df1,'cat1','cat2')
+        m.test_normality2(df1, '0', "Shapiro")
+        m.test_plot_qqplot(df1, '1')
 
         
         log("Testing heteroscedacity...")
@@ -116,7 +116,7 @@ def test_all():
     def test_drift_detect():
         import tensorflow as tf
         from tensorflow.keras.layers import Dense,InputLayer,Dropout
-        from utilmy.tabular import pd_data_drift_detect
+        from utilmy.tabular import pd_data_drift_detect_alibi
 
         input_size = X_train.shape[1]
         output_size = y_train.nunique()
@@ -131,14 +131,14 @@ def test_all():
         model.compile(optimizer='adam',loss='mse')
         model.fit(X_train,y_train,epochs=1)
 
-        pd_data_drift_detect(X_train, X_test,'regressoruncertaintydrift','tensorflow',model=model)
-        pd_data_drift_detect(X_train, X_test,'learnedkerneldrift','tensorflow',model=model)
-        pd_data_drift_detect(X_train, X_test,'spotthediffdrift','tensorflow',model=model)
-        pd_data_drift_detect(X_train, X_test,'spotthediffdrift','tensorflow')
-        pd_data_drift_detect(X_train, X_test,'ksdrift','tensorflow')
-        pd_data_drift_detect(X_train, X_test,'mmddrift','tensorflow')
-        pd_data_drift_detect(X_train, X_test,'chisquaredrift','tensorflow')
-        pd_data_drift_detect(X_train, X_test,'tabulardrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train, X_test,'regressoruncertaintydrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train, X_test,'learnedkerneldrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train, X_test,'spotthediffdrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train, X_test,'spotthediffdrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train, X_test,'ksdrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train, X_test,'mmddrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train, X_test,'chisquaredrift','tensorflow')
+        pd_data_drift_detect_alibi(X_train, X_test,'tabulardrift','tensorflow')
 
         input_size = X_train.shape[1]
         output_size = y_train.nunique()
@@ -152,7 +152,7 @@ def test_all():
         )
         model.compile(optimizer='adam',loss=tf.keras.losses.CategoricalCrossentropy())
         model.fit(X_train,tf.one_hot(y_train,output_size),epochs=1)
-        pd_data_drift_detect(X_train,  X_test,'classifieruncertaintydrift','tensorflow',model=model)
+        pd_data_drift_detect_alibi(X_train,X_test,'classifieruncertaintydrift','tensorflow',model=model)
     
    
    
@@ -858,7 +858,7 @@ def pd_data_drift_detect_alibi(
         mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val)
 
         
-    is_drift_pvalue_scores = mdrift.predict(dfnew.values)
+    is_drift_pvalue_scores = mdrift.predict(df_new.values)
     return mdrift, is_drift_pvalue_scores
 
 

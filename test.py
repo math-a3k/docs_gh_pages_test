@@ -13,7 +13,6 @@ import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as n
 
 
 
-
 #### NEVER IMPORT HERE  !!!!
 ### from utilmy import pd_random, pd_generate_data
 # from utilmy.tabular import pd_data_drift_detect
@@ -176,6 +175,3 @@ def test_all():
 if __name__ == "__main__":
     import fire
     fire.Fire() 
-
-
-
