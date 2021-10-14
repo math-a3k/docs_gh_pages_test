@@ -43,14 +43,14 @@ def test_all():
     
     def test():
         log("Testing normality...")
-        from utilmy.tabular import  test_normality
+        import utilmy.tabular as m
         test_normality(df["yield"])
         
         
-        df = pd_generate_data(7, 100)
-        m.test_anova(df,'cat1','cat2')
-        m.test_normality2(df, '0', "Shapiro")
-        m.test_plot_qqplot(df, '1')
+        df1 = pd_generate_data(7, 100)
+        m.test_anova(df1,'cat1','cat2')
+        m.test_normality2(df1, '0', "Shapiro")
+        m.test_plot_qqplot(df1, '1')
 
         
         log("Testing heteroscedacity...")
