@@ -12,18 +12,12 @@ from typing import Callable, Tuple, Union
 #################################################################################################
 verbose = 0
 
-def log(*s):
-    print(*s, flush=True)
-
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
-
+def log(*s, **kw):  print(*s, flush=True, **kw)
+def log2(*s, **kw):  if verbose >1 : print(*s, flush=True, **kw)
 
 def help():
     from utilmy import help_create
-    ss  = ""
-    ss += HELP
+    ss  = HELP
     ss += help_create("utilmy.parallel")
     print(ss)
 
@@ -387,7 +381,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
           #log("Len", n_pool*j + i, len(dfall))
           del dfi; gc.collect()
 
-    pool.terminate() ; pool.join() ; pool = None
+    pool.close() ; pool.join() ;  pool = None
     if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
     return dfall
 
@@ -431,11 +425,9 @@ def pd_groupby_parallel(df, colsgroup=None, fun_apply=None, n_pool=4, npool=None
     Use of multi-thread on group by apply when order is not important
     """
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias
-    import pandas as pd
-    import concurrent.futures
+    import pandas as pd, concurrent.futures
 
     dfGrouped = df.groupby(colsgroup)
-
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=npool) as executor:
         futures = []
@@ -459,10 +451,9 @@ def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
     import pandas as pd, numpy as np, time, gc
 
     def f2(df):
-        return df.apply(fun_apply, axis=1)
+        return df.apply(lambda x : fun_apply(x), axis=1)
 
     if npool == 1 : return f2(df)
-
 
     #### Pool execute ###################################
     import concurrent.futures
@@ -482,7 +473,7 @@ def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
             dfi = future.result()
             dfall = pd.concat((dfall, dfi)) if dfall is not None else dfi
             del dfi
-            log(i, 'job finished')
+            print(i, 'done' , end="," )
 
     return dfall
 
@@ -521,7 +512,6 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
     if input_fixed is not None:  #### Fixed keywword variable
         fun_async = functools.partial(fun_async, **input_fixed)
 
-
     xi_list = [[] for t in range(n_pool)]
     for i, xi in enumerate(input_list):
         jj = i % n_pool
@@ -532,7 +522,7 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
             log('proc ', j, len(xi_list[j]))
         # time.sleep(6)
 
-    #### Pool execute ###################################
+    #### Pool execute ###############################################
     import multiprocessing as mp
     pool = mp.Pool(processes=n_pool)
     # pool     = mp.pool.ThreadPool(processes=n_pool)
@@ -548,7 +538,7 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 
-    pool.terminate(); pool.join(); pool = None
+    pool.close(); pool.join(); pool = None
     log('n_processed', len(res_list))
     return res_list
 
@@ -598,7 +588,7 @@ def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verb
         res_list.append(job_list[i].get())
         log(i, 'job finished')
 
-    pool.terminate(); pool.join(); pool = None
+    pool.close(); pool.join(); pool = None
     log('n_processed', len(res_list))
     return res_list
 

@@ -502,102 +502,37 @@ utilmy/graph.py
 utilmy/iio.py
 
 
-utilmy/images/util_exceptions.py
--------------------------functions----------------------
-config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
-dataset_donwload(url, path_target)
-dataset_get_path(cfg: dict)
-log(*s)
-log2(*s)
-loge(*s)
-logger_setup()
-logw(*s)
-os_extract_archive(file_path, path = ".", archive_format = "auto")
-to_file(s, filep)
-
-
-
 utilmy/images/util_image.py
 -------------------------functions----------------------
 help()
-help()
 image_cache_check(db_path:str = "db_images.cache", dirout:str = "tmp/", tag = "cache1")
-image_cache_check(db_path:str = "db_images.cache", dirout:str = "tmp/", tag = "cache1")
-image_cache_save(image_path_list:str = "db_images.cache", db_dir:str = "tmp/", tag = "cache1")
+image_cache_create()
 image_cache_save(image_path_list:str = "db_images.cache", db_dir:str = "tmp/", tag = "cache1")
 image_center_crop(img, dim)
-image_center_crop(img, dim)
-image_check(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
 image_check(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
 image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
-image_check_npz(path_npz, keys = ['train'], path = "", tag = "", n_sample = 3, renorm = True)
-image_create_cache()
-image_create_cache()
-image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
 image_face_blank(in_dir = "", level  =  "/*", out_dir = f"", npool = 30)
 image_merge(image_list, n_dim, padding_size, max_height, total_width)
-image_merge(image_list, n_dim, padding_size, max_height, total_width)
-image_padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
 image_padding_generate(paddings_number: int  =  1, min_padding: int  =  1, max_padding: int  =  1)
 image_read(filepath_or_buffer: Union[str, io.BytesIO])
-image_read(filepath_or_buffer: Union[str, io.BytesIO])
-image_remove_bg(in_dir = "", out_dir = "", level = 1)
 image_remove_bg(in_dir = "", out_dir = "", level = 1)
 image_remove_extra_padding(img, inverse = False, removedot = True)
-image_remove_extra_padding(img, inverse = False, removedot = True)
-image_resize(img, size = (256, 256)
-image_resize(img, size = (256, 256)
-image_resize2(image, width = None, height = None, inter = cv2.INTER_AREA)
+image_resize(image, width = None, height = None, inter = cv2.INTER_AREA)
 image_resize2(image, width = None, height = None, inter = cv2.INTER_AREA)
 image_resize_pad(img, size = (256, 256)
-image_resize_pad(img, size = (256, 256)
+image_resize_ratio(image, width = None, height = None, inter = cv2.INTER_AREA)
 image_save()
-image_save()
-image_text_blank(in_dir, out_dir, level = "/*")
+image_show_in_row(image_list:dict = None)
 image_text_blank(in_dir, out_dir, level = "/*")
 log(*s)
-log(*s)
-log2(*s)
 log2(*s)
 os_path_check(path, n = 5)
-os_path_check(path, n = 5)
-prep_image(image_paths, nmax = 10000000)
 prep_image(image_paths, nmax = 10000000)
 prep_images(image_paths, nmax = 10000000)
-prep_images(image_paths, nmax = 10000000)
-prep_images2(image_paths, nmax = 10000000)
 prep_images2(image_paths, nmax = 10000000)
 prep_images_multi(image_path_list:list, prepro_image_fun = None, npool = 1)
-prep_images_multi(image_path_list:list, prepro_image_fun = None, npool = 1)
-run_multiprocess(myfun, list_args, npool = 10, **kwargs)
 run_multiprocess(myfun, list_args, npool = 10, **kwargs)
 test()
-test()
-
-
-
-utilmy/images/util_image1.py
--------------------------functions----------------------
-deps()
-log(*s)
-maintain_aspect_ratio_resize(image, width = None, height = None, inter = cv2.INTER_AREA)
-read_image(filepath_or_buffer: typing.Union[str, io.BytesIO])
-visualize_in_row(**images)
-
-
-
-utilmy/images/utils.py
--------------------------functions----------------------
-config_load(config_path: Optional[Union[str, pathlib.Path]]  =  None)
-dataset_donwload(url, path_target)
-dataset_get_path(cfg: dict)
-log(*s)
-log2(*s)
-loge(*s)
-logger_setup()
-logw(*s)
-os_extract_archive(file_path, path = ".", archive_format = "auto")
-to_file(s, filep)
 
 
 
@@ -1323,6 +1258,18 @@ test_lsh()
 
 
 utilmy/tseries/util_tseries.py
+
+
+utilmy/util_zip.py
+-------------------------functions----------------------
+dataset_donwload(url, path_target)
+dataset_get_path(cfg: dict)
+dir_size(dirin = "mypath", dirout = "./save.txt")
+gzip(dirin = '/mydir', dirout = "./")
+os_extract_archive(file_path, path = ".", archive_format = "auto")
+to_file(s, filep)
+unzip(in_dir, out_dir)
+
 
 
 utilmy/utilmy.py
