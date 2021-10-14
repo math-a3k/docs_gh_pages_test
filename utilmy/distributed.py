@@ -70,7 +70,7 @@ def test2_funtions_thread():
     # define test function
     def running(fun_args):
         print(f'Function running in thread: {fun_args} START')
-        time.sleep(fun_args*3)
+        time.sleep(fun_args* 0.5)
         print(f'Function running in thread: {fun_args} END')
 
     # define test thread
@@ -78,7 +78,7 @@ def test2_funtions_thread():
         print(f'Thread {number} START')
         os_lock_execute(running, number, plock='tmp/plock2.lock')
         print(f'Thread {number} sleeping in {number*3}s')
-        time.sleep(number*3)
+        time.sleep(number* 0.5)
         print(f'Thread {number} END')
 
     # Create thread
@@ -116,7 +116,7 @@ def test3_index():
         print(f'Thread {number} END')
 
     # Create thread
-    for i in range(100):
+    for i in range(10):
         t = threading.Thread(target=thread_running, args=(i+1, ))
         t.start()
 
