@@ -7,16 +7,15 @@ Rules to follow :
    Put import only inside the function.
    def  test_{pythonfilename.py}() :
        from utilmy import parallel as m
-       Put all the test  below
-       n.myfun()
+       m.test_all()
 """
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
 
-#### Only for testing
-from utilmy import pd_random, pd_generate_data
+
 
 
 #### NEVER IMPORT HERE  !!!!
+### from utilmy import pd_random, pd_generate_data
 # from utilmy.tabular import pd_data_drift_detect
 # from tensorflow.python.ops.gen_array_ops import one_hot
 
@@ -100,16 +99,11 @@ def test_text():
 
 #########################################################################################
 def test_viz_vizhtml():
-   from utilmy.viz import vizhtml as vi
+   from utilmy.viz import vizhtml as m
    log("Visualization ")
    log(" from utilmy.viz import vizhtml as vi     ")
-   vi.test1()
-   vi.test2()
-   vi.test3()
-   vi.test4()
-   vi.test_scatter_and_histogram_matplot()
-   vi.test_pd_plot_network()
-   vi.test_cssname()
+   m.test_all()
+
    
 
 #########################################################################################
