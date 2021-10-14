@@ -11,6 +11,7 @@ Rules to follow :
        n.myfun()
 """
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
+from tensorflow.python.ops.gen_array_ops import one_hot
 from utilmy import pd_random, pd_generate_data
 
 
@@ -483,8 +484,10 @@ def test_tabular():
         log("Testing pd_utils ...")
         from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
             pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
-            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+            pd_stat_shift_trend_correlation,pd_stat_shift_changes,pd_data_drift_detect
         from utilmy.prepro.util_feature import pd_colnum_tocat_stat
+        import tensorflow as tf
+        from tensorflow.keras.layers import Dense,InputLayer,Dropout
 
         pd_train_test_split_time(df, coltime="block")
         pd_to_scipy_sparse_matrix(df)
@@ -495,7 +498,7 @@ def test_tabular():
         '''
         # log(pd_stat_correl_pair(df,coltarget=["fertilizer"],colname=["yield"]))
         
-        pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
+        # pd_stat_pandas_profile(df,savefile="./testdata/tmp/test/report.html", title="Pandas profile")
         pd_stat_distribution_colnum(df, nrows=len(df))
         pd_stat_histogram(df, bins=50, coltarget="yield")
         _,df_grouped = pd_colnum_tocat_stat(df,"density","block",10)
@@ -510,6 +513,41 @@ def test_tabular():
         pd_stat_shift_changes(df,"yield", features_list=["density","block"])
         '''
 
+        input_size = X_train.shape[1]
+        output_size = y_train.nunique()
+        model = tf.keras.Sequential(
+            [
+                InputLayer(input_shape=(input_size)),
+                Dense(16,activation=tf.nn.relu),
+                Dropout(0.3),
+                Dense(1)
+            ]
+        )
+        model.compile(optimizer='adam',loss='mse')
+        model.fit(X_train,y_train,epochs=1)
+
+        pd_data_drift_detect(X_test,'regressoruncertaintydrift','tensorflow',model=model)
+        pd_data_drift_detect(X_test,'learnedkerneldrift','tensorflow',model=model)
+        pd_data_drift_detect(X_test,'spotthediffdrift','tensorflow',model=model)
+        pd_data_drift_detect(X_test,'spotthediffdrift','tensorflow')
+        pd_data_drift_detect(X_test,'ksdrift','tensorflow')
+        pd_data_drift_detect(X_test,'mmddrift','tensorflow')
+        pd_data_drift_detect(X_test,'chisquaredrift','tensorflow')
+        pd_data_drift_detect(X_test,'tabulardrift','tensorflow')
+
+        input_size = X_train.shape[1]
+        output_size = y_train.nunique()
+        model = tf.keras.Sequential(
+            [
+                InputLayer(input_shape=(input_size)),
+                Dense(16,activation=tf.nn.relu),
+                Dropout(0.3),
+                Dense(output_size,activation=tf.nn.softmax)
+            ]
+        )
+        model.compile(optimizer='adam',loss=tf.keras.losses.CategoricalCrossentropy())
+        model.fit(X_train,tf.one_hot(y_train,output_size),epochs=1)
+        pd_data_drift_detect(X_test,'classifieruncertaintydrift','tensorflow',model=model)
     
     def test_np_utils():
         log("Testing np_utils ...")
