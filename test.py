@@ -9,9 +9,7 @@ Rules to follow :
        from utilmy import parallel as m
        m.test_all()
 """
-import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np
-
-
+import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np, glob
 
 
 #### NEVER IMPORT HERE  !!!!
@@ -57,7 +55,7 @@ def test_utilmy():
    m.test_all()
    
    
-   #####  Bug of test_all() ##############################################################################
+   #####  Bug of globals() in utilmy.py #################################################
    log("\n##### Session  ")
    sess = m.Session("ztmp/session")
 
@@ -90,7 +88,7 @@ def test_ppandas():
    
 #########################################################################################
 def test_docs_cli():
-    """  from utilmy.docs.generate_doc import run_markdown, run_table
+    """  from utilmy.docs.generate_doc import run_markdown, run_table 
     """
     cmd = "doc-gen  --repo_dir utilmy/      --doc_dir docs/"
     os.system(cmd)
@@ -194,7 +192,6 @@ def test_tabular():
 def test_all():
     test_utilmy()
     test_decorators()
-    # test_tabular_test()
     test_ppandas()  
     test_text()
     test_docs_cli()
