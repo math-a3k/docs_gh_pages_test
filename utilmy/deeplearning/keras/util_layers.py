@@ -341,7 +341,7 @@ def test_resnetlayer():
             ResBlock(filters=[32, 128], kernels = [3, 3]),
             Dropout(0.5), 
             GlobalAveragePooling2D(),
-            Dense(10, activation = 'softmax')
+            Dense(10, activation = 'softmax'),
         ]
     )
 
