@@ -266,6 +266,35 @@ percep_model = tf.keras.applications.EfficientNetB2(
 
 ############################################################################################################################
 
+class DepthConvBlock(layers.Layer):
+    """
+        This is a Depthwise convolutional block. This performs the same function as a convolutional block with much fewer parameters.
+        It saves a lot of computational power by using Depthwise convolutional in addition to 1D convolution to replace Conv2D.
+
+        Inputs:
+        -> filers: Filter size of the 1d conv layer.
+
+        Input shape:
+        -> (n, h, w, c)
+
+            here n is batch size.
+            h and w are image dimensions 
+            c refers to the number of channels
+
+        Output shape:
+        ->(n, h, w, filters)
+    """
+
+    def __init__(self, filters):
+        super(DepthConvBlock, self).__init__()
+        self.conv = DepthwiseConv2D(3, strides=1, padding='same', activation='relu',)
+        self.bn1 = BatchNormalization()
+        self.bn2 = BatchNormalization()
+        self.depth_ = Conv2D(filters, 1, strides=1, padding='same', activation='relu',)
+
+    def call(self, input_tensor):
+        return self.bn2(self.depth_(self.bn1(self.conv(input_tensor))))
+
 class CNNBlock(Layer):
     """
         This is a convolutional block.
