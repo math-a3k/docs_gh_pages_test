@@ -387,4 +387,4 @@ class ResBlock(Layer):
         y = Add()([x, skip])
         return y
 
-      
+
