@@ -202,7 +202,6 @@ def test_all():
     test_tabular()
     test_adatasets()
     test_dates()
-    test_decorators()
     test_utils()
 
 

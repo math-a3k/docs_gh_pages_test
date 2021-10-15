@@ -153,9 +153,8 @@ def test_all():
         model.compile(optimizer='adam',loss=tf.keras.losses.CategoricalCrossentropy())
         model.fit(X_train,tf.one_hot(y_train,output_size),epochs=1)
         pd_data_drift_detect_alibi(X_train,X_test,'classifieruncertaintydrift','tensorflow',model=model)
-    
-   
-   
+
+
     def test_np_utils():
         log("Testing np_utils ...")
         from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
@@ -790,16 +789,16 @@ def pd_data_drift_detect_alibi(
                 'mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift',
                 'classifierdrift','spotthediffdrift']
     
-    if len(method) > 20 :
+    if len(method) > 25 :
         log('Using KSDrift as default')
         method = 'ksdrift'
         backend = 'tensorflow'
         
     assert method in methods, f"method is invalid, methods available {methods}"
 
-    #from utilmy import import_function
-    #mc = import_function(fun_name= method, module_name='alibi_detect.cd')  
-    #mdrift = myclass(df.values,p_val=p_val,**kwargs)
+    from utilmy import import_function
+    mc = import_function(fun_name= 'KSDrift', module_name='alibi_detect.cd')  
+    mdrift = mc(df.values,p_val=p_val,**kwargs)
     
     
     if method == "regressoruncertaintydrift":
@@ -848,14 +847,14 @@ def pd_data_drift_detect_alibi(
         if backend == 'tensorflow' and model is not None:
             from alibi_detect.utils.tensorflow.kernels import DeepKernel as mc
             kernel = mc(model)
-            mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
+            mdrift = SpotTheDiffDrift(df.values.astype('float32'),backend=backend,p_val=p_val,kernel=kernel)
 
         if backend == 'pytorch' and model is not None:
             from alibi_detect.utils.pytorch.kernels import DeepKernel as mc
             kernel = mc(model)
-            mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val,kernel=kernel)
+            mdrift = SpotTheDiffDrift(df.values.astype('float32'),backend=backend,p_val=p_val,kernel=kernel)
         
-        mdrift = SpotTheDiffDrift(df.values,backend=backend,p_val=p_val)
+        mdrift = SpotTheDiffDrift(df.values.astype('float32'),backend=backend,p_val=p_val)
 
         
     is_drift_pvalue_scores = mdrift.predict(df_new.values)
