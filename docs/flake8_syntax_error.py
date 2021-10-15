@@ -45,3 +45,8 @@
 0
 0
 0
+./utilmy/deeplearning/keras/util_layers.py:300:14: E999 SyntaxError: invalid syntax
+RESIDUAL BLOCK  ####################################################################################################
+             ^
+1     E999 SyntaxError: invalid syntax
+1

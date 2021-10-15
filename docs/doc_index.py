@@ -259,10 +259,14 @@ SprinklesTransform.apply(self, image, **params)
 
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
+help()
+log(*s)
+log2(*s, verbose = 1)
 make_classifier(class_dict)
 make_classifier_2(class_dict)
 make_decoder()
 make_encoder(n_outputs = 1)
+test_dcf()
 test_resnetlayer()
 
 -------------------------methods----------------------
