@@ -1,35 +1,75 @@
-# import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd
-import functools
-import sys
+# -*- coding: utf-8 -*-
+HELP = """
+ utils keras for layers
+"""
+import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
 import tensorflow as tf
-
-# import tensorflow_addons as tfa
-# from tensorflow.python.keras.utils.data_utils import Sequence
-# from box import Box
-# from utilmy import pd_read_file
-
-from tensorflow.keras.layers import Conv2D, Add, BatchNormalization, MaxPool2D, Layer, GlobalAveragePooling2D, Dropout,\
-    Input, Dense, DepthwiseConv2D, Flatten, Reshape
+from tensorflow.keras.layers import (Conv2D, Add, BatchNormalization, MaxPool2D, Layer, GlobalAveragePooling2D,
+    Dropout,Input, Dense, DepthwiseConv2D, Flatten, Reshape)
 from tensorflow.keras import layers
 from tensorflow.keras import regularizers
 from tensorflow.keras.models import Sequential
+# from tensorflow.python.keras.utils.data_utils import Sequence
 
-# -*- coding: utf-8 -*-
-HELP = """
- utils 
-"""
+
+# import tensorflow_addons as tfa
+# from box import Box
+# from utilmy import pd_read_file
+
 
 ################################################################################################
-# from utilmy.images.util_image import log, log2, help
-# from typing import Union
-
 verbose = 0
 
+def log(*s):
+    print(*s, flush=True)
+
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
+
+
+def help():
+    from utilmy import help_create
+    ss = HELP + help_create("utilmy.deeplearning.keras.util_layers")
+    print(ss)
+
+
+
+
+################################################################################################
+def test_all():
+    test_resnetlayer()
+
+
+def test_resnetlayer():
+    """ basic implementation of the Residual block in a model architecture
+    """
+    model = Sequential(
+        layers=[
+            Input(shape=(224, 224, 3)),
+            CNNBlock(32, 3, strides=1, padding='same', activation='relu'),
+            ResBlock(filters=[32, 128], kernels=[3, 3]),
+            Dropout(0.5),
+            GlobalAveragePooling2D(),
+            Dense(10, activation='softmax')
+        ]
+    )
+
+    print(model.summary())
+
+
+
+################################################################################################
 # The number given below are test cases, remove these before usage
 cdim = 3
 n_filters = 3
 
 
+
+
+
+
+
+################################################################################################
 class DFC_VAE(tf.keras.Model):
     """Deep Feature Consistent Variational Autoencoder Class"""
 
@@ -255,21 +295,20 @@ def make_classifier_2(latent_dim, class_dict):
 """ 1-4) Build loss function"""
 
 
-# Input is 0-255, do not normalize input
 
-# percep_model = tf.keras.applications.EfficientNetB2(
-#     include_top=False, weights='imagenet', input_tensor=None,
-#     input_shape=(xdim, ydim, cdim), pooling=None, classes=1000,
-#     classifier_activation='softmax'
-# )
+def test_cdfvae():
+    pass
+    # Input is 0-255, do not normalize input
+    # percep_model = tf.keras.applications.EfficientNetB2(
+    #     include_top=False, weights='imagenet', input_tensor=None,
+    #    input_shape=(xdim, ydim, cdim), pooling=None, classes=1000,
+    #     classifier_activation='softmax'
+    # )
 
 
-#######################################################################################################################
 
-# ------------ RESIDUAL BLOCK --------------#
-
-#######################################################################################################################
-
+################################################################################################
+######## RESIDUAL BLOCK  #######################################################################
 class DepthConvBlock(Layer):
     """
         This is a Depthwise convolutional block.
@@ -359,19 +398,12 @@ class ResBlock(Layer):
         return y
 
 
-def test_resnetlayer():
-    """
-        This is a basic implementation of the Residual block in a model architecture
-    """
-    model = Sequential(
-        layers=[
-            Input(shape=(224, 224, 3)),
-            CNNBlock(32, 3, strides=1, padding='same', activation='relu'),
-            ResBlock(filters=[32, 128], kernels=[3, 3]),
-            Dropout(0.5),
-            GlobalAveragePooling2D(),
-            Dense(10, activation='softmax')
-        ]
-    )
 
-    print(model.summary())
+
+
+
+
+
+
+
+
