@@ -3,7 +3,7 @@
 HELP="""
  utils 
 """
-import os,io, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
+import os,io, sys, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
 from typing import Union
 
 import tensorflow as tf, tensorflow_addons as tfa
@@ -16,13 +16,45 @@ from tensorflow.keras.models import Sequential
 
 ################################################################################################
 verbose = 0
-from utilmy.images.util_image import log,log2,help;
-import sys
+
+def log(*s):
+    print(*s, flush=True)
+
+def log2(*s, verbose=1):
+    if verbose >0 : print(*s, flush=True)
+
+def help():
+    from utilmy import help_create
+    ss = HELP + help_create("utilmy.deeplearning.keras.util_layers")
+    print(ss)
+
+
+
+
+################################################################################################  
+##### Custom ###################################################################################
+def test_resnetlayer():
+    """
+        This is a basic implementation of the Residual block in a model architecture
+    """
+    model = Sequential(
+        layers= [
+            Input(shape = (224, 224, 3)),
+            CNNBlock(32, 3, strides=1, padding = 'same', activation = 'relu'),
+            ResBlock(filters=[32, 128], kernels = [3, 3]),
+            Dropout(0.5), 
+            GlobalAveragePooling2D(),
+            Dense(10, activation = 'softmax')
+        ]
+    )
+
+    print(model.summary())
+
+
 
 
 ################################################################################################
 ##### Custom ###################################################################################
-
 class DFC_VAE(tf.keras.Model):
     """Deep Feature Consistent Variational Autoencoder Class"""
     def __init__(self, latent_dim, class_dict):
@@ -251,21 +283,21 @@ def make_classifier_2(class_dict):
 
     return clf
 
-"""## 1-4) Build loss function"""
-#### input is 0-255, do not normalize input
-percep_model = tf.keras.applications.EfficientNetB2(
-    include_top=False, weights='imagenet', input_tensor=None,
-    input_shape=(xdim, ydim, cdim), pooling=None, classes=1000,
-    classifier_activation='softmax'
-)
+   
+def test_dcf():   
+   """## 1-4) Build loss function"""
+   #### input is 0-255, do not normalize input
+   percep_model = tf.keras.applications.EfficientNetB2(
+       include_top=False, weights='imagenet', input_tensor=None,
+       input_shape=(xdim, ydim, cdim), pooling=None, classes=1000,
+       classifier_activation='softmax'
+   )
 
+   
 
 ############################################################################################################################
-
-                        #------------ RESIDUAL BLOCK --------------#
-
-############################################################################################################################
-
+########
+RESIDUAL BLOCK  ####################################################################################################
 class DepthConvBlock(layers.Layer):
     """
         This is a Depthwise convolutional block. This performs the same function as a convolutional block with much fewer parameters.
@@ -296,10 +328,8 @@ class DepthConvBlock(layers.Layer):
         return self.bn2(self.depth_(self.bn1(self.conv(input_tensor))))
 
 class CNNBlock(Layer):
-    """
-        This is a convolutional block.
-        Here a convolutional layer is followed by a BatchNormalization layer
-
+    """ convolutional block.
+        convolutional layer is followed by a BatchNormalization layer
         Inputs:
         -> output_channels: Filers of the convolutional layer
         -> Kernals: Holds same meaning as the attributes of Conv2D layer
@@ -324,9 +354,7 @@ class CNNBlock(Layer):
 
 
 class ResBlock(Layer):
-
-    """
-        This is a Residual Block. 
+    """ Residual Block. 
         The input to the block is passed through 2 convolutional layers.
         The output of these convolutions is added to the input to the residual block through a skip connection.
         NOTE: An identity_mapping is a 1D convolution done in order to ensure that the dimensions match.
@@ -359,19 +387,4 @@ class ResBlock(Layer):
         y = Add()([x, skip])
         return y
 
-def test_resnetlayer():
-    """
-        This is a basic implementation of the Residual block in a model architecture
-    """
-    model = Sequential(
-        layers= [
-            Input(shape = (224, 224, 3)),
-            CNNBlock(32, 3, strides=1, padding = 'same', activation = 'relu'),
-            ResBlock(filters=[32, 128], kernels = [3, 3]),
-            Dropout(0.5), 
-            GlobalAveragePooling2D(),
-            Dense(10, activation = 'softmax')
-        ]
-    )
-
-    print(model.summary())
+      
