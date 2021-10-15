@@ -82,7 +82,7 @@ def test2_funtions_thread():
         print(f'Thread {number} END')
 
     # Create thread
-    for i in range(5):
+    for i in range(4):
         t = threading.Thread(target=thread_running, args=(i+1, ))
         t.start()
 

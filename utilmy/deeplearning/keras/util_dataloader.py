@@ -1,24 +1,41 @@
 # -*- coding: utf-8 -*-
-
-import io,  os
-from typing import Union
-
+HELP = """
+ utils keras for layers
+"""
+import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
 import cv2
-import numpy as np
-#import tifffile.tifffile
-from skimage import morphology
+# import tifffile.tifffile
+# from skimage import morphology
 
+from albumentations import (
+    Compose, HorizontalFlip, CLAHE, HueSaturationValue,
+    RandomBrightness, RandomContrast, RandomGamma,
+    ToFloat, ShiftScaleRotate, Resize
+)
+from albumentations.core.transforms_interface import ImageOnlyTransform
+import tensorflow as tf
 
 
 ###################################################################################################
-def print_log(*s):
+verbose = 0
+
+def log(*s):
     print(*s, flush=True)
 
+def log2(*s):
+    if verbose >1 : print(*s, flush=True)
+
+def help():
+    from utilmy import help_create
+    ss = HELP + help_create("utilmy.deeplearning.keras.util_layers")
+    print(ss)
 
 
 
 
-#################################################################################
+
+
+##################################################################################################
 def get_data_sample(batch_size, x_train, labels_val):   #name changed
         #### 
         # i_select = 10
@@ -58,7 +75,7 @@ def to_OneHot(df, dfref, labels_col) :       #name changed
     
 
 
-def add_onehot(dfref, img_dir, labels_col) :   #name changed
+def data_add_onehot(dfref, img_dir, labels_col) :   #name changed
     """
        id, uri, cat1, cat2, .... , cat1_onehot
     """
@@ -176,11 +193,6 @@ class SprinklesTransform(ImageOnlyTransform):
         return self.sprinkles(image).numpy()
 
     
-from albumentations import (
-    Compose, HorizontalFlip, CLAHE, HueSaturationValue,
-    RandomBrightness, RandomContrast, RandomGamma,
-    ToFloat, ShiftScaleRotate, Resize
-)
 
 #image_size = 64
 train_augments = Compose([

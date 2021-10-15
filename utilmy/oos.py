@@ -4,7 +4,7 @@ https://github.com/uqfoundation/pox/tree/master/pox
 
 
 """
-
+import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
 
 
 #################################################################
@@ -31,6 +31,8 @@ def test_all():
     return 1  
     log("Testing oos.py............................")
     from utilmy import oos as m
+    from utilmy import pd_random
+
 
     from utilmy.oos import os_makedirs, os_system, os_removedirs
     os_makedirs('ztmp/ztmp2/myfile.txt')
