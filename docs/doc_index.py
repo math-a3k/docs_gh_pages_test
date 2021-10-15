@@ -114,6 +114,14 @@ timer_decorator(func)
 utilmy/deeplearning/__init__.py
 
 
+utilmy/deeplearning/keras/blocks_resnet.py
+-------------------------methods----------------------
+CNNBlock.__init__(self, filters, kernels, strides  =  1, padding  =  'valid', activation  =  'relu')
+CNNBlock.call(self, input_tensor, training  =  True)
+ResBlock.__init__(self, filters, kernels  =  [3, 3])
+ResBlock.call(self, input_tensor, training  =  False)
+
+
 utilmy/deeplearning/keras/nsl_graph_loss.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
