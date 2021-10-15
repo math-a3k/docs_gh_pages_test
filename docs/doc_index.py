@@ -114,14 +114,6 @@ timer_decorator(func)
 utilmy/deeplearning/__init__.py
 
 
-utilmy/deeplearning/keras/blocks_resnet.py
--------------------------methods----------------------
-CNNBlock.__init__(self, filters, kernels, strides  =  1, padding  =  'valid', activation  =  'relu')
-CNNBlock.call(self, input_tensor, training  =  True)
-ResBlock.__init__(self, filters, kernels  =  [3, 3])
-ResBlock.call(self, input_tensor, training  =  False)
-
-
 utilmy/deeplearning/keras/nsl_graph_loss.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
@@ -271,13 +263,18 @@ make_classifier(class_dict)
 make_classifier_2(class_dict)
 make_decoder()
 make_encoder(n_outputs = 1)
+test_resnetlayer()
 
 -------------------------methods----------------------
+CNNBlock.__init__(self, filters, kernels, strides  =  1, padding  =  'valid', activation  =  None)
+CNNBlock.call(self, input_tensor, training  =  True)
 DFC_VAE.__init__(self, latent_dim, class_dict)
 DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
 DFC_VAE.decode(self, z, apply_sigmoid = False)
 DFC_VAE.encode(self, x)
 DFC_VAE.reparameterize(self, z_mean, z_logsigma)
+ResBlock.__init__(self, filters, kernels)
+ResBlock.call(self, input_tensor, training  =  False)
 
 
 utilmy/deeplearning/keras/util_loss.py
