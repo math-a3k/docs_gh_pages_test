@@ -259,28 +259,24 @@ SprinklesTransform.apply(self, image, **params)
 
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
-help()
-log(*s)
-log2(*s, verbose = 1)
-make_classifier(class_dict)
-make_classifier_2(class_dict)
-make_decoder()
-make_encoder(n_outputs = 1)
-test_dcf()
+make_classifier(class_dict, latent_dim = 10)
+make_classifier_2(latent_dim, class_dict)
+make_decoder(xdim, ydim, latent_dim)
+make_encoder(xdim = 256, ydim = 256, latent_dim = 10)
 test_resnetlayer()
 
 -------------------------methods----------------------
-CNNBlock.__init__(self, filters, kernels, strides  =  1, padding  =  'valid', activation  =  None)
-CNNBlock.call(self, input_tensor, training  =  True)
+CNNBlock.__init__(self, filters, kernels, strides = 1, padding = 'valid', activation = None)
+CNNBlock.call(self, input_tensor, training = True)
 DFC_VAE.__init__(self, latent_dim, class_dict)
-DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
+DFC_VAE.call(self, x, training = True, mask = None, y_label_list = None)
 DFC_VAE.decode(self, z, apply_sigmoid = False)
 DFC_VAE.encode(self, x)
 DFC_VAE.reparameterize(self, z_mean, z_logsigma)
 DepthConvBlock.__init__(self, filters)
-DepthConvBlock.call(self, input_tensor)
+DepthConvBlock.call(self, inputs)
 ResBlock.__init__(self, filters, kernels)
-ResBlock.call(self, input_tensor, training  =  False)
+ResBlock.call(self, input_tensor, training = False)
 
 
 utilmy/deeplearning/keras/util_loss.py
