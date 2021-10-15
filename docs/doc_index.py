@@ -230,10 +230,12 @@ utilmy/deeplearning/keras/util_dataloader.py
 _byte_feature(value)
 _float_feature(value)
 _int64_feature(value)
-add_onehot(dfref, img_dir, labels_col)
 build_tfrecord(x, tfrecord_out_path, max_records)
+data_add_onehot(dfref, img_dir, labels_col)
 get_data_sample(batch_size, x_train, labels_val)
-print_log(*s)
+help()
+log(*s)
+log2(*s)
 to_OneHot(df, dfref, labels_col)
 
 -------------------------methods----------------------
@@ -259,10 +261,15 @@ SprinklesTransform.apply(self, image, **params)
 
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
+help()
+log(*s)
+log2(*s)
 make_classifier(class_dict, latent_dim = 10)
 make_classifier_2(latent_dim, class_dict)
 make_decoder(xdim, ydim, latent_dim)
 make_encoder(xdim = 256, ydim = 256, latent_dim = 10)
+test_all()
+test_cdfvae()
 test_resnetlayer()
 
 -------------------------methods----------------------
