@@ -66,9 +66,6 @@ n_filters = 3
 
 
 
-
-
-
 ################################################################################################
 class DFC_VAE(tf.keras.Model):
     """Deep Feature Consistent Variational Autoencoder Class"""

@@ -1,18 +1,22 @@
 # -*- coding: utf-8 -*-
-import io, os, numpy as np
+import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
 from typing import Union
 from sklearn.metrics import accuracy_score
+from box import Box
+import tensorflow as tf
+import tensorflow_addons as tfa
 
-
-
-###################################################################################################
+###################################################################################
 def log(*s):
     print(*s, flush=True)
 
 
 
+cc = Box({})
+dd = Box({})
 
-###################################################################################################
+
+###################################################################################
 def metric_accuracy(y_test, y_pred, dd):
    test_accuracy = {} 
    for k,(ytruei, ypredi) in enumerate(zip(y_test, y_pred)) : 
@@ -49,7 +53,6 @@ def clf_loss_macro_soft_f1(y, y_hat):   #name
     return macro_cost
     
 
-    
 
 class LearningRateDecay:
     def plot(self, epochs, title="Learning Rate Schedule", path=None):
@@ -58,7 +61,7 @@ class LearningRateDecay:
         pass
 
 
-#####  Learning Rate Schedule         
+#####  Learning Rate Schedule   ##################################################
 def learning_rate_schedule(mode="step", epoch=1, cc=None):
     if mode == "step" :
         # compute the learning rate for the current epoch
@@ -119,8 +122,8 @@ cc.loss= {}
 clf_loss_global    =  tf.keras.losses.BinaryCrossentropy()
 ### Classification distance
 triplet_loss_global = tfa.losses.TripletSemiHardLoss( margin=  1.0,    distance_metric='L2',    name= 'triplet',)
-recons_loss_global = tf.keras.losses.MeanAbsoluteError()  # reduction="sum"
-percep_loss_global = tf.keras.losses.MeanSquaredError()
+recons_loss_global  = tf.keras.losses.MeanAbsoluteError()  # reduction="sum"
+percep_loss_global  = tf.keras.losses.MeanSquaredError()
 
 
 def perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
