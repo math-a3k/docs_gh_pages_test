@@ -273,6 +273,8 @@ DFC_VAE.call(self, x, training = True, mask = None, y_label_list =  None)
 DFC_VAE.decode(self, z, apply_sigmoid = False)
 DFC_VAE.encode(self, x)
 DFC_VAE.reparameterize(self, z_mean, z_logsigma)
+DepthConvBlock.__init__(self, filters)
+DepthConvBlock.call(self, input_tensor)
 ResBlock.__init__(self, filters, kernels)
 ResBlock.call(self, input_tensor, training  =  False)
 
