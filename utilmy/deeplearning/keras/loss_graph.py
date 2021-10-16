@@ -23,7 +23,7 @@ def help():
 
 
 ######################################################################################
-def test_graph_loss();
+def test_graph_loss():
     # Prepare data.
     max_neighbors = 2
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
