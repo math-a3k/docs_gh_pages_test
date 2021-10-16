@@ -128,6 +128,40 @@ def test_all():
       
       
 ###############################################################################################
+def test_tofilesafe():
+   pass
+
+
+class FileWriter(object):
+   def __init__(fpath):
+      logger = logging.getLogger('log')
+      logger.setLevel(logging.INFO)
+      ch = logging.FileHandler(fpath)
+      ch.setFormatter(logging.Formatter('%(message)s'))
+      logger.addHandler(ch)     
+      self.logger = logger
+      
+   def write(self, msg):   
+        self.logger.info( msg)
+
+                  
+def to_file_safe(msg:str, fpath:str):
+   import logging
+
+   ss = str(msg)
+   logpath = fpath
+   logger = logging.getLogger('log')
+   logger.setLevel(logging.INFO)
+   ch = logging.FileHandler(logpath)
+   ch.setFormatter(logging.Formatter('%(message)s'))
+   logger.addHandler(ch)
+
+   logger.info( ss)
+   
+
+
+
+###############################################################################################
 def os_lock_acquireLock(plock:str="tmp/plock.lock"):
     ''' acquire exclusive lock file access, return the locker
 
