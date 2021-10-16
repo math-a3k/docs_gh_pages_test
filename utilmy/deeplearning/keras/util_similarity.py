@@ -8,7 +8,7 @@ import tensorflow as tf
 
 
 #################################################################################################
-from utilmy import log, log2
+from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
