@@ -18,6 +18,27 @@ def help():
     
     
 #################################################################################################    
+def gensim_model_load(dirin, modeltype, **kw):
+   """"
+     Fastext model binaries
+   
+   """
+   pass
+
+
+
+def gensim_model_train_save(model, dirout=None, **kw):
+   """
+     Continue training form binaries model a
+   
+   """
+   pass
+
+
+
+
+
+
 def embedding_model_to_parquet(model_vector_path="model.vec", nmax = 500):
     from gensim.models import KeyedVectors    
     from collections import OrderedDict
