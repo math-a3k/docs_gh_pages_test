@@ -373,6 +373,7 @@ utilmy/deeplearning/util_dl.py
 -------------------------functions----------------------
 create_train_npz()
 create_train_parquet()
+data_mnist_get_train_test(batch = 32)
 down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
 gpu_available()
 gpu_usage()
