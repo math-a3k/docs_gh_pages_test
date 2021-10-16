@@ -114,12 +114,16 @@ timer_decorator(func)
 utilmy/deeplearning/__init__.py
 
 
-utilmy/deeplearning/keras/nsl_graph_loss.py
+utilmy/deeplearning/keras/loss_graph.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
+create_graph_loss(max_neighbors = 2)
+help()
 map_func(x_batch, y_batch, neighbors, neighbor_weights)
-test_step(x, y, model, loss_fn)
-train_step(x, y, model, loss_fn, optimizer)
+test_adversarial()
+test_graph_loss()
+test_step(x, y, model, loss_fn, nbr_features_layer = None, ### Graphregularizer = None, #### Graph)
+train_step(x, y, model, loss_fn, optimizer, nbr_features_layer = None, ### Graphregularizer = None, ## Graph) as tape_w)
 
 
 
@@ -230,10 +234,12 @@ utilmy/deeplearning/keras/util_dataloader.py
 _byte_feature(value)
 _float_feature(value)
 _int64_feature(value)
-add_onehot(dfref, img_dir, labels_col)
 build_tfrecord(x, tfrecord_out_path, max_records)
+data_add_onehot(dfref, img_dir, labels_col)
 get_data_sample(batch_size, x_train, labels_val)
-print_log(*s)
+help()
+log(*s)
+log2(*s)
 to_OneHot(df, dfref, labels_col)
 
 -------------------------methods----------------------
@@ -259,10 +265,16 @@ SprinklesTransform.apply(self, image, **params)
 
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
-make_classifier(class_dict, latent_dim = 10)
+help()
+log(*s)
+log2(*s)
+make_classifier(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
 make_classifier_2(latent_dim, class_dict)
+make_classifier_multihead(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
 make_decoder(xdim, ydim, latent_dim)
 make_encoder(xdim = 256, ydim = 256, latent_dim = 10)
+test_all()
+test_cdfvae()
 test_resnetlayer()
 
 -------------------------methods----------------------
@@ -281,12 +293,13 @@ ResBlock.call(self, input_tensor, training = False)
 
 utilmy/deeplearning/keras/util_loss.py
 -------------------------functions----------------------
-clf_loss_macro_soft_f1(y, y_hat)
 learning_rate_schedule(mode = "step", epoch = 1, cc = None)
-log(*s)
+loss_clf_macro_soft_f1(y, y_hat)
+loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
 loss_schedule(mode = "step", epoch = 1)
 metric_accuracy(y_test, y_pred, dd)
-perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
+test_all()
+test_loss1()
 
 -------------------------methods----------------------
 LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
@@ -361,13 +374,48 @@ utilmy/deeplearning/util_dl.py
 create_train_npz()
 create_train_parquet()
 down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
+gpu_available()
+gpu_usage()
 model_deletes(dry = 0)
-print_available_gpus()
-print_gpu_usage()
 tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
-test()
+test_all()
 tf_check()
 
+
+
+utilmy/deeplearning/util_embedding.py
+-------------------------functions----------------------
+convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
+data_add_onehot(dfref, img_dir, labels_col)
+embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
+embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
+faiss_create_index(df_or_path = None, col = 'emb', dir_out = "", db_type  =  "IVF4096,Flat", nfile = 1000, emb_dim = 200)
+faiss_topk(df = None, root = None, colid = 'id', colemb = 'emb', faiss_index = None, topk = 200, npool = 1, nrows = 10**7, nfile = 1000)
+np_matrix_to_str(m, map_dict)
+np_matrix_to_str2(m, map_dict)
+np_matrix_to_str_sim(m)
+np_str_to_array(vv, l2_norm = True, mdim  =  200)
+np_str_to_array(vv, l2_norm = True, mdim  =  200)
+sim_score2(path = "")
+simscore_cosinus_calc(embs, words)
+test()
+topk(topk = 100, dname = None, pattern = "df_*1000*.parquet", filter1 = None)
+topk(topk = 100, dname = None, pattern = "df_*1000*.parquet", filter1 = None)
+topk_export()
+topk_nearest_vector(x0, vector_list, topk = 3)
+topk_nearest_vector(x0, vector_list, topk = 3)
+topk_predict()
+unzip(in_dir, out_dir)
+viz_run(dirin = "in/model.vec", dirout = "ztmp/", nmax = 100)
+
+-------------------------methods----------------------
+TopToolbar.__init__(self)
+vizEmbedding.__init__(self, path = "myembed.parquet", num_clusters = 5, sep = ";", config:dict = None)
+vizEmbedding.create_clusters(self, after_dim_reduction = True)
+vizEmbedding.create_visualization(self, dir_out = "ztmp/", mode = 'd3', cols_label = None, show_server = False, **kw)
+vizEmbedding.dim_reduction(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = None, ntest = 10000, npool = 2)
+vizEmbedding.draw_hiearchy(self)
+vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/", ntest = 10000)
 
 
 utilmy/deeplearning/util_topk.py
@@ -1047,6 +1095,7 @@ utilmy/tabular.py
 estimator_boostrap_bayes(err, alpha = 0.05, )
 estimator_bootstrap(err, custom_stat = None, alpha = 0.05, n_iter = 10000)
 estimator_std_normal(err, alpha = 0.05, )
+help()
 log(*s)
 np_col_extractname(col_onehot)
 np_conv_to_one_col(np_array, sep_char = "_")

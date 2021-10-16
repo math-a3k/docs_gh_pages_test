@@ -1,3 +1,4 @@
+# coding=utf-8
 HELP="""
 
 
@@ -22,9 +23,16 @@ from utilmy.utilmy import pd_generate_data
 from utilmy.prepro.util_feature import  pd_colnum_tocat, pd_colnum_tocat_stat
 
 
+#################################################################################################
+from utilmy.utilmy import log, log2
 
+def help():
+    from utilmy import help_create
+    print( HELP + help_create("utilmy.tabular") )
 
-###############################################################################
+    
+    
+#################################################################################################
 def test_all():
     """
     #### python test.py   test_tabular

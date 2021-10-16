@@ -6,11 +6,13 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, random
 
-def log(*s):
-    print(*s, flush=True)
+verbose = 0   ### Global setting
 
-def log2(*s, verbose=1):
-    if verbose >0 : print(*s, flush=True)
+def log(*s, **kw):
+    print(*s, flush=True, **kw)
+
+def log2(*s, **kw):
+    if verbose >0 : print(*s, flush=True, **kw)
 
 
 def help():
@@ -44,8 +46,7 @@ def import_function(fun_name=None, module_name=None):
 
 
 def help_create(modulename='utilmy.nnumpy', prefixs=None):
-    """
-       Extract code source from test code
+    """ Extract code source from test code
     """
     import importlib
     prefixs = ['test']
