@@ -383,6 +383,26 @@ tf_check()
 
 
 
+utilmy/deeplearning/util_embedding.py
+-------------------------functions----------------------
+embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
+embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
+np_str_to_array(vv, l2_norm = True, mdim  =  200)
+sim_score2(path = "")
+topk(topk = 100, dname = None, pattern = "df_*1000*.parquet", filter1 = None)
+topk_nearest_vector(x0, vector_list, topk = 3)
+viz_run(dirin = "in/model.vec", dirout = "ztmp/", nmax = 100)
+
+-------------------------methods----------------------
+TopToolbar.__init__(self)
+vizEmbedding.__init__(self, path = "myembed.parquet", num_clusters = 5, sep = ";", config:dict = None)
+vizEmbedding.create_clusters(self, after_dim_reduction = True)
+vizEmbedding.create_visualization(self, dir_out = "ztmp/", mode = 'd3', cols_label = None, show_server = False, **kw)
+vizEmbedding.dim_reduction(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = None, ntest = 10000, npool = 2)
+vizEmbedding.draw_hiearchy(self)
+vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/", ntest = 10000)
+
+
 utilmy/deeplearning/util_topk.py
 -------------------------functions----------------------
 convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
