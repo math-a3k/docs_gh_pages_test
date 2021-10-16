@@ -1060,6 +1060,7 @@ utilmy/tabular.py
 estimator_boostrap_bayes(err, alpha = 0.05, )
 estimator_bootstrap(err, custom_stat = None, alpha = 0.05, n_iter = 10000)
 estimator_std_normal(err, alpha = 0.05, )
+help()
 log(*s)
 np_col_extractname(col_onehot)
 np_conv_to_one_col(np_array, sep_char = "_")
