@@ -2,24 +2,17 @@
 HELP="""
    Gensim model
 """
-import os, sys, itertools, time,  pandas as pd, numpy as np, pickle, gc
+import os, sys, itertools, time,  pandas as pd, numpy as np, pickle, gc, re
 from typing import Callable, Tuple, Union
-from gensim.models import FastText
-from essential_generators import DocumentGenerator
-from nltk.stem import WordNetLemmatizer
-from gensim.test.utils import datapath
-import re
-from nltk.corpus import stopwords
-import nltk
+
 
 
 #################################################################################################
-verbose = 0
 from utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss = HELP + help_create("utilmy.parallel")
+    ss = HELP + help_create("utilmy.nlp.util_model")
     print(ss)
 
     
@@ -39,6 +32,9 @@ def text_preprocess(sentence, lemmatizer, stop_words):
     :param stop_words: stop_words in english http://xpo6.com/list-of-english-stop-words/
     :return: preprocessed sentence
     """
+    from nltk.stem import WordNetLemmatizer  
+    from nltk.corpus import stopwords
+    import nltk  
     sentence = sentence.lower()
     sentence = re.sub(r'[^a-z]', ' ', sentence)
     sentence = re.sub(r'\s+', ' ', sentence)
@@ -46,13 +42,15 @@ def text_preprocess(sentence, lemmatizer, stop_words):
     return sentence
 
 
-def text_generate_random_senences(n_sentences=100, dirout=None):
+   
+def text_generate_random_sentences(n_sentences=100, dirout=None):
     """
     Generates Random sentences and Preprocesses them
 
     :param n_sentences: number of sentences to generate
     :return: generated sentences
     """
+    from essential_generators import DocumentGenerator  
     gen = DocumentGenerator()
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
@@ -76,6 +74,7 @@ def gensim_model_load(dirin, modeltye=None, **kw):
     :param kw:
     :return: loaded model
     """
+    from gensim.models import FastText  
     loaded_model = FastText.load(dirin)
     print(loaded_model)
     return loaded_model
@@ -100,6 +99,8 @@ def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', di
     :param kw:
     :return:
     """
+    from gensim.models import FastText  
+    from gensim.test.utils import datapath   
     if model is None :
       model = FastText(vector_size=vector_size, window=window, min_count=min_count) 
    
