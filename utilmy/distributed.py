@@ -13,7 +13,7 @@ All related to distributed compute and atomic read/write
 import os, sys, socket, platform, time, gc
 
 ###############################################################################################
-from utilmy import log, log2
+from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
