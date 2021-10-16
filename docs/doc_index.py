@@ -114,12 +114,16 @@ timer_decorator(func)
 utilmy/deeplearning/__init__.py
 
 
-utilmy/deeplearning/keras/nsl_graph_loss.py
+utilmy/deeplearning/keras/loss_graph.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
+create_graph_loss(max_neighbors = 2)
+help()
 map_func(x_batch, y_batch, neighbors, neighbor_weights)
-test_step(x, y, model, loss_fn)
-train_step(x, y, model, loss_fn, optimizer)
+test_adversarial()
+test_graph_loss();max_neighbors  =  2x_train, y_train), (x_test, y_test)  =  tf.keras.datasets.mnist.load_data()x_train, x_test  =  x_train / 255.0, x_test / 255.0x_train, max_neighbors)x_test, max_neighbors)(x_train, y_train, neighbors_train, neighbor_train_weights))buffer_size = x_train.shape[0])32)map_func, num_parallel_calls = 2)1)(x_train, y_train, neighbors_train, neighbor_train_weights))buffer_size = x_train.shape[0])32)map_func, num_parallel_calls = 2)1)[(28, 28), name = 'feature'), ), 128, activation = tf.nn.relu), 10, activation=tf.nn.softmax)]max_neighbors=2))1e-3)1) = tf.nn.softmax)]max_neighbors=2))1e-3)1):)
+test_step(x, y, model, loss_fn, nbr_features_layer = None, ### Graphregularizer = None, #### Graph)
+train_step(x, y, model, loss_fn, optimizer, nbr_features_layer = None, ### Graphregularizer = None, ## Graph) as tape_w)
 
 
 
@@ -369,11 +373,11 @@ utilmy/deeplearning/util_dl.py
 create_train_npz()
 create_train_parquet()
 down_page(query, out_dir = "query1", genre_en = '', id0 = "", cat = "", npage = 1)
+gpu_available()
+gpu_usage()
 model_deletes(dry = 0)
-print_available_gpus()
-print_gpu_usage()
 tensorboard_log(pars_dict:dict = None, writer = None, verbose = True)
-test()
+test_all()
 tf_check()
 
 
