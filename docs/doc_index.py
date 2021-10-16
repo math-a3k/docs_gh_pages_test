@@ -293,12 +293,13 @@ ResBlock.call(self, input_tensor, training = False)
 
 utilmy/deeplearning/keras/util_loss.py
 -------------------------functions----------------------
-clf_loss_macro_soft_f1(y, y_hat)
 learning_rate_schedule(mode = "step", epoch = 1, cc = None)
-log(*s)
+loss_clf_macro_soft_f1(y, y_hat)
+loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
 loss_schedule(mode = "step", epoch = 1)
 metric_accuracy(y_test, y_pred, dd)
-perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
+test_all()
+test_loss1()
 
 -------------------------methods----------------------
 LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule", path = None)
