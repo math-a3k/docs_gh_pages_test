@@ -286,8 +286,6 @@ SprinklesTransform.apply(self, image, **params)
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
 help()
-log(*s)
-log2(*s)
 make_classifier(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
 make_classifier_2(latent_dim, class_dict)
 make_classifier_multihead(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
@@ -467,7 +465,7 @@ time_sleep_random(nmax = 5)
 to_file_safe(msg:str, fpath:str)
 
 -------------------------methods----------------------
-FileWriter.__init__(fpath)
+FileWriter.__init__(self, fpath)
 FileWriter.write(self, msg)
 IndexLock.__init__(self, findex, plock)
 IndexLock.get(self)
