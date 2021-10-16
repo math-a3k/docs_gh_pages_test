@@ -259,8 +259,7 @@ build_tfrecord(x, tfrecord_out_path, max_records)
 data_add_onehot(dfref, img_dir, labels_col)
 get_data_sample(batch_size, x_train, labels_val)
 help()
-log(*s)
-log2(*s)
+test()
 to_OneHot(df, dfref, labels_col)
 
 -------------------------methods----------------------
