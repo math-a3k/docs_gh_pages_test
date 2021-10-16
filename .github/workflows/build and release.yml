@@ -154,6 +154,7 @@ jobs:
            docs all      --repo_dir utilmy/  --out_dir docs/
            rm -rf docs/doc_main.md
            rm -rf docs/output_repo.csv
+           pip freeze > docs/piplist.txt
 
 
     - name: Auto-Commit
