@@ -91,7 +91,7 @@ def make_classifier_multihead(label_name_ncount:dict=None,
     
     # Multi-heads Classifier
     outputs = []
-    for class_name, num_classes in label_name_ncount.items()
+    for class_name, num_classes in label_name_ncount.items():
        outputs.append( Dense(num_classes, activation='softmax', name=f'{class_name}_out')(x)  )
     
     clf = tf.keras.Model(name='clf_multihead_' + str(tag), 
