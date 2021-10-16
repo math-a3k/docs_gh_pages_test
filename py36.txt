@@ -34,7 +34,8 @@ psutil
 datasketch  ### lSH
 rapidfuzz
 editdistance
-
+gensim==4.1.2
+nltk==3.6.3
 
 ########################################################
 #### utilmy.viz.html
