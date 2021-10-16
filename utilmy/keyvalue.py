@@ -147,10 +147,7 @@ def db_cli():
 class DBcass():
     pass
 
-    
 
-    
-    
 
 class DBkeyvalue(object):
     """ Interface for mutiple key-value stores
@@ -205,8 +202,6 @@ class DBkeyvalue(object):
         
         
 
-        
-        
         
 class DBlist(object):
     """

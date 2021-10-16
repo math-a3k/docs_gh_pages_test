@@ -13,13 +13,7 @@ All related to distributed compute and atomic read/write
 import os, sys, socket, platform, time, gc
 
 ###############################################################################################
-verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
+from utilmy import log, log2
 
 def help():
     from utilmy import help_create

@@ -6,8 +6,16 @@ HELP= """
 import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
 
 
+###################################################################################
+from utilmy import log, log2
+
+def help():
+    from utilmy import help_create
+    ss = help_create("utilmy.ppandas") + HELP
+    print(ss)
 
 
+###################################################################################
 def test_all():
     from utilmy import os_makedirs
     os_makedirs("testdata/ppandas")
