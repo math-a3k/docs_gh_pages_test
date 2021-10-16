@@ -127,6 +127,27 @@ train_step(x, y, model, loss_fn, optimizer, nbr_features_layer = None, ### Graph
 
 
 
+utilmy/deeplearning/keras/loss_vq_vae2.py
+-------------------------functions----------------------
+encoder_Base(latent_dim)
+get_vqvae_layer_hierarchical(latent_dim = 16, num_embeddings = 64)
+plot_original_reconst_img(orig, rec)
+test_vqvae2()
+
+-------------------------methods----------------------
+PixelConvLayer.__init__(self, mask_type, **kwargs)
+PixelConvLayer.build(self, input_shape)
+PixelConvLayer.call(self, inputs)
+Quantizer.__init__(self, number_of_embeddings, embedding_dimensions, beta = 0.25, **kwargs)
+Quantizer.call(self, x)
+Quantizer.get_code_indices(self, flattened_inputs)
+ResidualBlock.__init__(self, filters, **kwargs)
+ResidualBlock.call(self, inputs)
+VQ_VAE_Trainer_2.__init__(self, train_variance, latent_dim = 16, number_of_embeddings = 128, **kwargs)
+VQ_VAE_Trainer_2.metrics(self)
+VQ_VAE_Trainer_2.train_step(self, x)
+
+
 utilmy/deeplearning/keras/template_train.py
 -------------------------functions----------------------
 label_get_data()
@@ -344,26 +365,6 @@ tf_compute_set(cc:dict)
 train_step_2(x, y, model, loss_fn, optimizer)
 train_stop(counter, patience)
 
-
-
-utilmy/deeplearning/keras/vq_vae2.py
--------------------------functions----------------------
-encoder_Base(latent_dim)
-get_vqvae_layer_hierarchical(latent_dim = 16, num_embeddings = 64)
-plot_original_reconst_img(orig, rec)
-
--------------------------methods----------------------
-PixelConvLayer.__init__(self, mask_type, **kwargs)
-PixelConvLayer.build(self, input_shape)
-PixelConvLayer.call(self, inputs)
-Quantizer.__init__(self, number_of_embeddings, embedding_dimensions, beta = 0.25, **kwargs)
-Quantizer.call(self, x)
-Quantizer.get_code_indices(self, flattened_inputs)
-ResidualBlock.__init__(self, filters, **kwargs)
-ResidualBlock.call(self, inputs)
-VQ_VAE_Trainer_2.__init__(self, train_variance, latent_dim = 16, number_of_embeddings = 128, **kwargs)
-VQ_VAE_Trainer_2.metrics(self)
-VQ_VAE_Trainer_2.train_step(self, x)
 
 
 utilmy/deeplearning/torch/util_train.py
