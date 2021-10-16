@@ -7,19 +7,15 @@ utils in DL
 import os,io, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
 from typing import Union
 from box import Box
-import diskcache as dc
-
 
 
 ################################################################################################
 verbose = 0
-from utilmy.images.util_image import log,log2,help
-
-#from images.util_image import help,log,log2
+from utilmy.images.util_image import log,log2
 
 
 ################################################################################################
-def test():
+def test_all():
     pass
 
 
