@@ -670,6 +670,18 @@ test_lsh()
 
 
 
+utilmy/nlp/util_model.py
+-------------------------functions----------------------
+embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
+embedding_model_to_parquet(model_vector_path = "model.vec", nmax  =  500)
+embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
+gensim_model_load(dirin, modeltype, **kw)
+gensim_model_train_save(model, dirout = None, **kw)
+help()
+np_str_to_array(vv, l2_norm = True, mdim  =  200)
+
+
+
 utilmy/nnumpy.py
 -------------------------functions----------------------
 is_float(x)
