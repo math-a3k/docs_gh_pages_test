@@ -1,9 +1,20 @@
 import os
+from typing import Dict, Mapping
 import numpy as np
 import xml.etree.ElementTree as ET
-
 # Function to get the data from XML Annotation
-def extract_info_from_xml(xml_file):
+def extract_info_from_xml( xml_file:str)->Mapping:
+    """
+        extracted data from Xml file formated in VOC
+
+        parameter:
+        xml_file(str): xml file path which need to transform
+
+        returns: 
+        dict: returns all the extracted information from xml which is important in transforming to any format.
+
+    """
+
 
     names = {}
     import xml.etree.ElementTree as ET
@@ -44,7 +55,24 @@ def extract_info_from_xml(xml_file):
     return info_dict,names
 
 # Convert the info dict to the required yolo format and write it to disk
-def convert_to_yolov5(info_dict,names, output):
+def convert_to_yolov5(info_dict:Dict, names:Dict, output:str)->None:
+    '''
+        transfrom data into yoloV5 format from info_dict
+
+        parameters:
+        info_dict (dict): dictionary in this format {'bboxes': [{'class': ,
+                                                    'xmin': ,
+                                                    'ymin': , 
+                                                    'xmax': , 
+                                                    'ymax': 
+                                                    }], 
+                                                'filename': , 
+                                                'image_size':
+                                                }
+        names (dict): dictionary of names {class_1:0, class_2:1, class_3: 2}
+        output (str): output folder path
+    '''
+
     print_buffer = []
     
     # For each bounding box
@@ -77,13 +105,21 @@ def convert_to_yolov5(info_dict,names, output):
     # with open(save_file_name,"w")
     # Save the annotation to disk
     print("\n".join(print_buffer), file= open(save_file_name, "w"))
-    print("labels saved in YoloV5 format at ", os.getcwd()+"/labels ", "with name ", save_file_name  )
+    print("labels saved in YoloV5 format at ", os.getcwd()+"/labels")
     # print(print_buffer)
 
-def yolov5_from_xml(xml_file_path = "None", xml_folder= "None",output="None" ):
+
+def yolov5_from_xml(xml_file_path:str = "None", xml_folder:str= "None",output:str="None")->Dict:
     '''
-    path1: annotation folder path
-    otuput: output txt file location 
+        transform XML file data from VOC to YOLOV5 Object detection format
+        
+        parameters:
+        xml_file_apth(str): xml file path need to transfrom from VOC XML to YoloV5 TXT format
+        xml_folder(str): annotation folder path which contain all the xml files 
+        output(str): location where all the transfromed data is stored
+
+        returns:
+        Dict: returns names of format of annoted classes 
     '''
 
     import os
@@ -112,5 +148,5 @@ def yolov5_from_xml(xml_file_path = "None", xml_folder= "None",output="None" ):
                     convert_to_yolov5(info_dict,names,output)
     return names
 
-# if __name__ == "__main__":
-#     yolov5_from_xml(xml_folder="xml_folder")
+if __name__ == "__main__":
+    yolov5_from_xml(xml_folder="xml_folder")
