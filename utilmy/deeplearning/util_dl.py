@@ -10,8 +10,7 @@ from box import Box
 
 
 ################################################################################################
-verbose = 0
-from utilmy.images.util_image import log,log2
+from utilmy import log,log2
 
 
 ################################################################################################
@@ -23,12 +22,35 @@ def test_all():
 
 ################################################################################################
 ################################################################################################
+def data_mnist_get_train_test(batch=32):
+    # get dataset from mnist on ready to use format
+    import tensorflow as tf
+    (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+    x_train, x_test = x_train / 255.0, x_test / 255.0
+
+
+    ### Train
+    train_ds = tf.data.Dataset.from_tensor_slices((x_train, y_train,))
+    train_ds = train_ds.shuffle(buffer_size=x_train.shape[0])
+    train_ds = train_ds.batch(batch)
+    train_ds = train_ds.prefetch(1)
+
+    ### Test
+    test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test,))
+    test_ds = test_ds.shuffle(buffer_size=x_test.shape[0])
+    test_ds = test_ds.batch(batch)
+    test_ds = test_ds.prefetch(1)
+    return train_ds, test_ds
+    
+    
+
+
 def tensorboard_log(pars_dict:dict=None,  writer=None,  verbose=True):
-    """
+    """ Save Arbitrary dict in tensorboard
     #### Usage 1
     logdir = 'logs/params'
 
-    cc = {'arbitray dict' : 1 }
+    cc = {'arbitray dict' : 1, 'ykey': {'mykey2' : 5 } }
 
     from tensorboardX import SummaryWriter
     # from tensorboard import SummaryWriter
@@ -75,13 +97,10 @@ def tf_check():
 
     
 def gpu_usage():
-    
    cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv"
-
    from utilmy import os_system    
    res = os_system(cmd)
-   print(res)
-        
+   print(res)        
    ## cmd = "nvidia-smi --query-gpu=utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv"
    ## cmd2= " nvidia-smi --query-gpu=timestamp,name,pci.bus_id,driver_version,pstate,pcie.link.gen.max,pcie.link.gen.current,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv  "
     
