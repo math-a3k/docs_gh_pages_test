@@ -419,6 +419,14 @@ vizEmbedding.draw_hiearchy(self)
 vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/", ntest = 10000)
 
 
+utilmy/deeplearning/util_transform.py
+-------------------------functions----------------------
+convert_to_yolov5(info_dict, names, output)
+extract_info_from_xml(xml_file)
+yolov5_from_xml(xml_file_path  =  "None", xml_folder =  "None", output = "None")
+
+
+
 utilmy/deeplearning/zz_util_topk.py
 -------------------------functions----------------------
 convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
