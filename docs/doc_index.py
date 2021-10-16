@@ -289,8 +289,6 @@ SprinklesTransform.apply(self, image, **params)
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
 help()
-log(*s)
-log2(*s)
 make_classifier(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
 make_classifier_2(latent_dim, class_dict)
 make_classifier_multihead(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
@@ -337,8 +335,7 @@ __get_rows_counts(left, right)
 __get_tensor_reshaped_norm(tensor, reshape_shape)
 __get_tensor_sqr(tensor, reshape_shape, tile_shape)
 help()
-log(*s)
-log2(*s)
+test_all()
 test_tf_cdist()
 tf_cdist(left, right, metric = 'euclidean')
 tf_cdist_cos(left, right)
@@ -422,6 +419,14 @@ vizEmbedding.draw_hiearchy(self)
 vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/", ntest = 10000)
 
 
+utilmy/deeplearning/util_transform.py
+-------------------------functions----------------------
+convert_to_yolov5(info_dict, names, output)
+extract_info_from_xml(xml_file)
+yolov5_from_xml(xml_file_path  =  "None", xml_folder =  "None", output = "None")
+
+
+
 utilmy/deeplearning/zz_util_topk.py
 -------------------------functions----------------------
 convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
@@ -453,8 +458,6 @@ date_now(fmt = "%Y-%m-%d %H =  "%Y-%m-%d %H:%M:%S %Z%z")
 help()
 load(to_file = "")
 load_serialize(name)
-log(*s)
-log2(*s)
 log_mem(*s)
 os_lock_acquireLock(plock:str = "tmp/plock.lock")
 os_lock_execute(fun_run, fun_args = None, ntry = 5, plock = "tmp/plock.lock")
@@ -470,7 +473,7 @@ time_sleep_random(nmax = 5)
 to_file_safe(msg:str, fpath:str)
 
 -------------------------methods----------------------
-FileWriter.__init__(fpath)
+FileWriter.__init__(self, fpath)
 FileWriter.write(self, msg)
 IndexLock.__init__(self, findex, plock)
 IndexLock.get(self)
@@ -688,10 +691,13 @@ utilmy/nlp/util_model.py
 embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
 embedding_model_to_parquet(model_vector_path = "model.vec", nmax  =  500)
 embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
-gensim_model_load(dirin, modeltype, **kw)
-gensim_model_train_save(model, dirout = None, **kw)
+generate_random_senences(n_sentences = 100)
+gensim_model_load(dirin, modeltye = None, **kw)
+gensim_model_train_save(model, corpus_filepath = 'lee_background.cor', dirout = None, **kw)
 help()
 np_str_to_array(vv, l2_norm = True, mdim  =  200)
+preprocess(sentence, lemmatizer, stop_words)
+test()
 
 
 
@@ -718,9 +724,7 @@ utilmy/oos.py
 help()
 is_float(x)
 is_int(x)
-log(*s)
 log10(*s, nmax = 60)
-log2(*s)
 log5(*s)
 log_trace(msg = "", dump_path = "", globs = None)
 np_add_remove(set_, to_remove, to_add)

@@ -8,26 +8,21 @@ import tensorflow as tf
 
 
 #################################################################################################
-verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
-
+from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss  = HELP
-    ss += help_create("utilmy.deeplearning.keras.util_similarity")
+    ss = help_create("utilmy.deeplearning.keras.util_similarity") + HELP
     print(ss)
 
 
 
 
 ######################################################################################
+def test_all():
+    test_tf_cdist()
+
+
 def test_tf_cdist():
     from scipy.spatial.distance import cdist
     from tqdm import tqdm

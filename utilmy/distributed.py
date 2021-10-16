@@ -10,16 +10,10 @@ All related to distributed compute and atomic read/write
 
 
 """
-import os, sys, socket, platform, time, gc
+import os, sys, socket, platform, time, gc,logging
 
 ###############################################################################################
-verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
+from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
@@ -133,7 +127,10 @@ def test_tofilesafe():
 
 
 class FileWriter(object):
-   def __init__(fpath):
+   def __init__(self,fpath):
+      """
+       Thread Safe file writer
+      """
       logger = logging.getLogger('log')
       logger.setLevel(logging.INFO)
       ch = logging.FileHandler(fpath)
@@ -146,13 +143,10 @@ class FileWriter(object):
 
                   
 def to_file_safe(msg:str, fpath:str):
-   import logging
-
    ss = str(msg)
-   logpath = fpath
    logger = logging.getLogger('log')
    logger.setLevel(logging.INFO)
-   ch = logging.FileHandler(logpath)
+   ch = logging.FileHandler(fpath)
    ch.setFormatter(logging.Formatter('%(message)s'))
    logger.addHandler(ch)
 

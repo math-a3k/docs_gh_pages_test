@@ -6,8 +6,16 @@ HELP= """
 import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
 
 
+###################################################################################
+from utilmy.utilmy import log, log2
+
+def help():
+    from utilmy import help_create
+    ss = help_create("utilmy.ppandas") + HELP
+    print(ss)
 
 
+###################################################################################
 def test_all():
     from utilmy import os_makedirs
     os_makedirs("testdata/ppandas")
@@ -68,13 +76,6 @@ def test2():
     to_datetime("2018-01-16")
     
 
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s, verbose=1):
-    if verbose >0 : print(*s, flush=True)
-
-    
 ###################################################################################################
 ###### Pandas #####################################################################################
 def pd_random(nrows=100):

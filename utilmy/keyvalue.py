@@ -23,7 +23,7 @@ db_path : Single DB storage
 """
 import os, glob, sys, math, string, time, json, logging, functools, random, yaml, operator, gc
 import pandas as pd, numpy as np
-from pathlib import Path; from collections import defaultdict, OrderedDict ;  
+from pathlib import Path; from collections import defaultdict, OrderedDict
 from box import Box
 
 
@@ -35,16 +35,7 @@ from utilmy.utilmy import   pd_read_file, pd_to_file
 
 
 #####################################################################################    
-verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
-
-
+from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
@@ -60,7 +51,7 @@ def help():
 def pd_random(nrows=1000, ncols= 5):
     return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )
 
-def test():
+def test_all():
     """    
     """    
     n = 10**4
@@ -103,7 +94,7 @@ def test():
 
 
     
-############## Database Class ##########################################################################################
+############## Database Class #########################################################
 def db_cli():
     """
       Command line for db access.
@@ -147,10 +138,7 @@ def db_cli():
 class DBcass():
     pass
 
-    
 
-    
-    
 
 class DBkeyvalue(object):
     """ Interface for mutiple key-value stores
@@ -205,8 +193,6 @@ class DBkeyvalue(object):
         
         
 
-        
-        
         
 class DBlist(object):
     """

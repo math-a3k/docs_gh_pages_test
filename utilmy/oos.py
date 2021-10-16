@@ -8,18 +8,11 @@ import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as n
 
 
 #################################################################
-verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
+from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss  = help_create("utilmy.nnumpy", prefixs= [ 'test'])  #### Merge test code
-    ss += HELP
+    ss = help_create("utilmy.oos") + HELP
     print(ss)
 
 

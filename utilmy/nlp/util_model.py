@@ -4,6 +4,13 @@ HELP="""
 """
 import os, sys, itertools, time,  pandas as pd, numpy as np, pickle, gc
 from typing import Callable, Tuple, Union
+from gensim.models import FastText
+from essential_generators import DocumentGenerator
+from nltk.stem import WordNetLemmatizer
+from gensim.test.utils import datapath
+import re
+from nltk.corpus import stopwords
+import nltk
 
 
 #################################################################################################
@@ -17,22 +24,82 @@ def help():
 
     
     
-#################################################################################################    
-def gensim_model_load(dirin, modeltype, **kw):
-   """"
-     Fastext model binaries
-   
-   """
-   pass
+#################################################################################################
+def preprocess(sentence, lemmatizer, stop_words):
+    """
+    Preprocessing Function
+    Lowers the characters of a sentence
+    Removes all symbols and numbers in a sentence
+    Removes all multiple whitespaces with a whitespace in a sentence
+    Lemmatizes the words and removes all the stop words
+    Returns the word tokenized sentence as a list
+
+    :param sentence: sentence to preprocess
+    :param lemmatizer: the class which lemmatizes the words
+    :param stop_words: stop_words in english http://xpo6.com/list-of-english-stop-words/
+    :return: preprocessed sentence
+    """
+    sentence = sentence.lower()
+    sentence = re.sub(r'[^a-z]', ' ', sentence)
+    sentence = re.sub(r'\s+', ' ', sentence)
+    sentence = [lemmatizer.lemmatize(word) for word in nltk.word_tokenize(sentence) if word not in stop_words]
+    return sentence
+
+
+def generate_random_senences(n_sentences=100):
+    """
+    Generates Random sentences and Preprocesses them
+
+    :param n_sentences: number of sentences to generate
+    :return: generated sentences
+    """
+    gen = DocumentGenerator()
+    lemmatizer = WordNetLemmatizer()
+    stop_words = set(stopwords.words('english'))
+    sentences = [preprocess(gen.sentence(), lemmatizer, stop_words) for i in range(n_sentences)]
+    return sentences
 
 
 
-def gensim_model_train_save(model, dirout=None, **kw):
-   """
-     Continue training form binaries model a
-   
-   """
-   pass
+
+def gensim_model_load(dirin, modeltye=None, **kw):
+    """
+    Loads the FastText model from the given path
+
+    :param dirin: the path of the saved model
+    :param modeltye:
+    :param kw:
+    :return: loaded model
+    """
+    loaded_model = FastText.load(dirin)
+    print(loaded_model)
+    return loaded_model
+
+
+
+def gensim_model_train_save(model, corpus_filepath='lee_background.cor', dirout=None, **kw):
+    """
+    Trains the Fast text model and saves the model
+
+    :param model: The model to train
+    :param corpus_filepath: the filepath of the data
+    :param dirout: filepath to save the model
+    :param kw:
+    :return:
+    """
+    corpus_file = datapath(corpus_filepath)
+    model.build_vocab(corpus_file=corpus_file, update=True)
+    model.train(corpus_file=corpus_file, total_words=model.corpus_total_words, epochs=kw['kw'])
+    print(model)
+    model.save(dirout)
+
+
+def test():
+    if os.path.exists('fasttext'):
+        model = gensim_model_load('fasttext')
+        gensim_model_train_save(model, dirout='fasttext', kw=10)
+
+
 
 
 
