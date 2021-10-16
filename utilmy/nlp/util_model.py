@@ -82,9 +82,15 @@ def gensim_model_load(dirin, modeltye=None, **kw):
 
 
 
-def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', dirout=None, **kw):
+def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', dirout="./modelout/", epochs=1,  **kw):
     """
     Trains the Fast text model and saves the model
+      classgensim.models.fasttext.FastText(sentences=None, corpus_file=None, sg=0, hs=0, vector_size=100, 
+      alpha=0.025, window=5, min_count=5, max_vocab_size=None, word_ngrams=1, sample=0.001,
+      seed=1, workers=3, min_alpha=0.0001, negative=5, ns_exponent=0.75, cbow_mean=1,
+      hashfxn=<built-in function hash>, epochs=5, null_word=0, min_n=3, max_n=6,
+      sorted_vocab=1, bucket=2000000, trim_rule=None,
+      batch_words=10000, callbacks=(), max_final_vocab=None, shrink_windows=True)
 
     :param model: The model to train
     :param corpus_filepath: the filepath of the data
@@ -93,12 +99,17 @@ def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', di
     :return:
     """
     if model is None :
-      pass
+      model = FastText(vector_size=vector_size, window=window, min_count=min_count) 
+   
    
     corpus_file = datapath(corpus_filepath)
     model.build_vocab(corpus_file=corpus_file, update=True)
-    model.train(corpus_file=corpus_file, total_words=model.corpus_total_words, epochs=kw['kw'])
+    log(model.corpus_total_words )
+      
+    model.train(corpus_file=corpus_file, total_words=model.corpus_total_words, epochs= epochs)
     print(model)
+    from utilmy import os_makedirs
+    os_makedirs(dirout)
     model.save(dirout)
 
 
