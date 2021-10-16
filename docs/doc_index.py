@@ -457,9 +457,13 @@ test1_functions()
 test2_funtions_thread()
 test3_index()
 test_all()
+test_tofilesafe()
 time_sleep_random(nmax = 5)
+to_file_safe(msg:str, fpath:str)
 
 -------------------------methods----------------------
+FileWriter.__init__(fpath)
+FileWriter.write(self, msg)
 IndexLock.__init__(self, findex, plock)
 IndexLock.get(self)
 IndexLock.put(self, val = "", ntry = 100, plock = "tmp/plock.lock")
