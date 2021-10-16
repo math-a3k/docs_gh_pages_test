@@ -13,8 +13,7 @@ import neural_structured_learning.configs as nsl_configs
 
 
 ######################################################################################
-verbose = 0
-from utilmy import log
+from utilmy import log, log2
 
 def help():
     from utilmy import help_create
