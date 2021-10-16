@@ -687,13 +687,13 @@ utilmy/nlp/util_model.py
 embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
 embedding_model_to_parquet(model_vector_path = "model.vec", nmax  =  500)
 embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
-generate_random_senences(n_sentences = 100)
 gensim_model_load(dirin, modeltye = None, **kw)
-gensim_model_train_save(model, corpus_filepath = 'lee_background.cor', dirout = None, **kw)
+gensim_model_train_save(model = None, corpus_filepath = 'lee_background.cor', dirout = None, **kw)
 help()
 np_str_to_array(vv, l2_norm = True, mdim  =  200)
-preprocess(sentence, lemmatizer, stop_words)
 test()
+text_generate_random_senences(n_sentences = 100, dirout = None)
+text_preprocess(sentence, lemmatizer, stop_words)
 
 
 
