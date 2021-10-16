@@ -418,7 +418,7 @@ vizEmbedding.draw_hiearchy(self)
 vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/", ntest = 10000)
 
 
-utilmy/deeplearning/util_topk.py
+utilmy/deeplearning/zz_util_topk.py
 -------------------------functions----------------------
 convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
 data_add_onehot(dfref, img_dir, labels_col)
@@ -652,6 +652,33 @@ logw(*s)
 test()
 z_logger_custom_1()
 z_logger_stdout_override()
+
+
+
+utilmy/nlp/text.py
+-------------------------functions----------------------
+help()
+help_get_codesource(func)
+log(*s)
+pd_text_getcluster(df:pd.DataFrame, col:str = 'col', threshold = 0.5, num_perm:int = 5, npool = 1, chunk  =  100000)
+pd_text_hash_create_lsh(df, col, sep = " ", threshold = 0.7, num_perm = 10, npool = 1, chunk  =  20000)
+pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
+test()
+test()
+test_all()
+test_lsh()
+
+
+
+utilmy/nlp/util_model.py
+-------------------------functions----------------------
+embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
+embedding_model_to_parquet(model_vector_path = "model.vec", nmax  =  500)
+embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
+gensim_model_load(dirin, modeltype, **kw)
+gensim_model_train_save(model, dirout = None, **kw)
+help()
+np_str_to_array(vv, l2_norm = True, mdim  =  200)
 
 
 
