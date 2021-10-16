@@ -78,7 +78,7 @@ def tf_check():
 
 
     
-def print_gpu_usage():
+def gpu_usage():
     
    cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv"
 
@@ -90,7 +90,7 @@ def print_gpu_usage():
    ## cmd2= " nvidia-smi --query-gpu=timestamp,name,pci.bus_id,driver_version,pstate,pcie.link.gen.max,pcie.link.gen.current,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv  "
     
     
-def print_available_gpus():
+def gpu_available():
     cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv  "
     from utilmy import os_system    
     ss = os_system(cmd)
@@ -109,6 +109,10 @@ def print_available_gpus():
             
             
    
+
+
+
+
 
 def down_page(query, out_dir="query1", genre_en='', id0="", cat="", npage=1) :
     """
@@ -331,7 +335,7 @@ def model_deletes(dry=0):
 
     """
 
-    path0 = "/data/workspaces/noelkevin01/img/models/fashion/dcf_vae/*"
+    path0 = "/dion/dcf_vae/*"
     fpath0 = glob.glob(path0)
     # print(fpath0)
 
