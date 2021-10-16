@@ -6,15 +6,18 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, random
 
-verbose = 0   ### Global setting
+verbose = 3   ### Global setting
 
 def log(*s, **kw):
     print(*s, flush=True, **kw)
 
 def log2(*s, **kw):
-    if verbose >0 : print(*s, flush=True, **kw)
+    if verbose >=2 : print(*s, flush=True, **kw)
 
+def log3(*s, **kw):
+    if verbose >=3 : print(*s, flush=True, **kw)
 
+        
 def help():
     suffix = "\n\n\n###############################"
     ss     = help_create(modulename='utilmy', prefixs=None) + suffix
@@ -68,8 +71,7 @@ def pd_random(ncols=7, nrows=100):
 
 
 def pd_generate_data(ncols=7, nrows=100):
-    """ Generate sample data for function testing
-    categorical features for anova test
+    """ Generate sample data for function testing categorical features
     """
     import numpy as np, pandas as pd
     np.random.seed(444)
