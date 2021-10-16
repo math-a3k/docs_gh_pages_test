@@ -74,8 +74,10 @@ def gensim_model_load(dirin, modeltype='fastext', **kw):
     :param kw:
     :return: loaded model
     """
-    from gensim.models import FastText  
-    loaded_model = FastText.load(dirin)
+    if modeltype == 'fastext':  
+       from gensim.models import FastText  
+       loaded_model = FastText.load(dirin)
+      
     print(loaded_model)
     return loaded_model
 
