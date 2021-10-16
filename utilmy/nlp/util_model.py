@@ -25,7 +25,7 @@ def help():
     
     
 #################################################################################################
-def preprocess(sentence, lemmatizer, stop_words):
+def text_preprocess(sentence, lemmatizer, stop_words):
     """
     Preprocessing Function
     Lowers the characters of a sentence
@@ -46,7 +46,7 @@ def preprocess(sentence, lemmatizer, stop_words):
     return sentence
 
 
-def generate_random_senences(n_sentences=100):
+def text_generate_random_senences(n_sentences=100, dirout=None):
     """
     Generates Random sentences and Preprocesses them
 
@@ -57,8 +57,13 @@ def generate_random_senences(n_sentences=100):
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
     sentences = [preprocess(gen.sentence(), lemmatizer, stop_words) for i in range(n_sentences)]
-    return sentences
-
+      
+    if dirout is None :  
+        return sentences
+    else :
+      with open(dirout, mode='a') as fp:
+         for x in sentences :
+            fp.write(x + "\n" )
 
 
 
@@ -77,7 +82,7 @@ def gensim_model_load(dirin, modeltye=None, **kw):
 
 
 
-def gensim_model_train_save(model, corpus_filepath='lee_background.cor', dirout=None, **kw):
+def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', dirout=None, **kw):
     """
     Trains the Fast text model and saves the model
 
@@ -87,6 +92,9 @@ def gensim_model_train_save(model, corpus_filepath='lee_background.cor', dirout=
     :param kw:
     :return:
     """
+    if model is None :
+      pass
+   
     corpus_file = datapath(corpus_filepath)
     model.build_vocab(corpus_file=corpus_file, update=True)
     model.train(corpus_file=corpus_file, total_words=model.corpus_total_words, epochs=kw['kw'])
@@ -104,8 +112,8 @@ def test():
 
 
 
-
-
+####################################################################################################
+####################################################################################################
 def embedding_model_to_parquet(model_vector_path="model.vec", nmax = 500):
     from gensim.models import KeyedVectors    
     from collections import OrderedDict
