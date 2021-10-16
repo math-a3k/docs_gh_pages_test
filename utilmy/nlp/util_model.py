@@ -92,6 +92,8 @@ def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', di
       sorted_vocab=1, bucket=2000000, trim_rule=None,
       batch_words=10000, callbacks=(), max_final_vocab=None, shrink_windows=True)
 
+    https://radimrehurek.com/gensim/models/fasttext.html
+    
     :param model: The model to train
     :param corpus_filepath: the filepath of the data
     :param dirout: filepath to save the model
@@ -104,14 +106,22 @@ def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', di
    
     corpus_file = datapath(corpus_filepath)
     model.build_vocab(corpus_file=corpus_file, update=True)
-    log(model.corpus_total_words )
+    nwords = model.corpus_total_words 
+
+      
+    log( model.estimate_memory(vocab_size=nwords, report=None) )
+    log(model.get_latest_training_loss() )
+
       
     model.train(corpus_file=corpus_file, total_words=model.corpus_total_words, epochs= epochs)
+    log(model.get_latest_training_loss() )   
     print(model)
     from utilmy import os_makedirs
     os_makedirs(dirout)
     model.save(dirout)
 
+      
+      
 
 def test():
     if os.path.exists('fasttext'):
