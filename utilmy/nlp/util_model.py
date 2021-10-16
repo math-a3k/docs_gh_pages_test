@@ -4,7 +4,7 @@ HELP="""
 """
 import os, sys, itertools, time,  pandas as pd, numpy as np, pickle, gc, re
 from typing import Callable, Tuple, Union
-
+from box import Box
 
 
 #################################################################################################
@@ -83,7 +83,7 @@ def gensim_model_load(dirin, modeltype='fastext', **kw):
 
 
 
-def gensim_model_train_save(model=None, dirinput='lee_background.cor', dirout="./modelout/", epochs=1,  **kw):
+def gensim_model_train_save(model=None, dirinput='lee_background.cor', dirout="./modelout/", epochs=1, pars:dict=None,  **kw):
     """
     Trains the Fast text model and saves the model
       classgensim.models.fasttext.FastText(sentences=None, corpus_file=None, sg=0, hs=0, vector_size=100, 
@@ -110,7 +110,10 @@ def gensim_model_train_save(model=None, dirinput='lee_background.cor', dirout=".
     from gensim.models import FastText  
     from gensim.test.utils import datapath   
     if model is None :
-       model = FastText(vector_size=vector_size, window=window, min_count=min_count) 
+       pars = {} if pars is None else pars
+       # model = FastText(vector_size=vector_size, window=window, min_count=min_count) 
+       model = FastText(**pars) 
+         
          
     elif isinstance(model, str):
        modle_path = model  ### path !!!
