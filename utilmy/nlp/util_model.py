@@ -65,7 +65,7 @@ def text_generate_random_sentences(n_sentences=100, dirout=None):
 
 
 
-def gensim_model_load(dirin, modeltye=None, **kw):
+def gensim_model_load(dirin, modeltype='fastext', **kw):
     """
     Loads the FastText model from the given path
 
@@ -81,7 +81,7 @@ def gensim_model_load(dirin, modeltye=None, **kw):
 
 
 
-def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', dirout="./modelout/", epochs=1,  **kw):
+def gensim_model_train_save(model=None, dirinput='lee_background.cor', dirout="./modelout/", epochs=1,  **kw):
     """
     Trains the Fast text model and saves the model
       classgensim.models.fasttext.FastText(sentences=None, corpus_file=None, sg=0, hs=0, vector_size=100, 
@@ -108,17 +108,20 @@ def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', di
     from gensim.models import FastText  
     from gensim.test.utils import datapath   
     if model is None :
-      model = FastText(vector_size=vector_size, window=window, min_count=min_count) 
-   
-   
-    corpus_file = datapath(corpus_filepath)
+       model = FastText(vector_size=vector_size, window=window, min_count=min_count) 
+         
+    elif isinstance(model, str):
+       modle_path = model  ### path !!!
+       model = gensim_model_load(model)
+         
+            
+    corpus_file = datapath(dirinput)
     model.build_vocab(corpus_file=corpus_file, update=True)
     nwords = model.corpus_total_words 
 
       
     log( model.estimate_memory(vocab_size=nwords, report=None) )
     log(model.get_latest_training_loss() )
-
       
     model.train(corpus_file=corpus_file, total_words=model.corpus_total_words, epochs= epochs)
     log(model.get_latest_training_loss() )   
