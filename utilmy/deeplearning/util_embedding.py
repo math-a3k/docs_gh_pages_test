@@ -241,11 +241,6 @@ def sim_score2(path=""):
     
 
 
-    
-    
-    
-
-
 #####################################################################################
 def simscore_cosinus_calc(embs, words):
     """
@@ -532,27 +527,20 @@ def topk_predict():
     
     
 def topk(topk=100, dname=None, pattern="df_*", filter1=None):
-    """  python prepro.py  topk    |& tee -a  /data/worksg3_-img_train_r2p2_200k_clean_nobg_256_256-500000-cache_best_epoch_261/topk/zzlog.py
+    """  python prepro.py  topk    |& tee -a  /data/worpoch_261/topk/zzlog.py
     
 
-         
     """
     from utilmy import pd_read_file
     
     filter1 = "all"    #### "article"
     
-    if dname is None :
-       # dname = "m_train8bb_g2_-img_train_r2p2_70k_clean_nobg_256_256-100000-cache_best_epoch_64"
-       # dname = "m_train9a_g6_-img_train_nobg_256_256-100000-cache_best_epoch_54"
-       # dname = "m_train9b_g3_-img_train_r2p2_70k_clean_nobg_256_256-100000-cache_best_epoch_69"
-       # dname = "m_train9a_g6_-img_train_nobg_256_256-100000-cache_best_epoch_98"
-       # dname = "m_train9b_g3_-img_train_r2p2_70k_clean_nobg_256_256-100000-cache_best_epoch_120" 
-
+    if dname is None : 
        dname = "m_train9b_g3_-img_train_r2p2_200k_clean_nobg_256_256-500000-cache_best_epoch_261"
      
     
     dname    = dname.replace("/", "_").replace(".", "-")    
-    r0       = "/data/workspaces/noelkevin01/img/models/fashion/dcf_vae/m_train9pred/res/"
+    r0       = "/data/workspin9pred/res/"
     in_dir   = r0 + dname
     out_dir  = in_dir + "/topk/"
     os.makedirs(out_dir, exist_ok=True)
@@ -662,10 +650,8 @@ def topk_export():     #### python prepro.py  topk_export
 1      cs6481-01_1-4.png   kids          shoes       shoes  ...                   5               20              151                7
 
 
-     hdfs dfs -put  /data/womg_trche_best_best_good_epoch_313/fashion_emb_500k/                /user/scoupon/zexport/z/
-
     """
-    dir_in  = "/daain9b_g3_-img_trai000-cache_best_best_good_epoch_313/*.parquet" 
+    dir_in  = "/daain9b_g3_-imh_313/*.parquet" 
     dir_out = "/data/wai13/fashion_emb_500k/"
     
     os.makedirs(dir_out, exist_ok=True)
@@ -1030,11 +1016,7 @@ class vizEmbedding:
 
     
     
-    
-    
-    
-    
-    
+ 
     
 ###################################################################################################
 if __name__ == "__main__":
