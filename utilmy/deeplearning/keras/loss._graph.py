@@ -212,8 +212,11 @@ def train_step(x, y, model, loss_fn, optimizer,
         with tf.GradientTape() as tape_x:
             tape_x.watch(x)
             # Regular forward pass.
-            sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
-            base_output  = model(sample_features, training=True)
+            if nbr_features_layer is not None :
+                sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
+                base_output  = model(sample_features, training=True)
+            else :
+                base_output  = model(x, training=True)
             labeled_loss = loss_fn(y, base_output)
 
         has_nbr_inputs = nbr_weights is not None and nbr_features
