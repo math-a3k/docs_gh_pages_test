@@ -1,0 +1,89 @@
+[1mNAME[0m
+    test.py
+
+[1mSYNOPSIS[0m
+    test.py [4mGROUP[0m | [4mCOMMAND[0m
+
+[1mGROUPS[0m
+    [1m[4mGROUP[0m[0m is one of the following:
+
+     os
+       OS routines for NT or Posix depending on what system we're on.
+
+     sys
+       This module provides access to some objects used or maintained by the interpreter and to functions that interact strongly with the interpreter.
+
+     time
+       This module provides various functions to manipulate time values.
+
+     datetime
+       Fast implementation of the datetime type.
+
+     inspect
+       Get useful information from live Python objects.
+
+     random
+       Random variable generators.
+
+     pd
+       pandas - a powerful data analysis and manipulation library for Python =====================================================================
+
+     np
+       NumPy =====
+
+     glob
+       Filename globbing utility.
+
+     fire
+       The Python Fire module.
+
+[1mCOMMANDS[0m
+    [1m[4mCOMMAND[0m[0m is one of the following:
+
+     log
+
+     import_module
+
+     pd_random
+
+     pd_generate_data
+       Generate sample data for function testing categorical features for anova test
+
+     test_utilmy
+
+     test_ppandas
+
+     test_docs_cli
+       from utilmy.docs.generate_doc import run_markdown, run_table
+
+     test_adatasets
+       #### python test.py   test_adatasets
+
+     test_nnumpy
+       #### python test.py   test_nnumpy
+
+     test_dates
+
+     test_decorators
+
+     test_deeplearning_keras
+
+     test_text
+
+     test_viz_vizhtml
+
+     test_parallel
+
+     test_distributed
+
+     test_utils
+       #### python test.py   test_utils
+
+     test_oos
+       #### python test.py   test_oos
+
+     test_tabular
+
+     test_yolov5_transform
+
+     test_all

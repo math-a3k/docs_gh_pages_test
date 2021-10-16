@@ -184,6 +184,12 @@ def test_tabular():
    from utilmy import tabular as m
    m.test_all()
 
+#######################################################################################
+def test_yolov5_transform():
+   from utilmy.deeplearning import util_transform as m
+   m.test_all()
+
+
 
 
 
@@ -206,6 +212,7 @@ def test_all():
 
     ################
     test_deeplearning_keras()
+    test_yolov5_transform()
 
 
 
