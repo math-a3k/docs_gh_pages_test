@@ -133,7 +133,7 @@ def test_deeplearning_keras():
    
 #########################################################################################
 def test_text():
-    from utilmy import text as m
+    from utilmy.nlp import text as m
     m.test_all()  
 
 
