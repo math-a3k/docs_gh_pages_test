@@ -2,6 +2,7 @@ import os
 from typing import Dict, Mapping
 import numpy as np
 import xml.etree.ElementTree as ET
+
 # Function to get the data from XML Annotation
 def extract_info_from_xml( xml_file:str)->Mapping:
     """
@@ -105,13 +106,13 @@ def convert_to_yolov5(info_dict:Dict, names:Dict, output:str)->None:
     # with open(save_file_name,"w")
     # Save the annotation to disk
     print("\n".join(print_buffer), file= open(save_file_name, "w"))
-    print("labels saved in YoloV5 format at ", os.getcwd()+"/labels")
+    # print("labels saved in YoloV5 format at ", output+"/labels")
     # print(print_buffer)
 
 
 def yolov5_from_xml(xml_file_path:str = "None", xml_folder:str= "None",output:str="None")->Dict:
     '''
-        transform XML file data from VOC to YOLOV5 Object detection format
+        transform XML file data from VOC to YOLOV5 Object detection format and saves all the transfromed data at given location
         
         parameters:
         xml_file_apth(str): xml file path need to transfrom from VOC XML to YoloV5 TXT format
@@ -119,7 +120,7 @@ def yolov5_from_xml(xml_file_path:str = "None", xml_folder:str= "None",output:st
         output(str): location where all the transfromed data is stored
 
         returns:
-        Dict: returns names of format of annoted classes 
+        Dict: returns nafrom test import test_yolov5_transformmes of format of annoted classes 
     '''
 
     import os
@@ -129,17 +130,15 @@ def yolov5_from_xml(xml_file_path:str = "None", xml_folder:str= "None",output:st
     try:
         os.mkdir(os.path.join(output, "labels"))
     except Exception as e:
-        print(e)
+        pass
+        # print(e)
     if xml_file_path!="None" :
         info_dict,names = extract_info_from_xml(xml_file_path)
         convert_to_yolov5(info_dict,names,output)
     if(xml_folder!="None"):
-        print("in_xml_folder")
-        print(os.listdir(xml_folder))
         for root, _ ,files in os.walk(xml_folder):
-            print(files)
+
             for file in files:
-                print(file)
                 
                 if file[-4:]=='.xml':
 
@@ -148,5 +147,26 @@ def yolov5_from_xml(xml_file_path:str = "None", xml_folder:str= "None",output:st
                     convert_to_yolov5(info_dict,names,output)
     return names
 
+def test_convert_to_yolov5():
+    info_dict = { 'bboxes': [{'class': 'AIRPLANE', 'xmin': 171, 'ymin': 161, 'xmax': 185, 'ymax': 172}], 'filename': 'IR_AIRPLANE_0511_297.png', 'image_size': (320, 256, 1) }
+    names = {"AIRPLANE":0}
+    convert_to_yolov5(info_dict,names, output= "./testdata/util_transform")
+
+def test_extract_info_from_xml():
+    extract_info_from_xml("testdata/util_transform/724_29873.xml")
+
+
+def test_yolov5_from_xml():
+    yolov5_from_xml(xml_file_path= "testdata/util_transform/724_29873.xml",output= "testdata/util_transform")
+    yolov5_from_xml(xml_folder="testdata/util_transform",output= "testdata/util_transform")
+
+
+def test_all():
+    test_extract_info_from_xml()
+    test_convert_to_yolov5()
+    test_yolov5_from_xml()
+
+
 if __name__ == "__main__":
-    yolov5_from_xml(xml_folder="xml_folder")
+    # yolov5_from_xml(xml_folder="xml_folder")
+    test_all()
