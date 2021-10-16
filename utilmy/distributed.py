@@ -70,7 +70,7 @@ def test2_funtions_thread():
     # define test function
     def running(fun_args):
         print(f'Function running in thread: {fun_args} START')
-        time.sleep(fun_args* 0.5)
+        time.sleep(fun_args* 0.2)
         print(f'Function running in thread: {fun_args} END')
 
     # define test thread
@@ -82,7 +82,7 @@ def test2_funtions_thread():
         print(f'Thread {number} END')
 
     # Create thread
-    for i in range(4):
+    for i in range(3):
         t = threading.Thread(target=thread_running, args=(i+1, ))
         t.start()
 
@@ -116,7 +116,7 @@ def test3_index():
         print(f'Thread {number} END')
 
     # Create thread
-    for i in range(10):
+    for i in range(3):
         t = threading.Thread(target=thread_running, args=(i+1, ))
         t.start()
 
@@ -261,4 +261,5 @@ def save_serialize(name, value):
 
 
 if __name__ == '__main__':
-    test_all()
+    import fire
+    fire.Fire()
