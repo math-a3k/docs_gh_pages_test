@@ -385,12 +385,27 @@ tf_check()
 
 utilmy/deeplearning/util_embedding.py
 -------------------------functions----------------------
+convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
+data_add_onehot(dfref, img_dir, labels_col)
 embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
 embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
+faiss_create_index(df_or_path = None, col = 'emb', dir_out = "", db_type  =  "IVF4096,Flat", nfile = 1000, emb_dim = 200)
+faiss_topk(df = None, root = None, colid = 'id', colemb = 'emb', faiss_index = None, topk = 200, npool = 1, nrows = 10**7, nfile = 1000)
+np_matrix_to_str(m, map_dict)
+np_matrix_to_str2(m, map_dict)
+np_matrix_to_str_sim(m)
+np_str_to_array(vv, l2_norm = True, mdim  =  200)
 np_str_to_array(vv, l2_norm = True, mdim  =  200)
 sim_score2(path = "")
+simscore_cosinus_calc(embs, words)
+test()
 topk(topk = 100, dname = None, pattern = "df_*1000*.parquet", filter1 = None)
+topk(topk = 100, dname = None, pattern = "df_*1000*.parquet", filter1 = None)
+topk_export()
 topk_nearest_vector(x0, vector_list, topk = 3)
+topk_nearest_vector(x0, vector_list, topk = 3)
+topk_predict()
+unzip(in_dir, out_dir)
 viz_run(dirin = "in/model.vec", dirout = "ztmp/", nmax = 100)
 
 -------------------------methods----------------------
