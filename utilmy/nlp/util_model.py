@@ -92,7 +92,13 @@ def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', di
       batch_words=10000, callbacks=(), max_final_vocab=None, shrink_windows=True)
 
     https://radimrehurek.com/gensim/models/fasttext.html
-    
+
+
+    train(corpus_iterable=None, corpus_file=None, total_examples=None, total_words=None, epochs=None, start_alpha=None, 
+          end_alpha=None, word_count=0, queue_factor=2, 
+          report_delay=1.0, compute_loss=False, callbacks=(), **kwargs
+
+
     :param model: The model to train
     :param corpus_filepath: the filepath of the data
     :param dirout: filepath to save the model
@@ -122,9 +128,34 @@ def gensim_model_train_save(model=None, corpus_filepath='lee_background.cor', di
     model.save(dirout)
 
       
-      
+def gensim_model_check(model_path): 
+   '''
+   score(sentences, total_sentences=1000000, chunksize=100, queue_factor=2, report_delay=1)
+Score the log probability for a sequence of sentences. This does not change the fitted model in any way (see train() for that).
 
-def test():
+Gensim has currently only implemented score for the hierarchical softmax scheme, so you need to have run word2vec with hs=1 and negative=0 for this to work.
+
+Note that you should specify total_sentences; you’ll run into problems if you ask to score more than this number of sentences but it is inefficient to set the value too high.
+
+See the article by Matt Taddy: “Document Classification by Inversion of Distributed Language Representations” and the gensim demo for examples of how to use such scores in document classification.
+
+Parameters
+sentences (iterable of list of str) – The sentences iterable can be simply a list of lists of tokens, but for larger corpora, consider an iterable that streams the sentences directly from disk/network. See BrownCorpus, Text8Corpus or LineSentence in word2vec module for such examples.
+
+total_sentences (int, optional) – Count of sentences.
+
+chunksize (int, optional) – Chunksize of jobs
+
+queue_factor (int, optional) – Multiplier for size of queue (number of workers * queue_factor).
+
+report_delay (float, optional) – Seconds to wait before reporting progress.
+   
+   '''
+   pass
+   
+   
+
+def test_gensim1():
     if os.path.exists('fasttext'):
         model = gensim_model_load('fasttext')
         gensim_model_train_save(model, dirout='fasttext', kw=10)
