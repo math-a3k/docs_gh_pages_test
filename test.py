@@ -186,7 +186,7 @@ def test_tabular():
 
 #######################################################################################
 def test_yolov5_transform():
-   from utilmy.deeplearning.util_transform import yolov5_from_xml as m
+   from utilmy.deeplearning import util_transform as m
    m.test_all()
 
 
