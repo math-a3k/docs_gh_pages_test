@@ -4,6 +4,7 @@ HELP = """
 """
 import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
 import cv2
+import tensorflow as tf
 # import tifffile.tifffile
 # from skimage import morphology
 
@@ -13,17 +14,11 @@ from albumentations import (
     ToFloat, ShiftScaleRotate, Resize
 )
 from albumentations.core.transforms_interface import ImageOnlyTransform
-import tensorflow as tf
+
 
 
 ###################################################################################################
-verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
+from utilmy import log, log2
 
 def help():
     from utilmy import help_create
@@ -31,9 +26,54 @@ def help():
     print(ss)
 
 
+###################################################################################################    
+def test():    
+ #image_size = 64
+ train_augments = Compose([
+     #Resize(image_size, image_size, p=1),
+     HorizontalFlip(p=0.5),
+     #RandomContrast(limit=0.2, p=0.5),
+     #RandomGamma(gamma_limit=(80, 120), p=0.5),
+     #RandomBrightness(limit=0.2, p=0.5),
+     #HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
+     #                   val_shift_limit=10, p=.9),
+     ShiftScaleRotate(
+         shift_limit=0.0625, scale_limit=0.1, 
+         rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
+     # ToFloat(max_value=255),
+     SprinklesTransform(p=0.5),
+ ])
 
+ test_augments = Compose([
+     # Resize(image_size, image_size, p=1),
+     # ToFloat(max_value=255)
+ ])
 
+ ###############################################################################
+ image_size =  64
+ train_transforms = Compose([
+     Resize(image_size, image_size, p=1),
+     HorizontalFlip(p=0.5),
+     RandomContrast(limit=0.2, p=0.5),
+     RandomGamma(gamma_limit=(80, 120), p=0.5),
+     RandomBrightness(limit=0.2, p=0.5),
+     HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
+                        val_shift_limit=10, p=.9),
+     ShiftScaleRotate(
+         shift_limit=0.0625, scale_limit=0.1, 
+         rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
+     ToFloat(max_value=255),
+     SprinklesTransform(num_holes=10, side_length=10, p=0.5),
+ ])
 
+ test_transforms = Compose([
+     Resize(image_size, image_size, p=1),
+     ToFloat(max_value=255)
+ ])
+
+ 
+ 
+ 
 
 ##################################################################################################
 def get_data_sample(batch_size, x_train, labels_val):   #name changed
@@ -73,7 +113,6 @@ def to_OneHot(df, dfref, labels_col) :       #name changed
     return labels_val, labels_cnt
     
     
-
 
 def data_add_onehot(dfref, img_dir, labels_col) :   #name changed
     """
@@ -180,7 +219,6 @@ class CustomDataGenerator_img(Sequence):
                             
 ###############################################################################
 from albumentations.core.transforms_interface import ImageOnlyTransform
-import tensorflow as tf
 class SprinklesTransform(ImageOnlyTransform):
     def __init__(self, num_holes=30, side_length=5, always_apply=False, p=1.0):
         from tf_sprinkles import Sprinkles
@@ -193,52 +231,6 @@ class SprinklesTransform(ImageOnlyTransform):
         return self.sprinkles(image).numpy()
 
     
-
-#image_size = 64
-train_augments = Compose([
-    #Resize(image_size, image_size, p=1),
-    HorizontalFlip(p=0.5),
-    #RandomContrast(limit=0.2, p=0.5),
-    #RandomGamma(gamma_limit=(80, 120), p=0.5),
-    #RandomBrightness(limit=0.2, p=0.5),
-    #HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
-    #                   val_shift_limit=10, p=.9),
-    ShiftScaleRotate(
-        shift_limit=0.0625, scale_limit=0.1, 
-        rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
-    # ToFloat(max_value=255),
-    SprinklesTransform(p=0.5),
-])
-
-test_augments = Compose([
-    # Resize(image_size, image_size, p=1),
-    # ToFloat(max_value=255)
-])
-
-
-
-###############################################################################
-image_size =  64
-train_transforms = Compose([
-    Resize(image_size, image_size, p=1),
-    HorizontalFlip(p=0.5),
-    RandomContrast(limit=0.2, p=0.5),
-    RandomGamma(gamma_limit=(80, 120), p=0.5),
-    RandomBrightness(limit=0.2, p=0.5),
-    HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
-                       val_shift_limit=10, p=.9),
-    ShiftScaleRotate(
-        shift_limit=0.0625, scale_limit=0.1, 
-        rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
-    ToFloat(max_value=255),
-    SprinklesTransform(num_holes=10, side_length=10, p=0.5),
-])
-
-test_transforms = Compose([
-    Resize(image_size, image_size, p=1),
-    ToFloat(max_value=255)
-])
-
 
 class RealCustomDataGenerator(tf.keras.utils.Sequence):
     def __init__(self, image_dir, label_path, class_dict,
@@ -377,11 +369,6 @@ class CustomDataGenerator_img(Sequence):
             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
 
         return (batch_x, *batch_y)
-
-######################################################################################
-###############################IMAGE FUNCTIONS########################################
-######################################################################################
-
 
 
 
