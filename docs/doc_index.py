@@ -121,7 +121,7 @@ create_graph_loss(max_neighbors = 2)
 help()
 map_func(x_batch, y_batch, neighbors, neighbor_weights)
 test_adversarial()
-test_graph_loss();max_neighbors  =  2x_train, y_train), (x_test, y_test)  =  tf.keras.datasets.mnist.load_data()x_train, x_test  =  x_train / 255.0, x_test / 255.0x_train, max_neighbors)x_test, max_neighbors)(x_train, y_train, neighbors_train, neighbor_train_weights))buffer_size = x_train.shape[0])32)map_func, num_parallel_calls = 2)1)(x_train, y_train, neighbors_train, neighbor_train_weights))buffer_size = x_train.shape[0])32)map_func, num_parallel_calls = 2)1)[(28, 28), name = 'feature'), ), 128, activation = tf.nn.relu), 10, activation=tf.nn.softmax)]max_neighbors=2))1e-3)1) = tf.nn.softmax)]max_neighbors=2))1e-3)1):)
+test_graph_loss()
 test_step(x, y, model, loss_fn, nbr_features_layer = None, ### Graphregularizer = None, #### Graph)
 train_step(x, y, model, loss_fn, optimizer, nbr_features_layer = None, ### Graphregularizer = None, ## Graph) as tape_w)
 
