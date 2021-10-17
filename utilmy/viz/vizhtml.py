@@ -1388,6 +1388,8 @@ def zz_css_get_template(css_name:str= "A4_size"):
               box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
             }
             page[size="A4"] {width: 21cm; }
+            #mynetwork {float: none !important;}
+            #config{float: none !important;height: auto !important;}
             @media print {body, page {margin: 0;box-shadow: 0;}}
         """
     if css_name == "border":
