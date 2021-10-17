@@ -22,14 +22,14 @@ def test_all():
    
 def test_gensim1():
     log("test_gensim")
-    text_generate_random_sentences(dirout='./testdata/mytext1.txt')
-    gensim_model_train_save(dirout='./modelout1/', dirinput='./testdata/mytext1.txt', epochs=1)
+    text_generate_random_sentences(dirout= os.getcwd() + '/testdata/mytext1.txt')
+    gensim_model_train_save(dirout='./modelout1/', dirinput=  os.getcwd() + '/testdata/mytext1.txt', epochs=1)
     gensim_model_check('./modelout1/fasttext')
    
    
     model = gensim_model_load('./modelout2')
-    text_generate_random_sentences(dirout='./testdata/mytext2.txt')      
-    gensim_model_train_save(model, dirout='./modelout2/', dirinput='testdata/mytext2.txt', epochs=1)
+    text_generate_random_sentences(dirout=  os.getcwd() + '/testdata/mytext2.txt')      
+    gensim_model_train_save(model, dirout='./modelout2/', dirinput= os.getcwd() + '/testdata/mytext2.txt', epochs=1)
     gensim_model_check('./modelout2/fasttext')
 
 
@@ -175,10 +175,13 @@ def text_generate_random_sentences(n_sentences=100, dirout=None):
     stop_words = []  
     # sentences = [text_preprocess(gen.sentence(), lemmatizer, stop_words) for i in range(n_sentences)]
     sentences = [ gen.sentence()  for i in range(n_sentences)]
+ 
+    from utilmy import os_makedirs
    
     if dirout is None:
         return sentences
     else:
+       os_makedirs(dirout)            
         with open(dirout, mode='a') as fp:
             for x in sentences:
                 fp.write(x + "\n")
