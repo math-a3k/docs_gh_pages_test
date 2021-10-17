@@ -24,17 +24,17 @@ def test_gensim1():
     log("test_gensim")
     dir0 = os.getcwd()  
     pars = Box({})
-    pars.min_n=6 ;  pars.max_n=6; pars.window=1
+    pars.min_n=6 ;  pars.max_n=6; pars.window=3
    
     text_generate_random_sentences(dirout=  dir0 + '/testdata/mytext1.txt')
     gensim_model_train_save(dirout= dir0 + '/modelout1/model.bin', dirinput=  dir0 +  '/testdata/mytext1.txt', epochs=1)
-    gensim_model_check(dir0 + '/modelout1/model.bin')
+    #gensim_model_check(dir0 + '/modelout1/model.bin')
    
    
     model = gensim_model_load('./modelout2')
     text_generate_random_sentences(dirout=  dir0 +  '/testdata/mytext2.txt')      
     gensim_model_train_save(model, dirout= dir0 + '/modelout2/model.bin', dirinput= dir0 +  '/testdata/mytext2.txt', epochs=1)
-    gensim_model_check(dir0 +  '/modelout2/model.bin')
+    # gensim_model_check(dir0 +  '/modelout2/model.bin')
 
 
 
@@ -158,7 +158,7 @@ def text_preprocess(sentence, lemmatizer, stop_words):
     return ' '.join(sentence)
 
 
-def text_generate_random_sentences(n_sentences=10, dirout=None):
+def text_generate_random_sentences( dirout=None, n_sentences=10,):
     """
     Generates Random sentences and Preprocesses them
 
