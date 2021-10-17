@@ -74,10 +74,8 @@ def gensim_model_train_save(model_or_path=None, dirinput='lee_background.cor', d
     :param model: The model to train
     :param dirinput: the filepath of the input data
     :param dirout: directory to save the model
-    :param fileout: filename of the saving model
     :epochs: number of epochs to train the model
     :pars: parameters of the creating FastText
-    :param kw:
     :return:
     """
     from gensim.test.utils import datapath      
@@ -181,7 +179,7 @@ def text_generate_random_sentences(n_sentences=100, dirout=None):
     if dirout is None:
         return sentences
     else:
-       os_makedirs(dirout)            
+        os_makedirs(dirout)            
         with open(dirout, mode='a') as fp:
             for x in sentences:
                 fp.write(x + "\n")
