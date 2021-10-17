@@ -34,8 +34,11 @@ psutil
 datasketch  ### lSH
 rapidfuzz
 editdistance
+
 gensim==4.1.2
 nltk==3.6.3
+essential-generators==1.0
+
 
 ########################################################
 #### utilmy.viz.html
@@ -55,7 +58,7 @@ pyvis
 
 
 #########################################################
-#### utilmy.text
+#### utilmy.down
 wget
 
 
@@ -75,18 +78,19 @@ scikit-learn
 pmlb
 pandas_profiling
 
+
+
 ########################################################
 #### utilmy.dates
 holidays
+
+
 
 ###############################
 ## tabular
 statsmodels
 hypothetical
 bootstrapped
-
-
-
 
 
 
