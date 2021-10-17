@@ -173,8 +173,9 @@ def text_generate_random_sentences(n_sentences=100, dirout=None):
     lemmatizer = WordNetLemmatizer()
     # stop_words = set(stopwords.words('english'))
     stop_words = []  
-    sentences = [text_preprocess(gen.sentence(), lemmatizer, stop_words) for i in range(n_sentences)]
-
+    # sentences = [text_preprocess(gen.sentence(), lemmatizer, stop_words) for i in range(n_sentences)]
+    sentences = [ gen.sentence()  for i in range(n_sentences)]
+   
     if dirout is None:
         return sentences
     else:
