@@ -22,7 +22,10 @@ def test_all():
    
 def test_gensim1():
     log("test_gensim")
-    fir0 = os.getcwd()   
+    fir0 = os.getcwd()  
+    pars = Box({})
+    pars.min_n=6 ;  pars.max_n=6; pars.window=1
+   
     text_generate_random_sentences(dirout=  dir0 + '/testdata/mytext1.txt')
     gensim_model_train_save(dirout= dir0 + '/modelout1/model.bin', dirinput=  dir0 +  '/testdata/mytext1.txt', epochs=1)
     gensim_model_check(dir0 + '/modelout1/model.bin')
@@ -112,12 +115,11 @@ def gensim_model_train_save(model_or_path=None, dirinput='lee_background.cor', d
 
 def gensim_model_check(model_path):
     ''' various model check
+          score(sentences, total_sentences=1000000, chunksize=100, queue_factor=2, report_delay=1)
+          Score the log probability for a sequence of sentences. This does not change the fitted model in any way (see train() for that).
 
-       score(sentences, total_sentences=1000000, chunksize=100, queue_factor=2, report_delay=1)
-       Score the log probability for a sequence of sentences. This does not change the fitted model in any way (see train() for that).
-
-       Gensim has currently only implemented score for the hierarchical softmax scheme, so you need to have run word2vec with hs=1 and negative=0 for this to work.
-       Note that you should specify total_sentences; you’ll run into problems if you ask to score more than this number of sentences but it is inefficient to set the value too high.
+          Gensim has currently only implemented score for the hierarchical softmax scheme, so you need to have run word2vec with hs=1 and negative=0 for this to work.
+          Note that you should specify total_sentences; you’ll run into problems if you ask to score more than this number of sentences but it is inefficient to set the value too high.
 
        Parameters
        sentences (iterable of list of str) – The sentences iterable can be simply a list of lists of tokens, but for larger corpora, consider an iterable that streams the sentences directly from disk/network. See BrownCorpus, Text8Corpus or LineSentence in word2vec module for such examples.
@@ -156,7 +158,7 @@ def text_preprocess(sentence, lemmatizer, stop_words):
     return ' '.join(sentence)
 
 
-def text_generate_random_sentences(n_sentences=100, dirout=None):
+def text_generate_random_sentences(n_sentences=10, dirout=None):
     """
     Generates Random sentences and Preprocesses them
 
