@@ -5,7 +5,7 @@ HELP = """
 import os, sys, itertools, time, pandas as pd, numpy as np, pickle, gc, re
 from typing import Callable, Tuple, Union
 from box import Box
-from gensim.test.utils import datapath
+
 
 #################################################################################################
 from utilmy import log, log2
@@ -80,6 +80,7 @@ def gensim_model_train_save(model_or_path=None, dirinput='lee_background.cor', d
     :param kw:
     :return:
     """
+    from gensim.test.utils import datapath      
     from gensim.models import FastText
     if model_or_path is None:
         pars = {} if pars is None else pars
@@ -90,15 +91,14 @@ def gensim_model_train_save(model_or_path=None, dirinput='lee_background.cor', d
          model_path = model_or_path  ### path  is provided !!!
          model = gensim_model_load(model_path)
 
-    # corpus_file = dirinput
+    log("#### Input data building  ")
     corpus_file = datapath(dirinput)
-
     to_update = True if model.wv else False
-
     model.build_vocab(corpus_file=corpus_file, update=to_update)
     nwords = model.corpus_total_words
 
-    log(model.estimate_memory(vocab_size=nwords, report=None))
+    log("#### Model training   ")
+    log('model ram', model.estimate_memory(vocab_size=nwords, report=None))
     log(nwords, model.get_latest_training_loss())
 
     model.train(corpus_file=corpus_file, total_words=nwords, epochs=epochs)
@@ -128,11 +128,13 @@ def gensim_model_check(model_path):
        report_delay (float, optional) – Seconds to wait before reporting progress.
 
     '''
+    from gensim.test.utils import datapath  
     model = gensim_model_load(model_path)
     print('Log Accuracy:    ', model.wv.evaluate_word_analogies(datapath('questions-words.txt'))[0])
+      
     print('distance of the word {w1} and {w2} is {d}'.format(w1=model.wv.index_to_key[0],
-                                                                 w2=model.wv.index_to_key[1],
-                                                                 d=model.wv.distance(model.wv.index_to_key[0],
+                                                             w2=model.wv.index_to_key[1],
+                                                             d=model.wv.distance(model.wv.index_to_key[0],
                                                                                      model.wv.index_to_key[1])))
 
     print('Most similar words to    ', model.wv.index_to_key[0])
@@ -142,12 +144,6 @@ def gensim_model_check(model_path):
 
 def text_preprocess(sentence, lemmatizer, stop_words):
     """ Preprocessing Function
-    Lowers the characters of a sentence
-    Removes all symbols and numbers in a sentence
-    Removes all multiple whitespaces with a whitespace in a sentence
-    Lemmatizes the words and removes all the stop words
-    Returns the word tokenized sentence as a list
-
     :param sentence: sentence to preprocess
     :param lemmatizer: the class which lemmatizes the words
     :param stop_words: stop_words in english http://xpo6.com/list-of-english-stop-words/
@@ -155,8 +151,8 @@ def text_preprocess(sentence, lemmatizer, stop_words):
     """
     import nltk
     sentence = sentence.lower()
-    sentence = re.sub(r'[^a-z]', ' ', sentence)
-    sentence = re.sub(r'\s+', ' ', sentence)
+    sentence = re.sub(r'[^a-z]', ' ', sentence)   ### ascii only
+    sentence = re.sub(r'\s+', ' ', sentence)  ### Removes all multiple whitespaces with a whitespace in a sentence
     sentence = [lemmatizer.lemmatize(word) for word in nltk.word_tokenize(sentence) if word not in stop_words]
     return ' '.join(sentence)
 
