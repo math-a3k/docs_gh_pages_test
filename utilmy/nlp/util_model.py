@@ -37,7 +37,7 @@ def text_preprocess(sentence, lemmatizer, stop_words):
     sentence = re.sub(r'[^a-z]', ' ', sentence)
     sentence = re.sub(r'\s+', ' ', sentence)
     sentence = [lemmatizer.lemmatize(word) for word in nltk.word_tokenize(sentence) if word not in stop_words]
-    return sentence
+    return ' '.join(sentence)
 
 
 def text_generate_random_sentences(n_sentences=100, dirout=None):
@@ -78,7 +78,6 @@ def gensim_model_load(dirin, filein='fasttext', modeltype='fastext', **kw):
         from gensim.models import FastText
         loaded_model = FastText.load(f'{dirin}/{filein}')
 
-    print(loaded_model)
     return loaded_model
 
 
@@ -158,7 +157,7 @@ def gensim_model_check(model_path):
        report_delay (float, optional) – Seconds to wait before reporting progress.
 
     '''
-    model = gensim_model_load('./modelout2')
+    model = gensim_model_load(model_path)
     print('Log Accuracy:    ', model.wv.evaluate_word_analogies(datapath('questions-words.txt'))[0])
     print('The distance of the word {w1} and {w2} is {d}'.format(w1=model.wv.index_to_key[0],
                                                                  w2=model.wv.index_to_key[1],
@@ -170,11 +169,14 @@ def gensim_model_check(model_path):
 
 
 def test_gensim1():
+    text_generate_random_sentences(dirout='./testdata/mytext1.txt')
+    text_generate_random_sentences(dirout='./testdata/mytext2.txt')
     gensim_model_train_save(dirout='./modelout2/', dirinput='./testdata/mytext1.txt', epochs=10)
     gensim_model_check('./modelout2/fasttext')
     model = gensim_model_load('./modelout2')
     gensim_model_train_save(model, dirout='./modelout2/', dirinput='testdata/mytext2.txt', epochs=10)
     gensim_model_check('./modelout2/fasttext')
+
 
 
 ####################################################################################################
