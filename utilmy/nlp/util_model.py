@@ -31,7 +31,7 @@ def test_gensim1():
     #gensim_model_check(dir0 + '/modelout1/model.bin')
    
    
-    model = gensim_model_load('./modelout2')
+    model = gensim_model_load( dir0 + '/modelout1/model.bin')
     text_generate_random_sentences(dirout=  dir0 +  '/testdata/mytext2.txt')      
     gensim_model_train_save(model, dirout= dir0 + '/modelout2/model.bin', dirinput= dir0 +  '/testdata/mytext2.txt', epochs=1)
     # gensim_model_check(dir0 +  '/modelout2/model.bin')
