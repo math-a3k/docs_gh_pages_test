@@ -125,18 +125,16 @@ def test_decorators():
     m.test_all()
 
 
-#########################################################################################
-def test_deeplearning_keras():
-    from utilmy.deeplearning.keras import  util_similarity as m
-    m.test_tf_cdist()
-
    
 #########################################################################################
 def test_text():
     from utilmy.nlp import text as m
     m.test_all()  
 
+    from utilmy.nlp import util_model as m
+    m.test_all()  
 
+   
 #########################################################################################
 def test_viz_vizhtml():
    from utilmy.viz import vizhtml as m
@@ -184,8 +182,15 @@ def test_tabular():
    from utilmy import tabular as m
    m.test_all()
 
+   
+#########################################################################################
+def test_deeplearning_keras():
+    from utilmy.deeplearning.keras import  util_similarity as m
+    m.test_tf_cdist()
+
+   
 #######################################################################################
-def test_yolov5_transform():
+def test_deepelearning_yolov5():
    from utilmy.deeplearning import util_transform as m
    m.test_all()
 
@@ -212,7 +217,7 @@ def test_all():
 
     ################
     test_deeplearning_keras()
-    test_yolov5_transform()
+    test_deeplearning_yolov5()
 
 
 
@@ -221,3 +226,6 @@ def test_all():
 if __name__ == "__main__":
     import fire
     fire.Fire() 
+
+   
+   
