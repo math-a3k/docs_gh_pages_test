@@ -95,7 +95,7 @@ def gensim_model_train_save(model_or_path=None, dirinput='lee_background.cor', d
 
     log("#### Input data building  ")
     corpus_file = datapath(dirinput)
-    to_update = True if model.wv else False
+    to_update = True # if model.wv else False
     model.build_vocab(corpus_file=corpus_file, update=to_update)
     nwords = model.corpus_total_words
 
