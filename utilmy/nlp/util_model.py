@@ -45,6 +45,7 @@ def text_generate_random_sentences(n_sentences=100, dirout=None):
     Generates Random sentences and Preprocesses them
 
     :param n_sentences: number of sentences to generate
+    :param dirout: filepath do write the generated sentences
     :return: generated sentences
     """
     from essential_generators import DocumentGenerator
@@ -101,8 +102,11 @@ def gensim_model_train_save(model=None, dirinput='lee_background.cor', dirout=".
 
 
     :param model: The model to train
-    :param corpus_filepath: the filepath of the data
-    :param dirout: filepath to save the model
+    :param dirinput: the filepath of the input data
+    :param dirout: directory to save the model
+    :param fileout: filename of the saving model
+    :epochs: number of epochs to train the model
+    :pars: parameters of the creating FastText
     :param kw:
     :return:
     """
