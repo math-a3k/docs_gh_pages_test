@@ -22,15 +22,16 @@ def test_all():
    
 def test_gensim1():
     log("test_gensim")
-    text_generate_random_sentences(dirout= os.getcwd() + '/testdata/mytext1.txt')
-    gensim_model_train_save(dirout='./modelout1/model.bin', dirinput=  os.getcwd() + '/testdata/mytext1.txt', epochs=1)
-    gensim_model_check('./modelout1/fasttext')
+    fir0 = os.getcwd()   
+    text_generate_random_sentences(dirout=  dir0 + '/testdata/mytext1.txt')
+    gensim_model_train_save(dirout= dir0 + '/modelout1/model.bin', dirinput=  dir0 +  '/testdata/mytext1.txt', epochs=1)
+    gensim_model_check(dir0 + '/modelout1/model.bin')
    
    
     model = gensim_model_load('./modelout2')
-    text_generate_random_sentences(dirout=  os.getcwd() + '/testdata/mytext2.txt')      
-    gensim_model_train_save(model, dirout='./modelout2/model.bin', dirinput= os.getcwd() + '/testdata/mytext2.txt', epochs=1)
-    gensim_model_check('./modelout2/fasttext')
+    text_generate_random_sentences(dirout=  dir0 +  '/testdata/mytext2.txt')      
+    gensim_model_train_save(model, dirout= dir0 + '/modelout2/model.bin', dirinput= dir0 +  '/testdata/mytext2.txt', epochs=1)
+    gensim_model_check(dir0 +  '/modelout2/model.bin')
 
 
 
