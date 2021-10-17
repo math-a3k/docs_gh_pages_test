@@ -23,6 +23,7 @@ datasketch==1.5.3
 decorator==4.4.2
 diskcache==5.2.1
 editdistance==0.6.0
+essential-generators==1.0
 executing==0.8.2
 faiss-cpu==1.7.1.post2
 Fiona==1.8.20
@@ -132,7 +133,7 @@ traitlets==4.3.3
 typing-extensions==3.10.0.2
 urllib3==1.26.7
 urwid==2.1.2
--e git+https://github.com/arita37/myutil@808ec17da3d794825ff18f65412ffe88b406b442#egg=utilmy
+-e git+https://github.com/arita37/myutil@7608267c1518b824878bd69be47b5d694d70f8fb#egg=utilmy
 visions==0.7.4
 wcwidth==0.2.5
 Werkzeug==2.0.2
