@@ -110,7 +110,7 @@ def gensim_model_train_save(model=None, dirinput='lee_background.cor', dirout=".
     if model is None:
         pars = {} if pars is None else pars
         # model = FastText(vector_size=vector_size, window=window, min_count=min_count)
-        model = FastText(**pars, min_count=1)
+        model = FastText(**pars)
 
 
     # elif isinstance(model, str):
