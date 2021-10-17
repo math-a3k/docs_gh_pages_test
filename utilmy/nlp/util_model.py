@@ -22,7 +22,7 @@ def test_all():
    
 def test_gensim1():
     log("test_gensim")
-    fir0 = os.getcwd()  
+    dir0 = os.getcwd()  
     pars = Box({})
     pars.min_n=6 ;  pars.max_n=6; pars.window=1
    
