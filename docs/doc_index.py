@@ -700,6 +700,7 @@ utilmy/nlp/util_model.py
 embedding_load_parquet(dirin = "df.parquet", nmax = 500)
 embedding_model_to_parquet(model_vector_path = "model.vec", nmax = 500)
 embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10 ** 8, is_linevalid_fun=Nonedirout);dirout);4)if is_linevalid_fun is None = Nonedirout);dirout);4)if is_linevalid_fun is None:  #### Validate linew):)
+generate_random_bigrams(n_words = 100, word_length = 4, bigrams_length = 5000)
 gensim_model_check(model_path)
 gensim_model_load(dirin, modeltype = 'fastext', **kw)
 gensim_model_train_save(model_or_path = None, dirinput = 'lee_background.cor', dirout = "./modelout/model", epochs = 1, pars: dict  =  None, **kw)
@@ -709,6 +710,7 @@ test_all()
 test_gensim1()
 text_generate_random_sentences(dirout = None, n_sentences = 5, )
 text_preprocess(sentence, lemmatizer, stop_words)
+write_random_sentences_from_bigrams_to_file(dirout, n_sentences = 14000)
 
 
 
@@ -1388,21 +1390,6 @@ test()
 test()
 test_all()
 test_lsh()
-
-
-
-utilmy/text/util_text2.py
--------------------------functions----------------------
-generate_random_bigrams(n_words = 100, word_length = 4, bigrams_length = 5000)
-gensim_model_check(model_or_path)
-gensim_model_load(dirin, modeltype = 'fastext', **kw)
-gensim_model_train_save(model_or_path = None, dirinput = 'lee_background.cor', dirout = "./modelout/model", epochs = 1, pars: dict  =  None, **kw)
-help()
-test_all()
-test_gensim1()
-text_generate_random_sentences(dirout = None, n_sentences = 5, )
-text_preprocess(sentence, lemmatizer, stop_words)
-write_random_sentences_from_bigrams_to_file(dirout, n_sentences = 14000)
 
 
 
