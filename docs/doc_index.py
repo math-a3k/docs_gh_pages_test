@@ -1470,6 +1470,9 @@ vizEmbedding.draw_hiearchy(self)
 vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/")
 
 
+utilmy/viz/template1.py
+
+
 utilmy/viz/util_map.py
 
 
