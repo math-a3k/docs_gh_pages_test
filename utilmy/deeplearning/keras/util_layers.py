@@ -416,8 +416,23 @@ def make_classifier_2(latent_dim, class_dict):
 
 """ 1-4) Build loss function"""
 
+def vae_loss(x, output):
+    '''
+        Here we need 2 types of losses:
+        * Reconstruction Loss -> Binary crossentropy between each input pixel in input image and corrosponding output pixel
+        * KL-divergence 
+    '''
+    x = tf.keras.backend.flatten(x)
+    output = K.flatten(output)
 
+    # Reconstruction loss (as we used sigmoid activation we can use binarycrossentropy)
+    recon_loss = tf.keras.metrics.binary_crossentropy(x, output)
 
+    # KL divergence
+    kl_loss = -5e-4 * tf.keras.backend.mean(1 + z_logsigma - tf.keras.backend.mean.square(z_mean) - tf.keras.backend.mean.exp(z_logsigma), axis=-1)
+    return K.mean(recon_loss + kl_loss)
+
+   
 def test_cdfvae():
     pass
     # Input is 0-255, do not normalize input
