@@ -114,17 +114,6 @@ timer_decorator(func)
 utilmy/deeplearning/__init__.py
 
 
-utilmy/deeplearning/keras/class_activation_map.py
--------------------------functions----------------------
-get_final_image(file_path, model_path, target_size)
-
--------------------------methods----------------------
-GradCAM.__init__(self, model, classIdx, layerName = None)
-GradCAM.compute_heatmap(self, image, eps = 1e-8)
-GradCAM.find_target_layer(self)
-GradCAM.overlay_heatmap(self, heatmap, image, alpha = 0.5, colormap = cv2.COLORMAP_JET)
-
-
 utilmy/deeplearning/keras/loss_graph.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
@@ -337,6 +326,19 @@ StepDecay.__call__(self, epoch)
 StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 
 
+utilmy/deeplearning/keras/util_models.py
+-------------------------functions----------------------
+get_final_image(file_path, model_path, target_size)
+test_all()
+test_classactivation()
+
+-------------------------methods----------------------
+GradCAM.__init__(self, model, classIdx, layerName = None)
+GradCAM.compute_heatmap(self, image, eps = 1e-8)
+GradCAM.find_target_layer(self)
+GradCAM.overlay_heatmap(self, heatmap, image, alpha = 0.5, colormap = cv2.COLORMAP_JET)
+
+
 utilmy/deeplearning/keras/util_similarity.py
 -------------------------functions----------------------
 __cast_left_and_right_to_tensors(left, right)
@@ -428,14 +430,13 @@ vizEmbedding.draw_hiearchy(self)
 vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  5000, dir_out = "ztmp/", ntest = 10000)
 
 
-utilmy/deeplearning/util_transform.py
+utilmy/deeplearning/util_yolo.py
 -------------------------functions----------------------
 convert_to_yolov5(info_dict:Dict, names:Dict, output:str)
-extract_info_from_xml(xml_file:str)
 test_all()
 test_convert_to_yolov5()
-test_extract_info_from_xml()
 test_yolov5_from_xml()
+yolo_extract_info_from_xml(xml_file:str)
 yolov5_from_xml(xml_file_path:str  =  "None", xml_folder:str =  "None", output:str = "None")
 
 
