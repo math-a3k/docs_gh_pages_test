@@ -1,12 +1,21 @@
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.models import Model
-import tensorflow as tf
-import numpy as np
-import imutils
-import cv2
+import tensorflow as tf, numpy as np, imutils, cv2
 
 
+
+
+def test_all():
+    pass
+
+
+def test_classactivation():
+    pass
+
+
+
+######################################################################################
 class GradCAM:
     def __init__(self, model, classIdx, layerName=None):
         # store the model, the class index used to measure the class
