@@ -46,6 +46,35 @@ def test_gensim1():
       
       
 #################################################################################################
+def generate_random_bigrams(n_words=100, word_length=4, bigrams_length=5000):
+    import string
+    words = []
+    while len(words) != n_words:
+        word = ''.join(random.SystemRandom().choice(string.ascii_lowercase) for _ in range(word_length))
+        if word not in words:
+            words.append(word)
+
+    paragraph = [random.choice(words) for i in range(bigrams_length + 1)]
+    bigrams = list(nltk.bigrams(paragraph))
+    return bigrams
+
+
+def write_random_sentences_from_bigrams_to_file(dirout, n_sentences=14000):
+    if not os.path.exists(dirout):
+        from utilmy import os_makedirs
+        os_makedirs(dirout)
+    bigrams = generate_random_bigrams()
+    with open(dirout, mode='w+') as fp:
+        for i in range(n_sentences):
+            rand_item = random.choice(bigrams)
+            third_word = random.choice([i[1] for i in bigrams if i[0] == rand_item[1]])
+            sent = ' '.join(rand_item)
+            sent += ' ' + third_word
+            fp.write(sent + "\n")
+
+            
+            
+#################################################################################################
 def gensim_model_load(dirin,  modeltype='fastext', **kw):
     """
     Loads the FastText model from the given path
