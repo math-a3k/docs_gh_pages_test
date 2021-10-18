@@ -114,6 +114,17 @@ timer_decorator(func)
 utilmy/deeplearning/__init__.py
 
 
+utilmy/deeplearning/keras/class_activation_map.py
+-------------------------functions----------------------
+get_final_image(file_path, model_path, target_size)
+
+-------------------------methods----------------------
+GradCAM.__init__(self, model, classIdx, layerName = None)
+GradCAM.compute_heatmap(self, image, eps = 1e-8)
+GradCAM.find_target_layer(self)
+GradCAM.overlay_heatmap(self, heatmap, image, alpha = 0.5, colormap = cv2.COLORMAP_JET)
+
+
 utilmy/deeplearning/keras/loss_graph.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
@@ -294,6 +305,7 @@ make_encoder(xdim = 256, ydim = 256, latent_dim = 10)
 test_all()
 test_cdfvae()
 test_resnetlayer()
+vae_loss(x, output)
 
 -------------------------methods----------------------
 CNNBlock.__init__(self, filters, kernels, strides = 1, padding = 'valid', activation = None)
