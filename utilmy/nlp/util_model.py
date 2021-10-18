@@ -46,6 +46,133 @@ def test_gensim1():
       
       
 #################################################################################################
+  ####  Need
+
+  db_cocount_name  = {}  ######   worda  ---> List of cocount wordb
+  db_cocount_proba = {}  #######  wordb  --> Freuqnecy of cocoun wordb
+
+  
+  def bigram_load_convert(path):
+     pass
+     """"
+      
+      
+     """"
+     db_cocount_name  = {}  ######   worda  ---> List of cocount wordb
+     db_cocount_proba = {}  #######  wordb  --> Freuqnecy of cocoun wordb
+
+   
+   
+  def bigram_write_seq(rr=0, dirin=None, dirout=None, tag="") :
+      ####  python prepro.py  ccnt_write_seq --rr 0  
+
+      istart = int(0      + rr     * 1.4 * 10**6)
+      iend   = int(istart + (rr+1) * 1.4 * 10**6)
+      # iend   = 3  #  istart + (rr+1) * 2*10**6
+
+      qq=2
+
+      ### load Bi-gram tables from disk file
+      flist = sorted( glob.glob( dirin ) )
+      os_makedirs(dirout)
+
+      df         = pd_read_file( flist ,  npool=5)  ### cols= ['a', 'cnt'],
+      df.columns = [ 'a', 'b' , 'count' ]   ###Bi-grams tables
+      df         = df[ (df.cnt < 10**7 ) & ( df.cnt >= 3 ) ]
+
+      log(dirin, df, df.columns)
+      if df is None or len(df) < 1 :
+          return 1
+
+      log('Start writing')
+      v_ranid = df['ranid'].values
+      v_cnt   = df['cnt'].values
+      del df ; gc.collect()
+      jj      = 0
+      out     = ""
+
+      with open(dirout, mode='a') as fp :
+          for ii in range(len(v_ranid)) :
+             if ii <  istart   : continue
+             if ii >= iend     : break
+             # ranid =  297840888214120000
+             ranid   = int(  v_ranid[ii] )
+             siid0   = ""  # map_ranid_to_siid(ranid, -1)
+             itemtag = ""  # str(db_itemid_itemtag.get( siid0, ""))
+             # if len(itemtag) < 5 : continue
+             if ii % 5000 == 0   : log(ii, jj, ranid, siid0,  itemtag  )
+
+             lname, lproba = bigram_get_list(ranid, mode='name,proba')
+             if len(lname) < 1 : return ""
+             lproba = np.log( lproba )   #### Log proba to reduce the gap
+             pnorm  = lproba / np.sum(lproba)
+
+             kmax = 15 * int( max(1, np.log( v_cnt[ii]  ))  )
+             jj   = jj + kmax
+             for kk in range(0, kmax):
+                 ss = bigram_get_seq3( ranid, itemtag,  lname,  pnorm= pnorm )
+                 if len(ss) > 5 :
+                      out= out + ss + "\n"
+
+             if len(out)  > 5000 :
+                 fp.write(out)
+                 out = ""
+
+          if len(out)> 0 :  fp.write(out)
+          log( 'all finished', jj )
+
+
+  def bigram_get_seq3(ranid, itemtag, lname, pnorm):
+    ## Generate sequence of ssid, based on co-count proba.
+
+    list_a1 = ccount_get_sample(lname, pnorm=pnorm, k=2 )
+
+    try :
+       ss = str(list_a1[0]) + " "  + str(ranid)  + " " +  str( list_a1[1])
+       return ss
+    except :
+       return ""
+
+
+
+  def bigram_get_list(ranid, mode='name, proba'):
+      lname =  db_cocount_name.get(ranid, "")
+      if len(lname) < 1 :
+          if 'proba' in mode : return [],[]
+          else  : return []
+
+      # if verbose : log(ranid, 'list',  str(lname)[:100] )
+      lname =  [int(t) for t in  lname.split(",") ]
+
+
+      if 'proba' in mode :
+         lproba = db_cocount_proba.get(ranid,"").split(",")
+         lproba = [ float(t) for t in lproba  ]
+         # if verbose : log( 'name', str(lname)[:60],  str(lproba)[:60] )
+         return lname, lproba
+
+      return lname
+
+
+  def ccount_get_sample(lname, lproba=None, pnorm=None, k=5):
+    if pnorm is None :
+       pnorm = lproba / np.sum(lproba)
+
+    ll = np.random.choice(lname, size=k,  p= pnorm )
+    # ll = [ lname[0] for i in range(k) ]
+    # log(ll)
+    return ll
+
+
+  def np_intersec(va, vb):
+     return [  x  for x in va if x in set(vb) ]
+
+
+
+
+            
+            
+
 def generate_random_bigrams(n_words=100, word_length=4, bigrams_length=5000):
     import string
     words = []
