@@ -23,15 +23,16 @@ import os, sys, random, numpy as np, pandas as pd, fire
 from datetime import datetime
 from typing import List
 from tqdm import tqdm
-from box import Box
-
 
 try :
    # Converting python --> HTML
+   from box import Box
    import matplotlib.pyplot as plt
    import mpld3
+   from highcharts import Highchart
+   from pyvis import network as net
 except :
-   print(" pip install python-box python-highcharts  mpld3 pandas-highcharts  pretty-html-table matplotlib ipython")
+   print(" pip install python-box python-highcharts  mpld3 pandas-highcharts  pretty-html-table matplotlib ipython  pyvis ")
 
 
 ############################################################################################
