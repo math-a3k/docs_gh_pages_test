@@ -174,7 +174,7 @@ def os_lock_releaseLock(locked_file_descriptor):
     # locked_file_descriptor.close()
 
     
-def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock"):
+def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock", sleep=5):
     """ Run a function in an atomic way :
          Write on disk  exclusively on COMMON File.
 
@@ -189,8 +189,8 @@ def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock"):
         except Exception as e:
             # log2(e)
             # reduce sleep time
-            log2("file lock waiting", 20, 'sec')
-            time.sleep(20)
+            log2("file lock waiting", sleep, 'sec')
+            time.sleep(sleep)
             i += 1
 
 
