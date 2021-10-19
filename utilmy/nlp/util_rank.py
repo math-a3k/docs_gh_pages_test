@@ -1,7 +1,6 @@
 # pylint: disable=C0103, R0914, R0201
 HELP= """
-
-Main module for rbo.
+Main module for ranking comparison , including rbo
 
 https://github.com/changyaochen/rbo/blob/master/rbo/rbo.py
 https://towardsdatascience.com/rbo-v-s-kendall-tau-to-compare-ranked-lists-of-items-8776c5182899
@@ -11,6 +10,7 @@ https://changyaochen.github.io/Comparing-two-ranked-lists/
 from typing import List, Optional, Union
 import numpy as np
 from tqdm import tqdm
+import math
 
 from utilmy.utilmy import log, log2
 
@@ -20,12 +20,58 @@ def test_all():
 
 
 def test():
- S = [1, 2, 3]; T = [1, 3, 2]
- log( rbo.RankingSimilarity(S, T).rbo() )
+  S = [1, 2, 3]; T = [1, 3, 2]
+  log( rbo.RankingSimilarity(S, T).rbo() )
+
+  # Example usage
+  rbo([1,2,3], [3,2,1]) # Output: 0.8550000000000001 
   
   
 
+  
 
+def rank_biased_overlap(list1, list2, p=0.9):
+   """ rank based comparison between 2 lists.
+   The parameter p is a tunable parameter in the range (0, 1) that can be used to determine
+   the contribution of the top d ranks to the final value of the RBO similarity measure. 
+   
+   """
+   # tail recursive helper function
+   def helper(ret, i, d):
+       l1 = set(list1[:i]) if i < len(list1) else set(list1)
+       l2 = set(list2[:i]) if i < len(list2) else set(list2)
+       a_d = len(l1.intersection(l2))/i
+       term = math.pow(p, i) * a_d
+       if d == i:
+           return ret + term
+       return helper(ret + term, i + 1, d)
+   k = max(len(list1), len(list2))
+   x_k = len(set(list1).intersection(set(list2)))
+   summation = helper(0, 1, k)
+   return ((float(x_k)/k) * math.pow(p, k)) + ((1-p)/p * summation)
+
+
+def rbo_find_p():
+  p = 0.9
+  d = 10
+
+  def sum_series(p, d):
+     # tail recursive helper function
+     def helper(ret, p, d, i):
+         term = math.pow(p, i)/i
+         if d == i:
+             return ret + term
+         return helper(ret + term, p, d, i+1)
+     return helper(0, p, d, 1)
+
+  wrbo1_d = 1 - math.pow(p, d-1) + (((1-p)/p) * d *(np.log(1/(1-p)) - sum_series(p, d-1)))
+  print(wrbo1_d) # Output: 0.855585446747351
+
+  
+  
+
+  
+#############################################################################
 class RankingSimilarity:
     """
     This class will include some similarity measures between two different
