@@ -10,7 +10,7 @@ https://changyaochen.github.io/Comparing-two-ranked-lists/
 from typing import List, Optional, Union
 import numpy as np
 from tqdm import tqdm
-import math
+import math, glob, os, sys, time
 
 from utilmy.utilmy import log, log2
 
@@ -27,6 +27,60 @@ def test():
   rbo([1,2,3], [3,2,1]) # Output: 0.8550000000000001 
   
   
+
+#################################################################################################
+#################################################################################################
+def rank_topk_check(dirin=None, dirout=None, nmax=3000, tag='fasttext'):      
+    """ Compare ranking in "," format
+        Compare id_list with ref_list  ranking and show some correlation numbers.
+        id_list  : Vector based ranking  "," separated
+        ref_list : reference ranking (ie co-count).
+
+        id, id_list,  ref_list
+
+    """
+    from scipy.stats import kendalltau
+    from utilmy.nlp import util_rank as rank1
+    from utilmy import pd_read_file, pd_to_file
+
+    flist = sorted(glob.glob( dirin  ))
+    log(len(flist), str(flist)[:100])
+    kk = 0
+    for fi in flist :  
+        df             = pd_read_file(fi)  
+        df = df.iloc[:nmax,:]
+        if 'ref_list' not in df.columns :
+            df['ref_list'] = df['id'].apply( lambda x : db_cocount_name.get( int(x),"")  )                
+
+        log(df)        
+        df0   = [] 
+        for i,x in df.iterrows():
+            # if i > 10 : break
+            xid  = x['id']                
+            real = x['ref_list']
+
+            if real != "" : 
+               # log(i, xid ) 
+               x2 = real.split(",")
+               x1 = x['id_list'].split(",")
+               ni = min( len(x1), len(x2) )
+               x2 = x2[:ni]
+               x1 = x1[:ni]
+
+               ninter   = len( set(x1) & set(x2) )   ### Intersection elements
+               corr     = kendalltau( x1, x2   )                    
+               rbo      = rank1.rank_biased_overlap(x1, x2, p=0.8) 
+               corrken2 = rank1.rank_topk_kendall( np.array(x1), np.array(x2), topk=50, p=0.8)
+
+               df0.append([ i,tag,  xid, ninter,  corr.correlation, rbo, corrken2  ])
+            if i % 10000 == 0 : log( df0[-1] if len(df0) >0 else '' )
+
+
+        kk  = kk + 1
+        df0 = pd.DataFrame(df0, columns = [ 'i', 'tag', 'id', 'n_intersection', 'corr_kendall', 'rank_rbo', 'corr_kendall_topk' ])
+        pd_to_file( df0, dirout + f"/rank_check_{kk}.csv" )
+        df0 = []
+
 
   
 
