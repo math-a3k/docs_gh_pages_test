@@ -54,10 +54,6 @@ db_cocount_proba = {}  #######  wordb  --> Freuqnecy of cocoun wordb
 
 def bigram_load_convert(path):
   pass
-  """"
-
-
-  """"
   db_cocount_name  = {}  ######   worda  ---> List of cocount wordb
   db_cocount_proba = {}  #######  wordb  --> Freuqnecy of cocoun wordb
 
