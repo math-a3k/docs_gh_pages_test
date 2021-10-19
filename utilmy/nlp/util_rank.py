@@ -70,7 +70,7 @@ def rbo_find_p():
   
   
 #################################################################################################################   
-def rank_topk_kendall(a:list, b:list, k=5,p=0): #zero is equal 1 is max distance, compare with 1-scipy.stats.kendalltau(a,b)/2+1/2
+def rank_topk_kendall(a:list, b:list, topk=5,p=0): #zero is equal 1 is max distance, compare with 1-scipy.stats.kendalltau(a,b)/2+1/2
     """
     kendall_top_k(np.array,np.array,k,p)
     #zero is equal 1 is max distance, compare with 1-scipy.stats.kendalltau(a,b)/2+1/2
@@ -84,6 +84,7 @@ def rank_topk_kendall(a:list, b:list, k=5,p=0): #zero is equal 1 is max distance
      Author: Alessandro Checco  https://github.com/AlessandroChecco       
             
     """
+    k = topk
     import numpy as np
     import scipy.stats as stats
     import scipy.special as special
