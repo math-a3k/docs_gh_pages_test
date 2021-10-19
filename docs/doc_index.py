@@ -720,6 +720,19 @@ write_random_sentences_from_bigrams_to_file(dirout, n_sentences = 14000)
 
 
 
+utilmy/nlp/util_rank.py
+-------------------------functions----------------------
+rbo_find_p()
+
+-------------------------methods----------------------
+RankingSimilarity.__init__(self, S: Union[List, np.ndarray], T: Union[List, np.ndarray], verbose = False)
+RankingSimilarity._bound_range(self, value: float)
+RankingSimilarity.assert_p(self, p: float)
+RankingSimilarity.rbo(self, k: Optional[float]  =  None, p: float  =  1.0, ext: bool  =  False)
+RankingSimilarity.rbo_ext(self, p = 0.98)
+RankingSimilarity.top_weightness(self, p: Optional[float]  =  None, d: Optional[int]  =  None)
+
+
 utilmy/nnumpy.py
 -------------------------functions----------------------
 is_float(x)
