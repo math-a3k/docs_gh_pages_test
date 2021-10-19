@@ -267,7 +267,56 @@ def y_adjuster_log(y_true, y_pred_log, error_func, **kwargs):
         raise RuntimeError(f"Finding correction term failed!\n{res}")
 
 
-            
+# conduct multiple comparisons
+from tqdm import tqdm
+from typing import List
+from scipy import stats
+
+def test_multiple_comparisons(data: pd.DataFrame, label='y', adjuster=True) -> List[float]:
+    """Run multiple t tests.
+       p_values = multiple_comparisons(data)
+       
+       # bonferroni correction
+        print('Total number of discoveries is: {:,}'
+              .format(sum([x[1] < threshold / n_trials for x in p_values])))
+        print('Percentage of significant results: {:5.2%}'
+              .format(sum([x[1] < threshold / n_trials for x in p_values]) / n_trials))
+
+        # Benjamini–Hochberg procedure
+        p_values.sort(key=lambda x: x[1])
+
+        for i, x in enumerate(p_values):
+            if x[1] >= (i + 1) / len(p_values) * threshold:
+                break
+        significant = p_values[:i]
+
+        print('Total number of discoveries is: {:,}'
+              .format(len(significant)))
+        print('Percentage of significant results: {:5.2%}'
+              .format(len(significant) / n_trials))
+
+    """
+    p_values = []
+    for c in tqdm(data.columns):
+        if c.startswith(label): 
+            continue
+        group_a = data[data[c] == 0][label]
+        group_b = data[data[c] == 1][label]
+
+        _, p = stats.ttest_ind(group_a, group_b, equal_var=True)
+        p_values.append((c, p))
+    
+    if adjuster:
+        p_values.sort(key=lambda x: x[1])
+        for i, x in enumerate(p_values):
+            if x[1] >= (i + 1) / len(p_values) * threshold:
+                break
+        significant = p_values[:i]    
+        return significant
+    
+    return p_values
+
+
 
     
 def test_anova(df, col1, col2):
