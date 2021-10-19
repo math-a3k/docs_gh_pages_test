@@ -137,3 +137,4 @@ dmypy.json
 /utilmy/.idea/inspectionProfiles
 /utilmy/.idea
 /utilmy/zml/source/bin/auto_feature_AFEM/*.pdf
+/dockers/ml-workspace/docs/images/features
