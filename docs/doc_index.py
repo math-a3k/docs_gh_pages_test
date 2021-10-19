@@ -722,6 +722,7 @@ write_random_sentences_from_bigrams_to_file(dirout, n_sentences = 14000)
 
 utilmy/nlp/util_rank.py
 -------------------------functions----------------------
+rank_topk_kendall(a:list, b:list, k = 5, p = 0)
 rbo_find_p()
 
 -------------------------methods----------------------
