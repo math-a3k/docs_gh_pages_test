@@ -90,8 +90,8 @@ def rank_topk_kendall(a:list, b:list, topk=5,p=0): #zero is equal 1 is max dista
     import scipy.special as special
 
     if k is None:
-        k = a.size
-    if a.size != b.size:
+        k = len(a)
+    if len(a) != len(b) :
         raise NameError('The two arrays need to have same lengths')
     k = min(k,a.size)
     a_top_k = np.argpartition(a,-k)[-k:]
