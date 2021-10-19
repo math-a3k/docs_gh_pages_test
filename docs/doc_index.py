@@ -469,7 +469,7 @@ load(to_file = "")
 load_serialize(name)
 log_mem(*s)
 os_lock_acquireLock(plock:str = "tmp/plock.lock")
-os_lock_execute(fun_run, fun_args = None, ntry = 5, plock = "tmp/plock.lock")
+os_lock_execute(fun_run, fun_args = None, ntry = 5, plock = "tmp/plock.lock", sleep = 5)
 os_lock_releaseLock(locked_file_descriptor)
 save(dd, to_file = "", verbose = False)
 save_serialize(name, value)
@@ -1194,12 +1194,16 @@ test_all()
 test_anova(df, col1, col2)
 test_heteroscedacity(y, y_pred, pred_value_only = 1)
 test_hypothesis(df_obs, df_ref, method = '', **kw)
+test_multiple_comparisons(data: pd.DataFrame, label = 'y', adjuster = True)
 test_mutualinfo(error, Xtest, colname = None, bins = 5)
 test_normality(df, column, test_type)
 test_normality2(df, column, test_type)
 test_plot_qqplot(df, col_name)
 y_adjuster_log(y_true, y_pred_log, error_func, **kwargs)
 
+
+
+utilmy/tabular/util_drift.py
 
 
 utilmy/templates/__init__.py
