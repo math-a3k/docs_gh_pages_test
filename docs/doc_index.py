@@ -1015,8 +1015,11 @@ dict2.__init__(self, d)
 
 utilmy/spark/main.py
 -------------------------functions----------------------
+config_getdefault()
 main()
-spark_init(config:dict)
+pd_to_spark_format()
+spark_init(config:dict = None)
+test()
 
 
 
