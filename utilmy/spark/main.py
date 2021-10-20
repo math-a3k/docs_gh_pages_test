@@ -7,13 +7,35 @@ from pyspark.sql import SparkSession
 
 from src.utils import config_load, log
 
+def config_getdefault():
+    
+    
+def test():    
+    from pyspark.sql import SparkSession
+    spark = SparkSession.builder\
+        .appName('abc')\
+        # .config("spark.jars","/myfolder/spark-avro_2.12-2.4.4.jar")\
+        .master("local[*]")\
+        .getOrCreate()
+    df = spark.read.format("avro").load(file_path)
 
-def spark_init(config:dict)->SparkSession:
+
+
+
+def spark_init(config:dict=None)->SparkSession:
     """
     Args:
         config: config dict
     Returns: SparkSession
     """
+    if config is None :
+        spark = SparkSession.builder\
+            .appName('app1')\
+            # .config("spark.jars","/myfolder/spark-avro_2.12-2.4.4.jar")\
+            .master("local[*]")\
+            .getOrCreate()
+        return spark
+    
     cfg  = config['sparkconfig']
     conf = SparkConf().setMaster(cfg['spark.master']).setAppName(cfg['spark.app.name'])
 
