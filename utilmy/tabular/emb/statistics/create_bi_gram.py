@@ -70,14 +70,13 @@ for sentence in f:
 
 X_in = []
 y_out = []
+# creating vector from x to y, for getting embedding space
 for i, w in enumerate(X):
     yw = Y[i]
-    
     if (dic[w]>2) and (dic[yw]>2):
         v = E(w)
         X_in.append(v)
-
-        v = E(w)
+        v = E(yw)
         y_out.append(v)
     
 X_in = np.array(X_in)
