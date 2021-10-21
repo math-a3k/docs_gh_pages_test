@@ -1,0 +1,116 @@
+rank_biased_overlap_mean: 0.14476181560428572 
+rank_topk_kendall_mean: 0.4945454545454546
+
+## example from cocount
+{
+	'cloud': {'layer': 2,
+  'precipitating': 2,
+  'associated': 1,
+  'beverwijck': 1,
+  'channel': 1,
+  'chemistry': 1,
+  'cold': 1,
+  'deck': 1,
+  'depth': 1,
+  'develop': 1,
+  'front': 1,
+  'heap': 1,
+  'higher': 1,
+  'low': 1,
+  'mesoamerican': 1,
+  'negative': 1,
+  'parallel': 1,
+  'pareidolically': 1,
+  'posted': 1,
+  'prairie': 1}
+}
+
+## example from bi-gram 
+{
+    "cloud": {
+        'bay': 0.748575783400417,
+        'began': 0.7352917470949293,
+        'one': 0.6985105569126479,
+        'theory': 0.33618177554245293,
+        'growth': 0.6602023696238616,
+        'degree': 0.6578513706229662,
+        'roughly': 0.3510515038324382,
+        'posted': 0.3548618543528121,
+        'world': 0.6413856179766648,
+        'france': 0.6362344906520645
+    }
+}
+
+## example from model
+{
+    "cloud": {
+        'europe': 0.2469479739665985,
+        'people': 0.20017245411872864,
+        'theory': 0.18374206125736237,
+        'theoretical': 0.1798827052116394,
+        'european': 0.14671583473682404,
+        'substance': 0.114181287586689,
+        'person': 0.11217017471790314,
+        'network': 0.10383737087249756,
+        'world': 0.09686078876256943,
+        'scientific': 0.09196242690086365
+    }
+}
+
+###########
+## from cocount
+{
+	'french': {'cinema': 2,
+  'conversely': 2,
+  'director': 2,
+  'foreign': 2,
+  'generation': 2,
+  'grasshopper': 2,
+  'accelerator': 1,
+  'atom': 1,
+  'defend': 1,
+  'exception': 1,
+  'formed': 1,
+  'main': 1,
+  'percent': 1,
+  'physic': 1,
+  'abrupt': 0,
+  'abusive': 0,
+  'accommodate': 0,
+  'achievement': 0,
+  'across': 0,
+  'act': 0}
+
+## from bi-gram 
+
+{
+    "french": {
+        'theoretical': 0.8205200058257771,
+        'different': 0.2549243712361026,
+        'growth': 0.7402851501781308,
+        'study': 0.265653311339495,
+        'animal': 0.2879150639295346,
+        'posted': 0.30744596139004604,
+        'american': 0.676994786204553,
+        'one': 0.6752272670746493,
+        'person': 0.33611850969495705,
+        'rule': 0.33760565185322167
+    }
+}
+
+## from model 
+{
+    "french": {
+        'one': 0.266126811504364,
+        'rule': 0.21379074454307556,
+        'chemistry': 0.21156728267669678,
+        'may': 0.16627907752990723,
+        'non': 0.1459185779094696,
+        'japan': 0.13922397792339325,
+        'france': 0.12886042892932892,
+        'study': 0.1123766303062439,
+        'set': 0.11236829310655594,
+        'time': 0.10582320392131805
+    }
+}
+
