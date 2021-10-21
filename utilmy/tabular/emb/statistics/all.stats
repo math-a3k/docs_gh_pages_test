@@ -1,0 +1,11 @@
+fastext_ss, cocount_ss
+rank_biased_overlap_mean 0.3293622699885983
+rank_topk_kendall_mean 0.4901052631578947
+
+fastext_1, cocount_1
+rank_biased_overlap_mean 0.11034346132651085
+rank_topk_kendall_mean 0.4935140882509304
+
+fastext_1, fasttext_ss
+ank_biased_overlap_mean 0.11903375695337254
+rank_topk_kendall_mean 0.5052631578947367
