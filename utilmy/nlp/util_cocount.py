@@ -1,4 +1,9 @@
 HELP = """
+
+from utilmy.nlp import util_cocount as uc
+uc.run_all()
+
+
 # Create corpus to train model 
 # Train the model and save 
 # Create co-count matrix 
@@ -10,7 +15,7 @@ HELP = """
 # Train the model and save 
 # Prepair cocount similarity file and model and save fasttext_ss and cocount_ss results.
 """
-
+import os, sys, socket, platform, time, gc,logging
 import re
 from nltk.corpus.reader.cmudict import read_cmudict_block
 import numpy as np
@@ -23,6 +28,18 @@ from nltk.corpus import stopwords
 from essential_generators import DocumentGenerator
 from sklearn.feature_extraction.text import CountVectorizer
 
+
+
+
+###############################################################################################
+from utilmy.utilmy import log, log2
+
+
+
+
+
+
+#####################################################################################################
 def corpus_generate(outfile="data.cor", unique_words_needed=1000):
     """
     function to generate trainable data for model
