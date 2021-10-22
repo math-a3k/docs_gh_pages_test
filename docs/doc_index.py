@@ -695,6 +695,24 @@ test_lsh()
 
 
 
+utilmy/nlp/util_cocount.py
+-------------------------functions----------------------
+calc_comparison_stats(model, ccount_name_dict, ccount_score_dict, corpus_file = "data.cor", top = 20, output_dir = "./no_ss_test")
+cocount_calc_matrix(dirin = "gen_text_dist3.txt", dense = True)
+cocount_get_topk(matrix, w_to_id)
+cocount_matrix_to_dict(matrix, w_to_id)
+cocount_norm(matrix)
+corpus_add_prefix(dirin = "gen_text_dist3.txt", dirout = "gen_text_dist4.txt")
+corpus_generate(outfile = "data.cor", unique_words_needed = 1000)
+corpus_generate_from_cocount(dirin = "./data.cor", dirout = "gen_text_dist3.txt", unique_words = 100, sentences_count = 1000)
+create_1gram_stats(dirin, w_to_id)
+get_top_k(w, ccount_name_dict, ccount_score_dict, top = 5)
+load_model(dirin = "./modelout/model.bin")
+run_all()
+train_model(dirinput = "./data.cor", dirout = "./modelout/model.bin", **params)
+
+
+
 utilmy/nlp/util_model.py
 -------------------------functions----------------------
 bigram_get_list(ranid, mode = 'name, proba')
