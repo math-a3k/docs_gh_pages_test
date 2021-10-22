@@ -111,6 +111,7 @@ def pd_getdata(verbose=True):
 
 
 def glob_glob(dirin, nfile=1000):
+    import glob
     flist  = sorted( glob.glob(dirin  ))
     flist  = flist[:nfile]
     log('Nfile: ', len(flist), str(flist)[:100])
@@ -179,7 +180,7 @@ from utilmy.ppandas import (
     pd_add_noise,
     pd_cols_unique_count,
     pd_show,
-    pd_to_hive_parquet
+    pd_to_hiveparquet
 )
 
 
