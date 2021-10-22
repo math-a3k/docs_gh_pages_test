@@ -1105,7 +1105,7 @@ utilmy/spark/main.py
 -------------------------functions----------------------
 config_getdefault()
 main()
-pd_to_spark_format()
+pd_to_spark_hive_format(df, dirout)
 spark_init(config:dict = None)
 test()
 
