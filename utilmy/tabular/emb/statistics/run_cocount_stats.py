@@ -11,6 +11,7 @@
 
 
 import re
+from nltk.corpus.reader.cmudict import read_cmudict_block
 import numpy as np
 import pandas as pd 
 from util_rank import *
@@ -78,61 +79,61 @@ def load_model(dirin="./modelout/model.bin"):
     return model
 
 
-def cocount_matrix(dirin="gen_text_dist3.txt"):
-    """
-    dirin: corpus file to generate cocount matrix.
-    returns: cocount matrix, normalize cocount matrix, dictionary with all top similar words(wb) from a given word(wa), dictionary with all word_to_index in matrix
-    """
-    f = open(dirin, 'r').read().split('\n')
-    doc = []
-    for sen in f:
-        temp = sen.split(' ')
-        try:
-            i = temp.index('')
-            temp.remove(i)
-        except:
-            pass
-        doc.append(" ".join(temp))
+# def cocount_matrix(dirin="gen_text_dist3.txt"):
+#     """
+#     dirin: corpus file to generate cocount matrix.
+#     returns: cocount matrix, normalize cocount matrix, dictionary with all top similar words(wb) from a given word(wa), dictionary with all word_to_index in matrix
+#     """
+#     f = open(dirin, 'r').read().split('\n')
+#     doc = []
+#     for sen in f:
+#         temp = sen.split(' ')
+#         try:
+#             i = temp.index('')
+#             temp.remove(i)
+#         except:
+#             pass
+#         doc.append(" ".join(temp))
 
-    count_model = CountVectorizer(ngram_range=(1,1)) 
-    X = count_model.fit_transform(doc)
+#     count_model = CountVectorizer(ngram_range=(1,1)) 
+#     X = count_model.fit_transform(doc)
 
-    Xc = (X.T * X) 
+#     Xc = (X.T * X) 
 
-    Xc.setdiag(0) # sometimes you want to fill same word cooccurence to 0
-    # print(Xc.todense()) # print out matrix in dense format
+#     Xc.setdiag(0) # sometimes you want to fill same word cooccurence to 0
+#     # print(Xc.todense()) # print out matrix in dense format
 
-    matrix = Xc.todense()
+#     matrix = Xc.todense()
 
-    ## normalization
-    norm_matrix = np.log(1+matrix)
+#     ## normalization
+#     norm_matrix = np.log(1+matrix)
 
-    def id_to_w(idx, w_to_id):
-        for key in w_to_id:
-            if w_to_id[key] == idx:
-                return key
+#     def id_to_w(idx, w_to_id):
+#         for key in w_to_id:
+#             if w_to_id[key] == idx:
+#                 return key
 
-    from numpy import dot
-    from numpy.linalg import norm
+#     from numpy import dot
+#     from numpy.linalg import norm
 
-    top_similar_dic = {}
-    w_to_id = count_model.vocabulary_
-    for w in w_to_id:
-        temp_dic = {}
+#     top_similar_dic = {}
+#     w_to_id = count_model.vocabulary_
+#     for w in w_to_id:
+#         temp_dic = {}
         
-        a = matrix[:, w_to_id[w]]
-        a = np.squeeze(np.asarray(a))
-        temp_l = []
-        for i,v in enumerate(a):
-            temp_l.append([i,v])
-        temp_l = sorted(temp_l, key=lambda x: x[1], reverse=True)
+#         a = matrix[:, w_to_id[w]]
+#         a = np.squeeze(np.asarray(a))
+#         temp_l = []
+#         for i,v in enumerate(a):
+#             temp_l.append([i,v])
+#         temp_l = sorted(temp_l, key=lambda x: x[1], reverse=True)
 
-        for i, v in temp_l:
-            temp_dic[id_to_w(i, w_to_id)] = v
+#         for i, v in temp_l:
+#             temp_dic[id_to_w(i, w_to_id)] = v
                 
-        top_similar_dic[w] = temp_dic
+#         top_similar_dic[w] = temp_dic
 
-    return matrix, norm_matrix, top_similar_dic, w_to_id
+#     return matrix, norm_matrix, top_similar_dic, w_to_id
 
 
 
@@ -177,7 +178,7 @@ def cocount_get_topk(matrix, w_to_id):
     from numpy.linalg import norm
 
     top_similar_dic = {}
-    w_to_id = count_model.vocabulary_
+
     for w in w_to_id:
         temp_dic = {}
         
@@ -233,30 +234,27 @@ def cocount_matrix_to_dict(matrix, w_to_id):
 
 
 
-def cocount_norm(matrix, w_to_id):
+def cocount_norm(matrix):
     return np.log(1+matrix)
 
 
 
-def get_top_k(w, top_similar_dic, top=5):
+def get_top_k(w, ccount_name_dict, ccount_score_dict, top=5):
     """
     w: word
     top_similar_dic: dictionary with all top similar words(wb) from a given word(wa)
     top: top-k values similar in output.
+    return: list of similar words, list of similar words score (with same index)
     """
-    dic = top_similar_dic[w]
-    temp = sorted(dic, key=lambda x: abs(dic[x]), reverse=True)
-    
-    resp = {}
-    if len(temp)>top:
-        temp = temp[:top]
-        
-    for w in temp:
-        resp[w] = dic[w]
-        
-    return temp, resp
+    if top > 100:
+        raise Exception('Top can take values upto 100')
 
-def save_all_stats(model, top_similar_dic, corpus_file="data.cor", top=20, output_dir="./no_ss_test"):
+    similar_word_list = ccount_name_dict[w][:top]
+    similar_word_score = ccount_score_dict[w][:top]
+
+    return similar_word_list, similar_word_score
+
+def save_all_stats(model, ccount_name_dict, ccount_score_dict, corpus_file="data.cor", top=20, output_dir="./no_ss_test"):
     """
     model: gensim model, 
     top_similar_dic: dictionary with all top similar words(wb) from a given word(wa)
@@ -290,7 +288,7 @@ def save_all_stats(model, top_similar_dic, corpus_file="data.cor", top=20, outpu
 
     for i in range(1, len(frequent_words)):
         if frequent_words[i] == "": continue
-        sw, _ = get_top_k(frequent_words[i], top_similar_dic, top=top)
+        sw, _ = get_top_k(frequent_words[i], ccount_name_dict, ccount_score_dict, top=top)
         nsw = [x[0] for x in model.wv.most_similar(frequent_words[i], topn=top)]
 
         w_id.append(frequent_words[i])
@@ -364,7 +362,7 @@ def generate_corpus_from_cocount_and_unigram(dirin="./data.cor", dirout="gen_tex
 
     assert len(frequent_words) == len(unigram_p)
 
-    matrix, _, _, w_to_id = cocount_matrix(dirin="gen_text_dist3.txt")
+    matrix, w_to_id = cocount_calc_matrix(dirin="gen_text_dist3.txt")
     unigram_word_ids = [w_to_id[w] for w in frequent_words]
     unigram_word_ids = sorted(unigram_word_ids)
     matrix = matrix[unigram_word_ids][:,unigram_word_ids]
@@ -447,12 +445,13 @@ def run_all():
 
 
     # Create co-count matrix 
-    matrix, norm_matrix, top_similar_dic, w_to_id = cocount_matrix(dirin="data.cor")
+    matrix, w_to_id = cocount_calc_matrix(dirin="data.cor")
+    ccount_name_dict, ccount_score_dict = cocount_matrix_to_dict(matrix, w_to_id)
 
 
     # Prepair cocount similarity file and model and save fasttext_1 and cocount_1 results.\
     model = load_model(dirin="./modelout/model.bin")
-    save_all_stats(model, top_similar_dic, corpus_file="data.cor", top=20, output_dir="./data_test")
+    save_all_stats(model, ccount_name_dict, ccount_score_dict, corpus_file="data.cor", top=20, output_dir="./data_test")
 
 
     # Generate corpus based on unigram and cocount frequency 
@@ -465,8 +464,9 @@ def run_all():
 
     # Prepair cocount similarity file and model and save fasttext_2 and cocount_2 results.
     model = load_model(dirin="./modelout/model2.bin")
-    matrix, norm_matrix, top_similar_dic, w_to_id = cocount_matrix(dirin="./gen_text_dist3.txt")
-    save_all_stats(model, top_similar_dic, corpus_file="data.cor", top=20, output_dir="./data_test_without_ss")
+    matrix, w_to_id = cocount_calc_matrix(dirin="./gen_text_dist3.txt")
+    ccount_name_dict, ccount_score_dict = cocount_matrix_to_dict(matrix, w_to_id)
+    save_all_stats(model, ccount_name_dict, ccount_score_dict, corpus_file="data.cor", top=20, output_dir="./data_test_without_ss")
 
 
     # Add 'ss' as prefix and suffix to last generated corpus 
@@ -479,8 +479,9 @@ def run_all():
 
     # Prepair cocount similarity file and model and save fasttext_ss and cocount_ss results.
     model = load_model(dirin="./modelout/model2.bin")
-    matrix, norm_matrix, top_similar_dic, w_to_id = cocount_matrix(dirin="./gen_text_dist4.txt")
-    save_all_stats(model, top_similar_dic, corpus_file="data.cor", top=20, output_dir="./data_test_with_ss")
+    matrix, w_to_id = cocount_calc_matrix(dirin="./gen_text_dist4.txt")
+    ccount_name_dict, ccount_score_dict = cocount_matrix_to_dict(matrix, w_to_id)
+    save_all_stats(model, ccount_name_dict, ccount_score_dict, corpus_file="data.cor", top=20, output_dir="./data_test_with_ss")
 
 
 if __name__ == "__main__":
