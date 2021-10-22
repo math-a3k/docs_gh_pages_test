@@ -8,28 +8,13 @@ from pyspark.sql import SparkSession
 from src.utils import config_load, log
 
 
-def pd_to_spark_format():
-
-import pyarrow as pa
-    fields = [
-                pa.field('EmpId', pa.int32()),
-                pa.field('FirstName', pa.string()),
-                pa.field('LastName', pa.string()),
-                pa.field('EmailID', pa.string()),
-                pa.field('ActiveFlag', pa.int8()),
-             ]
-    pa_schema = pa.schema(fields) # Create a schema from the pa fields
-    pandasDF = pd.read_parquet("emp.parquet") # Read parquet file into a Pandas dataframe
-    paTbl = pa.Table.from_pandas(pandasDF, schema=pa_schema) # Create a pyarrow table from pandas and apply the schema
-    paTbl.schema.remove_metadata() # We see the schema now shows ActiveFlag correctly as int8
-    paTbl["ActiveFlag"] # Even the values in the table show up as integers
-
-    paDict    = paTbl.to_pydict()
-    df_spark  = spark.createDataFrame(zip(*paDict.values()), list(paDict.keys()))
-    df_target = spark.createDataFrame(df_spark.rdd, schema_target) # Apply the schema we created earlier
-    df_target.printSchema() # Print the schema to validate
-    df_target.show() # Show the records and now it won't error out on TypeError. Yoohoo!  
-    
+def pd_to_spark_hive_format(df, dirout):
+  """
+     To export into Spark/Hive format, Issue with pyarrow.
+  
+  """
+  import fastparquet as fp
+  fp.write(dirout, df, )
 
 
 def config_getdefault():
