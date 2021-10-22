@@ -78,7 +78,7 @@ def test2():
 
 ###################################################################################################
 ###### Pandas #####################################################################################
-def pd_to_hive_parquet(dirin, dirout="/ztmp_hive_parquet/df.parquet", verbose=False):
+def pd_to_hiveparquet(dirin, dirout="/ztmp_hive_parquet/df.parquet", verbose=False):
     """  Hive parquet needs special headers to read, only fastparquet can do it
               fastparquet.write(filename, data, row_group_offsets=50000000, compression=None, file_scheme='simple', open_with=<built-in function open>, mkdirs=<function default_mkdirs>, has_nulls=True, write_index=None, partition_on=[], fixed_text=None, append=False, object_encoding='infer', times='int64', custom_metadata=None)[source]
     """
