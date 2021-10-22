@@ -195,8 +195,46 @@ def cocount_get_topk(matrix, w_to_id):
     return top_similar_dic
 
 
+def cocount_matrix_to_dict(matrix, w_to_id):
+    """
+    decomposing matrix to 2 dict, 
+    matrix: cocount matrix 
+    w_to_id: vocabulary for same matrix
+    return: cocount name dict to give top 100 words with Co-count(Wa, Wb); cocount score dict to store the co-count(Wa, Wb) in sorted order as of words.
+    """
+    def id_to_w(idx, w_to_id):
+        for key in w_to_id:
+            if w_to_id[key] == idx:
+                return key
+
+    ccount_name_dict = {}
+    ccount_score_dict = {}
+    for w in w_to_id:
+        name_list = []
+        score_list = []
+        a = matrix[:, w_to_id[w]]
+        a = np.squeeze(np.asarray(a))
+        temp_l = []
+        for i,v in enumerate(a):
+            temp_l.append([i,v])
+        temp_l = sorted(temp_l, key=lambda x: x[1], reverse=True)
+
+        if len(temp_l) > 100:
+            temp_l = temp_l[:100]
+        for i, v in temp_l:
+            name_list.append(id_to_w(i))
+            score_list.append(v)
+        
+        ccount_name_dict[w] = name_list
+        ccount_score_dict[w] = score_list
+
+    return ccount_name_dict, ccount_score_dict
+
+
+
+
 def cocount_norm(matrix, w_to_id):
-    return = np.log(1+matrix)
+    return np.log(1+matrix)
 
 
 
