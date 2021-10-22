@@ -254,6 +254,7 @@ def get_top_k(w, ccount_name_dict, ccount_score_dict, top=5):
 
     return similar_word_list, similar_word_score
 
+
 def save_all_stats(model, ccount_name_dict, ccount_score_dict, corpus_file="data.cor", top=20, output_dir="./no_ss_test"):
     """
     model: gensim model, 
@@ -318,6 +319,38 @@ def save_all_stats(model, ccount_name_dict, ccount_score_dict, corpus_file="data
     newdf.to_csv(output_dir+'/topk_tests.csv', index=False)
 
 
+
+def create_1gram(dirin, w_to_id):
+    """
+    dirin: location of corpus file 
+    w_to_id: word to index for matrix 
+    return: df-> dataframe with word, freq, id_matrix
+    """
+
+    from collections import Counter
+
+    f = open(dirin, 'r').read()
+    f = f.replace('\n', ' ')
+    dic =  Counter(f.split(' '))
+
+    del dic['']
+    word = []
+    freq = []
+    id_matrix = []
+    
+    for w in dic:
+        word.append(w)
+        freq.append(dic[w])
+        id_matrix.append(w_to_id[w])
+
+    df = pd.DataFrame()
+    df['word'] = word
+    df['freq'] = freq 
+    df['id_matrix'] = id_matrix
+    return df
+
+
+
 def generate_corpus_from_cocount_and_unigram(dirin="./data.cor", dirout="gen_text_dist3.txt", unique_words=100, sentences_count=1000):
     """
     dirin: location of corpus file to generate new text based on A0 A1 A2 rule:
@@ -329,41 +362,19 @@ def generate_corpus_from_cocount_and_unigram(dirin="./data.cor", dirout="gen_tex
     unique_words: total unique words in corpus 
     sentences_count: total number of sentences in corpus.
     """
-    from collections import Counter
 
-    f = open(dirin, 'r').read()
-    f = f.replace('\n', ' ')
-    dic =  Counter(f.split(' '))
+    matrix, w_to_id = cocount_calc_matrix(dirin)
+    df_1gram = create_1gram(dirin, w_to_id)
 
-    del dic['']
-
-    unigram_dis = {}
-    for w in dic:
-        unigram_dis[w] = dic[w]/len(dic)
-
-    frequent_words = []
-    for w in dic:
-        if w == "": continue
-        frequent_words.append([w, dic[w]])
-
-    frequent_words = sorted(frequent_words, key=lambda x: x[1], reverse=True)
-
-    if len(frequent_words)>unique_words:
-        frequent_words = frequent_words[:unique_words]
-    else:
-        raise Exception('total unique_words in corpus already lower then required')
-
-    frequent_words = [w for w,_ in frequent_words]
-    unigram_p = [unigram_dis[w] for w in frequent_words]
-
-    nrom_prod = 1/sum(unigram_p)
-    unigram_p = np.array(unigram_p)
-    unigram_p = unigram_p*nrom_prod
-
+    df_1gram['norm_p'] = df_1gram['freq']/df_1gram['freq'].sum()
+    df_1gram = df_1gram.sort_values('norm_p', ascending=False)
+    frequent_words_data = df_1gram[['word', 'norm_p', 'id_matrix']].values
+    frequent_words   = frequent_words_data[:unique_words, 0]
+    unigram_p        = frequent_words_data[:unique_words, 1]
     assert len(frequent_words) == len(unigram_p)
 
-    matrix, w_to_id = cocount_calc_matrix(dirin="gen_text_dist3.txt")
-    unigram_word_ids = [w_to_id[w] for w in frequent_words]
+    unigram_word_ids = frequent_words_data[:unique_words, 2]
+
     unigram_word_ids = sorted(unigram_word_ids)
     matrix = matrix[unigram_word_ids][:,unigram_word_ids]
 
