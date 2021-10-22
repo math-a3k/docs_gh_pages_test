@@ -656,24 +656,34 @@ Repo: ./
 | <a name='utilmy/parallel.py' href='.//utilmy/parallel.py'>utilmy/parallel.py</a> | function | <a href='.//utilmy/parallel.py#L925'>ztest2</a> | addition<br>addition1<br>fun_async<br>test_print<br>print<br>freeze_support<br>log<br>pd.DataFrame<br>pd_groupby_parallel<br>pd_groupby_parallel2<br>pd_apply_parallel<br>multithread_run<br>multithread_run_list<br> |
 | <a name='utilmy/parallel.py' href='.//utilmy/parallel.py'>utilmy/parallel.py</a> | function | <a href='.//utilmy/parallel.py#L838'>zz_pd_groupby_parallel5</a> | f2<br>pd.DataFrame<br>dfi.apply<br>fun_apply<br>pd.concat<br>gc.collect<br>df.groupby<br>enumerate<br>log<br>len<br>job_list.append<br>range<br>pool.terminate<br>pool.join<br> |
 | <a name='utilmy/parallel.py' href='.//utilmy/parallel.py'>utilmy/parallel.py</a> | function | <a href='.//utilmy/parallel.py#L747'>zz_pd_read_file3</a> | log<br>print<br>isinstance<br>path_glob.split<br>file_list.extend<br>sorted<br>glob.glob<br>file_list.append<br>len<br>fun_async<br>pd.DataFrame<br>readers.get<br>pd_reader_obj<br>dfi.drop_duplicates<br>dfi.apply<br>fun_apply<br>pd.concat<br>range<br>enumerate<br>tuple<br>time.sleep<br>ThreadPool<br>job_list.append<br>pool.apply_async<br>gc.collect<br>pool.terminate<br>pool.join<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L465'>is_float</a> | float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L458'>is_int</a> | int<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L435'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L431'>np_list_intersection</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L360'>pd_add_noise</a> | pd.DataFrame<br>pd_dtype_getcontinuous<br>print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L374'>pd_cols_unique_count</a> | len<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L351'>pd_del</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L277'>pd_dtype_count_unique</a> | gef_is_continuous<br>str<br>np.sum<br>np.round<br>len<br>min<br>any<br>list<br>n=min<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L335'>pd_dtype_getcontinuous</a> | len<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L316'>pd_dtype_to_category</a> | isinstance<br>df.select_dtypes<br>len<br>float<br>pd.to_datetime<br>print<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L392'>pd_show</a> | os_makedirs<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L426'>to_datetime</a> | pd.to_datetime<br>str<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L413'>to_dict</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L444'>to_float</a> | float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L451'>to_int</a> | int<br>float<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L418'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | class | <a href='.//utilmy/ppandas.py#L407'>dict_to_namespace</a> |  |
-| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | method | <a href='.//utilmy/ppandas.py#L409'>dict_to_namespace:__init__</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L488'>is_float</a> | float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L481'>is_int</a> | int<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L458'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L454'>np_list_intersection</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L383'>pd_add_noise</a> | pd.DataFrame<br>pd_dtype_getcontinuous<br>print<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L265'>pd_cartesian</a> | list<br>pd.merge<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L280'>pd_col_bins</a> | pd.qcut<br>np.arange<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L397'>pd_cols_unique_count</a> | len<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L374'>pd_del</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L300'>pd_dtype_count_unique</a> | gef_is_continuous<br>str<br>np.sum<br>np.round<br>len<br>min<br>any<br>list<br>n=min<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L358'>pd_dtype_getcontinuous</a> | len<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L287'>pd_dtype_reduce</a> | np.dtype<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L339'>pd_dtype_to_category</a> | isinstance<br>df.select_dtypes<br>len<br>float<br>pd.to_datetime<br>print<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L191'>pd_filter</a> | isinstance<br>filter_dict.items<br>filter_dict.split<br>x_convert<br>str<br>dict<br>float<br>x.strip<br>print<br>len<br>x.split<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L110'>pd_merge</a> | list<br>df1.join<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L166'>pd_plot_histogram</a> | dfi.quantile<br>dfi.hist<br>dfi.sample<br>plt.title<br>path_save.split<br>plt.show<br>os.makedirs<br>plt.savefig<br>print<br>plt.close<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L116'>pd_plot_multi</a> | plt.figure<br>len<br>getattr<br>df.plot<br>plt.show<br>ax.set_ylabel<br>range<br>ax.get_legend_handles_labels<br>ax.twinx<br>ax_new.set_ylabel<br>ax_new.get_legend_handles_labels<br>ax.legend<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L104'>pd_random</a> | pd.DataFrame<br>columns=list<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L257'>pd_sample_strat</a> | df.groupby<br>x.sample<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L415'>pd_show</a> | os_makedirs<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L229'>pd_to_file</a> | Path<br>os.makedirs<br>df.to_pickle<br>df.to_parquet<br>df.to_csv<br>log<br>gc.collect<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L449'>to_datetime</a> | pd.to_datetime<br>str<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L436'>to_dict</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L467'>to_float</a> | float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L474'>to_int</a> | int<br>float<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | function | <a href='.//utilmy/ppandas.py#L441'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | class | <a href='.//utilmy/ppandas.py#L430'>dict_to_namespace</a> |  |
+| <a name='utilmy/ppandas.py' href='.//utilmy/ppandas.py'>utilmy/ppandas.py</a> | method | <a href='.//utilmy/ppandas.py#L432'>dict_to_namespace:__init__</a> |  |
 | <a name='utilmy/prepro/prepro.py' href='.//utilmy/prepro/prepro.py'>utilmy/prepro/prepro.py</a> | function | <a href='.//utilmy/prepro/prepro.py#L41'>_pd_colnum</a> | _pd_colnum_fill_na_median<br> |
 | <a name='utilmy/prepro/prepro.py' href='.//utilmy/prepro/prepro.py'>utilmy/prepro/prepro.py</a> | function | <a href='.//utilmy/prepro/prepro.py#L47'>_pd_colnum_fill_na_median</a> |  |
 | <a name='utilmy/prepro/prepro.py' href='.//utilmy/prepro/prepro.py'>utilmy/prepro/prepro.py</a> | function | <a href='.//utilmy/prepro/prepro.py#L14'>log</a> | print<br>log2<br>log3<br> |
@@ -996,23 +1006,24 @@ Repo: ./
 | <a name='utilmy/util_zip.py' href='.//utilmy/util_zip.py'>utilmy/util_zip.py</a> | function | <a href='.//utilmy/util_zip.py#L77'>os_extract_archive</a> | isinstance<br>is_match_fn<br>open_fn<br>archive.extractall<br>os.remove<br>shutil.rmtree<br> |
 | <a name='utilmy/util_zip.py' href='.//utilmy/util_zip.py'>utilmy/util_zip.py</a> | function | <a href='.//utilmy/util_zip.py#L124'>to_file</a> | open<br>fp.write<br> |
 | <a name='utilmy/util_zip.py' href='.//utilmy/util_zip.py'>utilmy/util_zip.py</a> | function | <a href='.//utilmy/util_zip.py#L11'>unzip</a> | zipfile.ZipFile<br>zip_ref.extractall<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L333'>git_current_hash</a> | subprocess.check_output<br>label.decode<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L323'>git_repo_root</a> | os_system<br>mout.split<br>len<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L317'>git_current_hash</a> | subprocess.check_output<br>label.decode<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L307'>git_repo_root</a> | os_system<br>mout.split<br>len<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L113'>glob_glob</a> | sorted<br>glob.glob<br>log<br>len<br>str<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L51'>help_create</a> | importlib.import_module<br>dir<br>import_function<br>help_get_codesource<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L39'>import_function</a> | isinstance<br>importlib.import_module<br>getattr<br>globals<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L420'>load</a> | pickle.load<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L404'>load</a> | pickle.load<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L73'>pd_generate_data</a> | random.random<br>range<br>pd.DataFrame<br>np.where<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L86'>pd_getdata</a> | url.split<br>print<br>pd.read_csv<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L66'>pd_random</a> | random.random<br>range<br>pd.DataFrame<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L413'>save</a> | os.makedirs<br>pickle.dump<br>open<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L118'>test_all</a> | log<br>m.git_repo_root<br>m.help_create<br>print<br>m.global_verbosity<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | class | <a href='.//utilmy/utilmy.py#L345'>Session</a> |  |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L351'>Session:__init__</a> | os.makedirs<br>print<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L368'>Session:load</a> | print<br>self.load_session<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L398'>Session:load_session</a> | print<br>os.walk<br>x.replace<br>load<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L362'>Session:save</a> | os.makedirs<br>self.save_session<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L375'>Session:save_session</a> | os.makedirs<br>globs.items<br>x.startswith<br>str<br>pd.to_pickle<br>save<br>print<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L357'>Session:show</a> | glob.glob<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L397'>save</a> | os.makedirs<br>pickle.dump<br>open<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L123'>test_all</a> | log<br>m.git_repo_root<br>m.help_create<br>print<br>m.global_verbosity<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | class | <a href='.//utilmy/utilmy.py#L329'>Session</a> |  |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L335'>Session:__init__</a> | os.makedirs<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L352'>Session:load</a> | print<br>self.load_session<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L382'>Session:load_session</a> | print<br>os.walk<br>x.replace<br>load<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L346'>Session:save</a> | os.makedirs<br>self.save_session<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L359'>Session:save_session</a> | os.makedirs<br>globs.items<br>x.startswith<br>str<br>pd.to_pickle<br>save<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L341'>Session:show</a> | glob.glob<br>print<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L103'>config_load</a> | str<br>logw<br>log2<br>yaml.load<br>log<br>os.makedirs<br>open<br>json.dump<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L151'>dataset_donwload</a> | log<br>os.makedirs<br>wget.download<br>url.split<br>os_extract_archive<br>log2<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L70'>log</a> | logger.info<br>log2<br>logger.debug<br>logw<br>logger.warning<br>loge<br>logger.error<br>logger_setup<br>logger.configure<br> |
