@@ -135,6 +135,71 @@ def cocount_matrix(dirin="gen_text_dist3.txt"):
     return matrix, norm_matrix, top_similar_dic, w_to_id
 
 
+
+
+def cocount_calc_matrix(dirin="gen_text_dist3.txt", dense=True):
+    """
+    dirin: corpus file to generate cocount matrix.
+    returns: cocount matrix, normalize cocount matrix, dictionary with all top similar words(wb) from a given word(wa), dictionary with all word_to_index in matrix
+    """
+    f = open(dirin, 'r').read().split('\n')
+    doc = []
+    for sen in f:
+        temp = sen.split(' ')
+        try:
+            i = temp.index('')
+            temp.remove(i)
+        except:
+            pass
+        doc.append(" ".join(temp))
+
+    count_model = CountVectorizer(ngram_range=(1,1)) 
+    X = count_model.fit_transform(doc)
+
+    Xc = (X.T * X) 
+
+    # Xc.setdiag(0) # sometimes you want to fill same word cooccurence to 0
+    # print(Xc.todense()) # print out matrix in dense format
+    if dense:
+       Xc = Xc.todense()
+    w_to_id = count_model.vocabulary_
+    return Xc,  w_to_id
+
+
+
+def cocount_get_topk(matrix, w_to_id):
+    def id_to_w(idx, w_to_id):
+        for key in w_to_id:
+            if w_to_id[key] == idx:
+                return key
+
+    from numpy import dot
+    from numpy.linalg import norm
+
+    top_similar_dic = {}
+    w_to_id = count_model.vocabulary_
+    for w in w_to_id:
+        temp_dic = {}
+        
+        a = matrix[:, w_to_id[w]]
+        a = np.squeeze(np.asarray(a))
+        temp_l = []
+        for i,v in enumerate(a):
+            temp_l.append([i,v])
+        temp_l = sorted(temp_l, key=lambda x: x[1], reverse=True)
+
+        for i, v in temp_l:
+            temp_dic[id_to_w(i, w_to_id)] = v
+                
+        top_similar_dic[w] = temp_dic
+    return top_similar_dic
+
+
+def cocount_norm(matrix, w_to_id):
+    return = np.log(1+matrix)
+
+
+
 def get_top_k(w, top_similar_dic, top=5):
     """
     w: word
@@ -281,12 +346,21 @@ def generate_corpus_from_cocount_and_unigram(dirin="./data.cor", dirout="gen_tex
 
     A0 = np.random.choice(frequent_words, size=sentences_count, p=unigram_p)
     gen_text_list = []
+    
+    text_file = open(dirout, "a") 
     for w in A0:
         sample = []
-        p = np.squeeze(np.asarray(pnorm_matrix[cocount_words.index(A0[0]),:]))
-        A1 = np.random.choice(cocount_words, size=1, p=p)
-        A2 = np.random.choice(cocount_words, size=1, p=p)
+        p = np.squeeze(np.asarray(pnorm_matrix[cocount_words.index(A0[0]),:]))   ### Too complicated, simplify
+        A = np.random.choice(cocount_words, size=2, p=p)
+        #A2 = np.random.choice(cocount_words, size=1, p=p)        
+        A1 = A[0] ; A2 = A[1]
         
+        ss = " ".join([ A1, A0, A2, "\n"])
+        text_file.write(ss)
+        
+    text_file.close()    
+    
+    """    
         sample.append(A1[0])
         sample.append(w)    
         sample.append(A2[0])    
@@ -296,9 +370,9 @@ def generate_corpus_from_cocount_and_unigram(dirin="./data.cor", dirout="gen_tex
     for sen in gen_text_list:
         sample = " ".join(sen)
         gen_text += sample + '\n'
-
-    with open(dirout, "w") as text_file:
-        text_file.write(gen_text)
+    """
+ 
+        
 
     text_file.close()
 
