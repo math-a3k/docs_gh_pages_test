@@ -78,6 +78,29 @@ def test2():
 
 ###################################################################################################
 ###### Pandas #####################################################################################
+def pd_to_hive_parquet(dirin, dirout="/ztmp_hive_parquet/df.parquet", verbose=False):
+    """  Hive parquet needs special headers to read, only fastparquet can do it
+              fastparquet.write(filename, data, row_group_offsets=50000000, compression=None, file_scheme='simple', open_with=<built-in function open>, mkdirs=<function default_mkdirs>, has_nulls=True, write_index=None, partition_on=[], fixed_text=None, append=False, object_encoding='infer', times='int64', custom_metadata=None)[source]
+    """
+    import fastparquet as fp   
+    from utilmy import glob_glob
+    if isinstance(dirin, pd.DataFrame):
+        fp.write(dirout, df, fixed_text=None, compression='SNAPPY', file_scheme='hive')    
+        return df.iloc[:10, :]
+
+    os_makedirs(dirout)
+    dirout = "/".join( dirout.split("/")[-1] )
+
+    flist = glob_glob(dirin, 10000)
+    for fi in flist :
+        df = fp.ParquetFile(flist )
+        df = df.to_pandas()
+        if verbose: log(df, df.dtypes)                
+        dirouti = dirout + "/" + fi.split("/")[-1]    
+        fp.write(dirouti, df, fixed_text=None, compression='SNAPPY', file_scheme='hive')       
+    return df.iloc[:10, :]
+    
+    
 def pd_random(nrows=100):
    df = pd.DataFrame(np.random.randint(0, 10, size=(nrows, 4)), 
                      columns=list('abcd'))
