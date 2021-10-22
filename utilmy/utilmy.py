@@ -110,7 +110,11 @@ def pd_getdata(verbose=True):
     return data
 
 
-
+def glob_glob(dirin, nfile=1000):
+    flist  = sorted( glob.glob(dirin  ))
+    flist  = flist[:nfile]
+    log('Nfile: ', len(flist), str(flist)[:100])
+    return flist
 
 
 ###################################################################################################
@@ -143,29 +147,7 @@ def test_all():
 
 
    ###################################################################################
-   """
-   log("\n##### Session  ")
-   sess = m.Session("ztmp/session")
 
-   global mydf
-   mydf = pd_generate_data()
-
-   sess.save('mysess', glob=globals(), tag='01')
-   os.system("ls ztmp/session")
-   sess.show()
-
-   import glob
-   flist = glob.glob("ztmp/session/" + "/*")
-   for f in flist:
-       t = os.path.exists(os.path.abspath(f))
-       assert  t == True, "session path not created "
-
-       pickle_created = os.path.exists(os.path.abspath(f + "/mydf.pkl"))
-       assert  pickle_created == True, "Pickle file not created"
-
-   sess.load('mysess')
-   sess.load('mysess', tag='01')
-   """
 
 
 
@@ -196,7 +178,8 @@ from utilmy.ppandas import (
     pd_del,
     pd_add_noise,
     pd_cols_unique_count,
-    pd_show
+    pd_show,
+    pd_to_hive_parquet
 )
 
 
