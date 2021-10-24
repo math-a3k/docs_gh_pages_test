@@ -146,7 +146,6 @@ def test_all():
    gverbosity =m.global_verbosity(__file__, "config.json", 40,)
    assert gverbosity == verbosity, "incorrect verbosity "
 
-
    ###################################################################################
 
 
@@ -256,6 +255,9 @@ from utilmy.oos import(
     os_makedirs
 )
 
+### Alias
+os_remove = os_removedirs
+to_file   = os_to_file
 
 
 
