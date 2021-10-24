@@ -773,7 +773,7 @@ def os_copy(src, dst, overwrite=False, exclude=""):
 
 
 
-def os_removedirs(path):
+def os_removedirs(path, verbose=False):
     """  issues with no empty Folder
     # Delete everything reachable from the directory named in 'top',
     # assuming there are no symbolic links.
@@ -788,12 +788,17 @@ def os_removedirs(path):
         for name in files:
             try :
               os.remove(os.path.join(root, name))
-            except :
-              pass
+              if verbose: log(name)
+            except Exception as e :
+              log('error', name, e)
+            
         for name in dirs:
             try :
               os.rmdir(os.path.join(root, name))
-            except: pass
+              if verbose: log(name)
+            except  Exception as e:
+              log('error', name, e)
+            
     try :
       os.rmdir(path)
     except: pass
