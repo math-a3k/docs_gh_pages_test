@@ -3,7 +3,7 @@ HELP= """
 
 
 """
-import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as np
+import os, sys, time, datetime,inspect, json, yaml, gc, glob, pandas as pd, numpy as np
 
 
 ###################################################################################
@@ -83,7 +83,7 @@ def pd_to_mapdict(df, colkey='ranid', colval='item_tag', naval='0', colkey_type=
     if isinstance(df, str):
        dirin = df
        log('loading', dirin)
-       flist = glob_glob( dirin , 1000) 
+       flist = glob.glob( dirin ) 
        df    = pd_read_file(flist, cols=[ colkey, colval  ], nrows=nrows,  n_pool=npool, verbose= verbose)
 
     if verbose: log( df, df.dtypes )
