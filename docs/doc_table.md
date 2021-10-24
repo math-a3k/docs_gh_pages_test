@@ -649,9 +649,9 @@ Repo: ./
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L13'>help</a> | help_create<br>print<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L345'>is_float</a> | float<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L338'>is_int</a> | int<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L856'>log10</a> | print<br>type<br>str<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L865'>log5</a> | ic<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L876'>log_trace</a> | print<br>pdb.set_trace<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L861'>log10</a> | print<br>type<br>str<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L870'>log5</a> | ic<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L881'>log_trace</a> | print<br>pdb.set_trace<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L315'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L311'>np_list_intersection</a> |  |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L646'>os_clean_memory</a> | gc.collect<br> |
@@ -661,28 +661,28 @@ Repo: ./
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L676'>os_file_check</a> | log<br>os.stat<br>time.ctime<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L385'>os_file_replacestring</a> | os_file_replacestring1<br>fileinput.FileInput<br>line.replace<br>file1.close<br>print<br>format<br>os_walk<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L576'>os_get_function_name</a> | str<br>socket.gethostname<br>sys._getframe<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L803'>os_getcwd</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L808'>os_getcwd</a> |  |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L597'>os_import</a> | __import__<br>hasattr<br>dir<br>name.startswith<br>all_names2.append<br>print<br>globs.update<br>getattr<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L826'>os_makedirs</a> | dir_or_file.split<br>os.makedirs<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L831'>os_makedirs</a> | dir_or_file.split<br>os.makedirs<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L704'>os_memory</a> | open<br>i.split<br>str<br>int<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L355'>os_path_size</a> | os.walk<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L368'>os_path_split</a> | fpath.replace<br>fpath.split<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L699'>os_platform_ip</a> |  |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L689'>os_platform_os</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L776'>os_removedirs</a> | len<br>print<br>os.walk<br>os.remove<br>os.rmdir<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L776'>os_removedirs</a> | len<br>print<br>os.walk<br>os.remove<br>log<br>os.rmdir<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L560'>os_search_content</a> | os_walk<br>z_os_search_fast<br>pd.DataFrame<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L733'>os_sizeof</a> | id<br>getsizeof<br>ids.add<br>isinstance<br>sum<br>d<br>o.items<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L721'>os_sleep_cpu</a> | psutil.cpu_percent<br>log<br>time.sleep<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L809'>os_system</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L814'>os_system</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L654'>os_system_list</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L684'>os_to_file</a> | open<br>fp.write<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L634'>os_variable_check</a> | Exception<br>log<br>sys.exit<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L624'>os_variable_exist</a> | str<br>log<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L589'>os_variable_init</a> |  |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L407'>os_walk</a> | path.replace<br>dir1.count<br>os.walk<br>root.replace<br>root.count<br>fnmatch.filter<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L837'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L882'>profiler_start</a> | Profiler<br>profiler.start<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L890'>profiler_stop</a> | profiler.stop<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L842'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L887'>profiler_start</a> | Profiler<br>profiler.start<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L895'>profiler_stop</a> | profiler.stop<br>print<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L200'>test0</a> | os_makedirs<br>os.system<br>os_removedirs<br>os_system<br>log<br>os_platform_os<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L222'>test1</a> | is_int<br>is_float<br>to_float<br>to_int<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L230'>test2</a> | os_path_size<br>log<br>os_path_split<br>open<br>file.write<br>os_file_replacestring<br>os_copy_safe<br>z_os_search_fast<br>os.getcwd<br> |
@@ -1075,24 +1075,24 @@ Repo: ./
 | <a name='utilmy/util_zip.py' href='.//utilmy/util_zip.py'>utilmy/util_zip.py</a> | function | <a href='.//utilmy/util_zip.py#L77'>os_extract_archive</a> | isinstance<br>is_match_fn<br>open_fn<br>archive.extractall<br>os.remove<br>shutil.rmtree<br> |
 | <a name='utilmy/util_zip.py' href='.//utilmy/util_zip.py'>utilmy/util_zip.py</a> | function | <a href='.//utilmy/util_zip.py#L124'>to_file</a> | open<br>fp.write<br> |
 | <a name='utilmy/util_zip.py' href='.//utilmy/util_zip.py'>utilmy/util_zip.py</a> | function | <a href='.//utilmy/util_zip.py#L11'>unzip</a> | zipfile.ZipFile<br>zip_ref.extractall<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L317'>git_current_hash</a> | subprocess.check_output<br>label.decode<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L307'>git_repo_root</a> | os_system<br>mout.split<br>len<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L319'>git_current_hash</a> | subprocess.check_output<br>label.decode<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L309'>git_repo_root</a> | os_system<br>mout.split<br>len<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L113'>glob_glob</a> | sorted<br>glob.glob<br>log<br>len<br>str<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L51'>help_create</a> | importlib.import_module<br>dir<br>import_function<br>help_get_codesource<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L39'>import_function</a> | isinstance<br>importlib.import_module<br>getattr<br>globals<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L404'>load</a> | pickle.load<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L406'>load</a> | pickle.load<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L73'>pd_generate_data</a> | random.random<br>range<br>pd.DataFrame<br>np.where<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L86'>pd_getdata</a> | url.split<br>print<br>pd.read_csv<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L66'>pd_random</a> | random.random<br>range<br>pd.DataFrame<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L397'>save</a> | os.makedirs<br>pickle.dump<br>open<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L399'>save</a> | os.makedirs<br>pickle.dump<br>open<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L123'>test_all</a> | log<br>m.git_repo_root<br>m.help_create<br>print<br>m.global_verbosity<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | class | <a href='.//utilmy/utilmy.py#L329'>Session</a> |  |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L335'>Session:__init__</a> | os.makedirs<br>print<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L352'>Session:load</a> | print<br>self.load_session<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L382'>Session:load_session</a> | print<br>os.walk<br>x.replace<br>load<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L346'>Session:save</a> | os.makedirs<br>self.save_session<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L359'>Session:save_session</a> | os.makedirs<br>globs.items<br>x.startswith<br>str<br>pd.to_pickle<br>save<br>print<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L341'>Session:show</a> | glob.glob<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | class | <a href='.//utilmy/utilmy.py#L331'>Session</a> |  |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L337'>Session:__init__</a> | os.makedirs<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L354'>Session:load</a> | print<br>self.load_session<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L384'>Session:load_session</a> | print<br>os.walk<br>x.replace<br>load<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L348'>Session:save</a> | os.makedirs<br>self.save_session<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L361'>Session:save_session</a> | os.makedirs<br>globs.items<br>x.startswith<br>str<br>pd.to_pickle<br>save<br>print<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L343'>Session:show</a> | glob.glob<br>print<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L103'>config_load</a> | str<br>logw<br>log2<br>yaml.load<br>log<br>os.makedirs<br>open<br>json.dump<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L151'>dataset_donwload</a> | log<br>os.makedirs<br>wget.download<br>url.split<br>os_extract_archive<br>log2<br> |
 | <a name='utilmy/utils.py' href='.//utilmy/utils.py'>utilmy/utils.py</a> | function | <a href='.//utilmy/utils.py#L70'>log</a> | logger.info<br>log2<br>logger.debug<br>logw<br>logger.warning<br>loge<br>logger.error<br>logger_setup<br>logger.configure<br> |
