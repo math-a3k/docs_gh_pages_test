@@ -1103,10 +1103,11 @@ dict2.__init__(self, d)
 
 utilmy/spark/main.py
 -------------------------functions----------------------
+config_default()
 config_getdefault()
 main()
 pd_to_spark_hive_format(df, dirout)
-spark_init(config:dict = None)
+spark_init(config:dict = None, appname = 'app1', local = "local[*]")
 test()
 
 
