@@ -179,7 +179,8 @@ from utilmy.ppandas import (
     pd_add_noise,
     pd_cols_unique_count,
     pd_show,
-    pd_to_hiveparquet
+    pd_to_hiveparquet,
+    pd_to_mapdict
 )
 
 
