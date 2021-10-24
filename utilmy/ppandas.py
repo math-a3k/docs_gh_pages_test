@@ -78,6 +78,28 @@ def test2():
 
 ###################################################################################################
 ###### Pandas #####################################################################################
+def pd_to_mapdict(df, colkey='ranid', colval='item_tag', naval='0', colkey_type='str', colval_type='str', npool=5, nrows=900900900, verbose=True):
+    ### load Pandas into key-val dict, for apply-map
+    if isinstance(df, str):
+       dirin = df
+       log('loading', dirin)
+       flist = glob_glob( dirin , 1000) 
+       df    = pd_read_file(flist, cols=[ colkey, colval  ], nrows=nrows,  n_pool=npool, verbose= verbose)
+
+    if verbose: log( df, df.dtypes )
+    df = df.drop_duplicates(colkey)
+    df = df.fillna(naval)    
+
+    df[colkey] = df[colkey].astype(colkey_type)
+    df[colval] = df[colval].astype(colval_type)
+
+    df = df.set_index(colkey)        
+    df = df[[ colval ]].to_dict()
+    df = df[colval] ### dict
+    if verbose: log('Dict Loaded', len(df), str(df)[:100])
+    return df
+
+
 def pd_to_hiveparquet(dirin, dirout="/ztmp_hive_parquet/df.parquet", verbose=False):
     """  Hive parquet needs special headers to read, only fastparquet can do it
               fastparquet.write(filename, data, row_group_offsets=50000000, compression=None, file_scheme='simple', open_with=<built-in function open>, mkdirs=<function default_mkdirs>, has_nulls=True, write_index=None, partition_on=[], fixed_text=None, append=False, object_encoding='infer', times='int64', custom_metadata=None)[source]
