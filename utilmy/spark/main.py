@@ -1,13 +1,49 @@
 # -*- coding: utf-8 -*-
-import argparse
-import importlib
+HELP="""
 
+    # .config("spark.jars","/myfolder/spark-avro_2.12-2.4.4.jar")\
+
+"""
+import argparse, importlib
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 
-from src.utils import config_load, log
+from utilmy.spark.src.utils import config_load, log
 
 
+
+################################################################################
+def config_default():
+  ss ="""
+- sparkconfig:
+    maxrecordfile                      : 50000
+
+    #spark.master                      : 'yarn'
+    spark.master                       : 'local[1]'   # 'spark://virtual:7077'
+    spark.app.name                     : 'logprocess'
+    spark.driver.maxResultSize         : '10g'
+    spark.driver.memory                : '10g'
+    spark.driver.port                  : '45975'
+    #spark.eventLog.enabled             : 'true'
+    #spark.executor.cores               : 2
+    #spark.executor.id                  : 'driver'
+    #spark.executor.instances           : 2
+    spark.executor.memory              : '10g'
+    #spark.kryoserializer.buffer.max    : '2000mb'
+    spark.rdd.compress                 : 'True'
+    spark.serializer                   : 'org.apache.spark.serializer.KryoSerializer'
+    #spark.serializer.objectStreamReset : 100
+    spark.sql.shuffle.partitions       : 8
+    spark.sql.session.timeZone         : "UTC"    
+    # spark.sql.catalogImplementation  : 'hive'
+    #spark.sql.warehouse.dir           : '/user/myuser/warehouse'
+    #spark.sql.warehouse.dir           : '/tmp'    
+    spark.submit.deployMode            : 'client'  
+  
+  """
+  
+  
+    
 def pd_to_spark_hive_format(df, dirout):
   """
      To export into Spark/Hive format, Issue with pyarrow.
@@ -16,6 +52,7 @@ def pd_to_spark_hive_format(df, dirout):
   import fastparquet as fp
   fp.write(dirout, df, )
 
+  
 
 def config_getdefault():
     pass
@@ -23,11 +60,11 @@ def config_getdefault():
 def test():    
     from pyspark.sql import SparkSession
     spark = SparkSession.builder\
-        .appName('abc')\
-        # .config("spark.jars","/myfolder/spark-avro_2.12-2.4.4.jar")\
+        .appName('main')\
         .master("local[*]")\
         .getOrCreate()
-    df = spark.read.format("avro").load(file_path)
+
+    df = spark.read.format("parquet").load(file_path)
 
 
 
@@ -41,7 +78,6 @@ def spark_init(config:dict=None)->SparkSession:
     if config is None :
         spark = SparkSession.builder\
             .appName('app1')\
-            # .config("spark.jars","/myfolder/spark-avro_2.12-2.4.4.jar")\
             .master("local[*]")\
             .getOrCreate()
         return spark
