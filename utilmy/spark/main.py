@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 HELP="""
+You can run Spark in local mode using local, local[n] or the most general local[*] for the master URL.
 
+The URL says how many threads can be used in total:
+local[n] uses n threads.
+
+local[*] uses as many threads as the number of processors available to the Java virtual machine (it uses Runtime.getRuntime.availableProcessors() to know the number).
+
+local[N, maxFailures] (called local-with-retries) with N being * or the number of threads to use (as explained above) and maxFailures being the value of spark.task.maxFailures.
     # .config("spark.jars","/myfolder/spark-avro_2.12-2.4.4.jar")\
+
 
 """
 import argparse, importlib
@@ -69,19 +77,21 @@ def test():
 
 
 
-def spark_init(config:dict=None)->SparkSession:
-    """
+def spark_init(config:dict=None, appname='app1', local="local[*]")->SparkSession:
+    """  from utilmy.spark import spark_init
     Args:
         config: config dict
     Returns: SparkSession
     """
     if config is None :
         spark = SparkSession.builder\
-            .appName('app1')\
-            .master("local[*]")\
+            .appName(appname)\
+            .master(local)\
             .getOrCreate()
         return spark
+
     
+    ########################################################
     cfg  = config['sparkconfig']
     conf = SparkConf().setMaster(cfg['spark.master']).setAppName(cfg['spark.app.name'])
 
