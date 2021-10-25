@@ -429,55 +429,55 @@ def os_walk(path, pattern="*", dirlevel=50):
     return  matches
 
 
-    def os_copy_safe(dirin=None, dirout=None,  nlevel=5, nfile=5000, logdir="./", pattern="*", exclude="", force=False, sleep=0.5, cmd_fallback="",
-                     verbose=True):  ### 
-        """ Copy safe
-        """
-        import shutil, time, os, glob
+def os_copy_safe(dirin=None, dirout=None,  nlevel=5, nfile=5000, logdir="./", pattern="*", exclude="", force=False, sleep=0.5, cmd_fallback="",
+                 verbose=True):  ### 
+    """ Copy safe
+    """
+    import shutil, time, os, glob
 
-        flist = [] ; dirinj = dirin
-        for j in range(nlevel):
-            ztmp   = sorted( glob.glob(dirinj + "/" + pattern ) )
-            dirinj = dirinj + "/*/"             
-            if len(ztmp) < 1 : break
-            flist  = flist + ztmp
-            
-        flist2 = []    
-        for x in exclude.split(","):
-            if len(x) <=1 : continue
-            for t in flist :
-                if  not x in t :
-                    flist2.append(t)
-        flist = flist2
+    flist = [] ; dirinj = dirin
+    for j in range(nlevel):
+        ztmp   = sorted( glob.glob(dirinj + "/" + pattern ) )
+        dirinj = dirinj + "/*/"             
+        if len(ztmp) < 1 : break
+        flist  = flist + ztmp
 
-        log('n files', len(flist), dirinj, dirout ) ; time.sleep(sleep)
-        kk = 0 ; ntry = 0 ;i =0
-        for i in range(0, len(flist)) :
-            fi  = flist[i]
-            fi2 = fi.replace(dirin, dirout)
+    flist2 = []    
+    for x in exclude.split(","):
+        if len(x) <=1 : continue
+        for t in flist :
+            if  not x in t :
+                flist2.append(t)
+    flist = flist2
 
-            if not fi.isascii(): continue
-            if not os.path.isfile(fi) : continue
+    log('n files', len(flist), dirinj, dirout ) ; time.sleep(sleep)
+    kk = 0 ; ntry = 0 ;i =0
+    for i in range(0, len(flist)) :
+        fi  = flist[i]
+        fi2 = fi.replace(dirin, dirout)
 
-            if (not os.path.isfile(fi2) )  or force :
-                 kk = kk + 1
-                 if kk > nfile   : return 1
-                 if kk % 50 == 0  and sleep >0 : time.sleep(sleep)
-                 if kk % 10 == 0  and verbose  : log(fi2)
-                 os.makedirs(os.path.dirname(fi2), exist_ok=True)
-                 try :
-                    shutil.copy(fi, fi2)
-                    ntry = 0
-                    if verbose: log(fi2)
-                 except Exception as e:
-                    log(e)
-                    time.sleep(10)
-                    log(cmd_fallback)
-                    os.system(cmd_fallback)
-                    time.sleep(10)
-                    i = i - 1
-                    ntry = ntry + 1
-        log('Scanned', i, 'transfered', kk)
+        if not fi.isascii(): continue
+        if not os.path.isfile(fi) : continue
+
+        if (not os.path.isfile(fi2) )  or force :
+             kk = kk + 1
+             if kk > nfile   : return 1
+             if kk % 50 == 0  and sleep >0 : time.sleep(sleep)
+             if kk % 10 == 0  and verbose  : log(fi2)
+             os.makedirs(os.path.dirname(fi2), exist_ok=True)
+             try :
+                shutil.copy(fi, fi2)
+                ntry = 0
+                if verbose: log(fi2)
+             except Exception as e:
+                log(e)
+                time.sleep(10)
+                log(cmd_fallback)
+                os.system(cmd_fallback)
+                time.sleep(10)
+                i = i - 1
+                ntry = ntry + 1
+    log('Scanned', i, 'transfered', kk)
 
 ### Alias       
 os_copy = os_copy_safe
