@@ -1529,6 +1529,13 @@ utilmy/tseries/util_tseries.py
 utilmy/util_download.py
 
 
+utilmy/util_sampling.py
+-------------------------functions----------------------
+reservoir_sampling(src, nsample, temp_fac = 1.5, rs = None)
+test()
+
+
+
 utilmy/util_zip.py
 -------------------------functions----------------------
 dataset_donwload(url, path_target)
