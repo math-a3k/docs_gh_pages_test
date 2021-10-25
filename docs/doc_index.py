@@ -885,6 +885,10 @@ z_os_search_fast(fname, texts = None, mode = "regex/str")
 
 -------------------------methods----------------------
 dict_to_namespace.__init__(self, d)
+toFileSafe.__init__(self, fpath)
+toFileSafe.log(self, msg)
+toFileSafe.w(self, msg)
+toFileSafe.write(self, msg)
 
 
 utilmy/parallel.py
