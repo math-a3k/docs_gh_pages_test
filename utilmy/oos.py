@@ -364,7 +364,6 @@ def os_path_size(path = '.'):
     return total_size
 
 
-
 def os_path_split(fpath:str=""):
     #### Get path split
     fpath = fpath.replace("\\", "/")
@@ -430,87 +429,105 @@ def os_walk(path, pattern="*", dirlevel=50):
     return  matches
 
 
-def os_copy_safe(dirin:str=None, dirout:str=None,  nlevel=5, nfile=50000, logdir="./", pattern="*", cmd_fallback=""):
-    """
-        Copy Safe between drives, remount drive when needed
-    """
-    import shutil, time, os, glob
-    if dirin is None :
-       dirin  = "/tmp/"
-       dirout = "/tmp"
+    def os_copy_safe(dirin=None, dirout=None,  nlevel=5, nfile=5000, logdir="./", pattern="*", exclude="", force=False, sleep=0.5, cmd_fallback="",
+                     verbose=True):  ### 
+        """ Copy safe
+        """
+        import shutil, time, os, glob
 
-    flist = [] ; dirinj = dirin
-    for j in range(nlevel):
-        dirinj = dirinj + "/" + pattern
-        ztmp =  sorted( glob.glob(dirinj ) )
-        if len(ztmp) < 1 : break
-        flist  = flist + ztmp
+        flist = [] ; dirinj = dirin
+        for j in range(nlevel):
+            ztmp   = sorted( glob.glob(dirinj + "/" + pattern ) )
+            dirinj = dirinj + "/*/"             
+            if len(ztmp) < 1 : break
+            flist  = flist + ztmp
+            
+        flist2 = []    
+        for x in exclude.split(","):
+            if len(x) <=1 : continue
+            for t in flist :
+                if  not x in t :
+                    flist2.append(t)
+        flist = flist2
 
+        log('n files', len(flist), dirinj, dirout ) ; time.sleep(sleep)
+        kk = 0 ; ntry = 0 ;i =0
+        for i in range(0, len(flist)) :
+            fi  = flist[i]
+            fi2 = fi.replace(dirin, dirout)
 
-    log('n files', len(flist), dirinj, dirin )
-    kk = 1 ; ntry = 0 ;i =0
-    for i in range(0, len(flist)) :
-        fi  = flist[i]
-        fi2 = fi.replace(dirin, dirout)
+            if not fi.isascii(): continue
+            if not os.path.isfile(fi) : continue
 
-        # if not fi.isascii(): continue
+            if (not os.path.isfile(fi2) )  or force :
+                 kk = kk + 1
+                 if kk > nfile   : return 1
+                 if kk % 50 == 0  and sleep >0 : time.sleep(sleep)
+                 if kk % 10 == 0  and verbose  : log(fi2)
+                 os.makedirs(os.path.dirname(fi2), exist_ok=True)
+                 try :
+                    shutil.copy(fi, fi2)
+                    ntry = 0
+                    if verbose: log(fi2)
+                 except Exception as e:
+                    log(e)
+                    time.sleep(10)
+                    log(cmd_fallback)
+                    os.system(cmd_fallback)
+                    time.sleep(10)
+                    i = i - 1
+                    ntry = ntry + 1
+        log('Scanned', i, 'transfered', kk)
 
-        if not os.path.isfile(fi2) and os.path.isfile(fi) :
-             kk = kk + 1
-             if kk > nfile   : return 1
-             if kk % 50 == 0 : time.sleep(0.5)
-             if kk % 10 : log(fi2)
-             os.makedirs(os.path.dirname(fi2), exist_ok=True)
-             try :
-                shutil.copy(fi, fi2)
-                ntry = 0
-                # log(fi2)
-             except Exception as e:
-                log(e)
-                time.sleep(10)
-                log(cmd_fallback)
-                os.system(cmd_fallback)
-                time.sleep(10)
-                i = i - 1
-                ntry = ntry + 1
-    log('Finished', i)
-
-
-    
-    def os_merge_safe(dirin_list=None, dirout=None, nlevel=5, nfile=5000, nrows=10**8,  cmd_fallback = "umount /mydrive/  && mount /mydrive/  ", sleep=0.3):
-        ### merge file in safe way
-        nrows = 10**8
-        flist = []
-        for fi in dirin_list :
-            flist = flist + glob.glob(fi)
-        log(flist); time.sleep(2)    
+### Alias       
+os_copy = os_copy_safe
+"""
+def os_copy(src, dst, overwrite=False, exclude=""):
         
-        os_makedirs(dirout)            
-        fout = open(dirout,'a')
-        for fi in flist :    
-            log(fi)             
-            ii   = 0
-            fin  = open(fi,'r')
-            while True:
-                try :
-                  ii = ii + 1
-                  if ii % 100000 == 0 : time.sleep(sleep)
-                  if ii > nrows : break      
-                  x = fin.readline()
-                  if not x: break        
-                  fout.write(x.strip()+"\n")
-                except Exception as e:
-                  log(e)
-                  os.system(cmd_fallback)
-                  time.sleep(10)
-                  fout.write(x.strip()+"\n") 
-            fin.close()    
-    
-    
-    
-    
-    
-    
+    import shutil
+    def ignore_pyc_files(dirname, filenames):
+        return [name for name in filenames if name.endswith('.pyc')]
+
+    patterns = exclude.split(";")
+    os.makedirs(dst, exist_ok=True)
+    shutil.copytree(src, dst, ignore = shutil.ignore_patterns(*patterns))
+"""
+
+
+def os_merge_safe(dirin_list=None, dirout=None, nlevel=5, nfile=5000, nrows=10**8,  cmd_fallback = "umount /mydrive/  && mount /mydrive/  ", sleep=0.3):
+    ### merge file in safe way
+    nrows = 10**8
+    flist = []
+    for fi in dirin_list :
+        flist = flist + glob.glob(fi)
+    log(flist); time.sleep(2)    
+
+    os_makedirs(dirout)            
+    fout = open(dirout,'a')
+    for fi in flist :    
+        log(fi)             
+        ii   = 0
+        fin  = open(fi,'r')
+        while True:
+            try :
+              ii = ii + 1
+              if ii % 100000 == 0 : time.sleep(sleep)
+              if ii > nrows : break      
+              x = fin.readline()
+              if not x: break        
+              fout.write(x.strip()+"\n")
+            except Exception as e:
+              log(e)
+              os.system(cmd_fallback)
+              time.sleep(10)
+              fout.write(x.strip()+"\n") 
+        fin.close()    
+
+
+
+
+
+
     
     
 def z_os_search_fast(fname, texts=None, mode="regex/str"):
@@ -761,15 +778,6 @@ def os_sizeof(o, ids, hint=" deep_getsizeof(df_pd, set()) "):
 
 
 
-def os_copy(src, dst, overwrite=False, exclude=""):
-    import shutil
-    def ignore_pyc_files(dirname, filenames):
-        return [name for name in filenames if name.endswith('.pyc')]
-
-
-    patterns = exclude.split(";")
-    os.makedirs(dst, exist_ok=True)
-    shutil.copytree(src, dst, ignore = shutil.ignore_patterns(*patterns))
 
 
 
