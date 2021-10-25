@@ -1,21 +1,9 @@
-##### 1) Continuous Integration CI Tests  + Full size Run
+##### To add utilities
 ```
-Run with Docker,
-Spark 2.4 setup as 1 Master + 1 node (standalone cluster)
+
+https://github.com/zaksamalik/pyspark-utilities
 
 
-##### Unit Testing
-   With Spark Docker + Github Actions CI + Pytest
-      Results:  https://github.com/arita37/zzeqe_knoe/runs/2753712471?check_suite_focus=true
-
-      config:   https://github.com/arita37/zzeqe_knoe/blob/test/.github/workflows/pytest.yml
-
-
-##### Full Run
-   With Spark Docker + Github Actions CI + Full data size
-      Results:  https://github.com/arita37/zzeqe_knoe/runs/2753712472?check_suite_focus=true
-
-      config:  https://github.com/arita37/zzeqe_knoe/blob/test/.github/workflows/main_full.yml
 
 
 ```
