@@ -46,10 +46,11 @@ Utils
 
 https://packagegalaxy.com/python/utilmy
 
+https://github.com/arita37/utilmy
 
 
-git hash : https://github.com/arita37/myutil/tree/{githash}
 """
+### git hash : https://github.com/arita37/myutil/tree/{githash}
 
 long_description = f""" ``` """ + ss1 +  """```"""
 
