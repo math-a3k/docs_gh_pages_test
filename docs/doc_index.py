@@ -1182,6 +1182,12 @@ run(spark:SparkSession, config_name: str = 'config.yaml')
 
 
 
+utilmy/spark/src/util_hadoop.py
+-------------------------functions----------------------
+hdfs_down(from_dir = "", to_dir = "", verbose = False, n_pool = 1, **kw)
+
+
+
 utilmy/spark/src/util_models.py
 -------------------------functions----------------------
 Predict(spark, df_m:pyspark.sql.DataFrame, features:list, regressor:str, path:str = None, conf_model:dict = None)
@@ -1189,6 +1195,9 @@ TimeSeriesSplit(df_m:pyspark.sql.DataFrame, splitRatio:float, sparksession:objec
 Train(spark, df_m:pyspark.sql.DataFrame, features:list, regressor:str, path:str = None, conf_model:dict = None)
 os_makedirs(path:str)
 
+
+
+utilmy/spark/src/util_spark.py
 
 
 utilmy/spark/src/utils.py
