@@ -649,40 +649,40 @@ Repo: ./
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L13'>help</a> | help_create<br>print<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L345'>is_float</a> | float<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L338'>is_int</a> | int<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L861'>log10</a> | print<br>type<br>str<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L870'>log5</a> | ic<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L881'>log_trace</a> | print<br>pdb.set_trace<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L869'>log10</a> | print<br>type<br>str<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L878'>log5</a> | ic<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L889'>log_trace</a> | print<br>pdb.set_trace<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L315'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L311'>np_list_intersection</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L646'>os_clean_memory</a> | gc.collect<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L764'>os_copy</a> | range<br>sorted<br>glob.glob<br>len<br>log<br>fi.replace<br>time.sleep<br>os.makedirs<br>shutil.copy<br>os.system<br>os_merge_safe<br>os_makedirs<br>open<br>fin.readline<br>fout.write<br>fin.close<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L433'>os_copy_safe</a> | range<br>sorted<br>glob.glob<br>len<br>log<br>fi.replace<br>time.sleep<br>os.makedirs<br>shutil.copy<br>os.system<br>os_merge_safe<br>os_makedirs<br>open<br>fin.readline<br>fout.write<br>fin.close<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L694'>os_cpu</a> | os.cpu_count<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L676'>os_file_check</a> | log<br>os.stat<br>time.ctime<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L385'>os_file_replacestring</a> | os_file_replacestring1<br>fileinput.FileInput<br>line.replace<br>file1.close<br>print<br>format<br>os_walk<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L576'>os_get_function_name</a> | str<br>socket.gethostname<br>sys._getframe<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L808'>os_getcwd</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L597'>os_import</a> | __import__<br>hasattr<br>dir<br>name.startswith<br>all_names2.append<br>print<br>globs.update<br>getattr<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L831'>os_makedirs</a> | dir_or_file.split<br>os.makedirs<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L704'>os_memory</a> | open<br>i.split<br>str<br>int<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L663'>os_clean_memory</a> | gc.collect<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L432'>os_copy_safe</a> | sorted<br>glob.glob<br>len<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L711'>os_cpu</a> | os.cpu_count<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L693'>os_file_check</a> | log<br>os.stat<br>time.ctime<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L384'>os_file_replacestring</a> | os_file_replacestring1<br>fileinput.FileInput<br>line.replace<br>file1.close<br>print<br>format<br>os_walk<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L593'>os_get_function_name</a> | str<br>socket.gethostname<br>sys._getframe<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L816'>os_getcwd</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L614'>os_import</a> | __import__<br>hasattr<br>dir<br>name.startswith<br>all_names2.append<br>print<br>globs.update<br>getattr<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L839'>os_makedirs</a> | dir_or_file.split<br>os.makedirs<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L721'>os_memory</a> | open<br>i.split<br>str<br>int<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L497'>os_merge_safe</a> | glob.glob<br>log<br>time.sleep<br>os_makedirs<br>open<br>fin.readline<br>fout.write<br>os.system<br>fin.close<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L355'>os_path_size</a> | os.walk<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L368'>os_path_split</a> | fpath.replace<br>fpath.split<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L699'>os_platform_ip</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L689'>os_platform_os</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L776'>os_removedirs</a> | len<br>print<br>os.walk<br>os.remove<br>log<br>os.rmdir<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L560'>os_search_content</a> | os_walk<br>z_os_search_fast<br>pd.DataFrame<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L733'>os_sizeof</a> | id<br>getsizeof<br>ids.add<br>isinstance<br>sum<br>d<br>o.items<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L721'>os_sleep_cpu</a> | psutil.cpu_percent<br>log<br>time.sleep<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L814'>os_system</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L654'>os_system_list</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L684'>os_to_file</a> | open<br>fp.write<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L634'>os_variable_check</a> | Exception<br>log<br>sys.exit<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L624'>os_variable_exist</a> | str<br>log<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L589'>os_variable_init</a> |  |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L407'>os_walk</a> | path.replace<br>dir1.count<br>os.walk<br>root.replace<br>root.count<br>fnmatch.filter<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L842'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L887'>profiler_start</a> | Profiler<br>profiler.start<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L895'>profiler_stop</a> | profiler.stop<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L367'>os_path_split</a> | fpath.replace<br>fpath.split<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L716'>os_platform_ip</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L706'>os_platform_os</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L784'>os_removedirs</a> | len<br>print<br>os.walk<br>os.remove<br>log<br>os.rmdir<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L577'>os_search_content</a> | os_walk<br>z_os_search_fast<br>pd.DataFrame<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L750'>os_sizeof</a> | id<br>getsizeof<br>ids.add<br>isinstance<br>sum<br>d<br>o.items<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L738'>os_sleep_cpu</a> | psutil.cpu_percent<br>log<br>time.sleep<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L822'>os_system</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L671'>os_system_list</a> | len<br>enumerate<br>log<br>os.system<br>time.sleep<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L701'>os_to_file</a> | open<br>fp.write<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L651'>os_variable_check</a> | Exception<br>log<br>sys.exit<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L641'>os_variable_exist</a> | str<br>log<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L606'>os_variable_init</a> |  |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L406'>os_walk</a> | path.replace<br>dir1.count<br>os.walk<br>root.replace<br>root.count<br>fnmatch.filter<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L850'>print_everywhere</a> | snoop.install<br>myfun<br>pp<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L895'>profiler_start</a> | Profiler<br>profiler.start<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L903'>profiler_stop</a> | profiler.stop<br>print<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L200'>test0</a> | os_makedirs<br>os.system<br>os_removedirs<br>os_system<br>log<br>os_platform_os<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L222'>test1</a> | is_int<br>is_float<br>to_float<br>to_int<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L230'>test2</a> | os_path_size<br>log<br>os_path_split<br>open<br>file.write<br>os_file_replacestring<br>os_copy_safe<br>z_os_search_fast<br>os.getcwd<br> |
@@ -694,7 +694,7 @@ Repo: ./
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L324'>to_float</a> | float<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L331'>to_int</a> | int<br>float<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L298'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
-| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L516'>z_os_search_fast</a> | re.compile<br>enumerate<br>re.search<br>line.decode<br>res.append<br>found.start<br>text.encode<br>line.find<br>print<br> |
+| <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L533'>z_os_search_fast</a> | re.compile<br>enumerate<br>re.search<br>line.decode<br>res.append<br>found.start<br>text.encode<br>line.find<br>print<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | class | <a href='.//utilmy/oos.py#L287'>dict_to_namespace</a> |  |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | method | <a href='.//utilmy/oos.py#L289'>dict_to_namespace:__init__</a> |  |
 | <a name='utilmy/parallel.py' href='.//utilmy/parallel.py'>utilmy/parallel.py</a> | function | <a href='.//utilmy/parallel.py#L19'>help</a> | help_create<br>print<br> |
