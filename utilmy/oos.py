@@ -281,6 +281,9 @@ def test5():
     log(os_sizeof(pd_df, set()))
 
 
+    
+    
+    
 
 ########################################################################################################
 ########################################################################################################
@@ -350,8 +353,32 @@ def is_float(x):
         return False   
 
 
-
+########################################################################################################
 ##### OS, cofnfig ######################################################################################
+class toFileSafe(object):
+   def __init__(self,fpath):
+      """ Thread Safe file writer
+        tofile = toFileSafe('mylog.log)
+        tofile.w("msg")
+      """
+      logger = logging.getLogger('logsafe')
+      logger.setLevel(logging.INFO)
+      ch = logging.FileHandler(fpath)
+      ch.setFormatter(logging.Formatter('%(message)s'))
+      logger.addHandler(ch)     
+      self.logger = logger
+      
+   def write(self, msg):   
+        self.logger.info( msg)
+    
+   def log(self, msg):   
+        self.logger.info( msg)    
+
+   def w(self, msg):   
+        self.logger.info( msg)   
+
+        
+        
 def os_path_size(path = '.'):
     total_size = 0
     for dirpath, dirnames, filenames in os.walk(path):
