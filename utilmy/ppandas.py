@@ -5,6 +5,8 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, glob, pandas as pd, numpy as np
 
+from utilmy import pd_read_file, pd_read_file2
+
 
 ###################################################################################
 from utilmy.utilmy import log, log2
@@ -78,6 +80,34 @@ def test2():
 
 ###################################################################################################
 ###### Pandas #####################################################################################
+def pd_schema_enforce(df, int_default:int=0, dtype_dict:dict=None):
+        """   dtype0= {'brand': 'int64',
+                 'category': 'int64',
+                 'chain': 'int64',
+              }
+        """
+        if isinstance(df, str):
+            df = pd_read_file(df)
+
+
+        if dtype_dict is not None :
+           return df.astype(dtype_dict)    
+
+
+        def to_int(x):
+            try : return int(x)
+            except : return int_default
+
+        for ci in df.columns :
+            ss = str(df[ci].dtypes).lower()
+            if 'object'  in ss:   df[ci] = df[ci].astype('str')  
+            elif 'int64' in ss:   df[ci] = df[ci].apply( lambda x : to_int(x)) 
+            elif 'float' in ss:   df[ci] = df[ci].apply( lambda x : float(x))
+            elif 'int'   in ss:   df[ci] = df[ci].apply( lambda x : to_int(x)).astype('int32') 
+        return df           
+
+    
+
 def pd_to_mapdict(df, colkey='ranid', colval='item_tag', naval='0', colkey_type='str', colval_type='str', npool=5, nrows=900900900, verbose=True):
     ### load Pandas into key-val dict, for apply-map
     if isinstance(df, str):
