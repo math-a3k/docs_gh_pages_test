@@ -5,7 +5,7 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, glob, pandas as pd, numpy as np
 
-from utilmy.ppandas import pd_read_file, pd_read_file2
+from utilmy.parallel import pd_read_file, pd_read_file2
 
 
 ###################################################################################
