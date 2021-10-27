@@ -262,7 +262,6 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
     ### TODO : use with kewyword arguments ###############
     def fun_async(filei):
-        try :
             ext  = os.path.splitext(filei)[1]
             if ext is None or ext == '': ext ='.parquet'
 
