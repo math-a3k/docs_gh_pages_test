@@ -262,25 +262,28 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
     ### TODO : use with kewyword arguments ###############
     def fun_async(filei):
-        ext  = os.path.splitext(filei)[1]
-        if ext is None or ext == '': ext ='.parquet'
-
-        pd_reader_obj = readers.get(ext, None)
-        # dfi = pd_reader_obj(filei)
         try :
-           dfi = pd_reader_obj(filei, **kw)
-        except Exception as e:
-           log('Error', filei, e)
-           return pd.DataFrame()
+            ext  = os.path.splitext(filei)[1]
+            if ext is None or ext == '': ext ='.parquet'
 
-        # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
-        if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
-        if cols is not None :             dfi = dfi[cols]
-        if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
-        if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
-        if fun_apply is not None  :       dfi = dfi.apply(lambda  x : fun_apply(x), axis=1)
-        return dfi
+            pd_reader_obj = readers.get(ext, None)
+            # dfi = pd_reader_obj(filei)
+            try :
+               dfi = pd_reader_obj(filei, **kw)
+            except Exception as e:
+               log('Error', filei, e)
+               return pd.DataFrame()
 
+            # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
+            if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
+            if cols is not None :             dfi = dfi[cols]
+            if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
+            if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
+            if fun_apply is not None  :       dfi = dfi.apply(lambda  x : fun_apply(x), axis=1)
+            return dfi
+
+            
+            
     ### Parallel run #################################
     import concurrent.futures
     dfall  = pd.DataFrame()
@@ -291,10 +294,12 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
             futures.append( executor.submit(fun_async, fi ))
 
         for future in concurrent.futures.as_completed(futures):
-          dfi   = future.result()
-          dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
-          del dfi; gc.collect()
-
+            try:
+                dfi   = future.result()
+                dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
+                del dfi; gc.collect()
+            except Exception as e:
+                log('error', e)
     return dfall
 
 
@@ -376,11 +381,15 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
            if verbose : log(j, filei)
 
         for i in range(n_pool):
-          if i >= len(job_list): break
-          dfi   = job_list[ i].get()
-          dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
-          #log("Len", n_pool*j + i, len(dfall))
-          del dfi; gc.collect()
+            try :
+                  if i >= len(job_list): break
+                  dfi   = job_list[ i].get()
+                  dfall = pd.concat( (dfall, dfi), ignore_index=ignore_index, sort= concat_sort)
+                  #log("Len", n_pool*j + i, len(dfall))
+                  del dfi; gc.collect()
+            except Exception as e:
+                log('error', filei, e)
+          
 
     pool.close() ; pool.join() ;  pool = None
     if m_job>0 and verbose : log(n_file, j * n_file//n_pool )
