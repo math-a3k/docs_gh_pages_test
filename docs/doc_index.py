@@ -400,6 +400,7 @@ utilmy/deeplearning/util_embedding.py
 convert_txt_to_vector_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8)
 data_add_onehot(dfref, img_dir, labels_col)
 embedding_load_parquet(dirin = "df.parquet", nmax  =  500)
+embedding_table_comparison(embeddings_1:list, embeddings_2:list, labels_1:list, labels_2:list, plot_title, plot_width = 1200, plot_height = 600, xaxis_font_size = '12pt', yaxis_font_size = '12pt')
 embedding_to_parquet(dirin = None, dirout = None, skip = 0, nmax = 10**8, is_linevalid_fun=Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None  = Nonedirout) ; os_makedirs(dirout)  ; time.sleep(4)if is_linevalid_fun is None : #### Validate linew):)
 faiss_create_index(df_or_path = None, col = 'emb', dir_out = "", db_type  =  "IVF4096,Flat", nfile = 1000, emb_dim = 200)
 faiss_topk(df = None, root = None, colid = 'id', colemb = 'emb', faiss_index = None, topk = 200, npool = 1, nrows = 10**7, nfile = 1000)
