@@ -23,23 +23,18 @@ import os, sys, random, numpy as np, pandas as pd, fire, time
 from datetime import datetime
 from typing import List
 from tqdm import tqdm
+from box import Box
 
 try :
-   # Converting python --> HTML
-   from box import Box
+   
    import matplotlib.pyplot as plt
    import mpld3
    from highcharts import Highchart
    from pyvis import network as net
 except :
-   print("Installing  ")
-   cmd = "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis "
-   print( cmd +"  \n\n\n ...") ; time.sleep(5)
-   os.system(cmd + " --upgrade-strategy only-if-needed mypackage ")
-   print( " Please reload utilmy  \n\n\n")   
-   from utilmy.utilmy import sys_exit
-   sys_exit(msg="exited", cmd_sys="", err_int=0)
-
+   from utilmy.utilmy import sys_install
+   sys_install(cmd= "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis")
+   
 
 ############################################################################################
 def log(*s):
