@@ -48,7 +48,7 @@ https://packagegalaxy.com/python/utilmy
 
 
 Report bugs here:
-https://github.com/arita37/utilmy
+https://github.com/arita37/utilmy_bugonly
 
 
 """
