@@ -118,6 +118,18 @@ def glob_glob(dirin, nfile=1000):
     return flist
 
 
+def sys_exit(msg="exited", cmd_sys="", err_int=0):
+    import os, sys
+    print(msg)         
+    
+    if len(cmd) > 1: os.system(cmd)
+    ### exit with no error msg 
+    f = open(os.devnull, 'w')
+    sys.stderr = f
+    sys.exit(err_int)         
+
+
+
 ###################################################################################################
 ###### Test #####################################################################################
 def test_all():
