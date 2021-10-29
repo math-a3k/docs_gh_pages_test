@@ -118,14 +118,12 @@ def glob_glob(dirin, nfile=1000):
     return flist
 
 
-def sys_exit(msg="exited", cmd_sys="", err_int=0):
+def sys_exit(msg="exited",  err_int=0):
     import os, sys
     print(msg)         
-    
-    if len(cmd_sys) > 1: os.system(cmd_sys)
     ### exit with no error msg 
-    f = open(os.devnull, 'w')
-    sys.stderr = f
+    # sys.stderr = open(os.devnull, 'w')
+    sys.stdout = sys.__stdout__ = open(os.devnull, 'w')
     sys.exit(err_int)         
 
     
@@ -134,8 +132,8 @@ def sys_install(cmd=""):
    print("Installing  ")
    print( cmd +"  \n\n ...") ; time.sleep(7)
    os.system(cmd )
-   print( "\n\n\n############### Please reload utilmy  ############## \n\n\n")   
-   print('Exit \n\n')
+   print( "\n\n\n############### Please relaunch python  ############## \n")   
+   print('Exit \n\n\n')
 
 
 
