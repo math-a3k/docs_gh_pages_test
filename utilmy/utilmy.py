@@ -132,7 +132,7 @@ def sys_exit(msg="exited", cmd_sys="", err_int=0):
 def sys_install(cmd=""):
    import os, sys, time  
    print("Installing  ")
-   print( cmd +"  \n\n ...") ; time.sleep(5)
+   print( cmd +"  \n\n ...") ; time.sleep(7)
    os.system(cmd )
    print( " Please reload utilmy  \n\n\n")   
    print('Exit')
