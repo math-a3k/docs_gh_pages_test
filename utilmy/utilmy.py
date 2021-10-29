@@ -122,7 +122,7 @@ def sys_exit(msg="exited", cmd_sys="", err_int=0):
     import os, sys
     print(msg)         
     
-    if len(cmd) > 1: os.system(cmd)
+    if len(cmd_sys) > 1: os.system(cmd_sys)
     ### exit with no error msg 
     f = open(os.devnull, 'w')
     sys.stderr = f
