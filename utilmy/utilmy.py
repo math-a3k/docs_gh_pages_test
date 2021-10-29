@@ -128,6 +128,16 @@ def sys_exit(msg="exited", cmd_sys="", err_int=0):
     sys.stderr = f
     sys.exit(err_int)         
 
+    
+def sys_install(cmd=""):
+   import os, sys, time  
+   print("Installing  ")
+   print( cmd +"  \n\n ...") ; time.sleep(5)
+   os.system(cmd + " -y --upgrade-strategy only-if-needed mypackage ")
+   print( " Please reload utilmy  \n\n\n")   
+   from utilmy.utilmy import sys_exit
+   sys_exit(msg="exited", cmd_sys="", err_int=0)
+
 
 
 ###################################################################################################
