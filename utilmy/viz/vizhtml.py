@@ -32,8 +32,8 @@ try :
    from highcharts import Highchart
    from pyvis import network as net
 except :
-   print("Please install manually : ')
-   print(" pip install python-box python-highcharts  mpld3 pandas-highcharts  pretty-html-table matplotlib ipython  pyvis \n\n\n")
+   print("Please install manually : ")
+   print(" pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis \n\n\n")
    sys.exit()
 
 
