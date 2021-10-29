@@ -1566,7 +1566,7 @@ pd_generate_data(ncols = 7, nrows = 100)
 pd_getdata(verbose = True)
 pd_random(ncols = 7, nrows = 100)
 save(dd, to_file = "", verbose = False)
-sys_exit(msg = "exited", cmd_sys = "", err_int = 0)
+sys_exit(msg = "exited", err_int = 0)
 sys_install(cmd = "")
 test_all()
 

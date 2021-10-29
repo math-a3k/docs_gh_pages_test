@@ -133,7 +133,7 @@ traitlets==4.3.3
 typing-extensions==3.10.0.2
 urllib3==1.26.7
 urwid==2.1.2
--e git+https://github.com/arita37/myutil@e887e3dfe50483c61ddcbcafd0e6991af9b7274b#egg=utilmy
+-e git+https://github.com/arita37/myutil@0c7be1c9bb22148de163bf4f07dfbb1632a18f8b#egg=utilmy
 visions==0.7.4
 wcwidth==0.2.5
 Werkzeug==2.0.2
