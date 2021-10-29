@@ -1097,7 +1097,7 @@ Repo: ./
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L66'>pd_random</a> | random.random<br>range<br>pd.DataFrame<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L426'>save</a> | os.makedirs<br>pickle.dump<br>open<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L121'>sys_exit</a> | print<br>len<br>os.system<br>open<br>sys.exit<br> |
-| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L132'>sys_install</a> | print<br>time.sleep<br>os.system<br>sys.exit<br> |
+| <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L132'>sys_install</a> | print<br>time.sleep<br>os.system<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | function | <a href='.//utilmy/utilmy.py#L147'>test_all</a> | log<br>m.git_repo_root<br>m.help_create<br>print<br>m.global_verbosity<br> |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | class | <a href='.//utilmy/utilmy.py#L358'>Session</a> |  |
 | <a name='utilmy/utilmy.py' href='.//utilmy/utilmy.py'>utilmy/utilmy.py</a> | method | <a href='.//utilmy/utilmy.py#L364'>Session:__init__</a> | os.makedirs<br>print<br> |
