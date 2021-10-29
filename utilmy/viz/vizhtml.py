@@ -33,7 +33,7 @@ try :
    from pyvis import network as net
 except :
    from utilmy.utilmy import sys_install
-   sys_install(cmd= "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis")
+   sys_install(cmd= "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis  --upgrade-strategy only-if-needed")
    
 
 ############################################################################################
