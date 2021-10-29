@@ -35,7 +35,7 @@ def log_mem(*s):
 
 ################################################################################################
 # Test functions
-def test1_functions():
+def test_functions():
     """Check that list function is working.
     os_lock_releaseLock, os_lock_releaseLock, os_lock_execute
 
@@ -50,7 +50,7 @@ def test1_functions():
     os_lock_execute(running, [1, 2, 3], plock='tmp/plock.lock')
 
 
-def test2_funtions_thread():
+def test_funtions_thread():
     """Check that list function is working.
     os_lock_releaseLock, os_lock_releaseLock, os_lock_execute
     Multi threads
@@ -81,7 +81,7 @@ def test2_funtions_thread():
         t.start()
 
 
-def test3_index():
+def test_index():
     """Check that class IndexLock is working
     Multi threads
 
@@ -116,9 +116,9 @@ def test3_index():
 
 
 def test_all():
-    test1_functions()
-    test2_funtions_thread()
-    test3_index()
+    test_functions()
+    test_funtions_thread()
+    test_index()
       
       
 ###############################################################################################
