@@ -299,7 +299,8 @@ def test_cssname(verbose=False,css_name="A4_size"):
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
-    def __init__(self, dir_out="", mode="", title: str="", format: str = None, cfg: dict =None,css_name:str="a4_page",
+    def __init__(self, dir_out="", mode="", title: str = "", format: str = None, cfg: dict = None,
+                 css_name: str = "a4_page", css_file: str = None, jscript_file: str = None,
                  verbose=True, **kw):
         """
            Generate HTML page to display graph/Table.
@@ -326,8 +327,12 @@ class htmlDoc(object):
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script> 
               <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet"> """
         
+        links = links + f'\n<link rel="stylesheet" href="{css_file}">' if css_file else links
+      
         self.head = self.head + """<head><title>{title}</title>
               {links}""".format(title=title,links=links)
+         
+        self.tail = f"\n<script src='{jscript_file}'></script>\n" + self.tail if jscript_file else self.tail
 
         self.add_css(CSS_TEMPLATE.get(css_name, ''))
         # self.add_css(css_get_template(css_name=css_name))
