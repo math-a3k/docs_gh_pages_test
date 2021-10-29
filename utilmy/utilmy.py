@@ -136,7 +136,7 @@ def sys_install(cmd=""):
    os.system(cmd )
    print( " Please reload utilmy  \n\n\n")   
    print('Exit')
-   sys.exit()
+   sys.exit(0)
    #from utilmy.utilmy import sys_exit
    #sys_exit(msg="exited", cmd_sys="", err_int=0)
 
