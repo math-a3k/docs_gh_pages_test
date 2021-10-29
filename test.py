@@ -191,9 +191,12 @@ def test_deeplearning_keras():
    
 #######################################################################################
 def test_deepelearning_yolov5():
-   from utilmy.deeplearning import util_transform as m
+   from utilmy.deeplearning import util_yolo as m
    m.test_all()
 
+
+
+import utilmy as  uu
 
 
 
