@@ -19,7 +19,7 @@ https://datatables.net/
 https://www.highcharts.com/docs/getting-started/how-to-set-options
 
 """
-import os, sys, random, numpy as np, pandas as pd, fire
+import os, sys, random, numpy as np, pandas as pd, fire, time
 from datetime import datetime
 from typing import List
 from tqdm import tqdm
@@ -32,8 +32,11 @@ try :
    from highcharts import Highchart
    from pyvis import network as net
 except :
-   print("Please install manually : ")
-   print(" pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis \n\n\n")
+   print("Installing  ")
+   cmd = "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis "
+   print( cmd +"  \n\n\n ...") ; time.sleep(5)
+   os.system(cmd + " --upgrade-strategy only-if-needed mypackage ")
+   print( " Please reload utilmy  \n\n\n")   
    sys.exit()
 
 
