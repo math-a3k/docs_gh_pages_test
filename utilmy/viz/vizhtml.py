@@ -26,16 +26,17 @@ from tqdm import tqdm
 from box import Box
 
 try :
-   
    import matplotlib.pyplot as plt
    import mpld3
    from highcharts import Highchart
    from pyvis import network as net
 except :
    from utilmy.utilmy import sys_install
-   sys_install(cmd= "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis  --upgrade-strategy only-if-needed")
-   
+   sys_install(cmd= "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis  --upgrade-strategy only-if-needed")   
+   sys.stderr = open(os.devnull, 'w')
+   sys.exit(0)
 
+   
 ############################################################################################
 def log(*s):
     print(*s, flush=True)
