@@ -366,7 +366,7 @@ class Session(object) :
       os.makedirs( folder , exist_ok= True)
       lcheck = [ "<class 'pandas.core.frame.DataFrame'>", "<class 'list'>", "<class 'dict'>",
                  "<class 'str'>" ,  "<class 'numpy.ndarray'>" ]
-      lexclude = {   "In", "Out" }
+      lexclude = {   "In", "Out", "get_ipython', 'exit','quit', 'Session',  }
       gitems = globs.items()
       for x, _ in gitems :
          if not x.startswith('_') and  x not in lexclude  :
