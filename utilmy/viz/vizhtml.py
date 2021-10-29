@@ -37,7 +37,8 @@ except :
    print( cmd +"  \n\n\n ...") ; time.sleep(5)
    os.system(cmd + " --upgrade-strategy only-if-needed mypackage ")
    print( " Please reload utilmy  \n\n\n")   
-   sys.exit()
+   from utilmy.utilmy import sys_exit
+   sys_exit(msg="exited", cmd_sys="", err_int=0)
 
 
 ############################################################################################
