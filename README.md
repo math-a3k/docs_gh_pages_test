@@ -49,29 +49,19 @@
 
 
 
-## Other usages
+## Variable  naming rules/Patterns
 
  ```
-   #### Save current python session on disk.
-   from utilmy import Session
-   sess = Session("ztmp/session")
+    df    --->   pandas dataframe
+    
+    def  pd_XXXXX  : main input is dataframe
+    
+    def  np_XXXXX  : main input is numpy
    
-   
-   aabb = 'ok'
-   
-      
-   ### Save Python sesison
-   sess.save('mysess', globals(),)
-   sess.show()
-   
-   
-   ### Reload session
-   del aabb
-   sess.load('mysess', )
-   print(aabb)
-   
-   
-   
+    def log  :    used for print/logging
+    
+    
+    
  ```
  
  
