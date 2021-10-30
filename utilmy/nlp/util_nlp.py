@@ -47,10 +47,11 @@ import rouge
 ###############################################################################
 #                  TEXT ANALYSIS                                              #
 ###############################################################################
-'''
-Plot univariate and bivariate distributions.
-'''
+
 def plot_distributions(dtf, x, max_cat=20, top=None, y=None, bins=None, figsize=(10,5)):
+    '''
+    Plot univariate and bivariate distributions.
+    '''
     ## univariate
     if y is None:
         fig, ax = plt.subplots(figsize=figsize)
