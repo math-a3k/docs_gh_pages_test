@@ -128,10 +128,10 @@ def test_decorators():
    
 #########################################################################################
 def test_text():
-    from utilmy.nlp import text as m
+    from utilmy.nlp import util_cluster as m
     m.test_all()  
 
-    from utilmy.nlp import util_model as m
+    from utilmy.nlp import util_gensim as m
     m.test_all()  
 
    
