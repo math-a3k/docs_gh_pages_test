@@ -113,14 +113,14 @@ class SentenceEncoder(tf.keras.Model):
         return self.model(inputs)
 
 
-def model_load(model_path)
+def model_load(model_path):
   ### model load
   model     = tf.keras.models.load_model(model_path)
   model_embedding = model.layers[0].layers[0]
   return model
 
 
-def model_get_embed(model)
+def model_get_embed(model):
     ### model_embedding('my sentence')    
     model_embed = model.layers[0].layers[0]
     return model_embed
