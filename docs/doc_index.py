@@ -684,13 +684,12 @@ z_logger_stdout_override()
 utilmy/nlp/util_cluster.py
 -------------------------functions----------------------
 help()
-help_get_codesource(func)
 log(*s)
 pd_text_getcluster(df:pd.DataFrame, col:str = 'col', threshold = 0.5, num_perm:int = 5, npool = 1, chunk  =  100000)
 pd_text_hash_create_lsh(df, col, sep = " ", threshold = 0.7, num_perm = 10, npool = 1, chunk  =  20000)
 pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
 test()
-test()
+test2()
 test_all()
 test_lsh()
 
