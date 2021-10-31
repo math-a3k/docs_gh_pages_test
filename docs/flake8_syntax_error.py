@@ -52,3 +52,4 @@ def model_load(model_path)
                          ^
 1     E999 SyntaxError: invalid syntax
 1
+0
