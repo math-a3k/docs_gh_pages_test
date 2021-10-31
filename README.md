@@ -15,7 +15,7 @@
 
     pip install --upgrade utilmy
 
-    https://github.com/arita37/myutil/issues/127
+   https://github.com/arita37/myutil/issues/127
    
 
 
@@ -23,7 +23,7 @@
 
      This package is looking for contributors. 
      Please check here:
-     https://github.com/arita37/myutil/issues/144
+   https://github.com/arita37/myutil/issues/144
    
     
 
