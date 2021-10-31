@@ -7,7 +7,7 @@
 ## myutil
     1000s of One liner function utilities.
     
-    https://pypi.org/project/utilmy/#history
+    https://packagegalaxy.com/python/utilmy
 
 
 
