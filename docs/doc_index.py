@@ -814,6 +814,23 @@ RankingSimilarity.rbo_ext(self, p = 0.98)
 RankingSimilarity.top_weightness(self, p: Optional[float]  =  None, d: Optional[int]  =  None)
 
 
+utilmy/nlp/util_sentence.py
+-------------------------functions----------------------
+embed_compare_class_sim(model, embed_a, embed_b, embed_c, embed_d)
+get_embed(model_emb, word)
+help()
+model_finetune_classifier(model_path, df, n_labels = 3, lrate = 1e-5)
+model_get_embed(model)model_embed  =  model.layers[0].layers[0]return model_embedmodel_emb, word) )
+model_load(model_path)model_path)model_embedding  =  model.layers[0].layers[0]return modelmodel)model_embed = model.layers[0].layers[0]return model_embedmodel_emb, word) )
+test1()
+test2()
+test_all()
+
+-------------------------methods----------------------
+SentenceEncoder.__init__(self, num_labels = None)
+SentenceEncoder.call(self, inputs, **kwargs)
+
+
 utilmy/nnumpy.py
 -------------------------functions----------------------
 is_float(x)
