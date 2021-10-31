@@ -33,8 +33,6 @@ def test_all():
 
     assert_series_equal(original_value, output_value, check_names=False)
 
-
-    from utilmy.nlp import text as m
     log(m.pd_text_getcluster )
     m.test_lsh()
       

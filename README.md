@@ -7,7 +7,7 @@
 ## myutil
     1000s of One liner function utilities.
     
-    https://pypi.org/project/utilmy/#history
+    https://packagegalaxy.com/python/utilmy
 
 
 
@@ -63,6 +63,16 @@
     
     
  ```
+ 
+ 
+ ## Datasets available :
+ 
+ https://github.com/arita37/zdata/blob/main/README.md
+ 
+ 
+ 
+ 
+ 
  
  
 

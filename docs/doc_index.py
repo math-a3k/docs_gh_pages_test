@@ -681,7 +681,7 @@ z_logger_stdout_override()
 
 
 
-utilmy/nlp/text.py
+utilmy/nlp/util_cluster.py
 -------------------------functions----------------------
 help()
 help_get_codesource(func)
@@ -714,7 +714,7 @@ train_model(dirinput = "./data.cor", dirout = "./modelout/model.bin", **params)
 
 
 
-utilmy/nlp/util_model.py
+utilmy/nlp/util_gensim.py
 -------------------------functions----------------------
 bigram_get_list(ranid, mode = 'name, proba')
 bigram_get_seq3(ranid, itemtag, lname, pnorm)
@@ -812,6 +812,23 @@ RankingSimilarity.assert_p(self, p: float)
 RankingSimilarity.rbo(self, k: Optional[float]  =  None, p: float  =  1.0, ext: bool  =  False)
 RankingSimilarity.rbo_ext(self, p = 0.98)
 RankingSimilarity.top_weightness(self, p: Optional[float]  =  None, d: Optional[int]  =  None)
+
+
+utilmy/nlp/util_sentence.py
+-------------------------functions----------------------
+embed_compare_class_sim(model, embed_a, embed_b, embed_c, embed_d)
+get_embed(model_emb, word)
+help()
+model_finetune_classifier(model_path, df, n_labels = 3, lrate = 1e-5)
+model_get_embed(model)model_embed  =  model.layers[0].layers[0]return model_embedmodel_emb, word) )
+model_load(model_path)model_path)model_embedding  =  model.layers[0].layers[0]return modelmodel)model_embed = model.layers[0].layers[0]return model_embedmodel_emb, word) )
+test1()
+test2()
+test_all()
+
+-------------------------methods----------------------
+SentenceEncoder.__init__(self, num_labels = None)
+SentenceEncoder.call(self, inputs, **kwargs)
 
 
 utilmy/nnumpy.py
@@ -1514,25 +1531,13 @@ test_image_padding_get()
 
 
 
-utilmy/text.py
--------------------------functions----------------------
-help()
-help_get_codesource(func)
-log(*s)
-pd_text_getcluster(df:pd.DataFrame, col:str = 'col', threshold = 0.5, num_perm:int = 5, npool = 1, chunk  =  100000)
-pd_text_hash_create_lsh(df, col, sep = " ", threshold = 0.7, num_perm = 10, npool = 1, chunk  =  20000)
-pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
-test()
-test()
-test_all()
-test_lsh()
-
-
-
 utilmy/tseries/util_tseries.py
 
 
 utilmy/util_download.py
+
+
+utilmy/util_hadoop.py
 
 
 utilmy/util_sampling.py
@@ -8085,3 +8090,18 @@ test_get_classification_data(name = None)
 
 -------------------------methods----------------------
 dict2.__init__(self, d)
+
+
+utilmy/zzz_text.py
+-------------------------functions----------------------
+help()
+help_get_codesource(func)
+log(*s)
+pd_text_getcluster(df:pd.DataFrame, col:str = 'col', threshold = 0.5, num_perm:int = 5, npool = 1, chunk  =  100000)
+pd_text_hash_create_lsh(df, col, sep = " ", threshold = 0.7, num_perm = 10, npool = 1, chunk  =  20000)
+pd_text_similarity(df: pd.DataFrame, cols = [], algo = '')
+test()
+test()
+test_all()
+test_lsh()
+
