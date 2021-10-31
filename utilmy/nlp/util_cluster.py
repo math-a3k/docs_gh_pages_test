@@ -16,7 +16,7 @@ from utilmy import log, log2
 
 ########################################################################
 def test_all():
-    from utilmy.nlp import text as m
+    from utilmy.nlp import util_cluster as m
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
 
