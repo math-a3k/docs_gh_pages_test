@@ -14,10 +14,9 @@ def log(*s):
 
 
 def help():
-    ss = HELP
+    from utilmy.utilmy import help_create
+    ss = HELP + help_create('utilmy.nlp.util_cluster')
     print(ss)
-
-
 
 
 
