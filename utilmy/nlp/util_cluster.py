@@ -9,6 +9,14 @@ from typing import List
 ########################################################################
 from utilmy import log, log2
 
+def log(*s):
+    print(s, flush=True)
+
+
+def help():
+    ss = HELP
+    print(ss)
+
 
 
 
@@ -37,7 +45,7 @@ def test_all():
     m.test_lsh()
       
 
-def test():
+def test2():
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
 
@@ -58,25 +66,6 @@ def test():
     test_lsh()
       
 
-def log(*s):
-    print(s, flush=True)
-
-
-def help():
-    ss  = ""
-    ss += HELP
-    print(ss)
-
-
-def help_get_codesource(func):
-    """ Extract code source from func name"""
-    import inspect
-    try:
-        lines_to_skip = len(func.__doc__.split('\n'))
-    except AttributeError:
-        lines_to_skip = 0
-    lines = inspect.getsourcelines(func)[0]
-    return ''.join( lines[lines_to_skip+1:] )
 
 
 #############################################################################
