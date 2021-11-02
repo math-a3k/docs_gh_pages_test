@@ -75,7 +75,7 @@ def test_all():
    vi.test_scatter_and_histogram_matplot()
    vi.test_pd_plot_network()
    vi.test_cssname()
-         
+   vi.test_external_css()      
           
       
 def test_getdata(verbose=True):
