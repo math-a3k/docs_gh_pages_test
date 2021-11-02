@@ -296,6 +296,45 @@ def test_cssname(verbose=False,css_name="A4_size"):
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
+def test_external_css():
+  from box import Box
+  cfg = Box({})
+  cfg.tseries = {"title": 'ok'}
+  cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
+  cfg.histo   = {"title": 'ok'}
+  cfg.use_datatable = True
+  # loading border style from external css
+  doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css', cfg=cfg)
+  data = test_getdata()
+  # table
+  doc.h1(" Table test ")
+  doc.table(data['titanic.csv'], use_datatable=True, table_id="test", custom_css_class='intro')
+  doc.hr()
+  # histogram
+  doc.h1(" histo test ")
+  doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
+  doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+  doc.hr()
+  #  scatter plot
+  doc.tag('<h2> Scater Plot </h2>')
+  doc.plot_scatter( data['titanic.csv'], colx='Age', coly='Fare',
+                    collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                    cfg=cfg.scatter, mode='matplot', save_img='')
+  doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
+                        collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                        figsize=(20,7),cfg=cfg, mode='highcharts',)
+
+  # create time series chart. mode highcharts
+  doc.h2('Plot of weather data') 
+  doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
+                    coly1   =  ['Temperature'],coly2   =  ["Rainfall"],
+                    # xlabel=     'Date', y1label=  "Temperature", y2label=  "Rainfall", 
+                    title ="Weather",cfg={},mode='highcharts')
+  doc.hr()
+
+  doc.save('test4.html')
+  doc.open_browser()
+  html1 = doc.get_html()
 
 #####################################################################################
 #### HTML doc ########################################################################
