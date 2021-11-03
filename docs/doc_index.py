@@ -1644,6 +1644,7 @@ pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str = None, coly:str = None, c
 pd_plot_scatter_matplot(df:pd.DataFrame, colx: str = None, coly: str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, cfg: dict  =  {}, mode = 'd3', save_path: str = '', verbose = True, **kw)
 pd_plot_tseries_highcharts(df, coldate:str = None, date_format:str = '%m/%d/%Y', coly1:list  = [], coly2:list  = [], figsize:tuple  =   None, title:str = None, xlabel:str = None, y1label:str = None, y2label:str = None, cfg:dict = {}, mode = 'd3', save_img = "", verbose = True, **kw)
 pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str = None, coly1: list  =  [], coly2: list  =  [], 8, 4), spacing = 0.1, verbose = True, **kw))
+print_table_image(df, colgroup =  None, colimage  =  None, title = None, format: str = 'blue_light', dir_out = 'print_table_image.html', custom_css_class = None, use_datatable = False, table_id = None, )
 show_csvfile(file, title = None, format: str = 'blue_light', dir_out = 'table.html', custom_css_class = None, use_datatable = True, table_id = None, )
 test1(verbose = False)
 test2(verbose = False)
