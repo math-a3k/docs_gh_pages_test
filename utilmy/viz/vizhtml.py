@@ -75,8 +75,8 @@ def test_all():
    vi.test_scatter_and_histogram_matplot()
    vi.test_pd_plot_network()
    vi.test_cssname()
-         
-          
+   vi.test_external_css()      
+   vi.test_table()       
       
 def test_getdata(verbose=True):
     """data = test_get_data()
@@ -296,7 +296,53 @@ def test_cssname(verbose=False,css_name="A4_size"):
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
+def test_external_css():
+  from box import Box
+  cfg = Box({})
+  cfg.tseries = {"title": 'ok'}
+  cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
+  cfg.histo   = {"title": 'ok'}
+  cfg.use_datatable = True
+  # loading border style from external css
+  doc = htmlDoc(dir_out="", title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css', cfg=cfg)
+  data = test_getdata()
+  # table
+  doc.h1(" Table test ")
+  doc.table(data['titanic.csv'], use_datatable=True, table_id="test", custom_css_class='intro')
+  doc.hr()
+  # histogram
+  doc.h1(" histo test ")
+  doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
+  doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+  doc.hr()
+  #  scatter plot
+  doc.tag('<h2> Scater Plot </h2>')
+  doc.plot_scatter( data['titanic.csv'], colx='Age', coly='Fare',
+                    collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                    cfg=cfg.scatter, mode='matplot', save_img='')
+  doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
+                        collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                        figsize=(20,7),cfg=cfg, mode='highcharts',)
 
+  # create time series chart. mode highcharts
+  doc.h2('Plot of weather data') 
+  doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
+                    coly1   =  ['Temperature'],coly2   =  ["Rainfall"],
+                    # xlabel=     'Date', y1label=  "Temperature", y2label=  "Rainfall", 
+                    title ="Weather",cfg={},mode='highcharts')
+  doc.hr()
+
+  doc.save('test4.html')
+  doc.open_browser()
+  html1 = doc.get_html()
+
+def test_table():
+   url = 'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/table_data.csv'
+   df = pd.read_csv(url)
+   a = df.head()
+   print_table_image(df,colimage='image_url',colgroup='name',title='test_table')
+   
+   
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
@@ -1113,6 +1159,39 @@ def html_show(html_code, verbose=True):
 
 
 
+def show_csvfile(file,title=None,format: str='blue_light',dir_out='table.html', custom_css_class=None, use_datatable=True, table_id=None,):
+    df = pd.read_csv(file);
+    doc = vi.htmlDoc(dir_out="", title=title, format='myxxxx', cfg={})
+    if title: doc.h1(title) 
+    doc.table(df, use_datatable=use_datatable, table_id=table_id, custom_css_class=custom_css_class)
+    doc.save(dir_out)
+    doc.open_browser()
+      
+def print_table_image(df,colgroup= None,colimage = None,title=None,format: str='blue_light',dir_out='print_table_image.html', custom_css_class=None, use_datatable=False, table_id=None,):
+      # df = pd.read_csv(file);
+
+    if colimage:
+        df[colimage] = df[colimage].map('<img src="{}" width="50px" height="50px">'.format)
+
+    if colgroup:
+        blank_row=[np.nan for i in df.columns]
+
+    l = []
+
+    for n,g in df.groupby(colgroup):
+        l.append(g)
+        l.append(pd.DataFrame([blank_row], columns=df.columns, index=[0]))
+
+    df = pd.concat(l,ignore_index=True).iloc[:-1]
+
+    doc = htmlDoc(title=title, format='myxxxx',css_name='base', cfg={})
+    if title: doc.h1(title) 
+    doc.table(df, use_datatable=use_datatable, table_id=table_id, custom_css_class=custom_css_class)
+    doc.html = doc.html.replace('&lt;','<')
+    doc.html = doc.html.replace('&gt;','>')
+    doc.html = doc.html.replace('width: auto"></td>','width: auto">&nbsp;</td>')
+    doc.save(dir_out)
+    doc.open_browser() 
 
 ############################################################################################################################
 ############################################################################################################################
