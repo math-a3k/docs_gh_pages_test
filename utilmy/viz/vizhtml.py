@@ -304,7 +304,7 @@ def test_external_css():
   cfg.histo   = {"title": 'ok'}
   cfg.use_datatable = True
   # loading border style from external css
-  doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css', cfg=cfg)
+  doc = htmlDoc(dir_out="", title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css', cfg=cfg)
   data = test_getdata()
   # table
   doc.h1(" Table test ")
