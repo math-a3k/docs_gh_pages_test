@@ -1152,7 +1152,15 @@ def html_show(html_code, verbose=True):
 
 
 
-
+def show_csvfile(file,title=None,format: str='blue_light',dir_out='table.html', custom_css_class=None, use_datatable=True, table_id=None,):
+    df = pd.read_csv(file);
+    doc = vi.htmlDoc(dir_out="", title=title, format='myxxxx', cfg={})
+    if title: doc.h1(title) 
+    doc.table(df, use_datatable=use_datatable, table_id=table_id, custom_css_class=custom_css_class)
+    doc.save(dir_out)
+    doc.open_browser()
+      
+   
 ############################################################################################################################
 ############################################################################################################################
 def images_to_html(dir_input="*.png",  title="", verbose=False):
