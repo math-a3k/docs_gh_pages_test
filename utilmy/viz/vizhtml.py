@@ -336,6 +336,13 @@ def test_external_css():
   doc.open_browser()
   html1 = doc.get_html()
 
+def test_table():
+   url = 'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/table_data.csv'
+   df = pd.read_csv(url)
+   a = df.head()
+   print_table_image(df,colimage='image_url',colgroup='name',title='test_table')
+   
+   
 #####################################################################################
 #### HTML doc ########################################################################
 class htmlDoc(object):
@@ -1160,7 +1167,32 @@ def show_csvfile(file,title=None,format: str='blue_light',dir_out='table.html', 
     doc.save(dir_out)
     doc.open_browser()
       
-   
+def print_table_image(df,colgroup= None,colimage = None,title=None,format: str='blue_light',dir_out='print_table_image.html', custom_css_class=None, use_datatable=False, table_id=None,):
+      # df = pd.read_csv(file);
+
+    if colimage:
+        df[colimage] = df[colimage].map('<img src="{}" width="50px" height="50px">'.format)
+
+    if colgroup:
+        blank_row=[np.nan for i in df.columns]
+
+    l = []
+
+    for n,g in df.groupby(colgroup):
+        l.append(g)
+        l.append(pd.DataFrame([blank_row], columns=df.columns, index=[0]))
+
+    df = pd.concat(l,ignore_index=True).iloc[:-1]
+
+    doc = htmlDoc(title=title, format='myxxxx',css_name='base', cfg={})
+    if title: doc.h1(title) 
+    doc.table(df, use_datatable=use_datatable, table_id=table_id, custom_css_class=custom_css_class)
+    doc.html = doc.html.replace('&lt;','<')
+    doc.html = doc.html.replace('&gt;','>')
+    doc.html = doc.html.replace('width: auto"></td>','width: auto">&nbsp;</td>')
+    doc.save(dir_out)
+    doc.open_browser() 
+
 ############################################################################################################################
 ############################################################################################################################
 def images_to_html(dir_input="*.png",  title="", verbose=False):
