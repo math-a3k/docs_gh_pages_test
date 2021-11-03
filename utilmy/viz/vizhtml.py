@@ -76,7 +76,7 @@ def test_all():
    vi.test_pd_plot_network()
    vi.test_cssname()
    vi.test_external_css()      
-          
+   vi.test_table()       
       
 def test_getdata(verbose=True):
     """data = test_get_data()
