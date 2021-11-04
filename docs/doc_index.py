@@ -823,6 +823,7 @@ model_get_embed(model)
 model_load(model_path)
 test1()
 test2()
+test3()
 test_all()
 
 -------------------------methods----------------------
