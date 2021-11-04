@@ -29,7 +29,66 @@ def help():
 def test_all():
     pass
     
-
+def test3():
+      ## Check model for various languages ##
+  X = [
+    
+    # Chinese Simplified
+    '这是用中文写的',
+    '我很高兴认识你',
+    '你叫什么名字？',
+    
+    # Czech
+    'Těší mě, že vás poznávám.',
+    'Jak se jmenuješ?',
+    'Píše se to v českém',
+    
+    # Dutch
+    'Dit is geschreven in het Nederlands',
+    'Wat is je naam??',
+    'Leuk je te ontmoeten.',
+    
+    # French
+    'Ravi de vous rencontrer.',
+    'Quel est votre nom?',
+    'Ceci est écrit en Français',
+    
+    # German
+    'Schön dich kennenzulernen.',
+    'Wie heißt du?',
+    'Dies ist in deutscher Sprache geschrieben',
+    
+    # Greek
+    'Πώς σε λένε?',
+    'Χάρηκα για τη γνωριμία.',
+    'Αυτό είναι γραμμένο στα ελληνικά',
+    
+    # Gujarati
+    'તમને મળીને આનંદ થયો.',
+    'તમારું નામ શું છે?',
+    'આ ગુજરાતીમાં લખવામાં આવ્યું છે',
+    
+    # Hindi
+    'आपसे मिलकर अच्छा लगा।',
+    'आपका नाम क्या है?',
+    'यह हिंदी में लिखा है',
+    
+    # Korean
+    '日本語で書かれています',
+    'はじめまして。',
+    'あなたの名前は何ですか。',
+  ]
+  
+  y = [0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,8,8,8]
+  
+  df = pd.DataFrame({
+    'features' : X,
+    'class' : y
+  })
+  
+  model = SentenceEncoder(num_labels=9)
+  model_finetune_classifier(model_path, df, n_labels=9, lrate=1e-5)
+  model = model_load(model_path)
 
 
 
