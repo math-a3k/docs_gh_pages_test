@@ -136,7 +136,36 @@ def sys_install(cmd=""):
    print('Exit \n\n\n')
 
 
+class Index0(object):
+    """
+    ### to maintain global index, flist = index.read()  index.save(flist)
+    """
+    def __init__(self, findex:str="ztmp_file.txt"):
+        self.findex = findex        
+        os.makedirs(os.path.dirname(self.findex), exist_ok=True)
+        if not os.path.isfile(self.findex):
+            with open(self.findex, mode='a') as fp:
+                fp.write("")              
 
+    def read(self,):            
+        with open(self.findex, mode='r') as fp:
+            flist = fp.readlines()
+
+        if len(flist) < 1 : return []    
+        flist2 = []
+        for t  in flist :
+            if len(t) > 5 and t[0] != "#"  :
+              flist2.append( t.strip() )
+        return flist2    
+
+    def save(self, flist:list):
+        if len(flist) < 1 : return True
+        ss = ""
+        for fi in flist :
+          ss = ss + fi + "\n"                
+        with open(self.findex, mode='a') as fp:
+            fp.write(ss )
+        return True   
 
 ###################################################################################################
 ###### Test #####################################################################################
