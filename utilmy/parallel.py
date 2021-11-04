@@ -233,14 +233,16 @@ def test_pdreadfile():
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True,
                  n_pool=1, npool=None,
                  drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
-                 fun_apply=None,   **kw):
+                 fun_apply=None, use_ext=None,   **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
     :return:
     """
     import glob, gc,  pandas as pd, os
+    
+    if isinstance(path_glob, pd.DataFrame ) : return path_glob   ### Helpers
+    
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias
-
     def log(*s, **kw):  print(*s, flush=True, **kw)
     readers = {
             ".pkl"     : pd.read_pickle, ".parquet" : pd.read_parquet,
@@ -304,13 +306,15 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
 
 def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None,  **kw):
+                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None, use_ext=None,  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
     :return:
     """
     import glob, gc,  pandas as pd, os
+    if isinstance(path_glob, pd.DataFrame ) : return path_glob   ### Helpers    
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias
+    
     def log(*s, **kw):
         print(*s, flush=True, **kw)
     readers = {
