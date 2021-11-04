@@ -1576,6 +1576,9 @@ sys_install(cmd = "")
 test_all()
 
 -------------------------methods----------------------
+Index0.__init__(self, findex:str = "ztmp_file.txt")
+Index0.read(self, )
+Index0.save(self, flist:list)
 Session.__init__(self, dir_session = "ztmp/session/", )
 Session.load(self, name, glob:dict = None, tag = "")
 Session.load_session(self, folder, globs = None)
