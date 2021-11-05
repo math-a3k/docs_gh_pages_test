@@ -1,0 +1,10 @@
+pyspark==2.4.6
+ua-parser==0.10.0
+pyarrow==0.14
+pytest==6.2.4
+pytest-html==3.1.1
+Cython>=0.22
+numpy>=1.10.0
+pyyaml
+loguru
+pandas==0.25.3
