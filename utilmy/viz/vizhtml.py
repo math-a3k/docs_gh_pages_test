@@ -282,17 +282,6 @@ def test_cssname(verbose=False,css_name="A4_size"):
     doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
                      collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
                      cfg=cfg.scatter, mode='matplot', save_img='')
-    doc.hr()  # doc.sep() line separator
-
-    # test create table
-    df = test_getdata()['titanic.csv']
-    doc.h1(" Table test ")
-    doc.table(data['housing.csv'][0:10], use_datatable=True, table_id="test", custom_css_class='intro')
-
-    doc.tag('<h2> My histo title </h2>')
-    doc.plot_histogram(data['sales.csv'],col='Unit Cost',mode='matplot', save_img="")
-    doc.plot_histogram(data['sales.csv'],col='Unit Price',cfg =  cfg.histo,title="Price", mode='matplot', save_img="")
-
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
@@ -312,26 +301,13 @@ def test_external_css():
   doc.hr()
   # histogram
   doc.h1(" histo test ")
-  doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="Price",ylabel="Unit price", mode='matplot', save_img="")
   doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
   doc.hr()
-  #  scatter plot
-  doc.tag('<h2> Scater Plot </h2>')
-  doc.plot_scatter( data['titanic.csv'], colx='Age', coly='Fare',
-                    collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                    cfg=cfg.scatter, mode='matplot', save_img='')
-  doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
-                        collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                        figsize=(20,7),cfg=cfg, mode='highcharts',)
-
   # create time series chart. mode highcharts
   doc.h2('Plot of weather data') 
   doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
                     coly1   =  ['Temperature'],coly2   =  ["Rainfall"],
-                    # xlabel=     'Date', y1label=  "Temperature", y2label=  "Rainfall", 
                     title ="Weather",cfg={},mode='highcharts')
-  doc.hr()
-
   doc.save('test4.html')
   doc.open_browser()
   html1 = doc.get_html()
@@ -343,10 +319,6 @@ def test_table():
    show_table_image(df, colimage='image_url', colgroup='name', title='test_table')
    
 
-   
-   
-   
-   
    
 #####################################################################################
 def show(file, title='table',format: str='blue_light',dir_out='table.html', css_class=None, use_datatable=True, table_id=None,):
