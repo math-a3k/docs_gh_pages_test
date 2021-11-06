@@ -45,6 +45,15 @@ RUN cd /app \
     && pip3 install --no-cache-dir  wheel pypandoc \
     && pip3 install --no-cache-dir  -r requirements.txt
 
-ENV PATH=$PATH:$SPARK_HOME/bin/
+######################## Miniconda
+ENV CONDA_DIR=/opt/minicond
+RUN cd /tmp \
+    && wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
+    && chmod +x miniconda.sh \
+    && ./miniconda.sh -b -p $CONDA_DIR \
+    && rm -rf ./miniconda.sh
+
+
+ENV PATH=$PATH:$SPARK_HOME/bin:$CONDA_DIR/bin
 
 CMD $SPARK_HOME/bin/spark-class org.apache.spark.deploy.master.Master
