@@ -85,7 +85,7 @@ def test_index():
     """
     import threading
 
-    file_name = "test.txt"
+    file_name = "./test.txt"
     #file_lock = "tmp/plock3.lock"
 
     INDEX = IndexLock(file_name, file_lock=None)
@@ -162,7 +162,7 @@ class IndexLock(object):
     ### Manage Invemtory Index with Atomic Write/Read
     def __init__(self, findex, file_lock=None, min_size=5, skip_comment=True, ntry=20):
         self.findex= findex
-        os.makedirs(os.path.dirname(self.findex), exist_ok=True)
+        os.makedirs(os.path.dirname( os.path.abspath(self.findex)), exist_ok=True)
 
         if file_lock is None:
             file_lock = os.path.dirname(findex) +"/"+ findex.split("/")[-1].replace(".", "_lock.")
