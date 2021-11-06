@@ -160,13 +160,13 @@ class IndexLock(object):
 
     """
     ### Manage Invemtory Index with Atomic Write/Read
-    def __init__(self, findex, plock=None, min_size=5, skip_comment=True, ntry=20):
+    def __init__(self, findex, file_lock=None, min_size=5, skip_comment=True, ntry=20):
         self.findex= findex
         os.makedirs(os.path.dirname(self.findex), exist_ok=True)
 
-        if plock is None:
-            plock = os.path.dirname(findex) +"/"+ findex.split("/")[-1].replace(".", "_lock.")
-        self.plock = plock
+        if file_lock is None:
+            file_lock = os.path.dirname(findex) +"/"+ findex.split("/")[-1].replace(".", "_lock.")
+        self.plock = file_lock
 
         ### Initiate the file
         if not os.path.isfile(self.findex):
