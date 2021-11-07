@@ -4,8 +4,13 @@ HELP= """ Utils for easy batching
 
 
 """
+import os, sys, socket, platform, time, gc,logging, random, datetime, logging
+
 
 from utilmy.utilmy import log, log2
+from utilmy import pd_read_file
+
+
 
 def now_weekday_isin(day_week=[  0,1,2  ]) :
     ### 0 is sunday, 1 is monday 
