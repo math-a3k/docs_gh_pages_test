@@ -1542,6 +1542,29 @@ utilmy/tseries/util_tseries.py
 
 
 utilmy/util_batch.py
+-------------------------functions----------------------
+date_now_jp(fmt = "%Y%m%d", add_days = 0, add_hours = 0, timezone = 'Asia/Tokyo')
+os_lock_acquireLock(plock:str = "tmp/plock.lock")
+os_lock_releaseLock(locked_file_descriptor)
+os_wait_cpu_ram_lower(cpu_max, ram_max)
+os_wait_isfile_exist(dirin, ntry_max = 30)
+os_wait_program_end(prog_name, max_wait = 86400)
+time_sleep_random(nmax = 5)
+to_file_safe(msg:str, fpath:str)
+
+-------------------------methods----------------------
+Index0.__init__(self, findex:str = "ztmp_file.txt", ntry = 10)
+Index0.read(self, )
+Index0.save(self, flist:list)
+Index0.save_filter(self, val:list = None)
+IndexLock.__init__(self, findex, file_lock = None, min_size = 5, skip_comment = True, ntry = 20)
+IndexLock.get(self, **kw)
+IndexLock.put(self, val:list = None)
+IndexLock.read(self, )
+IndexLock.save_filter(self, val:list = None)
+IndexLock.save_isok(self, flist:list)
+toFile.__init__(self, fpath)
+toFile.write(self, msg)
 
 
 utilmy/util_download.py
