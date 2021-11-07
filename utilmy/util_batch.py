@@ -5,7 +5,7 @@ HELP= """ Utils for easy batching
 
 """
 
-form utilmy.utilmy import log, log2
+from utilmy.utilmy import log, log2
 
 def now_weekday_isin(day_week=[  0,1,2  ]) :
     ### 0 is sunday, 1 is monday 
