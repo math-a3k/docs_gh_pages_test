@@ -6,20 +6,100 @@ HELP= """ Utils for easy batching
 """
 import os, sys, socket, platform, time, gc,logging, random, datetime, logging
 
-
 from utilmy.utilmy import log, log2
 from utilmy import pd_read_file
 
 
 
-def now_weekday_isin(day_week=[  0,1,2  ]) :
-    ### 0 is sunday, 1 is monday 
-    return False
-    
-    return True
+
+################################################################################################
+# Test functions
+def test_functions():
+    """Check that list function is working.
+    os_lock_releaseLock, os_lock_releaseLock, os_lock_execute
+    Basic test on only 1 thread
+    """
+    # test function
+    def running(fun_args):
+        print(f'Function running with arg: {fun_args}')
+
+    # test that os_lock_execute is working
+    os_lock_execute(running, 'Test_args', plock='tmp/plock.lock')
+    os_lock_execute(running, [1, 2, 3], plock='tmp/plock.lock')
+
+
+def test_funtions_thread():
+    """Check that list function is working.
+    os_lock_releaseLock, os_lock_releaseLock, os_lock_execute
+    Multi threads
+    How the test work.
+    - Create and run 5 threads. These threads try to access and use 1 function `running`
+    with os_lock_execute. So in one 1, only 1 thread can access and use this function.
+    """
+    import threading
+
+    # define test function
+    def running(fun_args):
+        print(f'Function running in thread: {fun_args} START')
+        time.sleep(fun_args* 0.2)
+        print(f'Function running in thread: {fun_args} END')
+
+    # define test thread
+    def thread_running(number):
+        print(f'Thread {number} START')
+        os_lock_execute(running, number, plock='tmp/plock2.lock')
+        print(f'Thread {number} sleeping in {number*3}s')
+        time.sleep(number* 0.5)
+        print(f'Thread {number} END')
+
+    # Create thread
+    for i in range(3):
+        t = threading.Thread(target=thread_running, args=(i+1, ))
+        t.start()
+
+
+def test_index():
+    """Check that class IndexLock is working
+    Multi threads
+    How the test work.
+    - The test will create the INDEX with the file using plock
+    - Create 100 threads that try to write data to this INDEX file lock
+    - This test will make sure with this INDEX file log
+        only 1 thread can access and put data to this file.
+        Others will waiting to acquire key after thread release it.
+    """
+    import threading
+
+    file_name = "./test.txt"
+    #file_lock = "tmp/plock3.lock"
+
+    INDEX = IndexLock(file_name, file_lock=None)
+
+    #1. Create test file
+    #with open(file_name, mode='w+') as fp:
+    #    pass
+
+    # define test thread
+    def thread_running(number):
+        print(f'Thread {number} START')
+        INDEX.put(f'Thread {number}')
+        INDEX.save_filter(f'Thread {number}')
+        print( INDEX.get() )
+
+        print(f'Thread {number} END')
+
+    # Create thread
+    for i in range(3):
+        t = threading.Thread(target=thread_running, args=(i+1, ))
+        t.start()
 
 
 
+def test_all():
+    pass
+
+########################################################################################
+##### Date #############################################################################
 def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp") :
     ### Daily Batch time is between 2 time. 
     return False
@@ -42,12 +122,18 @@ def now_weekday_isin(day_week=[  0,1,2  ], timezone="jp") :
 
 
 
-#########################################################################################
+####################################################################################################
+####################################################################################################
 def batchLog(object):    
-    def __init__(self,dirlog="log/batch_log", date_fmt="%Y%m%d", format="", timezone="jp")
-          pass
+    def __init__(self,dirlog="log/batch_log", date_fmt="%Y%m%d", format="", timezone="jp"):
+        """  Log on file when task is done and Check if a task is done.
+           Log file format:
+           dt\t prog_name\t name \t tag \t info
+        
+        """
+        pass
     
-    def save(self, name,  tag="end/start", info="", **kw)    
+    def save(self, name,  tag="end/start", info="", **kw):    
         """  Log on file , termination of file
              Thread Safe writing.    
             dt\t prog_name\t name \t tag \t info
@@ -58,14 +144,16 @@ def batchLog(object):
         pass
 
 
-    def isdone(self, name="*",  tag="end/start", info="",  tstart="*", tend="*",  )
+    def isdone(self, name="*",  tag="end/start", info="",  tstart="*", tend="*",  ):
         """  Find if a task was done or not.
         """
-        pass
+        return True
+    
+        return False
 
     
     def getall(self, date="*" )
-        """  Find if a task was done or not.
+        """  get the log
         """
         df = pd_read_file(  self.dirlog + "/" + date, sep="\t" )
         return df
@@ -75,9 +163,28 @@ def batchLog(object):
 
 
 #########################################################################################
-def os_wait_cpu_ram_lower(cpu_max, ram_max):
+def os_wait_cpu_ram_lower(cpu_min=30, sleep=10, interval=5, msg= "", name_proc=None, verbose=True):
     #### Wait until Server CPU and ram are lower than threshold.    
-    return True
+    #### Sleep until CPU becomes normal usage
+    import psutil, time
+
+    if name_proc is not None :   ### If process not in running ones
+        flag = True
+        while flag :
+            flag = False
+            for proc in psutil.process_iter():
+               ss = " ".join(proc.cmdline())
+               if name_proc in ss :
+                    flag = True
+            if flag : time.sleep(sleep)
+
+    aux = psutil.cpu_percent(interval=interval)  ### Need to call 2 times
+    while aux > cpu_min:
+        ui = psutil.cpu_percent(interval=interval)
+        aux = 0.5 * (aux +  ui)
+        if verbose : log( 'Sleep sec', sleep, ' Usage %', aux, ui, msg )
+        time.sleep(sleep)
+    return aux
 
 
 
@@ -87,7 +194,7 @@ def os_wait_program_end(prog_name, max_wait=86400):
     return True
 
 
-def os_wait_isfile_exist(dirin, ntry_max=30): 
+def os_wait_isfile_exist(dirin, ntry_max=100, sleep_time=300): 
     import glob, time
     log('####### Check if file ready', "\n", dirin,)
     ntry=0
@@ -95,7 +202,8 @@ def os_wait_isfile_exist(dirin, ntry_max=30):
        fi = glob.glob(dirin )
        if len(fi) >= 1: break
        ntry += 1
-       time.sleep(60*5)    
+       time.sleep(sleep_time)    
+       if ntry % 10 == 0 : log('waiting file') 
     log('File is ready:', dirin)    
 
 
@@ -120,7 +228,11 @@ def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
        return now_pacific.strftime(fmt)
 
       
-      
+        
+def time_sleep_random(nmax=5):
+    import random, time
+    time.sleep( random.randrange(nmax) )
+              
         
 #########################################################################################################
 ####### Atomic File writing ##############################################################################
@@ -359,11 +471,7 @@ def os_lock_releaseLock(locked_file_descriptor):
     fcntl.flock(locked_file_descriptor, fcntl.LOCK_UN)
     # locked_file_descriptor.close()
      
-        
-def time_sleep_random(nmax=5):
-    import random, time
-    time.sleep( random.randrange(nmax) )
-        
+
         
 
 if __name__ == '__main__':
