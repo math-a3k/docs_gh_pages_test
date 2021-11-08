@@ -483,11 +483,18 @@ time_sleep_random(nmax = 5)
 to_file_safe(msg:str, fpath:str)
 
 -------------------------methods----------------------
-FileWriter.__init__(self, fpath)
-FileWriter.write(self, msg)
-IndexLock.__init__(self, findex, plock)
-IndexLock.get(self)
-IndexLock.put(self, val = "", ntry = 100, plock = "tmp/plock.lock")
+Index0.__init__(self, findex:str = "ztmp_file.txt", ntry = 10)
+Index0.read(self, )
+Index0.save(self, flist:list)
+Index0.save_filter(self, val:list = None)
+IndexLock.__init__(self, findex, file_lock = None, min_size = 5, skip_comment = True, ntry = 20)
+IndexLock.get(self, **kw)
+IndexLock.put(self, val:list = None)
+IndexLock.read(self, )
+IndexLock.save_filter(self, val:list = None)
+IndexLock.save_isok(self, flist:list)
+toFile.__init__(self, fpath)
+toFile.write(self, msg)
 
 
 utilmy/docs/__init__.py
@@ -678,6 +685,21 @@ logw(*s)
 test()
 z_logger_custom_1()
 z_logger_stdout_override()
+
+
+
+utilmy/logs/util_log_std.py
+-------------------------functions----------------------
+create_appid(filename)
+create_logfilename(filename)
+create_uniqueid()
+load_arguments(config_file = None, arg_list = None)
+logger_handler_console(formatter = None)
+logger_handler_file(isrotate = False, rotate_time = "midnight", formatter = None, log_file_used = None)
+logger_setup(logger_name = None, log_file = None, formatter = FORMATTER_1, isrotate = False, isconsole_output = True, logging_level = logging.DEBUG, )
+logger_setup2(name = __name__, level = None)
+printlog(s = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "", s7 = "", s8 = "", s9 = "", s10 = "", app_id = "", logfile = None, iswritelog = True, )
+writelog(m = "", f = None)
 
 
 
@@ -1532,6 +1554,89 @@ test_image_padding_get()
 
 
 utilmy/tseries/util_tseries.py
+
+
+utilmy/util_batch.py
+-------------------------functions----------------------
+batchLog(object)
+date_now_jp(fmt = "%Y%m%d", add_days = 0, add_hours = 0, timezone = 'Asia/Tokyo')
+now_daymonth_isin(day_month, timezone = "jp")
+now_daymonth_isin(day_month, timezone = "jp")
+now_hour_between(hour1="12 = "12:45", hour2="13 = "13:45", timezone = "jp")
+now_hour_between(hour1="12 = "12:45", hour2="13 = "13:45", timezone = "jp")
+now_weekday_isin(day_week = None)
+now_weekday_isin(day_week = None)
+os_lock_acquireLock(plock:str = "tmp/plock.lock")
+os_lock_releaseLock(locked_file_descriptor)
+os_process_find_name(name = r"((.*/)
+os_wait_cpu_ram_lower(cpu_min = 30, sleep = 10, interval = 5, msg =  "", name_proc = None, verbose = True)
+os_wait_isfile_exist(dirin, ntry_max = 100, sleep_time = 300)
+os_wait_program_end(prog_name, max_wait = 86400)
+test_all()
+test_funtions_thread()
+test_index()
+time_sleep_random(nmax = 5)
+to_file_safe(msg:str, fpath:str)
+
+-------------------------methods----------------------
+Index0.__init__(self, findex:str = "ztmp_file.txt", ntry = 10)
+Index0.read(self, )
+Index0.save(self, flist:list)
+Index0.save_filter(self, val:list = None)
+IndexLock.__init__(self, findex, file_lock = None, min_size = 5, skip_comment = True, ntry = 20)
+IndexLock.get(self, **kw)
+IndexLock.put(self, val:list = None)
+IndexLock.read(self, )
+IndexLock.save_filter(self, val:list = None)
+IndexLock.save_isok(self, flist:list)
+toFile.__init__(self, fpath)
+toFile.write(self, msg)
+
+
+utilmy/util_cpu.py
+-------------------------functions----------------------
+log(*argv)
+monitor_maintain()
+monitor_nodes()
+np_avg(list)
+np_pretty_nb(num, suffix = "")
+os_environment()
+os_extract_commands(csv_file, has_header = False)
+os_generate_cmdline()
+os_getparent(dir0)
+os_is_wndows()
+os_launch(commands)
+os_python_environment()
+ps_all_children(pr)
+ps_find_procs_by_name(name = r"((.*/)
+ps_get_computer_resources_usage()
+ps_get_cpu_percent(process)
+ps_get_memory_percent(process)
+ps_get_process_status(pr)
+ps_is_issue(p)
+ps_is_issue_system()
+ps_net_send(tperiod = 5)
+ps_process_isdead(pid)
+ps_process_monitor_child(pid, logfile = None, duration = None, interval = None)
+ps_terminate(processes)
+ps_wait_process_completion(subprocess_list, waitsec = 10)
+ps_wait_ressourcefree(cpu_max = 90, mem_max = 90, waitsec = 15)
+
+-------------------------methods----------------------
+IOThroughputAggregator.__init__(self)
+IOThroughputAggregator.aggregate(self, cur_read, cur_write)
+NodeStats.__init__(self, num_connected_users = 0, num_pids = 0, cpu_count = 0, cpu_percent = None, mem_total = 0, mem_avail = 0, swap_total = 0, swap_avail = 0, disk_io = None, disk_usage = None, net = None, )
+NodeStats.mem_used(self)
+NodeStatsCollector.__init__(self, pool_id, node_id, refresh_interval = _DEFAULT_STATS_UPDATE_INTERVAL, app_insights_key = None, )
+NodeStatsCollector._collect_stats(self)
+NodeStatsCollector._get_disk_io(self)
+NodeStatsCollector._get_disk_usage(self)
+NodeStatsCollector._get_network_usage(self)
+NodeStatsCollector._log_stats(self, stats)
+NodeStatsCollector._sample_stats(self)
+NodeStatsCollector._send_stats(self, stats)
+NodeStatsCollector.init(self)
+NodeStatsCollector.run(self)
 
 
 utilmy/util_download.py

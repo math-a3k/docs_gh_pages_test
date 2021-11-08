@@ -1,30 +1,13 @@
-HELP="""All related to distributed compute and atomic read/write
-   Thread Safe
-   Process Safe
-   Lock Mechanism
-   
+HELP= """ Utils for easy batching
+
+
+
+
 """
-import os, sys, socket, platform, time, gc,logging, random
+import os, sys, socket, platform, time, gc,logging, random, datetime, logging
 
-###############################################################################################
 from utilmy.utilmy import log, log2
-
-def help():
-    from utilmy import help_create
-    ss  = help_create("utilmy.distributed", prefixs= [ 'test'])  #### Merge test code
-    ss += HELP
-    print(ss)
-
-
-def log_mem(*s):
-    try:
-        # print(*s, "\n", flush=True)
-        import psutil
-        log2('mem check', str(psutil.virtual_memory()))
-        # print(s)
-    except:
-        pass
-
+from utilmy import pd_read_file
 
 
 ################################################################################################
@@ -109,15 +92,208 @@ def test_index():
         t.start()
 
 
-def test_tofilesafe():
-   pass
-
-
 
 def test_all():
-    test_functions()
-    test_funtions_thread()
-    test_index()
+    pass
+
+########################################################################################
+##### Date #############################################################################
+
+
+
+def now_weekday_isin(day_week=None):
+    # 0 is sunday, 1 is monday
+    if not day_week:
+        day_week = [0, 1, 2]
+
+    now_weekday = (datetime.datetime.now(tz=tzone('Asia/Tokyo')).weekday() + 1) % 7
+    if now_weekday in day_week:
+        return True
+    return False
+
+
+def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp"):
+    # Daily Batch time is between 2 time.
+    timezone = 'Asia/Tokyo' if timezone == "jp" else timezone
+    format_time = "%H:%M"
+    hour1 = datetime.datetime.strptime(hour1, format_time).time()
+    hour2 = datetime.datetime.strptime(hour2, format_time).time()
+    now_weekday = datetime.datetime.now(tz=tzone(timezone)).time()
+    if hour1 <= now_weekday <= hour2:
+        return True
+    return False
+
+
+def now_daymonth_isin(day_month, timezone="jp"):
+    # 1th day of month
+    timezone = 'Asia/Tokyo' if timezone == "jp" else timezone
+
+    if not day_month:
+        day_month = [1, 2]
+
+    now_day_month = datetime.datetime.now(tz=tzone(timezone)).day
+
+    if now_day_month in day_month:
+        return True
+    return False
+
+
+def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp") :
+    ### Daily Batch time is between 2 time. 
+    return False
+    
+    return True
+
+
+def now_daymonth_isin(day_month=[ 1,2  ], timezone="jp") :
+    ### 1th day of month
+    return False
+    
+    return True
+
+
+def now_weekday_isin(day_week=[  0,1,2  ], timezone="jp") :
+    ### 0 is sunday, 1 is monday 
+    return False
+    
+    return True
+
+    
+date_now = date_now_jp  ### alias
+
+
+def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
+    # "%Y-%m-%d %H:%M:%S %Z%z"
+    from pytz import timezone as tzone
+    import datetime
+    # Current time in UTC
+    now_utc = datetime.datetime.now(tzone('UTC'))
+    now_new = now_utc+ datetime.timedelta(days=add_days, hours=add_hours)
+
+    if timezone == 'utc':
+       return now_new.strftime(fmt)
+      
+    else :
+       # Convert to US/Pacific time zone
+       now_pacific = now_new.astimezone(tzone(timezone))
+       return now_pacific.strftime(fmt)
+
+      
+        
+def time_sleep_random(nmax=5):
+    import random, time
+    time.sleep( random.randrange(nmax) )
+              
+        
+
+####################################################################################################
+####################################################################################################
+def batchLog(object):    
+    def __init__(self,dirlog="log/batch_log", date_fmt="%Y%m%d", format="", timezone="jp"):
+        """  Log on file when task is done and Check if a task is done.
+           Log file format:
+           dt\t prog_name\t name \t tag \t info
+        
+        """
+        pass
+    
+    def save(self, name,  tag="end/start", info="", **kw):    
+        """  Log on file , termination of file
+             Thread Safe writing.    
+            dt\t prog_name\t name \t tag \t info
+            
+            One file per day
+
+        """
+        pass
+
+
+    def isdone(self, name="*",  tag="end/start", info="",  tstart="*", tend="*",  ):
+        """  Find if a task was done or not.
+        """
+        return True
+    
+        return False
+
+    
+    def getall(self, date="*" )
+        """  get the log
+        """
+        df = pd_read_file(  self.dirlog + "/" + date, sep="\t" )
+        return df
+        
+        
+    
+
+
+#########################################################################################
+def os_wait_cpu_ram_lower(cpu_min=30, sleep=10, interval=5, msg= "", name_proc=None, verbose=True):
+    #### Wait until Server CPU and ram are lower than threshold.    
+    #### Sleep until CPU becomes normal usage
+    import psutil, time
+
+    if name_proc is not None :   ### If process not in running ones
+        flag = True
+        while flag :
+            flag = False
+            for proc in psutil.process_iter():
+               ss = " ".join(proc.cmdline())
+               if name_proc in ss :
+                    flag = True
+            if flag : time.sleep(sleep)
+
+    aux = psutil.cpu_percent(interval=interval)  ### Need to call 2 times
+    while aux > cpu_min:
+        ui = psutil.cpu_percent(interval=interval)
+        aux = 0.5 * (aux +  ui)
+        if verbose : log( 'Sleep sec', sleep, ' Usage %', aux, ui, msg )
+        time.sleep(sleep)
+    return aux
+
+
+
+def os_process_find_name(name=r"((.*/)?tasks.*/t.*/main\.(py|sh))", ishow=1, isregex=1):
+    """ Return a list of processes matching 'name'.
+        Regex (./tasks./t./main.(py|sh)|tasks./t.*/main.(py|sh))
+        Condensed Regex to:
+        ((.*/)?tasks.*/t.*/main\.(py|sh)) - make the characters before 'tasks' optional group.
+    """
+    import psutil
+    ls = []
+    for p in psutil.process_iter(["pid", "name", "exe", "cmdline"]):
+        cmdline = " ".join(p.info["cmdline"]) if p.info["cmdline"] else ""
+        if isregex:
+            flag = re.match(name, cmdline, re.I)
+        else:
+            flag = name and name.lower() in cmdline.lower()
+
+        if flag:
+            ls.append({"pid": p.info["pid"], "cmdline": cmdline})
+
+            if ishow > 0:
+                log("Monitor", p.pid, cmdline)
+    return ls
+
+
+def os_wait_program_end(prog_name, max_wait=86400):
+    #### Wait until one program finishes
+    
+    return True
+
+
+def os_wait_isfile_exist(dirin, ntry_max=100, sleep_time=300): 
+    import glob, time
+    log('####### Check if file ready', "\n", dirin,)
+    ntry=0
+    while ntry < ntry_max :
+       fi = glob.glob(dirin )
+       if len(fi) >= 1: break
+       ntry += 1
+       time.sleep(sleep_time)    
+       if ntry % 10 == 0 : log('waiting file') 
+    log('File is ready:', dirin)    
+
+
 
 #########################################################################################################
 ####### Atomic File writing ##############################################################################
@@ -153,11 +329,9 @@ def to_file_safe(msg:str, fpath:str):
 class IndexLock(object):
     """Keep a Global Index of processed files.
       INDEX = IndexLock(findex)
-
       flist = index.save_isok(flist)  ## Filter out files in index and return available files
       ### only process correct files
       
-
     """
     ### Manage Invemtory Index with Atomic Write/Read
     def __init__(self, findex, file_lock=None, min_size=5, skip_comment=True, ntry=20):
@@ -209,9 +383,7 @@ class IndexLock(object):
         """ Read, check if the insert values are there, and save the files
           flist = index.check_filter(flist)   ### Remove already processed files
           if  len(flist) < 1 : continue   ### Dont process flist
-
           ### Need locking mechanism Common File to check for Check + Write locking.
-
         """
         import random, time
         if val is None : return True
@@ -302,7 +474,6 @@ class Index0(object):
           isok = index.save_isok(flist)
           if not isok : continue   ### Dont process flist
           ### Need locking mechanism Common File to check for Check + Write locking.
-
         """
         import random, time
         if val is None : return True
@@ -360,77 +531,14 @@ def os_lock_releaseLock(locked_file_descriptor):
     import fcntl
     fcntl.flock(locked_file_descriptor, fcntl.LOCK_UN)
     # locked_file_descriptor.close()
+     
 
-
-def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock", sleep=5):
-    """ Run a function in an atomic way :
-         Write on disk  exclusively on COMMON File.
-    """
-    i = 0
-    while i < ntry :
-        try :
-            lock_fd = os_lock_acquireLock(plock)
-            fun_run(fun_args)
-            os_lock_releaseLock(lock_fd)
-            break
-        except Exception as e:
-            # log2(e)
-            # reduce sleep time
-            log2("file lock waiting", sleep, 'sec')
-            time.sleep(sleep)
-            i += 1
-
-
-
-################################################################################################
-def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
-    from pytz import timezone
-    from datetime import datetime
-    # Current time in UTC
-    now_utc = datetime.now(timezone('UTC'))
-    # Convert to US/Pacific time zone
-    now_pacific = now_utc.astimezone(timezone('Asia/Tokyo'))
-    return now_pacific.strftime(fmt)
-
-
-def time_sleep_random(nmax=5):
-    import random, time
-    time.sleep( random.randrange(nmax) )
-
-
-def save(dd, to_file="", verbose=False):
-  import pickle, os
-  os.makedirs(os.path.dirname(to_file), exist_ok=True)
-  pickle.dump(dd, open(to_file, mode="wb") , protocol=pickle.HIGHEST_PROTOCOL)
-  #if verbose : os_file_check(to_file)
-
-
-def load(to_file=""):
-  import pickle
-  dd =   pickle.load(open(to_file, mode="rb"))
-  return dd
-
-
-def load_serialize(name):
-     global pcache
-     #import diskcache as dc
-     log2("loading ", pcache)
-     cache = load(pcache)
-     return cache
-     # return {'a' : {'b': 2}}
-
-def save_serialize(name, value):
-     global pcache
-     #import diskcache as dc
-     log2("inserting ", pcache)
-     save(value, pcache)
-
-
-
-
-
-
+        
 
 if __name__ == '__main__':
     import fire
-    fire.Fire()
+    fire.Fire()        
+        
+        
+        
+        
