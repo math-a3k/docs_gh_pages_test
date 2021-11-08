@@ -10,8 +10,6 @@ from utilmy.utilmy import log, log2
 from utilmy import pd_read_file
 
 
-
-
 ################################################################################################
 # Test functions
 def test_functions():
@@ -120,7 +118,33 @@ def now_weekday_isin(day_week=[  0,1,2  ], timezone="jp") :
     
     return True
 
+    
+date_now = date_now_jp  ### alias
 
+
+def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
+    # "%Y-%m-%d %H:%M:%S %Z%z"
+    from pytz import timezone as tzone
+    import datetime
+    # Current time in UTC
+    now_utc = datetime.datetime.now(tzone('UTC'))
+    now_new = now_utc+ datetime.timedelta(days=add_days, hours=add_hours)
+
+    if timezone == 'utc':
+       return now_new.strftime(fmt)
+      
+    else :
+       # Convert to US/Pacific time zone
+       now_pacific = now_new.astimezone(tzone(timezone))
+       return now_pacific.strftime(fmt)
+
+      
+        
+def time_sleep_random(nmax=5):
+    import random, time
+    time.sleep( random.randrange(nmax) )
+              
+        
 
 ####################################################################################################
 ####################################################################################################
@@ -188,6 +212,29 @@ def os_wait_cpu_ram_lower(cpu_min=30, sleep=10, interval=5, msg= "", name_proc=N
 
 
 
+def os_process_find_name(name=r"((.*/)?tasks.*/t.*/main\.(py|sh))", ishow=1, isregex=1):
+    """ Return a list of processes matching 'name'.
+        Regex (./tasks./t./main.(py|sh)|tasks./t.*/main.(py|sh))
+        Condensed Regex to:
+        ((.*/)?tasks.*/t.*/main\.(py|sh)) - make the characters before 'tasks' optional group.
+    """
+    import psutil
+    ls = []
+    for p in psutil.process_iter(["pid", "name", "exe", "cmdline"]):
+        cmdline = " ".join(p.info["cmdline"]) if p.info["cmdline"] else ""
+        if isregex:
+            flag = re.match(name, cmdline, re.I)
+        else:
+            flag = name and name.lower() in cmdline.lower()
+
+        if flag:
+            ls.append({"pid": p.info["pid"], "cmdline": cmdline})
+
+            if ishow > 0:
+                log("Monitor", p.pid, cmdline)
+    return ls
+
+
 def os_wait_program_end(prog_name, max_wait=86400):
     #### Wait until one program finishes
     
@@ -207,33 +254,7 @@ def os_wait_isfile_exist(dirin, ntry_max=100, sleep_time=300):
     log('File is ready:', dirin)    
 
 
-    
-date_now = date_now_jp  ### alias
 
-
-def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
-    # "%Y-%m-%d %H:%M:%S %Z%z"
-    from pytz import timezone as tzone
-    import datetime
-    # Current time in UTC
-    now_utc = datetime.datetime.now(tzone('UTC'))
-    now_new = now_utc+ datetime.timedelta(days=add_days, hours=add_hours)
-
-    if timezone == 'utc':
-       return now_new.strftime(fmt)
-      
-    else :
-       # Convert to US/Pacific time zone
-       now_pacific = now_new.astimezone(tzone(timezone))
-       return now_pacific.strftime(fmt)
-
-      
-        
-def time_sleep_random(nmax=5):
-    import random, time
-    time.sleep( random.randrange(nmax) )
-              
-        
 #########################################################################################################
 ####### Atomic File writing ##############################################################################
 class toFile(object):
