@@ -98,6 +98,46 @@ def test_all():
 
 ########################################################################################
 ##### Date #############################################################################
+
+
+
+def now_weekday_isin(day_week=None):
+    # 0 is sunday, 1 is monday
+    if not day_week:
+        day_week = [0, 1, 2]
+
+    now_weekday = (datetime.datetime.now(tz=tzone('Asia/Tokyo')).weekday() + 1) % 7
+    if now_weekday in day_week:
+        return True
+    return False
+
+
+def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp"):
+    # Daily Batch time is between 2 time.
+    timezone = 'Asia/Tokyo' if timezone == "jp" else timezone
+    format_time = "%H:%M"
+    hour1 = datetime.datetime.strptime(hour1, format_time).time()
+    hour2 = datetime.datetime.strptime(hour2, format_time).time()
+    now_weekday = datetime.datetime.now(tz=tzone(timezone)).time()
+    if hour1 <= now_weekday <= hour2:
+        return True
+    return False
+
+
+def now_daymonth_isin(day_month, timezone="jp"):
+    # 1th day of month
+    timezone = 'Asia/Tokyo' if timezone == "jp" else timezone
+
+    if not day_month:
+        day_month = [1, 2]
+
+    now_day_month = datetime.datetime.now(tz=tzone(timezone)).day
+
+    if now_day_month in day_month:
+        return True
+    return False
+
+
 def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp") :
     ### Daily Batch time is between 2 time. 
     return False
