@@ -105,6 +105,6 @@ bootstrapped
 ########################################################
 #### utilmy.deeplearning
 faiss-cpu
-tensorflow-cpu==2.6.0
+tensorflow-cpu==2.6.2
 
 
