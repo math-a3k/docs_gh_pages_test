@@ -47,34 +47,25 @@ ENV PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$SPARK_HOME/python/:$P
 RUN mkdir -p /usr/spark/work/ \
   && chmod -R 777 /usr/spark/work/
 
-######################## Python 3.7 and PIP packages
-RUN cd /usr/src \
-     && wget https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tgz  \
-     && tar xzf Python-3.7.11.tgz \
-     && rm -rf Python-3.7.11.tgz \
-     && cd Python-3.7.11 \
-     && ./configure --enable-optimizations \
-     && make altinstall \
-     && cd ../ && rm -rf Python-3.7.11
 
-RUN ln -s /usr/local/bin/python3.7  /usr/bin/python3 \
-    && ln -s /usr/local/bin/pip3.7 /usr/bin/pip3
+######################## Miniconda
+ENV CONDA_DIR=/opt/minicond
+ENV PATH=$PATH:$SPARK_HOME/bin:$CONDA_DIR/bin
 
+RUN cd /tmp \
+    && wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
+    && chmod +x miniconda.sh \
+    && ./miniconda.sh -b -p $CONDA_DIR \
+    && rm -rf ./miniconda.sh \
+    && conda install python=3.7
+
+
+######################## PIP packages install
 WORKDIR /app/
 COPY requirements.txt /app
 RUN cd /app \
     && pip3 install --no-cache-dir  wheel pypandoc \
     && pip3 install --no-cache-dir  -r requirements.txt
 
-######################## Miniconda
-ENV CONDA_DIR=/opt/minicond
-RUN cd /tmp \
-    && wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
-    && chmod +x miniconda.sh \
-    && ./miniconda.sh -b -p $CONDA_DIR \
-    && rm -rf ./miniconda.sh
-
-
-ENV PATH=$PATH:$SPARK_HOME/bin:$CONDA_DIR/bin
 
 CMD $SPARK_HOME/bin/spark-class org.apache.spark.deploy.master.Master
