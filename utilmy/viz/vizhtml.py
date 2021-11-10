@@ -266,13 +266,7 @@ def test_pd_plot_network(verbose=False):
 def test_cssname(verbose=False,css_name="A4_size"):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata(verbose=verbose)
-    from box import Box
-    cfg = Box({})
-    cfg.tseries = {"title": 'ok'}
-    cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
-    cfg.histo   = {"title": 'ok'}
-    cfg.use_datatable = True
-    doc = htmlDoc(dir_out="", title="hello",css_name=css_name, format='myxxxx', cfg=cfg)
+    doc = htmlDoc(title="hello",css_name=css_name, format='myxxxx')
 
     doc.h1('My title')  # h1
     doc.sep()
@@ -281,7 +275,7 @@ def test_cssname(verbose=False,css_name="A4_size"):
     doc.tag('<h2> Test Cssname </h2>')
     doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
                      collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                     cfg=cfg.scatter, mode='matplot', save_img='')
+                     mode='matplot', save_img='')
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
@@ -293,7 +287,7 @@ def test_external_css():
   cfg.histo   = {"title": 'ok'}
   cfg.use_datatable = True
   # loading border style from external css
-  doc = htmlDoc(dir_out="", title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css', cfg=cfg)
+  doc = htmlDoc(title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css')
   data = test_getdata()
   # table
   doc.h1(" Table test ")
@@ -301,13 +295,8 @@ def test_external_css():
   doc.hr()
   # histogram
   doc.h1(" histo test ")
-  doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts', save_img=False)
+  doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income", mode='highcharts')
   doc.hr()
-  # create time series chart. mode highcharts
-  doc.h2('Plot of weather data') 
-  doc.plot_tseries(data['weatherdata.csv'].iloc[:1000, :],coldate='Date',date_format =  '%m/%d/%Y',
-                    coly1   =  ['Temperature'],coly2   =  ["Rainfall"],
-                    title ="Weather",cfg={},mode='highcharts')
   doc.save('test4.html')
   doc.open_browser()
   html1 = doc.get_html()
