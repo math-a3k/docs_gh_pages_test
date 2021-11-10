@@ -6,8 +6,18 @@ HELP= """ Utils for easy batching
 """
 import os, sys, socket, platform, time, gc,logging, random, datetime, logging
 
-from utilmy.utilmy import log, log2
-from utilmy import pd_read_file
+
+################################################################################################
+verbose = 3   ### Global setting
+
+def log(*s, **kw):
+    print(*s, flush=True, **kw)
+
+def log2(*s, **kw):
+    if verbose >=2 : print(*s, flush=True, **kw)
+
+def log3(*s, **kw):
+    if verbose >=3 : print(*s, flush=True, **kw)
 
 
 ################################################################################################
@@ -67,34 +77,85 @@ def test_index():
         Others will waiting to acquire key after thread release it.
     """
     import threading
+    import os
 
     file_name = "./test.txt"
     #file_lock = "tmp/plock3.lock"
 
+    def remove_file(file_name):
+        if os.path.exists(file_name):
+            os.remove(file_name)
+
+    remove_file(file_name)
     INDEX = IndexLock(file_name, file_lock=None)
 
-    #1. Create test file
-    #with open(file_name, mode='w+') as fp:
-    #    pass
+    # 1. Normal put get string
+    print("------------------------ Test put string ------------------------")
+    str_test = "The quick brown fox jumps over the lazy dog"
+    print(INDEX.put(str_test))
+    print(INDEX.get())
+    assert str_test in INDEX.get(), "[FAILED] Put string"
 
+    #. 2 Normal put get array of string
+    print("------------------------ Test put array ------------------------")
+    data_test = (
+        "The earliest known appearance of the phrase is from",
+        "favorite copy set by writing teachers for their pupils",
+        "Computer usage",
+        "Cultural references",
+    )
+    print(INDEX.put(data_test))
+    print(INDEX.get())
+    for string in data_test:
+        assert string in INDEX.get(), "[FAILED] Put list array"
+
+    # 3. Test the comment tring will be ignore when get data
+    print("------------------------ Test put comments ------------------------")
+    str_test = "# References"
+    print(INDEX.put(str_test))
+    print(INDEX.get())
+    assert str_test not in INDEX.get(), "[FAILED] Comment string should be ignored"
+
+    # 4. min size
+    print("------------------------ Test put small size ------------------------")
+    str_test = "zxcv"
+    print(INDEX.put(str_test))
+    print(INDEX.get())
+    assert str_test not in INDEX.get(), "[FAILED] small siZe should be ignored"
+
+    # 5. Try to put same data.
+    print("------------------------ Test put duplicated string ------------------------")
+    str_test = "Numerous references to the phrase have occurred in movies"
+    put1 = INDEX.put(str_test)
+    print(put1)
+    assert put1 == [str_test], "[FAILED] Put string"
+    put2 = INDEX.put(str_test)
+    print(put2)
+    assert put2 == []
+    print(INDEX.get())
+    assert str_test in INDEX.get(), "[FAILED] Put duplicated string"
+
+
+    print("------------------------ Test threads ------------------------")
+    # 6. Multi threads with IndexLock
     # define test thread
     def thread_running(number):
         print(f'Thread {number} START')
-        INDEX.put(f'Thread {number}')
-        INDEX.save_filter(f'Thread {number}')
+        print(INDEX.put(f'Thread {number}'))
+        print(INDEX.save_filter(f'Thread {number}'))
         print( INDEX.get() )
-
+        assert f'Thread {number}' in INDEX.get(), "[FAILED] Put string"
         print(f'Thread {number} END')
 
     # Create thread
-    for i in range(3):
+    for i in range(5):
         t = threading.Thread(target=thread_running, args=(i+1, ))
         t.start()
 
 
-
 def test_all():
-    pass
+    test_index()
+
 
 ########################################################################################
 ##### Date #############################################################################
@@ -159,7 +220,7 @@ def now_weekday_isin(day_week=[  0,1,2  ], timezone="jp") :
     return True
 
     
-date_now = date_now_jp  ### alias
+# date_now = date_now_jp()  ### alias
 
 
 def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
@@ -213,14 +274,14 @@ def batchLog(object):
         """
         return True
     
-        return False
 
     
-    def getall(self, date="*" )
+    def getall(self, date="*" ):
         """  get the log
         """
-        df = pd_read_file(  self.dirlog + "/" + date, sep="\t" )
-        return df
+        # df = pd_read_file(  self.dirlog + "/" + date, sep="\t" )
+        # return df
+        return True
         
         
     
@@ -357,10 +418,10 @@ class IndexLock(object):
 
 
     def save_isok(self, flist:list):   ### Alias
-        return put(self, val)
+        return self.put(val)
 
     def save_filter(self, val:list=None):
-        return put(self, val)
+        return self.put(val)
 
 
     ######################################################################
@@ -373,7 +434,7 @@ class IndexLock(object):
 
         flist2 = []
         for t  in flist :
-            if len(t) < self.min_size: continue
+            if len(t.strip()) < self.min_size: continue
             if self.skip_comment and t[0] == "#"  : continue
             flist2.append( t.strip() )
         return flist2
@@ -421,6 +482,7 @@ class IndexLock(object):
                 return val2
 
             except Exception as e:
+                log2(e)
                 log2(f"file lock waiting {i}s")
                 time.sleep( random.random() * i )
                 i += 1
@@ -531,14 +593,11 @@ def os_lock_releaseLock(locked_file_descriptor):
     import fcntl
     fcntl.flock(locked_file_descriptor, fcntl.LOCK_UN)
     # locked_file_descriptor.close()
-     
 
-        
+def main():
+    test_all()
 
 if __name__ == '__main__':
-    import fire
-    fire.Fire()        
-        
-        
-        
-        
+    # import fire
+    # fire.Fire()
+    main()
