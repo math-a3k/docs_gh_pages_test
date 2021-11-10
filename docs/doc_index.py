@@ -1560,6 +1560,7 @@ utilmy/util_batch.py
 -------------------------functions----------------------
 batchLog(object)
 date_now_jp(fmt = "%Y%m%d", add_days = 0, add_hours = 0, timezone = 'Asia/Tokyo')
+main()
 now_daymonth_isin(day_month, timezone = "jp")
 now_hour_between(hour1="12 = "12:45", hour2="13 = "13:45", timezone = "jp")
 now_weekday_isin(day_week = None, timezone = 'jp')
