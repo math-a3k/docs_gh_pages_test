@@ -266,7 +266,6 @@ def test_pd_plot_network(verbose=False):
 def test_cssname(verbose=False,css_name="A4_size"):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata(verbose=verbose)
-    cfg.use_datatable = True
     doc = htmlDoc(title="hello",css_name=css_name, format='myxxxx')
 
     doc.h1('My title')  # h1
@@ -276,7 +275,7 @@ def test_cssname(verbose=False,css_name="A4_size"):
     doc.tag('<h2> Test Cssname </h2>')
     doc.plot_scatter(data['titanic.csv'], colx='Age', coly='Fare',
                      collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
-                     cfg=cfg.scatter, mode='matplot', save_img='')
+                     mode='matplot', save_img='')
     doc.save(dir_out="myfile.html")
     doc.open_browser()  # Open myfile.html
 
