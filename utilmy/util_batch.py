@@ -98,15 +98,14 @@ def test_all():
 
 ########################################################################################
 ##### Date #############################################################################
-
-
-
-def now_weekday_isin(day_week=None):
+def now_weekday_isin(day_week=None, timezone='jp'):
     # 0 is sunday, 1 is monday
     if not day_week:
         day_week = [0, 1, 2]
 
-    now_weekday = (datetime.datetime.now(tz=tzone('Asia/Tokyo')).weekday() + 1) % 7
+    timezone = {'jp' : 'Asia/Tokyo', 'utc' : 'utc'}.get(timezone, 'utc')
+    
+    now_weekday = (datetime.datetime.now(tz=tzone(timezone)).weekday() + 1) % 7
     if now_weekday in day_week:
         return True
     return False
@@ -114,7 +113,7 @@ def now_weekday_isin(day_week=None):
 
 def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp"):
     # Daily Batch time is between 2 time.
-    timezone = 'Asia/Tokyo' if timezone == "jp" else timezone
+    timezone = {'jp' : 'Asia/Tokyo', 'utc' : 'utc'}.get(timezone, 'utc')
     format_time = "%H:%M"
     hour1 = datetime.datetime.strptime(hour1, format_time).time()
     hour2 = datetime.datetime.strptime(hour2, format_time).time()
@@ -126,10 +125,10 @@ def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp"):
 
 def now_daymonth_isin(day_month, timezone="jp"):
     # 1th day of month
-    timezone = 'Asia/Tokyo' if timezone == "jp" else timezone
+    timezone = {'jp' : 'Asia/Tokyo', 'utc' : 'utc'}.get(timezone, 'utc')
 
     if not day_month:
-        day_month = [1, 2]
+        day_month = [1]
 
     now_day_month = datetime.datetime.now(tz=tzone(timezone)).day
 
@@ -138,29 +137,11 @@ def now_daymonth_isin(day_month, timezone="jp"):
     return False
 
 
-def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp") :
-    ### Daily Batch time is between 2 time. 
-    return False
-    
-    return True
 
 
-def now_daymonth_isin(day_month=[ 1,2  ], timezone="jp") :
-    ### 1th day of month
-    return False
-    
-    return True
 
 
-def now_weekday_isin(day_week=[  0,1,2  ], timezone="jp") :
-    ### 0 is sunday, 1 is monday 
-    return False
-    
-    return True
-
-    
 date_now = date_now_jp  ### alias
-
 
 def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
     # "%Y-%m-%d %H:%M:%S %Z%z"
@@ -227,6 +208,21 @@ def batchLog(object):
 
 
 #########################################################################################
+def os_wait_filexist(flist, sleep=300):
+    import glob, time
+    nfile = len(flist)
+    ii = -1
+    while True:
+       ii += 1
+       kk = 0
+       if ii % 10 == 0 :  print("Waiting files", flist)        
+       for fi in flist :
+            fj = glob.glob(fi) #### wait
+            if len(fj)> 0:
+                kk = kk + 1
+       if kk == nfile: break
+       else : time.sleep(sleep)
+
 def os_wait_cpu_ram_lower(cpu_min=30, sleep=10, interval=5, msg= "", name_proc=None, verbose=True):
     #### Wait until Server CPU and ram are lower than threshold.    
     #### Sleep until CPU becomes normal usage
