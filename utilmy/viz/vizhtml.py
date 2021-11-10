@@ -515,7 +515,7 @@ class htmlDoc(object):
 
                      date_format: str='%m/%d/%Y', nsample: int= 10000,
                      
-                     cfg: dict = {}, mode: str='matplot', save_img="",  **kw):
+                     cfg: dict = {}, mode: str='highcharts', save_img="",  **kw):
         """Create html time series chart.
         Args:
             df:         pd Dataframe
