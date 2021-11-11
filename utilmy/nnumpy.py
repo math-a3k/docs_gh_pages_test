@@ -61,8 +61,28 @@ def test1():
 
 
 
-###################################################################################################
-####### Numpy, compute related  ###################################################################
+##############################################################################################################
+####### Numpy, Dict, List compute related  ###################################################################
+class fixedDict(Dict):
+    """  fixed size dict
+          ddict = fixedDict(limit=10**6)
+
+    """
+    def __init__(self, *args, **kwds):
+        self.size_limit = kwds.pop("limit", None)
+        Dict.__init__(self, *args, **kwds)
+        self._check_size_limit()
+
+    def __setitem__(self, key, value):
+        Dict.__setitem__(self, key, value)
+        self._check_size_limit()
+
+    def _check_size_limit(self):
+        if self.size_limit is not None:
+            while len(self) > self.size_limit:
+                self.popitem(last=False)
+
+
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
