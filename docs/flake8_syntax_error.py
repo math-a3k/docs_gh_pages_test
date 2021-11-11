@@ -57,3 +57,8 @@ form utilmy.utilmy import log, log2
 0
 0
 0
+./utilmy/util_batch.py:266:46: E999 SyntaxError: invalid syntax
+        with open(self.dirlog, mode='r') as fp
+                                             ^
+1     E999 SyntaxError: invalid syntax
+1
