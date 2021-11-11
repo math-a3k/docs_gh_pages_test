@@ -869,6 +869,9 @@ to_timeunix(datex = "2018-01-16")
 
 -------------------------methods----------------------
 dict_to_namespace.__init__(self, d)
+fixedDict.__init__(self, *args, **kwds)
+fixedDict.__setitem__(self, key, value)
+fixedDict._check_size_limit(self)
 
 
 utilmy/oos.py
