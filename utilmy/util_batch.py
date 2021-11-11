@@ -6,7 +6,6 @@ HELP= """ Utils for easy batching
 """
 import os, sys, socket, platform, time, gc,logging, random, datetime, logging
 
-
 ################################################################################################
 verbose = 3   ### Global setting
 
@@ -29,7 +28,7 @@ def test_functions():
     """
     # test function
     def running(fun_args):
-        print(f'Function running with arg: {fun_args}')
+        log(f'Function running with arg: {fun_args}')
 
     # test that os_lock_execute is working
     os_lock_execute(running, 'Test_args', plock='tmp/plock.lock')
@@ -48,17 +47,17 @@ def test_funtions_thread():
 
     # define test function
     def running(fun_args):
-        print(f'Function running in thread: {fun_args} START')
+        log(f'Function running in thread: {fun_args} START')
         time.sleep(fun_args* 0.2)
-        print(f'Function running in thread: {fun_args} END')
+        log(f'Function running in thread: {fun_args} END')
 
     # define test thread
     def thread_running(number):
-        print(f'Thread {number} START')
+        log(f'Thread {number} START')
         os_lock_execute(running, number, plock='tmp/plock2.lock')
-        print(f'Thread {number} sleeping in {number*3}s')
+        log(f'Thread {number} sleeping in {number*3}s')
         time.sleep(number* 0.5)
-        print(f'Thread {number} END')
+        log(f'Thread {number} END')
 
     # Create thread
     for i in range(3):
@@ -90,62 +89,62 @@ def test_index():
     INDEX = IndexLock(file_name, file_lock=None)
 
     # 1. Normal put get string
-    print("------------------------ Test put string ------------------------")
+    log("------------------------ Test put string ------------------------")
     str_test = "The quick brown fox jumps over the lazy dog"
-    print(INDEX.put(str_test))
-    print(INDEX.get())
+    log(INDEX.put(str_test))
+    log(INDEX.get())
     assert str_test in INDEX.get(), "[FAILED] Put string"
 
     #. 2 Normal put get array of string
-    print("------------------------ Test put array ------------------------")
+    log("------------------------ Test put array ------------------------")
     data_test = (
         "The earliest known appearance of the phrase is from",
         "favorite copy set by writing teachers for their pupils",
         "Computer usage",
         "Cultural references",
     )
-    print(INDEX.put(data_test))
-    print(INDEX.get())
+    log(INDEX.put(data_test))
+    log(INDEX.get())
     for string in data_test:
         assert string in INDEX.get(), "[FAILED] Put list array"
 
     # 3. Test the comment tring will be ignore when get data
-    print("------------------------ Test put comments ------------------------")
+    log("------------------------ Test put comments ------------------------")
     str_test = "# References"
-    print(INDEX.put(str_test))
-    print(INDEX.get())
+    log(INDEX.put(str_test))
+    log(INDEX.get())
     assert str_test not in INDEX.get(), "[FAILED] Comment string should be ignored"
 
     # 4. min size
-    print("------------------------ Test put small size ------------------------")
+    log("------------------------ Test put small size ------------------------")
     str_test = "zxcv"
-    print(INDEX.put(str_test))
-    print(INDEX.get())
+    log(INDEX.put(str_test))
+    log(INDEX.get())
     assert str_test not in INDEX.get(), "[FAILED] small siZe should be ignored"
 
     # 5. Try to put same data.
-    print("------------------------ Test put duplicated string ------------------------")
+    log("------------------------ Test put duplicated string ------------------------")
     str_test = "Numerous references to the phrase have occurred in movies"
     put1 = INDEX.put(str_test)
-    print(put1)
+    log(put1)
     assert put1 == [str_test], "[FAILED] Put string"
     put2 = INDEX.put(str_test)
-    print(put2)
+    log(put2)
     assert put2 == []
-    print(INDEX.get())
+    log(INDEX.get())
     assert str_test in INDEX.get(), "[FAILED] Put duplicated string"
 
 
-    print("------------------------ Test threads ------------------------")
+    log("------------------------ Test threads ------------------------")
     # 6. Multi threads with IndexLock
     # define test thread
     def thread_running(number):
-        print(f'Thread {number} START')
-        print(INDEX.put(f'Thread {number}'))
-        print(INDEX.save_filter(f'Thread {number}'))
-        print( INDEX.get() )
+        log(f'Thread {number} START')
+        log(INDEX.put(f'Thread {number}'))
+        log(INDEX.save_filter(f'Thread {number}'))
+        log( INDEX.get() )
         assert f'Thread {number}' in INDEX.get(), "[FAILED] Put string"
-        print(f'Thread {number} END')
+        log(f'Thread {number} END')
 
     # Create thread
     for i in range(5):
@@ -198,14 +197,11 @@ def now_daymonth_isin(day_month, timezone="jp"):
     return False
 
 
-
-
-
   
 # date_now = date_now_jp()  ### alias
 
 
-def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
+def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='jp'):
     # "%Y-%m-%d %H:%M:%S %Z%z"
     from pytz import timezone as tzone
     import datetime
@@ -217,6 +213,7 @@ def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='Asia/Tokyo'):
        return now_new.strftime(fmt)
       
     else :
+       timezone = {'jp' : 'Asia/Tokyo', 'utc' : 'utc'}.get(timezone, 'jp') 
        # Convert to US/Pacific time zone
        now_pacific = now_new.astimezone(tzone(timezone))
        return now_pacific.strftime(fmt)
@@ -232,15 +229,17 @@ def time_sleep_random(nmax=5):
 ####################################################################################################
 ####################################################################################################
 def batchLog(object):    
-    def __init__(self,dirlog="log/batch_log", date_fmt="%Y%m%d", format="", timezone="jp"):
+    def __init__(self,dirlog="log/batch_log", use_date=True, tag="", timezone="jp"):
         """  Log on file when task is done and Check if a task is done.
            Log file format:
            dt\t prog_name\t name \t tag \t info
         
         """
-        pass
+        today = date_now_jp("%Y%m%d")        
+        self.dirlog = dirlog + f"/batchlog_{tag}_{today}.log"
+        
     
-    def save(self, name,  tag="end/start", info="", **kw):    
+    def save(self, msg,   **kw):    
         """  Log on file , termination of file
              Thread Safe writing.    
             dt\t prog_name\t name \t tag \t info
@@ -248,22 +247,30 @@ def batchLog(object):
             One file per day
 
         """
-        pass
+        ### Thread Safe logging on disk
 
 
-    def isdone(self, name="*",  tag="end/start", info="",  tstart="*", tend="*",  ):
+    def isdone(self, name="*" ):
         """  Find if a task was done or not.
         """
-        return True
-    
+        flist = self.getall( date="*" )
+        for fi in flist :
+            if name in fi : #### use regex
+                return True
+        return False             
 
     
     def getall(self, date="*" ):
         """  get the log
         """
-        # df = pd_read_file(  self.dirlog + "/" + date, sep="\t" )
-        # return df
-        return True
+        with open(self.dirlog, mode='r') as fp
+            flist = fp.readlines()
+            
+        flist2 = []    
+        for  fi in flist :
+            if fi[0] == "#" or len(fi) < 5 : continue
+            flist2.append(fi)            
+        return flist2
         
         
     
@@ -277,13 +284,30 @@ def os_wait_filexist(flist, sleep=300):
     while True:
        ii += 1
        kk = 0
-       if ii % 10 == 0 :  print("Waiting files", flist)        
+       if ii % 10 == 0 :  log("Waiting files", flist)        
        for fi in flist :
             fj = glob.glob(fi) #### wait
             if len(fj)> 0:
                 kk = kk + 1
        if kk == nfile: break
        else : time.sleep(sleep)
+
+
+
+def os_wait_fileexist2(dirin, ntry_max=100, sleep_time=300): 
+    import glob, time
+    log('####### Check if file ready', "\n", dirin,)
+    ntry=0
+    while ntry < ntry_max :
+       fi = glob.glob(dirin )
+       if len(fi) >= 1: break
+       ntry += 1
+       time.sleep(sleep_time)    
+       if ntry % 10 == 0 : log('waiting file') 
+    log('File is ready:', dirin)    
+
+
+
 
 def os_wait_cpu_ram_lower(cpu_min=30, sleep=10, interval=5, msg= "", name_proc=None, verbose=True):
     #### Wait until Server CPU and ram are lower than threshold.    
@@ -333,23 +357,30 @@ def os_process_find_name(name=r"((.*/)?tasks.*/t.*/main\.(py|sh))", ishow=1, isr
     return ls
 
 
-def os_wait_program_end(prog_name, max_wait=86400):
-    #### Wait until one program finishes
-    
-    return True
+
+def os_wait_program_end(cpu_min=30, sleep=60, interval=5, msg= "", program_name=None, verbose=True):
+    #### Sleep until CPU becomes normal usage
+    import psutil, time
+
+    if program_name is not None :   ### If process not in running ones
+        flag = True
+        while flag :
+            flag = False
+            for proc in psutil.process_iter():
+               ss = " ".join(proc.cmdline())
+               if program_name in ss :
+                    flag = True
+            if flag : time.sleep(sleep)
+
+    aux = psutil.cpu_percent(interval=interval)  ### Need to call 2 times
+    while aux > cpu_min:
+        ui = psutil.cpu_percent(interval=interval)
+        aux = 0.5 * (aux +  ui)
+        if verbose : log( 'Sleep sec', sleep, ' Usage %', aux, ui, msg )
+        time.sleep(sleep)
+    return aux
 
 
-def os_wait_isfile_exist(dirin, ntry_max=100, sleep_time=300): 
-    import glob, time
-    log('####### Check if file ready', "\n", dirin,)
-    ntry=0
-    while ntry < ntry_max :
-       fi = glob.glob(dirin )
-       if len(fi) >= 1: break
-       ntry += 1
-       time.sleep(sleep_time)    
-       if ntry % 10 == 0 : log('waiting file') 
-    log('File is ready:', dirin)    
 
 
 
@@ -415,7 +446,7 @@ class IndexLock(object):
 
 
     def save_isok(self, flist:list):   ### Alias
-        return self.put(val)
+        return self.put(flist)
 
     def save_filter(self, val:list=None):
         return self.put(val)
@@ -459,7 +490,7 @@ class IndexLock(object):
                 val2 = [] ; isok= True
                 for fi in val:
                     if fi in fall :
-                        print('exist in Index, skipping', fi)
+                        log('exist in Index, skipping', fi)
                         isok =False
                     else :
                         val2.append(fi)
@@ -548,7 +579,7 @@ class Index0(object):
                 val2 = [] ; isok= True
                 for fi in val:
                     if fi in fall :
-                        print('exist in Index, skipping', fi)
+                        log('exist in Index, skipping', fi)
                         isok =False
                     else :
                         val2.append(fi)
@@ -567,7 +598,7 @@ class Index0(object):
                 return val2
 
             except Exception as e:
-                print(f"file lock waiting {i}s")
+                log(f"file lock waiting {i}s")
                 time.sleep( random.random() * i )
                 i += 1
 
@@ -591,10 +622,15 @@ def os_lock_releaseLock(locked_file_descriptor):
     fcntl.flock(locked_file_descriptor, fcntl.LOCK_UN)
     # locked_file_descriptor.close()
 
+
+
 def main():
     test_all()
 
+
+#####################################################################################################
 if __name__ == '__main__':
     # import fire
     # fire.Fire()
     main()
+
