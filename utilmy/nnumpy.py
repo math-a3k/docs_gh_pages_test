@@ -6,6 +6,7 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc
 
+from collections import OrderedDict
 
 ###################################################################################################
 verbose = 0
@@ -63,7 +64,7 @@ def test1():
 
 ##############################################################################################################
 ####### Numpy, Dict, List compute related  ###################################################################
-class fixedDict(Dict):
+class fixedDict(OrderedDict):
     """  fixed size dict
           ddict = fixedDict(limit=10**6)
 
@@ -74,7 +75,7 @@ class fixedDict(Dict):
         self._check_size_limit()
 
     def __setitem__(self, key, value):
-        Dict.__setitem__(self, key, value)
+        OrderedDict.__setitem__(self, key, value)
         self._check_size_limit()
 
     def _check_size_limit(self):
