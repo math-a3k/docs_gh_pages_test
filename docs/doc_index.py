@@ -1577,6 +1577,7 @@ os_wait_program_end(cpu_min = 30, sleep = 60, interval = 5, msg =  "", program_n
 test_all()
 test_funtions_thread()
 test_index()
+test_os_process_find_name()
 time_sleep_random(nmax = 5)
 to_file_safe(msg:str, fpath:str)
 
