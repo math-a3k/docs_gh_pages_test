@@ -1354,7 +1354,9 @@ CSS_TEMPLATE.base = """
               hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
               div{margin-top: 5px;margin-bottom: 5px;}
               table {border-collapse: collapse;}
-              table th,table td {border: 1px solid lightgrey;}         
+              table th,table td {border: 1px solid lightgrey;}
+              #mynetwork{float: none !important;}
+              #config{float: none !important;}
 """
 
 
