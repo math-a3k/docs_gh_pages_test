@@ -111,14 +111,14 @@ def test_index():
     # 3. Test the comment tring will be ignore when get data
     log("------------------------ Test put comments ------------------------")
     str_test = "# References"
-    log(INDEX.put(str_test))
+    INDEX.put(str_test)
     log(INDEX.get())
     assert str_test not in INDEX.get(), "[FAILED] Comment string should be ignored"
 
     # 4. min size
     log("------------------------ Test put small size ------------------------")
     str_test = "zxcv"
-    log(INDEX.put(str_test))
+    INDEX.put(str_test)
     log(INDEX.get())
     assert str_test not in INDEX.get(), "[FAILED] small siZe should be ignored"
 
@@ -126,10 +126,8 @@ def test_index():
     log("------------------------ Test put duplicated string ------------------------")
     str_test = "Numerous references to the phrase have occurred in movies"
     put1 = INDEX.put(str_test)
-    log(put1)
     assert put1 == [str_test], "[FAILED] Put string"
     put2 = INDEX.put(str_test)
-    log(put2)
     assert put2 == []
     log(INDEX.get())
     assert str_test in INDEX.get(), "[FAILED] Put duplicated string"
@@ -140,8 +138,8 @@ def test_index():
     # define test thread
     def thread_running(number):
         log(f'Thread {number} START')
-        log(INDEX.put(f'Thread {number}'))
-        log(INDEX.save_filter(f'Thread {number}'))
+        INDEX.put(f'Thread {number}')
+        INDEX.save_filter(f'Thread {number}')
         log( INDEX.get() )
         assert f'Thread {number}' in INDEX.get(), "[FAILED] Put string"
         log(f'Thread {number} END')
@@ -152,7 +150,15 @@ def test_index():
         t.start()
 
 
+def test_os_process_find_name():
+    # check name with re
+    print(os_process_find_name(name=r".+util_batch\.py"))
+    # check name without re
+    print(os_process_find_name(name="util_batch", isregex=0))
+
+
 def test_all():
+    test_os_process_find_name()
     test_index()
 
 
@@ -248,6 +254,7 @@ def batchLog(object):
 
         """
         ### Thread Safe logging on disk
+        pass
 
 
     def isdone(self, name="*" ):
@@ -263,7 +270,7 @@ def batchLog(object):
     def getall(self, date="*" ):
         """  get the log
         """
-        with open(self.dirlog, mode='r') as fp
+        with open(self.dirlog, mode='r') as fp:
             flist = fp.readlines()
             
         flist2 = []    
@@ -271,9 +278,6 @@ def batchLog(object):
             if fi[0] == "#" or len(fi) < 5 : continue
             flist2.append(fi)            
         return flist2
-        
-        
-    
 
 
 #########################################################################################
@@ -340,7 +344,7 @@ def os_process_find_name(name=r"((.*/)?tasks.*/t.*/main\.(py|sh))", ishow=1, isr
         Condensed Regex to:
         ((.*/)?tasks.*/t.*/main\.(py|sh)) - make the characters before 'tasks' optional group.
     """
-    import psutil
+    import psutil, re
     ls = []
     for p in psutil.process_iter(["pid", "name", "exe", "cmdline"]):
         cmdline = " ".join(p.info["cmdline"]) if p.info["cmdline"] else ""
