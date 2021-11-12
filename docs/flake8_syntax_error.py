@@ -69,3 +69,4 @@ form utilmy.utilmy import log, log2
 1
 0
 0
+0
