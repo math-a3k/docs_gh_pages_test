@@ -1356,8 +1356,7 @@ CSS_TEMPLATE.base = """
               table {border-collapse: collapse;}
               table th,table td {border: 1px solid lightgrey;}
               #mynetwork{float: none !important;}
-              #config{float: none !important;}
-              height: auto !important;
+              #config{float: none !important;height: auto !important;}              
 """
 
 
