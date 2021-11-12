@@ -373,7 +373,7 @@ class htmlDoc(object):
         cfg          = {} if cfg is None else cfg
         self.cc      = Box(cfg)  # Config dict
         self.dir_out = dir_out.replace("\\", "/")
-        self.head    = f"  <html>\n    "
+        self.head    = f"  <html>\n<head>\n"
         self.html    = "\n </head> \n<body>"
         self.tail    = "\n </body>\n</html>"
 
@@ -389,7 +389,7 @@ class htmlDoc(object):
         
         links = links + f'\n<link rel="stylesheet" href="{css_file}">' if css_file else links
       
-        self.head = self.head + """<head><title>{title}</title>
+        self.head = self.head + """<title>{title}</title>
               {links}""".format(title=title,links=links)
          
         self.tail = f"\n<script src='{jscript_file}'></script>\n" + self.tail if jscript_file else self.tail
@@ -608,8 +608,9 @@ class htmlDoc(object):
 
     def pd_plot_network(self, df:pd.DataFrame, cola:    str='col_node1', colweight:str="weight",
                         colb: str='col_node2', coledge: str='col_edge'):
-        html_code = pd_plot_network(df, cola=cola, colb=colb,colweight=colweight, coledge=coledge)
-        self.html += "\n\n" + html_code
+        head, body = pd_plot_network(df, cola=cola, colb=colb,colweight=colweight, coledge=coledge)
+        self.html += "\n\n" + body
+        self.head += "\n\n" + head 
 
 
 
@@ -1325,11 +1326,11 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
             content = f.read()
             head = extract_text('head',content)
             body = extract_text('body',content)
-            return head + "\n" + body
+            return head, body
     networkx_graph = convert_to_networkx(df, cola, colb, colweight=colweight)
-    ng2 = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
+    head, body = draw_graph(networkx_graph, notebook=False, output_filename='graph.html',
                show_buttons=True, only_physics_buttons=False,html_code = True)
-    return ng2
+    return head, body
 
 
 
