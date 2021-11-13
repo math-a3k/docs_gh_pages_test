@@ -330,8 +330,16 @@ def test_page():
     doc.h3("histogram highchart")
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
                        xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts',title="test_histo", save_img=False)
+    doc.h4("nbin")
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},nbin=30, mode='highcharts',title="test_histo", save_img=False)
+    doc.h4("bin width")
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},binWidth=3, mode='highcharts',title="test_histo", save_img=False)
     doc.h3("histogram matplot")
     doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="test_histo",ylabel="Unit price", mode='matplot', save_img="")
+    doc.h4("nbin")
+    doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',nbin=20,cfg = cfg.histo,title="test_histo",ylabel="Unit price", mode='matplot', save_img="")
     doc.br()
 
     # plot scatter
@@ -342,21 +350,24 @@ def test_page():
                      cfg=cfg.scatter, mode='matplot', save_img='')
     doc.h3("scatter matplot")
     doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
-                         collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                         collabel='Name', colclass1='Fare', colclass2='Age', colclass3='Sex',
                          figsize=(20,7),cfg=cfg, mode='highcharts',)
     
     
-    # plot scatter
+    # plot tseries
     doc.h1("Test TSeries")
     doc.h3("matplot tseries")
     doc.plot_tseries(data['stock_data.csv'],coldate = 'Date', date_format = '%m/%d/%Y', coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+    doc.h4("only one axis")
+    doc.plot_tseries(data['weatherdata.csv'],coldate = 'Date', date_format = '%m/%d/%Y', xlabel='date', y1label="quantity", coly1 = ['Temperature', 'Temperature'], title = "weather",mode='highcharts')
 
     # network
     df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
     doc.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
     
     vi.html_show(doc.get_html())
-    doc.save('allgraphinonepage.html')  
+    doc.save('allgraphinonepage.html')
+ 
    
 
    
