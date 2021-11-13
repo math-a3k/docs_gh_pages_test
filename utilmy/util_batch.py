@@ -156,6 +156,11 @@ def test_os_process_find_name():
     # check name without re
     print(os_process_find_name(name="util_batch", isregex=0))
 
+    # test with fnmatch
+    import fnmatch
+    print(os_process_find_name(name=fnmatch.translate('*bash*')))
+    print(os_process_find_name(name=fnmatch.translate('*.py')))
+    print(os_process_find_name(name=fnmatch.translate('python*')))
 
 def test_all():
     test_os_process_find_name()
