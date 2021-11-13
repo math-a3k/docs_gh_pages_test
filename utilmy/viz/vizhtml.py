@@ -306,6 +306,58 @@ def test_table():
    log( df.head() )
    show_table_image(df, colimage='image_url', colgroup='name', title='test_table')
    
+def test_page():
+    # get data
+    data = vi.test_getdata(verbose=False)
+    
+    from box import Box
+    cfg = Box({})
+    cfg.tseries = {"title": 'tseries_title'}
+    cfg.scatter = {"title" : "scatter_title", 'figsize' : (12, 7)}
+    cfg.histo   = {"title": 'histo_title'}
+
+    # initialize htmldoc
+    doc = htmlDoc(title='Weather report', dir_out="", cfg={}, css_name= "a4_page")
+
+    # test_table
+    doc.h1("Test Table")
+    doc.table(data['titanic.csv'][0:30], use_datatable=True, table_id="test", custom_css_class='intro', format='grey_dark')  
+    doc.table(data['stock_data.csv'][0:10], use_datatable=False, table_id="test_false_datatable", custom_css_class='intro', format='orange_dark')
+    doc.sep()
+
+    # plot histogram
+    doc.h1("Test Histogram")
+    doc.h3("histogram highchart")
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts',title="test_histo", save_img=False)
+    doc.h3("histogram matplot")
+    doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="test_histo",ylabel="Unit price", mode='matplot', save_img="")
+    doc.br()
+
+    # plot scatter
+    doc.h1("Test Scatter")
+    doc.h3("scatter highchart")
+    doc.plot_scatter( data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
+                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                     cfg=cfg.scatter, mode='matplot', save_img='')
+    doc.h3("scatter matplot")
+    doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
+                         collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                         figsize=(20,7),cfg=cfg, mode='highcharts',)
+    
+    
+    # plot scatter
+    doc.h1("Test TSeries")
+    doc.h3("matplot tseries")
+    doc.plot_tseries(data['stock_data.csv'],coldate = 'Date', date_format = '%m/%d/%Y', coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+
+    # network
+    df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
+    doc.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
+    
+    vi.html_show(doc.get_html())
+    doc.save('allgraphinonepage.html')  
+   
 
    
 #####################################################################################
