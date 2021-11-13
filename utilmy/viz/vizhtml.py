@@ -549,7 +549,7 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_tseries(self, df:pd.DataFrame, coldate, coly1: list, coly2=None,
+    def plot_tseries(self, df:pd.DataFrame, coldate, coly1: list, coly2=[],
                      title: str="", xlabel=None, y1label=None,  y2label=None,                      
                      figsize: tuple=(14,7),  plot_type="", spacing=0.1,
 
