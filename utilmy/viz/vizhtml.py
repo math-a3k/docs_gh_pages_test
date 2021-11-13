@@ -1409,7 +1409,7 @@ CSS_TEMPLATE.base_grey = """
 """
 
 CSS_TEMPLATE.base = """
-              body{margin:25px;font-family: 'Open Sans', sans-serif;}
+              body{margin:25px;font-family: 'Open Sans', sans-serif;font-size:8px !important;}
               h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
               .dataTables_wrapper{overflow-x: auto;}
               hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
