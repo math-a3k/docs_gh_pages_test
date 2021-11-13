@@ -588,9 +588,8 @@ class htmlDoc(object):
 
     def plot_histogram(self, df:pd.DataFrame, col,
                        title: str='', xlabel: str=None, ylabel: str=None,
-                       
                        figsize: tuple=(14,7), colormap:str = 'RdYlBu', 
-                       nsample=10000,
+                       nsample=10000,binWidth=None,
                        nbin=10, q5=0.005, q95=0.95,cfg: dict = {}, 
                        mode: str='matplot', save_img="",  **kw):
         """Create html histogram chart.
@@ -612,9 +611,9 @@ class htmlDoc(object):
         elif mode == 'highcharts':
             cfg['figsize'] = figsize
             html_code = pd_plot_histogram_highcharts(df, col,
-                                                     title=title, xlabel=xlabel, ylabel=ylabel,
+                                                     title=title, xaxis_label=xlabel, yaxis_label=ylabel,
                                                      colormap=colormap, nsample=nsample,
-
+                                                     binsNumber=nbin,binWidth=binWidth,
                                                      cfg=cfg,mode=mode,save_img=save_img, verbose=self.verbose  )
         self.html += "\n\n" + html_code
 
