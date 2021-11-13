@@ -1145,8 +1145,8 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
     '''
     cc = Box(cfg)
     cc.title        = cc.get('title',    "My Title" ) if title is None else title
-    cc.xaxis_label  = xaxis_label
-    cc.yaxis_label  = yaxis_label
+    cc.xaxis_label  = xaxis_label if xaxis_label else "x-axis"
+    cc.yaxis_label  = yaxis_label if yaxis_label else "y-axis"
 
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
     data         = df[colname].values.tolist()
