@@ -152,10 +152,14 @@ def test_index():
 
 def test_os_process_find_name():
     # check name with re
-    print(os_process_find_name(name=r".+util_batch\.py"))
+    print(os_process_find_name(name="*util_batch.py"))
     # check name without re
     print(os_process_find_name(name="util_batch", isregex=0))
 
+    # test with fnmatch
+    print(os_process_find_name(name='*bash*'))
+    print(os_process_find_name(name='*.py'))
+    print(os_process_find_name(name='python*'))
 
 def test_all():
     test_os_process_find_name()
@@ -344,12 +348,14 @@ def os_process_find_name(name=r"((.*/)?tasks.*/t.*/main\.(py|sh))", ishow=1, isr
         Condensed Regex to:
         ((.*/)?tasks.*/t.*/main\.(py|sh)) - make the characters before 'tasks' optional group.
     """
-    import psutil, re
+    import psutil, re, fnmatch
     ls = []
+
+    re_name = fnmatch.translate(name)
     for p in psutil.process_iter(["pid", "name", "exe", "cmdline"]):
         cmdline = " ".join(p.info["cmdline"]) if p.info["cmdline"] else ""
         if isregex:
-            flag = re.match(name, cmdline, re.I)
+            flag = re.match(re_name, cmdline, re.I)
         else:
             flag = name and name.lower() in cmdline.lower()
 
