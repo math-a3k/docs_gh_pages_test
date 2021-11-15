@@ -306,6 +306,69 @@ def test_table():
    log( df.head() )
    show_table_image(df, colimage='image_url', colgroup='name', title='test_table')
    
+def test_page():
+    # get data
+    data = vi.test_getdata(verbose=False)
+    
+    from box import Box
+    cfg = Box({})
+    cfg.tseries = {"title": 'tseries_title'}
+    cfg.scatter = {"title" : "scatter_title", 'figsize' : (12, 7)}
+    cfg.histo   = {"title": 'histo_title'}
+
+    # initialize htmldoc
+    doc = htmlDoc(title='Weather report', dir_out="", cfg={}, css_name= "a4_page")
+
+    # test_table
+    doc.h1("Test Table")
+    doc.table(data['titanic.csv'][0:30], use_datatable=True, table_id="test", custom_css_class='intro', format='grey_dark')  
+    doc.table(data['stock_data.csv'][0:10], use_datatable=False, table_id="test_false_datatable", custom_css_class='intro', format='orange_dark')
+    doc.sep()
+
+    # plot histogram
+    doc.h1("Test Histogram")
+    doc.h3("histogram highchart")
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts',title="test_histo", save_img=False)
+    doc.h4("nbin")
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},nbin=30, mode='highcharts',title="test_histo", save_img=False)
+    doc.h4("bin width")
+    doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},binWidth=3, mode='highcharts',title="test_histo", save_img=False)
+    doc.h3("histogram matplot")
+    doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="test_histo",ylabel="Unit price", mode='matplot', save_img="")
+    doc.h4("nbin")
+    doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',nbin=20,cfg = cfg.histo,title="test_histo",ylabel="Unit price", mode='matplot', save_img="")
+    doc.br()
+
+    # plot scatter
+    doc.h1("Test Scatter")
+    doc.h3("scatter highchart")
+    doc.plot_scatter( data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
+                     collabel='Name', colclass1='Sex', colclass2='Age', colclass3='Sex',
+                     cfg=cfg.scatter, mode='matplot', save_img='')
+    doc.h3("scatter matplot")
+    doc.plot_scatter(data['titanic.csv'].iloc[:50, :], colx='Age', coly='Fare',
+                         collabel='Name', colclass1='Fare', colclass2='Age', colclass3='Sex',
+                         figsize=(20,7),cfg=cfg, mode='highcharts',)
+    
+    
+    # plot tseries
+    doc.h1("Test TSeries")
+    doc.h3("matplot tseries")
+    doc.plot_tseries(data['stock_data.csv'],coldate = 'Date', date_format = '%m/%d/%Y', coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+    doc.h4("only one axis")
+    doc.plot_tseries(data['weatherdata.csv'],coldate = 'Date', date_format = '%m/%d/%Y', xlabel='date', y1label="quantity", coly1 = ['Temperature', 'Temperature'], title = "weather",mode='highcharts')
+
+    # network
+    df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
+    doc.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
+    
+    vi.html_show(doc.get_html())
+    doc.save('allgraphinonepage.html')
+ 
+   
 
    
 #####################################################################################
@@ -497,7 +560,7 @@ class htmlDoc(object):
         self.html += "\n\n" + html_code
 
 
-    def plot_tseries(self, df:pd.DataFrame, coldate, coly1: list, coly2=None,
+    def plot_tseries(self, df:pd.DataFrame, coldate, coly1: list, coly2=[],
                      title: str="", xlabel=None, y1label=None,  y2label=None,                      
                      figsize: tuple=(14,7),  plot_type="", spacing=0.1,
 
@@ -536,9 +599,8 @@ class htmlDoc(object):
 
     def plot_histogram(self, df:pd.DataFrame, col,
                        title: str='', xlabel: str=None, ylabel: str=None,
-                       
                        figsize: tuple=(14,7), colormap:str = 'RdYlBu', 
-                       nsample=10000,
+                       nsample=10000,binWidth=None,
                        nbin=10, q5=0.005, q95=0.95,cfg: dict = {}, 
                        mode: str='matplot', save_img="",  **kw):
         """Create html histogram chart.
@@ -560,9 +622,9 @@ class htmlDoc(object):
         elif mode == 'highcharts':
             cfg['figsize'] = figsize
             html_code = pd_plot_histogram_highcharts(df, col,
-                                                     title=title, xlabel=xlabel, ylabel=ylabel,
+                                                     title=title, xaxis_label=xlabel, yaxis_label=ylabel,
                                                      colormap=colormap, nsample=nsample,
-
+                                                     binsNumber=nbin,binWidth=binWidth,
                                                      cfg=cfg,mode=mode,save_img=save_img, verbose=self.verbose  )
         self.html += "\n\n" + html_code
 
@@ -1094,8 +1156,8 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
     '''
     cc = Box(cfg)
     cc.title        = cc.get('title',    "My Title" ) if title is None else title
-    cc.xaxis_label  = xaxis_label
-    cc.yaxis_label  = yaxis_label
+    cc.xaxis_label  = xaxis_label if xaxis_label else "x-axis"
+    cc.yaxis_label  = yaxis_label if yaxis_label else "y-axis"
 
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
     data         = df[colname].values.tolist()
@@ -1347,7 +1409,7 @@ CSS_TEMPLATE.base_grey = """
 """
 
 CSS_TEMPLATE.base = """
-              body{margin:25px;font-family: 'Open Sans', sans-serif;}
+              body{margin:25px;font-family: 'Open Sans', sans-serif;font-size:8px !important;}
               h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
               .dataTables_wrapper{overflow-x: auto;}
               hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
