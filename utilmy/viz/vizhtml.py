@@ -1409,7 +1409,7 @@ CSS_TEMPLATE.base_grey = """
 """
 
 CSS_TEMPLATE.base = """
-              body{margin:25px;font-family: 'Open Sans', sans-serif;font-size:8px !important;}
+              body{margin:25px;font-family: 'Open Sans', sans-serif;}
               h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
               .dataTables_wrapper{overflow-x: auto;}
               hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
@@ -1446,6 +1446,14 @@ CSS_TEMPLATE.a3d = CSS_TEMPLATE.base + """
             padding: 5px;} 
 """
 
+
+CSS_TEMPLATE.css_8px = CSS_TEMPLATE.base + """
+            body,table th,table td,text,
+            .highcharts-title,.highcharts-axis-title,
+            #mynetwork,#config{
+               font-size:8px !important;
+            }
+"""
 
 
 
@@ -1534,6 +1542,14 @@ def zz_css_get_template(css_name:str= "A4_size"):
             margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);}
           h1,h2,h3,h4,h5,h6 {box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
             padding: 5px;} 
+        """
+    if css_name == "css_8px":
+          css_code = css_code + """
+            body,table th,table td,text,
+            .highcharts-title,.highcharts-axis-title,
+            #mynetwork,#config{
+               font-size:8px !important;
+            } 
         """
     return css_code
 
