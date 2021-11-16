@@ -23,7 +23,7 @@ from datetime import datetime
 from typing import List
 from tqdm import tqdm
 from box import Box
-from css import getcss
+from utilmy.viz.css import getcss
 
 try :
    import matplotlib.pyplot as plt
