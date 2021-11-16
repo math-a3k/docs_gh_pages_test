@@ -1715,6 +1715,12 @@ to_file(s, filep)
 utilmy/viz/__init__.py
 
 
+utilmy/viz/css.py
+-------------------------functions----------------------
+fontsize_css(size)
+
+
+
 utilmy/viz/embedding.py
 -------------------------functions----------------------
 embedding_load_parquet(path = "df.parquet", nmax  =  500)
