@@ -23,6 +23,7 @@ from datetime import datetime
 from typing import List
 from tqdm import tqdm
 from box import Box
+from css import getcss
 
 try :
    import matplotlib.pyplot as plt
@@ -456,7 +457,7 @@ class htmlDoc(object):
          
         self.tail = f"\n<script src='{jscript_file}'></script>\n" + self.tail if jscript_file else self.tail
 
-        self.add_css(CSS_TEMPLATE.get(css_name, ''))
+        self.add_css(getcss(css_name))
         # self.add_css(css_get_template(css_name=css_name))
 
         if css_name=="a4_page":
