@@ -67,3 +67,5 @@ def getcss(css_name):
         return a4_page
     elif css_name.split("_")[0] == "css" and len(css_name.split("_")) == 2 and css_name.split("_")[1][:-2].isdigit():
         return fontsize_css(css_name.split("_")[1][:-2])
+    else:
+        return ""
