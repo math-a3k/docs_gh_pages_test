@@ -1,4 +1,4 @@
-base = """
+default = """
               body{margin:25px;font-family: 'Open Sans', sans-serif;}
               h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
               .dataTables_wrapper{overflow-x: auto;}
@@ -10,7 +10,7 @@ base = """
               #config{float: none !important;height: auto !important;}              
 """
 
-a4_page = base + """
+a4 = default + """
             body {background: rgb(204,204,204); }
             page {
               background: white;display: block;padding:15px;margin: 0 auto;margin-bottom: 0.5cm;
@@ -20,12 +20,12 @@ a4_page = base + """
             @media print {body, page {margin: 0;box-shadow: 0;}}
 """
 
-border = base + """
+border = default + """
             .highcharts-container {border: 3px dotted grey;}
             .mpld3-figure {border: 3px dotted grey;}
 """
 
-a3d = base + """
+a3d = default + """
             div {
             background: white;display: block;margin: 0 auto;
             margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);}
@@ -35,7 +35,7 @@ a3d = base + """
 
 
 
-base_grey = """
+grey = """
         .body {
           font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
           margin: 0;
