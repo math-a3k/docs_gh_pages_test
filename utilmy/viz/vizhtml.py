@@ -460,7 +460,7 @@ class htmlDoc(object):
         self.add_css(getcss(css_name))
         # self.add_css(css_get_template(css_name=css_name))
 
-        if css_name=="a4_page":
+        if css_name=="a4":
           self.html = self.html + '\n <page size="A4">'
           self.tail = "</page> \n" + self.tail
 
