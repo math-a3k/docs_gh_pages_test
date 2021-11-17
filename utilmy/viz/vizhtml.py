@@ -309,7 +309,7 @@ def test_table():
    
 def test_page():
     # get data
-    data = vi.test_getdata(verbose=False)
+    data = test_getdata(verbose=False)
     
     from box import Box
     cfg = Box({})
@@ -333,10 +333,10 @@ def test_page():
                        xaxis_label= "x-axis",yaxis_label="y-axis",cfg={}, mode='highcharts',title="test_histo", save_img=False)
     doc.h4("nbin")
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
-                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},nbin=30, mode='highcharts',title="test_histo", save_img=False)
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},nbin=30, mode='highcharts',title="test_histo",color="lightblue", save_img=False)
     doc.h4("bin width")
     doc.plot_histogram(data['housing.csv'].iloc[:1000, :], col="median_income",
-                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},binWidth=3, mode='highcharts',title="test_histo", save_img=False)
+                       xaxis_label= "x-axis",yaxis_label="y-axis",cfg={},binWidth=3, mode='highcharts',title="test_histo",color="orangered", save_img=False)
     doc.h3("histogram matplot")
     doc.plot_histogram(data['sales.csv'],col='Unit Price',colormap='RdYlBu',cfg =  cfg.histo,title="test_histo",ylabel="Unit price", mode='matplot', save_img="")
     doc.h4("nbin")
@@ -367,7 +367,7 @@ def test_page():
     doc.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
     
     vi.html_show(doc.get_html())
-    doc.save('allgraphinonepage.html')
+    doc.save('test_page.html')
  
    
 
