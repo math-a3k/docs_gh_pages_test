@@ -601,7 +601,7 @@ class htmlDoc(object):
     def plot_histogram(self, df:pd.DataFrame, col,
                        title: str='', xlabel: str=None, ylabel: str=None,
                        figsize: tuple=(14,7), colormap:str = 'RdYlBu', 
-                       nsample=10000,binWidth=None,color:str='red',
+                       nsample=10000,binWidth=None,color:str='#7CB5EC',
                        nbin=10, q5=0.005, q95=0.95,cfg: dict = {}, 
                        mode: str='matplot', save_img="",  **kw):
         """Create html histogram chart.
@@ -1134,7 +1134,7 @@ def pd_plot_tseries_highcharts(df,
 
 
 def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
-                              binsNumber=None, binWidth=None,color:str='red',
+                              binsNumber=None, binWidth=None,color:str='#7CB5EC',
                               title:str="", xaxis_label:str= "x-axis", yaxis_label:str="y-axis",
                               cfg:dict={}, mode='d3', save_img="",
                               show=False, verbose=True, **kw):
