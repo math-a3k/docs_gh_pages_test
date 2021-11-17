@@ -263,7 +263,7 @@ def test_pd_plot_network(verbose=False):
   html_code = pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
   if verbose: print(html_code)
 
-def test_cssname(verbose=False,css_name="A4_size"):
+def test_cssname(verbose=False,css_name="a4"):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata(verbose=verbose)
     doc = htmlDoc(title="hello",css_name=css_name, format='myxxxx')
@@ -318,7 +318,7 @@ def test_page():
     cfg.histo   = {"title": 'histo_title'}
 
     # initialize htmldoc
-    doc = htmlDoc(title='Weather report', dir_out="", cfg={}, css_name= "a4_page")
+    doc = htmlDoc(title='Weather report', dir_out="", cfg={}, css_name= "a4")
 
     # test_table
     doc.h1("Test Table")
@@ -407,7 +407,7 @@ def show_table_image(df, colgroup= None, colimage = None,title=None,format: str=
 
     df = pd.concat(l,ignore_index=True).iloc[:-1]
 
-    doc = htmlDoc(title=title, format='myxxxx',css_name='base', cfg={})
+    doc = htmlDoc(title=title, format='myxxxx',css_name='default', cfg={})
     if title: doc.h1(title) 
     doc.table(df, use_datatable=use_datatable, table_id=table_id, custom_css_class=custom_css_class)
     doc.html = doc.html.replace('&lt;','<')
@@ -423,7 +423,7 @@ def show_table_image(df, colgroup= None, colimage = None,title=None,format: str=
 #### HTML doc ########################################################################
 class htmlDoc(object):
     def __init__(self, dir_out="", mode="", title: str = "", format: str = None, cfg: dict = None,
-                 css_name: str = "a4_page", css_file: str = None, jscript_file: str = None,
+                 css_name: str = "default", css_file: str = None, jscript_file: str = None,
                  verbose=True, **kw):
         """
            Generate HTML page to display graph/Table.
@@ -1396,65 +1396,65 @@ def pd_plot_network(df:pd.DataFrame, cola: str='col_node1',
 
 
 
-###################################################################################################
-########CSS Teamplates ############################################################################
-CSS_TEMPLATE = Box({})
-CSS_TEMPLATE.base_grey = """
-        .body {
-          font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
-          margin: 0;
-          padding: 0;
-          color: #333;
-          background-color: #fff;
-        }
-"""
+# ###################################################################################################
+# ########CSS Teamplates ############################################################################
+# CSS_TEMPLATE = Box({})
+# CSS_TEMPLATE.base_grey = """
+#         .body {
+#           font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+#           margin: 0;
+#           padding: 0;
+#           color: #333;
+#           background-color: #fff;
+#         }
+# """
 
-CSS_TEMPLATE.base = """
-              body{margin:25px;font-family: 'Open Sans', sans-serif;}
-              h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
-              .dataTables_wrapper{overflow-x: auto;}
-              hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
-              div{margin-top: 5px;margin-bottom: 5px;}
-              table {border-collapse: collapse;}
-              table th,table td {border: 1px solid lightgrey;}
-              #mynetwork{float: none !important;}
-              #config{float: none !important;height: auto !important;}              
-"""
-
-
-CSS_TEMPLATE.a4_page = CSS_TEMPLATE.base + """
-            body {background: rgb(204,204,204); }
-            page {
-              background: white;display: block;padding:15px;margin: 0 auto;margin-bottom: 0.5cm;
-              box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-            }
-            page[size="A4"] {width: 21cm; }
-            @media print {body, page {margin: 0;box-shadow: 0;}}
-"""
+# CSS_TEMPLATE.base = """
+#               body{margin:25px;font-family: 'Open Sans', sans-serif;}
+#               h1,h2,h3,h4,h5,h6{margin-bottom: 0.5rem;font-family: 'Arvo', serif;line-height: 1.5;color: #32325d;}
+#               .dataTables_wrapper{overflow-x: auto;}
+#               hr{border-top: dotted 4px rgba(26, 47, 51, 0.7);opacity:0.3 ;}
+#               div{margin-top: 5px;margin-bottom: 5px;}
+#               table {border-collapse: collapse;}
+#               table th,table td {border: 1px solid lightgrey;}
+#               #mynetwork{float: none !important;}
+#               #config{float: none !important;height: auto !important;}              
+# """
 
 
-CSS_TEMPLATE.border = CSS_TEMPLATE.base + """
-            .highcharts-container {border: 3px dotted grey;}
-            .mpld3-figure {border: 3px dotted grey;}
-"""
+# CSS_TEMPLATE.a4_page = CSS_TEMPLATE.base + """
+#             body {background: rgb(204,204,204); }
+#             page {
+#               background: white;display: block;padding:15px;margin: 0 auto;margin-bottom: 0.5cm;
+#               box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+#             }
+#             page[size="A4"] {width: 21cm; }
+#             @media print {body, page {margin: 0;box-shadow: 0;}}
+# """
 
 
-CSS_TEMPLATE.a3d = CSS_TEMPLATE.base + """
-            div {
-            background: white;display: block;margin: 0 auto;
-            margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);}
-            h1,h2,h3,h4,h5,h6 {box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-            padding: 5px;} 
-"""
+# CSS_TEMPLATE.border = CSS_TEMPLATE.base + """
+#             .highcharts-container {border: 3px dotted grey;}
+#             .mpld3-figure {border: 3px dotted grey;}
+# """
 
 
-CSS_TEMPLATE.css_8px = CSS_TEMPLATE.base + """
-            body,table th,table td,text,
-            .highcharts-title,.highcharts-axis-title,
-            #mynetwork,#config{
-               font-size:8px !important;
-            }
-"""
+# CSS_TEMPLATE.a3d = CSS_TEMPLATE.base + """
+#             div {
+#             background: white;display: block;margin: 0 auto;
+#             margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);}
+#             h1,h2,h3,h4,h5,h6 {box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+#             padding: 5px;} 
+# """
+
+
+# CSS_TEMPLATE.css_8px = CSS_TEMPLATE.base + """
+#             body,table th,table td,text,
+#             .highcharts-title,.highcharts-axis-title,
+#             #mynetwork,#config{
+#                font-size:8px !important;
+#             }
+# """
 
 
 
