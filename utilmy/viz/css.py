@@ -55,16 +55,16 @@ def fontsize_css(size):
     return css_8px
 
 def getcss(css_name):
-    if css_name == "base_grey":
-        return base_grey
+    if css_name == "grey":
+        return grey
     elif css_name == "a3d":
         return a3d
-    elif css_name == "base":
-        return base
+    elif css_name == "default":
+        return default
     elif css_name == "border":
         return border
-    elif css_name == "a4_page":
-        return a4_page
+    elif css_name == "a4":
+        return a4
     elif css_name.split("_")[0] == "css" and len(css_name.split("_")) == 2 and css_name.split("_")[1][:-2].isdigit():
         return fontsize_css(css_name.split("_")[1][:-2])
     else:
