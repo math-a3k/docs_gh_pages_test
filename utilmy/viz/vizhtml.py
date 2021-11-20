@@ -79,31 +79,31 @@ def test_all():
    vi.test_external_css()      
    vi.test_table()       
       
-# def test_getdata(verbose=True):
-#     """data = test_get_data()
-#     df   = data['housing.csv']
-#     df.head(3)
-#     https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data
-#     """
-#     import pandas as pd
-#     flist = [
-#         'https://raw.githubusercontent.com/samigamer1999/datasets/main/titanic.csv',
-#         'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
-#         'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/stock_data.csv',
-#         'https://raw.githubusercontent.com/samigamer1999/datasets/main/cars.csv',
-#         'https://raw.githubusercontent.com/samigamer1999/datasets/main/sales.csv',
-#         'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/weatherdata.csv'
-#     ]
-#     data = {}
-#     for url in flist :
-#        fname =  url.split("/")[-1]
-#        print( "\n", "\n", url, )
-#        df = pd.read_csv(url)
-#        data[fname] = df
-#        if verbose: print(df)
-#        # df.to_csv(fname , index=False)
-#     print(data.keys() )
-#     return data
+def test_getdata(verbose=True):
+    """data = test_get_data()
+    df   = data['housing.csv']
+    df.head(3)
+    https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data
+    """
+    import pandas as pd
+    flist = [
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/titanic.csv',
+        'https://github.com/subhadipml/California-Housing-Price-Prediction/raw/master/housing.csv',
+        'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/stock_data.csv',
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/cars.csv',
+        'https://raw.githubusercontent.com/samigamer1999/datasets/main/sales.csv',
+        'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/data/weatherdata.csv'
+    ]
+    data = {}
+    for url in flist :
+       fname =  url.split("/")[-1]
+       print( "\n", "\n", url, )
+       df = pd.read_csv(url)
+       data[fname] = df
+       if verbose: print(df)
+       # df.to_csv(fname , index=False)
+    print(data.keys() )
+    return data
 
 # def test1(verbose=False):
 #     ####  Test Datatable
