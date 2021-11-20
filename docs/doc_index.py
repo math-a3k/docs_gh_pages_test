@@ -835,6 +835,19 @@ RankingSimilarity.rbo_ext(self, p = 0.98)
 RankingSimilarity.top_weightness(self, p: Optional[float]  =  None, d: Optional[int]  =  None)
 
 
+utilmy/nlp/util_rankmerge.py
+-------------------------functions----------------------
+log(*s)
+rank_eval(rank_true, dfmerged, nrank)
+rank_fillna(df)
+rank_generate_fake(dict_full, list_overlap, nsize = 100, ncorrect = 20)
+rank_generatefake(ncorrect, nrank)
+rank_merge(df, method = 'borda')
+rank_merge_v2(list1, list2, nrank)
+test()
+
+
+
 utilmy/nlp/util_sentence.py
 -------------------------functions----------------------
 embed_compare_class_sim(model, embed_a, embed_b, embed_c, embed_d)
@@ -1739,6 +1752,15 @@ vizEmbedding.run_all(self, mode = "mds", col_embed = 'embed', ndim = 2, nmax =  
 
 
 utilmy/viz/template1.py
+
+
+utilmy/viz/test_vizhtml.py
+-------------------------functions----------------------
+test1(verbose = False)
+test2(verbose = False)
+test_all()
+test_getdata(verbose = True)
+
 
 
 utilmy/viz/util_map.py
