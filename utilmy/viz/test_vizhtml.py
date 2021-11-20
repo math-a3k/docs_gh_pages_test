@@ -1,4 +1,4 @@
-from utilmy.viz.vizhtml import htmlDoc
+from utilmy.viz.vizhtml import *
 
 def test_getdata(verbose=True):
     """data = test_get_data()
