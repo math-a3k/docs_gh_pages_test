@@ -42,12 +42,12 @@ githash = get_current_githash()
 
 #####################################################################################
 ss1 = f"""
-Thousand of one liners functions 
 
+Details:
 https://packagegalaxy.com/python/utilmy
 
 
-To report bugs/comment :
+ONLY to report bugs :
 https://github.com/arita37/utilmy_report/blob/main/README.md
 
 
