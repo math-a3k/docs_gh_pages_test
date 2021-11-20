@@ -1760,6 +1760,7 @@ test1(verbose = False)
 test2(verbose = False)
 test_all()
 test_getdata(verbose = True)
+test_getdata(verbose = True)
 
 
 
