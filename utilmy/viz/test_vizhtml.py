@@ -1,3 +1,5 @@
+from utilmy.viz.vizhtml import test_getdata,htmlDoc
+
 def test_all():
    from utilmy.viz import vizhtml as vi
    log("Visualization ")
