@@ -1,21 +1,6 @@
 from utilmy.viz import vizhtml as vi
-import matplotlib.pyplot as plt
+import pandas as pd
 
-import os, sys, random, numpy as np, pandas as pd, fire, time
-from datetime import datetime
-from typing import List
-from tqdm import tqdm
-from box import Box
-
-try :
-   import matplotlib.pyplot as plt
-   import mpld3
-   from highcharts import Highchart
-   from pyvis import network as net
-except :
-   from utilmy.utilmy import sys_install
-   sys_install(cmd= "pip install python-box python-highcharts matplotlib ipython  mpld3 pandas-highcharts  pretty-html-table  pyvis  --upgrade-strategy only-if-needed")      
-   1/0  ### exit Gracefully !
 
 def test_getdata(verbose=True):
     """data = test_get_data()
