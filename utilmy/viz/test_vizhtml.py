@@ -41,21 +41,7 @@ def test_getdata(verbose=True):
        if verbose: print(df)
        # df.to_csv(fname , index=False)
     print(data.keys() )
-    return data
-   
-def test_all():
-   from utilmy.viz import vizhtml as vi
-   log("Visualization ")
-   log(" from utilmy.viz import vizhtml as vi     ")
-   vi.test1()
-   vi.test2()
-   vi.test3()
-   vi.test4()
-   vi.test_scatter_and_histogram_matplot()
-   vi.test_pd_plot_network()
-   vi.test_cssname()
-   vi.test_external_css()      
-   vi.test_table()       
+    return data     
       
 def test_getdata(verbose=True):
     """data = test_get_data()
@@ -239,13 +225,13 @@ def test_scatter_and_histogram_matplot(verbose=False):
 
 def test_pd_plot_network(verbose=False):
   df = pd.DataFrame({ 'from':['A', 'B', 'C','A'], 'to':['D', 'A', 'E','C'], 'weight':[1, 2, 1,5]})
-  html_code = pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
+  html_code = vi.pd_plot_network(df, cola='from', colb='to', coledge='col_edge',colweight="weight")
   if verbose: print(html_code)
 
 def test_cssname(verbose=False,css_name="a4"):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata(verbose=verbose)
-    doc = ci.htmlDoc(title="hello",css_name=css_name, format='myxxxx')
+    doc = vi.htmlDoc(title="hello",css_name=css_name, format='myxxxx')
 
     doc.h1('My title')  # h1
     doc.sep()
@@ -266,7 +252,7 @@ def test_external_css():
   cfg.histo   = {"title": 'ok'}
   cfg.use_datatable = True
   # loading border style from external css
-  doc = ci.htmlDoc(title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css')
+  doc = vi.htmlDoc(title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css')
   data = test_getdata()
   # table
   doc.h1(" Table test ")
@@ -284,7 +270,7 @@ def test_table():
    url = 'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/table_data.csv'
    df = pd.read_csv(url)
    log( df.head() )
-   show_table_image(df, colimage='image_url', colgroup='name', title='test_table')
+   vi.show_table_image(df, colimage='image_url', colgroup='name', title='test_table')
    
 def test_page():
     # get data
