@@ -269,7 +269,7 @@ def test_external_css():
 def test_table():
    url = 'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/table_data.csv'
    df = pd.read_csv(url)
-   log( df.head() )
+   vi.log( df.head() )
    vi.show_table_image(df, colimage='image_url', colgroup='name', title='test_table')
    
 def test_page():
