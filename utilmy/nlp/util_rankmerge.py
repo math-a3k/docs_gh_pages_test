@@ -12,7 +12,7 @@ Original file is located at
 
 
 """
-import random, pandas as pd, numpy as np, import scipy, math
+import random, pandas as pd, numpy as np,  scipy, math
 try :
    import ranky as rk
    from mc4.algorithm import mc4_aggregator
