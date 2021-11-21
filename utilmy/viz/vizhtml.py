@@ -24,7 +24,7 @@ from typing import List
 from tqdm import tqdm
 from box import Box
 from utilmy.viz.css import getcss
-# from utilmy.viz.test_vizhtml import *
+from utilmy.viz.test_vizhtml import *
 
 try :
    import matplotlib.pyplot as plt
