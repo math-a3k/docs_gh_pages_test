@@ -13,8 +13,6 @@ Original file is located at
 
 """
 import random, pandas as pd, numpy as np, import scipy, math
-
-
 try :
    import ranky as rk
    from mc4.algorithm import mc4_aggregator
@@ -62,22 +60,58 @@ def test():
 
 ############################################################################################
 ############################################################################################
+def rank_generatefake(ncorrect=30, nsize=100):
+    """
+      Generate a fake rank list of size nrank that contains ncorrect elements that
+      are correctly ranked. Returns a dataframe where the two fake ranks are merged
+
+      # each column of the dataframe should contain the rank each ranker assigns to each candidate
+      # because of the fake generate algorithm, some items might not have ranks assigned to them by the ranker
+
+      Keyword arguments:
+      ncorrect: The number of correctly ranked elements in list
+      nrank: Total number of elements to be ranked
+    """
+    ### Reference 1000 elements
+    dict_full = {}
+    for i in range(1000):
+      dict_full[i] = i + 1
+
+    list_overlap = [1, 15, 20, 30, 80]
+    list1 = rank_generate_fake(dict_full, list_overlap, nsize=nsize,  ncorrect=ncorrect) 
+    list2 = rank_generate_fake(dict_full, list_overlap, nsize=nsize,  ncorrect=ncorrect)
+    rank1, rank2 = [None] * 1000, [None] * 1000
+    for i in range(1000):
+      if i in list1:
+        rank1[i - 1] = list1.index(i)
+
+      if i in list2:
+        rank2[i - 1] = list2.index(i)
+
+    df = pd.DataFrame([rank1, rank2], index=['rank1', 'rank2'])
+    df = df.fillna(np.nan)
+    df = df.transpose()
+    # normalize by replacing missing values
+    df = rank_fillna(df)
+    return df, rank1, rank2, dict_full
+
+
 def rank_generate_fake(dict_full, list_overlap, nsize=100, ncorrect=20):
     """  Returns a list of random rankings of size nsize where ncorrect
          elements have correct ranks
 
         Keyword arguments:
-        dict_full: a dictionary of 1000 objects and their ranks
-        list_overlap: list items common to all lists
-        nsize: the total number of elements to be ranked
-        ncorrect: the number of correctly ranked objects 
+        dict_full    : a dictionary of 1000 objects and their ranks
+        list_overlap : list items common to all lists
+        nsize        : the total number of elements to be ranked
+        ncorrect     : the number of correctly ranked objects
     """
     # first randomly sample nsize - len(list_overlap) elements from dict_full
     # of those, ncorrect of them must be correctly ranked
     random_vals = []
     while len(random_vals) <= nsize - len(list_overlap):
       rand = random.sample(list(dict_full), 1)
-      if (rand not in random_vals):
+      if (rand not in random_vals and rand not in list_overlap):
         random_vals.append(rand[0])
 
     # next create list as aggregate of random_vals and list_overlap
@@ -112,43 +146,10 @@ def rank_fillna(df):
 
 
 
-def rank_generatefake(ncorrect, nrank):
-    """
-      Generate a fake rank list of size nrank that contains ncorrect elements that
-      are correctly ranked. Returns a dataframe where the two fake ranks are merged
-
-      # each column of the dataframe should contain the rank each ranker assigns to each candidate
-      # because of the fake generate algorithm, some items might not have ranks assigned to them by the ranker
-
-      Keyword arguments:
-      ncorrect: The number of correctly ranked elements in list
-      nrank: Total number of elements to be ranked
-    """
-    dict_full = {}
-    for i in range(1000):
-      dict_full[i] = i + 1
-
-    list_overlap = [1, 15, 20, 30, 80]
-    list1 = rank_generate_fake(dict_full, list_overlap, ncorrect=ncorrect) 
-    list2 = rank_generate_fake(dict_full, list_overlap, ncorrect=ncorrect)
-    rank1, rank2 = [None] * 1000, [None] * 1000
-    for i in range(1000):
-      if i in list1:
-        rank1[i - 1] = list1.index(i)
-
-      if i in list2:
-        rank2[i - 1] = list2.index(i)
-
-    df = pd.DataFrame([rank1, rank2], index=['rank1', 'rank2'])
-    df = df.fillna(np.nan)
-    df = df.transpose()
-    # normalize by replacing missing values
-    df = rank_fillna(df)
-    return df, rank1, rank2, dict_full
 
 
-
-def rank_eval(rank_true, dfmerged, nrank):
+############################################################################################
+def rank_eval(rank_true, dfmerged, nrank=100):
   """
     Returns a dataframe where the columns are the rank aggregation algorithms
     and the rows are the metrics used to evaluate the algorithms
@@ -163,8 +164,8 @@ def rank_eval(rank_true, dfmerged, nrank):
   df = pd.DataFrame([], index=['spearman_rho', 'kendall-tau'])
   for col in columns:
     rank_list    = dfmerged[col].tolist()
-    spearman_rho = scipy.stats.spearmanr(rank_true[0:nrank], rank_list[0:100])
-    kendall_tau  = scipy.stats.kendalltau(rank_true[0:nrank], rank_list[0:100])
+    spearman_rho = scipy.stats.spearmanr(rank_true[0:nrank],  rank_list[0:nrank])
+    kendall_tau  = scipy.stats.kendalltau(rank_true[0:nrank], rank_list[0:nrank])
     df[col]      = [spearman_rho[0], kendall_tau[0]]
   return df
 
@@ -222,6 +223,8 @@ def rank_merge(df, method='borda'):
     return rank
 
 
+
+
 def rank_merge_v2(list1, list2, nrank):
   """ Inver MRR cores
     A custom rank aggregation algorithm that assigns a score to each item 
@@ -253,5 +256,11 @@ def rank_merge_v2(list1, list2, nrank):
     rank.append(item)
   return rank
 
+
+
+##########################################################################################
+if __name__ == '__main__':
+    import fire
+    fire.Fire()
 
 
