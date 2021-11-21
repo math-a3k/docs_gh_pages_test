@@ -838,10 +838,10 @@ RankingSimilarity.top_weightness(self, p: Optional[float]  =  None, d: Optional[
 utilmy/nlp/util_rankmerge.py
 -------------------------functions----------------------
 log(*s)
-rank_eval(rank_true, dfmerged, nrank)
+rank_eval(rank_true, dfmerged, nrank = 100)
 rank_fillna(df)
 rank_generate_fake(dict_full, list_overlap, nsize = 100, ncorrect = 20)
-rank_generatefake(ncorrect, nrank)
+rank_generatefake(ncorrect = 30, nsize = 100)
 rank_merge(df, method = 'borda')
 rank_merge_v2(list1, list2, nrank)
 test()
