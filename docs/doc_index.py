@@ -1758,7 +1758,6 @@ utilmy/viz/test_vizhtml.py
 -------------------------functions----------------------
 test1(verbose = False)
 test2(verbose = False)
-test_all()
 test_getdata(verbose = True)
 test_getdata(verbose = True)
 
@@ -1785,8 +1784,6 @@ pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str = None, coly:str = None, c
 pd_plot_scatter_matplot(df:pd.DataFrame, colx: str = None, coly: str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, cfg: dict  =  {}, mode = 'd3', save_path: str = '', verbose = True, **kw)
 pd_plot_tseries_highcharts(df, coldate:str = None, date_format:str = '%m/%d/%Y', coly1:list  = [], coly2:list  = [], figsize:tuple  =   None, title:str = None, xlabel:str = None, y1label:str = None, y2label:str = None, cfg:dict = {}, mode = 'd3', save_img = "", verbose = True, **kw)
 pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str = None, coly1: list  =  [], coly2: list  =  [], 8, 4), spacing = 0.1, verbose = True, **kw))
-test1(verbose = False)
-test2(verbose = False)
 zz_css_get_template(css_name:str =  "A4_size")
 zz_pd_plot_histogram_highcharts_old(df, col, figsize = None, title = None, cfg:dict = {}, mode = 'd3', save_img = '')
 zz_test_get_random_data(n = 100)
