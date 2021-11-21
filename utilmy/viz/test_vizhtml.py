@@ -1,4 +1,4 @@
-from utilmy.viz.vizhtml import *
+from utilmy.viz import vizhtml as vi
 
 def test_getdata(verbose=True):
     """data = test_get_data()
@@ -68,7 +68,7 @@ def test_getdata(verbose=True):
 
 def test1(verbose=False):
     ####  Test Datatable
-    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
+    doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
     # check add css
     css = """.intro { background-color: yellow;} """
     doc.add_css(css)
@@ -87,7 +87,7 @@ def test2(verbose=False):
       vi.test2()
     """
     data = test_getdata(verbose=verbose)
-    doc = htmlDoc(title='Weather report', dir_out="", cfg={} )
+    doc = vi.htmlDoc(title='Weather report', dir_out="", cfg={} )
     doc.h1(' Weather report')
     doc.hr()
 
@@ -132,7 +132,7 @@ def test3(verbose=False):
     df = pd.DataFrame([[1, 2]])
     df2_list = [df, df, df]
     print(df2_list)
-    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+    doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
 
     doc.h1('My title')  # h1
     doc.sep()
@@ -163,7 +163,7 @@ def test4(verbose=False):
     cfg.scatter = {"title" : "Titanic", 'figsize' : (12, 7)}
     cfg.histo   = {"title": 'ok'}
     cfg.use_datatable = True
-    doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+    doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
     # table
     doc.h1(" Table test ")
     doc.table(data['titanic.csv'], use_datatable=True, table_id="test", custom_css_class='intro')
@@ -206,7 +206,7 @@ def test_scatter_and_histogram_matplot(verbose=False):
   cfg.histo   = {"title": 'ok'}
   cfg.use_datatable = True
 
-  doc = htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
+  doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx', cfg=cfg)
   doc.h1('My title')  # h1
   doc.sep()
   doc.br()  # <br>
@@ -228,7 +228,7 @@ def test_pd_plot_network(verbose=False):
 def test_cssname(verbose=False,css_name="a4"):
     # pip install box-python    can use .key or ["mykey"]  for dict
     data = test_getdata(verbose=verbose)
-    doc = htmlDoc(title="hello",css_name=css_name, format='myxxxx')
+    doc = ci.htmlDoc(title="hello",css_name=css_name, format='myxxxx')
 
     doc.h1('My title')  # h1
     doc.sep()
@@ -249,7 +249,7 @@ def test_external_css():
   cfg.histo   = {"title": 'ok'}
   cfg.use_datatable = True
   # loading border style from external css
-  doc = htmlDoc(title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css')
+  doc = ci.htmlDoc(title="hello", format='myxxxx',css_name='None',css_file='https://alexadvent.github.io/style.css')
   data = test_getdata()
   # table
   doc.h1(" Table test ")
@@ -280,7 +280,7 @@ def test_page():
     cfg.histo   = {"title": 'histo_title'}
 
     # initialize htmldoc
-    doc = htmlDoc(title='Weather report', dir_out="", cfg={}, css_name= "a4")
+    doc = vi.htmlDoc(title='Weather report', dir_out="", cfg={}, css_name= "a4")
 
     # test_table
     doc.h1("Test Table")
