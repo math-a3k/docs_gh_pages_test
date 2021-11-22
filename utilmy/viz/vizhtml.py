@@ -69,15 +69,15 @@ def test_all():
    from utilmy.viz import vizhtml as vi
    log("Visualization ")
    log(" from utilmy.viz import vizhtml as vi     ")
-   vi.test1()
-   vi.test2()
-   vi.test3()
-   vi.test4()
-   vi.test_scatter_and_histogram_matplot()
-   vi.test_pd_plot_network()
-   vi.test_cssname()
-   vi.test_external_css()      
-   vi.test_table()       
+   test1()
+   test2()
+   test3()
+   test4()
+   test_scatter_and_histogram_matplot()
+   test_pd_plot_network()
+   test_cssname()
+   test_external_css()      
+   test_table()       
 
    
 #####################################################################################
