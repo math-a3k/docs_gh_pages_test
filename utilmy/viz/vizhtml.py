@@ -24,7 +24,7 @@ from typing import List
 from tqdm import tqdm
 from box import Box
 from utilmy.viz.css import getcss
-from utilmy.viz.test_vizhtml import *
+from utilmy.viz.test_vizhtml import test1, test2, test3, test4, test_scatter_and_histogram_matplot, test_pd_plot_network, test_cssname, test_external_css, test_table
 
 try :
    import matplotlib.pyplot as plt
