@@ -947,6 +947,20 @@ toFileSafe.w(self, msg)
 toFileSafe.write(self, msg)
 
 
+utilmy/optim/util_hyper.py
+-------------------------functions----------------------
+create_model_name(save_folder, model_name)
+data_loader(file_name = 'dataset/GOOG-year.csv')
+load_arguments(config_file =  None)
+log(*s)
+optim(modelname = "model_dl.1_lstm.py", pars =  {}, df  =  None, optim_engine = "optuna", optim_method = "normal/prune", save_folder = "model_save/", log_folder = "logs/", ntrials = 2)
+optim_optuna(modelname = "model_dl.1_lstm.py", pars =  {}, df  =  None, optim_method = "normal/prune", save_folder = "/mymodel/", log_folder = "", ntrials = 2)
+run_hyper_optuna(obj_fun, pars_dict_init, pars_dict_range, engine_pars, ntrials = 3)
+test_all()
+test_fast()
+
+
+
 utilmy/parallel.py
 -------------------------functions----------------------
 help()
