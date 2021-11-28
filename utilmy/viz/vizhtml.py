@@ -233,7 +233,7 @@ class htmlDoc(object):
         self.add_js(js)
 
 
-    def table(self, df:pd.DataFrame, format: str='blue_light', custom_css_class=None, use_datatable=False, table_id=None, **kw):
+    def table(self, df:pd.DataFrame, format: str='blue_light', custom_css_class=None,colimage = None, use_datatable=False, table_id=None, **kw):
         """ Show Pandas in HTML and interactive
         ## show table in HTML : https://pypi.org/project/pretty-html-table/
         Args:
@@ -249,7 +249,12 @@ class htmlDoc(object):
         # add custom CSS class
         if custom_css_class:
             html_code = html_code.replace('<table', f'<table class="{custom_css_class}"')
-
+            
+        if colimage:
+            colimage = [colimage] if isinstance(colimage, str) else colimage
+            for ci in colimage : 
+               df[ci] = df[ci].map('<img src="{}" width="50px" height="50px">'.format)
+               
         if use_datatable:
             # JS add datatables library
             self.head = self.head + """
@@ -266,6 +271,9 @@ class htmlDoc(object):
                            }); 
                            });\n</script>\n
                          """.replace('{mytable_id}', str(table_id))
+            html_code = html_code.replace('&lt;','<')
+            html_code = html_code.replace('&gt;','>')
+            html_code = html_code.replace('width: auto"></td>','width: auto">&nbsp;</td>')
         self.html += "\n\n" + html_code
 
 
