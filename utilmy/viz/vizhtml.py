@@ -246,6 +246,11 @@ class htmlDoc(object):
             use_datatable:      [Option] Create html table as a database
             table_id:           [Option] Id for table tag
         """
+        if colimage:
+            colimage = [colimage] if isinstance(colimage, str) else colimage
+            for ci in colimage : 
+               df[ci] = df[ci].map('<img src="{}" width="50px" height="50px">'.format)
+               
         import pretty_html_table
         html_code = pretty_html_table.build_table(df, format)
         table_id  = random.randint(9999,999999) if table_id is None else table_id  #### Unique ID
@@ -253,11 +258,6 @@ class htmlDoc(object):
         # add custom CSS class
         if custom_css_class:
             html_code = html_code.replace('<table', f'<table class="{custom_css_class}"')
-            
-        if colimage:
-            colimage = [colimage] if isinstance(colimage, str) else colimage
-            for ci in colimage : 
-               df[ci] = df[ci].map('<img src="{}" width="50px" height="50px">'.format)
                
         if use_datatable:
             # JS add datatables library
@@ -275,6 +275,7 @@ class htmlDoc(object):
                            }); 
                            });\n</script>\n
                          """.replace('{mytable_id}', str(table_id))
+        if colimage:
             html_code = html_code.replace('&lt;','<')
             html_code = html_code.replace('&gt;','>')
             html_code = html_code.replace('width: auto"></td>','width: auto">&nbsp;</td>')
