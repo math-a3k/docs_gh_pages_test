@@ -28,7 +28,7 @@ from typing import List
 from tqdm import tqdm
 from box import Box
 from utilmy.viz.css import getcss
-from utilmy.viz.test_vizhtml import test1, test2, test3, test4, test_scatter_and_histogram_matplot, test_pd_plot_network, test_cssname, test_external_css, test_table, test_getdata
+from utilmy.viz.test_vizhtml import test1, test2, test3, test4, test_scatter_and_histogram_matplot, test_pd_plot_network, test_page, test_cssname, test_external_css, test_table, test_getdata, test_colimage_table 
 
 try :
    import matplotlib.pyplot as plt
@@ -59,7 +59,10 @@ def help():
     ss += help_get_codesource(test_scatter_and_histogram_matplot) + suffix
     ss += help_get_codesource(test_pd_plot_network) + suffix
     ss += help_get_codesource(test_cssname ) + suffix
-
+    ss += help_get_codesource(test_external_css ) + suffix
+    ss += help_get_codesource(test_table ) + suffix
+    ss += help_get_codesource(test_colimage_table ) + suffix
+    ss += help_get_codesource(test_page ) + suffix
     ss +=  "Template CSS: \n\n " + str( CSS_TEMPLATE.keys()) + suffix
     ss +=  "colormap_list : \n\n " + str(colormap_get_names()) + suffix
     ss +=  HELP
@@ -82,7 +85,9 @@ def test_all():
    test_cssname()
    test_external_css()      
    test_table()       
-
+   test_colimage_table()
+   test_page()
+   
    
 #####################################################################################
 def show(file, title='table',format: str='blue_light',dir_out='table.html', css_class=None, use_datatable=True, table_id=None,):
