@@ -297,5 +297,14 @@ def test_page():
     vi.html_show(doc.get_html())
     doc.save('test_page.html')
  
-   
-
+ 
+def test_colimage_table():
+  doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
+  url = 'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/table_data.csv'
+  df = pd.read_csv(url)
+  doc.h1(" Table without colimage")
+  doc.table(df, use_datatable=False, table_id="test", custom_css_class='intro')
+  doc.h1(" Table with colimage")
+  doc.table(df, use_datatable=False, table_id="testwithcolimage", custom_css_class='intro', colimage='image_url')
+  doc.save(dir_out="testdata/test_viz_table.html")
+  doc.open_browser()  # Open myfile.html   
