@@ -11,9 +11,13 @@ https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scroll
 
 https://try2explore.com/questions/10109123
 https://mpld3.github.io/examples/index.html
+issue: mpld3.fig_to_html throws AttributeError: module 'matplotlib.dates' has no attribute '_SwitchableDateConverter'
+solved by adding matplotlib==3.2.1 mpld3==0.5.5
+https://stackoverflow.com/questions/70132396/mpld3-fig-to-html-throws-attributeerror-module-matplotlib-dates-has-no-attrib
+github isuue link : https://github.com/mpld3/mpld3/issues/504#event-5681391653
+
 https://notebook.community/johnnycakes79/pyops/dashboard/pandas-highcharts-examples
 https://datatables.net/
-
 
 https://www.highcharts.com/docs/getting-started/how-to-set-options
 
