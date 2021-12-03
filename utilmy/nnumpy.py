@@ -64,6 +64,41 @@ def test1():
 
 ##############################################################################################################
 ####### Numpy, Dict, List compute related  ###################################################################
+from collections import OrderedDict
+
+
+class LRUCache(object):
+    def __init__(self, max_size=4):
+        if max_size <= 0:
+            raise ValueError
+
+        self.max_size = max_size
+        self._items = OrderedDict()
+
+    def _move_latest(self, key):
+        # Order is in descending priority, i.e. first element
+        # is latest.
+        self._items.move_to_end(key, last=False)
+
+    def __getitem__(self, key, default=None):
+        if key not in self._items:
+            return default
+
+        value = self._items[key]
+        self._move_latest(key)
+        return value
+
+    def __setitem__(self, key, value):
+        if len(self._items) >= self.max_size:
+            keys = list(self._items.keys())
+            key_to_evict = keys[-1]
+            self._items.pop(key_to_evict)
+
+        self._items[key] = value
+        self._move_latest(key)
+        
+        
+        
 class fixedDict(OrderedDict):
     """  fixed size dict
           ddict = fixedDict(limit=10**6)
