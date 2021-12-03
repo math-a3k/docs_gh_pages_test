@@ -881,6 +881,10 @@ to_int(x, valdef = -1)
 to_timeunix(datex = "2018-01-16")
 
 -------------------------methods----------------------
+LRUCache.__getitem__(self, key, default = None)
+LRUCache.__init__(self, max_size = 4)
+LRUCache.__setitem__(self, key, value)
+LRUCache._move_latest(self, key)
 dict_to_namespace.__init__(self, d)
 fixedDict.__init__(self, *args, **kwds)
 fixedDict.__setitem__(self, key, value)

@@ -672,23 +672,28 @@ Repo: ./
 | <a name='utilmy/nlp/util_sentence.py' href='.//utilmy/nlp/util_sentence.py'>utilmy/nlp/util_sentence.py</a> | class | <a href='.//utilmy/nlp/util_sentence.py#L158'>SentenceEncoder</a> |  |
 | <a name='utilmy/nlp/util_sentence.py' href='.//utilmy/nlp/util_sentence.py'>utilmy/nlp/util_sentence.py</a> | method | <a href='.//utilmy/nlp/util_sentence.py#L160'>SentenceEncoder:__init__</a> | super<br>hub.load<br>hub.KerasLayer<br> |
 | <a name='utilmy/nlp/util_sentence.py' href='.//utilmy/nlp/util_sentence.py'>utilmy/nlp/util_sentence.py</a> | method | <a href='.//utilmy/nlp/util_sentence.py#L170'>SentenceEncoder:call</a> | self.model<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L145'>is_float</a> | float<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L137'>is_int</a> | int<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L115'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L111'>np_list_intersection</a> |  |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L180'>is_float</a> | float<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L172'>is_int</a> | int<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L150'>np_add_remove</a> | set_.copy<br>result_temp.remove<br>result_temp.add<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L146'>np_list_intersection</a> |  |
 | <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L47'>test0</a> | log<br>to_dict<br>to_timeunix<br>to_datetime<br> |
 | <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L54'>test1</a> | np_list_intersection<br>np_add_remove<br>log<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L106'>to_datetime</a> | pd.to_datetime<br>str<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L93'>to_dict</a> |  |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L124'>to_float</a> | float<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L130'>to_int</a> | int<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L98'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | class | <a href='.//utilmy/nnumpy.py#L87'>dict_to_namespace</a> |  |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | class | <a href='.//utilmy/nnumpy.py#L67'>fixedDict</a> |  |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L89'>dict_to_namespace:__init__</a> |  |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L72'>fixedDict:__init__</a> | kwds.pop<br>Dict.__init__<br>self._check_size_limit<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L77'>fixedDict:__setitem__</a> | OrderedDict.__setitem__<br>self._check_size_limit<br> |
-| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L81'>fixedDict:_check_size_limit</a> | len<br>self.popitem<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L141'>to_datetime</a> | pd.to_datetime<br>str<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L128'>to_dict</a> |  |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L159'>to_float</a> | float<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L165'>to_int</a> | int<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | function | <a href='.//utilmy/nnumpy.py#L133'>to_timeunix</a> | isinstance<br>int<br>datex.timetuple<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | class | <a href='.//utilmy/nnumpy.py#L70'>LRUCache</a> |  |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | class | <a href='.//utilmy/nnumpy.py#L122'>dict_to_namespace</a> |  |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | class | <a href='.//utilmy/nnumpy.py#L102'>fixedDict</a> |  |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L83'>LRUCache:__getitem__</a> | self._move_latest<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L71'>LRUCache:__init__</a> | OrderedDict<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L91'>LRUCache:__setitem__</a> | len<br>list<br>self._move_latest<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L78'>LRUCache:_move_latest</a> |  |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L124'>dict_to_namespace:__init__</a> |  |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L107'>fixedDict:__init__</a> | kwds.pop<br>Dict.__init__<br>self._check_size_limit<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L91'>fixedDict:__setitem__</a> | OrderedDict.__setitem__<br>self._check_size_limit<br> |
+| <a name='utilmy/nnumpy.py' href='.//utilmy/nnumpy.py'>utilmy/nnumpy.py</a> | method | <a href='.//utilmy/nnumpy.py#L116'>fixedDict:_check_size_limit</a> | len<br>self.popitem<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L13'>help</a> | help_create<br>print<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L348'>is_float</a> | float<br> |
 | <a name='utilmy/oos.py' href='.//utilmy/oos.py'>utilmy/oos.py</a> | function | <a href='.//utilmy/oos.py#L341'>is_int</a> | int<br> |
