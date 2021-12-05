@@ -703,6 +703,47 @@ writelog(m = "", f = None)
 
 
 
+utilmy/nlp/rank_fusion.py
+-------------------------functions----------------------
+comb(rank_list, fusion_function, params)
+file_merge(base_path, norm, merge_function, params, max_k, rank_name, output)
+folder_merge(base_path, norm, merge_function, params, max_k, rank_name, output)
+get_fusion_alg(text)
+norm_minmax(ranks, lowest, highest)
+norm_zscore(ranks, lowest, highest)
+parse_svmlight_rank(filepath)
+parse_svmlight_score(filepath)
+parse_trec(filepath, idIsFilename = False)
+print_comb(ranks, max_k, outstream, rank_name)
+sort_by_score_and_id(elem1, elem2)
+
+-------------------------methods----------------------
+prettyfloat.__repr__(self)
+prettyfloat.__str__(self)
+prettyint.__repr__(self)
+prettyint.__str__(self)
+
+
+utilmy/nlp/rank_fusion_functions.py
+-------------------------functions----------------------
+compareCondor(item1, item2)
+condor(doc_id_scores)
+expn_isr(result_list, params)
+expn_rrf(result_list, params)
+isr(result_list, params)
+log_isr(result_list, params)
+logn_isr(result_list, params)
+logn_rrf(result_list, params)
+max(result_list, params)
+min(result_list, params)
+mnz(result_list, params)
+rr(result_list, params)
+rrf(result_list, params)
+sum(result_list, params)
+votes(result_list, params)
+
+
+
 utilmy/nlp/util_cluster.py
 -------------------------functions----------------------
 help()
