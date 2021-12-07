@@ -1840,7 +1840,7 @@ pd_plot_network(df:pd.DataFrame, cola: str = 'col_node1', colb: str = 'col_node2
 pd_plot_scatter_get_data(df0:pd.DataFrame, colx: str = None, coly: str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, nmax: int = 20000, **kw)
 pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str = None, coly:str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, colclass3: str = None, nsample = 10000, cfg:dict = {}, mode = 'd3', save_img = '', verbose = True, **kw)
 pd_plot_scatter_matplot(df:pd.DataFrame, colx: str = None, coly: str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, cfg: dict  =  {}, mode = 'd3', save_path: str = '', verbose = True, **kw)
-pd_plot_tseries_highcharts(df, coldate:str = None, date_format:str = '%m/%d/%Y', coly1:list  = [], coly2:list  = [], figsize:tuple  =   None, title:str = None, xlabel:str = None, y1label:str = None, y2label:str = None, cfg:dict = {}, mode = 'd3', save_img = "", verbose = True, **kw)
+pd_plot_tseries_highcharts(df0, coldate:str = None, date_format:str = '%m/%d/%Y', coly1:list  = [], coly2:list  = [], figsize:tuple  =   None, title:str = None, xlabel:str = None, y1label:str = None, y2label:str = None, cfg:dict = {}, mode = 'd3', save_img = "", verbose = True, **kw)
 pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str = None, coly1: list  =  [], coly2: list  =  [], 8, 4), spacing = 0.1, verbose = True, **kw))
 zz_css_get_template(css_name:str =  "A4_size")
 zz_pd_plot_histogram_highcharts_old(df, col, figsize = None, title = None, cfg:dict = {}, mode = 'd3', save_img = '')
