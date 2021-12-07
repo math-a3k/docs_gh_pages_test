@@ -807,7 +807,7 @@ def pd_plot_tseries_highcharts(df0,
     from box import Box
     cc = Box(cfg)
     import copy, datetime
-    df = copy.deepcopy(df0)   ### Prevent to modify the original
+    df = copy.deepcopy(df0)
     cc.coldate      = 'date'  if coldate is None else coldate
     cc.xlabel      = coldate if xlabel is None else xlabel
     cc.y1label   = "_".join(coly1)      if y1label is None else y1label
@@ -819,11 +819,10 @@ def pd_plot_tseries_highcharts(df0,
     cc.coly2    = coly2
     #df[cc.coldate]     = pd.to_datetime(df[cc.coldate],format=date_format)    
     #df[cc.coldate] =  df[cc.coldate].dt.rng.strftime(date_format)
-    #### Unidex timeStamp !!!!!  
-    vdate = [ datetime.datetime.timestamp( datetime.datetime.strptime(t, date_format) ) for t in df[cc.coldate].values  ]
+    ### Unix time in milit for highcharts
+    vdate = [ 1000 * int( datetime.datetime.timestamp( datetime.datetime.strptime(t, date_format) ) ) for t in df[cc.coldate].values  ] 
+    log(len(vdate), len(df))
     
-
-
     #########################################################
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
     H = Highchart(renderTo=container_id)
