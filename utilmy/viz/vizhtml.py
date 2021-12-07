@@ -785,7 +785,7 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
     return html_code
 
 
-def pd_plot_tseries_highcharts(df,
+def pd_plot_tseries_highcharts(df0,
                               coldate:str=None, date_format:str='%m/%d/%Y',
                               coly1:list =[],     coly2:list =[],
                               figsize:tuple =  None, title:str=None,
@@ -806,6 +806,8 @@ def pd_plot_tseries_highcharts(df,
     from highcharts import Highchart
     from box import Box
     cc = Box(cfg)
+    import copy, datetime
+    df = copy.deepcopy(df0)   ### Prevent to modify the original
     cc.coldate      = 'date'  if coldate is None else coldate
     cc.xlabel      = coldate if xlabel is None else xlabel
     cc.y1label   = "_".join(coly1)      if y1label is None else y1label
@@ -815,7 +817,12 @@ def pd_plot_tseries_highcharts(df,
     cc.subtitle     = cc.get('subtitle', '')
     cc.coly1    = coly1
     cc.coly2    = coly2
-    df[cc.coldate]     = pd.to_datetime(df[cc.coldate],format=date_format)
+    #df[cc.coldate]     = pd.to_datetime(df[cc.coldate],format=date_format)    
+    #df[cc.coldate] =  df[cc.coldate].dt.rng.strftime(date_format)
+    #### Unidex timeStamp !!!!!  
+    vdate = [ datetime.datetime.timestamp( datetime.datetime.strptime(t, date_format) ) for t in df[cc.coldate].values  ]
+    
+
 
     #########################################################
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
@@ -844,12 +851,13 @@ def pd_plot_tseries_highcharts(df,
     }
     H.set_dict_options(options)
 
+    # vdate = df[cc.coldate].values
     for col_name in cc.coly1:
-      data = [[df[cc.coldate][i] , float(df[col_name][i]) ] for i in range(df.shape[0])]
+      data = [[ vdate[i] , float(df[col_name].iloc[i] ) ] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name,yAxis=1)
 
     for col_name in cc.coly2:
-      data = [[df[cc.coldate][i] , float(df[col_name][i])] for i in range(df.shape[0])]
+      data = [[ vdate[i] , float(df[col_name].iloc[i] )] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name, yAxis=0, )
 
     ##################################################################
