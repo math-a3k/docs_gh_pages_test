@@ -305,7 +305,7 @@ class htmlDoc(object):
         html_code = ''
         if mode == 'matplot':
             fig       = pd_plot_tseries_matplot(df, coldate, coly1=coly1, coly2=coly2,
-                                                   date_format='%m/%d/%Y',
+                                                   date_format=date_format,
 
                                                    title=title, xlabel=xlabel, y1label=y1label, y2label=y2label,
                                                    figsize=figsize,  spacing=spacing,
@@ -315,7 +315,7 @@ class htmlDoc(object):
 
         elif mode == 'highcharts':
             html_code = pd_plot_tseries_highcharts(df, coldate, coly1=coly1, coly2=coly2,
-                                                   date_format='%m/%d/%Y',
+                                                   date_format=date_format,
 
                                                    title=title, xlabel=xlabel, y1label=y1label, y2label=y2label,
                                                    figsize=figsize,  spacing=spacing,
