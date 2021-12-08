@@ -820,9 +820,10 @@ def pd_plot_tseries_highcharts(df0,
     #df[cc.coldate]     = pd.to_datetime(df[cc.coldate],format=date_format)    
     #df[cc.coldate] =  df[cc.coldate].dt.rng.strftime(date_format)
     ### Unix time in milit for highcharts
-    vdate = [ 1000 * int( datetime.datetime.timestamp( datetime.datetime.strptime(t, date_format) ) ) for t in df[cc.coldate].values  ] 
+    import dateparser
+    # vdate = [ 1000 * int( datetime.datetime.timestamp( datetime.datetime.strptime(t, date_format) ) ) for t in df[cc.coldate].values  ] 
+    vdate = [ 1000 * int( datetime.datetime.timestamp( dateparser.parse(str(t)) ) ) for t in df[cc.coldate].values  ] 
     log(len(vdate), len(df))
-    
     #########################################################
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
     H = Highchart(renderTo=container_id)
