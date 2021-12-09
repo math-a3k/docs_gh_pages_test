@@ -822,7 +822,7 @@ def pd_plot_tseries_highcharts(df0,
     ### Unix time in milit for highcharts
     import dateparser
     # vdate = [ 1000 * int( datetime.datetime.timestamp( datetime.datetime.strptime(t, date_format) ) ) for t in df[cc.coldate].values  ] 
-    if colformat:
+    if date_format:
       vdate = [ 1000 * int( datetime.datetime.timestamp( datetime.datetime.strptime(str(t), date_format) ) ) for t in df[cc.coldate].values  ]
     else:
       vdate = [ 1000 * int( datetime.datetime.timestamp( dateparser.parse(str(t)) ) ) for t in df[cc.coldate].values  ]
