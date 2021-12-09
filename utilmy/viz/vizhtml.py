@@ -291,7 +291,7 @@ class htmlDoc(object):
                      title: str="", xlabel=None, y1label=None,  y2label=None,                      
                      figsize: tuple=(14,7),  plot_type="", spacing=0.1,
 
-                     date_format: str='%m/%d/%Y', nsample: int= 10000,
+                     date_format=None, nsample: int= 10000,
                      
                      cfg: dict = {}, mode: str='highcharts', save_img="",  **kw):
         """Create html time series chart.
@@ -786,7 +786,7 @@ def pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str=None, coly:str=None, c
 
 
 def pd_plot_tseries_highcharts(df0,
-                              coldate:str=None, date_format:str='%m/%d/%Y',
+                              coldate:str=None, date_format = None,
                               coly1:list =[],     coly2:list =[],
                               figsize:tuple =  None, title:str=None,
                               xlabel:str=None,  y1label:str=None, y2label:str=None,
@@ -822,7 +822,10 @@ def pd_plot_tseries_highcharts(df0,
     ### Unix time in milit for highcharts
     import dateparser
     # vdate = [ 1000 * int( datetime.datetime.timestamp( datetime.datetime.strptime(t, date_format) ) ) for t in df[cc.coldate].values  ] 
-    vdate = [ 1000 * int( datetime.datetime.timestamp( dateparser.parse(str(t)) ) ) for t in df[cc.coldate].values  ] 
+    if colformat:
+      vdate = [ 1000 * int( datetime.datetime.timestamp( datetime.datetime.strptime(str(t), date_format) ) ) for t in df[cc.coldate].values  ]
+    else:
+      vdate = [ 1000 * int( datetime.datetime.timestamp( dateparser.parse(str(t)) ) ) for t in df[cc.coldate].values  ]
     log(len(vdate), len(df))
     #########################################################
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
@@ -853,11 +856,11 @@ def pd_plot_tseries_highcharts(df0,
 
     # vdate = df[cc.coldate].values
     for col_name in cc.coly1:
-      data = [[ vdate[i] , float(df[col_name].iloc[i] ) ] for i in range(df.shape[0])]
+      data = [[ vdate[i] , to_float(df[col_name].iloc[i] ) ] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name,yAxis=1)
 
     for col_name in cc.coly2:
-      data = [[ vdate[i] , float(df[col_name].iloc[i] )] for i in range(df.shape[0])]
+      data = [[ vdate[i] , to_float(df[col_name].iloc[i] )] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name, yAxis=0, )
 
     ##################################################################
@@ -1228,7 +1231,9 @@ def help_get_codesource(func):
     return ''.join( lines[lines_to_skip+1:] )
 
 
-
+def to_float(x):
+  try: return float(x)
+  except : return 0
 
 
 ###################################################################################################
