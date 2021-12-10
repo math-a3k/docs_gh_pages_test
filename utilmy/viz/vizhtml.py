@@ -581,8 +581,8 @@ def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,colormap:str='RdYlBu
     return fig
     """
     cm = plt.cm.get_cmap(colormap)
-#     df[col] = df[col].fillna(0)
-#     df[col] = [ to_float(t) for t in df[col].values  ]
+    df.loc[:,col] = df[col].fillna(0)
+    df.loc[:,col] = [ to_float(t) for t in df[col].values  ]
     dfi = df[col]
     q0  = dfi.quantile(q5)
     q1  = dfi.quantile(q95)
