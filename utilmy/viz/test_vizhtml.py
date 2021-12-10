@@ -310,24 +310,24 @@ def test_colimage_table():
   doc.open_browser()  # Open myfile.html   
   
   
- def test_tseries_dateformat():
-   data = test_getdata(verbose=False)
-   from box import Box
-   cfg = Box({})
-   cfg.tseries = {"title": 'tseries_title'}
-   cfg.scatter = {"title" : "scatter_title", 'figsize' : (12, 7)}
-   cfg.histo   = {"title": 'histo_title'}
+def test_tseries_dateformat():
+  data = test_getdata(verbose=False)
+  from box import Box
+  cfg = Box({})
+  cfg.tseries = {"title": 'tseries_title'}
+  cfg.scatter = {"title" : "scatter_title", 'figsize' : (12, 7)}
+  cfg.histo   = {"title": 'histo_title'}
 
-   # initialize htmldoc
-   doc = vi.htmlDoc(title='Stock report', dir_out="", cfg={}, css_name= "a4")
-   doc.h1("Test TSeries")
-   doc.h3("matplot tseries")   
-   doc.plot_tseries(a,coldate = 'date_space', date_format = '%Y %m %d', coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
-   doc.plot_tseries(a,coldate = 'date_string', date_format = '%Y%m%d', coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
-   doc.plot_tseries(a,coldate = 'date_timestamp', date_format = None, coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
-   doc.plot_tseries(a,coldate = 'date_year', date_format = '%Y', coly1 = ['Open'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
-   doc.plot_tseries(a,coldate = 'date_month_year', date_format = None, coly1 = ['Open'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
-   doc.plot_tseries(a,coldate = 'Date', date_format = None, coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+  # initialize htmldoc
+  doc = vi.htmlDoc(title='Stock report', dir_out="", cfg={}, css_name= "a4")
+  doc.h1("Test TSeries")
+  doc.h3("matplot tseries")   
+  doc.plot_tseries(a,coldate = 'date_space', date_format = '%Y %m %d', coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+  doc.plot_tseries(a,coldate = 'date_string', date_format = '%Y%m%d', coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+  doc.plot_tseries(a,coldate = 'date_timestamp', date_format = None, coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+  doc.plot_tseries(a,coldate = 'date_year', date_format = '%Y', coly1 = ['Open'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+  doc.plot_tseries(a,coldate = 'date_month_year', date_format = None, coly1 = ['Open'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
+  doc.plot_tseries(a,coldate = 'Date', date_format = None, coly1 = ['Open', 'High', 'Low', 'Close'], coly2  = ['Turnover (Lacs)'],title = "Stock",mode='highcharts')
 
-   vi.html_show(doc.get_html())
-   doc.save('test_date_format.html')
+  vi.html_show(doc.get_html())
+  doc.save('test_date_format.html')
