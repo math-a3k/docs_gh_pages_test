@@ -28,7 +28,7 @@ from typing import List
 from tqdm import tqdm
 from box import Box
 from utilmy.viz.css import getcss
-from utilmy.viz.test_vizhtml import test1, test2, test3, test4, test_scatter_and_histogram_matplot, test_pd_plot_network, test_page, test_cssname, test_external_css, test_table, test_getdata, test_colimage_table 
+from utilmy.viz.test_vizhtml import test1, test2, test3, test4, test_scatter_and_histogram_matplot, test_pd_plot_network, test_page, test_cssname, test_external_css, test_table, test_getdata, test_colimage_table, test_tseries_dateformat 
 
 try :
    import matplotlib.pyplot as plt
@@ -87,7 +87,7 @@ def test_all():
    test_table()       
    test_colimage_table()
    test_page()
-   
+   test_tseries_dateformat()
    
 #####################################################################################
 def show(file, title='table',format: str='blue_light',dir_out='table.html', css_class=None, use_datatable=True, table_id=None,):
