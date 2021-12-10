@@ -1233,7 +1233,11 @@ def help_get_codesource(func):
 
 
 def to_float(x):
-  try: return float(x)
+  try: 
+      if not np.isnan(x):
+        return float(x)
+      else :
+        return 0
   except : return 0
 
 
