@@ -856,10 +856,12 @@ def pd_plot_tseries_highcharts(df0,
 
     # vdate = df[cc.coldate].values
     for col_name in cc.coly1:
+      df[col_name] = df[col_name].fillna(0)
       data = [[ vdate[i] , to_float(df[col_name].iloc[i] ) ] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name,yAxis=1)
 
     for col_name in cc.coly2:
+      df[col_name] = df[col_name].fillna(0)
       data = [[ vdate[i] , to_float(df[col_name].iloc[i] )] for i in range(df.shape[0])]
       H.add_data_set(data, 'spline', col_name, yAxis=0, )
 
@@ -899,6 +901,7 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
 
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
 #     data         = df[colname].values.tolist()
+    df[colname] = df[colname].fillna(0)
     data = [ to_float(t) for t in df[colname].values  ]  
       
     code_html_start = f"""
@@ -1233,11 +1236,7 @@ def help_get_codesource(func):
 
 
 def to_float(x):
-  try: 
-      if not np.isnan(x):
-        return float(x)
-      else :
-        return 0
+  try: return float(x)
   except : return 0
 
 
