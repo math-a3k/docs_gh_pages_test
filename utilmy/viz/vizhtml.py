@@ -898,8 +898,9 @@ def pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str=None,
     cc.yaxis_label  = yaxis_label if yaxis_label else "y-axis"
 
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
-    data         = df[colname].values.tolist()
-
+#     data         = df[colname].values.tolist()
+    data = [ to_float(t) for t in df[colname].values  ]  
+      
     code_html_start = f"""
          <script src="https://code.highcharts.com/6/modules/histogram-bellcurve.js"></script>
              <div id="{container_id}">Loading</div>
