@@ -17,7 +17,7 @@ def test_yolov5_from_xml():
 
 
 def test_all():
-    test_extract_info_from_xml()
+    # test_extract_info_from_xml()
     test_convert_to_yolov5()
     test_yolov5_from_xml()
 
