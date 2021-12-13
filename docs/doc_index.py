@@ -1859,6 +1859,107 @@ utilmy/viz/zarchive/toptoolbar.py
 TopToolbar.__init__(self)
 
 
+utilmy/webscraper/__init__.py
+
+
+utilmy/webscraper/cli_arxiv.py
+-------------------------functions----------------------
+main(url = "", path_pdf = "data/scraper/v1/pdf/", path_txt = "data/scraper/v1/txt/", npage_max = 1, tag = "v1")
+parse_main_page(url)
+process_and_paginate_soup(response_soup)
+process_url(url_data, idx, list_len, path_pdf = "", path_txt = "")
+
+
+
+utilmy/webscraper/cli_openreview.py
+-------------------------methods----------------------
+OpenreviewScraper.__init__(self, url = "", npage_max = 1, path_pdf = "", path_txt = "")
+OpenreviewScraper.run(self)
+PDFExtractor.__init__(self, pdf_path, txt_path)
+PDFExtractor.extract(self, url_data: URLData)
+PageParser.__init__(self)
+PageParser.construct_api_url(self, url)
+PageParser.construct_pdf_url(note)
+PageParser.generate_next_url(self, current_url)
+PageParser.parse(self, url, page_limit)
+PageParser.process_api_response(self, response)
+URLData.pdf_title(self)
+URLData.title_normalized(self)
+URLData.txt_title(self)
+
+
+utilmy/webscraper/cli_reddit.py
+-------------------------methods----------------------
+RedditPageScraper.__init__(self, path_txt)
+RedditPageScraper.extract(self, url_data: URLData)
+RedditPageScraper.parse(self, url, nposts)
+RedditPageScraper.replace_url(self, url, page_count)
+RedditPageScraper.request(self, url)
+RedditScraper.__init__(self, url = "", nposts = 20, path_txt = "")
+RedditScraper.run(self)
+URLData.completed_url(self)
+URLData.fixed_post_id(self)
+URLData.new_url(self)
+URLData.sanitized_title(self)
+
+
+utilmy/webscraper/ner_extractor.py
+
+
+utilmy/webscraper/pdf_scraper.py
+-------------------------functions----------------------
+main(url = "", path_pdf = "data/scraper/v1/pdf/", path_txt = "data/scraper/v1/txt/", npage_max = 1, tag = "v1")
+parse_main_page(url)
+process_and_paginate_soup(response_soup)
+process_url(url_data, idx, list_len, path_pdf = "", path_txt = "")
+
+
+
+utilmy/webscraper/scrape_batch.py
+-------------------------functions----------------------
+download_page()
+extract_to_pandas()
+
+
+
+utilmy/webscraper/test/Scraper_INSTAGRAM.py
+-------------------------functions----------------------
+make_soup(url)
+
+
+
+utilmy/webscraper/test/scraper_img.py
+
+
+utilmy/webscraper/test/url_scraper.py
+-------------------------methods----------------------
+GlassDoor.parse(self, response)
+
+
+utilmy/webscraper/test/vc_scraper.py
+-------------------------methods----------------------
+GlassDoor.parse(self, response)
+GlassDoor.start_requests(self)
+
+
+utilmy/webscraper/util_search.py
+-------------------------functions----------------------
+googleSearch(query)
+run()
+
+-------------------------methods----------------------
+Search.__init__(self)
+Search.repos_user()
+
+
+utilmy/webscraper/util_web.py
+-------------------------functions----------------------
+web_get_url_loginpassword(url_list = None, browser = "phantomjs", login = "", password = "", phantomjs_path="D = "D:/_devs/webserver/phantomjs-1.9.8/phantomjs.exe", pars = None, if pars is None)
+web_send_email_tls(FROM, recipient, subject, body, login1 = "mizenjapan@gmail.com", pss1 = "sophieelise237", server1 = "smtp.gmail.com", port1 = 465, )
+web_sendurl(url1)
+
+
+
 utilmy/zml/__init__.py
 
 
