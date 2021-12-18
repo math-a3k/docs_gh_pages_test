@@ -883,9 +883,14 @@ rank_eval(rank_true, dfmerged, nrank = 100)
 rank_fillna(df)
 rank_generate_fake(dict_full, list_overlap, nsize = 100, ncorrect = 20)
 rank_generatefake(ncorrect = 30, nsize = 100)
-rank_merge(df, method = 'borda')
+rank_merge(ll1, ll2)
 rank_merge_v2(list1, list2, nrank)
+rank_merge_v3(list1, list2, maxrank = 100)
+rank_merge_v4(ll1, ll2)
+rank_score(rank1, rank2, adjust = 1.0, kk = 1.0)
 test()
+test1()
+test_use_operon()
 
 
 
