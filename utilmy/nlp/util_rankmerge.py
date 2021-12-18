@@ -26,6 +26,104 @@ def log(*s):
   print(*s, flush=True)
 
 
+
+
+def test1():
+    """"
+        # evaluate each rank aggregation algorithm by using spearman's rho's and kendall-tau's metrics
+        # for varying levels of ncorrect in the generated rankings    
+    
+    """"
+
+    def rank_merge_v4(ll1, ll2):
+        """ Re-rank elements of list1 using ranking of list2
+        """        
+        n1, n2 = len(ll1), len(ll2)
+        adjust, mrank = (1.0 * n1) / n2, n2
+        rank3 = np.zeros(n1, dtype='float32')
+        kk = 2
+
+        for rank1, sid in enumerate(ll1):
+            rank2 = np_find(ll2, sid)
+            rank2 = mrank if rank2 == -1 else rank2
+            rank3[rank1] = -rank_score(rank1, rank2, adjust, kk=kk)
+
+        # Id of ll1 sorted list
+        return [ll1[i] for i in np.argsort(rank3)]
+
+    pd.set_option('display.max_columns', 7)
+    for ncorrect in [0, 20, 50, 80, 100]:
+      print('ncorrect = {}'.format(ncorrect))
+
+      #### Fake with ncorrect 
+      df, rank1, rank2, dict_full = rank_generatefake(ncorrect, 100)
+      rank_true = list(dict_full)
+        
+        
+      def rank_score(rank1, rank2, adjust=1.0, kk=1.0):
+            return 1.0 / (kk + rank1) + 1.0 / (kk + rank2 * adjust)
+        
+        
+      def loss(rank_score_formulae):        
+         rankmerge = rank_merge_v3(rank1, rank2, 100)  
+         metric    = kendall_tau(rank_true, rankmerge)  
+        
+         retrun metric*metric
+
+     #### Find rank_score formulae, such as metric is minimize
+    
+    
+def test_use_operon():    
+    # SPDX-License-Identifier: MIT
+    # SPDX-FileCopyrightText: Copyright 2019-2021 Heal Research
+
+    import pandas as pd
+    import numpy as np
+    from sklearn.model_selection import train_test_split, cross_val_score
+    from sklearn.metrics import r2_score, make_scorer
+    from scipy.stats import pearsonr
+
+    from operon import RSquared
+    from operon.sklearn import SymbolicRegressor
+
+    from pmlb import fetch_data, dataset_names, classification_dataset_names, regression_dataset_names
+    #print(regression_dataset_names)
+
+    X, y = fetch_data('1027_ESL', return_X_y=True)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.75, test_size=0.25, shuffle=True, random_state=1234)
+
+    reg = SymbolicRegressor(
+            allowed_symbols='add,sub,mul,div,constant,variable',
+            offspring_generator='basic',
+            local_iterations=10,
+            n_threads=4,
+            objectives = ['r2', 'shape'],
+            random_state=1234
+            )
+
+    reg.fit(X_train, y_train)
+    print(reg.get_model_string(2))
+    print(reg._stats)
+
+    y_pred_train = reg.predict(X_train)
+    print('r2 train (sklearn.r2_score): ', r2_score(y_train, y_pred_train))
+    # for comparison we calculate the r2 from _operon and scipy.pearsonr
+    print('r2 train (operon.rsquared): ', RSquared(y_train, y_pred_train))
+    r = pearsonr(y_train, y_pred_train)[0]
+    print('r2 train (scipy.pearsonr): ', r * r)
+
+    # crossvalidation
+    sc = make_scorer(RSquared, greater_is_better=True)
+    scores = cross_val_score(reg, X, y, cv=5, scoring=sc)
+    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+    
+
+    
+    
+###################################################################################################
+###################################################################################################    
 def test():
     # evaluate each rank aggregation algorithm by using spearman's rho's and kendall-tau's metrics
     # for varying levels of ncorrect in the generated rankings
@@ -173,8 +271,69 @@ def rank_eval(rank_true, dfmerged, nrank=100):
 
 
 
-
 #####################################################################################
+#####################################################################################
+def rank_score(rank1, rank2, adjust=1.0, kk=1.0):
+    return 1.0 / (kk + rank1) + 1.0 / (kk + rank2 * adjust)
+
+
+
+def rank_merge_v4(ll1, ll2):
+    """ Re-rank elements of list1 using ranking of list2
+    """        
+    n1, n2 = len(ll1), len(ll2)
+    adjust, mrank = (1.0 * n1) / n2, n2
+    rank3 = np.zeros(n1, dtype='float32')
+    kk = 2
+
+    for rank1, sid in enumerate(ll1):
+        rank2 = np_find(ll2, sid)
+        rank2 = mrank if rank2 == -1 else rank2
+        rank3[rank1] = -rank_score(rank1, rank2, adjust, kk=kk)
+
+    # Id of ll1 sorted list
+    return [ll1[i] for i in np.argsort(rank3)]
+
+
+
+def rank_merge_v3(list1, list2, maxrank=100):
+    """ Inver MRR cores
+      A custom rank aggregation algorithm that assigns a score to each item 
+      based on its rankings. The algorithm sorts the items by their score inescending order and returns them
+      Keyword arguments:
+      list1: a list containing the items
+      list2: a list containing the items
+      nrank: total number of elements to be ranked
+    """
+    keys, scores = [], []    
+    adjust = len(list1) / len(list2) * 1.0 
+    kk     = 1
+
+    for i, x in enumerate(list1):
+        rank1 = i + 1
+        rank2 = np_find(x, list2)
+        rank2 = maxrank if rank2 < 0 else rank2+1
+        score  = rank_score(rank1, rank2, adjust, kk= kk)
+        keys.append(x)
+        scores.append(score)
+
+    for i, x in enumerate(list2):
+        if x in keys:
+            continue
+        rank_2 = i + 1
+        rank_1 = maxrank
+        score  = rank_score(rank1, rank2, adjust, kk= kk)
+        keys.append(x)
+        scores.append(score)
+
+    # sort list by rank in descending order
+    return [keys[i] for i in np.argsort(np.array(scores))[::-1]]
+
+    
+    
+    
+############################################################################################
+############ Algo 2#########################################################################
 def rank_merge(df, method='borda'):
     """
       Returns a list of merged ranks for each item in the dataframe
