@@ -1,16 +1,27 @@
-"""
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
 
 
 
+def test_extract_to_pandas():
+    url = 'http://my-trade.in/'
+    page = requests.get(url)
+    df = extract_to_pandas(page.content, 'MainContent_dataGridView1')
+    print(df.head())
+	
 
+def extract_to_pandas(html, table_id=None):
+	
+    soup = BeautifulSoup(html, 'html.parser')
+    if table_id:
+        tbl = soup.find("table", {'id': table_id})
+    else:
+        tbl = soup.find("table")
+    df = pd.read_html(str(tbl))[0]
+    return df	
+	
 
-
-"""
-
-
-
-
-def extract_to_pandas(html):
 	"""
       HTML --> return pandas dataframe
 
