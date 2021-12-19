@@ -1923,7 +1923,8 @@ process_url(url_data, idx, list_len, path_pdf = "", path_txt = "")
 utilmy/webscraper/scrape_batch.py
 -------------------------functions----------------------
 download_page()
-extract_to_pandas()
+extract_to_pandas(html, table_id = None)
+test_extract_to_pandas()
 
 
 
