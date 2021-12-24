@@ -109,7 +109,7 @@ def get_data_sample(batch_size, x_train, labels_val):   #name changed
 
 
 def to_OneHot(df, dfref, labels_col) :       #name changed
-    """[summary]
+    """
 
     Args:
         df (DataFrame): Actual DataFrame
