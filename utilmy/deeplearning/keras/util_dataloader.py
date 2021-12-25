@@ -99,7 +99,7 @@ def get_data_sample(batch_size, x_train, labels_val):   #name changed
     x        = np.array([ x_train[i]  for i in i_select ] )
 
     #### y_onehot Labels  [y1, y2, y3, y4]
-    labels_col   = [  'gender', 'masterCategory', 'subCategory', 'articleType' ]
+    labels_col   = [  'gender', 'masterCategory', 'subCategory', 'articleType' ] #*To make user-defined
     y_label_list = []
     for ci in labels_col :
         v =  labels_val[ci][i_select]
@@ -183,7 +183,7 @@ class CustomDataGenerator(Sequence):
         x (np array): The input samples from the dataset
         y (np arrays): The label column from the dataset
         batch_size (int, optional): batch size for the samples. Defaults to 32.
-        augmentations (bool, optional): perform augmentations to the input samples. Defaults to None.
+        augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
     """
     
     def __init__(self, x, y, batch_size=32, augmentations=None):
@@ -211,12 +211,25 @@ class CustomDataGenerator(Sequence):
 #################################################################################   
 from PIL import Image
 class CustomDataGenerator_img(Sequence):
+    
+    """Custom DataGenerator using Keras Sequence for images
+
+    Args:
+        img_dir (Path(str)): String path to images directory
+        label_path (DataFrame): Dataset for Generator
+        class_list (list): list of classes
+        split (str, optional): split for train or test. Defaults to 'train'.
+        batch_size (int, optional): batch_size for each batch. Defaults to 8.
+        transforms (str, optional):  type of transformations to perform on images. Defaults to None.
+    """
+    
+    # """    
+    #    df_label format :
+    #        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+    # """
+    
     def __init__(self, img_dir, label_path, class_list,
-                 split='train', batch_size=8, transforms=None):
-        """    
-           df_label format :
-               id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-        """
+                 split='train', batch_size=8, transforms=None): 
         self.image_dir   = img_dir
         self.class_list  = class_list
         self.batch_size  = batch_size
