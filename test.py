@@ -190,7 +190,7 @@ def test_deeplearning_keras():
 
    
 #######################################################################################
-def test_deepelearning_yolov5():
+def test_deeplearning_yolov5():
    from utilmy.deeplearning import util_yolo as m
    m.test_all()
 
