@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 HELP = """
- utils keras for layers
+ utils keras for dataloading
 """
 import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
 import cv2
 import tensorflow as tf
 # import tifffile.tifffile
 # from skimage import morphology
+from tensorflow.python.keras.utils.data_utils import Sequence  
 
 from albumentations import (
     Compose, HorizontalFlip, CLAHE, HueSaturationValue,
@@ -28,48 +29,48 @@ def help():
 
 ###################################################################################################    
 def test():    
- #image_size = 64
- train_augments = Compose([
-     #Resize(image_size, image_size, p=1),
-     HorizontalFlip(p=0.5),
-     #RandomContrast(limit=0.2, p=0.5),
-     #RandomGamma(gamma_limit=(80, 120), p=0.5),
-     #RandomBrightness(limit=0.2, p=0.5),
-     #HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
-     #                   val_shift_limit=10, p=.9),
-     ShiftScaleRotate(
-         shift_limit=0.0625, scale_limit=0.1, 
-         rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
-     # ToFloat(max_value=255),
-     SprinklesTransform(p=0.5),
- ])
+  #image_size = 64
+  train_augments = Compose([
+      #Resize(image_size, image_size, p=1),
+      HorizontalFlip(p=0.5),
+      #RandomContrast(limit=0.2, p=0.5),
+      #RandomGamma(gamma_limit=(80, 120), p=0.5),
+      #RandomBrightness(limit=0.2, p=0.5),
+      #HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
+      #                   val_shift_limit=10, p=.9),
+      ShiftScaleRotate(
+          shift_limit=0.0625, scale_limit=0.1, 
+          rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
+      # ToFloat(max_value=255),
+      SprinklesTransform(p=0.5),
+  ])
 
- test_augments = Compose([
-     # Resize(image_size, image_size, p=1),
-     # ToFloat(max_value=255)
- ])
+  test_augments = Compose([
+      # Resize(image_size, image_size, p=1),
+      # ToFloat(max_value=255)
+  ])
 
- ###############################################################################
- image_size =  64
- train_transforms = Compose([
-     Resize(image_size, image_size, p=1),
-     HorizontalFlip(p=0.5),
-     RandomContrast(limit=0.2, p=0.5),
-     RandomGamma(gamma_limit=(80, 120), p=0.5),
-     RandomBrightness(limit=0.2, p=0.5),
-     HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
-                        val_shift_limit=10, p=.9),
-     ShiftScaleRotate(
-         shift_limit=0.0625, scale_limit=0.1, 
-         rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
-     ToFloat(max_value=255),
-     SprinklesTransform(num_holes=10, side_length=10, p=0.5),
- ])
+  ###############################################################################
+  image_size =  64
+  train_transforms = Compose([
+      Resize(image_size, image_size, p=1),
+      HorizontalFlip(p=0.5),
+      RandomContrast(limit=0.2, p=0.5),
+      RandomGamma(gamma_limit=(80, 120), p=0.5),
+      RandomBrightness(limit=0.2, p=0.5),
+      HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
+                         val_shift_limit=10, p=.9),
+      ShiftScaleRotate(
+          shift_limit=0.0625, scale_limit=0.1, 
+          rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
+      ToFloat(max_value=255),
+      SprinklesTransform(num_holes=10, side_length=10, p=0.5),
+  ])
 
- test_transforms = Compose([
-     Resize(image_size, image_size, p=1),
-     ToFloat(max_value=255)
- ])
+  test_transforms = Compose([
+      Resize(image_size, image_size, p=1),
+      ToFloat(max_value=255)
+  ])
 
  
  
@@ -108,7 +109,7 @@ def get_data_sample(batch_size, x_train, labels_val):   #name changed
     return x, y_label_list 
 
 
-def to_OneHot(df, dfref, labels_col) :       #name changed
+def pd_get_onehot_dict(df, labels_col:list, dfref=None, ) :       #name changed
     """
 
     Args:
@@ -119,7 +120,8 @@ def to_OneHot(df, dfref, labels_col) :       #name changed
     Returns:
         dictionary: label_columns, count
     """
-    df       = df.merge(dfref, on = 'id', how='left')
+    if dfref is not None :
+        df       = df.merge(dfref, on = 'id', how='left')
 
     
     labels_val = {}
@@ -136,20 +138,20 @@ def to_OneHot(df, dfref, labels_col) :       #name changed
     
     
 
-def data_add_onehot(dfref, img_dir, labels_col) :   #name changed
+def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col) :   #name changed
     """One Hot encode label_cols
-
+    # 
+    #    id, uri, cat1, cat2, .... , cat1_onehot
+    #
     Args:
         dfref (DataFrame): DataFrame to perform one hot encoding on
-        img_dir (Path(str)): String Path to image directory
+        img_dir (Path(str)): String Path /*.png to image directory
         labels_col (list): Columns to perform One Hot encoding on
 
     Returns:
         DataFrame: One Hot encoded DataFrame
     """
-    # """
-    #    id, uri, cat1, cat2, .... , cat1_onehot
-    # """
+
     import glob
     fpaths   = glob.glob(img_dir )
     fpaths   = [ fi for fi in fpaths if "." in fi.split("/")[-1] ]
@@ -173,8 +175,7 @@ def data_add_onehot(dfref, img_dir, labels_col) :   #name changed
 
 
 
-#################################################################################    
-from tensorflow.python.keras.utils.data_utils import Sequence    
+#################################################################################      
 class CustomDataGenerator(Sequence):
     
     """Custom DataGenerator usinf keras Sequence
