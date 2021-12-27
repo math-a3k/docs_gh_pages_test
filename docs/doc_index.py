@@ -256,11 +256,11 @@ _byte_feature(value)
 _float_feature(value)
 _int64_feature(value)
 build_tfrecord(x, tfrecord_out_path, max_records)
-data_add_onehot(dfref, img_dir, labels_col)
 get_data_sample(batch_size, x_train, labels_val)
 help()
+pd_get_onehot_dict(df, labels_col:list, dfref = None, )
+pd_merge_imgdir_onehotfeat(dfref, img_dir = "*.jpg", labels_col)
 test()
-to_OneHot(df, dfref, labels_col)
 
 -------------------------methods----------------------
 CustomDataGenerator.__getitem__(self, idx)
