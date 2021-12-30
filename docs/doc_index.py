@@ -1227,6 +1227,22 @@ test_normality(error, distribution = "norm", test_size_limit = 5000)
 dict2.__init__(self, d)
 
 
+utilmy/qdrant/dbvector.py
+-------------------------methods----------------------
+Client.__init__(self, host  =  'localhost', port  =  6333, table = 'default')
+Client.connect(self, table)
+Client.get_multi(self, vect_list, query_filter = None, topk = 5)
+Client.table_create(self, table, vector_size = 768)
+Client.table_view(self, table)
+
+
+utilmy/qdrant/test.py
+-------------------------functions----------------------
+get_data(filename = "startups.json")
+main()
+
+
+
 utilmy/spark/conda/script.py
 
 

@@ -969,6 +969,14 @@ Repo: ./
 | <a name='utilmy/prepro/util_feature.py' href='.//utilmy/prepro/util_feature.py'>utilmy/prepro/util_feature.py</a> | function | <a href='.//utilmy/prepro/util_feature.py#L713'>test_normality</a> | shapiro<br>dict<br>anderson<br>kstest<br> |
 | <a name='utilmy/prepro/util_feature.py' href='.//utilmy/prepro/util_feature.py'>utilmy/prepro/util_feature.py</a> | class | <a href='.//utilmy/prepro/util_feature.py#L28'>dict2</a> |  |
 | <a name='utilmy/prepro/util_feature.py' href='.//utilmy/prepro/util_feature.py'>utilmy/prepro/util_feature.py</a> | method | <a href='.//utilmy/prepro/util_feature.py#L29'>dict2:__init__</a> |  |
+| <a name='utilmy/qdrant/dbvector.py' href='.//utilmy/qdrant/dbvector.py'>utilmy/qdrant/dbvector.py</a> | class | <a href='.//utilmy/qdrant/dbvector.py#L12'>Client</a> |  |
+| <a name='utilmy/qdrant/dbvector.py' href='.//utilmy/qdrant/dbvector.py'>utilmy/qdrant/dbvector.py</a> | method | <a href='.//utilmy/qdrant/dbvector.py#L13'>Client:__init__</a> |  |
+| <a name='utilmy/qdrant/dbvector.py' href='.//utilmy/qdrant/dbvector.py'>utilmy/qdrant/dbvector.py</a> | method | <a href='.//utilmy/qdrant/dbvector.py#L22'>Client:connect</a> | QdrantClient<br> |
+| <a name='utilmy/qdrant/dbvector.py' href='.//utilmy/qdrant/dbvector.py'>utilmy/qdrant/dbvector.py</a> | method | <a href='.//utilmy/qdrant/dbvector.py#L35'>Client:get_multi</a> |  |
+| <a name='utilmy/qdrant/dbvector.py' href='.//utilmy/qdrant/dbvector.py'>utilmy/qdrant/dbvector.py</a> | method | <a href='.//utilmy/qdrant/dbvector.py#L27'>Client:table_create</a> |  |
+| <a name='utilmy/qdrant/dbvector.py' href='.//utilmy/qdrant/dbvector.py'>utilmy/qdrant/dbvector.py</a> | method | <a href='.//utilmy/qdrant/dbvector.py#L30'>Client:table_view</a> | collection_info.dict<br> |
+| <a name='utilmy/qdrant/test.py' href='.//utilmy/qdrant/test.py'>utilmy/qdrant/test.py</a> | function | <a href='.//utilmy/qdrant/test.py#L8'>get_data</a> | open<br>json.loads<br>data.append<br> |
+| <a name='utilmy/qdrant/test.py' href='.//utilmy/qdrant/test.py'>utilmy/qdrant/test.py</a> | function | <a href='.//utilmy/qdrant/test.py#L20'>main</a> | print<br>Client<br>client.connect<br>client.create_collection<br>get_data<br>client.put_multi<br>client.table_view<br>client.get_multi<br> |
 | <a name='utilmy/spark/main.py' href='.//utilmy/spark/main.py'>utilmy/spark/main.py</a> | function | <a href='.//utilmy/spark/main.py#L24'>config_default</a> |  |
 | <a name='utilmy/spark/main.py' href='.//utilmy/spark/main.py'>utilmy/spark/main.py</a> | function | <a href='.//utilmy/spark/main.py#L65'>config_getdefault</a> |  |
 | <a name='utilmy/spark/main.py' href='.//utilmy/spark/main.py'>utilmy/spark/main.py</a> | function | <a href='.//utilmy/spark/main.py#L114'>main</a> | argparse.ArgumentParser<br>pars.add_argument<br>pars.parse_args<br>log<br>config_load<br>spark_init<br>importlib.import_module<br>job.run<br> |
