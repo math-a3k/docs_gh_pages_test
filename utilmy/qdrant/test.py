@@ -1,3 +1,36 @@
+"""
+
+
+https://blog.qdrant.tech/neural-search-tutorial-3f034ab13adc
+
+
+
+from qdrant_openapi_client.models.models import Filter
+
+    ...
+
+    city_of_interest = "Berlin"
+
+    # Define a filter for cities
+    city_filter = Filter(**{
+        "must": [{
+            "key": "city", # We store city information in a field of the same name 
+            "match": { # This condition checks if payload field have requested value
+                "keyword": city_of_interest
+            }
+        }]
+    })
+
+    search_result = self.qdrant_client.search(
+        collection_name=self.collection_name,
+        query_vector=vector,
+        query_filter=city_filter,
+        top=5
+    )
+    ...
+
+
+"""
 import json
 import numpy as np
 from dbvector import ClientQdrant
