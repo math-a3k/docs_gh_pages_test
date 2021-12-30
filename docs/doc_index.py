@@ -1243,6 +1243,12 @@ main()
 
 
 
+utilmy/qdrant/triplet.py
+-------------------------functions----------------------
+new_algo(df)
+
+
+
 utilmy/spark/conda/script.py
 
 
