@@ -1238,6 +1238,17 @@ Client.table_create(self, table, vector_size = 768)
 Client.table_view(self, table)
 
 
+utilmy/qdrant/qdrant_example.py
+-------------------------functions----------------------
+get_data(filename = "startups.json")
+main()
+search_startup(q: str)
+
+-------------------------methods----------------------
+NeuralSearcher.__init__(self, collection_name)
+NeuralSearcher.search(self, text: str)
+
+
 utilmy/qdrant/test.py
 -------------------------functions----------------------
 get_data(filename = "startups.json")
