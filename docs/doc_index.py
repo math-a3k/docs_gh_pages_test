@@ -962,6 +962,7 @@ os_path_size(path  =  '.')
 os_path_split(fpath:str = "")
 os_platform_ip()
 os_platform_os()
+os_process_list()
 os_removedirs(path, verbose = False)
 os_search_content(srch_pattern = None, mode = "str", dir1 = "", file_pattern = "*.*", dirlevel = 1)
 os_sizeof(o, ids, hint = " deep_getsizeof(df_pd, set()
@@ -972,6 +973,7 @@ os_to_file(txt = "", filename = "ztmp.txt", mode = 'a')
 os_variable_check(ll, globs = None, do_terminate = True)
 os_variable_exist(x, globs, msg = "")
 os_variable_init(ll, globs)
+os_wait_processes(nhours = 7)
 os_walk(path, pattern = "*", dirlevel = 50)
 print_everywhere()
 profiler_start()
@@ -1240,6 +1242,12 @@ utilmy/qdrant/test.py
 -------------------------functions----------------------
 get_data(filename = "startups.json")
 main()
+
+
+
+utilmy/qdrant/triplet.py
+-------------------------functions----------------------
+new_algo(df)
 
 
 
