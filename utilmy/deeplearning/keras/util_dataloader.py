@@ -71,6 +71,27 @@ def test():
       Resize(image_size, image_size, p=1),
       ToFloat(max_value=255)
   ])
+  
+  def test1():
+    from tensorflow.keras.datasets import mnist
+    from tqdm import tqdm
+
+    (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
+    
+    train_loader = CustomDataGenerator(X_train, y_train)
+    valid_loader = CustomDataGenerator(X_valid, y_valid)
+
+    for i, (image, label) in enumerate(train_loader):
+        print('Training : ')
+        print(f'image shape : {image.shape}')
+        print(f'label shape : {label.shape}')
+        break
+
+    for i, (image, label) in enumerate(valid_loader):
+        print('\nValidation : ')
+        print(f'image shape : {image.shape}')
+        print(f'label shape : {label.shape}')
+        break
 
  
  
@@ -178,13 +199,44 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #nam
 
 
 #################################################################################      
+# class CustomDataGenerator(Sequence):
+    
+#     """Custom DataGenerator using keras Sequence
+
+#     Args:
+#         x (np array): The input samples from the dataset
+#         y (np arrays): The label column from the dataset
+#         batch_size (int, optional): batch size for the samples. Defaults to 32.
+#         augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
+#     """
+    
+#     def __init__(self, x, y, batch_size=32, augmentations=None):
+#         self.x          = x
+#         self.y          = y
+#         self.batch_size = batch_size
+#         self.augment    = augmentations
+
+#     def __len__(self):
+#         return int(np.ceil(len(self.x) / float(self.batch_size)))
+
+#     def __getitem__(self, idx):
+#         batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
+#         batch_y = []
+#         for y_head in self.y:
+#             batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
+        
+#         if self.augment is not None:
+#             batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
+#         return (batch_x, *batch_y)
+
+
 class CustomDataGenerator(Sequence):
     
     """Custom DataGenerator using keras Sequence
 
     Args:
         x (np array): The input samples from the dataset
-        y (np arrays): The label column from the dataset
+        y (np array): The labels from the dataset
         batch_size (int, optional): batch size for the samples. Defaults to 32.
         augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
     """
@@ -200,17 +252,16 @@ class CustomDataGenerator(Sequence):
 
     def __getitem__(self, idx):
         batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
-        batch_y = []
-        for y_head in self.y:
-            batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
-        
+        batch_y = self.y[idx * self.batch_size:(idx + 1) * self.batch_size]
+        # for y_head in self.y:                                                         ----
+        #     batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size]) ----
         if self.augment is not None:
             batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
-        return (batch_x, *batch_y)
+        # return (batch_x, *batch_y)                                                    ----
+        return (batch_x, batch_y)
 
     
-
-
+    
 #################################################################################   
 from PIL import Image
 class CustomDataGenerator_img(Sequence):
