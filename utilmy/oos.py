@@ -355,6 +355,31 @@ def is_float(x):
 
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
+def os_process_list():
+     """  List of processes
+     #ll = os_process_list()
+     #ll = [t for t in ll if 'root' in t and 'python ' in t ]
+     ### root   ....  python run          
+     """
+     import subprocess
+     ps = subprocess.Popen('ps -ef', shell=True, stdout=subprocess.PIPE)
+     ll = ps.stdout.readlines()
+     ll = [ t.decode().replace("\n", "") for t in ll ]
+     return ll
+
+
+def os_wait_processes(nhours=7):        
+    t0 = time.time()
+    while (time.time() - t0 ) < nhours * 3600 :
+       hdfs_export()            
+       ll = os_process_list()
+       ll = [t for t in ll if 'scoupon' in t and 'python ' in t ]
+       if len(ll) < 2 : break   ### Process are not running anymore 
+       log("sleep 30min", ll)     
+       time.sleep(3600* 0.5)
+
+    
+    
 class toFileSafe(object):
    def __init__(self,fpath):
       """ Thread Safe file writer
