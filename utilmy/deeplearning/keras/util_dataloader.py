@@ -71,19 +71,41 @@ def test():
       Resize(image_size, image_size, p=1),
       ToFloat(max_value=255)
   ])
+  
+  def test1():
+    from tensorflow.keras.datasets import mnist
+    from tqdm import tqdm
+
+    (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
+    
+    train_loader = CustomDataGenerator(X_train, y_train)
+    valid_loader = CustomDataGenerator(X_valid, y_valid)
+
+    for i, (image, label) in enumerate(train_loader):
+        print('Training : ')
+        print(f'image shape : {image.shape}')
+        print(f'label shape : {label.shape}')
+        break
+
+    for i, (image, label) in enumerate(valid_loader):
+        print('\nValidation : ')
+        print(f'image shape : {image.shape}')
+        print(f'label shape : {label.shape}')
+        break
 
  
  
  
 
 ##################################################################################################
-def get_data_sample(batch_size, x_train, labels_val):   #name changed
+def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name changed
     """ Get a data sample with batch size from dataset
 
     Args:
         batch_size (int): Provide a batch size for sampling
-        x_train ([type]): Inputs from the dataset
-        labels_val ([type]): True labels for the dataset
+        x_train (list): Inputs from the dataset
+        labels_val (list): True labels for the dataset
+        labels_col(list): Samples to select from these columns
 
     Returns:
         x (numpy array): Selected samples of size batch_size
@@ -100,7 +122,7 @@ def get_data_sample(batch_size, x_train, labels_val):   #name changed
     x        = np.array([ x_train[i]  for i in i_select ] )
 
     #### y_onehot Labels  [y1, y2, y3, y4]
-    labels_col   = [  'gender', 'masterCategory', 'subCategory', 'articleType' ] #*To make user-defined
+    # labels_col   = [  'gender', 'masterCategory', 'subCategory', 'articleType' ] #*To make user-defined
     y_label_list = []
     for ci in labels_col :
         v =  labels_val[ci][i_select]
@@ -138,7 +160,8 @@ def pd_get_onehot_dict(df, labels_col:list, dfref=None, ) :       #name changed
     
     
 
-def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col) :   #name changed
+def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #name changed
+    
     """One Hot encode label_cols
     # 
     #    id, uri, cat1, cat2, .... , cat1_onehot
@@ -146,7 +169,7 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col) :   #name cha
     Args:
         dfref (DataFrame): DataFrame to perform one hot encoding on
         img_dir (Path(str)): String Path /*.png to image directory
-        labels_col (list): Columns to perform One Hot encoding on
+        labels_col (list): Columns to perform One Hot encoding on. Defaults to []
 
     Returns:
         DataFrame: One Hot encoded DataFrame
@@ -176,13 +199,44 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col) :   #name cha
 
 
 #################################################################################      
+# class CustomDataGenerator(Sequence):
+    
+#     """Custom DataGenerator using keras Sequence
+
+#     Args:
+#         x (np array): The input samples from the dataset
+#         y (np arrays): The label column from the dataset
+#         batch_size (int, optional): batch size for the samples. Defaults to 32.
+#         augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
+#     """
+    
+#     def __init__(self, x, y, batch_size=32, augmentations=None):
+#         self.x          = x
+#         self.y          = y
+#         self.batch_size = batch_size
+#         self.augment    = augmentations
+
+#     def __len__(self):
+#         return int(np.ceil(len(self.x) / float(self.batch_size)))
+
+#     def __getitem__(self, idx):
+#         batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
+#         batch_y = []
+#         for y_head in self.y:
+#             batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
+        
+#         if self.augment is not None:
+#             batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
+#         return (batch_x, *batch_y)
+
+
 class CustomDataGenerator(Sequence):
     
-    """Custom DataGenerator usinf keras Sequence
+    """Custom DataGenerator using keras Sequence
 
     Args:
         x (np array): The input samples from the dataset
-        y (np arrays): The label column from the dataset
+        y (np array): The labels from the dataset
         batch_size (int, optional): batch size for the samples. Defaults to 32.
         augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
     """
@@ -198,17 +252,16 @@ class CustomDataGenerator(Sequence):
 
     def __getitem__(self, idx):
         batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
-        batch_y = []
-        for y_head in self.y:
-            batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
-        
+        batch_y = self.y[idx * self.batch_size:(idx + 1) * self.batch_size]
+        # for y_head in self.y:                                                         ----
+        #     batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size]) ----
         if self.augment is not None:
             batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
-        return (batch_x, *batch_y)
+        # return (batch_x, *batch_y)                                                    ----
+        return (batch_x, batch_y)
 
     
-
-
+    
 #################################################################################   
 from PIL import Image
 class CustomDataGenerator_img(Sequence):
@@ -289,6 +342,19 @@ class SprinklesTransform(ImageOnlyTransform):
     
 
 class RealCustomDataGenerator(tf.keras.utils.Sequence):
+    
+    """Custom Data Generator using keras Sequence
+
+        Args:
+            image_dir (Path(str)): String Path /*.png to image directory
+            label_path (DataFrame): Dataset for Generator
+            class_dict (list): list of columns for categories
+            split (str, optional): split as train, validation, or test. Defaults to 'train'.
+            batch_size (int, optional): Batch size for the dataloader. Defaults to 8.
+            transforms (str, optional): type of transform to perform on images. Defaults to None.
+            shuffle (bool, optional): Shuffle the data. Defaults to True.
+        """
+        
     def __init__(self, image_dir, label_path, class_dict,
                  split='train', batch_size=8, transforms=None, shuffle=True):
         self.image_dir = image_dir
@@ -384,12 +450,24 @@ def build_tfrecord(x, tfrecord_out_path, max_records):
 
 
 class CustomDataGenerator_img(Sequence):
+    
+    """Custom DataGenerator using Keras Sequence for images
+
+        Args:
+            img_dir (Path(str)): String path to images directory
+            label_path (DataFrame): Dataset for Generator
+            class_list (list): list of classes
+            split (str, optional): split for train or test. Defaults to 'train'.
+            batch_size (int, optional): batch_size for each batch. Defaults to 8.
+            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
+    """
+    # """
+    #    df_label format :
+    #        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+    # """
+        
     def __init__(self, img_dir, label_path, class_list,
                  split='train', batch_size=8, transforms=None):
-        """
-           df_label format :
-               id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-        """
         self.image_dir = img_dir
         self.class_list = class_list
         self.batch_size = batch_size
@@ -425,12 +503,3 @@ class CustomDataGenerator_img(Sequence):
             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
 
         return (batch_x, *batch_y)
-
-
-
-
-
-
-
-
-
