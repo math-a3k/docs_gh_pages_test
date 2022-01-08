@@ -72,12 +72,12 @@ def test():
       ToFloat(max_value=255)
   ])
   
-  def test1():
+def test1():
     from tensorflow.keras.datasets import mnist
     from tqdm import tqdm
 
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
-    
+
     train_loader = CustomDataGenerator(X_train, y_train)
     valid_loader = CustomDataGenerator(X_valid, y_valid)
 
@@ -92,6 +92,53 @@ def test():
         print(f'image shape : {image.shape}')
         print(f'label shape : {label.shape}')
         break
+
+
+def test2(): #using predefined df
+    import numpy
+    import os
+    from numpy import random
+    from PIL import Image
+    from pathlib import Path
+    import pandas as pd
+
+    folder_name = 'random images'
+    csv_file_name = 'df.csv'
+    p = Path(folder_name)
+    num_images = 50
+
+    num_labels = 2
+    
+    def create_random_images_ds(img_shape, num_images = 10, folder = 'random images', return_df = True, num_labels = 2, label_cols = ['label']):
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+        for n in range(num_images):
+            filename = f'{folder}/{n}.jpg'
+            rgb_img = numpy.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
+            image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
+            image.save(filename)
+
+        label_dict = []
+
+        files = [i.as_posix() for i in p.glob('*.jpg')]
+        for i in enumerate(label_cols):
+            label_dict.append(random.randint(num_labels, size=(num_images)))
+
+        zipped = list(zip(files, *label_dict))
+        df = pd.DataFrame(zipped, columns=['uri'] + label_cols)
+        if return_df:
+            return df
+
+    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = folder_name)
+    df.to_csv(csv_file_name, index=False)
+
+    dt_loader = CustomDataGenerator_img_predefined_df(p.as_posix(), df, ['label'], batch_size = 32)
+
+    for i, (image, label) in enumerate(dt_loader):
+        print(f'image shape : {(image).shape}')
+        print(f'label shape : {(label).shape}')
+        break
+
 
  
  
@@ -194,6 +241,28 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #nam
       #####  0,0,1,0 format   log(dfi_1hot)
 
     return df
+
+
+def pd_onehotfeat_predefined_df(dfref, labels_col = []) :   #name changed
+    
+    """One Hot encode label_cols for predefined df
+    # 
+    #    id, uri, cat1, cat2, .... , cat1_onehot
+    #
+    Args:
+        dfref (DataFrame): DataFrame to perform one hot encoding on
+        labels_col (list): Columns to perform One Hot encoding on. Defaults to []
+
+    Returns:
+        DataFrame: One Hot encoded DataFrame
+    """
+    for ci in labels_col :
+      dfi_1hot           = pd.get_dummies(dfref, columns=[ci])  ### OneHot
+      dfi_1hot           = dfi_1hot[[ t for t in dfi_1hot.columns if ci in t   ]]  ## keep only OneHot
+      dfref[ci + "_onehot"] = dfi_1hot.apply( lambda x : ','.join([   str(t) for t in x  ]), axis=1)
+      #####  0,0,1,0 format   log(dfi_1hot)
+
+    return dfref
 
 
 
@@ -321,6 +390,63 @@ class CustomDataGenerator_img(Sequence):
             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
 
         return (batch_x, *batch_y)
+    
+    
+    
+
+class CustomDataGenerator_img_predefined_df(Sequence):
+    
+    """Custom DataGenerator using Keras Sequence for images with predefined DataFrame
+
+    df_label format :
+    id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+
+    Args:
+        img_dir (Path(str)): String path to images directory
+        label_path (DataFrame): Dataset for Generator
+        class_list (list): list of classes
+        split (str, optional): split for train or test. Defaults to 'train'.
+        batch_size (int, optional): batch_size for each batch. Defaults to 8.
+        transforms (str, optional): type of transformations to perform on images. Defaults to None.
+    """
+    def __init__(self, img_dir, label_path, class_list,
+                 split='train', batch_size=8, transforms=None): 
+        self.image_dir   = img_dir
+        self.class_list  = class_list
+        self.batch_size  = batch_size
+        self.transforms  = transforms
+        # dfref       = pd.read_csv(label_path)
+        self.labels = pd_onehotfeat_predefined_df(label_path, class_list)
+
+    def on_epoch_end(self):
+        np.random.seed(12)
+        np.random.shuffle(self.labels)
+
+    def __len__(self):
+        return int(np.ceil(len(self.labels) / float(self.batch_size)))
+
+    def __getitem__(self, idx):
+        # Create batch targets
+        df_batch    = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
+
+        batch_x = []
+        batch_y = []  #  list of heads
+
+        for ii, x in df_batch.iterrows():  
+            img =  np.array(Image.open(x['uri']).convert('RGB') )  
+            batch_x.append(img)
+
+        for ci in self.class_list :
+          v = [ x.split(",") for x in df_batch[ci + "_onehot" ] ] 
+          v = np.array( [ [int(t) for t in vlist ]   for vlist in v    ])
+          batch_y.append( v )
+          # batch_y = *batch_y
+
+                
+        if self.transforms is not None:
+            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
+
+        return (np.array(batch_x),np.array(*batch_y))
  
 
 
