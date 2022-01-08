@@ -14,7 +14,7 @@ import scipy.stats ; from scipy.stats import norm
 from template_train import *
 
 
-from utilmy import pd_read_file
+from utilmy import pd_read_file, log, log2
 
 ###########################################################################################
 
@@ -35,13 +35,13 @@ def clean_duplicates(ll):   #name changed
 
 
 ### log  #############################################################################
-def print_debug_info(*s):   #name changed
+def log3(*s):   #name changed
     if cc.verbosity >= 3:   
         print(*s, flush=True)
         with open(cc.model_dir2 + "/debug.py", mode='a') as fp:
             fp.write(str(s) + "\n")
 
-def print_log_info(*s):   #name changed
+def log1(*s):   #name changed
     print(*s, flush=True)
     with open(cc.model_dir2 + "/log.py", mode='a') as fp:
         fp.write(str(s) + "\n")
@@ -50,10 +50,7 @@ def print_log_info(*s):   #name changed
         
 
 ########################################################################################################
-########### TPU ########################################################################################
 ### CPU Multi-thread
-
-
 def tf_compute_set(cc:dict):
     cc = Box(cc)  ### dot notaation
     tf.config.threading.set_intra_op_parallelism_threads(cc.n_thread)
@@ -62,7 +59,7 @@ def tf_compute_set(cc:dict):
 
 
     if cc.compute_mode == "custom":
-        log2("# Disable all GPUS")
+        log3("# Disable all GPUS")
         ll = tf.config.list_physical_devices('GPU')
         tf.config.set_visible_devices( [ ll[ cc.gpu_id ] ], 'GPU')
         visible_devices = tf.config.get_visible_devices()
@@ -71,21 +68,21 @@ def tf_compute_set(cc:dict):
 
     if cc.compute_mode == "cpu_only":
         try:
-            print_log_info("# Disable all GPUS")
+            log1("# Disable all GPUS")
             tf.config.set_visible_devices([], 'GPU')
             visible_devices = tf.config.get_visible_devices()
             for device in visible_devices:
                 assert device.device_type != 'GPU'
         except Exception as e :
-            print_log_info(e)
+            log1(e)
             # Invalid device or cannot modify virtual devices once initialized.
             pass
 
 
     if cc.compute_mode == "gpu" :
-        log2("# Create a MirroredStrategy.")
+        log3("# Create a MirroredStrategy.")
         strategy = tf.distribute.MirroredStrategy()
-        log2('Number of devices: {}'.format(strategy.num_replicas_in_sync))
+        log3('Number of devices: {}'.format(strategy.num_replicas_in_sync))
 
 
 
