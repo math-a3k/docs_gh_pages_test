@@ -247,7 +247,7 @@ os.makedirs(model_dir2, exist_ok=True)
 time.sleep(3) 
 ### log  #######################################################
 
-from utilmy.deeplearning.keras.util_train import print_log_info, print_debug_info
+from utilmy.deeplearning.keras.util_train import print_log_info, log2
 from utilmy.deeplearning.keras.util_train import *
 
 ########################################################################################################

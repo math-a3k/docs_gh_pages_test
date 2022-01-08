@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 HELP = """nsl_graph_losses.ipynb
-Original file is located at
     https://colab.research.google.com/drive/11BWemRJoxYmz3YpvX4MBxRomOu2IJQa6
 #!pip install neural_structured_learning
 
 """
 import numpy as np, tensorflow as tf
 
-import neural_structured_learning as nsl
-from neural_structured_learning.keras import layers as nsl_layers
-import neural_structured_learning.configs as nsl_configs
+
+try :
+    import neural_structured_learning as nsl
+    from neural_structured_learning.keras import layers as nsl_layers
+    import neural_structured_learning.configs as nsl_configs
+except Exception as e :
+    print(e)
+    print("pip install neural_structured_learning ") ; 1/0
 
 
 ######################################################################################
