@@ -377,6 +377,19 @@ train_stop(counter, patience)
 
 
 
+utilmy/deeplearning/torch/sent_trans.py
+-------------------------functions----------------------
+build_model()
+sentrans_train(modelname_or_path = "", taskname = "classifier", lossname = "", train_path = "train/*.csv", val_path = "val/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  Nonecc)   #### can use cc.epoch   cc.lr{})cc.epoch = 3cc.lr = 1E-5cc.warmup = 100cc.n_sample  = 1000cc.batch_size=16cc.mode = 'cpu/gpu'cc.ncpu =5  dir_train )dftrain = dftrain[[ 'text1', 'text2', 'label'  ]].values  dir_train )dfval  =  dfval[[ 'text1', 'text2', 'label'  ]].valuesif lossname == 'cosinus' = = 'cosinus':  loss =if taskname == 'classifier ':)
+test()
+
+-------------------------methods----------------------
+ReRanker.__init__(self)
+ReRanker.call(self, inputs, **kwargs)
+SentenceEncoder.__init__(self, num_labels = None)
+SentenceEncoder.call(self, inputs, **kwargs)
+
+
 utilmy/deeplearning/torch/util_train.py
 
 
@@ -1227,6 +1240,66 @@ test_normality(error, distribution = "norm", test_size_limit = 5000)
 
 -------------------------methods----------------------
 dict2.__init__(self, d)
+
+
+utilmy/project_graph/project_graph/__init__.py
+
+
+utilmy/project_graph/setup.py
+
+
+utilmy/project_graph/test_script.py
+-------------------------functions----------------------
+sleep_one_seconds()
+sleep_two_seconds()
+
+
+
+utilmy/project_graph/test_script_argparse.py
+-------------------------functions----------------------
+foo()
+sleep_one_seconds()
+sleep_two_seconds()
+
+
+
+utilmy/project_graph/tests/__init__.py
+
+
+utilmy/project_graph/tests/goodnight.py
+-------------------------functions----------------------
+sleep_five_seconds()
+
+
+
+utilmy/project_graph/tests/script_test_case_1.py
+-------------------------functions----------------------
+bar()
+foo()
+
+
+
+utilmy/project_graph/tests/sub_dir/__init__.py
+
+
+utilmy/project_graph/tests/sub_dir/script_test_case_2.py
+-------------------------functions----------------------
+bar()
+foo()
+
+
+
+utilmy/project_graph/tests/sub_dir/subsub_dir/helper.py
+-------------------------functions----------------------
+sleep_five_seconds()
+
+
+
+utilmy/project_graph/tests/test_performance_graph.py
+-------------------------functions----------------------
+test_lowlvl()
+test_toplvl()
+
 
 
 utilmy/qdrant/dbvector.py
