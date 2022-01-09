@@ -126,11 +126,22 @@ def sentrans_train(modelname_or_path="",
 
 
   ## dataloader
+  dftrain = pd.read_csv(  dir_train )
+  dftrain = dftrain[[ 'text1', 'text2', 'label'  ]].values
+
+  dfval = pd.read_csv(  dir_train )
+  dfval = dfval[[ 'text1', 'text2', 'label'  ]].values
+
+
 
 
 
   ### create task and Loss function
+  if lossname == 'cosinus':  loss = 
 
+
+  if taskname == 'classifier ':
+      task =  
 
 
 
