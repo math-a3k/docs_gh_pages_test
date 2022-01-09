@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """sentence transformer main.ipynb
 Original file is located at
-    https://colab.research.google.com/drive/1oc1fzgNEDLDEDn4Lfa-72Bzx_SIA20A-
+https://colab.research.google.com/drive/1oc1fzgNEDLDEDn4Lfa-72Bzx_SIA20A-?usp=sharing
+
+
+
 """
 
 #!pip3 install tensorflow
