@@ -243,7 +243,7 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #nam
     return df
 
 
-def pd_onehotfeat_predefined_df(dfref, labels_col = []) :   #name changed
+def pd_to_onehot(dfref, labels_col = []) :   #name changed
     
     """One Hot encode label_cols for predefined df
     # 
