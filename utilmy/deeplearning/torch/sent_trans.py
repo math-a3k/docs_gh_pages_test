@@ -14,7 +14,59 @@ import sys
 ### pip install python-box
 from box import Box
 
+
 ##### Train params  #################
+def test():
+  """
+    Run Various test suing strans_former,
+
+    Mostly Single sentence   ---> Classification
+
+  """
+  ### Classifier with Cosinus Loss
+  cc = Box({}) 
+  cc = Box({})
+  cc.epoch = 3
+  cc.lr = 1E-5
+  cc.warmup = 100
+
+  cc.n_sample  = 1000
+  cc.batch_size=16
+
+  cc.mode = 'cpu/gpu'
+  cc.ncpu =5
+  cc.ngpu= 2  
+
+  sentrans_train(    , cc=cc)
+
+
+
+  ### Classifier with Triplet Hard loss Loss
+
+
+
+
+
+
+
+
+  ### Classifier with Softmax Loss
+
+
+
+
+
+  ### Ranking with Cosinus Loss
+
+
+
+
+  ###
+
+
+
+
+"""  
 cc = Box({})
 cc.epoch = 3
 cc.lr = 1E-5
@@ -26,11 +78,11 @@ cc.batch_size=16
 cc.mode = 'cpu/gpu'
 cc.ncpu =5
 cc.ngpu= 2
+"""
 
 
 
-
-def strans_train(modelname_or_path="",
+def sentrans_train(modelname_or_path="",
                  taskname="classifier", 
                  lossname="",
                  train_path="train/*.csv",
@@ -52,6 +104,21 @@ def strans_train(modelname_or_path="",
 
   """
   cc = Box(cc)   #### can use cc.epoch   cc.lr
+
+  """  
+  cc = Box({})
+  cc.epoch = 3
+  cc.lr = 1E-5
+  cc.warmup = 100
+
+  cc.n_sample  = 1000
+  cc.batch_size=16
+
+  cc.mode = 'cpu/gpu'
+  cc.ncpu =5
+  cc.ngpu= 2
+  """
+
 
 
   ### load model form disk or from internet
@@ -87,12 +154,33 @@ def strans_train(modelname_or_path="",
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ############################################################################
 """sentence-transformers/distiluse-base-multilingual-cased-v
 !pip install sentence-transformers
 
 """
-
 from sentence_transformers import SentenceTransformer, InputExample, losses
 from torch.utils.data import DataLoader
 
