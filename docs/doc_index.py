@@ -250,7 +250,7 @@ VQ_VAE.reparameterize(self, z_mean, z_logsigma)
 VQ_VAE.reparameterize(self, z_mean, z_logsigma)
 
 
-utilmy/deeplearning/keras/util_dataloader.py
+utilmy/deeplearning/keras/util_dataloader_img.py
 -------------------------functions----------------------
 _byte_feature(value)
 _float_feature(value)
@@ -266,18 +266,18 @@ test1()
 test2()
 
 -------------------------methods----------------------
-CustomDataGenerator.__getitem__(self, idx)
-CustomDataGenerator.__init__(self, x, y, batch_size = 32, augmentations = None)
-CustomDataGenerator.__len__(self)
-CustomDataGenerator_img.__getitem__(self, idx)
-CustomDataGenerator_img.__init__(self, img_dir, label_path, class_list, split = 'train', batch_size = 8, transforms = None)
-CustomDataGenerator_img.__len__(self)
-CustomDataGenerator_img.on_epoch_end(self)
-RealCustomDataGenerator.__getitem__(self, idx)
-RealCustomDataGenerator.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None, shuffle = True)
-RealCustomDataGenerator.__len__(self)
-RealCustomDataGenerator._load_data(self, label_path)
-RealCustomDataGenerator.on_epoch_end(self)
+DataGenerator_img.__getitem__(self, idx)
+DataGenerator_img.__init__(self, x, y, batch_size = 32, augmentations = None)
+DataGenerator_img.__len__(self)
+DataGenerator_img_disk2.__getitem__(self, idx)
+DataGenerator_img_disk2.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None, shuffle = True)
+DataGenerator_img_disk2.__len__(self)
+DataGenerator_img_disk2._load_data(self, label_path)
+DataGenerator_img_disk2.on_epoch_end(self)
+DataGenerator_img_disk.__getitem__(self, idx)
+DataGenerator_img_disk.__init__(self, img_dir, label_path, class_list, split = 'train', batch_size = 8, transforms = None)
+DataGenerator_img_disk.__len__(self)
+DataGenerator_img_disk.on_epoch_end(self)
 SprinklesTransform.__init__(self, num_holes = 30, side_length = 5, always_apply = False, p = 1.0)
 SprinklesTransform.apply(self, image, **params)
 
