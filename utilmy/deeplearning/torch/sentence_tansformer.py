@@ -125,12 +125,12 @@ def model_evaluate(model ="modelname OR path OR model object", fIn='', cc:dict= 
             score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
             test_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
 
-    
-    if isinstance(model, str): 
+
+    if isinstance(model, str):
        if "/" in model : model= model_load(model)
        else :    model = SentenceTransformer(model)
-        
-        
+
+
     test_evaluator = EmbeddingSimilarityEvaluator.from_input_examples(test_samples, batch_size=16, name='sts-test')
     test_evaluator(model, output_path=model)
 
@@ -186,25 +186,28 @@ def load_dataloader(path_or_df = "", cc:dict= None):
     for i,row in dftrain.iterrows():
       train_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=row['label']))
       train_dataloader = DataLoader(train_samples, shuffle=True, batch_size=cc.batch_size)
+
                 
+    log('Nelements', len(train_dataloader))
     return train_dataloader
 
 
 
 def load_loss(model ='', lossname ='cusinus', dftrain ="", coly='label', cc:dict= None):
-        
+
     if lossname == 'MultpleNegativesRankingLoss':
       train_loss = losses.MultipleNegativesRankingLoss(model)
-      
+
     elif lossname == 'softmax':
-      train_loss = losses.SoftmaxLoss(model=model, sentence_embedding_dimension=model.get_sentence_embedding_dimension(), 
+      train_loss = losses.SoftmaxLoss(model=model, sentence_embedding_dimension=model.get_sentence_embedding_dimension(),
                                       num_labels=len(pd.unique(dftrain[coly])))
     elif lossname =='cusinus':
       train_loss = losses.CosineSimilarityLoss(model)
-      
+
     elif lossname =='triplethard':
       train_loss = losses.BatchHardTripletLoss(model=model)
-        
+
+
     return train_loss
 
 
@@ -250,7 +253,7 @@ def sentrans_train(modelname_or_path="",
     ### datalodaer
     df      = pd.read_csv(train_path, error_bad_lines=False)
     dftrain = df[[ 'sentence1', 'sentence2', 'label'  ]].values
-    train_dataloader,train_loss = load_dataloader( df,cc)
+    train_dataloader = load_dataloader( df,cc)
 
     
     dfval = pd.read_csv(train_path, error_bad_lines=False)
@@ -259,7 +262,7 @@ def sentrans_train(modelname_or_path="",
     
     ### create loss    
     train_loss = load_losses(model,lossname, df,cc)  
-    log(len(train_dataloader))
+
 
     if taskname == 'classifier':
         # Configure the training
@@ -275,10 +278,10 @@ def sentrans_train(modelname_or_path="",
         else :
             device = 'cpu'
         log('device', device)
-        
+
         if device == 'cpu' and torch.cuda.device_count() > 1:
             model = nn.DataParallel(model)
-            
+
         elif torch.cuda.device_count() > 1:
           log("Let's use", torch.cuda.device_count(), "GPU")
           model = DDP(model)
