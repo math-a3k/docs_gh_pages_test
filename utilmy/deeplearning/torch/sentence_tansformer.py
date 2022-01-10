@@ -137,7 +137,7 @@ def model_load(path):
     model.eval()
     return model
 
-def model_save(path):
+def model_save(model,path):
     #### reload model
     
     torch.save(model, path)
@@ -265,7 +265,7 @@ def sentrans_train(modelname_or_path="",
         print("\n******************< finish training > ********************")
         
         ## save the model
-        model_save(modelname_or_path)
+        model_save(model, modelname_or_path)
 
         # show metrics
         metric_evaluate(modelname_or_path,eval_path)
