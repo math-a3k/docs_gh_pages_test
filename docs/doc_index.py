@@ -394,6 +394,19 @@ SentenceEncoder.__init__(self, num_labels = None)
 SentenceEncoder.call(self, inputs, **kwargs)
 
 
+utilmy/deeplearning/torch/sentence_tansformer.py
+-------------------------functions----------------------
+create_evaluator(dname = 'sts', dirin = '/content/sample_data/', cc:dict = None)
+load_data_loader_and_loss(modelname_or_path  =  '', lossname  =  'cusinus', dftrain  =  "", cc:dict =  None)
+log(*s)
+metric_evaluate(modelname_or_path  =  "", fIn = '', cc:dict =  None)
+model_load(path)
+model_save(model, path)
+sentrans_train(modelname_or_path = "", taskname = "classifier", lossname = "cosinus", train_path = "train/*.csv", val_path = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
+test()
+
+
+
 utilmy/deeplearning/torch/util_train.py
 
 
