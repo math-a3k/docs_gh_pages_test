@@ -32,6 +32,7 @@ from sentence_transformers import SentenceTransformer, SentencesDataset, losses,
 from sentence_transformers import models, losses, datasets
 from sentence_transformers.readers import InputExample
 from torch.utils.data import DataLoader
+from torch.nn.parallel import DistributedDataParallel as DDP
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import SparseCategoricalAccuracy
 from sentence_transformers.evaluation import EmbeddingSimilarityEvaluator
@@ -45,6 +46,7 @@ import csv
 import random
 import torch
 import pandas as pd
+os.environ['CUDA_VISIBLE_DEVICES']='2,3'
 
 ##### Train params  #################
 def test():
@@ -241,13 +243,13 @@ def sentrans_train(modelname_or_path="",
         dev_evaluator = create_evaluator('sts', '/content/sample_data/', cc)
        
  
-        # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
+         # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        model.cuda()
-        if torch.cuda.device_count() > 1:
-            print("Let's use", torch.cuda.device_count(), "GPUs!")
-          # dim = 0 [30, xxx] -> [10, ...], [10, ...], [10, ...] on 3 GPUs
+        if device == 'cpu' and torch.cuda.device_count() > 1:
             model = nn.DataParallel(model)
+        elif torch.cuda.device_count() > 1:
+          print("Let's use", torch.cuda.device_count(), "GPUs!")
+          model = DDP(model)
 
         model.to(device)
         
