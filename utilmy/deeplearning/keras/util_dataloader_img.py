@@ -3,14 +3,15 @@ HELP = """
  utils keras for dataloading
 """
 import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
-import cv2
 import tensorflow as tf
-# import tifffile.tifffile
-# from skimage import morphology
 from tensorflow.python.keras.utils.data_utils import Sequence  
 
 
 
+######################################################################################
+import cv2
+# import tifffile.tifffile
+# from skimage import morphology
 from PIL import Image
 from albumentations import (
     Compose, HorizontalFlip, CLAHE, HueSaturationValue,
@@ -21,12 +22,13 @@ from albumentations.core.transforms_interface import ImageOnlyTransform
 
 
 
+
 ###################################################################################################
 from utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss = HELP + help_create("utilmy.deeplearning.keras.util_layers")
+    ss = HELP + help_create("utilmy.deeplearning.keras.util_dataloader_img")
     print(ss)
 
 
@@ -141,9 +143,7 @@ def test2(): #using predefined df
 
 
  
- 
- 
-
+################################################################################################## 
 ##################################################################################################
 def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name changed
     """ Get a data sample X, Y_multilabel, with batch size from dataset
