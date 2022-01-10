@@ -83,8 +83,8 @@ def test1():
 
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
 
-    train_loader = CustomDataGenerator(X_train, y_train)
-    valid_loader = CustomDataGenerator(X_valid, y_valid)
+    train_loader = DataGenerator_img(X_train, y_train)
+    valid_loader = DataGenerator_img(X_valid, y_valid)
 
     for i, (image, label) in enumerate(train_loader):
         print('Training : ')
@@ -101,7 +101,6 @@ def test1():
 
 def test2(): #using predefined df
     from numpy import random
-    from PIL import Image
     from pathlib import Path
 
     folder_name = 'random images'
