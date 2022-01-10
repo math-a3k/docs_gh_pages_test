@@ -11,37 +11,31 @@ Original file is located at
 > Cusine Loss
 > TripletHard Loss
 > MultpleNegativesRanking Loss
-"""
-
-#!pip3 install tensorflow
-from google.colab import drive
-drive.mount('/content/drive')
-import sys
-# sys.path.append('drive/sent_tans')
 
 #!pip3 install python-box
+# !pip install sentence-transformers
+#!pip3 install tensorflow
+
+"""
+from google.colab import drive
+drive.mount('/content/drive')
+
+import sys, os, gzip, csv, random, math, logging, pandas as pd
+from datetime import datetime
 from box import Box
 
-# !pip install sentence-transformers
+# sys.path.append('drive/sent_tans')
 
 from sentence_transformers import SentenceTransformer, SentencesDataset, losses, util
 from sentence_transformers import models, losses, datasets
 from sentence_transformers.readers import InputExample
+from sentence_transformers.evaluation import EmbeddingSimilarityEvaluator
+
 from torch.utils.data import DataLoader
 from torch.nn.parallel import DistributedDataParallel as DDP
-from tensorflow.keras.optimizers import Adam
+
 from tensorflow.keras.metrics import SparseCategoricalAccuracy
-from sentence_transformers.evaluation import EmbeddingSimilarityEvaluator
-import math 
-import logging
-from datetime import datetime
-import sys
-import os
-import gzip
-import csv
-import random
-import torch
-import pandas as pd
+
 os.environ['CUDA_VISIBLE_DEVICES']='2,3'
 
 
