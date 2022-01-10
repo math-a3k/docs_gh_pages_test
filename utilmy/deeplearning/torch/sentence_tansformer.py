@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """sentence_tansformer.ipynb
-
 cd deeplearning/torch/
 python sentrans.py  test
-
 Original file is located at
     https://colab.research.google.com/drive/13jklIi81IT8B3TrIOhWSLwk48Qf2Htmc
 **This Notebook has been created by Ali Hamza (9th January, 2022) to train Sentence Transformer with different Losses such as:**
@@ -11,11 +9,9 @@ Original file is located at
 > Cusine Loss
 > TripletHard Loss
 > MultpleNegativesRanking Loss
-
 #!pip3 install python-box
 # !pip install sentence-transformers
 #!pip3 install tensorflow
-
 """
 from google.colab import drive
 drive.mount('/content/drive')
@@ -58,8 +54,13 @@ def test():
 
     cc.mode = 'cpu/gpu'
     cc.ncpu =5
-    cc.ngpu= 2  
-    
+    cc.ngpu= 2
+
+    #### Data
+    cc.data_nclass = 5
+
+
+
   ### Classifier with Cosinus Loss
     log("Classifier with Cosinus Loss ")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
@@ -108,7 +109,7 @@ def test():
    # I have written the script for evaluation in the bottom of sentrans_train() function
 
 
-
+###################################################################################################################
 def model_evaluate(model ="modelname OR path OR model object", fIn='', cc:dict= None):
 
     df = pd.read_csv(fIn, error_bad_lines=False)
@@ -129,11 +130,14 @@ def model_evaluate(model ="modelname OR path OR model object", fIn='', cc:dict= 
     test_evaluator(model, output_path=model)
 
 
-def model_load(path):
+def model_load(path_or_name):
     #### reload model
-    model = SentenceTransformer(path)
+
+    # model = SentenceTransformer('distilbert-base-nli-mean-tokens')
+    model = SentenceTransformer(path_or_name)
     model.eval()
     return model
+
 
 def model_save(model,path, reload=True):
     torch.save(model, path)
@@ -145,6 +149,28 @@ def model_save(model,path, reload=True):
         model1
 
 
+def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
+     # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
+    if cc.get('use_gpu', 0) > 0 :        ### default is CPU
+        device = torch.device("cuda:0")
+    else :
+        device = 'cpu'
+    log('device', device)
+
+    if device == 'cpu' and torch.cuda.device_count() > 1:
+        model = nn.DataParallel(model)
+
+    elif torch.cuda.device_count() > 1:
+      log("Let's use", torch.cuda.device_count(), "GPU")
+      model = DDP(model)
+
+    model.to(device)
+    return model
+
+
+
+
+###################################################################################################################
 def create_evaluator(dname='sts', dirin='/content/sample_data/', cc:dict=None):
     if dname == 'sts':
         ###Read STSbenchmark dataset and use it as development set
@@ -181,20 +207,21 @@ def load_dataloader(path_or_df = "", cc:dict= None):
       train_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=row['label']))
       train_dataloader = DataLoader(train_samples, shuffle=True, batch_size=cc.batch_size)
 
-                
+
     log('Nelements', len(train_dataloader))
     return train_dataloader
 
 
 
-def load_loss(model ='', lossname ='cusinus', dftrain ="", coly='label', cc:dict= None):
+def load_loss(model ='', lossname ='cusinus',  cc:dict= None):
 
     if lossname == 'MultpleNegativesRankingLoss':
       train_loss = losses.MultipleNegativesRankingLoss(model)
 
     elif lossname == 'softmax':
+      nclass     =  cc.get('data_nclass',-1)
       train_loss = losses.SoftmaxLoss(model=model, sentence_embedding_dimension=model.get_sentence_embedding_dimension(),
-                                      num_labels=len(pd.unique(dftrain[coly])))
+                                      num_labels=nclass )
     elif lossname =='cusinus':
       train_loss = losses.CosineSimilarityLoss(model)
 
@@ -206,7 +233,7 @@ def load_loss(model ='', lossname ='cusinus', dftrain ="", coly='label', cc:dict
 
 
 
-def sentrans_train(modelname_or_path="",
+def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
                  taskname="classifier", 
                  lossname="cosinus",
                  train_path="train/*.csv",
@@ -223,11 +250,7 @@ def sentrans_train(modelname_or_path="",
   #     evaluate
   #     save on disk
   #     reload the model for check.
-  # """
 
-  
-    cc = Box(cc)   #### can use cc.epoch   cc.lr
-  # """  
   # cc = Box({})
   # cc.epoch = 3
   # cc.lr = 1E-5
@@ -238,35 +261,44 @@ def sentrans_train(modelname_or_path="",
   # cc.ncpu =5
   # cc.ngpu= 2
   # """
-  
 
-  ### load model form disk or from internet
+    cc = Box(cc)   #### can use cc.epoch   cc.lr
 
-    model = SentenceTransformer('distilbert-base-nli-mean-tokens')
+
+    ### load model form disk or from internet
+    # model = SentenceTransformer()
+    model = model_load(modelname_or_path)
+
     
     ### datalodaer
     df      = pd.read_csv(train_path, error_bad_lines=False)
-    dftrain = df[[ 'sentence1', 'sentence2', 'label'  ]].values
-    train_dataloader = load_dataloader( df,cc)
+    # dftrain = df[[ 'sentence1', 'sentence2', 'label'  ]].values
+    train_dataloader = load_dataloader( df, cc)
 
     
     dfval = pd.read_csv(train_path, error_bad_lines=False)
-    dfval = dfval[[ 'sentence1', 'sentence2', 'label'  ]].values
+    # dfval = dfval[[ 'sentence1', 'sentence2', 'label'  ]].values
 
     
-    ### create loss    
-    train_loss = load_losses(model,lossname, df,cc)  
+    ### create loss
+    if 'data_nclass' not in cc :
+        cc.data_nclass = df['label'].nunique()
+
+    train_loss = load_loss(model,lossname,  cc= cc)
 
 
     if taskname == 'classifier':
         # Configure the training
-        warmup_steps = math.ceil(len(train_dataloader) * cc.epoch * 0.1) #10% of train data for warm-up.  
-        log("Warmup-steps: {}".format(warmup_steps))
+        cc.warmup_steps = math.ceil(len(train_dataloader) * cc.epoch * 0.1) #10% of train data for warm-up.
+        log("Warmup-steps: {}".format(cc.warmup_steps))
     
         dev_evaluator = create_evaluator('sts', '/content/sample_data/', cc)
        
- 
-         # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
+
+        # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
+        model = model_setup_compute(model, use_gpu=cc.get('use_gpu', 0)  , ngpu= cc.get('ngpu', 1) , ncpu= cc.get('ncpu', 1) )
+
+        """
         if cc.get('use_gpu', 0) > 0 :        ### default is CPU
             device = torch.device("cuda:0")
         else :
@@ -281,14 +313,14 @@ def sentrans_train(modelname_or_path="",
           model = DDP(model)
 
         model.to(device)
-        
+        """
         
         log('########## train')
         model.fit(train_objectives=[(train_dataloader, train_loss)],
           evaluator=dev_evaluator,
           epochs=cc.epoch,
           evaluation_steps= cc.n_sample,
-          warmup_steps=cc.warmup,
+          warmup_steps=cc.warmup_steps,
           output_path=dirout,
           use_amp=True          #Set to True, if your GPU supports FP16 operations
           )
