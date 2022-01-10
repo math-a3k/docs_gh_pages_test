@@ -398,12 +398,13 @@ utilmy/deeplearning/torch/sentence_tansformer.py
 -------------------------functions----------------------
 create_evaluator(dname = 'sts', dirin = '/content/sample_data/', cc:dict = None)
 load_dataloader(path_or_df  =  "", cc:dict =  None)
-load_loss(model  = '', lossname  = 'cusinus', dftrain  = "", coly = 'label', cc:dict =  None)
+load_loss(model  = '', lossname  = 'cusinus', cc:dict =  None)
 log(*s)
 model_evaluate(model  = "modelname OR path OR model object", fIn = '', cc:dict =  None)
-model_load(path)
+model_load(path_or_name)
 model_save(model, path, reload = True)
-sentrans_train(modelname_or_path = "", taskname = "classifier", lossname = "cosinus", train_path = "train/*.csv", val_path = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
+model_setup_compute(model, use_gpu = 0, ngpu = 1, ncpu = 1)
+sentrans_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", train_path = "train/*.csv", val_path = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
 test()
 
 
