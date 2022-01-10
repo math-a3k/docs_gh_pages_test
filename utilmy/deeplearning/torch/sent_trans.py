@@ -85,6 +85,98 @@ cc.ngpu= 2
 
 
 
+
+
+
+
+##### Please use those tempalte code
+def log(*s): print(*s, flush=True)
+
+
+
+def metric_evaluate(model, )
+    df = pd.read_csv(fIn, delimiter='\t',)
+    test_samples = []
+
+    for i, row in df.iterrows():
+        if row['split'] == 'test':
+          score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
+          test_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
+
+    """
+    ### show metrics
+    with gzip.open(sts_dataset_path, 'rt', encoding='utf8') as fIn:
+      reader = csv.DictReader(fIn, delimiter='\t', quoting=csv.QUOTE_NONE)
+      for row in reader:
+        if row['split'] == 'test':
+          score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
+          test_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
+    """
+
+    model = SentenceTransformer(modelname_or_path)
+    test_evaluator = EmbeddingSimilarityEvaluator.from_input_examples(test_samples, batch_size=16, name='sts-test')
+    test_evaluator(model, output_path=modelname_or_path)
+
+
+
+
+def model_load(path):
+    #### reload model
+    model = SentenceTransformer(path)
+    model.eval()
+    return model
+
+
+def model_save(path):
+    #### reload model
+    model = laodd ...
+    model.eval()
+        
+
+
+def create_evaluator(dname='sts', dirin='/content/sample_data/sent_tans/', cc:dict=None):
+    if dname ='sts':
+        ###Read STSbenchmark dataset and use it as development set
+        download_dataset()
+        nli_dataset_path = dirin + 'AllNLI.tsv.gz'
+        sts_dataset_path = dirin + '/stsbenchmark.tsv.gz'
+        
+        log("Read STSbenchmark dev dataset")
+
+        dev_samples = []
+        df = pd_read_csv( sts_dataset_path, delimiter='\t', quoting=csv.QUOTE_NONE )
+        for i,row in df.iterrows():
+          if row['split'] == 'dev':
+              score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
+              dev_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
+
+        """
+        with gzip.open(sts_dataset_path, 'rt', encoding='utf8') as fIn:
+            reader = csv.DictReader(fIn, delimiter='\t', quoting=csv.QUOTE_NONE)
+            for row in reader:
+                if row['split'] == 'dev':
+                    score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
+                    dev_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
+        """
+        dev_evaluator = EmbeddingSimilarityEvaluator.from_input_examples(dev_samples, batch_size=cc.batch_size, name='sts-dev')
+        return dev_evaluator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def sentrans_train(modelname_or_path="",
                  taskname="classifier", 
                  lossname="",
