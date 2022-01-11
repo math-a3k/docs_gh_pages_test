@@ -132,12 +132,13 @@ def model_evaluate(model ="modelname OR path OR model object", fIn='', cc:dict= 
     test_evaluator(model, output_path=model)
 
 
-def model_load(path_or_name):
-    #### reload model
-
-    # model = SentenceTransformer('distilbert-base-nli-mean-tokens')
-    model = SentenceTransformer(path_or_name)
-    model.eval()
+def model_load(path_or_name_or_object):
+    #### reload model or return the model itself
+    if isintance(path_or_name_or_object, str) :
+       # model = SentenceTransformer('distilbert-base-nli-mean-tokens')
+       model = SentenceTransformer(path_or_name_or_object)
+       model.eval()
+    
     return model
 
 
@@ -148,24 +149,25 @@ def model_save(model,path, reload=True):
     if reload:
         #### reload model  + model something   
         model1 = model_load(path)
-        model1
+        log(model1)
 
 
 def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
      # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
     if cc.get('use_gpu', 0) > 0 :        ### default is CPU
-        device = torch.device("cuda:0")
+        if torch.cuda.device_count() < 0 :
+            log('no gpu')
+            device = 'cpu'
+            model = nn.DataParallel(model)            
+        else :    
+            log("Let's use", torch.cuda.device_count(), "GPU")
+            device = torch.device("cuda:0")
+            model = DDP(model)        
     else :
         device = 'cpu'
-    log('device', device)
-
-    if device == 'cpu' and torch.cuda.device_count() > 1:
         model = nn.DataParallel(model)
-
-    elif torch.cuda.device_count() > 1:
-      log("Let's use", torch.cuda.device_count(), "GPU")
-      model = DDP(model)
-
+        
+    log('device', device)
     model.to(device)
     return model
 
@@ -234,9 +236,9 @@ def load_loss(model ='', lossname ='cusinus',  cc:dict= None):
     return train_loss
 
 ### function to compute cosinue similarity
-def calculate_cosine_similarity(sentence1 = "sentence 1" , sentence2 = "sentence 2", model_path_or_name = "model name or path"):
+def calculate_cosine_similarity(sentence1 = "sentence 1" , sentence2 = "sentence 2", model_id = "model name or path or object"):
     
-  model = model_load(model_path_or_name)
+  model = model_load(model_id)
 
   #Compute embedding for both lists
   embeddings1 = model.encode(sentence1, convert_to_tensor=True)
@@ -281,7 +283,6 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
 
 
     ### load model form disk or from internet
-    # model = SentenceTransformer()
     model = model_load(modelname_or_path)
 
     
@@ -291,6 +292,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
     train_dataloader = load_dataloader( df, cc)
 
     
+    #### Use in the code ?????????
     dfval = pd.read_csv(train_path, error_bad_lines=False)
     # dfval = dfval[[ 'sentence1', 'sentence2', 'label'  ]].values
 
@@ -312,28 +314,14 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         cc.warmup_steps = math.ceil(len(train_dataloader) * cc.epoch * 0.1) #10% of train data for warm-up.
         log("Warmup-steps: {}".format(cc.warmup_steps))
     
+        #### 
         dev_evaluator = create_evaluator('sts', '/content/sample_data/', cc)
        
 
         # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
-        model = model_setup_compute(model, use_gpu=cc.get('use_gpu', 0)  , ngpu= cc.get('ngpu', 1) , ncpu= cc.get('ncpu', 1) )
+        model = model_setup_compute(model, use_gpu=cc.get('use_gpu', 0)  , ngpu= cc.get('ngpu', 0) , ncpu= cc.get('ncpu', 1) )
 
-        """
-        if cc.get('use_gpu', 0) > 0 :        ### default is CPU
-            device = torch.device("cuda:0")
-        else :
-            device = 'cpu'
-        log('device', device)
 
-        if device == 'cpu' and torch.cuda.device_count() > 1:
-            model = nn.DataParallel(model)
-
-        elif torch.cuda.device_count() > 1:
-          log("Let's use", torch.cuda.device_count(), "GPU")
-          model = DDP(model)
-
-        model.to(device)
-        """
         
         log('########## train')
         model.fit(train_objectives=[(train_dataloader, train_loss)],
@@ -351,11 +339,12 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         log(" calculate_cosine_similarity after training")    
         calculate_cosine_similarity(df['sentence1'][0], df['sentence2'][0])
         
-        log("## save the model  ")
+        log("### Save the model  ")
         model_save(model, dirout, reload=True)
+        model = model_load(dirout)
 
 
-        log('# show metrics')
+        log('### Show metrics')
         model_evaluate(model, eval_path)
         
         
