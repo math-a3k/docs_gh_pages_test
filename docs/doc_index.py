@@ -396,13 +396,13 @@ SentenceEncoder.call(self, inputs, **kwargs)
 
 utilmy/deeplearning/torch/sentence_tansformer.py
 -------------------------functions----------------------
-calculate_cosine_similarity(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_path_or_name  =  "model name or path")
+calculate_cosine_similarity(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_id  =  "model name or path or object")
 create_evaluator(dname = 'sts', dirin = '/content/sample_data/', cc:dict = None)
 load_dataloader(path_or_df  =  "", cc:dict =  None)
-load_loss(model  = '', lossname  = 'cusinus', cc:dict =  None)
+load_loss(model  = '', lossname  = 'cosinus', cc:dict =  None)
 log(*s)
 model_evaluate(model  = "modelname OR path OR model object", fIn = '', cc:dict =  None)
-model_load(path_or_name)
+model_load(path_or_name_or_object)
 model_save(model, path, reload = True)
 model_setup_compute(model, use_gpu = 0, ngpu = 1, ncpu = 1)
 sentrans_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", train_path = "train/*.csv", val_path = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
