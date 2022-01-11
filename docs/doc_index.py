@@ -376,6 +376,25 @@ train_stop(counter, patience)
 
 
 
+utilmy/deeplearning/sentence2.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+fit2(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, model = None, **kw)
+get_params(param_pars, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+predict2(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
 utilmy/deeplearning/torch/sent_trans.py
 -------------------------functions----------------------
 build_model()
@@ -392,6 +411,25 @@ ReRanker.__init__(self)
 ReRanker.call(self, inputs, **kwargs)
 SentenceEncoder.__init__(self, num_labels = None)
 SentenceEncoder.call(self, inputs, **kwargs)
+
+
+utilmy/deeplearning/torch/sentence2.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+fit2(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, model = None, **kw)
+get_params(param_pars, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+predict2(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
 
 
 utilmy/deeplearning/torch/sentences.py
