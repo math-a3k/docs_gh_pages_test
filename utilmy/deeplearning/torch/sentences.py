@@ -184,16 +184,14 @@ def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
 
 
 ###################################################################################################################
-def create_evaluator(dname='sts', dirin='/content/sample_data/', cc:dict=None):
+def create_evaluator(dname='sts', fIn='/content/sample_data/', cc:dict=None):
     if dname == 'sts':
         ###Read STSbenchmark dataset and use it as development set
-        nli_dataset_path = dirin + 'fake_train_data.csv'
-        sts_dataset_path = dirin + 'stsbenchmark.csv'
         
         log("Read STSbenchmark dev dataset")
 
         dev_samples = []
-        df = pd.read_csv(sts_dataset_path, error_bad_lines=False)
+        df = pd.read_csv(fIn, error_bad_lines=False)
         
         for i,row in df.iterrows():
             if row['split'] == 'dev':
@@ -320,7 +318,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         log("Warmup-steps: {}".format(cc.warmup_steps))
     
         #### 
-        dev_evaluator = create_evaluator('sts', '/content/sample_data/', cc)
+        dev_evaluator = create_evaluator('sts', eval_path, cc)
        
 
         # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
@@ -347,7 +345,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         model = model_load(dirout)
 
         log('### Show eval metrics')
-        model_evaluate(model, eval_path)
+        model_evaluate(model, dirout)
         
        
         log("\n******************< finish  > ********************")
