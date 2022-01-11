@@ -184,27 +184,9 @@ def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
 
 
 ###################################################################################################################
-def create_evaluator(dname='sts', fIn='/content/sample_data/', cc:dict=None):
-    if dname == 'sts':
-        ###Read STSbenchmark dataset and use it as development set
-        
-        log("Read STSbenchmark dev dataset")
-
-        dev_samples = []
-        df = pd.read_csv(fIn, error_bad_lines=False)
-        
-        for i,row in df.iterrows():
-            if row['split'] == 'dev':
-                score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
-                dev_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
-
-        dev_evaluator = EmbeddingSimilarityEvaluator.from_input_examples(dev_samples, batch_size=cc.batch_size, name='sts-dev')
-        return dev_evaluator
-
-
-def load_dataloader(path_or_df = "", cc:dict= None, npool=4):    
+def pd_read(path_or_df='./myfile.csv', npool=1,  **kw):
     if isinstance(path_or_df, str):
-        if '.tsv' in path_or_df :
+        if '.tsv' in path_or_df or '.csv' in  path_or_df  :
             dftrain = pd_read_file(path_or_df, npool=npool)
         else :    
             dftrain = pd.read_csv(path_or_df, error_bad_lines=False)
@@ -213,6 +195,25 @@ def load_dataloader(path_or_df = "", cc:dict= None, npool=4):
         dftrain = path_or_df
     else : 
         raise Exception('need' path_or_df)
+    return dftrain    
+        
+        
+def load_evaluator(name='sts', path_or_df="", dname='sts', cc:dict=None):
+    if dname == 'sts':        
+        log("Read STSbenchmark dev dataset")
+        df = pd_read(path_or_df) 
+        dev_samples = []        
+        for i,row in df.iterrows():
+            if row['split'] == 'dev':
+                score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
+                dev_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
+
+        dev_evaluator = EmbeddingSimilarityEvaluator.from_input_examples(dev_samples, batch_size= cc.batch_size, name=name)
+        return dev_evaluator
+
+
+def load_dataloader(name='sts', path_or_df = "", cc:dict= None, npool=4):    
+    df = pd_read(path_or_df, npool=npool) 
     
     train_samples = []
     for i,row in dftrain.iterrows():
@@ -242,9 +243,9 @@ def load_loss(model ='', lossname ='cosinus',  cc:dict= None):
 
     return train_loss
 
-### function to compute cosinue similarity
-def calculate_cosine_similarity(sentence1 = "sentence 1" , sentence2 = "sentence 2", model_id = "model name or path or object"):
-    
+
+def metrics_cosine_sim(sentence1 = "sentence 1" , sentence2 = "sentence 2", model_id = "model name or path or object"):
+  ### function to compute cosinue similarity      
   model = model_load(model_id)
 
   #Compute embedding for both lists
@@ -260,9 +261,12 @@ def calculate_cosine_similarity(sentence1 = "sentence 1" , sentence2 = "sentence
 def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
                  taskname="classifier", 
                  lossname="cosinus",
+                 datasetname = 'sts',  
+                   
                  train_path="train/*.csv",
                  val_path="val/*.csv",
                  eval_path ="eval/*.csv",
+                   
                  metricname='cosinus',
                  dirout ="mymodel_save/",
                  cc:dict= None):
@@ -287,47 +291,34 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
   # """
     cc = Box(cc)   #### can use cc.epoch   cc.lr
 
-
     ##### load model form disk or from internet
     model = model_load(modelname_or_path)
-
     
-    ##### dataloader train
-    train_dataloader = load_dataloader( train_path, cc)
-
-    
-    ##### Use in the code ?????????
-    ## dfval = pd.read_csv(train_path, error_bad_lines=False)
-    ## dfval = dfval[[ 'sentence1', 'sentence2', 'label'  ]].values
-
-    
-    ##### create loss  ##########################################
-    if 'data_nclass' not in cc :
-        cc.data_nclass = df['label'].nunique()
-
-    train_loss = load_loss(model,lossname,  cc= cc)
-
-
     if taskname == 'classifier':
-        # print calculate_cosine_similarity before training
-        log(" calculate_cosine_similarity before training")  
-        calculate_cosine_similarity(df['sentence1'][0], df['sentence2'][0])
+        log(" metrics_cosine_similarity before training")  
+        metrics_cosine_sim(df['sentence1'][0], df['sentence2'][0], model)
         
-        # Configure the training
+        
+        ##### dataloader train, evaluator
+        if 'data_nclass' not in cc :
+            cc.data_nclass = df['label'].nunique()
+        
+        train_dataloader = load_dataloader(datasetname, train_path, cc)        
+        val_evaluator    = load_evaluator(datasetname,  eval_path,  cc)
+    
+        ##### Task Loss
+        train_loss       = load_loss(model, lossname,  cc= cc)        
+        
+        ##### Configure the training
         cc.warmup_steps = math.ceil(len(train_dataloader) * cc.epoch * 0.1) #10% of train data for warm-up.
         log("Warmup-steps: {}".format(cc.warmup_steps))
-    
-        #### 
-        dev_evaluator = create_evaluator('sts', eval_path, cc)
-       
-
-        # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
+          
         model = model_setup_compute(model, use_gpu=cc.get('use_gpu', 0)  , ngpu= cc.get('ngpu', 0) , ncpu= cc.get('ncpu', 1) )
-
-
+        
+        
         log('########## train')
         model.fit(train_objectives=[(train_dataloader, train_loss)],
-          evaluator=dev_evaluator,
+          evaluator=val_evaluator,
           epochs=cc.epoch,
           evaluation_steps= cc.n_sample,
           warmup_steps=cc.warmup_steps,
@@ -337,8 +328,8 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
 
         log("\n******************< Eval similarity > ********************")
          # print calculate_cosine_similarity after training
-        log(" calculate_cosine_similarity after training")    
-        calculate_cosine_similarity(df['sentence1'][0], df['sentence2'][0])
+        log(" cosine_similarity after training")    
+        metrics_cosine_sim(df['sentence1'][0], df['sentence2'][0])
         
         log("### Save the model  ")
         model_save(model, dirout, reload=True)
@@ -347,7 +338,6 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         log('### Show eval metrics')
         model_evaluate(model, dirout)
         
-       
         log("\n******************< finish  > ********************")
 
 
