@@ -434,6 +434,7 @@ Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, *
 
 utilmy/deeplearning/torch/sentences.py
 -------------------------functions----------------------
+download_dataset(dirout = '/content/sample_data/sent_tans/')
 load_dataloader(name = 'sts', path_or_df  =  "", cc:dict =  None, npool = 4)
 load_evaluator(name = 'sts', path_or_df = "", dname = 'sts', cc:dict = None)
 load_loss(model  = '', lossname  = 'cosinus', cc:dict =  None)
