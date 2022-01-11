@@ -17,10 +17,6 @@ train Sentence Transformer with different Losses such as:**
 # !pip install sentence-transformers
 #!pip3 install tensorflow
 """
-# from google.colab import drive
-# drive.mount('/content/drive')
-# sys.path.append('drive/sent_tans')
-
 import sys, os, gzip, csv, random, math, logging, pandas as pd
 from datetime import datetime
 from box import Box
@@ -130,7 +126,7 @@ def test():
                 val_path=   dirdata + f"/data_fake.parquet",
                 eval_path = dirdata + f"/data_fake.parquet",
                 metricname='MultpleNegativesRankingLoss',
-                dirout= dirdata + f"/results/MultpleNegativesRankingLoss",cc=cc)
+                dirout= dirdata + f"/results/cosinus",cc=cc)
 
 
 
