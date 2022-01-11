@@ -170,6 +170,8 @@ def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
         if torch.cuda.device_count() < 0 :
             log('no gpu')
             device = 'cpu'
+            torch.set_num_threads(ncpu)
+            print("No. Of Threads in CPU" ,torch.get_num_threads())
             model = nn.DataParallel(model)            
         else :    
             log("Let's use", torch.cuda.device_count(), "GPU")
@@ -177,6 +179,8 @@ def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
             model = DDP(model)        
     else :
         device = 'cpu'
+        torch.set_num_threads(ncpu)
+        print("No. Of Threads in CPU" ,torch.get_num_threads())
         model = nn.DataParallel(model)
         
     log('device', device)
