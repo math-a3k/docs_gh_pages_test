@@ -106,10 +106,19 @@ def test():
                 val_path="content/sample_data/fake_train_data_v2.csv",
                 eval_path = "/content/sample_data/stsbenchmark.csv",
                 metricname='MultpleNegativesRankingLoss',
-                dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)    
+                dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)   
+    
+    
    ### Ranking with Cosinus Loss
-   # I have written the script for evaluation in the bottom of sentrans_train() function
-
+    log("Classifier with cosinus Loss")
+    sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
+                taskname="classifier", 
+                lossname="cosinus",
+                train_path="/content/sample_data/fake_train_data_v2.csv",
+                val_path="content/sample_data/fake_train_data_v2.csv",
+                eval_path = "/content/sample_data/stsbenchmark.csv",
+                metricname='MultpleNegativesRankingLoss',
+                dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)
 
 ###################################################################################################################
 def model_evaluate(model ="modelname OR path OR model object", fIn='', cc:dict= None):
@@ -217,7 +226,7 @@ def load_dataloader(path_or_df = "", cc:dict= None):
 
 
 
-def load_loss(model ='', lossname ='cusinus',  cc:dict= None):
+def load_loss(model ='', lossname ='cosinus',  cc:dict= None):
 
     if lossname == 'MultpleNegativesRankingLoss':
       train_loss = losses.MultipleNegativesRankingLoss(model)
@@ -226,7 +235,7 @@ def load_loss(model ='', lossname ='cusinus',  cc:dict= None):
       nclass     =  cc.get('data_nclass',-1)
       train_loss = losses.SoftmaxLoss(model=model, sentence_embedding_dimension=model.get_sentence_embedding_dimension(),
                                       num_labels=nclass )
-    elif lossname =='cusinus':
+    elif lossname =='cosinus':
       train_loss = losses.CosineSimilarityLoss(model)
 
     elif lossname =='triplethard':
