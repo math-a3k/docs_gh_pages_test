@@ -52,12 +52,13 @@ def test():
     cc = Box({})
     cc.epoch = 3
     cc.lr = 1E-5
-    cc.warmup = 100
+    cc.warmup = 10
 
-    cc.n_sample  = 1000
-    cc.batch_size=16
+    cc.n_sample  = 50
+    cc.batch_size=8
 
     cc.mode = 'cpu/gpu'
+    cc.use_gpu = 0
     cc.ncpu =5
     cc.ngpu= 2
 
@@ -124,28 +125,23 @@ def test():
                 dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)
 
 ###################################################################################################################
-def model_evaluate(model ="modelname OR path OR model object", fIn='', cc:dict= None):
-
-    df = pd.read_csv(fIn, error_bad_lines=False)
+def model_evaluate(model ="modelname OR path OR model object", dirdata='./*.csv', dirout='./', cc:dict= None, batch_size=16, name='sts-test'):
+    ### Evaluate Model
+    df = pd.read_csv(dirdata, error_bad_lines=False)
     test_samples = []
-
     for i, row in df.iterrows():
         if row['split'] == 'test':
             score = float(row['score']) / 5.0 #Normalize score to range 0 ... 1
             test_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=score))
 
+    model= model_load(model)
 
-    if isinstance(model, str):
-       if "/" in model : model= model_load(model)
-       else :    model = SentenceTransformer(model)
-
-
-    test_evaluator = EmbeddingSimilarityEvaluator.from_input_examples(test_samples, batch_size=16, name='sts-test')
-    test_evaluator(model, output_path=model)
+    test_evaluator = EmbeddingSimilarityEvaluator.from_input_examples(test_samples, batch_size=batch_size, name=name)
+    test_evaluator(model, output_path=dirout)
 
 
 def model_load(path_or_name_or_object):
-    #### reload model or return the model itself
+    #### Reload model or return the model itself
     if isintance(path_or_name_or_object, str) :
        # model = SentenceTransformer('distilbert-base-nli-mean-tokens')
        model = SentenceTransformer(path_or_name_or_object)
@@ -171,17 +167,17 @@ def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
             log('no gpu')
             device = 'cpu'
             torch.set_num_threads(ncpu)
-            print("No. Of Threads in CPU" ,torch.get_num_threads())
+            log('cpu used:', ncpu, " / " ,torch.get_num_threads())
             model = nn.DataParallel(model)            
         else :    
             log("Let's use", torch.cuda.device_count(), "GPU")
             device = torch.device("cuda:0")
             model = DDP(model)        
     else :
-        device = 'cpu'
-        torch.set_num_threads(ncpu)
-        print("No. Of Threads in CPU" ,torch.get_num_threads())
-        model = nn.DataParallel(model)
+            device = 'cpu'
+            torch.set_num_threads(ncpu)
+            log('cpu used:', ncpu, " / " ,torch.get_num_threads())
+            model = nn.DataParallel(model)  
         
     log('device', device)
     model.to(device)
@@ -227,7 +223,6 @@ def load_dataloader(path_or_df = "", cc:dict= None):
       train_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=row['label']))
       train_dataloader = DataLoader(train_samples, shuffle=True, batch_size=cc.batch_size)
 
-
     log('Nelements', len(train_dataloader))
     return train_dataloader
 
@@ -239,7 +234,7 @@ def load_loss(model ='', lossname ='cosinus',  cc:dict= None):
       train_loss = losses.MultipleNegativesRankingLoss(model)
 
     elif lossname == 'softmax':
-      nclass     =  cc.get('data_nclass',-1)
+      nclass     =  cc.get('data_nclass', -1)
       train_loss = losses.SoftmaxLoss(model=model, sentence_embedding_dimension=model.get_sentence_embedding_dimension(),
                                       num_labels=nclass )
     elif lossname =='cosinus':
@@ -294,27 +289,25 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
   # cc.ncpu =5
   # cc.ngpu= 2
   # """
-
     cc = Box(cc)   #### can use cc.epoch   cc.lr
 
 
-    ### load model form disk or from internet
+    ##### load model form disk or from internet
     model = model_load(modelname_or_path)
 
     
-    ### datalodaer
+    ##### datalodaer
     df = pd.read_csv(train_path, error_bad_lines=False)
     # df = pd_read_file(train_path,  error_bad_lines=False)
-    # dftrain = df[[ 'sentence1', 'sentence2', 'label'  ]].values
     train_dataloader = load_dataloader( df, cc)
 
     
-    #### Use in the code ?????????
+    ##### Use in the code ?????????
     dfval = pd.read_csv(train_path, error_bad_lines=False)
     # dfval = dfval[[ 'sentence1', 'sentence2', 'label'  ]].values
 
     
-    ### create loss
+    ##### create loss
     if 'data_nclass' not in cc :
         cc.data_nclass = df['label'].nunique()
 
@@ -322,7 +315,6 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
 
 
     if taskname == 'classifier':
-        
         # print calculate_cosine_similarity before training
         log(" calculate_cosine_similarity before training")  
         calculate_cosine_similarity(df['sentence1'][0], df['sentence2'][0])
@@ -339,7 +331,6 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         model = model_setup_compute(model, use_gpu=cc.get('use_gpu', 0)  , ngpu= cc.get('ngpu', 0) , ncpu= cc.get('ncpu', 1) )
 
 
-        
         log('########## train')
         model.fit(train_objectives=[(train_dataloader, train_loss)],
           evaluator=dev_evaluator,
@@ -350,8 +341,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
           use_amp=True          #Set to True, if your GPU supports FP16 operations
           )
 
-        log("\n******************< finish training > ********************")
-        
+        log("\n******************< Eval similarity > ********************")
          # print calculate_cosine_similarity after training
         log(" calculate_cosine_similarity after training")    
         calculate_cosine_similarity(df['sentence1'][0], df['sentence2'][0])
@@ -360,12 +350,10 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         model_save(model, dirout, reload=True)
         model = model_load(dirout)
 
-
-        log('### Show metrics')
+        log('### Show eval metrics')
         model_evaluate(model, eval_path)
         
-        
-
+       
         log("\n******************< finish  > ********************")
 
 
