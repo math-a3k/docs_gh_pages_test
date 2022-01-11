@@ -254,7 +254,7 @@ def metrics_cosine_sim(sentence1 = "sentence 1" , sentence2 = "sentence 2", mode
 
   #Compute cosine-similarity
   cosine_scores = util.cos_sim(embeddings1, embeddings2)
-  print("{} \t {} \n cosine-similarity Score: {:.4f}".format(sentence1, sentence2, cosine_scores[0][0]))
+  log( f"{sentence1} \t {sentence2} \n cosine-similarity Score: {cosine_scores[0][0]}" )
 
 
 
