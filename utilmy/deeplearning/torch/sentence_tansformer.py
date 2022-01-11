@@ -36,6 +36,9 @@ from sklearn.metrics.pairwise import cosine_similarity,cosine_distances
 
 os.environ['CUDA_VISIBLE_DEVICES']='2,3'
 
+#### read data on disk
+from utilmy import pd_read_file
+
 
 #####################################################################################
 def log(*s):
@@ -296,7 +299,8 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
 
     
     ### datalodaer
-    df      = pd.read_csv(train_path, error_bad_lines=False)
+    df = pd.read_csv(train_path, error_bad_lines=False)
+    # df = pd_read_file(train_path,  error_bad_lines=False)
     # dftrain = df[[ 'sentence1', 'sentence2', 'label'  ]].values
     train_dataloader = load_dataloader( df, cc)
 
