@@ -396,16 +396,17 @@ SentenceEncoder.call(self, inputs, **kwargs)
 
 utilmy/deeplearning/torch/sentences.py
 -------------------------functions----------------------
-calculate_cosine_similarity(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_id  =  "model name or path or object")
-create_evaluator(dname = 'sts', fIn = '/content/sample_data/', cc:dict = None)
-load_dataloader(path_or_df  =  "", cc:dict =  None, npool = 4)
+load_dataloader(name = 'sts', path_or_df  =  "", cc:dict =  None, npool = 4)
+load_evaluator(name = 'sts', path_or_df = "", dname = 'sts', cc:dict = None)
 load_loss(model  = '', lossname  = 'cosinus', cc:dict =  None)
 log(*s)
+metrics_cosine_sim(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_id  =  "model name or path or object")
 model_evaluate(model  = "modelname OR path OR model object", dirdata = './*.csv', dirout = './', cc:dict =  None, batch_size = 16, name = 'sts-test')
 model_load(path_or_name_or_object)
 model_save(model, path, reload = True)
 model_setup_compute(model, use_gpu = 0, ngpu = 1, ncpu = 1)
-sentrans_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", train_path = "train/*.csv", val_path = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
+pd_read(path_or_df = './myfile.csv', npool = 1, **kw)
+sentrans_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", datasetname  =  'sts', train_path = "train/*.csv", val_path = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
 test()
 
 
