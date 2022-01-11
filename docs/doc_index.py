@@ -396,6 +396,7 @@ SentenceEncoder.call(self, inputs, **kwargs)
 
 utilmy/deeplearning/torch/sentence_tansformer.py
 -------------------------functions----------------------
+calculate_cosine_similarity(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_path_or_name  =  "model name or path")
 create_evaluator(dname = 'sts', dirin = '/content/sample_data/', cc:dict = None)
 load_dataloader(path_or_df  =  "", cc:dict =  None)
 load_loss(model  = '', lossname  = 'cusinus', cc:dict =  None)
