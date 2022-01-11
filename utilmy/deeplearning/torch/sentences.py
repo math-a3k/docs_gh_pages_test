@@ -54,7 +54,7 @@ def test():
     cc.lr = 1E-5
     cc.warmup = 10
 
-    cc.n_sample  = 50
+    cc.eval_steps  = 50
     cc.batch_size=8
 
     cc.mode = 'cpu/gpu'
@@ -202,6 +202,8 @@ def load_evaluator(name='sts', path_or_df="", dname='sts', cc:dict=None):
     if dname == 'sts':        
         log("Read STSbenchmark dev dataset")
         df = pd_read(path_or_df) 
+        if 'nsample' in cc : df = df.iloc[:cc.nsample,:]
+     
         dev_samples = []        
         for i,row in df.iterrows():
             if row['split'] == 'dev':
@@ -215,8 +217,10 @@ def load_evaluator(name='sts', path_or_df="", dname='sts', cc:dict=None):
 def load_dataloader(name='sts', path_or_df = "", cc:dict= None, npool=4):    
     df = pd_read(path_or_df, npool=npool) 
     
+    if 'nsample' in cc : df = df.iloc[:cc.nsample,:]
+    
     train_samples = []
-    for i,row in dftrain.iterrows():
+    for i,row in df.iterrows():
       train_samples.append(InputExample(texts=[row['sentence1'], row['sentence2']], label=row['label']))
       train_dataloader = DataLoader(train_samples, shuffle=True, batch_size=cc.batch_size)
 
@@ -318,10 +322,10 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         
         log('########## train')
         model.fit(train_objectives=[(train_dataloader, train_loss)],
-          evaluator=val_evaluator,
-          epochs=cc.epoch,
-          evaluation_steps= cc.n_sample,
-          warmup_steps=cc.warmup_steps,
+          evaluator =val_evaluator,
+          epochs    =cc.epoch,
+          evaluation_steps = cc.eval_steps,
+          warmup_steps     = cc.warmup_steps,
           output_path=dirout,
           use_amp=True          #Set to True, if your GPU supports FP16 operations
           )
