@@ -1,3 +1,5 @@
+
+
 # -*- coding: utf-8 -*-
 """sentence_tansformer.ipynb
 cd deeplearning/torch/
@@ -69,64 +71,109 @@ def test():
     #### Data
     cc.data_nclass = 5
 
+
+    dirdata ='ztest/'
+    modelid = "distilbert-base-nli-mean-tokens"
+    
+    dataset_download(dirout= dirdata)
+    dataset_fake(dirdata)
     
     log("Classifier with Cosinus Loss ")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
                 lossname="cosinus",
-                train_path="/content/sample_data/fake_train_data_v2.csv",
-                val_path="/content/sample_data/fake_train_data_v2.csv",
-                eval_path = "/content/sample_data/stsbenchmark.csv",
+                train_path= dirdata + f"/data_fake.parquet",
+                val_path=   dirdata + f"/data_fake.parquet",
+                eval_path = dirdata + f"/data_fake.parquet",
                 metricname='cosinus',
-                dirout= "/content/sample_data/results/cosinus",cc=cc) 
+                dirout= dirdata + f"/results/cosinus",cc=cc) 
     
 
     log("Classifier with Triplet Hard  Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
                 lossname="triplethard",
-                train_path="/content/sample_data/fake_train_data_v2.csv",
-                eval_path = "/content/sample_data/stsbenchmark.csv",
+                train_path= dirdata + f"/data_fake.parquet",
+                val_path=   dirdata + f"/data_fake.parquet",
+                eval_path = dirdata + f"/data_fake.parquet",
                 metricname='tripletloss',
-                dirout= "/content/sample_data/results/triplethard",cc=cc) 
+                dirout= dirdata + f"/results/triplethard",cc=cc) 
 
     
     # log("Classifier with Softmax Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
                 lossname="softmax",
-                train_path="/content/sample_data/fake_train_data_v2.csv",
-                val_path="/content/sample_data/fake_train_data_v2.csv",
-                eval_path = "/content/sample_data/stsbenchmark.csv",
+                train_path= dirdata + f"/data_fake.parquet",
+                val_path=   dirdata + f"/data_fake.parquet",
+                eval_path = dirdata + f"/data_fake.parquet",
                 metricname='softmax',
-                dirout= "/content/sample_data/results/softmax",cc=cc) 
+                dirout= dirdata + f"/results/softmax",cc=cc) 
 
     
     log("Classifier with MultpleNegativesRanking Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
                 lossname="MultpleNegativesRankingLoss",
-                train_path="/content/sample_data/fake_train_data_v2.csv",
-                val_path="content/sample_data/fake_train_data_v2.csv",
-                eval_path = "/content/sample_data/stsbenchmark.csv",
+                train_path= dirdata + f"/data_fake.parquet",
+                val_path=   dirdata + f"/data_fake.parquet",
+                eval_path = dirdata + f"/data_fake.parquet",
                 metricname='MultpleNegativesRankingLoss',
-                dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)   
+                dirout=    dirdata + f"/results/MultpleNegativesRankingLoss",cc=cc)   
     
     
     log("Classifier with cosinus Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
                 lossname="cosinus",
-                train_path="/content/sample_data/fake_train_data_v2.csv",
-                val_path="content/sample_data/fake_train_data_v2.csv",
-                eval_path = "/content/sample_data/stsbenchmark.csv",
+                train_path= dirdata + f"/data_fake.parquet",
+                val_path=   dirdata + f"/data_fake.parquet",
+                eval_path = dirdata + f"/data_fake.parquet",
                 metricname='MultpleNegativesRankingLoss',
-                dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)
+                dirout= dirdata + f"/results/MultpleNegativesRankingLoss",cc=cc)
+
+
+
+###################################################################################################################        
+def dataset_fake(dirdata):        
+    nli_dataset_path = dirdata + '/AllNLI.tsv.gz'
+    sts_dataset_path = dirdata + '/stsbenchmark.tsv.gz'
+
+    # Read the AllNLI.tsv.gz file and create the training dataset
+    df = pd_read(nli_dataset_path, npool=1) 
+    df.iloc[:50, :].to_parquet(dirdata +"/fake_data.parquet")
+
+
+
+def dataset_fake2():
+    # This function load the fake dataset if it's already existed otherwise downloads it first.
+    # then Preprocess the data for MultpleNegativesRanking loss function and return it as dataloader
+
+    def add_to_samples(sent1, sent2, label):
+        if sent1 not in train_data:
+            train_data[sent1] = {'contradiction': set(), 'entailment': set(), 'neutral': set()}
+            train_data[sent1][label].add(sent2)
+
+    train_data = {}
+    with gzip.open(nli_dataset_path, 'rt', encoding='utf8') as fIn:
+        reader = csv.DictReader(fIn, delimiter='\t', quoting=csv.QUOTE_NONE)
+        for row in reader:
+            if row['split'] == 'train':
+                sent1 = row['sentence1'].strip()
+                sent2 = row['sentence2'].strip()
+
+                df.append(sent1, sent2, row['label'])
+                df.append(sent2, sent1, row['label'])  #Also add the opposite
+
+
+    train_samples = []
+    for sent1, others in train_data.items():
+        if len(others['entailment']) > 0 and len(others['contradiction']) > 0:
+            train_samples.append(InputExample(texts=[sent1, random.choice(list(others['entailment'])), random.choice(list(others['contradiction']))]))
+            train_samples.append(InputExample(texts=[random.choice(list(others['entailment'])), sent1, random.choice(list(others['contradiction']))]))
 
     
-    
-###################################################################################################################
-def download_dataset(dirout='/content/sample_data/sent_tans/'):
+def dataset_download(dirout='/content/sample_data/sent_tans/'):
     #### Check if dataset exsist. If not, download and extract  it    
     nli_dataset_path = dirout + '/AllNLI.tsv.gz'
     sts_dataset_path = dirout + '/stsbenchmark.tsv.gz'
@@ -137,7 +184,9 @@ def download_dataset(dirout='/content/sample_data/sent_tans/'):
     if not os.path.exists(sts_dataset_path):
         util.http_get('https://sbert.net/datasets/stsbenchmark.tsv.gz', sts_dataset_path)
         
-        
+
+
+###################################################################################################################        
 def model_evaluate(model ="modelname OR path OR model object", dirdata='./*.csv', dirout='./', cc:dict= None, batch_size=16, name='sts-test'):
     ### Evaluate Model
     df = pd.read_csv(dirdata, error_bad_lines=False)
@@ -279,26 +328,15 @@ def metrics_cosine_sim(sentence1 = "sentence 1" , sentence2 = "sentence 2", mode
 
 
 def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
-                 taskname="classifier", 
-                 lossname="cosinus",
+                 taskname="classifier",   lossname="cosinus",
                  datasetname = 'sts',  
                    
-                 train_path="train/*.csv",
-                 val_path="val/*.csv",
-                 eval_path ="eval/*.csv",
+                 train_path="train/*.csv", val_path  ="val/*.csv",  eval_path ="eval/*.csv",
                    
                  metricname='cosinus',
                  dirout ="mymodel_save/",
                  cc:dict= None):
   #  """"
-  #     load a model,
-  #     load a loss/task
-  #     load dataset
-  #     fine tuning train the model
-  #     evaluate
-  #     save on disk
-  #     reload the model for check.
-
   # cc = Box({})
   # cc.epoch = 3
   # cc.lr = 1E-5
