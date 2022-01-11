@@ -155,7 +155,7 @@ def model_load(path_or_name_or_object):
 
 
 def model_save(model,path, reload=True):
-    torch.save(model, path)
+    model.save( path)
     log(path)
     
     if reload:
