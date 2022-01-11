@@ -13,8 +13,8 @@ Original file is located at
 # !pip install sentence-transformers
 #!pip3 install tensorflow
 """
-from google.colab import drive
-drive.mount('/content/drive')
+# from google.colab import drive
+# drive.mount('/content/drive')
 
 import sys, os, gzip, csv, random, math, logging, pandas as pd
 from datetime import datetime
@@ -31,6 +31,8 @@ from torch.utils.data import DataLoader
 from torch.nn.parallel import DistributedDataParallel as DDP
 
 from tensorflow.keras.metrics import SparseCategoricalAccuracy
+
+from sklearn.metrics.pairwise import cosine_similarity,cosine_distances
 
 os.environ['CUDA_VISIBLE_DEVICES']='2,3'
 
@@ -231,6 +233,19 @@ def load_loss(model ='', lossname ='cusinus',  cc:dict= None):
 
     return train_loss
 
+### function to compute cosinue similarity
+def calculate_cosine_similarity(sentence1 = "sentence 1" , sentence2 = "sentence 2", model_path_or_name = "model name or path"):
+    
+  model = model_load(model_path_or_name)
+
+  #Compute embedding for both lists
+  embeddings1 = model.encode(sentence1, convert_to_tensor=True)
+  embeddings2 = model.encode(sentence2, convert_to_tensor=True)
+
+  #Compute cosine-similarity
+  cosine_scores = util.cos_sim(embeddings1, embeddings2)
+  print("{} \t {} \n cosine-similarity Score: {:.4f}".format(sentence1, sentence2, cosine_scores[0][0]))
+
 
 
 def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
@@ -288,6 +303,11 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
 
 
     if taskname == 'classifier':
+        
+        # print calculate_cosine_similarity before training
+        log(" calculate_cosine_similarity before training")  
+        calculate_cosine_similarity(df['sentence1'][0], df['sentence2'][0])
+        
         # Configure the training
         cc.warmup_steps = math.ceil(len(train_dataloader) * cc.epoch * 0.1) #10% of train data for warm-up.
         log("Warmup-steps: {}".format(cc.warmup_steps))
@@ -326,6 +346,10 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
           )
 
         log("\n******************< finish training > ********************")
+        
+         # print calculate_cosine_similarity after training
+        log(" calculate_cosine_similarity after training")    
+        calculate_cosine_similarity(df['sentence1'][0], df['sentence2'][0])
         
         log("## save the model  ")
         model_save(model, dirout, reload=True)
