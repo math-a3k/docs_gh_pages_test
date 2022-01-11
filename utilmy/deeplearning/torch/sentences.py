@@ -72,60 +72,19 @@ def test():
     dataset_download(dirout= dirdata)
     dataset_fake(dirdata)
     
-    log("Classifier with Cosinus Loss ")
-    sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
-                taskname="classifier", 
-                lossname="cosinus",
-                train_path= dirdata + f"/data_fake.parquet",
-                val_path=   dirdata + f"/data_fake.parquet",
-                eval_path = dirdata + f"/data_fake.parquet",
-                metricname='cosinus',
-                dirout= dirdata + f"/results/cosinus",cc=cc) 
+    lloss = [ 'cosine', 'triplethard',"softmax", 'MultpleNegativesRankingLoss' ]
     
-
-    log("Classifier with Triplet Hard  Loss")
-    sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
-                taskname="classifier", 
-                lossname="triplethard",
-                train_path= dirdata + f"/data_fake.parquet",
-                val_path=   dirdata + f"/data_fake.parquet",
-                eval_path = dirdata + f"/data_fake.parquet",
-                metricname='tripletloss',
-                dirout= dirdata + f"/results/triplethard",cc=cc) 
-
+    for lname in lloss :
+        log("Classifier with Loss ", lname)
+        sentrans_train(modelname_or_path = modelid,
+                    taskname  = "classifier", 
+                    lossname  = lname,
+                    train_path= dirdata + f"/data_fake.parquet",
+                    val_path=   dirdata + f"/data_fake.parquet",
+                    eval_path = dirdata + f"/data_fake.parquet",
+                    metricname='cosinus',
+                    dirout= dirdata + f"/results/" + lloss, cc=cc) 
     
-    # log("Classifier with Softmax Loss")
-    sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
-                taskname="classifier", 
-                lossname="softmax",
-                train_path= dirdata + f"/data_fake.parquet",
-                val_path=   dirdata + f"/data_fake.parquet",
-                eval_path = dirdata + f"/data_fake.parquet",
-                metricname='softmax',
-                dirout= dirdata + f"/results/softmax",cc=cc) 
-
-    
-    log("Classifier with MultpleNegativesRanking Loss")
-    sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
-                taskname="classifier", 
-                lossname="MultpleNegativesRankingLoss",
-                train_path= dirdata + f"/data_fake.parquet",
-                val_path=   dirdata + f"/data_fake.parquet",
-                eval_path = dirdata + f"/data_fake.parquet",
-                metricname='MultpleNegativesRankingLoss',
-                dirout=    dirdata + f"/results/MultpleNegativesRankingLoss",cc=cc)   
-    
-    
-    log("Classifier with cosinus Loss")
-    sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
-                taskname="classifier", 
-                lossname="cosinus",
-                train_path= dirdata + f"/data_fake.parquet",
-                val_path=   dirdata + f"/data_fake.parquet",
-                eval_path = dirdata + f"/data_fake.parquet",
-                metricname='MultpleNegativesRankingLoss',
-                dirout= dirdata + f"/results/cosinus",cc=cc)
-
 
 
 ###################################################################################################################        
