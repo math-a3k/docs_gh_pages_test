@@ -434,7 +434,9 @@ Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, *
 
 utilmy/deeplearning/torch/sentences.py
 -------------------------functions----------------------
-download_dataset(dirout = '/content/sample_data/sent_tans/')
+dataset_download(dirout = '/content/sample_data/sent_tans/')
+dataset_fake(dirdata)
+dataset_fake2()
 load_dataloader(name = 'sts', path_or_df  =  "", cc:dict =  None, npool = 4)
 load_evaluator(name = 'sts', path_or_df = "", dname = 'sts', cc:dict = None)
 load_loss(model  = '', lossname  = 'cosinus', cc:dict =  None)
@@ -445,7 +447,7 @@ model_load(path_or_name_or_object)
 model_save(model, path, reload = True)
 model_setup_compute(model, use_gpu = 0, ngpu = 1, ncpu = 1)
 pd_read(path_or_df = './myfile.csv', npool = 1, **kw)
-sentrans_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", datasetname  =  'sts', train_path = "train/*.csv", val_path = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
+sentrans_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", datasetname  =  'sts', train_path = "train/*.csv", val_path   = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
 test()
 
 
