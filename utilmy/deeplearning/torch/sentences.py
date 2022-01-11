@@ -23,6 +23,8 @@ import sys, os, gzip, csv, random, math, logging, pandas as pd
 from datetime import datetime
 from box import Box
 
+import sentence_transformers as st
+
 from sentence_transformers import SentenceTransformer, SentencesDataset, losses, util
 from sentence_transformers import models, losses, datasets
 from sentence_transformers.readers import InputExample
@@ -34,7 +36,6 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 #vfrom tensorflow.keras.metrics import SparseCategoricalAccuracy
 from sklearn.metrics.pairwise import cosine_similarity,cosine_distances
 
-os.environ['CUDA_VISIBLE_DEVICES']='2,3'
 
 #### read data on disk
 from utilmy import pd_read_file
@@ -44,11 +45,14 @@ from utilmy import pd_read_file
 def log(*s):
     print(*s, flush=True)
 
+    
 
 #####################################################################################
 def test():
   #  Run Various test suing strans_former,
   # Mostly Single sentence   ---> Classification
+  os.environ['CUDA_VISIBLE_DEVICES']='2,3'
+  
     cc = Box({})
     cc.epoch = 3
     cc.lr = 1E-5
@@ -122,6 +126,18 @@ def test():
     
     
 ###################################################################################################################
+def download_dataset(dirout='/content/sample_data/sent_tans/'):
+    #### Check if dataset exsist. If not, download and extract  it    
+    nli_dataset_path = dirout + '/AllNLI.tsv.gz'
+    sts_dataset_path = dirout + '/stsbenchmark.tsv.gz'
+    os.makedirs(dirout, exist_ok=False)    
+    if not os.path.exists(nli_dataset_path):
+        util.http_get('https://sbert.net/datasets/AllNLI.tsv.gz', nli_dataset_path)
+
+    if not os.path.exists(sts_dataset_path):
+        util.http_get('https://sbert.net/datasets/stsbenchmark.tsv.gz', sts_dataset_path)
+        
+        
 def model_evaluate(model ="modelname OR path OR model object", dirdata='./*.csv', dirout='./', cc:dict= None, batch_size=16, name='sts-test'):
     ### Evaluate Model
     df = pd.read_csv(dirdata, error_bad_lines=False)
