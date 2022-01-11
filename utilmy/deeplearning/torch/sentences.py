@@ -49,9 +49,9 @@ def log(*s):
 
 #####################################################################################
 def test():
-  #  Run Various test suing strans_former,
-  # Mostly Single sentence   ---> Classification
-  os.environ['CUDA_VISIBLE_DEVICES']='2,3'
+    #  Run Various test suing strans_former,
+    # Mostly Single sentence   ---> Classification
+    os.environ['CUDA_VISIBLE_DEVICES']='2,3'
   
     cc = Box({})
     cc.epoch = 3
