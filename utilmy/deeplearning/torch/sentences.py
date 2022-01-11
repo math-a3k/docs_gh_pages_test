@@ -1,5 +1,3 @@
-
-
 # -*- coding: utf-8 -*-
 """sentence_tansformer.ipynb
 cd deeplearning/torch/
