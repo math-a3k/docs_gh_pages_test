@@ -394,11 +394,11 @@ SentenceEncoder.__init__(self, num_labels = None)
 SentenceEncoder.call(self, inputs, **kwargs)
 
 
-utilmy/deeplearning/torch/sentence_tansformer.py
+utilmy/deeplearning/torch/sentences.py
 -------------------------functions----------------------
 calculate_cosine_similarity(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_id  =  "model name or path or object")
 create_evaluator(dname = 'sts', dirin = '/content/sample_data/', cc:dict = None)
-load_dataloader(path_or_df  =  "", cc:dict =  None)
+load_dataloader(path_or_df  =  "", cc:dict =  None, npool = 4)
 load_loss(model  = '', lossname  = 'cosinus', cc:dict =  None)
 log(*s)
 model_evaluate(model  = "modelname OR path OR model object", dirdata = './*.csv', dirout = './', cc:dict =  None, batch_size = 16, name = 'sts-test')
