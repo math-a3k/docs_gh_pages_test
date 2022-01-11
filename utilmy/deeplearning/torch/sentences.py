@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """sentence_tansformer.ipynb
 cd deeplearning/torch/
-python sentrans.py  test
+python sentences.py  test
+
 Original file is located at
     https://colab.research.google.com/drive/13jklIi81IT8B3TrIOhWSLwk48Qf2Htmc
-**This Notebook has been created by Ali Hamza (9th January, 2022) to train Sentence Transformer with different Losses such as:**
+
+train Sentence Transformer with different Losses such as:**
 > Softmax Loss
 > Cusine Loss
 > TripletHard Loss
@@ -15,12 +17,11 @@ Original file is located at
 """
 # from google.colab import drive
 # drive.mount('/content/drive')
+# sys.path.append('drive/sent_tans')
 
 import sys, os, gzip, csv, random, math, logging, pandas as pd
 from datetime import datetime
 from box import Box
-
-# sys.path.append('drive/sent_tans')
 
 from sentence_transformers import SentenceTransformer, SentencesDataset, losses, util
 from sentence_transformers import models, losses, datasets
@@ -30,8 +31,7 @@ from sentence_transformers.evaluation import EmbeddingSimilarityEvaluator
 from torch.utils.data import DataLoader
 from torch.nn.parallel import DistributedDataParallel as DDP
 
-from tensorflow.keras.metrics import SparseCategoricalAccuracy
-
+#vfrom tensorflow.keras.metrics import SparseCategoricalAccuracy
 from sklearn.metrics.pairwise import cosine_similarity,cosine_distances
 
 os.environ['CUDA_VISIBLE_DEVICES']='2,3'
@@ -65,9 +65,7 @@ def test():
     #### Data
     cc.data_nclass = 5
 
-
-
-  ### Classifier with Cosinus Loss
+    
     log("Classifier with Cosinus Loss ")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
@@ -79,7 +77,6 @@ def test():
                 dirout= "/content/sample_data/results/cosinus",cc=cc) 
     
 
-  ### Classifier with Triplet Hard  Loss
     log("Classifier with Triplet Hard  Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
@@ -89,8 +86,7 @@ def test():
                 metricname='tripletloss',
                 dirout= "/content/sample_data/results/triplethard",cc=cc) 
 
-
-   ### Classifier with Softmax Loss
+    
     # log("Classifier with Softmax Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
@@ -101,7 +97,7 @@ def test():
                 metricname='softmax',
                 dirout= "/content/sample_data/results/softmax",cc=cc) 
 
-   ### Classifier with MultpleNegativesRankingLoss Loss
+    
     log("Classifier with MultpleNegativesRanking Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
@@ -113,7 +109,6 @@ def test():
                 dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)   
     
     
-   ### Ranking with Cosinus Loss
     log("Classifier with cosinus Loss")
     sentrans_train(modelname_or_path ="distilbert-base-nli-mean-tokens",
                 taskname="classifier", 
@@ -124,6 +119,8 @@ def test():
                 metricname='MultpleNegativesRankingLoss',
                 dirout= "/content/sample_data/results/MultpleNegativesRankingLoss",cc=cc)
 
+    
+    
 ###################################################################################################################
 def model_evaluate(model ="modelname OR path OR model object", dirdata='./*.csv', dirout='./', cc:dict= None, batch_size=16, name='sts-test'):
     ### Evaluate Model
@@ -207,16 +204,17 @@ def create_evaluator(dname='sts', dirin='/content/sample_data/', cc:dict=None):
         return dev_evaluator
 
 
-
-def load_dataloader(path_or_df = "", cc:dict= None):
-    
+def load_dataloader(path_or_df = "", cc:dict= None, npool=4):    
     if isinstance(path_or_df, str):
-        dftrain = pd.read_csv(path_or_df)
+        if '.tsv' in path_or_df :
+            dftrain = pd_read_file(path_or_df, npool=npool)
+        else :    
+            dftrain = pd.read_csv(path_or_df, error_bad_lines=False)
         
     elif isinstance(path_or_df, pd.DataFrame):
         dftrain = path_or_df
     else : 
-        raise Exception('need')
+        raise Exception('need' path_or_df)
     
     train_samples = []
     for i,row in dftrain.iterrows():
@@ -296,18 +294,16 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
     model = model_load(modelname_or_path)
 
     
-    ##### datalodaer
-    df = pd.read_csv(train_path, error_bad_lines=False)
-    # df = pd_read_file(train_path,  error_bad_lines=False)
-    train_dataloader = load_dataloader( df, cc)
+    ##### dataloader train
+    train_dataloader = load_dataloader( train_path, cc)
 
     
     ##### Use in the code ?????????
-    dfval = pd.read_csv(train_path, error_bad_lines=False)
-    # dfval = dfval[[ 'sentence1', 'sentence2', 'label'  ]].values
+    ## dfval = pd.read_csv(train_path, error_bad_lines=False)
+    ## dfval = dfval[[ 'sentence1', 'sentence2', 'label'  ]].values
 
     
-    ##### create loss
+    ##### create loss  ##########################################
     if 'data_nclass' not in cc :
         cc.data_nclass = df['label'].nunique()
 
