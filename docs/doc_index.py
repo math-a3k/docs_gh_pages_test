@@ -114,6 +114,9 @@ timer_decorator(func)
 utilmy/deeplearning/__init__.py
 
 
+utilmy/deeplearning/autoencoder/keras_ae.py
+
+
 utilmy/deeplearning/keras/loss_graph.py
 -------------------------functions----------------------
 create_fake_neighbor(x, max_neighbors)
@@ -376,41 +379,7 @@ train_stop(counter, patience)
 
 
 
-utilmy/deeplearning/sentence2.py
--------------------------functions----------------------
-evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
-fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
-fit2(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
-get_dataset(data_pars = None, **kw)
-get_dataset2(data_pars = None, model = None, **kw)
-get_params(param_pars, **kw)
-load(load_pars = None)
-predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
-predict2(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
-reset_model()
-save(model, session = None, save_pars = None)
-test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
-
--------------------------methods----------------------
-Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
-
-
-utilmy/deeplearning/torch/sent_trans.py
--------------------------functions----------------------
-build_model()
-create_evaluator(dname = 'sts', dirin = '/content/sample_data/sent_tans/', cc:dict = None)
-log(*s)
-metric_evaluate(model, )fIn, delimiter = '\t', )test_samples = []) =  []):)
-model_load(path)
-model_save(path)
-sentrans_train(modelname_or_path = "", taskname = "classifier", lossname = "", train_path = "train/*.csv", val_path = "val/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  Nonecc)   #### can use cc.epoch   cc.lr{})cc.epoch = 3cc.lr = 1E-5cc.warmup = 100cc.n_sample  = 1000cc.batch_size=16cc.mode = 'cpu/gpu'cc.ncpu =5  dir_train )dftrain = dftrain[[ 'text1', 'text2', 'label'  ]].values  dir_train )dfval  =  dfval[[ 'text1', 'text2', 'label'  ]].valuesif lossname == 'cosinus' = = 'cosinus':  loss =if taskname == 'classifier ':)
-test()
-
--------------------------methods----------------------
-ReRanker.__init__(self)
-ReRanker.call(self, inputs, **kwargs)
-SentenceEncoder.__init__(self, num_labels = None)
-SentenceEncoder.call(self, inputs, **kwargs)
+utilmy/deeplearning/torch/__init__.py
 
 
 utilmy/deeplearning/torch/sentence2.py
@@ -453,6 +422,24 @@ test()
 
 
 utilmy/deeplearning/torch/util_train.py
+
+
+utilmy/deeplearning/torch/zkeras_torch_sentence.py
+-------------------------functions----------------------
+build_model()
+create_evaluator(dname = 'sts', dirin = '/content/sample_data/sent_tans/', cc:dict = None)
+log(*s)
+metric_evaluate(model, )fIn, delimiter = '\t', )test_samples = []) =  []):)
+model_load(path)
+model_save(path)
+sentrans_train(modelname_or_path = "", taskname = "classifier", lossname = "", train_path = "train/*.csv", val_path = "val/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  Nonecc)   #### can use cc.epoch   cc.lr{})cc.epoch = 3cc.lr = 1E-5cc.warmup = 100cc.n_sample  = 1000cc.batch_size=16cc.mode = 'cpu/gpu'cc.ncpu =5  dir_train )dftrain = dftrain[[ 'text1', 'text2', 'label'  ]].values  dir_train )dfval  =  dfval[[ 'text1', 'text2', 'label'  ]].valuesif lossname == 'cosinus' = = 'cosinus':  loss =if taskname == 'classifier ':)
+test()
+
+-------------------------methods----------------------
+ReRanker.__init__(self)
+ReRanker.call(self, inputs, **kwargs)
+SentenceEncoder.__init__(self, num_labels = None)
+SentenceEncoder.call(self, inputs, **kwargs)
 
 
 utilmy/deeplearning/util_dl.py
