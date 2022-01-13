@@ -8552,6 +8552,2600 @@ test_get_classification_data(name = None)
 dict2.__init__(self, d)
 
 
+utilmy/zzml/docs/source/conf.py
+
+
+utilmy/zzml/install/run_doc.py
+-------------------------functions----------------------
+get_recursive_files(folderPath, ext = '/*model*/*.py')
+os_package_root_path(add_path = "", n = 0)
+
+
+
+utilmy/zzml/install/run_pypi.py
+-------------------------functions----------------------
+ask(question, ans = 'yes')
+git_commit(message)
+main(*args)
+pypi_upload()
+update_version(path, n)
+
+-------------------------methods----------------------
+Version.__init__(self, major, minor, patch)
+Version.__repr__(self)
+Version.__str__(self)
+Version.new_version(self, orig)
+Version.parse(cls, string)
+Version.stringify(self)
+
+
+utilmy/zzml/install/zconda/zold/distri_model_tch.py
+-------------------------functions----------------------
+model_create(modelname = "", params = None, modelonly = 1)
+model_instance(name = "net", params = {})
+
+-------------------------methods----------------------
+Net.__init__(self)
+Net.forward(self, x)
+
+
+utilmy/zzml/mlmodels/_version.py
+-------------------------functions----------------------
+get_config()
+get_keywords()
+get_versions()
+git_get_keywords(versionfile_abs)
+git_pieces_from_vcs(tag_prefix, root, verbose, run_command = run_command)
+git_versions_from_keywords(keywords, tag_prefix, verbose)
+plus_or_dot(pieces)
+register_vcs_handler(vcs, method)
+render(pieces)
+render_git_describe(pieces)
+render_git_describe_long(pieces)
+render_pep440(pieces)
+render_pep440_old(pieces)
+render_pep440_post(pieces)
+render_pep440_pre(pieces)
+run_command(commands, args, cwd = None, verbose = False, hide_stderr = False, env = None)
+versions_from_parentdir(parentdir_prefix, root, verbose)
+
+
+
+utilmy/zzml/mlmodels/benchmark.py
+-------------------------functions----------------------
+benchmark_run(bench_pars = None, args = None, config_mode = "test")
+cli_load_arguments(config_file = None)
+config_model_list(folder = None)
+get_all_json_path(json_path)
+main()
+metric_eval(actual = None, pred = None, metric_name = "mean_absolute_error")
+
+
+
+utilmy/zzml/mlmodels/data.py
+-------------------------functions----------------------
+download_dtopbox(data_pars)
+download_googledrive(file_list, **kw)
+get_dataset(data_pars)
+import_data(name = "", mode = "train", node_id = 0, data_folder_root = "")
+import_data_dask(**kw)
+import_data_fromfile(**kw)
+import_data_tch(name = "", mode = "train", node_id = 0, data_folder_root = "")
+tf_dataset(dataset_pars)
+
+
+
+utilmy/zzml/mlmodels/dataloader.py
+-------------------------functions----------------------
+_check_output_shape(self, inter_output, shape, max_len)
+_validate_data_info(self, data_info)
+batch_generator(iterable, n = 1)
+cli_load_arguments(config_file = None)
+get_dataset_type(x)
+image_dir_load(path)
+main()
+pickle_dump(t, **kwargs)
+pickle_load()
+split_xy_from_dict(out, **kwargs)
+test_dataloader(path = 'dataset/json/refactor/')
+test_json_list(data_pars_list)
+test_run_model()
+test_single(arg)
+
+-------------------------methods----------------------
+DataLoader.__init__(self, data_pars)
+
+
+utilmy/zzml/mlmodels/dataloader_test.py
+-------------------------functions----------------------
+gluon_append_target_string(out, data_pars)
+identical_test_set_split(*args, test_size, **kwargs)
+load_npz(path)
+main()
+pandas_load_train_test(path, test_path, **args)
+pandas_split_xy(out, data_pars)
+read_csvs_from_directory(path, files = None, **args)
+rename_target_to_y(out, data_pars)
+split_timeseries_df(out, data_pars, length, shift)
+split_xy_from_dict(out, data_pars)
+timeseries_split(*args, test_size = 0.2)
+tokenize_x(data, no_classes, max_words = None)
+
+-------------------------methods----------------------
+SingleFunctionPreprocessor.__init__(self, func_dict)
+SingleFunctionPreprocessor.compute(self, data)
+SingleFunctionPreprocessor.get_data(self)
+
+
+utilmy/zzml/mlmodels/distri_torch.py
+-------------------------functions----------------------
+load_arguments()
+metric_average(val, name)
+test()
+train(epoch)
+
+
+
+utilmy/zzml/mlmodels/distributed.py
+-------------------------functions----------------------
+config_model_list(folder = None)
+get_all_json_path(json_path)
+
+
+
+utilmy/zzml/mlmodels/example/arun_hyper.py
+
+
+utilmy/zzml/mlmodels/example/arun_model.py
+
+
+utilmy/zzml/mlmodels/example/benchmark_timeseries_m4.py
+-------------------------functions----------------------
+benchmark_m4()
+
+
+
+utilmy/zzml/mlmodels/example/benchmark_timeseries_m5.py
+-------------------------functions----------------------
+create_startdate(date = "2011-01-29", freq = "1D", n_timeseries = 1)
+gluonts_create_dataset(train_timeseries_list, start_dates_list, train_dynamic_list, train_static_list, freq = "D")
+gluonts_create_dynamic(df_dynamic, submission = 1, single_pred_length = 28, submission_pred_length = 10, n_timeseries = 1, transpose = 1)
+gluonts_create_static(df_static, submission = 1, single_pred_length = 28, submission_pred_length = 10, n_timeseries = 1, transpose = 1)
+gluonts_create_timeseries(df_timeseries, submission = 1, single_pred_length = 28, submission_pred_length = 10, n_timeseries = 1, transpose = 1)
+pandas_to_gluonts_multiseries(df_timeseries, df_dynamic, df_static, pars = None)
+plot_prob_forecasts(ts_entry, forecast_entry, path, sample_id, inline = True)
+
+
+
+utilmy/zzml/mlmodels/example/custom_model/1_lstm.py
+-------------------------functions----------------------
+evaluate(model, sess = None, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwarg)
+get_dataset(data_pars = None)
+get_params(param_pars = {}, **kw)
+load(load_pars = None)
+metrics(model, sess = None, data_pars = None, compute_pars = None, out_pars = None)
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, get_hidden_state = False, init_value = None)
+reset_model()
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/example/lightgbm_glass.py
+
+
+utilmy/zzml/mlmodels/example/vision_mnist.py
+
+
+utilmy/zzml/mlmodels/metrics.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 1)
+metrics_eval(metric_list = ["mean_squared_error"], ytrue = None, ypred = None, ypred_proba = None, return_dict = 0)
+test()
+
+
+
+utilmy/zzml/mlmodels/model_gluon/fb_prophet.py
+-------------------------functions----------------------
+fit(model = None, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+get_dataset(data_pars)
+get_params(param_pars = {}, **kw)
+load(load_pars = {}, **kw)
+metrics_plot(metrics_params)
+predict(model = None, model_pars = None, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "test0", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_gluon/gluon_automl.py
+-------------------------functions----------------------
+_config_process(config)
+get_params(choice = "", data_path = "dataset/", config_mode = "test", **kw)
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+test(data_path = "dataset/", pars_choice = "json")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_gluon/gluonts_model.py
+-------------------------functions----------------------
+evaluate(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+evaluate(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, sess = None, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(data_pars)
+get_dataset2(data_pars)
+get_dataset_gluonts(data_pars)
+get_dataset_pandas_multi(data_pars)
+get_dataset_pandas_single(data_pars)
+get_params(choice = "", data_path = "dataset/timeseries/", config_mode = "test", **kw)
+load(path)
+metrics(ypred, data_pars, compute_pars = None, out_pars = None, **kw)
+plot_predict(item_metrics, out_pars = None)
+plot_prob_forecasts(ypred, out_pars = None)
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+save(model, path)
+test(data_path = "dataset/", choice = "", config_mode = "test")
+test_single(data_path = "dataset/", choice = "", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_gluon/gluonts_model_old.py
+-------------------------functions----------------------
+evaluate(ypred, data_pars, compute_pars = None, out_pars = None, **kw)
+fit(model, sess = None, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(data_pars)
+get_params(choice = "", data_path = "dataset/timeseries/", config_mode = "test", **kw)
+load(path)
+metrics(ypred, data_pars, compute_pars = None, out_pars = None, **kw)
+plot_predict(item_metrics, out_pars = None)
+plot_prob_forecasts(ypred, out_pars = None)
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+save(model, path)
+test(data_path = "dataset/", choice = "", config_mode = "test")
+test_single(data_path = "dataset/", choice = "", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_gluon/raw/gluon_prophet.py
+-------------------------functions----------------------
+get_params(choice = "", data_path = "dataset/", config_mode = "test", **kw)
+test(data_path = "dataset/", choice = "")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_gluon/util.py
+-------------------------functions----------------------
+_config_process(data_path, config_mode = "test")
+fit(model, sess = None, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(data_pars)
+load(path)
+metrics(ypred, data_pars, compute_pars = None, out_pars = None, **kwargs)
+plot_predict(item_metrics, out_pars = None)
+plot_prob_forecasts(ypred, out_pars = None)
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+save(model, path)
+
+-------------------------methods----------------------
+Model_empty.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_gluon/util_autogluon.py
+-------------------------functions----------------------
+_get_dataset_from_aws(**kw)
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(**kw)
+import_data_fromfile(**kw)
+load(path)
+log(*s, n = 0, m = 1)
+metrics(model, ypred, ytrue, data_pars, compute_pars = None, out_pars = None, **kwargs)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+predict(model, data_pars, compute_pars = None, out_pars = None, **kwargs)
+save(model, out_pars)
+
+-------------------------methods----------------------
+Model_empty.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/Autokeras.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_dataset(data_pars)
+get_dataset_imbd(data_pars)
+get_dataset_titanic(data_pars)
+get_params(param_pars = None, **kw)
+load(load_pars, config_mode = "test")
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+save(model, session = None, save_pars = None, config_mode = "test")
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+test_single(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/armdn.py
+
+
+utilmy/zzml/mlmodels/model_keras/charcnn.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, save_pars = None, session = None)
+str_to_indexes(s)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+tokenize(data, num_of_classes = 4)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/charcnn_zhang.py
+-------------------------functions----------------------
+evaluate(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+fit(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = {}, out_pars = {}, compute_pars = {}, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/deepctr.py
+-------------------------functions----------------------
+_config_process(config)
+_preprocess_criteo(df, **kw)
+_preprocess_movielens(df, **kw)
+config_load(data_path, file_default, config_mode)
+fit(model, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+get_dataset(data_pars = None, **kw)
+get_params(choice = "", data_path = "dataset/", config_mode = "test", **kwargs)
+metrics(ypred, ytrue = None, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+predict(model, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+reset_model()
+test(data_path = "dataset/", pars_choice = 0, **kwargs)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_keras/namentity_crm_bilstm.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars)
+get_params(param_pars = {}, **kw)
+load(load_pars)
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_keras/old/01_deepctr.py
+-------------------------functions----------------------
+_config_process(config)
+_preprocess_criteo(df, **kw)
+_preprocess_movielens(df, **kw)
+config_load(data_path, file_default, config_mode)
+fit(model, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+get_dataset(data_pars = None, **kw)
+get_params(choice = "", data_path = "dataset/", config_mode = "test", **kwargs)
+metrics(ypred, ytrue = None, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+predict(model, session = None, compute_pars = None, data_pars = None, out_pars = None, **kwargs)
+reset_model()
+test(data_path = "dataset/", pars_choice = 0, **kwargs)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_keras/old/02_cnn.py
+-------------------------functions----------------------
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(data_pars, **kw)
+get_params(choice = 0, data_path = "dataset/", **kw)
+load(load_pars = {})
+log(*s, n = 0, m = 1)
+metrics(ypred, model, session = None, model_pars = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", out_path = "keras/keras.png", reset = True)
+test2(data_path = "dataset/", out_path = "keras/keras.png", reset = True)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, compute_pars = None, data_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/old/Autokeras.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_dataset(data_pars)
+get_dataset_auto_mpg(data_pars)
+get_dataset_imbd(data_pars)
+get_dataset_titanic(data_pars)
+get_params(param_pars = None, **kw)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+test_single(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+Model_keras_empty.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/old/armdn.py
+
+
+utilmy/zzml/mlmodels/model_keras/old/charcnn.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, save_pars = None, session = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/old/charcnn_zhang.py
+-------------------------functions----------------------
+evaluate(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+fit(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = {}, out_pars = {}, compute_pars = {}, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/old/namentity_crm_bilstm.py
+-------------------------functions----------------------
+_preprocess_test(data_pars, **kw)
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars)
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_keras/old/nbeats.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = None)
+main()
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, save_pars = None, session = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/old/textcnn.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/old/textvae.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/preprocess.py
+-------------------------functions----------------------
+_preprocess_criteo(df, **kw)
+_preprocess_movielens(df, **kw)
+_preprocess_none(df, **kw)
+get_dataset(**kw)
+log(*s, n = 0, m = 1)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+test(data_path = "dataset/", pars_choice = 0)
+
+
+
+utilmy/zzml/mlmodels/model_keras/raw/no_03_textcnn.py
+-------------------------functions----------------------
+fit(model, Xtrain, ytrain, compute_pars = None, **kw)
+get_params(choice = "", data_path = "./dataset/", config_mode = "test", **kw)
+get_pre_train_word2vec(model, index2word, vocab_size)
+load(path)
+log(*s, n = 0, m = 1)
+metrics(ytrue, ypred, data_pars = None, out_pars = None, **kw)
+os_module_path()
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+predict(model, Xtest, ytest, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model, path)
+test(data_path = "dataset/", pars_choice = "json", reset = True)
+test2(data_path = "dataset/", pars_choice = "json", reset = True)
+
+-------------------------methods----------------------
+Model.__init__(self, embedding_matrix = None, vocab_size = None, model_pars = None)
+Model.model(self)
+data_loader.Generate_data(self, data_pars = None)
+data_loader.__init__(self, data_pars = None)
+data_loader.as_matrix(self, sequences, max_len, index2word)
+data_loader.clean_str(self, string)
+data_loader.load_data_and_labels(self)
+data_provider.__init__(self, data_loader, data_pars = None)
+data_provider.get_dataset(self, **kw)
+
+
+utilmy/zzml/mlmodels/model_keras/textcnn.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/02_cnn.py
+-------------------------functions----------------------
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(data_pars, **kw)
+get_params(choice = 0, data_path = "dataset/", **kw)
+load(load_pars = {})
+log(*s, n = 0, m = 1)
+metrics(ypred, model, session = None, model_pars = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", out_path = "keras/keras.png", reset = True)
+test2(data_path = "dataset/", out_path = "keras/keras.png", reset = True)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, compute_pars = None, data_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/Autokeras.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_dataset(data_pars)
+get_dataset_auto_mpg(data_pars)
+get_dataset_imbd(data_pars)
+get_dataset_titanic(data_pars)
+get_params(param_pars = None, **kw)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+test_single(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+Model_keras_empty.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/charcnn.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, save_pars = None, session = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/charcnn_zhang.py
+-------------------------functions----------------------
+evaluate(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+fit(model, data_pars = {}, compute_pars = {}, out_pars = {}, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = {}, out_pars = {}, compute_pars = {}, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/namentity_crm_bilstm.py
+-------------------------functions----------------------
+_preprocess_test(data_pars, **kw)
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars)
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/nbeats.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = None)
+main()
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, save_pars = None, session = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/textcnn.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/todo/textvae.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_keras/util.py
+-------------------------functions----------------------
+_config_process(data_path, config_mode = "test")
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, session = None, **kwargs)
+get_dataset(**kw)
+load(path)
+log(*s, n = 0, m = 1)
+metrics(ypred, data_pars, compute_pars = None, out_pars = None, **kwargs)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+predict(model, data_pars, compute_pars = None, out_pars = None, **kwargs)
+save(model, path)
+
+-------------------------methods----------------------
+Model_empty.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_rank/dev/LambdaRank.py
+-------------------------functions----------------------
+train(start_epoch = 0, additional_epoch = 100, lr = 0.0001, optim = "adam", leaky_relu = False, ndcg_gain_in_train = "exp2", sigma = 1.0, double_precision = False, standardize = False, small_dataset = False, debug = False, )
+
+-------------------------methods----------------------
+LambdaRank.__init__(self, net_structures, leaky_relu = False, sigma = 1.0, double_precision = False)
+LambdaRank.dump_param(self)
+LambdaRank.forward(self, input1)
+
+
+utilmy/zzml/mlmodels/model_rank/dev/RankNet.py
+-------------------------functions----------------------
+baseline_pairwise_training_loop(epoch, net, loss_func, optimizer, train_loader, batch_size = 100000, precision = torch.float32, device = "cpu", debug = False)
+eval_model(inference_model, device, df_valid, valid_loader)
+factorized_training_loop(epoch, net, loss_func, optimizer, train_loader, batch_size = 200, sigma = 1.0, training_algo = SUM_SESSION, precision = torch.float32, device = "cpu", debug = False)
+get_train_inference_net(train_algo, num_features, start_epoch, double_precision)
+load_from_ckpt(ckpt_file, epoch, model)
+train_rank_net(start_epoch = 0, additional_epoch = 100, lr = 0.0001, optim = "adam", train_algo = SUM_SESSION, double_precision = False, standardize = False, small_dataset = False, debug = False)
+
+-------------------------methods----------------------
+RankNet.__init__(self, net_structures, double_precision = False)
+RankNet.dump_param(self)
+RankNet.forward(self, input1)
+RankNetPairs.__init__(self, net_structures, double_precision = False)
+RankNetPairs.forward(self, input1, input2)
+
+
+utilmy/zzml/mlmodels/model_rank/dev/load_mslr.py
+-------------------------functions----------------------
+get_time()
+
+-------------------------methods----------------------
+DataLoader.__init__(self, path)
+DataLoader._load_mslr(self)
+DataLoader._parse_feature_and_label(self, df)
+DataLoader.apply_scaler(self, scaler)
+DataLoader.generate_batch_per_query(self, df = None)
+DataLoader.generate_query_batch(self, df, batchsize = 100000)
+DataLoader.generate_query_pair_batch(self, df = None, batchsize = 2000)
+DataLoader.generate_query_pairs(self, df, qid)
+DataLoader.get_num_pairs(self)
+DataLoader.get_num_sessions(self)
+DataLoader.load(self)
+DataLoader.train_scaler_and_transform(self)
+
+
+utilmy/zzml/mlmodels/model_rank/dev/metrics.py
+-------------------------methods----------------------
+DCG.__init__(self, k = 10, gain_type = 'exp2')
+DCG._get_discount(self, k)
+DCG._get_gain(self, targets)
+DCG._make_discount(n)
+DCG.evaluate(self, targets)
+NDCG.__init__(self, k = 10, gain_type = 'exp2')
+NDCG.evaluate(self, targets)
+NDCG.maxDCG(self, targets)
+
+
+utilmy/zzml/mlmodels/model_rank/dev/utils.py
+-------------------------functions----------------------
+eval_cross_entropy_loss(model, device, loader, phase = "Eval", sigma = 1.0)
+eval_ndcg_at_k(inference_model, device, df_valid, valid_loader, batch_size, k_list, phase = "Eval")
+get_args_parser()
+get_ckptdir(net_name, net_structure, sigma = None)
+get_device()
+init_weights(m)
+load_train_vali_data(data_fold, small_dataset = False)
+save_to_ckpt(ckpt_file, epoch, model, optimizer, lr_scheduler)
+str2bool(v)
+
+
+
+utilmy/zzml/mlmodels/model_sklearn/model_lightgbm/model.py
+-------------------------functions----------------------
+evaluate(data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+init(*kw, **kwargs)
+load(path = "")
+load_info(path = "")
+predict(data_pars = None, compute_pars = None, out_pars = None, **kw)
+reset()
+save(path = None, info = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_sklearn/model_sklearn/model.py
+-------------------------functions----------------------
+evaluate(data_pars = None, compute_pars = None, out_pars = None, verbose = False, **kw)
+fit(data_pars = None, compute_pars = None, out_pars = None, verbose = False, **kw)
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+init(*kw, **kwargs)
+json_parse(js)
+load(path = "")
+load_info(path = "")
+predict(data_pars = None, compute_pars = None, out_pars = None, verbose = False, **kw)
+preprocessor_ram(data_pars = None, task_type = "train", **kw)
+reset()
+save(path = None, info = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_sklearn/model_sklearn/myprocessor.py
+-------------------------functions----------------------
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+json_parse(js)
+process()
+test()
+
+
+
+utilmy/zzml/mlmodels/model_tch/matchZoo.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_data_loader(model_name, preprocessor, preprocess_pars, raw_data)
+get_dataset(_model, preprocessor, _preprocessor_pars, data_pars)
+get_glove_embedding_matrix(term_index, dimension)
+get_params(param_pars = None, **kw)
+get_raw_dataset(data_info, **args)
+get_task(model_pars, task)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+save(model, session = None, save_pars = None)
+test_train(data_path, pars_choice, model_name)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/old/03_nbeats_dataloader.py
+-------------------------functions----------------------
+Model(model_pars, data_pars, compute_pars)
+data_generator(x_full, y_full, bs)
+evaluate(model, data_pars, compute_pars, out_pars)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit_simple(net, optimiser, data_generator, on_save_callback, device, data_pars, out_pars, max_grad_steps = 500, )
+get_dataset(data_pars)
+get_params(param_pars, **kw)
+load(model, optimiser, CHECKPOINT_NAME = "nbeats-fiting-checkpoint.th")
+load_checkpoint(model, optimiser, CHECKPOINT_NAME = "nbeats-fiting-checkpoint.th")
+plot(net, x, target, backcast_length, forecast_length, grad_step, out_path = "./")
+plot_model(net, x, target, grad_step, data_pars, disable_plot = False)
+plot_predict(x_test, y_test, p, data_pars, compute_pars, out_pars)
+predict(model, sess, data_pars = None, compute_pars = None, out_pars = None, **kw)
+save(model, optimiser, grad_step, CHECKPOINT_NAME = "mycheckpoint")
+save_checkpoint(model, optimiser, grad_step, CHECKPOINT_NAME = "mycheckpoint")
+test(data_path = "dataset/milk.csv")
+
+
+
+utilmy/zzml/mlmodels/model_tch/old/matchzoo_models.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_data_loader(model_name, preprocessor, preprocess_pars, raw_data)
+get_glove_embedding_matrix(term_index, dimension)
+get_params(param_pars = None, **kw)
+get_raw_dataset(data_pars, task)
+get_task(model_pars)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None)
+save(model, session = None, save_pars = None)
+test_train(data_path, pars_choice, model_name)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/old/mlp.py
+-------------------------methods----------------------
+Model.__init__(self)
+Model.forward(self, x)
+
+
+utilmy/zzml/mlmodels/model_tch/old/nbeats.py
+-------------------------functions----------------------
+data_generator(x_full, y_full, bs)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit_simple(net, optimiser, data_generator, on_save_callback, device, data_pars, out_pars, max_grad_steps = 500)
+get_data(data_pars)
+get_dataset(**kw)
+get_params(param_pars, **kw)
+load(model, optimiser, CHECKPOINT_NAME = 'nbeats-fiting-checkpoint.th')
+load_checkpoint(model, optimiser, CHECKPOINT_NAME = 'nbeats-fiting-checkpoint.th')
+plot(net, x, target, backcast_length, forecast_length, grad_step, out_path = "./")
+plot_model(net, x, target, grad_step, data_pars, disable_plot = False)
+plot_predict(x_test, y_test, p, data_pars, compute_pars, out_pars)
+predict(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+save(model, optimiser, grad_step, CHECKPOINT_NAME = "mycheckpoint")
+save_checkpoint(model, optimiser, grad_step, CHECKPOINT_NAME = "mycheckpoint")
+test(choice = "json", data_path = "nbeats.json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/old/pplm.py
+-------------------------functions----------------------
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+generate(cond_text, bag_of_words, discrim = None, class_label = -1)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = None, **kw)
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/old/pytorch_vae.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = None, **kw)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, imax  =  1, return_ytrue = 1)
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/old/textcnn.py
+-------------------------functions----------------------
+_get_device()
+_train(m, device, train_itr, optimizer, epoch, max_epoch)
+_valid(m, device, test_itr)
+clean_str(string)
+create_data_iterator(tr_batch_size, val_batch_size, tabular_train, tabular_valid, d)
+create_tabular_dataset(path_train, path_valid, lang = 'en', pretrained_emb = 'glove.6B.300d')
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+fit(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_data_file()
+get_dataset(data_pars = None, out_pars = None, **kwargs)
+get_params(param_pars = None, **kw)
+load(load_pars =  None)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, return_ytrue = 1)
+save(model, session = None, save_pars = None)
+split_train_valid(path_data, path_train, path_valid, frac = 0.7)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+TextCNN.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+TextCNN.forward(self, x)
+TextCNN.rebuild_embed(self, vocab_built)
+
+
+utilmy/zzml/mlmodels/model_tch/old/torchhub.py
+-------------------------functions----------------------
+_get_device()
+_train(m, device, train_itr, criterion, optimizer, epoch, max_epoch, imax = 1)
+_valid(m, device, test_itr, criterion, imax = 1)
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_dataset(data_pars = None, **kw)
+get_dataset_mnist_torch(data_pars)
+get_params(param_pars = None, **kw)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, imax  =  1, return_ytrue = 1)
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+test2(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/old/transformer_classifier.py
+-------------------------functions----------------------
+_preprocess_XXXX(df, **kw)
+evaluate(model, tokenizer, model_pars, data_pars, out_pars, compute_pars, prefix = "")
+fit(train_dataset, model, tokenizer)
+get_dataset(task, tokenizer, evaluate = False)
+get_eval_report(labels, preds)
+get_mismatched(labels, preds)
+get_params(param_pars = {}, **kw)
+load(task, tokenizer, evaluate = False)
+load_and_cache_examples(task, tokenizer, evaluate = False)
+metrics(task_name, preds, labels)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path, model_pars, data_pars, compute_pars, out_pars, pars_choice = 0)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/old/transformer_sentence.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+fit2(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, model = None, **kw)
+get_params(param_pars, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+predict2(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_tch/textcnn.py
+-------------------------functions----------------------
+_get_device()
+_train(m, device, train_itr, optimizer, epoch, max_epoch)
+_valid(m, device, test_itr)
+analyze_datainfo_paths(data_info)
+clean_str(string)
+create_data_iterator(batch_size, tabular_train, tabular_valid, d)
+create_tabular_dataset(data_info, **args)
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+fit(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_data_file()
+get_dataset(data_pars = None, out_pars = None, **kwargs)
+get_params(param_pars = None, **kw)
+load(load_pars =  None)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, return_ytrue = 1)
+save(model, session = None, save_pars = None)
+split_train_valid(data_info, **args)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+TextCNN.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+TextCNN.forward(self, x)
+TextCNN.rebuild_embed(self, vocab_built)
+
+
+utilmy/zzml/mlmodels/model_tch/torchhub.py
+-------------------------functions----------------------
+_get_device()
+_train(m, device, train_itr, criterion, optimizer, epoch, max_epoch, imax = 1)
+_valid(m, device, test_itr, criterion, imax = 1)
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_config_file()
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = None, **kw)
+load(load_pars)
+predict(model, session = None, data_pars = None, compute_pars = None, out_pars = None, imax  =  1, return_ytrue = 1)
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+test2(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, out_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tch/transformer_sentence.py
+-------------------------functions----------------------
+evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+fit2(model, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, *args, **kw)
+get_dataset(data_pars = None, **kw)
+get_dataset2(data_pars = None, model = None, **kw)
+get_params(param_pars, **kw)
+load(load_pars = None)
+predict(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+predict2(model, session = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model, session = None, save_pars = None)
+test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_tch/util_data.py
+
+
+utilmy/zzml/mlmodels/model_tch/util_transformer.py
+-------------------------functions----------------------
+_truncate_seq_pair(tokens_a, tokens_b, max_length)
+convert_example_to_feature(example_row, pad_token = 0, sequence_a_segment_id = 0, sequence_b_segment_id = 1, cls_token_segment_id = 1, pad_token_segment_id = 0, mask_padding_with_zero = True, sep_token_extra = False)
+convert_examples_to_features(examples, label_list, max_seq_length, tokenizer, output_mode, cls_token_at_end = False, sep_token_extra = False, pad_on_left = False, cls_token = '[CLS]', sep_token = '[SEP]', pad_token = 0, sequence_a_segment_id = 0, sequence_b_segment_id = 1, cls_token_segment_id = 1, pad_token_segment_id = 0, mask_padding_with_zero = True, ) - 2))
+
+-------------------------methods----------------------
+BinaryProcessor._create_examples(self, lines, set_type)
+BinaryProcessor.get_dev_examples(self, data_dir)
+BinaryProcessor.get_labels(self)
+BinaryProcessor.get_train_examples(self, data_dir)
+DataProcessor._read_tsv(cls, input_file, quotechar = None)
+DataProcessor.get_dev_examples(self, data_dir)
+DataProcessor.get_labels(self)
+DataProcessor.get_train_examples(self, data_dir)
+InputExample.__init__(self, guid, text_a, text_b = None, label = None)
+InputFeatures.__init__(self, input_ids, input_mask, segment_ids, label_id)
+TransformerDataReader.__init__(self, **args)
+TransformerDataReader.compute(self, input_tmp)
+TransformerDataReader.get_data(self)
+
+
+utilmy/zzml/mlmodels/model_tch/zdocs/transformer_classifier2.py
+-------------------------functions----------------------
+_preprocess_XXXX(df, **kw)
+evaluate(model, tokenizer, prefix = "")
+fit(model, data_pars = None, model_pars = {}, compute_pars = None, out_pars = None, *args, **kw)
+get_dataset(data_pars = None, **kw)
+get_eval_report(labels, preds)
+get_mismatched(labels, preds)
+get_params(choice = 0, data_path = "dataset/", **kw)
+load(out_pars = None)
+metrics(task_name, preds, labels)
+metrics_evaluate()
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+predict(model, sess = None, data_pars = None, out_pars = None, compute_pars = None, **kw)
+reset_model()
+save(model, out_pars)
+test(data_path = "dataset/", pars_choice = 0)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None)
+Model_empty.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/model_tf/1_lstm.py
+-------------------------functions----------------------
+evaluate(data_pars = None, compute_pars = None, out_pars = None)
+fit(data_pars = None, compute_pars = None, out_pars = None, **kwarg)
+get_dataset(data_pars = None)
+get_params(param_pars = {}, **kw)
+init(*kw, **kwargs)
+load(load_pars = None)
+metrics(data_pars = None, compute_pars = None, out_pars = None)
+predict(data_pars = None, compute_pars = None, out_pars = None, get_hidden_state = False, init_value = None)
+reset_model()
+save(save_pars = None)
+test(data_path = "dataset/", pars_choice = "test01", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/10_encoder_vanilla.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame)
+reducedimension(input_, dimension = 2, learning_rate = 0.01, hidden_layer = 256, epoch = 20)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+Model.build_model(self)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/11_bidirectional_vanilla.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/12_vanilla_2path.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/13_lstm_seq2seq.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/14_lstm_attention.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, attention_size = 10, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/15_lstm_seq2seq_attention.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, attention_size = 10, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/16_lstm_seq2seq_bidirectional.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/17_lstm_seq2seq_bidirectional_attention.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, attention_size = 10, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/18_lstm_attention_scaleddot.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, seq_len, forget_bias = 0.1, epoch = 500, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/19_lstm_dilated.py
+-------------------------functions----------------------
+contruct_cells(hidden_structs)
+dilated_rnn(cell, inputs, rate, states, scope = "default")
+fit(model, data_frame)
+multi_dilated_rnn(cells, inputs, dilations, states)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+rnn_reformat(x, input_dims, n_steps)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, steps, dimension_input, dimension_output, learning_rate = 0.001, hidden_structs = [20], dilations = [1, 1, 1, 1], epoch = 500, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/20_only_attention.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame)
+sinusoidal_positional_encoding(inputs, num_units, zero_pad = False, scale = False)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, seq_len, learning_rate, dimension_input, dimension_output, epoch = 100)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/21_multihead_attention.py
+-------------------------functions----------------------
+embed_seq(inputs, vocab_size = None, embed_dim = None, zero_pad = False, scale = False)
+fit(model, data_frame)
+layer_norm(inputs, epsilon = 1e-8)
+learned_positional_encoding(inputs, embed_dim, zero_pad = False, scale = False)
+pointwise_feedforward(inputs, num_units = [None, None], activation = None)
+predict(model, sess, data_frame)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, dimension_input, dimension_output, seq_len, learning_rate, num_heads = 8, 1, 6), epoch = 1, )
+Model.multihead_attn(self, inputs, masks)
+Model.window_mask(self, h_w)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/22_lstm_bahdanau.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, attention_size = 10, epoch = 100, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/23_lstm_luong.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, attention_size = 10, epoch = 100, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/24_lstm_luong_bahdanau.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, attention_size = 10, epoch = 1, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/25_dnc.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, size, size_layer, output_size, epoch, timestep, access_config, controller_config, clip_value, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/26_lstm_residual.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, epoch = 1, timestep = 5)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/27_byte_net.py
+-------------------------functions----------------------
+bytenet_residual_block(input_, dilation, layer_no, residual_channels, filter_width, causal = True)
+conv1d(input_, output_channels, dilation = 1, filter_width = 1, causal = False)
+fit(model, data_frame)
+layer_normalization(x, epsilon = 1e-8)
+predict(model, sess, data_frame)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, size, output_size, channels, encoder_dilations, encoder_filter_width, learning_rate = 0.001, beta1 = 0.5, epoch = 1, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/28_attention_is_all_you_need.py
+-------------------------functions----------------------
+fit(model, data_frame)
+label_smoothing(inputs, epsilon = 0.1)
+layer_norm(inputs, epsilon = 1e-8)
+learned_position_encoding(inputs, mask, embed_dim)
+multihead_attn(queries, keys, q_masks, k_masks, future_binding, num_units, num_heads)
+pointwise_feedforward(inputs, hidden_units, activation = None)
+predict(model, sess, data_frame)
+sinusoidal_position_encoding(inputs, mask, repr_dim)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, size_layer, embedded_size, learning_rate, size, output_size, num_blocks = 2, num_heads = 8, min_freq = 50, epoch = 1, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/29_fairseq.py
+-------------------------functions----------------------
+decoder_block(inp, n_hidden, filter_size)
+encoder_block(inp, n_hidden, filter_size)
+fit(model, data_frame)
+glu(x)
+layer(inp, conv_block, kernel_width, n_hidden, residual = None)
+predict(model, sess, data_frame)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, n_layers, size, output_size, emb_size, n_hidden, n_attn_heads, learning_rate, epoch = 1, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/2_encoder_lstm.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame)
+reducedimension(input_, dimension = 2, learning_rate = 0.01, hidden_layer = 256, epoch = 20, sess = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 5, timestep = 5, )
+Model.build_model(self)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/3_bidirectional_lstm.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/4_lstm_2path.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, timestep = 5, epoch = 10, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/50lstm attention.py
+-------------------------functions----------------------
+softmax_activation(x)
+
+-------------------------methods----------------------
+AttentionModel.__init__(self, x, y, layer_1_rnn_units, attn_dense_nodes = 0, epochs = 100, batch_size = 128, shared_attention_layer = True, chg_yield = False, float_type = 'float32', 0.00001, '00001'), window = 52, predict = 1)
+AttentionModel.build_attention_rnn(self)
+AttentionModel.calculate_attentions(self, x_data)
+AttentionModel.delete_model(self)
+AttentionModel.fit_model(self)
+AttentionModel.heatmap(self, data, title_supplement = None)
+AttentionModel.load_model(self)
+AttentionModel.make_shared_layers(self)
+AttentionModel.save_model(self)
+AttentionModel.set_learning(self, learning)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/5_gru.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 1, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/6_encoder_gru.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame)
+reducedimension(input_, dimension = 2, learning_rate = 0.01, hidden_layer = 256, epoch = 20)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, timestep = 5, epoch = 1, )
+Model.build_model(self)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/7_bidirectional_gru.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/8_gru_2path.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value_forward = None, init_value_backward = None, )
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/9_vanilla.py
+-------------------------functions----------------------
+fit(model, data_frame)
+predict(model, sess, data_frame, get_hidden_state = False, init_value = None)
+test(filename = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias = 0.1, epoch = 500, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/model_tf/raw/access.py
+-------------------------functions----------------------
+_erase_and_write(memory, address, reset_weights, values)
+
+-------------------------methods----------------------
+MemoryAccess.__init__(self, memory_size = 128, word_size = 20, num_reads = 1, num_writes = 1, name = "memory_access")
+MemoryAccess._build(self, inputs, prev_state)
+MemoryAccess._read_inputs(self, inputs)
+MemoryAccess._read_weights(self, inputs, memory, prev_read_weights, link)
+MemoryAccess._write_weights(self, inputs, memory, usage)
+MemoryAccess.output_size(self)
+MemoryAccess.state_size(self)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/addressing.py
+-------------------------functions----------------------
+_vector_norms(m)
+weighted_softmax(activations, strengths, strengths_op)
+
+-------------------------methods----------------------
+CosineWeights.__init__(self, num_heads, word_size, strength_op = tf.nn.softplus, name = "cosine_weights")
+CosineWeights._build(self, memory, keys, strengths)
+Freeness.__init__(self, memory_size, name = "freeness")
+Freeness._allocation(self, usage)
+Freeness._build(self, write_weights, free_gate, read_weights, prev_usage)
+Freeness._usage_after_read(self, prev_usage, free_gate, read_weights)
+Freeness._usage_after_write(self, prev_usage, write_weights)
+Freeness.state_size(self)
+Freeness.write_allocation_weights(self, usage, write_gates, num_writes)
+TemporalLinkage.__init__(self, memory_size, num_writes, name = "temporal_linkage")
+TemporalLinkage._build(self, write_weights, prev_state)
+TemporalLinkage._link(self, prev_link, prev_precedence_weights, write_weights)
+TemporalLinkage._precedence_weights(self, prev_precedence_weights, write_weights)
+TemporalLinkage.directional_read_weights(self, link, prev_read_weights, forward)
+
+
+utilmy/zzml/mlmodels/model_tf/raw/autoencoder.py
+-------------------------functions----------------------
+reducedimension(input_, dimension = 2, learning_rate = 0.01, hidden_layer = 256, epoch = 20)
+
+
+
+utilmy/zzml/mlmodels/model_tf/raw/convert_ipny_cli.py
+-------------------------functions----------------------
+Run()
+check(file_list, dump = False)
+convert_topython(source_files, data_file, out_dir)
+scan(data_file)
+
+
+
+utilmy/zzml/mlmodels/model_tf/raw/dnc.py
+-------------------------methods----------------------
+DNC.__init__(self, access_config, controller_config, output_size, clip_value = None, name = "dnc")
+DNC._build(self, inputs, prev_state)
+DNC._clip_if_enabled(self, x)
+DNC.initial_state(self, batch_size, dtype = tf.float32)
+DNC.output_size(self)
+DNC.state_size(self)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/0_template_rl.py
+-------------------------functions----------------------
+do_action_example(action_dict)
+fit(model, df, do_action, state_initial = None, reward_initial = None, params = None)
+predict(model, sess, df, do_action = None, params =  params)
+val(x, y)
+
+-------------------------methods----------------------
+Agent.__init__(self, history, do_action, params = {})
+Agent.discount_rewards(self, r)
+Agent.get_predicted_action(self, sequence)
+Agent.get_state(self, t, state = None, history = None, reward = None)
+Agent.predict_action(self, inputs)
+Agent.run_sequence(self, history, do_action, params)
+Agent.train(self, n_iters = 1, n_log_freq = 1, state_initial = None, reward_initial = None)
+Model.__init__(self, history, params = {})
+to_name.__init__(self, adict)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/1.turtle-agent.py
+-------------------------functions----------------------
+buy_stock(real_movement, signal, initial_money = 10000, max_buy = 20, max_sell = 20)
+
+
+
+utilmy/zzml/mlmodels/model_tf/rl/10.duel-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip, batch_size)
+Agent.act(self, state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.replay(self, batch_size)
+Agent.train(self, iterations, checkpoint, initial_money)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/11.double-duel-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, done)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_predicted_action(self, sequence)
+Agent.get_state(self, t)
+Agent.predict(self, inputs)
+Agent.train(self, iterations, checkpoint, initial_money)
+Model.__init__(self, input_size, output_size, layer_size, learning_rate)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/12.duel-recurrent-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead, rnn_state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/13.double-duel-recurrent-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self, from_name, to_name)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead, rnn_state)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+Model.__init__(self, input_size, output_size, layer_size, learning_rate, name)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/14.actor-critic-agent.py
+-------------------------methods----------------------
+Actor.__init__(self, name, input_size, output_size, size_layer)
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self, from_name, to_name)
+Agent._construct_memories_and_train(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+Critic.__init__(self, name, input_size, output_size, size_layer, learning_rate)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/15.actor-critic-duel-agent.py
+-------------------------methods----------------------
+Actor.__init__(self, name, input_size, output_size, size_layer)
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self, from_name, to_name)
+Agent._construct_memories_and_train(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+Critic.__init__(self, name, input_size, output_size, size_layer, learning_rate)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/16.actor-critic-recurrent-agent.py
+-------------------------methods----------------------
+Actor.__init__(self, name, input_size, output_size, size_layer)
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self, from_name, to_name)
+Agent._construct_memories_and_train(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead, rnn_state)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+Critic.__init__(self, name, input_size, output_size, size_layer, learning_rate)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/17.actor-critic-duel-recurrent-agent.py
+-------------------------methods----------------------
+Actor.__init__(self, name, input_size, output_size, size_layer)
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self, from_name, to_name)
+Agent._construct_memories_and_train(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead, rnn_state)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+Critic.__init__(self, name, input_size, output_size, size_layer, learning_rate)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/18.curiosity-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, done)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_predicted_action(self, sequence)
+Agent.get_state(self, t)
+Agent.predict(self, inputs)
+Agent.train(self, iterations, checkpoint, initial_money)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/19.recurrent-curiosity-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, done, rnn_state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/2.moving-average-agent.py
+-------------------------functions----------------------
+buy_stock(real_movement, signal, initial_money = 10000, max_buy = 20, max_sell = 20)
+
+
+
+utilmy/zzml/mlmodels/model_tf/rl/20.duel-curiosity-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, done)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_predicted_action(self, sequence)
+Agent.get_state(self, t)
+Agent.predict(self, inputs)
+Agent.train(self, iterations, checkpoint, initial_money)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/21.neuro-evolution-agent.py
+-------------------------functions----------------------
+feed_forward(X, nets)
+relu(X)
+softmax(X)
+
+-------------------------methods----------------------
+NeuroEvolution.__init__(self, population_size, mutation_rate, model_generator, state_size, window_size, trend, skip, initial_money, )
+NeuroEvolution._initialize_population(self)
+NeuroEvolution.act(self, p, state)
+NeuroEvolution.buy(self, individual)
+NeuroEvolution.calculate_fitness(self)
+NeuroEvolution.crossover(self, parent1, parent2)
+NeuroEvolution.evolve(self, generations = 20, checkpoint = 5)
+NeuroEvolution.get_state(self, t)
+NeuroEvolution.inherit_weights(self, parent, child)
+NeuroEvolution.mutate(self, individual, scale = 1.0)
+neuralnetwork.__init__(self, id_, hidden_size = 128)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/22.neuro-evolution-novelty-search-agent.py
+-------------------------functions----------------------
+feed_forward(X, nets)
+relu(X)
+softmax(X)
+
+-------------------------methods----------------------
+NeuroEvolution.__init__(self, population_size, mutation_rate, model_generator, state_size, window_size, trend, skip, initial_money, )
+NeuroEvolution._initialize_population(self)
+NeuroEvolution._memorize(self, q, i, limit)
+NeuroEvolution.act(self, p, state)
+NeuroEvolution.buy(self, individual)
+NeuroEvolution.calculate_fitness(self)
+NeuroEvolution.crossover(self, parent1, parent2)
+NeuroEvolution.evaluate(self, individual, backlog, pop, k = 4)
+NeuroEvolution.evolve(self, generations = 20, checkpoint = 5)
+NeuroEvolution.get_state(self, t)
+NeuroEvolution.inherit_weights(self, parent, child)
+NeuroEvolution.mutate(self, individual, scale = 1.0)
+neuralnetwork.__init__(self, id_, hidden_size = 128)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/3.signal-rolling-agent.py
+-------------------------functions----------------------
+buy_stock(real_movement, delay = 5, initial_state = 1, initial_money = 10000, max_buy = 20, max_sell = 20)
+
+
+
+utilmy/zzml/mlmodels/model_tf/rl/4.policy-gradient-agent_old.py
+-------------------------functions----------------------
+do_action_example(action_dict)
+fit(model, df, do_action)
+predict(model, sess, df, do_action)
+test(filename =  'dataset/GOOG-year.csv')
+
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent.buy(self, initial_money)
+Agent.discount_rewards(self, r)
+Agent.get_predicted_action(self, sequence)
+Agent.get_state(self, t, reward_state = None)
+Agent.predict(self, inputs)
+Agent.predict_sequence(self, trend_input, do_action, param = None)
+Agent.train(self, iterations, checkpoint, initial_money)
+Model.__init__(self, state_size, window_size, trend, skip, iterations, initial_reward)
+to_name.__init__(self, adict)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/4_policy-gradient-agent.py
+-------------------------functions----------------------
+fit(model, dftrain, params = {})
+predict(model, sess, dftest, params = {})
+test(filename =  'dataset/GOOG-year.csv')
+
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent.discount_rewards(self, r)
+Agent.get_predicted_action(self, sequence)
+Agent.get_state(self, t, reward_state = None)
+Agent.predict(self, inputs)
+Agent.predict_sequence(self, pars, trend_history = None)
+Agent.train(self, iterations, checkpoint, initial_money)
+Model.__init__(self, state_size, window_size, trend, skip, iterations, initial_reward, checkpoint  =  10)
+to_name.__init__(self, adict)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/5_q-learning-agent.py
+-------------------------functions----------------------
+fit(model, dftrain, params = {})
+predict(model, sess, dftest, params = {})
+test(filename =  '../dataset/GOOG-year.csv')
+
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip, batch_size)
+Agent.act(self, state)
+Agent.get_state(self, t)
+Agent.predict_sequence(self, pars, trend_history = None)
+Agent.replay(self, batch_size)
+Agent.train(self, iterations, checkpoint, initial_money)
+Model.__init__(self, state_size, window_size, trend, skip, iterations, initial_reward, checkpoint  =  10)
+to_name.__init__(self, adict)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/6_evolution-strategy-agent.py
+-------------------------functions----------------------
+fit(model, dftrain, params = {})
+get_imports()
+predict(model, sess, dftest, params = {})
+test(filename =  '../dataset/GOOG-year.csv')
+
+-------------------------methods----------------------
+Agent.__init__(self, model, window_size, trend, skip, initial_money)
+Agent.act(self, sequence)
+Agent.fit(self, iterations, checkpoint)
+Agent.get_reward(self, weights)
+Agent.get_state(self, t)
+Agent.run_sequence(self, df_test)
+Deep_Evolution_Strategy.__init__(self, weights, reward_function, population_size, sigma, learning_rate)
+Deep_Evolution_Strategy._get_weight_from_population(self, weights, population)
+Deep_Evolution_Strategy.get_weights(self)
+Deep_Evolution_Strategy.train(self, epoch = 100, print_every = 1)
+Model.__init__(self, input_size, layer_size, output_size, window_size, skip, initial_money, iterations = 500, checkpoint = 10)
+Model.get_weights(self)
+Model.predict(self, inputs)
+Model.set_weights(self, weights)
+to_name.__init__(self, adict)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/7.double-q-learning-agent.py
+-------------------------functions----------------------
+fit(model, dftrain, params = {})
+predict(model, sess, dftest, params = {})
+test(filename =  '../dataset/GOOG-year.csv')
+
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, done)
+Agent._select_action(self, state)
+Agent.get_predicted_action(self, sequence)
+Agent.get_state(self, t)
+Agent.predict(self, inputs)
+Agent.run_sequence(self, initial_money)
+Agent.train(self, iterations, checkpoint, initial_money)
+Model.__init__(self, window_size, trend, skip, iterations, initial_reward, checkpoint  =  10)
+QModel.__init__(self, input_size, output_size, layer_size, learning_rate)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/8.recurrent-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead, rnn_state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/9.double-recurrent-q-learning-agent.py
+-------------------------methods----------------------
+Agent.__init__(self, state_size, window_size, trend, skip)
+Agent._assign(self, from_name, to_name)
+Agent._construct_memories(self, replay)
+Agent._memorize(self, state, action, reward, new_state, dead, rnn_state)
+Agent._select_action(self, state)
+Agent.buy(self, initial_money)
+Agent.get_state(self, t)
+Agent.train(self, iterations, checkpoint, initial_money)
+Model.__init__(self, input_size, output_size, layer_size, learning_rate, name)
+
+
+utilmy/zzml/mlmodels/model_tf/rl/updated-NES-google.py
+-------------------------functions----------------------
+act(model, sequence)
+f(w)
+get_state(data, t, n)
+
+-------------------------methods----------------------
+Agent.__init__(self, model, money, max_buy, max_sell, close, window_size, skip)
+Agent.act(self, sequence)
+Agent.buy(self)
+Agent.fit(self, iterations, checkpoint)
+Agent.get_reward(self, weights)
+Deep_Evolution_Strategy.__init__(self, weights, reward_function, population_size, sigma, learning_rate)
+Deep_Evolution_Strategy._get_weight_from_population(self, weights, population)
+Deep_Evolution_Strategy.get_weights(self)
+Deep_Evolution_Strategy.train(self, epoch = 100, print_every = 1)
+Model.__init__(self, input_size, layer_size, output_size)
+Model.get_weights(self)
+Model.predict(self, inputs)
+Model.set_weights(self, weights)
+
+
+utilmy/zzml/mlmodels/model_tf/util.py
+-------------------------functions----------------------
+batch_gather(values, indices)
+batch_invert_permutation(permutations)
+one_hot(length, index)
+os_file_path(data_path)
+os_module_path()
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+set_root_dir()
+
+
+
+utilmy/zzml/mlmodels/models.py
+-------------------------functions----------------------
+cli_load_arguments(config_file = None)
+config_generate_json(modelname, to_path = "ztest/new_model/")
+config_get_pars(config_file, config_mode = "test")
+config_init(to_path = ".")
+config_model_list(folder = None)
+evaluate(module, data_pars = None, compute_pars = None, out_pars = None, **kwarg)
+fit(module, data_pars = None, compute_pars = None, out_pars = None, **kwarg)
+fit_cli(arg)
+get_params(module, params_pars, **kwarg)
+load(module, load_pars, **kwarg)
+main()
+metrics(module, data_pars = None, compute_pars = None, out_pars = None, **kwarg)
+model_create(module, model_pars = None, data_pars = None, compute_pars = None, **kwarg)
+module_env_build(model_uri = "", verbose = 0, do_env_build = 0)
+module_load(model_uri = "", verbose = 0, env_build = 0)
+module_load_full(model_uri = "", model_pars = None, data_pars = None, compute_pars = None, choice = None, **kwarg)
+predict(module, data_pars = None, compute_pars = None, out_pars = None, **kwarg)
+predict_cli(arg)
+save(module, save_pars, **kwarg)
+test(folder = None)
+test_all(folder = None)
+test_api(model_uri = "model_xxxx/yyyy.py", param_pars = None)
+test_cli(arg)
+test_global(modelname)
+test_module(model_uri = "model_xxxx/yyyy.py", param_pars = None, fittable  =  True)
+
+
+
+utilmy/zzml/mlmodels/optim.py
+-------------------------functions----------------------
+cli()
+cli_load_arguments(config_file = None)
+main()
+optim(model_uri = "model_tf.1_lstm", hypermodel_pars = {}, model_pars = {}, data_pars = {}, compute_pars = {}, out_pars = {})
+optim_cli(arg)
+optim_optuna(model_uri = "model_tf.1_lstm.py", hypermodel_pars = {"engine_pars" =  {"engine_pars": {}}, model_pars       =  {}, data_pars        =  {}, compute_pars     =  {}, # only Model parsout_pars         =  {})
+post_process_best(model, module, model_uri, model_pars_update, data_pars, compute_pars, out_pars)
+test_all()
+test_json(path_json = "", config_mode = "test")
+
+
+
+utilmy/zzml/mlmodels/pipeline.py
+-------------------------functions----------------------
+drop_cols(df, cols = None, **kw)
+generate_data(df, num_data = 0, means = [], cov = [[1, 0], [0, 1]])
+get_params(choice = "", data_path = "dataset/", config_mode = "test", **kw)
+load_model(path)
+log(*s, n = 0, m = 1)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+pd_concat(df1, df2, colid1)
+pd_na_values(df, cols = None, default = 0.0, **kw)
+pipe_checkpoint(df, **kw)
+pipe_load(df, **in_pars)
+pipe_merge(in_pars, out_pars, compute_pars = None, **kw)
+pipe_run_inference(pipe_list, in_pars, out_pars, compute_pars = None, checkpoint = True, **kw)
+pipe_split(in_pars, out_pars, compute_pars, **kw)
+save_model(model, path)
+test(data_path = "/dataset/", pars_choice = "colnum")
+
+-------------------------methods----------------------
+Pipe.__init__(self, pipe_list, in_pars, out_pars, compute_pars = None, **kw)
+Pipe.get_checkpoint(self)
+Pipe.get_fitted_pipe_list(self, key = "")
+Pipe.get_model_path(self)
+Pipe.run(self)
+
+
+utilmy/zzml/mlmodels/preprocess/generic.py
+-------------------------functions----------------------
+create_kerasDataloader()
+get_dataset_keras(data_info, **args)
+get_dataset_torch(data_info, **args)
+get_model_embedding(data_info, **args)
+get_model_embedding(data_info, **args)
+log2(*v, **kw)
+pandas_reader(task, path, colX, coly, path_eval = None, train_size = 0.8)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+text_create_tabular_dataset(path_train, path_valid, lang = 'en', pretrained_emb = 'glove.6B.300d')
+tf_dataset_download(data_info, **args)
+torch_datasets_wrapper(sets, args_list  =  None, **args)
+
+-------------------------methods----------------------
+Custom_DataLoader.__init__(self, dataset = None, batch_size = -1, shuffle = True, drop_last = False)
+Custom_DataLoader.__iter__(self)
+NumpyDataset.__getitem__(self, index)
+NumpyDataset.__init__(self, root = "", train = True, transform = None, target_transform = None, download = False, data_info = {}, **args)
+NumpyDataset.__len__(self)
+NumpyDataset.get_data(self)
+pandasDataset.__init__(self, root = "", train = True, transform = None, target_transform = None, download = False, data_info = {}, **args)
+pandasDataset.__len__(self)
+pandasDataset.get_data(self)
+pandasDataset.shuffle(self, frac = 1.0, random_state = 123)
+
+
+utilmy/zzml/mlmodels/preprocess/generic_old.py
+-------------------------functions----------------------
+create_kerasDataloader()
+get_dataset_keras(data_pars)
+get_dataset_torch(data_pars)
+get_model_embedding(model_pars, data_pars)
+load_function(uri_name = "path_norm")
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+text_create_tabular_dataset(path_train, path_valid, lang = 'en', pretrained_emb = 'glove.6B.300d')
+tf_dataset_download(data_pars)
+torch_datasets_wrapper(sets, args_list  =  None, **args)
+
+-------------------------methods----------------------
+NumpyDataset.__init__(self, root = "", train = True, transform = None, target_transform = None, download = False, data_pars = None)
+
+
+utilmy/zzml/mlmodels/preprocess/image.py
+-------------------------functions----------------------
+torch_transform_data_augment(fixed_scale  =  256, train  =  False)
+torch_transform_generic(fixed_scale  =  256, train  =  False)
+torch_transform_mnist()
+torchvision_dataset_MNIST_load(path, **args)
+
+
+
+utilmy/zzml/mlmodels/preprocess/keras_dataloader/dataloader.py
+-------------------------functions----------------------
+default_collate_fn(samples)
+
+-------------------------methods----------------------
+DataGenerator.__getitem__(self, index)
+DataGenerator.__init__(self, dataset: Dataset, collate_fn = default_collate_fn, batch_size = 32, shuffle = True, num_workers = 0, replacement: bool  =  False, )
+DataGenerator.__len__(self)
+DataGenerator.on_epoch_end(self)
+
+
+utilmy/zzml/mlmodels/preprocess/keras_dataloader/dataset.py
+-------------------------methods----------------------
+ConcatDataset.__getitem__(self, idx)
+ConcatDataset.__init__(self, datasets)
+ConcatDataset.__len__(self)
+ConcatDataset.cummulative_sizes(self)
+ConcatDataset.cumsum(sequence)
+Dataset.__add__(self, other)
+Dataset.__getitem__(self, index)
+Dataset.__init__(self, dtype = 'float32')
+Dataset.__len__(self)
+
+
+utilmy/zzml/mlmodels/preprocess/tabular_keras.py
+-------------------------functions----------------------
+check_model(model, model_name, x, y, check_model_io = True)
+gen_sequence(dim, max_len, sample_size)
+get_test_data(sample_size = 1000, embedding_size = 4, sparse_feature_num = 1, dense_feature_num = 1, sequence_feature = None, classification = True, include_length = False, hash_flag = False, prefix = '', use_group = False)
+get_xy_fd_dien(use_neg = False, hash_flag = False)
+get_xy_fd_din(hash_flag = False)
+get_xy_fd_dsin(hash_flag = False)
+has_arg(fn, name, accept_all = False)
+layer_test(layer_cls, kwargs = {}, input_shape = None, input_dtype = None, input_data = None, expected_output = None, expected_output_dtype = None, fixed_batch_size = False, supports_masking = False)
+
+
+
+utilmy/zzml/mlmodels/preprocess/text_keras.py
+-------------------------functions----------------------
+_remove_long_seq(maxlen, seq, label)
+
+-------------------------methods----------------------
+IMDBDataset.__init__(self, *args, **kwargs)
+IMDBDataset.compute(self, data)
+IMDBDataset.get_data(self)
+Preprocess_namentity.__init__(self, max_len, **args)
+Preprocess_namentity.compute(self, df)
+Preprocess_namentity.get_data(self)
+
+
+utilmy/zzml/mlmodels/preprocess/text_torch.py
+-------------------------functions----------------------
+clean_str(string)
+imdb_spacy_tokenizer(text, lang = "en")
+test_onehot_sentences(data, max_len)
+test_pandas_fillna(data, **args)
+test_word_categorical_labels_per_sentence(data, max_len)
+test_word_count(data)
+
+
+
+utilmy/zzml/mlmodels/preprocess/timeseries.py
+-------------------------functions----------------------
+benchmark_m4()
+create_startdate(date = "2011-01-29", freq = "1D", n_timeseries = 1)
+gluonts_create_dataset(train_timeseries_list, start_dates_list, train_dynamic_list, train_static_list, freq = "D")
+gluonts_create_dynamic(df_dynamic, submission = True, single_pred_length = 28, submission_pred_length = 10, n_timeseries = 1, transpose = 1)
+gluonts_create_static(df_static, submission = 1, single_pred_length = 28, submission_pred_length = 10, n_timeseries = 1, transpose = 1)
+gluonts_create_timeseries(df_timeseries, submission = 1, single_pred_length = 28, submission_pred_length = 10, n_timeseries = 1, transpose = 1)
+gluonts_dataset_to_pandas(dataset_name_list = ["m4_hourly", "m4_daily", "m4_weekly", "m4_monthly", "m4_quarterly", "m4_yearly", ])
+gluonts_to_pandas(ds)
+pandas_to_gluonts(df, pars = None)
+pandas_to_gluonts_multiseries(df_timeseries, df_dynamic, df_static, pars={'submission' = {'submission':True, 'single_pred_length':28, 'submission_pred_length':10, 'n_timeseries':1, 'start_date':"2011-01-29", 'freq':"1D"})
+pd_clean(df, cols = None, pars = None)
+pd_clean_v1(df, cols = None, pars = None)
+pd_interpolate(df, cols, pars={"method" = {"method": "linear", "limit_area": "inside"  })
+pd_load(path)
+pd_reshape(test, features, target, pred_len, m_feat)
+preprocess_timeseries_m5(data_path = None, dataset_name = None, pred_length = 10, item_id = None)
+preprocess_timeseries_m5b()
+save_to_file(path, data)
+test_gluonts()
+test_gluonts2()
+time_train_test_split(df, **kw)
+time_train_test_split2(df, **kw)
+tofloat(x)
+
+-------------------------methods----------------------
+Preprocess_nbeats.__init__(self, backcast_length, forecast_length)
+Preprocess_nbeats.compute(self, df)
+Preprocess_nbeats.get_data(self)
+SklearnMinMaxScaler.__init__(self, **args)
+SklearnMinMaxScaler.compute(self, df)
+SklearnMinMaxScaler.get_data(self)
+
+
+utilmy/zzml/mlmodels/preprocess/ztemp.py
+-------------------------functions----------------------
+batch_generator(iterable, n = 1)
+custom_dataset()
+get_loader(fix_length, vocab_threshold, batch_size)
+image_dir_load(path)
+pandas_dataset()
+pickle_load(file)
+text_dataloader()
+
+-------------------------methods----------------------
+DataLoader.__getitem__(self, key)
+DataLoader.__init__(self, data_pars)
+DataLoader._interpret_input_pars(self, input_pars)
+DataLoader._interpret_output(self, output, intermediate_output)
+DataLoader._load_data(self, loader)
+DataLoader._name_outputs(self, names, outputs)
+DataLoader._split_data(self)
+DataLoader.compute(self)
+DataLoader.get_data(self, intermediate = False)
+MNIST.__getitem__(self, index)
+MNIST.__init__(self, root, train = True, transform = None, target_transform = None, download = False)
+MNIST.__len__(self)
+MNIST._check_exists(self)
+MNIST.class_to_idx(self)
+MNIST.download(self)
+MNIST.extra_repr(self)
+MNIST.processed_folder(self)
+MNIST.raw_folder(self)
+MNIST.test_data(self)
+MNIST.test_labels(self)
+MNIST.train_data(self)
+MNIST.train_labels(self)
+
+
+utilmy/zzml/mlmodels/preprocessor.py
+-------------------------methods----------------------
+MissingDataPreprocessorError.__init__(self)
+Preprocessor.__init__(self, preprocessor_dict)
+Preprocessor._interpret_preprocessor_dict(self, pars)
+Preprocessor._name_outputs(self, names, outputs)
+Preprocessor.fit_transform(self, data)
+Preprocessor.transform(self, data)
+PreprocessorNotFittedError.__init__(self)
+
+
+utilmy/zzml/mlmodels/template/00_template_keras.py
+-------------------------functions----------------------
+_preprocess_XXXX(df, **kw)
+fit(model, session = None, data_pars = None, model_pars = None, compute_pars = None, out_pars = None, **kwargs)
+get_dataset(**kw)
+get_params(choice = 0, data_path = "dataset/", **kw)
+load(path)
+log(*s, n = 0, m = 1)
+metrics(ypred, data_pars, compute_pars = None, out_pars = None, **kwargs)
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+path_setup(out_folder = "", sublevel = 0, data_path = "dataset/")
+predict(model, data_pars, compute_pars = None, out_pars = None, **kwargs)
+reset_model()
+save(model, path)
+test(data_path = "dataset/", pars_choice = 0)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None, **kwargs)
+Model_empty.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/template/model_xxx.py
+-------------------------functions----------------------
+evaluate(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit(model, data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, **kw)
+get_params(param_pars = {}, **kw)
+load(load_pars = {})
+predict(model, sess = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
+reset_model()
+save(model = None, session = None, save_pars = {})
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/template/zarchive/gluonts_model.py
+-------------------------functions----------------------
+get_params(choice = 0, data_path = "dataset/", **kw)
+test(data_path = "dataset/", out_path = "GLUON/gluon.png", reset = True)
+test2(data_path = "dataset/", out_path = "GLUON/gluon.png", reset = True)
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/template/zarchive/model_tf_sequential.py
+-------------------------functions----------------------
+fit(model, data_pars, out_pars = None, compute_pars = None, **kwargs)
+get_dataset(data_pars = None)
+get_pars(choice = "test", **kwargs)
+log(*s, n = 0, m = 1)
+metrics(model, sess = None, data_pars = None, out_pars = None)
+os_file_path(data_path)
+os_module_path()
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+predict(model, sess, data_pars = None, out_pars = None, compute_pars = None, get_hidden_state = False, init_value = None)
+reset_model()
+test(data_path = "dataset/GOOG-year.csv", out_path = "", reset = True)
+test2(data_path = "dataset/GOOG-year.csv")
+
+-------------------------methods----------------------
+Model.__init__(self, epoch = 5, learning_rate = 0.001, num_layers = 2, size = None, size_layer = 128, output_size = None, forget_bias = 0.1, timestep = 5, )
+
+
+utilmy/zzml/mlmodels/util.py
+-------------------------functions----------------------
+config_load_root()
+config_path_dataset()
+config_path_pretrained()
+config_set(ddict2)
+env_build(model_uri, env_pars)
+env_conda_build(env_pars = None)
+env_pip_check(env_pars = None)
+env_pip_requirement(env_pars = None)
+get_device_torch()
+get_model_uri(file)
+get_recursive_files(folderPath, ext = '/*model*/*.py')
+get_recursive_files2(folderPath, ext)
+get_recursive_files3(folderPath, ext)
+json_norm(ddict)
+load(args, config_file, config_mode, verbose = 0)
+load_callable_from_dict(function_dict, return_other_keys = False)
+load_callable_from_uri(uri)
+load_config(args, config_file, config_mode, verbose = 0)
+load_function(package = "mlmodels.util", name = "path_norm")
+load_function_uri(uri_name = "path_norm")
+load_gluonts(load_pars = None)
+load_keras(load_pars, custom_pars = None)
+load_pkl(load_pars)
+load_tch(load_pars)
+load_tch_checkpoint(model, optimiser, load_pars)
+load_tf(load_pars = "")
+log(*s, n = 0, m = 0)
+model_get_list(folder = None, block_list = [])
+os_file_current_path()
+os_folder_copy(src, dst)
+os_folder_getfiles(folder, ext, dirlevel  =  -1, mode = "fullpath")
+os_get_file(folder = None, block_list = [], pattern = r'*.py')
+os_package_root_path(filepath = "", sublevel = 0, path_add = "")
+os_path_split(path)
+params_json_load(path, config_mode = "test", tlist =  [ "model_pars", "data_pars", "compute_pars", "out_pars"])
+path_norm(path = "")
+path_norm_dict(ddict)
+save(model = None, session = None, save_pars = None)
+save_gluonts(model = None, session = None, save_pars = None)
+save_keras(model = None, session = None, save_pars = None, )
+save_pkl(model = None, session = None, save_pars = None)
+save_tch(model = None, optimizer = None, save_pars = None)
+save_tch_checkpoint(model, optimiser, save_pars)
+save_tf(model = None, sess = None, save_pars =  None)
+test_module(model_uri = "model_tf/1_lstm.py", data_path = "dataset/", pars_choice = "json", reset = True)
+tf_deprecation()
+val(x, xdefault)
+
+-------------------------methods----------------------
+Model_empty.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+to_namespace.__init__(self, adict)
+to_namespace.get(self, key)
+
+
+utilmy/zzml/mlmodels/util_json.py
+
+
+utilmy/zzml/mlmodels/util_log.py
+-------------------------functions----------------------
+create_appid(filename)
+create_logfilename(filename)
+create_uniqueid()
+load_arguments(config_file = None, arg_list = None)
+logger_handler_console(formatter = None)
+logger_handler_file(isrotate = False, rotate_time = "midnight", formatter = None, log_file_used = None)
+logger_setup(logger_name = None, log_file = None, formatter = FORMATTER_1, isrotate = False, isconsole_output = True, logging_level = logging.DEBUG, )
+logger_setup2(name = __name__, level = None)
+printlog(s = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "", s7 = "", s8 = "", s9 = "", s10 = "", app_id = "", logfile = None, iswritelog = True, )
+writelog(m = "", f = None)
+
+
+
+utilmy/zzml/mlmodels/utils/bayesian.py
+-------------------------functions----------------------
+X_transform(dfXy, colsX)
+cost_total(vprice, unit_fun, verbose = False)
+covariate_01(ds)
+demand(price, i0 = 17)
+exp_(x1)
+generate_X_item(df, prefix_col  = "")
+generate_itemid_stats(price_dir = "")
+generate_metrics(path, cola = "porder_s2")
+generate_report(path_model)
+get_l2_item(df, item_id)
+histo(dfi, path_save = None, nbin = 20.0)
+logic(x1, x2, )
+my_funcs(df)
+objective(trial)
+objective(trial)
+objective(trial)
+optim_de(cost_class, n_iter = 10, time_list = None, pop_size = 20, date0 = "20200507")
+pd_col_flatten(cols)
+pd_filter(df, filter_dict = None)
+pd_show_file(path = "*y-porder_2020* ")
+pd_to_onehot(df, colnames, map_dict = None, verbose = 1)
+pd_trim(dfi)
+price_normalize(vprice)
+score_fun(price, cost, units, alpha = 0.3)
+score_fun2(price, cost, units, alpha = 0.3)
+season_remove(x)
+season_remove(x)
+to_json_highcharts(df, cols, coldate, fpath, verbose = False)
+train_split_time(df, test_period  =  40, cols = None, coltime  = "time_key", minsize = 5)
+unit_fun(price)
+unit_fun01(price)
+unit_fun01(price)
+unit_fun02(ii = 6990003, t = 0, price = 0, verbose = False)
+
+-------------------------methods----------------------
+cost_class.__init__(self, dim = 0)
+cost_class.fitness(self, x)
+cost_class.get_bounds(self)
+cost_class.get_extra_info()
+cost_class.get_name(self)
+item._init__(self, shop_id = None, item_id = None)
+item.elastic(self, window = "1m", date"", model = "default")
+item.forecast(start = "", end = "", model = "", model_date = "")
+sphere_function.__init__(self, dim)
+sphere_function.fitness(self, x)
+sphere_function.get_bounds(self)
+sphere_function.get_extra_info()
+sphere_function.get_name(self)
+
+
+utilmy/zzml/mlmodels/utils/model_v1.py
+-------------------------functions----------------------
+fit(data_pars = None, compute_pars = None, out_pars = None, **kw)
+fit_metrics(data_pars = None, compute_pars = None, out_pars = None, **kw)
+get_dataset(data_pars = None, task_type = "train", **kw)
+get_params(param_pars = {}, **kw)
+init(*kw, **kwargs)
+load_info(path = "")
+load_model(path = "")
+log(*s)
+predict(data_pars = None, compute_pars = None, out_pars = None, **kw)
+preprocess(prepro_pars)
+reset()
+save(path = None, info = None)
+test(data_path = "dataset/", pars_choice = "json", config_mode = "test")
+
+-------------------------methods----------------------
+Model.__init__(self, model_pars = None, data_pars = None, compute_pars = None)
+
+
+utilmy/zzml/mlmodels/utils/parse.py
+-------------------------functions----------------------
+cli_load_arguments(config_file = None)
+extract_args(txt, outfile)
+
+
+
+utilmy/zzml/mlmodels/utils/predict.py
+-------------------------functions----------------------
+cli_load_argument(config_file = None)
+
+
+
+utilmy/zzml/mlmodels/utils/test_dataloader.py
+-------------------------functions----------------------
+gluon_append_target_string(out, data_pars)
+identical_test_set_split(*args, test_size, **kwargs)
+load_npz(path)
+pandas_load_train_test(path, test_path, **args)
+pandas_split_xy(out, data_pars)
+read_csvs_from_directory(path, files = None, **args)
+rename_target_to_y(out, data_pars)
+split_timeseries_df(out, data_pars, length, shift)
+split_xy_from_dict(out, **kwargs)
+timeseries_split(*args, test_size = 0.2)
+tokenize_x(data, no_classes, max_words = None)
+
+-------------------------methods----------------------
+SingleFunctionPreprocessor.__init__(self, func_dict)
+SingleFunctionPreprocessor.compute(self, data)
+SingleFunctionPreprocessor.get_data(self)
+
+
+utilmy/zzml/mlmodels/utils/train.py
+-------------------------functions----------------------
+add_dates(df)
+cli_load_argument(config_file = None)
+create_mae_summary(path, path_modelgroup, tag = "", ytarget = "porder_s2", agg_level =  None, verbose = True)
+create_metrics_summary(path_model, im = 40, verbose = True)
+pd_check_na(name, dfXy, verbose  =  False, debug = False, train_path = "ztmp/")
+train_enhance(dfi, colsref, ytarget, n_sample = 5)
+
+
+
+utilmy/zzml/mlmodels/utils/ztest_structure.py
+-------------------------functions----------------------
+code_check(sign_list = None, model_list = None)
+find_in_list(x, llist)
+get_recursive_files(folderPath, ext = '/*model*/*.py')
+log(*s, n = 0, m = 1)
+main()
+model_get_list(folder = None, block_list = [])
+os_file_current_path()
+os_package_root_path(filepath, sublevel = 0, path_add = "")
+
+
+
+utilmy/zzml/mlmodels/ztest.py
+-------------------------functions----------------------
+json_load(path)
+log_info_repo(arg = None)
+log_remote_push(arg = None)
+log_remote_start(arg = None)
+log_separator(space = 140)
+os_bash(cmd)
+os_file_current_path()
+os_system(cmd, dolog = 1, prefix = "", dateformat='+%Y-%m-%d_%H = '+%Y-%m-%d_%H:%M:%S,%3N')
+to_logfile(prefix = "", dateformat='+%Y-%m-%d_%H = '+%Y-%m-%d_%H:%M:%S,%3N')
+
+
+
+utilmy/zzml/pullrequest/aa_mycode_test.py
+-------------------------functions----------------------
+os_file_current_path()
+test(arg = None)
+
+
+
+utilmy/zzml/setup.py
+
+
+utilmy/zzml/versioneer.py
+-------------------------functions----------------------
+do_setup()
+do_vcs_install(manifest_in, versionfile_source, ipy)
+get_cmdclass()
+get_config(root)
+get_config_from_root(root)
+get_keywords()
+get_root()
+get_version()
+get_versions()
+get_versions()
+get_versions()
+git_get_keywords(versionfile_abs)
+git_get_keywords(versionfile_abs)
+git_pieces_from_vcs(tag_prefix, root, verbose, run_command = run_command)
+git_pieces_from_vcs(tag_prefix, root, verbose, run_command = run_command)
+git_versions_from_keywords(keywords, tag_prefix, verbose)
+git_versions_from_keywords(keywords, tag_prefix, verbose)
+plus_or_dot(pieces)
+plus_or_dot(pieces)
+register_vcs_handler(vcs, method)
+register_vcs_handler(vcs, method)
+render(pieces)
+render(pieces)
+render_git_describe(pieces)
+render_git_describe(pieces)
+render_git_describe_long(pieces)
+render_git_describe_long(pieces)
+render_pep440(pieces)
+render_pep440(pieces)
+render_pep440_old(pieces)
+render_pep440_old(pieces)
+render_pep440_post(pieces)
+render_pep440_post(pieces)
+render_pep440_pre(pieces)
+render_pep440_pre(pieces)
+run_command(commands, args, cwd = None, verbose = False, hide_stderr = False, env = None)
+run_command(commands, args, cwd = None, verbose = False, hide_stderr = False, env = None)
+scan_setup_py()
+versions_from_file(filename)
+versions_from_parentdir(parentdir_prefix, root, verbose)
+versions_from_parentdir(parentdir_prefix, root, verbose)
+write_to_version_file(filename, versions)
+
+
+
 utilmy/zzz_text.py
 -------------------------functions----------------------
 help()
