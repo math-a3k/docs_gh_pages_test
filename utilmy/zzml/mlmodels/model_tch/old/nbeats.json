@@ -1,0 +1,54 @@
+{
+    "test": {
+
+        "hypermodel_pars" :{
+
+
+
+
+        },
+
+
+        "data_pars":  {"train_data_path": "dataset/timeseries/milk.csv", 
+                      "col_Xinput" :  ["milk_production_pounds"],
+
+                      "col_yinput" : [],
+                       "forecast_length": 5, 
+                       "backcast_length": 10
+
+
+
+                     },
+  
+
+        "model_pars": {"stack_types": ["NBeatsNet.GENERIC_BLOCK", "NBeatsNet.GENERIC_BLOCK"],
+                      "device": "cpu",
+                      "nb_blocks_per_stack": 3, 
+                      "forecast_length": 5, 
+                      "backcast_length": 10,
+                      "thetas_dims": [7, 8], 
+                      "share_weights_in_stack": 0, 
+                      "hidden_layer_units": 256},
+
+
+        "compute_pars": {"batch_size": 100, 
+                         "disable_plot":  1,
+                         "norm_contsant":  1.0,
+                         "result_path":    "ztest/model_tch/nbeats/n_beats_{}test.png",
+                         "model_path":     "mycheckpoint"},
+
+
+        "out_pars" : {"out_path":  "ztest/model_tch/nbeats/" , 
+                      "model_checkpoint" :"ztest/model_tch/nbeats/model_checkpoint/"}
+
+
+    },
+
+
+
+
+
+    "prod": {}
+}
+
+

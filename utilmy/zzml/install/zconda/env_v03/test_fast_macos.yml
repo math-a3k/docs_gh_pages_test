@@ -1,0 +1,55 @@
+name: test_fast_macos
+
+
+on:
+  push:
+    branches: 
+      - dev__
+ 
+jobs:
+  build:
+
+    runs-on: macos-latest 
+
+    steps:
+    - uses: actions/checkout@v1
+   
+    - name: Set up Python 3.6.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6.*
+      
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+      
+
+      
+    - uses: actions/cache@v1
+      id: cache
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/install/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+          
+    - name: Install numpy
+      run: pip install numpy
+      
+    - name: Install repo
+      run: pip install -e .
+
+
+    ########  Test running 
+    - name: ml_optim
+      run: ml_optim
+
+
+    - name: ml_models
+      run: ml_models
+
+
+    - name: ml_test
+      run: ml_test
+      
+      

@@ -1,0 +1,47 @@
+{
+	"test": {
+		"model_pars": {
+			"embedding_size": 128,
+			"conv_layers": [[256, 7, 3], [256, 7, 3], [256, 3, -1], [256, 3, -1], [256, 3, -1], [256, 3, 3] ], 
+			"fully_connected_layers": [
+				1024,
+				1024
+			],
+			"threshold": 1e-6,
+			"dropout_p": 0.5,
+			"optimizer": "adam",
+			"loss": "categorical_crossentropy"
+		},
+		"data_pars": {
+			"train": true,
+			"alphabet": "abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{}",
+			"alphabet_size": 69,
+			"input_size": 1014,
+			"num_of_classes": 4,
+			"train_data_source": "dataset/text/ag_news_csv/train.csv",
+			"val_data_source": "dataset/text/ag_news_csv/test.csv"
+		},
+		"compute_pars": {
+			"epochs": 1,
+			"batch_size": 128
+		},
+		"out_pars": {
+			"path": "ztest/ml_keras/charcnn_zhang/",
+			"data_type": "pandas",
+			"size": [
+				0,
+				0,
+				6
+			],
+			"output_size": [
+				0,
+				6
+			]
+		}
+	},
+	"prod": {
+		"model_pars": {},
+		"data_pars": {}
+	}
+}
+

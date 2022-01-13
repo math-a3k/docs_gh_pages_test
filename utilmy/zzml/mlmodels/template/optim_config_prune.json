@@ -1,0 +1,71 @@
+{
+"test" :{
+
+ "hypermodel_pars":   {
+
+
+        "engine_pars": {"engine": "optuna", "method": "normal", 
+                        "ntrials": 2, "metric_target": "loss"},
+
+
+        "learning_rate": {"type": "log_uniform", "init": 0.01,  "range" : [0.001, 0.1] },
+        "num_layers":    {"type": "int", "init": 2,  "range" :[2, 4] },
+        "size":    {"type": "int", "init": 6,  "range" :[6, 6] },
+        "output_size":    {"type": "int", "init": 6,  "range" : [6, 6] },
+
+        "size_layer":    {"type" : "categorical", "value": [128, 256 ] },
+        "timestep":      {"type" : "categorical", "value": [5] },
+        "epoch":         {"type" : "categorical", "value": [2] }
+    },
+
+
+  "model_pars": {
+      "model_uri" :"model_tf.1_lstm",
+      "learning_rate": 0.001,
+      "num_layers": 1,
+      "size": 6,
+      "size_layer": 128,
+      "output_size": 6,
+      "timestep": 4,
+      "epoch": 2
+    },
+
+
+
+ "data_pars": {
+			"data_path": "dataset/timeseries/GOOG-year_small.csv",
+			"data_type": "pandas",
+			"size": [0, 0, 6],
+			"output_size": [0, 6]
+		},
+
+   
+   "compute_pars" : {
+      "engine" : "optuna",
+      "method" : "prune",
+      "ntrials" : 5
+  },
+
+
+    "out_pars": {
+      "path": "ztest/optim_1lstm/",
+      "data_type": "pandas",
+      "size": [0, 0, 6],
+      "output_size": [0, 6]
+    }
+
+
+
+},
+
+
+"prod" :{
+
+
+
+   
+   }
+   
+   
+}
+

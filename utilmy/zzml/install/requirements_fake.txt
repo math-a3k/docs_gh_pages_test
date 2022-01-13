@@ -1,0 +1,98 @@
+#### DL framework
+git+https://www.github.com/keras-team/keras-contrib.git
+mlflow==1.7.1
+fire==0.3.1  ### CLI automatic
+
+
+
+### JSON with Cmment embedded
+jsoncomment==0.4.2
+
+
+
+### TF
+tensorflow-datasets==3.0
+
+
+### Lightning for GPU/TPu training
+pytorch-lightning==0.7.3
+
+
+
+
+### Computer Vision
+torchvision==0.4.0
+Pillow<7.0   ##Issue
+
+
+
+### transformers with 7.0
+pytorch-transformers
+###transformers==2.4.1 #### fix issue #23 could not run on macos
+transformers==2.3.0 #### due to sentence transformers
+sentence-transformers==0.2.4
+tensorboardX
+
+
+### autokeras
+# autokeras==1.0.2
+# packaging==20.3
+# tensorflow==2.0  ### Conflict
+
+
+
+#####Gluon#######################
+mxnet==1.6.0
+gluonts==0.4.2
+pydantic<=1.4  ### issue with DeepAR
+autogluon==0.0.5
+
+
+lightgbm==2.3.0
+
+
+############################
+deepctr
+
+
+############################
+pandas<1.0
+scipy>=1.3.0
+scikit-learn==0.21.2
+numexpr>=2.6.8
+# sqlalchemy>=1.3.8, 
+sqlalchemy<=1.3.13
+boto3==1.9.187
+toml
+setuptools==45.2.0
+python-dateutil==2.8.0
+
+
+###Utils
+cli_code
+
+
+#### NLP
+torchtext
+nltk
+spacy
+gensim 
+matchzoo-py==1.1.1   #  pytorch-transformers >= 1.1.0, pytorch > 1.2.0
+
+
+#### Distributed training
+# horovod==0.16.2   #### Issues with OPEN MPI
+
+
+#### For ARMDN 
+tensorflow_probability<=0.7.0
+keras-mdn-layer<=0.2.1
+
+
+
+## Required for gluon_FB prophet
+fbprophet==0.6
+convertdate>=2.1.2
+
+
+

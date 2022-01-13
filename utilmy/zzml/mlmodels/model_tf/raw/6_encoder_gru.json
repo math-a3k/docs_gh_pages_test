@@ -1,0 +1,16 @@
+[
+    {
+        "/home/rayx/mlmodels/mlmodels/model_tf/raw/6_encoder_gru.py:Model": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/6_encoder_gru.py:Model:__init__",
+                "args": ["learning_rate", "num_layers", "size", "size_layer", "output_size"],
+                "kwargs": {"forget_bias": 0.1, "timestep": 5, "epoch": 1}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/6_encoder_gru.py:Model:build_model",
+                "args": [],
+                "kwargs": {}
+            }
+        ]
+    }
+]

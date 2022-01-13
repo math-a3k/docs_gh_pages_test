@@ -1,0 +1,49 @@
+{
+  "test_list": [{ "name": "test_list", "args": {} }],
+
+  "current_dev_list" :[
+    
+       {"repo_url" :  "https://github.com/arita37/mlmodels/",
+        "branch" : "feat_VAE",
+        "github_issue" :  "https://github.com/arita37/mlmodels/issues/155",
+        "test_file"  :  [ "model_gluon/fb_prophet.py"           ]
+       },
+    
+    
+    
+       {"repo_url" :  "https://github.com/arita37/mlmodels/",
+        "branch" : "feat_GAN",
+        "github_issue" :  "https://github.com/arita37/mlmodels/issues/155",
+        "test_file"  :  [ "model_gluon/fb_prophet.py" , "benchmark.py"          ]
+       }    
+    
+    
+    
+    
+    
+    
+  ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  "backup_list" :[
+    
+       {"repo_url" :  "https://github.com/arita37/mlmodels/",
+        "branch" : "feat_VAE2",
+        "github_issue" :  "https://github.com/arita37/mlmodels/issues/155",
+        "test_file"  :  [ "model_gluon/fb_prophet.py"           ]
+       }    
+    
+       
+   ]
+  
+
+}

@@ -1,0 +1,33 @@
+#image:
+#file: .gitpod.Dockerfile
+image: kavis131995/gitpod_mlmodel
+
+
+ports:
+- port: 8080
+  onOpen: open-preview
+- port: 8888
+  onOpen: open-browser
+  
+  
+
+tasks:
+- init: >
+    source activate py36 && pip install jupyterlab  &&
+    source activate py36 && pip install -r install/requirements.txt  &&
+    source activate py36 && pip install -r install/requirements_fake.txt  &&
+    source activate py36 && pip install -e .  --no-deps  &&
+    source activate py36 && pip install  ipykernel   &&
+    chmod -R 777 .  &&
+    conda init &&
+    alias py36="source activate py36" &&
+    alias ggit="git add --all && git commit -m feat && git push --all"
+# &&  ./run_jupyter.sh
+
+# - command: >
+#     source activate py36
+#     cd mlmodels  && pwd  && which python
+
+
+
+     

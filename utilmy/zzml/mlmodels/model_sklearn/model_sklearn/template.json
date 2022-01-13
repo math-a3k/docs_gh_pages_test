@@ -1,0 +1,127 @@
+{
+    "test": {
+
+        "hypermodel_pars" :  {
+            ### Compute follows mlmodel compute scheme
+
+            "model_pars": {  "model_uri"   : "optuna.py", 
+                             "model_pars"  :  { "study_name" :  "mystudy",
+                                                "storage"    :  "my.sqlite" ,
+                                                "pruner"     :  "uri::optuna.pruners.MedianPruner" }
+                          },                
+
+            "compute_pars" :  { "ntrials":1,  "metric_target":"roc_auc_score",
+                                "compute_pars" : {}
+                              },
+
+            "data_pars" : { 
+                 ### Hyper variables to be optimized , ie variables in  model_pars or in compute_pars
+                 "vars" : {
+                    "num_leaves":   {"type": "int", "init": 100,  "range" : [5, 200] },
+                    "max_depth":    {"type": "int", "init": 4,    "range" : [0, 6] }
+                  }  
+             },
+
+             "out_pars" :  { "path" : "zdata/hyper_params/test01/" }
+
+        },
+
+
+        "model_pars": {
+            "model_uri" : "model_sklearn.model_sklearn.model.py",
+            "model_name":  "RandomForestClassifier",
+            "model_pars": {
+                "warm_start": false,
+                "verbose": 1,
+                "random_state": 0,
+                "oob_score": false,
+                "n_jobs": null,
+                "n_estimators": 10,
+                "min_weight_fraction_leaf": 0.0,
+                "min_samples_split": 2,
+                "min_samples_leaf": 1,
+                "min_impurity_split": null,
+                "min_impurity_decrease": 0.0,
+                "max_leaf_nodes": null,
+                "max_features": "auto",
+                "max_depth": 4,
+                "criterion": "gini",
+                "class_weight": null,
+                "bootstrap": true
+            }           
+        },
+
+
+        "data_pars": {
+            "data_info": {
+                "data_path": "dataset/tabular/",
+                "dataset":   "csv titanic",
+                "data_type": "csv",
+                "batch_size": 10,
+            },
+            "preprocessors": [
+            {
+                "uri"  : "mlmodels.preprocess.generic.pandas_reader",
+                "args"  : {
+                           "task": "train", 
+                           "path" : "dataset/tabular/titanic_train_preprocessed.csv",
+                           "colX": ["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked_Q", "Embarked_S", "Title"],
+                           "coly": "Survived",
+                           "path_eval" : "",
+                           "train_size" : 0.8,
+                          },
+                "out"   :  [  "Xtrain", "ytrain", "Xtest", "ytest" ]          
+            }]
+
+
+
+        },
+        
+
+        "compute_pars" :  { 
+            "return_pred_not": false,
+
+            ## Specific to the model
+            "compute_pars": {
+                "sample_weight" : null,
+            },
+
+            "fit_pars" :{
+              "sample_weight" : null,
+            },   
+
+            "evaluate_pars" :{
+            },   
+
+            "predict_pars" :{
+            },   
+
+
+
+        },
+        
+        "out_pars":  { "path": "../ztest/"}
+
+
+    },
+
+
+    "prod": {
+    }
+
+
+
+}
+
+
+/*
+
+def optim_optuna(model_uri="model_tf.1_lstm.py",
+                 hypermodel_pars = {"engine_pars": {}},
+                 model_pars      = {},
+                 data_pars       = {},
+                 compute_pars    = {},  # only Model pars
+                 out_pars        = {}):
+
+
+*/

@@ -1,0 +1,275 @@
+{
+
+    "a_deepar_covid": {
+         "model_pars": {
+             "model_uri"  : "model_gluon.gluonts_model",
+             "model_name" : "deepar",
+             "model_pars" : {
+                 "prediction_length"    : 20,
+                 "freq"                 : "D",
+                 "distr_output"         : "gluonts.distribution.neg_binomial:NegativeBinomialOutput",
+                
+                 "use_feat_static_real" : true,
+                 
+                 "num_layers"           : 2,
+                 "num_cells"            : 40,
+                 "cell_type"            : "lstm",
+                 "dropout_rate"         : 0.1,
+
+                 "time_features"        : "None",
+                 "scaling"              : true,
+                 "num_parallel_samples" : 100
+             }
+             
+             
+        },
+
+
+        "data_pars": {
+            "data_info": {},
+            "preprocessors": [
+                {   "name" :  "get_dataset_process",
+                    "uri"  : "mlmodels.model_gluon.gluonts_model:get_dataset2",
+                    "args"  : { 
+
+                        "train"                 : true,
+                        "dt_source"             : "",
+
+                        "data_type"             : "gluonts",
+
+                        "use_feat_dynamic_real" : false,
+                        "use_feat_static_cat"   : false,
+                        "use_feat_static_real"  : true,
+                       
+                        "submission"            : false ,
+                        
+                        "data_path"             : "dataset/timeseries/covid19_gluonts/" ,
+                       
+                        "numseries"             : 1
+                    }
+                }
+            ]
+        },
+
+
+
+
+            
+        "compute_pars": {
+            "num_samples": 100,
+            
+            "learning_rate"         : 1e-3,
+            "epochs"                : 100,
+            "num_batches_per_epoch" : 50,
+            "batch_size"            : 32,   
+            
+            "compute_pars" : {
+                
+                "batch_size"                 : 32, "clip_gradient": 10, "epochs": 50, "learning_rate": 1e-5,
+                "learning_rate_decay_factor" : 0.5,
+                
+                "num_batches_per_epoch"      : 50,
+                
+                "minimum_learning_rate"      : 5e-05
+            }
+        },
+        
+      "out_pars": {
+         "path": "ztest/model_gluon/gluonts_deepar/",
+         "plot_prob": true, "quantiles": [0.5,0.67]
+      }
+    },
+
+
+
+
+
+    "deepar_m5_dataset": {
+         "model_pars": {
+             "model_uri"  : "model_gluon.gluonts_model",
+             "model_name" : "deepar",
+             "model_pars" : {
+                 "prediction_length"     : 12,
+                 "freq"                  : "D",
+                 "distr_output"          : "gluonts.distribution.neg_binomial:NegativeBinomialOutput",
+                
+
+                 "use_feat_dynamic_real" : true,
+                 "use_feat_static_cat"   : true,
+                 "use_feat_static_real"  : false,
+                 
+                 "num_layers"            : 2,
+                 "num_cells"             : 40,
+                 "cell_type"             : "lstm",
+                 "dropout_rate"          : 0.1,
+
+                 
+                 "scaling"               : true,
+                 "num_parallel_samples"  : 100,
+                 "cardinality"           : [3049, 7, 3, 10, 3]
+             }
+             
+             
+             },
+
+        "data_pars": {
+            "data_info": {},
+            "preprocessors": [
+                {   "name" :  "get_dataset_process",
+                    "uri"  : "mlmodels.model_gluon.gluonts_model:get_dataset2",
+                    "args"  : { 
+
+                        "train"                 : true,
+                        "dt_source"             : "",
+
+                        "use_feat_dynamic_real" : true,
+                        "use_feat_static_cat"   : true,
+                        "use_feat_static_real"  : false,
+                        "data_type"             : "gluonts",
+
+                        "submission"            : false ,
+
+                        "data_path"             : "dataset/timeseries/gluonts_data/m5_dataset" ,
+
+                        "single_pred_length"    : 28,
+                        "freq"                  : "1D",
+                        "start"                 : "2015-02-26 21:42:53",
+                        "startdate"             : "2011-01-29",
+                        "col_date"              : "timestamp",
+                        "col_ytarget"           : ["value"],  "num_series" : 1,
+
+                        "cols_cat"              : [],   "cols_num" : []
+                    }
+                }
+
+            ]
+        },
+             
+
+        "compute_pars": {
+            "num_samples"           : 100,
+            
+            "learning_rate"         : 1e-3,
+            "epochs"                : 100,
+            "num_batches_per_epoch" : 50,
+            "batch_size"            : 32,
+            
+            "compute_pars" : {
+                
+                "batch_size"                 : 32, "clip_gradient": 100, "epochs": 1, "init": "xavier", "learning_rate": 1e-3,
+                "learning_rate_decay_factor" : 0.5,
+                "hybridize"                  : false,
+                "num_batches_per_epoch"      : 10,
+                
+                "minimum_learning_rate"      : 5e-05, "patience": 10, "weight_decay": 1e-08
+            }
+        },
+        
+      "out_pars": {
+         "path": "ztest/model_gluon/gluonts_deepar/",
+         "plot_prob": true, "quantiles": [0.5]
+      }
+    },
+
+
+
+
+
+
+
+    "deepar_m4_dataset": {
+         "model_pars": {
+             "model_uri"  : "model_gluon.gluonts_model",
+             "model_name" : "deepar",
+             "model_pars" : {
+                 "prediction_length"    : 14,
+                 "freq"                 : "D",
+                 "distr_output"         : "gluonts.distribution.student_t.StudentTOutput",
+                
+
+                 "use_feat_static_cat"  : true,
+                 "use_feat_static_real" : false,
+                 
+                 "num_layers"           : 2,
+                 "num_cells"            : 40,
+                 "cell_type"            : "lstm",
+                 "dropout_rate"         : 0.1,
+
+                 
+                 "scaling"              : true,
+                 "num_parallel_samples" : 100,
+                 "cardinality"          : [4227]
+             }
+             
+             
+             },
+
+
+        "data_pars": {
+            "data_info": {},
+            "preprocessors": [
+                {   "name" :  "get_dataset_process",
+                    "uri"  : "mlmodels.model_gluon.gluonts_model:get_dataset2",
+                    "args"  : { 
+
+                        "train"                : true,
+                        "dt_source"            : "",
+                        "data_type"            : "gluonts",
+
+
+                        "use_feat_static_cat"  : true,
+                        "use_feat_static_real" : false,
+
+
+                        "submission"           : false ,
+                        "dataset_name"         : "m4_daily" ,
+
+                        "data_path"            : "dataset/timeseries/gluonts_data/m4_dataset/m4_daily" ,
+
+                        "single_pred_length"   : 28,
+                        "freq"                 : "1D",
+                        "start"                : "1750-01-01 00:00:00",
+                        "startdate"            : "1750-01-01",
+                        "col_date"             : "timestamp",
+                        "col_ytarget"          : ["target"],
+                        "num_series"           : 1,
+
+                        "cols_cat"             : [],   "cols_num" : []
+                           
+
+                   }
+                }
+
+            ]
+        },
+             
+
+            
+        "compute_pars": {
+            "num_samples"           : 100,
+            "learning_rate"         : 1e-3,
+            "epochs"                : 100,
+            "num_batches_per_epoch" : 50,
+            "batch_size"            : 32,
+            
+            "compute_pars" : {
+                "batch_size"                 : 32, "clip_gradient": 100, "epochs": 100, "init": "xavier", "learning_rate": 1e-3,
+                "learning_rate_decay_factor" : 0.5,
+                "hybridize"                  : false,
+                "num_batches_per_epoch"      : 50,
+                
+                "minimum_learning_rate"      : 5e-05, "patience": 10, "weight_decay": 1e-08
+            }
+        },
+        
+      "out_pars": {
+         "path": "ztest/model_gluon/gluonts_deepar/",
+         "plot_prob": true, "quantiles": [0.5]
+      }
+    },
+
+
+
+
+
+}

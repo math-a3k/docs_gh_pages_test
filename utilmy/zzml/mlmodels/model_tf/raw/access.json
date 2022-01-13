@@ -1,0 +1,41 @@
+[
+    {
+        "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess:__init__",
+                "args": [],
+                "kwargs": {"memory_size": 128, "word_size": 20, "num_reads": 1, "num_writes": 1, "name": "memory_access"}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess:_build",
+                "args": ["inputs", "prev_state"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess:_read_inputs",
+                "args": ["inputs"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess:_write_weights",
+                "args": ["inputs", "memory", "usage"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess:_read_weights",
+                "args": ["inputs", "memory", "prev_read_weights", "link"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess:state_size",
+                "args": [],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/access.py:MemoryAccess:output_size",
+                "args": [],
+                "kwargs": {}
+            }
+        ]
+    }
+]

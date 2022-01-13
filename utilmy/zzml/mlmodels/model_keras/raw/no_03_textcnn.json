@@ -1,0 +1,59 @@
+[
+    {
+        "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_loader": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_loader:__init__",
+                "args": [],
+                "kwargs": {"data_pars": null}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_loader:clean_str",
+                "args": ["string"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_loader:load_data_and_labels",
+                "args": [],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_loader:as_matrix",
+                "args": ["sequences", "max_len", "index2word"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_loader:Generate_data",
+                "args": [],
+                "kwargs": {"data_pars": null}
+            }
+        ]
+    },
+    {
+        "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_provider": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_provider:__init__",
+                "args": ["data_loader"],
+                "kwargs": {"data_pars": null}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:data_provider:get_dataset",
+                "args": [],
+                "kwargs": {}
+            }
+        ]
+    },
+    {
+        "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:Model": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:Model:__init__",
+                "args": [],
+                "kwargs": {"embedding_matrix": null, "vocab_size": null, "model_pars": null}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_keras/raw/no_03_textcnn.py:Model:model",
+                "args": [],
+                "kwargs": {}
+            }
+        ]
+    }
+]

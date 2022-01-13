@@ -1,0 +1,97 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+
+
+
+
+name: test_fast_linux
+
+
+on:
+  push:
+    branches: 
+      - dev
+ 
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+   
+    - name: Set up Python 3.6.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6.*
+      
+
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+      
+      
+    #- uses: actions/cache@v1
+    #  id: cache-pip
+    #  with:
+    #    path: ~/.cache/pip
+    #    key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+    #    restore-keys: |
+    #      ${{ runner.os }}-pip-
+
+
+
+
+    - name: Cache pipenv virtualenv
+      id: cache-pipenv
+      uses: actions/cache@v1
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }} 
+
+          
+
+    - name: Install numpy
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run: pip install numpy
+
+
+    - name: Install dependencies
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run: pipenv install -e .
+ 
+
+      
+    #- name: Install repo
+    #  run: pip install -e .
+
+
+    - name: ml_optim
+      run: ml_optim
+
+
+    - name: ml_models
+      run: ml_models
+
+
+    #- name: ml_test
+    #  run: ml_test
+      
+      
+
+
+

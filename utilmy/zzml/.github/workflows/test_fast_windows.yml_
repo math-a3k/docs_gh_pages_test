@@ -1,0 +1,84 @@
+name: test_fast_windows
+
+
+on:
+  push:
+    branches: 
+      - dev
+ 
+jobs:
+  build:
+
+
+    runs-on: windows-latest 
+
+    steps:
+    - uses: actions/checkout@v1
+   
+    - name: Set up Python 3.6.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6.*
+      
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+      
+
+      
+    #- uses: actions/cache@v1
+    #  id: cache
+    #  with:
+    #    path: ~/.cache/pip
+    #    key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements_wi.txt') }}
+    #    restore-keys: |
+    #      ${{ runner.os }}-pip-
+          
+
+
+    - name: Cache pipenv virtualenv
+      id: cache-pipenv
+      uses: actions/cache@v1
+      with:
+        path: /opt/hostedtoolcache/Python/
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/requirements_wi.txt') }}
+
+
+          
+    - name: Install numpy
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run:  |
+        pip install  numpy<1.17.0
+        # pip install torch==0.4.1 -f https://download.pytorch.org/whl/torch_stable.html
+        pip install torch==1.2.0 -f https://download.pytorch.org/whl/torch_stable.html
+
+
+
+    - name: Install repo requirements
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run: |
+           pip install -r requirements_wi.txt
+           pip install -r install/requirements_fake.txt
+
+
+    - name: Install repo
+      run: pip install -e .  -r requirements_wi.txt  --no-deps
+
+
+    - name: Repo Check
+      run: python -c "import mlmodels,os ; print(mlmodels); print(os)"
+
+
+
+    ########  Test running 
+    - name: ml_optim
+      run: ml_optim
+
+
+    - name: ml_models
+      run: ml_models
+
+
+    #- name: ml_test
+    #  run: ml_test
+      
+      

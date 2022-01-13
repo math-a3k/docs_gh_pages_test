@@ -1,0 +1,24 @@
+{
+	"test": {
+        "data_pars": {"mode": "test",
+                      "path": "dataset/tabular/titanic_train_preprocessed.csv", 
+                      "data_type" : "pandas" 
+                    },
+
+        "model_pars": {"objective":  "regression", 
+                       "max_depth" : 4 , 
+                       "random_state":0
+                    },
+
+        "compute_pars": {  "compute_pars" :{}},
+
+        "out_pars":  {"save_path": "ztest/model_sklearn/lightgbm/", 
+                      "log_path": "ztest/model_sklearn/lightgbm/"
+                    }
+    }
+}
+
+
+
+
+

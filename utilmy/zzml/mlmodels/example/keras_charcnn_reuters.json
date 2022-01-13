@@ -1,0 +1,39 @@
+{
+  "test": {
+    
+    "model_pars": {
+      "embedding_size": 2,
+      "conv_layers": [
+      ],
+      "fully_connected_layers": [512],
+      "threshold": 1e-6,
+      "dropout_p": 0.1,
+      "optimizer": "adam",
+      "loss": "categorical_crossentropy"
+    },
+    "data_pars": {
+      "train": true,
+      "alphabet": "abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{}",
+      "alphabet_size": 69,
+      "input_size": 10000,
+      "num_of_classes": 46,
+      "type": "npz",
+      "train_data_source": "dataset/text/reuters/reuters.npz"
+    },
+    "compute_pars": {
+      "epochs": 50,
+      "batch_size": 128,
+      "metric_score": "accuracy_score"
+    },
+    "out_pars": {
+      "path": "ztest/ml_keras/charcnn/charcnn.h5",
+      "data_type": "pandas",
+      "size": [0, 0, 6],
+      "output_size": [0, 6]
+    }
+  },
+  "prod": {
+    "model_pars": {},
+    "data_pars": {}
+  }
+}

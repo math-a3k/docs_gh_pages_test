@@ -1,0 +1,21 @@
+[
+    {
+        "/home/rayx/mlmodels/mlmodels/model_tf/raw/21_multihead_attention.py:Model": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/21_multihead_attention.py:Model:__init__",
+                "args": ["dimension_input", "dimension_output", "seq_len", "learning_rate"],
+                "kwargs": {"num_heads": 8, "attn_windows": null, "epoch": 1}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/21_multihead_attention.py:Model:multihead_attn",
+                "args": ["inputs", "masks"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/21_multihead_attention.py:Model:window_mask",
+                "args": ["h_w"],
+                "kwargs": {}
+            }
+        ]
+    }
+]

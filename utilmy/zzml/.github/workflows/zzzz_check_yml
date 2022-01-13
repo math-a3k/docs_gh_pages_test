@@ -1,0 +1,91 @@
+name: test_cli
+## Command Line testing
+
+
+on:
+  push:
+    branches: 
+      dev333
+      
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    ### Every 3 hours
+    - cron:  '0 */23 * * *'      
+    # - cron:  '*/1 * * * *'  
+ 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+   
+    - name: Set up Python 3.6.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6.*
+      
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+      
+
+    ##### Log Start  ######################################################
+    - name: ssh_gen
+      uses: webfactory/ssh-agent@v0.2.0
+      with:
+        ssh-private-key: ${{ secrets.GIT_RSA }}
+                
+    - name: log_start
+      run: |
+           cd /home/runner/work/mlmodels/  && git clone git@github.com:arita37/mlmodels_store.git  &&  ls && pwd
+           cd /home/runner/work/mlmodels/mlmodels/
+    ########################################################################
+
+
+      
+    #- uses: actions/cache@v1
+    #  id: cache
+    #  with:
+    #    path: ~/.cache/pip
+    #    key: ${{ runner.os }}-pip-${{ hashFiles('**/install/requirements.txt') }}
+    #    restore-keys: |
+    #      ${{ runner.os }}-pip-
+   
+
+
+    - name: Cache pipenv virtualenv
+      id: cache-pipenv
+      uses: actions/cache@v1
+      with:
+        path: /opt/hostedtoolcache/Python/
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/install/requirements_fake.txt') }}
+
+          
+    - name: repo path
+      run: |
+          echo  $GITHUB_REPOSITORY 
+          echo  $GITHUB_SHA
+      
+      
+    - name: Install repo
+      run: pip install -e . -r install/requirements.txt  --no-deps
+
+
+    ########  Test running for ALL Command Line
+    # - uses: franzdiebold@github-env-vars-action@v1.0.0
+    - name: cli_test
+      run: ml_test --do test_cli   --repo $GITHUB_REPOSITORY   --sha  $GITHUB_SHA   2>&1 | tee -a  cd /home/runner/work/mlmodels/mlmodels_store/log_test_cli/log_$(date '+%Y-%m-%d_%H-%M-%S-%3N').py
+
+      env:
+         github_sha: ${{ github.sha }}
+         github_repo: ${{ github.repo }}
+
+
+
+    - name: log_gitcommit
+      run: ml_test --do log_remote_push
+
+
+

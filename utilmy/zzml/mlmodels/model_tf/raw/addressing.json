@@ -1,0 +1,89 @@
+[
+    {
+        "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:CosineWeights": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:CosineWeights:__init__",
+                "args": ["num_heads", "word_size"],
+                "kwargs": {"strength_op": "tf.nn.softplus", "name": "cosine_weights"}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:CosineWeights:_build",
+                "args": ["memory", "keys", "strengths"],
+                "kwargs": {}
+            }
+        ]
+    },
+    {
+        "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:TemporalLinkage": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:TemporalLinkage:__init__",
+                "args": ["memory_size", "num_writes"],
+                "kwargs": {"name": "temporal_linkage"}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:TemporalLinkage:_build",
+                "args": ["write_weights", "prev_state"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:TemporalLinkage:directional_read_weights",
+                "args": ["link", "prev_read_weights", "forward"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:TemporalLinkage:_link",
+                "args": ["prev_link", "prev_precedence_weights", "write_weights"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:TemporalLinkage:_precedence_weights",
+                "args": ["prev_precedence_weights", "write_weights"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:TemporalLinkage:state_size",
+                "args": [],
+                "kwargs": {}
+            }
+        ]
+    },
+    {
+        "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness:__init__",
+                "args": ["memory_size"],
+                "kwargs": {"name": "freeness"}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness:_build",
+                "args": ["write_weights", "free_gate", "read_weights", "prev_usage"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness:write_allocation_weights",
+                "args": ["usage", "write_gates", "num_writes"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness:_usage_after_write",
+                "args": ["prev_usage", "write_weights"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness:_usage_after_read",
+                "args": ["prev_usage", "free_gate", "read_weights"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness:_allocation",
+                "args": ["usage"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/addressing.py:Freeness:state_size",
+                "args": [],
+                "kwargs": {}
+            }
+        ]
+    }
+]

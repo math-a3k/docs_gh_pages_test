@@ -1,0 +1,46 @@
+{
+	"test": {
+
+		"model_pars": {
+
+			"model_uri" : "model_tf.1_lstm",
+
+			
+			"learning_rate": 0.001,
+			"num_layers": 1,
+			"size_layer": 128,
+			"timestep": 4,
+			"epoch": 2,
+
+			"size": 6,
+			"output_size": 6
+		},
+
+		"data_pars": {
+			"data_path": "dataset/timeseries/GOOG-year.csv",
+			"data_type": "pandas",
+			"size": [0, 0, 6],
+			"output_size": [0, 6]
+		},
+		
+        "compute_pars" :  { "learning_rate": 0.001, "epoch":2},
+        
+        "out_pars":  { "path": "ztest_1lstm/", "model_path" : "ztest_1lstm/model/"}
+
+
+	},
+
+
+	"prod": {
+
+		"model_pars": {},
+
+		"data_pars": {}
+
+
+	}
+
+
+
+}
+

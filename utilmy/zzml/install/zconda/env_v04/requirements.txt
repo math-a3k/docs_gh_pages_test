@@ -1,0 +1,48 @@
+torch==1.0.1
+tensorflow<2.0
+keras<2.4.0
+numpy
+
+### transformers
+pytorch-transformers
+###transformers==2.4.1 #### fix issue #23 could not run on macos
+transformers==2.3.0 #### due to sentence transformers
+sentence-transformers
+
+############################
+mxnet
+gluonts==0.4.2
+autogluon==0.0.5
+lightgbm==2.3.0
+
+############################
+optuna<1.2.0
+deepctr
+
+############################
+pandas<1.0
+scipy>=1.3.0
+scikit-learn==0.21.2
+numexpr>=2.6.8
+# sqlalchemy>=1.3.8, 
+sqlalchemy<=1.3.13
+boto3==1.9.187
+toml
+setuptools==45.2.0
+python-dateutil==2.8.0
+
+#### NLP
+torchtext
+nltk
+spacy
+gensim 
+
+
+#### Distributed training
+# horovod==0.16.2   #### Issues with OPEN MPI
+
+
+
+
+
+

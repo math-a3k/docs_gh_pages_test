@@ -1,0 +1,100 @@
+name:  test_benchmark
+
+
+on:
+  push:
+    branches: 
+      - dev5
+
+#on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    ### Every 3 hours
+    - cron:  '0 */4 * * *'      
+    # - cron:  '*/1 * * * *'   
+ 
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Set up Python 3.6.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6.*
+
+      
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+
+
+
+    - name: ssh_gen
+      uses: webfactory/ssh-agent@v0.2.0
+      with:
+        ssh-private-key: ${{ secrets.GIT_RSA }}
+        
+        
+    - name: log_start
+      run: |
+           cd /home/runner/work/mlmodels/  && git clone git@github.com:arita37/mlmodels_store.git  &&  ls && pwd
+           cd /home/runner/work/mlmodels/mlmodels/
+
+            
+    #- uses: actions/cache@v1
+    #  id: cache
+    #  with:
+    #    path: ~/.cache/pip
+    #    key: ${{ runner.os }}-pip-${{ hashFiles('**/install/requirements.txt') }}
+    #    restore-keys: |
+    #      ${{ runner.os }}-pip-
+   
+  
+    - name: Cache pipenv virtualenv
+      id: cache-pipenv
+      uses: actions/cache@v1
+      with:
+        path: /opt/hostedtoolcache/Python/
+        key: ${{ runner.os }}-venv-mlmodels-${{ hashFiles('**/install/requirements.txt') }}
+
+
+
+    - name: Install numpy
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run: pip install numpy
+ 
+
+    - name: Install repo requirements 1
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run:  |
+        pip install -r install/requirements.txt
+
+
+    - name: Install repo requirements 2
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run:  |
+        pip install -r install/requirements_fake.txt
+
+
+    - name: Install repo
+      run: pip install -e . -r install/requirements.txt   --no-deps
+
+
+    - name: repo path
+      run: python  install/run_basic_check.py
+
+
+    ########  Test running 
+    - name: ml_test
+      # run: ml_test  --do test_benchmark     2>&1 | tee -a  cd /home/runner/work/mlmodels/mlmodels_store/log_benchmark/log_benchmark_$(date '+%Y-%m-%d-%H-%M')_$GITHUB_SHA.py
+      run: ml_test  --do test_benchmark     2>&1 | tee  cd /home/runner/work/mlmodels/mlmodels_store/log_benchmark/log_benchmark.py
+
+      
+        
+
+    - name: log_gitcommit
+      run: ml_test --do log_remote_push  --name test_benchmark.yml
+

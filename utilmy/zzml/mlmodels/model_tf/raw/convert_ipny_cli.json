@@ -1,0 +1,22 @@
+[
+    {
+        "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/convert_ipny_cli.py:scan",
+        "args": ["data_file"],
+        "kwargs": {}
+    },
+    {
+        "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/convert_ipny_cli.py:convert_topython",
+        "args": ["source_files", "data_file", "out_dir"],
+        "kwargs": {}
+    },
+    {
+        "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/convert_ipny_cli.py:check",
+        "args": ["file_list"],
+        "kwargs": {"dump": false}
+    },
+    {
+        "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/convert_ipny_cli.py:Run",
+        "args": [],
+        "kwargs": {}
+    }
+]

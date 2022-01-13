@@ -1,0 +1,31 @@
+{
+	"test": {
+		"model_pars": {
+			"MAX_NB_WORDS": 12000,
+			"EMBEDDING_DIM": 50,
+			"latent_dim": 32,
+			"intermediate_dim": 96,
+			"epsilon_std": 0.1,
+			"num_sampled": 500,
+			"optimizer": "adam"
+		},
+		"data_pars": {
+			"train": true,
+			"MAX_SEQUENCE_LENGTH": 15,
+			"train_data_path": "dataset/text/quora/train.csv",
+			"val_data_source": "dataset/text/glove/glove.6B.50d.txt"
+		},
+		"compute_pars": {
+			"epochs": 1,
+			"batch_size": 100
+		},
+		"out_pars": {
+			"path": "ztest/ml_keras/textvae/"
+		}
+	},
+	"prod": {
+		"model_pars": {},
+		"data_pars": {}
+	}
+}
+

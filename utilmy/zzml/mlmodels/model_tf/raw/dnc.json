@@ -1,0 +1,36 @@
+[
+    {
+        "/home/rayx/mlmodels/mlmodels/model_tf/raw/dnc.py:DNC": [
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/dnc.py:DNC:__init__",
+                "args": ["access_config", "controller_config", "output_size"],
+                "kwargs": {"clip_value": null, "name": "dnc"}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/dnc.py:DNC:_clip_if_enabled",
+                "args": ["x"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/dnc.py:DNC:_build",
+                "args": ["inputs", "prev_state"],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/dnc.py:DNC:initial_state",
+                "args": ["batch_size"],
+                "kwargs": {"dtype": "tf.float32"}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/dnc.py:DNC:state_size",
+                "args": [],
+                "kwargs": {}
+            },
+            {
+                "uri": "/home/rayx/mlmodels/mlmodels/model_tf/raw/dnc.py:DNC:output_size",
+                "args": [],
+                "kwargs": {}
+            }
+        ]
+    }
+]

@@ -1,0 +1,63 @@
+    {
+        "test": {
+
+              "hypermodel_pars":   {
+             "learning_rate": {"type": "log_uniform", "init": 0.01,  "range" : [0.001, 0.1] },
+             "num_layers":    {"type": "int", "init": 2,  "range" :[2, 4] },
+             "size":    {"type": "int", "init": 6,  "range" :[6, 6] },
+             "output_size":    {"type": "int", "init": 6,  "range" : [6, 6] },
+
+             "size_layer":    {"type" : "categorical", "value": [128, 256 ] },
+             "timestep":      {"type" : "categorical", "value": [5] },
+             "epoch":         {"type" : "categorical", "value": [2] }
+             },
+
+            "model_pars": {
+                "learning_rate": 0.001,     
+                "num_layers": 1,
+                "size": 6,
+                "size_layer": 128,
+                "output_size": 6,
+                "timestep": 4,
+                "epoch": 2
+            },
+
+            "data_pars" :{
+              "path"            : "dataset/text/ner_dataset.csv",
+              "location_type"   :  "repo",
+              "data_type"   :   "text",
+
+
+              "data_loader" :  "pandas.read_csv",
+              "data_loader_pars" :  {""},
+
+
+              "data_preprocessor" : "mlmodels.model_keras.prepocess:process",
+              "data_preprocessor_pars" : "mlmodels.model_keras.prepocess:process",
+              
+
+              "size" : [0,1,2],
+              "output_size": [0, 6]              
+            },
+
+
+            "compute_pars": {
+                "distributed": "mpi",
+                "epoch": 10
+            },
+            "out_pars": {
+                "out_path": "dataset/",
+                "data_type": "pandas",
+                "size": [0, 0, 6],
+                "output_size": [0, 6]
+            }
+        },
+    
+        "prod": {
+            "model_pars": {},
+            "data_pars": {}
+        }
+    }
+
+
+

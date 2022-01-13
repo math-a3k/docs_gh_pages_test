@@ -1,0 +1,71 @@
+{
+	"test": {
+
+		"model_pars": {
+			"model_uri": "model_keras.textcnn.py",
+			"maxlen":40,
+			"max_features": 5,
+			"embedding_dims":50
+		},
+
+		"data_pars": {
+			"data_info": {
+				"dataset" : "mlmodels/dataset/text/imdb",
+				"pass_data_pars": false,
+				"train": true,
+				"maxlen":40,
+				"max_features": 5
+			},
+
+			"preprocessors": [
+				{
+					"name": "loader",
+					"uri": "mlmodels.preprocess.generic:NumpyDataset",
+					"args": {
+                        "numpy_loader_args":{
+                            "allow_pickle":true
+                        },
+						"encoding": "'ISO-8859-1'"
+					}
+				},
+				{
+					"name": "imdb_process",
+					"uri": "mlmodels.preprocess.text_keras:IMDBDataset",
+					"args": {
+						"num_words": 5
+					}
+				}
+			]
+		},
+
+
+		"compute_pars": {
+			"engine": "adam",
+			"loss": "binary_crossentropy",
+			"metrics": ["accuracy"] ,
+			"batch_size": 1000,
+			"epochs":1
+		},
+
+
+		"out_pars": {
+			"path": "mlmodels/output/textcnn_keras//model.h5",
+			"model_path": "mlmodels/output/textcnn_keras/model.h5"
+		}
+	},
+
+
+	"prod": {
+
+		"model_pars": {},
+
+		"data_pars": {}
+
+
+	}
+
+
+
+	
+	
+}
