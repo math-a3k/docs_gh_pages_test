@@ -310,6 +310,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
     model = model_load(modelname_or_path)
     
     if taskname == 'classifier':
+        df = pd_read_file(train_path)
         log(" metrics_cosine_similarity before training")  
         metrics_cosine_sim(df['sentence1'][0], df['sentence2'][0], model)
         
@@ -317,6 +318,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         ##### dataloader train, evaluator
         if 'data_nclass' not in cc :
             cc.data_nclass = df['label'].nunique()
+        del df
         
         train_dataloader = load_dataloader(datasetname, train_path, cc)        
         val_evaluator    = load_evaluator(datasetname,  eval_path,  cc)
