@@ -21,6 +21,14 @@ pd_stat_shift_trend_changes(df, feature, target_col, threshold = 0.03)
 pd_stat_shift_trend_correlation(df, df_test, colname, target_col)
 pd_to_scipy_sparse_matrix(df)
 pd_train_test_split_time(df, test_period  =  40, cols = None, coltime  = "time_key", sort = True, minsize = 5, n_sample = 5, verbose = False)
+np_confidence_interval(sample_mean=0, sample_std=1, sample_size=1, sig_level=0.05)
+np_z_val(sig_level=0.05, two_tailed=True)
+np_ab_dist(stderr, d_hat=0, group_type='control')
+plot_norm_dist(ax, mu, std, with_CI=False, sig_level=0.05, label=None)
+plot_binom_dist(ax, n, p, label=None)
+plot_ci(ax, mu, s, sig_level=0.05, color='grey')
+plot_null(ax, stderr)
+plot_alt(ax, stderr, d_hat)
 
 
 test_anova(df, col1, col2)
@@ -93,6 +101,3 @@ def test():
       inference_method='proportions_delta',
       hypothesis='larger'
   )
-
-
-
