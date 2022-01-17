@@ -1,0 +1,12 @@
+$ cat .gitignore
+
+.cache/
+.idea/
+build/
+dist/
+venv/
+*.egg-info
+notebooks/
+*.xml
+*.iml
+*.pyc
