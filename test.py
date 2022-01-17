@@ -195,6 +195,14 @@ def test_deeplearning_yolov5():
    m.test_all()
 
 
+#######################################################################################
+def test_ab():
+   from utilmy.recsys import ab as m
+   log("from utilmy.recsys import ab")
+   m.test_all()
+
+
+
 
 import utilmy as  uu
 
@@ -222,6 +230,9 @@ def test_all():
     test_deeplearning_keras()
     test_deeplearning_yolov5()
 
+
+    ###############
+    test_ab()
 
 
       
