@@ -40,6 +40,8 @@ https://pypi.org/project//
 
 https://github.com/aschleg/hypothetical
 
+Binomial
+https://github.com/aschleg/hypothetical/blob/master/hypothetical/hypothesis.py#L48
 
 """
 import os, sys, random, numpy as np, pandas as pd, fire, time
@@ -48,11 +50,11 @@ from tqdm import tqdm
 from box import Box
 
 try :
-  import abra
+  import abra, hypothetical 
 except :
    from utilmy.utilmy import sys_install
-   ss = "  abracadabra   hypothetical  "  
-   sys_install(cmd= f"pip install ss  --upgrade-strategy only-if-needed")      
+   pkg = "  abracadabra   hypothetical  "  
+   sys_install(cmd= f"pip install {pkg}  --upgrade-strategy only-if-needed")      
    1/0  ### exit Gracefully !
 
 
