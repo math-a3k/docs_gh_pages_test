@@ -677,7 +677,7 @@ def plot_alternate_hypothesis_dist(ax, stderr, d_hat):
     plot_norm_dist(ax, d_hat, stderr, label="Alternative")
 
 
- def show_area(ax, d_hat, stderr, sig_level, area_type='power'):
+def show_area(ax, d_hat, stderr, sig_level, area_type='power'):
     """Fill between upper significance boundary and distribution for
     alternative hypothesis
     """
