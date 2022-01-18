@@ -178,12 +178,16 @@ def get_ab_test_data(vars_also=False):
 
 def test_plot_binom_dist():
     from numpy.testing import assert_almost_equal
-    _, ab_summary = get_ab_test_data()
+    _, vars = get_ab_test_data(vars_also=True)
 
     fig, ax = plt.subplots(figsize=(12,6))
     plot_binom_dist(ax,
-                    A_converted, A_cr, A_total,
-                    B_converted, B_cr, B_total)
+                    vars['A_converted'],
+                    vars['A_cr'],
+                    vars['A_total'],
+                    vars['B_converted'],
+                    vars['B_cr'],
+                    vars['B_total'])
     
     fig.canvas.draw()
     plt.close()
@@ -404,7 +408,7 @@ def np_calculate_z_val(sig_level=0.05, two_tailed=True):
 
 def np_calculate_confidence_interval(sample_mean=0, sample_std=1, sample_size=1, sig_level=0.05):
     """Returns the confidence interval as a tuple"""
-    z = z_val(sig_level)
+    z = np_calculate_z_val(sig_level)
 
     left = sample_mean - z * sample_std / np.sqrt(sample_size)
     right = sample_mean + z * sample_std / np.sqrt(sample_size)
@@ -500,8 +504,8 @@ def pd_generate_ctr_data(N_A, N_B, p_A, p_B, days=None, control_label='A',
     # summary dataframe
     ab_summary = df.pivot_table(values='converted', index='group', aggfunc=np.sum)
     # add additional columns to the pivot table
-    ab_summary['total'] = ab_data.pivot_table(values='converted', index='group', aggfunc=lambda x: len(x))
-    ab_summary['rate'] = ab_data.pivot_table(values='converted', index='group')
+    ab_summary['total'] = df.pivot_table(values='converted', index='group', aggfunc=lambda x: len(x))
+    ab_summary['rate'] = df.pivot_table(values='converted', index='group')
 
     return df, ab_summary
 
@@ -830,7 +834,7 @@ def abplot_CI_bars(N, X, sig_level=0.05, dmin=None):
     y = np.arange(len(N)-1)
 
     # get z value
-    z = z_val(sig_level)
+    z = np_calculate_z_val(sig_level)
     # confidence interval values
     ci = SE * z
 
@@ -887,7 +891,7 @@ def funnel_CI_plot(A, B, sig_level=0.05):
     y = np.arange(len(A))
 
     # get z value
-    z = z_val(sig_level)
+    z = np_calculate_z_val(sig_level)
     # confidence interval values
     ci = SE * z
 
