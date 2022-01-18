@@ -26,6 +26,8 @@ from sentence_transformers import models, losses, datasets
 from sentence_transformers.readers import InputExample
 from sentence_transformers.evaluation import EmbeddingSimilarityEvaluator
 
+import torch
+from torch import nn
 from torch.utils.data import DataLoader
 from torch.nn.parallel import DistributedDataParallel as DDP
 
@@ -98,9 +100,10 @@ def dataset_fake(dirdata):
 
 
 
-def dataset_fake2():
+def dataset_fake2(dirdata=''):
     # This function load the fake dataset if it's already existed otherwise downloads it first.
     # then Preprocess the data for MultpleNegativesRanking loss function and return it as dataloader
+    nli_dataset_path = dirdata + '/AllNLI.tsv.gz'
 
     def add_to_samples(sent1, sent2, label):
         if sent1 not in train_data:
@@ -108,6 +111,7 @@ def dataset_fake2():
             train_data[sent1][label].add(sent2)
 
     train_data = {}
+    df = []
     with gzip.open(nli_dataset_path, 'rt', encoding='utf8') as fIn:
         reader = csv.DictReader(fIn, delimiter='\t', quoting=csv.QUOTE_NONE)
         for row in reader:
@@ -157,7 +161,7 @@ def model_evaluate(model ="modelname OR path OR model object", dirdata='./*.csv'
 
 def model_load(path_or_name_or_object):
     #### Reload model or return the model itself
-    if isintance(path_or_name_or_object, str) :
+    if isinstance(path_or_name_or_object, str) :
        # model = SentenceTransformer('distilbert-base-nli-mean-tokens')
        model = SentenceTransformer(path_or_name_or_object)
        model.eval()
@@ -175,7 +179,7 @@ def model_save(model,path, reload=True):
         log(model1)
 
 
-def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1):
+def model_setup_compute(model, use_gpu=0, ngpu=1, ncpu=1, cc:dict=None):
      # Tell pytorch to run this model on the multiple GPUs if available otherwise use all CPUs.
     if cc.get('use_gpu', 0) > 0 :        ### default is CPU
         if torch.cuda.device_count() < 0 :
@@ -212,7 +216,7 @@ def pd_read(path_or_df='./myfile.csv', npool=1,  **kw):
     elif isinstance(path_or_df, pd.DataFrame):
         dftrain = path_or_df
     else : 
-        raise Exception('need' path_or_df)
+        raise Exception('need path_or_df')
     return dftrain    
         
         
@@ -306,6 +310,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
     model = model_load(modelname_or_path)
     
     if taskname == 'classifier':
+        df = pd_read_file(train_path)
         log(" metrics_cosine_similarity before training")  
         metrics_cosine_sim(df['sentence1'][0], df['sentence2'][0], model)
         
@@ -313,6 +318,7 @@ def sentrans_train(modelname_or_path='distilbert-base-nli-mean-tokens',
         ##### dataloader train, evaluator
         if 'data_nclass' not in cc :
             cc.data_nclass = df['label'].nunique()
+        del df
         
         train_dataloader = load_dataloader(datasetname, train_path, cc)        
         val_evaluator    = load_evaluator(datasetname,  eval_path,  cc)

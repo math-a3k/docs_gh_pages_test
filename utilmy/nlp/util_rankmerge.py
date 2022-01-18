@@ -72,55 +72,7 @@ def test1():
 
      #### Find rank_score formulae, such as metric is minimize
     
-    
-def test_use_operon():    
-    # SPDX-License-Identifier: MIT
-    # SPDX-FileCopyrightText: Copyright 2019-2021 Heal Research
 
-    import pandas as pd
-    import numpy as np
-    from sklearn.model_selection import train_test_split, cross_val_score
-    from sklearn.metrics import r2_score, make_scorer
-    from scipy.stats import pearsonr
-
-    from operon import RSquared
-    from operon.sklearn import SymbolicRegressor
-
-    from pmlb import fetch_data, dataset_names, classification_dataset_names, regression_dataset_names
-    #print(regression_dataset_names)
-
-    X, y = fetch_data('1027_ESL', return_X_y=True)
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.75, test_size=0.25, shuffle=True, random_state=1234)
-
-    reg = SymbolicRegressor(
-            allowed_symbols='add,sub,mul,div,constant,variable',
-            offspring_generator='basic',
-            local_iterations=10,
-            n_threads=4,
-            objectives = ['r2', 'shape'],
-            random_state=1234
-            )
-
-    reg.fit(X_train, y_train)
-    print(reg.get_model_string(2))
-    print(reg._stats)
-
-    y_pred_train = reg.predict(X_train)
-    print('r2 train (sklearn.r2_score): ', r2_score(y_train, y_pred_train))
-    # for comparison we calculate the r2 from _operon and scipy.pearsonr
-    print('r2 train (operon.rsquared): ', RSquared(y_train, y_pred_train))
-    r = pearsonr(y_train, y_pred_train)[0]
-    print('r2 train (scipy.pearsonr): ', r * r)
-
-    # crossvalidation
-    sc = make_scorer(RSquared, greater_is_better=True)
-    scores = cross_val_score(reg, X, y, cv=5, scoring=sc)
-    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
-
-    
-
-    
     
 ###################################################################################################
 ###################################################################################################    
@@ -155,11 +107,60 @@ def test():
       log(dfres)
 
 
-        
+
+
+def test_rankadjust2(df1, df2):
+
+    #### Data
+    import pandas as pd, numpy as np, time
+     
+    df = []
+    for i in range(0, 20000):
+      vv = (i,  ",".join( [str(t) for t in  np.arange(1000, 1100, 1)  ] ) )
+      df.append(vv)
+    df1 =pd.DataFrame(df, columns = ['id', 'list1'])  
+     
+     
+    df = []
+    for i in range(0, 20000):
+      vv = (i,   ",".join( [str(t) for t in  np.arange(3000, 1000, -1)  ]) )
+      df.append(vv)
+    df2 =pd.DataFrame(df, columns = ['id', 'list2'])  
+ 
+
+    df1 = df1.merge(df2, on = 'id', how='left')
+    df1['merge'] = df1.apply(lambda x : rank_adjust2(x['list1'], x['list2'],), axis=1 )
+    df1 = df1[['id', 'merge']]
+ 
+ 
         
 
 ############################################################################################
 ############################################################################################
+def rank_adjust2(ll1, ll2, kk= 1):
+    """ Re-rank elements of list1 using ranking of list2"""
+    if len(ll2) < 1: return ll1        
+    if isinstance(ll1, str): ll1 = ll1.split(",")
+    if isinstance(ll2, str): ll2 = ll2.split(",")
+    n1, n2 = len(ll1), len(ll2)
+
+    if not isinstance(ll2, dict) :
+       ll2 = {x:i for i,x in enumerate( ll2 )  }
+
+    # log(ll1) ; log(ll2)
+
+    adjust, mrank = (1.0 * n1) / n2, n2        
+    rank2 = np.array([ll2.get(sid, mrank) for sid in ll1])
+    rank1 = np.arange(n1)
+    rank3 = -1.0 / (kk + rank1) - 1.0 / (kk + rank2 * adjust)
+
+    # Id of ll1 sorted list
+    v = [ll1[i] for i in np.argsort(rank3)]
+    return ",".join( v)
+
+
+
+
 def rank_generatefake(ncorrect=30, nsize=100):
     """
       Generate a fake rank list of size nrank that contains ncorrect elements that
