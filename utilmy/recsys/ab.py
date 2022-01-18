@@ -137,10 +137,11 @@ def test_ab_getstat():
                         hypothesis=['larger', 'smaller'],
                         experiment_name='Experiment',
                         dirout='./results',
+                        tag='test'
                         )
-    assert os.path.exists('./results/plot_inference=proportions_delta_hypothesis=larger.png')
-    assert os.path.exists('./results/plot_inference=proportions_delta_hypothesis=smaller.png')
-    assert os.path.exists('./results/Experiment_results.parquet')
+    assert os.path.exists('./results_test/abplot_inference=proportions_delta_hypothesis=larger.png')
+    assert os.path.exists('./results_test/abplot_inference=proportions_delta_hypothesis=smaller.png')
+    assert os.path.exists('./results_test/abstats.parquet')
 
     
 def test_np_calculate_z_val():
@@ -330,6 +331,7 @@ def ab_getstat(df,
                alpha=.05,
                experiment_name='Experiment',
                dirout=None,
+               tag=None,
                **kwargs
                ):
     """ Wrapper function for running AB Tests.
@@ -363,6 +365,8 @@ def ab_getstat(df,
         alpha (float): the Type I error rate
         exp_name (str): the name of the experiment.
         dirout (str): disk path where results and plots will be saved.
+        tag (str): suffix that gets appended to the dirout
+            if none is provided, timestamp will be used as suffix
     Returns:
         DataFrame: result of the AB test experiment.
     """
@@ -386,6 +390,9 @@ def ab_getstat(df,
       log(df.shape, df.columns)
 
     if dirout is not None:
+        if tag is None:
+            tag = str(int(time.time()))
+        dirout = dirout + "_" + tag
         os.makedirs(dirout, exist_ok=True)
             
     exp = Experiment(data=df,
@@ -406,7 +413,8 @@ def ab_getstat(df,
         ab_test_result = exp.run_test(ab_test, alpha=alpha)
 
         if dirout is not None:
-            outfile = os.path.join(dirout, 'plot_inference={}_hypothesis={}'.format(i,h))
+
+            outfile = os.path.join(dirout, 'abplot_inference={}_hypothesis={}'.format(i,h))
             ab_test_result.visualize(outfile=outfile)
 
         ab_test_result_df = ab_test_result.to_dataframe()
@@ -414,7 +422,7 @@ def ab_getstat(df,
 
     if dirout is not None:
       from utilmy import pd_to_file
-      save_path = os.path.join(dirout, experiment_name+'_results.parquet')
+      save_path = os.path.join(dirout, 'abstats.parquet')
       pd_to_file(ab_test_results.astype('str'), save_path, show=1)
     else :  
       return ab_test_results
