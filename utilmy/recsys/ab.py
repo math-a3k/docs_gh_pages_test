@@ -1,6 +1,9 @@
 HELP = """"
 All about abtest
 
+cd utilmy/recsys/ab
+python ab.py ab_getstat --df  /mypath/data.parquet   
+
 
 
 _pooled_prob(N_A, N_B, X_A, X_B)
@@ -118,6 +121,7 @@ def test_ab_getstat():
                         variation_label='B',
                         inference_method=['proportions_delta'],
                         hypothesis=['larger', 'smaller'],
+                        dirout= None,
                         )
     result = str(result.to_dict(orient='records'))
     expected_df = "[{'metric': 'metric', 'hypothesis': 'B is larger', 'model_name': 'proportions_delta', 'accept_hypothesis': True, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.03811217367380087, 'p_interpretation': 'p-value', 'delta_ci': (-0.009399936102360451, inf), 'ntiles_ci': (0.05, inf), 'delta_relative_ci': (-1.7375639461938985, inf), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.03811217367380087, 'power': 0.4630913221833776, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}, {'metric': 'metric', 'hypothesis': 'B is smaller', 'model_name': 'proportions_delta', 'accept_hypothesis': False, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.9618878263261992, 'p_interpretation': 'p-value', 'delta_ci': (-inf, 0.28336492637743665), 'ntiles_ci': (-inf, 0.95), 'delta_relative_ci': (-inf, 52.37957730007161), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.9618878263261992, 'power': 0.0006941837287176945, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}]"
@@ -309,7 +313,9 @@ def ab_getstat(df,
                inference_method,
                hypothesis=None,
                alpha=.05,
-               experiment_name = 'Experiment'
+               experiment_name = 'Experiment',
+               dirout= None,
+               **kw
                ):
     """ Wrapper function for running AB Tests.
     Args:
@@ -369,10 +375,9 @@ def ab_getstat(df,
                      attributes=attribute_cols,
                      name=experiment_name)
 
-    ab_test_results = None
-
+    
+    ab_test_results = pd.DataFrame()
     for i, h in zip(inference_method, hypothesis):
-
         ab_test = HypothesisTest(metric=measure_col,
                                 treatment=treatment_col,
                                 control=control_label,
@@ -383,13 +388,13 @@ def ab_getstat(df,
         ab_test_result = exp.run_test(ab_test, alpha=alpha)
         ab_test_result = ab_test_result.to_dataframe()
 
-        if ab_test_results is not None:
-            ab_test_results = pd.concat([ab_test_results, ab_test_result],
-                                        ignore_index=True)
-        else:
-            ab_test_results = ab_test_result
+        ab_test_results = pd.concat([ab_test_results, ab_test_result],    ignore_index=True)
 
-    return ab_test_results
+    if dirout is not None:
+      from utilmy import pd_to_file
+      pd_to_file(ab_test_results, dirout, show=1)
+    else :  
+      return ab_test_results
   
   
   
@@ -932,5 +937,8 @@ def _p_val(N_A, N_B, p_A, p_B):
     return scs.binom(N_A, p_A).pmf(p_B * N_B)
 
 
-  
+###################################################################################################
+if __name__ == "__main__":
+    import fire
+    fire.Fire()  
   
