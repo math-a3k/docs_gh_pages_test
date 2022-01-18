@@ -39,6 +39,7 @@ plot_ab(ax, N_A, N_B, bcr, d_hat, sig_level=0.05, show_power=False
 zplot(ax, area=0.95, two_tailed=True, align_right=False)
 abplot_CI_bars(N, X, sig_level=0.05, dmin=None)
 funnel_CI_plot(A, B, sig_level=0.05)
+ab_getstat(df,treatment_col,measure_col,attribute_cols,control_label,variation_label,inference_method,hypothesis,alpha,experiment_name)
 
 
 test_anova(df, col1, col2)
@@ -78,13 +79,13 @@ from box import Box
 import scipy.stats as scs
 import matplotlib.pyplot as plt
 
-# try :
-#   import abra, hypothetical 
-# except :
-#    from utilmy.utilmy import sys_install
-#    pkg = "  abracadabra   hypothetical  "  
-#    sys_install(cmd= f"pip install {pkg}  --upgrade-strategy only-if-needed")      
-#    1/0  ### exit Gracefully !
+try :
+  import abra, hypothetical 
+except :
+   from utilmy.utilmy import sys_install
+   pkg = "  abracadabra   hypothetical  "  
+   sys_install(cmd= f"pip install {pkg}  --upgrade-strategy only-if-needed")      
+   1/0  ### exit Gracefully !
 
 
 def test_np_calculate_z_val():
@@ -249,6 +250,30 @@ def test_zplot():
     assert_almost_equal(fig_mean, 248.9381, decimal=4)
 
 
+def test_ab_getstat():
+    from abra.utils import generate_fake_observations
+    
+    # generate demo data
+    experiment_observations = generate_fake_observations(
+        distribution='bernoulli',
+        n_treatments=2,
+        n_attributes=3,
+        n_observations=120
+    )
+    result = ab_getstat(df=experiment_observations,
+                        treatment_col='treatment',
+                        measure_col='metric',
+                        attribute_cols=['attr_0','attr_1'],
+                        control_label='A',
+                        variation_label='B',
+                        inference_method=['proportions_delta'],
+                        hypothesis=['larger', 'smaller'],
+                        )
+    result = str(result.to_dict(orient='records'))
+    expected_df = "[{'metric': 'metric', 'hypothesis': 'B is larger', 'model_name': 'proportions_delta', 'accept_hypothesis': True, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.03811217367380087, 'p_interpretation': 'p-value', 'delta_ci': (-0.009399936102360451, inf), 'ntiles_ci': (0.05, inf), 'delta_relative_ci': (-1.7375639461938985, inf), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.03811217367380087, 'power': 0.4630913221833776, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}, {'metric': 'metric', 'hypothesis': 'B is smaller', 'model_name': 'proportions_delta', 'accept_hypothesis': False, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.9618878263261992, 'p_interpretation': 'p-value', 'delta_ci': (-inf, 0.28336492637743665), 'ntiles_ci': (-inf, 0.95), 'delta_relative_ci': (-inf, 52.37957730007161), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.9618878263261992, 'power': 0.0006941837287176945, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}]"
+    assert result == expected_df
+
+
 def test_all():
     test_np_calculate_z_val()
     test_np_calculate_confidence_interval()
@@ -258,6 +283,7 @@ def test_all():
     test_plot_binom_dist()
     test_plot_ab()
     test_zplot()
+    test_ab_getstat
 
 
 ################################################################################################################
@@ -826,3 +852,92 @@ def funnel_CI_plot(A, B, sig_level=0.05):
     # label variants on y axis
     labels = ['metric{}'.format(idx+1) for idx in range(len(A))]
     plt.yticks(np.arange(len(A)), labels)
+
+
+def ab_getstat(df,
+               treatment_col,
+               measure_col,
+               attribute_cols,
+               control_label,
+               variation_label,
+               inference_method,
+               hypothesis=None,
+               alpha=.05,
+               experiment_name = 'Experiment'
+               ):
+    """
+    Wrapper function for running AB Tests.
+
+    Args:
+        df (DataFrame): the tabular data to analyze, must have columns that 
+            correspond with `treatment`, `measures`, `attributes`, and `enrollment` 
+            if any of those are defined.
+        treatment_col (str): the column in `data` that identifies the association of each
+            enrollment in the experiment with one of the experiment conditions.
+        measure_col (str): the column in the dataset that is associated with indicator 
+            measurements.
+        attribute_cols (list[str]): the columns in `data` that define segmenting attributes
+            associated with each enrollment in the experiment.
+        control_label (str): the name of the control treatment.
+        variation_label (str): the name of the experimental treatment.
+        inference_method (str, list[str]): a single or a list of inference method, one for each test.
+            Each item in the list is the name of the inference method used to perform the hypothesis test.
+            Can be one of the following:
+            Frequentist Inference:
+                - 'means_delta'         Continuous
+                - 'proprortions_delta'  Proportions
+                - 'rates_ratio'         Counts / rates
+            Bayesian Inference:
+                - 'gaussian'            Continuous
+                - 'exp_student_t'       Continuous
+                - 'bernoulli'           Proportions / binary
+                - 'beta_binomial'       Proportions
+                - 'binomial'            Proportions
+                - 'gamma_poisson'       Counts / rates
+        hypothesis (str, list[str]): a single or a list of hypothesis names to be tested, one for each test
+        alpha (float): the Type I error rate
+        exp_name (str): the name of the experiment.
+    Returns:
+        DataFrame: result of the AB test experiment.
+    """
+    from abra import Experiment, HypothesisTest
+
+    inference_method = [inference_method] if isinstance(inference_method, str) else inference_method
+    hypothesis = [hypothesis] if isinstance(hypothesis, str) else hypothesis
+
+    if len(inference_method)>1:
+        if len(hypothesis)>1:
+            assert len(inference_method) == len(hypothesis), 'Length of inference_method and hypothesis should be same'
+        else:
+            hypothesis = hypothesis*len(inference_method)
+    else:
+        if len(hypothesis)>1:
+            inference_method = inference_method*len(hypothesis)
+
+    exp = Experiment(data=df,
+                     treatment=treatment_col,
+                     measures=measure_col,
+                     attributes=attribute_cols,
+                     name=experiment_name)
+
+    ab_test_results = None
+
+    for i, h in zip(inference_method, hypothesis):
+
+        ab_test = HypothesisTest(metric=measure_col,
+                                treatment=treatment_col,
+                                control=control_label,
+                                variation=variation_label,
+                                inference_method=i,
+                                hypothesis=h)
+        
+        ab_test_result = exp.run_test(ab_test, alpha=alpha)
+        ab_test_result = ab_test_result.to_dataframe()
+
+        if ab_test_results is not None:
+            ab_test_results = pd.concat([ab_test_results, ab_test_result],
+                                        ignore_index=True)
+        else:
+            ab_test_results = ab_test_result
+
+    return ab_test_results
