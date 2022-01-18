@@ -29,51 +29,6 @@ ab_getstat(df,treatment_col,measure_col,attribute_cols,control_label,variation_l
 
 https://pypi.org/project/abracadabra/
 
-https://pypi.org/project//
-
-https://github.com/aschleg/hypothetical
-
-Binomial
-https://github.com/aschleg/hypothetical/blob/master/hypothetical/hypothesis.py#L48
-
-
-
-### https://github.com/arita37/myutil/blob/main/docs/doc_index.py#L1582-L1590
-
-test_anova(df, col1, col2)
-test_heteroscedacity(y, y_pred, pred_value_only = 1)
-test_hypothesis(df_obs, df_ref, method = '', **kw)
-test_multiple_comparisons(data: pd.DataFrame, label = 'y', adjuster = True)
-test_mutualinfo(error, Xtest, colname = None, bins = 5)
-test_normality(df, column, test_type)
-test_normality2(df, column, test_type)
-test_plot_qqplot(df, col_name)
-y_adjuster_log(y_true, y_pred_log, error_func, **kwargs)
-test_np_calculate_z_val()
-test_np_calculate_confidence_interval()
-test_np_calculate_ab_dist()
-test_pd_generate_ctr_data()
-test_np_calculate_min_sample_size()
-get_ab_test_data(vars_also=False)
-test_plot_binom_dist()
-test_plot_ab()
-test_zplot()
-estimator_boostrap_bayes(err, alpha = 0.05, )
-estimator_bootstrap(err, custom_stat = None, alpha = 0.05, n_iter = 10000)
-estimator_std_normal(err, alpha = 0.05, )
-help()
-log(*s)
-np_col_extractname(col_onehot)
-pd_stat_correl_pair(df, coltarget = None, colname = None)
-pd_stat_distribution_colnum(df, nrows = 2000, verbose = False)
-pd_stat_histogram(df, bins = 50, coltarget = "diff")
-pd_stat_pandas_profile(df, savefile = "report.html", title = "Pandas Profile")
-pd_stat_shift_changes(df, target_col, features_list = 0, bins = 10, df_test = 0)
-pd_stat_shift_trend_changes(df, feature, target_col, threshold = 0.03)
-pd_stat_shift_trend_correlation(df, df_test, colname, target_col)
-pd_to_scipy_sparse_matrix(df)
-pd_train_test_split_time(df, test_period  =  40, cols = None, coltime  = "time_key", sort = True, minsize = 5, n_sample = 5, verbose = False)
-
 
 """
 import os, sys, random, numpy as np, pandas as pd, fire, time
@@ -90,9 +45,9 @@ try :
   import abra
 except :
    from utilmy.utilmy import sys_install
-   pkg = "  abracadabra   hypothetical  "  
-   print('Installing pip install ' + pkgs) ; time.time(7)
-   sys_install(cmd= f"pip install {pkg}  --upgrade-strategy only-if-needed")      
+   pkg = "  abracadabra   hypothetical  "
+   print('Installing pip install ' + pkg) ; time.time(7)
+   # sys_install(cmd= f"pip install {pkg}  --upgrade-strategy only-if-needed")
    1/0  ### exit Gracefully !
 
     
@@ -107,13 +62,15 @@ def test_ab_getstat():
     from abra.utils import generate_fake_observations
     
     # generate demo data
-    experiment_observations = generate_fake_observations(
+    df_log = generate_fake_observations(
         distribution='bernoulli',
         n_treatments=2,
         n_attributes=3,
         n_observations=120
     )
-    result = ab_getstat(df=experiment_observations,
+    log(df_log)
+
+    result = ab_getstat(df=df_log,
                         treatment_col='treatment',
                         measure_col='metric',
                         attribute_cols=['attr_0','attr_1'],
@@ -124,10 +81,11 @@ def test_ab_getstat():
                         dirout=None,
                         )
     result = str(result.to_dict(orient='records'))
-    expected_df = "[{'metric': 'metric', 'hypothesis': 'B is larger', 'model_name': 'proportions_delta', 'accept_hypothesis': True, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.03811217367380087, 'p_interpretation': 'p-value', 'delta_ci': (-0.009399936102360451, inf), 'ntiles_ci': (0.05, inf), 'delta_relative_ci': (-1.7375639461938985, inf), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.03811217367380087, 'power': 0.4630913221833776, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}, {'metric': 'metric', 'hypothesis': 'B is smaller', 'model_name': 'proportions_delta', 'accept_hypothesis': False, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.9618878263261992, 'p_interpretation': 'p-value', 'delta_ci': (-inf, 0.28336492637743665), 'ntiles_ci': (-inf, 0.95), 'delta_relative_ci': (-inf, 52.37957730007161), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.9618878263261992, 'power': 0.0006941837287176945, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}]"
+    expected_df = "[{'metric': 'metric', 'hypothesis': 'B is larger', 'model_name': 'proportions_delta', " \
+                  "'accept_hypothesis': True, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.03811217367380087, 'p_interpretation': 'p-value', 'delta_ci': (-0.009399936102360451, inf), 'ntiles_ci': (0.05, inf), 'delta_relative_ci': (-1.7375639461938985, inf), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.03811217367380087, 'power': 0.4630913221833776, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}, {'metric': 'metric', 'hypothesis': 'B is smaller', 'model_name': 'proportions_delta', 'accept_hypothesis': False, 'control_name': 'A', 'control_nobs': 61.0, 'control_mean': 0.5409836065573771, 'control_ci': (0.4148941954376071, 0.6670730176771471), 'control_var': 0.24832034399355019, 'variation_name': 'B', 'variation_nobs': 59.0, 'variation_mean': 0.6779661016949152, 'variation_ci': (0.5577150512709282, 0.7982171521189022), 'variation_var': 0.218328066647515, 'delta': 0.13698249513753813, 'delta_relative': 25.32100667693886, 'effect_size': 0.28343191705927406, 'alpha': 0.05, 'segmentation': None, 'warnings': None, 'test_type': 'frequentist', 'p': 0.9618878263261992, 'p_interpretation': 'p-value', 'delta_ci': (-inf, 0.28336492637743665), 'ntiles_ci': (-inf, 0.95), 'delta_relative_ci': (-inf, 52.37957730007161), 'ci_interpretation': 'Confidence Interval', 'p_value': 0.9618878263261992, 'power': 0.0006941837287176945, 'statistic_name': 'z', 'statistic_value': 1.7730263098116528, 'df': None, 'mc_correction': None}]"
     assert result == expected_df
 
-    ab_getstat(df=experiment_observations,
+    ab_getstat(df=df_log,
                         treatment_col='treatment',
                         measure_col='metric',
                         attribute_cols=['attr_0','attr_1'],
@@ -329,7 +287,7 @@ def ab_getstat(df,
                inference_method='means_delta',
                hypothesis=None,
                alpha=.05,
-               experiment_name='Experiment',
+               experiment_name='exp',
                dirout=None,
                tag=None,
                **kwargs
@@ -347,6 +305,7 @@ def ab_getstat(df,
             associated with each enrollment in the experiment.
         control_label (str): the name of the control treatment.
         variation_label (str): the name of the experimental treatment.
+
         inference_method (str, list[str]): a single or a list of inference method, one for each test.
             Each item in the list is the name of the inference method used to perform the hypothesis test.
             Can be one of the following:
@@ -354,6 +313,7 @@ def ab_getstat(df,
                 - 'means_delta'         Continuous
                 - 'proprortions_delta'  Proportions
                 - 'rates_ratio'         Counts / rates
+
             Bayesian Inference:
                 - 'gaussian'            Continuous
                 - 'exp_student_t'       Continuous
@@ -373,7 +333,7 @@ def ab_getstat(df,
     from abra import Experiment, HypothesisTest
 
     inference_method = [inference_method] if isinstance(inference_method, str) else inference_method
-    hypothesis = [hypothesis] if isinstance(hypothesis, str) else hypothesis
+    hypothesis       = [hypothesis] if isinstance(hypothesis, str) else hypothesis
 
     if len(inference_method)>1:
         if len(hypothesis)>1:
@@ -395,13 +355,12 @@ def ab_getstat(df,
         dirout = dirout + "_" + tag
         os.makedirs(dirout, exist_ok=True)
             
-    exp = Experiment(data=df,
-                     treatment=treatment_col,
+    exp = Experiment(data=df,  treatment=treatment_col,
                      measures=measure_col,
                      attributes=attribute_cols,
                      name=experiment_name)
     
-    ab_test_results = pd.DataFrame()
+    abtest_res = pd.DataFrame()
     for i, h in zip(inference_method, hypothesis):
         ab_test = HypothesisTest(metric=measure_col,
                                 treatment=treatment_col,
@@ -413,19 +372,18 @@ def ab_getstat(df,
         ab_test_result = exp.run_test(ab_test, alpha=alpha)
 
         if dirout is not None:
-
-            outfile = os.path.join(dirout, 'abplot_inference={}_hypothesis={}'.format(i,h))
+            outfile = os.path.join(dirout, f'abplot_inference={i}_hypothesis={h}')
             ab_test_result.visualize(outfile=outfile)
 
         ab_test_result_df = ab_test_result.to_dataframe()
-        ab_test_results = pd.concat([ab_test_results, ab_test_result_df], ignore_index=True)
+        abtest_res = pd.concat([abtest_res, ab_test_result_df], ignore_index=True)
 
     if dirout is not None:
-      from utilmy import pd_to_file
-      save_path = os.path.join(dirout, 'abstats.parquet')
-      pd_to_file(ab_test_results.astype('str'), save_path, show=1)
+        from utilmy import pd_to_file
+        save_path = os.path.join(dirout, 'abstats.parquet')
+        pd_to_file(abtest_res.astype('str'), save_path, show=1)
     else :  
-      return ab_test_results
+      return abtest_res
   
   
   
