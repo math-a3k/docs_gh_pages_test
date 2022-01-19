@@ -204,11 +204,11 @@ def pd_get_onehot_dict(df, labels_col:list, dfref=None, ) :       #name changed
     
     
 
-def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #name changed
+def pd_merge_labels_imgdir(dflabels, img_dir="*.jpg", labels_col = []) :   #name changed
     """One Hot encode label_cols
     #    id, uri, cat1, cat2, .... , cat1_onehot
     Args:
-        dfref (DataFrame): DataFrame to perform one hot encoding on
+        dflabels (DataFrame): DataFrame to perform one hot encoding on
         img_dir (Path(str)): String Path /*.png to image directory
         labels_col (list): Columns to perform One Hot encoding on. Defaults to []
 
@@ -224,7 +224,7 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #nam
     log(df.head(1).T)
     df['id']   = df['uri'].apply(lambda x : x.split("/")[-1].split(".")[0]    )
     # df['id']   = df['id'].apply( lambda x: int(x) )
-    df         = df.merge(dfref, on='id', how='left')
+    df         = df.merge(dflabels, on='id', how='left')
 
     # labels_col = [  'gender', 'masterCategory', 'subCategory', 'articleType' ]
     for ci in labels_col :
@@ -232,27 +232,26 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #nam
       dfi_1hot           = dfi_1hot[[ t for t in dfi_1hot.columns if ci in t   ]]  ## keep only OneHot
       df[ci + "_onehot"] = dfi_1hot.apply( lambda x : ','.join([   str(t) for t in x  ]), axis=1)
       #####  0,0,1,0 format   log(dfi_1hot)
-
     return df
 
 
-def pd_to_onehot(dfref, labels_col = []) :   #name changed
+def pd_to_onehot(dflabels, labels_col = []) :   #name changed
     """One Hot encode label_cols for predefined df
     #    id, uri, cat1, cat2, .... , cat1_onehot
     Args:
-        dfref (DataFrame): DataFrame to perform one hot encoding on
+        dflabels (DataFrame): DataFrame to perform one hot encoding on
         labels_col (list): Columns to perform One Hot encoding on. Defaults to []
 
     Returns:
         DataFrame: One Hot encoded DataFrame
     """
     for ci in labels_col :
-      dfi_1hot           = pd.get_dummies(dfref, columns=[ci])  ### OneHot
+      dfi_1hot           = pd.get_dummies(dflabels, columns=[ci])  ### OneHot
       dfi_1hot           = dfi_1hot[[ t for t in dfi_1hot.columns if ci in t   ]]  ## keep only OneHot
-      dfref[ci + "_onehot"] = dfi_1hot.apply( lambda x : ','.join([   str(t) for t in x  ]), axis=1)
+      dflabels[ci + "_onehot"] = dfi_1hot.apply(lambda x : ','.join([str(t) for t in x]), axis=1)
       #####  0,0,1,0 format   log(dfi_1hot)
 
-    return dfref
+    return dflabels
 
 
 
@@ -312,7 +311,7 @@ class DataGenerator_img_disk(Sequence):
 
         from utilmy import pd_read_file
         dflabel     = pd_read_file(label_dir)
-        self.labels = pd_merge_imgdir_onehotfeat(dflabel, img_dir, label_cols)
+        self.labels = pd_merge_labels_imgdir(dflabel, img_dir, label_cols)
 
 
     def on_epoch_end(self):
@@ -540,8 +539,8 @@ def build_tfrecord(x, tfrecord_out_path, max_records):
 #         self.batch_size = batch_size
 #         self.transforms = transforms
 
-#         dfref = pd.read_csv(label_dir)
-#         self.labels = data_add_onehot(dfref, img_dir, label_cols)
+#         dflabels = pd.read_csv(label_dir)
+#         self.labels = data_add_onehot(dflabels, img_dir, label_cols)
 
 #     def on_epoch_end(self):
 #         np.random.seed(12)
