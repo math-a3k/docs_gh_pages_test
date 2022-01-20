@@ -163,7 +163,7 @@ def __get_tensor_reshaped_norm(tensor, reshape_shape):
     Returns a normalized `Tensor`
 
     Arguments:
-    `tensor` - `Tensor` object; 
+    `tensor`; 
     `reshape_shape` - Tuple of length 2
     """
     norm = tf.norm(tensor, axis=1)
