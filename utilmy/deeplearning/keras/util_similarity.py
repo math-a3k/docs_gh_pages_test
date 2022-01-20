@@ -147,7 +147,7 @@ def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
     Returns squared, tiled `Tensor`
 
     Arguments:
-    `tensor` - `Tensor` object; 
+    `tensor`; 
     `reshape_shape` - Tuple of length 2;
     `tile_shape` - 1-D Array
     """
