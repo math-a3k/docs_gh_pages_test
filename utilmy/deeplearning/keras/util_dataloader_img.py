@@ -20,6 +20,7 @@ from albumentations import (
     ToFloat, ShiftScaleRotate, Resize
 )
 from albumentations.core.transforms_interface import ImageOnlyTransform
+from torch import batch_norm
 
 
 
@@ -286,61 +287,215 @@ class DataGenerator_img(Sequence):
         return (batch_x, batch_y)
 
     
+
+from keras_preprocessing.image import ImageDataGenerator
+
+class DataGenerator_img_disk:
+    """
+    TODO: DOC
+    """
+
+    generator = None
+    # required_keys = ['csv_path', 'imgs_paths_col', 'classes']
+    augmentaion_args = {
+        'featurewise_center': False,
+        'samplewise_center': False,
+        'featurewise_std_normalization': False,
+        'samplewise_std_normalization': False,
+        'zca_whitening': False,
+        'zca_epsilon': 1e-6,
+        'rotation_range': 0,
+        'width_shift_range': 0.,
+        'height_shift_range': 0.,
+        'brightness_range': None,
+        'shear_range': 0.,
+        'zoom_range': 0.,
+        'channel_shift_range': 0.,
+        'fill_mode': 'nearest',
+        'cval': 0.,
+        'horizontal_flip': False,
+        'vertical_flip': False,
+        'rescale': None,
+        'preprocessing_function': None,
+        'data_format': 'channels_last',
+        'interpolation_order': 1,
+        'dtype': 'float32'
+    }
+
+    def __init__(self, *, 
+                imgs_augmention_config:dict=None,
+                imgs_target_config: dict={'target_size':(256, 256), 'color_mode':'rgb', 'interpolation': 'nearest'},
+                validation_split:float=0.0) -> None:
+
+        if imgs_augmention_config:
+            intersected_keys = set(imgs_augmention_config.keys()) & set(self.augmentaion_default.keys())
+            for key in list(intersected_keys):
+                self.augmentaion_args[key] = imgs_augmention_config[key]
+
+        self.validation_split = validation_split
+        self.imgs_target_config = imgs_target_config
+
+        self.data_gen = ImageDataGenerator(
+                featurewise_center=self.augmentaion_args['featurewise_center'],
+                samplewise_center=self.augmentaion_args['samplewise_center'],
+                featurewise_std_normalization=self.augmentaion_args['featurewise_std_normalization'],
+                samplewise_std_normalization=self.augmentaion_args['samplewise_std_normalization'],
+                zca_whitening=self.augmentaion_args['zca_whitening'],
+                zca_epsilon=self.augmentaion_args['zca_epsilon'],
+                rotation_range=self.augmentaion_args['rotation_range'],
+                width_shift_range=self.augmentaion_args['width_shift_range'],
+                height_shift_range=self.augmentaion_args['height_shift_range'],
+                brightness_range=self.augmentaion_args['brightness_range'],
+                shear_range=self.augmentaion_args['shear_range'],
+                zoom_range=self.augmentaion_args['zoom_range'],
+                channel_shift_range=self.augmentaion_args['channel_shift_range'],
+                fill_mode=self.augmentaion_args['fill_mode'],
+                cval=self.augmentaion_args['cval'],
+                horizontal_flip=self.augmentaion_args['horizontal_flip'],
+                vertical_flip=self.augmentaion_args['vertical_flip'],
+                rescale=self.augmentaion_args['rescale'],
+                preprocessing_function=self.augmentaion_args['preprocessing_function'],
+                data_format=self.augmentaion_args['data_format'],
+                validation_split=validation_split,
+                interpolation_order=self.augmentaion_args['interpolation_order'],
+                dtype=self.augmentaion_args['dtype']
+            )
+
+    def read_from_csv(self, csv_config:dict, parent_dir:str=None, classes:list=None, class_mode:str='categorical', batch_size:int=8,
+                    shuffle_config:dict={'shuffle': True, 'seed': None},
+                    save_config:dict={'save_to_dir': None, 'save_format': 'png'}, validate_filenames:bool=True,
+                    imgs_target_config: dict={'target_size':(256, 256), 'color_mode':'rgb', 'interpolation': 'nearest'}):
+
+        if not self._csv_config_valid(csv_config):
+            raise ValueError("CSV config not valid")  
+        
+        df = pd.read_csv(csv_config['csv_path'])
+        image_paths_col_name = csv_config['imgs_paths_col']
+        classes_col_name = csv_config['classes']
+        # drop nans
+        df.dropna(subset=[image_paths_col_name, classes_col_name], how='any', inplace=True)
+
+        generator = self.data_gen.flow_from_dataframe(
+                df,
+                directory=parent_dir,
+                x_col=image_paths_col_name,
+                y_col=classes_col_name,
+                classes=classes,
+                class_mode=class_mode,
+                target_size=imgs_target_config['target_size'],
+                interpolation=imgs_target_config['interpolation'],
+                color_mode=imgs_target_config['color_mode'],
+                save_to_dir=save_config['save_to_dir'],
+                save_format=save_config['save_format'],
+                validate_filenames=validate_filenames,
+                shuffle=shuffle_config['suffle'],
+                seed=shuffle_config['seed'],
+                batch_size=batch_size
+            )
+
+        return generator
+
+    def read_from_disk(self, parent_directory:str, classes:list=None, class_mode:str='categorical', batch_size:int=8,
+                    imgs_batch_size:int=8, shuffle_config:dict={'shuffle': True, 'seed': None},
+                    save_config:dict={'save_to_dir': None, 'save_format': 'png'}, validate_filenames:bool=True,
+                    imgs_target_config: dict={'target_size':(256, 256), 'color_mode':'rgb', 'interpolation': 'nearest'}):
+
+        generator = self.data_gen.flow_from_directory(
+            directory=parent_directory,
+            target_size=imgs_target_config['target_size'],
+            color_mode=imgs_target_config['color_mode'],
+            classes=classes,
+            class_mode=class_mode,
+            batch_size=batch_size,
+            shuffle=shuffle_config['suffle'],
+            seed=shuffle_config['seed'],
+            save_to_dir=save_config['save_to_dir'],
+            save_format=save_config['save_format'],
+            interpolation=imgs_target_config['interpolation'],
+        )
+
+        return generator
+
+    def _csv_config_valid(self, csv_config: dict) -> bool:
+        csv_config_keys = list(csv_config.keys())
+        required_keys = ['csv_path', 'imgs_paths_col', 'classes']
+        try:
+            for required_key in required_keys:
+                if required_key not in csv_config_keys:
+                    print(f'{required_key} is missing from config')
+                    return False
+                elif not isinstance(csv_config[required_key], str):
+                    print(f'{required_key} must be a string')
+                    return False
+
+            if not os.path.exists(csv_config['csv_path']):
+                print(f"csv path doesnt exist: {csv_config['csv_path']}")
+                return False
+            
+            df = pd.read_csv(csv_config['csv_path'])
+            if set(required_keys[1:]) & set(df.columns) != {required_keys[1:]}:
+                print(f'csv file must contain columns: [{required_keys[1:]}]')
+                return False     
+        except Exception as exp:
+            print(exp)
+            return False
+        return True
+
     
 #################################################################################   
-class DataGenerator_img_disk(Sequence):
-    """Custom DataGenerator using Keras Sequence for images on disk
-        df_label format :
-        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+# class DataGenerator_img_disk(Sequence):
+#     """Custom DataGenerator using Keras Sequence for images on disk
+#         df_label format :
+#         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
 
-        Args:
-            img_dir (Path(str)): String path to images directory
-            label_dir (DataFrame): Dataset for Generator
-            label_cols (list): list of cols for the label (multi label)
-            split (str, optional): split for train or test. Defaults to 'train'.
-            batch_size (int, optional): batch_size for each batch. Defaults to 8.
-            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
-    """
+#         Args:
+#             img_dir (Path(str)): String path to images directory
+#             label_dir (DataFrame): Dataset for Generator
+#             label_cols (list): list of cols for the label (multi label)
+#             split (str, optional): split for train or test. Defaults to 'train'.
+#             batch_size (int, optional): batch_size for each batch. Defaults to 8.
+#             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
+#     """
         
-    def __init__(self, img_dir, label_dir, label_cols,
-                 split='train', batch_size=8, transforms=None):
-        self.image_dir  = img_dir
-        self.label_cols = label_cols
-        self.batch_size = batch_size
-        self.transforms = transforms
+#     def __init__(self, img_dir, label_dir, label_cols,
+#                  split='train', batch_size=8, transforms=None):
+#         self.image_dir  = img_dir
+#         self.label_cols = label_cols
+#         self.batch_size = batch_size
+#         self.transforms = transforms
 
-        from utilmy import pd_read_file
-        dflabel     = pd_read_file(label_dir)
-        self.labels = pd_merge_labels_imgdir(dflabel, img_dir, label_cols)
+#         from utilmy import pd_read_file
+#         dflabel     = pd_read_file(label_dir)
+#         self.labels = pd_merge_labels_imgdir(dflabel, img_dir, label_cols)
 
 
-    def on_epoch_end(self):
-        np.random.seed(12)
-        np.random.shuffle(self.labels)
+#     def on_epoch_end(self):
+#         np.random.seed(12)
+#         np.random.shuffle(self.labels)
 
-    def __len__(self):
-        return int(np.ceil(len(self.labels) / float(self.batch_size)))
+#     def __len__(self):
+#         return int(np.ceil(len(self.labels) / float(self.batch_size)))
 
-    def __getitem__(self, idx):
-        # Create batch targets
-        df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
+#     def __getitem__(self, idx):
+#         # Create batch targets
+#         df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
 
-        batch_x = []
-        batch_y = []  # list of heads
+#         batch_x = []
+#         batch_y = []  # list of heads
 
-        for ii, x in df_batch.iterrows():
-            img = np.array(Image.open(x['uri']).convert('RGB'))
-            batch_x.append(img)
+#         for ii, x in df_batch.iterrows():
+#             img = np.array(Image.open(x['uri']).convert('RGB'))
+#             batch_x.append(img)
 
-        for ci in self.label_cols:
-            v = [x.split(",") for x in df_batch[ci + "_onehot"]]
-            v = np.array([[int(t) for t in vlist] for vlist in v])
-            batch_y.append(v)
+#         for ci in self.label_cols:
+#             v = [x.split(",") for x in df_batch[ci + "_onehot"]]
+#             v = np.array([[int(t) for t in vlist] for vlist in v])
+#             batch_y.append(v)
 
-        if self.transforms is not None:
-            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
+#         if self.transforms is not None:
+#             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
 
-        return (np.array(batch_x), np.array(*batch_y))
+#         return (np.array(batch_x), np.array(*batch_y))
  
 
 
