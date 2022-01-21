@@ -116,7 +116,7 @@ def test2(): #using predefined df
             os.mkdir(folder)
         for n in range(num_images):
             filename = f'{folder}/{n}.jpg'
-            rgb_img = numpy.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
+            rgb_img = np.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
             image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
             image.save(filename)
 
