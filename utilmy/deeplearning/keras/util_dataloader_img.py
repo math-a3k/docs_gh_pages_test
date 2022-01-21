@@ -286,18 +286,77 @@ class DataGenerator_img(Sequence):
         # return (batch_x, *batch_y)                                                    ----
         return (batch_x, batch_y)
 
-    
-
 from keras_preprocessing.image import ImageDataGenerator
+from utilmy import pd_read_file
+import math
 
 class DataGenerator_img_disk:
     """
-    TODO: DOC
+        Custom Image Data Loader and Augmention Generator,
+        that wrappes keras API, and can be use to load dataset from 
+        a directory class orgnized dataset or from a labeled csv file
+
+        # Arguments
+            image_dir: string, path to image directory
+            label_path: string, path to label csv file, 
+                        provide None if dataset is folder orgnized.
+            label_cols: list, ['image path column name', 'image label column name'],
+                        Only relavent if label_path is provided.
+            validate_filenames: bool, if True then ignore if image is not found,
+                        Only relavent if label_path is provided.
+            batch_size: int, size of the batches of data (default: 8).
+            class_mode: string, One of "categorical", "binary", "sparse",
+                        "input", or None. Default: "categorical".
+                        Determines the type of label arrays that are returned:
+                        - "categorical" will be 2D one-hot encoded labels,
+                        - "binary" will be 1D binary labels,
+                            "sparse" will be 1D integer labels,
+                        - "input" will be images identical
+                            to input images (mainly used to work with autoencoders).
+                        - If None, no labels are returned
+                        (the generator will only yield batches of image data,
+                        which is useful to use with `model.predict_generator()`).
+                        Please note that in case of class_mode None,
+                        the data still needs to reside in a subdirectory
+                        of `directory` for it to work correctly.
+            classes: list of class subdirectories
+                    (e.g. `['dogs', 'cats']`). Default: None.
+                    If not provided, the list of classes will be automatically
+                    inferred from the subdirectory names/structure
+                    under `directory`, where each subdirectory will
+                    be treated as a different class
+                    (and the order of the classes, which will map to the label
+                    indices, will be alphanumeric).
+            imgs_target_config: dictionary, 
+                                'target_size':(256, 256), output target image size
+                                'color_mode':'rgb', output target image mode,
+                                        One of "grayscale", "rgb", "rgba". Default: "rgb".
+                                        Whether the images will be converted to
+                                        have 1, 3, or 4 channels.
+                                'interpolation': 'nearest', what strategy to use when upsampling a low resolution image,
+                                        Interpolation method used to resample the image if the
+                                        target size is different from that of the loaded image.
+                                        Supported methods are `"nearest"`, `"bilinear"`, and `"bicubic"`.
+                                        If PIL version 1.1.3 or newer is installed, `"lanczos"` is also
+                                        supported. If PIL version 3.4.0 or newer is installed,
+                                        `"box"` and `"hamming"` are also supported.
+                                        By default, `"nearest"` is used.
+            transforms: dict, optional dictionary for image augmentations,
+                        doc can be found at 'https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator'
+            split_config: dict, optional.
+                            'split_type':'training', (`training` or `validation`) 
+                            'validation_split':0.0, Float. Fraction of images reserved for validation (strictly between 0 and 1).
+            shuffle_config: dict, optional.
+                            'shuffle': True, shuffle dataset batchs or not
+                            'seed': None, seed for the shuffling
+            save_config: dict, optional.
+                            'save_to_dir': None, directory to save augmented images
+                            'save_format': 'png', save format of images
     """
 
     generator = None
-    # required_keys = ['csv_path', 'imgs_paths_col', 'classes']
-    augmentaion_args = {
+    
+    transforms = {
         'featurewise_center': False,
         'samplewise_center': False,
         'featurewise_std_normalization': False,
@@ -321,185 +380,120 @@ class DataGenerator_img_disk:
         'interpolation_order': 1,
         'dtype': 'float32'
     }
+    
+    imgs_target_config = {
+        'target_size':(256, 256), 
+        'color_mode':'rgb', 
+        'interpolation': 'nearest'
+    }
 
-    def __init__(self, *, 
-                imgs_augmention_config:dict=None,
+    def __init__(self, img_dir, label_dir=None, label_cols:list=None, validate_filenames:bool=True, batch_size=8, class_mode:str='categorical', 
+                 classes:list=None, *,
                 imgs_target_config: dict={'target_size':(256, 256), 'color_mode':'rgb', 'interpolation': 'nearest'},
-                validation_split:float=0.0) -> None:
+                transforms:dict=None,
+                split_config:dict={'split_type':'training', 'validation_split':0.0},
+                shuffle_config:dict={'shuffle': True, 'seed': None},
+                save_config:dict={'save_to_dir': None, 'save_format': 'png'}) -> None:
 
-        if imgs_augmention_config:
-            intersected_keys = set(imgs_augmention_config.keys()) & set(self.augmentaion_default.keys())
+        self.img_dir = img_dir # parent Images directory
+        self.label_dir = label_dir # csv File that contains labels
+        self.label_cols = label_cols # ['image path column name', 'image label']
+        self.validate_filenames = validate_filenames # if csv file is probided, if True then ignore if image is not found
+        self.batch_size = batch_size
+        self.class_mode = class_mode
+        self.classes = classes
+        
+        # filter only what the user have provided and set the reset to the default values
+        intersected_keys = set(imgs_target_config.keys()) & set(self.imgs_target_config.keys())
+        for key in list(intersected_keys):
+            self.imgs_target_config[key] = imgs_target_config[key]
+
+        # filter only what the user have provided and set the reset to the default values
+        if transforms:
+            intersected_keys = set(transforms.keys()) & set(self.transforms.keys())
             for key in list(intersected_keys):
-                self.augmentaion_args[key] = imgs_augmention_config[key]
-
-        self.validation_split = validation_split
-        self.imgs_target_config = imgs_target_config
+                self.transforms[key] = transforms[key]
+            
+        self.split_config = split_config
+        self.shuffle_config = shuffle_config
+        self.save_config = save_config
 
         self.data_gen = ImageDataGenerator(
-                featurewise_center=self.augmentaion_args['featurewise_center'],
-                samplewise_center=self.augmentaion_args['samplewise_center'],
-                featurewise_std_normalization=self.augmentaion_args['featurewise_std_normalization'],
-                samplewise_std_normalization=self.augmentaion_args['samplewise_std_normalization'],
-                zca_whitening=self.augmentaion_args['zca_whitening'],
-                zca_epsilon=self.augmentaion_args['zca_epsilon'],
-                rotation_range=self.augmentaion_args['rotation_range'],
-                width_shift_range=self.augmentaion_args['width_shift_range'],
-                height_shift_range=self.augmentaion_args['height_shift_range'],
-                brightness_range=self.augmentaion_args['brightness_range'],
-                shear_range=self.augmentaion_args['shear_range'],
-                zoom_range=self.augmentaion_args['zoom_range'],
-                channel_shift_range=self.augmentaion_args['channel_shift_range'],
-                fill_mode=self.augmentaion_args['fill_mode'],
-                cval=self.augmentaion_args['cval'],
-                horizontal_flip=self.augmentaion_args['horizontal_flip'],
-                vertical_flip=self.augmentaion_args['vertical_flip'],
-                rescale=self.augmentaion_args['rescale'],
-                preprocessing_function=self.augmentaion_args['preprocessing_function'],
-                data_format=self.augmentaion_args['data_format'],
-                validation_split=validation_split,
-                interpolation_order=self.augmentaion_args['interpolation_order'],
-                dtype=self.augmentaion_args['dtype']
+                featurewise_center=self.transforms['featurewise_center'],
+                samplewise_center=self.transforms['samplewise_center'],
+                featurewise_std_normalization=self.transforms['featurewise_std_normalization'],
+                samplewise_std_normalization=self.transforms['samplewise_std_normalization'],
+                zca_whitening=self.transforms['zca_whitening'],
+                zca_epsilon=self.transforms['zca_epsilon'],
+                rotation_range=self.transforms['rotation_range'],
+                width_shift_range=self.transforms['width_shift_range'],
+                height_shift_range=self.transforms['height_shift_range'],
+                brightness_range=self.transforms['brightness_range'],
+                shear_range=self.transforms['shear_range'],
+                zoom_range=self.transforms['zoom_range'],
+                channel_shift_range=self.transforms['channel_shift_range'],
+                fill_mode=self.transforms['fill_mode'],
+                cval=self.transforms['cval'],
+                horizontal_flip=self.transforms['horizontal_flip'],
+                vertical_flip=self.transforms['vertical_flip'],
+                rescale=self.transforms['rescale'],
+                preprocessing_function=self.transforms['preprocessing_function'],
+                data_format=self.transforms['data_format'],
+                validation_split=self.split_config['validation_split'],
+                interpolation_order=self.transforms['interpolation_order'],
+                dtype=self.transforms['dtype']
             )
-
-    def read_from_csv(self, csv_config:dict, parent_dir:str=None, classes:list=None, class_mode:str='categorical', batch_size:int=8,
-                    shuffle_config:dict={'shuffle': True, 'seed': None},
-                    save_config:dict={'save_to_dir': None, 'save_format': 'png'}, validate_filenames:bool=True,
-                    imgs_target_config: dict={'target_size':(256, 256), 'color_mode':'rgb', 'interpolation': 'nearest'}):
-
-        if not self._csv_config_valid(csv_config):
-            raise ValueError("CSV config not valid")  
         
-        df = pd.read_csv(csv_config['csv_path'])
-        image_paths_col_name = csv_config['imgs_paths_col']
-        classes_col_name = csv_config['classes']
-        # drop nans
-        df.dropna(subset=[image_paths_col_name, classes_col_name], how='any', inplace=True)
-
-        generator = self.data_gen.flow_from_dataframe(
-                df,
-                directory=parent_dir,
-                x_col=image_paths_col_name,
-                y_col=classes_col_name,
-                classes=classes,
-                class_mode=class_mode,
-                target_size=imgs_target_config['target_size'],
-                interpolation=imgs_target_config['interpolation'],
-                color_mode=imgs_target_config['color_mode'],
-                save_to_dir=save_config['save_to_dir'],
-                save_format=save_config['save_format'],
-                validate_filenames=validate_filenames,
-                shuffle=shuffle_config['suffle'],
-                seed=shuffle_config['seed'],
-                batch_size=batch_size
-            )
-
-        return generator
-
-    def read_from_disk(self, parent_directory:str, classes:list=None, class_mode:str='categorical', batch_size:int=8,
-                    imgs_batch_size:int=8, shuffle_config:dict={'shuffle': True, 'seed': None},
-                    save_config:dict={'save_to_dir': None, 'save_format': 'png'}, validate_filenames:bool=True,
-                    imgs_target_config: dict={'target_size':(256, 256), 'color_mode':'rgb', 'interpolation': 'nearest'}):
-
-        generator = self.data_gen.flow_from_directory(
-            directory=parent_directory,
-            target_size=imgs_target_config['target_size'],
-            color_mode=imgs_target_config['color_mode'],
-            classes=classes,
-            class_mode=class_mode,
-            batch_size=batch_size,
-            shuffle=shuffle_config['suffle'],
-            seed=shuffle_config['seed'],
-            save_to_dir=save_config['save_to_dir'],
-            save_format=save_config['save_format'],
-            interpolation=imgs_target_config['interpolation'],
-        )
-
-        return generator
-
-    def _csv_config_valid(self, csv_config: dict) -> bool:
-        csv_config_keys = list(csv_config.keys())
-        required_keys = ['csv_path', 'imgs_paths_col', 'classes']
-        try:
-            for required_key in required_keys:
-                if required_key not in csv_config_keys:
-                    print(f'{required_key} is missing from config')
-                    return False
-                elif not isinstance(csv_config[required_key], str):
-                    print(f'{required_key} must be a string')
-                    return False
-
-            if not os.path.exists(csv_config['csv_path']):
-                print(f"csv path doesnt exist: {csv_config['csv_path']}")
-                return False
+        if (self.label_dir is not None) and (self.label_cols is not None):
+            df = pd_read_file(self.label_dir, drop_duplicates=True)
+        
+            image_paths_col_name = self.label_cols[0]
+            classes_col_name = self.label_cols[1]
             
-            df = pd.read_csv(csv_config['csv_path'])
-            if set(required_keys[1:]) & set(df.columns) != {required_keys[1:]}:
-                print(f'csv file must contain columns: [{required_keys[1:]}]')
-                return False     
-        except Exception as exp:
-            print(exp)
-            return False
-        return True
+            # drop nans only for target columns
+            df.dropna(subset=[image_paths_col_name, classes_col_name], how='any', inplace=True)
 
+            self.generator = self.data_gen.flow_from_dataframe(
+                    df,
+                    directory=self.img_dir,
+                    x_col=image_paths_col_name,
+                    y_col=classes_col_name,
+                    classes=self.classes,
+                    class_mode=self.class_mode,
+                    target_size=self.imgs_target_config['target_size'],
+                    interpolation=self.imgs_target_config['interpolation'],
+                    color_mode=self.imgs_target_config['color_mode'],
+                    save_to_dir=self.save_config['save_to_dir'],
+                    save_format=self.save_config['save_format'],
+                    validate_filenames=self.validate_filenames,
+                    shuffle=self.shuffle_config['suffle'],
+                    seed=self.shuffle_config['seed'],
+                    batch_size=self.batch_size
+                )
+        else:
+            self.generator = self.data_gen.flow_from_directory(
+                    directory=self.img_dir,
+                    target_size=self.imgs_target_config['target_size'],
+                    color_mode=self.imgs_target_config['color_mode'],
+                    classes=self.classes,
+                    class_mode=self.class_mode,
+                    batch_size=self.batch_size,
+                    shuffle=self.shuffle_config['suffle'],
+                    seed=self.shuffle_config['seed'],
+                    save_to_dir=self.save_config['save_to_dir'],
+                    save_format=self.save_config['save_format'],
+                    interpolation=self.imgs_target_config['interpolation'],
+                )
     
-#################################################################################   
-# class DataGenerator_img_disk(Sequence):
-#     """Custom DataGenerator using Keras Sequence for images on disk
-#         df_label format :
-#         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-
-#         Args:
-#             img_dir (Path(str)): String path to images directory
-#             label_dir (DataFrame): Dataset for Generator
-#             label_cols (list): list of cols for the label (multi label)
-#             split (str, optional): split for train or test. Defaults to 'train'.
-#             batch_size (int, optional): batch_size for each batch. Defaults to 8.
-#             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
-#     """
-        
-#     def __init__(self, img_dir, label_dir, label_cols,
-#                  split='train', batch_size=8, transforms=None):
-#         self.image_dir  = img_dir
-#         self.label_cols = label_cols
-#         self.batch_size = batch_size
-#         self.transforms = transforms
-
-#         from utilmy import pd_read_file
-#         dflabel     = pd_read_file(label_dir)
-#         self.labels = pd_merge_labels_imgdir(dflabel, img_dir, label_cols)
-
-
-#     def on_epoch_end(self):
-#         np.random.seed(12)
-#         np.random.shuffle(self.labels)
-
-#     def __len__(self):
-#         return int(np.ceil(len(self.labels) / float(self.batch_size)))
-
-#     def __getitem__(self, idx):
-#         # Create batch targets
-#         df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
-
-#         batch_x = []
-#         batch_y = []  # list of heads
-
-#         for ii, x in df_batch.iterrows():
-#             img = np.array(Image.open(x['uri']).convert('RGB'))
-#             batch_x.append(img)
-
-#         for ci in self.label_cols:
-#             v = [x.split(",") for x in df_batch[ci + "_onehot"]]
-#             v = np.array([[int(t) for t in vlist] for vlist in v])
-#             batch_y.append(v)
-
-#         if self.transforms is not None:
-#             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
-
-#         return (np.array(batch_x), np.array(*batch_y))
- 
-
-
-
+    def __len__(self):
+        """
+        Calculates steps per epoch
+        """
+        return int(math.ceil((1. * self.generator.n) / self.batch_size))
+    
+    def get_img_gen(self):
+        return self.generator
+    
                             
 ###############################################################################
 from albumentations.core.transforms_interface import ImageOnlyTransform
