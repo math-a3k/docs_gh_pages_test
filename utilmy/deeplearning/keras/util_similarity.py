@@ -6,9 +6,9 @@ Similarity between tensors
 import os, sys, pandas as pd, numpy as np
 import tensorflow as tf
 
-
 #################################################################################################
 from utilmy.utilmy import log, log2
+from typing import Iterable
 
 def help():
     from utilmy import help_create
@@ -19,8 +19,6 @@ def help():
 ######################################################################################
 def test_all():
     test_tf_cdist()
-# Charis: What does this test_all() do? 
-# Why can't we directly call test_tf_cdist() on `test.py?`
 
 
 def test_tf_cdist():
@@ -65,15 +63,11 @@ def test_tf_cdist():
 
 
 ######################################################################################
-def tf_cdist(left, right, metric='euclidean'):
+def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str ='euclidean'):
     """
-    Test unit to calculate distance based on `metric`.
-    Returns calculated `metric` distance between point A and B.
-
-    Arguments: 
-    `left` - Point A coordinates;
-    `right` - Point B coordinates;
-    `metric` - 'euclidean' or 'cosine'
+    Calculate distance based on `metric`.
+    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]], 'euclidean'`\n
+    Returns: `tf.Tensor([[12.72  15.55 ] [9.899 12.72]])`
     """
     #### distance between tensor
     if metric == 'euclidean':
@@ -85,13 +79,11 @@ def tf_cdist(left, right, metric='euclidean'):
         raise ValueError(err_msg)
 
 
-def tf_cdist_euclidean(left, right):
+def tf_cdist_euclidean(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
     """
-    Wrapper function to return euclidean distance from Point A to B.
-
-    Arguments:
-    `left` - Point A coordinates;
-    `right` - Point B coordinates
+    Wrapper function to return euclidean distance from Point A to B.\n
+    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]]`\n
+    Returns: `tf.Tensor([[12.72  15.55 ] [9.899 12.72]])`
     """
     left, right                       = __cast_left_and_right_to_tensors(left, right)
     rows_count_left, rows_count_right = __get_rows_counts(left, right)
@@ -103,13 +95,11 @@ def tf_cdist_euclidean(left, right):
     distance                          = tf.cast(distance, tf.float32)
     return distance
 
-def tf_cdist_cos(left, right):
+def tf_cdist_cos(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
     """
-    Wrapper function to return cosine distance from Point A to B.
-
-    Arguments:
-    `left` - Point A coordinates;
-    `right` - Point B coordinates
+    Wrapper function to return cosine distance from Point A to B.\n
+    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]]`\n
+    Returns: `tf.Tensor([[0.037  0.039 ] [0.004 0.005]])`
     """
     left, right = __cast_left_and_right_to_tensors(left, right)
     norm_left   = __get_tensor_reshaped_norm(left, (-1, 1))
@@ -119,37 +109,27 @@ def tf_cdist_cos(left, right):
     distance    = tf.cast(distance, tf.float32)
     return distance
 
-def __cast_left_and_right_to_tensors(left, right):
+def __cast_left_and_right_to_tensors(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
     """
-    Convert coordinates into `float32` `Tensor` types.
-    
-    Arguments:
-    `left` - Point A coordinates, any type;
-    `right` - Point B coordinates, any type
+    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]]`\n
+    Returns: `tf.Tensor([1. 2.] [3. 4.]), tf.Tensor([10. 11.] [12. 13.])`
     """
     left  = tf.cast(tf.convert_to_tensor(left), dtype=tf.float32)
     right = tf.cast(tf.convert_to_tensor(right), dtype=tf.float32)
     return left, right
 
-def __get_rows_counts(left, right):
+def __get_rows_counts(left: tf.Tensor, right: tf.Tensor) -> tuple:
     """
-    Returns each `Tensor` row counts.
-    
-    Arguments:
-    `left` - Point A coordinates of type `Tensor`;
-    `right` - Point B coordinates of type `Tensor`
+    Input example: `tf.constant([[1., 2.],[3., 4.]]), tf.constant([[5., 6.],[7., 8.]])`
+    Returns: `(<tf.Tensor: shape=(), dtype=int32, numpy=2>, <tf.Tensor: shape=(), dtype=int32, numpy=2>)`
     """
     count_left, count_right  = tf.shape(left)[0], tf.shape(right)[0]
     return count_left, count_right
 
-def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
+def __get_tensor_sqr(tensor: tf.Tensor, reshape_shape: int, tile_shape: Iterable[float]) -> tf.Tensor:
     """
-    Returns squared, tiled `Tensor`
-
-    Arguments:
-    `tensor`; 
-    `reshape_shape` - Tuple of length 2;
-    `tile_shape` - 1-D Array
+    Input example: `tf.constant([[1., 2.],[3., 4.]]), 2, [3,]`\n
+    Returns: `tf.Tensor([ 5. 25.  5. 25.  5. 25.], shape=(6,), dtype=float32))` 
     """
     sqr = tf.pow(tensor, 2.0)
     sqr = tf.reduce_sum(sqr, axis=1)
@@ -158,16 +138,18 @@ def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
     return sqr
 
 
-def __get_tensor_reshaped_norm(tensor, reshape_shape):
+def __get_tensor_reshaped_norm(tensor: tf.Tensor, reshape_shape: int = None) -> tf.Tensor:
     """
-    Returns a normalized `Tensor`
-
-    Arguments:
-    `tensor`; 
-    `reshape_shape` - Tuple of length 2
+    Input example: `tf.constant([[1., 2.],[3., 4.]]), 2`\n
+    Returns: `tf.Tensor([2.236 5.   ], shape=(2,), dtype=float32)` 
     """
+    reshape_shape = reshape_shape if reshape_shape is not None else tensor.shape[0]
     norm = tf.norm(tensor, axis=1)
     norm = tf.reshape(norm, reshape_shape)
     return norm
 
 
+rank_2_tensor = tf.constant([[1., 2.],[3., 4.]])
+print(rank_2_tensor)
+a = tf.constant([[5., 6.],[7., 8.], [9.,10.]])
+print(tf_cdist_euclidean([[1, 2], [3, 4]], [[10, 11], [12, 13]]))
