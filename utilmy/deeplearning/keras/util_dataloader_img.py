@@ -466,7 +466,7 @@ class DataGenerator_img_disk:
                     save_to_dir=self.save_config['save_to_dir'],
                     save_format=self.save_config['save_format'],
                     validate_filenames=self.validate_filenames,
-                    shuffle=self.shuffle_config['suffle'],
+                    shuffle=self.shuffle_config['shuffle'],
                     seed=self.shuffle_config['seed'],
                     batch_size=self.batch_size
                 )
@@ -478,7 +478,7 @@ class DataGenerator_img_disk:
                     classes=self.classes,
                     class_mode=self.class_mode,
                     batch_size=self.batch_size,
-                    shuffle=self.shuffle_config['suffle'],
+                    shuffle=self.shuffle_config['shuffle'],
                     seed=self.shuffle_config['seed'],
                     save_to_dir=self.save_config['save_to_dir'],
                     save_format=self.save_config['save_format'],
@@ -493,8 +493,73 @@ class DataGenerator_img_disk:
     
     def get_img_gen(self):
         return self.generator
+
+
+def test_img_data_gen_1():
+    """
+    Documenting how to use DataGenerator_img_disk when loading images from disk
+    given that iamges sub directories names are the label names
+    """
     
-                            
+    # define your generator and required config
+    generator = DataGenerator_img_disk(img_dir='images_parent directory',
+                                    batch_size=8,
+                                    class_mode='categorical',                       # categorical, binary, ...etc
+                                    classes=['class 1', 'class 2'],                 # optional argument
+                                    imgs_target_config={'target_size': (256, 256)}, 
+                                    save_config={'save_to_dir': 'E:/augs', 'save_format': 'png'},   # saving augmentations config
+                                    transforms={'rotation_range': 0.5,                              # transforms/augmentations config
+                                                'horizontal_flip':True,
+                                                'zoom_range':0.6,
+                                                'brightness_range':[0.1, 0.5]})
+    
+    # get generator
+    train_gen = generator.get_img_gen()
+
+    # get generator length
+    steps_per_epoch = generator.len()
+
+    # use the generator in the fit function
+    # model.fit(train_gen,
+    #         epochs=3,
+    #         verbose=1,
+    #         steps_per_epoch=steps_per_epoch)
+
+def test_img_data_gen_2():
+    """
+    Documenting how to use DataGenerator_img_disk when loading images from disk
+    given that images paths and labels are in a csv file
+    """
+    
+    # define your generator and required config
+    generator = DataGenerator_img_disk(img_dir='images_parent directory',
+                                    label_dir='CSV path', 
+                                    label_cols=['x_col_name', 'y_col_name'],        # x_col (image paths) name, y_col (labels) columns name
+                                    batch_size=8,
+                                    class_mode='categorical',                       # categorical, binary, ...etc
+                                    classes=['class 1', 'class 2'],                 # optional argument (can be infered from csv file)
+                                    imgs_target_config={'target_size': (256, 256)}, 
+                                    save_config={'save_to_dir': 'E:/augs', 'save_format': 'png'},   # saving augmentations config
+                                    transforms={'rotation_range': 0.5,                              # transforms/augmentations config
+                                                'horizontal_flip':True,
+                                                'zoom_range':0.6,
+                                                'brightness_range':[0.1, 0.5]})
+    
+    # get generator
+    train_gen = generator.get_img_gen()
+
+    # get generator length
+    steps_per_epoch = generator.len()
+
+    # use the generator in the fit function
+    # model.fit(train_gen,
+    #         epochs=3,
+    #         verbose=1,
+    #         steps_per_epoch=steps_per_epoch)
+
+
+
+
 ###############################################################################
 from albumentations.core.transforms_interface import ImageOnlyTransform
 class Transform_sprinkle(ImageOnlyTransform):
