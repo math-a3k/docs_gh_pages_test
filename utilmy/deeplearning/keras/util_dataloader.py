@@ -3,16 +3,12 @@ HELP = """
  utils keras for dataloading
 """
 import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
-import tensorflow as tf
-from tensorflow.python.keras.utils.data_utils import Sequence  
-
-
-
-######################################################################################
 import cv2
+import tensorflow as tf
 # import tifffile.tifffile
 # from skimage import morphology
-from PIL import Image
+from tensorflow.python.keras.utils.data_utils import Sequence  
+
 from albumentations import (
     Compose, HorizontalFlip, CLAHE, HueSaturationValue,
     RandomBrightness, RandomContrast, RandomGamma,
@@ -22,13 +18,12 @@ from albumentations.core.transforms_interface import ImageOnlyTransform
 
 
 
-
 ###################################################################################################
 from utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss = HELP + help_create("utilmy.deeplearning.keras.util_dataloader_img")
+    ss = HELP + help_create("utilmy.deeplearning.keras.util_layers")
     print(ss)
 
 
@@ -77,14 +72,14 @@ def test():
       ToFloat(max_value=255)
   ])
   
-  
-def test1():
+  def test1():
     from tensorflow.keras.datasets import mnist
+    from tqdm import tqdm
 
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
-
-    train_loader = DataGenerator_img(X_train, y_train)
-    valid_loader = DataGenerator_img(X_valid, y_valid)
+    
+    train_loader = CustomDataGenerator(X_train, y_train)
+    valid_loader = CustomDataGenerator(X_valid, y_valid)
 
     for i, (image, label) in enumerate(train_loader):
         print('Training : ')
@@ -98,54 +93,14 @@ def test1():
         print(f'label shape : {label.shape}')
         break
 
-
-def test2(): #using predefined df
-    from numpy import random
-    from pathlib import Path
-
-    folder_name = 'random images'
-    csv_file_name = 'df.csv'
-    p = Path(folder_name)
-    num_images = 50
-
-    num_labels = 2
-    
-    def create_random_images_ds(img_shape, num_images = 10, folder = 'random images', return_df = True, num_labels = 2, label_cols = ['label']):
-        if not os.path.exists(folder):
-            os.mkdir(folder)
-        for n in range(num_images):
-            filename = f'{folder}/{n}.jpg'
-            rgb_img = numpy.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
-            image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
-            image.save(filename)
-
-        label_dict = []
-
-        files = [i.as_posix() for i in p.glob('*.jpg')]
-        for i in enumerate(label_cols):
-            label_dict.append(random.randint(num_labels, size=(num_images)))
-
-        zipped = list(zip(files, *label_dict))
-        df = pd.DataFrame(zipped, columns=['uri'] + label_cols)
-        if return_df:
-            return df
-
-    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = folder_name)
-    df.to_csv(csv_file_name, index=False)
-
-    dt_loader = DataGenerator_img_disk(p.as_posix(), df, ['label'], batch_size = 32)
-
-    for i, (image, label) in enumerate(dt_loader):
-        print(f'image shape : {(image).shape}')
-        print(f'label shape : {(label).shape}')
-        break
-
-
  
-################################################################################################## 
+ 
+ 
+
 ##################################################################################################
 def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name changed
-    """ Get a data sample X, Y_multilabel, with batch size from dataset
+    """ Get a data sample with batch size from dataset
+
     Args:
         batch_size (int): Provide a batch size for sampling
         x_train (list): Inputs from the dataset
@@ -160,8 +115,8 @@ def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name change
     #### 
     # i_select = 10
     # i_select = np.random.choice(np.arange(train_size), size=batch_size, replace=False)
-    col0 = labels_col[0]
-    i_select = np.random.choice(np.arange(len(labels_val[ col0 ])), size=batch_size, replace=False)
+    i_select = np.random.choice(np.arange(len(labels_val['gender'])), size=batch_size, replace=False)
+
 
     #### Images
     x        = np.array([ x_train[i]  for i in i_select ] )
@@ -178,6 +133,7 @@ def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name change
 
 def pd_get_onehot_dict(df, labels_col:list, dfref=None, ) :       #name changed
     """
+
     Args:
         df (DataFrame): Actual DataFrame
         dfref (DataFrame): Reference DataFrame 
@@ -188,6 +144,7 @@ def pd_get_onehot_dict(df, labels_col:list, dfref=None, ) :       #name changed
     """
     if dfref is not None :
         df       = df.merge(dfref, on = 'id', how='left')
+
     
     labels_val = {}
     labels_cnt = {}
@@ -204,8 +161,11 @@ def pd_get_onehot_dict(df, labels_col:list, dfref=None, ) :       #name changed
     
 
 def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #name changed
+    
     """One Hot encode label_cols
+    # 
     #    id, uri, cat1, cat2, .... , cat1_onehot
+    #
     Args:
         dfref (DataFrame): DataFrame to perform one hot encoding on
         img_dir (Path(str)): String Path /*.png to image directory
@@ -214,6 +174,7 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #nam
     Returns:
         DataFrame: One Hot encoded DataFrame
     """
+
     import glob
     fpaths   = glob.glob(img_dir )
     fpaths   = [ fi for fi in fpaths if "." in fi.split("/")[-1] ]
@@ -235,30 +196,44 @@ def pd_merge_imgdir_onehotfeat(dfref, img_dir="*.jpg", labels_col = []) :   #nam
     return df
 
 
-def pd_to_onehot(dfref, labels_col = []) :   #name changed
-    """One Hot encode label_cols for predefined df
-    #    id, uri, cat1, cat2, .... , cat1_onehot
-    Args:
-        dfref (DataFrame): DataFrame to perform one hot encoding on
-        labels_col (list): Columns to perform One Hot encoding on. Defaults to []
-
-    Returns:
-        DataFrame: One Hot encoded DataFrame
-    """
-    for ci in labels_col :
-      dfi_1hot           = pd.get_dummies(dfref, columns=[ci])  ### OneHot
-      dfi_1hot           = dfi_1hot[[ t for t in dfi_1hot.columns if ci in t   ]]  ## keep only OneHot
-      dfref[ci + "_onehot"] = dfi_1hot.apply( lambda x : ','.join([   str(t) for t in x  ]), axis=1)
-      #####  0,0,1,0 format   log(dfi_1hot)
-
-    return dfref
-
-
 
 
 #################################################################################      
-class DataGenerator_img(Sequence):
-    """Custom DataGenerator using keras Sequence for image data in numpy array
+# class CustomDataGenerator(Sequence):
+    
+#     """Custom DataGenerator using keras Sequence
+
+#     Args:
+#         x (np array): The input samples from the dataset
+#         y (np arrays): The label column from the dataset
+#         batch_size (int, optional): batch size for the samples. Defaults to 32.
+#         augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
+#     """
+    
+#     def __init__(self, x, y, batch_size=32, augmentations=None):
+#         self.x          = x
+#         self.y          = y
+#         self.batch_size = batch_size
+#         self.augment    = augmentations
+
+#     def __len__(self):
+#         return int(np.ceil(len(self.x) / float(self.batch_size)))
+
+#     def __getitem__(self, idx):
+#         batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
+#         batch_y = []
+#         for y_head in self.y:
+#             batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
+        
+#         if self.augment is not None:
+#             batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
+#         return (batch_x, *batch_y)
+
+
+class CustomDataGenerator(Sequence):
+    
+    """Custom DataGenerator using keras Sequence
+
     Args:
         x (np array): The input samples from the dataset
         y (np array): The labels from the dataset
@@ -288,32 +263,34 @@ class DataGenerator_img(Sequence):
     
     
 #################################################################################   
-class DataGenerator_img_disk(Sequence):    
-    """Custom DataGenerator using Keras Sequence for images on disk
-        df_label format :
-        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+from PIL import Image
+class CustomDataGenerator_img(Sequence):
+    
+    """Custom DataGenerator using Keras Sequence for images
 
-        Args:
-            img_dir (Path(str)): String path to images directory
-            label_path (DataFrame): Dataset for Generator
-            class_list (list): list of classes
-            split (str, optional): split for train or test. Defaults to 'train'.
-            batch_size (int, optional): batch_size for each batch. Defaults to 8.
-            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
+    Args:
+        img_dir (Path(str)): String path to images directory
+        label_path (DataFrame): Dataset for Generator
+        class_list (list): list of classes
+        split (str, optional): split for train or test. Defaults to 'train'.
+        batch_size (int, optional): batch_size for each batch. Defaults to 8.
+        transforms (str, optional):  type of transformations to perform on images. Defaults to None.
     """
-        
+    
+    # """    
+    #    df_label format :
+    #        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+    # """
+    
     def __init__(self, img_dir, label_path, class_list,
-                 split='train', batch_size=8, transforms=None):
-        self.image_dir = img_dir
-        self.class_list = class_list
-        self.batch_size = batch_size
-        self.transforms = transforms
-        if not isinstance(label_path, pd.DataFrame):
-            dfref = pd.read_csv(label_path)
-            self.labels = data_add_onehot(dfref, img_dir, class_list)
-        else:
-            self.labels = pd_onehotfeat_predefined_df(label_path, class_list)
-        
+                 split='train', batch_size=8, transforms=None): 
+        self.image_dir   = img_dir
+        self.class_list  = class_list
+        self.batch_size  = batch_size
+        self.transforms  = transforms
+
+        dfref       = pd.read_csv(label_path)
+        self.labels = data_add_onehot(dfref, img_dir, class_list)
 
     def on_epoch_end(self):
         np.random.seed(12)
@@ -324,24 +301,26 @@ class DataGenerator_img_disk(Sequence):
 
     def __getitem__(self, idx):
         # Create batch targets
-        df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
+        df_batch    = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
 
         batch_x = []
-        batch_y = []  # list of heads
+        batch_y = []  #  list of heads
 
-        for ii, x in df_batch.iterrows():
-            img = np.array(Image.open(x['uri']).convert('RGB'))
+        for ii, x in df_batch.iterrows():  
+            img =  np.array(Image.open(x['uri']).convert('RGB') )  
             batch_x.append(img)
 
-        for ci in self.class_list:
-            v = [x.split(",") for x in df_batch[ci + "_onehot"]]
-            v = np.array([[int(t) for t in vlist] for vlist in v])
-            batch_y.append(v)
+            
+        for ci in self.class_list :
+               v = [ x.split(",") for x in df_batch[ci + "_onehot" ] ] 
+               v = np.array( [ [int(t) for t in vlist ]   for vlist in v    ])
+               batch_y.append( v )
 
+                
         if self.transforms is not None:
             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
 
-        return (np.array(batch_x), np.array(*batch_y))
+        return (batch_x, *batch_y)
  
 
 
@@ -360,10 +339,10 @@ class SprinklesTransform(ImageOnlyTransform):
         elif isinstance(image, np.ndarray):      image = tf.constant(image, dtype=tf.float32)
         return self.sprinkles(image).numpy()
 
+    
 
-       
-###############################################################################       
-class DataGenerator_img_disk2(tf.keras.utils.Sequence):
+class RealCustomDataGenerator(tf.keras.utils.Sequence):
+    
     """Custom Data Generator using keras Sequence
 
         Args:
@@ -430,9 +409,6 @@ class DataGenerator_img_disk2(tf.keras.utils.Sequence):
         return (idx, batch_x, *batch_y)
 
 
-       
-###############################################################################
-#############  Utilities ######################################################
 def _byte_feature(value):
     if not isinstance(value, (tuple, list)):
         value = [value]
@@ -473,100 +449,57 @@ def build_tfrecord(x, tfrecord_out_path, max_records):
     return tfrecord_out_path
 
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-# class CustomDataGenerator(Sequence):
+class CustomDataGenerator_img(Sequence):
     
-#     """Custom DataGenerator using keras Sequence
+    """Custom DataGenerator using Keras Sequence for images
 
-#     Args:
-#         x (np array): The input samples from the dataset
-#         y (np arrays): The label column from the dataset
-#         batch_size (int, optional): batch size for the samples. Defaults to 32.
-#         augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
-#     """
-    
-#     def __init__(self, x, y, batch_size=32, augmentations=None):
-#         self.x          = x
-#         self.y          = y
-#         self.batch_size = batch_size
-#         self.augment    = augmentations
-
-#     def __len__(self):
-#         return int(np.ceil(len(self.x) / float(self.batch_size)))
-
-#     def __getitem__(self, idx):
-#         batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
-#         batch_y = []
-#         for y_head in self.y:
-#             batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
+        Args:
+            img_dir (Path(str)): String path to images directory
+            label_path (DataFrame): Dataset for Generator
+            class_list (list): list of classes
+            split (str, optional): split for train or test. Defaults to 'train'.
+            batch_size (int, optional): batch_size for each batch. Defaults to 8.
+            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
+    """
+    # """
+    #    df_label format :
+    #        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+    # """
         
-#         if self.augment is not None:
-#             batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
-#         return (batch_x, *batch_y)
+    def __init__(self, img_dir, label_path, class_list,
+                 split='train', batch_size=8, transforms=None):
+        self.image_dir = img_dir
+        self.class_list = class_list
+        self.batch_size = batch_size
+        self.transforms = transforms
 
+        dfref = pd.read_csv(label_path)
+        self.labels = data_add_onehot(dfref, img_dir, class_list)
 
+    def on_epoch_end(self):
+        np.random.seed(12)
+        np.random.shuffle(self.labels)
 
+    def __len__(self):
+        return int(np.ceil(len(self.labels) / float(self.batch_size)))
 
-# class CustomDataGenerator_img(Sequence):
-    
-#     """Custom DataGenerator using Keras Sequence for images
+    def __getitem__(self, idx):
+        # Create batch targets
+        df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
 
-#         Args:
-#             img_dir (Path(str)): String path to images directory
-#             label_path (DataFrame): Dataset for Generator
-#             class_list (list): list of classes
-#             split (str, optional): split for train or test. Defaults to 'train'.
-#             batch_size (int, optional): batch_size for each batch. Defaults to 8.
-#             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
-#     """
-#     # """
-#     #    df_label format :
-#     #        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-#     # """
-        
-#     def __init__(self, img_dir, label_path, class_list,
-#                  split='train', batch_size=8, transforms=None):
-#         self.image_dir = img_dir
-#         self.class_list = class_list
-#         self.batch_size = batch_size
-#         self.transforms = transforms
+        batch_x = []
+        batch_y = []  # list of heads
 
-#         dfref = pd.read_csv(label_path)
-#         self.labels = data_add_onehot(dfref, img_dir, class_list)
+        for ii, x in df_batch.iterrows():
+            img = np.array(Image.open(x['uri']).convert('RGB'))
+            batch_x.append(img)
 
-#     def on_epoch_end(self):
-#         np.random.seed(12)
-#         np.random.shuffle(self.labels)
+        for ci in self.class_list:
+            v = [x.split(",") for x in df_batch[ci + "_onehot"]]
+            v = np.array([[int(t) for t in vlist] for vlist in v])
+            batch_y.append(v)
 
-#     def __len__(self):
-#         return int(np.ceil(len(self.labels) / float(self.batch_size)))
+        if self.transforms is not None:
+            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
 
-#     def __getitem__(self, idx):
-#         # Create batch targets
-#         df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
-
-#         batch_x = []
-#         batch_y = []  # list of heads
-
-#         for ii, x in df_batch.iterrows():
-#             img = np.array(Image.open(x['uri']).convert('RGB'))
-#             batch_x.append(img)
-
-#         for ci in self.class_list:
-#             v = [x.split(",") for x in df_batch[ci + "_onehot"]]
-#             v = np.array([[int(t) for t in vlist] for vlist in v])
-#             batch_y.append(v)
-
-#         if self.transforms is not None:
-#             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
-
-#         return (batch_x, *batch_y)
+        return (batch_x, *batch_y)

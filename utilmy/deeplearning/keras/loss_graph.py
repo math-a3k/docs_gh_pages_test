@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 HELP = """nsl_graph_losses.ipynb
+Original file is located at
     https://colab.research.google.com/drive/11BWemRJoxYmz3YpvX4MBxRomOu2IJQa6
 #!pip install neural_structured_learning
 
 """
 import numpy as np, tensorflow as tf
 
-
-try :
-    import neural_structured_learning as nsl
-    from neural_structured_learning.keras import layers as nsl_layers
-    import neural_structured_learning.configs as nsl_configs
-except Exception as e :
-    print(e)
-    print("pip install neural_structured_learning ") ; 1/0
+import neural_structured_learning as nsl
+from neural_structured_learning.keras import layers as nsl_layers
+import neural_structured_learning.configs as nsl_configs
 
 
 ######################################################################################
 from utilmy import log, log2
 
 def help():
+    """
+    Summary: Extract code source from test code
+    """
+
     from utilmy import help_create
     ss = HELP + help_create("utilmy.deeplearning.keras.Loss_graph")
     print(ss)
@@ -28,6 +28,10 @@ def help():
 
 ######################################################################################
 def test_graph_loss():
+    """
+    Summary: Calculates the graph loss
+    """
+
     # Prepare data.
     max_neighbors = 2
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
@@ -100,7 +104,8 @@ def test_graph_loss():
 
 
 def test_adversarial():
-    """# Adversial Regularization"""
+    """
+    Summary: Adversial Regularization """
     # Prepare data.
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
     x_train, x_test = x_train / 255.0, x_test / 255.0
@@ -162,6 +167,18 @@ def test_adversarial():
 #################################################################################################################
 """# Graph regularization"""
 def create_fake_neighbor(x, max_neighbors):
+    """
+    Summary: Graph regularization
+
+    Parameter:
+    x (np.array):
+    max_neighbors (integer):
+
+    Returns:
+    np.array: containing neighbors
+    np.array: containing neighbor_weights
+    """
+
     n                = x.shape[0]
     neighbors        = []
     neighbor_weights = []
@@ -173,6 +190,20 @@ def create_fake_neighbor(x, max_neighbors):
 
 
 def map_func(x_batch, y_batch, neighbors, neighbor_weights):
+    """
+    Summary: Maps x_batch features
+
+    Parameter:
+    x_batch (np.array):
+    y_batch (np.array):
+    neighbors (data_type):
+    neighbor_weights (data_type):
+
+    Returns:
+    features_dict (dictionary): containing mapped features of x_batch
+    y_batch (np.array):
+    """
+
     feature_name = 'feature'
     # for x_batch, y_batch, neighbors, neighbor_weights in ds:
     # x_batch, y_batch, neighbors, neighbor_weights = samples
@@ -188,6 +219,17 @@ def map_func(x_batch, y_batch, neighbors, neighbor_weights):
 
 
 def create_graph_loss(max_neighbors=2):
+    """
+    Summary: Creates Graph loss
+
+    Parameter:
+    max_neighbors (integer):
+
+    Returns:
+    nbr_features_layer (data_type):
+    regularizer (data_type):
+    """
+
     graph_reg_config = nsl.configs.make_graph_reg_config(
         max_neighbors          = max_neighbors,
         neighbor_prefix        = 'NL_nbr_',
@@ -207,6 +249,25 @@ def train_step(x, y, model, loss_fn, optimizer,
                nbr_features_layer=None,  ### Graph
                regularizer=None,   ## Graph
               ):   #changed file
+    """
+    Summary: Function defining train steps
+
+    Parameter:
+    x (np.array):
+    y (np.array):
+    model (data_type):
+    loss_fn (data_type):
+    optimizer (data_type):
+    nbr_features_layer (data_type):
+    regularizer (data_type):
+    
+    Returns:
+    base_output (data_type):
+    total_loss (data_type):
+    labeled_loss (data_type):
+    scaled_graph_loss (data_type):
+    """
+
     #### Add Graph OPtimization to actual loss
     
     with tf.GradientTape() as tape_w:
@@ -249,6 +310,24 @@ def test_step(x, y, model, loss_fn,
                nbr_features_layer=None,  ### Graph
                regularizer=None,        #### Graph             
              ):  
+    """
+    Summary: Function defining test steps
+
+    Parameter:
+    x (np.array):
+    y (np.array):
+    model (data_type):
+    loss_fn (data_type):
+    nbr_features_layer (data_type):
+    regularizer (data_type):
+    
+    Returns:
+    base_output (data_type):
+    total_loss (data_type):
+    labeled_loss (data_type):
+    scaled_graph_loss (data_type):
+    """
+
     # Regular forward pass.
     sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
     base_output  = model(sample_features, training=False)

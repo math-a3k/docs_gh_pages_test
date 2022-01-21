@@ -74,6 +74,11 @@ def tf_cdist(left, right, metric='euclidean'):
 
 
 def tf_cdist_euclidean(left, right):
+    """ 
+    Summary: Compute euclidean distance between tensors
+    Parameters:
+    left,right: tensor
+    """
     left, right                       = __cast_left_and_right_to_tensors(left, right)
     rows_count_left, rows_count_right = __get_rows_counts(left, right)
     left_sqr                          = __get_tensor_sqr(left, (-1, 1), (1, rows_count_right))
@@ -85,6 +90,11 @@ def tf_cdist_euclidean(left, right):
     return distance
 
 def tf_cdist_cos(left, right):
+    """ 
+    Summary: Compute cosine distance between tensors
+    Parameters:
+    left,right: tensor
+    """
     left, right = __cast_left_and_right_to_tensors(left, right)
     norm_left   = __get_tensor_reshaped_norm(left, (-1, 1))
     norm_right  = __get_tensor_reshaped_norm(right, (1, -1))
@@ -96,18 +106,21 @@ def tf_cdist_cos(left, right):
 
 
 def __cast_left_and_right_to_tensors(left, right):
+    """ Cast left, right into tensors"""
     left  = tf.cast(tf.convert_to_tensor(left), dtype=tf.float32)
     right = tf.cast(tf.convert_to_tensor(right), dtype=tf.float32)
     return left, right
 
 
 def __get_rows_counts(left, right):
+    """ Count rows"""
     count_left  = tf.shape(left)[0]
     count_right = tf.shape(right)[0]
     return count_left, count_right
 
 
 def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
+    """ Calculate the square of a tensor"""
     sqr = tf.pow(tensor, 2.0)
     sqr = tf.reduce_sum(sqr, axis=1)
     sqr = tf.reshape(sqr, reshape_shape)
@@ -118,6 +131,7 @@ def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
 
 
 def __get_tensor_reshaped_norm(tensor, reshape_shape):
+    """ Normalize and reshape the tensor"""
     norm = tf.norm(tensor, axis=1)
     norm = tf.reshape(norm, reshape_shape)
     return norm

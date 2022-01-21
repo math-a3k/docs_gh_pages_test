@@ -20,7 +20,8 @@ from keras.layers.merge import concatenate
 
 ############################################################################    
 def test_vqvae2():
-    """Loading/ processing the dataset and then training and plotting"""
+    """
+    Summary: Loading/ processing the dataset and then training and plotting"""
 
     (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
     #since we dont need the labels, we will discard them
@@ -162,7 +163,25 @@ def test_vqvae2():
 #################################################################################################
 #################################################################################################
 class Quantizer(layers.Layer):
+    """
+    Summary: This is a class for quantizing the layers of tensor
+      
+    Attributes:
+    number_of_embeddings (int):
+    embedding_dimensions (int):
+    beta (float):
+    """
+
     def __init__(self, number_of_embeddings, embedding_dimensions, beta=0.25, **kwargs):
+        """
+        Summary: The constructor for Quantizer class.
+  
+        Parameters:
+           number_of_embeddings (int):
+           embedding_dimensions (int):
+           beta (float):
+        """
+
         super().__init__(**kwargs)
         self.embedding_dimensions = embedding_dimensions
         self.number_of_embeddings = number_of_embeddings
@@ -182,6 +201,15 @@ class Quantizer(layers.Layer):
         )
 
     def call(self, x):
+        """
+        Summary: The function to quantize the tensor
+  
+        Parameters:
+        x (tensor): 
+          
+        Returns:
+        quatized (tensor): 
+        """
         # flattening the input
         input_shape = tf.shape(x)
         flattened = tf.reshape(x, [-1, self.embedding_dimensions])
@@ -207,6 +235,15 @@ class Quantizer(layers.Layer):
         return quantized
 
     def get_code_indices(self, flattened_inputs):
+        """
+        Summary: The function to get code indices
+  
+        Parameters:
+        flattened_inputs (tensor): 
+          
+        Returns:
+        encoding_indices (tensor): 
+        """
         similarity = tf.matmul(flattened_inputs, self.embeddings)
         distances = (
             tf.reduce_sum(flattened_inputs ** 2, axis=1, keepdims=True)
@@ -217,51 +254,78 @@ class Quantizer(layers.Layer):
         return encoding_indices
 
 def encoder_Base(latent_dim):
-  encoder_A_inputs = keras.Input(shape=(28, 28, 1))
-  Encoder_A = layers.Conv2D(32, 3, activation="relu", strides=2, padding="same")(encoder_A_inputs)
-  Encoder_A = layers.Conv2D(64, 3, activation="relu", strides=2, padding="same")(Encoder_A)
-  encoder_A_outputs = layers.Conv2D(latent_dim, 1, padding="same")(Encoder_A)
-  return keras.Model(encoder_A_inputs, encoder_A_outputs, name="encoder")
+    """
+    Summary: Function to encode base
+
+    Parameter:
+    latent_dim (number):
+    
+    Returns:
+    Keras.Model
+    """
+
+    encoder_A_inputs = keras.Input(shape=(28, 28, 1))
+    Encoder_A = layers.Conv2D(32, 3, activation="relu", strides=2, padding="same")(encoder_A_inputs)
+    Encoder_A = layers.Conv2D(64, 3, activation="relu", strides=2, padding="same")(Encoder_A)
+    encoder_A_outputs = layers.Conv2D(latent_dim, 1, padding="same")(Encoder_A)
+    return keras.Model(encoder_A_inputs, encoder_A_outputs, name="encoder")
 
 
 def get_vqvae_layer_hierarchical(latent_dim=16, num_embeddings=64):
-  vq_layer = Quantizer(num_embeddings, latent_dim, name="vector_quantizer")
+    """
+    Summary: Function to get vqvae hierarchical layer
 
-  
-  encoder_A_inputs = keras.Input(shape=(28, 28, 1))
-  encoder = encoder_Base(latent_dim)
-  encoder_A_outputs = encoder(encoder_A_inputs)
+    Parameter:
+    latent_dim (number):
+    num_embeddings (number):
+    
+    Returns:
+    Keras.Model
+    """
 
-  
-  Encoder_B = layers.Conv2D(32, 3, activation="relu", strides=1, padding="same")(encoder_A_outputs)
-  Encoder_B = layers.Conv2D(64, 3, activation="relu", strides=1, padding="same")(Encoder_B)
-  encoder_B_outputs = layers.Conv2D(latent_dim, 3, padding="same", name="encoder_B")(Encoder_B)
+    vq_layer = Quantizer(num_embeddings, latent_dim, name="vector_quantizer")
 
-  quantized_latents_b = vq_layer(encoder_A_outputs)
-  quantized_latents_t = vq_layer(encoder_B_outputs)
+    encoder_A_inputs = keras.Input(shape=(28, 28, 1))
+    encoder = encoder_Base(latent_dim)
+    encoder_A_outputs = encoder(encoder_A_inputs)
 
 
-  
-  Decoder_T = layers.Conv2DTranspose(64, 3, activation="relu", strides=2, padding="same")(quantized_latents_t)
-  Decoder_T = layers.Conv2DTranspose(32, 3, activation="relu", strides=2, padding="same")(Decoder_T)
-  decoder_T_outputs = layers.Conv2DTranspose(1, 3, padding="same", name="decoder_B")(Decoder_T)
+    Encoder_B = layers.Conv2D(32, 3, activation="relu", strides=1, padding="same")(encoder_A_outputs)
+    Encoder_B = layers.Conv2D(64, 3, activation="relu", strides=1, padding="same")(Encoder_B)
+    encoder_B_outputs = layers.Conv2D(latent_dim, 3, padding="same", name="encoder_B")(Encoder_B)
 
-  Decoder_B = layers.Conv2DTranspose(64, 3, activation="relu", strides=2, padding="same")(quantized_latents_b)
-  Decoder_B = layers.Conv2DTranspose(32, 3, activation="relu", strides=2, padding="same")(Decoder_B)
-  decoder_B_outputs = layers.Conv2DTranspose(1, 3, padding="same", name="decoder_A")(Decoder_B)
-  
-  reconstructions_of_t = layers.Conv2D(16, 3, activation="relu", strides=2, padding="same")(decoder_T_outputs)
-  reconstructions_of_t = layers.Conv2D(16, 3, activation="relu", strides=2, padding="same")(reconstructions_of_t)
+    quantized_latents_b = vq_layer(encoder_A_outputs)
+    quantized_latents_t = vq_layer(encoder_B_outputs)
 
-  concat = tf.keras.layers.Concatenate(axis=-1)([reconstructions_of_t,quantized_latents_b])
-  Decoder_B = layers.Conv2DTranspose(64, 3, activation="relu", strides=2, padding="same")(concat)
-  Decoder_B = layers.Conv2DTranspose(32, 3, activation="relu", strides=2, padding="same")(Decoder_B)
-  decoder_B_outputs = layers.Conv2DTranspose(1, 3, padding="same")(Decoder_B)
-  
-  return keras.Model(encoder_A_inputs, decoder_B_outputs, name="decoder")
+
+
+    Decoder_T = layers.Conv2DTranspose(64, 3, activation="relu", strides=2, padding="same")(quantized_latents_t)
+    Decoder_T = layers.Conv2DTranspose(32, 3, activation="relu", strides=2, padding="same")(Decoder_T)
+    decoder_T_outputs = layers.Conv2DTranspose(1, 3, padding="same", name="decoder_B")(Decoder_T)
+
+    Decoder_B = layers.Conv2DTranspose(64, 3, activation="relu", strides=2, padding="same")(quantized_latents_b)
+    Decoder_B = layers.Conv2DTranspose(32, 3, activation="relu", strides=2, padding="same")(Decoder_B)
+    decoder_B_outputs = layers.Conv2DTranspose(1, 3, padding="same", name="decoder_A")(Decoder_B)
+
+    reconstructions_of_t = layers.Conv2D(16, 3, activation="relu", strides=2, padding="same")(decoder_T_outputs)
+    reconstructions_of_t = layers.Conv2D(16, 3, activation="relu", strides=2, padding="same")(reconstructions_of_t)
+
+    concat = tf.keras.layers.Concatenate(axis=-1)([reconstructions_of_t,quantized_latents_b])
+    Decoder_B = layers.Conv2DTranspose(64, 3, activation="relu", strides=2, padding="same")(concat)
+    Decoder_B = layers.Conv2DTranspose(32, 3, activation="relu", strides=2, padding="same")(Decoder_B)
+    decoder_B_outputs = layers.Conv2DTranspose(1, 3, padding="same")(Decoder_B)
+
+    return keras.Model(encoder_A_inputs, decoder_B_outputs, name="decoder")
 
 
 def plot_original_reconst_img(orig, rec):   #name changed
+    """
+    Summary: Plots original reconstructed image
+
+    Parameter:
+    orig (data_type):
+    Rec (data_type):
+    """
     plt.subplot(1, 2, 1)
     plt.imshow(orig.squeeze() + 0.5)
     plt.title("Real Image")
@@ -277,7 +341,25 @@ def plot_original_reconst_img(orig, rec):   #name changed
     
     
 class VQ_VAE_Trainer_2(keras.models.Model):
+    """
+    This is a class for VQ VAE trainer
+      
+    Attributes:
+    train_variance (number):
+    latent_dim (int):
+    number_of_embeddings (int):
+    """
+
     def __init__(self, train_variance, latent_dim=16, number_of_embeddings=128, **kwargs):
+        """
+        Summarry: The constructor for VQ_VAE_Trainer_2 class.
+  
+        Parameters:
+        train_variance (number):
+        latent_dim (int):
+        number_of_embeddings (int):
+        """
+
         super(VQ_VAE_Trainer_2, self).__init__(**kwargs)
         self.train_variance = train_variance
         self.latent_dim = latent_dim
@@ -293,6 +375,14 @@ class VQ_VAE_Trainer_2(keras.models.Model):
 
     @property
     def metrics(self):
+        """
+        Summary: Defines the output metrics
+
+        Returns:
+        total_loss_tracker (data_type):
+        reconstruction_loss_tracker (data_type):
+        vq_loss_tracker (data_type):
+        """
         return [
             self.total_loss_tracker,
             self.reconstruction_loss_tracker,
@@ -300,6 +390,14 @@ class VQ_VAE_Trainer_2(keras.models.Model):
         ]
 
     def train_step(self, x):
+        """
+        Summary: Defines the train steps of model
+
+        Returns:
+        total_loss_tracker.result() (data_type):
+        reconstruction_loss_tracker.result() (data_type):
+        vq_loss_tracker.result() (data_type):
+        """
         with tf.GradientTape() as tape:
             # Outputs from the VQ-VAE.
             reconstructions = self.vqvae(x)
@@ -332,12 +430,30 @@ class VQ_VAE_Trainer_2(keras.models.Model):
 
 # PixelCNN layer..
 class PixelConvLayer(layers.Layer):
+    """
+    This is a class for adding Pixel convolutional layer
+      
+    Attributes:
+    mask_type (data_type):
+    """
     def __init__(self, mask_type, **kwargs):
+        """
+        Summarry: The constructor for PixelConvLayer class.
+  
+        Parameters:
+        mask_type (data_type):
+        """
         super(PixelConvLayer, self).__init__()
         self.mask_type = mask_type
         self.conv = layers.Conv2D(**kwargs)
 
     def build(self, input_shape):
+        """
+        Summarry: Build the conv2d layer to initialize kernel variables and create mask
+  
+        Parameters:
+        input_shape (tuple):
+        """
         # Build the conv2d layer to initialize kernel variables
         self.conv.build(input_shape)
         # Use the initialized kernel to create the mask
@@ -349,13 +465,34 @@ class PixelConvLayer(layers.Layer):
             self.mask[kernel_shape[0] // 2, kernel_shape[1] // 2, ...] = 1.0
 
     def call(self, inputs):
+        """
+        Summarry: Build the conv2d layer to initialize kernel variables and create mask
+  
+        Parameters:
+        input_shape (tuple):
+
+        Returns:
+        conv (convolutional layer):
+        """
         self.conv.kernel.assign(self.conv.kernel * self.mask)
         return self.conv(inputs)
 
 
 # residual block layer is based upon PixelConvLayer.
 class ResidualBlock(keras.layers.Layer):
+    """
+    This is a class for adding Residual Block layer
+      
+    Attributes:
+    filters (int):
+    """
     def __init__(self, filters, **kwargs):
+        """
+        Summarry: The constructor for ResidualBlock class.
+  
+        Parameters:
+        filters (int):
+        """
         super(ResidualBlock, self).__init__(**kwargs)
         self.conv1 = keras.layers.Conv2D(
             filters=filters, kernel_size=1, activation="relu"
@@ -372,6 +509,15 @@ class ResidualBlock(keras.layers.Layer):
         )
 
     def call(self, inputs):
+        """
+        Summarry: Build the ResidualBlock
+  
+        Parameters:
+        input_shape (tuple):
+
+        Returns:
+        Keras Layer (layer):
+        """
         x = self.conv1(inputs)
         x = self.pixel_conv(x)
         x = self.conv2(x)

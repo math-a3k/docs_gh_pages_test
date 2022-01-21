@@ -23,6 +23,15 @@ cc = Box({})
 
 
 def param_set():
+    """
+        Summarry: Defines the parameter set
+  
+        Parameters:
+        
+
+        Returns:
+        
+    """
     ### Output naming  ##################################################
     #cc.dname       = 'fashion_64_44k'
     #cc.dname = "img_fashiondata_64_64-100000.cache"
@@ -149,6 +158,13 @@ def param_set():
 
 
 def params_set2():
+    """
+        Summarry: Defines Parameter set
+  
+        Parameters:
+
+        Returns:
+    """
     import diskcache as dc
     db_path    = cc.data_train + f"/{cc.dname}"
     db_path    = "/dev/shm/img_train_nobg_256_256-100000.cache"
@@ -247,7 +263,7 @@ os.makedirs(model_dir2, exist_ok=True)
 time.sleep(3) 
 ### log  #######################################################
 
-from utilmy.deeplearning.keras.util_train import print_log_info, log2
+from utilmy.deeplearning.keras.util_train import print_log_info, print_debug_info
 from utilmy.deeplearning.keras.util_train import *
 
 ########################################################################################################
@@ -336,6 +352,14 @@ def pd_get_dummies(df, cols_cat, cat_dict:dict, only_onehot=True):
 #################################################################################################
 #### Code for generating custom data from the Kaggle dataset   ##################################
 def label_get_data():
+    """
+        Summarry: Code for generating custom data from the Kaggle dataset 
+  
+        Parameters:
+
+        Returns:
+        df (dataframe):
+    """
     
     #### Labels  ##############################
     #df          = pd.read_csv(cc.path_label_raw)  #, error_bad_lines=False, warn_bad_lines=False)
@@ -402,6 +426,18 @@ log('N test batches:',     len(val_data))
 """## Train"""
 @tf.function
 def train_step(x, model, y_label_list=None):
+    """
+    Summary: Function defining train steps
+
+    Parameter:
+    x (np.array):
+    model (keras_model):
+    y_label (np.array):
+    
+    Returns:
+    loss (float):
+    """
+
     with tf.GradientTape() as tape:
         z_mean, z_logsigma, x_recon, out_classes = model(x, training=True, y_label_list= y_label_list)      #Forward pass through the VAE
         
@@ -418,6 +454,19 @@ def train_step(x, model, y_label_list=None):
 
 @tf.function
 def validation_step(x, model, y_label_list=None):
+    """
+    Summary: Function defining train steps
+
+    Parameter:
+    x (np.array):
+    model (keras_model):
+    y_label (np.array):
+    
+    Returns:
+    loss (float):
+    x_recon (data_type):
+    out_classes (data_type):
+    """
     z_mean, z_logsigma, x_recon, out_classes = model(x, training=False)  #Forward pass through the VAE
     loss = perceptual_loss_function(x[0], x_recon, z_mean, z_logsigma,
             y_label_heads = y_label_list, 
