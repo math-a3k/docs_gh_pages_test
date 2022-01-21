@@ -405,6 +405,19 @@ Transform_sprinkle.__init__(self, num_holes = 30, side_length = 5, always_apply 
 Transform_sprinkle.apply(self, image, **params)
 
 
+utilmy/deeplearning/keras/util_debug.py
+-------------------------functions----------------------
+image_compare_modelpred(file_path, model_path, target_size)
+test_all()
+test_classactivation()
+
+-------------------------methods----------------------
+GradCAM.__init__(self, model, classIdx, layerName = None)
+GradCAM.compute_heatmap(self, image, eps = 1e-8)
+GradCAM.find_target_layer(self)
+GradCAM.overlay_heatmap(self, heatmap, image, alpha = 0.5, colormap = cv2.COLORMAP_JET)
+
+
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
 help()
@@ -439,7 +452,6 @@ StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 
 utilmy/deeplearning/keras/util_models.py
 -------------------------functions----------------------
-get_final_image(file_path, model_path, target_size)
 make_classifier(class_dict, latent_dim = 10)
 make_classifier_2(latent_dim, class_dict)
 make_decoder(xdim, ydim, latent_dim)
@@ -447,7 +459,6 @@ make_efficientet(xdim, ydim, cdim)
 make_encoder(xdim = 256, ydim = 256, latent_dim = 10)
 test_DFC_VAE()
 test_all()
-test_classactivation()
 
 -------------------------methods----------------------
 DFC_VAE.__init__(self, latent_dim, class_dict)
@@ -455,10 +466,6 @@ DFC_VAE.call(self, x, training = True, mask = None, y_label_list = None)
 DFC_VAE.decode(self, z, apply_sigmoid = False)
 DFC_VAE.encode(self, x)
 DFC_VAE.reparameterize(self, z_mean, z_logsigma)
-GradCAM.__init__(self, model, classIdx, layerName = None)
-GradCAM.compute_heatmap(self, image, eps = 1e-8)
-GradCAM.find_target_layer(self)
-GradCAM.overlay_heatmap(self, heatmap, image, alpha = 0.5, colormap = cv2.COLORMAP_JET)
 
 
 utilmy/deeplearning/keras/util_similarity.py
