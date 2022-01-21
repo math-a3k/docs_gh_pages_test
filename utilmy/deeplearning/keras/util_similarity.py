@@ -147,9 +147,3 @@ def __get_tensor_reshaped_norm(tensor: tf.Tensor, reshape_shape: int = None) -> 
     norm = tf.norm(tensor, axis=1)
     norm = tf.reshape(norm, reshape_shape)
     return norm
-
-
-rank_2_tensor = tf.constant([[1., 2.],[3., 4.]])
-print(rank_2_tensor)
-a = tf.constant([[5., 6.],[7., 8.], [9.,10.]])
-print(tf_cdist_euclidean([[1, 2], [3, 4]], [[10, 11], [12, 13]]))
