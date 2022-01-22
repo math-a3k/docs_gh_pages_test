@@ -29,13 +29,30 @@ def test_loss1():
     triplet_loss_global = tfa.losses.TripletSemiHardLoss( margin=  1.0,    distance_metric='L2',    name= 'triplet',)
     recons_loss_global  = tf.keras.losses.MeanAbsoluteError()  # reduction="sum"
     percep_loss_global  = tf.keras.losses.MeanSquaredError()
-    clf_loss_global     =  tf.keras.losses.BinaryCrossentropy()
+    clf_loss_global    =  tf.keras.losses.BinaryCrossentropy()
     
+    
+
+###################################################################################
+def metric_accuracy(y_test, y_pred, dd):
+   """ Calculating Test Accuracy"""
+   from sklearn.metrics import accuracy_score 
+   test_accuracy = {} 
+   for k,(ytruei, ypredi) in enumerate(zip(y_test, y_pred)) : 
+       ytruei = np.argmax(ytruei,         axis=-1)
+       ypredi = np.argmax(ypredi.numpy(), axis=-1)
+       # log(ytruei, ypredi ) 
+       test_accuracy[ dd.labels_col[k] ] = accuracy_score(ytruei, ypredi )
+        
+   log('accuracy', test_accuracy)     
+   return test_accuracy 
     
 
 #################################################################################
 ###### Loss definition ##########################################################
 ####  reduction=tf.keras.losses.Reduction.NONE  for distributed GPU
+
+
 def loss_clf_macro_soft_f1(y, y_hat):   #name
     """Compute the macro soft F1-score as a cost.
     Average (1 - soft-F1) across all labels.
@@ -60,30 +77,15 @@ def loss_clf_macro_soft_f1(y, y_hat):   #name
 
     
 def loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
-                             y_label_heads=None, y_pred_heads=None, clf_loss_fn=None, epoch=1, percep_model=None, cc:dict=None):
-    """
-         percep_model = tf.keras.applications.EfficientNetB2(
-         include_top=False, weights='imagenet', input_tensor=None,
-       input_shape=(xdim, ydim, cdim), pooling=None, classes=1000,
-         classifier_activation='softmax'
-     )
+                             y_label_heads=None, y_pred_heads=None, clf_loss_fn=None):
+    """ Perceptual loss function """
+    
     ### log( 'x_recon.shae',  x_recon.shape )
-    ### VAE Loss  :  Mean Square : 0.054996297 0.046276666   , Huber: 0.0566
+    ### VAE Loss  :  Mean Square : 0.054996297 0.046276666   , Huber: 0.0566 
     ### m = 0.00392156862  # 1/255
     ###   recons_loss = tf.reduce_mean( tf.reduce_mean(tf.abs(x-x_recon), axis=(1,2,3)) )
     ###   recons_loss = tf.reduce_mean( tf.reduce_mean(tf.square(x-x_recon), axis=(1,2,3) ) )    ## MSE error
-    #     recons_loss = tf.reduce_mean( tf.square(x-x_recon), axis=(1,2,3) )     ## MSE error
-
-    """
-    cc = Box(cc)  ### key.value
-
-
-    triplet_loss_global = tfa.losses.TripletSemiHardLoss( margin=  1.0,    distance_metric='L2',    name= 'triplet',)
-    recons_loss_global  = tf.keras.losses.MeanAbsoluteError()  # reduction="sum"
-    percep_loss_global  = tf.keras.losses.MeanSquaredError()
-    clf_loss_global     =  tf.keras.losses.BinaryCrossentropy()
-
-
+    #     recons_loss = tf.reduce_mean( tf.square(x-x_recon), axis=(1,2,3) )     ## MSE error    
     recons_loss = recons_loss_global(x, x_recon)
     latent_loss = tf.reduce_mean( 0.5 * tf.reduce_sum(tf.exp(z_logsigma) + tf.square(z_mean) - 1.0 - z_logsigma, axis=1) )
     loss_vae    = kl_weight*latent_loss + recons_loss
@@ -96,7 +98,7 @@ def loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
     
     
     #### Update  cc.loss  weights
-    loss_schedule_custom(mode="step", epoch=epoch)
+    loss_schedule(mode="step", epoch=epoch)
 
         
     ### Triplet Loss: ####################################################################################################
@@ -126,56 +128,22 @@ def loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
     return loss_all
     
 
-
-
-
-def loss_vae(x, output, z_logsigma, z_mean):
-    '''
-        Here we need 2 types of losses:
-        * Reconstruction Loss -> Binary crossentropy between each input pixel in input image and corrosponding output pixel
-        * KL-divergence
-    '''
-    x = tf.keras.backend.flatten(x)
-    output = tf.keras.flatten(output)
-
-    # Reconstruction loss (as we used sigmoid activation we can use binarycrossentropy)
-    recon_loss = tf.keras.metrics.binary_crossentropy(x, output)
-
-    # KL divergence
-    kl_loss = -5e-4 * tf.keras.backend.mean(1 + z_logsigma - tf.keras.backend.mean.square(z_mean) - tf.keras.backend.mean.exp(z_logsigma), axis=-1)
-    return tf.keras.mean(recon_loss + kl_loss)
-
-
-
-
-
-##############################################################################################
-#####  Learning Rate Schedule   ##############################################################
+    
+    
+#####  Learning Rate Schedule   ##################################################
 class LearningRateDecay:
+    """ Plotting Learning Rate"""
     def plot(self, epochs, title="Learning Rate Schedule", path=None):
         # compute the set of learning rates for each corresponding
         # epoch
         pass
 
-
-class StepDecay(LearningRateDecay):
-    def __init__(self, init_lr=0.01, factor=0.25, drop_every=5):
-        # store the base initial learning rate, drop factor, and epochs to drop every
-        self.init_lr    = init_lr
-        self.factor     = factor
-        self.drop_every = drop_every
-
-    def __call__(self, epoch):
-        # compute the learning rate for the current epoch
-        if   epoch % 30  < 7 :  return 1e-3 * np.exp(-epoch * 0.005)  ### 0.74 every 10 epoch
-        elif epoch % 30  < 17:  return 7e-4 * np.exp(-epoch * 0.005)
-        elif epoch % 30  < 25:  return 3e-4 * np.exp(-epoch * 0.005)
-        elif epoch % 30  < 30:  return 5e-5 * np.exp(-epoch * 0.005)
-        else :  return 1e-5
-
-
-
-def learning_rate_schedule_custom(mode="step", epoch=1, cc=None):
+def learning_rate_schedule(mode="step", epoch=1, cc=None):
+    """ Summmary: Learning Rate Scheduler Class
+    Parameters:
+    mode: string
+    epoch: int
+    """
     if mode == "step" :
         # compute the learning rate for the current epoch
         if   epoch % 30  < 7 :  return 1e-3 * np.exp(-epoch * 0.005)  ### 0.74 every 10 epoch
@@ -183,22 +151,27 @@ def learning_rate_schedule_custom(mode="step", epoch=1, cc=None):
         elif epoch % 30  < 25:  return 3e-4 * np.exp(-epoch * 0.005)
         elif epoch % 30  < 30:  return 5e-5 * np.exp(-epoch * 0.005)
         else :  return 1e-4
-
+    
     if mode == "random" :
         # randomize to prevent overfit... and reset learning
         if   epoch < 10 :  return 1e-3 * np.exp(-epoch * 0.004)  ### 0.74 every 10 epoch
         else :
             if epoch % 10 == 0 :
-               ll = np.array([ 1e-3, 7e-4, 6e-4, 3e-4, 2e-4, 1e-4, 5e-5 ]) * np.exp(-epoch * 0.004)
-               ix = np.random.randint(len(ll))
-               cc.lr_actual =  ll[ix]
+               ll = np.array([ 1e-3, 7e-4, 6e-4, 3e-4, 2e-4, 1e-4, 5e-5 ]) * np.exp(-epoch * 0.004)            
+               ix = np.random.randint(len(ll))        
+               cc.lr_actual =  ll[ix]            
             return cc.lr_actual
+        
 
-
-
-def loss_schedule_custom(mode="step", epoch=1):
+        
+def loss_schedule(mode="step", epoch=1):
+    """ Summmary: Loss Scheduler Class
+    Parameters:
+    mode: string
+    epoch: int
+    """
     if mode == "step" :
-        ####  Classifier Loss :   2.8920667 2.6134858
+        ####  Classifier Loss :   2.8920667 2.6134858 
         ####  {'gender': 0.8566666, 'masterCategory': 0.99, 'subCategory': 0.9166, 'articleType': 0.7, 'baseColour': 0.5633333 }
         cc.loss.ww_clf_head = [ 1.0 , 1.0, 1.0, 200.0, 90.0  ]
         cc.loss.ww_triplet = 1.0
@@ -227,26 +200,24 @@ def loss_schedule_custom(mode="step", epoch=1):
             cc.loss.ww_clf_head = [ 1.0 , 1.0, 1.0, 200.0, 100.0  ]
 
 
+class StepDecay(LearningRateDecay):
+    """ Step-based Learning Rate Scheduler"""
+    def __init__(self, init_lr=0.01, factor=0.25, drop_every=5):
+        # store the base initial learning rate, drop factor, and epochs to drop every
+        self.init_lr    = init_lr
+        self.factor     = factor
+        self.drop_every = drop_every
 
-
-##############################################################################################
-##############################################################################################
-if 'utils':
-    def metric_accuracy(y_test, y_pred, dd):
-       from sklearn.metrics import accuracy_score
-       test_accuracy = {}
-       for k,(ytruei, ypredi) in enumerate(zip(y_test, y_pred)) :
-           ytruei = np.argmax(ytruei,         axis=-1)
-           ypredi = np.argmax(ypredi.numpy(), axis=-1)
-           # log(ytruei, ypredi )
-           test_accuracy[ dd.labels_col[k] ] = accuracy_score(ytruei, ypredi )
-
-       log('accuracy', test_accuracy)
-       return test_accuracy
-
-
+    def __call__(self, epoch):
+        # compute the learning rate for the current epoch
+        if   epoch % 30  < 7 :  return 1e-3 * np.exp(-epoch * 0.005)  ### 0.74 every 10 epoch
+        elif epoch % 30  < 17:  return 7e-4 * np.exp(-epoch * 0.005)
+        elif epoch % 30  < 25:  return 3e-4 * np.exp(-epoch * 0.005)
+        elif epoch % 30  < 30:  return 5e-5 * np.exp(-epoch * 0.005)
+        else :  return 1e-5
 
 
 
-
+    
+    
     

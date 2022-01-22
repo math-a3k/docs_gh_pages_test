@@ -14,7 +14,7 @@ import scipy.stats ; from scipy.stats import norm
 from template_train import *
 
 
-from utilmy import pd_read_file, log, log2
+from utilmy import pd_read_file
 
 ###########################################################################################
 
@@ -23,25 +23,29 @@ from utilmy import pd_read_file, log, log2
 
 ##### Labels
 def np_remove_duplicates(seq):
+    """Remove duplicates in numpy array"""
     seen = set()
     seen_add = seen.add
     return [x for x in seq if not (x in seen or seen_add(x))]
 
 
 def clean_duplicates(ll):   #name changed
+    """Clean duplicates"""
     v = [ t for t in ll if len(t) > 1 ]
     return  np_remove_duplicates(v)
 
 
 
 ### log  #############################################################################
-def log3(*s):   #name changed
+def print_debug_info(*s):   #name changed
+    """Print debug info"""
     if cc.verbosity >= 3:   
         print(*s, flush=True)
         with open(cc.model_dir2 + "/debug.py", mode='a') as fp:
             fp.write(str(s) + "\n")
 
-def log1(*s):   #name changed
+def print_log_info(*s):   #name changed
+    """ Print log info"""
     print(*s, flush=True)
     with open(cc.model_dir2 + "/log.py", mode='a') as fp:
         fp.write(str(s) + "\n")
@@ -50,8 +54,12 @@ def log1(*s):   #name changed
         
 
 ########################################################################################################
+########### TPU ########################################################################################
 ### CPU Multi-thread
+
+
 def tf_compute_set(cc:dict):
+    """ Set the compute mode for the model"""
     cc = Box(cc)  ### dot notaation
     tf.config.threading.set_intra_op_parallelism_threads(cc.n_thread)
     tf.config.threading.set_inter_op_parallelism_threads(cc.n_thread)
@@ -59,7 +67,7 @@ def tf_compute_set(cc:dict):
 
 
     if cc.compute_mode == "custom":
-        log3("# Disable all GPUS")
+        log2("# Disable all GPUS")
         ll = tf.config.list_physical_devices('GPU')
         tf.config.set_visible_devices( [ ll[ cc.gpu_id ] ], 'GPU')
         visible_devices = tf.config.get_visible_devices()
@@ -68,21 +76,21 @@ def tf_compute_set(cc:dict):
 
     if cc.compute_mode == "cpu_only":
         try:
-            log1("# Disable all GPUS")
+            print_log_info("# Disable all GPUS")
             tf.config.set_visible_devices([], 'GPU')
             visible_devices = tf.config.get_visible_devices()
             for device in visible_devices:
                 assert device.device_type != 'GPU'
         except Exception as e :
-            log1(e)
+            print_log_info(e)
             # Invalid device or cannot modify virtual devices once initialized.
             pass
 
 
     if cc.compute_mode == "gpu" :
-        log3("# Create a MirroredStrategy.")
+        log2("# Create a MirroredStrategy.")
         strategy = tf.distribute.MirroredStrategy()
-        log3('Number of devices: {}'.format(strategy.num_replicas_in_sync))
+        log2('Number of devices: {}'.format(strategy.num_replicas_in_sync))
 
 
 
@@ -94,7 +102,8 @@ def log(*s):
     print(*s, flush=True)
 
     
-def config_save(cc,path):   
+def config_save(cc,path):
+   """ Save config file"""   
    import json 
    #path1 = path +"/info.json"  #### model_dir2 +"/info.json" 
    json.dump(  str(cc), open( path , mode='a'))
@@ -175,7 +184,8 @@ def train_stop(counter, patience):
     return False
 
 
-def model_reload(model_reload_name, cc,):    
+def model_reload(model_reload_name, cc,): 
+    """ Reload the model"""   
     model2      = DFC_VAE(latent_dim= cc.latent_dim, class_dict= cc.labels_count )
     input_shape = (batch_size, xdim, ydim, cdim)   ### x_train = x_train.reshape(-1, 28, 28, 1)
     model2.build(input_shape)
@@ -184,6 +194,7 @@ def model_reload(model_reload_name, cc,):
 
 
 def image_check(name, img, renorm=False):
+    """ Save the image"""
     img  = img[:, :, ::-1]    
     if renorm :
         img = (img *0.5 +0.5) * 255.0        
@@ -198,7 +209,7 @@ from utilmy.deeplearning.keras.util_loss import LearningRateDecay;
 #################################################################################################
 #### Code for generating custom data from the Kaggle dataset   ##################################
 def get_custom_label_data():
-    
+    """ Get Custom Label Data"""
     #### Labels  ##############################
     #df          = pd.read_csv(cc.path_label_raw)  #, error_bad_lines=False, warn_bad_lines=False)
     df          = pd_read_file(cc.path_label_raw)  #, error_bad_lines=False, warn_bad_lines=False)
@@ -247,6 +258,7 @@ def get_custom_label_data():
 
 #### Filter label values  #######################################
 def pd_category_filter(df, category_map):
+    """ Filter label values"""
     def cat_filter(s, values):
         if s.lower() in values:
              return s.lower()
@@ -271,6 +283,7 @@ def pd_category_filter(df, category_map):
 
 @tf.function
 def train_step_2(x, y, model, loss_fn, optimizer):   #changed file
+    """ Train step"""
     with tf.GradientTape() as tape_w:
 
         # A separate GradientTape is needed for watching the input.
@@ -303,6 +316,7 @@ def train_step_2(x, y, model, loss_fn, optimizer):   #changed file
 
 @tf.function
 def test_step(x, y, model, loss_fn):   #changed file
+    """ Test step"""
     # Regular forward pass.
     sample_features, nbr_features, nbr_weights = nbr_features_layer.call(x)
     base_output  = model(sample_features, training=False)

@@ -188,11 +188,17 @@ import neural_structured_learning.configs as nsl_configs
 """## 1) Define some helper functions"""
 
 def log(*s):
-    """Log decorator"""
+    """Summary: Log decorator"""
     print(*s, flush=True)
 
 
 def metric_accuracy(y_val, y_pred_head, class_dict):
+    """Summary: Calculate validation accuracy
+    Arguments: y_truth: numpy array
+               y_predicted: numpy array
+               class_dictionary: dict
+               
+    Return: Validation Accuracy"""
     # Val accuracy
     val_accuracies = {class_name: 0. for class_name in class_dict}
     for i, class_name in enumerate(class_dict):
@@ -203,6 +209,12 @@ def metric_accuracy(y_val, y_pred_head, class_dict):
     return val_accuracies
     
 def metric_accuracy_2(y_test, y_pred, dd):
+   """Summary: Calculate test accuracy
+    Arguments: y_truth: numpy array
+               y_redicted: numpy array
+               class_dictionary: dict
+               
+    Return: Test Accuracy"""
    test_accuracy = {} 
    for k,(ytruei, ypredi) in enumerate(zip(y_test, y_pred)) : 
        ytruei = np.argmax(ytruei,         axis=-1)
@@ -238,6 +250,7 @@ def cal_loss_macro_soft_f1(y, y_hat):
     
 
 def plot_original_images(test_sample):
+    """Plot original images"""
     fig1 = plt.figure(figsize=(8, 8))
 
     for i in range(len(test_sample)):
@@ -891,49 +904,51 @@ time_df.plot(kind='barh', x='Transform', figsize=(15, 10))
 # https://www.pyimagesearch.com/2019/07/22/keras-learning-rate-schedules-and-decay/
 
 class LearningRateDecay:
-	def plot(self, epochs, title="Learning Rate Schedule"):
-		# compute the set of learning rates for each corresponding
-		# epoch
-		lrs = [self(i) for i in epochs]
-		# the learning rate schedule
-		plt.style.use("ggplot")
-		plt.figure()
-		plt.plot(epochs, lrs)
-		plt.title(title)
-		plt.xlabel("Epoch #")
-		plt.ylabel("Learning Rate")
-
-
+    """## Summary: Learning rate decay plotting"""
+    def plot(self, epochs, title="Learning Rate Schedule"):
+        # compute the set of learning rates for each corresponding
+        # epoch
+        lrs = [self(i) for i in epochs]
+        # the learning rate schedule
+        plt.style.use("ggplot")
+        plt.figure()
+        plt.plot(epochs, lrs)
+        plt.title(title)
+        plt.xlabel("Epoch #")
+        plt.ylabel("Learning Rate")
+    
 class StepDecay(LearningRateDecay):
-	def __init__(self, init_lr=0.01, factor=0.25, drop_every=10):
+    """ Summary: Step-based learning rate decay """
+    def __init__(self, init_lr=0.01, factor=0.25, drop_every=10):
 		# store the base initial learning rate, drop factor, and
 		# epochs to drop every
-		self.init_lr = init_lr
-		self.factor = factor
-		self.drop_every = drop_every
+        self.init_lr = init_lr
+        self.factor = factor
+        self.drop_every = drop_every
 
-	def __call__(self, epoch):
-		# compute the learning rate for the current epoch
-		exp = np.floor((1 + epoch) / self.drop_every)
-		alpha = self.init_lr * (self.factor ** exp)
-		# return the learning rate
-		return float(alpha)
+    def __call__(self, epoch):
+        # compute the learning rate for the current epoch
+        exp = np.floor((1 + epoch) / self.drop_every)
+        alpha = self.init_lr * (self.factor ** exp)
+        # return the learning rate
+        return float(alpha)
 
 
 class PolynomialDecay(LearningRateDecay):
-	def __init__(self, max_epochs=100, init_lr=0.01, power=1.0):
-		# store the maximum number of epochs, base learning rate,
-		# and power of the polynomial
-		self.max_epochs = max_epochs
-		self.init_lr = init_lr
-		self.power = power
+    """ Summary: Polynomial-based learning rate decay """
+    def __init__(self, max_epochs=100, init_lr=0.01, power=1.0):
+        # store the maximum number of epochs, base learning rate,
+        # and power of the polynomial
+        self.max_epochs = max_epochs
+        self.init_lr = init_lr
+        self.power = power
 
-	def __call__(self, epoch):
-		# compute the new learning rate based on polynomial decay
-		decay = (1 - (epoch / float(self.max_epochs))) ** self.power
-		alpha = self.init_lr * decay
-		# return the new learning rate
-		return float(alpha)
+    def __call__(self, epoch):
+        # compute the new learning rate based on polynomial decay
+        decay = (1 - (epoch / float(self.max_epochs))) ** self.power
+        alpha = self.init_lr * decay
+        # return the new learning rate
+        return float(alpha)
 
 def visualize_imgs(img_list, path, tag, y_labels, n_sample=None):
     """Assess image validity"""
@@ -2210,6 +2225,7 @@ print(y_train[0].shape)
 from albumentations.core.transforms_interface import ImageOnlyTransform
 
 class SprinklesTransform(ImageOnlyTransform):
+    """SprinklesTransform Class"""
     def __init__(self, num_holes=100, side_length=10, always_apply=False, p=1.0):
         super(SprinklesTransform, self).__init__(always_apply, p)
         self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)

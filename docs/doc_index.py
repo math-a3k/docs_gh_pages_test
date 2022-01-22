@@ -122,6 +122,7 @@ utilmy/dates.py
 date_generate(start = '2018-01-01', ndays = 100)
 date_is_holiday(array)
 date_now(fmt="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S %Z%z", add_days = 0, timezone = 'Asia/Tokyo')
+date_to_timezone(tdate, fmt="%Y%m%d-%H = "%Y%m%d-%H:%M", timezone = 'Asia/Tokyo')
 date_weekday_excel(x)
 date_weekmonth(d)
 date_weekmonth2(d)
@@ -323,8 +324,10 @@ validation_step(x, model, y_label_list = None)
 utilmy/deeplearning/keras/train_vqvae_loss.py
 -------------------------functions----------------------
 apply_func(s, values)
+build_model(input_shape, num_classes)
 build_model_2(input_shape, num_classes)
 clf_loss_crossentropy(y_true, y_pred)
+custom_loss(y_true, y_pred)
 custom_loss(y_true, y_pred)
 decoder_base(latent_dim, shape)
 encoder_base(input_shape, latent_dim)
@@ -345,12 +348,16 @@ visualize_imgs(img_list, path, tag, y_labels, n_sample = None)
 
 -------------------------methods----------------------
 CustomDataGenerator0.__getitem__(self, idx)
-CustomDataGenerator0.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None)
+CustomDataGenerator0.__init__(self, x, y, batch_size = 32, augmentations = None)
 CustomDataGenerator0.__len__(self)
-CustomDataGenerator0.on_epoch_end(self)
 CustomDataGenerator.__getitem__(self, idx)
-CustomDataGenerator.__init__(self, x, y, batch_size = 32, augmentations = None)
+CustomDataGenerator.__getitem__(self, idx)
+CustomDataGenerator.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None)
+CustomDataGenerator.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None)
 CustomDataGenerator.__len__(self)
+CustomDataGenerator.__len__(self)
+CustomDataGenerator.on_epoch_end(self)
+CustomDataGenerator.on_epoch_end(self)
 LearningRateDecay.plot(self, epochs, title = "Learning Rate Schedule")
 PolynomialDecay.__call__(self, epoch)
 PolynomialDecay.__init__(self, max_epochs = 100, init_lr = 0.01, power = 1.0)
@@ -373,7 +380,7 @@ VQ_VAE.reparameterize(self, z_mean, z_logsigma)
 VQ_VAE.reparameterize(self, z_mean, z_logsigma)
 
 
-utilmy/deeplearning/keras/util_dataloader_img.py
+utilmy/deeplearning/keras/util_dataloader.py
 -------------------------functions----------------------
 _byte_feature(value)
 _float_feature(value)
@@ -385,36 +392,58 @@ pd_get_onehot_dict(df, labels_col:list, dfref = None, )
 pd_merge_labels_imgdir(dflabels, img_dir = "*.jpg", labels_col  =  [])
 pd_to_onehot(dflabels, labels_col  =  [])
 test()
-test1()
-test2()
 
 -------------------------methods----------------------
-DataGenerator_img.__getitem__(self, idx)
-DataGenerator_img.__init__(self, x, y, batch_size = 32, augmentations = None)
-DataGenerator_img.__len__(self)
-DataGenerator_img_disk2.__getitem__(self, idx)
-DataGenerator_img_disk2.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None, shuffle = True)
-DataGenerator_img_disk2.__len__(self)
-DataGenerator_img_disk2._load_data(self, label_path)
-DataGenerator_img_disk2.on_epoch_end(self)
+CustomDataGenerator.__init__(self, x, y, batch_size = 32, augmentations = None)
+CustomDataGenerator_img.__getitem__(self, idx)
+CustomDataGenerator_img.__len__(self)
+CustomDataGenerator_img.on_epoch_end(self)
 DataGenerator_img_disk.__getitem__(self, idx)
 DataGenerator_img_disk.__init__(self, img_dir, label_dir, label_cols, split = 'train', batch_size = 8, transforms = None)
 DataGenerator_img_disk.__len__(self)
-DataGenerator_img_disk.on_epoch_end(self)
+RealCustomDataGenerator.__getitem__(self, idx)
+RealCustomDataGenerator.__init__(self, image_dir, label_path, class_dict, split = 'train', batch_size = 8, transforms = None, shuffle = True)
+RealCustomDataGenerator.__len__(self)
+RealCustomDataGenerator._load_data(self, label_path)
+RealCustomDataGenerator.on_epoch_end(self)
 Transform_sprinkle.__init__(self, num_holes = 30, side_length = 5, always_apply = False, p = 1.0)
 Transform_sprinkle.apply(self, image, **params)
+
+
+utilmy/deeplearning/keras/util_debug.py
+-------------------------functions----------------------
+image_compare_modelpred(file_path, model_path, target_size)
+test_all()
+test_classactivation()
+
+-------------------------methods----------------------
+GradCAM.__init__(self, model, classIdx, layerName = None)
+GradCAM.compute_heatmap(self, image, eps = 1e-8)
+GradCAM.find_target_layer(self)
+GradCAM.overlay_heatmap(self, heatmap, image, alpha = 0.5, colormap = cv2.COLORMAP_JET)
 
 
 utilmy/deeplearning/keras/util_layers.py
 -------------------------functions----------------------
 help()
-make_classifier_multihead(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1', cdim = 3, n_filters = 3)
+make_classifier(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
+make_classifier_2(latent_dim, class_dict)
+make_classifier_multihead(label_name_ncount:dict = None, layers_dim = [128, 1024], tag = '1')
+make_decoder(xdim, ydim, latent_dim)
+make_encoder(xdim = 256, ydim = 256, latent_dim = 10)
 test_all()
+test_cdfvae()
 test_resnetlayer()
+vae_loss(x, output)
 
 -------------------------methods----------------------
 CNNBlock.__init__(self, filters, kernels, strides = 1, padding = 'valid', activation = None)
 CNNBlock.call(self, input_tensor, training = True)
+DFC_VAE.__init__(self, latent_dim, class_dict)
+DFC_VAE.call(self, x, training = True, mask = None, y_label_list = None)
+DFC_VAE.decode(self, z, apply_sigmoid = False)
+DFC_VAE.encode(self, x)
+DFC_VAE.reparameterize(self, z_mean, z_logsigma)
 DepthConvBlock.__init__(self, filters)
 DepthConvBlock.call(self, inputs)
 ResBlock.__init__(self, filters, kernels)
@@ -423,11 +452,11 @@ ResBlock.call(self, input_tensor, training = False)
 
 utilmy/deeplearning/keras/util_loss.py
 -------------------------functions----------------------
-learning_rate_schedule_custom(mode = "step", epoch = 1, cc = None)
+learning_rate_schedule(mode = "step", epoch = 1, cc = None)
 loss_clf_macro_soft_f1(y, y_hat)
-loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None, epoch = 1, percep_model = None, cc:dict = None)
-loss_schedule_custom(mode = "step", epoch = 1)
-loss_vae(x, output, z_logsigma, z_mean)
+loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight = 0.00005, y_label_heads = None, y_pred_heads = None, clf_loss_fn = None)
+loss_schedule(mode = "step", epoch = 1)
+metric_accuracy(y_test, y_pred, dd)
 test_all()
 test_loss1()
 
@@ -439,7 +468,6 @@ StepDecay.__init__(self, init_lr = 0.01, factor = 0.25, drop_every = 5)
 
 utilmy/deeplearning/keras/util_models.py
 -------------------------functions----------------------
-get_final_image(file_path, model_path, target_size)
 make_classifier(class_dict, latent_dim = 10)
 make_classifier_2(latent_dim, class_dict)
 make_decoder(xdim, ydim, latent_dim)
@@ -447,7 +475,6 @@ make_efficientet(xdim, ydim, cdim)
 make_encoder(xdim = 256, ydim = 256, latent_dim = 10)
 test_DFC_VAE()
 test_all()
-test_classactivation()
 
 -------------------------methods----------------------
 DFC_VAE.__init__(self, latent_dim, class_dict)
@@ -455,10 +482,6 @@ DFC_VAE.call(self, x, training = True, mask = None, y_label_list = None)
 DFC_VAE.decode(self, z, apply_sigmoid = False)
 DFC_VAE.encode(self, x)
 DFC_VAE.reparameterize(self, z_mean, z_logsigma)
-GradCAM.__init__(self, model, classIdx, layerName = None)
-GradCAM.compute_heatmap(self, image, eps = 1e-8)
-GradCAM.find_target_layer(self)
-GradCAM.overlay_heatmap(self, heatmap, image, alpha = 0.5, colormap = cv2.COLORMAP_JET)
 
 
 utilmy/deeplearning/keras/util_similarity.py
@@ -484,12 +507,12 @@ config_save(cc, path)
 get_custom_label_data()
 image_check(name, img, renorm = False)
 log(*s)
-log1(*s)
-log3(*s)
 model_reload(model_reload_name, cc, )
 np_remove_duplicates(seq)
 os_path_copy(in_dir, path, ext = "*.py")
 pd_category_filter(df, category_map)
+print_debug_info(*s)
+print_log_info(*s)
 save_best_model(model, model_dir2, curr_loss, best_loss, counter, epoch, dd)
 save_model_state(model, model_dir2)
 test_step(x, y, model, loss_fn)
@@ -500,6 +523,25 @@ train_stop(counter, patience)
 
 
 utilmy/deeplearning/torch/__init__.py
+
+
+utilmy/deeplearning/torch/graphnlp.py
+-------------------------functions----------------------
+dataset_download(dirout = '/content/sample_data/sent_tans/')
+dataset_fake(dirdata)
+graphnlp_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", datasetname  =  'sts', train_path = "train/*.csv", val_path   = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
+load_dataloader(name = 'sts', path_or_df  =  "", cc:dict =  None, npool = 4)
+load_evaluator(name = 'sts', path_or_df = "", dname = 'sts', cc:dict = None)
+load_loss(model  = '', lossname  = 'cosinus', cc:dict =  None)
+log(*s)
+metrics_cosine_sim(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_id  =  "model name or path or object")
+model_evaluate(model  = "modelname OR path OR model object", dirdata = './*.csv', dirout = './', cc:dict =  None, batch_size = 16, name = 'sts-test')
+model_load(path_or_name_or_object)
+model_save(model, path, reload = True)
+model_setup_compute(model, use_gpu = 0, ngpu = 1, ncpu = 1, cc:dict = None)
+pd_read(path_or_df = './myfile.csv', npool = 1, **kw)
+test()
+
 
 
 utilmy/deeplearning/torch/sentence2.py
@@ -1092,6 +1134,7 @@ fixedDict._check_size_limit(self)
 
 utilmy/oos.py
 -------------------------functions----------------------
+date_to_timezone(tdate, fmt="%Y%m%d-%H = "%Y%m%d-%H:%M", timezone = 'Asia/Tokyo')
 help()
 is_float(x)
 is_int(x)
@@ -1104,6 +1147,7 @@ os_clean_memory(varlist, globx)
 os_copy_safe(dirin = None, dirout = None, nlevel = 5, nfile = 5000, logdir = "./", pattern = "*", exclude = "", force = False, sleep = 0.5, cmd_fallback = "", verbose = Trueimport shutil, time, os, globflist = [] ; dirinj = dirinnlevel) =  [] ; dirinj = dirinnlevel):)
 os_cpu()
 os_file_check(fp)
+os_file_date_modified(dirin, fmt="%Y%m%d-%H = "%Y%m%d-%H:%M", timezone = 'Asia/Tokyo')
 os_file_replacestring(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
 os_get_function_name()
 os_getcwd()

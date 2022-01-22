@@ -64,10 +64,10 @@ def test_tf_cdist():
 
 ######################################################################################
 def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str ='euclidean'):
-    """
-    Calculate distance based on `metric`.
-    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]], 'euclidean'`\n
-    Returns: `tf.Tensor([[12.72  15.55 ] [9.899 12.72]])`
+    """ 
+    Computes `metric` distance between tensors.\n
+    Parameters: 
+    left, right: tensor or array-like, metric: 'euclidean' or 'cosine'
     """
     #### distance between tensor
     if metric == 'euclidean':
@@ -80,10 +80,10 @@ def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str ='euclid
 
 
 def tf_cdist_euclidean(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
-    """
-    Wrapper function to return euclidean distance from Point A to B.\n
-    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]]`\n
-    Returns: `tf.Tensor([[12.72  15.55 ] [9.899 12.72]])`
+    """ 
+    Computes euclidean distance between tensors.\n
+    Parameters:
+    left, right: tensor or array-like
     """
     left, right                       = __cast_left_and_right_to_tensors(left, right)
     rows_count_left, rows_count_right = __get_rows_counts(left, right)
@@ -96,10 +96,10 @@ def tf_cdist_euclidean(left: Iterable[float], right: Iterable[float]) -> tf.Tens
     return distance
 
 def tf_cdist_cos(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
-    """
-    Wrapper function to return cosine distance from Point A to B.\n
-    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]]`\n
-    Returns: `tf.Tensor([[0.037  0.039 ] [0.004 0.005]])`
+    """ 
+    Computes cosine distance between tensors.\n
+    Parameters:
+    left, right: tensor or array-like
     """
     left, right = __cast_left_and_right_to_tensors(left, right)
     norm_left   = __get_tensor_reshaped_norm(left, (-1, 1))
@@ -109,28 +109,30 @@ def tf_cdist_cos(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
     distance    = tf.cast(distance, tf.float32)
     return distance
 
-def __cast_left_and_right_to_tensors(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
-    """
-    Input example: `[[1, 2], [3, 4]], [[10, 11], [12, 13]]`\n
-    Returns: `tf.Tensor([1. 2.] [3. 4.]), tf.Tensor([10. 11.] [12. 13.])`
-    """
+
+
+def __cast_left_and_right_to_tensors(left, right):
+    """Cast left, right into tensors.\n
+    Parameters:
+    left, right: tensor or array-like"""
     left  = tf.cast(tf.convert_to_tensor(left), dtype=tf.float32)
     right = tf.cast(tf.convert_to_tensor(right), dtype=tf.float32)
     return left, right
 
-def __get_rows_counts(left: tf.Tensor, right: tf.Tensor) -> tuple:
-    """
-    Input example: `tf.constant([[1., 2.],[3., 4.]]), tf.constant([[5., 6.],[7., 8.]])`
-    Returns: `(<tf.Tensor: shape=(), dtype=int32, numpy=2>, <tf.Tensor: shape=(), dtype=int32, numpy=2>)`
-    """
-    count_left, count_right  = tf.shape(left)[0], tf.shape(right)[0]
+
+def __get_rows_counts(left, right):
+    """ Count rows for left, right.\n
+    Parameters:
+    left, right: tensor"""
+    count_left  = tf.shape(left)[0]
+    count_right = tf.shape(right)[0]
     return count_left, count_right
 
-def __get_tensor_sqr(tensor: tf.Tensor, reshape_shape: int, tile_shape: Iterable[float]) -> tf.Tensor:
-    """
-    Input example: `tf.constant([[1., 2.],[3., 4.]]), 2, [3,]`\n
-    Returns: `tf.Tensor([ 5. 25.  5. 25.  5. 25.], shape=(6,), dtype=float32))` 
-    """
+
+def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
+    """ Calculate the element-wise square of a tensor.\n
+    Parameters:
+    left, right: tensor"""
     sqr = tf.pow(tensor, 2.0)
     sqr = tf.reduce_sum(sqr, axis=1)
     sqr = tf.reshape(sqr, reshape_shape)
@@ -138,12 +140,10 @@ def __get_tensor_sqr(tensor: tf.Tensor, reshape_shape: int, tile_shape: Iterable
     return sqr
 
 
-def __get_tensor_reshaped_norm(tensor: tf.Tensor, reshape_shape: int = None) -> tf.Tensor:
-    """
-    Input example: `tf.constant([[1., 2.],[3., 4.]]), 2`\n
-    Returns: `tf.Tensor([2.236 5.   ], shape=(2,), dtype=float32)` 
-    """
-    reshape_shape = reshape_shape if reshape_shape is not None else tensor.shape[0]
+def __get_tensor_reshaped_norm(tensor, reshape_shape):
+    """ Normalize and reshape the tensor.\n
+    Parameters:
+    tensor, reshape_shape: int"""
     norm = tf.norm(tensor, axis=1)
     norm = tf.reshape(norm, reshape_shape)
     return norm

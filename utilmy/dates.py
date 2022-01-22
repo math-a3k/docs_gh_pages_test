@@ -73,6 +73,17 @@ def pd_date_split(df, coldate =  'time_key', prefix_col ="",sep="/" ,verbose=Fal
     return df
 
 
+def date_to_timezone(tdate,  fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
+    """
+       dt = datetime.datetime.now(timz('UTC'))
+    """
+    from pytz import timezone as tzone
+    import datetime
+    # Convert to US/Pacific time zone
+    now_pacific = tdate.astimezone(tzone('Asia/Tokyo'))
+    return now_pacific.strftime(fmt)
+
+
 
 def date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo'):
     from pytz import timezone as timz

@@ -200,7 +200,18 @@ from utilmy.deeplearning.keras.util_loss import metric_accuracy,clf_loss_macro_s
 """## 1-3) Define VQ-VAE model"""
 
 class Quantizer(layers.Layer):
+    """
+    Summary: This is a class for quantizing the layers of tensor
+    """
     def __init__(self, number_of_embeddings, embedding_dimensions, beta=0.25, **kwargs):
+        """
+        Summary: The constructor for Quantizer class.
+  
+        Parameters:
+           number_of_embeddings (int):
+           embedding_dimensions (int):
+           beta (float):
+        """
         super().__init__(**kwargs)
         self.embedding_dimensions = embedding_dimensions
         self.number_of_embeddings = number_of_embeddings
@@ -220,6 +231,15 @@ class Quantizer(layers.Layer):
         )
 
     def call(self, x):
+        """
+        Summary: The function to quantize the tensor
+  
+        Parameters:
+        x (tensor): 
+          
+        Returns:
+        quantized (tensor): 
+        """
         # flattening the input
         input_shape = tf.shape(x)
         flattened = tf.reshape(x, [-1, self.embedding_dimensions])
@@ -245,6 +265,15 @@ class Quantizer(layers.Layer):
         return quantized
 
     def get_code_indices(self, flattened_inputs):
+        """
+        Summary: The function to get code indices
+  
+        Parameters:
+        flattened_inputs (tensor): 
+          
+        Returns:
+        encoding_indices (tensor): 
+        """
         similarity = tf.matmul(flattened_inputs, self.embeddings)
         distances = (
             tf.reduce_sum(flattened_inputs ** 2, axis=1, keepdims=True)
@@ -288,7 +317,13 @@ def decoder_base(latent_dim, shape):
 
 
 def make_vqvae_encoder(input_shape, latent_dim):
-    """
+    """ VQ-VAE encoder model
+       Parameters
+
+    latent_dim: int
+        Latent dim.
+    input_shape: tuple
+        The input shape.
     """
     encoder_A_inputs = keras.Input(shape=input_shape)
     encoder = encoder_base(input_shape, latent_dim)
@@ -301,7 +336,13 @@ def make_vqvae_encoder(input_shape, latent_dim):
 
 
 def make_vqvae_decoder(input_shape, latent_dim):
-    """
+    """ VQ-VAE decoder model
+       Parameters
+
+    latent_dim: int
+        Latent dim.
+    input_shape: tuple
+        The input shape.
     """
     quantized_latents_b = tf.keras.layers.Input(input_shape)
     quantized_latents_t = tf.keras.layers.Input(input_shape)
@@ -361,9 +402,9 @@ def make_vqvae_classifier(class_dict):
 
     return clf
 
-
+"""## VQ-VAE model"""
 class VQ_VAE(tf.keras.Model):
-    """Deep Feature Consistent Variational Autoencoder Class"""
+    """Vector Quantised Variational Autoencoder Class"""
     def __init__(self, latent_dim, class_dict, num_embeddings=64, image_size=64):
         super(VQ_VAE, self).__init__()
         self.latent_dim = latent_dim
@@ -593,6 +634,7 @@ def perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
 """Data Loader"""
 
 class SprinklesTransform(ImageOnlyTransform):
+    """ Sprinkles Transform Class """
     def __init__(self, num_holes=100, side_length=10, always_apply=False, p=1.0):
         super(SprinklesTransform, self).__init__(always_apply, p)
         self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)
@@ -607,6 +649,7 @@ class SprinklesTransform(ImageOnlyTransform):
 
 
 class CustomDataGenerator0(tf.keras.utils.Sequence):
+    """ Custom Data Generator Class """
     def __init__(self, x, y, batch_size=32, augmentations=None):
         self.x = x
         self.y = y
@@ -628,6 +671,7 @@ class CustomDataGenerator0(tf.keras.utils.Sequence):
 
 
 class CustomDataGenerator(tf.keras.utils.Sequence):
+    """ Custom Data Generator Class """
     def __init__(self, image_dir, label_path, class_dict,
                  split='train', batch_size=8, transforms=None):
         self.image_dir = image_dir
@@ -1000,49 +1044,52 @@ time_df.plot(kind='barh', x='Transform', figsize=(15, 10))
 # https://www.pyimagesearch.com/2019/07/22/keras-learning-rate-schedules-and-decay/
 
 class LearningRateDecay:
-	def plot(self, epochs, title="Learning Rate Schedule"):
-		# compute the set of learning rates for each corresponding
-		# epoch
-		lrs = [self(i) for i in epochs]
-		# the learning rate schedule
-		plt.style.use("ggplot")
-		plt.figure()
-		plt.plot(epochs, lrs)
-		plt.title(title)
-		plt.xlabel("Epoch #")
-		plt.ylabel("Learning Rate")
+    """ Plotting Learning Rate"""
+    def plot(self, epochs, title="Learning Rate Schedule"):
+        # compute the set of learning rates for each corresponding
+        # epoch
+        lrs = [self(i) for i in epochs]
+        # the learning rate schedule
+        plt.style.use("ggplot")
+        plt.figure()
+        plt.plot(epochs, lrs)
+        plt.title(title)
+        plt.xlabel("Epoch #")
+        plt.ylabel("Learning Rate")
 
 
 class StepDecay(LearningRateDecay):
-	def __init__(self, init_lr=0.01, factor=0.25, drop_every=10):
-		# store the base initial learning rate, drop factor, and
-		# epochs to drop every
-		self.init_lr = init_lr
-		self.factor = factor
-		self.drop_every = drop_every
+    """ Step-based Learning Rate Decay"""
+    def __init__(self, init_lr=0.01, factor=0.25, drop_every=10):
+        # store the base initial learning rate, drop factor, and
+        # epochs to drop every
+        self.init_lr = init_lr
+        self.factor = factor
+        self.drop_every = drop_every
 
-	def __call__(self, epoch):
-		# compute the learning rate for the current epoch
-		exp = np.floor((1 + epoch) / self.drop_every)
-		alpha = self.init_lr * (self.factor ** exp)
-		# return the learning rate
-		return float(alpha)
+    def __call__(self, epoch):
+        # compute the learning rate for the current epoch
+        exp = np.floor((1 + epoch) / self.drop_every)
+        alpha = self.init_lr * (self.factor ** exp)
+        # return the learning rate
+        return float(alpha)
 
 
 class PolynomialDecay(LearningRateDecay):
-	def __init__(self, max_epochs=100, init_lr=0.01, power=1.0):
-		# store the maximum number of epochs, base learning rate,
-		# and power of the polynomial
-		self.max_epochs = max_epochs
-		self.init_lr = init_lr
-		self.power = power
+    """ Polynomial-based Learning Rate Decay"""
+    def __init__(self, max_epochs=100, init_lr=0.01, power=1.0):
+        # store the maximum number of epochs, base learning rate,
+        # and power of the polynomial
+        self.max_epochs = max_epochs
+        self.init_lr = init_lr
+        self.power = power
 
-	def __call__(self, epoch):
-		# compute the new learning rate based on polynomial decay
-		decay = (1 - (epoch / float(self.max_epochs))) ** self.power
-		alpha = self.init_lr * decay
-		# return the new learning rate
-		return float(alpha)
+    def __call__(self, epoch):
+        # compute the new learning rate based on polynomial decay
+        decay = (1 - (epoch / float(self.max_epochs))) ** self.power
+        alpha = self.init_lr * decay
+        # return the new learning rate
+        return float(alpha)
 
 def visualize_imgs(img_list, path, tag, y_labels, n_sample=None):
     """Assess image validity"""
@@ -1148,6 +1195,7 @@ elif schedule_type == "poly":
 
 
 def metric_accuracy(y_val, y_pred_head, class_dict):
+
     # Val accuracy
     val_accuracies = {class_name: 0. for class_name in class_dict}
     for i, class_name in enumerate(class_dict):
@@ -2312,6 +2360,7 @@ print(y_train[0].shape)
 from albumentations.core.transforms_interface import ImageOnlyTransform
 
 class SprinklesTransform(ImageOnlyTransform):
+    """ Sprinkles Transform Class"""
     def __init__(self, num_holes=100, side_length=10, always_apply=False, p=1.0):
         super(SprinklesTransform, self).__init__(always_apply, p)
         self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)
@@ -2326,6 +2375,7 @@ class SprinklesTransform(ImageOnlyTransform):
 
 
 class CustomDataGenerator(tf.keras.utils.Sequence):
+    """Custom DataGenerator Class"""
     def __init__(self, x, y, batch_size=32, augmentations=None):
         self.x = x
         self.y = y
@@ -2395,7 +2445,7 @@ def custom_loss(y_true, y_pred):
 
 
 def build_model(input_shape, num_classes):
-    """EfficientNet"""
+    """EfficientNet Model"""
     base_model = EfficientNetB0(include_top=False,
                                 weights='imagenet',
                                 input_shape=input_shape)
@@ -2419,7 +2469,7 @@ def custom_loss(y_true, y_pred):
 
 
 def build_model_2(input_shape, num_classes):
-    """Vanilla CNN"""
+    """Vanilla CNN Model"""
 
     base_model = tf.keras.Sequential([
         layers.InputLayer(input_shape),
