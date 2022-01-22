@@ -79,19 +79,12 @@ def test():
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
     
     train_loader = CustomDataGenerator(X_train, y_train)
-    valid_loader = CustomDataGenerator(X_valid, y_valid)
 
-    for i, (image, label) in enumerate(train_loader):
-        print('Training : ')
-        print(f'image shape : {image.shape}')
-        print(f'label shape : {label.shape}')
+    for i, (Xbatch, ybatch) in enumerate(train_loader):
+        log(f'image shape : {Xbatch.shape}')
+        log(f'label shape : {ybatch.shape}')
         break
 
-    for i, (image, label) in enumerate(valid_loader):
-        print('\nValidation : ')
-        print(f'image shape : {image.shape}')
-        print(f'label shape : {label.shape}')
-        break
 
  
  
