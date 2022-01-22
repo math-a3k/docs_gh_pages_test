@@ -352,7 +352,7 @@ class VQ_VAE_Trainer_2(keras.models.Model):
 
     def __init__(self, train_variance, latent_dim=16, number_of_embeddings=128, **kwargs):
         """
-        Summarry: The constructor for VQ_VAE_Trainer_2 class.
+        Summary: The constructor for VQ_VAE_Trainer_2 class.
   
         Parameters:
         train_variance (number):
@@ -438,7 +438,7 @@ class PixelConvLayer(layers.Layer):
     """
     def __init__(self, mask_type, **kwargs):
         """
-        Summarry: The constructor for PixelConvLayer class.
+        Summary: The constructor for PixelConvLayer class.
   
         Parameters:
         mask_type (data_type):
@@ -449,7 +449,7 @@ class PixelConvLayer(layers.Layer):
 
     def build(self, input_shape):
         """
-        Summarry: Build the conv2d layer to initialize kernel variables and create mask
+        Summary: Build the conv2d layer to initialize kernel variables and create mask
   
         Parameters:
         input_shape (tuple):
@@ -466,7 +466,7 @@ class PixelConvLayer(layers.Layer):
 
     def call(self, inputs):
         """
-        Summarry: Build the conv2d layer to initialize kernel variables and create mask
+        Summary: Build the conv2d layer to initialize kernel variables and create mask
   
         Parameters:
         input_shape (tuple):
@@ -488,7 +488,7 @@ class ResidualBlock(keras.layers.Layer):
     """
     def __init__(self, filters, **kwargs):
         """
-        Summarry: The constructor for ResidualBlock class.
+        Summary: The constructor for ResidualBlock class.
   
         Parameters:
         filters (int):
@@ -510,7 +510,7 @@ class ResidualBlock(keras.layers.Layer):
 
     def call(self, inputs):
         """
-        Summarry: Build the ResidualBlock
+        Summary: Build the ResidualBlock
   
         Parameters:
         input_shape (tuple):
@@ -522,5 +522,4 @@ class ResidualBlock(keras.layers.Layer):
         x = self.pixel_conv(x)
         x = self.conv2(x)
         return keras.layers.add([inputs, x])
-
 

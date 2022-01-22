@@ -77,6 +77,8 @@ def image_compare_modelpred(file_path, model_path, target_size):
     
     
 class GradCAM:
+    """ Summary: Gradient-weighted Class Activation Mapping  Model for mapping gradients onto images """
+
     def __init__(self, model, classIdx, layerName=None):
         # store the model, the class index used to measure the class
         # activation map, and the layer to be used when visualizing
@@ -170,7 +172,6 @@ class GradCAM:
         # return a 2-tuple of the color mapped heatmap and the output,
         # overlaid image
         return (heatmap, output)
-
 
 
 
