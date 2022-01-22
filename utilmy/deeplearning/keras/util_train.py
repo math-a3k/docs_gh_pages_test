@@ -23,6 +23,7 @@ from utilmy import pd_read_file
 
 ##### Labels
 def np_remove_duplicates(seq):
+    """Remove duplicates in numpy array"""
     seen = set()
     seen_add = seen.add
     return [x for x in seq if not (x in seen or seen_add(x))]
@@ -102,7 +103,7 @@ def log(*s):
 
     
 def config_save(cc,path):
-    """ Save config file"""   
+   """ Save config file"""   
    import json 
    #path1 = path +"/info.json"  #### model_dir2 +"/info.json" 
    json.dump(  str(cc), open( path , mode='a'))

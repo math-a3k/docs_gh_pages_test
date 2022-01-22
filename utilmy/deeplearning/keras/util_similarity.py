@@ -63,6 +63,9 @@ def test_tf_cdist():
 
 ######################################################################################
 def tf_cdist(left, right, metric='euclidean'):
+    """ 
+    Summary: Compute metric distance between tensors
+    """
     #### distance between tensor
     if metric == 'euclidean':
         return tf_cdist_euclidean(left, right)

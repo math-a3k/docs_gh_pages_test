@@ -78,6 +78,8 @@ def loss_clf_macro_soft_f1(y, y_hat):   #name
     
 def loss_perceptual_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005,
                              y_label_heads=None, y_pred_heads=None, clf_loss_fn=None):
+    """ Perceptual loss function """
+    
     ### log( 'x_recon.shae',  x_recon.shape )
     ### VAE Loss  :  Mean Square : 0.054996297 0.046276666   , Huber: 0.0566 
     ### m = 0.00392156862  # 1/255
