@@ -7,9 +7,13 @@ Original file is located at
 """
 import numpy as np, tensorflow as tf
 
-import neural_structured_learning as nsl
-from neural_structured_learning.keras import layers as nsl_layers
-import neural_structured_learning.configs as nsl_configs
+try :
+    import neural_structured_learning as nsl
+    from neural_structured_learning.keras import layers as nsl_layers
+    import neural_structured_learning.configs as nsl_configs
+except Exception as e :
+    print(e)
+    print("pip install neural_structured_learning ") ; 1/0
 
 
 ######################################################################################
