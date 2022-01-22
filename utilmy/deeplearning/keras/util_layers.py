@@ -59,9 +59,21 @@ def test_classifier_multihead():
    log(clf.summary())
  
  
+def test_DFC_VAE():
+ 
+   log(m.summary()
 
 
-
+def test_encoder():
+       
+   log(m.summary()
+       
+       
+def test_decoder():
+       
+   log(m.summary()
+       
+       
 ################################################################################################
 def make_classifier_multihead(label_name_ncount:dict=None, 
                               layers_dim=[128, 1024], tag='1', latent_dim=512):
