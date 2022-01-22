@@ -355,6 +355,30 @@ def is_float(x):
 
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
+def os_file_date_modified(dirin, fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
+    """last modified date
+    """
+    import datetime 
+    from pytz import timezone as tzone
+    try :
+      mtime  = os.path.getmtime(dirin)
+      mtime2 = datetime.datetime.utcfromtimestamp(mtime)
+      mtime2 = mdate2.astimezone(tzone(timezone))
+      return mtime2.strftime(fmt)
+    except:
+      return ""  
+
+
+def date_to_timezone(tdate,  fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
+    # "%Y-%m-%d %H:%M:%S %Z%z"
+    from pytz import timezone as tzone
+    import datetime
+    # Convert to US/Pacific time zone
+    now_pacific = tdate.astimezone(tzone('Asia/Tokyo'))
+    return now_pacific.strftime(fmt)
+
+
+
 def os_process_list():
      """  List of processes
      #ll = os_process_list()
