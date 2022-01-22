@@ -12,7 +12,7 @@ from tensorflow.keras.models import Sequential
 # from tensorflow.python.keras.utils.data_utils import Sequence
 
 # import tensorflow_addons as tfa
-# from box import Box
+from box import Box
 # from utilmy import pd_read_file
 
 
@@ -59,24 +59,17 @@ def test_classifier_multihead():
    log(clf.summary())
  
  
- 
-
-################################################################################################
-# The number given below are test cases, remove these before usage
-cdim = 3
-n_filters = 3
 
 
 
 ################################################################################################
 def make_classifier_multihead(label_name_ncount:dict=None, 
-                              layers_dim=[128, 1024], tag='1'):
+                              layers_dim=[128, 1024], tag='1', latent_dim=512):
     """ multi Label output head 
         Vector  --> Dense --> Multiple Softmax Classifier  ( 1 label per class)    
         label_name_ncount:   { 'gender' :  2       #  'male', 'female' 
                                'clothtype':  5     #  'top', 'shirt'
         }  
-        
         
     """
     Input = tf.keras.layers.InputLayer
@@ -105,10 +98,6 @@ def make_classifier_multihead(label_name_ncount:dict=None,
     clf = tf.keras.Model(name='clf_multihead_' + str(tag), 
                          inputs=base_model.input, outputs=outputs)
     return clf
-
-
-
-
 
 
 
@@ -203,6 +192,10 @@ class ResBlock(Layer):
 
 
 
+################################################################################################
+# The number given below are test cases, remove these before usage
+cdim = 3
+n_filters = 3
 
 
 ################################################################################################
@@ -426,25 +419,6 @@ def make_classifier_2(latent_dim, class_dict):
     clf = tf.keras.Model(name='clf', inputs=base_model.input, outputs=outputs)
 
     return clf
-
-
-""" 1-4) Build loss function"""
-
-def vae_loss(x, output):
-    '''
-        Here we need 2 types of losses:
-        * Reconstruction Loss -> Binary crossentropy between each input pixel in input image and corrosponding output pixel
-        * KL-divergence 
-    '''
-    x = tf.keras.backend.flatten(x)
-    output = K.flatten(output)
-
-    # Reconstruction loss (as we used sigmoid activation we can use binarycrossentropy)
-    recon_loss = tf.keras.metrics.binary_crossentropy(x, output)
-
-    # KL divergence
-    kl_loss = -5e-4 * tf.keras.backend.mean(1 + z_logsigma - tf.keras.backend.mean.square(z_mean) - tf.keras.backend.mean.exp(z_logsigma), axis=-1)
-    return K.mean(recon_loss + kl_loss)
 
    
 def test_cdfvae():
