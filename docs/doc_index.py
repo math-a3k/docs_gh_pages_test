@@ -525,6 +525,25 @@ train_stop(counter, patience)
 utilmy/deeplearning/torch/__init__.py
 
 
+utilmy/deeplearning/torch/graphnlp.py
+-------------------------functions----------------------
+dataset_download(dirout = '/content/sample_data/sent_tans/')
+dataset_fake(dirdata)
+graphnlp_train(modelname_or_path = 'distilbert-base-nli-mean-tokens', taskname = "classifier", lossname = "cosinus", datasetname  =  'sts', train_path = "train/*.csv", val_path   = "val/*.csv", eval_path  = "eval/*.csv", metricname = 'cosinus', dirout  = "mymodel_save/", cc:dict =  None)
+load_dataloader(name = 'sts', path_or_df  =  "", cc:dict =  None, npool = 4)
+load_evaluator(name = 'sts', path_or_df = "", dname = 'sts', cc:dict = None)
+load_loss(model  = '', lossname  = 'cosinus', cc:dict =  None)
+log(*s)
+metrics_cosine_sim(sentence1  =  "sentence 1", sentence2  =  "sentence 2", model_id  =  "model name or path or object")
+model_evaluate(model  = "modelname OR path OR model object", dirdata = './*.csv', dirout = './', cc:dict =  None, batch_size = 16, name = 'sts-test')
+model_load(path_or_name_or_object)
+model_save(model, path, reload = True)
+model_setup_compute(model, use_gpu = 0, ngpu = 1, ncpu = 1, cc:dict = None)
+pd_read(path_or_df = './myfile.csv', npool = 1, **kw)
+test()
+
+
+
 utilmy/deeplearning/torch/sentence2.py
 -------------------------functions----------------------
 evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
