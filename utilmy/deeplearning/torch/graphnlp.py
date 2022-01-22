@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-https://graph4ai.github.io/graph4nlp/_sources/tutorial/text_classification.rst.txt
+
+https://github.com/graph4ai/graph4nlp_demo/blob/main/SIGIR2021_demo/text_classification.ipynb
+
+
 
 
 cd deeplearning/torch/
@@ -235,6 +238,7 @@ def graphnlp_train(modelname_or_path='distilbert-base-nli-mean-tokens',
                  dirout ="mymodel_save/",
                  cc:dict= None):
   #  """"
+  # https://github.com/graph4ai/graph4nlp_demo/blob/main/SIGIR2021_demo/text_classification.ipynb
   # cc = Box({})
   # cc.epoch = 3
   # cc.lr = 1E-5
@@ -247,26 +251,38 @@ def graphnlp_train(modelname_or_path='distilbert-base-nli-mean-tokens',
   # """
     cc = Box(cc)   #### can use cc.epoch   cc.lr
 
-    ##### load model form disk or from internet
-    model = model_load(modelname_or_path)
+
+    # config setup
+    config_file =  cc.config_file  # '../config/trec/graphsage_bi_fuse_static_dependency.yaml'
+    config = yaml.load(open(config_file, 'r'), Loader=yaml.FullLoader)
+    print_config(config)
     
     if taskname == 'classifier':
-        df = pd_read_file(train_path)
-        log(" metrics_cosine_similarity before training")  
-        metrics_cosine_sim(df['sentence1'][0], df['sentence2'][0], model)
-        
-        
+        ##### load model form disk or from internet        
+        modelrun = ModelHandler(config)
+    
+    
         ##### dataloader train, evaluator
 
     
         ##### Task Loss
+        loss = 
 
+        ##### optimizer Loss
+        optimizer = 
+        scheduler =
+        stopper = 
+        
         
         log('########## train')
+        val_acc = modelrun.train()
+       
+        
 
+        ### return self.stopper.best_score
 
-        log("\n******************< Eval similarity > ********************")
-
+        log("\n******************< Eval > ********************")
+         test_acc = modelrun.test() 
         
         log("### Save+ Reload the model  ")
 
