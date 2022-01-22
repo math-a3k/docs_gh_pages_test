@@ -122,6 +122,7 @@ utilmy/dates.py
 date_generate(start = '2018-01-01', ndays = 100)
 date_is_holiday(array)
 date_now(fmt="%Y-%m-%d %H = "%Y-%m-%d %H:%M:%S %Z%z", add_days = 0, timezone = 'Asia/Tokyo')
+date_to_timezone(tdate, fmt="%Y%m%d-%H = "%Y%m%d-%H:%M", timezone = 'Asia/Tokyo')
 date_weekday_excel(x)
 date_weekmonth(d)
 date_weekmonth2(d)
@@ -1114,6 +1115,7 @@ fixedDict._check_size_limit(self)
 
 utilmy/oos.py
 -------------------------functions----------------------
+date_to_timezone(tdate, fmt="%Y%m%d-%H = "%Y%m%d-%H:%M", timezone = 'Asia/Tokyo')
 help()
 is_float(x)
 is_int(x)
@@ -1126,6 +1128,7 @@ os_clean_memory(varlist, globx)
 os_copy_safe(dirin = None, dirout = None, nlevel = 5, nfile = 5000, logdir = "./", pattern = "*", exclude = "", force = False, sleep = 0.5, cmd_fallback = "", verbose = Trueimport shutil, time, os, globflist = [] ; dirinj = dirinnlevel) =  [] ; dirinj = dirinnlevel):)
 os_cpu()
 os_file_check(fp)
+os_file_date_modified(dirin, fmt="%Y%m%d-%H = "%Y%m%d-%H:%M", timezone = 'Asia/Tokyo')
 os_file_replacestring(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
 os_get_function_name()
 os_getcwd()
