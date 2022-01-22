@@ -421,17 +421,6 @@ def make_classifier_2(latent_dim, class_dict):
     return clf
 
    
-def test_cdfvae():
-    pass
-    # Input is 0-255, do not normalize input
-    # percep_model = tf.keras.applications.EfficientNetB2(
-    #     include_top=False, weights='imagenet', input_tensor=None,
-    #    input_shape=(xdim, ydim, cdim), pooling=None, classes=1000,
-    #     classifier_activation='softmax'
-    # )
-
-
-
 
 
 
