@@ -74,6 +74,23 @@ def test_decoder():
    log(m.summary()
        
        
+       
+def dataloader_get_mnist():
+    """" train_laoder = dataloader_get_mnist()
+    for i, (Xbatch, ybatch) in enumerate(train_loader):
+        log(f'image shape : {Xbatch.shape}')
+        log(f'label shape : {ybatch.shape}')
+        break
+    """        
+    from tensorflow.keras.datasets import mnist
+    (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
+    
+    from util.deeplearning.keras.util_dataloader_img import  CustomDataGenerator   
+    train_loader = CustomDataGenerator(X_train, y_train)
+    return train_loader   
+
+       
+       
 ################################################################################################
 def make_classifier_multihead(label_name_ncount:dict=None, 
                               layers_dim=[128, 1024], tag='1', latent_dim=512):
