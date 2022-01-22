@@ -50,8 +50,16 @@ def test_resnetlayer():
         ]
     )
     log(model.summary())
-
-
+    
+    
+def test_classifier_multihead():
+   label_name_ncount = { 'color': 5, 'gender': 2, 'size': 7}
+   clf = make_classifier_multihead(label_name_ncount:dict=None, 
+                              layers_dim=[128, 1024], tag='1')
+   log(clf.summary())
+ 
+ 
+ 
 
 ################################################################################################
 # The number given below are test cases, remove these before usage
