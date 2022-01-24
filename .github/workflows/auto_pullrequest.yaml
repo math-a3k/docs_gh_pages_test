@@ -1,10 +1,12 @@
 name:  pullrequest_auto
 
 on:
-  schedule:
-    - cron:  '0 */6 * * *'   
-#    - cron:  '*/10 * * * *'   
-
+  #schedule:
+  #  - cron:  '0 */6 * * *'   
+  #    - cron:  '*/10 * * * *'   
+  push:
+    branches:
+    - main
 
 
 jobs:
@@ -25,12 +27,15 @@ jobs:
            curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
            git config --local user.email "noelkev0@gmail.com" &&  git config --local user.name "arita37"
            git config --global hub.protocol ssh
+           git checkout sparsh  && git merge --no-ff main && git push  && git push origin sparsh & \
+           
            bin/hub pull-request --base arita37:sparsh   --head arita37:main  -m "Auto Sync arita37/main"  & \
            bin/hub pull-request --base arita37:dhamani  --head arita37:main   -m "Auto Sync arita37/main"  & \
            bin/hub pull-request --base arita37:ashraf  --head arita37:main   -m "Auto Sync arita37/main"  & \
            bin/hub pull-request --base arita37:aaiit  --head arita37:main   -m "Auto Sync arita37/main"  & \
            bin/hub pull-request --base arita37:ravishankar  --head arita37:main   -m "Auto Sync arita37/main"  & \
            bin/hub pull-request --base arita37:alex  --head arita37:main   -m "Auto Sync arita37/main"  & \
+
 
 
       env
