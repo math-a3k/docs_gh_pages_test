@@ -40,6 +40,16 @@ def test_classactivation():
 
 
   
+######################################################################################  
+def keras_check_layer(mlayer,):
+  """ Providing a layer,
+      build and run the layer
+  
+      https://stackoverflow.com/questions/40143676/keras-output-simple-inputs-to-test-layers
+  
+  
+  """
+  pass
   
   
 
