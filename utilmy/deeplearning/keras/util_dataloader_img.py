@@ -282,8 +282,34 @@ class Transform_sprinkle(ImageOnlyTransform):
 
     
 
-    
-    
+def transform_get_basic(pars:dict=None):    
+  """"  Get Transformation Class for Datalaoder
+        Basic version
+  cc.resize.p = 1
+  
+  """
+  cc = Box({}) if pars is None else Box(pars)
+  
+  train_transforms = Compose([
+      Resize(image_size, image_size, p=1),
+      HorizontalFlip(p=0.5),
+      RandomContrast(limit=0.2, p=0.5),
+      RandomGamma(gamma_limit=(80, 120), p=0.5),
+      RandomBrightness(limit=0.2, p=0.5),
+      HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
+                         val_shift_limit=10, p=.9),
+      ShiftScaleRotate(
+          shift_limit=0.0625, scale_limit=0.1, 
+          rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8), 
+      ToFloat(max_value=255),
+      Transform_sprinkle(num_holes=10, side_length=10, p=0.5),
+  ])
+
+  test_transforms = Compose([
+      Resize(image_size, image_size, p=1),
+      ToFloat(max_value=255)
+  ])
+  return train_transforms, test_transforms
     
     
     
@@ -332,18 +358,19 @@ class DataGenerator_img_disk(Sequence):
             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
     """
         
-    def __init__(self, img_dir, label_dir, label_cols,
-                 split='train', batch_size=8, transforms=None):
+    def __init__(self, img_dir, label_dir, label_cols:list,  split='train', col_img='uri', batch_size=8, transforms=None):
         self.image_dir  = img_dir
         self.label_cols = label_cols
         self.batch_size = batch_size
         self.transforms = transforms
-
+        
         from utilmy import pd_read_file
         dflabel     = pd_read_file(label_dir)
         self.labels = pd_merge_labels_imgdir(dflabel, img_dir, label_cols)
 
-
+        assert col_img in self.labels.columns 
+        
+        
     def on_epoch_end(self):
         np.random.seed(12)
         np.random.shuffle(self.labels)
@@ -374,6 +401,7 @@ class DataGenerator_img_disk(Sequence):
         return (batch_x, *batch_y)
  
 
+ 
 class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
     """Custom Data Loader using keras Sequence
         Args:  image_dir (Path(str)): String Path /*.png to image directory
