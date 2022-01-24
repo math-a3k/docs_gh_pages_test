@@ -38,6 +38,6 @@ jobs:
 
 
 
-      env
+      env:
            GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
   
