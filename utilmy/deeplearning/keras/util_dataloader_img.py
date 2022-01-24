@@ -265,15 +265,35 @@ def pd_to_onehot(dflabels, labels_col = []) :   #name changed
 #         return (batch_x, *batch_y)
 
 
-class CustomDataGenerator(Sequence):
-    
-    """Custom DataGenerator using keras Sequence
 
-    Args:
-        x (np array): The input samples from the dataset
-        y (np array): The labels from the dataset
-        batch_size (int, optional): batch size for the samples. Defaults to 32.
-        augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
+                            
+###############################################################################
+from albumentations.core.transforms_interface import ImageOnlyTransform
+class Transform_sprinkle(ImageOnlyTransform):
+    def __init__(self, num_holes=30, side_length=5, always_apply=False, p=1.0):
+        from tf_sprinkles import Sprinkles
+        super(Transform_sprinkle, self).__init__(always_apply, p)
+        self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)
+    
+    def apply(self, image, **params):
+        if isinstance(image, PIL.Image.Image):   image = tf.constant(np.array(image), dtype=tf.float32)            
+        elif isinstance(image, np.ndarray):      image = tf.constant(image, dtype=tf.float32)
+        return self.sprinkles(image).numpy()
+
+    
+
+    
+    
+    
+    
+    
+##########################################################################################
+class CustomDataGenerator(Sequence):
+    """Custom DataGenerator using keras Sequence
+    Args: x (np array): The input samples from the dataset
+          y (np array): The labels from the dataset
+          batch_size (int, optional): batch size for the samples. Defaults to 32.
+          augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
     """
     
     def __init__(self, x, y, batch_size=32, augmentations=None):
@@ -354,36 +374,15 @@ class DataGenerator_img_disk(Sequence):
         return (batch_x, *batch_y)
  
 
-
-
-                            
-###############################################################################
-from albumentations.core.transforms_interface import ImageOnlyTransform
-class Transform_sprinkle(ImageOnlyTransform):
-    def __init__(self, num_holes=30, side_length=5, always_apply=False, p=1.0):
-        from tf_sprinkles import Sprinkles
-        super(Transform_sprinkle, self).__init__(always_apply, p)
-        self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)
-    
-    def apply(self, image, **params):
-        if isinstance(image, PIL.Image.Image):   image = tf.constant(np.array(image), dtype=tf.float32)            
-        elif isinstance(image, np.ndarray):      image = tf.constant(image, dtype=tf.float32)
-        return self.sprinkles(image).numpy()
-
-    
-
-class RealCustomDataGenerator(tf.keras.utils.Sequence):
-    
-    """Custom Data Generator using keras Sequence
-
-        Args:
-            image_dir (Path(str)): String Path /*.png to image directory
-            label_path (DataFrame): Dataset for Generator
-            class_dict (list): list of columns for categories
-            split (str, optional): split as train, validation, or test. Defaults to 'train'.
-            batch_size (int, optional): Batch size for the dataloader. Defaults to 8.
-            transforms (str, optional): type of transform to perform on images. Defaults to None.
-            shuffle (bool, optional): Shuffle the data. Defaults to True.
+class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
+    """Custom Data Loader using keras Sequence
+        Args:  image_dir (Path(str)): String Path /*.png to image directory
+               label_path (DataFrame): Dataset for Generator
+               class_dict (list): list of columns for categories
+               split (str, optional): split as train, validation, or test. Defaults to 'train'.
+               batch_size (int, optional): Batch size for the dataloader. Defaults to 8.
+               transforms (str, optional): type of transform to perform on images. Defaults to None.
+               shuffle (bool, optional): Shuffle the data. Defaults to True.
         """
         
     def __init__(self, image_dir, label_path, class_dict,
@@ -479,65 +478,5 @@ def build_tfrecord(x, tfrecord_out_path, max_records):
                 id_cnt += 1
     return tfrecord_out_path
 
-
-class CustomDataGenerator_img(Sequence):
-    
-    """Custom DataGenerator using Keras Sequence for images
-
-
-
-
-# class CustomDataGenerator_img(Sequence):
-    
-#     Custom DataGenerator using Keras Sequence for images
-
-#         Args:
-#             img_dir (Path(str)): String path to images directory
-#             label_dir (DataFrame): Dataset for Generator
-#             label_cols (list): list of classes
-#             split (str, optional): split for train or test. Defaults to 'train'.
-#             batch_size (int, optional): batch_size for each batch. Defaults to 8.
-#             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
-#     """
-#     # """
-#     #    df_label format :
-#     #        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-#     # """
-        
-#     def __init__(self, img_dir, label_dir, label_cols,
-#                  split='train', batch_size=8, transforms=None):
-#         self.image_dir = img_dir
-#         self.label_cols = label_cols
-#         self.batch_size = batch_size
-#         self.transforms = transforms
-
-#         dflabels = pd.read_csv(label_dir)
-#         self.labels = data_add_onehot(dflabels, img_dir, label_cols)
-
-    def on_epoch_end(self):
-        np.random.seed(12)
-        np.random.shuffle(self.labels)
-
-    def __len__(self):
-        return int(np.ceil(len(self.labels) / float(self.batch_size)))
-
-    def __getitem__(self, idx):
-        # Create batch targets
-        df_batch = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
-
-        batch_x = []
-        batch_y = []  # list of heads
-
-        for ii, x in df_batch.iterrows():
-            img = np.array(Image.open(x['uri']).convert('RGB'))
-            batch_x.append(img)
-
-#         for ci in self.label_cols:
-#             v = [x.split(",") for x in df_batch[ci + "_onehot"]]
-#             v = np.array([[int(t) for t in vlist] for vlist in v])
-#             batch_y.append(v)
-
-        if self.transforms is not None:
-            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
-
-        return (batch_x, *batch_y)
+   
+   
