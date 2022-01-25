@@ -20,8 +20,6 @@ from albumentations import (
     ToFloat, ShiftScaleRotate, Resize
 )
 from albumentations.core.transforms_interface import ImageOnlyTransform
-from torch import batch_norm
-
 
 
 
