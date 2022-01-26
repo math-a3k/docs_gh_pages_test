@@ -5,6 +5,8 @@ HELP = """
 import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
 import cv2
 import tensorflow as tf
+from tensorflow import keras
+
 # import tifffile.tifffile
 # from skimage import morphology
 import PIL
@@ -109,22 +111,23 @@ def test2(): #using predefined df and model training using model.fit()
                   optimizer=tf.keras.optimizers.Adam(learning_rate=1e-7),   metrics=["accuracy"])
       return model
 
-    folder_name = 'random_images'
-    csv_file_name = 'df.csv'
-    p = Path(folder_name)
-    num_images = 256
-    num_labels = 2
+    #####################################################
+    label_file    = 'df.csv'
 
-    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = folder_name)
+    dir_img_path  = 'random_images/'
+    dir_img       = Path(dir_img_path).as_posix()
+    num_images    = 256
+    num_labels    = 2
 
+    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = dir_img_path)
     #df = create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
     #                              dirout =folder_name,  n_class_perlabel=2,  cols_labels = [ 'label', ] )
-    df.to_csv(csv_file_name, index=False)
-
+    df.to_csv(label_file, index=False)
 
 
     log('############   without Transform')
-    dt_loader = DataGenerator_img_disk(p.as_posix(), df, ['label'], batch_size = 32)
+    dt_loader = DataGenerator_img_disk(dir_img, label_dir= df, label_cols=['label'], batch_size = 32,
+                                       col_img='uri', transforms= None )
 
     for i, (image, label) in enumerate(dt_loader):
         log(f'image shape : {(image).shape}')
@@ -132,12 +135,10 @@ def test2(): #using predefined df and model training using model.fit()
         break
 
     model = get_model()
-    model.fit(
-        dt_loader,
-        epochs=5,
-    )
+    model.fit(dt_loader, epochs=1, )
 
-    log('############   with Transform')
+
+    log('############   with Transform + model fit ')
     trans_train = Compose([
       #Resize(image_size, image_size, p=1),
       HorizontalFlip(p=0.5),
@@ -147,7 +148,7 @@ def test2(): #using predefined df and model training using model.fit()
       # ToFloat(max_value=255),
       Transform_sprinkle(p=0.5),
      ])
-    dt_loader = DataGenerator_img_disk(p.as_posix(), label_dir= df, label_cols= ['label'],
+    dt_loader = DataGenerator_img_disk(dir_img, label_dir= df, label_cols= ['label'],
                                        batch_size = 32, col_img='uri', transforms= trans_train )
 
     for i, (image, label) in enumerate(dt_loader):
@@ -156,10 +157,10 @@ def test2(): #using predefined df and model training using model.fit()
         break
     
     model = get_model()
-    model.fit(
-        dt_loader,
-        epochs=5,
-    )
+    model.fit(dt_loader, epochs=1, )
+
+
+
 
 def create_random_images_ds(img_shape, num_images = 10, folder = 'random images', return_df = True, num_labels = 2, label_cols = ['label']):
         if not os.path.exists(folder):
