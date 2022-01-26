@@ -139,6 +139,10 @@ def test2(): #using predefined df
 
 def create_random_images_ds(img_shape=(10,10,2), num_images = 10,
                             dirout ='random_images/',  n_class_perlabel=7,  cols_labels = [ 'gender', 'color', 'size'] ):
+    """ Image + labels into Folder + csv files.
+        Multiple label:
+
+    """
     os.makedirs(dirout, exist_ok=True)
     for n in range(num_images):
         filename = f'{dirout}/{n}.jpg'
@@ -148,7 +152,7 @@ def create_random_images_ds(img_shape=(10,10,2), num_images = 10,
 
 
     files = [fi.replace("\\", "/") for fi in glob.glob( dirout + '/*.jpg')]
-    df = pd.DataFrame(files, columns='img_dir')
+    df = pd.DataFrame(files, columns=['img_dir'])
 
     for ci in cols_labels:
       df[ci] = np.random.choice( np.arange(0, n_class_perlabel)  ,len(df), replace=True)
