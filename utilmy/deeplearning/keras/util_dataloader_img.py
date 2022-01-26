@@ -84,7 +84,6 @@ def test1():
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
 
     train_loader = DataGenerator_img(X_train, y_train)
-    valid_loader = DataGenerator_img(X_valid, y_valid)
 
     for i, (image, label) in enumerate(train_loader):
         print('Training : ')
@@ -92,56 +91,74 @@ def test1():
         print(f'label shape : {label.shape}')
         break
 
-    for i, (image, label) in enumerate(valid_loader):
-        print('\nValidation : ')
-        print(f'image shape : {image.shape}')
-        print(f'label shape : {label.shape}')
-        break
 
 
 def test2(): #using predefined df
-    from numpy import random
-    from pathlib import Path
+    img_dir = 'random_images/'
+    label_file = 'df.csv'
+    cols_labels = [ 'gender', 'color', 'size']
 
-    folder_name = 'random images'
-    csv_file_name = 'df.csv'
-    p = Path(folder_name)
-    num_images = 50
+    df = create_random_images_ds(img_shape=(10,10,2), num_images = 10,
+                                 dirout = img_dir,  n_class_perlabel=7,  cols_labels = cols_labels )
+    df.to_csv(label_file, index=False)
 
-    num_labels = 2
-    
-    def create_random_images_ds(img_shape, num_images = 10, folder = 'random images', return_df = True, num_labels = 2, label_cols = ['label']):
-        if not os.path.exists(folder):
-            os.mkdir(folder)
-        for n in range(num_images):
-            filename = f'{folder}/{n}.jpg'
-            rgb_img = numpy.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
-            image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
-            image.save(filename)
 
-        label_dict = []
-
-        files = [i.as_posix() for i in p.glob('*.jpg')]
-        for i in enumerate(label_cols):
-            label_dict.append(random.randint(num_labels, size=(num_images)))
-
-        zipped = list(zip(files, *label_dict))
-        df = pd.DataFrame(zipped, columns=['uri'] + label_cols)
-        if return_df:
-            return df
-
-    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = folder_name)
-    df.to_csv(csv_file_name, index=False)
-
-    dt_loader = DataGenerator_img_disk(p.as_posix(), df, ['label'], batch_size = 32)
+    log('############  No Transform')
+    dt_loader = DataGenerator_img_disk(img_dir, label_dir= label_file, label_cols= cols_labels,
+                                       col_img='img_dir', batch_size=16, transforms=None)
 
     for i, (image, label) in enumerate(dt_loader):
-        print(f'image shape : {(image).shape}')
-        print(f'label shape : {(label).shape}')
+        log(f'image shape : {(image).shape}')
+        log(f'label shape : {(label).shape}')
         break
 
 
- 
+    log('############   with Transform')
+    trans_train = Compose([
+      #Resize(image_size, image_size, p=1),
+      HorizontalFlip(p=0.5),
+      #RandomContrast(limit=0.2, p=0.5),
+      #RandomGamma(gamma_limit=(80, 120), p=0.5),
+      #RandomBrightness(limit=0.2, p=0.5),
+      #HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
+      #                   val_shift_limit=10, p=.9),
+      ShiftScaleRotate(
+          shift_limit=0.0625, scale_limit=0.1,
+          rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8),
+      # ToFloat(max_value=255),
+      Transform_sprinkle(p=0.5),
+     ])
+
+    dt_loader = DataGenerator_img_disk(img_dir, label_dir= label_file, label_cols= cols_labels,
+                                       col_img='uri', batch_size=16, transforms= trans_train )
+    for i, (image, label) in enumerate(dt_loader):
+        log(f'image shape : {(image).shape}')
+        log(f'label shape : {(label).shape}')
+        break
+
+
+
+
+def create_random_images_ds(img_shape=(10,10,2), num_images = 10,
+                            dirout ='random_images/',  n_class_perlabel=7,  cols_labels = [ 'gender', 'color', 'size'] ):
+    os.makedirs(dirout, exist_ok=True)
+    for n in range(num_images):
+        filename = f'{dirout}/{n}.jpg'
+        rgb_img  = np.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
+        image    = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
+        image.save(filename)
+
+
+    files = [fi.as_posix() for fi in glob.glob( dirout + '/*.jpg')]
+    df = pd.DataFrame(files, columns='img_dir')
+
+    for ci in cols_labels:
+      df[ci] = np.random.choice( np.arange(0, n_class_perlabel)  ,len(df), replace=True)
+
+    return df
+
+
+
 ################################################################################################## 
 ##################################################################################################
 def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name changed
@@ -284,29 +301,114 @@ class DataGenerator_img(Sequence):
         # return (batch_x, *batch_y)                                                    ----
         return (batch_x, batch_y)
 
+########################################################################################################################
+
+
+
+########################################################################################################################
+class DataGenerator_img_disk(Sequence):
+    """Custom DataGenerator using Keras Sequence for images on disk
+        df_label format :
+        id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
+        Args:
+            img_dir (Path(str)): String path to images directory
+            label_dir (DataFrame): Dataset for Generator
+            label_cols (list): list of cols for the label (multi label)
+            split (str, optional): split for train or test. Defaults to 'train'.
+            batch_size (int, optional): batch_size for each batch. Defaults to 8.
+            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
+    """
+
+    def __init__(self, img_dir, label_dir, label_cols:list,  split='train', col_img='uri', batch_size=8, transforms=None):
+        self.image_dir  = img_dir
+        self.batch_size = batch_size
+        self.transforms = transforms
+
+
+        self.label_cols = label_cols
+        self.col_img = col_img
+
+        from utilmy import pd_read_file
+        dflabel     = pd_read_file(label_dir)
+        dflabel     = dflabel.dropna()
+        self.labels = pd_merge_labels_imgdir(dflabel, img_dir, label_cols)
+
+
+        assert col_img in self.labels.columns
+
+
+    def on_epoch_end(self):
+        np.random.seed(12)
+        np.random.shuffle(self.labels)
+
+    def __len__(self):
+        return int(np.ceil(len(self.labels) / float(self.batch_size)))
+
+    def __getitem__(self, idx):
+        # Create batch targets
+        df_batch    = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
+
+        batch_x = []
+        batch_y = []  #  list of heads
+
+        for ii, x in df_batch.iterrows():
+            img =  np.array(Image.open(x[ self.col_img]).convert('RGB') )
+            batch_x.append(img)
+
+        for ci in self.label_cols:
+            v = [x.split(",") for x in df_batch[ci + "_onehot"]]
+            v = np.array([[int(t) for t in vlist] for vlist in v])
+            batch_y.append(v)
+
+        if self.transforms is not None:
+            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
+
+        return (batch_x, *batch_y)
+
+
+    def __get_data(self, idx, batch=8):
+        # Create batch targets
+        df_batch    = self.labels[idx * batch:(idx + 1) * self.batch_size]
+
+        batch_x = []
+        batch_y = []  #  list of heads
+
+        for ii, x in df_batch.iterrows():
+            img =  np.array(Image.open(x['uri']).convert('RGB') )
+            batch_x.append(img)
+
+        for ci in self.label_cols:
+            v = [x.split(",") for x in df_batch[ci + "_onehot"]]
+            v = np.array([[int(t) for t in vlist] for vlist in v])
+            batch_y.append(v)
+
+        if self.transforms is not None:
+            batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
+
+        return (batch_x, *batch_y)
+
+
+
+########################################################################################################################
 from keras_preprocessing.image import ImageDataGenerator
 import albumentations
 from utilmy import pd_read_file
 import math
 
-class DataGenerator_img_disk(tf.keras.utils.Sequence):
-    """
-        Custom DataGenerator using Keras Sequence for images on disk
-
+class DataGenerator_img_disk2(tf.keras.utils.Sequence):
+    """ Custom DataGenerator using Keras Sequence for images on disk
         df_label format :
         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-
         Args:
-            TODO
     """
 
-    def __init__(self, csv_path: str, x_col: str, y_col: str, image_dir: str,
+    def __init__(self, csv_path: str, col_img: str, cols_label: str, image_dir: str,
                  absolute_path: bool = False, validate_filenames: bool = True, labels: pd.DataFrame = None,
                  batch_size: int = 8, img_target_size: tuple = (32, 32), classes: list = None, shuffle: bool = True,
                  transforms: albumentations.Compose = None):
         self.csv_path = csv_path
-        self.x_col = x_col
-        self.y_col = y_col
+        self.x_col = col_img
+        self.y_col = cols_label
         self.image_dir = image_dir
         self.absolute_path = absolute_path
         self.validate_filenames = validate_filenames
@@ -316,17 +418,18 @@ class DataGenerator_img_disk(tf.keras.utils.Sequence):
         self.shuffle = shuffle
         self.transforms = transforms
 
-        self.df = pd_read_file(csv_path, col_filter_val=[self.x_col, self.y_col])
+        self.df = pd_read_file(csv_path, cols=[self.x_col, self.y_col])
         self.df = self.df.dropna()
 
         if self.classes is None:
-            self.classes = self.df[y_col].unique()
+            self.classes = self.df[cols_label].unique()
 
         # calacualte indices
-        self.indices = self.df.index.tolist()
+        self.df      = np.arange(0, len(self.df))
+        self.indices = np.arange(0, len(self.df))
 
         if labels is None:
-            pd_to_onehot(self.df, [y_col])
+            self.df = pd_to_onehot(self.df, cols_label)
             self.labels = None
         else:
             self.labels = labels
@@ -402,7 +505,7 @@ def test_img_data_gen_1():
     
     train_generator = DataGenerator_img_disk(
             csv_path='csv/path.csv',
-            x_col='img_pathes_col_name', y_col='class_col_name',
+            col_img='img_pathes_col_name', cols_label='class_col_name',
             image_dir='base/img/dir/',
             absolute_path=False, validate_filenames=True, batch_size=16, img_target_size=(224, 224),
             transforms=Compose([
@@ -441,7 +544,7 @@ class Transform_sprinkle(ImageOnlyTransform):
 
        
 ###############################################################################       
-class DataGenerator_img_disk2(tf.keras.utils.Sequence):
+class DataGenerator_img_disk3(tf.keras.utils.Sequence):
     """Custom Data Generator using keras Sequence
 
         Args:
