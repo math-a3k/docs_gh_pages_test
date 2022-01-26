@@ -106,8 +106,7 @@ def test2(): #using predefined df and model training using model.fit()
         layers.Dense(num_labels, activation="softmax"),
       ] )
       model.compile(loss=tf.keras.losses.CategoricalCrossentropy(), 
-                  optimizer=tf.keras.optimizers.Adam(learning_rate=1e-7), 
-                  metrics=["accuracy"])
+                  optimizer=tf.keras.optimizers.Adam(learning_rate=1e-7),   metrics=["accuracy"])
       return model
 
     folder_name = 'random_images'
@@ -119,7 +118,7 @@ def test2(): #using predefined df and model training using model.fit()
     df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = folder_name)
 
     #df = create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
-    #                              dirout =folder_name,  n_class_perlabel=2,  cols_labels = [ 'gender', ] )
+    #                              dirout =folder_name,  n_class_perlabel=2,  cols_labels = [ 'label', ] )
     df.to_csv(csv_file_name, index=False)
 
 
@@ -142,18 +141,14 @@ def test2(): #using predefined df and model training using model.fit()
     trans_train = Compose([
       #Resize(image_size, image_size, p=1),
       HorizontalFlip(p=0.5),
-      #RandomContrast(limit=0.2, p=0.5),
-      #RandomGamma(gamma_limit=(80, 120), p=0.5),
-      #RandomBrightness(limit=0.2, p=0.5),
-      #HueSaturationValue(hue_shift_limit=5, sat_shift_limit=20,
-      #                   val_shift_limit=10, p=.9),
       ShiftScaleRotate(
           shift_limit=0.0625, scale_limit=0.1,
           rotate_limit=15, border_mode=cv2.BORDER_REFLECT_101, p=0.8),
       # ToFloat(max_value=255),
       Transform_sprinkle(p=0.5),
      ])
-    dt_loader = DataGenerator_img_disk(p.as_posix(), label_dir= df, label_cols= ['label'], batch_size = 32, col_img='uri', transforms= trans_train )
+    dt_loader = DataGenerator_img_disk(p.as_posix(), label_dir= df, label_cols= ['label'],
+                                       batch_size = 32, col_img='uri', transforms= trans_train )
 
     for i, (image, label) in enumerate(dt_loader):
         log(f'image shape : {(image).shape}')
@@ -187,7 +182,9 @@ def create_random_images_ds(img_shape, num_images = 10, folder = 'random images'
 
 
 def create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
-                            dirout ='random_images/',  n_class_perlabel=7,  cols_labels = [ 'gender', 'color', 'size'] ):
+                            dirout ='random_images/',  n_class_perlabel=7,
+                             cols_labels = [ 'gender', 'color', 'size'],
+                             col_img = 'uri' ):
     """ Image + labels into Folder + csv files.
         Multiple label:
     """
@@ -198,11 +195,14 @@ def create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
         image    = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
         image.save(filename)
 
-
     files = [fi.replace("\\", "/") for fi in glob.glob( dirout + '/*.jpg')]
-    df = pd.DataFrame(files, columns=['img_dir'])
+    df = pd.DataFrame(files, columns=[col_img])
 
- 
+    ##### Labels
+    for ci in cols_labels:
+      df[ci] = np.random.choice( np.arange(0, n_class_perlabel)  ,len(df), replace=True)
+    return df
+
 
 ##################################################################################################
 def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name changed
