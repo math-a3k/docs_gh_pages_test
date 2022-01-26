@@ -128,24 +128,6 @@ def test2(): #using predefined df and model training using model.fit()
 
     num_labels = 2
     
-    def create_random_images_ds(img_shape, num_images = 10, folder = 'random images', return_df = True, num_labels = 2, label_cols = ['label']):
-        if not os.path.exists(folder):
-            os.mkdir(folder)
-        for n in range(num_images):
-            filename = f'{folder}/{n}.jpg'
-            rgb_img = numpy.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
-            image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
-            image.save(filename)
-
-        label_dict = []
-
-        files = [i.as_posix() for i in p.glob('*.jpg')]
-        for i in enumerate(label_cols):
-            label_dict.append(random.randint(num_labels, size=(num_images)))
-
-        df = pd.DataFrame(list(zip(files, *label_dict)), columns=['uri'] + label_cols)
-        if return_df:
-            return df
 
     df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = folder_name)
     df.to_csv(csv_file_name, index=False)
@@ -193,29 +175,43 @@ def test2(): #using predefined df and model training using model.fit()
         epochs=5,
     )
 
+def create_random_images_ds(img_shape, num_images = 10, folder = 'random images', return_df = True, num_labels = 2, label_cols = ['label']):
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+        for n in range(num_images):
+            filename = f'{folder}/{n}.jpg'
+            rgb_img = numpy.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
+            image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
+            image.save(filename)
+
+        label_dict = []
+
+        files = [i.as_posix() for i in p.glob('*.jpg')]
+        for i in enumerate(label_cols):
+            label_dict.append(random.randint(num_labels, size=(num_images)))
+
+        df = pd.DataFrame(list(zip(files, *label_dict)), columns=['uri'] + label_cols)
+        if return_df:
+            return df
 
 
+def create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
+                            dirout ='random_images/',  n_class_perlabel=7,  cols_labels = [ 'gender', 'color', 'size'] ):
+    """ Image + labels into Folder + csv files.
+        Multiple label:
 
-# def create_random_images_ds(img_shape=(10,10,2), num_images = 10,
-#                             dirout ='random_images/',  n_class_perlabel=7,  cols_labels = [ 'gender', 'color', 'size'] ):
-#     os.makedirs(dirout, exist_ok=True)
-#     for n in range(num_images):
-#         filename = f'{dirout}/{n}.jpg'
-#         rgb_img  = np.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
-#         image    = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
-#         image.save(filename)
-
-
-#     files = [fi.replace("\\", "/") for fi in glob.glob( dirout + '/*.jpg')]
-#     df = pd.DataFrame(files, columns='img_dir')
-
-#     for ci in cols_labels:
-#       df[ci] = np.random.choice( np.arange(0, n_class_perlabel)  ,len(df), replace=True)
-
-#     return df
+    """
+    os.makedirs(dirout, exist_ok=True)
+    for n in range(num_images):
+        filename = f'{dirout}/{n}.jpg'
+        rgb_img  = np.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
+        image    = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
+        image.save(filename)
 
 
- 
+    files = [fi.replace("\\", "/") for fi in glob.glob( dirout + '/*.jpg')]
+    df = pd.DataFrame(files, columns=['img_dir'])
+
  
 
 ##################################################################################################
