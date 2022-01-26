@@ -119,7 +119,7 @@ def test2(): #using predefined df and model training using model.fit()
     num_images    = 256
     num_labels    = 2
 
-    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = dir_img_path)
+    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, dirout= dir_img_path)
     #df = create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
     #                              dirout =folder_name,  n_class_perlabel=2,  cols_labels = [ 'label', ] )
     df.to_csv(label_file, index=False)
@@ -162,18 +162,18 @@ def test2(): #using predefined df and model training using model.fit()
 
 
 
-def create_random_images_ds(img_shape, num_images = 10, folder = 'random images', return_df = True, num_labels = 2, label_cols = ['label']):
-        if not os.path.exists(folder):
-            os.mkdir(folder)
+def create_random_images_ds(img_shape, num_images = 10, dirout ='random_images/', return_df = True, num_labels = 2, label_cols = ['label']):
+        if not os.path.exists(dirout):
+            os.mkdir(dirout)
         for n in range(num_images):
-            filename = f'{folder}/{n}.jpg'
+            filename = f'{dirout}/{n}.jpg'
             rgb_img = np.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
             image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
             image.save(filename)
 
         label_dict = []
 
-        files = [i.as_posix() for i in p.glob('*.jpg')]
+        files = [i.as_posix() for i in glob.glob(dirout + '/*.jpg')]
         for i in enumerate(label_cols):
             label_dict.append(np.random.randint(num_labels, size=(num_images)))
 
