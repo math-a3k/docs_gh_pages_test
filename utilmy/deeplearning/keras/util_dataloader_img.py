@@ -94,15 +94,15 @@ def test1():
 def test2(): #using predefined df
     img_dir = 'random_images/'
     label_file = 'df.csv'
-    cols_labels = [ 'gender', 'color', 'size']
+    label_cols = [ 'gender', 'color', 'size']
 
     df = create_random_images_ds(img_shape=(10,10,2), num_images = 10,
-                                 dirout = img_dir,  n_class_perlabel=7,  cols_labels = cols_labels )
+                                 dirout = img_dir,  n_class_perlabel=7,  cols_labels = label_cols )
     df.to_csv(label_file, index=False)
 
 
     log('############  No Transform')
-    dt_loader = DataGenerator_img_disk(img_dir, label_dir= label_file, label_cols= cols_labels,
+    dt_loader = DataGenerator_img_disk(img_dir, label_dir= label_file, label_cols= label_cols,
                                        col_img='img_dir', batch_size=16, transforms=None)
 
     for i, (image, label) in enumerate(dt_loader):
@@ -127,7 +127,7 @@ def test2(): #using predefined df
       Transform_sprinkle(p=0.5),
      ])
 
-    dt_loader = DataGenerator_img_disk(img_dir, label_dir= label_file, label_cols= cols_labels,
+    dt_loader = DataGenerator_img_disk(img_dir, label_dir= label_file, label_cols= label_cols,
                                        col_img='uri', batch_size=16, transforms= trans_train )
     for i, (image, label) in enumerate(dt_loader):
         log(f'image shape : {(image).shape}')
@@ -147,7 +147,7 @@ def create_random_images_ds(img_shape=(10,10,2), num_images = 10,
         image.save(filename)
 
 
-    files = [fi.as_posix() for fi in glob.glob( dirout + '/*.jpg')]
+    files = [fi.replace("\\", "/") for fi in glob.glob( dirout + '/*.jpg')]
     df = pd.DataFrame(files, columns='img_dir')
 
     for ci in cols_labels:
@@ -162,7 +162,6 @@ def create_random_images_ds(img_shape=(10,10,2), num_images = 10,
 ##################################################################################################
 def get_data_sample(batch_size, x_train, labels_val, labels_col):   #name changed
     """ Get a data sample with batch size from dataset
-
     Args:
         batch_size (int): Provide a batch size for sampling
         x_train (list): Inputs from the dataset
@@ -274,20 +273,6 @@ def pd_to_onehot(dflabels, labels_col = []) :   #name changed
 
     return dflabels
 
-#     def __len__(self):
-#         return int(np.ceil(len(self.x) / float(self.batch_size)))
-
-#     def __getitem__(self, idx):
-#         batch_x = self.x[idx * self.batch_size:(idx + 1) * self.batch_size]
-#         batch_y = []
-#         for y_head in self.y:
-#             batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size])
-        
-#         if self.augment is not None:
-#             batch_x = np.stack([self.augment(image=x)['image'] for x in batch_x], axis=0)
-#         return (batch_x, *batch_y)
-
-
 
                             
 ###############################################################################
@@ -312,9 +297,12 @@ def transform_get_basic(pars:dict=None):
   
   """
   cc = Box({}) if pars is None else Box(pars)
+
+  cc.height = 64
+  cc.width  = 64
   
   train_transforms = Compose([
-      Resize(image_size, image_size, p=1),
+      Resize(cc.height, cc.width, p=1),
       HorizontalFlip(p=0.5),
       RandomContrast(limit=0.2, p=0.5),
       RandomGamma(gamma_limit=(80, 120), p=0.5),
@@ -329,7 +317,7 @@ def transform_get_basic(pars:dict=None):
   ])
 
   test_transforms = Compose([
-      Resize(image_size, image_size, p=1),
+      Resize(cc.height, cc.width, p=1),
       ToFloat(max_value=255)
   ])
   return train_transforms, test_transforms
