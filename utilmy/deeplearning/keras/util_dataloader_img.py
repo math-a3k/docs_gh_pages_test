@@ -92,48 +92,39 @@ def test1():
 
 
 def test2(): #using predefined df and model training using model.fit()
-    import numpy
-    import os
-    from numpy import random
     from PIL import Image
     from pathlib import Path
-    import pandas as pd
-    import numpy as np
     from tensorflow import keras
     from tensorflow.keras import layers
 
     def get_model():
-      model = keras.Sequential(
-          [
+      model = keras.Sequential(  [
         keras.Input(shape=(28, 28, 3)),
         layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
         layers.MaxPooling2D(pool_size=(2, 2)),
-        layers.Conv2D(64, kernel_size=(3, 3), activation="relu"),
-        layers.MaxPooling2D(pool_size=(2, 2)),
         layers.Flatten(),
-        layers.Dropout(0.5),
         layers.Dense(num_labels, activation="softmax"),
-                                
-      ]
-    )   
+      ] )
       model.compile(loss=tf.keras.losses.CategoricalCrossentropy(), 
                   optimizer=tf.keras.optimizers.Adam(learning_rate=1e-7), 
                   metrics=["accuracy"])
       return model
 
-    folder_name = 'random images'
+    folder_name = 'random_images'
     csv_file_name = 'df.csv'
     p = Path(folder_name)
     num_images = 256
-
     num_labels = 2
-    
 
     df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, folder = folder_name)
+
+    #df = create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
+    #                              dirout =folder_name,  n_class_perlabel=2,  cols_labels = [ 'gender', ] )
     df.to_csv(csv_file_name, index=False)
 
-    log('############   without Transform')
 
+
+    log('############   without Transform')
     dt_loader = DataGenerator_img_disk(p.as_posix(), df, ['label'], batch_size = 32)
 
     for i, (image, label) in enumerate(dt_loader):
@@ -180,7 +171,7 @@ def create_random_images_ds(img_shape, num_images = 10, folder = 'random images'
             os.mkdir(folder)
         for n in range(num_images):
             filename = f'{folder}/{n}.jpg'
-            rgb_img = numpy.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
+            rgb_img = np.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
             image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
             image.save(filename)
 
@@ -188,7 +179,7 @@ def create_random_images_ds(img_shape, num_images = 10, folder = 'random images'
 
         files = [i.as_posix() for i in p.glob('*.jpg')]
         for i in enumerate(label_cols):
-            label_dict.append(random.randint(num_labels, size=(num_images)))
+            label_dict.append(np.random.randint(num_labels, size=(num_images)))
 
         df = pd.DataFrame(list(zip(files, *label_dict)), columns=['uri'] + label_cols)
         if return_df:
@@ -199,7 +190,6 @@ def create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
                             dirout ='random_images/',  n_class_perlabel=7,  cols_labels = [ 'gender', 'color', 'size'] ):
     """ Image + labels into Folder + csv files.
         Multiple label:
-
     """
     os.makedirs(dirout, exist_ok=True)
     for n in range(num_images):
