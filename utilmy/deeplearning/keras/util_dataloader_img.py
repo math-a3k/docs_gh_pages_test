@@ -95,10 +95,13 @@ def test2(): #using predefined df and model training using model.fit()
     #                              dirout =folder_name,  n_class_perlabel=2,  cols_labels = [ 'label', ] )
     df.to_csv(label_file, index=False)
 
+    label_cols = ['label']
+    label_dict = { ci: df[ci].unique() for ci in label_cols   }
+
 
     log('############   without Transform')
-    dt_loader = DataLoader_imgdisk(dir_img, label_dir= df, label_cols=['label'], batch_size = 32,
-                                   col_img='uri', transforms= None)
+    dt_loader = DataLoader_imgdisk(dir_img, label_dir= df, label_dict=label_dict,
+                                   col_img='uri', batch_size = 32, transforms= None)
 
     for i, (image, label) in enumerate(dt_loader):
         log(f'image shape : {(image).shape}')
@@ -119,7 +122,7 @@ def test2(): #using predefined df and model training using model.fit()
       # ToFloat(max_value=255),
       Transform_sprinkle(p=0.5),
      ])
-    dt_loader = DataLoader_imgdisk(dir_img, label_dir= df, label_cols= ['label'],
+    dt_loader = DataLoader_imgdisk(dir_img, label_dir= df, label_dict=label_dict,
                                    batch_size = 32, col_img='uri', transforms= trans_train)
 
     for i, (image, label) in enumerate(dt_loader):
@@ -247,8 +250,7 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
     """
 
-    def __init__(self, img_dir:str="images/", label_dir:str=None, label_cols:list=None,
-                 label_dict:dict=None,
+    def __init__(self, img_dir:str="images/", label_dir:str=None, label_dict:dict=None,
                  col_img='uri', batch_size:int=8, transforms=None, shuffle=True):
         """
         Args:
@@ -269,7 +271,7 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
 
 
         from utilmy import pd_read_file
-        self.label_cols = label_cols
+        self.label_cols = list(label_dict.keys())
         dflabel     = pd_read_file(label_dir)
         dflabel     = dflabel.dropna()
         self.labels = pd_to_onehot(dflabel, label_cols)  ### One Hot encoding
@@ -352,7 +354,6 @@ class DataLoader_img(tf.keras.utils.Sequence):
 
 ##########################################################################################
 if 'utils':
-    ##################################################################################################
     def get_data_sample(batch_size, x_train, ylabel_dict, ylabel_name):   #name changed
         """ Get a data sample with batch size from dataset
         Args:
@@ -384,17 +385,23 @@ if 'utils':
         return x, y_label_list
 
 
-    def pd_get_onehot_dict(df, labels_col:list, dfref=None, ) :       #name changed
+    def pd_get_onehot_dict(df, labels_col:list, dfref=None, category_dict=None ) :       #name changed
         """
         Args:
             df (DataFrame): Actual DataFrame
             dfref (DataFrame): Reference DataFrame
             labels_col (list): List of label columns
+            category_dict:  Provide the category list
         Returns:
             dictionary: label_columns, count
         """
         if dfref is not None :
-            df       = df.merge(dfref, on = 'id', how='left')
+            for ci in labels_col:
+               df[ci] = pd.Categorical(df[ci], categories= dfref[ci].unique() )
+
+        if category_dict is not None :
+            for ci, catval in category_dict.items():
+               df[ci] = pd.Categorical(df[ci], categories= catval )
 
 
         labels_val = {}
@@ -408,7 +415,6 @@ if 'utils':
 
         print(labels_cnt)
         return labels_val, labels_cnt
-
 
 
     def pd_merge_labels_imgdir(dflabels, img_dir="*.jpg", labels_col = []) :   #name changed
@@ -461,7 +467,7 @@ if 'utils':
 
 
 
-    ##########################################################################################
+    ####################################################################################
     def _byte_feature(value):
         if not isinstance(value, (tuple, list)):
             value = [value]
