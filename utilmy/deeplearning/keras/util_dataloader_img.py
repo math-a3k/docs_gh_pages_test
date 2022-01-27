@@ -56,7 +56,7 @@ def test1():
     from tensorflow.keras.datasets import mnist
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
 
-    train_loader = DataGenerator_img(X_train, y_train)
+    train_loader = DataLoader_img(X_train, y_train)
     for i, (image, label) in enumerate(train_loader):
         print('Training : ')
         print(f'image shape : {image.shape}')
@@ -97,8 +97,8 @@ def test2(): #using predefined df and model training using model.fit()
 
 
     log('############   without Transform')
-    dt_loader = DataGenerator_img_disk(dir_img, label_dir= df, label_cols=['label'], batch_size = 32,
-                                       col_img='uri', transforms= None )
+    dt_loader = DataLoader_imgdisk(dir_img, label_dir= df, label_cols=['label'], batch_size = 32,
+                                   col_img='uri', transforms= None)
 
     for i, (image, label) in enumerate(dt_loader):
         log(f'image shape : {(image).shape}')
@@ -119,8 +119,8 @@ def test2(): #using predefined df and model training using model.fit()
       # ToFloat(max_value=255),
       Transform_sprinkle(p=0.5),
      ])
-    dt_loader = DataGenerator_img_disk(dir_img, label_dir= df, label_cols= ['label'],
-                                       batch_size = 32, col_img='uri', transforms= trans_train )
+    dt_loader = DataLoader_imgdisk(dir_img, label_dir= df, label_cols= ['label'],
+                                   batch_size = 32, col_img='uri', transforms= trans_train)
 
     for i, (image, label) in enumerate(dt_loader):
         log(f'image shape : {(image).shape}')
@@ -234,7 +234,7 @@ def transform_get_basic(pars:dict=None):
 
     
 ##########################################################################################
-class DataGenerator_img_disk(tf.keras.utils.Sequence):
+class DataLoader_imgdisk(tf.keras.utils.Sequence):
     """Custom DataGenerator using Keras Sequence for images on disk
         df_label format :
         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
@@ -320,7 +320,7 @@ class DataGenerator_img_disk(tf.keras.utils.Sequence):
 
 
 ##########################################################################################
-class DataGenerator_img(tf.keras.utils.Sequence):
+class DataLoader_img(tf.keras.utils.Sequence):
     """Custom DataGenerator using keras Sequence
     Args: x (np array): The input samples from the dataset
           y (np array): The labels from the dataset
