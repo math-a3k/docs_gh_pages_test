@@ -3,6 +3,7 @@ HELP = """
  utils keras for dataloading
 """
 import os,io, numpy as np, sys, glob, time, copy, json, pandas as pd, functools, sys
+from box import Box
 import cv2
 import tensorflow as tf
 from tensorflow import keras
@@ -11,16 +12,18 @@ from tensorflow import keras
 # from skimage import morphology
 import PIL
 from PIL import Image
+
+
 from albumentations import (
     Compose, HorizontalFlip, CLAHE, HueSaturationValue,
     RandomBrightness, RandomContrast, RandomGamma,
-    ToFloat, ShiftScaleRotate, Resize
+    ToFloat, ShiftScaleRotate, Resize,
 )
 from albumentations.core.transforms_interface import ImageOnlyTransform
 
 
 
-###################################################################################################
+#############################################################################################
 from utilmy import log, log2
 
 def help():
@@ -31,7 +34,7 @@ def help():
 
 
 
-###################################################################################################    
+############################################################################################
 def test():
   image_size =  64
   train_transforms = Compose([
@@ -49,9 +52,6 @@ def test():
   ])
   
 
-
-
-
 def test1():
     from tensorflow.keras.datasets import mnist
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
@@ -62,7 +62,6 @@ def test1():
         print(f'image shape : {image.shape}')
         print(f'label shape : {label.shape}')
         break
-
 
 
 def test2(): #using predefined df and model training using model.fit()
@@ -133,6 +132,8 @@ def test2(): #using predefined df and model training using model.fit()
 
 
 
+
+############################################################################################
 def create_random_images_ds(img_shape, num_images = 10, dirout ='random_images/', return_df = True, num_labels = 2,
                             label_cols = ['label']):
         if not os.path.exists(dirout):
@@ -179,9 +180,11 @@ def create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
 
 
                             
-###############################################################################
+##########################################################################################
 class Transform_sprinkle(ImageOnlyTransform):
     def __init__(self, num_holes=30, side_length=5, always_apply=False, p=1.0):
+        """ Remove Patches of the image, very efficient for training.
+        """
         from tf_sprinkles import Sprinkles
         super(Transform_sprinkle, self).__init__(always_apply, p)
         self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)
@@ -199,11 +202,12 @@ def transform_get_basic(pars:dict=None):
   cc.resize.p = 1
   
   """
-  cc = Box({}) if pars is None else Box(pars)
+  if pars is None :
+     cc = Box({})
+     cc.height = 64
+     cc.width  = 64
+  else: Box(pars)
 
-  cc.height = 64
-  cc.width  = 64
-  
   train_transforms = Compose([
       Resize(cc.height, cc.width, p=1),
       HorizontalFlip(p=0.5),
@@ -229,7 +233,7 @@ def transform_get_basic(pars:dict=None):
     
 
     
-#################################################################################   
+##########################################################################################
 class DataGenerator_img_disk(tf.keras.utils.Sequence):
     """Custom DataGenerator using Keras Sequence for images on disk
         df_label format :
@@ -245,13 +249,13 @@ class DataGenerator_img_disk(tf.keras.utils.Sequence):
 
     def __init__(self, img_dir:str="images/", label_dir:str=None, label_cols:list=None,
                  label_dict:dict=None,
-                 col_img='uri', batch_size=8, transforms=None, shuffle=True):
+                 col_img='uri', batch_size:int=8, transforms=None, shuffle=True):
         """
         Args:
             img_dir (Path(str)): String path to images directory
             label_dir (DataFrame): Dataset for Generator
             label_cols (list): list of cols for the label (multi label)
-            label_dict (dict):    label_name : list of values
+            label_dict (dict):    {label_name : list of values }
             split (str, optional): split for train or test. Defaults to 'train'.
             batch_size (int, optional): batch_size for each batch. Defaults to 8.
             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
@@ -346,7 +350,7 @@ class DataGenerator_img(tf.keras.utils.Sequence):
 
 
 
-###################################################################################################
+##########################################################################################
 if 'utils':
     ##################################################################################################
     def get_data_sample(batch_size, x_train, ylabel_dict, ylabel_name):   #name changed
@@ -500,7 +504,7 @@ if 'utils':
 
 
 
-    
+
 
 
 
