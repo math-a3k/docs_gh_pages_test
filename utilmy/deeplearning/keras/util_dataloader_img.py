@@ -90,7 +90,7 @@ def test2(): #using predefined df and model training using model.fit()
     num_images    = 256
     num_labels    = 2
 
-    df = create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, dirout= dir_img_path)
+    df = test_create_random_images_ds((28, 28, 3), num_images = num_images, num_labels = num_labels, dirout= dir_img_path)
     #df = create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
     #                              dirout =folder_name,  n_class_perlabel=2,  cols_labels = [ 'label', ] )
     df.to_csv(label_file, index=False)
@@ -137,8 +137,8 @@ def test2(): #using predefined df and model training using model.fit()
 
 
 ############################################################################################
-def create_random_images_ds(img_shape, num_images = 10, dirout ='random_images/', return_df = True, num_labels = 2,
-                            label_cols = ['label']):
+def test_create_random_images_ds(img_shape, num_images = 10, dirout ='random_images/', return_df = True, num_labels = 2,
+                                 label_cols = ['label']):
         if not os.path.exists(dirout):
             os.mkdir(dirout)
         for n in range(num_images):
@@ -158,10 +158,10 @@ def create_random_images_ds(img_shape, num_images = 10, dirout ='random_images/'
             return df
 
 
-def create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
-                            dirout ='random_images/',  n_class_perlabel=7,
-                             cols_labels = [ 'gender', 'color', 'size'],
-                             col_img = 'uri' ):
+def test_create_random_images_ds2(img_shape=(10, 10, 2), num_images = 10,
+                                  dirout ='random_images/', n_class_perlabel=7,
+                                  cols_labels = [ 'gender', 'color', 'size'],
+                                  col_img = 'uri'):
     """ Image + labels into Folder + csv files.
         Multiple label:
     """
@@ -468,19 +468,19 @@ if 'utils':
 
 
     ####################################################################################
-    def _byte_feature(value):
+    def tf_byte_feature(value):
         if not isinstance(value, (tuple, list)):
             value = [value]
         return tf.train.Feature(bytes_list=tf.train.BytesList(value=value))
 
 
-    def _int64_feature(value):
+    def tf_int64_feature(value):
         if not isinstance(value, (tuple, list)):
             value = [value]
         return tf.train.Feature(int64_list=tf.train.Int64List(value=value))
 
 
-    def _float_feature(value):
+    def tf_float_feature(value):
         if not isinstance(value, (tuple, list)):
             value = [value]
         return tf.train.Feature(float_list=tf.train.FloatList(value=value))
@@ -501,8 +501,8 @@ if 'utils':
                 batch_embedding = extractor(images, training=False).numpy().tolist()
                 for embedding in batch_embedding:
                     example = tf.train.Example(features=tf.train.Features(feature={
-                        'id': _byte_feature(str(id_cnt).encode('utf-8')),
-                        'embedding': _float_feature(embedding),
+                        'id': tf_byte_feature(str(id_cnt).encode('utf-8')),
+                        'embedding': tf_float_feature(embedding),
                     }))
                     writer.write(example.SerializeToString())
                     id_cnt += 1
