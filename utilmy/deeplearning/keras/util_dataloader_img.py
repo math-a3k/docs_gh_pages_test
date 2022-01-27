@@ -271,22 +271,23 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
 
 
         from utilmy import pd_read_file
-        self.label_cols = list(label_dict.keys())
         dflabel     = pd_read_file(label_dir)
         dflabel     = dflabel.dropna()
-        self.labels = pd_to_onehot(dflabel, label_cols)  ### One Hot encoding
+        self.label_cols = list(label_dict.keys())
+        self.label_df   = pd_to_onehot(dflabel, labels_dict= label_dict)  ### One Hot encoding
+        self.label_dict = label_dict
 
-        assert col_img in self.labels.columns
+        assert col_img in self.label_df.columns
 
 
     def on_epoch_end(self):
         if self.shuffle:
             np.random.seed(12)
-            self.labels = self.labels.sample(frac=1).reset_index(drop=True)
+            self.label_df = self.label_df.sample(frac=1).reset_index(drop=True)
             # np.random.shuffle(self.labels.reset_index(drop=True))
 
     def __len__(self):
-        return int(np.ceil(len(self.labels) / float(self.batch_size)))
+        return int(np.ceil(len(self.label_df) / float(self.batch_size)))
 
     def __getitem__(self, idx):
         # for X,y in mydatagen :
@@ -296,7 +297,7 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
 
     def __get_data(self, idx, batch=8):
         # Create batch targets
-        df_batch    = self.labels[idx * batch:(idx + 1) * self.batch_size]
+        df_batch    = self.label_df[idx * batch:(idx + 1) * self.batch_size]
         batch_x, batch_y = [], []   #  list of output heads
 
         ##### Xinput
@@ -448,7 +449,7 @@ if 'utils':
         return df
 
 
-    def pd_to_onehot(dflabels, labels_col:list=None, labels_dict:dict=None) :   #name changed
+    def pd_to_onehot(dflabels,  labels_dict:dict=None) :   #name changed
         """One Hot encode label_cols for predefined df
         #    id, uri, cat1, cat2, .... , cat1_onehot
         Args:
@@ -456,6 +457,11 @@ if 'utils':
             labels_col (list): Columns to perform One Hot encoding on. Defaults to []
         Returns: DataFrame: One Hot encoded DataFrame
         """
+        if labels_dict is not None :
+            for ci, catval in labels_dict.items():
+               dflabels[ci] = pd.Categorical(dflabels[ci], categories= catval )
+        labels_col = labels_dict.keys()
+
         for ci in labels_col :
           dfi_1hot           = pd.get_dummies(dflabels, columns=[ci])  ### OneHot
           dfi_1hot           = dfi_1hot[[ t for t in dfi_1hot.columns if ci in t   ]]  ## keep only OneHot
