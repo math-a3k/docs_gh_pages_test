@@ -1,0 +1,74 @@
+Mount Google Drive on headless CentOS 7 server
+Aug 07, 2018  Tips N Tricks, Linux   
+I have been using google-drive-ocamlfuse for quite some time to backup my Virtualmin Virtual Servers, but finding any help setting this up for CentOS 7 in one place as far as i can see doesn't exist.
+
+So I have taken information from 2 seperate blogs (i have linked to these below) and examples from what i had to do to get it up and running.
+
+First thing is first... We need to install it from source.
+
+You need OPAM to be installed this is pretty easy to do, just type the following commands:
+
+$ sudo yum install ocaml ocaml-camlp4-devel ocaml-ocamldoc
+$ git clone https://github.com/OCamlPro/opam.git 
+$ cd opam 
+$ ./configure 
+$ make 
+$ sudo make install
+$ sudo yum install m4 fuse fuse-devel libcurl-devel libsqlite3x-devel zlib-devel
+$ opam init 
+$ opam update 
+$ opam install google-drive-ocamlfuse
+After successful build, the google-drive-ocamlfuse binary will be found in ~/.opam/system/bin. Add this to the end of your PATH environment as below:
+
+$ nano ~/.bashrc
+PATH=$PATH:$HOME/.opam/system/bin
+export PATH
+$ source ~/.bashrc
+Once installed you need to authorise it with your account, you do this as follows:
+
+Head over to https://console.developers.google.com/project and create a new project for access to Google Drive.
+
+First click on Create Project and then enter a Project Name anything will do here.
+
+Once it's created you should be able to manage it, if not just click on the name you created.
+
+Then click on the three lines in the top right and select API Manager, on this page select Drive API and then Enable
+
+You will then get an error saying you need to create credentials, this is fine just click the Go to Credentials button.
+
+On the next page, it's hard to spot at first but click where it says client ID (it's the 3rd line down), then click Configure consent screen.
+
+On this page just fill the form in how ever you want, it doesn't affect what we are doing here (Minimum you need to fill in is Product name shown to users).
+
+Next select Web application, and again give it any name then click Create.
+
+You will now see your client ID and client secret, keep these handy for the next step.
+
+Head back over to your SSH window and type the following, using the clientID and client secret you generated previously:
+
+$ google-drive-ocamlfuse -headless -id YOUR_CLIENT_ID -secret YOUR_SECRET
+An url will appear in the window, just copy and paste the link into your web browser follow the prompts and then copy and paste the code shown back into the console.
+
+Once entered it should give the following response:
+
+Access token retrieved correctly.
+
+After that your Google Drive access should be ok!
+
+The next quick step is to mount the folder, choose where you want it and create the folder as follows:
+
+mkdir YOUR FOLDER PATH
+then mount it:
+
+google-drive-ocamlfuse YOUR FOLDER PATH
+if you need to unmount it for any reason just use the following:
+
+fusermount -u YOUR FOLDER PATH
+If you want to use a folder which is not empty just add the -o nonempty mount option as follows:
+
+$ google-drive-ocamlfuse YOUR FOLDER PATH -o nonempty
+I used the sites below to help with this.
+
+http://xmodulo.com/mount-google-drive-linux.html
+
+https://www.devops.zone/ubuntu-howtos/mount-google-drive-on-your-server-using-ocamlfuse/
