@@ -27,7 +27,7 @@
      Please check here:
    https://github.com/arita37/myutil/issues/144
    
-    
+
 
 
 ## Usage examples
@@ -41,36 +41,10 @@
     https://colab.research.google.com/drive/1NYQZrfAPqbuLCt9yhVROLMRJM-RrFYWr#scrollTo=2zMKv6MXOJJu
 
 
-
-
-
-
-## Install for dev
-    https://github.com/arita37/myutil/issues/144 
-
-
-
-
-## Variable  naming rules/Patterns
-
- ```
-    df    --->   pandas dataframe
-    
-    def  pd_XXXXX  : main input is dataframe
-    
-    def  np_XXXXX  : main input is numpy
-   
-    def log  :    used for print/logging
-    
-    
-    
- ```
- 
  
  ## Datasets available :
  
  https://github.com/arita37/zdata/blob/main/README.md
- 
  
  
  
