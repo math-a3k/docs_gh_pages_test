@@ -4,6 +4,17 @@
 
 def pandas_to_csr(Xdf,  ydf, hashsize=5000):
     """
+    
+        genre_list1 : Consider as list of music genre_id, listened by one person
+
+            one genre_id : 234234/234234/42342 : Hiearchy of sub-genre
+
+            Goal is to predict which music genre that will listen
+
+            Using a sparse model
+
+
+    
         Dataframes
         Xdf:
         userid :  Int64
@@ -39,6 +50,8 @@ def pandas_to_csr(Xdf,  ydf, hashsize=5000):
     
     
     return X, y
+
+
 
 
 
