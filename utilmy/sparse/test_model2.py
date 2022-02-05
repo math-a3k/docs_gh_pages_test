@@ -3,6 +3,8 @@
 only Linux
 Install
 
+https://github.com/amzn/pecos
+
 conda create env -n test   python=3.7.11
 conda install   *.tar.gz
 
