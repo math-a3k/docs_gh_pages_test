@@ -1,30 +1,44 @@
 
 ##### Input Data
 
-Dataframes
-Xdf:
-userid :  Int64
-genre_list1  :  string:    "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
-genre_list2  :  string :   "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
 
+def pandas_to_csr(Xdf,  ydf, hashsize=5000):
+    """
+        Dataframes
+        Xdf:
+        userid :  Int64
+        genre_list1  :  string:    "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
+        genre_list2  :  string :   "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
+
+
+        Ydf:
+        genre_list3  :  string:    "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
+
+
+        To transform into :
+
+        X sparse of dimension:
+              ncol: 5000 (hash size) *   (nlist1 + nlist2) 
+              nrows:  n_userid
+
+
+        y sparse of dimension:
+              ncol: 5000 (hash size) *   (nlist3) 
+              nrows:  n_userid
+
+
+        ll = "4343/4343/4545".split("/")
+        for t in ll :
+           colid = hash(t) % 5000 ---> into 0---5000 bucket (ie one hot).
     
-Ydf:
-genre_list3  :  string:    "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
-
-
-To transform into :
-
-X sparse of dimension:
-      ncol: 5000 (hash size) *   (nlist1 + nlist2) 
-      nrows:  n_userid
-      
-      
-y sparse of dimension:
-      ncol: 5000 (hash size) *   (nlist3) 
-      nrows:  n_userid
-      
-
-
+    
+    """
+    
+    
+    
+    
+    
+    return X, y
 
 
 
