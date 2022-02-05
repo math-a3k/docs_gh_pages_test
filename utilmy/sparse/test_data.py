@@ -42,6 +42,8 @@ def pandas_to_csr(Xdf,  ydf, hashsize=5000):
         for t in ll :
            colid = hash(t) % 5000 ---> into 0---5000 bucket (ie one hot).
     
+           genrehash = hash("genreid")  % 5000      (there are 100,000 genres, too big, so hash into 5000 buckets)  
+    
     
     """
     
