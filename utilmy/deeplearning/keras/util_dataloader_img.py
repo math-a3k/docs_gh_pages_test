@@ -2,31 +2,32 @@
 HELP = """
  utils keras for dataloading
 """
-import glob
-import os
-from pathlib import Path
+from albumentations.core.composition import Compose
+from numpy import ndarray
+from pandas.core.frame import DataFrame
 from typing import List, Optional, Tuple
+
+import os, numpy as np, glob, pandas as pd
+from box import Box
+import cv2
+import tensorflow as tf
+from tensorflow import keras
+from pathlib import Path
 
 # import tifffile.tifffile
 # from skimage import morphology
 import PIL
-import cv2
-import numpy as np
-import pandas as pd
-import tensorflow as tf
 from PIL import Image
+
 from albumentations import (
     Compose, HorizontalFlip, HueSaturationValue,
     RandomBrightness, RandomContrast, RandomGamma,
     ToFloat, ShiftScaleRotate, Resize,
 )
 from albumentations.core.transforms_interface import ImageOnlyTransform
-from box import Box
-from numpy import ndarray
-from pandas.core.frame import DataFrame
 
 #############################################################################################
-from utilmy import log
+from utilmy import log, log2
 
 
 def help():
@@ -66,6 +67,7 @@ def test1() -> None:
 
 
 def test2() -> None:  # using predefined df and model training using model.fit()
+    from PIL import Image
     from pathlib import Path
     from tensorflow import keras
     from tensorflow.keras import layers
@@ -83,12 +85,12 @@ def test2() -> None:  # using predefined df and model training using model.fit()
         return model
 
     #####################################################
-    label_file    = 'df.csv'
+    label_file = 'df.csv'
 
-    dir_img_path  = 'random_images/'
-    dir_img       = Path(dir_img_path).as_posix()
-    num_images    = 256
-    num_labels    = 2
+    dir_img_path = 'random_images/'
+    dir_img = Path(dir_img_path).as_posix()
+    num_images = 256
+    num_labels = 2
 
     df = test_create_random_images_ds((28, 28, 3), num_images=num_images, num_labels=num_labels, dirout=dir_img_path)
     # df = create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
@@ -133,9 +135,9 @@ def test2() -> None:  # using predefined df and model training using model.fit()
 
 
 ############################################################################################
-def test_create_random_images_ds(img_shape: Tuple[int, int, int], num_images: int = 10, dirout: str = 'random_images/',
-                                 return_df: bool = True, num_labels: int = 2,
-                                 label_cols: List[str] = ['label']) -> DataFrame:
+def test_create_random_images_ds(img_shape: Tuple[int, int, int], num_images: int=10, dirout: str='random_images/',
+                                 return_df: bool=True, num_labels: int=2,
+                                 label_cols: List[str]=['label']) -> DataFrame:
     if not os.path.exists(dirout):
         os.mkdir(dirout)
     for n in range(num_images):
@@ -180,7 +182,7 @@ def test_create_random_images_ds2(img_shape=(10, 10, 2), num_images=10,
 
 ##########################################################################################
 class Transform_sprinkle(ImageOnlyTransform):
-    def __init__(self, num_holes: int = 30, side_length: int = 5, always_apply: bool = False, p: float = 1.0) -> None:
+    def __init__(self, num_holes: int=30, side_length: int=5, always_apply: bool=False, p: float=1.0) -> None:
         """ Remove Patches of the image, very efficient for training.
         """
         from tf_sprinkles import Sprinkles
@@ -245,8 +247,7 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
     """
 
     def __init__(self, img_dir: str = "images/", label_dir: str = None, label_dict: dict = None,
-                 col_img: str = 'uri', batch_size: int = 8, transforms: Optional[Compose] = None,
-                 shuffle: bool = True) -> None:
+                 col_img: str='uri', batch_size: int = 8, transforms: Optional[Compose]=None, shuffle: bool=True) -> None:
         """
         Args:
             img_dir (Path(str)): String path to images directory
@@ -318,7 +319,7 @@ class DataLoader_img(tf.keras.utils.Sequence):
           augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
     """
 
-    def __init__(self, x: ndarray, y: ndarray, batch_size: int = 32, transform: None = None) -> None:
+    def __init__(self, x: ndarray, y: ndarray, batch_size: int=32, transform: None=None) -> None:
         self.x = x
         self.y = y
         self.batch_size = batch_size
@@ -347,11 +348,9 @@ if 'utils':
             x_train (list): Inputs from the dataset
             ylabel_dict (list): True labels for the dataset
             ylabel_name(list): Samples to select from these columns
-
         Returns:
             x (numpy array): Selected samples of size batch_size
             y_label_list (list): List of labels from selected samples
-
         """
         for k, y0_list in ylabel_dict:
             break
@@ -513,12 +512,10 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
         self.batch_size = batch_size
         self.transforms = transforms
         self.shuffle = shuffle
-
     def _load_data(self, label_path):
         df = pd.read_csv(label_path, error_bad_lines=False, warn_bad_lines=False)
         keys = ['id'] + list(self.class_dict.keys())
         df = df[keys]
-
         # Get image ids
         df = df.dropna()
         image_ids = df['id'].tolist()
@@ -528,7 +525,6 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
             categories = pd.get_dummies(df[col]).values
             labels.append(categories)
         return image_ids, labels
-
     def on_epoch_end(self):
         if self.shuffle:
             np.random.seed(12)
@@ -536,10 +532,8 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
             np.random.shuffle(indices)
             self.image_ids = self.image_ids[indices]
             self.labels = [label[indices] for label in self.labels]
-
     def __len__(self):
         return int(np.ceil(len(self.image_ids) / float(self.batch_size)))
-
     def __getitem__(self, idx):
         batch_img_ids = self.image_ids[idx * self.batch_size:(idx + 1) * self.batch_size]
         batch_x = []
@@ -547,11 +541,9 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
             # Load image
             image = np.array(Image.open(os.path.join(self.image_dir, '%d.jpg' % image_id)).convert('RGB'))
             batch_x.append(image)
-
         batch_y = []
         for y_head in self.labels:
             batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size, :])
-
         if self.transforms is not None:
             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
         return (idx, batch_x, *batch_y)
