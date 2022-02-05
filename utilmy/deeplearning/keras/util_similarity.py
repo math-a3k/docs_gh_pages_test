@@ -1,17 +1,13 @@
-HELP = """
-
+HELP="""
 Similarity between tensors
-
 """
-from typing import Tuple, Union, Iterable
-
 import numpy as np
 import tensorflow as tf
-from tensorflow.python.framework.ops import EagerTensor
 
 #################################################################################################
 from utilmy.utilmy import log
-
+from typing import Tuple, Union, Iterable
+from tensorflow.python.framework.ops import EagerTensor, Tensor
 
 def help():
     from utilmy import help_create
@@ -62,11 +58,14 @@ def test_tf_cdist() -> None:
     log('tf_cdist test completed successfully.')
 
 
+
+
+
 ######################################################################################
-def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str = 'euclidean') -> EagerTensor:
-    """ 
+def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str ='euclidean') -> EagerTensor:
+    """
     Computes `metric` distance between tensors.\n
-    Parameters: 
+    Parameters:
     left, right: tensor or array-like, metric: 'euclidean' or 'cosine'
     """
     #### distance between tensor
@@ -80,7 +79,7 @@ def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str = 'eucli
 
 
 def tf_cdist_euclidean(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
-    """ 
+    """
     Computes euclidean distance between tensors.\n
     Parameters:
     left, right: tensor or array-like
@@ -95,9 +94,8 @@ def tf_cdist_euclidean(left: Iterable[float], right: Iterable[float]) -> tf.Tens
     distance                          = tf.cast(distance, tf.float32)
     return distance
 
-
 def tf_cdist_cos(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
-    """ 
+    """
     Computes cosine distance between tensors.\n
     Parameters:
     left, right: tensor or array-like
@@ -111,11 +109,12 @@ def tf_cdist_cos(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
     return distance
 
 
+
 def __cast_left_and_right_to_tensors(left: EagerTensor, right: EagerTensor) -> Tuple[EagerTensor, EagerTensor]:
     """Cast left, right into tensors.\n
     Parameters:
     left, right: tensor or array-like"""
-    left = tf.cast(tf.convert_to_tensor(left), dtype=tf.float32)
+    left  = tf.cast(tf.convert_to_tensor(left), dtype=tf.float32)
     right = tf.cast(tf.convert_to_tensor(right), dtype=tf.float32)
     return left, right
 
@@ -124,7 +123,7 @@ def __get_rows_counts(left: EagerTensor, right: EagerTensor) -> Tuple[EagerTenso
     """ Count rows for left, right.\n
     Parameters:
     left, right: tensor"""
-    count_left = tf.shape(left)[0]
+    count_left  = tf.shape(left)[0]
     count_right = tf.shape(right)[0]
     return count_left, count_right
 
