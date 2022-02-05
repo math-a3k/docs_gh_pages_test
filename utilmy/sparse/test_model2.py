@@ -14,9 +14,37 @@ pip install readline==7.0  sqlite==3.33.0
 
 
 
+5
+
+
+##### Input Data
+
+Dataframes
+Xdf:
+userid :  Int64
+genre_list1  :  string:    "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
+genre_list2  :  string :   "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
+
+    
+Ydf:
+genre_list3  :  string:    "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545,4343/4343/4545"
+
+
+To transform into :
+
+X sparse of dimension:
+      ncol: 5000 (hash size) *   (nlist1 + nlist2) 
+      nrows:  n_userid
+      
+      
+y sparse of dimension:
+      ncol: 5000 (hash size) *   (nlist3) 
+      nrows:  n_userid
+      
+
+
 
 """
-
 
 
 import scipy, numpy as np
