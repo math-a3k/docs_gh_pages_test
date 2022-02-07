@@ -26,7 +26,9 @@ from albumentations import (
 )
 from albumentations.core.transforms_interface import ImageOnlyTransform
 
-#############################################################################################
+
+############################################################################################# 
+
 from utilmy import log, log2
 
 
@@ -233,21 +235,52 @@ def transform_get_basic(pars: dict = None):
 
 
 ##########################################################################################
+def pd_sample_strat(df, col, n):
+  ### Stratified sampling
+  n2   = min(n, df[col].value_counts().min())
+  df_ = df.groupby(col).apply(lambda x: x.sample(n = n2, replace=True))
+  df_.index = df_.index.droplevel(0)
+  return df_
+
+def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
+    ### Return cadinat=lity
+    clist = {}
+    for ci in df.columns :
+        ctype   = df[ci].dtype
+        if nsample == -1 :
+            nunique = len(df[ci].unique())
+        else :
+            nunique = len(df.sample(n= nsample, replace=True)[ci].unique())
+
+        if 'float' in  str(ctype) and ci not in cols_exclude and nunique > 5 :
+           clist[ci] = 0
+        else :
+           clist[ci] = nunique
+
+    return clist
+
+
+def pd_label_normalize_freq(df, cols:list)  -> pd.DataFrame : 
+   """
+      Resample each class
+
+      
+      for ci in cols:
+          nuniques[ci] =  df[ci].nunique()
+
+     
+   
+   """
+   pass
+
+
 class DataLoader_imgdisk(tf.keras.utils.Sequence):
     """Custom DataGenerator using Keras Sequence for images on disk
         df_label format :
         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-        Args:
-            img_dir (Path(str)): String path to images directory
-            label_dir (DataFrame): Dataset for Generator
-            label_cols (list): list of cols for the label (multi label)
-            split (str, optional): split for train or test. Defaults to 'train'.
-            batch_size (int, optional): batch_size for each batch. Defaults to 8.
-            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
     """
-
     def __init__(self, img_dir: str = "images/", label_dir: str = None, label_dict: dict = None,
-                 col_img: str='uri', batch_size: int = 8, transforms: Optional[Compose]=None, shuffle: bool=True) -> None:
+                 col_img: str='uri', batch_size: int = 8, transforms=None, shuffle: bool=True, label_imbalance=True) -> None:
         """
         Args:
             img_dir (Path(str)): String path to images directory
@@ -266,8 +299,13 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
         self.col_img = col_img
 
         from utilmy import pd_read_file
-        dflabel = pd_read_file(label_dir)
-        dflabel = dflabel.dropna()
+        dflabel     = pd_read_file(label_dir)
+        dflabel     = dflabel.dropna()
+
+        ### Imablance label 
+        #if label_imbalance:
+        #    dflabel = pd_label_normalize_freq(dflabel)
+
         self.label_cols = list(label_dict.keys())
         self.label_df = pd_to_onehot(dflabel, labels_dict=label_dict)  ### One Hot encoding
         self.label_dict = label_dict
