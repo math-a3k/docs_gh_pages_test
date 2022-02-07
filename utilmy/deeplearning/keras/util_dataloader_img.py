@@ -157,10 +157,10 @@ def test_create_random_images_ds(img_shape: Tuple[int, int, int], num_images: in
         return df
 
 
-def test_create_random_images_ds2(img_shape=(10, 10, 2), num_images=10,
-                                  dirout='random_images/', n_class_perlabel=7,
-                                  cols_labels=['gender', 'color', 'size'],
-                                  col_img='uri'):
+def test_create_random_images_ds2(img_shape: Tuple[int, int, int]=(10, 10, 2), num_images: int=10,
+                                  dirout:str='random_images/', n_class_perlabel: int=7,
+                                  cols_labels: List[str, str, str]=['gender', 'color', 'size'],
+                                  col_img: str='uri') -> DataFrame:
     """ Image + labels into Folder + csv files.
         Multiple label:
     """
