@@ -152,3 +152,6 @@ def date_generate(start='2018-01-01', ndays=100) :
 if __name__ == "__main__":
     import fire
     fire.Fire()
+
+
+
