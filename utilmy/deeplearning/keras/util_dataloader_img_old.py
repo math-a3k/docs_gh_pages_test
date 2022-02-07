@@ -31,7 +31,7 @@ def help():
 
 
 ###################################################################################################    
-def test():    
+def test() -> None:    
   #image_size = 64
   train_augments = Compose([
       #Resize(image_size, image_size, p=1),
@@ -298,8 +298,8 @@ class DataGenerator_img_disk(Sequence):
             transforms (str, optional):  type of transformations to perform on images. Defaults to None.
     """
         
-    def __init__(self, img_dir, label_path, class_list,
-                 split='train', batch_size=8, transforms=None):
+    def __init__(self, img_dir: str, label_path: DataFrame, class_list: List[str],
+                 split: str='train', batch_size: int=8, transforms: None=None):
         self.image_dir = img_dir
         self.class_list = class_list
         self.batch_size = batch_size
@@ -345,8 +345,11 @@ class DataGenerator_img_disk(Sequence):
                             
 ###############################################################################
 from albumentations.core.transforms_interface import ImageOnlyTransform
+from pandas.core.frame import DataFrame
+from typing import List
+
 class SprinklesTransform(ImageOnlyTransform):
-    def __init__(self, num_holes=30, side_length=5, always_apply=False, p=1.0):
+    def __init__(self, num_holes: int=30, side_length: int=5, always_apply: bool=False, p: float=1.0) -> None:
         from tf_sprinkles import Sprinkles
         super(SprinklesTransform, self).__init__(always_apply, p)
         self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)

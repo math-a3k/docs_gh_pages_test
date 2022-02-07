@@ -18,6 +18,8 @@ from box import Box
 
 ################################################################################################
 from utilmy.utilmy import log, log2
+from tensorflow.python.keras.engine.functional import Functional
+from typing import List, Optional
 
 def help():
     """
@@ -29,14 +31,14 @@ def help():
 
 
 ################################################################################################
-def test_all():
+def test_all() -> None:
     """
     Summary: test the Resnet network layer
     """
     test_resnetlayer()
 
 
-def test_resnetlayer():
+def test_resnetlayer() -> None:
     """ basic implementation of the Residual block in a model architecture
     """
     model = Sequential(
@@ -52,26 +54,26 @@ def test_resnetlayer():
     log(model.summary())
     
     
-def test_classifier_multihead():
+def test_classifier_multihead() -> None:
    label_name_ncount = { 'color': 5, 'gender': 2, 'size': 7}
-   clf = make_classifier_multihead(label_name_ncount:dict=None, 
-                              layers_dim=[128, 1024], tag='1')
+   clf = make_classifier_multihead(label_name_ncount=label_name_ncount,
+                                   layers_dim=[128, 1024], tag='1')
    log(clf.summary())
  
  
 def test_DFC_VAE():
  
-   log(m.summary()
+   log(m.summary())
 
 
 def test_encoder():
        
-   log(m.summary()
+   log(m.summary())
        
        
 def test_decoder():
        
-   log(m.summary()
+   log(m.summary())
        
        
        
@@ -93,7 +95,7 @@ def dataloader_get_mnist():
        
 ################################################################################################
 def make_classifier_multihead(label_name_ncount:dict=None, 
-                              layers_dim=[128, 1024], tag='1', latent_dim=512):
+                              layers_dim: List[int]=[128, 1024], tag: str='1', latent_dim: int=512) -> Functional:
     """ multi Label output head 
         Vector  --> Dense --> Multiple Softmax Classifier  ( 1 label per class)    
         label_name_ncount:   { 'gender' :  2       #  'male', 'female' 
@@ -173,7 +175,7 @@ class CNNBlock(Layer):
         -> output of the convolutional layer after passing through BatchNormalization and activation
     """
 
-    def __init__(self, filters, kernels, strides=1, padding='valid', activation=None):
+    def __init__(self, filters: int, kernels: int, strides: int=1, padding: str='valid', activation: Optional[str]=None) -> None:
         super(CNNBlock, self).__init__()
         self.cnn = Conv2D(filters, kernels, strides=strides, padding=padding)
         self.bn = BatchNormalization()
@@ -197,7 +199,7 @@ class ResBlock(Layer):
         Returns the output of the convolutions after adding it to the input of the block through a skip connection
     """
 
-    def __init__(self, filters, kernels):
+    def __init__(self, filters: List[int], kernels: List[int]) -> None:
         try:
             assert (type(kernels) == list) and (type(filters) == list)
             assert (len(kernels) == 2) and (len(filters) == 2)

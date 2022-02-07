@@ -1,14 +1,13 @@
 HELP="""
-
 Similarity between tensors
-
 """
-import os, sys, pandas as pd, numpy as np
+import numpy as np
 import tensorflow as tf
 
 #################################################################################################
-from utilmy.utilmy import log, log2
-from typing import Iterable
+from utilmy.utilmy import log
+from typing import Tuple, Union, Iterable
+from tensorflow.python.framework.ops import EagerTensor, Tensor
 
 def help():
     from utilmy import help_create
@@ -17,11 +16,11 @@ def help():
 
 
 ######################################################################################
-def test_all():
+def test_all() -> None:
     test_tf_cdist()
 
 
-def test_tf_cdist():
+def test_tf_cdist() -> None:
     """
     Tests all similarity functions.
     """
@@ -63,10 +62,10 @@ def test_tf_cdist():
 
 
 ######################################################################################
-def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str ='euclidean'):
-    """ 
+def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str ='euclidean') -> EagerTensor:
+    """
     Computes `metric` distance between tensors.\n
-    Parameters: 
+    Parameters:
     left, right: tensor or array-like, metric: 'euclidean' or 'cosine'
     """
     #### distance between tensor
@@ -80,7 +79,7 @@ def tf_cdist(left: Iterable[float], right: Iterable[float], metric: str ='euclid
 
 
 def tf_cdist_euclidean(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
-    """ 
+    """
     Computes euclidean distance between tensors.\n
     Parameters:
     left, right: tensor or array-like
@@ -96,7 +95,7 @@ def tf_cdist_euclidean(left: Iterable[float], right: Iterable[float]) -> tf.Tens
     return distance
 
 def tf_cdist_cos(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
-    """ 
+    """
     Computes cosine distance between tensors.\n
     Parameters:
     left, right: tensor or array-like
@@ -111,7 +110,7 @@ def tf_cdist_cos(left: Iterable[float], right: Iterable[float]) -> tf.Tensor:
 
 
 
-def __cast_left_and_right_to_tensors(left, right):
+def __cast_left_and_right_to_tensors(left: EagerTensor, right: EagerTensor) -> Tuple[EagerTensor, EagerTensor]:
     """Cast left, right into tensors.\n
     Parameters:
     left, right: tensor or array-like"""
@@ -120,7 +119,7 @@ def __cast_left_and_right_to_tensors(left, right):
     return left, right
 
 
-def __get_rows_counts(left, right):
+def __get_rows_counts(left: EagerTensor, right: EagerTensor) -> Tuple[EagerTensor, EagerTensor]:
     """ Count rows for left, right.\n
     Parameters:
     left, right: tensor"""
@@ -129,7 +128,8 @@ def __get_rows_counts(left, right):
     return count_left, count_right
 
 
-def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
+def __get_tensor_sqr(tensor: EagerTensor, reshape_shape: Tuple[int, int],
+                     tile_shape: Union[Tuple[EagerTensor, int], Tuple[int, EagerTensor]]) -> EagerTensor:
     """ Calculate the element-wise square of a tensor.\n
     Parameters:
     left, right: tensor"""
@@ -140,7 +140,7 @@ def __get_tensor_sqr(tensor, reshape_shape, tile_shape):
     return sqr
 
 
-def __get_tensor_reshaped_norm(tensor, reshape_shape):
+def __get_tensor_reshaped_norm(tensor: EagerTensor, reshape_shape: Tuple[int, int]) -> EagerTensor:
     """ Normalize and reshape the tensor.\n
     Parameters:
     tensor, reshape_shape: int"""

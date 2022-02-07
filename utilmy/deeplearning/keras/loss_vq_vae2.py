@@ -14,6 +14,11 @@ from tensorflow.keras import layers
 import tensorflow_probability as tfp
 import tensorflow as tf
 from keras.layers.merge import concatenate
+from keras.engine.functional import Functional
+from keras.metrics import Mean
+from numpy import float64
+from tensorflow.python.framework.ops import Tensor
+from typing import Dict, List
 
 
 
@@ -172,7 +177,7 @@ class Quantizer(layers.Layer):
     beta (float):
     """
 
-    def __init__(self, number_of_embeddings, embedding_dimensions, beta=0.25, **kwargs):
+    def __init__(self, number_of_embeddings: int, embedding_dimensions: int, beta: float=0.25, **kwargs) -> None:
         """
         Summary: The constructor for Quantizer class.
   
@@ -200,7 +205,7 @@ class Quantizer(layers.Layer):
             name="embeddings_for_vq_vae",
         )
 
-    def call(self, x):
+    def call(self, x: Tensor):
         """
         Summary: The function to quantize the tensor
   
@@ -253,7 +258,7 @@ class Quantizer(layers.Layer):
         encoding_indices = tf.argmin(distances, axis=1)
         return encoding_indices
 
-def encoder_Base(latent_dim):
+def encoder_Base(latent_dim: int) -> Functional:
     """
     Summary: Function to encode base
 
@@ -271,7 +276,7 @@ def encoder_Base(latent_dim):
     return keras.Model(encoder_A_inputs, encoder_A_outputs, name="encoder")
 
 
-def get_vqvae_layer_hierarchical(latent_dim=16, num_embeddings=64):
+def get_vqvae_layer_hierarchical(latent_dim: int=16, num_embeddings: int=64) -> Functional:
     """
     Summary: Function to get vqvae hierarchical layer
 
@@ -350,7 +355,8 @@ class VQ_VAE_Trainer_2(keras.models.Model):
     number_of_embeddings (int):
     """
 
-    def __init__(self, train_variance, latent_dim=16, number_of_embeddings=128, **kwargs):
+    def __init__(self, train_variance: float64, latent_dim: int=16, number_of_embeddings: int=128, **kwargs
+    ) -> None:
         """
         Summary: The constructor for VQ_VAE_Trainer_2 class.
   
@@ -374,7 +380,7 @@ class VQ_VAE_Trainer_2(keras.models.Model):
         self.vq_loss_tracker = keras.metrics.Mean(name="vq_loss")
 
     @property
-    def metrics(self):
+    def metrics(self) -> List[Mean]:
         """
         Summary: Defines the output metrics
 
@@ -389,7 +395,7 @@ class VQ_VAE_Trainer_2(keras.models.Model):
             self.vq_loss_tracker,
         ]
 
-    def train_step(self, x):
+    def train_step(self, x: Tensor) -> Dict[str, Tensor]:
         """
         Summary: Defines the train steps of model
 
