@@ -6,18 +6,18 @@ from albumentations.core.composition import Compose
 from numpy import ndarray
 from pandas.core.frame import DataFrame
 from typing import List, Optional, Tuple
+
 import os, numpy as np, glob, pandas as pd
 from box import Box
 import cv2
-from pathlib import Path
 import tensorflow as tf
 from tensorflow import keras
+from pathlib import Path
 
 # import tifffile.tifffile
 # from skimage import morphology
 import PIL
 from PIL import Image
-
 
 from albumentations import (
     Compose, HorizontalFlip, HueSaturationValue,
@@ -30,6 +30,7 @@ from albumentations.core.transforms_interface import ImageOnlyTransform
 
 #############################################################################################
 from utilmy import log, log2
+
 
 def help():
     from utilmy import help_create
@@ -103,7 +104,6 @@ def test2() -> None:  # using predefined df and model training using model.fit()
     label_cols = ['label']
     label_dict = {ci: df[ci].unique() for ci in label_cols}
 
-
     log('############   without Transform')
     dt_loader = DataLoader_imgdisk(dir_img, label_dir=df, label_dict=label_dict,
                                    col_img='uri', batch_size=32, transforms=None)
@@ -134,7 +134,7 @@ def test2() -> None:  # using predefined df and model training using model.fit()
         log(f'image shape : {(image).shape}')
         log(f'label shape : {(label).shape}')
         break
-    
+
     model = get_model()
     model.fit(dt_loader, epochs=1, )
 
@@ -283,15 +283,7 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
     """Custom DataGenerator using Keras Sequence for images on disk
         df_label format :
         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
-        Args:
-            img_dir (Path(str)): String path to images directory
-            label_dir (DataFrame): Dataset for Generator
-            label_cols (list): list of cols for the label (multi label)
-            split (str, optional): split for train or test. Defaults to 'train'.
-            batch_size (int, optional): batch_size for each batch. Defaults to 8.
-            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
     """
-
     def __init__(self, img_dir:str="images/", label_dir:str=None, label_dict:dict=None,
                  col_img: str='uri', batch_size:int=8, transforms: Optional[Compose]=None,
                  shuffle: bool=True, label_imbalance: bool=True) -> None:
@@ -566,12 +558,10 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
         self.batch_size = batch_size
         self.transforms = transforms
         self.shuffle = shuffle
-
     def _load_data(self, label_path):
         df = pd.read_csv(label_path, error_bad_lines=False, warn_bad_lines=False)
         keys = ['id'] + list(self.class_dict.keys())
         df = df[keys]
-
         # Get image ids
         df = df.dropna()
         image_ids = df['id'].tolist()
@@ -581,7 +571,6 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
             categories = pd.get_dummies(df[col]).values
             labels.append(categories)
         return image_ids, labels
-
     def on_epoch_end(self):
         if self.shuffle:
             np.random.seed(12)
@@ -589,10 +578,8 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
             np.random.shuffle(indices)
             self.image_ids = self.image_ids[indices]
             self.labels = [label[indices] for label in self.labels]
-
     def __len__(self):
         return int(np.ceil(len(self.image_ids) / float(self.batch_size)))
-
     def __getitem__(self, idx):
         batch_img_ids = self.image_ids[idx * self.batch_size:(idx + 1) * self.batch_size]
         batch_x = []
@@ -600,11 +587,9 @@ class Dataloader_img_disk_custom(tf.keras.utils.Sequence):
             # Load image
             image = np.array(Image.open(os.path.join(self.image_dir, '%d.jpg' % image_id)).convert('RGB'))
             batch_x.append(image)
-
         batch_y = []
         for y_head in self.labels:
             batch_y.append(y_head[idx * self.batch_size:(idx + 1) * self.batch_size, :])
-
         if self.transforms is not None:
             batch_x = np.stack([self.transforms(image=x)['image'] for x in batch_x], axis=0)
         return (idx, batch_x, *batch_y)
