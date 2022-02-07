@@ -52,7 +52,8 @@ def os_getenv_dict():
   if 'verbose' in ddict :  ddict['verbose'] = to_int(  ddict['verbose'], 0 )
   return ddict 
   
-# verbose = os_getenv_dict()
+  
+VERBOSE = os.getenv('verbose', 1) 
 from utilmy import log, log2
 
 def help():
