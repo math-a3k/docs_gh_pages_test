@@ -9,6 +9,7 @@ from typing import List, Optional, Tuple
 import os, numpy as np, glob, pandas as pd
 from box import Box
 import cv2
+from pathlib import Path
 import tensorflow as tf
 from tensorflow import keras
 
@@ -165,7 +166,7 @@ def test_create_random_images_ds(img_shape: Tuple[int, int, int], num_images: in
 
 def test_create_random_images_ds2(img_shape: Tuple[int, int, int]=(10, 10, 2), num_images: int=10,
                                   dirout:str='random_images/', n_class_perlabel: int=7,
-                                  cols_labels: List[str, str, str]=['gender', 'color', 'size'],
+                                  cols_labels: List[str]=['gender', 'color', 'size'],
                                   col_img: str='uri') -> DataFrame:
     """ Image + labels into Folder + csv files.
         Multiple label:
@@ -293,7 +294,7 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
 
     def __init__(self, img_dir:str="images/", label_dir:str=None, label_dict:dict=None,
                  col_img: str='uri', batch_size:int=8, transforms: Optional[Compose]=None,
-                 shuffle: bool=True, label_imbalance: bool=True):
+                 shuffle: bool=True, label_imbalance: bool=True) -> None:
         """
         Args:
             img_dir (Path(str)): String path to images directory
