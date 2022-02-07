@@ -54,24 +54,24 @@ def test_resnetlayer():
     
 def test_classifier_multihead():
    label_name_ncount = { 'color': 5, 'gender': 2, 'size': 7}
-   clf = make_classifier_multihead(label_name_ncount:dict=None, 
-                              layers_dim=[128, 1024], tag='1')
+   clf = make_classifier_multihead(label_name_ncount=label_name_ncount,
+                                   layers_dim=[128, 1024], tag='1')
    log(clf.summary())
  
  
 def test_DFC_VAE():
  
-   log(m.summary()
+   log(m.summary())
 
 
 def test_encoder():
        
-   log(m.summary()
+   log(m.summary())
        
        
 def test_decoder():
        
-   log(m.summary()
+   log(m.summary())
        
        
        
