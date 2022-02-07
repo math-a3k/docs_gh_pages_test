@@ -5,6 +5,8 @@ Original file is located at
 #!pip install neural_structured_learning
 
 """
+from numpy import ndarray
+from typing import Tuple
 import numpy as np, tensorflow as tf
 
 try :
@@ -31,7 +33,7 @@ def help():
 
 
 ######################################################################################
-def test_graph_loss():
+def test_graph_loss() -> None:
     """
     Summary: Calculates the graph loss
     """
@@ -107,7 +109,7 @@ def test_graph_loss():
 
 
 
-def test_adversarial():
+def test_adversarial() -> None:
     """
     Summary: Adversarial Regularization """
     # Prepare data.
@@ -170,7 +172,7 @@ def test_adversarial():
         
 #################################################################################################################
 """# Graph regularization"""
-def create_fake_neighbor(x, max_neighbors):
+def create_fake_neighbor(x: ndarray, max_neighbors: int) -> Tuple[ndarray, ndarray]:
     """
     Summary: Graph regularization
 
