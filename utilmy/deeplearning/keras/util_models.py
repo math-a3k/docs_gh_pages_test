@@ -30,7 +30,7 @@ def make_efficientet(xdim, ydim, cdim):
 
 
 ################################################################################################
-def test_DFC_VAE():
+def test_DFC_VAE() -> None:
     """
     model = DFC_VAE(5, 5)
     y_label_list = [ [ 1,2], [2,3 ]
