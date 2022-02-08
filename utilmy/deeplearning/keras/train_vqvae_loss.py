@@ -495,6 +495,7 @@ class DFC_VAE(tf.keras.Model):
 
 
 def make_encoder(n_outputs=1):
+    """Creates encoder model"""
     #Functionally define the different layer types
     Input = tf.keras.layers.InputLayer
     Conv2D = functools.partial(tf.keras.layers.Conv2D, padding='same', activation='relu',
@@ -610,6 +611,7 @@ def clf_loss_crossentropy(y_true, y_pred):
 
 def perceptual_loss_function(x, x_recon, z_mean, z_logsigma, kl_weight=0.00005, 
                              y_label_heads=None, y_pred_heads=None, clf_loss_fn=None):
+    """Calculates and returns total loss"""
     ### log( 'x_recon.shae',  x_recon.shape )  
     ### VAE Loss
     reconstruction_loss = tf.reduce_mean(tf.reduce_mean(tf.abs(x-x_recon), axis=(1,2,3)))
