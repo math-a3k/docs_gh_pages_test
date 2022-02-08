@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 import keras
 import numpy as np
-
+import pandas as pd
 from keras_dataloader.dataset import Dataset
 
 
@@ -93,7 +93,17 @@ def tf_data_create_sparse(cols_type_received:dict= {'cols_sparse' : ['col1', 'co
 
 
 
-def tf_data_pandas_to_dataset(training_df, colsX, coly):
+def tf_data_pandas_to_dataset(training_df: pd.DataFrame, colsX: str, coly: str):
+    """
+    Creates tf dataset from pandas dataframes
+    Args:
+        training_df: Dataframe
+        colsX: X column name;
+        coly: Y column name
+
+    Returns:
+        tf dataset object
+    """
     # tf.enable_eager_execution()
     # features = ['feature1', 'feature2', 'feature3']
     import tensorflow as tf
