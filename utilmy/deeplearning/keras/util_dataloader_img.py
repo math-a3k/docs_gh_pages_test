@@ -42,6 +42,7 @@ def help():
 
 ############################################################################################
 def test() -> None:
+    """Tests train and test images transformation functions"""
     image_size = 64
     train_transforms = Compose([
         Resize(image_size, image_size, p=1),
@@ -59,6 +60,7 @@ def test() -> None:
 
 
 def test1() -> None:
+    """Tests image dataloader"""
     from tensorflow.keras.datasets import mnist
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
 
@@ -71,6 +73,7 @@ def test1() -> None:
 
 
 def test2() -> None:  # using predefined df and model training using model.fit()
+    """Tests model training process"""
     from PIL import Image
     from pathlib import Path
     from tensorflow import keras
@@ -145,6 +148,7 @@ def test2() -> None:  # using predefined df and model training using model.fit()
 def test_create_random_images_ds(img_shape: Tuple[int, int, int], num_images: int=10, dirout: str='random_images/',
                                  return_df: bool=True, num_labels: int=2,
                                  label_cols: List[str]=['label']) -> DataFrame:
+    """Creates datasets with random images for testing"""
     if not os.path.exists(dirout):
         os.mkdir(dirout)
     for n in range(num_images):
