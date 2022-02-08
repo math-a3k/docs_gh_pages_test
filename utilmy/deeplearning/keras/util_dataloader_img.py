@@ -27,8 +27,8 @@ from albumentations import (
 from albumentations.core.transforms_interface import ImageOnlyTransform
 
 
-############################################################################################# 
 
+#############################################################################################
 from utilmy import log, log2
 
 
@@ -36,6 +36,8 @@ def help():
     from utilmy import help_create
     ss = HELP + help_create("utilmy.deeplearning.keras.util_layers")
     print(ss)
+
+
 
 
 ############################################################################################
@@ -87,12 +89,12 @@ def test2() -> None:  # using predefined df and model training using model.fit()
         return model
 
     #####################################################
-    label_file = 'df.csv'
+    label_file    = 'df.csv'
 
-    dir_img_path = 'random_images/'
-    dir_img = Path(dir_img_path).as_posix()
-    num_images = 256
-    num_labels = 2
+    dir_img_path  = 'random_images/'
+    dir_img       = Path(dir_img_path).as_posix()
+    num_images    = 256
+    num_labels    = 2
 
     df = test_create_random_images_ds((28, 28, 3), num_images=num_images, num_labels=num_labels, dirout=dir_img_path)
     # df = create_random_images_ds2(img_shape=(10,10,2), num_images = 10,
@@ -113,6 +115,7 @@ def test2() -> None:  # using predefined df and model training using model.fit()
 
     model = get_model()
     model.fit(dt_loader, epochs=1, )
+
 
     log('############   with Transform + model fit ')
     trans_train = Compose([
@@ -136,6 +139,8 @@ def test2() -> None:  # using predefined df and model training using model.fit()
     model.fit(dt_loader, epochs=1, )
 
 
+
+
 ############################################################################################
 def test_create_random_images_ds(img_shape: Tuple[int, int, int], num_images: int=10, dirout: str='random_images/',
                                  return_df: bool=True, num_labels: int=2,
@@ -154,14 +159,14 @@ def test_create_random_images_ds(img_shape: Tuple[int, int, int], num_images: in
     for i in enumerate(label_cols):
         label_dict.append(np.random.randint(num_labels, size=(num_images)))
 
-    df = pd.DataFrame(list(zip(files, *label_dict)), columns=['uri'] + label_cols)
-    if return_df:
-        return df
+        df = pd.DataFrame(list(zip(files, *label_dict)), columns=['uri'] + label_cols)
+        if return_df:
+            return df
 
 
 def test_create_random_images_ds2(img_shape: Tuple[int, int, int]=(10, 10, 2), num_images: int=10,
                                   dirout:str='random_images/', n_class_perlabel: int=7,
-                                  cols_labels: List[str, str, str]=['gender', 'color', 'size'],
+                                  cols_labels: List[str]=['gender', 'color', 'size'],
                                   col_img: str='uri') -> DataFrame:
     """ Image + labels into Folder + csv files.
         Multiple label:
@@ -169,8 +174,8 @@ def test_create_random_images_ds2(img_shape: Tuple[int, int, int]=(10, 10, 2), n
     os.makedirs(dirout, exist_ok=True)
     for n in range(num_images):
         filename = f'{dirout}/{n}.jpg'
-        rgb_img = np.random.rand(img_shape[0], img_shape[1], img_shape[2]) * 255
-        image = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
+        rgb_img  = np.random.rand(img_shape[0],img_shape[1],img_shape[2]) * 255
+        image    = Image.fromarray(rgb_img.astype('uint8')).convert('RGB')
         image.save(filename)
 
     files = [fi.replace("\\", "/") for fi in glob.glob(dirout + '/*.jpg')]
@@ -260,16 +265,16 @@ def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
     return clist
 
 
-def pd_label_normalize_freq(df, cols:list)  -> pd.DataFrame : 
+def pd_label_normalize_freq(df, cols:list)  -> pd.DataFrame :
    """
       Resample each class
 
-      
+
       for ci in cols:
           nuniques[ci] =  df[ci].nunique()
 
-     
-   
+
+
    """
    pass
 
@@ -279,8 +284,9 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
         df_label format :
         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
     """
-    def __init__(self, img_dir: str = "images/", label_dir: str = None, label_dict: dict = None,
-                 col_img: str='uri', batch_size: int = 8, transforms=None, shuffle: bool=True, label_imbalance=True) -> None:
+    def __init__(self, img_dir:str="images/", label_dir:str=None, label_dict:dict=None,
+                 col_img: str='uri', batch_size:int=8, transforms: Optional[Compose]=None,
+                 shuffle: bool=True, label_imbalance: bool=True) -> None:
         """
         Args:
             img_dir (Path(str)): String path to images directory
@@ -293,16 +299,17 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
         """
         self.batch_size = batch_size
         self.transforms = transforms
-        self.shuffle = shuffle
+        self.shuffle    = shuffle
 
-        self.image_dir = img_dir
-        self.col_img = col_img
+        self.image_dir  = img_dir
+        self.col_img    = col_img
+
 
         from utilmy import pd_read_file
         dflabel     = pd_read_file(label_dir)
         dflabel     = dflabel.dropna()
 
-        ### Imablance label 
+        ### Imablance label
         #if label_imbalance:
         #    dflabel = pd_label_normalize_freq(dflabel)
 
@@ -326,14 +333,15 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
         batch_x, batch_y = self.__get_data(idx, self.batch_size)
         return np.array(batch_x), np.array(batch_y)
 
+
     def __get_data(self, idx, batch=8):
         # Create batch targets
-        df_batch = self.label_df[idx * batch:(idx + 1) * self.batch_size]
-        batch_x, batch_y = [], []  # list of output heads
+        df_batch    = self.label_df[idx * batch:(idx + 1) * self.batch_size]
+        batch_x, batch_y = [], []   #  list of output heads
 
         ##### Xinput
         for ii, x in df_batch.iterrows():
-            img = np.array(Image.open(x['uri']).convert('RGB'))
+            img =  np.array(Image.open(x['uri']).convert('RGB') )
             batch_x.append(img)
 
         if self.transforms is not None:
