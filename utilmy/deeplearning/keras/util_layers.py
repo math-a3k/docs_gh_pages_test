@@ -272,6 +272,7 @@ class DFC_VAE(tf.keras.Model):
 
 
 def make_encoder(xdim=256, ydim=256, latent_dim=10):
+    """Creates encoder class"""
     # Functionally define the different layer types
     # Input = tf.keras.layers.InputLayer
     Conv2D = functools.partial(tf.keras.layers.Conv2D, padding='same', activation='relu',

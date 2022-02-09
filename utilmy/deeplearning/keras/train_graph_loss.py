@@ -334,6 +334,8 @@ def train_stop(counter, patience):
 class DFC_VAE(tf.keras.Model):
     """Deep Feature Consistent Variational Autoencoder Class"""
     def __init__(self, latent_dim, class_dict):
+        """
+        Initializes class instance"""
         super(DFC_VAE, self).__init__()
         self.latent_dim = latent_dim
         self.encoder = make_encoder()
@@ -341,7 +343,14 @@ class DFC_VAE(tf.keras.Model):
         
         self.classifier = make_classifier(class_dict)
 
-    def encode(self, x):
+    def encode(self, x) -> tuple:
+        """
+        Encodes data to latent variables: Z-mean and Z-logsigma.
+        Args:
+            x: input data
+        Returns:
+            (Tuple): z-mean, z-logsigma
+        """
         z_mean, z_logsigma = tf.split(self.encoder(x), num_or_size_splits=2, axis=1)
         return z_mean, z_logsigma
   
@@ -349,7 +358,16 @@ class DFC_VAE(tf.keras.Model):
         eps = tf.random.normal(shape=tf.shape(z_mean))
         return eps * tf.exp(z_logsigma * 0.5) + z_mean
 
-    def decode(self, z, apply_sigmoid=False):
+    def decode(self, z, apply_sigmoid: bool=False):
+        """
+        Decodes variable.
+        Args:
+            z: latent variable;
+            apply_sigmoid: flag of whether apply or not activation function;
+
+        Returns:
+            re-constracted variable.
+        """
         x_recon = self.decoder(z)
         if apply_sigmoid:
             new_x_recon = tf.sigmoid(x_recon)
@@ -369,6 +387,7 @@ class DFC_VAE(tf.keras.Model):
 
 
 def make_encoder(n_outputs=1):
+    """Creates encoder model"""
     #Functionally define the different layer types
     Input = tf.keras.layers.InputLayer
     Conv2D = functools.partial(tf.keras.layers.Conv2D, padding='same', activation='relu',
