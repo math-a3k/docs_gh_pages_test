@@ -6,7 +6,14 @@ HELP= """
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, random
 
-verbose = 3   ### Global setting
+####################################################################
+global verbose
+def get_verbosity(verbose:int=None):
+    if verbose is None :
+        verbose = os.environ.get('verbose', 3)
+    return verbose
+verbose = get_verbosity()   ### Global setting
+
 
 def log(*s, **kw):
     print(*s, flush=True, **kw)
@@ -17,7 +24,6 @@ def log2(*s, **kw):
 def log3(*s, **kw):
     if verbose >=3 : print(*s, flush=True, **kw)
 
-        
 def help():
     suffix = "\n\n\n###############################"
     ss     = help_create(modulename='utilmy', prefixs=None) + suffix
@@ -25,6 +31,7 @@ def help():
     print(ss)
 
 
+###################################################################################################
 def help_get_codesource(func):
     """ Extract code source from func name"""
     import inspect
@@ -34,19 +41,6 @@ def help_get_codesource(func):
         lines_to_skip = 0
     lines = inspect.getsourcelines(func)[0]
     return ''.join( lines[lines_to_skip+1:] )
-
-
-def import_function(fun_name=None, module_name=None):
-    import importlib
-
-    if isinstance(module_name, str):
-       module1 = importlib.import_module(module_name)
-       func = getattr(module1, fun_name)
-    else :
-       func = globals()[fun_name]
-
-    return func
-
 
 def help_create(modulename='utilmy.nnumpy', prefixs=None):
     """ Extract code source from test code
@@ -63,6 +57,64 @@ def help_create(modulename='utilmy.nnumpy', prefixs=None):
     return ss
 
 
+###################################################################################################
+def get_verbosity(verbose:int=None):
+    if verbose is None :
+        verbose = os.environ.get('verbose', 1)
+    return verbose
+
+
+def get_loggers(mode='print', n_loggers=2, verbose_level=None):
+    global verbose
+    verbose = get_verbosity(verbose_level)
+
+    if mode == 'print' :
+        ttuple = [log]
+        if n_loggers >=  2:    ttuple.append(log2)
+        if n_loggers >=  3:    ttuple.append(log3)
+        return tuple(ttuple)
+
+
+###################################################################################################
+def import_function(fun_name=None, module_name=None):
+    import importlib
+
+    if isinstance(module_name, str):
+       module1 = importlib.import_module(module_name)
+       func = getattr(module1, fun_name)
+    else :
+       func = globals()[fun_name]
+
+    return func
+
+def glob_glob(dirin, nfile=1000):
+    import glob
+    flist  = sorted( glob.glob(dirin  ))
+    flist  = flist[:nfile]
+    log('Nfile: ', len(flist), str(flist)[:100])
+    return flist
+
+
+def sys_exit(msg="exited",  err_int=0):
+    import os, sys
+    print(msg)         
+    ### exit with no error msg 
+    # sys.stderr = open(os.devnull, 'w')
+    sys.stdout = sys.__stdout__ = open(os.devnull, 'w')
+    sys.exit(err_int)         
+
+    
+def sys_install(cmd=""):
+   import os, sys, time  
+   print("Installing  ")
+   print( cmd +"  \n\n ...") ; time.sleep(7)
+   os.system(cmd )
+   print( "\n\n\n############### Please relaunch python  ############## \n")   
+   print('Exit \n\n\n')
+
+
+
+###################################################################################################
 def pd_random(ncols=7, nrows=100):
    import pandas as pd
    ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
@@ -110,32 +162,6 @@ def pd_getdata(verbose=True):
     return data
 
 
-def glob_glob(dirin, nfile=1000):
-    import glob
-    flist  = sorted( glob.glob(dirin  ))
-    flist  = flist[:nfile]
-    log('Nfile: ', len(flist), str(flist)[:100])
-    return flist
-
-
-def sys_exit(msg="exited",  err_int=0):
-    import os, sys
-    print(msg)         
-    ### exit with no error msg 
-    # sys.stderr = open(os.devnull, 'w')
-    sys.stdout = sys.__stdout__ = open(os.devnull, 'w')
-    sys.exit(err_int)         
-
-    
-def sys_install(cmd=""):
-   import os, sys, time  
-   print("Installing  ")
-   print( cmd +"  \n\n ...") ; time.sleep(7)
-   os.system(cmd )
-   print( "\n\n\n############### Please relaunch python  ############## \n")   
-   print('Exit \n\n\n')
-
-
 class Index0(object):
     """
     ### to maintain global index, flist = index.read()  index.save(flist)
@@ -167,8 +193,9 @@ class Index0(object):
             fp.write(ss )
         return True   
 
+
 ###################################################################################################
-###### Test #####################################################################################
+###### Test #######################################################################################
 def test_all():
    import utilmy as m
 
@@ -195,7 +222,7 @@ def test_all():
    gverbosity =m.global_verbosity(__file__, "config.json", 40,)
    assert gverbosity == verbosity, "incorrect verbosity "
 
-   ###################################################################################
+   ################################################################################################
 
 
 
