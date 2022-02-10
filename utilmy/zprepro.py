@@ -1,18 +1,6 @@
 # -*- coding: utf-8 -*-
 HELP ="""
 
-### backup the data in RAM
-cp -R  /a/gfs101/ipsvols07/ndata/cpa/db/db/   /sys/fs/cgroup/cpa/
-
-
-rm -rf   /sys/fs/cgroup/cpa/db/db_easyid_topg_intra.cache/ 
-
-
-
-cp -R  /a/gfs101/ipsvols07/ndata/cpa/db/db/db_easyid_topg_intra.cache/   /sys/fs/cgroup/cpa/db/
-
-
-db_easyid_topg_intra.cache
 
 
 """
