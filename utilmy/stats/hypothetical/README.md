@@ -1,13 +1,6 @@
 # hypothetical - Hypothesis and Statistical Testing in Python
 
-[![Build Status](https://travis-ci.org/aschleg/hypothetical.svg?branch=master)](https://travis-ci.org/aschleg/hypothetical)
-[![Build status](https://ci.appveyor.com/api/projects/status/i1i1blt9ny3tyi6a?svg=true)](https://ci.appveyor.com/project/aschleg/hypy)
-[![Coverage Status](https://coveralls.io/repos/github/aschleg/hypothetical/badge.svg?branch=master)](https://coveralls.io/github/aschleg/hypothetical?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3ceba919fdb34d45af43c044a761ddb8)](https://www.codacy.com/app/aschleg/hypothetical?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aschleg/hypothetical&amp;utm_campaign=Badge_Grade)
-[![Dependencies](https://img.shields.io/librariesio/github/aschleg/hypothetical.svg?label=dependencies)](https://libraries.io/github/aschleg/hypothetical)
-![Python versions](https://img.shields.io/badge/python-3.5%2C%203.6%2C%203.7-blue.svg)
-
-Python library for conducting hypothesis and other group comparison tests.
+library for conducting hypothesis and other group comparison tests.
 
 ## Installation
 
@@ -128,6 +121,3 @@ I need!
 * `scipy>=1.1.0`
 * `statsmodels>=0.9.0`
 
-## License
-
-MIT
