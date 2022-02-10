@@ -89,8 +89,10 @@ holidays
 ###############################
 ## tabular
 statsmodels
-hypothetical
+# hypothetical
+mapie
 bootstrapped
+mmh3  
 
 
 
