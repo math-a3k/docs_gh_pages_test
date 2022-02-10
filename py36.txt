@@ -90,7 +90,7 @@ holidays
 ## tabular
 statsmodels
 # hypothetical
-MAPIE
+MAPIE==0.3.1
 bootstrapped
 mmh3  
 
