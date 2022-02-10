@@ -29,10 +29,10 @@ def test2():
     df = pd.DataFrame()
     df['key'] = np.arange(0, nmax)
     for i in range(0, nmin):
-    df[ f'int{i}'] = np.random.randint(0, 100,size=(nmax, ))
-    df[ f'flo{i}'] = np.random.rand(1, nmax)[0] 
-    df[ f'str{i}'] =  [ ",".join([ str(t) for t in np.random.randint(10000000,999999999,size=(500, )) ] )  for k in range(0,nmax) ]
-    print(df.head)
+        df[ f'int{i}'] = np.random.randint(0, 100,size=(nmax, ))
+        df[ f'flo{i}'] = np.random.rand(1, nmax)[0] 
+        df[ f'str{i}'] =  [ ",".join([ str(t) for t in np.random.randint(10000000,999999999,size=(500, )) ] )  for k in range(0,nmax) ]
+        print(df.head)
     df.to_parquet('myfile')
 
 
@@ -54,6 +54,8 @@ def test2():
     df.groupby('key').agg(pl.col(f'str{i}')).select([pl.col('key'), pl.col(f'str{i}').arr.join(",")])
     df.groupby([f'flo{i}']).agg(pl.all().sum())
     df.to_parquet('myfile.parquet.polars')
+
+
 
 
 def test_create_parquet():
