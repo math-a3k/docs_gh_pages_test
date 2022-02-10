@@ -420,6 +420,81 @@ def rank_merge_v2(list1, list2, nrank):
 
 
 
+
+
+def test(df1, df2):
+import pandas as pd, numpy as np
+import time
+import timeit
+ 
+df = []
+for i in range(0, 20000):
+  vv = (i,  ",".join( [str(t) for t in  np.arange(1000, 2000, 1)  ] ) )
+  df.append(vv)
+df1 =pd.DataFrame(df, columns = ['id', 'list1'])
+ 
+ 
+df = []
+for i in range(0, 20000):
+  vv = (i,   ",".join( [str(t) for t in  np.arange(2000, 1500, -1)  ]) )
+  df.append(vv)
+df2 =pd.DataFrame(df, columns = ['id', 'list2'])
+ 
+df1 = df1.merge(df2, on = 'id', how='left')
+ 
+def test(df1, df2):
+    def rank_adjust2(ll1, ll2,):
+        """ Re-rank elements of list1 using ranking of list2"""
+        if isinstance(ll1, str): ll1 = ll1.split(",")
+        if isinstance(ll2, str): ll2 = ll2.split(",")
+        n1, n2 = len(ll1), len(ll2)
+        if n2 < 1: return ll1
+ 
+        ll2 = {x:i for i,x in enumerate( ll2 )  }
+ 
+        # log(ll1) ; log(ll2)
+ 
+        adjust, mrank = (1.0 * n1) / n2, n2
+        kk    = 1
+        #rank2 = np.array([ll2.get(sid, mrank) for sid in ll1])
+        #rank1 = np.arange(n1)
+ 
+        v = [' ']  * n1
+        rank1 = np.arange(n1)
+        rank2 = np.array([int(ll2.get(x, mrank)) for x in ll1])
+ 
+        js = get_sorted_indice_vector(rank1, rank2, adjust, kk)
+ 
+        # print(js)
+        v = [ll1[j] for j in js]
+        # for rank1,x in enumerate(ll1):
+        #     rank2 = ll2.get(x, mrank)
+        #     j  = get_sorted_indice(rank1, rank2, adjust, kk)
+        #     v[ j ] = x
+ 
+ 
+        # Id of ll1 sorted list
+        #v = [ll1[i] for i in np.argsort(rank3)]
+        return ",".join( v)
+ 
+    def get_sorted_indice_vector(rank1, rank2, adjust, kk =1, ):
+        farray = 1/(   1.0 / (kk + rank1) + 1.0 / (kk + rank2 * adjust) ) * 1/adjust
+        return farray.astype(int) - 1
+    def get_sorted_indice(rank1, rank2, adjust, kk =1, ):
+      ix = int(  1/(   1.0 / (kk + rank1) + 1.0 / (kk + rank2 * adjust) ) * 1/adjust ) -1
+      return ix
+ 
+ 
+ 
+    df1.apply(lambda x : rank_adjust2(x['list1'], x['list2'],), axis=1 )
+ 
+    
+    t0 = time.time()
+    test(df1, df2)
+    print(time.time() -t0)
+
+
+
 ##########################################################################################
 if __name__ == '__main__':
     import fire
