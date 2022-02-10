@@ -178,7 +178,7 @@ def test_oos():
 
 
 #######################################################################################
-def test_tabular_util_sparse():
+def test_tabular():
    from utilmy.tabular import util_sparse as m
    log("from utilmy.tabular import util_sparse")   
    m.test_all()
@@ -221,7 +221,7 @@ def test_all():
 
     ################
     # test_oos()
-    test_tabular_util_sparse()
+    test_tabular()
     test_adatasets()
     test_dates()
     test_utils()
