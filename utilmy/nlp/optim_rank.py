@@ -28,6 +28,183 @@ def log(*s):
 
 
 
+
+#####################################################################################
+#####################################################################################
+"""
+Goal is to find new formulae for
+     rank_score0  = FORMULAE( ...)
+
+using cost_fitness (ie minimize)
+and Genetic Programming algo.
+
+
+"""
+
+def cost_fitness(rank_score):
+    """
+    
+    """
+    ##### True list
+    ltrue = [ str(i)  for i in range(0, 100) ]   
+
+    #### Create noisy list 
+    ltrue_rank = {x:i for i,x in enumerate(ltrue)}
+    list_overlap =  ltrue
+    ll1  = rank_generate_fake(dict_full, list_overlap, nsize=100, ncorrect=40)
+    ll2  = rank_generate_fake(dict_full, list_overlap, nsize=100, ncorrect=50)
+
+
+    #### Merge them using rank_score
+    lnew = rank_merge_v5(ll1, ll2, kk= 1, rank_score= rank_score)
+
+    ### Eval with True Rank
+    spearman_rho = scipy.stats.spearmanr(ltrue,  lnew)
+    return -spearman_rho
+
+
+
+#### Example of rank_scores0
+def rank_score0(rank1:list, rank2:list, adjust=1.0, kk=1.0)-> list:
+    """     ### take 2 np.array and calculate one list of float (ie NEW scores for position)
+ 
+     list of items:  a,b,c,d, ...
+
+     item      a,b,c,d,e
+
+     rank1 :   1,2,3,4 ,,n     (  a: 1,  b:2, ..)
+     rank1 :   5,7,2,1 ,,n     (  a: 5,  b:6, ..)
+    
+     scores_new :   a: -7.999,  b:-2.2323   
+     (item has new scores)
+    
+    """
+    scores_new =  -1.0 / (kk + rank1) - 1.0 / (kk + rank2 * adjust)
+    return scores_new
+
+
+def rank_merge_v5(ll1:list, ll2:list, kk= 1, rank_score=None):
+    """ Re-rank elements of list1 using ranking of list2
+        20k dataframe : 6 sec ,  4sec if dict is pre-build
+        Fastest possible in python
+    """
+    if len(ll2) < 1: return ll1
+    n1, n2 = len(ll1), len(ll2)
+
+    if not isinstance(ll2, dict) :
+        ll2 = {x:i for i,x in enumerate( ll2 )  }  ### Most costly op, 50% time.
+
+    adjust, mrank = (1.0 * n1) / n2, n2
+    rank2 = np.array([ll2.get(sid, mrank) for sid in ll1])
+    rank1 = np.arange(n1)
+    rank3 = rank_score(rank1, rank2, adjust=1.0, kk=1.0) ### Score
+
+    #### re-rank  based on NEW Scores.
+    v = [ll1[i] for i in np.argsort(rank3)]
+    return v  #### for later preprocess
+    
+
+
+
+def rank_generate_fake(dict_full, list_overlap, nsize=100, ncorrect=20):
+    """  Returns a list of random rankings of size nsize where ncorrect
+         elements have correct ranks
+
+        Keyword arguments:
+        dict_full    : a dictionary of 1000 objects and their ranks
+        list_overlap : list items common to all lists
+        nsize        : the total number of elements to be ranked
+        ncorrect     : the number of correctly ranked objects
+    """
+    # first randomly sample nsize - len(list_overlap) elements from dict_full
+    # of those, ncorrect of them must be correctly ranked
+    random_vals = []
+    while len(random_vals) <= nsize - len(list_overlap):
+      rand = random.sample(list(dict_full), 1)
+      if (rand not in random_vals and rand not in list_overlap):
+        random_vals.append(rand[0])
+
+    # next create list as aggregate of random_vals and list_overlap
+    list2 = random_vals + list_overlap
+    
+    # shuffle nsize - ncorrect elements from list2 
+    copy = list2[0:nsize - ncorrect]
+    random.shuffle(copy)
+    list2[0:nsize - ncorrect] = copy
+
+    # ensure there are ncorrect elements in correct places
+    if ncorrect == 0: 
+      return list2
+    rands = random.sample(list(dict_full)[0:nsize + 1], ncorrect + 1)
+    for r in rands:
+      list2[r] = list(dict_full)[r]
+    return list2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def test1():
     """"
         # evaluate each rank aggregation algorithm by using spearman's rho's and kendall-tau's metrics
@@ -72,7 +249,6 @@ def test1():
 
      #### Find rank_score formulae, such as metric is minimize
     
-
     
 ###################################################################################################
 ###################################################################################################    
@@ -108,32 +284,6 @@ def test():
 
 
 
-
-def test_rankadjust2(df1, df2):
-
-    #### Data
-    import pandas as pd, numpy as np, time
-     
-    df = []
-    for i in range(0, 20000):
-      vv = (i,  ",".join( [str(t) for t in  np.arange(1000, 1100, 1)  ] ) )
-      df.append(vv)
-    df1 =pd.DataFrame(df, columns = ['id', 'list1'])  
-     
-     
-    df = []
-    for i in range(0, 20000):
-      vv = (i,   ",".join( [str(t) for t in  np.arange(3000, 1000, -1)  ]) )
-      df.append(vv)
-    df2 =pd.DataFrame(df, columns = ['id', 'list2'])  
- 
-
-    df1 = df1.merge(df2, on = 'id', how='left')
-    df1['merge'] = df1.apply(lambda x : rank_adjust2(x['list1'], x['list2'],), axis=1 )
-    df1 = df1[['id', 'merge']]
- 
- 
-        
 
 ############################################################################################
 ############################################################################################
@@ -273,248 +423,6 @@ def rank_eval(rank_true, dfmerged, nrank=100):
 
 
 
-
-#####################################################################################
-#####################################################################################
-def rank_score(rank1, rank2, adjust=1.0, kk=1.0):
-    return 1.0 / (kk + rank1) + 1.0 / (kk + rank2 * adjust)
-
-
-
-def rank_merge_v4(ll1, ll2):
-    """ Re-rank elements of list1 using ranking of list2
-    """        
-    n1, n2 = len(ll1), len(ll2)
-    adjust, mrank = (1.0 * n1) / n2, n2
-    rank3 = np.zeros(n1, dtype='float32')
-    kk = 2
-
-    for rank1, sid in enumerate(ll1):
-        rank2 = np_find(ll2, sid)
-        rank2 = mrank if rank2 == -1 else rank2
-        rank3[rank1] = -rank_score(rank1, rank2, adjust, kk=kk)
-
-    # Id of ll1 sorted list
-    return [ll1[i] for i in np.argsort(rank3)]
-
-
-
-def rank_merge_v3(list1, list2, maxrank=100):
-    """ Inver MRR cores
-      A custom rank aggregation algorithm that assigns a score to each item 
-      based on its rankings. The algorithm sorts the items by their score inescending order and returns them
-      Keyword arguments:
-      list1: a list containing the items
-      list2: a list containing the items
-      nrank: total number of elements to be ranked
-    """
-    keys, scores = [], []    
-    adjust = len(list1) / len(list2) * 1.0 
-    kk     = 1
-
-    for i, x in enumerate(list1):
-        rank1 = i + 1
-        rank2 = np_find(x, list2)
-        rank2 = maxrank if rank2 < 0 else rank2+1
-        score  = rank_score(rank1, rank2, adjust, kk= kk)
-        keys.append(x)
-        scores.append(score)
-
-    for i, x in enumerate(list2):
-        if x in keys:
-            continue
-        rank_2 = i + 1
-        rank_1 = maxrank
-        score  = rank_score(rank1, rank2, adjust, kk= kk)
-        keys.append(x)
-        scores.append(score)
-
-    # sort list by rank in descending order
-    return [keys[i] for i in np.argsort(np.array(scores))[::-1]]
-
-    
-
-def rank_merge_v5(ll1, ll2, kk= 1):
-    """ Re-rank elements of list1 using ranking of list2
-        20k dataframe : 6 sec ,  4sec if dict is pre-build
-        Fastest possible in python
-    """
-    if len(ll2) < 1: return ll1
-    if isinstance(ll1, str): ll1 = ll1.split(",")
-    if isinstance(ll2, str): ll2 = ll2.split(",")
-    n1, n2 = len(ll1), len(ll2)
-
-    if not isinstance(ll2, dict) :
-        ll2 = {x:i for i,x in enumerate( ll2 )  }  ### Most costly op, 50% time.
-
-    adjust, mrank = (1.0 * n1) / n2, n2
-    rank2 = np.array([ll2.get(sid, mrank) for sid in ll1])
-    rank1 = np.arange(n1)
-    rank3 = -1.0 / (kk + rank1) - 1.0 / (kk + rank2 * adjust)  ### Score
-
-    # Id of ll1 sorted list
-    v = [ll1[i] for i in np.argsort(rank3)]
-    return v  #### for later preprocess
-    #return ",".join( v)
-    
-    
-############################################################################################
-############ Algo 2#########################################################################
-def rank_merge(df, method='borda'):
-    """
-      Returns a list of merged ranks for each item in the dataframe
-
-      Keyword arguments:
-      df: a dataframe in which each row represents an item and each column
-          represents it's rank assigned by a ranker
-      method: A rank aggregation algorithm
-    """
-    columns = df.columns
-    # rank aggregation algorithm for dowdall and average doesn't accept dataframes
-    # so convert each column to list
-    rank_list = [df[column].tolist() for column in columns]
-    if method == 'borda':
-      rank = rk.rank(rk.borda(df)).tolist()
-
-    elif method == 'majority':
-      rank = rk.majority(df).tolist()
-
-    elif method == 'center':
-      rank = rk.center(df).tolist()
-
-    elif method == 'instant_runoff':
-      agg = ra.RankAggregator()   
-      rank = agg.instant_runoff(rank_list)
-
-    elif method == 'dowdall':
-      agg = ra.RankAggregator()
-      rank = agg.dowdall(rank_list)
-      res = []
-      for r in rank:
-        res.append(r[0])
-      return res
-
-    elif method == 'average':
-      agg = ra.RankAggregator()
-      rank = agg.average_rank(rank_list)
-      res = [None] * 1000
-      for r in rank:
-        res[int(r[0]) - 1] = r[1]
-      return res
-
-    elif method == 'mc4':
-      aggregated_ranks = mc4_aggregator(df, header_row = 0, index_col = 0) 
-      return list(aggregated_ranks.values())
-    return rank
-
-
-
-
-def rank_merge_v2(list1, list2, nrank):
-  """ Inver MRR cores
-    A custom rank aggregation algorithm that assigns a score to each item 
-    based on its rankings. The algorithm sorts the items by their score in
-    descending order and returns them
-
-    Keyword arguments:
-    list1: a list containing the ranks of items
-    list2: a list containing the ranks of items
-    nrank: total number of elements to be ranked
-  """
-  scores = []
-  for i in range(1, nrank + 1):
-    rank_1, rank_2 = nrank, nrank
-    if i in list1:
-      rank_1 = list1.index(i) + 1
-
-    if i in list2:
-      rank_2 = list2.index(i) + 1
-
-    score = ((1 / rank_1) + (1 / rank_2)) / 2.0
-    tup = (i, score)
-    scores.append(tup)
-  
-  # sort list by rank in descending order
-  scores.sort(key=lambda tup: tup[1], reverse=True)
-  rank = []
-  for (item, score) in scores:
-    rank.append(item)
-  return rank
-
-
-
-
-
-def test(df1, df2):
-import pandas as pd, numpy as np
-import time
-import timeit
- 
-df = []
-for i in range(0, 20000):
-  vv = (i,  ",".join( [str(t) for t in  np.arange(1000, 2000, 1)  ] ) )
-  df.append(vv)
-df1 =pd.DataFrame(df, columns = ['id', 'list1'])
- 
- 
-df = []
-for i in range(0, 20000):
-  vv = (i,   ",".join( [str(t) for t in  np.arange(2000, 1500, -1)  ]) )
-  df.append(vv)
-df2 =pd.DataFrame(df, columns = ['id', 'list2'])
- 
-df1 = df1.merge(df2, on = 'id', how='left')
- 
-def test(df1, df2):
-    def rank_adjust2(ll1, ll2,):
-        """ Re-rank elements of list1 using ranking of list2"""
-        if isinstance(ll1, str): ll1 = ll1.split(",")
-        if isinstance(ll2, str): ll2 = ll2.split(",")
-        n1, n2 = len(ll1), len(ll2)
-        if n2 < 1: return ll1
- 
-        ll2 = {x:i for i,x in enumerate( ll2 )  }
- 
-        # log(ll1) ; log(ll2)
- 
-        adjust, mrank = (1.0 * n1) / n2, n2
-        kk    = 1
-        #rank2 = np.array([ll2.get(sid, mrank) for sid in ll1])
-        #rank1 = np.arange(n1)
- 
-        v = [' ']  * n1
-        rank1 = np.arange(n1)
-        rank2 = np.array([int(ll2.get(x, mrank)) for x in ll1])
- 
-        js = get_sorted_indice_vector(rank1, rank2, adjust, kk)
- 
-        # print(js)
-        v = [ll1[j] for j in js]
-        # for rank1,x in enumerate(ll1):
-        #     rank2 = ll2.get(x, mrank)
-        #     j  = get_sorted_indice(rank1, rank2, adjust, kk)
-        #     v[ j ] = x
- 
- 
-        # Id of ll1 sorted list
-        #v = [ll1[i] for i in np.argsort(rank3)]
-        return ",".join( v)
- 
-    def get_sorted_indice_vector(rank1, rank2, adjust, kk =1, ):
-        farray = 1/(   1.0 / (kk + rank1) + 1.0 / (kk + rank2 * adjust) ) * 1/adjust
-        return farray.astype(int) - 1
-    def get_sorted_indice(rank1, rank2, adjust, kk =1, ):
-      ix = int(  1/(   1.0 / (kk + rank1) + 1.0 / (kk + rank2 * adjust) ) * 1/adjust ) -1
-      return ix
- 
- 
- 
-    df1.apply(lambda x : rank_adjust2(x['list1'], x['list2'],), axis=1 )
- 
-    
-    t0 = time.time()
-    test(df1, df2)
-    print(time.time() -t0)
 
 
 

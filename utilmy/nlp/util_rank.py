@@ -168,7 +168,7 @@ def rank_topk_kendall(a:list, b:list, topk=5,p=0): #zero is equal 1 is max dista
     return kendall
     
   
-  
+
   
 #############################################################################
 class RankingSimilarity:
@@ -449,3 +449,34 @@ class RankingSimilarity:
                   "the evaluation.".format(d, top_w))
 
         return self._bound_range(top_w)
+
+
+
+
+#### rank merge
+
+
+def rank_adjust(ll1, ll2, kk= 1):
+    """ Re-rank elements of list1 using ranking of list2
+        20k dataframe : 6 sec ,  4sec if dict is pre-build
+    """
+    if len(ll2) < 1: return ll1
+    if isinstance(ll1, str): ll1 = ll1.split(",")
+    if isinstance(ll2, str): ll2 = ll2.split(",")
+    n1, n2 = len(ll1), len(ll2)
+
+    if not isinstance(ll2, dict) :
+        ll2 = {x:i for i,x in enumerate( ll2 )  }  ### Most costly op, 50% time.
+
+    adjust, mrank = (1.0 * n1) / n2, n2
+    rank2 = np.array([ll2.get(sid, mrank) for sid in ll1])
+    rank1 = np.arange(n1)
+    rank3 = -1.0 / (kk + rank1) - 1.0 / (kk + rank2 * adjust)  ### Score
+
+    # Id of ll1 sorted list
+    v = [ll1[i] for i in np.argsort(rank3)]
+    return v  #### for later preprocess
+    #return ",".join( v)
+
+
+
