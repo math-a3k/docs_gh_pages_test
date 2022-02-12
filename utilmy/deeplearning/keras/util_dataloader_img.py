@@ -2,21 +2,16 @@
 HELP = """
  utils keras for dataloading
 """
-from albumentations.core.composition import Compose
-from numpy import ndarray
-from pandas.core.frame import DataFrame
-from typing import List, Optional, Tuple
-
 import os, numpy as np, glob, pandas as pd
+from pathlib import Path
 from box import Box
-import cv2
+
 import tensorflow as tf
 from tensorflow import keras
-from pathlib import Path
 
 # import tifffile.tifffile
 # from skimage import morphology
-import PIL
+import PIL, cv2
 from PIL import Image
 
 from albumentations import (
@@ -25,6 +20,13 @@ from albumentations import (
     ToFloat, ShiftScaleRotate, Resize,
 )
 from albumentations.core.transforms_interface import ImageOnlyTransform
+
+#### Types
+from albumentations.core.composition import Compose
+from numpy import ndarray
+from pandas.core.frame import DataFrame
+from typing import List, Optional, Tuple
+
 
 
 
@@ -41,7 +43,13 @@ def help():
 
 
 ############################################################################################
-def test() -> None:
+def test_all():
+    test()
+    test1()
+    test2()
+
+
+def test():
     """Tests train and test images transformation functions"""
     image_size = 64
     train_transforms = Compose([
@@ -59,7 +67,7 @@ def test() -> None:
     ])
 
 
-def test1() -> None:
+def test1():
     """Tests image dataloader"""
     from tensorflow.keras.datasets import mnist
     (X_train, y_train), (X_valid, y_valid) = mnist.load_data()
@@ -72,7 +80,7 @@ def test1() -> None:
         break
 
 
-def test2() -> None:  # using predefined df and model training using model.fit()
+def test2():  # using predefined df and model training using model.fit()
     """Tests model training process"""
     from PIL import Image
     from pathlib import Path
@@ -193,7 +201,7 @@ def test_create_random_images_ds2(img_shape: Tuple[int, int, int]=(10, 10, 2), n
 
 ##########################################################################################
 class Transform_sprinkle(ImageOnlyTransform):
-    def __init__(self, num_holes: int=30, side_length: int=5, always_apply: bool=False, p: float=1.0) -> None:
+    def __init__(self, num_holes: int=30, side_length: int=5, always_apply: bool=False, p: float=1.0):
         """ Remove Patches of the image, very efficient for training.
         """
         from tf_sprinkles import Sprinkles
@@ -244,53 +252,15 @@ def transform_get_basic(pars: dict = None):
 
 
 ##########################################################################################
-def pd_sample_strat(df, col, n):
-  ### Stratified sampling
-  n2   = min(n, df[col].value_counts().min())
-  df_ = df.groupby(col).apply(lambda x: x.sample(n = n2, replace=True))
-  df_.index = df_.index.droplevel(0)
-  return df_
-
-def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
-    ### Return cadinat=lity
-    clist = {}
-    for ci in df.columns :
-        ctype   = df[ci].dtype
-        if nsample == -1 :
-            nunique = len(df[ci].unique())
-        else :
-            nunique = len(df.sample(n= nsample, replace=True)[ci].unique())
-
-        if 'float' in  str(ctype) and ci not in cols_exclude and nunique > 5 :
-           clist[ci] = 0
-        else :
-           clist[ci] = nunique
-
-    return clist
-
-
-def pd_label_normalize_freq(df, cols:list)  -> pd.DataFrame :
-   """
-      Resample each class
-
-
-      for ci in cols:
-          nuniques[ci] =  df[ci].nunique()
-
-
-
-   """
-   pass
-
-
 class DataLoader_imgdisk(tf.keras.utils.Sequence):
     """Custom DataGenerator using Keras Sequence for images on disk
         df_label format :
         id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ....
     """
     def __init__(self, img_dir:str="images/", label_dir:str=None, label_dict:dict=None,
-                 col_img: str='uri', batch_size:int=8, transforms: Optional[Compose]=None,
-                 shuffle: bool=True, label_imbalance: bool=True) -> None:
+                 col_img: str='uri', 
+                 batch_size:int=8, transforms: Optional[Compose]=None, shuffle: bool=True, 
+                 label_imbalance_col: str=None, label_imbalance_min_sample:int=100):
         """
         Args:
             img_dir (Path(str)): String path to images directory
@@ -299,7 +269,7 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
             label_dict (dict):    {label_name : list of values }
             split (str, optional): split for train or test. Defaults to 'train'.
             batch_size (int, optional): batch_size for each batch. Defaults to 8.
-            transforms (str, optional):  type of transformations to perform on images. Defaults to None.
+            transforms (str, optional): type of transformations to perform on images. Defaults to None.
         """
         self.batch_size = batch_size
         self.transforms = transforms
@@ -314,16 +284,18 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
         dflabel     = dflabel.dropna()
 
         ### Imablance label
-        #if label_imbalance:
-        #    dflabel = pd_label_normalize_freq(dflabel)
+        if label_imbalance_col is not None:
+            dflabel = pd_sample_equal(dflabel, col= label_imbalance_col, nsample = label_imbalance_min_sample)
 
+        self.dflabel    = dflabel
         self.label_cols = list(label_dict.keys())
-        self.label_df = pd_to_onehot(dflabel, labels_dict=label_dict)  ### One Hot encoding
+        self.label_df   = pd_to_onehot(dflabel, labels_dict=label_dict)  ### One Hot encoding
         self.label_dict = label_dict
 
         assert col_img in self.label_df.columns
 
-    def on_epoch_end(self) -> None:
+
+    def on_epoch_end(self):
         if self.shuffle:
             np.random.seed(12)
             self.label_df = self.label_df.sample(frac=1).reset_index(drop=True)
@@ -369,7 +341,7 @@ class DataLoader_img(tf.keras.utils.Sequence):
           augmentations (str, optional): perform augmentations to the input samples. Defaults to None.
     """
 
-    def __init__(self, x: ndarray, y: ndarray, batch_size: int=32, transform: None=None) -> None:
+    def __init__(self, x: ndarray, y: ndarray, batch_size: int=32, transform: None=None):
         self.x = x
         self.y = y
         self.batch_size = batch_size
@@ -391,6 +363,45 @@ class DataLoader_img(tf.keras.utils.Sequence):
 
 ##########################################################################################
 if 'utils':
+    def pd_sample_equal(df, col, nsampl=100):
+        ### Stratified under-sampling, using the least frequent from category col
+        n2  = min(nsample, df[col].value_counts().min())
+        df_ = df.groupby(col).apply(lambda x: x.sample(n = n2, replace=True))
+        df_.index = df_.index.droplevel(0)
+        return df_
+
+    def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
+        ### Return cadinat=lity
+        clist = {}
+        for ci in df.columns :
+            ctype   = df[ci].dtype
+            if nsample == -1 :
+                nunique = len(df[ci].unique())
+            else :
+                nunique = len(df.sample(n= nsample, replace=True)[ci].unique())
+
+            if 'float' in  str(ctype) and ci not in cols_exclude and nunique > 5 :
+               clist[ci] = 0
+            else :
+               clist[ci] = nunique
+
+        return clist
+
+
+    def pd_label_normalize_freq(df, cols:list)  -> pd.DataFrame :
+        """
+            Resample each class
+
+
+            for ci in cols:
+                nuniques[ci] =  df[ci].nunique()
+
+
+
+        """
+        pass
+
+
     def get_data_sample(batch_size, x_train, ylabel_dict, ylabel_name):  # name changed
         """ Get a data sample with batch size from dataset
         Args:
@@ -544,11 +555,13 @@ if 'utils':
                     id_cnt += 1
         return tfrecord_out_path
 
+
 ###################################################################################################
 if __name__ == "__main__":
     import fire
 
     fire.Fire()
+
 
 """
 class Dataloader_img_disk_custom(tf.keras.utils.Sequence):        
