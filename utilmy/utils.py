@@ -16,6 +16,85 @@ from loguru import logger
 
 
 #####################################################################
+def load_function(package="mlmodels.util", name="path_norm"):
+  import importlib
+  return  getattr(importlib.import_module(package), name)
+
+
+
+def load_function_uri(uri_name="path_norm"):
+    """ Load dynamically function from URI
+
+    ###### Pandas CSV case : Custom MLMODELS One
+    #"dataset"        : "mlmodels.preprocess.generic:pandasDataset"
+
+    ###### External File processor :
+    #"dataset"        : "MyFolder/preprocess/myfile.py:pandasDataset"
+
+    """
+    
+    import importlib, sys
+    from pathlib import Path
+    pkg = uri_name.split(":")
+
+    assert len(pkg) > 1, "  Missing :   in  uri_name module_name:function_or_class "
+    package, name = pkg[0], pkg[1]
+    
+    try:
+        #### Import from package mlmodels sub-folder
+        return  getattr(importlib.import_module(package), name)
+
+    except Exception as e1:
+        try:
+            ### Add Folder to Path and Load absoluate path module
+            path_parent = str(Path(package).parent.parent.absolute())
+            sys.path.append(path_parent)
+            #log(path_parent)
+
+            #### import Absolute Path model_tf.1_lstm
+            model_name   = Path(package).stem  # remove .py
+            package_name = str(Path(package).parts[-2]) + "." + str(model_name)
+            #log(package_name, model_name)
+            return  getattr(importlib.import_module(package_name), name)
+
+        except Exception as e2:
+            raise NameError(f"Module {pkg} notfound, {e1}, {e2}")
+
+
+def load_callable_from_uri(uri):
+    assert(len(uri)>0 and ('::' in uri or '.' in uri))
+    if '::' in uri:
+        module_path, callable_name = uri.split('::')
+    else:
+        module_path, callable_name = uri.rsplit('.',1)
+    if os.path.isfile(module_path):
+        module_name = '.'.join(module_path.split('.')[:-1])
+        spec = importlib.util.spec_from_file_location(module_name, module_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+    else:
+        module = importlib.import_module(module_path)
+    return dict(getmembers(module))[callable_name]
+        
+
+def load_callable_from_dict(function_dict, return_other_keys=False):
+    function_dict = function_dict.copy()
+    uri = function_dict.pop('uri')
+    func = load_callable_from_uri(uri)
+    try:
+        assert(callable(func))
+    except:
+        raise TypeError(f'{func} is not callable')
+    arg = function_dict.pop('arg', {})
+    if not return_other_keys:
+        return func, arg
+    else:
+        return func, arg, function_dict
+    
+
+
+
+#####################################################################
 def test_all():
     """
     #### python test.py   test_utils
