@@ -28,63 +28,44 @@ def help():
 
 
 
-
-def model_fit(name='imodel.SLIMRegressor', model_pars:dict=None, data_pars:dict=None, **kw):
-    # installable with: `pip install imodels`
-    from imodels import SLIMRegressor, BayesianRuleListClassifier, RuleFitRegressor, GreedyRuleListClassifier
-    from imodels import SLIMClassifier, OneRClassifier, BoostedRulesClassifier
-    from imodels.util.convert import tree_to_code
+#############################################################################################
+def test_all():
+    test1()
 
 
-    from utilmy.utils import load_function_uri
+def test1():
+    d = Box({})
+    d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_reg_boston_data()
+    d.task_type = 'regressor'
 
-    d = Box(data_pars) if data_pars is not None else Box({})
-
-    name = name.replace(".", ":")
-
-    Model0 = load_function_uri(name)
-    model  = Model0(**model_pars)
-
-
-    # brc = BoostedRulesClassifier(n_estimators=10)
-    model.fit(d.X_train, d.y_train, feature_names=d.feat_names)
-    log(model)
-
-    # look at performance
-    probs = model.predict_proba(X_test)
-    model_viz_classification_preds(probs, y_test)
+    """
+      imodels.SLIMRegressor, RuleFitRegressor, 
+      GreedyRuleListClassifier,  BayesianRuleListClassifier, 
+      imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
 
 
+    """
 
 
-def model_save(model, dirout=""):
-  pass
+    mlist = [ ('imodels.RuleFitRegressor', {'max_rules':10},  ), 
+              ('imodels.SLIMRegressor',    {'alpha': 0.01)},  ) 
+            
+             
+    ]
 
+    for m in mlist :
+        d.task_type = 'regressor' if 'Regressor' in m[0] else 'classifier'
+        model = model_fit(name       = m[0] , 
+                          model_pars = m[1], 
+                          data_pars=d, do_eval=True )
+        model_save(model, 'mymodel/')
 
-def model_load(dirin=""):
-  pass
-
-
-def model_viz_classification_preds(probs, y_test):
-    '''look at prediction breakdown
-    '''
-    plt.subplot(121)
-    plt.hist(probs[:, 1][y_test==0], label='Class 0')
-    plt.hist(probs[:, 1][y_test==1], label='Class 1', alpha=0.8)
-    plt.ylabel('Count')
-    plt.xlabel('Predicted probability of class 1')
-    plt.legend()
-    
-    plt.subplot(122)
-    preds = np.argmax(probs, axis=1)
-    plt.title('ROC curve')
-    fpr, tpr, thresholds = metrics.roc_curve(y_test, preds)
-    plt.xlabel('False positive rate')
-    plt.ylabel('True positive rate')
-    plt.plot(fpr, tpr)
-    plt.tight_layout()
-    plt.show()
-
+        # reLoad model and check
+        model2 = model_load('mymodel/')
+        
+        try :
+          model_extract_rules(model2)
+        except : pass
 
 
 def test_imodels():
@@ -327,6 +308,175 @@ def test_imodels():
         model.fit(X_sim, y_sim, lambda_reg)
         mll = np.mean(metrics.log_loss(y_sim, model.predict(X_sim)))
         print(f'lambda: {lambda_reg}\tmlogloss: {mll: 0.2f}\tweights: {model.model_.coef_}')
+
+
+
+#############################################################################################
+def model_fit(name='imodels.SLIMRegressor', model_pars:dict=None, data_pars:dict=None, do_eval=True, **kw):
+    """  
+      imodels.SLIMRegressor, BayesianRuleListClassifier, RuleFitRegressor, GreedyRuleListClassifier
+      imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
+
+    """
+    from imodels.util.convert import tree_to_code
+    from sklearn import metrics
+
+    from utilmy.utils import load_function_uri
+    d = Box(data_pars) if data_pars is not None else Box({})
+
+    log("#### model load")    
+    name = name.replace(".", ":")
+    Model0 = load_function_uri(name)
+    model  = Model0(**model_pars)
+
+    log("#### model fit")    ###  brc = BoostedRulesClassifier(n_estimators=10)
+    model.fit(d.X_train, d.y_train, feature_names=d.feat_names)
+    log(model)
+
+    ### d.get('task_type', 'classifier')
+    if do_eval :
+      model_evaluate(model, data_pars)
+
+    return model
+
+
+def model_save(model, path=None, info=None):
+    import cloudpickle as pickle
+    os.makedirs(path, exist_ok=True)
+    filename = "model.pkl"
+    pickle.dump(model, open(f"{path}/{filename}", mode='wb'))  # , protocol=pickle.HIGHEST_PROTOCOL )
+
+    filename = "info.pkl"
+    info = {} if info is None else info
+    pickle.dump(info, open(f"{path}/{filename}", mode='wb'))   # ,protocol=pickle.HIGHEST_PROTOCOL )
+
+
+def model_load(path=""):
+    import cloudpickle as pickle
+    model0 = pickle.load(open(f"{path}/model.pkl", mode='rb'))
+    return model0
+
+
+def model_info(path=""):
+    import cloudpickle as pickle
+    model0 = pickle.load(open(f"{path}/info.pkl", mode='rb'))
+    return model0
+
+
+def model_viz_classification_preds(probs, y_test):
+    '''look at prediction breakdown
+    '''
+    plt.subplot(121)
+    plt.hist(probs[:, 1][y_test==0], label='Class 0')
+    plt.hist(probs[:, 1][y_test==1], label='Class 1', alpha=0.8)
+    plt.ylabel('Count')
+    plt.xlabel('Predicted probability of class 1')
+    plt.legend()
+    
+    plt.subplot(122)
+    preds = np.argmax(probs, axis=1)
+    plt.title('ROC curve')
+    fpr, tpr, thresholds = metrics.roc_curve(y_test, preds)
+    plt.xlabel('False positive rate')
+    plt.ylabel('True positive rate')
+    plt.plot(fpr, tpr)
+    plt.tight_layout()
+    plt.show()
+
+
+def model_evaluate(model, data_pars:dict):
+    """ Evaluate model
+
+    """
+    d = Box(data_pars) if data_pars is not None else Box({})
+    task_type = d.get('task_type', 'classifier')
+    if task_type == 'classifier' :
+      probs = model.predict_proba(d.X_test)
+      model_viz_classification_preds(probs, d.y_test)
+    else :
+      # get test performance
+      preds = model.predict(d.X_test)
+      print(f'test r2: {metrics.r2_score(d.y_test, preds):0.2f}')
+
+
+def model_extract_rules(model):
+    """ From imodel extract rules
+       # 'rule' is how the feature is constructed
+       # 'coef' is its weight in the final linear model
+       # 'support' is the fraction of points it applies to
+    """ 
+    rules =  model.get_rules()
+
+    # inspect and print the rules
+    rules = rules[rules.coef != 0].sort_values("support", ascending=False)
+
+    display(rules[['rule', 'coef', 'support']].style.background_gradient(cmap='viridis'))
+
+
+
+
+#############################################################################################
+def get_reg_boston_data():
+    '''load (regression) data on boston housing prices
+    '''
+    X_reg, y_reg = load_boston(return_X_y=True)
+    feature_names = load_boston()['feature_names']
+    X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_reg, y_reg, test_size=0.75) # split
+    return X_train_reg, X_test_reg, y_train_reg, y_test_reg, feature_names
+
+
+def get_diabetes_data():
+    '''load (classification) data on diabetes
+    '''
+    data = loadarff("content/imodels/imodels/tests/test_data/diabetes.arff")
+    data_np = np.array(list(map(lambda x: np.array(list(x)), data[0])))
+    X = data_np[:, :-1].astype('float32')
+    y_text = data_np[:, -1].astype('str')
+    y = (y_text == 'tested_positive').astype(int)  # labels 0-1
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.75) # split
+    feature_names = ["#Pregnant","Glucose concentration test","Blood pressure(mmHg)","Triceps skin fold thickness(mm)",
+                "2-Hour serum insulin (mu U/ml)","Body mass index","Diabetes pedigree function","Age (years)"]
+    return X_train, X_test, y_train, y_test, feature_names
+    
+
+def load_function_uri(uri_name="path_norm"):
+    """ Load dynamically function from URI
+    ###### Pandas CSV case : Custom MLMODELS One
+    #"dataset"        : "mlmodels.preprocess.generic:pandasDataset"
+
+    ###### External File processor :
+    #"dataset"        : "MyFolder/preprocess/myfile.py:pandasDataset"
+    """
+    import importlib, sys
+    from pathlib import Path
+    pkg = uri_name.split(":")
+
+    assert len(pkg) > 1, "  Missing :   in  uri_name module_name:function_or_class "
+    package, name = pkg[0], pkg[1]
+    
+    try:
+        #### Import from package mlmodels sub-folder
+        return  getattr(importlib.import_module(package), name)
+
+    except Exception as e1:
+        try:
+            ### Add Folder to Path and Load absoluate path module
+            path_parent = str(Path(package).parent.parent.absolute())
+            sys.path.append(path_parent)
+            #log(path_parent)
+
+            #### import Absolute Path model_tf.1_lstm
+            model_name   = Path(package).stem  # remove .py
+            package_name = str(Path(package).parts[-2]) + "." + str(model_name)
+            #log(package_name, model_name)
+            return  getattr(importlib.import_module(package_name), name)
+
+        except Exception as e2:
+            raise NameError(f"Module {pkg} notfound, {e1}, {e2}")
+
+
+
+
 
 
 
