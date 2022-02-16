@@ -48,7 +48,7 @@ def test1():
 
 
     mlist = [ ('imodels.RuleFitRegressor', {'max_rules':10},  ), 
-              ('imodels.SLIMRegressor',    {'alpha': 0.01)},  ) 
+              ('imodels.SLIMRegressor',    {'alpha': 0.01},  ) 
             
              
     ]
@@ -312,7 +312,7 @@ def test_imodels():
 
 
 #############################################################################################
-def model_fit(name='imodels.SLIMRegressor', model_pars:dict=None, data_pars:dict=None, do_eval=True, **kw):
+def model_fit(name:str='imodels.SLIMRegressor', model_pars:dict=None, data_pars:dict=None, do_eval=True, **kw):
     """  
       imodels.SLIMRegressor, BayesianRuleListClassifier, RuleFitRegressor, GreedyRuleListClassifier
       imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
@@ -363,7 +363,7 @@ def model_info(path=""):
     return model0
 
 
-def model_viz_classification_preds(probs, y_test):
+def model_viz_classification_preds(probs:list, y_test:list):
     '''look at prediction breakdown
     '''
     plt.subplot(121)
