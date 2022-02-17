@@ -88,36 +88,11 @@ def test():
     })
     print(arg)
 
-
     arg.model_info = model_info
     arg.merge = 'cat'
     arg.input_dim = 20   ### 20
     arg.output_dim = 1
 
-
-    #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
-    #import wget 
-    #wget.download(url)
-    #datadf = pd.read_csv("./cardio_train.csv",delimiter=';')
-    #df = datadf.drop(['id'], axis=1)
-
-    # loss_task_func = nn.BCELoss()
-
-    # device = arg.device
-    # seed = arg.seed
-    #random.seed(seed)
-    #np.random.seed(seed)
-    #torch.manual_seed(seed)
-    #torch.cuda.manual_seed(seed)
-    #torch.cuda.manual_seed_all(seed)
-    #torch.backends.cudnn.deterministic = True
-    #torch.backends.cudnn.benchmark = False
-    # datapath = arg.datapath
-
-    # arg.output_dim_encoder = arg.output_dim_encoder
-    # arg.hidden_dim_encoder = arg.hidden_dim_encoder
-    # arg.hidden_dim_db = arg.arg.hidden_dim_db
-    # arg.n_layers = arg.arg.n_layers
 
     ### device setup
     device = device_setup(arg)
@@ -141,17 +116,9 @@ def test():
 
 
     #### Test
-    model_eval, loss_task_func = model_load(arg)
+    model_eval, losses = model_load(arg)
 
-    #model_eval = model_build(arg=arg, mode='test')
-    #checkpoint = torch.load( arg.saved_filename)
-    #model_eval.load_state_dict(checkpoint['model_state_dict'])
-    #print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
-    #loss_task_func = nn.BCELoss()
-
-
-
-    model_evaluation(model_eval, loss_task_func, arg=arg)
+    model_evaluation(model_eval, losses.loss_task_func , arg=arg)
          
 
 
@@ -295,13 +262,13 @@ def model_load(arg):
     model_eval.load_state_dict(checkpoint['model_state_dict'])
     print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
     
-    loss_task_func = nn.BCELoss()
-    return model_eval, loss_task_func
+
+    ll = Box({})
+    ll.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))      
+    ll.loss_task_func = nn.BCELoss()
+    return model_eval, ll # (loss_task_func, loss_rule_func)
     # model_evaluation(model_eval, loss_task_func, arg=arg)
          
-
-
-
 
 def model_build(arg, mode='train'):
   # device, seed, datapath, input_dim, arg.output_dim,arg.output_dim_encoder, arg.hidden_dim_encoder, arg.hidden_dim_db, arg.n_layers,merge= arguments(arg)
@@ -362,8 +329,6 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
     model_type=arg.model_type
     rule_feature = 'ap_hi'
     seed=arg.seed
-    #saved_filename = 'cardio_{}_rule-{}_src{}-target{}_seed{}.demo.pt'.format(model_type, rule_feature, src_usual_ratio, src_usual_ratio, seed)
-    #saved_filename =  os.path.join("/content/drive/MyDrive/", saved_filename)
     print('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
 
@@ -450,11 +415,10 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
 
 
 def model_evaluation(model_eval, loss_task_func, arg):
-    df = dataset_load(arg)
 
-    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)
-           
     ### Create dataloader
+    df = dataset_load(arg)
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)           
     train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
 
     model_eval.eval()
