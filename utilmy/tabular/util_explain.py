@@ -407,23 +407,25 @@ def model_info(path=""):
 def model_viz_classification_preds(probs:list, y_test:list):
     '''look at prediction breakdown
     '''
-    plt.subplot(121)
-    plt.hist(probs[:, 1][y_test==0], label='Class 0')
-    plt.hist(probs[:, 1][y_test==1], label='Class 1', alpha=0.8)
-    plt.ylabel('Count')
-    plt.xlabel('Predicted probability of class 1')
-    plt.legend()
-    
-    plt.subplot(122)
-    preds = np.argmax(probs, axis=1)
-    plt.title('ROC curve')
-    fpr, tpr, thresholds = metrics.roc_curve(y_test, preds)
-    plt.xlabel('False positive rate')
-    plt.ylabel('True positive rate')
-    plt.plot(fpr, tpr)
-    plt.tight_layout()
-    plt.show()
-
+    try :
+        plt.subplot(121)
+        plt.hist(probs[:, 1][y_test==0], label='Class 0')
+        plt.hist(probs[:, 1][y_test==1], label='Class 1', alpha=0.8)
+        plt.ylabel('Count')
+        plt.xlabel('Predicted probability of class 1')
+        plt.legend()
+        
+        plt.subplot(122)
+        preds = np.argmax(probs, axis=1)
+        plt.title('ROC curve')
+        fpr, tpr, thresholds = metrics.roc_curve(y_test, preds)
+        plt.xlabel('False positive rate')
+        plt.ylabel('True positive rate')
+        plt.plot(fpr, tpr)
+        plt.tight_layout()
+        plt.show()
+    except Exception as e :
+        log(e)
 
 def model_evaluate(model, data_pars:dict):
     """ Evaluate model
@@ -433,6 +435,7 @@ def model_evaluate(model, data_pars:dict):
     task_type = d.get('task_type', 'classifier')
     if task_type == 'classifier' :
       probs = model.predict_proba(d.X_test)
+      log(probs)
       model_viz_classification_preds(probs, d.y_test)
     else :
       # get test performance
