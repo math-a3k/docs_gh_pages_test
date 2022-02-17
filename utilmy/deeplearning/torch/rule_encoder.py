@@ -121,7 +121,7 @@ def test():
            
 
     ### Create dataloader
-    train_loader, valid_loader, test_loader = dataloader_create( (train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y), args)
+    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y, args)
 
     ### Model Build
     model, optimizer, (loss_rule_func, loss_task_func) = model_build(args=args)
