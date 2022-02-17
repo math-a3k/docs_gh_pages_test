@@ -55,8 +55,8 @@ def test():
       "dataurl":  "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv",
       "datapath": './cardio_train.csv',
       "rule_threshold": 129.5,
-      "src_usual_ratio": 0.3,
-      "src_unusual_ratio": 0.7,
+      "src_ok_ratio": 0.3,
+      "src_unok_ratio": 0.7,
       "target_rule_ratio": 0.7,
 
       "seed": 42,
@@ -119,7 +119,7 @@ def test():
 
 
 
-#####################################################################################################################
+##############################################################################################
 def dataset_load(arg):
   # Load dataset
   #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
@@ -164,62 +164,72 @@ def dataset_preprocess(df, arg):
     )
 
     X = column_trans.fit_transform(X_raw)
-    num_samples = X.shape[0]
+    nsamples = X.shape[0]
     X_np = X.copy()
 
 
-    ######## Rule : higher ap -> higher risk   ####################
-    """  Identify Class y=0 /1 from rules
+    ######## Rule : higher ap -> higher risk   ######################
+    """  Identify Class y=0 /1 from rule 1
 
     """
     rule_threshold = arg.rule_threshold
     rule_ind       = arg.rule_ind
     rule_feature   = 'ap_hi'
 
-    low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # usual
-    high_ap_positive = (df[rule_feature] > rule_threshold) & (df[coly] == 1)    # usual
-    low_ap_positive  = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unusual
-    high_ap_negative = (df[rule_feature] > rule_threshold) & (df[coly] == 0)    # unusual
+    #### Ok cases: nornal
+    low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # ok
+    high_ap_positive = (df[rule_feature] > rule_threshold)  & (df[coly] == 1)    # ok
+
+    ### Outlier cases (from rule)
+    low_ap_positive  = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unok
+    high_ap_negative = (df[rule_feature] > rule_threshold)  & (df[coly] == 0)    # unok
+
+    #################################################################
 
 
-   #################################################################
-    # Samples in Usual group
-    X_usual = X[low_ap_negative | high_ap_positive]
-    y_usual = y[low_ap_negative | high_ap_positive]
-    y_usual = y_usual.to_numpy()
-    X_usual, y_usual = shuffle(X_usual, y_usual, random_state=0)
-    num_usual_samples = X_usual.shape[0]
+    #################################################################
+    # Samples in ok group
+    idx_ok = low_ap_negative | high_ap_positive
 
-    # Samples in Unusual group
-    X_unusual = X[low_ap_positive | high_ap_negative]
-    y_unusual = y[low_ap_positive | high_ap_negative]
-    y_unusual = y_unusual.to_numpy()
-    X_unusual, y_unusual = shuffle(X_unusual, y_unusual, random_state=0)
-    num_unusual_samples = X_unusual.shape[0]
+    X_ok = X[low_ap_negative | high_ap_positive]
+    y_ok = y[low_ap_negative | high_ap_positive]
+    y_ok = y_ok.to_numpy()
+    X_ok, y_ok = shuffle(X_ok, y_ok, random_state=0)
+    num_ok_samples = X_ok.shape[0]
 
-    # Build a source dataset
-    src_usual_ratio = arg.src_usual_ratio
-    src_unusual_ratio = arg.src_unusual_ratio
-    num_samples_from_unusual = int(src_unusual_ratio * num_unusual_samples)
-    num_samples_from_usual = int(num_samples_from_unusual * src_usual_ratio / (1-src_usual_ratio))
 
-    X_src = np.concatenate((X_usual[:num_samples_from_usual], X_unusual[:num_samples_from_unusual]), axis=0)
-    y_src = np.concatenate((y_usual[:num_samples_from_usual], y_unusual[:num_samples_from_unusual]), axis=0)
+    # Samples in Unok group
+    idx_unok = low_ap_negative | high_ap_positive
+
+    X_unok = X[low_ap_positive | high_ap_negative]
+    y_unok = y[low_ap_positive | high_ap_negative]
+    y_unok = y_unok.to_numpy()
+    X_unok, y_unok = shuffle(X_unok, y_unok, random_state=0)
+    num_unok_samples = X_unok.shape[0]
+
+
+    ######### Build a source dataset
+    nsamples_from_unok = int(arg.src_unok_ratio * num_unok_samples)
+    nsamples_from_ok   = int(nsamples_from_unok * arg.src_ok_ratio / (1- arg.src_ok_ratio))
+
+    X_src = np.concatenate((X_ok[:nsamples_from_ok], X_unok[:nsamples_from_unok]), axis=0)
+    y_src = np.concatenate((y_ok[:nsamples_from_ok], y_unok[:nsamples_from_unok]), axis=0)
 
     log("Source dataset statistics:")
-    log("# of samples in Usual group: {}".format(num_samples_from_usual))
-    log("# of samples in Unusual group: {}".format(num_samples_from_unusual))
-    log("Usual ratio: {:.2f}%".format(100 * num_samples_from_usual / (X_src.shape[0])))
-    seed= 42
+    log("# of samples in ok group: {}".format(nsamples_from_ok))
+    log("# of samples in Unok group: {}".format(nsamples_from_unok))
+    log("ok ratio: {:.2f}%".format(100 * nsamples_from_ok / (X_src.shape[0])))
+
 
     ##### Split   #####################
-    train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - arg.train_ratio, random_state=seed)
-    valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
+    seed= 42    
+    train_X, test_X, train_y, test_y = train_test_split(X_src,  y_src,  test_size=1 - arg.train_ratio, random_state=seed)
+    valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size= arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
     return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
 
 
 
-#####################################################################################################################
+###############################################################################################
 def device_setup(arg):
     device = arg.device
     seed   = arg.seed
@@ -339,8 +349,8 @@ def model_train(model, optimizer, losses, train_loader, valid_loader, arg, argm:
     early_stopping_thld    = arg.early_stopping_thld
     counter_early_stopping = 1
     valid_freq = arg.valid_freq 
-    src_usual_ratio = arg.src_usual_ratio
-    src_unusual_ratio = arg.src_unusual_ratio
+    src_ok_ratio = arg.src_ok_ratio
+    src_unok_ratio = arg.src_unok_ratio
     model_type=arg.model_type
     seed=arg.seed
     log('saved_filename: {}\n'.format( arg.saved_filename))
