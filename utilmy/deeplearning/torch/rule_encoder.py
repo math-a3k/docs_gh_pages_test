@@ -124,7 +124,7 @@ def dataset_load(arg):
   # Load dataset
   #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
   import wget, glob 
-  if glob.glob(arg.datapath) < 1 :
+  if len(glob.glob(arg.datapath)) < 1 :
      if 'dataurl' not in arg : raise Exception('no dataurl in arg') 
      wget.download(arg.dataurl)
 
