@@ -87,7 +87,7 @@ def test2():
     mlist = [ # ('imodels.FIGSClassifier',      {'max_rules':10},  ), 
               # ('imodels.HSTreeClassifierCV',  {'estimator': None, 'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring': None},  ), 
              
-              ('imodels.RuleFitClassifier',   {'max_rules':10},  ), 
+              #('imodels.RuleFitClassifier',   {'max_rules':10},  ), 
                          
     ]
 
@@ -523,6 +523,13 @@ def load_function_uri(uri_name="path_norm"):
 
 
 
+
+
+###################################################################################################
+if __name__ == "__main__":
+    import fire
+
+    fire.Fire()
 
 
 
