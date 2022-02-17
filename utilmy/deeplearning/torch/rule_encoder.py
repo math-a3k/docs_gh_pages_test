@@ -145,11 +145,11 @@ def test():
     #rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
     #data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
     #model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge=args.merge).to(args.device)    # Not residual connection
-    '''
-    checkpoint = torch.load(saved_filename)
+
+    checkpoint = torch.load( args.saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
     print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
-    '''
+    
 
     model_evaluation(model_eval, args=args)
          
@@ -166,12 +166,9 @@ def dataset_load(args):
   df = pd.read_csv(args.datapath,delimiter=';')
   log(df, df.columns, df.shape)
 
-  y = df['cardio']
-  #X_raw = df.drop(['cardio'], axis=1)
+  # y = df['cardio']
+  # X_raw = df.drop(['cardio'], axis=1)
 
-  print("Target class ratio:")
-  print("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
-  print("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
   return df
 
 
@@ -179,6 +176,10 @@ def dataset_preprocess(df, args):
 
     y     = df['cardio']
     X_raw = df.drop(['cardio'], axis=1)    
+
+    print("Target class ratio:")
+    print("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
+    print("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
 
     column_trans = ColumnTransformer(
         [('age_norm', StandardScaler(), ['age']),
@@ -287,6 +288,8 @@ def dataloader_create(train_X, test_X, train_y, test_y, valid_X, valid_y,  args)
     return train_loader, valid_loader, test_loader
 
 
+
+
 def model_build(args, mode='train'):
   # device, seed, datapath, input_dim, args.output_dim,args.output_dim_encoder, args.hidden_dim_encoder, args.hidden_dim_db, args.n_layers,merge= arguments(args)
   # device = device_setup(args)
@@ -346,9 +349,9 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
     model_type=args.model_type
     rule_feature = 'ap_hi'
     seed=args.seed
-    saved_filename = 'cardio_{}_rule-{}_src{}-target{}_seed{}.demo.pt'.format(model_type, rule_feature, src_usual_ratio, src_usual_ratio, seed)
-    saved_filename =  os.path.join("/content/drive/MyDrive/", saved_filename)
-    print('saved_filename: {}\n'.format(saved_filename))
+    #saved_filename = 'cardio_{}_rule-{}_src{}-target{}_seed{}.demo.pt'.format(model_type, rule_feature, src_usual_ratio, src_usual_ratio, seed)
+    #saved_filename =  os.path.join("/content/drive/MyDrive/", saved_filename)
+    print('saved_filename: {}\n'.format( args.saved_filename))
     best_val_loss = float('inf')
 
     for epoch in range(1, epochs+1):
