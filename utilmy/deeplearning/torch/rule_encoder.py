@@ -52,16 +52,15 @@ def test():
                 }
 
     arg = Box({
+      "dataurl":  "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv",
       "datapath": './cardio_train.csv',
       "rule_threshold": 129.5,
       "src_usual_ratio": 0.3,
       "src_unusual_ratio": 0.7,
       "target_rule_ratio": 0.7,
 
-
       "seed": 42,
       "device": 'cpu',  ### 'cuda:0',
-
 
 
       "batch_size": 32,
@@ -123,9 +122,11 @@ def test():
 #####################################################################################################################
 def dataset_load(arg):
   # Load dataset
-  url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
-  import wget 
-  wget.download(url)
+  #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
+  import wget, glob 
+  if glob.glob(arg.datapath) < 1 :
+     if 'dataurl' not in arg : raise Exception('no dataurl in arg') 
+     wget.download(arg.dataurl)
 
   df = pd.read_csv(arg.datapath,delimiter=';')
   log(df, df.columns, df.shape)
