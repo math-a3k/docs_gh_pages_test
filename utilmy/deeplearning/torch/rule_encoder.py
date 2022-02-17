@@ -327,6 +327,9 @@ def model_build(arg, mode='train'):
 def model_train(model, optimizer, losses, train_loader, valid_loader, arg, argm:dict=None ):
 
 
+    rule_feature = 'ap_hi'
+
+
     argm = Box(argm) if argm is not None else Box({})
 
     loss_rule_func, loss_task_func = losses.loss_rule_func, losses.loss_task_func
@@ -338,7 +341,6 @@ def model_train(model, optimizer, losses, train_loader, valid_loader, arg, argm:
     src_usual_ratio = arg.src_usual_ratio
     src_unusual_ratio = arg.src_unusual_ratio
     model_type=arg.model_type
-    rule_feature = 'ap_hi'
     seed=arg.seed
     log('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
