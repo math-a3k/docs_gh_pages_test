@@ -100,11 +100,11 @@ def test():
     df = dataset_load(arg)
 
     ### dataset preprocess
-    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)
+    train_X, train_y, valid_X,  valid_y, test_X,  test_y  = dataset_preprocess(df, arg)
            
 
     ### Create dataloader
-    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
+    train_loader, valid_loader, test_loader = dataloader_create( train_X, train_y, valid_X, valid_y, test_X, test_y,  arg)
 
     ### Model Build
     model, optimizer, losses = model_build(arg=arg)
@@ -212,7 +212,8 @@ def dataset_preprocess(df, arg):
     test_ratio = arg.test_ratio
     train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=test_ratio / (test_ratio + validation_ratio), random_state=seed)
-    return (train_X, test_X, train_y, test_y, valid_X,  valid_y)
+    #return (train_X, test_X, train_y, test_y, valid_X,  valid_y)
+    return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
 
 
 
@@ -236,21 +237,24 @@ def device_setup(arg):
     return device
 
 
-def dataloader_create(train_X, test_X, train_y, test_y, valid_X, valid_y,  arg):
-    #device= device_setup(arg)
-    # train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = X
-    # rain_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y=dataset_preprocess(X_raw, y, arg)
-    train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=arg.device), torch.tensor(train_y, dtype=torch.float32, device=arg.device)
-    valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=arg.device), torch.tensor(valid_y, dtype=torch.float32, device=arg.device)
-    test_X, test_y = torch.tensor(test_X,    dtype=torch.float32, device=arg.device), torch.tensor(test_y, dtype=torch.float32, device=arg.device)
-
+def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, test_X=None, test_y=None,  arg):
     batch_size = arg.batch_size
+    train_loader, valid_loader, test_loader = None, None, None
 
-    
-    train_loader = DataLoader(TensorDataset(train_X, train_y), batch_size=batch_size, shuffle=True)
-    valid_loader = DataLoader(TensorDataset(valid_X, valid_y), batch_size=valid_X.shape[0])
-    test_loader = DataLoader(TensorDataset(test_X, test_y), batch_size=test_X.shape[0])
-    print("data size: {}/{}/{}".format(len(train_X), len(valid_X), len(test_X)))
+    if train_X is not None : 
+        train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=arg.device), torch.tensor(train_y, dtype=torch.float32, device=arg.device)
+        train_loader = DataLoader(TensorDataset(train_X, train_y), batch_size=batch_size, shuffle=True)
+        print("data size", len(train_X) )
+
+    if valid_X is not None : 
+        valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=arg.device), torch.tensor(valid_y, dtype=torch.float32, device=arg.device)
+        valid_loader = DataLoader(TensorDataset(valid_X, valid_y), batch_size=valid_X.shape[0])
+        print("data size", len(valid_X)  )
+
+    if test_X  is not None : 
+        test_X, test_y   = torch.tensor(test_X,  dtype=torch.float32, device=arg.device), torch.tensor(test_y, dtype=torch.float32, device=arg.device)
+        test_loader  = DataLoader(TensorDataset(test_X, test_y), batch_size=test_X.shape[0])
+        print("data size:", len(test_X) )
 
     return train_loader, valid_loader, test_loader
 
