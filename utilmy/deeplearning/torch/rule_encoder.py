@@ -117,11 +117,11 @@ def test():
     df, X_raw, y = dataset_load(args)
 
     ### dataset preprocess
-    train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = dataset_preprocess(X_raw, y, df, args)
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(X_raw, y, df, args)
            
 
     ### Create dataloader
-    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y, args)
+    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, args)
 
     ### Model Build
     model, optimizer, (loss_rule_func, loss_task_func) = model_build(args=args)
@@ -230,7 +230,7 @@ def dataset_preprocess(X_raw, y, df, args):
     test_ratio = args.test_ratio
     train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=test_ratio / (test_ratio + validation_ratio), random_state=seed)
-    return (train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y)
+    return (train_X, test_X, train_y, test_y, valid_X,  valid_y)
 
 
 
@@ -248,7 +248,7 @@ def device_setup(args):
     return device
 
 
-def dataloader_create(train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y, args):
+def dataloader_create(train_X, test_X, train_y, test_y, valid_X, valid_y,  args):
     #device= device_setup(args)
     # train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = X
     # rain_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y=dataset_preprocess(X_raw, y, args)
