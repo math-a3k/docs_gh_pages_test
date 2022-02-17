@@ -29,7 +29,7 @@ from utilmy import log, log2
 def help():
     from utilmy import help_create
     ss = HELP + help_create(MNAME)
-    print(ss)
+    log(ss)
 
 
 #############################################################################################
@@ -85,12 +85,11 @@ def test():
       'saved_filename' :'./model.pt',
 
     })
-    print(arg)
-
     arg.model_info = model_info
     arg.merge = 'cat'
     arg.input_dim = 20   ### 20
     arg.output_dim = 1
+    log(arg)
 
 
     ### device setup
@@ -101,14 +100,14 @@ def test():
 
     ### dataset preprocess
     train_X, train_y, valid_X,  valid_y, test_X,  test_y  = dataset_preprocess(df, arg)
-           
+
+
 
     ### Create dataloader
     train_loader, valid_loader, test_loader = dataloader_create( train_X, train_y, valid_X, valid_y, test_X, test_y,  arg)
 
     ### Model Build
     model, optimizer, losses = model_build(arg=arg)
-
 
     ### Model Train
     model_train(model, optimizer, losses.loss_rule_func, losses.loss_task_func, train_loader, valid_loader, arg=arg )
@@ -144,9 +143,9 @@ def dataset_preprocess(df, arg):
     y     = df[coly]
     X_raw = df.drop([coly], axis=1)    
 
-    print("Target class ratio:")
-    print("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
-    print("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
+    log("Target class ratio:")
+    log("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
+    log("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
 
     column_trans = ColumnTransformer(
         [('age_norm', StandardScaler(), ['age']),
@@ -206,19 +205,16 @@ def dataset_preprocess(df, arg):
 
     X_src = np.concatenate((X_usual[:num_samples_from_usual], X_unusual[:num_samples_from_unusual]), axis=0)
     y_src = np.concatenate((y_usual[:num_samples_from_usual], y_unusual[:num_samples_from_unusual]), axis=0)
-    print()
-    print("Source dataset statistics:")
-    print("# of samples in Usual group: {}".format(num_samples_from_usual))
-    print("# of samples in Unusual group: {}".format(num_samples_from_unusual))
-    print("Usual ratio: {:.2f}%".format(100 * num_samples_from_usual / (X_src.shape[0])))
+
+    log("Source dataset statistics:")
+    log("# of samples in Usual group: {}".format(num_samples_from_usual))
+    log("# of samples in Unusual group: {}".format(num_samples_from_unusual))
+    log("Usual ratio: {:.2f}%".format(100 * num_samples_from_usual / (X_src.shape[0])))
     seed= 42
 
-
-    train_ratio = arg.train_ratio
-    validation_ratio = arg.validation_ratio
-    test_ratio = arg.test_ratio
-    train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - train_ratio, random_state=seed)
-    valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=test_ratio / (test_ratio + validation_ratio), random_state=seed)
+    ##### Split   #####################
+    train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - arg.train_ratio, random_state=seed)
+    valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
     return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
 
 
@@ -250,17 +246,17 @@ def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, te
     if train_X is not None : 
         train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=arg.device), torch.tensor(train_y, dtype=torch.float32, device=arg.device)
         train_loader = DataLoader(TensorDataset(train_X, train_y), batch_size=batch_size, shuffle=True)
-        print("data size", len(train_X) )
+        log("data size", len(train_X) )
 
     if valid_X is not None : 
         valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=arg.device), torch.tensor(valid_y, dtype=torch.float32, device=arg.device)
         valid_loader = DataLoader(TensorDataset(valid_X, valid_y), batch_size=valid_X.shape[0])
-        print("data size", len(valid_X)  )
+        log("data size", len(valid_X)  )
 
     if test_X  is not None : 
         test_X, test_y   = torch.tensor(test_X,  dtype=torch.float32, device=arg.device), torch.tensor(test_y, dtype=torch.float32, device=arg.device)
         test_loader  = DataLoader(TensorDataset(test_X, test_y), batch_size=test_X.shape[0])
-        print("data size:", len(test_X) )
+        log("data size:", len(test_X) )
 
     return train_loader, valid_loader, test_loader
 
@@ -270,7 +266,7 @@ def model_load(arg):
 
     checkpoint = torch.load( arg.saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
-    print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
+    log("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
     
 
     ll = Box({})
@@ -313,7 +309,7 @@ def model_build(arg, mode='train'):
     elif len(beta_param) == 2:
       alpha_distribution = Beta(float(beta_param[0]), float(beta_param[1]))
 
-    print('model_type: {}\tscale:{}\tBeta distribution: Beta({})\tlr: {}\t \tpert_coeff: {}'.format(model_type, scale, beta_param, lr, pert_coeff))
+    log('model_type: {}\tscale:{}\tBeta distribution: Beta({})\tlr: {}\t \tpert_coeff: {}'.format(model_type, scale, beta_param, lr, pert_coeff))
 
 
 
@@ -340,7 +336,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
     model_type=arg.model_type
     rule_feature = 'ap_hi'
     seed=arg.seed
-    print('saved_filename: {}\n'.format( arg.saved_filename))
+    log('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
 
     for epoch in range(1, epochs+1):
@@ -408,7 +404,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
             counter_early_stopping = 1
             best_val_loss = val_loss
             best_model_state_dict = deepcopy(model.state_dict())
-            print('[Valid] Epoch: {} Loss: {:.6f} (alpha: {:.2f})\t Loss(Task): {:.6f} Acc: {:.2f}\t Loss(Rule): {:.6f}\t Ratio: {:.4f} best model is updated %%%%'
+            log('[Valid] Epoch: {} Loss: {:.6f} (alpha: {:.2f})\t Loss(Task): {:.6f} Acc: {:.2f}\t Loss(Rule): {:.6f}\t Ratio: {:.4f} best model is updated %%%%'
                   .format(epoch, best_val_loss, alpha, val_loss_task, val_acc, val_loss_rule, val_ratio))
             torch.save({
                 'epoch': epoch,
@@ -417,7 +413,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
                 'loss': best_val_loss
             }, arg.saved_filename)
           else:
-            print('[Valid] Epoch: {} Loss: {:.6f} (alpha: {:.2f})\t Loss(Task): {:.6f} Acc: {:.2f}\t Loss(Rule): {:.6f}\t Ratio: {:.4f}({}/{})'
+            log('[Valid] Epoch: {} Loss: {:.6f} (alpha: {:.2f})\t Loss(Task): {:.6f} Acc: {:.2f}\t Loss(Rule): {:.6f}\t Ratio: {:.4f}({}/{})'
                   .format(epoch, val_loss, alpha, val_loss_task, val_acc, val_loss_rule, val_ratio, counter_early_stopping, early_stopping_thld))
             if counter_early_stopping >= early_stopping_thld:
               break
@@ -440,7 +436,7 @@ def model_evaluation(model_eval, loss_task_func, arg):
       output = model_eval(te_x, alpha=0.0)
       test_loss_task = loss_task_func(output, te_y).item()
       
-    print('\n[Test] Average loss: {:.8f}\n'.format(test_loss_task))
+    log('\n[Test] Average loss: {:.8f}\n'.format(test_loss_task))
     pert_coeff = 0.1
     model_eval.eval()
     rule_ind = arg.rule_ind
@@ -478,10 +474,10 @@ def model_evaluation(model_eval, loss_task_func, arg):
         y_pred = np.round(y_score)
         test_acc = accuracy_score(y_true, y_pred)
 
-      print('[Test] Average loss: {:.8f} (alpha:{})'.format(test_loss_task, alpha))
-      print('[Test] Accuracy: {:.4f} (alpha:{})'.format(test_acc, alpha))
-      print("[Test] Ratio of verified predictions: {:.6f} (alpha:{})".format(test_ratio, alpha))
-      print()
+      log('[Test] Average loss: {:.8f} (alpha:{})'.format(test_loss_task, alpha))
+      log('[Test] Accuracy: {:.4f} (alpha:{})'.format(test_acc, alpha))
+      log("[Test] Ratio of verified predictions: {:.6f} (alpha:{})".format(test_ratio, alpha))
+      log()
  
 
 
