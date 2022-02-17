@@ -88,6 +88,13 @@ def test():
     })
     print(arg)
 
+
+    arg.model_info = model_info
+    arg.merge = 'cat'
+    arg.input_dim = 20   ### 20
+    arg.output_dim = 1
+
+
     #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
     #import wget 
     #wget.download(url)
@@ -107,15 +114,11 @@ def test():
     #torch.backends.cudnn.benchmark = False
     # datapath = arg.datapath
 
-    arg.model_info = model_info
-    
-    arg.merge = 'cat'
-    arg.input_dim = 20   ### 20
     # arg.output_dim_encoder = arg.output_dim_encoder
     # arg.hidden_dim_encoder = arg.hidden_dim_encoder
     # arg.hidden_dim_db = arg.arg.hidden_dim_db
     # arg.n_layers = arg.arg.n_layers
-    arg.output_dim = 1
+
 
 
     ### device setup
@@ -140,17 +143,14 @@ def test():
 
 
     #### Test
-    model_eval = model_build(arg=arg, mode='test')
+    model_eval, loss_task_func = model_load(arg)
 
-    #rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-    #data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-    #model_eval = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge=arg.merge).to(arg.device)    # Not residual connection
+    #model_eval = model_build(arg=arg, mode='test')
+    #checkpoint = torch.load( arg.saved_filename)
+    #model_eval.load_state_dict(checkpoint['model_state_dict'])
+    #print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
+    #loss_task_func = nn.BCELoss()
 
-    checkpoint = torch.load( arg.saved_filename)
-    model_eval.load_state_dict(checkpoint['model_state_dict'])
-    print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
-    
-    loss_task_func = nn.BCELoss()
     model_evaluation(model_eval, loss_task_func, arg=arg)
          
 
@@ -286,6 +286,19 @@ def dataloader_create(train_X, test_X, train_y, test_y, valid_X, valid_y,  arg):
     print("data size: {}/{}/{}".format(len(train_X), len(valid_X), len(test_X)))
 
     return train_loader, valid_loader, test_loader
+
+
+def model_load(arg):
+    model_eval = model_build(arg=arg, mode='test')
+
+    checkpoint = torch.load( arg.saved_filename)
+    model_eval.load_state_dict(checkpoint['model_state_dict'])
+    print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
+    
+    loss_task_func = nn.BCELoss()
+    return model_eval, loss_task_func
+    # model_evaluation(model_eval, loss_task_func, arg=arg)
+         
 
 
 
