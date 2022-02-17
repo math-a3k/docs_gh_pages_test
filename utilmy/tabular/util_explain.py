@@ -84,7 +84,7 @@ def test2():
       imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
     """
 
-    mlist = [ ('imodels.FIGSClassifier',      {'max_rules':10},  ), 
+    mlist = [ # ('imodels.FIGSClassifier',      {'max_rules':10},  ), 
               # ('imodels.HSTreeClassifierCV',  {'estimator': None, 'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring': None},  ), 
              
               ('imodels.RuleFitClassifier',   {'max_rules':10},  ), 
