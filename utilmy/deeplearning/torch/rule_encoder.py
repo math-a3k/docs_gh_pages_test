@@ -52,7 +52,7 @@ def test():
                 }
 
 
-    args = Box({
+    arg = Box({
       "datapath": './cardio_train.csv',
       "rule_threshold": 129.5,
       "src_usual_ratio": 0.3,
@@ -86,7 +86,7 @@ def test():
       'saved_filename' :'./model.pt',
 
     })
-    print(args)
+    print(arg)
 
     #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
     #import wget 
@@ -96,8 +96,8 @@ def test():
 
     # loss_task_func = nn.BCELoss()
 
-    # device = args.device
-    # seed = args.seed
+    # device = arg.device
+    # seed = arg.seed
     #random.seed(seed)
     #np.random.seed(seed)
     #torch.manual_seed(seed)
@@ -105,65 +105,65 @@ def test():
     #torch.cuda.manual_seed_all(seed)
     #torch.backends.cudnn.deterministic = True
     #torch.backends.cudnn.benchmark = False
-    # datapath = args.datapath
+    # datapath = arg.datapath
 
-    args.model_info = model_info
+    arg.model_info = model_info
     
-    args.merge = 'cat'
-    args.input_dim = 20   ### 20
-    # args.output_dim_encoder = args.output_dim_encoder
-    # args.hidden_dim_encoder = args.hidden_dim_encoder
-    # args.hidden_dim_db = args.args.hidden_dim_db
-    # args.n_layers = args.args.n_layers
-    args.output_dim = 1
+    arg.merge = 'cat'
+    arg.input_dim = 20   ### 20
+    # arg.output_dim_encoder = arg.output_dim_encoder
+    # arg.hidden_dim_encoder = arg.hidden_dim_encoder
+    # arg.hidden_dim_db = arg.arg.hidden_dim_db
+    # arg.n_layers = arg.arg.n_layers
+    arg.output_dim = 1
 
 
     ### device setup
-    device = device_setup(args)
+    device = device_setup(arg)
 
     ### dataset load
-    df = dataset_load(args)
+    df = dataset_load(arg)
 
     ### dataset preprocess
-    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, args)
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)
            
 
     ### Create dataloader
-    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, args)
+    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
 
     ### Model Build
-    model, optimizer, (loss_rule_func, loss_task_func) = model_build(args=args)
+    model, optimizer, (loss_rule_func, loss_task_func) = model_build(arg=arg)
 
 
     ### Model Train
-    model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, args=args )
+    model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, arg=arg )
 
 
     #### Test
-    model_eval = model_build(args=args, mode='test')
+    model_eval = model_build(arg=arg, mode='test')
 
-    #rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    #data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    #model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge=args.merge).to(args.device)    # Not residual connection
+    #rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    #data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    #model_eval = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge=arg.merge).to(arg.device)    # Not residual connection
 
-    checkpoint = torch.load( args.saved_filename)
+    checkpoint = torch.load( arg.saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
     print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
     
 
-    model_evaluation(model_eval, args=args)
+    model_evaluation(model_eval, arg=arg)
          
 
 
 
 #####################################################################################################################
-def dataset_load(args):
+def dataset_load(arg):
   # Load dataset
   url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
   import wget 
   wget.download(url)
 
-  df = pd.read_csv(args.datapath,delimiter=';')
+  df = pd.read_csv(arg.datapath,delimiter=';')
   log(df, df.columns, df.shape)
 
   # y = df['cardio']
@@ -172,7 +172,7 @@ def dataset_load(args):
   return df
 
 
-def dataset_preprocess(df, args):
+def dataset_preprocess(df, arg):
 
     y     = df['cardio']
     X_raw = df.drop(['cardio'], axis=1)    
@@ -201,8 +201,8 @@ def dataset_preprocess(df, args):
     X_np = X.copy()
 
     # Rule : higher ap -> higher risk
-    rule_threshold = args.rule_threshold
-    rule_ind = args.rule_ind
+    rule_threshold = arg.rule_threshold
+    rule_ind = arg.rule_ind
     rule_feature = 'ap_hi'
 
     low_ap_negative = (df[rule_feature] <= rule_threshold) & (df['cardio'] == 0)    # usual
@@ -227,8 +227,8 @@ def dataset_preprocess(df, args):
     num_unusual_samples = X_unusual.shape[0]
 
     # Build a source dataset
-    src_usual_ratio = args.src_usual_ratio
-    src_unusual_ratio = args.src_unusual_ratio
+    src_usual_ratio = arg.src_usual_ratio
+    src_unusual_ratio = arg.src_unusual_ratio
     num_samples_from_unusual = int(src_unusual_ratio * num_unusual_samples)
     num_samples_from_usual = int(num_samples_from_unusual * src_usual_ratio / (1-src_usual_ratio))
 
@@ -241,9 +241,9 @@ def dataset_preprocess(df, args):
     print("Usual ratio: {:.2f}%".format(100 * num_samples_from_usual / (X_src.shape[0])))
     seed= 42
 
-    train_ratio = args.train_ratio
-    validation_ratio = args.validation_ratio
-    test_ratio = args.test_ratio
+    train_ratio = arg.train_ratio
+    validation_ratio = arg.validation_ratio
+    test_ratio = arg.test_ratio
     train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=test_ratio / (test_ratio + validation_ratio), random_state=seed)
     return (train_X, test_X, train_y, test_y, valid_X,  valid_y)
@@ -251,9 +251,9 @@ def dataset_preprocess(df, args):
 
 
 #####################################################################################################################
-def device_setup(args):
-    device = args.device
-    seed   = args.seed
+def device_setup(arg):
+    device = arg.device
+    seed   = arg.seed
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -269,15 +269,15 @@ def device_setup(args):
     return device
 
 
-def dataloader_create(train_X, test_X, train_y, test_y, valid_X, valid_y,  args):
-    #device= device_setup(args)
+def dataloader_create(train_X, test_X, train_y, test_y, valid_X, valid_y,  arg):
+    #device= device_setup(arg)
     # train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = X
-    # rain_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y=dataset_preprocess(X_raw, y, args)
-    train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=args.device), torch.tensor(train_y, dtype=torch.float32, device=args.device)
-    valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=args.device), torch.tensor(valid_y, dtype=torch.float32, device=args.device)
-    test_X, test_y = torch.tensor(test_X,    dtype=torch.float32, device=args.device), torch.tensor(test_y, dtype=torch.float32, device=args.device)
+    # rain_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y=dataset_preprocess(X_raw, y, arg)
+    train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=arg.device), torch.tensor(train_y, dtype=torch.float32, device=arg.device)
+    valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=arg.device), torch.tensor(valid_y, dtype=torch.float32, device=arg.device)
+    test_X, test_y = torch.tensor(test_X,    dtype=torch.float32, device=arg.device), torch.tensor(test_y, dtype=torch.float32, device=arg.device)
 
-    batch_size = args.batch_size
+    batch_size = arg.batch_size
 
     
     train_loader = DataLoader(TensorDataset(train_X, train_y), batch_size=batch_size, shuffle=True)
@@ -290,18 +290,18 @@ def dataloader_create(train_X, test_X, train_y, test_y, valid_X, valid_y,  args)
 
 
 
-def model_build(args, mode='train'):
-  # device, seed, datapath, input_dim, args.output_dim,args.output_dim_encoder, args.hidden_dim_encoder, args.hidden_dim_db, args.n_layers,merge= arguments(args)
-  # device = device_setup(args)
+def model_build(arg, mode='train'):
+  # device, seed, datapath, input_dim, arg.output_dim,arg.output_dim_encoder, arg.hidden_dim_encoder, arg.hidden_dim_db, arg.n_layers,merge= arguments(arg)
+  # device = device_setup(arg)
 
   if 'test' in mode :
-    rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge=args.merge).to(args.device)    # Not residual connection
+    rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    model_eval = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge=arg.merge).to(arg.device)    # Not residual connection
     return model_eval 
 
-  model_info = args.model_info
-  model_type = args.model_type
+  model_info = arg.model_info
+  model_type = arg.model_type
   if model_type not in model_info:
     # default setting
     lr = 0.001
@@ -327,9 +327,9 @@ def model_build(args, mode='train'):
 
 
 
-    rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    model = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge= args.merge).to(args.device)    # Not residual connection
+    rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    model = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
 
     optimizer = optim.Adam(model.parameters(), lr=lr)        
     loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
@@ -338,20 +338,20 @@ def model_build(args, mode='train'):
     return model, optimizer, (loss_rule_func, loss_task_func)
 
 
-def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, args ):
-    model_type = args.model_type
-    epochs     = args.epochs
-    early_stopping_thld    = args.early_stopping_thld
+def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, arg ):
+    model_type = arg.model_type
+    epochs     = arg.epochs
+    early_stopping_thld    = arg.early_stopping_thld
     counter_early_stopping = 1
-    valid_freq = args.valid_freq 
-    src_usual_ratio = args.src_usual_ratio
-    src_unusual_ratio = args.src_unusual_ratio
-    model_type=args.model_type
+    valid_freq = arg.valid_freq 
+    src_usual_ratio = arg.src_usual_ratio
+    src_unusual_ratio = arg.src_unusual_ratio
+    model_type=arg.model_type
     rule_feature = 'ap_hi'
-    seed=args.seed
+    seed=arg.seed
     #saved_filename = 'cardio_{}_rule-{}_src{}-target{}_seed{}.demo.pt'.format(model_type, rule_feature, src_usual_ratio, src_usual_ratio, seed)
     #saved_filename =  os.path.join("/content/drive/MyDrive/", saved_filename)
-    print('saved_filename: {}\n'.format( args.saved_filename))
+    print('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
 
     for epoch in range(1, epochs+1):
@@ -374,7 +374,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
 
         ###### perturbed input and its output  #####################
         pert_batch_train_x = batch_train_x.detach().clone()
-        rule_ind = args.rule_ind
+        rule_ind = arg.rule_ind
         pert_coeff = 0.1
         pert_batch_train_x[:,rule_ind] = get_perturbed_input(pert_batch_train_x[:,rule_ind], pert_coeff)
         pert_output = model(pert_batch_train_x, alpha=alpha)
@@ -426,7 +426,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
                 'model_state_dict': best_model_state_dict,
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': best_val_loss
-            }, args.saved_filename)
+            }, arg.saved_filename)
           else:
             print('[Valid] Epoch: {} Loss: {:.6f} (alpha: {:.2f})\t Loss(Task): {:.6f} Acc: {:.2f}\t Loss(Rule): {:.6f}\t Ratio: {:.4f}({}/{})'
                   .format(epoch, val_loss, alpha, val_loss_task, val_acc, val_loss_rule, val_ratio, counter_early_stopping, early_stopping_thld))
@@ -436,9 +436,9 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
               counter_early_stopping += 1
 
 
-def model_evaluation(model_eval, loss_task_func, args):
-    X_raw, y = dataset_load(args)
-    train_loader, valid_loader, test_loader = dataloader_create(X_raw, y, args)
+def model_evaluation(model_eval, loss_task_func, arg):
+    X_raw, y = dataset_load(arg)
+    train_loader, valid_loader, test_loader = dataloader_create(X_raw, y, arg)
     model_eval.eval()
     with torch.no_grad():
       for te_x, te_y in test_loader:
@@ -449,8 +449,8 @@ def model_evaluation(model_eval, loss_task_func, args):
     print('\n[Test] Average loss: {:.8f}\n'.format(test_loss_task))
     pert_coeff = 0.1
     model_eval.eval()
-    rule_ind = args.rule_ind
-    model_type=args.model_type
+    rule_ind = arg.rule_ind
+    model_type=arg.model_type
     alphas = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
     # perturbed input and its output
     pert_test_x = te_x.detach().clone()
