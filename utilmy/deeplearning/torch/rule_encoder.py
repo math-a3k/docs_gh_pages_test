@@ -83,8 +83,8 @@ def test():
     url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
     import wget 
     wget.download(url)
-    datadf = pd.read_csv("./cardio_train.csv",delimiter=';')
-    df = datadf.drop(['id'], axis=1)
+    #datadf = pd.read_csv("./cardio_train.csv",delimiter=';')
+    #df = datadf.drop(['id'], axis=1)
 
     loss_task_func = nn.BCELoss()
 
