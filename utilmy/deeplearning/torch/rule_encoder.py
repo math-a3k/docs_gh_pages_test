@@ -114,7 +114,7 @@ def test():
     device = device_setup(args)
 
     ### dataset load
-    X_raw, y = dataset_load(args)
+    df, X_raw, y = dataset_load(args)
 
     ### dataset preprocess
     train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = dataset_preprocess(X_raw, y, df, args)
@@ -160,7 +160,7 @@ def dataset_load(args):
   print("Target class ratio:")
   print("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
   print("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
-  return X_raw, y
+  return df, X_raw, y
 
 
 def dataset_preprocess(X_raw, y, df, args):
@@ -266,9 +266,16 @@ def dataloader_create(X_raw, y, args):
     return train_loader, valid_loader, test_loader
 
 
-def model_build(args):
+def model_build(args, mode='train'):
   # device, seed, datapath, input_dim, args.output_dim,args.output_dim_encoder, args.hidden_dim_encoder, args.hidden_dim_db, args.n_layers,merge= arguments(args)
   # device = device_setup(args)
+
+  if 'test' in mode :
+    rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge=args.merge).to(args.device)    # Not residual connection
+    return model_eval 
+
   model_info = args.model_info
   model_type = args.model_type
   if model_type not in model_info:
