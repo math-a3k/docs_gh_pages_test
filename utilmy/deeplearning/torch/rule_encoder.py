@@ -119,8 +119,6 @@ def test():
     # arg.hidden_dim_db = arg.arg.hidden_dim_db
     # arg.n_layers = arg.arg.n_layers
 
-
-
     ### device setup
     device = device_setup(arg)
 
@@ -150,6 +148,8 @@ def test():
     #model_eval.load_state_dict(checkpoint['model_state_dict'])
     #print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
     #loss_task_func = nn.BCELoss()
+
+
 
     model_evaluation(model_eval, loss_task_func, arg=arg)
          
