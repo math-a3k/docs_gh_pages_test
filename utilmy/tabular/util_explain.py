@@ -368,7 +368,10 @@ def model_fit(name:str='imodels.SLIMRegressor', model_pars:dict=None, data_pars:
     model  = Model0(**model_pars)
 
     log("#### model fit")    ###  brc = BoostedRulesClassifier(n_estimators=10)
-    model.fit(d.X_train, d.y_train, feature_names=d.feat_names)
+    try :
+       model.fit(d.X_train, d.y_train, feature_names=d.feat_names)
+    except :
+       model.fit(d.X_train, d.y_train, )
     log(model)
 
     ### d.get('task_type', 'classifier')
