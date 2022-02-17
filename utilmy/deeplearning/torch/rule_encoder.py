@@ -214,16 +214,16 @@ def dataset_preprocess(df, arg):
 
 
     ######### Build a source dataset
-    nsamples_from_unok = int(arg.src_unok_ratio * num_unok_samples)
-    nsamples_from_ok   = int(nsamples_from_unok * arg.src_ok_ratio / (1- arg.src_ok_ratio))
+    n_from_unok = int(arg.src_unok_ratio * num_unok_samples)
+    n_from_ok   = int(n_from_unok * arg.src_ok_ratio / (1- arg.src_ok_ratio))
 
-    X_src = np.concatenate((X_ok[:nsamples_from_ok], X_unok[:nsamples_from_unok]), axis=0)
-    y_src = np.concatenate((y_ok[:nsamples_from_ok], y_unok[:nsamples_from_unok]), axis=0)
+    X_src = np.concatenate((X_ok[:n_from_ok], X_unok[:n_from_unok]), axis=0)
+    y_src = np.concatenate((y_ok[:n_from_ok], y_unok[:n_from_unok]), axis=0)
 
     log("Source dataset statistics:")
-    log("# of samples in ok group: {}".format(nsamples_from_ok))
-    log("# of samples in Unok group: {}".format(nsamples_from_unok))
-    log("ok ratio: {:.2f}%".format(100 * nsamples_from_ok / (X_src.shape[0])))
+    log("# of samples in ok group: {}".format(n_from_ok))
+    log("# of samples in Unok group: {}".format(n_from_unok))
+    log("ok ratio: {:.2f}%".format(100 * n_from_ok / (X_src.shape[0])))
 
 
     ##### Split   #########################################################################
