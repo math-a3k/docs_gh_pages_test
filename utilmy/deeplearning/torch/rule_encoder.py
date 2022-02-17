@@ -150,8 +150,8 @@ def test():
     model_eval.load_state_dict(checkpoint['model_state_dict'])
     print("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
     
-
-    model_evaluation(model_eval, arg=arg)
+    loss_task_func = nn.BCELoss()
+    model_evaluation(model_eval, loss_task_func, arg=arg)
          
 
 
@@ -437,8 +437,13 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
 
 
 def model_evaluation(model_eval, loss_task_func, arg):
-    X_raw, y = dataset_load(arg)
-    train_loader, valid_loader, test_loader = dataloader_create(X_raw, y, arg)
+    df = dataset_load(arg)
+
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)
+           
+    ### Create dataloader
+    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
+
     model_eval.eval()
     with torch.no_grad():
       for te_x, te_y in test_loader:
@@ -446,6 +451,7 @@ def model_evaluation(model_eval, loss_task_func, arg):
 
       output = model_eval(te_x, alpha=0.0)
       test_loss_task = loss_task_func(output, te_y).item()
+      
     print('\n[Test] Average loss: {:.8f}\n'.format(test_loss_task))
     pert_coeff = 0.1
     model_eval.eval()
