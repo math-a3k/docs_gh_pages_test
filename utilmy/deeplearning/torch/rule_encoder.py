@@ -51,7 +51,6 @@ def test():
                 'ours-beta0.1-pert1.0': {'beta': [0.1], 'pert': 1.0},
                 }
 
-
     arg = Box({
       "datapath": './cardio_train.csv',
       "rule_threshold": 129.5,
@@ -108,11 +107,11 @@ def test():
     train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
 
     ### Model Build
-    model, optimizer, (loss_rule_func, loss_task_func) = model_build(arg=arg)
+    model, optimizer, losses = model_build(arg=arg)
 
 
     ### Model Train
-    model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, arg=arg )
+    model_train(model, optimizer, losses.loss_rule_func, losses.loss_task_func, train_loader, valid_loader, arg=arg )
 
 
     #### Test
@@ -233,6 +232,7 @@ def device_setup(arg):
             torch.backends.cudnn.benchmark = False
         except Exception as e:
             log(e)    
+            device = 'cpu'
     return device
 
 
@@ -312,10 +312,11 @@ def model_build(arg, mode='train'):
     model = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
 
     optimizer = optim.Adam(model.parameters(), lr=lr)        
-    loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
-    loss_task_func = nn.BCELoss()    # return scalar (reduction=mean)
+    losses = Box({})
+    losses.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
+    losses.loss_task_func = nn.BCELoss()    # return scalar (reduction=mean)
 
-    return model, optimizer, (loss_rule_func, loss_task_func)
+    return model, optimizer, losses
 
 
 def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, arg ):
