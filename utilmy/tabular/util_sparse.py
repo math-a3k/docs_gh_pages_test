@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
-HELP= """ Utils for sparse matrix creation
-
-
+MNAME = "utilmy.tabular.util_sparse"
+HELP  = """ Utils for sparse matrix creation
 """
 import os, sys, time, datetime,inspect, json, yaml, gc, glob, pandas as pd, numpy as np
+from box import Box
+
 from utilmy.parallel import pd_read_file, pd_read_file2
 
 
 ###################################################################################
-from utilmy.utilmy import log, log2
+from utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss = help_create("utilmy.ppandas") + HELP
+    ss = HELP + help_create(NMAME) 
     print(ss)
 
 ####################################################################################
@@ -24,7 +25,7 @@ def log2(*s, **kw):
 
 def help():
     from utilmy import help_create
-    print(HELP + help_create("utilmy.tabular.util_sparse"))
+    print(HELP + help_create( MNAME))
 
 
 
@@ -41,7 +42,6 @@ def test1():
     print('No. of Ones in the Matrix: ', np.count_nonzero(X == 1) )
     assert np.count_nonzero(X == 1) == nExpectedOnes, "Invalid CSR matrix"
     print('Sparse matrix verified')    
-
 
 
 def test_create_fake_df():
@@ -75,7 +75,6 @@ def test_create_fake_df():
 
 
 ###################################################################################################
-######  ###########################################################################################
 def pd_historylist_to_csr(df:pd.DataFrame, colslist:list=None, hashSize:int=5000, dtype=np.float32):
     """ Creates Sparse matrix of dimensions:
          ncol: hashsize * (nlist1 + nlist2 + ....)    X    nrows: nUserID
@@ -121,6 +120,7 @@ def pd_historylist_to_csr(df:pd.DataFrame, colslist:list=None, hashSize:int=5000
     return X
 
 
+
 #####################################################################################################
 def to_float(x):
     try :
@@ -142,6 +142,7 @@ def is_int(x):
         return True
     except :
         return False    
+
 
 def is_float(x):
     try :
