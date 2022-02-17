@@ -80,9 +80,9 @@ def test():
     })
     print(args)
 
-    url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
-    import wget 
-    wget.download(url)
+    #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
+    #import wget 
+    #wget.download(url)
     #datadf = pd.read_csv("./cardio_train.csv",delimiter=';')
     #df = datadf.drop(['id'], axis=1)
 
@@ -114,10 +114,10 @@ def test():
     device = device_setup(args)
 
     ### dataset load
-    df, X_raw, y = dataset_load(args)
+    df = dataset_load(args)
 
     ### dataset preprocess
-    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(X_raw, y, df, args)
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, args)
            
 
     ### Create dataloader
@@ -151,20 +151,26 @@ def test():
 #####################################################################################################################
 def dataset_load(args):
   # Load dataset
-  datadf = pd.read_csv(args.datapath,delimiter=';')
-  df = datadf.drop(['id'], axis=1)
+  url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
+  import wget 
+  wget.download(url)
+
+  df = pd.read_csv(args.datapath,delimiter=';')
 
   y = df['cardio']
-  X_raw = df.drop(['cardio'], axis=1)
+  #X_raw = df.drop(['cardio'], axis=1)
 
   print("Target class ratio:")
   print("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
   print("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
-  return df, X_raw, y
+  return df
 
 
-def dataset_preprocess(X_raw, y, df, args):
-    device= device_setup(args)
+def dataset_preprocess(df, args):
+
+    y = df['cardio']
+    X_raw = df.drop(['cardio'], axis=1)    
+
     column_trans = ColumnTransformer(
         [('age_norm', StandardScaler(), ['age']),
         ('height_norm', StandardScaler(), ['height']),
