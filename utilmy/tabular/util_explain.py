@@ -38,34 +38,33 @@ def test1():
     d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_reg_boston_data()
     d.task_type = 'regressor'
 
-    """
+    """  imodels.FIGSRegressor
+      HSTreeRegressorCV reg_param_list: List[float] = [0.1, 1, 10, 50, 100, 500], shrinkage_scheme_: str = 'node_based', cv: int = 3, scoring=None, *args, **kwargs)
       imodels.SLIMRegressor, RuleFitRegressor, 
       GreedyRuleListClassifier,  BayesianRuleListClassifier, 
       imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
-
-
     """
 
+    mlist = [ ('imodels.FIGSRegressor',      {'max_rules':10},  ), 
+              ('imodels.HSTreeRegressorCV',  {'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring'},  ), 
 
-    mlist = [ ('imodels.RuleFitRegressor', {'max_rules':10},  ), 
-              ('imodels.SLIMRegressor',    {'alpha': 0.01},  ) 
-            
-             
+              ('imodels.RuleFitRegressor',   {'max_rules':10},  ), 
+              ('imodels.SLIMRegressor',      {'alpha': 0.01},  ) ## no Rules
+                         
     ]
 
     for m in mlist :
+        log(m[0])
         d.task_type = 'regressor' if 'Regressor' in m[0] else 'classifier'
         model = model_fit(name       = m[0] , 
                           model_pars = m[1], 
                           data_pars=d, do_eval=True )
         model_save(model, 'mymodel/')
 
+
         # reLoad model and check
         model2 = model_load('mymodel/')
-        
-        try :
-          model_extract_rules(model2)
-        except : pass
+        odel_extract_rules(model2)
 
 
 def test_imodels():
@@ -405,12 +404,15 @@ def model_extract_rules(model):
        # 'coef' is its weight in the final linear model
        # 'support' is the fraction of points it applies to
     """ 
-    rules =  model.get_rules()
+    try :
+      rules =  model.get_rules()
 
-    # inspect and print the rules
-    rules = rules[rules.coef != 0].sort_values("support", ascending=False)
+      # inspect and print the rules
+      rules = rules[rules.coef != 0].sort_values("support", ascending=False)
 
-    display(rules[['rule', 'coef', 'support']].style.background_gradient(cmap='viridis'))
+      display(rules[['rule', 'coef', 'support']].style.background_gradient(cmap='viridis'))
+    except :
+      print('No rules available')
 
 
 
