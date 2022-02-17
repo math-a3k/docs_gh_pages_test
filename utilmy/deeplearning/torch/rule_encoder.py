@@ -78,14 +78,37 @@ def test():
     })
     print(args)
 
-    datadf = pd.read_csv("/content/drive/MyDrive/cardio_train.csv",delimiter=';')
+    url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
+    import wget 
+    wget.donwload(url)
+    datadf = pd.read_csv("./cardio_train.csv",delimiter=';')
     df = datadf.drop(['id'], axis=1)
 
     loss_task_func = nn.BCELoss()
 
-    device, seed, datapath, input_dim, output_dim,output_dim_encoder, hidden_dim_encoder, hidden_dim_db, n_layers,merge= arguments(args)
+    device = args.device
+    seed = args.seed
+    #random.seed(seed)
+    #np.random.seed(seed)
+    #torch.manual_seed(seed)
+    #torch.cuda.manual_seed(seed)
+    #torch.cuda.manual_seed_all(seed)
+    #torch.backends.cudnn.deterministic = True
+    #torch.backends.cudnn.benchmark = False
+    datapath = args.datapath
+    
+
+    merge = 'cat'
+    input_dim = 19
+    output_dim_encoder = args.output_dim_encoder
+    hidden_dim_encoder = args.hidden_dim_encoder
+    hidden_dim_db = args.hidden_dim_db
+    n_layers = args.n_layers
+    output_dim = 1
+
+
     ### device setup
-    device_setup(args)
+    device = device_setup(args)
 
     ### dataset load
     X_raw, y = dataset_load(args)
@@ -120,176 +143,6 @@ def test():
     model_evaluation(model_eval, args=args)
          
 
-def arguments(args):
-    device = args.device
-    seed = args.seed
-    random.seed(seed)
-    np.random.seed(seed)
-    
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-    datapath = args.datapath
-    
-
-    merge = 'cat'
-    input_dim = 19
-    output_dim_encoder = args.output_dim_encoder
-    hidden_dim_encoder = args.hidden_dim_encoder
-    hidden_dim_db = args.hidden_dim_db
-    n_layers = args.n_layers
-    output_dim = 1
-    return (device, seed, datapath, input_dim, output_dim,output_dim_encoder, hidden_dim_encoder, hidden_dim_db, n_layers,merge)
-
-
-
-#############################################################################################
-'''
-model.py
-'''
-class NaiveModel(nn.Module):
-  def __init__(self):
-    super(NaiveModel, self).__init__()
-    self.net = nn.Identity()
-
-  def forward(self, x, alpha=0.0):
-    return self.net(x)
-
-
-class RuleEncoder(nn.Module):
-  def __init__(self, input_dim, output_dim, hidden_dim=4):
-    super(RuleEncoder, self).__init__()
-    self.input_dim = input_dim
-    self.output_dim = output_dim
-    self.net = nn.Sequential(nn.Linear(input_dim, hidden_dim),
-                             nn.ReLU(),
-                             nn.Linear(hidden_dim, output_dim))
-
-  def forward(self, x):
-    return self.net(x)
-
-
-class DataEncoder(nn.Module):
-  def __init__(self, input_dim, output_dim, hidden_dim=4):
-    super(DataEncoder, self).__init__()
-    self.input_dim = input_dim
-    self.output_dim = output_dim
-    self.net = nn.Sequential(nn.Linear(input_dim, hidden_dim),
-                             nn.ReLU(),
-                             nn.Linear(hidden_dim, output_dim))
-
-  def forward(self, x):
-    return self.net(x)
-
-
-class Net(nn.Module):
-  def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, n_layers=2, merge='cat', skip=False, input_type='state'):
-    super(Net, self).__init__()
-    self.skip = skip
-    self.input_type   = input_type
-    self.rule_encoder = rule_encoder
-    self.data_encoder = data_encoder
-    self.n_layers = n_layers
-    assert self.rule_encoder.input_dim == self.data_encoder.input_dim
-    assert self.rule_encoder.output_dim == self.data_encoder.output_dim
-    self.merge = merge
-    if merge == 'cat':
-      self.input_dim_decision_block = self.rule_encoder.output_dim * 2
-    elif merge == 'add':
-      self.input_dim_decision_block = self.rule_encoder.output_dim
-
-    self.net = []
-    for i in range(n_layers):
-      if i == 0:
-        in_dim = self.input_dim_decision_block
-      else:
-        in_dim = hidden_dim
-
-      if i == n_layers-1:
-        out_dim = output_dim
-      else:
-        out_dim = hidden_dim
-
-      self.net.append(nn.Linear(in_dim, out_dim))
-      if i != n_layers-1:
-        self.net.append(nn.ReLU())
-
-    self.net.append(nn.Sigmoid())
-
-    self.net = nn.Sequential(*self.net)
-
-  def get_z(self, x, alpha=0.0):
-    rule_z = self.rule_encoder(x)
-    data_z = self.data_encoder(x)
-
-    if self.merge == 'add':
-      z = alpha*rule_z + (1-alpha)*data_z
-    elif self.merge == 'cat':
-      z = torch.cat((alpha*rule_z, (1-alpha)*data_z), dim=-1)
-    elif self.merge == 'equal_cat':
-      z = torch.cat((rule_z, data_z), dim=-1)
-
-    return z
-
-  def forward(self, x, alpha=0.0):
-    # merge: cat or add
-
-    rule_z = self.rule_encoder(x)
-    data_z = self.data_encoder(x)
-
-    if self.merge == 'add':
-      z = alpha*rule_z + (1-alpha)*data_z
-    elif self.merge == 'cat':
-      z = torch.cat((alpha*rule_z, (1-alpha)*data_z), dim=-1)
-    elif self.merge == 'equal_cat':
-      z = torch.cat((rule_z, data_z), dim=-1)
-
-    if self.skip:
-      if self.input_type == 'seq':
-        return self.net(z) + x[:, -1, :]
-      else:
-        return self.net(z) + x    # predict delta values
-    else:
-      return self.net(z)    # predict absolute values
-
-
-
-#####################################################################################################################
-from sklearn.metrics import accuracy_score, roc_curve, auc, roc_auc_score, precision_score, recall_score, precision_recall_curve, accuracy_score
-
-def get_metrics(y_true, y_pred, y_score):
-    acc = accuracy_score(y_true, y_pred)
-    prec = precision_score(y_true, y_pred)
-    recall = recall_score(y_true, y_pred)
-    fpr, tpr, _ = roc_curve(y_true, y_score)
-    roc_auc = auc(fpr, tpr)
-    
-    return acc, prec, recall, fpr, tpr, roc_auc
-
-def get_correct_results(out, label_Y):
-    y_pred_tag = torch.round(out)    # Binary label
-    return (y_pred_tag == label_Y).sum().float()
-
-def verification(out, pert_out, threshold=0.0):
-    '''
-    return the ratio of qualified samples.
-    '''
-    if isinstance(out, torch.Tensor):
-        return 1.0*torch.sum(pert_out-out < threshold) / out.shape[0]
-    else:
-        return 1.0*np.sum(pert_out-out < threshold) / out.shape[0]
-      
-def get_perturbed_input(input_tensor, pert_coeff):
-    '''
-    X = X + pert_coeff*rand*X
-    return input_tensor + input_tensor*pert_coeff*torch.rand()
-    '''
-    device = input_tensor.device
-    return input_tensor + torch.abs(input_tensor)*pert_coeff*torch.rand(input_tensor.shape, device=device)
-
-
 
 
 #####################################################################################################################
@@ -305,19 +158,6 @@ def dataset_load(args):
   print("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
   print("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
   return X_raw, y
-
-
-def device_setup(args):
-    device = args.device
-    seed = args.seed
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-    return device
 
 
 def dataset_preprocess(X_raw, y, args):
@@ -388,6 +228,20 @@ def dataset_preprocess(X_raw, y, args):
     train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=test_ratio / (test_ratio + validation_ratio), random_state=seed)
     return (train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y)
+
+
+
+#####################################################################################################################
+def device_setup(args):
+    device = args.device
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    return device
 
 
 def dataloader_create(X_raw, y, args):
@@ -599,6 +453,153 @@ def model_evaluation(model_eval, args):
       print("[Test] Ratio of verified predictions: {:.6f} (alpha:{})".format(test_ratio, alpha))
       print()
  
+
+
+
+#############################################################################################
+'''model.py '''
+class NaiveModel(nn.Module):
+  def __init__(self):
+    super(NaiveModel, self).__init__()
+    self.net = nn.Identity()
+
+  def forward(self, x, alpha=0.0):
+    return self.net(x)
+
+
+class RuleEncoder(nn.Module):
+  def __init__(self, input_dim, output_dim, hidden_dim=4):
+    super(RuleEncoder, self).__init__()
+    self.input_dim = input_dim
+    self.output_dim = output_dim
+    self.net = nn.Sequential(nn.Linear(input_dim, hidden_dim),
+                             nn.ReLU(),
+                             nn.Linear(hidden_dim, output_dim))
+
+  def forward(self, x):
+    return self.net(x)
+
+
+class DataEncoder(nn.Module):
+  def __init__(self, input_dim, output_dim, hidden_dim=4):
+    super(DataEncoder, self).__init__()
+    self.input_dim = input_dim
+    self.output_dim = output_dim
+    self.net = nn.Sequential(nn.Linear(input_dim, hidden_dim),
+                             nn.ReLU(),
+                             nn.Linear(hidden_dim, output_dim))
+
+  def forward(self, x):
+    return self.net(x)
+
+
+class Net(nn.Module):
+  def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, n_layers=2, merge='cat', skip=False, input_type='state'):
+    super(Net, self).__init__()
+    self.skip = skip
+    self.input_type   = input_type
+    self.rule_encoder = rule_encoder
+    self.data_encoder = data_encoder
+    self.n_layers = n_layers
+    assert self.rule_encoder.input_dim == self.data_encoder.input_dim
+    assert self.rule_encoder.output_dim == self.data_encoder.output_dim
+    self.merge = merge
+    if merge == 'cat':
+      self.input_dim_decision_block = self.rule_encoder.output_dim * 2
+    elif merge == 'add':
+      self.input_dim_decision_block = self.rule_encoder.output_dim
+
+    self.net = []
+    for i in range(n_layers):
+      if i == 0:
+        in_dim = self.input_dim_decision_block
+      else:
+        in_dim = hidden_dim
+
+      if i == n_layers-1:
+        out_dim = output_dim
+      else:
+        out_dim = hidden_dim
+
+      self.net.append(nn.Linear(in_dim, out_dim))
+      if i != n_layers-1:
+        self.net.append(nn.ReLU())
+
+    self.net.append(nn.Sigmoid())
+
+    self.net = nn.Sequential(*self.net)
+
+  def get_z(self, x, alpha=0.0):
+    rule_z = self.rule_encoder(x)
+    data_z = self.data_encoder(x)
+
+    if self.merge == 'add':
+      z = alpha*rule_z + (1-alpha)*data_z
+    elif self.merge == 'cat':
+      z = torch.cat((alpha*rule_z, (1-alpha)*data_z), dim=-1)
+    elif self.merge == 'equal_cat':
+      z = torch.cat((rule_z, data_z), dim=-1)
+
+    return z
+
+  def forward(self, x, alpha=0.0):
+    # merge: cat or add
+
+    rule_z = self.rule_encoder(x)
+    data_z = self.data_encoder(x)
+
+    if self.merge == 'add':
+      z = alpha*rule_z + (1-alpha)*data_z
+    elif self.merge == 'cat':
+      z = torch.cat((alpha*rule_z, (1-alpha)*data_z), dim=-1)
+    elif self.merge == 'equal_cat':
+      z = torch.cat((rule_z, data_z), dim=-1)
+
+    if self.skip:
+      if self.input_type == 'seq':
+        return self.net(z) + x[:, -1, :]
+      else:
+        return self.net(z) + x    # predict delta values
+    else:
+      return self.net(z)    # predict absolute values
+
+
+
+#####################################################################################################################
+from sklearn.metrics import accuracy_score, roc_curve, auc, roc_auc_score, precision_score, recall_score, precision_recall_curve, accuracy_score
+
+def get_metrics(y_true, y_pred, y_score):
+    acc = accuracy_score(y_true, y_pred)
+    prec = precision_score(y_true, y_pred)
+    recall = recall_score(y_true, y_pred)
+    fpr, tpr, _ = roc_curve(y_true, y_score)
+    roc_auc = auc(fpr, tpr)
+    
+    return acc, prec, recall, fpr, tpr, roc_auc
+
+def get_correct_results(out, label_Y):
+    y_pred_tag = torch.round(out)    # Binary label
+    return (y_pred_tag == label_Y).sum().float()
+
+def verification(out, pert_out, threshold=0.0):
+    '''
+    return the ratio of qualified samples.
+    '''
+    if isinstance(out, torch.Tensor):
+        return 1.0*torch.sum(pert_out-out < threshold) / out.shape[0]
+    else:
+        return 1.0*np.sum(pert_out-out < threshold) / out.shape[0]
+      
+def get_perturbed_input(input_tensor, pert_coeff):
+    '''
+    X = X + pert_coeff*rand*X
+    return input_tensor + input_tensor*pert_coeff*torch.rand()
+    '''
+    device = input_tensor.device
+    return input_tensor + torch.abs(input_tensor)*pert_coeff*torch.rand(input_tensor.shape, device=device)
+
+
+
 
 
 
