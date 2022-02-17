@@ -57,13 +57,19 @@ def test():
       "rule_threshold": 129.5,
       "src_usual_ratio": 0.3,
       "src_unusual_ratio": 0.7,
+      "target_rule_ratio": 0.7,
+
+
       "seed": 42,
       "device": 'cpu',  ### 'cuda:0',
-      "target_rule_ratio": 0.7,
+
+
+
       "batch_size": 32,
       "train_ratio": 0.7,
       "validation_ratio": 0.1,
       "test_ratio": 0.2,
+      
       "model_type": 'dataonly',
       "input_dim_encoder": 16,
       "output_dim_encoder": 16,
@@ -71,9 +77,11 @@ def test():
       "hidden_dim_db": 16,
       "n_layers": 1,
       "rule_ind": 5,
-      "epochs": 1000,
+      
+      "epochs": 2,
       "early_stopping_thld": 10,
       "valid_freq": 1,
+
 
       'saved_filename' :'./model.pt',
 
@@ -86,7 +94,7 @@ def test():
     #datadf = pd.read_csv("./cardio_train.csv",delimiter=';')
     #df = datadf.drop(['id'], axis=1)
 
-    loss_task_func = nn.BCELoss()
+    # loss_task_func = nn.BCELoss()
 
     # device = args.device
     # seed = args.seed
@@ -102,7 +110,7 @@ def test():
     args.model_info = model_info
     
     args.merge = 'cat'
-    args.input_dim = 19
+    args.input_dim = 20   ### 20
     # args.output_dim_encoder = args.output_dim_encoder
     # args.hidden_dim_encoder = args.hidden_dim_encoder
     # args.hidden_dim_db = args.args.hidden_dim_db
@@ -156,6 +164,7 @@ def dataset_load(args):
   wget.download(url)
 
   df = pd.read_csv(args.datapath,delimiter=';')
+  log(df, df.columns, df.shape)
 
   y = df['cardio']
   #X_raw = df.drop(['cardio'], axis=1)
