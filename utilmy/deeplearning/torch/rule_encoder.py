@@ -36,6 +36,7 @@ def help():
 
 #############################################################################################
 def test_all():
+    log(MNAME)
     test()
 
 
@@ -52,8 +53,8 @@ def test():
                 'ours-beta0.1-pert1.0': {'beta': [0.1], 'pert': 1.0},
                 }
 
-    import easydict
-    args = easydict.EasyDict({
+
+    args = Box({
       "datapath": '/content/drive/MyDrive/cardio_train.csv',
       "rule_threshold": 129.5,
       "src_usual_ratio": 0.3,
@@ -76,9 +77,9 @@ def test():
       "early_stopping_thld": 10,
       "valid_freq": 1,
 
-  })
+    })
     print(args)
-    print()
+
     datadf = pd.read_csv("/content/drive/MyDrive/cardio_train.csv",delimiter=';')
     df = datadf.drop(['id'], axis=1)
 
@@ -607,6 +608,5 @@ def model_evaluation(model_eval, args):
 ###################################################################################################
 if __name__ == "__main__":
     import fire
-
     fire.Fire()
 

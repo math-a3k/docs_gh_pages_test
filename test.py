@@ -192,7 +192,14 @@ def test_deeplearning_keras():
     from utilmy.deeplearning.keras import  util_similarity as m
     m.test_tf_cdist()
 
-   
+
+
+#########################################################################################
+def test_deeplearning_torch():
+    from utilmy.deeplearning.torch import  rule_encoder as m
+    m.test_all()
+
+
 #######################################################################################
 def test_deeplearning_yolov5():
    from utilmy.deeplearning import util_yolo as m
