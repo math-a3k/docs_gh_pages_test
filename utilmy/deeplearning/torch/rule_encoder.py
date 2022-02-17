@@ -151,7 +151,7 @@ def test():
 #####################################################################################################################
 def dataset_load(args):
   # Load dataset
-  datadf = pd.read_csv("/content/drive/MyDrive/cardio_train.csv",delimiter=';')
+  datadf = pd.read_csv(args.datapath,delimiter=';')
   df = datadf.drop(['id'], axis=1)
 
   y = df['cardio']
