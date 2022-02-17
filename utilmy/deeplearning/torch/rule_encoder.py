@@ -2,8 +2,6 @@
 MNAME = "utilmy.deeplearning.torch.rule_encoder"
 HELP = """ utils for model explanation
 """
-from __future__ import division
-from __future__ import print_function
 import os, random, numpy as np, glob, pandas as pd, matplotlib.pyplot as plt ;from box import Box
 from copy import deepcopy
 from argparse import ArgumentParser
