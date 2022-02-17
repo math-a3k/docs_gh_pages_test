@@ -376,7 +376,8 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
     src_unok_ratio = arg.src_unok_ratio
     model_type     = arg.model_type
     rule_ind = arg.rule_ind
-    
+    pert_coeff = 0.1
+        
     seed=arg.seed
     log('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
