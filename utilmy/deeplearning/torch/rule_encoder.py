@@ -58,7 +58,7 @@ def test():
       "src_usual_ratio": 0.3,
       "src_unusual_ratio": 0.7,
       "seed": 42,
-      "device": 'cuda:0',
+      "device": 'cpu',  ### 'cuda:0',
       "target_rule_ratio": 0.7,
       "batch_size": 32,
       "train_ratio": 0.7,
@@ -241,10 +241,15 @@ def device_setup(args):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
+
+    if 'gpu' in device :
+        try :
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+        except Exception as e:
+        log(e)    
     return device
 
 
