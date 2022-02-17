@@ -116,7 +116,6 @@ def test():
 
     #### Test
     model_eval, losses = model_load(arg)
-
     model_evaluation(model_eval, losses.loss_task_func , arg=arg)
          
 
@@ -132,16 +131,18 @@ def dataset_load(arg):
   df = pd.read_csv(arg.datapath,delimiter=';')
   log(df, df.columns, df.shape)
 
-  # y = df['cardio']
-  # X_raw = df.drop(['cardio'], axis=1)
+  # y = df[coly]
+  # X_raw = df.drop([coly], axis=1)
 
   return df
 
 
 def dataset_preprocess(df, arg):
 
-    y     = df['cardio']
-    X_raw = df.drop(['cardio'], axis=1)    
+    coly = 'cardio'
+
+    y     = df[coly]
+    X_raw = df.drop([coly], axis=1)    
 
     print("Target class ratio:")
     print("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
@@ -166,16 +167,21 @@ def dataset_preprocess(df, arg):
     num_samples = X.shape[0]
     X_np = X.copy()
 
-    # Rule : higher ap -> higher risk
+
+    ######## Rule : higher ap -> higher risk   ####################
+    """  Identify Class y=0 /1 from rules
+
+    """
     rule_threshold = arg.rule_threshold
-    rule_ind = arg.rule_ind
-    rule_feature = 'ap_hi'
+    rule_ind       = arg.rule_ind
+    rule_feature   = 'ap_hi'
 
-    low_ap_negative = (df[rule_feature] <= rule_threshold) & (df['cardio'] == 0)    # usual
-    high_ap_positive = (df[rule_feature] > rule_threshold) & (df['cardio'] == 1)    # usual
-    low_ap_positive = (df[rule_feature] <= rule_threshold) & (df['cardio'] == 1)    # unusual
-    high_ap_negative = (df[rule_feature] > rule_threshold) & (df['cardio'] == 0)    # unusual
+    low_ap_negative = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # usual
+    high_ap_positive = (df[rule_feature] > rule_threshold) & (df[coly] == 1)    # usual
+    low_ap_positive = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unusual
+    high_ap_negative = (df[rule_feature] > rule_threshold) & (df[coly] == 0)    # unusual
 
+   #################################################################
 
 
     # Samples in Usual group
@@ -207,12 +213,12 @@ def dataset_preprocess(df, arg):
     print("Usual ratio: {:.2f}%".format(100 * num_samples_from_usual / (X_src.shape[0])))
     seed= 42
 
+
     train_ratio = arg.train_ratio
     validation_ratio = arg.validation_ratio
     test_ratio = arg.test_ratio
     train_X, test_X, train_y, test_y = train_test_split(X_src, y_src, test_size=1 - train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size=test_ratio / (test_ratio + validation_ratio), random_state=seed)
-    #return (train_X, test_X, train_y, test_y, valid_X,  valid_y)
     return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
 
 
@@ -237,7 +243,7 @@ def device_setup(arg):
     return device
 
 
-def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, test_X=None, test_y=None,  arg):
+def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, test_X=None, test_y=None,  arg=None):
     batch_size = arg.batch_size
     train_loader, valid_loader, test_loader = None, None, None
 
