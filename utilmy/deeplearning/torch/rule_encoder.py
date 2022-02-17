@@ -132,11 +132,11 @@ def test():
 
 
     #### Test
-    model_eval = model_build(args=args)
+    model_eval = model_build(args=args, mode='test')
 
-    rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge=args.merge).to(args.device)    # Not residual connection
+    #rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    #data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    #model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge=args.merge).to(args.device)    # Not residual connection
     '''
     checkpoint = torch.load(saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
@@ -168,7 +168,7 @@ def dataset_load(args):
 
 def dataset_preprocess(df, args):
 
-    y = df['cardio']
+    y     = df['cardio']
     X_raw = df.drop(['cardio'], axis=1)    
 
     column_trans = ColumnTransformer(
