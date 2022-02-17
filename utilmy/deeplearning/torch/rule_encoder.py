@@ -80,7 +80,7 @@ def test():
 
     url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
     import wget 
-    wget.donwload(url)
+    wget.download(url)
     datadf = pd.read_csv("./cardio_train.csv",delimiter=';')
     df = datadf.drop(['id'], axis=1)
 
