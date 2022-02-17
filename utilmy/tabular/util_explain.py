@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+MNAME = "utilmy.tabular.util_explain"
 HELP = """ utils for model explanation
 """
+
 import os, numpy as np, glob, pandas as pd, matplotlib.pyplot as plt
 from box import Box
 
@@ -23,13 +25,14 @@ from utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss = HELP + help_create("utilmy.tabular.util_explain")
+    ss = HELP + help_create(MNAME)
     print(ss)
 
 
 
 #############################################################################################
 def test_all():
+    log(MNAME)
     test1()
     test2()
 

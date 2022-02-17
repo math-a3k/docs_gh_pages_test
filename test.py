@@ -180,8 +180,11 @@ def test_oos():
 #######################################################################################
 def test_tabular():
    from utilmy.tabular import util_sparse as m
-   log("from utilmy.tabular import util_sparse")   
    m.test_all()
+
+   from utilmy.tabular import util_explain as m
+   m.test_all()
+
 
    
 #########################################################################################
