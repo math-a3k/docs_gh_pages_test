@@ -54,33 +54,35 @@ def test():
     arg = Box({
       "dataurl":  "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv",
       "datapath": './cardio_train.csv',
+
+      ##### Rules
       "rule_threshold": 129.5,
       "src_ok_ratio": 0.3,
       "src_unok_ratio": 0.7,
       "target_rule_ratio": 0.7,
-
-      "seed": 42,
-      "device": 'cpu',  ### 'cuda:0',
+      "rule_ind": 5,
 
 
-      "batch_size": 32,
+      ##### 
       "train_ratio": 0.7,
       "validation_ratio": 0.1,
       "test_ratio": 0.2,
-      
+
       "model_type": 'dataonly',
       "input_dim_encoder": 16,
       "output_dim_encoder": 16,
       "hidden_dim_encoder": 100,
       "hidden_dim_db": 16,
       "n_layers": 1,
-      "rule_ind": 5,
-      
+
+
+      ##### Training 
+      "seed": 42,
+      "device": 'cpu',  ### 'cuda:0',
+      "batch_size": 32,      
       "epochs": 2,
       "early_stopping_thld": 10,
       "valid_freq": 1,
-
-
       'saved_filename' :'./model.pt',
 
     })
@@ -106,10 +108,10 @@ def test():
     train_loader, valid_loader, test_loader = dataloader_create( train_X, train_y, valid_X, valid_y, test_X, test_y,  arg)
 
     ### Model Build
-    model, optimizer, losses, argm = model_build(arg=arg)
+    model, losses, argm = model_build(arg=arg)
 
     ### Model Train
-    model_train(model, optimizer, losses, train_loader, valid_loader, arg=arg, argm= argm )
+    model_train(model, losses, train_loader, valid_loader, arg=arg, argm= argm )
 
 
     #### Test
@@ -332,18 +334,24 @@ def model_build(arg, mode='train'):
     model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, 
                        n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
 
-    optimizer = optim.Adam(model.parameters(), lr=lr)        
+
     losses    = Box({})
     losses.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
     losses.loss_task_func = nn.BCELoss()    # return scalar (reduction=mean)
 
-    return model, optimizer, losses, argm
+    return model, losses, argm
 
 
-def model_train(model, optimizer, losses, train_loader, valid_loader, arg, argm:dict=None ):
+def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None ):
     rule_feature = 'ap_hi'
 
     argm = Box(argm) if argm is not None else Box({})
+
+
+    model_params = arg.model_info[model_type]
+    lr           = model_params['lr'] if 'lr' in model_params else 0.001
+    optimizer = optim.Adam(model.parameters(), lr=lr)        
+
 
     loss_rule_func, loss_task_func = losses.loss_rule_func, losses.loss_task_func
     model_type = arg.model_type
