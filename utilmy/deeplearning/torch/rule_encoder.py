@@ -97,9 +97,10 @@ def test():
     #torch.cuda.manual_seed_all(seed)
     #torch.backends.cudnn.deterministic = True
     #torch.backends.cudnn.benchmark = False
-    datapath = args.datapath
-    
+    # datapath = args.datapath
 
+    args.model_info = model_info
+    
     args.merge = 'cat'
     args.input_dim = 19
     # args.output_dim_encoder = args.output_dim_encoder
@@ -116,7 +117,7 @@ def test():
     X_raw, y = dataset_load(args)
 
     ### dataset preprocess
-    train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = dataset_preprocess(X_raw, y, args)
+    train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = dataset_preprocess(X_raw, y, df, args)
            
 
     ### Create dataloader
@@ -135,7 +136,7 @@ def test():
 
     rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
     data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, args.n_layers=args.n_layers, merge=merge).to(args.device)    # Not residual connection
+    model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge=args.merge).to(args.device)    # Not residual connection
     '''
     checkpoint = torch.load(saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
@@ -162,7 +163,7 @@ def dataset_load(args):
   return X_raw, y
 
 
-def dataset_preprocess(X_raw, y, args):
+def dataset_preprocess(X_raw, y, df, args):
     device= device_setup(args)
     column_trans = ColumnTransformer(
         [('age_norm', StandardScaler(), ['age']),
@@ -268,6 +269,7 @@ def dataloader_create(X_raw, y, args):
 def model_build(args):
   # device, seed, datapath, input_dim, args.output_dim,args.output_dim_encoder, args.hidden_dim_encoder, args.hidden_dim_db, args.n_layers,merge= arguments(args)
   # device = device_setup(args)
+  model_info = args.model_info
   model_type = args.model_type
   if model_type not in model_info:
     # default setting
@@ -296,7 +298,7 @@ def model_build(args):
 
     rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
     data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
-    model = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, args.n_layers=args.n_layers, merge=merge).to(args.device)    # Not residual connection
+    model = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, n_layers=args.n_layers, merge= args.merge).to(args.device)    # Not residual connection
 
     optimizer = optim.Adam(model.parameters(), lr=lr)        
     loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
@@ -403,7 +405,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
               counter_early_stopping += 1
 
 
-def model_evaluation(model_eval, args):
+def model_evaluation(model_eval, loss_task_func, args):
     X_raw, y = dataset_load(args)
     train_loader, valid_loader, test_loader = dataloader_create(X_raw, y, args)
     model_eval.eval()
@@ -497,13 +499,13 @@ class DataEncoder(nn.Module):
 
 
 class Net(nn.Module):
-  def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, args.n_layers=2, merge='cat', skip=False, input_type='state'):
+  def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, n_layers=2, merge='cat', skip=False, input_type='state'):
     super(Net, self).__init__()
     self.skip = skip
     self.input_type   = input_type
     self.rule_encoder = rule_encoder
     self.data_encoder = data_encoder
-    self.args.n_layers = args.n_layers
+    self.n_layers =n_layers
     assert self.rule_encoder.input_dim == self.data_encoder.input_dim
     assert self.rule_encoder.output_dim == self.data_encoder.output_dim
     self.merge = merge
@@ -513,19 +515,19 @@ class Net(nn.Module):
       self.input_dim_decision_block = self.rule_encoder.output_dim
 
     self.net = []
-    for i in range(args.n_layers):
+    for i in range(n_layers):
       if i == 0:
         in_dim = self.input_dim_decision_block
       else:
         in_dim = hidden_dim
 
-      if i == args.n_layers-1:
+      if i == n_layers-1:
         out_dim = output_dim
       else:
         out_dim = hidden_dim
 
       self.net.append(nn.Linear(in_dim, out_dim))
-      if i != args.n_layers-1:
+      if i != n_layers-1:
         self.net.append(nn.ReLU())
 
     self.net.append(nn.Sigmoid())
