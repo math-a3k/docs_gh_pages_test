@@ -31,6 +31,7 @@ def help():
 #############################################################################################
 def test_all():
     test1()
+    test2()
 
 
 def test1():
@@ -65,6 +66,41 @@ def test1():
         # reLoad model and check
         model2 = model_load('mymodel/')
         odel_extract_rules(model2)
+
+
+
+def test2():
+    d = Box({})
+    d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_classifier_diabetes_data()
+    d.task_type = 'classifier'
+
+    """  imodels.FIGSRegressor
+      HSTreeRegressorCV reg_param_list: List[float] = [0.1, 1, 10, 50, 100, 500], shrinkage_scheme_: str = 'node_based', cv: int = 3, scoring=None, *args, **kwargs)
+      imodels.SLIMRegressor, RuleFitRegressor, 
+      GreedyRuleListClassifier,  BayesianRuleListClassifier, 
+      imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
+    """
+
+    mlist = [ ('imodels.FIGSClassifier',      {'max_rules':10},  ), 
+              ('imodels.HSTreeClassifierCV',  {'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring'},  ), 
+             
+              ('imodels.RuleFitClassifier',   {'max_rules':10},  ), 
+                         
+    ]
+
+    for m in mlist :
+        log(m[0])
+        d.task_type = 'regressor' if 'Regressor' in m[0] else 'classifier'
+        model = model_fit(name       = m[0] , 
+                          model_pars = m[1], 
+                          data_pars=d, do_eval=True )
+        model_save(model, 'mymodel/')
+
+
+        # reLoad model and check
+        model2 = model_load('mymodel/')
+        odel_extract_rules(model2)
+
 
 
 def test_imodels():
@@ -427,17 +463,16 @@ def get_reg_boston_data():
     return X_train_reg, X_test_reg, y_train_reg, y_test_reg, feature_names
 
 
-def get_diabetes_data():
+def get_classifier_diabetes_data():
     '''load (classification) data on diabetes
     '''
-    data = loadarff("content/imodels/imodels/tests/test_data/diabetes.arff")
-    data_np = np.array(list(map(lambda x: np.array(list(x)), data[0])))
-    X = data_np[:, :-1].astype('float32')
-    y_text = data_np[:, -1].astype('str')
-    y = (y_text == 'tested_positive').astype(int)  # labels 0-1
+    from sklearn.datasets import load_diabetes
+    from sklearn.model_selection import train_test_split
+    diabetes = load_diabetes()
+    X, y     = diabetes.data, diabetes.target
+    feature_names = load_diabetes()['feature_names']
+
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.75) # split
-    feature_names = ["#Pregnant","Glucose concentration test","Blood pressure(mmHg)","Triceps skin fold thickness(mm)",
-                "2-Hour serum insulin (mu U/ml)","Body mass index","Diabetes pedigree function","Age (years)"]
     return X_train, X_test, y_train, y_test, feature_names
     
 
