@@ -53,7 +53,7 @@ def test():
 
 
     args = Box({
-      "datapath": '/content/drive/MyDrive/cardio_train.csv',
+      "datapath": './cardio_train.csv',
       "rule_threshold": 129.5,
       "src_usual_ratio": 0.3,
       "src_unusual_ratio": 0.7,
@@ -66,14 +66,16 @@ def test():
       "test_ratio": 0.2,
       "model_type": 'dataonly',
       "input_dim_encoder": 16,
-      "output_dim_encoder": 16,
-      "hidden_dim_encoder": 100,
-      "hidden_dim_db": 16,
-      "n_layers": 1,
+      "args.output_dim_encoder": 16,
+      "args.hidden_dim_encoder": 100,
+      "args.hidden_dim_db": 16,
+      "args.n_layers": 1,
       "rule_ind": 5,
       "epochs": 1000,
       "early_stopping_thld": 10,
       "valid_freq": 1,
+
+      'saved_filename' :'./model.pt',
 
     })
     print(args)
@@ -86,8 +88,8 @@ def test():
 
     loss_task_func = nn.BCELoss()
 
-    device = args.device
-    seed = args.seed
+    # device = args.device
+    # seed = args.seed
     #random.seed(seed)
     #np.random.seed(seed)
     #torch.manual_seed(seed)
@@ -98,13 +100,13 @@ def test():
     datapath = args.datapath
     
 
-    merge = 'cat'
-    input_dim = 19
-    output_dim_encoder = args.output_dim_encoder
-    hidden_dim_encoder = args.hidden_dim_encoder
-    hidden_dim_db = args.hidden_dim_db
-    n_layers = args.n_layers
-    output_dim = 1
+    args.merge = 'cat'
+    args.input_dim = 19
+    # args.output_dim_encoder = args.output_dim_encoder
+    # args.hidden_dim_encoder = args.hidden_dim_encoder
+    # args.hidden_dim_db = args.args.hidden_dim_db
+    # args.n_layers = args.args.n_layers
+    args.output_dim = 1
 
 
     ### device setup
@@ -131,9 +133,9 @@ def test():
     #### Test
     model_eval = model_build(args=args)
 
-    rule_encoder = RuleEncoder(input_dim, output_dim_encoder, hidden_dim_encoder)
-    data_encoder = DataEncoder(input_dim, output_dim_encoder, hidden_dim_encoder)
-    model_eval = Net(input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=hidden_dim_db, n_layers=n_layers, merge=merge).to(device)    # Not residual connection
+    rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    model_eval = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, args.n_layers=args.n_layers, merge=merge).to(args.device)    # Not residual connection
     '''
     checkpoint = torch.load(saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
@@ -234,6 +236,7 @@ def dataset_preprocess(X_raw, y, args):
 #####################################################################################################################
 def device_setup(args):
     device = args.device
+    seed   = args.seed
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -245,11 +248,11 @@ def device_setup(args):
 
 
 def dataloader_create(X_raw, y, args):
-    device= device_setup(args)
+    #device= device_setup(args)
     train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y=dataset_preprocess(X_raw, y, args)
-    train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=device), torch.tensor(train_y, dtype=torch.float32, device=device)
-    valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=device), torch.tensor(valid_y, dtype=torch.float32, device=device)
-    test_X, test_y = torch.tensor(test_X, dtype=torch.float32, device=device), torch.tensor(test_y, dtype=torch.float32, device=device)
+    train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=args.device), torch.tensor(train_y, dtype=torch.float32, device=args.device)
+    valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=args.device), torch.tensor(valid_y, dtype=torch.float32, device=args.device)
+    test_X, test_y = torch.tensor(test_X,    dtype=torch.float32, device=args.device), torch.tensor(test_y, dtype=torch.float32, device=args.device)
 
     batch_size = args.batch_size
 
@@ -263,8 +266,8 @@ def dataloader_create(X_raw, y, args):
 
 
 def model_build(args):
-  device, seed, datapath, input_dim, output_dim,output_dim_encoder, hidden_dim_encoder, hidden_dim_db, n_layers,merge= arguments(args)
-  device = device_setup(args)
+  # device, seed, datapath, input_dim, args.output_dim,args.output_dim_encoder, args.hidden_dim_encoder, args.hidden_dim_db, args.n_layers,merge= arguments(args)
+  # device = device_setup(args)
   model_type = args.model_type
   if model_type not in model_info:
     # default setting
@@ -291,9 +294,9 @@ def model_build(args):
 
 
 
-    rule_encoder = RuleEncoder(input_dim, output_dim_encoder, hidden_dim_encoder)
-    data_encoder = DataEncoder(input_dim, output_dim_encoder, hidden_dim_encoder)
-    model = Net(input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=hidden_dim_db, n_layers=n_layers, merge=merge).to(device)    # Not residual connection
+    rule_encoder = RuleEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    data_encoder = DataEncoder(args.input_dim, args.output_dim_encoder, args.hidden_dim_encoder)
+    model = Net(args.input_dim, args.output_dim, rule_encoder, data_encoder, hidden_dim=args.hidden_dim_db, args.n_layers=args.n_layers, merge=merge).to(args.device)    # Not residual connection
 
     optimizer = optim.Adam(model.parameters(), lr=lr)        
     loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
@@ -494,13 +497,13 @@ class DataEncoder(nn.Module):
 
 
 class Net(nn.Module):
-  def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, n_layers=2, merge='cat', skip=False, input_type='state'):
+  def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, args.n_layers=2, merge='cat', skip=False, input_type='state'):
     super(Net, self).__init__()
     self.skip = skip
     self.input_type   = input_type
     self.rule_encoder = rule_encoder
     self.data_encoder = data_encoder
-    self.n_layers = n_layers
+    self.args.n_layers = args.n_layers
     assert self.rule_encoder.input_dim == self.data_encoder.input_dim
     assert self.rule_encoder.output_dim == self.data_encoder.output_dim
     self.merge = merge
@@ -510,19 +513,19 @@ class Net(nn.Module):
       self.input_dim_decision_block = self.rule_encoder.output_dim
 
     self.net = []
-    for i in range(n_layers):
+    for i in range(args.n_layers):
       if i == 0:
         in_dim = self.input_dim_decision_block
       else:
         in_dim = hidden_dim
 
-      if i == n_layers-1:
+      if i == args.n_layers-1:
         out_dim = output_dim
       else:
         out_dim = hidden_dim
 
       self.net.append(nn.Linear(in_dim, out_dim))
-      if i != n_layers-1:
+      if i != args.n_layers-1:
         self.net.append(nn.ReLU())
 
     self.net.append(nn.Sigmoid())
