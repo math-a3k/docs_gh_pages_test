@@ -342,6 +342,19 @@ def model_build(arg, mode='train'):
     return model, losses, argm
 
 
+
+def loss_rule_calc(model, batch_train_x,loss_rule_func, output, arg ):
+    rule_ind = arg.rule_ind
+    pert_coeff = 0.1
+
+    pert_batch_train_x             = batch_train_x.detach().clone()
+    pert_batch_train_x[:,rule_ind] = get_perturbed_input(pert_batch_train_x[:,rule_ind], pert_coeff)
+    pert_output = model(pert_batch_train_x, alpha=alpha)
+    loss_rule   = loss_rule_func(output, pert_output)    # output should be less than pert_output
+    return loss_rule
+
+
+
 def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None ):
     rule_feature = 'ap_hi'
 
@@ -358,52 +371,46 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
     epochs     = arg.epochs
     early_stopping_thld    = arg.early_stopping_thld
     counter_early_stopping = 1
-    valid_freq = arg.valid_freq 
-    src_ok_ratio = arg.src_ok_ratio
+    valid_freq     = arg.valid_freq 
+    src_ok_ratio   = arg.src_ok_ratio
     src_unok_ratio = arg.src_unok_ratio
-    model_type=arg.model_type
+    model_type     = arg.model_type
     seed=arg.seed
     log('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
+
 
     for epoch in range(1, epochs+1):
       model.train()
       for batch_train_x, batch_train_y in train_loader:
         batch_train_y = batch_train_y.unsqueeze(-1)
-
         optimizer.zero_grad()
 
-        if model_type.startswith('dataonly'):
-          alpha = 0.0
-        elif model_type.startswith('ruleonly'):
-          alpha = 1.0
-        elif model_type.startswith('ours'):
-          alpha = argm.alpha_distribution.sample().item()
+        if   model_type.startswith('dataonly'):  alpha = 0.0
+        elif model_type.startswith('ruleonly'):  alpha = 1.0
+        elif model_type.startswith('ours'):      alpha = argm.alpha_distribution.sample().item()
 
-        # stable output
+        ###### Base output #########################################
         output    = model(batch_train_x, alpha=alpha)
         loss_task = loss_task_func(output, batch_train_y)
 
-        ###### perturbed input and its output  #####################
-        pert_batch_train_x = batch_train_x.detach().clone()
-        rule_ind = arg.rule_ind
-        pert_coeff = 0.1
-        pert_batch_train_x[:,rule_ind] = get_perturbed_input(pert_batch_train_x[:,rule_ind], pert_coeff)
-        pert_output = model(pert_batch_train_x, alpha=alpha)
-        scale = 1
-        loss_rule = loss_rule_func(output, pert_output)    # output should be less than pert_output
-        loss      = alpha * loss_rule + scale * (1 - alpha) * loss_task
 
+        ###### perturbed input and its output  #####################
+        loss_rule = loss_rule_calc(model, batch_train_x,loss_rule_func, output, arg )
+
+
+        #### Total Losses  #########################################
+        scale = 1
+        loss  = alpha * loss_rule + scale * (1 - alpha) * loss_task
         loss.backward()
         optimizer.step()
+
 
       # Evaluate on validation set
       if epoch % valid_freq == 0:
         model.eval()
-        if  model_type.startswith('ruleonly'):
-          alpha = 1.0
-        else:
-          alpha = 0.0
+        if  model_type.startswith('ruleonly'):  alpha = 1.0
+        else:                                   alpha = 0.0
 
         with torch.no_grad():
           for val_x, val_y in valid_loader:
