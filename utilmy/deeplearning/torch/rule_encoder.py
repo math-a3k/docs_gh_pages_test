@@ -343,13 +343,13 @@ def model_build(arg, mode='train'):
 
 
 
-def loss_rule_calc(model, batch_train_x,loss_rule_func, output, arg ):
+def loss_rule_calc(model, batch_train_x, loss_rule_func, output, arg, argm ):
     rule_ind = arg.rule_ind
     pert_coeff = 0.1
 
     pert_batch_train_x             = batch_train_x.detach().clone()
     pert_batch_train_x[:,rule_ind] = get_perturbed_input(pert_batch_train_x[:,rule_ind], pert_coeff)
-    pert_output = model(pert_batch_train_x, alpha=alpha)
+    pert_output = model(pert_batch_train_x, alpha= argm.alpha)
     loss_rule   = loss_rule_func(output, pert_output)    # output should be less than pert_output
     return loss_rule
 
@@ -389,6 +389,7 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
         if   model_type.startswith('dataonly'):  alpha = 0.0
         elif model_type.startswith('ruleonly'):  alpha = 1.0
         elif model_type.startswith('ours'):      alpha = argm.alpha_distribution.sample().item()
+        argm.alpha = alpha
 
         ###### Base output #########################################
         output    = model(batch_train_x, alpha=alpha)
@@ -396,7 +397,7 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
 
 
         ###### perturbed input and its output  #####################
-        loss_rule = loss_rule_calc(model, batch_train_x,loss_rule_func, output, arg )
+        loss_rule = loss_rule_calc(model, batch_train_x, loss_rule_func, output, arg, argm )
 
 
         #### Total Losses  #########################################
