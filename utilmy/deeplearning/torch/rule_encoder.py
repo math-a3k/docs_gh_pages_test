@@ -138,9 +138,7 @@ def dataset_load(arg):
 
 
 def dataset_preprocess(df, arg):
-
     coly = 'cardio'
-
     y     = df[coly]
     X_raw = df.drop([coly], axis=1)    
 
@@ -168,41 +166,48 @@ def dataset_preprocess(df, arg):
     X_np = X.copy()
 
 
-    ######## Rule : higher ap -> higher risk   ######################
+    ######## Rule : higher ap -> higher risk   #####################################
     """  Identify Class y=0 /1 from rule 1
 
     """
-    rule_threshold = arg.rule_threshold
-    rule_ind       = arg.rule_ind
-    rule_feature   = 'ap_hi'
+    if 'rule1':
+        rule_threshold = arg.rule_threshold
+        rule_ind       = arg.rule_ind
+        rule_feature   = 'ap_hi'
 
-    #### Ok cases: nornal
-    low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # ok
-    high_ap_positive = (df[rule_feature] > rule_threshold)  & (df[coly] == 1)    # ok
+        #### Ok cases: nornal
+        low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # ok
+        high_ap_positive = (df[rule_feature] > rule_threshold)  & (df[coly] == 1)    # ok
 
-    ### Outlier cases (from rule)
-    low_ap_positive  = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unok
-    high_ap_negative = (df[rule_feature] > rule_threshold)  & (df[coly] == 0)    # unok
-
-    #################################################################
+        ### Outlier cases (from rule)
+        low_ap_positive  = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unok
+        high_ap_negative = (df[rule_feature] > rule_threshold)  & (df[coly] == 0)    # unok
 
 
-    #################################################################
+
+
+    #### Merge rules ##############################################
     # Samples in ok group
     idx_ok = low_ap_negative | high_ap_positive
 
-    X_ok = X[low_ap_negative | high_ap_positive]
-    y_ok = y[low_ap_negative | high_ap_positive]
+
+    # Samples in Unok group
+    idx_unok = low_ap_negative | high_ap_positive
+
+
+
+    ##############################################################################
+    # Samples in ok group
+    X_ok = X[ idx_ok ]
+    y_ok = y[ idx_ok ]
     y_ok = y_ok.to_numpy()
     X_ok, y_ok = shuffle(X_ok, y_ok, random_state=0)
     num_ok_samples = X_ok.shape[0]
 
 
     # Samples in Unok group
-    idx_unok = low_ap_negative | high_ap_positive
-
-    X_unok = X[low_ap_positive | high_ap_negative]
-    y_unok = y[low_ap_positive | high_ap_negative]
+    X_unok = X[ idx_unok ]
+    y_unok = y[ idx_unok ]
     y_unok = y_unok.to_numpy()
     X_unok, y_unok = shuffle(X_unok, y_unok, random_state=0)
     num_unok_samples = X_unok.shape[0]
@@ -221,7 +226,7 @@ def dataset_preprocess(df, arg):
     log("ok ratio: {:.2f}%".format(100 * nsamples_from_ok / (X_src.shape[0])))
 
 
-    ##### Split   #####################
+    ##### Split   #########################################################################
     seed= 42    
     train_X, test_X, train_y, test_y = train_test_split(X_src,  y_src,  test_size=1 - arg.train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size= arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
@@ -336,10 +341,7 @@ def model_build(arg, mode='train'):
 
 
 def model_train(model, optimizer, losses, train_loader, valid_loader, arg, argm:dict=None ):
-
-
     rule_feature = 'ap_hi'
-
 
     argm = Box(argm) if argm is not None else Box({})
 
