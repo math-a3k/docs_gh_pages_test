@@ -110,7 +110,7 @@ def test():
     model, optimizer, losses, argm = model_build(arg=arg)
 
     ### Model Train
-    model_train(model, optimizer, losses.loss_rule_func, losses.loss_task_func, train_loader, valid_loader, arg=arg, argm= argm )
+    model_train(model, optimizer, losses, train_loader, valid_loader, arg=arg, argm= argm )
 
 
     #### Test
@@ -175,9 +175,9 @@ def dataset_preprocess(df, arg):
     rule_ind       = arg.rule_ind
     rule_feature   = 'ap_hi'
 
-    low_ap_negative = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # usual
+    low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # usual
     high_ap_positive = (df[rule_feature] > rule_threshold) & (df[coly] == 1)    # usual
-    low_ap_positive = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unusual
+    low_ap_positive  = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unusual
     high_ap_negative = (df[rule_feature] > rule_threshold) & (df[coly] == 0)    # unusual
 
 
@@ -324,9 +324,12 @@ def model_build(arg, mode='train'):
     return model, optimizer, losses, argm
 
 
-def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, arg, argm:dict=None ):
+def model_train(model, optimizer, losses, train_loader, valid_loader, arg, argm:dict=None ):
+
 
     argm = Box(argm) if argm is not None else Box({})
+
+    loss_rule_func, loss_task_func = losses.loss_rule_func, losses.loss_task_func
     model_type = arg.model_type
     epochs     = arg.epochs
     early_stopping_thld    = arg.early_stopping_thld
