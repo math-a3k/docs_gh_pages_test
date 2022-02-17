@@ -80,7 +80,7 @@ def test():
       "seed": 42,
       "device": 'cpu',  ### 'cuda:0',
       "batch_size": 32,      
-      "epochs": 2,
+      "epochs": 1,
       "early_stopping_thld": 10,
       "valid_freq": 1,
       'saved_filename' :'./model.pt',
@@ -348,7 +348,7 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
     argm = Box(argm) if argm is not None else Box({})
 
 
-    model_params = arg.model_info[model_type]
+    model_params = arg.model_info[ arg.model_type]
     lr           = model_params['lr'] if 'lr' in model_params else 0.001
     optimizer = optim.Adam(model.parameters(), lr=lr)        
 
@@ -449,7 +449,6 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
 
 
 def model_evaluation(model_eval, loss_task_func, arg):
-
     ### Create dataloader
     df = dataset_load(arg)
     train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)           
