@@ -426,7 +426,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
                 'model_state_dict': best_model_state_dict,
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': best_val_loss
-            }, saved_filename)
+            }, args.saved_filename)
           else:
             print('[Valid] Epoch: {} Loss: {:.6f} (alpha: {:.2f})\t Loss(Task): {:.6f} Acc: {:.2f}\t Loss(Rule): {:.6f}\t Ratio: {:.4f}({}/{})'
                   .format(epoch, val_loss, alpha, val_loss_task, val_acc, val_loss_rule, val_ratio, counter_early_stopping, early_stopping_thld))
