@@ -87,12 +87,13 @@ holidays
 
 
 ###############################
-## tabular
+## utilmy.tabular
 statsmodels
 # hypothetical
 ##MAPIE==0.3.1
 bootstrapped
 mmh3  
+imodels   ### rule generator
 
 
 
