@@ -4,6 +4,7 @@ numpy
 pandas
 scipy
 loguru
+cloudpickle
 
 ########################################################
 flake8
