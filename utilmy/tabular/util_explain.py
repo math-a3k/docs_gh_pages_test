@@ -68,7 +68,7 @@ def test1():
 
         # reLoad model and check
         model2 = model_load('mymodel/')
-        odel_extract_rules(model2)
+        model_extract_rules(model2)
 
 
 
