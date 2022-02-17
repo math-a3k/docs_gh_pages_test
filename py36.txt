@@ -103,7 +103,9 @@ imodels   ### rule generator
 #### utilmy.deeplearning
 faiss-cpu
 tensorflow-cpu==2.2.3
-torch==1.7.1
+-f https://download.pytorch.org/whl/torch_stable.html 
+torch==1.7.0+cpu 
+# torch==1.7.1
 #-f https://download.pytorch.org/whl/torch_stable.html
 #torchvision==0.8.2+cpu torchaudio==0.7.2 
 
