@@ -107,10 +107,10 @@ def test():
     train_loader, valid_loader, test_loader = dataloader_create( train_X, train_y, valid_X, valid_y, test_X, test_y,  arg)
 
     ### Model Build
-    model, optimizer, losses = model_build(arg=arg)
+    model, optimizer, losses, argm = model_build(arg=arg)
 
     ### Model Train
-    model_train(model, optimizer, losses.loss_rule_func, losses.loss_task_func, train_loader, valid_loader, arg=arg )
+    model_train(model, optimizer, losses.loss_rule_func, losses.loss_task_func, train_loader, valid_loader, arg=arg, argm= argm )
 
 
     #### Test
@@ -144,8 +144,8 @@ def dataset_preprocess(df, arg):
     X_raw = df.drop([coly], axis=1)    
 
     log("Target class ratio:")
-    log("# of cardio=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
-    log("# of cardio=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
+    log("# of y=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
+    log("# of y=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
 
     column_trans = ColumnTransformer(
         [('age_norm', StandardScaler(), ['age']),
@@ -180,9 +180,8 @@ def dataset_preprocess(df, arg):
     low_ap_positive = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unusual
     high_ap_negative = (df[rule_feature] > rule_threshold) & (df[coly] == 0)    # unusual
 
+
    #################################################################
-
-
     # Samples in Usual group
     X_usual = X[low_ap_negative | high_ap_positive]
     y_usual = y[low_ap_negative | high_ap_positive]
@@ -277,8 +276,8 @@ def model_load(arg):
          
 
 def model_build(arg, mode='train'):
-  # device, seed, datapath, input_dim, arg.output_dim,arg.output_dim_encoder, arg.hidden_dim_encoder, arg.hidden_dim_db, arg.n_layers,merge= arguments(arg)
-  # device = device_setup(arg)
+
+  argm = Box({})  
 
   if 'test' in mode :
     rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
@@ -294,38 +293,40 @@ def model_build(arg, mode='train'):
     pert_coeff = 0.1
     scale = 1.0
     beta_param = [1.0]
-    alpha_distribution = Beta(float(beta_param[0]), float(beta_param[0]))
+    argm.alpha_distribution = Beta(float(beta_param[0]), float(beta_param[0]))
     model_params = {}
 
   else:
     model_params = model_info[model_type]
-    lr = model_params['lr'] if 'lr' in model_params else 0.001
-    pert_coeff = model_params['pert'] if 'pert' in model_params else 0.1
-    scale = model_params['scale'] if 'scale' in model_params else 1.0
-    beta_param = model_params['beta'] if 'beta' in model_params else [1.0]
+    lr           = model_params['lr'] if 'lr' in model_params else 0.001
+    pert_coeff   = model_params['pert'] if 'pert' in model_params else 0.1
+    scale        = model_params['scale'] if 'scale' in model_params else 1.0
+    beta_param   = model_params['beta'] if 'beta' in model_params else [1.0]
 
     if len(beta_param) == 1:
-      alpha_distribution = Beta(float(beta_param[0]), float(beta_param[0]))
+      argm.alpha_distribution = Beta(float(beta_param[0]), float(beta_param[0]))
     elif len(beta_param) == 2:
-      alpha_distribution = Beta(float(beta_param[0]), float(beta_param[1]))
+      argm.alpha_distribution = Beta(float(beta_param[0]), float(beta_param[1]))
 
     log('model_type: {}\tscale:{}\tBeta distribution: Beta({})\tlr: {}\t \tpert_coeff: {}'.format(model_type, scale, beta_param, lr, pert_coeff))
 
 
-
     rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
     data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-    model = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
+    model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, 
+                       n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
 
     optimizer = optim.Adam(model.parameters(), lr=lr)        
-    losses = Box({})
+    losses    = Box({})
     losses.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
     losses.loss_task_func = nn.BCELoss()    # return scalar (reduction=mean)
 
-    return model, optimizer, losses
+    return model, optimizer, losses, argm
 
 
-def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, arg ):
+def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, valid_loader, arg, argm:dict=None ):
+
+    argm = Box(argm) if argm is not None else Box({})
     model_type = arg.model_type
     epochs     = arg.epochs
     early_stopping_thld    = arg.early_stopping_thld
@@ -351,7 +352,7 @@ def model_train(model, optimizer, loss_rule_func, loss_task_func, train_loader, 
         elif model_type.startswith('ruleonly'):
           alpha = 1.0
         elif model_type.startswith('ours'):
-          alpha = alpha_distribution.sample().item()
+          alpha = argm.alpha_distribution.sample().item()
 
         # stable output
         output    = model(batch_train_x, alpha=alpha)
