@@ -7,7 +7,7 @@ on:
   # but only for the main branch
   pull_request:
     branches:
-    - main2
+    - main
 
 jobs:
   build:
