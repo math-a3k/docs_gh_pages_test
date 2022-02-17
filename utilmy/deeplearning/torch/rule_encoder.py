@@ -121,7 +121,7 @@ def test():
            
 
     ### Create dataloader
-    train_loader, valid_loader, test_loader = dataloader_create(X_raw, y, args)
+    train_loader, valid_loader, test_loader = dataloader_create( (train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y), args)
 
     ### Model Build
     model, optimizer, (loss_rule_func, loss_task_func) = model_build(args=args)
@@ -248,9 +248,10 @@ def device_setup(args):
     return device
 
 
-def dataloader_create(X_raw, y, args):
+def dataloader_create(train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y, args):
     #device= device_setup(args)
-    train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y=dataset_preprocess(X_raw, y, args)
+    # train_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y = X
+    # rain_X, test_X, train_y, test_y, valid_X, test_X, valid_y, test_y=dataset_preprocess(X_raw, y, args)
     train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=args.device), torch.tensor(train_y, dtype=torch.float32, device=args.device)
     valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=args.device), torch.tensor(valid_y, dtype=torch.float32, device=args.device)
     test_X, test_y = torch.tensor(test_X,    dtype=torch.float32, device=args.device), torch.tensor(test_y, dtype=torch.float32, device=args.device)
