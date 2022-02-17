@@ -50,7 +50,7 @@ def test1():
     """
 
     mlist = [ ('imodels.FIGSRegressor',      {'max_rules':10},  ), 
-              ('imodels.HSTreeRegressorCV',  {'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring'},  ), 
+              ('imodels.HSTreeRegressorCV',  {'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring': None},  ), 
 
               ('imodels.RuleFitRegressor',   {'max_rules':10},  ), 
               ('imodels.SLIMRegressor',      {'alpha': 0.01},  ) ## no Rules
@@ -85,7 +85,7 @@ def test2():
     """
 
     mlist = [ ('imodels.FIGSClassifier',      {'max_rules':10},  ), 
-              ('imodels.HSTreeClassifierCV',  {'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring'},  ), 
+              ('imodels.HSTreeClassifierCV',  {'reg_param_list':[0.1, 1, 10, 50, 100, 500],   'cv':3 , 'scoring': None},  ), 
              
               ('imodels.RuleFitClassifier',   {'max_rules':10},  ), 
                          
