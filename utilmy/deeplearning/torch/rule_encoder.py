@@ -63,7 +63,11 @@ def test():
       "rule_ind": 5,
 
 
+<<<<<<< HEAD
       #####
+=======
+      ##### 
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
       "train_ratio": 0.7,
       "validation_ratio": 0.1,
       "test_ratio": 0.2,
@@ -76,10 +80,17 @@ def test():
       "n_layers": 1,
 
 
+<<<<<<< HEAD
       ##### Training
       "seed": 42,
       "device": 'cpu',  ### 'cuda:0',
       "batch_size": 32,
+=======
+      ##### Training 
+      "seed": 42,
+      "device": 'cpu',  ### 'cuda:0',
+      "batch_size": 32,      
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
       "epochs": 1,
       "early_stopping_thld": 10,
       "valid_freq": 1,
@@ -117,7 +128,11 @@ def test():
     #### Test
     model_eval, losses = model_load(arg)
     model_evaluation(model_eval, losses.loss_task_func , arg=arg)
+<<<<<<< HEAD
 
+=======
+         
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
 
 
 
@@ -125,13 +140,26 @@ def test():
 def dataset_load(arg):
   # Load dataset
   #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
+<<<<<<< HEAD
   import wget, glob
   if len(glob.glob(arg.datapath)) < 1 :
      if 'dataurl' not in arg : raise Exception('no dataurl in arg')
+=======
+  import wget, glob 
+  if len(glob.glob(arg.datapath)) < 1 :
+     if 'dataurl' not in arg : raise Exception('no dataurl in arg') 
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
      wget.download(arg.dataurl)
 
   df = pd.read_csv(arg.datapath,delimiter=';')
   log(df, df.columns, df.shape)
+<<<<<<< HEAD
+
+  # y = df[coly]
+  # X_raw = df.drop([coly], axis=1)
+
+  return df
+=======
 
   # y = df[coly]
   # X_raw = df.drop([coly], axis=1)
@@ -142,12 +170,25 @@ def dataset_load(arg):
 def dataset_preprocess(df, arg):
     coly = 'cardio'
     y     = df[coly]
+    X_raw = df.drop([coly], axis=1)    
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
+
+    log("Target class ratio:")
+    log("# of y=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
+    log("# of y=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
+
+<<<<<<< HEAD
+def dataset_preprocess(df, arg):
+    coly = 'cardio'
+    y     = df[coly]
     X_raw = df.drop([coly], axis=1)
 
     log("Target class ratio:")
     log("# of y=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
     log("# of y=0: {}/{} ({:.2f}%)\n".format(np.sum(y==0), len(y), 100*np.sum(y==0)/len(y)))
 
+=======
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
     column_trans = ColumnTransformer(
         [('age_norm', StandardScaler(), ['age']),
         ('height_norm', StandardScaler(), ['height']),
@@ -170,6 +211,14 @@ def dataset_preprocess(df, arg):
 
     ######## Rule : higher ap -> higher risk   #####################################
     """  Identify Class y=0 /1 from rule 1
+<<<<<<< HEAD
+
+    """
+    if 'rule1':
+        rule_threshold = arg.rule_threshold
+        rule_ind       = arg.rule_ind
+        rule_feature   = 'ap_hi'
+=======
 
     """
     if 'rule1':
@@ -191,6 +240,23 @@ def dataset_preprocess(df, arg):
     #### Merge rules ##############################################
     # Samples in ok group
     idx_ok = low_ap_negative | high_ap_positive
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
+
+        #### Ok cases: nornal
+        low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # ok
+        high_ap_positive = (df[rule_feature] > rule_threshold)  & (df[coly] == 1)    # ok
+
+<<<<<<< HEAD
+        ### Outlier cases (from rule)
+        low_ap_positive  = (df[rule_feature] <= rule_threshold) & (df[coly] == 1)    # unok
+        high_ap_negative = (df[rule_feature] > rule_threshold)  & (df[coly] == 0)    # unok
+
+
+
+
+    #### Merge rules ##############################################
+    # Samples in ok group
+    idx_ok = low_ap_negative | high_ap_positive
 
 
     # Samples in Unok group
@@ -198,6 +264,13 @@ def dataset_preprocess(df, arg):
 
 
 
+=======
+    # Samples in Unok group
+    idx_unok = low_ap_negative | high_ap_positive
+
+
+
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
     ##############################################################################
     # Samples in ok group
     X_ok = X[ idx_ok ]
@@ -229,7 +302,11 @@ def dataset_preprocess(df, arg):
 
 
     ##### Split   #########################################################################
+<<<<<<< HEAD
     seed= 42
+=======
+    seed= 42    
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
     train_X, test_X, train_y, test_y = train_test_split(X_src,  y_src,  test_size=1 - arg.train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size= arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
     return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
@@ -251,7 +328,11 @@ def device_setup(arg):
             torch.backends.cudnn.deterministic = True
             torch.backends.cudnn.benchmark = False
         except Exception as e:
+<<<<<<< HEAD
             log(e)
+=======
+            log(e)    
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
             device = 'cpu'
     return device
 
@@ -259,6 +340,7 @@ def device_setup(arg):
 def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, test_X=None, test_y=None,  arg=None):
     batch_size = arg.batch_size
     train_loader, valid_loader, test_loader = None, None, None
+<<<<<<< HEAD
 
     if train_X is not None :
         train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=arg.device), torch.tensor(train_y, dtype=torch.float32, device=arg.device)
@@ -271,6 +353,20 @@ def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, te
         log("data size", len(valid_X)  )
 
     if test_X  is not None :
+=======
+
+    if train_X is not None : 
+        train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=arg.device), torch.tensor(train_y, dtype=torch.float32, device=arg.device)
+        train_loader = DataLoader(TensorDataset(train_X, train_y), batch_size=batch_size, shuffle=True)
+        log("data size", len(train_X) )
+
+    if valid_X is not None : 
+        valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=arg.device), torch.tensor(valid_y, dtype=torch.float32, device=arg.device)
+        valid_loader = DataLoader(TensorDataset(valid_X, valid_y), batch_size=valid_X.shape[0])
+        log("data size", len(valid_X)  )
+
+    if test_X  is not None : 
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
         test_X, test_y   = torch.tensor(test_X,  dtype=torch.float32, device=arg.device), torch.tensor(test_y, dtype=torch.float32, device=arg.device)
         test_loader  = DataLoader(TensorDataset(test_X, test_y), batch_size=test_X.shape[0])
         log("data size:", len(test_X) )
@@ -284,6 +380,7 @@ def model_load(arg):
     checkpoint = torch.load( arg.saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
     log("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
+<<<<<<< HEAD
 
 
     ll = Box({})
@@ -296,12 +393,30 @@ def model_load(arg):
 def model_build(arg, mode='train'):
 
   argm = Box({})
+=======
+    
+
+    ll = Box({})
+    ll.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))      
+    ll.loss_task_func = nn.BCELoss()
+    return model_eval, ll # (loss_task_func, loss_rule_func)
+    # model_evaluation(model_eval, loss_task_func, arg=arg)
+         
+
+def model_build(arg, mode='train'):
+
+  argm = Box({})  
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
 
   if 'test' in mode :
     rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
     data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
     model_eval = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge=arg.merge).to(arg.device)    # Not residual connection
+<<<<<<< HEAD
     return model_eval
+=======
+    return model_eval 
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
 
   model_info = arg.model_info
   model_type = arg.model_type
@@ -331,7 +446,11 @@ def model_build(arg, mode='train'):
 
     rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
     data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+<<<<<<< HEAD
     model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db,
+=======
+    model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, 
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
                        n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
 
 
@@ -363,7 +482,11 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
 
     model_params = arg.model_info[ arg.model_type]
     lr           = model_params['lr'] if 'lr' in model_params else 0.001
+<<<<<<< HEAD
     optimizer = optim.Adam(model.parameters(), lr=lr)
+=======
+    optimizer = optim.Adam(model.parameters(), lr=lr)        
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
 
 
     loss_rule_func, loss_task_func = losses.loss_rule_func, losses.loss_task_func
@@ -371,13 +494,21 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
     epochs     = arg.epochs
     early_stopping_thld    = arg.early_stopping_thld
     counter_early_stopping = 1
+<<<<<<< HEAD
     valid_freq     = arg.valid_freq
+=======
+    valid_freq     = arg.valid_freq 
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
     src_ok_ratio   = arg.src_ok_ratio
     src_unok_ratio = arg.src_unok_ratio
     model_type     = arg.model_type
     rule_ind = arg.rule_ind
     pert_coeff = 0.1
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
     seed=arg.seed
     log('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
@@ -462,7 +593,11 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
 def model_evaluation(model_eval, loss_task_func, arg):
     ### Create dataloader
     df = dataset_load(arg)
+<<<<<<< HEAD
     train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)
+=======
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)           
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
     train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
 
     model_eval.eval()
@@ -472,7 +607,11 @@ def model_evaluation(model_eval, loss_task_func, arg):
 
       output = model_eval(te_x, alpha=0.0)
       test_loss_task = loss_task_func(output, te_y).item()
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
     log('\n[Test] Average loss: {:.8f}\n'.format(test_loss_task))
     pert_coeff = 0.1
     model_eval.eval()
@@ -515,7 +654,11 @@ def model_evaluation(model_eval, loss_task_func, arg):
       log('[Test] Accuracy: {:.4f} (alpha:{})'.format(test_acc, alpha))
       log("[Test] Ratio of verified predictions: {:.6f} (alpha:{})".format(test_ratio, alpha))
       log()
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 21c734a6e7d696f9db93f34b04e272a5ed5fa842
 
 
 
