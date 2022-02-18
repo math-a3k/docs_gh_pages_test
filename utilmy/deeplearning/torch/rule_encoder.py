@@ -63,7 +63,7 @@ def test():
       "rule_ind": 5,
 
 
-      #####
+      ##### 
       "train_ratio": 0.7,
       "validation_ratio": 0.1,
       "test_ratio": 0.2,
@@ -76,10 +76,10 @@ def test():
       "n_layers": 1,
 
 
-      ##### Training
+      ##### Training 
       "seed": 42,
       "device": 'cpu',  ### 'cuda:0',
-      "batch_size": 32,
+      "batch_size": 32,      
       "epochs": 1,
       "early_stopping_thld": 10,
       "valid_freq": 1,
@@ -117,7 +117,7 @@ def test():
     #### Test
     model_eval, losses = model_load(arg)
     model_evaluation(model_eval, losses.loss_task_func , arg=arg)
-
+         
 
 
 
@@ -125,9 +125,9 @@ def test():
 def dataset_load(arg):
   # Load dataset
   #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
-  import wget, glob
+  import wget, glob 
   if len(glob.glob(arg.datapath)) < 1 :
-     if 'dataurl' not in arg : raise Exception('no dataurl in arg')
+     if 'dataurl' not in arg : raise Exception('no dataurl in arg') 
      wget.download(arg.dataurl)
 
   df = pd.read_csv(arg.datapath,delimiter=';')
@@ -142,7 +142,7 @@ def dataset_load(arg):
 def dataset_preprocess(df, arg):
     coly = 'cardio'
     y     = df[coly]
-    X_raw = df.drop([coly], axis=1)
+    X_raw = df.drop([coly], axis=1)    
 
     log("Target class ratio:")
     log("# of y=1: {}/{} ({:.2f}%)".format(np.sum(y==1), len(y), 100*np.sum(y==1)/len(y)))
@@ -229,7 +229,7 @@ def dataset_preprocess(df, arg):
 
 
     ##### Split   #########################################################################
-    seed= 42
+    seed= 42    
     train_X, test_X, train_y, test_y = train_test_split(X_src,  y_src,  test_size=1 - arg.train_ratio, random_state=seed)
     valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size= arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
     return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
@@ -251,7 +251,7 @@ def device_setup(arg):
             torch.backends.cudnn.deterministic = True
             torch.backends.cudnn.benchmark = False
         except Exception as e:
-            log(e)
+            log(e)    
             device = 'cpu'
     return device
 
@@ -260,17 +260,17 @@ def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, te
     batch_size = arg.batch_size
     train_loader, valid_loader, test_loader = None, None, None
 
-    if train_X is not None :
+    if train_X is not None : 
         train_X, train_y = torch.tensor(train_X, dtype=torch.float32, device=arg.device), torch.tensor(train_y, dtype=torch.float32, device=arg.device)
         train_loader = DataLoader(TensorDataset(train_X, train_y), batch_size=batch_size, shuffle=True)
         log("data size", len(train_X) )
 
-    if valid_X is not None :
+    if valid_X is not None : 
         valid_X, valid_y = torch.tensor(valid_X, dtype=torch.float32, device=arg.device), torch.tensor(valid_y, dtype=torch.float32, device=arg.device)
         valid_loader = DataLoader(TensorDataset(valid_X, valid_y), batch_size=valid_X.shape[0])
         log("data size", len(valid_X)  )
 
-    if test_X  is not None :
+    if test_X  is not None : 
         test_X, test_y   = torch.tensor(test_X,  dtype=torch.float32, device=arg.device), torch.tensor(test_y, dtype=torch.float32, device=arg.device)
         test_loader  = DataLoader(TensorDataset(test_X, test_y), batch_size=test_X.shape[0])
         log("data size:", len(test_X) )
@@ -284,24 +284,24 @@ def model_load(arg):
     checkpoint = torch.load( arg.saved_filename)
     model_eval.load_state_dict(checkpoint['model_state_dict'])
     log("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
-
+    
 
     ll = Box({})
-    ll.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))
+    ll.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))      
     ll.loss_task_func = nn.BCELoss()
     return model_eval, ll # (loss_task_func, loss_rule_func)
     # model_evaluation(model_eval, loss_task_func, arg=arg)
-
+         
 
 def model_build(arg, mode='train'):
 
-  argm = Box({})
+  argm = Box({})  
 
   if 'test' in mode :
     rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
     data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
     model_eval = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge=arg.merge).to(arg.device)    # Not residual connection
-    return model_eval
+    return model_eval 
 
   model_info = arg.model_info
   model_type = arg.model_type
@@ -331,7 +331,7 @@ def model_build(arg, mode='train'):
 
     rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
     data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-    model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db,
+    model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, 
                        n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
 
 
@@ -363,7 +363,7 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
 
     model_params = arg.model_info[ arg.model_type]
     lr           = model_params['lr'] if 'lr' in model_params else 0.001
-    optimizer = optim.Adam(model.parameters(), lr=lr)
+    optimizer = optim.Adam(model.parameters(), lr=lr)        
 
 
     loss_rule_func, loss_task_func = losses.loss_rule_func, losses.loss_task_func
@@ -371,13 +371,13 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
     epochs     = arg.epochs
     early_stopping_thld    = arg.early_stopping_thld
     counter_early_stopping = 1
-    valid_freq     = arg.valid_freq
+    valid_freq     = arg.valid_freq 
     src_ok_ratio   = arg.src_ok_ratio
     src_unok_ratio = arg.src_unok_ratio
     model_type     = arg.model_type
     rule_ind = arg.rule_ind
     pert_coeff = 0.1
-
+        
     seed=arg.seed
     log('saved_filename: {}\n'.format( arg.saved_filename))
     best_val_loss = float('inf')
@@ -462,7 +462,7 @@ def model_train(model, losses, train_loader, valid_loader, arg, argm:dict=None )
 def model_evaluation(model_eval, loss_task_func, arg):
     ### Create dataloader
     df = dataset_load(arg)
-    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)           
     train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
 
     model_eval.eval()
@@ -472,7 +472,7 @@ def model_evaluation(model_eval, loss_task_func, arg):
 
       output = model_eval(te_x, alpha=0.0)
       test_loss_task = loss_task_func(output, te_y).item()
-
+      
     log('\n[Test] Average loss: {:.8f}\n'.format(test_loss_task))
     pert_coeff = 0.1
     model_eval.eval()
@@ -515,7 +515,7 @@ def model_evaluation(model_eval, loss_task_func, arg):
       log('[Test] Accuracy: {:.4f} (alpha:{})'.format(test_acc, alpha))
       log("[Test] Ratio of verified predictions: {:.6f} (alpha:{})".format(test_ratio, alpha))
       log()
-
+ 
 
 
 
@@ -637,7 +637,7 @@ def get_metrics(y_true, y_pred, y_score):
     recall = recall_score(y_true, y_pred)
     fpr, tpr, _ = roc_curve(y_true, y_score)
     roc_auc = auc(fpr, tpr)
-
+    
     return acc, prec, recall, fpr, tpr, roc_auc
 
 def get_correct_results(out, label_Y):
@@ -652,7 +652,7 @@ def verification(out, pert_out, threshold=0.0):
         return 1.0*torch.sum(pert_out-out < threshold) / out.shape[0]
     else:
         return 1.0*np.sum(pert_out-out < threshold) / out.shape[0]
-
+      
 def get_perturbed_input(input_tensor, pert_coeff):
     '''
     X = X + pert_coeff*rand*X
