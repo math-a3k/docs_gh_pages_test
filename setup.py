@@ -75,12 +75,36 @@ scripts = [     ]
 ### CLI Scripts  ###################################################   
 entry_points={ 'console_scripts': [
 
-    'docs=utilmy.docs.cli:run_cli',
+    'docs      = utilmy.docs.cli:run_cli',
 
-    'templates=utilmy.templates.cli:run_cli'
+    'templates = utilmy.templates.cli:run_cli',
 
+    #### generic
+    'utilmy = utilmy.cli:run_cli',
 
  ] }
+
+"""
+
+from setuptools import setup, find_packages
+
+
+setup(
+    name='xpdtools',
+    version='0.2.0',
+    packages=find_packages(),
+    description='data processing module',
+    zip_safe=False,
+    package_data={'xpdan': ['config/*']},
+    include_package_data=True,
+    entry_points={'console_scripts': 'iq = xpdtools.raw_to_iq:main_cli'}
+)
+
+
+def main_cli(): fire.Fire(main)
+    
+    
+"""
 
 
 
