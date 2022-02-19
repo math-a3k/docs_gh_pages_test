@@ -84,8 +84,6 @@ def help_info(fun_name:str="os.system", doprint=True):
    return dd
 
 
-
-
 def help_get_codesource(func):
     """ Extract code source from func name"""
     import inspect
@@ -183,12 +181,33 @@ def get_loggers(mode='print', n_loggers=2, verbose_level=None):
 
 
 ###################################################################################################
-def import_function(fun_name=None, module_name=None):
+def find_fuzzy(word:str, wlist:list):
+  """ Find closest fuzzy string
+        ll = dir(utilmy)
+        print(ll)
+        find_fuzzy('help create fun arguu', ll)  
+  """  
+  # import numpy as np   
+  from difflib import SequenceMatcher as SM
+  scores = [ SM(None, word, s2).ratio() for s2 in wlist  ]
+  #print(scores)
+  # imax = np.argmax(scores)  
+  imax = max(range(len(scores)), key=scores.__getitem__)
+  most_similar = wlist[imax]
+  return most_similar
+
+ll = dir(utilmy)
+print(ll)
+find_fuzzy('help box', ll)
+
+
+def import_function(fun_name=None, module_name=None), fuzzy_match=True):
     import importlib
 
     try :
         if isinstance(module_name, str):
           module1 = importlib.import_module(module_name)
+          if fuzzy_match: fun_name = find_fuzzy(fun_name, dir(module1) )
           func = getattr(module1, fun_name)
         else :
           func = globals()[fun_name]

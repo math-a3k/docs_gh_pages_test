@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 MNAME = "utilmy.tabular.util_uncertainty"
 HELP = """ utils for uncertainty estimation
+#### Uncertainy interval.
+https://mapie.readthedocs.io/en/latest/tutorial_classification.html
 
 
 clf = GaussianNB().fit(X_train, y_train)
@@ -14,8 +16,6 @@ alpha = [0.2, 0.1, 0.05]
 y_pred_score, y_ps_score = mapie_score.predict(X_test_mesh, alpha=alpha)
 
 
-#### Uncertainy interval.
-https://mapie.readthedocs.io/en/latest/tutorial_classification.html
 
 
 """
