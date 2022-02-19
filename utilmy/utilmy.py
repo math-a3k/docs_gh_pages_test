@@ -32,6 +32,27 @@ def help():
 
 
 ###################################################################################################
+def help_get_info(fun_name):   
+   if ":"in fun_name :
+       x = fun_name.split(":")
+       module_name = x[0]
+       fun_name    = x[-1]
+   else :
+       x = fun_name.split(".")
+       module_name = ".".join(x[:-1])
+       fun_name    = x[-1]
+
+   func = import_function(fun_name, module_name)
+
+   dd = Box({})
+   dd.name = fun_name
+   dd.args = help_get_funargs(func)   
+   dd.doc  = help_get_docstring(func)
+   dd.code = help_get_codesource(func)
+   return dd
+
+
+
 def help_get_codesource(func):
     """ Extract code source from func name"""
     import inspect
@@ -41,6 +62,23 @@ def help_get_codesource(func):
         lines_to_skip = 0
     lines = inspect.getsourcelines(func)[0]
     return ''.join( lines[lines_to_skip+1:] )
+
+
+def help_get_docstring(func):
+    """ Extract Docstring from func name"""
+    import inspect
+    try:      lines = func.__doc__
+    except :  lines = ""
+    return lines
+
+
+def help_get_funargs(func):
+    """ Extract Docstring  :  (a, b, x='blah') """
+    import inspect
+    try:     llist = inspect.signature(func)
+    except : llist = []
+    return llist
+
 
 def help_create(modulename='utilmy.nnumpy', prefixs=None):
     """ Extract code source from test code
@@ -55,6 +93,7 @@ def help_create(modulename='utilmy.nnumpy', prefixs=None):
         fun = import_function(fname, modulename)
         ss += help_get_codesource(fun)
     return ss
+
 
 
 ###################################################################################################
