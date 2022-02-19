@@ -8,17 +8,17 @@ utilmy/adatasets.py
 dataset_classifier_XXXXX(nrows = 500, **kw)
 dataset_classifier_pmlb(name = '', return_X_y = False)
 fetch_dataset(url_dataset, path_target = None, file_target = None)
-log(*s)
-log2(*s)
 pd_train_test_split(df, coly = None)
 pd_train_test_split2(df, coly)
 test0()
 test1()
 test_all()
-test_dataset_classification_fake(nrows = 500)
-test_dataset_classification_petfinder(nrows = 1000)
-test_dataset_classifier_covtype(nrows = 500)
-test_dataset_regression_fake(nrows = 500, n_features = 17)
+test_data_classifier_covtype(nrows = 500)
+test_data_classifier_digits(nrows = 100)
+test_data_classifier_fake(nrows = 500)
+test_data_classifier_petfinder(nrows = 1000)
+test_data_regression_boston(nrows = 100)
+test_data_regression_fake(nrows = 500, n_features = 17)
 
 
 
@@ -1317,6 +1317,19 @@ toFileSafe.__init__(self, fpath)
 toFileSafe.log(self, msg)
 toFileSafe.w(self, msg)
 toFileSafe.write(self, msg)
+
+
+utilmy/optim/gp.py
+-------------------------functions----------------------
+NodesToProcess(G)
+cost(G)
+decode(G)
+is_valid(G)
+random_solution()
+random_walker(G, h)
+search()
+sigint_handler(signal, frame)
+
 
 
 utilmy/optim/util_hyper.py
@@ -2748,21 +2761,21 @@ to_int(x)
 
 utilmy/tabular/util_uncertainty.py
 -------------------------functions----------------------
-get_classifier_digits_data()
-get_reg_boston_data()
 help()
 load_function_uri(uri_name = "path_norm")
 model_eval2(clf, Xval, yval, dirout = "")
 model_evaluate(model, data_pars:dict, predict_pars:dict)
 model_fit(name  =  'mapie.regression.MapieRegressor', model = None, mapie_pars:dict = None, predict_pars:dict = None, data_pars:dict = None, do_prefit = False, do_eval = True, test_size = 0.3)
 model_load(path = "")
-model_predict(model, predict_pars:dict = None, interval = True)
+model_predict(model, X_test, predict_pars:dict = None, interval = True)
 model_save(model, path = None, info = None)
 model_viz_classification_preds(preds, y_test)
 test1()
 test2()
 test5()
 test_all()
+test_data_classifier_digits()
+test_data_regression_boston()
 
 
 
