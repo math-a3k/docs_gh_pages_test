@@ -34,7 +34,7 @@ def help():
 ###################################################################################################
 
 ###################################################################################################
-def help_get_info(fun_name:str="utilmy.help_create", doprint=True):   
+def help_info(fun_name:str="utilmy.help_create", doprint=True):   
    if ":"in fun_name :
        x = fun_name.split(":")
        module_name = x[0]
@@ -66,7 +66,6 @@ def help_get_info(fun_name:str="utilmy.help_create", doprint=True):
        return ''
 
    return dd
-
 
 
 def help_get_codesource(func):
@@ -296,8 +295,9 @@ def test_all():
 
 
    log("\n##### Doc generator: help_create  ")
-   for name in [ 'utilmy.parallel', 'utilmy.utilmy', 'utilmy.ppandas'  ]:
+   for name in [ 'utilmy.parallel', 'utilmy.utilmy',  ]:
       log("\n#############", name,"\n", m.help_create(name))
+      log("\n#############", name,"\n", m.help_info(name))
 
 
    ###################################################################################
