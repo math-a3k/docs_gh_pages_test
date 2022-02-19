@@ -40,14 +40,19 @@ def help_info(fun_name:str="os.system", doprint=True):
       
    """ 
    from box import Box 
+
+   fun_name = fun_name.strip()
+   fun_name = fun_name.replace(" ", ".")
+
    if ":"in fun_name :
        x = fun_name.split(":")
        module_name = x[0]
        fun_name    = x[-1]
-   else :
-       x = fun_name.split(".")
+   else  :
+       x           = fun_name.split(".")
        module_name = ".".join(x[:-1])
        fun_name    = x[-1]
+
 
    func = import_function(fun_name, module_name)
 
@@ -65,18 +70,20 @@ def help_info(fun_name:str="os.system", doprint=True):
             if len(l)> 1:
                 ss = ss + f"'{l[0]}': {l[1]}"  +","
             else :
-                ss = ss + str(l) +","    
+                ss = ss + l +","    
         dd.args2 = "{" + ss[:-1]  + "}"
    except :
        dd.args2 = dd.args
 
    if doprint == 1 or doprint == True :
-       print( 'Name: ',  module_name +"."+ fun_name, "\n" )
+       print( 'Name: ', "\n",  module_name +"."+ fun_name, "\n" )
        print( 'args:', "\n",  dd.args2, "\n" )
        print( 'doc:',  "\n",  dd.doc, "\n" )
        return ''
 
    return dd
+
+
 
 
 def help_get_codesource(func):
@@ -179,13 +186,17 @@ def get_loggers(mode='print', n_loggers=2, verbose_level=None):
 def import_function(fun_name=None, module_name=None):
     import importlib
 
-    if isinstance(module_name, str):
-       module1 = importlib.import_module(module_name)
-       func = getattr(module1, fun_name)
-    else :
-       func = globals()[fun_name]
+    try :
+        if isinstance(module_name, str):
+          module1 = importlib.import_module(module_name)
+          func = getattr(module1, fun_name)
+        else :
+          func = globals()[fun_name]
+        return func
+    except Exception as e :
+        msg = "Missing " + str(fun_name) + "," + str(dir(module1))
+        raise Exception( msg )  
 
-    return func
 
 def glob_glob(dirin, nfile=1000):
     import glob
