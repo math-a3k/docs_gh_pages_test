@@ -103,7 +103,6 @@ def pd_train_test_split2(df, coly):
 
 
 ####################################################################################################
-####################################################################################################
 def dataset_classifier_pmlb(name='', return_X_y=False):
     from pmlb import fetch_data, classification_dataset_names
     ds = classification_dataset_names[name]
@@ -218,6 +217,28 @@ def test_dataset_classification_petfinder(nrows=1000):
     pars = { 'colnum': colnum, 'colcat': colcat, "coly": coly, 'colembed' : colembed }
     return df, pars
 
+
+def test_data_regression_boston(nrows=100):
+    '''load (regression) data on boston housing prices
+    '''
+    from sklearn.datasets import load_boston
+    X_reg, y_reg = load_boston(return_X_y=True)
+    feature_names = load_boston()['feature_names']
+    X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_reg, y_reg, test_size=0.25) # split
+    return X_train_reg, X_test_reg, y_train_reg, y_test_reg, feature_names
+
+
+def test_data_classifier_digits(nrows=100):
+    '''load (classification) data on diabetes
+    '''
+    from sklearn.datasets import load_digits
+    from sklearn.model_selection import train_test_split
+    digits = load_digits()
+    X, y     = digits.data, digits.target
+    feature_names = load_digits()['feature_names']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y) # split
+    return X_train, X_test, y_train, y_test, feature_names
 
 
 

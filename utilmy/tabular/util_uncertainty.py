@@ -53,7 +53,7 @@ def test_all():
 def test1():
   from sklearn.linear_model import LinearRegression
   d = Box({})
-  d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_reg_boston_data()
+  d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_regression_boston()
   
   mlist = [
         ('mapie.regression.MapieRegressor', LinearRegression(), 
@@ -79,14 +79,14 @@ def test2():
   from sklearn.tree import DecisionTreeClassifier
 
   d = Box({})
-  d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_classifier_digits_data()
+  d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_classifier_digits()
   
   mlist = [
         ('mapie.classification.MapieClassifier', DecisionTreeClassifier(), 
             {'method':'score', 'cv': 'prefit', 'n_jobs': 1, 'verbose':50 }  ,  ### mapie model
             {'alpha':[0.05, 0.32]}),  ## Preds
         ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'cumulative_score'}  ,  {'alpha':[0.05, 0.32]}),
-        ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'top_k'}  ,  {'alpha':[0.05, 0.32]}),
+        # ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'top_k'}  ,  {'alpha':[0.05, 0.32]}),  ## NG
   ]
 
   for ii,m in enumerate(mlist) :  
@@ -218,7 +218,7 @@ def model_eval2(clf, Xval, yval, dirout=""):
 
 
 #############################################################################################
-def get_reg_boston_data():
+def test_data_regression_boston():
     '''load (regression) data on boston housing prices
     '''
     from sklearn.datasets import load_boston
@@ -228,7 +228,7 @@ def get_reg_boston_data():
     return X_train_reg, X_test_reg, y_train_reg, y_test_reg, feature_names
 
 
-def get_classifier_digits_data():
+def test_data_classifier_digits():
     '''load (classification) data on diabetes
     '''
     from sklearn.datasets import load_digits
