@@ -58,11 +58,17 @@ def help_info(fun_name:str="os.system", doprint=True):
    dd.doc  = help_get_docstring(func)
    dd.code = help_get_codesource(func)
 
-   ss = ""
-   for l in dd.args:
-     l  = l.split("=")  
-     ss = ss + f"'{l[0]}': {l[1]}"  +","
-   dd.args2 = "{" + ss[:-1]  + "}"
+   try :
+    ss = ""
+    for l in dd.args:
+        l  = l.split("=")  
+        if len(l)> 1:
+            ss = ss + f"'{l[0]}': {l[1]}"  +","
+        else :
+            ss = ss + l +","    
+    dd.args2 = "{" + ss[:-1]  + "}"
+   except :
+       dd.args2 = dd.args
 
    if doprint == 1 or doprint == True :
        print( 'Name: ', "\n",  module_name +"."+ fun_name, "\n" )
