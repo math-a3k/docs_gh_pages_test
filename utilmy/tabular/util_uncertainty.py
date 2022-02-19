@@ -25,17 +25,23 @@ from box import Box
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor, plot_tree, DecisionTreeClassifier
 from sklearn import metrics
+<<<<<<< HEAD
 from mapie.classification import MapieClassifier
 from mapie.metrics import classification_coverage_score
 
+=======
+>>>>>>> f17f7219620d8df65847b8b2ab3ca2b047285a2c
 
+try :  ### for pytest
+   from mapie.classification import MapieClassifier
+   from mapie.metrics import classification_coverage_score, classification_mean_width_score
+except : pass
 
 #### Types
 
 
 #############################################################################################
 from utilmy import log, log2
-
 def help():
     from utilmy import help_create
     ss = HELP + help_create(MNAME)
@@ -55,16 +61,18 @@ def test1():
   d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_reg_boston_data()
   
   mlist = [
-        ('mapie.regression.MapieRegressor', LinearRegression(), {'method':'naive'}  ,{'alpha':[0.05, 0.32]}),
-        ('mapie.regression.MapieRegressor', Ridge(), {'method':'naive'}  ,          {'alpha':[0.05, 0.32]}),
-
-
+        ('mapie.regression.MapieRegressor', LinearRegression(), 
+           {'method':'naive', 'cv': 'prefit', 'n_jobs':1, 'verbose': 50 },  #### mapie pars
+           {'alpha':[0.05, 0.32]}),  ### pred_pars
+        ('mapie.regression.MapieRegressor', LinearRegression(), {'method':'base'}  ,{'alpha':[0.05, 0.32]}),
+        ('mapie.regression.MapieRegressor', LinearRegression(), {'method':'plus'}  ,{'alpha':[0.05, 0.32]}),
+        ('mapie.regression.MapieRegressor', LinearRegression(), {'method':'minmax'}  ,{'alpha':[0.05, 0.32]}),
   ]
 
   for ii,m in enumerate(mlist) :  
       print(str(m[1]))
       d.task_type = 'regressor' if 'Regressor' in m[0] else 'classifier'
-      model1= model_fit(name = m[0], model = m[1], model_pars = m[2], predict_pars = m[3], data_pars=d, do_prefit=True, do_eval=True)
+      model1= model_fit(name = m[0], model = m[1], mapie_pars = m[2], predict_pars = m[3], data_pars=d, do_prefit=True, do_eval=True)
 
       model_save(model1, f'./mymodel_{i}/')
       model2 = model_load( f'./mymodel_{i}/')
@@ -75,17 +83,17 @@ def test2():
   d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_classifier_digits_data()
   
   mlist = [
-        ('mapie.classification.MapieClassifier', DecisionTreeClassifier(), {'method':'score'}  ,  {'alpha':[0.05, 0.32]}),
-        ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'score'}  ,  {'alpha':[0.05, 0.32]}),
-
-
+        ('mapie.classification.MapieClassifier', DecisionTreeClassifier(), 
+            {'method':'score', 'cv': 'prefit', 'n_job': 1, 'verbose':50 }  ,  ### mapie model
+            {'alpha':[0.05, 0.32]}),  ## Preds
+        ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'cumulative_score'}  ,  {'alpha':[0.05, 0.32]}),
+        ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'top_k'}  ,  {'alpha':[0.05, 0.32]}),
   ]
 
   for ii,m in enumerate(mlist) :  
       print(str(m[1]))
       d.task_type = 'regressor' if 'Regressor' in m[0] else 'classifier'
-      model1= model_fit(name = m[0], model = m[1], model_pars = m[2], predict_pars = m[3], data_pars=d, do_prefit=True, do_eval=True)
-
+      model1= model_fit(name = m[0], model = m[1], mapie_pars = m[2], predict_pars = m[3], data_pars=d, do_prefit=True, do_eval=True)
       model_save(model1, f'./mymodel_{i}/')
       model2 = model_load( f'./mymodel_{i}/')
 
@@ -107,10 +115,12 @@ def test5():
 
   
 #############################################################################################  
-def model_fit(name = 'mapie.regression.MapieRegressor', model=None, model_pars:dict=None, predict_pars:dict=None, data_pars:dict=None, 
-              do_prefit=True, do_eval=True, test_size=0.3):
-    """
-        DecisionTreeClassifier()
+def model_fit(name = 'mapie.regression.MapieRegressor', model=None, mapie_pars:dict=None, predict_pars:dict=None, data_pars:dict=None, 
+              do_prefit=False, do_eval=True, test_size=0.3):
+    """  Fit Mapie
+        model :          DecisionTreeClassifier()
+        mapie_pars : {'method':'naive', 'cv': 'prefit', 'n_jobs':1, 'verbose': 50 },  #### mapie pars
+        predict_pars : 'alpha':[0.05, 0.32]
 
     """
     d = Box(data_pars) if data_pars is not None else Box({})
@@ -121,7 +131,7 @@ def model_fit(name = 'mapie.regression.MapieRegressor', model=None, model_pars:d
     mapie_model = load_function_uri(name)
 
 
-    print(model)
+    log(model)
     task = d.get('task_type', 'classifier')
 
     if do_prefit :
@@ -131,13 +141,13 @@ def model_fit(name = 'mapie.regression.MapieRegressor', model=None, model_pars:d
         X_cal, y_cal = d.X_train, d.y_train
 
     if task == 'classifier' :
-       final_model = mapie_model(model,**model_pars).fit(X_cal, y_cal)   ### .astype(int)
+       final_model = mapie_model(model,**mapie_pars).fit(X_cal, y_cal)   ### .astype(int)
 
     elif task == 'regressor' :
-       final_model = mapie_model(model,**model_pars).fit(X_cal, y_cal)   ### .astype(int)
+       final_model = mapie_model(model,**mapie_pars).fit(X_cal, y_cal)   ### .astype(int)
 
     else:
-       final_model = mapie_model(model,**model_pars).fit(X_cal, y_cal) 
+       final_model = mapie_model(model,**mapie_pars).fit(X_cal, y_cal) 
 
     if do_eval :
       model_evaluate(final_model, data_pars, predict_pars)

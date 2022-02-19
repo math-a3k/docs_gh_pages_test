@@ -179,12 +179,9 @@ def test_oos():
 
 #######################################################################################
 def test_tabular():
-   from utilmy.tabular import util_sparse as m
-   m.test_all()
-
-   from utilmy.tabular import util_explain as m
-   m.test_all()
-
+   from utilmy.tabular import util_sparse as m    ;     m.test_all()
+   from utilmy.tabular import util_explain as m  ;      m.test_all()
+   from utilmy.tabular import util_uncertainty as m  ;  m.test_all()
 
    
 #########################################################################################
