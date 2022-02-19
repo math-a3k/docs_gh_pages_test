@@ -11,13 +11,10 @@ Rules to follow :
 """
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np, glob
 
+
 #### NEVER IMPORT HERE  !!!!
 # from utilmy import pd_random, pd_generate_data
 # from tensorflow.python.ops.gen_array_ops import one_hot
-
-#### Only import utilmy
-import utilmy
-
 
 #########################################################################################
 def log(*s):
@@ -182,14 +179,15 @@ def test_oos():
 
 #######################################################################################
 def test_tabular():
-   utilmy.tabular.util_sparse.test_all()
-   utilmy.tabular.util_explain.test_all()
-   utilmy.tabular.util_uncertainty.test_all()
+   from utilmy.tabular import util_sparse as m    ;     m.test_all()
+   from utilmy.tabular import util_explain as m  ;      m.test_all()
+   from utilmy.tabular import util_uncertainty as m  ;  m.test_all()
 
    
 #########################################################################################
 def test_deeplearning_keras():
-    utilmy.deeplearning.keras.util_similarity.test_tf_cdist()
+    from utilmy.deeplearning.keras import  util_similarity as m
+    m.test_tf_cdist()
 
 
 
