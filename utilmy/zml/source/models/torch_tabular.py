@@ -324,8 +324,8 @@ def test(n_sample = 100):
     """
     global model, session
 
-    from adatasets import test_dataset_classifier_covtype
-    df, p                = test_dataset_classifier_covtype(nrows=n_sample)
+    from adatasets import test_data_classifier_covtype
+    df, p                = test_data_classifier_covtype(nrows=n_sample)
     colnum, colcat, coly = p['colnum'], p['colcat'],p['coly']
     X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes = train_test_split2(df, coly)
     # df, colnum, colcat, coly = test_dataset_covtype()
@@ -489,8 +489,8 @@ def test3(n_sample = 100):
         nrows : take first nrows from dataset
     """
     global model, session
-    from adatasets import test_dataset_classifier_covtype
-    df, p                = test_dataset_classifier_covtype(nrows=n_sample)
+    from adatasets import test_data_classifier_covtype
+    df, p                = test_data_classifier_covtype(nrows=n_sample)
     colnum, colcat, coly = p['colnum'], p['colcat'],p['coly']
     X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes = train_test_split2(df, coly)
 

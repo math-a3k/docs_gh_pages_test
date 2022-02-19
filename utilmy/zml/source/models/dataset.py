@@ -100,8 +100,8 @@ def log(*s):
 def test1():
     ## pip install adataset
     root = ""
-    from adatasets import test_dataset_classification_fake
-    df, p = test_dataset_classification_fake(nrows=100)
+    from adatasets import test_data_classifier_fake
+    df, p = test_data_classifier_fake(nrows=100)
     print(df.columns)
     df = df.astype('float')
     df.to_parquet(root+ 'datasets/parquet/f01.parquet')
@@ -428,8 +428,8 @@ from tensorflow.keras import layers
 
 
 
-from adatasets import test_dataset_classification_fake
-df, d = test_dataset_classification_fake(nrows=100)
+from adatasets import test_data_classifier_fake
+df, d = test_data_classifier_fake(nrows=100)
 print(df)
 colnum, colcat, coly = d['colnum'], d['colcat'], d['coly']
 

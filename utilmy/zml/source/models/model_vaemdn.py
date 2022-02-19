@@ -722,8 +722,8 @@ def test():
 
 
 def test2(n_sample          = 1000):
-    from adatasets import test_dataset_classification_fake, pd_train_test_split2
-    df, d=     test_dataset_classification_fake(n_sample)
+    from adatasets import test_data_classifier_fake, pd_train_test_split2
+    df, d=     test_data_classifier_fake(n_sample)
     colnum, colcat, coly = d['colnum'], d['colcat'], d['coly']
     # df, colnum, colcat, coly = test_dataset_classi_fake(nrows= n_sample)
     X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes  = pd_train_test_split2(df, coly)
@@ -798,8 +798,8 @@ def test2(n_sample          = 1000):
 
 
 def test3(n_sample = 1000):
-    from adatasets import test_dataset_classification_petfinder, pd_train_test_split2
-    df, d=     test_dataset_classification_petfinder(n_sample)
+    from adatasets import test_data_classifier_petfinder, pd_train_test_split2
+    df, d=     test_data_classifier_petfinder(n_sample)
     colnum, colcat, coly = d['colnum'], d['colcat'], d['coly']
     # df, colnum, colcat, coly = test_dataset_classi_fake(nrows= n_sample)
     X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes  = pd_train_test_split2(df, coly)

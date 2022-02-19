@@ -424,8 +424,8 @@ def test2(n_sample = 1000):
     #df, colnum, colcat, coly = test_dataset_classi_fake(nrows= n_sample)
     #X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes  = train_test_split2(df, coly)
 
-    from adatasets import test_dataset_classification_fake, pd_train_test_split2
-    df, d = test_dataset_classification_fake(n_sample)
+    from adatasets import test_data_classifier_fake, pd_train_test_split2
+    df, d = test_data_classifier_fake(n_sample)
     colnum, colcat, coly = d['colnum'], d['colcat'], d['coly']
     X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes  = pd_train_test_split2(df, coly)
 

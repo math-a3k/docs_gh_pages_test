@@ -569,8 +569,8 @@ def test(config='',     n_sample = 100):
     """ ACTUAL DICT
     """
     global model, session
-    from adatasets import test_dataset_classification_petfinder
-    df, d = test_dataset_classification_petfinder(nrows=100) ;     print(d)
+    from adatasets import test_data_classifier_petfinder
+    df, d = test_data_classifier_petfinder(nrows=100) ;     print(d)
     colnum, colcat, coly, colembed = d['colnum'], d['colcat'], d['coly'], d['colembed']
 
 
@@ -708,8 +708,8 @@ def test(config='',     n_sample = 100):
 def test2(config=''):
     """
     """
-    from adatasets import test_dataset_classification_petfinder
-    df, d = test_dataset_classification_petfinder(nrows=100) ;     print(d)
+    from adatasets import test_data_classifier_petfinder
+    df, d = test_data_classifier_petfinder(nrows=100) ;     print(d)
     colnum, colcat, coly, colembed = d['colnum'], d['colcat'], d['coly'], d['colembed']
 
 

@@ -226,8 +226,8 @@ def get_dataset(data_pars=None, task_type="train", **kw):
 ####################################################################################################
 ############ Test ##################################################################################
 def test(n_sample = 100):
-    from adatasets import test_dataset_classification_fake
-    df, d = test_dataset_classification_fake(nrows=500)
+    from adatasets import test_data_classifier_fake
+    df, d = test_data_classifier_fake(nrows=500)
     colnum, colcat, coly = d['colnum'], d['colcat'], d['coly']
     df[coly].iloc[:50] = 1  ## Force 2 class
 

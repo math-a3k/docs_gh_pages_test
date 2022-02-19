@@ -14,12 +14,12 @@ def test_all():
     """
     def test():
         log("Testing  ...")
-        from utilmy.adatasets import test_dataset_classification_fake, test_dataset_classification_petfinder, test_dataset_classifier_covtype,\
-            test_dataset_regression_fake,dataset_classifier_pmlb
-        test_dataset_regression_fake(nrows=500, n_features=17)
-        test_dataset_classification_fake(nrows=10)
-        test_dataset_classification_petfinder(nrows=10)
-        test_dataset_classifier_covtype(nrows=10)
+        from utilmy.adatasets import test_data_classifier_fake, test_data_classifier_petfinder, test_data_classifier_covtype,\
+            test_data_regression_fake,dataset_classifier_pmlb
+        test_data_regression_fake(nrows=500, n_features=17)
+        test_data_classifier_fake(nrows=10)
+        test_data_classifier_petfinder(nrows=10)
+        test_data_classifier_covtype(nrows=10)
         dataset_classifier_pmlb(name=2)
     
     def test_pd_utils():
@@ -37,10 +37,10 @@ def test_all():
 
 def test0():
     log("Testing  ...")
-    test_dataset_regression_fake(nrows=500, n_features=17)
-    test_dataset_classification_fake(nrows=10)
-    test_dataset_classification_petfinder(nrows=10)
-    test_dataset_classifier_covtype(nrows=10)
+    test_data_regression_fake(nrows=500, n_features=17)
+    test_data_classifier_fake(nrows=10)
+    test_data_classifier_petfinder(nrows=10)
+    test_data_classifier_covtype(nrows=10)
     '''TODO:
     dataset_classifier_pmlb(name=2)
     '''
@@ -102,7 +102,6 @@ def pd_train_test_split2(df, coly):
 
 
 
-####################################################################################################
 def dataset_classifier_pmlb(name='', return_X_y=False):
     from pmlb import fetch_data, classification_dataset_names
     ds = classification_dataset_names[name]
@@ -116,7 +115,10 @@ def dataset_classifier_pmlb(name='', return_X_y=False):
     return df, pars
 
 
-def test_dataset_classifier_covtype(nrows=500):
+
+####################################################################################################
+######## Lisr of datasets ##########################################################################
+def test_data_classifier_covtype(nrows=500):
     log("start")
 
     import wget
@@ -145,7 +147,7 @@ def test_dataset_classifier_covtype(nrows=500):
     return df, pars
 
 
-def test_dataset_regression_fake(nrows=500, n_features=17):
+def test_data_regression_fake(nrows=500, n_features=17):
     from sklearn import datasets as sklearn_datasets
     coly   = 'y'
     colnum = ["colnum_" +str(i) for i in range(0, 17) ]
@@ -162,7 +164,7 @@ def test_dataset_regression_fake(nrows=500, n_features=17):
     return df, pars
 
 
-def test_dataset_classification_fake(nrows=500):
+def test_data_classifier_fake(nrows=500):
     from sklearn import datasets as sklearn_datasets
     ndim    =11
     coly    = 'y'
@@ -180,7 +182,7 @@ def test_dataset_classification_fake(nrows=500):
     return df, pars
 
 
-def test_dataset_classification_petfinder(nrows=1000):
+def test_data_classifier_petfinder(nrows=1000):
     # Dense features
     import wget
     colnum = ['PhotoAmt', 'Fee','Age' ]
