@@ -26,7 +26,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor, plot_tree, DecisionTreeClassifier
 from sklearn import metrics
 from mapie.classification import MapieClassifier
-from mapie.metrics import classification_coverage_score, classification_mean_width_score
+from mapie.metrics import classification_coverage_score
+
 
 
 #### Types
