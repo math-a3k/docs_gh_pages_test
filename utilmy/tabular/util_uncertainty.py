@@ -28,7 +28,7 @@ from sklearn import metrics
 
 try :  ### for pytest
    from mapie.classification import MapieClassifier
-   from mapie.metrics import classification_coverage_score
+   from mapie.metrics import classification_coverage_score, classification_mean_width_score
 except : pass
 
 #### Types
@@ -51,7 +51,6 @@ def test_all():
 
 
 def test1():
-  from sklearn.linear_model import LinearRegression
   d = Box({})
   d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_reg_boston_data()
   
@@ -69,15 +68,11 @@ def test1():
       d.task_type = 'regressor' if 'Regressor' in m[0] else 'classifier'
       model1= model_fit(name = m[0], model = m[1], mapie_pars = m[2], predict_pars = m[3], data_pars=d, do_prefit=True, do_eval=True)
 
-      model_save(model1, f'./mymodel_{ii}/')
-      model2 = model_load( f'./mymodel_{ii}/')
+      model_save(model1, f'./mymodel_{i}/')
+      model2 = model_load( f'./mymodel_{i}/')
 
 
 def test2():
-
-  from sklearn.ensemble import RandomForestClassifier
-  from sklearn.tree import DecisionTreeClassifier
-
   d = Box({})
   d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_classifier_digits_data()
   
@@ -93,14 +88,14 @@ def test2():
       print(str(m[1]))
       d.task_type = 'regressor' if 'Regressor' in m[0] else 'classifier'
       model1= model_fit(name = m[0], model = m[1], mapie_pars = m[2], predict_pars = m[3], data_pars=d, do_prefit=True, do_eval=True)
-      model_save(model1, f'./mymodel_{ii}/')
-      model2 = model_load( f'./mymodel_{ii}/')
+      model_save(model1, f'./mymodel_{i}/')
+      model2 = model_load( f'./mymodel_{i}/')
 
 
 def test5():
   from sklearn.naive_bayes import GaussianNB
   from mapie.classification import MapieClassifier
-  from mapie.metrics import classification_coverage_score
+  from mapie.metrics import classification_coverage_score, classification_mean_width_score
   clf = GaussianNB().fit(X_train, y_train)
   y_pred = clf.predict(X_test)
   y_pred_proba = clf.predict_proba(X_test)
@@ -112,7 +107,7 @@ def test5():
 
 
 
-  
+
 #############################################################################################  
 def model_fit(name = 'mapie.regression.MapieRegressor', model=None, mapie_pars:dict=None, predict_pars:dict=None, data_pars:dict=None, 
               do_prefit=False, do_eval=True, test_size=0.3):
@@ -171,15 +166,15 @@ def model_load(path=""):
     return model0
 
 
-def model_predict(model, X_test, predict_pars:dict=None, interval=True):
+def model_predict(model, predict_pars:dict=None, interval=True):
     """ Convenien wrapper
 
     """
     if interval :
-      y_pred, y_pis = model.predict(X_test, **predict_pars)
+      y_pred, y_pis = model.predict(d.X_test, **predict_pars)
 
     else :
-      y_pred, _ = model.predict(X_test, **predict_pars)
+      y_pred, _ = model.predict(d.X_test, **predict_pars)
 
 
 def model_evaluate(model, data_pars:dict, predict_pars:dict):
@@ -206,15 +201,15 @@ def model_viz_classification_preds(preds, y_test):
 
 def model_eval2(clf, Xval, yval, dirout=""):
   from mapie.classification import MapieClassifier
-  from mapie.metrics import classification_coverage_score
+  from mapie.metrics import classification_coverage_score, classification_mean_width_score
   
   mapie_score = MapieClassifier(estimator=clf, cv="prefit", method="score")
   mapie_score.fit(Xval, yval)
   alpha = [0.2, 0.1, 0.05]
-  y_pred_score, y_ps_score = mapie_score.predict(Xval, alpha=alpha)
+  y_pred_score, y_ps_score = mapie_score.predict(X_test_mesh, alpha=alpha)
 
   from utilmy import save
-  save(mapie_score, dirout)
+  save(maple_score, dirout)
 
 
 #############################################################################################
@@ -249,8 +244,6 @@ def load_function_uri(uri_name="path_norm"):
     ###### External File processor :
     #"dataset"        : "MyFolder/preprocess/myfile.py:pandasDataset"
     """
-    import importlib, sys
-    from pathlib import Path
     if ":" in uri_name :
        pkg = uri_name.split(":")
        assert len(pkg) > 1, "  Missing :   in  uri_name module_name:function_or_class "
