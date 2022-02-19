@@ -11,10 +11,13 @@ Rules to follow :
 """
 import os, sys, time, datetime,inspect, random, pandas as pd, random, numpy as np, glob
 
-
 #### NEVER IMPORT HERE  !!!!
 # from utilmy import pd_random, pd_generate_data
 # from tensorflow.python.ops.gen_array_ops import one_hot
+
+#### Only import utilmy
+import utilmy
+
 
 #########################################################################################
 def log(*s):
