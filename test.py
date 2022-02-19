@@ -179,18 +179,14 @@ def test_oos():
 
 #######################################################################################
 def test_tabular():
-   from utilmy.tabular import util_sparse as m
-   m.test_all()
-
-   from utilmy.tabular import util_explain as m
-   m.test_all()
-
+   utilmy.tabular.util_sparse.test_all()
+   utilmy.tabular.util_explain.test_all()
+   utilmy.tabular.util_uncertainty.test_all()
 
    
 #########################################################################################
 def test_deeplearning_keras():
-    from utilmy.deeplearning.keras import  util_similarity as m
-    m.test_tf_cdist()
+    utilmy.deeplearning.keras.util_similarity.test_tf_cdist()
 
 
 
