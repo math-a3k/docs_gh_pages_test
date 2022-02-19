@@ -32,7 +32,9 @@ def help():
 
 
 ###################################################################################################
-def help_get_info(fun_name):   
+
+###################################################################################################
+def help_get_info(fun_name:str="utilmy.help_create", doprint=True):   
    if ":"in fun_name :
        x = fun_name.split(":")
        module_name = x[0]
@@ -46,9 +48,23 @@ def help_get_info(fun_name):
 
    dd = Box({})
    dd.name = fun_name
-   dd.args = help_get_funargs(func)   
+   # dd.args = help_signature(func)   
+   dd.args = help_get_funargs(func)      
    dd.doc  = help_get_docstring(func)
    dd.code = help_get_codesource(func)
+
+   ss = ""
+   for l in dd.args:
+     l  = l.split("=")  
+     ss = ss + f"'{l[0]}': {l[1]}"  +","
+   dd.args2 = "{" + ss[:-1]  + "}"
+
+   if doprint == 1 or doprint == True :
+       print( 'Name: ', "\n",  fun_name, "\n" )
+       print( 'args:', "\n",  dd.args2, "\n" )
+       print( 'doc:',  "\n",  dd.doc, "\n" )
+       return ''
+
    return dd
 
 
@@ -67,17 +83,51 @@ def help_get_codesource(func):
 def help_get_docstring(func):
     """ Extract Docstring from func name"""
     import inspect
-    try:      lines = func.__doc__
-    except :  lines = ""
+    try:
+        lines = func.__doc__
+    except AttributeError:
+        lines = ""
     return lines
 
 
 def help_get_funargs(func):
     """ Extract Docstring  :  (a, b, x='blah') """
     import inspect
-    try:     llist = inspect.signature(func)
-    except : llist = []
-    return llist
+    try:
+        ll = str( inspect.signature(func) )
+        ll = ll[1:-1]
+        ll = [ t.strip() for t in ll.split(", ")]
+
+    except :
+        ll = ""
+    return ll
+
+
+def help_signature(f):
+    from collections import namedtuple
+    sig = inspect.signature(f)
+    args = [
+        p.name for p in sig.parameters.values()
+        if p.kind == inspect.Parameter.POSITIONAL_OR_KEYWORD
+    ]
+    varargs = [
+        p.name for p in sig.parameters.values()
+        if p.kind == inspect.Parameter.VAR_POSITIONAL
+    ]
+    varargs = varargs[0] if varargs else None
+    keywords = [
+        p.name for p in sig.parameters.values()
+        if p.kind == inspect.Parameter.VAR_KEYWORD
+    ]
+    keywords = keywords[0] if keywords else None
+    defaults = [
+        p.default for p in sig.parameters.values()
+        if p.kind == inspect.Parameter.POSITIONAL_OR_KEYWORD
+        and p.default is not p.empty
+    ] or None
+    argspec = namedtuple('Signature', ['args', 'defaults',
+                                        'varargs', 'keywords'])
+    return argspec(args, defaults, varargs, keywords) 
 
 
 def help_create(modulename='utilmy.nnumpy', prefixs=None):
@@ -93,6 +143,7 @@ def help_create(modulename='utilmy.nnumpy', prefixs=None):
         fun = import_function(fname, modulename)
         ss += help_get_codesource(fun)
     return ss
+
 
 
 
