@@ -83,7 +83,7 @@ def test2():
   
   mlist = [
         ('mapie.classification.MapieClassifier', DecisionTreeClassifier(), 
-            {'method':'score', 'cv': 'prefit', 'n_job': 1, 'verbose':50 }  ,  ### mapie model
+            {'method':'score', 'cv': 'prefit', 'n_jobs': 1, 'verbose':50 }  ,  ### mapie model
             {'alpha':[0.05, 0.32]}),  ## Preds
         ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'cumulative_score'}  ,  {'alpha':[0.05, 0.32]}),
         ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'top_k'}  ,  {'alpha':[0.05, 0.32]}),
