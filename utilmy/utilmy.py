@@ -54,7 +54,7 @@ def help_info(fun_name:str="os.system", doprint=True):
        fun_name    = x[-1]
 
 
-   func = import_function(fun_name, module_name)
+   func = import_function(fun_name, module_name, fuzzy_match=True)
 
    dd = Box({})
    dd.name = fun_name
@@ -201,7 +201,7 @@ print(ll)
 find_fuzzy('help box', ll)
 
 
-def import_function(fun_name=None, module_name=None), fuzzy_match=True):
+def import_function(fun_name=None, module_name=None), fuzzy_match=False):
     import importlib
 
     try :
