@@ -3,8 +3,12 @@
 import os, sys, time, datetime,inspect, json, pandas as pd, numpy as np
 from pathlib import Path
 
-from utilmy import (os_makedirs, os_system, global_verbosity, git_current_hash, git_repo_root
-                           )
+from utilmy import (os_makedirs,  )
+
+####################################################################################################
+from utilmy import log, log2
+
+
 
 
 ##############################################################################################
@@ -34,7 +38,6 @@ def test_all():
     test_pd_utils()
 
 
-
 def test0():
     log("Testing  ...")
     test_data_regression_fake(nrows=500, n_features=17)
@@ -44,7 +47,8 @@ def test0():
     '''TODO:
     dataset_classifier_pmlb(name=2)
     '''
-    
+
+
 def test1():
     fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
     df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
@@ -55,14 +59,6 @@ def test1():
     pd_train_test_split2(df, "block")
 
     
-####################################################################################################
-verbosity = 3
-
-def log(*s):
-    if verbosity>= 1: print(*s, flush=True)
-
-def log2(*s):
-    if verbosity>= 1: print(*s, flush=True)
 
 
 ####################################################################################################
@@ -224,6 +220,7 @@ def test_data_regression_boston(nrows=100):
     '''load (regression) data on boston housing prices
     '''
     from sklearn.datasets import load_boston
+    from sklearn.model_selection import train_test_split
     X_reg, y_reg = load_boston(return_X_y=True)
     feature_names = load_boston()['feature_names']
     X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_reg, y_reg, test_size=0.25) # split
