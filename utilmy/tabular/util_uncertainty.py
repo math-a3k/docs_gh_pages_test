@@ -2,13 +2,12 @@
 MNAME = "utilmy.tabular.util_uncertainty"
 HELP = """ utils for uncertainty estimation
 
-from sklearn.naive_bayes import GaussianNB
-from mapie.classification import MapieClassifier
-from mapie.metrics import classification_coverage_score, classification_mean_width_score
+
 clf = GaussianNB().fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 y_pred_proba = clf.predict_proba(X_test)
 y_pred_proba_max = np.max(y_pred_proba, axis=1)
+
 mapie_score = MapieClassifier(estimator=clf, cv="prefit", method="score")
 mapie_score.fit(X_cal, y_cal)
 alpha = [0.2, 0.1, 0.05]
