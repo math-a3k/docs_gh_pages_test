@@ -36,6 +36,10 @@ def help():
 
 ###################################################################################################
 def help_info(fun_name:str="os.system", doprint=True):   
+   """  get infos
+      
+   """ 
+   from box import Box 
    if ":"in fun_name :
        x = fun_name.split(":")
        module_name = x[0]
