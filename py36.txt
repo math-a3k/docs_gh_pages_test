@@ -96,7 +96,7 @@ statsmodels
 bootstrapped
 mmh3  
 imodels   ### rule generator
-
+mapie  ### Uncertainty est.
 
 
 

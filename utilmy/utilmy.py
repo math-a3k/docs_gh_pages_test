@@ -239,6 +239,22 @@ def sys_install(cmd=""):
    print('Exit \n\n\n')
 
 
+def pip_install(pkg_str=" pandas "):
+    """
+        try:
+        import pandas as pd
+    except ImportError:
+        
+    finally:
+        import pandas as pd
+
+    """    
+    import subprocess, sys
+    clist = [sys.executable, "-m", "pip", "install",  ]  + pkg_str.split(" ")
+    log("Installing", pkg_str)
+    subprocess.check_call(clist)
+
+
 
 ###################################################################################################
 def pd_random(ncols=7, nrows=100):
