@@ -34,7 +34,7 @@ def help():
 ###################################################################################################
 
 ###################################################################################################
-def help_info(fun_name:str="utilmy.help_create", doprint=True):   
+def help_info(fun_name:str="os.system", doprint=True):   
    if ":"in fun_name :
        x = fun_name.split(":")
        module_name = x[0]
@@ -60,7 +60,7 @@ def help_info(fun_name:str="utilmy.help_create", doprint=True):
    dd.args2 = "{" + ss[:-1]  + "}"
 
    if doprint == 1 or doprint == True :
-       print( 'Name: ', "\n",  fun_name, "\n" )
+       print( 'Name: ', "\n",  module_name +"."+ fun_name, "\n" )
        print( 'args:', "\n",  dd.args2, "\n" )
        print( 'doc:',  "\n",  dd.doc, "\n" )
        return ''
