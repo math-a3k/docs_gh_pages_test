@@ -14,10 +14,10 @@ test0()
 test1()
 test_all()
 test_data_classifier_covtype(nrows = 500)
-test_data_classifier_digits(nrows = 100)
+test_data_classifier_digits(nrows = 1000)
 test_data_classifier_fake(nrows = 500)
 test_data_classifier_petfinder(nrows = 1000)
-test_data_regression_boston(nrows = 100)
+test_data_regression_boston(nrows = 1000)
 test_data_regression_fake(nrows = 500, n_features = 17)
 
 
