@@ -5,13 +5,15 @@ utilmy/__init__.py
 
 utilmy/adatasets.py
 -------------------------functions----------------------
-dataset_classifier_XXXXX(nrows = 500, **kw)
+download_dtopbox(data_pars)
+download_googledrive(file_list, **kw)
 fetch_dataset(url_dataset, path_target = None, file_target = None)
 pd_train_test_split(df, coly = None)
 pd_train_test_split2(df, coly)
 test0()
 test1()
 test_all()
+test_data_XXXXXfier_YYYY(nrows = 500, nmode = 'split/pandas', **kw)
 test_data_classifier_covtype(nrows = 500)
 test_data_classifier_digits(nrows = 1000)
 test_data_classifier_fake(nrows = 500)
@@ -20,6 +22,15 @@ test_data_classifier_pmlb(name = '', return_X_y = False, train_split = True)
 test_data_regression_boston(nrows = 1000)
 test_data_regression_fake(nrows = 500, n_features = 17)
 
+-------------------------methods----------------------
+Downloader.__init__(self, url)
+Downloader._transform_dropbox_url(self)
+Downloader._transform_gdrive_url(self)
+Downloader._transform_github_url(self)
+Downloader.adjust_url(self)
+Downloader.clean_netloc(self)
+Downloader.download(self, filepath = '')
+Downloader.get_filename(self, headers)
 
 
 utilmy/cli.py
