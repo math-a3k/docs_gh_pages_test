@@ -74,10 +74,8 @@ def test1():
 
 
 def test2():
-
   from sklearn.ensemble import RandomForestClassifier
   from sklearn.tree import DecisionTreeClassifier
-
   d = Box({})
   d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_classifier_digits()
   
@@ -85,7 +83,7 @@ def test2():
         ('mapie.classification.MapieClassifier', DecisionTreeClassifier(), 
             {'method':'score', 'cv': 'prefit', 'n_jobs': 1, 'verbose':50 }  ,  ### mapie model
             {'alpha':[0.05, 0.32]}),  ## Preds
-        ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'cumulated_score'}  ,  {'alpha':[0.05, 0.1]}),
+        ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'cumulated_score'}  ,  {'alpha':[0.05, 0.32]}),
         # ('mapie.classification.MapieClassifier', RandomForestClassifier(), {'method':'top_k'}  ,  {'alpha':[0.05, 0.32]}),  ## NG
   ]
 
@@ -105,7 +103,6 @@ def test5():
   y_pred = clf.predict(X_test)
   y_pred_proba = clf.predict_proba(X_test)
   y_pred_proba_max = np.max(y_pred_proba, axis=1)
-
   mapie_score = MapieClassifier(estimator=clf, cv="prefit", method="score")
   mapie_score.fit(X_cal, y_cal)
   alpha = [0.2, 0.1, 0.05]
