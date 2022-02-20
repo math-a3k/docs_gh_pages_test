@@ -888,6 +888,25 @@ write_to_file(uri, type, list_functions, list_classes, list_imported, dict_funct
 
 
 
+utilmy/docs/docstring.py
+-------------------------functions----------------------
+automate_mkdocs_from_docstring(mkdocs_dir: Union[str, Path], mkgendocs_f: str, repo_dir: Path, match_string: str)
+docstring(repo_dir: Path, dirout:str, overwrite_script: bool  =  False, test: bool  =  True)
+docstring_from_type_hints(repo_dir: Path, dirout:str, overwrite_script: bool  =  False, test: bool  =  True)
+indent(string: str)
+main()
+
+
+
+utilmy/docs/docstring2.py
+-------------------------functions----------------------
+automate_mkdocs_from_docstring(mkdocs_dir: Union[str, Path], mkgendocs_f: str, repo_dir: Path, match_string: str)
+docstring_from_type_hints(repo_dir: Path, overwrite_script: bool  =  False, test: bool  =  True)
+indent(string: str)
+main()
+
+
+
 utilmy/docs/generate_doc.py
 -------------------------functions----------------------
 markdown_create_file(list_info, prefix = '')
