@@ -181,7 +181,7 @@ def get_loggers(mode='print', n_loggers=2, verbose_level=None):
 
 
 ###################################################################################################
-def find_fuzzy(word:str, wlist:list):
+def find_fuzzy(word:str, wlist:list), threshold=0.0):
   """ Find closest fuzzy string
         ll = dir(utilmy)
         print(ll)
@@ -193,8 +193,12 @@ def find_fuzzy(word:str, wlist:list):
   #print(scores)
   # imax = np.argmax(scores)  
   imax = max(range(len(scores)), key=scores.__getitem__)
-  most_similar = wlist[imax]
-  return most_similar
+
+  if scores[imax] > treshold :
+      most_similar = wlist[imax]
+      return most_similar
+  else : 
+      raise Exception( f'Not exist {word}  ; {wlist} ' )   
 
 
 def import_function(fun_name=None, module_name=None, fuzzy_match=False):
