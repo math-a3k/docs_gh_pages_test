@@ -19,12 +19,12 @@ def test_all():
     def test():
         log("Testing  ...")
         from utilmy.adatasets import test_data_classifier_fake, test_data_classifier_petfinder, test_data_classifier_covtype,\
-            test_data_regression_fake,dataset_classifier_pmlb
+            test_data_regression_fake,test_data_classifier_pmlb
         test_data_regression_fake(nrows=500, n_features=17)
         test_data_classifier_fake(nrows=10)
         test_data_classifier_petfinder(nrows=10)
         test_data_classifier_covtype(nrows=10)
-        dataset_classifier_pmlb(name=2)
+        test_data_classifier_pmlb(name=2)
     
     def test_pd_utils():
         import pandas as pd
@@ -98,22 +98,35 @@ def pd_train_test_split2(df, coly):
 
 
 
-def dataset_classifier_pmlb(name='', return_X_y=False):
-    from pmlb import fetch_data, classification_dataset_names
-    ds = classification_dataset_names[name]
-    pars = {}
 
-    X,y = fetch_data(ds, return_X_y=  True)
-    colnum = list(range(X.shape[1]))
-    df = pd.DataFrame(X,columns=colnum)
-    df['coly'] = y
-    pars = {"colnum":colnum,"coly":y}
-    return df, pars
 
 
 
 ####################################################################################################
 ######## Lisr of datasets ##########################################################################
+def test_data_classifier_pmlb(name='', return_X_y=False, train_split=True):
+    """  pip install pmlb
+
+
+    """
+    from pmlb import fetch_data, classification_dataset_names
+    from sklearn.model_selection import train_test_split
+    from utilmy import find_fuzzy
+    ds = find_fuzzy(name, classification_dataset_names)
+    pars = {}
+
+    X,y = fetch_data(ds, return_X_y=  True)
+
+    if train_split:
+       X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y) # split
+       return X_train, X_test, y_train, y_test
+
+    colnum = [ str(i) for i in list(range(X.shape[1])) ]
+    df = pd.DataFrame(X,columns=colnum)
+    df['coly'] = y
+    pars = {"colnum":colnum,"coly":y}
+    return df, pars
+
 def test_data_classifier_covtype(nrows=500):
     log("start")
 
