@@ -189,7 +189,7 @@ def find_fuzzy(word:str, wlist:list):
   """  
   # import numpy as np   
   from difflib import SequenceMatcher as SM
-  scores = [ SM(None, word, s2).ratio() for s2 in wlist  ]
+  scores = [ SM(None, str(word), str(s2) ).ratio() for s2 in wlist  ]
   #print(scores)
   # imax = np.argmax(scores)  
   imax = max(range(len(scores)), key=scores.__getitem__)
