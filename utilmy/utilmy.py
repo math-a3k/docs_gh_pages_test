@@ -217,9 +217,12 @@ def import_function(fun_name=None, module_name=None, fuzzy_match=False):
         raise Exception( msg )  
 
 
-def glob_glob(dirin, nfile=1000):
+def glob_glob(dirin="**/*.py", nfile=1000, recursive=False, **kw):
+    """  **/*.py   any sub-directories
+
+    """
     import glob
-    flist  = sorted( glob.glob(dirin  ))
+    flist  = sorted( glob.glob(dirin , recursive= recursive, **kw ))
     flist  = flist[:nfile]
     log('Nfile: ', len(flist), str(flist)[:100])
     return flist
