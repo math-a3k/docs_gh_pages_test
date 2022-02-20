@@ -6,7 +6,6 @@ utilmy/__init__.py
 utilmy/adatasets.py
 -------------------------functions----------------------
 dataset_classifier_XXXXX(nrows = 500, **kw)
-dataset_classifier_pmlb(name = '', return_X_y = False)
 fetch_dataset(url_dataset, path_target = None, file_target = None)
 pd_train_test_split(df, coly = None)
 pd_train_test_split2(df, coly)
@@ -17,6 +16,7 @@ test_data_classifier_covtype(nrows = 500)
 test_data_classifier_digits(nrows = 1000)
 test_data_classifier_fake(nrows = 500)
 test_data_classifier_petfinder(nrows = 1000)
+test_data_classifier_pmlb(name = '', return_X_y = False, train_split = True)
 test_data_regression_boston(nrows = 1000)
 test_data_regression_fake(nrows = 500, n_features = 17)
 
@@ -3087,7 +3087,7 @@ unzip(in_dir, out_dir)
 
 utilmy/utilmy.py
 -------------------------functions----------------------
-find_fuzzy(word:str, wlist:list)
+find_fuzzy(word:str, wlist:list, threshold = 0.0)
 get_loggers(mode = 'print', n_loggers = 2, verbose_level = None)
 get_verbosity(verbose:int = None)
 git_current_hash(mode = 'full')
