@@ -1,17 +1,15 @@
-
-ni = 2
-no = 1
-
 #=================================
 # Printing control panel
 #=================================
 print_after = 100
-print_best = 0
+print_best = 1
 #=================================
-# Grid Parameters
+# Graph Parameters
 #=================================
-nf = ['+','-','*','/']
-nc,nr = 18,1  ## columns x rows (Controls the grid shape and size)
+ni = 2
+no = 1
+nf = ['+','-','*','/','log','exp']
+nc,nr = 20,1  ## columns x rows (Controls the grid shape and size)
 l = nc  ## levels-back (Suggested: l=nc if nr=1)
 o2i = 0 # Output connect to inputs?
 #=================================
@@ -27,20 +25,16 @@ rand_inject = 25
 #=================================
 import signal
 import sys
-from random import randint,randrange,uniform,choices,sample,choice
+from random import randint,randrange,uniform,choices,sample,choice,shuffle
 import math
 import numpy as np
-from subprocess import check_output
-import re
-from itertools import islice
 from copy import deepcopy
 from operator import itemgetter
 from timeit import default_timer as timer
-from datetime import datetime
-from pathlib import Path
-from collections import OrderedDict
-sys.setrecursionlimit(24000)
-
+import scipy.stats
+from icecream import ic
+import warnings
+warnings.filterwarnings("ignore")
 #=================================
 # Function Definitions
 #=================================
@@ -48,20 +42,119 @@ def sigint_handler(signal, frame):  # Press Ctrl+C to interrupt
     print ("\n\nInterrupted !!")
     print ("xxxxxxxxxxxxxxxxxxxxxxxxx")
     try:
-        total,ER,r_cost,ratioA,n_level,ckt,n_ratioA,vectors,n_gates = cost(best_egg[0])
-        print('\n#{}'.format(k),('cost:{} [{}] [{}] ({})'.format('%.3f'%(total),'%.2f'%(ER),'%.2f'%(n_ratioA)),\
-                               'distance:{}'.format(vectors),\
-                               'A:{}/{}'.format('%.3f'%(ratioA),'%.3f'%(tgt_ratioA)),\
-                               'level:{}/{}'.format(n_level,tgt_level),\
-                               'gates:{}/{} [{}/{}]'.format(n_gates,tgt_gates,'%.3f'%(r_cost),'%.3f'%(tgt_cost))),\
-                                datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
-        printls(ckt)
+        cost = round(best_egg[1][0], 3)
+        print(f'\n#{k}', f'{cost}')
+        if (print_best==1):
+            print(best_egg[1][1])
+            print('\n')
     except:
         print ("No best_egg so far")
     sys.exit(0)
 signal.signal(signal.SIGINT, sigint_handler)
 
+def log(*s): print(*s, flush=True)
 
+def get_correlm(eqn):
+    """  compare 2 lists lnew, ltrue and output correlation.
+       Goal is to find rank_score such Max(correl(lnew(rank_score), ltrue ))
+    
+    """
+    ##### True list
+    ltrue = [ str(i)  for i in range(0, 100) ]   
+
+    #### Create noisy list 
+    ltrue_rank = {i:x for i,x in enumerate(ltrue)}
+    list_overlap =  ltrue[:70]  #### Common elements
+
+    nsample=5
+    correls = []
+    for i in range(nsample):
+        ll1  = rank_generate_fake(ltrue_rank, list_overlap, nsize=100, ncorrect=40)
+        ll2  = rank_generate_fake(ltrue_rank, list_overlap, nsize=100, ncorrect=50)
+
+        #### Merge them using rank_score
+        lnew = rank_merge_v5(ll1, ll2, kk= 1, eqn = eqn)
+        lnew = lnew[:100]
+        # log(lnew) 
+
+        ### Eval with True Rank
+        correls.append(scipy.stats.spearmanr(ltrue,  lnew).correlation)
+
+    correlm = np.mean(correls)
+    return -correlm  ### minimize correlation val
+
+#### Example of rank_scores0
+def rank_score(eqn:str, rank1:list, rank2:list, adjust=1.0, kk=1.0)-> list:
+    """     ### take 2 np.array and calculate one list of float (ie NEW scores for position)
+ 
+     list of items:  a,b,c,d, ...
+     item      a,b,c,d,e
+     rank1 :   1,2,3,4 ,,n     (  a: 1,  b:2, ..)
+     rank2 :   5,7,2,1 ,,n     (  a: 5,  b:6, ..)
+    
+     scores_new :   a: -7.999,  b:-2.2323   
+     (item has new scores)
+    
+    """
+
+    x0 = 1/(kk + rank1)
+    x1 = 1/(kk + rank2*adjust)
+
+    scores_new =  eval(eqn)
+    return scores_new
+
+def rank_merge_v5(ll1:list, ll2:list, eqn:str, kk= 1):
+    """ Re-rank elements of list1 using ranking of list2
+        20k dataframe : 6 sec ,  4sec if dict is pre-build
+        Fastest possible in python
+    """
+    if len(ll2) < 1: return ll1
+    n1, n2 = len(ll1), len(ll2)
+
+    if not isinstance(ll2, dict) :
+        ll2 = {x:i for i,x in enumerate( ll2 )  }  ### Most costly op, 50% time.
+
+    adjust, mrank = (1.0 * n1) / n2, n2
+    rank2 = np.array([ll2.get(sid, mrank) for sid in ll1])
+    rank1 = np.arange(n1)
+    rank3 = rank_score(eqn, rank1, rank2, adjust=1.0, kk=1.0) ### Score   
+
+    #### re-rank  based on NEW Scores.
+    v = [ll1[i] for i in np.argsort(rank3)]
+    return v  #### for later preprocess
+
+def rank_generate_fake(dict_full, list_overlap, nsize=100, ncorrect=20):
+    """  Returns a list of random rankings of size nsize where ncorrect
+         elements have correct ranks
+        Keyword arguments:
+        dict_full    : a dictionary of 1000 objects and their ranks
+        list_overlap : list items common to all lists
+        nsize        : the total number of elements to be ranked
+        ncorrect     : the number of correctly ranked objects
+    """
+    # first randomly sample nsize - len(list_overlap) elements from dict_full
+    # of those, ncorrect of them must be correctly ranked
+    random_vals = []
+    while len(random_vals) <= nsize - len(list_overlap):
+      rand = sample(list(dict_full), 1)
+      if (rand not in random_vals and rand not in list_overlap):
+        random_vals.append(rand[0])
+
+    # next create list as aggregate of random_vals and list_overlap
+    list2 = random_vals + list_overlap
+    
+    # shuffle nsize - ncorrect elements from list2 
+    copy = list2[0:nsize - ncorrect]
+    shuffle(copy)
+    list2[0:nsize - ncorrect] = copy
+
+    # ensure there are ncorrect elements in correct places
+    if ncorrect == 0: 
+      return list2
+    rands = sample(list(dict_full)[0:nsize + 1], ncorrect + 1)
+    for r in rands:
+      list2[r] = list(dict_full)[r]
+    return list2
 
 def is_valid(G):
     def allUnique(x):
@@ -117,7 +210,6 @@ def is_valid(G):
     else:
         return False
 
-
 def random_solution():
     while True:
         G = []
@@ -148,8 +240,7 @@ def random_solution():
         if is_valid(G) == True: # check if all i/o have been used
             return G
 
-
-def NodesToProcess(G):
+def nodes_to_process(G):
     NU = [False]*M
 
     for i in range(Lg-no,Lg):
@@ -184,23 +275,54 @@ def NodesToProcess(G):
 
     return dic_nodes
 
-
 def decode(G):
-    nodes = NodesToProcess(G)
-    eqn = []
+    nodes = nodes_to_process(G)
+    #eqn = []
+    eqn = {}
 
     for i in range (ni):  #Inputs
-        eqn.append("INPUT(n{})\n".format(i))
+        #eqn.append("INPUT(n{})\n".format(i))
+        eqn[i] = f'x{i}'
 
-    for item in G[Lg-no:]:
-        eqn.append("OUTPUT(n{})\n".format(item))  #Outputs
-    
-    for key, value in nodes.items(): 
-        func = nf[value[0]]
-        eqn.append("x{} = ({})\n".format(key,value[1],func,value[2]))
+##    for item in G[Lg-no:]:
+##        eqn.append("OUTPUT(n{})\n".format(item))  #Outputs
+
+
+    for key in nodes.keys():
+        eqn[key] = None
+
+    # Initialize flag for repeated traversing of the netlist
+    flag = False
+    while True:
+        # Check if a node is still at level "None"
+        if None in eqn.values():
+            flag = True # Raise flag if any node is found "None"
+        if flag == True:
+            for key, value in nodes.items():
+                func = nf[value[0]]
+                val1 = eqn[value[1]]
+                val2 = eqn[value[2]]
+                
+                if val1!=None and val2!=None:
+                    if func in ('log', 'exp'):
+                        eqn[key] = f'(np.{func}({val1}))'
+                    else:
+                        eqn[key] = f'({val1}{func}{val2})'
+            flag = False
+        else: # If all nodes have been expressed, break this loop
+            break
+
+    keys = list(eqn.keys())
+    for key in keys:
+        if key not in G[Lg-no:]:
+            eqn.pop(key)
+        
+
+##    for key, value in nodes.items(): 
+##        func = nf[value[0]]
+##        eqn.append("x{} = (x{}{}x{})\n".format(key,value[1],func,value[2]))
 
     return eqn
-
 
 def random_walker(G,h):
     golden_G = deepcopy(G)
@@ -247,73 +369,23 @@ def random_walker(G,h):
         else:
             G = deepcopy(golden_G)
 
-
-def cost(G):
+def get_cost(G):
     def normalize(val,Rmin,Rmax,Tmin,Tmax):
         return (((val-Rmin)/(Rmax-Rmin)*(Tmax-Tmin))+Tmin)
 
     def denormalize(val,Rmin,Rmax,Tmin,Tmax):
         return (((val-Tmin)/(Tmax-Tmin)*(Rmax-Rmin))+Rmin)
 
-    ckt = decode(G)
-    
-    # Process for ER
-    difference_CNF(ckt) # Make CNF b/w target and candidate ckt (G/s)
-    
-    os.chdir(dir_cachet)
-    lines = str(check_output('./cachet CNF', shell=True)).split('\n') # Call Cachet
-    for line in lines: # Process output from Cachet
-        if "Number of solutions" in line:
-            vectors = int(re.search(r'\d+', line.split('Number of solutions')[1]).group())
-            break
+    eqn = decode(G)
 
-    ER = vectors/(2**ni)
-    n_ER = normalize(vectors,0,2**ni,0,alpha)
-    
-    # Process for ratio A
-    os.chdir(dir_hope)
+    try:
+        equation = eqn[G[Lg-no:][0]]
+        correlm = get_correlm(equation)
+    except:
+        #print(equation)
+        correlm = 1.0
 
-    f = open("ckt",'w')
-    f.write("# ckt\n")
-    for line in ckt:
-        f.write(line)
-    f.close()
-
-    ## Call HOPE
-    check_output('./hope -N -t patt -l log ckt', shell=True)
-
-    ## Read the log file
-    f = open("log",'r')
-    log = f.readlines()
-    f.close()
-
-    for line in log:
-
-        #if "Number of combinational gates" in line:
-            #n_gates = int(line.split(':')[1].strip())
-
-        if "Level of the circuit" in line:
-            n_level = int(line.split(':')[1].strip())
-
-        elif "Number of collapsed faults" in line:
-            n_collapsed = int(line.split(':')[1].strip())
-
-        elif "Number of detected faults" in line:
-            n_detected = int(line.split(':')[1].strip())
-
-    r_cost, n_gates = implementation_cost(ckt)
-
-    ## ratio A
-    ratioA = n_detected/n_collapsed
-    n_ratioA = normalize(ratioA,0,1.0,0,1-alpha)
-
-    ## final cost
-    total = n_ER + n_ratioA
-        
-    os.chdir(dir_home)
-    
-    return(total,ER,r_cost,ratioA,n_level,ckt,n_ratioA,vectors,n_gates)
-
+    return(correlm, equation)
 
 def search():
     def levyFlight(u):
@@ -322,12 +394,10 @@ def search():
     def randF():
         return (uniform(0.0001,0.9999))
 
-    #############################################################
     var_levy = []
-    for i in range(1000):    
+    for i in range(5):    
         var_levy.append(round(levyFlight(randF())))
     var_choice = choice
-    #############################################################
 
     def offsprings(nest,k_way):
         ## Best egg as father for breeding
@@ -363,29 +433,23 @@ def search():
 
             if len(children) >= n_replace:
                 return(children[:n_replace])
-
     
     # Initialize the nest
     nest = []
-    for i in range(n-1):
+    for i in range(n):
         egg = random_solution()
-        nest.append((egg,cost(egg)[:6]))
-    nest.append((seed,cost(seed)[:6])) # Adding seed as nth member
-    nest.sort(key = itemgetter(1)) #Sorting -> same as: nest.sort(key = lambda x: x[1][0])
+        nest.append((egg,get_cost(egg)))
 
-    ## Dump reference
-    f = open(f_dump,'w')
-    f.write('RatioA*Area*Level*Gates*Delay*Power*PDP*Circuit\n')
-    f.write(str(round(nest[0][1][3], 3))+'*'+str(round(nest[0][1][2], 3))+'*'+str(round(nest[0][1][4], 3))\
-            +'*'+'*'+'*'+'*'+'*'+(''.join(map(str, nest[0][1][-1])).replace('\n','\\n'))+'\n')
-    f.close()
+##    seed = [1,0,1, 0,1,2, 3,4,5, 0,1,3, 3,4,7, 0,6,8, 9]
+##    for i in range(n):
+##        nest.append((seed,get_cost(seed)))
+
+    nest.sort(key = itemgetter(1)) #Sorting -> same as: nest.sort(key = lambda x: x[1][0])
     
     global best_egg
     global k
     global dic_front
     ls_trace = []
-    dic_front = {}
-    dic_front[(nest[0][1][2],nest[0][1][3],nest[0][1][4])] = nest[0][1][-1]
     counter = 0
     # Main Loop
     for k in range(kmax+1):
@@ -394,39 +458,27 @@ def search():
             index = randint(0,n-1)
             egg = deepcopy(nest[index]) # Pick an egg at random from the nest
             cuckoo = random_walker(egg[0],var_choice(var_levy)) # Lay a cuckoo egg from that egg
-            cost_cuckoo = cost(cuckoo)[:6]
+            cost_cuckoo = get_cost(cuckoo)
             if (cost_cuckoo[0] <= egg[1][0]): # Check if the cuckoo egg is better
                 nest[index] = (cuckoo,cost_cuckoo)
 
         nest.sort(key = itemgetter(1)) # Sorting
 
-
-        # Frontiers
-        ls_eqv = [egg for egg in nest if egg[1][1]==0] # Consider only if ER==0
-        if len(ls_eqv) > 0: # if any ER>0
-            for egg in ls_eqv:
-
-                if (egg[1][2],egg[1][3],egg[1][4]) not in dic_front.keys():
-                    dic_front[(egg[1][2],egg[1][3],egg[1][4])] = egg[1][-1]
-
-
         # Store ratioA for trace
-        ls_trace.append(nest[0][1][3])
-        
+        ls_trace.append(nest[0][1][0])
                 
         if counter<rand_inject:
             # Genetically modify eggs with probability pa
             if n_replace>0:
                 children = offsprings(nest,k_way)
                 for i in range(n_replace):
-                    nest[(n-1)-(i)] = (children[i],cost(children[i])[:6])
+                    nest[(n-1)-(i)] = (children[i],get_cost(children[i]))
             counter+=1
         else:
             counter = 0
             for i in range(n_replace):
                 egg = random_solution()
-                nest[(n-1)-(i)] = (egg,cost(egg)[:6])
-
+                nest[(n-1)-(i)] = (egg,get_cost(egg))
 
         # Iterational printing
         if (k%print_after == 0):
@@ -438,18 +490,12 @@ def search():
             
             nest.sort(key = itemgetter(1)) # Rank nests and find current best
             best_egg = deepcopy(nest[0])
-            total,ER,r_cost,ratioA,n_level,ckt,n_ratioA,vectors,n_gates = cost(best_egg[0])
-            print('\n#{}'.format(k),('cost:{} [{}] ({})'.format('%.3f'%(total),'%.2f'%(ER),'%.2f'%(n_ratioA)),\
-                                   'distance:{}'.format(vectors),\
-                                   'A:{}/{}'.format('%.3f'%(ratioA),'%.3f'%(tgt_ratioA)),\
-                                   'level:{}/{}'.format(n_level,tgt_level),\
-                                   'gates:{}/{} [{}/{}]'.format(n_gates,tgt_gates,'%.3f'%(r_cost),'%.3f'%(tgt_cost))),\
-                                    datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+            cost = round(best_egg[1][0], 3)
+            print(f'\n#{k}', f'{cost}')
 
             if (print_best==1):
-                printls(ckt)
+                print(best_egg[1][1])
                 print('\n')
-                
                 
 #=================================
 # Remaining Grid Parameters
@@ -464,19 +510,19 @@ nu = 0  # No of active/used nodes
 #=================================
 # Init Status Printing
 #=================================
+print("Operators: {}".format(nf))
 print("I/O count: {}/{}".format(ni,no))
-print("Grid shape: {}x{}".format(nc,nr))
-print("Cells: {}".format(nf))
+print("Graph shape: {}x{}".format(nc,nr))
 if o2i==1:
-    print("o2i: Yes")
+    #print("o2i: Yes")
     o2i = 0
 elif o2i==0:
-    print("o2i: No")
+    #print("o2i: No")
     o2i = ni+Ln-(nr*l)
 print("Nest size: {}".format(n))
 print("Parasitic Probability: {}".format(pa))
 print("kmax: {}".format(kmax))
-print("rand_inject: {}".format(rand_inject))
+#print("rand_inject: {}".format(rand_inject))
 try:
     print("Step size: {}".format(step))
     s = round(Lg*step)
@@ -492,22 +538,12 @@ print("print_best: {}\n\n".format(print_best))
 n_cuckoo_eggs = round(pa*n)
 n_replace = round(pa*n)
 k_way = round(pa*n)
-
-
-
-
-geno = random_solution()
-pheno = decode(geno)
-print(pheno)
-
+f_trace = 'trace'
 
 #=================================
-# Execution
+# Driver code
 #=================================
-
-
-
-#search()
+search()
 
 
 
