@@ -397,14 +397,8 @@ def download_googledrive(file_list, **kw):
     
     for d in file_list :
       fileid = d["fileid"]
-      target = path_norm( d.get("path_target", "ztest/googlefile_" + str(random.randrange(1000) )  )
-      
-      """   
-      if not target:
-         tmp = os.path.join(gettempdir(), '.{}'.format(hash(os.times())))
-         os.makedirs(tmp)
-         target = tmp
-      """                                
+      target = path_norm( d.get("path_target", "ztest/googlefile_" + str(random.randrange(1000) )  ) )
+           
       if not os.path.exists(os.path.dirname(target)):
          os.makedirs(os.path.dirname(target), exist_ok=True)
 
