@@ -463,7 +463,7 @@ def download_dtopbox(data_pars):
       zip_ref.extractall(out_path)
 
 class Downloader:
-
+    import uuid 
     GITHUB_NETLOC = 'github.com'
     GITHUB_RAW_NETLOC = 'raw.githubusercontent.com'
 
