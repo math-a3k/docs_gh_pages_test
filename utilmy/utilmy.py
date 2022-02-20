@@ -194,7 +194,7 @@ def find_fuzzy(word:str, wlist:list, threshold=0.0):
   # imax = np.argmax(scores)  
   imax = max(range(len(scores)), key=scores.__getitem__)
 
-  if scores[imax] > treshold :
+  if scores[imax] > threshold :
       most_similar = wlist[imax]
       return most_similar
   else : 
