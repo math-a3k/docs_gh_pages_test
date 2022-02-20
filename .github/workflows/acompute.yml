@@ -82,7 +82,7 @@ jobs:
 
 
     ################################################################
-    - name: test_deeplearning
+    - name: test_compute
       run: python  utilmy/optim/gp.py   2>&1 | tee -a  docs/zlog_gp.py
 
 
