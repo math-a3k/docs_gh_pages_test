@@ -181,7 +181,7 @@ def get_loggers(mode='print', n_loggers=2, verbose_level=None):
 
 
 ###################################################################################################
-def find_fuzzy(word:str, wlist:list), threshold=0.0):
+def find_fuzzy(word:str, wlist:list, threshold=0.0):
   """ Find closest fuzzy string
         ll = dir(utilmy)
         print(ll)
