@@ -31,7 +31,7 @@ def help():
 #############################################################################################
 def test_all():
     log(MNAME)
-    #test()
+    test()
     test2()
 
 
@@ -143,6 +143,7 @@ def dataset_load_cardio(arg):
      wget.download(arg.dataurl)
 
   df = pd.read_csv(arg.datapath,delimiter=';')
+  df = df.iloc[:500, :]
   log(df, df.columns, df.shape)
 
   # y = df[coly]
@@ -360,9 +361,8 @@ def dataset_load_covtype(arg)->pd.DataFrame:
   df =df.data
   log(df)
   log(df.columns)
-
-
-  df = df.iloc[:5000, :]
+  df = df.iloc[:500, :10]
+  log(df)
   return df
 
 
@@ -859,5 +859,7 @@ def get_perturbed_input(input_tensor, pert_coeff):
 
 ###################################################################################################
 if __name__ == "__main__":
-    test_all()
+    import fire 
+    fire.Fire() 
+    # test_all()
 
