@@ -630,7 +630,7 @@ utilmy/deeplearning/torch/rule_encoder.py
 -------------------------functions----------------------
 dataloader_create(train_X = None, train_y = None, valid_X = None, valid_y = None, test_X = None, test_y = None, arg = None)
 dataset_load_cardio(arg)
-dataset_load_covtype()
+dataset_load_covtype(arg)
 dataset_preprocess_cardio(df, arg)
 dataset_preprocess_covtype(df, arg)
 device_setup(arg)
@@ -648,6 +648,7 @@ model_train(model, losses, train_loader, valid_loader, arg:dict = None)
 test()
 test2()
 test_all()
+test_dataset_classification_fake(nrows = 500)
 verification(out, pert_out, threshold = 0.0)
 
 -------------------------methods----------------------
@@ -1362,6 +1363,24 @@ decode(G)
 is_valid(G)
 random_solution()
 random_walker(G, h)
+search()
+sigint_handler(signal, frame)
+
+
+
+utilmy/optim/gp_formulae.py
+-------------------------functions----------------------
+NodesToProcess(G)
+decode(G)
+get_correlm(eqn)
+get_cost(G)
+is_valid(G)
+log(*s)
+random_solution()
+random_walker(G, h)
+rank_generate_fake(dict_full, list_overlap, nsize = 100, ncorrect = 20)
+rank_merge_v5(ll1:list, ll2:list, eqn:str, kk =  1)
+rank_score(eqn:str, rank1:list, rank2:list, adjust = 1.0, kk = 1.0)
 search()
 sigint_handler(signal, frame)
 
