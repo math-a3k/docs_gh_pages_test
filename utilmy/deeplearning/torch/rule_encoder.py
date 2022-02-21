@@ -354,14 +354,13 @@ def test2():
     model_evaluation(model_eval, losses.loss_task_func , arg=arg, dataset_load1= dataset_load_covtype,  dataset_preprocess1 =  dataset_preprocess_covtype  )
 
 
-
 def dataset_load_covtype(arg)->pd.DataFrame:
   from sklearn.datasets import fetch_covtype
   df = fetch_covtype(return_X_y=False, as_frame=True)
   df =df.data
   log(df)
   log(df.columns)
-  df = df.iloc[:1000, :10]
+  df = df.iloc[:500, :10]
   log(df)
   return df
 
@@ -854,10 +853,30 @@ def get_perturbed_input(input_tensor, pert_coeff):
 
 
 
+def test_dataset_classification_fake(nrows=500):
+    from sklearn import datasets as sklearn_datasets
+    ndim    =11
+    coly    = 'y'
+    colnum  = ["colnum_" +str(i) for i in range(0, ndim) ]
+    colcat  = ['colcat_1']
+    X, y    = sklearn_datasets.make_classification(n_samples=nrows, n_features=ndim, n_classes=1,
+                                                   n_informative=ndim-2)
+    df         = pd.DataFrame(X,  columns= colnum)
+    df[coly]   = y.reshape(-1, 1)
+
+    for ci in colcat :
+      df[ci] = np.random.randint(0,1, len(df))
+
+    pars = { 'colnum': colnum, 'colcat': colcat, "coly": coly }
+    return df, pars
+
 
 
 
 ###################################################################################################
 if __name__ == "__main__":
-    test_all()
+    import fire 
+    fire.Fire() 
+    # test_all()
+
 
