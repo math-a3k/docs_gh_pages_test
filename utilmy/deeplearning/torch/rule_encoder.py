@@ -32,7 +32,7 @@ def help():
 def test_all():
     log(MNAME)
     test()
-    test2()
+    # test2()
 
 
 
@@ -878,5 +878,4 @@ if __name__ == "__main__":
     import fire 
     fire.Fire() 
     # test_all()
-
 
