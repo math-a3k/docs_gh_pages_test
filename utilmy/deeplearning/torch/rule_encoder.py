@@ -31,7 +31,8 @@ def help():
 #############################################################################################
 def test_all():
     log(MNAME)
-    test()
+    #test()
+    test2()
 
 
 
@@ -56,7 +57,7 @@ def test():
 
       ##### Rules
       "rules": {},
-        
+
       #"rule_threshold": 129.5,
       #"src_ok_ratio": 0.3,
       #"src_unok_ratio": 0.7,
@@ -104,7 +105,7 @@ def test():
     }
     arg.rules.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
     arg.rules.loss_rule_calc = loss_rule_calc_cardio
-    
+
 
     ### device setup
     device = device_setup(arg)
@@ -188,7 +189,7 @@ def dataset_preprocess_cardio(df, arg):
         rule_ind       = arg.rules.rule_ind
         rule_feature   = 'ap_hi'
         src_unok_ratio = arg.rules.src_unok_ratio
-        src_ok_ratio   = arg.rules.src_ok_ratio 
+        src_ok_ratio   = arg.rules.src_ok_ratio
 
         #### Ok cases: nornal
         low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # ok
@@ -327,7 +328,7 @@ def test2():
 
 
     #### dataset load
-    df = dataset_load_covtype()
+    df = dataset_load_covtype(arg)
 
     #### dataset preprocess
     train_X, train_y, valid_X,  valid_y, test_X,  test_y  = dataset_preprocess_covtype(df, arg)
@@ -353,18 +354,20 @@ def test2():
 
 
 
-def dataset_load_covtype()->pd.DataFrame:
+def dataset_load_covtype(arg)->pd.DataFrame:
   from sklearn.datasets import fetch_covtype
   df = fetch_covtype(return_X_y=False, as_frame=True)
+  df =df.data
   log(df)
+  log(df.columns)
 
-  df = df.iloc[:10000, :]
+
+  df = df.iloc[:5000, :]
   return df
 
 
 def dataset_preprocess_covtype(df, arg):
-  coly  = 'Soil_Type'  # df.columns[-1]
-  
+  coly  = 'Slope'  # df.columns[-1]
   y_raw = df[coly]
   X_raw = df.drop([coly], axis=1)
 
@@ -532,7 +535,7 @@ def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
     #### Rules Loss, params  ##################################################
     rule_feature   = arg.rules.get( 'rule_feature',   'ap_hi' )
     loss_rule_func = arg.rules.loss_rule_func
-    if 'loss_rule_calc' in arg.rules: loss_rule_calc = arg.rules.loss_rule_calc     
+    if 'loss_rule_calc' in arg.rules: loss_rule_calc = arg.rules.loss_rule_calc
     src_ok_ratio   = arg.rules.src_ok_ratio
     src_unok_ratio = arg.rules.src_unok_ratio
     rule_ind       = arg.rules.rule_ind
@@ -664,7 +667,7 @@ def model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_pre
 
 
     model_eval.eval()
-  
+
     # perturbed input and its output
     pert_test_x = te_x.detach().clone()
     pert_test_x[:,rule_ind] = get_perturbed_input(pert_test_x[:,rule_ind], pert_coeff)
