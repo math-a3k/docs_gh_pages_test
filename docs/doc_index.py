@@ -971,6 +971,14 @@ test()
 
 
 
+utilmy/docs/generate_typeint.py
+-------------------------functions----------------------
+run_monkeytype(dirin, dirout, mode, diroot = None, nfile = 10)
+test()
+test_all()
+
+
+
 utilmy/docs/test.py
 -------------------------functions----------------------
 calculateBuyPrice(enter, profit)
