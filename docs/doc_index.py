@@ -1690,7 +1690,7 @@ ab_getstat(df, treatment_col = 'treatment', measure_col = 'metric', attribute_co
 abplot_CI_bars(N, X, sig_level = 0.05, dmin = None)
 funnel_CI_plot(A, B, sig_level = 0.05)
 get_ab_test_data(vars_also = False)
-log(*s)
+help()
 np_calculate_ab_dist(stderr, d_hat = 0, group_type = 'control')
 np_calculate_confidence_interval(sample_mean = 0, sample_std = 1, sample_size = 1, sig_level = 0.05)
 np_calculate_min_sample_size(bcr, mde, power = 0.8, sig_level = 0.05)
@@ -1714,6 +1714,26 @@ test_plot_ab()
 test_plot_binom_dist()
 test_zplot()
 zplot(ax, area = 0.95, two_tailed = True, align_right = False)
+
+
+
+utilmy/recsys/metric.py
+-------------------------functions----------------------
+coverage_at_k(y_preds, product_data, k = 3)
+help()
+hit_rate_at_k(y_preds, y_test, k = 3)
+hit_rate_at_k_nep(y_preds, y_test, k = 3)
+metrics_calc(dirin:str, dirout = None, colid = 'userid', colrec = 'rec_list', colinfo = 'genre_list', method = [''], nsample = -1, nfile = 1, )
+mrr_at_k(y_preds, y_test, k = 3)
+mrr_at_k_nep(y_preds, y_test, k = 3)
+popularity_bias_at_k(y_preds, x_train, k = 3)
+precision_at_k(y_preds, y_test, k = 3)
+recall_at_k(y_preds, y_test, k = 3)
+sample_hits_at_k(y_preds, y_test, x_test = None, k = 3, size = 3)
+sample_misses_at_k(y_preds, y_test, x_test = None, k = 3, size = 3)
+statistics(x_train, y_train, x_test, y_test, y_pred)
+test1()
+test_all())))
 
 
 
