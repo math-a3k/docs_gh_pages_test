@@ -381,16 +381,16 @@ def os_module_uncache(exclude='os.system'):
         if mod in exclude:
             continue
 
-         if mod in pkgs:
+        if mod in pkgs:
             to_uncache.append(mod)
             continue
 
-         for pkg in pkgs:
+        for pkg in pkgs:
             if mod.startswith(pkg + '.'):
                 to_uncache.append(mod)
                 break
 
-     for mod in to_uncache:
+    for mod in to_uncache:
         del sys.modules[mod]
 
         
