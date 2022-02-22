@@ -973,7 +973,7 @@ test()
 
 utilmy/docs/generate_typeint.py
 -------------------------functions----------------------
-run_monkeytype(dirin, dirout, mode, diroot = None, nfile = 10)
+run_monkeytype(dirin, dirout, mode, diroot = None, nfile = 10, exclude = "")
 test()
 test_all()
 
