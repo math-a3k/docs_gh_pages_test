@@ -663,6 +663,45 @@ RuleEncoder.__init__(self, input_dim, output_dim, hidden_dim = 4)
 RuleEncoder.forward(self, x)
 
 
+utilmy/deeplearning/torch/rule_encoder2.py
+-------------------------functions----------------------
+dataloader_create(train_X = None, train_y = None, valid_X = None, valid_y = None, test_X = None, test_y = None, arg = None)
+dataset_load_cardio(arg)
+dataset_load_covtype()
+dataset_preprocess_cardio(df, arg)
+dataset_preprocess_covtype(X_raw, y_raw, arg)
+device_setup(arg)
+get_correct_results(out, label_Y)
+get_metrics(y_true, y_pred, y_score)
+help()
+loss_rule_calc(model, batch_train_x, loss_rule_func, output, arg, argm)
+loss_rule_calc_cardio(model, batch_train_x, loss_rule_func, output, arg, argm)
+loss_rule_calc_covtype(model, batch_train_x, loss_rule_func, output, arg, )
+merge_loss_calc(lossses, weight)
+model_build(arg:dict, mode = 'train')
+model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_preprocess1)
+model_load(arg)
+model_train(model, losses, train_loader, valid_loader, arg:dict = None)
+rule_get_perturbed_input(input_tensor, pert_coeff)
+rule_loss_calc(model, batch_train_x, rule_loss_func, output, arg:dict)
+rule_output_check(out, pert_out, threshold = 0.0)
+task_loss_calc()
+test()
+test2()
+test_all()
+
+-------------------------methods----------------------
+DataEncoder.__init__(self, input_dim, output_dim, hidden_dim = 4)
+DataEncoder.forward(self, x)
+NaiveModel.__init__(self)
+NaiveModel.forward(self, x, alpha = 0.0)
+Net.__init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim = 4, n_layers = 2, merge = 'cat', skip = False, input_type = 'state')
+Net.forward(self, x, alpha = 0.0)
+Net.get_z(self, x, alpha = 0.0)
+RuleEncoder.__init__(self, input_dim, output_dim, hidden_dim = 4)
+RuleEncoder.forward(self, x)
+
+
 utilmy/deeplearning/torch/sentence2.py
 -------------------------functions----------------------
 evaluate(model, session = None, data_pars = None, compute_pars = None, out_pars = None, **kw)
