@@ -143,30 +143,26 @@ def test3():
     train_X, train_y, valid_X,  valid_y, test_X,  test_y  = mm.dataset_preprocess(df,  arg)
     arg.input_dim = train_X.shape[1]
 
-
-    ##### device setup   #############################################################
-    device = mm.device_setup(arg)
-
-    ### Create dataloader
+    #### Create dataloader
     train_loader, valid_loader, test_loader = mm.dataloader_create( train_X, train_y, valid_X, valid_y, test_X, test_y,  arg)
 
-    ### Model Build
+    #### Model Build
     model, losses, arg = mm.model_build(arg=arg)
 
 
-    ### Model Train
+    #### Model Train
     mm.model_train(model, losses, train_loader, valid_loader, arg=arg, )
 
     #### Test
     model_eval, losses = model_load(arg)
-    mm.model_evaluation(model_eval, losses, arg=arg )
+    mm.model_evaluate(model_eval, losses, test_loader, arg=arg )
 
 
 
 
 ##############################################################################################
 ######  Dataset preparation ##################################################################
-def dataset_load(arg):
+def dataset_load(arg, mode='eval'):
   # Load dataset
   #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
   import wget, glob
@@ -177,9 +173,6 @@ def dataset_load(arg):
   df = pd.read_csv(arg.datapath,delimiter=';')
   df = df.iloc[:500, :]
   log(df, df.columns, df.shape)
-
-  # y = df[coly]
-  # X_raw = df.drop([coly], axis=1)
 
   return df, arg
 
@@ -277,9 +270,12 @@ def dataset_preprocess(df, arg):
 
     ##### Split   #########################################################################
     seed= arg.seed
-    train_X, test_X, train_y, test_y = train_test_split(X_src,  y_src,  test_size=1 - arg.train_ratio, random_state=seed)
-    valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size= arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
-    return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
+    if arg.train_ratio < 1.0 :
+       train_X, test_X, train_y, test_y = train_test_split(X_src,  y_src,  test_size=1 - arg.train_ratio, random_state=seed)
+       valid_X, test_X, valid_y, test_y = train_test_split(test_X, test_y, test_size= arg.test_ratio / (arg.test_ratio + arg.validation_ratio), random_state=seed)
+       return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
+    else :
+       return X_src, y_src, None, None, None , None
 
 
 
@@ -424,6 +420,7 @@ def merge_loss_calc(losses, weight):
     pass
 
 
+#################
 def device_setup(arg):
     device = arg.device
     seed   = arg.seed
@@ -463,21 +460,6 @@ def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, te
         log("data size:", len(test_X) )
 
     return train_loader, valid_loader, test_loader
-
-
-def model_load(arg):
-    model_eval = model_build(arg=arg, mode='test')
-
-    checkpoint = torch.load( arg.saved_filename)
-    model_eval.load_state_dict(checkpoint['model_state_dict'])
-    log("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
-
-
-    ll = Box({})
-    ll.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))
-    ll.loss_task_func = nn.BCELoss()
-    return model_eval, ll # (loss_task_func, loss_rule_func)
-    # model_evaluation(model_eval, loss_task_func, arg=arg)
 
 
 def model_build(arg:dict, mode='train'):
@@ -639,19 +621,12 @@ def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
               counter_early_stopping += 1
 
 
-def model_evaluation(model_eval, losses, arg0,  ):
+def model_evaluate(model_eval, losses, test_loader, arg0:dict,  ):
     ### Create dataloader
     arg = deepcopy(arg0)
 
-    arg.train_ratio = 1.0
-    arg.test_ratio  = 0.0 
-
-    df, arg = dataset_load(arg)
-    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess(df, arg)
-
 
     ######
-    train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
     model_eval.eval()
     with torch.no_grad():
       for te_x, te_y in test_loader:
@@ -698,9 +673,9 @@ def model_evaluation(model_eval, losses, arg0,  ):
 
         test_ratio = rule_output_check(pert_output, output, threshold=0.0).item()
 
-        y_true = te_y.cpu().numpy()
+        y_true  = te_y.cpu().numpy()
         y_score = output.cpu().numpy()
-        y_pred = np.round(y_score)
+        y_pred  = np.round(y_score)
 
         test_acc = mean_squared_error(y_true.squeeze(), y_pred.squeeze())
 
@@ -708,6 +683,37 @@ def model_evaluation(model_eval, losses, arg0,  ):
       log('[Test] Accuracy: {:.4f} (alpha:{})'.format(test_acc, alpha))
       log("[Test] Ratio of verified predictions: {:.6f} (alpha:{})".format(test_ratio, alpha))
       log()
+
+
+def model_predict(model, test_loader, arg:dict)-:
+    """ Prediction only
+    """
+    return ypred  ### numpy
+
+
+def model_load(arg):
+    model_eval = model_build(arg=arg, mode='test')
+
+    checkpoint = torch.load( arg.saved_filename)
+    model_eval.load_state_dict(checkpoint['model_state_dict'])
+    log("best model loss: {:.6f}\t at epoch: {}".format(checkpoint['loss'], checkpoint['epoch']))
+
+
+    ll = Box({})
+    ll.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))
+    ll.loss_task_func = nn.BCELoss()
+    return model_eval, ll # (loss_task_func, loss_rule_func)
+    # model_evaluate(model_eval, loss_task_func, arg=arg)
+
+
+def model_save(model, optimizer, res:dict,  arg:dict):
+    torch.save({
+        'epoch': res.epoch,
+        'model_state_dict':     best_model_state_dict,
+        'optimizer_state_dict': optimizer.state_dict(),
+        'loss': res.best_val_loss
+    }, arg.saved_filename)
+
 
 
 
@@ -876,7 +882,7 @@ def test():
 
     #### Test
     model_eval, losses = model_load(arg)
-    model_evaluation(model_eval, losses.loss_task_func , arg=arg, dataset_load1= dataset_load_cardio,  dataset_preprocess1 =  dataset_preprocess_cardio  )
+    model_evaluate(model_eval, losses.loss_task_func , arg=arg, dataset_load1= dataset_load_cardio,  dataset_preprocess1 =  dataset_preprocess_cardio  )
 
 
 def dataset_load_cardio(arg):
@@ -1096,7 +1102,7 @@ def test2():
 
     #### Test
     model_eval, losses = model_load(arg)
-    model_evaluation(model_eval, losses.loss_task_func , arg=arg, dataset_load1= dataset_load_covtype,  dataset_preprocess1 =  dataset_preprocess_covtype  )
+    model_evaluate(model_eval, losses.loss_task_func , arg=arg, dataset_load1= dataset_load_covtype,  dataset_preprocess1 =  dataset_preprocess_covtype  )
 
 
 def dataset_load_covtype(arg)->pd.DataFrame:
