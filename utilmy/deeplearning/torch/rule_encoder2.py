@@ -32,6 +32,13 @@ def help():
 def test_all():
     log(MNAME)
     test()
+    # test2()
+
+
+
+
+
+
 
 
 
@@ -80,7 +87,7 @@ def test():
       "seed": 42,
       "device": 'cpu',  ### 'cuda:0',
       "batch_size": 32,
-      "epochs": 5,
+      "epochs": 1,
       "early_stopping_thld": 10,
       "valid_freq": 1,
       'saved_filename' :'./model.pt',
@@ -95,14 +102,14 @@ def test():
 
     #### Rules setup #############################################################
     arg.rules = {
-          "rule_threshold": 129.5,
-          "src_ok_ratio": 0.3,
-          "src_unok_ratio": 0.7,
+          "rule_threshold":  129.5,
+          "src_ok_ratio":      0.3,
+          "src_unok_ratio":    0.7,
           "target_rule_ratio": 0.7,
           "rule_ind": 2,    ### Index of the colum Used for rule:  df.iloc[:, rule_ind ]
     }
-    arg.rules.loss_rule_func = loss_rule_calc_cardio
-    arg.rules.loss_rule_calc = loss_rule_calc
+    arg.rules.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
+    arg.rules.loss_rule_calc = loss_rule_calc_cardio
 
 
     ### device setup
@@ -121,7 +128,7 @@ def test():
     train_loader, valid_loader, test_loader = dataloader_create( train_X, train_y, valid_X, valid_y, test_X, test_y,  arg)
 
     ### Model Build
-    model, losses, argm = model_build(arg=arg)
+    model, losses, arg = model_build(arg=arg)
 
     ### Model Train
     model_train(model, losses, train_loader, valid_loader, arg=arg, )
@@ -141,6 +148,7 @@ def dataset_load_cardio(arg):
      wget.download(arg.dataurl)
 
   df = pd.read_csv(arg.datapath,delimiter=';')
+  df = df.iloc[:500, :]
   log(df, df.columns, df.shape)
 
   # y = df[coly]
@@ -183,9 +191,11 @@ def dataset_preprocess_cardio(df, arg):
 
     """
     if 'rule1':
-        rule_threshold = arg.rule_threshold
-        rule_ind       = arg.rule_ind
+        rule_threshold = arg.rules.rule_threshold
+        rule_ind       = arg.rules.rule_ind
         rule_feature   = 'ap_hi'
+        src_unok_ratio = arg.rules.src_unok_ratio
+        src_ok_ratio   = arg.rules.src_ok_ratio
 
         #### Ok cases: nornal
         low_ap_negative  = (df[rule_feature] <= rule_threshold) & (df[coly] == 0)    # ok
@@ -226,8 +236,8 @@ def dataset_preprocess_cardio(df, arg):
 
 
     ######### Build a source dataset
-    n_from_unok = int(arg.src_unok_ratio * num_unok_samples)
-    n_from_ok   = int(n_from_unok * arg.src_ok_ratio / (1- arg.src_ok_ratio))
+    n_from_unok = int(src_unok_ratio * num_unok_samples)
+    n_from_ok   = int(n_from_unok * src_ok_ratio / (1- src_ok_ratio))
 
     X_src = np.concatenate((X_ok[:n_from_ok], X_unok[:n_from_unok]), axis=0)
     y_src = np.concatenate((y_ok[:n_from_ok], y_unok[:n_from_unok]), axis=0)
@@ -245,16 +255,17 @@ def dataset_preprocess_cardio(df, arg):
     return (train_X, train_y, valid_X,  valid_y, test_X,  test_y, )
 
 
-def loss_rule_calc_cardio(model, batch_train_x, loss_rule_func, output, arg, argm ):
+def loss_rule_calc_cardio(model, batch_train_x, loss_rule_func, output, arg, ):
     """ Calculate loss for constraints rules
 
     """
     rule_ind = arg.rules.rule_ind
     pert_coeff = arg.rules.pert_coeff
+    alpha = arg.alpha
 
     pert_batch_train_x             = batch_train_x.detach().clone()
-    pert_batch_train_x[:,rule_ind] = rule_get_perturbed_input(pert_batch_train_x[:, rule_ind], argm.rules.pert_coeff)
-    pert_output = model(pert_batch_train_x, alpha= argm.alpha)
+    pert_batch_train_x[:,rule_ind] = get_perturbed_input(pert_batch_train_x[:,rule_ind], pert_coeff)
+    pert_output = model(pert_batch_train_x, alpha= alpha)
     loss_rule   = loss_rule_func(output.reshape(pert_output.size()), pert_output)    # output should be less than pert_output
     return loss_rule
 
@@ -262,7 +273,7 @@ def loss_rule_calc_cardio(model, batch_train_x, loss_rule_func, output, arg, arg
 
 
 
-#####  covtype dataset #########################################################################
+#####  covtype dataset #######################################################################
 def test2():
     model_info = {'dataonly': {'rule': 0.0},
                 'ours-beta0.1': {'beta': [0.1], 'scale': 1.0, 'lr': 0.001},
@@ -296,7 +307,7 @@ def test2():
       "seed": 42,
       "device": 'cpu',  ### 'cuda:0',
       "batch_size": 32,
-      "epochs": 5,
+      "epochs": 1,
       "early_stopping_thld": 10,
       "valid_freq": 1,
       'saved_filename' :'./model.pt',
@@ -310,7 +321,6 @@ def test2():
 
 
     #### Rules setup #############################################################
-
     arg.rules = {
           "rule_threshold": 129.5,
           "src_ok_ratio": 0.3,
@@ -318,16 +328,16 @@ def test2():
           "target_rule_ratio": 0.7,
           "rule_ind": 2,    ### Index of the colum Used for rule:  df.iloc[:, rule_ind ]
     }
-    arg.rules.loss_rule_func = loss_rule_calc_covtype
-    arg.rules.loss_rule_calc = arg.rules.loss_rule_calc
+    arg.rules.loss_rule_func = lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
+    arg.rules.loss_rule_calc = loss_rule_calc_covtype
 
 
 
     #### dataset load
-    (df, labels_df) = dataset_load_covtype()
+    df = dataset_load_covtype(arg)
 
     #### dataset preprocess
-    train_X, train_y, valid_X,  valid_y, test_X,  test_y  = dataset_preprocess_covtype(df, labels_df, arg)
+    train_X, train_y, valid_X,  valid_y, test_X,  test_y  = dataset_preprocess_covtype(df, arg)
     arg.input_dim = train_X.shape[1]
 
 
@@ -349,14 +359,22 @@ def test2():
     model_evaluation(model_eval, losses.loss_task_func , arg=arg, dataset_load1= dataset_load_covtype,  dataset_preprocess1 =  dataset_preprocess_covtype  )
 
 
-
-def dataset_load_covtype():
+def dataset_load_covtype(arg)->pd.DataFrame:
   from sklearn.datasets import fetch_covtype
-  X_raw, y_raw = fetch_covtype(return_X_y=True,)
-  return (X_raw, y_raw)
+  df = fetch_covtype(return_X_y=False, as_frame=True)
+  df =df.data
+  log(df)
+  log(df.columns)
+  df = df.iloc[:500, :10]
+  log(df)
+  return df
 
 
-def dataset_preprocess_covtype(X_raw, y_raw, arg):
+def dataset_preprocess_covtype(df, arg):
+  coly  = 'Slope'  # df.columns[-1]
+  y_raw = df[coly]
+  X_raw = df.drop([coly], axis=1)
+
   X_column_trans = ColumnTransformer(
         [(col, StandardScaler() if not col.startswith('Soil_Type') else Binarizer(), [col]) for col in X_raw.columns],
         remainder='passthrough')
@@ -381,48 +399,77 @@ def loss_rule_calc_covtype(model, batch_train_x, loss_rule_func, output, arg, ):
     """
     rule_ind   = arg.rules.rule_ind
     pert_coeff = arg.rules.pert_coeff
+    alpha      = arg.alpha
 
     pert_batch_train_x             = batch_train_x.detach().clone()
-    pert_batch_train_x[:,rule_ind] = rule_get_perturbed_input(pert_batch_train_x[:, rule_ind], pert_coeff)
-    pert_output = model(pert_batch_train_x, alpha= arg.alpha)
+    pert_batch_train_x[:,rule_ind] = get_perturbed_input(pert_batch_train_x[:,rule_ind], pert_coeff)
+    pert_output = model(pert_batch_train_x, alpha= alpha)
     loss_rule   = loss_rule_func(output.reshape(pert_output.size()), pert_output)    # output should be less than pert_output
     return loss_rule
 
 
 
-"""
 
-    https://medium.com/@chipiga86/python-monkey-patching-like-a-boss-87d7ddb8098e
-    https://stackoverflow.com/questions/10027232/how-to-overwrite-a-imported-python-class-for-all-calls
-    
-    Monkey patching class
-    
-    import base_classes
+##############################################################################################
+##### Use Global Vars   ######################################################################
+def test3():
+    from utilmy.deeplearning.torch import rule_encoder  as mm
 
-class Bookcollection(base_classes.Bookcollection):
-   new_member = "lalala"
+    class RuleEncoder2(RuleEncoder):
+        def __init__(self):
+            pass
 
-base_classes.Bookcollection = Bookcollection
-    
-   
-  rule_pars
-  rule_encoder
-  rule_loss
-  
-  
-  task, task_encoder, task_loss
-  
-     --> meta
 
-"""
+    def rule_loss_calc2() :
+        pass
+
+
+    arg = {}
+
+
+
+    #### Rule Interface setup
+    # mm.arg.rules  =  {}
+    mm.RuleEncoder     = RuleEncoder2
+    mm.rule_loess_calc = rule_loss_calc2
+
+    ### Dataset
+    mm.dataset_load       = dataset_load_covtype
+    mm.dataset_preprocess = dataset_preprocess_covtype
+
+
+
+    ############## standard code #####################################################
+    #### dataset load
+    df, arg = mm.dataset_load(arg)
+
+    #### dataset preprocess
+    train_X, train_y, valid_X,  valid_y, test_X,  test_y  = mm.dataset_preprocess(df,  arg)
+    arg.input_dim = train_X.shape[1]
+
+
+    ##### device setup   #############################################################
+    device = mm.device_setup(arg)
+
+    ### Create dataloader
+    train_loader, valid_loader, test_loader = mm.dataloader_create( train_X, train_y, valid_X, valid_y, test_X, test_y,  arg)
+
+    ### Model Build
+    model, losses, arg = mm.model_build(arg=arg)
+
+    ### Model Train
+    mm.model_train(model, losses, train_loader, valid_loader, arg=arg, )
+
+
+    #### Test
+    model_eval, losses = model_load(arg)
+    mm.model_evaluation(model_eval, losses, arg=arg )
 
 
 
 
 ##############################################################################################
 ###### Rule Encoder ##########################################################################
-rule_arg = Box({})
-
 class RuleEncoder(nn.Module):
   def __init__(self, input_dim, output_dim, hidden_dim=4):
     super(RuleEncoder, self).__init__()
@@ -454,24 +501,13 @@ def rule_loss_calc(model, batch_train_x, rule_loss_func, output, arg:dict):
     return loss_rule
 
 
-##### Use Global Vars
-import myrules
 
-rule_arg.rules  =  {}
-RuleEncoder     = myrules.RuleEncoder
-rule_loess_calc = myrules.rule_loss_calc
-
-
-#####
 
 
 
 
 ##############################################################################################
 ##### Data Encoder + Task Loss ###############################################################
-task_arg = Box({})
-
-
 class DataEncoder(nn.Module):
   def __init__(self, input_dim, output_dim, hidden_dim=4):
     super(DataEncoder, self).__init__()
@@ -487,16 +523,15 @@ class DataEncoder(nn.Module):
 
 task_loss =  nn.BCELoss()
 
+
 def task_loss_calc():
     pass
 
 
 
+
 ##############################################################################################
-###############################################################################################
-merge_arg = Box({})
-
-
+####### Merge Model ##########################################################################
 class Net(nn.Module):
   def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, n_layers=2, merge='cat', skip=False, input_type='state'):
     super(Net, self).__init__()
@@ -572,57 +607,6 @@ def merge_loss_calc(lossses, weight):
     pass
 
 
-
-
-def model_build(arg:dict, mode='train'):
-    arg = Box(arg)
-
-    if 'test' in mode :
-        rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-        data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-        model_eval = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge=arg.merge).to(arg.device)    # Not residual connection
-        return model_eval
-
-    ##### Params  ############################################################################
-    model_params = arg.model_info.get( arg.model_type, {} )
-
-    #### Training
-    arg.lr      = model_params.get('lr', 0.001)  # if 'lr' in model_params else 0.001
-
-    #### Rules encoding
-    from torch.distributions.beta import Beta
-    arg.rules.pert_coeff   = model_params.get('pert', 0.1)
-    arg.rules.scale        = model_params.get('scale', 1.0)
-    beta_param   = model_params.get('beta', [1.0])
-    if   len(beta_param) == 1:  arg.rules.alpha_dist = Beta(float(beta_param[0]), float(beta_param[0]))
-    elif len(beta_param) == 2:  arg.rules.alpha_dist = Beta(float(beta_param[0]), float(beta_param[1]))
-    arg.rules.beta_param = beta_param
-
-
-    #########################################################################################
-    losses    = Box({})
-
-    #### Rule model
-    rule_encoder          = arg.rules.RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-    losses.loss_rule_func = arg.rules.rule_loss_func
-
-
-    #### Data model
-    data_encoder          = arg.task.DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
-    losses.loss_task_func = arg.task.task_loss_func     # return scalar (reduction=mean)
-
-    #### Merge Ensembling
-    model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db,
-                        n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
-
-    ### Summary
-    log('model_type: {}\tscale:\tBeta distribution: Beta()\tlr: \t \tpert_coeff: {}'.format(arg.model_type, arg.rules))
-    return model, losses, arg
-
-
-
-##############################################################################################
-###############################################################################################
 def device_setup(arg):
     device = arg.device
     seed   = arg.seed
@@ -679,21 +663,50 @@ def model_load(arg):
     # model_evaluation(model_eval, loss_task_func, arg=arg)
 
 
+def model_build(arg:dict, mode='train'):
+    arg = Box(arg)
+
+    if 'test' in mode :
+        rule_encoder = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+        data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+        model_eval = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db, n_layers=arg.n_layers, merge=arg.merge).to(arg.device)    # Not residual connection
+        return model_eval
+
+    ##### Params  ############################################################################
+    model_params = arg.model_info.get( arg.model_type, {} )
+
+    #### Training
+    arg.lr      = model_params.get('lr', 0.001)  # if 'lr' in model_params else 0.001
+
+    #### Rules encoding
+    from torch.distributions.beta import Beta
+    arg.rules.pert_coeff   = model_params.get('pert', 0.1)
+    arg.rules.scale        = model_params.get('scale', 1.0)
+    beta_param   = model_params.get('beta', [1.0])
+    if   len(beta_param) == 1:  arg.rules.alpha_dist = Beta(float(beta_param[0]), float(beta_param[0]))
+    elif len(beta_param) == 2:  arg.rules.alpha_dist = Beta(float(beta_param[0]), float(beta_param[1]))
+    arg.rules.beta_param = beta_param
 
 
-def loss_rule_calc(model, batch_train_x, loss_rule_func, output, arg:dict):
-    """ Calculate loss for constraints rules
+    #########################################################################################
+    losses    = Box({})
 
-    """
-    rule_ind   = arg.rules.rule_ind
-    pert_coeff = arg.rules.pert_coeff
+    #### Rule model
+    rule_encoder          = RuleEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    losses.loss_rule_func = arg.rules.loss_rule_func #lambda x,y: torch.mean(F.relu(x-y))    # if x>y, penalize it.
 
-    pert_batch_train_x             = batch_train_x.detach().clone()
-    pert_batch_train_x[:,rule_ind] = rule_get_perturbed_input(pert_batch_train_x[:, rule_ind], pert_coeff)
-    pert_output = model(pert_batch_train_x, alpha= arg.rules.alpha)
-    loss_rule   = loss_rule_func(output.reshape(pert_output.size()), pert_output)    # output should be less than pert_output
-    return loss_rule
 
+    #### Data model
+    data_encoder = DataEncoder(arg.input_dim, arg.output_dim_encoder, arg.hidden_dim_encoder)
+    losses.loss_task_func = nn.BCELoss()    # return scalar (reduction=mean)
+
+    #### Merge Ensembling
+    model        = Net(arg.input_dim, arg.output_dim, rule_encoder, data_encoder, hidden_dim=arg.hidden_dim_db,
+                        n_layers=arg.n_layers, merge= arg.merge).to(arg.device)    # Not residual connection
+
+    ### Summary
+    log('model_type: {}\tscale:\tBeta distribution: Beta()\tlr: \t \tpert_coeff: {}'.format(arg.model_type, arg.rules))
+    return model, losses, arg
 
 
 def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
@@ -738,7 +751,7 @@ def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
         if   model_type.startswith('dataonly'):  alpha = 0.0
         elif model_type.startswith('ruleonly'):  alpha = 1.0
         elif model_type.startswith('ours'):      alpha = arg.rules.alpha_dist.sample().item()
-        arg.rules.alpha = alpha
+        arg.alpha = alpha
 
         ###### Base output #########################################
         output    = model(batch_train_x, alpha=alpha).view(batch_train_y.size())
@@ -766,22 +779,22 @@ def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
           for val_x, val_y in valid_loader:
             val_y = val_y.unsqueeze(-1)
 
-            output        = model(val_x, alpha=alpha).reshape(val_y.size())
+            output = model(val_x, alpha=alpha).reshape(val_y.size())
             val_loss_task = loss_task_func(output, val_y).item()
 
             # perturbed input and its output
             pert_val_x = val_x.detach().clone()
-            pert_val_x[:,rule_ind] = rule_get_perturbed_input(pert_val_x[:, rule_ind], pert_coeff)
+            pert_val_x[:,rule_ind] = get_perturbed_input(pert_val_x[:,rule_ind], pert_coeff)
             pert_output = model(pert_val_x, alpha=alpha)    # \hat{y}_{p}    predicted sales from perturbed input
 
             val_loss_rule = loss_rule_func(output.reshape(pert_output.size()), pert_output).item()
-            val_ratio     = rule_output_check(pert_output, output, threshold=0.0).item()
+            val_ratio = verification(pert_output, output, threshold=0.0).item()
 
             val_loss = val_loss_task
 
-            y_true  = val_y.cpu().numpy()
+            y_true = val_y.cpu().numpy()
             y_score = output.cpu().numpy()
-            y_pred  = np.round(y_score)
+            y_pred = np.round(y_score)
 
             y_true = y_pred.reshape(y_true.shape[:-1])
             y_pred = y_pred.reshape(y_pred.shape[:-1])
@@ -794,7 +807,10 @@ def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
             best_model_state_dict = deepcopy(model.state_dict())
             log('[Valid] Epoch: {} Loss: {:.6f} (alpha: {:.2f})\t Loss(Task): {:.6f} Acc: {:.2f}\t Loss(Rule): {:.6f}\t Ratio: {:.4f} best model is updated %%%%'
                   .format(epoch, best_val_loss, alpha, val_loss_task, val_acc, val_loss_rule, val_ratio))
-            torch.save({  'epoch': epoch,  'model_state_dict': best_model_state_dict,  'optimizer_state_dict': optimizer.state_dict(),
+            torch.save({
+                'epoch': epoch,
+                'model_state_dict': best_model_state_dict,
+                'optimizer_state_dict': optimizer.state_dict(),
                 'loss': best_val_loss
             }, arg.saved_filename)
           else:
@@ -806,10 +822,12 @@ def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
               counter_early_stopping += 1
 
 
-def model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_preprocess1 ):
+def model_evaluation(model_eval, losses, arg, dataset_load1, dataset_preprocess1 ):
     ### Create dataloader
-    df, labels_df = dataset_load1()
-    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess1(df, labels_df, arg)
+    df = dataset_load1(arg)
+    train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess1(df, arg)
+
+
 
     ######
     train_loader, valid_loader, test_loader = dataloader_create( train_X, test_X, train_y, test_y, valid_X, valid_y, arg)
@@ -819,18 +837,22 @@ def model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_pre
         te_y = te_y.unsqueeze(-1)
 
       output         = model_eval(te_x, alpha=0.0)
-      test_loss_task = loss_task_func(output, te_y.view(output.size())).item()
+      test_loss_task = losses.loss_task_func(output, te_y.view(output.size())).item()
 
     log('\n[Test] Average loss: {:.8f}\n'.format(test_loss_task))
-    pert_coeff = arg.rule.pert_coeff
-    model_eval.eval()
-    rule_ind   = arg.rule_ind
+
+    ########## Pertfubation
+    pert_coeff = arg.rules.pert_coeff
+    rule_ind   = arg.rules.rule_ind
     model_type = arg.model_type
-    alphas = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
+    alphas     = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
+
+
+    model_eval.eval()
 
     # perturbed input and its output
     pert_test_x = te_x.detach().clone()
-    pert_test_x[:,rule_ind] = rule_get_perturbed_input(pert_test_x[:, rule_ind], pert_coeff)
+    pert_test_x[:,rule_ind] = rule_get_perturbed_input(pert_test_x[:,rule_ind], pert_coeff)
     for alpha in alphas:
       model_eval.eval()
       with torch.no_grad():
@@ -865,6 +887,10 @@ def model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_pre
       log('[Test] Accuracy: {:.4f} (alpha:{})'.format(test_acc, alpha))
       log("[Test] Ratio of verified predictions: {:.6f} (alpha:{})".format(test_ratio, alpha))
       log()
+
+
+
+
 
 
 
@@ -915,6 +941,27 @@ def rule_get_perturbed_input(input_tensor, pert_coeff):
     '''
     device = input_tensor.device
     return input_tensor + torch.abs(input_tensor)*pert_coeff*torch.rand(input_tensor.shape, device=device)
+
+
+def test_dataset_classification_fake(nrows=500):
+    from sklearn import datasets as sklearn_datasets
+    ndim    =11
+    coly    = 'y'
+    colnum  = ["colnum_" +str(i) for i in range(0, ndim) ]
+    colcat  = ['colcat_1']
+    X, y    = sklearn_datasets.make_classification(n_samples=nrows, n_features=ndim, n_classes=1,
+                                                   n_informative=ndim-2)
+    df         = pd.DataFrame(X,  columns= colnum)
+    df[coly]   = y.reshape(-1, 1)
+
+    for ci in colcat :
+      df[ci] = np.random.randint(0,1, len(df))
+
+    pars = { 'colnum': colnum, 'colcat': colcat, "coly": coly }
+    return df, pars
+
+
+
 
 
 
