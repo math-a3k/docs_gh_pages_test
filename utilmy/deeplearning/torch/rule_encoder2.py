@@ -310,6 +310,20 @@ def test2():
 
 
     #### Rules setup #############################################################
+    """
+    
+    https://stackoverflow.com/questions/10027232/how-to-overwrite-a-imported-python-class-for-all-calls
+    
+    Monkey patching class
+    
+    import base_classes
+
+class Bookcollection(base_classes.Bookcollection):
+   new_member = "lalala"
+
+base_classes.Bookcollection = Bookcollection
+    
+    """
     arg.rules = {
           "rule_threshold": 129.5,
           "src_ok_ratio": 0.3,
