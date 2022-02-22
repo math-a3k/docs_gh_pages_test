@@ -364,34 +364,34 @@ def os_monkeypatch_help():
     
     
 def os_module_uncache(exclude='os.system'):
-"""Remove package modules from cache except excluded ones.
-   On next import they will be reloaded.  Useful for monkey patching
-Args:
-    exclude (iter<str>): Sequence of module paths.
-    https://medium.com/@chipiga86/python-monkey-patching-like-a-boss-87d7ddb8098e
-"""
-import sys
-pkgs = []
-for mod in exclude:
-    pkg = mod.split('.', 1)[0]
-    pkgs.append(pkg)
+    """Remove package modules from cache except excluded ones.
+       On next import they will be reloaded.  Useful for monkey patching
+    Args:
+        exclude (iter<str>): Sequence of module paths.
+        https://medium.com/@chipiga86/python-monkey-patching-like-a-boss-87d7ddb8098e
+    """
+    import sys
+    pkgs = []
+    for mod in exclude:
+        pkg = mod.split('.', 1)[0]
+        pkgs.append(pkg)
 
-to_uncache = []
-for mod in sys.modules:
-    if mod in exclude:
-        continue
+    to_uncache = []
+    for mod in sys.modules:
+        if mod in exclude:
+            continue
 
-     if mod in pkgs:
-        to_uncache.append(mod)
-        continue
-
-     for pkg in pkgs:
-        if mod.startswith(pkg + '.'):
+         if mod in pkgs:
             to_uncache.append(mod)
-            break
+            continue
 
- for mod in to_uncache:
-    del sys.modules[mod]
+         for pkg in pkgs:
+            if mod.startswith(pkg + '.'):
+                to_uncache.append(mod)
+                break
+
+     for mod in to_uncache:
+        del sys.modules[mod]
 
         
         
