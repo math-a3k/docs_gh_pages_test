@@ -7,18 +7,29 @@ from box import Box
 from ast import literal_eval
 ###################################################################################
 
+from utilmy import log, log2
 
 def test_all():
   test()
 
 
-def test():  
+def test():
+  import utilmy
+
+  print(utilmy.__file__)
+
+  dir0 = utilmy.__file__.replace("\\","/")
+  dir0 = "/".join( dir0.split("/")[:-2])  +"/"
+  log(dir0)
+
+  os.chdir(dir0)
   dirin  = "utilmy/tabular/"
   dirout = "docs/stub/"
-  run_monkeytype(dirin, dirout, mode='stub', diroot=None, nfile=2)
+  run_monkeytype(dirin, dirout, mode='stub', diroot=None, nfile=1, exclude="sparse" )
+  os.system( f"ls {dirout}/")
 
 
-def run_monkeytype(dirin, dirout, mode, diroot=None, nfile=10):
+def run_monkeytype(dirin, dirout, mode, diroot=None, nfile=10, exclude="" ):
     """
     pip install --upgrade utilmy monkeytype
 
@@ -33,7 +44,12 @@ def run_monkeytype(dirin, dirout, mode, diroot=None, nfile=10):
     """
     from utilmy import os_makedirs
 
-    flist = glob.glob(dirin  +"/**/*.py")
+    flist = glob.glob(dirin  +"/*.py")
+    flist = flist + glob.glob(dirin  +"/**/*.py")
+    flist = [ fi for fi in flist if exclude not in fi ]
+    flist = flist[:nfile]
+    log(flist)
+
 
     if diroot is None :
       diroot = os.getcwd()
@@ -42,25 +58,31 @@ def run_monkeytype(dirin, dirout, mode, diroot=None, nfile=10):
 
 
     for fi in flist :
+      fi = fi.replace("\\", "/")
+      fi = fi.replace(diroot, "")
+
+      log(fi)
+
       cmd = f"monkeytype run {fi}"
       os.system(cmd)
 
       fi2 = fi.replace( diroot, ""  )
-      
-      dirouti = dirout +"/" + fi2 
+
+      dirouti = dirout +"/" + fi2
       os_makedirs(dirouti)
-      
+
       fi3 = fi2.replace(".py", "").replace("/", ".")
-      cmd = f"monkeytype stub {fi3}  > {dirouti}"
+      log(fi3, dirouti)
+      cmd = f"monkeytype stub {fi3}  > {dirouti} 2>&1 "
 
 
 
 
 
-################################################################################    
-################################################################################    
+################################################################################
+################################################################################
 if __name__ == '__main__':
-    import fire
-    fire.Fire()
-    # test()
+    #import fire
+    #fire.Fire()
+    test()
 
