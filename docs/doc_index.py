@@ -1727,14 +1727,20 @@ zplot(ax, area = 0.95, two_tailed = True, align_right = False)
 
 utilmy/recsys/metric.py
 -------------------------functions----------------------
+_mean_ranking_metric(predictions, labels, metric)
+_require_positive_k(k)
+_warn_for_empty_labels()
 coverage_at_k(y_preds, product_data, k = 3)
 help()
 hit_rate_at_k(y_preds, y_test, k = 3)
 hit_rate_at_k_nep(y_preds, y_test, k = 3)
-metrics_calc(dirin:str, dirout = None, colid = 'userid', colrec = 'rec_list', colinfo = 'genre_list', method = [''], nsample = -1, nfile = 1, )
+mean_average_precision(predictions, labels, assume_unique = True)
+metrics_calc(dirin:Union[str, pd.DataFrame], dirout:str = None, colid = 'userid', colrec = 'reclist', coltrue = 'purchaselist', colinfo = 'genrelist', colts = 'datetime', method = [''], nsample = -1, nfile = 1, **kw)
 mrr_at_k(y_preds, y_test, k = 3)
 mrr_at_k_nep(y_preds, y_test, k = 3)
+ndcg_at(predictions, labels, k = 10, assume_unique = True)
 popularity_bias_at_k(y_preds, x_train, k = 3)
+precision_at(y_preds, y_test, k = 3)
 precision_at_k(y_preds, y_test, k = 3)
 recall_at_k(y_preds, y_test, k = 3)
 sample_hits_at_k(y_preds, y_test, x_test = None, k = 3, size = 3)
@@ -1742,6 +1748,20 @@ sample_misses_at_k(y_preds, y_test, x_test = None, k = 3, size = 3)
 statistics(x_train, y_train, x_test, y_test, y_pred)
 test1()
 test_all())))
+test_data_fake()
+
+
+
+utilmy/recsys/metrics/__Init__.py
+
+
+utilmy/recsys/metrics/distance_metrics.py
+-------------------------functions----------------------
+distance_to_query(model, x_test, y_test, y_preds, k = 3, bins = 25, debug = False)
+error_by_cosine_distance(model, y_test, y_preds, k = 3, bins = 25, debug = False)
+generic_cosine_distance(embeddings: dict, type_fn, y_test, y_preds, k = 10, bins = 25, debug = False)
+graph_distance_test(y_test, y_preds, product_data, k = 3)
+shortest_path_length()
 
 
 
@@ -1820,6 +1840,22 @@ EASE.fit(self, df, lambda_: float  =  0.5, implicit = True)
 EASE.predict(self, train, users, items, k)
 
 
+utilmy/recsys/models/prod2vec.py
+-------------------------methods----------------------
+CoveoP2VRecModel.__init__(self, **kwargs)
+CoveoP2VRecModel.get_vector(self, product_sku)
+CoveoP2VRecModel.predict(self, prediction_input: list, *args, **kwargs)
+CoveoP2VRecModel.train(self, products, iterations = 15)
+MovieLensP2VRecModel.__init__(self, **kwargs)
+MovieLensP2VRecModel.get_vector(self, x)
+MovieLensP2VRecModel.predict(self, prediction_input, *args, **kwargs)
+MovieLensP2VRecModel.train(self, movies, iterations = 15)
+SpotifyP2VRecModel.__init__(self, **kwargs)
+SpotifyP2VRecModel.get_vector(self, track_uri)
+SpotifyP2VRecModel.predict(self, prediction_input: list, *args, **kwargs)
+SpotifyP2VRecModel.train(self, playlists, iterations = 15)
+
+
 utilmy/recsys/models/topk_bandit/environment.py
 -------------------------methods----------------------
 ContextualEnvironment.__init__(self, user_features, playlist_features, user_segment, n_recos, gamma  =  1.0)
@@ -1873,6 +1909,27 @@ TSPolicy.update_policy(self, user_ids, recos, rewards, l_init  =  3)
 TSSegmentPolicy.__init__(self, user_segment, n_playlists, alpha_zero = 1, beta_zero = 99, cascade_model = True)
 TSSegmentPolicy.recommend_to_users_batch(self, batch_users, n_recos = 12, l_init = 3)
 TSSegmentPolicy.update_policy(self, user_ids, recos, rewards, l_init  =  3)
+
+
+utilmy/recsys/util_rec.py
+-------------------------functions----------------------
+_get_stratified_tr_mask(u, i, train_size, random_state)
+_make_sparse_csr(data, rows, cols, dtype = DTYPE)
+_make_sparse_tr_te(users, items, ratings, train_mask)
+_validate_train_size(train_size)
+check_consistent_length(u, i, r)
+check_cv(cv = 3)
+test1()
+test_all()
+to_sparse_csr(u, i, r, axis = 0, dtype = DTYPE)
+train_test_split(u, i, r, train_size = 0.75, random_state = None)
+
+-------------------------methods----------------------
+BaseCrossValidator.__init__(self, n_splits = 3, random_state = None)
+BaseCrossValidator._iter_train_mask()
+BaseCrossValidator.get_n_splits(self)
+BaseCrossValidator.split(self, X)
+BootstrapCV._iter_train_mask(self, u, i, r)
 
 
 utilmy/recsys/vectors.py
@@ -3196,7 +3253,24 @@ NodeStatsCollector.init(self)
 NodeStatsCollector.run(self)
 
 
+utilmy/util_dirs.py
+-------------------------functions----------------------
+_get_win_folder_from_environ(csidl_name)
+_get_win_folder_from_registry(csidl_name)
+_get_win_folder_with_ctypes(csidl_name)
+_get_win_folder_with_jna(csidl_name)
+user_cache_dir(appname = None, appauthor = None, version = None, opinion = True)
+user_config_dir(appname = None, appauthor = None, version = None, roaming = False)
+user_data_dir(appname = None, appauthor = None, version = None, roaming = False)
+user_log_dir(appname = None, appauthor = None, version = None, opinion = True)
+
+
+
 utilmy/util_download.py
+-------------------------functions----------------------
+download_with_progress(url, destination)
+get_cache_directory()
+
 
 
 utilmy/util_hadoop.py
