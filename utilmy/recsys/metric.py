@@ -64,6 +64,21 @@ def test_data_fake():
 
 
 #################################################################################################
+def metrics_calc_batch(dirin:Union[str, pd.DataFrame], dirout:str=None, colid='userid',  colrec='reclist', coltrue='purchaselist',  colinfo='genrelist',  colts='datetime',    method=[''], 
+                 nsample=-1,  nfile=1, **kw):
+    """  Distributed metric calculation
+
+
+    """             
+
+
+    flist = glob.glob(dirin)
+    for fi in flist :   
+        metrics_calc(dirin= df, dirout:str=None, colid='userid',  colrec='reclist', coltrue='purchaselist',  colinfo='genrelist',  colts='datetime',    method=[''], 
+                 nsample=-1,  nfile=1, **kw):          
+
+
+
 def metrics_calc(dirin:Union[str, pd.DataFrame], dirout:str=None, colid='userid',  colrec='reclist', coltrue='purchaselist',  colinfo='genrelist',  colts='datetime',    method=[''], 
                  nsample=-1,  nfile=1, **kw):
   """  metrics for recommender in batch model
@@ -182,7 +197,7 @@ def hit_rate_at_k(y_preds, y_test, k=3):
 def mrr_at_k_nep(y_preds, y_test, k=3):
     """
     Computes MRR
-    :param y_preds: predictions, as lists of lists
+    :param y_preds: y, as lists of lists
     :param y_test: target data, as lists of lists (eventually [[sku1], [sku2],...]
     :param k: top-k
     """
@@ -193,7 +208,7 @@ def mrr_at_k_nep(y_preds, y_test, k=3):
 def mrr_at_k(y_preds, y_test, k=3):
     """
     Computes MRR
-    :param y_preds: predictions, as lists of lists
+    :param y_preds: y, as lists of lists
     :param y_test: target data, as lists of lists (eventually [[sku1], [sku2],...]
     :param k: top-k
     """
@@ -251,15 +266,15 @@ def _require_positive_k(k):
         raise ValueError("ranking position k should be positive")
 
 
-def _mean_ranking_metric(predictions, labels, metric):
+def _mean_ranking_metric(y, labels, metric):
     """Helper function for precision_at_k and mean_average_precision"""
     # do not zip, as this will require an extra pass of O(N). Just assert
     # equal length and index (compute in ONE pass of O(N)).
-    # if len(predictions) != len(labels):
-    #     raise ValueError("dim mismatch in predictions and labels!")
+    # if len(y) != len(labels):
+    #     raise ValueError("dim mismatch in y and labels!")
     # return np.mean([
-    #     metric(np.asarray(predictions[i]), np.asarray(labels[i]))
-    #     for i in range(len(predictions))
+    #     metric(np.asarray(y[i]), np.asarray(labels[i]))
+    #     for i in range(len(y))
     # ])
     
     # Actually probably want lazy evaluation in case preds is a 
@@ -267,7 +282,7 @@ def _mean_ranking_metric(predictions, labels, metric):
     # memory... but how to assert lengths equal? FIXME
     return np.mean([
         metric(np.asarray(prd), np.asarray(labels[i]))
-        for i, prd in enumerate(predictions)  # lazy eval if generator
+        for i, prd in enumerate(y)  # lazy eval if generator
     ])
 
 
@@ -277,7 +292,7 @@ def _warn_for_empty_labels():
     return 0.
 
 
-def precision_at(predictions, labels, k=10, assume_unique=True):
+def precision_at(y, labels, k=10, assume_unique=True):
     """Compute the precision at K.
     Compute the average precision of all the queries, truncated at
     ranking position k. If for a query, the ranking algorithm returns
@@ -288,7 +303,7 @@ def precision_at(predictions, labels, k=10, assume_unique=True):
     precision together with a warning.
     Parameters
     ----------
-    predictions : array-like, shape=(n_predictions,)
+    y : array-like, shape=(n_predictions,)
         The prediction array. The items that were predicted, in descending
         order of relevance.
     labels : array-like, shape=(n_ratings,)
@@ -296,12 +311,12 @@ def precision_at(predictions, labels, k=10, assume_unique=True):
     k : int, optional (default=10)
         The rank at which to measure the precision.
     assume_unique : bool, optional (default=True)
-        Whether to assume the items in the labels and predictions are each
+        Whether to assume the items in the labels and y are each
         unique. That is, the same item is not predicted multiple times or
         rated multiple times.
     Examples
     --------
-    >>> # predictions for 3 users
+    >>> # y for 3 users
     >>> preds = [[1, 6, 2, 7, 8, 3, 9, 10, 4, 5],
     ...          [4, 1, 5, 6, 2, 7, 3, 8, 9, 10],
     ...          [1, 2, 3, 4, 5]]
@@ -318,7 +333,7 @@ def precision_at(predictions, labels, k=10, assume_unique=True):
     _require_positive_k(k)
 
     def _inner_pk(pred, lab):
-        # need to compute the count of the number of values in the predictions
+        # need to compute the count of the number of values in the y
         # that are present in the labels. We'll use numpy in1d for this (set
         # intersection in O(1))
         if lab.shape[0] > 0:
@@ -328,28 +343,28 @@ def precision_at(predictions, labels, k=10, assume_unique=True):
         else:
             return _warn_for_empty_labels()
 
-    return _mean_ranking_metric(predictions, labels, _inner_pk)
+    return _mean_ranking_metric(y, labels, _inner_pk)
 
 
-def mean_average_precision(predictions, labels, assume_unique=True):
-    """Compute the mean average precision on predictions and labels.
+def mean_average_precision(y, labels, assume_unique=True):
+    """Compute the mean average precision on y and labels.
     Returns the mean average precision (MAP) of all the queries. If a query
     has an empty ground truth set, the average precision will be zero and a
     warning is generated.
     Parameters
     ----------
-    predictions : array-like, shape=(n_predictions,)
+    y : array-like, shape=(n_predictions,)
         The prediction array. The items that were predicted, in descending
         order of relevance.
     labels : array-like, shape=(n_ratings,)
         The labels (positively-rated items).
     assume_unique : bool, optional (default=True)
-        Whether to assume the items in the labels and predictions are each
+        Whether to assume the items in the labels and y are each
         unique. That is, the same item is not predicted multiple times or
         rated multiple times.
     Examples
     --------
-    >>> # predictions for 3 users
+    >>> # y for 3 users
     >>> preds = [[1, 6, 2, 7, 8, 3, 9, 10, 4, 5],
     ...          [4, 1, 5, 6, 2, 7, 3, 8, 9, 10],
     ...          [1, 2, 3, 4, 5]]
@@ -360,7 +375,7 @@ def mean_average_precision(predictions, labels, assume_unique=True):
     """
     def _inner_map(pred, lab):
         if lab.shape[0]:
-            # compute the number of elements within the predictions that are
+            # compute the number of elements within the y that are
             # present in the actual labels, and get the cumulative sum weighted
             # by the index of the ranking
             n = pred.shape[0]
@@ -388,10 +403,10 @@ def mean_average_precision(predictions, labels, assume_unique=True):
         else:
             return _warn_for_empty_labels()
 
-    return _mean_ranking_metric(predictions, labels, _inner_map)
+    return _mean_ranking_metric(y, labels, _inner_map)
 
 
-def ndcg_at(predictions, labels, k=10, assume_unique=True):
+def ndcg_at(y, labels, k=10, assume_unique=True):
     """Compute the normalized discounted cumulative gain at K.
     Compute the average NDCG value of all the queries, truncated at ranking
     position k. The discounted cumulative gain at position k is computed as:
@@ -402,7 +417,7 @@ def ndcg_at(predictions, labels, k=10, assume_unique=True):
     NDCG together with a warning.
     Parameters
     ----------
-    predictions : array-like, shape=(n_predictions,)
+    y : array-like, shape=(n_predictions,)
         The prediction array. The items that were predicted, in descending
         order of relevance.
     labels : array-like, shape=(n_ratings,)
@@ -410,12 +425,12 @@ def ndcg_at(predictions, labels, k=10, assume_unique=True):
     k : int, optional (default=10)
         The rank at which to measure the NDCG.
     assume_unique : bool, optional (default=True)
-        Whether to assume the items in the labels and predictions are each
+        Whether to assume the items in the labels and y are each
         unique. That is, the same item is not predicted multiple times or
         rated multiple times.
     Examples
     --------
-    >>> # predictions for 3 users
+    >>> # y for 3 users
     >>> preds = [[1, 6, 2, 7, 8, 3, 9, 10, 4, 5],
     ...          [4, 1, 5, 6, 2, 7, 3, 8, 9, 10],
     ...          [1, 2, 3, 4, 5]]
@@ -465,7 +480,7 @@ def ndcg_at(predictions, labels, k=10, assume_unique=True):
         else:
             return _warn_for_empty_labels()
 
-    return _mean_ranking_metric(predictions, labels, _inner_ndcg)
+    return _mean_ranking_metric(y, labels, _inner_ndcg)
 
 
 
