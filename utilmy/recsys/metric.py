@@ -25,7 +25,7 @@ https://rexmex.readthedocs.io/en/latest/modules/root.html#module-rexmex.metrics.
 
 
 """
-import os, sys, random, numpy as np, pandas as pd, fire, time, itertools, collections
+import os, sys, random, numpy as np, pandas as pd, fire, time, itertools, collections, warnings
 from typing import Union,TypeVar, List
 from tqdm import tqdm
 from box import Box
@@ -244,10 +244,6 @@ def recall_at_k(y_preds, y_test, k=3):
     return np.average(recall_ls)
 
 
-
-# original Spark Scala source code for recommender metrics.
-# https://github.com/apache/spark/blob/master/mllib/src/main/scala/org/apache/spark/mllib/evaluation/RankingMetrics.scala
-import warnings
 
 def _require_positive_k(k):
     """Helper function to avoid copy/pasted code for validating K"""
