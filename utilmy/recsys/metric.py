@@ -1,37 +1,11 @@
 # -*- coding: utf-8 -*-
-MNAME = "utilmy.recsys.ab"
+MNAME = "utilmy.recsys.metric"
 HELP = """"
-All about abtest
-
-cd utilmy/recsys/ab
-python ab.py ab_getstat --df  /mypath/data.parquet   
+All about metrics
 
 
 
-_pooled_prob(N_A, N_B, X_A, X_B)
-_pooled_SE(N_A, N_B, X_A, X_B)
-_p_val(N_A, N_B, p_A, p_B)
-np_calculate_z_val(sig_level=0.05, two_tailed=True)
-np_calculate_confidence_interval(sample_mean=0, sample_std=1, sample_size=1, sig_level=0.05)
-np_calculate_ab_dist(stderr, d_hat=0, group_type='control')
-pd_generate_ctr_data(N_A, N_B, p_A, p_B, days=None, control_label='A'
-np_calculate_min_sample_size(bcr, mde, power=0.8, sig_level=0.05)
-plot_confidence_interval(ax, mu, s, sig_level=0.05, color='grey')
-plot_norm_dist(ax, mu, std, with_CI=False, sig_level=0.05, label=None)
-plot_binom_dist(ax, A_converted, A_cr, A_total, B_converted, B_cr, B_total)
-plot_null_hypothesis_dist(ax, stderr)
-plot_alternate_hypothesis_dist(ax, stderr, d_hat)
-show_area(ax, d_hat, stderr, sig_level, area_type='power')
-plot_ab(ax, N_A, N_B, bcr, d_hat, sig_level=0.05, show_power=False
-zplot(ax, area=0.95, two_tailed=True, align_right=False)
-abplot_CI_bars(N, X, sig_level=0.05, dmin=None)
-funnel_CI_plot(A, B, sig_level=0.05)
-ab_getstat(df,treatment_col,measure_col,attribute_cols,control_label,variation_label,inference_method,hypothesis,alpha,experiment_name)
-
-
-https://pypi.org/project/abracadabra/
-
-
+https://github.com/jacopotagliabue/reclist/blob/main/reclist/recommenders/prod2vec.py
 """
 import os, sys, random, numpy as np, pandas as pd, fire, time, itertools, collections
 from typing import List
