@@ -50,7 +50,7 @@ def test_all()
     test1()
 
 def test1():
-  pass
+
 
 
    metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='reclist',  coltrue='purchaselist',  colinfo='genre_ist',   method=[''], nsample=-1,  nfile=10, )
@@ -249,12 +249,6 @@ def recall_at_k(y_preds, y_test, k=3):
 # https://github.com/apache/spark/blob/master/mllib/src/main/scala/org/apache/spark/mllib/evaluation/RankingMetrics.scala
 import warnings
 
-try:
-    xrange
-except NameError:  # python 3 does not have an 'xrange'
-    xrange = range
-
-
 def _require_positive_k(k):
     """Helper function to avoid copy/pasted code for validating K"""
     if k <= 0:
@@ -269,7 +263,7 @@ def _mean_ranking_metric(predictions, labels, metric):
     #     raise ValueError("dim mismatch in predictions and labels!")
     # return np.mean([
     #     metric(np.asarray(predictions[i]), np.asarray(labels[i]))
-    #     for i in xrange(len(predictions))
+    #     for i in range(len(predictions))
     # ])
     
     # Actually probably want lazy evaluation in case preds is a 
