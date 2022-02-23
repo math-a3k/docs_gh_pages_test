@@ -36,6 +36,59 @@ def test_all():
 
 
 
+class DatasetModelRule(object):
+
+  def __init__(self, arg:dict):
+    self.arg = Box(arg)
+
+  def test(self,)
+
+
+  def dataset_addon_create()-> pd.DataFrame:
+
+  def rule_encoder_create(self):
+    class RuleEncoder(nn.Module):
+      def __init__(self, input_dim, output_dim, hidden_dim=4):
+        super(RuleEncoder, self).__init__()
+        self.input_dim = input_dim
+        self.output_dim = output_dim
+        self.net = nn.Sequential(nn.Linear(input_dim, hidden_dim),
+                                nn.ReLU(),
+                                nn.Linear(hidden_dim, output_dim))
+
+      def forward(self, x):
+        return self.net(x)
+
+     return RuleEncoder   
+
+
+  def rule_loss_create(self):
+
+  def rule_loss_calc_create(self):
+
+  def evaluate(self):
+
+  def predict(self):
+
+
+
+class DatasetModelRule_cardio(DatasetModelRule)
+
+
+Dataset :  Raw Data  -->  dataloader
+
+
+DatasetModelRule  :  relatedt to rules (data + model part)
+
+DatasetModelTask  :  Base Model
+
+Modelmerge :   dataloader, Model1, Model2   -->  predict, train, ...
+
+
+
+
+
+
 ##############################################################################################
 ##### Use Monkey Patching   ##################################################################
 def test3():
