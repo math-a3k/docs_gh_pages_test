@@ -20,9 +20,13 @@ https://github.com/AstraZeneca/rexmex
 
 
 
+https://rexmex.readthedocs.io/en/latest/modules/root.html#module-rexmex.metrics.ranking
+
+
+
 """
 import os, sys, random, numpy as np, pandas as pd, fire, time, itertools, collections
-from typing import List
+from typing import Union,TypeVar, List
 from tqdm import tqdm
 from box import Box
 import scipy.stats as scs
@@ -32,7 +36,6 @@ import matplotlib.pyplot as plt
 
 ##################################################################################################
 from utilmy import log, log2
-
 def help():
     from utilmy import help_create
     ss = HELP + help_create(MNAME)
@@ -59,7 +62,9 @@ def test_data_fake():
 
     retrun df
 
-def metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='reclist', coltrue='purchaselist',  colinfo='genrelist',     method=[''], 
+
+#################################################################################################
+def metrics_calc(dirin:Union[str, pd.DataFrame], dirout:str=None, colid='userid',  colrec='reclist', coltrue='purchaselist',  colinfo='genrelist',  colts='datetime',    method=[''], 
                  nsample=-1,  nfile=1, **kw):
   """  metrics for recommender in batch model
     example_predictions = [
