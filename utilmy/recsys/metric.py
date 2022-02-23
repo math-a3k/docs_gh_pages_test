@@ -11,9 +11,10 @@ https://github.com/jacopotagliabue/reclist/blob/main/reclist/recommenders/prod2v
 https://github.com/statisticianinstilettos/recmetrics/blob/master/example.ipynb
 
 
+https://github.com/AstraZeneca/rexmex
+
+
 # Recommender system ranking metrics derived from Spark source for use with
-# Python-based recommender libraries (i.e., implicit, 
-# http://github.com/benfred/implicit/). These metrics are derived from the
 # original Spark Scala source code for recommender metrics.
 # https://github.com/apache/spark/blob/master/mllib/src/main/scala/org/apache/spark/mllib/evaluation/RankingMetrics.scala
 
@@ -85,11 +86,11 @@ def metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='reclist', colt
   
   if nsample > 0:  df = df.sample(n=nsample)
 
-  if isinstance(df[colrec].valus[0], str) :
+  if isinstance(df[colrec].values[0], str) :
      df[colrec] = df[colrec].apply(lambda x : x.split(","))  #### list
      ####  userid ---> colrec: [] 23243,2342,324345,4353,453,45345 ]
 
-  if isinstance(df[coltrue].valus[0], str) :
+  if isinstance(df[coltrue].values[0], str) :
      df[coltrue] = df[coltrue].apply(lambda x : x.split(","))  #### list
      ####  userid ---> colrec: [] 23243,2342,324345,4353,453,45345 ]
 
