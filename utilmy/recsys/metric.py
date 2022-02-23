@@ -33,12 +33,13 @@ https://pypi.org/project/abracadabra/
 
 
 """
-import os, sys, random, numpy as np, pandas as pd, fire, time
+import os, sys, random, numpy as np, pandas as pd, fire, time, itertools, collections
 from typing import List
 from tqdm import tqdm
 from box import Box
 import scipy.stats as scs
 import matplotlib.pyplot as plt
+
 
 
 ##################################################################################################
@@ -61,7 +62,17 @@ def test1():
   pass
 
 
-def metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='rec_list',  colinfo='genre_list',   method=[''], nsample=-1,  nfile=1,):
+   metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='reclist',  coltrue='purchaselist',  colinfo='genre_ist',   method=[''], nsample=-1,  nfile=10, )
+
+
+def test_data_fake():
+
+    df['reclist'] = [  [str(i) for i in np.random()      ]
+
+    retrun df
+
+def metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='reclist', coltrue='purchaselist',  colinfo='genrelist',     method=[''], 
+                 nsample=-1,  nfile=1, **kw):
   """  metrics for recommender in batch model
     example_predictions = [
         ['1', '2', 'C', 'D'],
@@ -72,25 +83,36 @@ def metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='rec_list',  co
 
    https://github.com/statisticianinstilettos/recmetrics/blob/master/example.ipynb
 
+
+   recmetrics.precision_recall_plot(targs=actual, preds=model_probs)
+
   """
   from utilmy import pd_read_file, pd_to_file
   import recmetrics
+
   if isinstance(dirin, pd.DataFrame):
     df = dirin 
   else :
-    df = pd_read_file(dirin, nfile= nfile)  
+    df = pd_read_file(dirin, nfile= nfile, npool=4)  
 
   
-
+  if nsample > 0:  df = df.sample(n=nsample)
 
   if isinstance(df[colrec].valus[0], str) :
-     df[colrec] = df[colrec].apply(lambda x : x.split(",")) 
+     df[colrec] = df[colrec].apply(lambda x : x.split(","))  #### list
+     ####  userid ---> colrec: [] 23243,2342,324345,4353,453,45345 ]
+
+  if isinstance(df[coltrue].valus[0], str) :
+     df[coltrue] = df[coltrue].apply(lambda x : x.split(","))  #### list
+     ####  userid ---> colrec: [] 23243,2342,324345,4353,453,45345 ]
 
 
   res = Box({})
   for mi in methods :
-    if mi == 'personalization': res[mi] = recmetrics.personalization( df['rec_list'].values)
+    if mi == 'personalization': res[mi] = recmetrics.personalization( df[colrec].values)
     if mi == 'intralist':       res[mi] = recmetrics.intra_list_similarity( df['rec_list'].values, feature_df)
+    if mi == 'mrr_at_k':        res[mi] = mrr_at_k( df['rec_list'].values,  df[coltrue].values, k=5 )
+
 
 
 
@@ -99,20 +121,12 @@ def metrics_calc(dirin:str, dirout=None, colid='userid',  colrec='rec_list',  co
 
   if isinstance(dirout, str):
      pd_to_file(dfres, dirout , show=1)
-
-
-
+  return dfres
 
 
 
 
 ###############################################
-import random
-import itertools
-import numpy as np
-import collections
-
-
 def statistics(x_train, y_train, x_test, y_test, y_pred):
     train_size = len(x_train)
     test_size = len(x_test)
