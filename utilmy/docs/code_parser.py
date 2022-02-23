@@ -533,6 +533,7 @@ def get_list_function_info(file_path):
         data["type"]    = "function"
         data['line']    = function['line']
         data['docs']    = _get_docs(all_file_lines, function['line'], lines)
+        data['indent']  = indent
 
         # calculate code_source
         data["code_source"] = ""
