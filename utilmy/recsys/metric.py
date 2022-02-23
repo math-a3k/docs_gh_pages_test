@@ -240,11 +240,6 @@ def recall_at_k(y_preds, y_test, k=3):
 
 
 
-
-
-# Recommender system ranking metrics derived from Spark source for use with
-# Python-based recommender libraries (i.e., implicit, 
-# http://github.com/benfred/implicit/). These metrics are derived from the
 # original Spark Scala source code for recommender metrics.
 # https://github.com/apache/spark/blob/master/mllib/src/main/scala/org/apache/spark/mllib/evaluation/RankingMetrics.scala
 import warnings
