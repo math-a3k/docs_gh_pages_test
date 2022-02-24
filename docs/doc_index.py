@@ -5,9 +5,8 @@ utilmy/__init__.py
 
 utilmy/adatasets.py
 -------------------------functions----------------------
-atemplate_dataset_classifier_XXXXX(nrows = 500, **kw)
-dataset_classifier_pmlb(name = '', return_X_y = False)
 help()
+template_dataset_classifier_XXXXX(nrows = 500, **kw)
 test()
 test1()
 test_all()
@@ -15,6 +14,7 @@ test_dataset_classifier_covtype(nrows = 500)
 test_dataset_classifier_diabetes_traintest()
 test_dataset_classifier_fake(nrows = 500)
 test_dataset_classifier_petfinder(nrows = 1000)
+test_dataset_classifier_pmlb(name = '', return_X_y = False)
 test_dataset_regression_boston_traintest()
 test_dataset_regression_fake(nrows = 500, n_features = 17)
 
