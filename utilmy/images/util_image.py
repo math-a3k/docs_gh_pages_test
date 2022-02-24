@@ -38,6 +38,27 @@ def test():
     pass
 
 
+def test_image_create_fake(dirout=None, nimages=1, ):
+    import cv2
+    import numpy as np
+
+    dirout = os.getcwd() + "/ztmp/images/"
+    os.makedirs(dirout, exist_ok=True)
+    ii = 0 ; img_list =[]
+    for ii in range(nmax):
+        # Create new blank 300x300 red image
+        width1, height1 = 300, 300
+        red = (255, 0, 0)
+        rgb_color= red
+        image = np.zeros((height, width, 3), np.uint8)
+        color = tuple(reversed(rgb_color))
+        image[:] = color
+
+        if dirout is not None :
+            cv2.imwrite( dirout + f'img_{ii}.jpg', image)
+        else:
+            img_list.append(image)
+
 
 ################################################################################################
 def prep_images(image_paths, nmax=10000000):
