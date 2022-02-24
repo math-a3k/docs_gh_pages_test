@@ -30,11 +30,11 @@ def test_all():
     """
     def test():
         log("Testing  ...")
-        from utilmy.adatasets import test_dataset_classification_fake, test_dataset_classification_petfinder, test_dataset_classifier_covtype,\
+        from utilmy.adatasets import test_dataset_classifier_fake, test_dataset_classifier_petfinder, test_dataset_classifier_covtype,\
             test_dataset_regression_fake,dataset_classifier_pmlb
         test_dataset_regression_fake(nrows=500, n_features=17)
-        test_dataset_classification_fake(nrows=10)
-        test_dataset_classification_petfinder(nrows=10)
+        test_dataset_classifier_fake(nrows=10)
+        test_dataset_classifier_petfinder(nrows=10)
         test_dataset_classifier_covtype(nrows=10)
         dataset_classifier_pmlb(name=2)
     
@@ -52,8 +52,8 @@ def test_all():
 def test0():
     log("Testing  ...")
     test_dataset_regression_fake(nrows=500, n_features=17)
-    test_dataset_classification_fake(nrows=10)
-    test_dataset_classification_petfinder(nrows=10)
+    test_dataset_classifier_fake(nrows=10)
+    test_dataset_classifier_petfinder(nrows=10)
     test_dataset_classifier_covtype(nrows=10)
     '''TODO:
     dataset_classifier_pmlb(name=2)
