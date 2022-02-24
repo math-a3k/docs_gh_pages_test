@@ -21,23 +21,11 @@ def help():
     print( HELP + help_create(MNAME) )
 
 
-
-
 ##############################################################################################
 def test_all():
-    """
-    #### python test.py   test_adatasets
-    """
-    def test_pd_utils():
-        import pandas as pd
-        from utilmy.adatasets import pd_train_test_split,pd_train_test_split2, fetch_dataset
-        fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
-        df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
-        pd_train_test_split(df,"block")
-        pd_train_test_split2(df, "block")
-
+    log(MNAME)
     test()
-    test_pd_utils()
+    test1()
 
 
 def test():
@@ -46,18 +34,14 @@ def test():
     test_dataset_classifier_petfinder(nrows=10)
     test_dataset_classifier_covtype(nrows=10)
     dataset_classifier_pmlb(name=2)
-    '''TODO:
-    dataset_classifier_pmlb(name=2)
-    '''
-    
+
+
 def test1():
     fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
     df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
-    ''' TODO : need to add axis on df.drop()
-    KeyError: "['block'] not found in axis"
-    pd_train_test_split(df,"block")
-    '''
+    pd_train_test_split(df,  "block")
     pd_train_test_split2(df, "block")
+
 
 
 ####################################################################################################
