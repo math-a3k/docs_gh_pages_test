@@ -33,19 +33,19 @@ def test():
     test_dataset_classifier_fake(nrows=10)
     test_dataset_classifier_petfinder(nrows=10)
     test_dataset_classifier_covtype(nrows=10)
-    dataset_classifier_pmlb(name=2)
+    test_dataset_classifier_pmlb(name=2)
 
 
 def test1():
     fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
     df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
-    pd_train_test_split(df,  "block")
-    pd_train_test_split2(df, "block")
+    pd_train_test_split(df,  coly="block")
+    pd_train_test_split2(df, coly="block")
 
 
 
 ####################################################################################################
-def atemplate_dataset_classifier_XXXXX(nrows=500, **kw):
+def template_dataset_classifier_XXXXX(nrows=500, **kw):
     """
 
     """
@@ -77,7 +77,7 @@ def test_dataset_classifier_fake(nrows=500):
     return df, pars
 
 
-def dataset_classifier_pmlb(name='', return_X_y=False):
+def test_dataset_classifier_pmlb(name='', return_X_y=False):
     from pmlb import fetch_data, classification_dataset_names
     ds = classification_dataset_names[name]
     pars = {}
