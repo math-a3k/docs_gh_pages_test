@@ -115,7 +115,7 @@ def dataset_classifier_pmlb(name='', return_X_y=False):
     return df, pars
 
 
-def test_dataset_classifier_covtype(nrows=500)->Tuple(pd.DataFrame, dict):
+def test_dataset_classifier_covtype(nrows=500):
     log("start")
 
     import wget
