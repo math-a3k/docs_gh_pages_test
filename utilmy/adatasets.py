@@ -8,7 +8,7 @@ import os, sys, time, datetime,inspect, json, pandas as pd, numpy as np
 from pathlib import Path
 from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
-from scipy.io.arff import loadarf
+from scipy.io.arff import loadarff
 
 
 
