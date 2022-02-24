@@ -28,16 +28,6 @@ def test_all():
     """
     #### python test.py   test_adatasets
     """
-    def test():
-        log("Testing  ...")
-        from utilmy.adatasets import test_dataset_classifier_fake, test_dataset_classifier_petfinder, test_dataset_classifier_covtype,\
-            test_dataset_regression_fake,dataset_classifier_pmlb
-        test_dataset_regression_fake(nrows=500, n_features=17)
-        test_dataset_classifier_fake(nrows=10)
-        test_dataset_classifier_petfinder(nrows=10)
-        test_dataset_classifier_covtype(nrows=10)
-        dataset_classifier_pmlb(name=2)
-    
     def test_pd_utils():
         import pandas as pd
         from utilmy.adatasets import pd_train_test_split,pd_train_test_split2, fetch_dataset
@@ -49,12 +39,13 @@ def test_all():
     test()
     test_pd_utils()
 
-def test0():
-    log("Testing  ...")
+
+def test():
     test_dataset_regression_fake(nrows=500, n_features=17)
     test_dataset_classifier_fake(nrows=10)
     test_dataset_classifier_petfinder(nrows=10)
     test_dataset_classifier_covtype(nrows=10)
+    dataset_classifier_pmlb(name=2)
     '''TODO:
     dataset_classifier_pmlb(name=2)
     '''
