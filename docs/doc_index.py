@@ -5,32 +5,19 @@ utilmy/__init__.py
 
 utilmy/adatasets.py
 -------------------------functions----------------------
-download_dtopbox(data_pars)
-download_googledrive(file_list, **kw)
-fetch_dataset(url_dataset, path_target = None, file_target = None)
-pd_train_test_split(df, coly = None)
-pd_train_test_split2(df, coly)
-test0()
+atemplate_dataset_classifier_XXXXX(nrows = 500, **kw)
+dataset_classifier_pmlb(name = '', return_X_y = False)
+help()
+test()
 test1()
 test_all()
-test_data_XXXXXfier_YYYY(nrows = 500, nmode = 'split/pandas', **kw)
-test_data_classifier_covtype(nrows = 500)
-test_data_classifier_digits(nrows = 1000)
-test_data_classifier_fake(nrows = 500)
-test_data_classifier_petfinder(nrows = 1000)
-test_data_classifier_pmlb(name = '', return_X_y = False, train_split = True)
-test_data_regression_boston(nrows = 1000)
-test_data_regression_fake(nrows = 500, n_features = 17)
+test_dataset_classifier_covtype(nrows = 500)
+test_dataset_classifier_diabetes_traintest()
+test_dataset_classifier_fake(nrows = 500)
+test_dataset_classifier_petfinder(nrows = 1000)
+test_dataset_regression_boston_traintest()
+test_dataset_regression_fake(nrows = 500, n_features = 17)
 
--------------------------methods----------------------
-Downloader.__init__(self, url)
-Downloader._transform_dropbox_url(self)
-Downloader._transform_gdrive_url(self)
-Downloader._transform_github_url(self)
-Downloader.adjust_url(self)
-Downloader.clean_netloc(self)
-Downloader.download(self, filepath = '')
-Downloader.get_filename(self, headers)
 
 
 utilmy/cli.py
@@ -1038,8 +1025,6 @@ image_resize_ratio(image, width = None, height = None, inter = cv2.INTER_AREA)
 image_save()
 image_show_in_row(image_list:dict = None)
 image_text_blank(in_dir, out_dir, level = "/*")
-log(*s)
-log2(*s)
 os_path_check(path, n = 5)
 prep_image(image_paths, nmax = 10000000)
 prep_images(image_paths, nmax = 10000000)
@@ -1047,6 +1032,8 @@ prep_images2(image_paths, nmax = 10000000)
 prep_images_multi(image_path_list:list, prepro_image_fun = None, npool = 1)
 run_multiprocess(myfun, list_args, npool = 10, **kwargs)
 test()
+test_all()
+test_image_create_fake(dirout = None, nimages = 1, )
 
 
 
@@ -3206,6 +3193,15 @@ IndexLock.save_filter(self, val:list = None)
 IndexLock.save_isok(self, flist:list)
 toFile.__init__(self, fpath)
 toFile.write(self, msg)
+
+
+utilmy/util_conda.py
+-------------------------functions----------------------
+help()
+pip_auto_install()
+
+-------------------------methods----------------------
+PipFinder.find_spec(cls, name, path, target = None)
 
 
 utilmy/util_cpu.py
