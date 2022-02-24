@@ -67,6 +67,20 @@ def main():
 
 
 
+
+def help_get_docstring(func):
+    """ Extract Docstring from func name"""
+    import inspect
+    try:
+        lines = func.__doc__
+    except AttributeError:
+        lines = ""
+    return lines
+
+
+
+
+
 if __name__ == "__main__":
     # import fire
     # fire.Fire()
