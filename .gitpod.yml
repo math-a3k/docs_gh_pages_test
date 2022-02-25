@@ -4,6 +4,7 @@
 
 tasks:
   - init: pip install .
+          pip install imodels
 vscode:
   extensions:
     - ms-python.python
