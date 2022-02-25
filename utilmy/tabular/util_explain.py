@@ -35,7 +35,7 @@ def test_all():
 
 def test1():
     d = Box({})
-    d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_reg_boston_data()
+    d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_regression_boston()
     d.task_type = 'regressor'
 
     """  imodels.FIGSRegressor
@@ -70,7 +70,7 @@ def test1():
 
 def test2():
     d = Box({})
-    d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = get_classifier_diabetes_data()
+    d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_classifier_diabetes()
     d.task_type = 'classifier'
 
     """  imodels.FIGSRegressor
@@ -135,8 +135,8 @@ def test_imodels():
         os.chdir('..')
 
 
-    X_train_reg, X_test_reg, y_train_reg, y_test_reg, feat_names_reg = get_reg_boston_data()
-    X_train, X_test, y_train, y_test, feat_names = get_classifier_diabetes_data()
+    X_train_reg, X_test_reg, y_train_reg, y_test_reg, feat_names_reg = test_data_regression_boston()
+    X_train, X_test, y_train, y_test, feat_names = test_data_classifier_diabetes()
 
 
     def viz_classification_preds(probs, y_test):
@@ -434,7 +434,7 @@ def model_extract_rules(model):
 
 
 #############################################################################################
-def get_reg_boston_data():
+def test_data_regression_boston():
     '''load (regression) data on boston housing prices
     '''
     from sklearn.datasets import load_boston
@@ -444,7 +444,7 @@ def get_reg_boston_data():
     return X_train_reg, X_test_reg, y_train_reg, y_test_reg, feature_names
 
 
-def get_classifier_diabetes_data():
+def test_data_classifier_diabetes():
     '''load (classification) data on diabetes
     '''
     from sklearn.datasets import load_diabetes

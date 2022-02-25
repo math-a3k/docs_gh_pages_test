@@ -29,11 +29,11 @@ def test_all():
 
 
 def test():
-    test_dataset_regression_fake(nrows=500, n_features=17)
-    test_dataset_classifier_fake(nrows=10)
-    test_dataset_classifier_petfinder(nrows=10)
-    test_dataset_classifier_covtype(nrows=10)
-    test_dataset_classifier_pmlb(name=2)
+    test_data_regression_fake(nrows=500, n_features=17)
+    test_data_classifier_fake(nrows=10)
+    test_data_classifier_petfinder(nrows=10)
+    test_data_classifier_covtype(nrows=10)
+    test_data_classifier_pmlb(name=2)
 
 
 def test1():
@@ -59,7 +59,7 @@ def template_dataset_classifier_XXXXX(nrows=500, **kw):
 
 ####################################################################################################
 ########## Classification ##########################################################################
-def test_dataset_classifier_fake(nrows=500):
+def test_data_classifier_fake(nrows=500):
     from sklearn import datasets as sklearn_datasets
     ndim    =11
     coly    = 'y'
@@ -77,7 +77,7 @@ def test_dataset_classifier_fake(nrows=500):
     return df, pars
 
 
-def test_dataset_classifier_pmlb(name='', return_X_y=False):
+def test_data_classifier_pmlb(name='', return_X_y=False):
     from pmlb import fetch_data, classification_dataset_names
     ds = classification_dataset_names[name]
     pars = {}
@@ -90,7 +90,7 @@ def test_dataset_classifier_pmlb(name='', return_X_y=False):
     return df, pars
 
 
-def test_dataset_classifier_covtype(nrows=500):
+def test_data_classifier_covtype(nrows=500):
     log("start")
 
     import wget
@@ -119,7 +119,7 @@ def test_dataset_classifier_covtype(nrows=500):
     return df, pars
 
 
-def test_dataset_classifier_petfinder(nrows=1000):
+def test_data_classifier_petfinder(nrows=1000):
     # Dense features
     import wget
     colnum = ['PhotoAmt', 'Fee','Age' ]
@@ -157,7 +157,7 @@ def test_dataset_classifier_petfinder(nrows=1000):
     return df, pars
 
 
-def test_dataset_classifier_diabetes_traintest():
+def test_data_classifier_diabetes_traintest():
     '''load (classification) data on diabetes
     '''
     data = loadarff("content/imodels/imodels/tests/test_data/diabetes.arff")
@@ -174,7 +174,7 @@ def test_dataset_classifier_diabetes_traintest():
 
 ####################################################################################################
 ######  Regression ##################################################################################
-def test_dataset_regression_fake(nrows=500, n_features=17):
+def test_data_regression_fake(nrows=500, n_features=17):
     from sklearn import datasets as sklearn_datasets
     coly   = 'y'
     colnum = ["colnum_" +str(i) for i in range(0, 17) ]
@@ -191,7 +191,7 @@ def test_dataset_regression_fake(nrows=500, n_features=17):
     return df, pars
 
 
-def test_dataset_regression_boston_traintest():
+def test_data_regression_boston_traintest():
     '''load (regression) data on boston housing prices
     '''
     X_reg, y_reg = load_boston(return_X_y=True)
