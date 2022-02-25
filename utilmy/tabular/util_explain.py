@@ -25,9 +25,7 @@ from utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss = HELP + help_create(MNAME)
-    print(ss)
-
+    print(  HELP + help_create(MNAME) )
 
 
 #############################################################################################
