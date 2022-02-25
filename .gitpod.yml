@@ -5,6 +5,9 @@
 tasks:
   - init: pip install py36.txt
           pip install imodels
+          git fetch && git pull origin main
+
+
 vscode:
   extensions:
     - ms-python.python
