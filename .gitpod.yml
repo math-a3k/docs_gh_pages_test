@@ -3,7 +3,7 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
-  - init: pip install py36_min.txt
+  - init: pip install py36.txt
           pip install imodels
 vscode:
   extensions:

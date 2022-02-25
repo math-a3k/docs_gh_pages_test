@@ -1,7 +1,7 @@
 fire
 python-box
 numpy
-pandas
+pandas<=1.2.1
 scipy
 loguru
 cloudpickle
