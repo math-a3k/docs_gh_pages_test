@@ -4,7 +4,7 @@
 
 tasks:
   - init: pip install py36.txt
-          pip install imodels
+          pip install imodels ipython
           git fetch && git pull origin main  --rebase
 #### Local commit applied on 
 
