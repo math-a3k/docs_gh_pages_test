@@ -143,3 +143,4 @@ dmypy.json
 .gitpod.yml
 testdata/ppandas/histogram.png
 testdata/ppandas/file.csv
+utilmy/tabular/docs/stub/utilmy/tabular/__init__.pyi

@@ -1,26 +1,27 @@
 # -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
-MNAME = "utilmy.tabular.util_sparse"
-HELP  = """ Utils for sparse matrix creation
+MNAME = "utilmy.docs.generate_typehint"
+HELP  = """ Utils for type generation
 """
 from email.policy import default
 import os, sys, time, datetime,inspect, json, yaml, gc, glob, pandas as pd, numpy as np
-import subprocess, shutil, re
+import subprocess, shutil, re, sysconfig
 from box import Box
 from ast import literal_eval
-###################################################################################
-import utilmy
-from utilmy import os_makedirs
-from utilmy import log, log2
-import sysconfig
 
 ## required if we want to annotate files in site-packages
 os.environ["MONKEYTYPE_TRACE_MODULES"] = 'utilmy,site-packages'
 
+###################################################################################
+from utilmy import log, log2, os_makedirs
+import utilmy
+def help():
+    from utilmy import help_create
+    print( HELP + help_create(MNAME) )
 
+
+####################################################################################
 def test_all():
   test1()
-
 
 
 def test3():
@@ -47,20 +48,19 @@ def test3():
   run_monkeytype(**d)
 
 
-
 def test1():
 
   log(utilmy.__file__)
 
-  dir0 = utilmy.__file__.replace("\\","/") 
-  dir0 = "/".join( dir0.split("/")[:-2])  +"/"
-  log(dir0)
+  #dir0 = utilmy.__file__.replace("\\","/") 
+  #dir0 = "/".join( dir0.split("/")[:-2])  +"/"
+  #log(dir0)
 
+  dir0 = os.getcwd()
+  # os.chdir(dir0) 
 
-  os.chdir(dir0) 
-
-  dirin  = "utilmy/tabular/" 
-  dirout = "docs/stub/"
+  dirin  = dir0 + "utilmy/tabular/" 
+  dirout = dir0 + "docs/stub/"
 
   run_monkeytype(dirin, dirout, mode='stub', diroot=None, nfile=10, exclude="sparse" )
   os.system( f"ls {dirout}/")
