@@ -8,5 +8,8 @@ pwd
 which python 
 
 
+alias aa='PS1="[\W]\\$ "'
+
+
 
 

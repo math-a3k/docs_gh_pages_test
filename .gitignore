@@ -144,3 +144,8 @@ dmypy.json
 testdata/ppandas/histogram.png
 testdata/ppandas/file.csv
 utilmy/tabular/docs/stub/utilmy/tabular/__init__.pyi
+mymodel/info.pkl
+utilmy/tabular/util_explain.py
+ztmp_monkeytype.py
+ztmp_monkey.py
+run_script.py

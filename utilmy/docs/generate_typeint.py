@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 MNAME = "utilmy.docs.generate_typehint"
 HELP  = """ Utils for type generation
+
+
+  test files via monkeytype run MY_SCRIPT.py command
+  That create SQLite3 DB locally and stores dtypes of variables
+    then to apply it for a files I was using: monkeytype apply MY_SCRIPT
+  documentation here: https://pypi.org/project/MonkeyType/
+
+
 """
 from email.policy import default
 import os, sys, time, datetime,inspect, json, yaml, gc, glob, pandas as pd, numpy as np
@@ -24,45 +32,17 @@ def test_all():
   test1()
 
 
-def test3():
-  import argparse
-  ap = argparse.ArgumentParser()
-  ap.add_argument("-di", "--dirin", type=str, required=True,
-    help="path to input files directory")
-  ap.add_argument("-do", "--dirout", type=str, required=True,
-    help="path to output files directory")
-  ap.add_argument("-nf", "--nfile", type=int, default=10 ,
-    help="number of files to be annotated")
-  ap.add_argument("-ex", "--exclude", type=str, default="",
-    help="Files whose name contains this value will be excluded")
-  ap.add_argument("-m", "--mode", type=str,default="stub",
-    help="mode stab or apply")
-  args = vars(ap.parse_args())
-  #test()
-  d = dict()
-  d['dirin'] = args["dirin"]
-  d['dirout'] = args["dirout"]
-  d['nfile'] = args["nfile"]
-  d['exclude'] = args["exclude"]
-  d['mode'] = args["mode"]
-  run_monkeytype(**d)
-
-
 def test1():
-
   log(utilmy.__file__)
 
-  #dir0 = utilmy.__file__.replace("\\","/") 
-  #dir0 = "/".join( dir0.split("/")[:-2])  +"/"
-  #log(dir0)
+  exclude = ""; nfile= 10
+  dir0   = os.getcwd()
+  dirin  = dir0 + "/utilmy/tabular/" 
+  dirout = dir0 + "/docs/types/"
+  diroot = dir0        
+  dirin = dirin.replace("\\", "/") + '/'
 
-  dir0 = os.getcwd()
-  # os.chdir(dir0) 
-
-  dirin  = dir0 + "utilmy/tabular/" 
-  dirout = dir0 + "docs/stub/"
-
-  run_monkeytype(dirin, dirout, mode='stub', diroot=None, nfile=10, exclude="sparse" )
+  run_monkeytype(dirin, dirout, mode='full', diroot=diroot, nfile=3, exclude="sparse" )
   os.system( f"ls {dirout}/")
 
 
@@ -82,92 +62,92 @@ def test2():
 
 
 
-def run_monkeytype(dirin:str, dirout:str, diroot:str=None, mode="stub", nfile=10, exclude="" ):
-    """  Generate type hints for files
-         test files via monkeytype run MY_SCRIPT.py command
-          That create SQLite3 DB locally and stores dtypes of variables
-           then to apply it for a files I was using: monkeytype apply MY_SCRIPT
-          documentation here: https://pypi.org/project/MonkeyType/
-
-    """
-    dirin = dirin.replace("\\", "/") + '/'
-
-
-    if "utilmy." in dirin :
-        dir0 =  os.path.dirname( utilmy.__file__) + "/"        
-        dirin = dir0 +  dirin.replace(".utilmy", "").replace(".", "/")
-
-
-    os.chdir(dirin)
-    diroot = os.getcwd()
+def os_path_norm(diroot):
     diroot = diroot.replace("\\", "/")
-    diroot = diroot + "/" if diroot[-1] != "/" else  diroot
+    return diroot + "/" if diroot[-1] != "/" else  diroot
 
 
-    flist = glob.glob(diroot +"/*.py") 
-    flist = flist + glob.glob(diroot + "/**/*.py") 
+
+def glob_glob_python(dirin, suffix ="*.py", nfile=7, exclude=""):
+    flist = glob.glob(dirin + suffix) 
+    flist = flist + glob.glob(dirin + "/**/" + suffix ) 
     if exclude != "":
       flist = [ fi for fi in flist if exclude not in fi ]
-
     flist = flist[:nfile]
+    log(flist)
+    return flist
 
 
-    dir0 = utilmy.__file__.replace("\\","/") 
-    dir0 = "/".join( dir0.split("/")[:-2])  +"/"
+def run_monkeytype(dirin:str, dirout:str, diroot:str=None, mode="stub", nfile=10, exclude="" ):
+    """  Generate type hints for files
+    exclude = ""; nfile= 10
+    dir0 = os.getcwd()
+    dirin  = dir0 + "/utilmy/tabular/" 
+    dirout = dir0 + "/docs/stub/"
+    diroot = dir0        
+    dirin = dirin.replace("\\", "/") + '/'
+
+    """
+    import os, sys
+    os.makedirs(dirout, exist_ok=True)
+    if "utilmy." in dirin :
+        dir0 =  os.path.dirname( utilmy.__file__) + "/"        
+        dirin = dir0 +  dirin.replace("utilmy", "").replace(".", "/").replace("//","/")
+
+    diroot = os.getcwd()  if diroot is None else diroot
+    diroot = os_path_norm(diroot)
+
+    
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=nfile, exclude=exclude)
+    for fi0 in flist :
+      log(f"####### Processing file {fi0} ###########")
+      fi      = fi0.replace("\\", "/")
+      fi_dir  = os.path.dirname(fi).replace("\\", "/")  + "/"
+
+      ### Relative to module root path
+      fi_pref  = fi.replace(diroot, "")
+      mod_name = fi_pref.replace(".py","").replace("/",".")
+      mod_name = mod_name[1:] if mod_name[0] == "." else mod_name
+      log(f'fi_dir : {fi_dir},  {fi_pref}')
 
 
-    for fi in flist :
-      fi = fi.replace("\\", "/")
-      fi_dir = '/'.join(fi.split("/")[:-1])+ "/"
-      log(f'fi_dir : {fi_dir}')
-
-      fi = fi.replace(diroot, "")
-      intensive_path = re.compile(re.escape(dir0), re.IGNORECASE)
-      pk = intensive_path.sub("",fi_dir)
-
-
-      log(f"####### Processing file {fi} ###########")
-      log(f"Runing Monkeytype to get traces database")
-
+      log(f"#### Runing Monkeytype to get traces database")
+      fi_monkey = os.getcwd() + '/ztmp_monkey.py'
       ### Monkeytype require using temporary runner script to import packages (Not necessary if the file is a pytest) 
-      fi_script = fi.replace(".py","").replace("/",".")
-      cmd = r'echo import %s ; %s.test_all() > run_script.py' % (fi_script,fi_script)
-      subprocess.call(cmd, shell=True)
-
+      with open( fi_monkey, mode='w' ) as fp :
+         fp.write( f"import {mod_name}  as mm ; mm.test_all()" )
 
       # run monkeytype on temporary script
-      cmd = f"monkeytype run run_script.py" #{fi}
-      os.system(cmd)
-
-      fi2 = fi.replace( diroot, ""  )
-      dirouti = dirout +"/"+ pk + fi2 
-      os_makedirs(dirouti)
-      fi3 = fi2.replace(".py", "").replace("/", ".")
+      os.system(f"monkeytype run ztmp_monkey.py"  )
 
 
+      log(f"###### Generate output in mode {mode}")
       ### copy sqlite traces database where our file is located
-      try:
-        shutil.copy("monkeytype.sqlite3", fi_dir) 
-      except:
-        pass
+      try:  
+        shutil.move("monkeytype.sqlite3", fi_dir + "monkeytype.sqlite3" ) 
+      except: pass
 
-      
-      log(f"Generate output in mode {mode}")
-      # Apply or Stub
-      if mode == "apply":
-        cmd = r'monkeytype apply %s > %s 2>&1' % (fi3 , dirouti)
-        subprocess.call(cmd, shell=True)
+      dircur = os.getcwd()
+      os.chdir(fi_dir)
+      if "full" in mode :  #### Overwrite
+          dirouti = dirout +"/full/"+ fi_pref
+          os_makedirs(dirouti)
+          cmd = f'monkeytype apply {mod_name} > {dirouti} 2>&1' 
+          subprocess.call(cmd, shell=True)
 
-      if mode == "stub":
-        dirouti = dirouti.replace(".py", ".pyi")
-        cmd = r'monkeytype stub %s > %s 2>&1' % (fi3 , dirouti)
-        subprocess.call(cmd, shell=True)
 
+      if "stub" in mode:
+          dirouti = dirout +"/stub/"+ fi_pref.replace(".py", ".pyi")
+          os_makedirs(dirouti)       
+          cmd = f'monkeytype stub {mod_name} > {dirouti} 2>&1' 
+          subprocess.call(cmd, shell=True)
 
       log(f"####### clean up")
-      sqlite_fi = f'{fi_dir}/monkeytype.sqlite3' 
-      cmd = 'rm -f run_script.py monkeytype.sqlite3 %s' % sqlite_fi
-      subprocess.call(cmd, shell=True)
+      try :
+        os.remove(f'{fi_dir}/monkeytype.sqlite3' )
+        os.remove(fi_monkey)
+      except : pass  
+      os.chdir( dircur )
 
 
 
@@ -177,3 +157,4 @@ def run_monkeytype(dirin:str, dirout:str, diroot:str=None, mode="stub", nfile=10
 ################################################################################
 if __name__ == '__main__':
   test1()
+ 
