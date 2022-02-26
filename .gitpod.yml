@@ -6,6 +6,8 @@ tasks:
   - init: pip install py36.txt
           pip install imodels ipython
           git fetch && git pull origin main  --rebase
+          chmod 777 init.sh  && ./init.sh
+          PS1="[\W]\\$ "
 #### Local commit applied on 
 
 
