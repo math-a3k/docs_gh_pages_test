@@ -149,3 +149,4 @@ utilmy/tabular/util_explain.py
 ztmp_monkeytype.py
 ztmp_monkey.py
 run_script.py
+monkeytype.sqlite3
