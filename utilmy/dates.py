@@ -6,7 +6,7 @@ HELP=""" dates utilities
 import os, sys, time, datetime,inspect, json, yaml, gc, numpy as np, pandas as pd
 
 #############################################################################################
-from utilmy import log, log2
+from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
