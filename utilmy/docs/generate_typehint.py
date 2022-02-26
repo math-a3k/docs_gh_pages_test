@@ -42,8 +42,36 @@ def test1():
   diroot = dir0        
   dirin = dirin.replace("\\", "/") + '/'
 
-  run_monkeytype(dirin, dirout, mode='full', diroot=diroot, nfile=3, exclude="sparse" )
+  run_monkeytype(dirin, dirout, mode='full,stub', diroot=diroot, nfile=3, exclude="sparse" )
   os.system( f"ls {dirout}/")
+
+
+def run_utilmy():
+  log(utilmy.__file__)
+  exclude = ""; nfile= 10
+  dir0   = os.getcwd()
+  dirin  = dir0 + "/utilmy/" 
+  dirout = dir0 + "/docs/types/"
+  diroot = dir0        
+  dirin = dirin.replace("\\", "/") + '/'
+
+  run_monkeytype(dirin, dirout, mode='full,stub', diroot=diroot, nfile=3, exclude="z" )
+  os.system( f"ls {dirout}/")
+
+
+
+def run_utilmy2():
+  log(utilmy.__file__)
+  exclude = ""; nfile= 10
+  dir0   = os.getcwd()
+  dirin  = dir0 + "/utilmy/" 
+  dirout = dir0 + "/utilmy/"
+  diroot = dir0        
+  dirin = dirin.replace("\\", "/") + '/'
+
+  run_monkeytype(dirin, dirout, mode='full', diroot=diroot, nfile=3, exclude="z" )
+  os.system( f"ls {dirout}/")
+
 
 
 def test2():
