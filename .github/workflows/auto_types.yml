@@ -1,4 +1,4 @@
-name: Auto-type hints
+name: Auto-typing Hints - aautotype branch 
 
 ###  https://github.com/arita37/awesome-actions#static-analysis
 
@@ -7,7 +7,7 @@ on:
   # but only for the main branch
   push:
     branches:
-    - autotype
+    - aautotype
 
 #  pull_request:
 #    branches:
@@ -72,12 +72,13 @@ jobs:
            python -c "import utilmy"        
         
 
-    - name: Code Syntax Checker flake8
+    - name: AutoTypes generation in docs/types/
       continue-on-error: true
       run:  |
         pip install --upgrade monkeytype
         python  utilmy/docs/generate_typehint.py  run_utilmy
-        
+
+
 
     - name: Auto-Commit
       continue-on-error: true
