@@ -76,7 +76,7 @@ jobs:
       continue-on-error: true
       run:  |
         pip install --upgrade monkeytype
-        python  utilmy/docs/generate_typehint.py  run_utilmy
+        python  utilmy/docs/generate_typehint.py  run_utilmy --nfile 100
 
 
 
