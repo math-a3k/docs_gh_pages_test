@@ -46,9 +46,9 @@ htmlmin==0.1.12
 icecream==2.1.2
 idna==3.3
 ImageHash==4.2.1
-imodels==1.2.4
+imodels==1.2.5
 importlib-metadata==4.2.0
-ipython==7.31.1
+ipython==7.32.0
 jedi==0.18.1
 Jinja2==3.0.3
 joblib==1.0.1
@@ -75,7 +75,7 @@ numpy==1.18.5
 oauthlib==3.2.0
 opt-einsum==3.3.0
 packaging==21.3
-pandas==1.3.5
+pandas==1.2.1
 pandas-profiling==3.1.0
 parso==0.8.3
 patsy==0.5.2
@@ -108,7 +108,7 @@ pytz-deprecation-shim==0.1.0.post0
 pyvis==0.1.9
 PyWavelets==1.2.0
 PyYAML==6.0
-rapidfuzz==2.0.2
+rapidfuzz==2.0.5
 rebound-cli==2.1.0
 regex==2022.1.18
 requests==2.27.1
@@ -140,7 +140,7 @@ tzdata==2021.5
 tzlocal==4.1
 urllib3==1.26.8
 urwid==2.1.2
--e git+https://github.com/arita37/myutil@cdc3ee37a003c48a950a187796ca9e0377914235#egg=utilmy
+-e git+https://github.com/arita37/myutil@6bb6ab5866fb7067d32ccbe2dc1d1a7dde87b338#egg=utilmy
 visions==0.7.4
 wcwidth==0.2.5
 Werkzeug==2.0.3
