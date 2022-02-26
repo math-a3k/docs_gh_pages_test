@@ -48,7 +48,7 @@ def test2() -> None:
 #############################################################################################
 def format_addheader(dirin:str=None):
 
-    flist = glob.glob( dirin + "**/*.py")
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="")
 
     for fi in flist :
         with open(fi, mode='r') as fp:
