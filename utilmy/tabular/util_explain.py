@@ -20,20 +20,26 @@ from imodels.util.convert import tree_to_code
 
 #############################################################################################
 from utilmy import log, log2
+from imodels.algebraic.slim import SLIMRegressor
+from imodels.rule_set.rule_fit import RuleFitRegressor
+from imodels.tree.figs import FIGSRegressor
+from numpy import ndarray
+from typing import List, Optional, Tuple, Union
 
 def help():
     from utilmy import help_create
-    print(  HELP + help_create(MNAME) )
+    print( HELP + help_create(MNAME) )
+
 
 
 #############################################################################################
-def test_all():
+def test_all() -> None:
     log(MNAME)
     test1()
     test2()
 
 
-def test1():
+def test1() -> None:
     d = Box({})
     d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_regression_boston()
     d.task_type = 'regressor'
@@ -68,7 +74,7 @@ def test1():
 
 
 
-def test2():
+def test2() -> None:
     d = Box({})
     d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_classifier_diabetes()
     d.task_type = 'classifier'
@@ -318,7 +324,8 @@ def test_imodels():
 
 
 #############################################################################################
-def model_fit(name:str='imodels.SLIMRegressor', model_pars:dict=None, data_pars:dict=None, do_eval=True, **kw):
+def model_fit(name:str='imodels.SLIMRegressor', model_pars:dict=None, data_pars:dict=None, do_eval: bool=True, **kw
+) -> Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor]:
     """  
       imodels.SLIMRegressor, BayesianRuleListClassifier, RuleFitRegressor, GreedyRuleListClassifier
       imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
@@ -348,7 +355,7 @@ def model_fit(name:str='imodels.SLIMRegressor', model_pars:dict=None, data_pars:
     return model
 
 
-def model_evaluate(model, data_pars:dict):
+def model_evaluate(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor], data_pars:dict) -> None:
     """ Evaluate model
     """
     d = Box(data_pars) if data_pars is not None else Box({})
@@ -367,7 +374,7 @@ def model_predict(model, predict_pars:dict):
     pass
 
 
-def model_save(model, path=None, info=None):
+def model_save(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor], path: Optional[str]=None, info: None=None) -> None:
     import cloudpickle as pickle
     os.makedirs(path, exist_ok=True)
     filename = "model.pkl"
@@ -378,7 +385,7 @@ def model_save(model, path=None, info=None):
     pickle.dump(info, open(f"{path}/{filename}", mode='wb'))   # ,protocol=pickle.HIGHEST_PROTOCOL )
 
 
-def model_load(path=""):
+def model_load(path: str="") -> Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor]:
     import cloudpickle as pickle
     model0 = pickle.load(open(f"{path}/model.pkl", mode='rb'))
     return model0
@@ -414,7 +421,7 @@ def model_viz_classification_preds(probs:np.ndarray, y_test:list):
         log(e)
 
 
-def model_extract_rules(model):
+def model_extract_rules(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor]) -> None:
     """ From imodel extract rules
        # 'rule' is how the feature is constructed
        # 'coef' is its weight in the final linear model
@@ -434,7 +441,7 @@ def model_extract_rules(model):
 
 
 #############################################################################################
-def test_data_regression_boston():
+def test_data_regression_boston() -> Tuple[ndarray, ndarray, ndarray, ndarray, ndarray]:
     '''load (regression) data on boston housing prices
     '''
     from sklearn.datasets import load_boston
@@ -444,7 +451,7 @@ def test_data_regression_boston():
     return X_train_reg, X_test_reg, y_train_reg, y_test_reg, feature_names
 
 
-def test_data_classifier_diabetes():
+def test_data_classifier_diabetes() -> Tuple[ndarray, ndarray, ndarray, ndarray, List[str]]:
     '''load (classification) data on diabetes
     '''
     from sklearn.datasets import load_diabetes
@@ -503,3 +510,4 @@ if __name__ == "__main__":
     fire.Fire()
 
 
+>>>>>>> 248f115 (ok)
