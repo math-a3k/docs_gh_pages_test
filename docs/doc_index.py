@@ -5,32 +5,19 @@ utilmy/__init__.py
 
 utilmy/adatasets.py
 -------------------------functions----------------------
-download_dtopbox(data_pars)
-download_googledrive(file_list, **kw)
-fetch_dataset(url_dataset, path_target = None, file_target = None)
-pd_train_test_split(df, coly = None)
-pd_train_test_split2(df, coly)
-test0()
+help()
+template_dataset_classifier_XXXXX(nrows = 500, **kw)
+test()
 test1()
 test_all()
-test_data_XXXXXfier_YYYY(nrows = 500, nmode = 'split/pandas', **kw)
 test_data_classifier_covtype(nrows = 500)
-test_data_classifier_digits(nrows = 1000)
+test_data_classifier_diabetes_traintest()
 test_data_classifier_fake(nrows = 500)
 test_data_classifier_petfinder(nrows = 1000)
-test_data_classifier_pmlb(name = '', return_X_y = False, train_split = True)
-test_data_regression_boston(nrows = 1000)
+test_data_classifier_pmlb(name = '', return_X_y = False)
+test_data_regression_boston_traintest()
 test_data_regression_fake(nrows = 500, n_features = 17)
 
--------------------------methods----------------------
-Downloader.__init__(self, url)
-Downloader._transform_dropbox_url(self)
-Downloader._transform_gdrive_url(self)
-Downloader._transform_github_url(self)
-Downloader.adjust_url(self)
-Downloader.clean_netloc(self)
-Downloader.download(self, filepath = '')
-Downloader.get_filename(self, headers)
 
 
 utilmy/cli.py
@@ -147,7 +134,7 @@ date_weekmonth(d)
 date_weekmonth2(d)
 date_weekyear2(dt)
 date_weekyear_excel(x)
-log(*s)
+help()
 pd_date_split(df, coldate  =   'time_key', prefix_col  = "", sep = "/", verbose = False)
 random_dates(start, end, size)
 random_genders(size, p = None)
@@ -629,25 +616,83 @@ test()
 utilmy/deeplearning/torch/rule_encoder.py
 -------------------------functions----------------------
 dataloader_create(train_X = None, train_y = None, valid_X = None, valid_y = None, test_X = None, test_y = None, arg = None)
-dataset_load(arg)
-dataset_preprocess(df, arg)
+dataset_load_cardio(arg)
+dataset_load_covtype(arg)
+dataset_preprocess_cardio(df, arg)
+dataset_preprocess_covtype(df, arg)
 device_setup(arg)
 get_correct_results(out, label_Y)
 get_metrics(y_true, y_pred, y_score)
 get_perturbed_input(input_tensor, pert_coeff)
 help()
-loss_rule_calc(model, batch_train_x, loss_rule_func, output, arg, argm)
-model_build(arg, mode = 'train')
-model_evaluation(model_eval, loss_task_func, arg)
+loss_rule_calc(model, batch_train_x, loss_rule_func, output, arg, )
+loss_rule_calc_cardio(model, batch_train_x, loss_rule_func, output, arg, )
+loss_rule_calc_covtype(model, batch_train_x, loss_rule_func, output, arg, )
+model_build(arg:dict, mode = 'train')
+model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_preprocess1)
 model_load(arg)
-model_train(model, losses, train_loader, valid_loader, arg, argm:dict = None)
+model_train(model, losses, train_loader, valid_loader, arg:dict = None)
 test()
+test2()
 test_all()
+test_dataset_classification_fake(nrows = 500)
 verification(out, pert_out, threshold = 0.0)
 
 -------------------------methods----------------------
 DataEncoder.__init__(self, input_dim, output_dim, hidden_dim = 4)
 DataEncoder.forward(self, x)
+NaiveModel.__init__(self)
+NaiveModel.forward(self, x, alpha = 0.0)
+Net.__init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim = 4, n_layers = 2, merge = 'cat', skip = False, input_type = 'state')
+Net.forward(self, x, alpha = 0.0)
+Net.get_z(self, x, alpha = 0.0)
+RuleEncoder.__init__(self, input_dim, output_dim, hidden_dim = 4)
+RuleEncoder.forward(self, x)
+
+
+utilmy/deeplearning/torch/rule_encoder2.py
+-------------------------functions----------------------
+dataloader_create(train_X = None, train_y = None, valid_X = None, valid_y = None, test_X = None, test_y = None, arg = None)
+dataset_load(arg, mode = 'eval')
+dataset_load_cardio(arg)
+dataset_load_covtype(arg)
+dataset_preprocess(df, arg)
+dataset_preprocess_cardio(df, arg)
+dataset_preprocess_covtype(df, arg)
+device_setup(arg)
+get_correct_results(out, label_Y)
+get_metrics(y_true, y_pred, y_score)
+help()
+loss_rule_calc_cardio(model, batch_train_x, loss_rule_func, output, arg, )
+loss_rule_calc_covtype(model, batch_train_x, loss_rule_func, output, arg, )
+merge_loss_calc(losses, weight)
+model_build(arg:dict, mode = 'train')
+model_evaluate(model_eval, losses, test_loader, arg0:dict, )
+model_load(arg)
+model_predict(model, test_loader, arg:dict)
+model_save(model, optimizer, res:dict, arg:dict)
+model_train(model, losses, train_loader, valid_loader, arg:dict = None)
+rule_get_perturbed_input(input_tensor, pert_coeff)
+rule_loss_calc(model, batch_train_x, rule_loss_func, output, arg:dict)
+rule_output_check(out, pert_out, threshold = 0.0)
+task_loss_calc()
+test()
+test2()
+test3()
+test_all()
+test_dataset_classification_fake(nrows = 500)
+
+-------------------------methods----------------------
+DataEncoder.__init__(self, input_dim, output_dim, hidden_dim = 4)
+DataEncoder.forward(self, x)
+DatasetModelRule.__init__(self, arg:dict)
+DatasetModelRule.dataset_addon_create()
+DatasetModelRule.evaluate(self)
+DatasetModelRule.predict()
+DatasetModelRule.rule_encoder_create(self)
+DatasetModelRule.rule_loss_calc_create(self)
+DatasetModelRule.rule_loss_create(self)
+DatasetModelRule.test(self, ))-> pd.DataFrame)
 NaiveModel.__init__(self)
 NaiveModel.forward(self, x, alpha = 0.0)
 Net.__init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim = 4, n_layers = 2, merge = 'cat', skip = False, input_type = 'state')
@@ -921,6 +966,20 @@ test()
 
 
 
+utilmy/docs/generate_typehint.py
+-------------------------functions----------------------
+glob_glob_python(dirin, suffix  = "*.py", nfile = 7, exclude = "")
+help()
+os_path_norm(diroot)
+run_monkeytype(dirin:str, dirout:str, diroot:str = None, mode = "stub", nfile = 10, exclude = "")
+run_utilmy()
+run_utilmy2()
+test1()
+test2()
+test_all()
+
+
+
 utilmy/docs/test.py
 -------------------------functions----------------------
 calculateBuyPrice(enter, profit)
@@ -972,8 +1031,6 @@ image_resize_ratio(image, width = None, height = None, inter = cv2.INTER_AREA)
 image_save()
 image_show_in_row(image_list:dict = None)
 image_text_blank(in_dir, out_dir, level = "/*")
-log(*s)
-log2(*s)
 os_path_check(path, n = 5)
 prep_image(image_paths, nmax = 10000000)
 prep_images(image_paths, nmax = 10000000)
@@ -981,6 +1038,8 @@ prep_images2(image_paths, nmax = 10000000)
 prep_images_multi(image_path_list:list, prepro_image_fun = None, npool = 1)
 run_multiprocess(myfun, list_args, npool = 10, **kwargs)
 test()
+test_all()
+test_image_create_fake(dirout = None, nimages = 1, )
 
 
 
@@ -1297,7 +1356,7 @@ log_trace(msg = "", dump_path = "", globs = None)
 np_add_remove(set_, to_remove, to_add)
 np_list_intersection(l1, l2)
 os_clean_memory(varlist, globx)
-os_copy_safe(dirin = None, dirout = None, nlevel = 5, nfile = 5000, logdir = "./", pattern = "*", exclude = "", force = False, sleep = 0.5, cmd_fallback = "", verbose = Trueimport shutil, time, os, globflist = [] ; dirinj = dirinnlevel) =  [] ; dirinj = dirinnlevel):)
+os_copy_safe(dirin:str = None, dirout:str = None, nlevel = 5, nfile = 5000, logdir = "./", pattern = "*", exclude = "", force = False, sleep = 0.5, cmd_fallback = "", verbose = Trueimport shutil, time, os, globflist = [] ; dirinj = dirinnlevel) =  [] ; dirinj = dirinnlevel):)
 os_cpu()
 os_file_check(fp)
 os_file_date_modified(dirin, fmt="%Y%m%d-%H = "%Y%m%d-%H:%M", timezone = 'Asia/Tokyo')
@@ -1308,6 +1367,7 @@ os_import(mod_name = "myfile.config.model", globs = None, verbose = True)
 os_makedirs(dir_or_file)
 os_memory()
 os_merge_safe(dirin_list = None, dirout = None, nlevel = 5, nfile = 5000, nrows = 10**8, cmd_fallback  =  "umount /mydrive/  && mount /mydrive/  ", sleep = 0.3)
+os_monkeypatch_help()
 os_path_size(path  =  '.')
 os_path_split(fpath:str = "")
 os_platform_ip()
@@ -1357,6 +1417,24 @@ decode(G)
 is_valid(G)
 random_solution()
 random_walker(G, h)
+search()
+sigint_handler(signal, frame)
+
+
+
+utilmy/optim/gp_formulae.py
+-------------------------functions----------------------
+NodesToProcess(G)
+decode(G)
+get_correlm(eqn)
+get_cost(G)
+is_valid(G)
+log(*s)
+random_solution()
+random_walker(G, h)
+rank_generate_fake(dict_full, list_overlap, nsize = 100, ncorrect = 20)
+rank_merge_v5(ll1:list, ll2:list, eqn:str, kk =  1)
+rank_score(eqn:str, rank1:list, rank2:list, adjust = 1.0, kk = 1.0)
 search()
 sigint_handler(signal, frame)
 
@@ -1613,7 +1691,7 @@ ab_getstat(df, treatment_col = 'treatment', measure_col = 'metric', attribute_co
 abplot_CI_bars(N, X, sig_level = 0.05, dmin = None)
 funnel_CI_plot(A, B, sig_level = 0.05)
 get_ab_test_data(vars_also = False)
-log(*s)
+help()
 np_calculate_ab_dist(stderr, d_hat = 0, group_type = 'control')
 np_calculate_confidence_interval(sample_mean = 0, sample_std = 1, sample_size = 1, sig_level = 0.05)
 np_calculate_min_sample_size(bcr, mde, power = 0.8, sig_level = 0.05)
@@ -1637,6 +1715,47 @@ test_plot_ab()
 test_plot_binom_dist()
 test_zplot()
 zplot(ax, area = 0.95, two_tailed = True, align_right = False)
+
+
+
+utilmy/recsys/metric.py
+-------------------------functions----------------------
+_mean_ranking_metric(y, labels, metric)
+_require_positive_k(k)
+_warn_for_empty_labels()
+coverage_at_k(y_preds, product_data, k = 3)
+help()
+hit_rate_at_k(y_preds, y_test, k = 3)
+hit_rate_at_k_nep(y_preds, y_test, k = 3)
+mean_average_precision(y, labels, assume_unique = True)
+metrics_calc(dirin:Union[str, pd.DataFrame], dirout:str = None, colid = 'userid', colrec = 'reclist', coltrue = 'purchaselist', colinfo = 'genrelist', colts = 'datetime', method = [''], nsample = -1, nfile = 1, **kw)
+metrics_calc_batch(dirin:Union[str, pd.DataFrame], dirout:str = None, colid = 'userid', colrec = 'reclist', coltrue = 'purchaselist', colinfo = 'genrelist', colts = 'datetime', method = [''], nsample = -1, nfile = 1, **kw)
+mrr_at_k(y_preds, y_test, k = 3)
+mrr_at_k_nep(y_preds, y_test, k = 3)
+ndcg_at(y, labels, k = 10, assume_unique = True)
+popularity_bias_at_k(y_preds, x_train, k = 3)
+precision_at(y_preds, y_test, k = 3)
+precision_at_k(y_preds, y_test, k = 3)
+recall_at_k(y_preds, y_test, k = 3)
+sample_hits_at_k(y_preds, y_test, x_test = None, k = 3, size = 3)
+sample_misses_at_k(y_preds, y_test, x_test = None, k = 3, size = 3)
+statistics(x_train, y_train, x_test, y_test, y_pred)
+test1()
+test_all())))
+test_data_fake()
+
+
+
+utilmy/recsys/metrics/__Init__.py
+
+
+utilmy/recsys/metrics/distance_metrics.py
+-------------------------functions----------------------
+distance_to_query(model, x_test, y_test, y_preds, k = 3, bins = 25, debug = False)
+error_by_cosine_distance(model, y_test, y_preds, k = 3, bins = 25, debug = False)
+generic_cosine_distance(embeddings: dict, type_fn, y_test, y_preds, k = 10, bins = 25, debug = False)
+graph_distance_test(y_test, y_preds, product_data, k = 3)
+shortest_path_length()
 
 
 
@@ -1715,6 +1834,22 @@ EASE.fit(self, df, lambda_: float  =  0.5, implicit = True)
 EASE.predict(self, train, users, items, k)
 
 
+utilmy/recsys/models/prod2vec.py
+-------------------------methods----------------------
+CoveoP2VRecModel.__init__(self, **kwargs)
+CoveoP2VRecModel.get_vector(self, product_sku)
+CoveoP2VRecModel.predict(self, prediction_input: list, *args, **kwargs)
+CoveoP2VRecModel.train(self, products, iterations = 15)
+MovieLensP2VRecModel.__init__(self, **kwargs)
+MovieLensP2VRecModel.get_vector(self, x)
+MovieLensP2VRecModel.predict(self, prediction_input, *args, **kwargs)
+MovieLensP2VRecModel.train(self, movies, iterations = 15)
+SpotifyP2VRecModel.__init__(self, **kwargs)
+SpotifyP2VRecModel.get_vector(self, track_uri)
+SpotifyP2VRecModel.predict(self, prediction_input: list, *args, **kwargs)
+SpotifyP2VRecModel.train(self, playlists, iterations = 15)
+
+
 utilmy/recsys/models/topk_bandit/environment.py
 -------------------------methods----------------------
 ContextualEnvironment.__init__(self, user_features, playlist_features, user_segment, n_recos, gamma  =  1.0)
@@ -1768,6 +1903,27 @@ TSPolicy.update_policy(self, user_ids, recos, rewards, l_init  =  3)
 TSSegmentPolicy.__init__(self, user_segment, n_playlists, alpha_zero = 1, beta_zero = 99, cascade_model = True)
 TSSegmentPolicy.recommend_to_users_batch(self, batch_users, n_recos = 12, l_init = 3)
 TSSegmentPolicy.update_policy(self, user_ids, recos, rewards, l_init  =  3)
+
+
+utilmy/recsys/util_rec.py
+-------------------------functions----------------------
+_get_stratified_tr_mask(u, i, train_size, random_state)
+_make_sparse_csr(data, rows, cols, dtype = DTYPE)
+_make_sparse_tr_te(users, items, ratings, train_mask)
+_validate_train_size(train_size)
+check_consistent_length(u, i, r)
+check_cv(cv = 3)
+test1()
+test_all()
+to_sparse_csr(u, i, r, axis = 0, dtype = DTYPE)
+train_test_split(u, i, r, train_size = 0.75, random_state = None)
+
+-------------------------methods----------------------
+BaseCrossValidator.__init__(self, n_splits = 3, random_state = None)
+BaseCrossValidator._iter_train_mask()
+BaseCrossValidator.get_n_splits(self)
+BaseCrossValidator.split(self, X)
+BootstrapCV._iter_train_mask(self, u, i, r)
 
 
 utilmy/recsys/vectors.py
@@ -2747,20 +2903,21 @@ y_adjuster_log(y_true, y_pred_log, error_func, **kwargs)
 
 utilmy/tabular/util_explain.py
 -------------------------functions----------------------
-get_classifier_diabetes_data()
-get_reg_boston_data()
 help()
 load_function_uri(uri_name = "path_norm")
-model_evaluate(model, data_pars:dict)
-model_extract_rules(model)
-model_fit(name:str = 'imodels.SLIMRegressor', model_pars:dict = None, data_pars:dict = None, do_eval = True, **kw)
+model_evaluate(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor], data_pars:dict)
+model_extract_rules(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor])
+model_fit(name:str = 'imodels.SLIMRegressor', model_pars:dict = None, data_pars:dict = None, do_eval: bool = True, **kw)
 model_info(path = "")
-model_load(path = "")
-model_save(model, path = None, info = None)
-model_viz_classification_preds(probs:list, y_test:list)
+model_load(path: str = "")
+model_predict(model, predict_pars:dict)
+model_save(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor], path: Optional[str] = None, info: None = None)
+model_viz_classification_preds(probs:np.ndarray, y_test:list)
 test1()
 test2()
 test_all()
+test_data_classifier_diabetes()
+test_data_regression_boston()
 test_imodels()
 
 
@@ -3045,6 +3202,15 @@ toFile.__init__(self, fpath)
 toFile.write(self, msg)
 
 
+utilmy/util_conda.py
+-------------------------functions----------------------
+help()
+pip_auto_install()
+
+-------------------------methods----------------------
+PipFinder.find_spec(cls, name, path, target = None)
+
+
 utilmy/util_cpu.py
 -------------------------functions----------------------
 log(*argv)
@@ -3091,7 +3257,24 @@ NodeStatsCollector.init(self)
 NodeStatsCollector.run(self)
 
 
+utilmy/util_dirs.py
+-------------------------functions----------------------
+_get_win_folder_from_environ(csidl_name)
+_get_win_folder_from_registry(csidl_name)
+_get_win_folder_with_ctypes(csidl_name)
+_get_win_folder_with_jna(csidl_name)
+user_cache_dir(appname = None, appauthor = None, version = None, opinion = True)
+user_config_dir(appname = None, appauthor = None, version = None, roaming = False)
+user_data_dir(appname = None, appauthor = None, version = None, roaming = False)
+user_log_dir(appname = None, appauthor = None, version = None, opinion = True)
+
+
+
 utilmy/util_download.py
+-------------------------functions----------------------
+download_with_progress(url, destination)
+get_cache_directory()
+
 
 
 utilmy/util_hadoop.py
