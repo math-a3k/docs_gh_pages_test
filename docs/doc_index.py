@@ -952,6 +952,16 @@ main()
 
 
 
+utilmy/docs/format.py
+-------------------------functions----------------------
+format_addheader(dirin:str = None)
+help()
+test1()
+test2()
+test_all()
+
+
+
 utilmy/docs/generate_doc.py
 -------------------------functions----------------------
 markdown_create_file(list_info, prefix = '')
@@ -3159,6 +3169,15 @@ test_image_resize()
 utilmy/templates/templist/pypi_package/tests/test_validate.py
 -------------------------functions----------------------
 test_image_padding_get()
+
+
+
+utilmy/templates/templist/util_xxx.py
+-------------------------functions----------------------
+help()
+test1()
+test2()
+test_all()
 
 
 
