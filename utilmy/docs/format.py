@@ -2,6 +2,10 @@
 MNAME = "utilmy.docs.format"
 HELP = """ utils for  formatting/parising python files
 
+Goal is to normalize all python files with similar structure.
+
+
+
 
 cd myutil
 python utilmy/docs/format.py  test1
