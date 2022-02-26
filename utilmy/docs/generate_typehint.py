@@ -107,15 +107,26 @@ def glob_glob_python(dirin, suffix ="*.py", nfile=7, exclude=""):
 
 
 def run_monkeytype(dirin:str, dirout:str, diroot:str=None, mode="stub", nfile=10, exclude="" ):
-    """  Generate type hints for files
-    exclude = ""; nfile= 10
-    dir0 = os.getcwd()
-    dirin  = dir0 + "/utilmy/tabular/" 
-    dirout = dir0 + "/docs/stub/"
-    diroot = dir0        
-    dirin = dirin.replace("\\", "/") + '/'
+    """Generate type hints for files
+          Args:
+              dirin (str): _description_
+              dirout (str): _description_
+              diroot (str, optional): _description_. Defaults to None.
+              mode (str, optional): _description_. Defaults to "stub".
+              nfile (int, optional): _description_. Defaults to 10.
+              exclude (str, optional): _description_. Defaults to "".
+            exclude = ""; nfile= 10
+            dir0 = os.getcwd()
+            dirin  = dir0 + "/utilmy/tabular/" 
+            dirout = dir0 + "/docs/stub/"
+            diroot = dir0        
+            dirin = dirin.replace("\\", "/") + '/'
+    """   
 
-    """
+
+
+
+
     import os, sys
     os.makedirs(dirout, exist_ok=True)
     if "utilmy." in dirin :
