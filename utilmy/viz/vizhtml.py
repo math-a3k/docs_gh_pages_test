@@ -589,9 +589,18 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
                      title: str = 'Plot Density',
                      figsize: tuple = (460, 460), xlabel: str = 'x-axis', ylabel: str = 'y-axis', color: str = '#69b3a2',
                      cfg: dict = {}):
-    html_code = '<div id="my_dataviz"></div>'
+   
+    container_id = 'cid_' + str(np.random.randint(9999, 99999999))
+    html_code = f'<div id="{container_id}"></div>'
 
     df = df.rename({colx: 'x', coly: 'y'}, axis=1)
+
+    
+    df.loc[:, 'x'] = df['x'].fillna(0)
+    df.loc[:, 'x'] = [to_float(t) for t in df['x'].values]
+
+    df.loc[:, 'y'] = df['y'].fillna(0)
+    df.loc[:, 'y'] = [to_float(t) for t in df['y'].values]
 
     # panda find max and min value of colx and coly
     x_max = df['x'].max()
@@ -600,12 +609,6 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
     y_min = df['y'].min()
     width = figsize[0]
     height = figsize[1]
-
-    df.loc[:, 'x'] = df['x'].fillna(0)
-    df.loc[:, 'x'] = [to_float(t) for t in df['x'].values]
-
-    df.loc[:, 'y'] = df['y'].fillna(0)
-    df.loc[:, 'y'] = [to_float(t) for t in df['y'].values]
 
     # panda total number of point
     n_point = df.shape[0]
