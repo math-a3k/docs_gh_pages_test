@@ -386,6 +386,24 @@ class htmlDoc(object):
                                                    cfg=cfg, mode=mode, save_img=save_img, verbose=self.verbose )
 
         self.html += "\n\n" + html_code
+      
+    def plot_density(self, df: pd.DataFrame, colx, coly, radius=9,
+                     title: str = 'Plot Density',
+                     figsize: tuple = (460, 460), xlabel: str = 'x-axis', ylabel: str = 'y-axis', color: str = '#69b3a2',
+                     cfg: dict = {}, mode: str = 'd3', **kw):
+        """Create html density chart.
+        Args:
+            df:         pd Dataframe
+            colx:       colx name
+            coly:       coly name
+            ...
+            mode:       d3
+        """
+      
+        html_code = ''
+        if mode == 'd3':
+            html_code = pd_plot_density_d3(df, colx, coly, radius, title, figsize, xlabel, ylabel, color, cfg)
+        self.html += "\n\n" + html_code 
 
       
     def images_dir(self, dir_input="*.png",  title: str="", 
@@ -563,7 +581,134 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
     html_code = mpld3.fig_to_html(fig)
     # print(html_code)
     return html_code
+   
 
+def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
+                     title: str = 'Plot Density',
+                     figsize: tuple = (460, 460), xlabel: str = 'x-axis', ylabel: str = 'y-axis', color: str = '#69b3a2',
+                     cfg: dict = {}):
+    html_code = '<div id="my_dataviz"></div>'
+
+    df = df.rename({colx: 'x', coly: 'y'}, axis=1)
+
+    # panda find max and min value of colx and coly
+    x_max = df['x'].max()
+    x_min = df['x'].min()
+    y_max = df['y'].max()
+    y_min = df['y'].min()
+    width = figsize[0]
+    height = figsize[1]
+
+    df.loc[:, 'x'] = df['x'].fillna(0)
+    df.loc[:, 'x'] = [to_float(t) for t in df['x'].values]
+
+    df.loc[:, 'y'] = df['y'].fillna(0)
+    df.loc[:, 'y'] = [to_float(t) for t in df['y'].values]
+
+    # panda total number of point
+    n_point = df.shape[0]
+
+    print(x_max, x_min, y_max, y_min, n_point)
+
+    # number of point in bins
+    n_point = int(n_point * 2 / ((x_max - x_min) * (y_max - y_min) / (3.14 * radius * radius)))
+
+    if n_point == 0:
+        n_point = 1
+
+    data = df[['x', 'y']].to_json(orient='records')
+
+    html_code += '''
+        <script>
+
+            // set the dimensions and margins of the graph
+            const margin = {{ top: 10, right: 30, bottom: 30, left: 40 }},
+                width = {width} - margin.left - margin.right,
+                height = {height} - margin.top - margin.bottom;
+
+            // append the svg object to the body of the page
+            const svg = d3.select("#my_dataviz")
+            .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            svg.append("text")
+               .attr("x", width/2)
+               .attr("y", margin.top)
+               .attr("text-anchor", "middle")
+               .style("font-size", "16px")
+               .text("{title}");
+
+            svg.append("text")
+               .attr("transform", "translate(" + (460/2) + " ," + (460-10) + ")")
+               .style("text-anchor", "middle")
+               .text("{xlabel}");
+
+            svg.append("text")
+           .attr("transform", "rotate(-90)")
+           .attr("x", -(height/2))
+           .attr("y", -30)
+           .style("text-anchor", "middle")
+           .text("{ylabel}");
+
+            const data = {data}
+            console.log(data);
+            // Add X axis
+            const x = d3.scaleLinear()
+                .domain([{x_min}, {x_max}])
+                .range([ 0, width ]);
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // Add Y axis
+            const y = d3.scaleLinear()
+                .domain([{y_min}, {y_max}])
+                .range([ height, 0 ]);
+            svg.append("g")
+                .call(d3.axisLeft(y));
+
+            // Reformat the data: d3.hexbin() needs a specific format
+            const inputForHexbinFun = []
+            data.forEach(function(d) {{
+                inputForHexbinFun.push( [x(d.x), y(d.y)] )  // Note that we had the transform value of X and Y !
+            }})
+
+            // Prepare a color palette
+            const color = d3.scaleLinear()
+                .domain([0, {n_point}]) // Number of points in the bin?
+                .range(["transparent",  "{color}"]);
+
+            // Compute the hexbin data
+            const hexbin = d3.hexbin()
+                .radius({radius}) // size of the bin in px
+                .extent([ [0, 0], [width, height] ])
+
+            // Plot the hexbins
+            svg.append("clipPath")
+                .attr("id", "clip")
+                .append("rect")
+                .attr("width", width)
+                .attr("height", height)
+
+            svg.append("g")
+                .attr("clip-path", "url(#clip)")
+                .selectAll("path")
+                .data( hexbin(inputForHexbinFun) )
+                .enter().append("path")
+                .attr("d", hexbin.hexagon())
+                .attr("transform", function(d) {{ return "translate(" + d.x + "," + d.y + ")"; }})
+                .attr("fill", function(d) {{ return color(d.length); }})
+                .attr("stroke", "black")
+                .attr("stroke-width", "0.1")
+        </script>
+    '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point,
+               radius=radius, width=width, height=height, title=title, xlabel=xlabel, ylabel=ylabel, color=color)
+
+    return html_code
 
 
 def pd_plot_histogram_matplot(df:pd.DataFrame, col: str='' ,colormap:str='RdYlBu', title: str='', nbin=20.0, q5=0.005, q95=0.995, nsample=-1,
