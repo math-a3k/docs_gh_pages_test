@@ -37,8 +37,10 @@ def test_all() -> None:
 
 
 def test1() -> None:
-    pass
-
+    flist = glob_glob_python("**/",nfile=3)
+    results = [os.system(f"python -m py_compile {i}") for i in flist]
+    results = ["Working" if x==0 else "Failed" for x in results]
+    log(results)
 
 def test2() -> None:
     pass

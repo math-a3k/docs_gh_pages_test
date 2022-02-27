@@ -208,7 +208,11 @@ def test_recsys_ab():
    log("from utilmy.recsys import ab")
    m.test_all()
 
-
+#######################################################################################
+def test_compile():
+   from utilmy.doc import format as m
+   log("from utilmy.doc import format")
+   m.test_all()
 
 
 import utilmy as  uu
