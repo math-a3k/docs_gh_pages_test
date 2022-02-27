@@ -1,52 +1,63 @@
 # -*- coding: utf-8 -*-
-HELP="""
-
- utils images
+MNAME = "utilmy.images.util_image"
+HELP=""" utils images
 
 """
 import os,io, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
 from typing import Union
 from box import Box
+import io, cv2,  tifffile.tifffile, matplotlib
+from PIL import Image
+
 
 os.environ['MPLCONFIGDIR'] = "/tmp/"
-
-import io, cv2,  tifffile.tifffile
-from PIL import Image
-from skimage import morphology
-
-import matplotlib
-
 try :
    from albumentations.core.transforms_interface import ImageOnlyTransform
    import diskcache as dc 
-
 except : pass
 
+
+#############################################################################################
 from utilmy import pd_read_file
-
-################################################################################################
-verbose = 0
-
-def log(*s):
-    print(*s, flush=True)
-
-def log2(*s):
-    if verbose >1 : print(*s, flush=True)
-
+from utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss  = HELP
-    ss += help_create("utilmy.deeplearning.util_image")
+    ss = HELP + help_create(MNAME)
     print(ss)
 
 
 
 ################################################################################################
+def test_all():
+    log(MNAME)
+    test()
+
+
 def test():
     pass
 
 
+def test_image_create_fake(dirout=None, nimages=1, ):
+    import cv2
+    import numpy as np
+
+    dirout = os.getcwd() + "/ztmp/images/"
+    os.makedirs(dirout, exist_ok=True)
+    ii = 0 ; img_list =[]
+    for ii in range(nmax):
+        # Create new blank 300x300 red image
+        width1, height1 = 300, 300
+        red = (255, 0, 0)
+        rgb_color= red
+        image = np.zeros((height, width, 3), np.uint8)
+        color = tuple(reversed(rgb_color))
+        image[:] = color
+
+        if dirout is not None :
+            cv2.imwrite( dirout + f'img_{ii}.jpg', image)
+        else:
+            img_list.append(image)
 
 
 ################################################################################################
@@ -330,9 +341,11 @@ def image_save():
     log( dir_check )
 
 
+image_load = image_read  ## alias
 
 
-################################################################
+
+##############################################################################
 def image_show_in_row(image_list:dict=None):
     """ # helper function for data visualization
     Plot images in one row.
@@ -384,10 +397,8 @@ def image_resize_ratio(image, width=None, height=None, inter=cv2.INTER_AREA):
     
     
     
-    
-    
-    
-    
+
+
 
 
 ############################################################################
@@ -531,10 +542,8 @@ def image_resize2(image, width=None, height=None, inter=cv2.INTER_AREA):
     # Return the resized image
     return cv2.resize(image, dim, interpolation=inter)
 
-       
 
-def image_padding_generate( paddings_number: int = 1, min_padding: int = 1, max_padding: int = 1
-) -> np.array:
+def image_padding_generate( paddings_number: int = 1, min_padding: int = 1, max_padding: int = 1) -> np.array:
     """
     Args:
         paddings_number:  4
@@ -543,7 +552,6 @@ def image_padding_generate( paddings_number: int = 1, min_padding: int = 1, max_
     Returns: padding list
     """
     return np.random.randint(low=min_padding, high=max_padding + 1, size=paddings_number)
-
 
 
 def image_merge(image_list, n_dim, padding_size, max_height, total_width):
@@ -587,7 +595,7 @@ def image_remove_extra_padding(img, inverse=False, removedot=True):
         img: image
     Returns: image cropped of extra padding
     """
-
+    from skimage import morphology
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     if removedot:
@@ -637,15 +645,7 @@ def image_remove_bg(in_dir="", out_dir="", level=1):
             try :
                os.system( cmd )
             except : pass         
-
-
-
-def os_path_check(path, n=5):
-    from utilmy import os_system
-    print('top files', os_system( f"ls -U   '{path}' | head -{n}") )
-    print('nfiles', os_system( f"ls -1q  '{path}' | wc -l") )
-               
-
+            
 
 def image_face_blank(in_dir="", level = "/*", 
                      out_dir=f"", npool=30):
@@ -706,7 +706,6 @@ def image_face_blank(in_dir="", level = "/*",
     pool.close()
     pool.join()     
         
-    
     
 def image_text_blank(in_dir, out_dir, level="/*"):
     """
@@ -787,12 +786,23 @@ def image_check():
 
 
 
+def os_path_check(path, n=5):
+    from utilmy import os_system
+    print('top files', os_system( f"ls -U   '{path}' | head -{n}") )
+    print('nfiles', os_system( f"ls -1q  '{path}' | wc -l") )
+   
     
 
 
+###################################################################################################
+if __name__ == "__main__":
+    import fire
+    fire.Fire()
 
-    
-    
+
+
+
+
 
 
 

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+MNAME = "utilmy.recsys.ab"
 HELP = """"
 All about abtest
 
@@ -50,12 +52,17 @@ except :
    # sys_install(cmd= f"pip install {pkg}  --upgrade-strategy only-if-needed")
    1/0  ### exit Gracefully !
 
-    
-def log(*s):
-  print(*s, flush=True)
-    
-    
-    
+
+##################################################################################################
+from utilmy import log, log2
+
+def help():
+    from utilmy import help_create
+    ss = HELP + help_create(MNAME)
+    print(ss)
+
+   
+
     
 #################################################################################################
 def test_ab_getstat():

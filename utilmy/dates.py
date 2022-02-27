@@ -1,12 +1,19 @@
-# pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
 # -*- coding: utf-8 -*-
-import os, sys, time, datetime,inspect, json, yaml, gc
-import numpy as np
-import pandas as pd
+MNAME= "utilmy.dates"
+HELP=""" dates utilities
+
+"""
+import os, sys, time, datetime,inspect, json, yaml, gc, numpy as np, pandas as pd
+
+#############################################################################################
+from utilmy.utilmy import log, log2
+
+def help():
+    from utilmy import help_create
+    print(  HELP + help_create(MNAME) )
 
 
-
-
+####################################################################################################
 def test_all():
     log("Testing dates.py ...")
     date_ = date_generate(start='2021-01-01', ndays=100)
@@ -33,9 +40,6 @@ def random_genders(size, p=None):
     gender = ("M", "F", "O", "")
     return np.random.choice(gender, size=size, p=p)
 
-
-def log(*s):
-    print(*s)
 
 ####################################################################################################
 ##### Utilities for date  ##########################################################################
@@ -82,7 +86,6 @@ def date_to_timezone(tdate,  fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
     # Convert to US/Pacific time zone
     now_pacific = tdate.astimezone(tzone('Asia/Tokyo'))
     return now_pacific.strftime(fmt)
-
 
 
 def date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo'):

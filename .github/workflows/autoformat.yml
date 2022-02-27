@@ -1,0 +1,108 @@
+name: Auto-format pythn]on files
+
+###  https://github.com/arita37/awesome-actions#static-analysis
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+    - autoformat 
+    - Lets7512  ### dev
+
+#  pull_request:
+#    branches:
+#    - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    #- uses: actions/checkout@v1
+    #  ref: ${{ github.head_ref }
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        
+    - name: Set up Python 3.7.*
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7.*
+      
+    - name: Install pipenv
+      uses: dschep/install-pipenv-action@v1
+      
+  
+    - name: Cache pipenv virtualenv
+      id: cache-pipenv
+      uses: actions/cache@v1
+      with:
+        path: /opt/hostedtoolcache/Python/
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**py36.txt') }}
+          
+
+    - name: Install repo requirements  1
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run: |
+           pip install -r  py36_min.txt
+
+
+    - name: Install utilmy
+      run:  |
+        pip install -e .
+        python -c "import utilmy"
+
+           
+    - name: Install repo requirements   2
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+      run:  |
+        ls .
+        pip install -r  py36.txt
+        #pip install -r install/requirements_fake.txt
+
+
+    - name: test_import
+      run: |
+           python -c "import os, pandas as pd; print(os)"
+           python -c "import utilmy"        
+        
+
+    - name: AutoFormat python files
+      continue-on-error: true
+      run:  |
+        pip install --upgrade monkeytype
+        python  utilmy/docs/format.py  run_format1
+
+
+
+
+
+    - name: Auto-Commit
+      continue-on-error: true
+      id: auto_commmit
+      uses: stefanzweifel/git-auto-commit-action@v4.8.0
+      with:
+          # Optional, but recommended
+          # Defaults to "Apply automatic changes"
+          commit_message: Auto Type Hints
+
+          # Optional branch name where commit should be pushed to.
+          # Defaults to the current branch.
+          # branch: main
+
+          # Optional. Used by `git-commit`.
+          # See https://git-scm.com/docs/git-commit#_options
+          commit_options: '--no-verify --signoff'
+
+          # Optional glob pattern of files which should be added to the commit
+          file_pattern: utilmy/**.* 
+
+          # Optional local file path to the repository
+          # Defaults to the root of the repository
+          repository: .
+
+
+
+
+  

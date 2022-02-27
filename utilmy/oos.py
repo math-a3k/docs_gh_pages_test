@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+MNAME= "utilmy.dates"
 HELP="""
 https://github.com/uqfoundation/pox/tree/master/pox
 
@@ -12,7 +13,7 @@ from utilmy.utilmy import log, log2
 
 def help():
     from utilmy import help_create
-    ss = help_create("utilmy.oos") + HELP
+    ss = help_create(MNAME) + HELP
     print(ss)
 
 
@@ -355,6 +356,46 @@ def is_float(x):
 
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
+def os_monkeypatch_help():
+    print( """
+    https://medium.com/@chipiga86/python-monkey-patching-like-a-boss-87d7ddb8098e
+    
+    
+    """)
+    
+    
+def os_module_uncache(exclude='os.system'):
+    """Remove package modules from cache except excluded ones.
+       On next import they will be reloaded.  Useful for monkey patching
+    Args:
+        exclude (iter<str>): Sequence of module paths.
+        https://medium.com/@chipiga86/python-monkey-patching-like-a-boss-87d7ddb8098e
+    """
+    import sys
+    pkgs = []
+    for mod in exclude:
+        pkg = mod.split('.', 1)[0]
+        pkgs.append(pkg)
+
+    to_uncache = []
+    for mod in sys.modules:
+        if mod in exclude:
+            continue
+
+        if mod in pkgs:
+            to_uncache.append(mod)
+            continue
+
+        for pkg in pkgs:
+            if mod.startswith(pkg + '.'):
+                to_uncache.append(mod)
+                break
+
+    for mod in to_uncache:
+        del sys.modules[mod]
+
+        
+        
 def os_file_date_modified(dirin, fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
     """last modified date
     """
@@ -505,7 +546,7 @@ def os_walk(path, pattern="*", dirlevel=50):
     return  matches
 
 
-def os_copy_safe(dirin=None, dirout=None,  nlevel=5, nfile=5000, logdir="./", pattern="*", exclude="", force=False, sleep=0.5, cmd_fallback="",
+def os_copy_safe(dirin:str=None, dirout:str=None,  nlevel=5, nfile=5000, logdir="./", pattern="*", exclude="", force=False, sleep=0.5, cmd_fallback="",
                  verbose=True):  ### 
     """ Copy safe
     """
@@ -557,17 +598,6 @@ def os_copy_safe(dirin=None, dirout=None,  nlevel=5, nfile=5000, logdir="./", pa
 
 ### Alias       
 os_copy = os_copy_safe
-"""
-def os_copy(src, dst, overwrite=False, exclude=""):
-        
-    import shutil
-    def ignore_pyc_files(dirname, filenames):
-        return [name for name in filenames if name.endswith('.pyc')]
-
-    patterns = exclude.split(";")
-    os.makedirs(dst, exist_ok=True)
-    shutil.copytree(src, dst, ignore = shutil.ignore_patterns(*patterns))
-"""
 
 
 def os_merge_safe(dirin_list=None, dirout=None, nlevel=5, nfile=5000, nrows=10**8,  cmd_fallback = "umount /mydrive/  && mount /mydrive/  ", sleep=0.3):

@@ -141,3 +141,12 @@ dmypy.json
 /utilmy/deeplearning/torch/model.pt
 /utilmy/deeplearning/torch/cardio_train.csv
 /monkeytype.sqlite3
+testdata/ppandas/histogram.png
+testdata/ppandas/file.csv
+utilmy/tabular/docs/stub/utilmy/tabular/__init__.pyi
+mymodel/info.pkl
+utilmy/tabular/util_explain.py
+ztmp_monkeytype.py
+ztmp_monkey.py
+run_script.py
+testdata/ppandas/file.csv
