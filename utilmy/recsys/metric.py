@@ -157,8 +157,11 @@ def metrics_calc(dirin:Union[str, pd.DataFrame],
     for mi in methods :
         if mi == 'personalization':              res[mi] = personalization(df[colrec].tolist())
         if mi == 'catalog_coverage':             res[mi] = catalog_coverage(df[colrec].tolist(), 
-                                                                            catalog=list(set([p for sublist in _df.reclist.tolist() for p in sublist] + \
-                                                                                             [p for sublist in _df.purchaselist.tolist() for p in sublist])))
+                                                            catalog=list(set([p for sublist in df.reclist.tolist() for p in sublist] + \
+                                                                    [p for sublist in df.purchaselist.tolist() for p in sublist])))
+
+
+
         if mi == 'intra_list_similarity':        res[mi] = intra_list_similarity(df[colrec].tolist(), featuredf)
         if mi == 'mark':                         res[mi] = mark(actual=df[colrec].tolist(), predicted=df[coltrue].tolist(), k=topk)
         if mi == 'novelty':                      res[mi] = novelty(predicted=df[colrec].tolist(), pop=popdict, u=df.shape[0],
