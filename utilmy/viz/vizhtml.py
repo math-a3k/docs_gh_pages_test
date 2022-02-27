@@ -710,7 +710,7 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
                 .attr("stroke", "black")
                 .attr("stroke-width", "0.1")
         </script>
-    '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point, container_id=container_id
+    '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point, container_id=container_id,
                radius=radius, width=width, height=height, title=title, xlabel=xlabel, ylabel=ylabel, color=color)
 
     return html_code
