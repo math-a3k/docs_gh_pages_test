@@ -205,10 +205,10 @@ def test_deeplearning_yolov5():
 #######################################################################################
 def test_recsys_ab():
    from utilmy.recsys import ab as m
-   log("from utilmy.recsys import ab")
    m.test_all()
 
-
+   from utilmy.recsys import metric as m
+   m.test_all()
 
 
 import utilmy as  uu
@@ -239,7 +239,7 @@ def test_all():
 
 
     ###############
-    test_recsys_ab()
+    test_recsys()
 
 
       

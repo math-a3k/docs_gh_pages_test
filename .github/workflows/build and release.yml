@@ -92,6 +92,9 @@ jobs:
       run: python test.py test_deeplearning_torch
 
 
+    - name: test_recsys  
+      run:  python test.py   test_recsys
+
     - name: test_ppandas
       run: python test.py test_ppandas
     
