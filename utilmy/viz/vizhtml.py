@@ -615,7 +615,8 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
     print(x_max, x_min, y_max, y_min, n_point)
 
     # number of point in bins
-    n_point = int(n_point * 3 / ((x_max - x_min) * (y_max - y_min) / (3.14 * radius * radius)))
+    n_point_helper = 5 if n_point < 100 else 20
+    n_point = int(n_point * (n_point // n_point_helper) / ((width) * (height) / (3.14 * radius * radius)))
 
     if n_point == 0:
         n_point = 1
