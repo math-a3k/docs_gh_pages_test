@@ -1,4 +1,4 @@
-name: Auto-format pythn]on files
+name: Auto-git operations
 
 ###  https://github.com/arita37/awesome-actions#static-analysis
 
@@ -7,8 +7,7 @@ on:
   # but only for the main branch
   push:
     branches:
-    - autoformat 
-    - Lets7512  ### dev
+    - autogit 
 
 #  pull_request:
 #    branches:
@@ -68,13 +67,10 @@ jobs:
            python -c "import utilmy"        
         
 
-    - name: AutoFormat python files
+    - name: AutoRebase Main branch
       continue-on-error: true
       run:  |
-        pip install --upgrade monkeytype
-        python  utilmy/docs/format.py  run_format1
-
-
+        git rebase main
 
 
 
@@ -96,7 +92,7 @@ jobs:
           commit_options: '--no-verify --signoff'
 
           # Optional glob pattern of files which should be added to the commit
-          file_pattern: utilmy/**.* 
+          file_pattern: ./**.* 
 
           # Optional local file path to the repository
           # Defaults to the root of the repository
