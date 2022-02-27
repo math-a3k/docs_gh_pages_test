@@ -210,7 +210,7 @@ def test_recsys_ab():
 
 #######################################################################################
 def test_compile():
-   from utilmy.doc import format as m
+   from utilmy.docs import format as m
    log("from utilmy.doc import format")
    m.test_all()
 
@@ -244,7 +244,7 @@ def test_all():
 
     ###############
     test_recsys_ab()
-
+    test_compile()
 
       
 #######################################################################################
