@@ -165,6 +165,8 @@ class htmlDoc(object):
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/heatmap.js"></script>
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/histogram-bellcurve.js"></script>
               <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script> 
+              <script src="https://d3js.org/d3.v4.js"></script>
+              <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
               <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet"> """
         
         links = links + f'\n<link rel="stylesheet" href="{css_file}">' if css_file else links
