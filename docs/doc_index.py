@@ -613,6 +613,28 @@ test()
 
 
 
+utilmy/deeplearning/torch/images/base.py
+-------------------------methods----------------------
+BaseHead.__init__(self, num_classes, in_channels, type = 'CrossEntropyLoss', loss_weight = 1.0), multi_class = False, label_smooth_eps = 0.0)
+BaseHead.forward(self, x)
+BaseHead.init_weights(self)
+BaseHead.loss(self, cls_score, labels, **kwargs)
+
+
+utilmy/deeplearning/torch/images/i3d.py
+-------------------------methods----------------------
+I3DHead.__init__(self, num_classes, in_channels, type = 'CrossEntropyLoss'), spatial_type = 'avg', dropout_ratio = 0.5, init_std = 0.01, **kwargs)
+I3DHead.forward(self, x)
+I3DHead.init_weights(self)
+
+
+utilmy/deeplearning/torch/images/x3d.py
+-------------------------methods----------------------
+X3DHead.__init__(self, num_classes, in_channels, type = 'CrossEntropyLoss'), spatial_type = 'avg', dropout_ratio = 0.5, init_std = 0.01, fc1_bias = False)
+X3DHead.forward(self, x)
+X3DHead.init_weights(self)
+
+
 utilmy/deeplearning/torch/rule_encoder.py
 -------------------------functions----------------------
 dataloader_create(train_X = None, train_y = None, valid_X = None, valid_y = None, test_X = None, test_y = None, arg = None)
@@ -986,6 +1008,15 @@ run_utilmy(nfile = 100)
 run_utilmy2(nfile = 100)
 test1()
 test2()
+test_all()
+
+
+
+utilmy/docs/generate_typeint.py
+-------------------------functions----------------------
+run_monkeytype(dirin, dirout, mode = "stub", nfile = 10, exclude = "")
+test()
+test()
 test_all()
 
 
@@ -1429,6 +1460,18 @@ random_solution()
 random_walker(G, h)
 search()
 sigint_handler(signal, frame)
+
+
+
+utilmy/optim/gp_dcgp.py
+-------------------------functions----------------------
+get_correlm(eqn)
+get_cost(ex)
+get_random_solution()
+rank_generate_fake(dict_full, list_overlap, nsize = 100, ncorrect = 20)
+rank_merge_v5(ll1:list, ll2:list, eqn:str, kk =  1)
+rank_score(eqn:str, rank1:list, rank2:list, adjust = 1.0, kk = 1.0)
+search()
 
 
 
