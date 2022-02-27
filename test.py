@@ -47,7 +47,6 @@ def pd_generate_data(ncols=7, nrows=100):
     return df   
    
    
-   
 #########################################################################################
 def test_utilmy():
    from utilmy import utilmy as m
