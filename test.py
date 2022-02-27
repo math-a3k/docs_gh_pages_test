@@ -63,7 +63,6 @@ def test_utilmy():
    sess.save('mysess', glob=globals(), tag='01')
    os.system("ls ztmp/session")
    sess.show()
-
    import glob
    flist = glob.glob("ztmp/session/" + "/*")
    for f in flist:
@@ -203,7 +202,7 @@ def test_deeplearning_yolov5():
 
 
 #######################################################################################
-def test_recsys_ab():
+def test_recsys():
    from utilmy.recsys import ab as m
    m.test_all()
 
