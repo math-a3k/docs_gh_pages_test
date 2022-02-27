@@ -613,6 +613,28 @@ test()
 
 
 
+utilmy/deeplearning/torch/images/base.py
+-------------------------methods----------------------
+BaseHead.__init__(self, num_classes, in_channels, type = 'CrossEntropyLoss', loss_weight = 1.0), multi_class = False, label_smooth_eps = 0.0)
+BaseHead.forward(self, x)
+BaseHead.init_weights(self)
+BaseHead.loss(self, cls_score, labels, **kwargs)
+
+
+utilmy/deeplearning/torch/images/i3d.py
+-------------------------methods----------------------
+I3DHead.__init__(self, num_classes, in_channels, type = 'CrossEntropyLoss'), spatial_type = 'avg', dropout_ratio = 0.5, init_std = 0.01, **kwargs)
+I3DHead.forward(self, x)
+I3DHead.init_weights(self)
+
+
+utilmy/deeplearning/torch/images/x3d.py
+-------------------------methods----------------------
+X3DHead.__init__(self, num_classes, in_channels, type = 'CrossEntropyLoss'), spatial_type = 'avg', dropout_ratio = 0.5, init_std = 0.01, fc1_bias = False)
+X3DHead.forward(self, x)
+X3DHead.init_weights(self)
+
+
 utilmy/deeplearning/torch/rule_encoder.py
 -------------------------functions----------------------
 dataloader_create(train_X = None, train_y = None, valid_X = None, valid_y = None, test_X = None, test_y = None, arg = None)
@@ -986,6 +1008,15 @@ run_utilmy(nfile = 100)
 run_utilmy2(nfile = 100)
 test1()
 test2()
+test_all()
+
+
+
+utilmy/docs/generate_typeint.py
+-------------------------functions----------------------
+run_monkeytype(dirin, dirout, mode = "stub", nfile = 10, exclude = "")
+test()
+test()
 test_all()
 
 
@@ -1429,6 +1460,18 @@ random_solution()
 random_walker(G, h)
 search()
 sigint_handler(signal, frame)
+
+
+
+utilmy/optim/gp_dcgp.py
+-------------------------functions----------------------
+get_correlm(eqn)
+get_cost(ex)
+get_random_solution()
+rank_generate_fake(dict_full, list_overlap, nsize = 100, ncorrect = 20)
+rank_merge_v5(ll1:list, ll2:list, eqn:str, kk =  1)
+rank_score(eqn:str, rank1:list, rank2:list, adjust = 1.0, kk = 1.0)
+search()
 
 
 
@@ -3422,16 +3465,10 @@ html_show(html_code, verbose = True)
 html_show_chart_highchart(html_code, verbose = True)
 images_to_html(dir_input = "*.png", title = "", verbose = False)
 mlpd3_add_tooltip(fig, points, labels)
-mpld3_server_start()
-pd_plot_highcharts(df)
-pd_plot_histogram_highcharts(df:pd.DataFrame, colname:str = None, binsNumber = None, binWidth = None, color:str = '#7CB5EC', title:str = "", xaxis_label:str =  "x-axis", yaxis_label:str = "y-axis", cfg:dict = {}, mode = 'd3', save_img = "", show = False, verbose = True, **kw)
-pd_plot_histogram_matplot(df:pd.DataFrame, col: str = '', colormap:str = 'RdYlBu', title: str = '', nbin = 20.0, q5 = 0.005, q95 = 0.995, nsample = -1, save_img: str = "", xlabel: str = None, ylabel: str = None, verbose = True, **kw)
+pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius = 9, title: str  =  'Plot Density', 460, 460), xlabel: str  =  'x-axis', ylabel: str  =  'y-axis', color: str  =  '#69b3a2', cfg: dict  =  {})
 pd_plot_network(df:pd.DataFrame, cola: str = 'col_node1', colb: str = 'col_node2', coledge: str = 'col_edge', colweight: str = "weight", html_code:bool  =  True)
 pd_plot_scatter_get_data(df0:pd.DataFrame, colx: str = None, coly: str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, nmax: int = 20000, **kw)
-pd_plot_scatter_highcharts(df0:pd.DataFrame, colx:str = None, coly:str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, colclass3: str = None, nsample = 10000, cfg:dict = {}, mode = 'd3', save_img = '', verbose = True, **kw)
 pd_plot_scatter_matplot(df:pd.DataFrame, colx: str = None, coly: str = None, collabel: str = None, colclass1: str = None, colclass2: str = None, cfg: dict  =  {}, mode = 'd3', save_path: str = '', verbose = True, **kw)
-pd_plot_tseries_highcharts(df0, coldate:str = None, date_format  =  None, coly1:list  = [], coly2:list  = [], figsize:tuple  =   None, title:str = None, xlabel:str = None, y1label:str = None, y2label:str = None, cfg:dict = {}, mode = 'd3', save_img = "", verbose = True, **kw)
-pd_plot_tseries_matplot(df:pd.DataFrame, plot_type: str = None, coly1: list  =  [], coly2: list  =  [], 8, 4), spacing = 0.1, verbose = True, **kw))
 to_float(x)
 zz_css_get_template(css_name:str =  "A4_size")
 zz_pd_plot_histogram_highcharts_old(df, col, figsize = None, title = None, cfg:dict = {}, mode = 'd3', save_img = '')

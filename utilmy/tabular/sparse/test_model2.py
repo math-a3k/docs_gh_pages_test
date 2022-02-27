@@ -45,6 +45,8 @@ y sparse of dimension:
 
 
 """
+import scipy
+from scipy import sparse
 
 
 import scipy, numpy as np

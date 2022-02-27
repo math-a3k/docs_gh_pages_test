@@ -51,28 +51,28 @@ def test_all():
     
     def test():
         log("Testing normality...")
-        import utilmy.tabular as m
+        # import utilmy.tabular as m
         test_normality(df["yield"])
         
         
         df1 = pd_generate_data(7, 100)
-        m.test_anova(df1,'cat1','cat2')
-        m.test_normality2(df1, '0', "Shapiro")
-        m.test_plot_qqplot(df1, '1')
+        test_anova(df1,'cat1','cat2')
+        test_normality2(df1, '0', "Shapiro")
+        test_plot_qqplot(df1, '1')
 
         
         log("Testing heteroscedacity...")
-        from utilmy.tabular import test_heteroscedacity
+        # from utilmy.tabular import test_heteroscedacity
         log(test_heteroscedacity(y_test,y_pred))
     
         log("Testing test_mutualinfo()...")
-        from utilmy.tabular import test_mutualinfo
+        # from utilmy.tabular import test_mutualinfo
         df1 = pd_generate_data(7, 100)
 
         test_mutualinfo(df1["0"],df1[["1","2","3"]],colname="test")
 
         log("Testing hypothesis_test()...")
-        from utilmy.tabular import test_hypothesis
+        #from utilmy.tabular import test_hypothesis
         log(test_hypothesis(X_train, X_test,"chisquare"))
 
     def custom_stat(values, axis=1):
@@ -83,7 +83,7 @@ def test_all():
 
     def test_estimator():
         log("Testing estimators()...")
-        from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
+        # from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
         log(estimator_std_normal(y_pred))
         log(estimator_boostrap_bayes(y_pred))
         estimator_bootstrap(y_pred, custom_stat=custom_stat)
@@ -92,9 +92,9 @@ def test_all():
     
     def test_pd_utils():
         log("Testing pd_utils ...")
-        from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
-            pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
-            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+        #from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
+        #    pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
+        #    pd_stat_shift_trend_correlation,pd_stat_shift_changes
         from utilmy.prepro.util_feature import pd_colnum_tocat_stat
 
         pd_train_test_split_time(df, coltime="block")
@@ -124,7 +124,7 @@ def test_all():
     def test_drift_detect():
         import tensorflow as tf
         from tensorflow.keras.layers import Dense,InputLayer,Dropout
-        from utilmy.tabular import pd_data_drift_detect_alibi
+        # from utilmy.tabular import pd_data_drift_detect_alibi
 
         input_size = X_train.shape[1]
         output_size = y_train.nunique()
@@ -165,7 +165,7 @@ def test_all():
 
     def test_np_utils():
         log("Testing np_utils ...")
-        from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
+        # from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
         import numpy as np
         arr = np.array([[1, 2, 3], [4, 5, 6]])
         np_col_extractname(["aa_","bb-","cc"])
@@ -175,7 +175,7 @@ def test_all():
   
     test()
     test_estimator()
-    test_pd_utils()
+    # test_pd_utils()
     # test_drift_detect()
     test_np_utils()
 
@@ -674,7 +674,16 @@ def np_conv_to_one_col(np_array, sep_char="_"):
 
 
 
- 
+
+
+################################################################################
+################################################################################
+if __name__ == '__main__':
+    #import fire
+    #fire.Fire()
+    test_all()
+
+
     
     
     

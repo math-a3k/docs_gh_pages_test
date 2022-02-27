@@ -140,7 +140,7 @@ dmypy.json
 /dockers/ml-workspace/docs/images/features
 /utilmy/deeplearning/torch/model.pt
 /utilmy/deeplearning/torch/cardio_train.csv
-.gitpod.yml
+/monkeytype.sqlite3
 testdata/ppandas/histogram.png
 testdata/ppandas/file.csv
 utilmy/tabular/docs/stub/utilmy/tabular/__init__.pyi
@@ -149,4 +149,4 @@ utilmy/tabular/util_explain.py
 ztmp_monkeytype.py
 ztmp_monkey.py
 run_script.py
-monkeytype.sqlite3
+testdata/ppandas/file.csv
