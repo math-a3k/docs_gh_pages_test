@@ -627,12 +627,12 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
         <script>
 
             // set the dimensions and margins of the graph
-            const margin = {{ top: 10, right: 30, bottom: 30, left: 40 }},
+            let margin = {{ top: 10, right: 30, bottom: 30, left: 40 }},
                 width = {width} - margin.left - margin.right,
                 height = {height} - margin.top - margin.bottom;
 
             // append the svg object to the body of the page
-            const svg = d3.select("#my_dataviz")
+            let svg = d3.select("#{container_id}")
             .append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
@@ -659,10 +659,10 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
            .style("text-anchor", "middle")
            .text("{ylabel}");
 
-            const data = {data}
+            let data = {data}
             console.log(data);
             // Add X axis
-            const x = d3.scaleLinear()
+            let x = d3.scaleLinear()
                 .domain([{x_min}, {x_max}])
                 .range([ 0, width ]);
             svg.append("g")
@@ -670,25 +670,25 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
                 .call(d3.axisBottom(x));
 
             // Add Y axis
-            const y = d3.scaleLinear()
+            let y = d3.scaleLinear()
                 .domain([{y_min}, {y_max}])
                 .range([ height, 0 ]);
             svg.append("g")
                 .call(d3.axisLeft(y));
 
             // Reformat the data: d3.hexbin() needs a specific format
-            const inputForHexbinFun = []
+            let inputForHexbinFun = []
             data.forEach(function(d) {{
                 inputForHexbinFun.push( [x(d.x), y(d.y)] )  // Note that we had the transform value of X and Y !
             }})
 
             // Prepare a color palette
-            const color = d3.scaleLinear()
+            let color = d3.scaleLinear()
                 .domain([0, {n_point}]) // Number of points in the bin?
                 .range(["transparent",  "{color}"]);
 
             // Compute the hexbin data
-            const hexbin = d3.hexbin()
+            let hexbin = d3.hexbin()
                 .radius({radius}) // size of the bin in px
                 .extent([ [0, 0], [width, height] ])
 
@@ -710,7 +710,7 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
                 .attr("stroke", "black")
                 .attr("stroke-width", "0.1")
         </script>
-    '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point,
+    '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point, container_id=container_id
                radius=radius, width=width, height=height, title=title, xlabel=xlabel, ylabel=ylabel, color=color)
 
     return html_code
