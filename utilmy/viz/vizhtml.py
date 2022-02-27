@@ -586,16 +586,15 @@ def pd_plot_scatter_matplot(df:pd.DataFrame, colx: str=None, coly: str=None, col
    
 
 def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
-                     title: str = 'Plot Density',
-                     figsize: tuple = (460, 460), xlabel: str = 'x-axis', ylabel: str = 'y-axis', color: str = '#69b3a2',
-                     cfg: dict = {}):
-   
+                       title: str = 'Plot Density',
+                       figsize: tuple = (460, 460), xlabel: str = 'x-axis', ylabel: str = 'y-axis',
+                       color: str = '#69b3a2',
+                       cfg: dict = {}):
     container_id = 'cid_' + str(np.random.randint(9999, 99999999))
     html_code = f'<div id="{container_id}"></div>'
 
     df = df.rename({colx: 'x', coly: 'y'}, axis=1)
 
-    
     df.loc[:, 'x'] = df['x'].fillna(0)
     df.loc[:, 'x'] = [to_float(t) for t in df['x'].values]
 
@@ -616,7 +615,7 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
     print(x_max, x_min, y_max, y_min, n_point)
 
     # number of point in bins
-    n_point = int(n_point * 2 / ((x_max - x_min) * (y_max - y_min) / (3.14 * radius * radius)))
+    n_point = int(n_point * 3 / ((x_max - x_min) * (y_max - y_min) / (3.14 * radius * radius)))
 
     if n_point == 0:
         n_point = 1
@@ -625,80 +624,68 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
 
     html_code += '''
         <script>
-
             // set the dimensions and margins of the graph
-            let margin = {{ top: 10, right: 30, bottom: 30, left: 40 }},
+            margin = {{ top: 10, right: 30, bottom: 30, left: 40 }},
                 width = {width} - margin.left - margin.right,
                 height = {height} - margin.top - margin.bottom;
-
             // append the svg object to the body of the page
-            let svg = d3.select("#{container_id}")
+            svg = d3.select("#{container_id}")
             .append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
             .append("g")
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
-
             svg.append("text")
                .attr("x", width/2)
                .attr("y", margin.top)
                .attr("text-anchor", "middle")
                .style("font-size", "16px")
                .text("{title}");
-
             svg.append("text")
                .attr("transform", "translate(" + (460/2) + " ," + (460-10) + ")")
                .style("text-anchor", "middle")
                .text("{xlabel}");
-
             svg.append("text")
            .attr("transform", "rotate(-90)")
            .attr("x", -(height/2))
            .attr("y", -30)
            .style("text-anchor", "middle")
            .text("{ylabel}");
-
-            let data = {data}
+            data = {data}
             console.log(data);
             // Add X axis
-            let x = d3.scaleLinear()
+            x = d3.scaleLinear()
                 .domain([{x_min}, {x_max}])
                 .range([ 0, width ]);
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
-
             // Add Y axis
-            let y = d3.scaleLinear()
+            y = d3.scaleLinear()
                 .domain([{y_min}, {y_max}])
                 .range([ height, 0 ]);
             svg.append("g")
                 .call(d3.axisLeft(y));
-
             // Reformat the data: d3.hexbin() needs a specific format
-            let inputForHexbinFun = []
+            inputForHexbinFun = []
             data.forEach(function(d) {{
                 inputForHexbinFun.push( [x(d.x), y(d.y)] )  // Note that we had the transform value of X and Y !
             }})
-
             // Prepare a color palette
-            let color = d3.scaleLinear()
+            color = d3.scaleLinear()
                 .domain([0, {n_point}]) // Number of points in the bin?
                 .range(["transparent",  "{color}"]);
-
             // Compute the hexbin data
-            let hexbin = d3.hexbin()
+            hexbin = d3.hexbin()
                 .radius({radius}) // size of the bin in px
                 .extent([ [0, 0], [width, height] ])
-
             // Plot the hexbins
             svg.append("clipPath")
                 .attr("id", "clip")
                 .append("rect")
                 .attr("width", width)
                 .attr("height", height)
-
             svg.append("g")
                 .attr("clip-path", "url(#clip)")
                 .selectAll("path")
@@ -710,7 +697,8 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
                 .attr("stroke", "black")
                 .attr("stroke-width", "0.1")
         </script>
-    '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point, container_id=container_id,
+    '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point,
+               container_id=container_id,
                radius=radius, width=width, height=height, title=title, xlabel=xlabel, ylabel=ylabel, color=color)
 
     return html_code
