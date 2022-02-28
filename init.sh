@@ -27,6 +27,9 @@ function git_autocommit {
 
 
 
+
+
+
 ################################################################################################
 #### Auto Batch
 while true; do git_autocommit; sleep 3600; done
