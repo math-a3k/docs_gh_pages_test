@@ -40,7 +40,7 @@ def test_all() -> None:
 def test1():
     import utilmy
     dirin = os.path.dirname(  utilmy.__file__ )
-    os_file_compile_batch(dirin)
+    os_file_compile_check_batch(dirin)
 
 
 
@@ -51,14 +51,14 @@ def test2() -> None:
 
 
 #############################################################################################
-def os_file_compile_batch(dirin) -> None:
+def os_file_compile_check_batch(dirin:str, nfile=10) -> None:
     """
     ### DO NOT use Command line  !!!!!!
 
 
 
     """
-    flist   = glob_glob_python( dirin, "*.py",nfile=3)
+    flist   = glob_glob_python( dirin, "*.py",nfile= nfile)
     results = []
     for fi in flist :
         res = os_file_compile_check(fi)
