@@ -59,7 +59,7 @@ def test_metrics():
     df, popdict, feature_df = get_testdata()
     result = metrics_calc(df,
              methods=['personalization','catalog_coverage','intra_list_similarity',
-                      'mark','novelty','recommender_precision','recommender_recall'],
+                      'recall_average_at_k_mean','novelty','recommender_precision','recommender_recall'],
              featuredf=feature_df,
              popdict=popdict
              )
@@ -67,7 +67,7 @@ def test_metrics():
     
     assert np.isclose(result['catalog_coverage'], 100.0, rtol=1e-2)
     assert np.isclose(result['intra_list_similarity'], 0.167, rtol=1e-2)
-    assert np.isclose(result['mark'], 0.667, rtol=1e-2)
+    assert np.isclose(result['recall_average_at_k_mean'], 0.667, rtol=1e-2)
     assert np.isclose(result['novelty'], -1.905, rtol=1e-2)
     assert np.isclose(result['personalization'], 0.389, rtol=1e-2)
     assert np.isclose(result['catalog_coverage'], 100.0, rtol=1e-2)
@@ -163,8 +163,8 @@ def metrics_calc(dirin:Union[str, pd.DataFrame],
 
 
         if mi == 'intra_list_similarity':        res[mi] = intra_list_similarity(df[colrec].tolist(), featuredf)
-        if mi == 'mark':                         res[mi] = mark(actual=df[colrec].tolist(), predicted=df[coltrue].tolist(), k=topk)
-        if mi == 'novelty':                      res[mi] = novelty(predicted=df[colrec].tolist(), pop=popdict, u=df.shape[0],
+        if mi == 'recall_average_at_k_mean':                         res[mi] = recall_average_at_k_mean(actual=df[colrec].tolist(), y_preds=df[coltrue].tolist(), k=topk)
+        if mi == 'novelty':                      res[mi] = novelty(y_preds=df[colrec].tolist(), pop=popdict, u=df.shape[0],
                                                                    n=max(df[colrec].apply(lambda x: len(x)).values))[0]
         if mi == 'recommender_precision':        res[mi] = recommender_precision(df[colrec].tolist(),  df[coltrue].tolist())
         if mi == 'recommender_recall':           res[mi] = recommender_recall(df[colrec].tolist(),  df[coltrue].tolist())
@@ -180,7 +180,7 @@ def metrics_calc(dirin:Union[str, pd.DataFrame],
 
 
 ####################################################################
-def personalization(predicted: List[list]) -> float:
+def personalization(y_preds: List[list]) -> float:
     """
     Personalization measures recommendation similarity across users.
     A high score indicates good personalization (user's lists of recommendations are different).
@@ -188,7 +188,7 @@ def personalization(predicted: List[list]) -> float:
     A model is "personalizing" well if the set of recommendations for each user is different.
     Parameters:
     ----------
-    predicted : a list of lists
+    y_preds : a list of lists
         Ordered predictions
         example: [['X', 'Y', 'Z'], ['X', 'Y', 'Z']]
     Returns:
@@ -196,8 +196,8 @@ def personalization(predicted: List[list]) -> float:
         The personalization score for all recommendations.
     """
 
-    def make_rec_matrix(predicted: List[list]) -> sp.csr_matrix:
-        df = pd.DataFrame(data=predicted).reset_index().melt(
+    def make_rec_matrix(y_preds: List[list]) -> sp.csr_matrix:
+        df = pd.DataFrame(data=y_preds).reset_index().melt(
             id_vars='index', value_name='item',
         )
         df = df[['index', 'item']].pivot(index='index', columns='item', values='item')
@@ -206,8 +206,8 @@ def personalization(predicted: List[list]) -> float:
         return rec_matrix
 
     #create matrix for recommendations
-    predicted = np.array(predicted)
-    rec_matrix_sparse = make_rec_matrix(predicted)
+    y_preds = np.array(y_preds)
+    rec_matrix_sparse = make_rec_matrix(y_preds)
 
     #calculate similarity for every user's recommendation list
     similarity = cosine_similarity(X=rec_matrix_sparse, dense_output=False)
@@ -217,12 +217,12 @@ def personalization(predicted: List[list]) -> float:
     personalization = (similarity.sum() - dim) / (dim * (dim - 1))
     return 1-personalization
 
-def catalog_coverage(predicted: List[list], catalog: list) -> float:
+def catalog_coverage(y_preds: List[list], catalog: list) -> float:
     """
     Computes the catalog coverage for k lists of recommendations
     Parameters
     ----------
-    predicted : a list of lists
+    y_preds : a list of lists
         Ordered predictions
         example: [['X', 'Y', 'Z'], ['X', 'Y', 'Z']]
     catalog: list
@@ -239,18 +239,18 @@ def catalog_coverage(predicted: List[list], catalog: list) -> float:
     Beyond accuracy: evaluating recommender systems by coverage and serendipity.
     In Proceedings of the fourth ACM conference on Recommender systems (pp. 257-260). ACM.
     """
-    predicted_flattened = [p for sublist in predicted for p in sublist]
+    predicted_flattened = [p for sublist in y_preds for p in sublist]
     L_predictions = len(set(predicted_flattened))
     catalog_coverage = round(L_predictions/(len(catalog)*1.0)*100,2)
     return catalog_coverage
 
-def intra_list_similarity(predicted: List[list], feature_df: pd.DataFrame) -> float:
+def intra_list_similarity(y_preds: List[list], feature_df: pd.DataFrame) -> float:
     """
     Computes the average intra-list similarity of all recommendations.
     This metric can be used to measure diversity of the list of recommended items.
     Parameters
     ----------
-    predicted : a list of lists
+    y_preds : a list of lists
         Ordered predictions
         Example: [['X', 'Y', 'Z'], ['X', 'Y', 'Z']]
     feature_df: dataframe
@@ -261,16 +261,16 @@ def intra_list_similarity(predicted: List[list], feature_df: pd.DataFrame) -> fl
         The average intra-list similarity for recommendations.
     """
     feature_df = feature_df.fillna(0)
-    Users = range(len(predicted))
-    ils = [_single_list_similarity(predicted[u], feature_df, u) for u in Users]
+    Users = range(len(y_preds))
+    ils = [_single_list_similarity(y_preds[u], feature_df, u) for u in Users]
     return np.mean(ils)
 
-def _single_list_similarity(predicted: list, feature_df: pd.DataFrame, u: int) -> float:
+def _single_list_similarity(y_preds: list, feature_df: pd.DataFrame, u: int) -> float:
     """
     Computes the intra-list similarity for a single list of recommendations.
     Parameters
     ----------
-    predicted : a list
+    y_preds : a list
         Ordered predictions
         Example: ['X', 'Y', 'Z']
     feature_df: dataframe
@@ -281,12 +281,12 @@ def _single_list_similarity(predicted: list, feature_df: pd.DataFrame, u: int) -
     ils_single_user: float
         The intra-list similarity for a single list of recommendations.
     """
-    # exception predicted list empty
-    if not(predicted):
+    # exception y_preds list empty
+    if not(y_preds):
         raise Exception('Predicted list is empty, index: {0}'.format(u))
 
     #get features for all recommended items
-    recs_content = feature_df.loc[predicted]
+    recs_content = feature_df.loc[y_preds]
     recs_content = recs_content.dropna()
     recs_content = sp.csr_matrix(recs_content.values)
 
@@ -300,15 +300,15 @@ def _single_list_similarity(predicted: list, feature_df: pd.DataFrame, u: int) -
     ils_single_user = np.mean(similarity[upper_right])
     return ils_single_user
 
-def _ark(actual: list, predicted: list, k=10) -> int:
+def recall_avg_at_k(actual: list, y_preds: list, k=10) -> int:
     """
     Computes the average recall at k.
     Parameters
     ----------
     actual : list
-        A list of actual items to be predicted
-    predicted : list
-        An ordered list of predicted items
+        A list of actual items to be y_preds
+    y_preds : list
+        An ordered list of y_preds items
     k : int, default = 10
         Number of predictions to consider
     Returns:
@@ -316,14 +316,14 @@ def _ark(actual: list, predicted: list, k=10) -> int:
     score : int
         The average recall at k.
     """
-    if len(predicted)>k:
-        predicted = predicted[:k]
+    if len(y_preds)>k:
+        y_preds = y_preds[:k]
 
     score = 0.0
     num_hits = 0.0
 
-    for i,p in enumerate(predicted):
-        if p in actual and p not in predicted[:i]:
+    for i,p in enumerate(y_preds):
+        if p in actual and p not in y_preds[:i]:
             num_hits += 1.0
             score += num_hits / (i+1.0)
 
@@ -332,30 +332,30 @@ def _ark(actual: list, predicted: list, k=10) -> int:
 
     return score / len(actual)
 
-def mark(actual: List[list], predicted: List[list], k=10) -> int:
+def recall_average_at_k_mean(actual: List[list], y_preds: List[list], k=10) -> int:
     """
     Computes the mean average recall at k.
     Parameters
     ----------
     actual : a list of lists
-        Actual items to be predicted
+        Actual items to be y_preds
         example: [['A', 'B', 'X'], ['A', 'B', 'Y']]
-    predicted : a list of lists
+    y_preds : a list of lists
         Ordered predictions
         example: [['X', 'Y', 'Z'], ['X', 'Y', 'Z']]
     Returns:
     -------
-        mark: int
+        recall_average_at_k_mean: int
             The mean average recall at k (mar@k)
     """
-    return np.mean([_ark(a,p,k) for a,p in zip(actual, predicted)])
+    return np.mean([recall_avg_at_k(a,p,k) for a,p in zip(actual, y_preds)])
 
-def novelty(predicted: List[list], pop: dict, u: int, n: int) -> Tuple[float, list]:
+def novelty(y_preds: List[list], pop: dict, u: int, n: int) -> Tuple[float, list]:
     """
     Computes the novelty for a list of recommendations
     Parameters
     ----------
-    predicted : a list of lists
+    y_preds : a list of lists
         Ordered predictions
         example: [['X', 'Y', 'Z'], ['X', 'Y', 'Z']]
     pop: dictionary
@@ -379,7 +379,7 @@ def novelty(predicted: List[list], pop: dict, u: int, n: int) -> Tuple[float, li
     """
     mean_self_information = []
     k = 0
-    for sublist in predicted:
+    for sublist in y_preds:
         self_information = 0
         k += 1
         for i in sublist:
@@ -389,56 +389,56 @@ def novelty(predicted: List[list], pop: dict, u: int, n: int) -> Tuple[float, li
     return novelty, mean_self_information
 
 
-def recommender_precision(predicted: List[list], actual: List[list]) -> int:
+def recommender_precision(y_preds: List[list], actual: List[list]) -> int:
     """
     Computes the precision of each user's list of recommendations, and averages precision over all users.
     ----------
     actual : a list of lists
-        Actual items to be predicted
+        Actual items to be y_preds
         example: [['A', 'B', 'X'], ['A', 'B', 'Y']]
-    predicted : a list of lists
+    y_preds : a list of lists
         Ordered predictions
         example: [['X', 'Y', 'Z'], ['X', 'Y', 'Z']]
     Returns:
     -------
         precision: int
     """
-    def calc_precision(predicted, actual):
-        prec = [value for value in predicted if value in actual]
-        prec = np.round(float(len(prec)) / float(len(predicted)), 4)
+    def calc_precision(y_preds, actual):
+        prec = [value for value in y_preds if value in actual]
+        prec = np.round(float(len(prec)) / float(len(y_preds)), 4)
         return prec
 
-    precision = np.mean(list(map(calc_precision, predicted, actual)))
+    precision = np.mean(list(map(calc_precision, y_preds, actual)))
     return precision
 
 
-def recommender_recall(predicted: List[list], actual: List[list]) -> int:
+def recommender_recall(y_preds: List[list], actual: List[list]) -> int:
     """
     Computes the recall of each user's list of recommendations, and averages precision over all users.
     ----------
     actual : a list of lists
-        Actual items to be predicted
+        Actual items to be y_preds
         example: [['A', 'B', 'X'], ['A', 'B', 'Y']]
-    predicted : a list of lists
+    y_preds : a list of lists
         Ordered predictions
         example: [['X', 'Y', 'Z'], ['X', 'Y', 'Z']]
     Returns:
     -------
         recall: int
     """
-    def calc_recall(predicted, actual):
-        reca = [value for value in predicted if value in actual]
+    def calc_recall(y_preds, actual):
+        reca = [value for value in y_preds if value in actual]
         reca = np.round(float(len(reca)) / float(len(actual)), 4)
         return reca
 
-    recall = np.mean(list(map(calc_recall, predicted, actual)))
+    recall = np.mean(list(map(calc_recall, y_preds, actual)))
     return recall
 
 
 
 
 #######################################################################
-def statistics(x_train, y_train, x_test, y_test, y_pred):
+def statistics(x_train, y_train, x_test, y_true, y_pred):
     train_size = len(x_train)
     test_size = len(x_test)
     #num non-zero preds
@@ -450,9 +450,9 @@ def statistics(x_train, y_train, x_test, y_test, y_pred):
     }
 
 
-def sample_hits_at_k(y_preds, y_test, x_test=None, k=3, size=3):
+def sample_hits_at_k(y_preds, y_true, x_test=None, k=3, size=3):
     hits = []
-    for idx, (_p, _y) in enumerate(zip(y_preds, y_test)):
+    for idx, (_p, _y) in enumerate(zip(y_preds, y_true)):
         if _y[0] in _p[:k]:
             hit_info = {
                 'Y_TEST': [_y[0]],
@@ -467,9 +467,9 @@ def sample_hits_at_k(y_preds, y_test, x_test=None, k=3, size=3):
     return random.sample(hits, k=size)
 
 
-def sample_misses_at_k(y_preds, y_test, x_test=None, k=3, size=3):
+def sample_misses_at_k(y_preds, y_true, x_test=None, k=3, size=3):
     misses = []
-    for idx, (_p, _y) in enumerate(zip(y_preds, y_test)):
+    for idx, (_p, _y) in enumerate(zip(y_preds, y_true)):
         if _y[0] not in _p[:k]:
             miss_info =  {
                 'Y_TEST': [_y[0]],
@@ -484,39 +484,39 @@ def sample_misses_at_k(y_preds, y_test, x_test=None, k=3, size=3):
     return random.sample(misses, k=size)
 
 
-def hit_rate_at_k_nep(y_preds, y_test, k=3):
-    y_test = [[k] for k in y_test]
-    return hit_rate_at_k(y_preds, y_test, k=k)
+def hit_rate_at_k_nep(y_preds, y_true, k=3):
+    y_true = [[k] for k in y_true]
+    return hit_rate_at_k(y_preds, y_true, k=k)
 
 
-def hit_rate_at_k(y_preds, y_test, k=3):
+def hit_rate_at_k(y_preds, y_true, k=3):
     hits = 0
-    for _p, _y in zip(y_preds, y_test):
+    for _p, _y in zip(y_preds, y_true):
         if len(set(_p[:k]).intersection(set(_y))) > 0:
             hits += 1
-    return hits / len(y_test)
+    return hits / len(y_true)
 
 
-def mrr_at_k_nep(y_preds, y_test, k=3):
+def mrr_at_k_nep(y_preds, y_true, k=3):
     """
     Computes MRR
     :param y_preds: y, as lists of lists
-    :param y_test: target data, as lists of lists (eventually [[sku1], [sku2],...]
+    :param y_true: target data, as lists of lists (eventually [[sku1], [sku2],...]
     :param k: top-k
     """
-    y_test = [[k] for k in y_test]
-    return mrr_at_k(y_preds, y_test, k=k)
+    y_true = [[k] for k in y_true]
+    return mrr_at_k(y_preds, y_true, k=k)
 
 
-def mrr_at_k(y_preds, y_test, k=3):
+def mrr_at_k(y_preds, y_true, k=3):
     """
     Computes MRR
     :param y_preds: y, as lists of lists
-    :param y_test: target data, as lists of lists (eventually [[sku1], [sku2],...]
+    :param y_true: target data, as lists of lists (eventually [[sku1], [sku2],...]
     :param k: top-k
     """
     rr = []
-    for _p, _y in zip(y_preds, y_test):
+    for _p, _y in zip(y_preds, y_true):
         for rank, p in enumerate(_p[:k], start=1):
             if p in _y:
                 rr.append(1 / rank)
@@ -552,13 +552,13 @@ def popularity_bias_at_k(y_preds, x_train, k=3):
     return sum(all_popularity) / len(y_preds)
 
 
-def precision_at_k(y_preds, y_test, k=3):
-    precision_ls = [len(set(_y).intersection(set(_p[:k]))) / len(_p) if _p else 1 for _p, _y in zip(y_preds, y_test)]
+def precision_at_k(y_preds, y_true, k=3):
+    precision_ls = [len(set(_y).intersection(set(_p[:k]))) / len(_p) if _p else 1 for _p, _y in zip(y_preds, y_true)]
     return np.average(precision_ls)
 
 
-def recall_at_k(y_preds, y_test, k=3):
-    recall_ls = [len(set(_y).intersection(set(_p[:k]))) / len(_y) if _y else 1 for _p, _y in zip(y_preds, y_test)]
+def recall_at_k(y_preds, y_true, k=3):
+    recall_ls = [len(set(_y).intersection(set(_p[:k]))) / len(_y) if _y else 1 for _p, _y in zip(y_preds, y_true)]
     return np.average(recall_ls)
 
 
@@ -603,7 +603,7 @@ def precision_at(y, labels, k=10, assume_unique=True):
     Parameters
     ----------
     y : array-like, shape=(n_predictions,)
-        The prediction array. The items that were predicted, in descending
+        The prediction array. The items that were y_preds, in descending
         order of relevance.
     labels : array-like, shape=(n_ratings,)
         The labels (positively-rated items).
@@ -611,7 +611,7 @@ def precision_at(y, labels, k=10, assume_unique=True):
         The rank at which to measure the precision.
     assume_unique : bool, optional (default=True)
         Whether to assume the items in the labels and y are each
-        unique. That is, the same item is not predicted multiple times or
+        unique. That is, the same item is not y_preds multiple times or
         rated multiple times.
     Examples
     --------
@@ -653,13 +653,13 @@ def mean_average_precision(y, labels, assume_unique=True):
     Parameters
     ----------
     y : array-like, shape=(n_predictions,)
-        The prediction array. The items that were predicted, in descending
+        The prediction array. The items that were y_preds, in descending
         order of relevance.
     labels : array-like, shape=(n_ratings,)
         The labels (positively-rated items).
     assume_unique : bool, optional (default=True)
         Whether to assume the items in the labels and y are each
-        unique. That is, the same item is not predicted multiple times or
+        unique. That is, the same item is not y_preds multiple times or
         rated multiple times.
     Examples
     --------
@@ -707,7 +707,7 @@ def mean_average_precision(y, labels, assume_unique=True):
     return _mean_ranking_metric(y, labels, _inner_map)
 
 
-def ndcg_at(y, labels, k=10, assume_unique=True):
+def ndcg_at_k(y, labels, k=10, assume_unique=True):
     """Compute the normalized discounted cumulative gain at K.
     Compute the average NDCG value of all the queries, truncated at ranking
     position k. The discounted cumulative gain at position k is computed as:
@@ -719,7 +719,7 @@ def ndcg_at(y, labels, k=10, assume_unique=True):
     Parameters
     ----------
     y : array-like, shape=(n_predictions,)
-        The prediction array. The items that were predicted, in descending
+        The prediction array. The items that were y_preds, in descending
         order of relevance.
     labels : array-like, shape=(n_ratings,)
         The labels (positively-rated items).
@@ -727,7 +727,7 @@ def ndcg_at(y, labels, k=10, assume_unique=True):
         The rank at which to measure the NDCG.
     assume_unique : bool, optional (default=True)
         Whether to assume the items in the labels and y are each
-        unique. That is, the same item is not predicted multiple times or
+        unique. That is, the same item is not y_preds multiple times or
         rated multiple times.
     Examples
     --------
@@ -737,9 +737,9 @@ def ndcg_at(y, labels, k=10, assume_unique=True):
     ...          [1, 2, 3, 4, 5]]
     >>> labels for the 3 users
     >>> labels = [[1, 2, 3, 4, 5], [1, 2, 3], []]
-    >>> ndcg_at(preds, labels, 3)
+    >>> ndcg_at_k(preds, labels, 3)
     0.3333333432674408
-    >>> ndcg_at(preds, labels, 10)
+    >>> ndcg_at_k(preds, labels, 10)
     0.48791273434956867
     References
     ----------
