@@ -78,7 +78,7 @@ def os_file_compile_check(filename:str, verbose=1):
         return True
     except Exception as e:
        valid = False
-       if verbose >0 verbose==True : 
+       if verbose >0 : 
            print(e)
            traceback.print_exc() # Remove to silence any errros
        return False
