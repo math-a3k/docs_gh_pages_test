@@ -43,10 +43,10 @@ def test1():
     os_file_compile_check_batch(dirin)
 
 
-
-
 def test2() -> None:
     pass
+
+
 
 
 
@@ -87,7 +87,7 @@ def os_file_compile_check(filename:str, verbose=1):
 
 
 #############################################################################################
-def format_addheader(dirin:str=None):
+def format_add_header(dirin:str=None):
 
     flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="")
 
