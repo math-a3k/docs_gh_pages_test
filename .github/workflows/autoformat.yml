@@ -69,9 +69,11 @@ jobs:
         
 
     - name: AutoFormat python files
+      continue-on-error: true
       run:  |
         pip install --upgrade monkeytype
-        python  utilmy/docs/format.py  run_format1
+        python  utilmy/docs/format.py  test1
+        python  utilmy/docs/format.py  format_add_header  --dirin "./"
 
 
     #- name: test_compile
