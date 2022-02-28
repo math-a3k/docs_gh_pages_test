@@ -69,12 +69,14 @@ jobs:
         
 
     - name: AutoFormat python files
-      continue-on-error: true
       run:  |
         pip install --upgrade monkeytype
         python  utilmy/docs/format.py  run_format1
 
 
+    #- name: test_compile
+    #  # continue-on-error: true
+    #  run: python test.py test_compile
 
 
 

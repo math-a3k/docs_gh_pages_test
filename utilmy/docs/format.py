@@ -36,14 +36,53 @@ def test_all() -> None:
     test2()
 
 
-def test1() -> None:
-    flist = glob_glob_python("**/",nfile=3)
-    results = [os.system(f"python -m py_compile {i}") for i in flist]
-    results = ["Working" if x==0 else "Failed" for x in results]
-    log(results)
+
+def test1():
+    import utilmy
+    dirin = os.path.dirname(  utilmy.__file__ )
+    os_file_compile_batch(dirin)
+
+
+
 
 def test2() -> None:
     pass
+
+
+
+#############################################################################################
+def os_file_compile_batch(dirin) -> None:
+    """
+
+
+
+    """
+    flist = glob_glob_python( dirin, "*.py",nfile=3)
+
+    ### DO NOT use Command line
+    for fi in flist :
+        res = os_file_compile_check(fi)
+        results.append(res)
+
+    #results = [os.system(f"python -m py_compile {i}") for i in flist]
+    results = ["Working" if x==0 else "Failed" for x in results]
+    log(results)
+
+
+def os_file_compile_check(filename:str, verbose=1):
+    import ast, traceback
+    try : 
+        with open(filename) as f:
+            source = f.read()
+        ast.parse(source)
+        return True
+    except Exception as e:
+       valid = False
+       if verbose >0 verbose==True : 
+           print(e)
+           traceback.print_exc() # Remove to silence any errros
+       return False
+
 
 
 
