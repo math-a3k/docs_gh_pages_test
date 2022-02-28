@@ -131,8 +131,13 @@ if 'utilties':
         """
         flist = glob.glob(dirin + suffix) 
         flist = flist + glob.glob(dirin + "/**/" + suffix ) 
-        if exclude != "":     
-           flist = [ fi for fi in flist if exclude not in fi ]
+        elist = []
+        
+        if exclude != "":    
+           for ei in exclude.split(";"):
+               elist = glob.glob(ei + "/" + suffix ) 
+        flist = [ fi for fi in flist if fi not in elist ]
+
         flist = flist[:nfile]
         log(flist)
         return flist
