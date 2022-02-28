@@ -95,15 +95,28 @@ def format_add_header(dirin:str=None):
         with open(fi, mode='r') as fp:
             ll = fp.readlines()
 
-        if not 'MNAME' in  ll : 
+        if not find_str(ll,  'MNAME') : 
             ll2 = "NAME" + ""
 
 
-        if not 'HELP' in  ll : 
+        if not find_str(ll,  'HELP') : 
              pass
 
 
+        
+        ### Write down and check
+        to_file(ll, finew)
+        isok  = os_file_compile_check(finew)
+        if isok :
+            os.remove(fi)
+            os.rename(finew, fi)
+        else :    
+            os.remove(finew)
+            err_list.append(fi)
+        
+  
 
+  
 
 if 'utilties':
     def os_path_norm(diroot:str):
