@@ -53,20 +53,20 @@ def test2() -> None:
 #############################################################################################
 def os_file_compile_batch(dirin) -> None:
     """
+    ### DO NOT use Command line  !!!!!!
 
 
 
     """
-    flist = glob_glob_python( dirin, "*.py",nfile=3)
-
-    ### DO NOT use Command line
+    flist   = glob_glob_python( dirin, "*.py",nfile=3)
+    results = []
     for fi in flist :
         res = os_file_compile_check(fi)
         results.append(res)
 
     #results = [os.system(f"python -m py_compile {i}") for i in flist]
     results = ["Working" if x==0 else "Failed" for x in results]
-    log(results)
+    return results
 
 
 def os_file_compile_check(filename:str, verbose=1):
