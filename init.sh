@@ -19,7 +19,6 @@ alias ipy="ipython --no-autoindent"
 
 ################################################################################################
 function git_autocommit {
-   now
    git  add -A
    git  commit -m "auto commit"
 }
@@ -27,12 +26,15 @@ function git_autocommit {
 
 
 
+function cron_autocommit {
+
+  while true; do git_autocommit; sleep 3600; done
+}
 
 
 
 ################################################################################################
 #### Auto Batch
-while true; do git_autocommit; sleep 3600; done
 
 
 
