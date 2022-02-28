@@ -39,7 +39,7 @@ def test_all() -> None:
 
 def test1():
     import utilmy
-    dirin = os.path.dirname(  utilmy.__file__ )
+    dirin = os.path.dirname(  utilmy.__file__ )  ### Repo Root folder
     os_file_compile_check_batch(dirin)
 
 
@@ -86,25 +86,26 @@ def os_file_compile_check(filename:str, verbose=1):
 
 
 #############################################################################################
-def format_add_header(dirin:str=None):
+def format_add_header(dirin:str="./"):
 
-    flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="")
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="*zz*")
 
+    ll2 = ""
     for fi in flist :
         with open(fi, mode='r') as fp:
             ll = fp.readlines()
 
-        if not find_str(ll,  'MNAME') : 
+        if find_str(ll,  'MNAME') < 0  : 
             ll2 = "NAME" + ""
 
 
-        if not find_str(ll,  'HELP') : 
+        if find_str(ll,  'HELP') < 0 : 
              pass
 
 
         
         ### Write down and check
-        to_file(ll, finew)
+        to_file(ll2, finew)
         isok  = os_file_compile_check(finew)
         if isok :
             os.remove(fi)
@@ -114,8 +115,17 @@ def format_add_header(dirin:str=None):
             err_list.append(fi)
         
   
+def to_file(lines, fpath):
+    pass
+    
 
+def find_str(lines, word):
+    for ii,li in enumerate(lines) :
+        if word in li : return ii
+    return -1    
   
+
+
 
 if 'utilties':
     def os_path_norm(diroot:str):
