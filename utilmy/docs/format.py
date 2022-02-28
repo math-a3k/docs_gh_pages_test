@@ -72,12 +72,11 @@ def os_file_compile_check_batch(dirin:str, nfile=10) -> None:
 def os_file_compile_check(filename:str, verbose=1):
     import ast, traceback
     try : 
-        with open(filename) as f:
+        with open(filename, mode='r') as f:
             source = f.read()
         ast.parse(source)
         return True
     except Exception as e:
-       valid = False
        if verbose >0 : 
            print(e)
            traceback.print_exc() # Remove to silence any errros
