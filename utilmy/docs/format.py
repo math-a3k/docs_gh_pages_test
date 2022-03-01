@@ -44,7 +44,10 @@ def test1():
 
 
 def test2() -> None:
-    pass
+    import utilmy
+    dirin = os.path.dirname("./")  ### Repo Root folder
+    dirout = os_make_dirs('utilmy\\docs\\test\\')[0]
+    reformatter(dirin,dirout)
 
 
 
@@ -86,7 +89,7 @@ def reformat_pyfile(file_path:str):
     """
     adding log function import and replace all print( with log(
     """
-    with open(file_path,'r') as f:
+    with open(file_path,'r',encoding='utf-8') as f:
         file_as_text = f.read()
     import_line = "from utilmy import log, log2"
     if file_as_text.find(import_line)==-1:
@@ -95,14 +98,14 @@ def reformat_pyfile(file_path:str):
     return file_as_text
 
 def reformatter(dirin:str,dirout:str):
-    flist = glob_glob_python(dirin, suffix ="*.py", nfile=3, exclude="*zz*")
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=50, exclude="*zz*")
     filenames = [x.split(os.sep)[-1] for x in flist]
     files_formatted = [reformat_pyfile(file) for file in flist]
-    out_dirs = os_make_dirs(dirout)
-    for out_dir in out_dirs:
-        for file_data,filename in zip(files_formatted,filenames):
-            with open(filename,'w') as w:
-                w.write(file_data)
+    if dirout[-1]!=os.sep:
+        dirout+=os.sep
+    for file_data,filename in zip(files_formatted,filenames):
+        with open(dirout+filename,'w',encoding='utf-8') as w:
+            w.write(file_data)
 
 #############################################################################################
 def format_add_header(dirin:str="./"):
