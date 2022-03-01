@@ -45,8 +45,8 @@ def test1():
 
 def test2() -> None:
     import utilmy
-    dirin = os.path.dirname("./")  ### Repo Root folder
-    dirout = os_make_dirs('utilmy\\docs\\test\\')[0]
+    dirin = os.path.dirname(utilmy.__file__)  ### Repo Root folder
+    dirout = os_make_dirs('utilmy\\docs\\test\\')[0] ### test dir
     reformatter(dirin,dirout)
 
 
