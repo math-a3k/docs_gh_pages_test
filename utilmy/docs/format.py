@@ -81,9 +81,28 @@ def os_file_compile_check(filename:str, verbose=1):
            print(e)
            traceback.print_exc() # Remove to silence any errros
        return False
+#############################################################################################
+def reformat_pyfile(file_path:str):
+    """
+    adding log function import and replace all print( with log(
+    """
+    with open(file_path,'r') as f:
+        file_as_text = f.read()
+    import_line = "from utilmy import log, log2"
+    if file_as_text.find(import_line)==-1:
+        file_as_text = import_line+"\n"+file_as_text
+    file_as_text = file_as_text.replace("print(",'log(')
+    return file_as_text
 
-
-
+def reformatter(dirin:str,dirout:str):
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=3, exclude="*zz*")
+    filenames = [x.split(os.sep)[-1] for x in flist]
+    files_formatted = [reformat_pyfile(file) for file in flist]
+    out_dirs = os_make_dirs(dirout)
+    for out_dir in out_dirs:
+        for file_data,filename in zip(files_formatted,filenames):
+            with open(filename,'w') as w:
+                w.write(file_data)
 
 #############################################################################################
 def format_add_header(dirin:str="./"):
@@ -164,7 +183,19 @@ if 'utilties':
         log(flist)
         return flist
 
+    def os_make_dirs(filename):
+        if isinstance(filename, str):
+            filename = [os.path.dirname(filename)]
 
+        if isinstance(filename, list):
+            folder_list = filename
+            for f in folder_list:
+                try:
+                    if not os.path.exists(f):
+                        os.makedirs(f)
+                except Exception as e:
+                    print(e)
+            return folder_list
 
 
 ###################################################################################################
