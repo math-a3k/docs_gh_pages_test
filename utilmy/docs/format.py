@@ -98,7 +98,7 @@ def reformat_pyfile(file_path:str):
     return file_as_text
 
 def reformatter(dirin:str,dirout:str):
-    flist = glob_glob_python(dirin, suffix ="*.py", nfile=50, exclude="*zz*")
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="*zz*")
     filenames = [x.split(os.sep)[-1] for x in flist]
     files_formatted = [reformat_pyfile(file) for file in flist]
     if dirout[-1]!=os.sep:
