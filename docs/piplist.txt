@@ -140,7 +140,7 @@ tzdata==2021.5
 tzlocal==4.1
 urllib3==1.26.8
 urwid==2.1.2
--e git+https://github.com/arita37/myutil@93afabea5e96e581fdfd7daab9885eeaef06ae12#egg=utilmy
+-e git+https://github.com/arita37/myutil@a3444ade7efe3dd8c5db5fbaec031b7938238946#egg=utilmy
 visions==0.7.4
 wcwidth==0.2.5
 Werkzeug==2.0.3

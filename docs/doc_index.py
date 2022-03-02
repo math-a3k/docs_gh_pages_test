@@ -28,63 +28,6 @@ run_cli()
 
 
 
-utilmy/codeparser/__init__.py
-
-
-utilmy/codeparser/project_graph/project_graph/__init__.py
-
-
-utilmy/codeparser/project_graph/setup.py
-
-
-utilmy/codeparser/project_graph/test_script.py
--------------------------functions----------------------
-sleep_one_seconds()
-sleep_two_seconds()
-
-
-
-utilmy/codeparser/project_graph/test_script_argparse.py
--------------------------functions----------------------
-foo()
-sleep_one_seconds()
-sleep_two_seconds()
-
-
-
-utilmy/codeparser/project_graph/tests/__init__.py
-
-
-utilmy/codeparser/project_graph/tests/goodnight.py
--------------------------functions----------------------
-sleep_five_seconds()
-
-
-
-utilmy/codeparser/project_graph/tests/script_test_case_1.py
--------------------------functions----------------------
-bar()
-foo()
-
-
-
-utilmy/codeparser/project_graph/tests/sub_dir/__init__.py
-
-
-utilmy/codeparser/project_graph/tests/sub_dir/script_test_case_2.py
--------------------------functions----------------------
-bar()
-foo()
-
-
-
-utilmy/codeparser/project_graph/tests/test_performance_graph.py
--------------------------functions----------------------
-test_lowlvl()
-test_toplvl()
-
-
-
 utilmy/configs/__init__.py
 
 
@@ -3227,6 +3170,379 @@ test_image_resize()
 utilmy/templates/templist/pypi_package/tests/test_validate.py
 -------------------------functions----------------------
 test_image_padding_get()
+
+
+
+utilmy/tools/__init__.py
+
+
+utilmy/tools/cli_code/cli_code/__init__.py
+
+
+utilmy/tools/cli_code/cli_code/cli_conda_merge.py
+-------------------------functions----------------------
+dump(output_yaml)
+getPipRequirementsContent(dependencies, versions = True, priorityVersions = True)
+getPriorityList()
+main()
+merge(args)
+merge_channels(channels_list)
+merge_envs(args)
+merge_pips(pips)
+parse_args()
+prioritySort(dependencies)
+removePinnedDependencies(dependencies, versions = True, priorityVersions = True)
+resolve_dependencies(dependencies_list)
+sortYamlDeps(dependencies)
+stripPinnedDep(dep)
+stripPinnedVerDep(dep)
+
+-------------------------methods----------------------
+DAG.__init__(self)
+DAG.__len__(self)
+DAG.add_edge(self, from_node, to_node)
+DAG.add_node(self, node_name)
+DAG.independent_nodes(self)
+DAG.topological_sort(self)
+DAG.validate(self)
+
+
+utilmy/tools/cli_code/cli_code/cli_convert_ipynb.py
+-------------------------functions----------------------
+check(file_list, dump = False)
+convert2python(source_files, data_file, out_dir)
+load_arguments()
+main()
+scan(data_file)
+
+
+
+utilmy/tools/cli_code/cli_code/cli_doc_auto/__init__.py
+
+
+utilmy/tools/cli_code/cli_code/cli_doc_auto/main.py
+-------------------------functions----------------------
+get_arguments()
+main()
+
+
+
+utilmy/tools/cli_code/cli_code/cli_docs.py
+-------------------------functions----------------------
+code_parse_line(li, pattern_type = "import/import_externa")
+conda_path_get(subfolder="package/F = "package/F:/")
+log(*args, reset = 0)
+main()
+module_doc_write(module_name = "", input_signature_csv_file = "", outputfile = "", filter_list = None, debug = 0)
+module_doc_write_batch(module_list = None, list_exclude = None, folder_export = "/")
+module_getname(name)
+module_getpath(name)
+module_load(name_or_path = "")
+module_signature_compare(df_csv_new, df_csv_old, export_csv = "", return_df = 0)
+module_signature_get(module_name)
+module_signature_write(module_name, outputfile = "", return_df = 0, isdebug = 0)
+module_tofolder(name_or_path, outputfolder = "./zmp", isdebug = 1)
+module_unitest_write(input_signature_csv_file = "", module_name = "", outputfile = "unittest.txt", filter_list = None, isdebug = 0, )
+np_list_dropduplicate(seq)
+np_merge(*dicts)
+obj_arg_filter_apply_1(df, filter_list = None)
+obj_arg_filter_nonetype(x)
+obj_class_ispecial(obj)
+obj_get_arginfo(obj, args)
+obj_get_args(obj)
+obj_get_doc_string(obj)
+obj_get_full_signature(obj)
+obj_get_name(obj)
+obj_get_nametype(obj)
+obj_get_prefix(name)
+obj_get_signature(obj)
+obj_get_type(x)
+obj_guess_arg_type(arg_default_values)
+obj_guess_arg_type2(full_name, arg_name, type_guess_engine = "pytype")
+os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
+pd_df_expand(x)
+pd_df_format(df, index, filter = True)
+str_join(*members)
+str_strip_text(string)
+zdoc()
+ztest()
+ztest_mod(mod)
+
+-------------------------methods----------------------
+Module.__init__(self, module_name)
+Module.get_builtin_functions(self)
+Module.get_class_methods(self)
+Module.get_classes(self)
+Module.get_functions(self)
+Module.get_mlattr(self, full_name)
+Module.get_module_isbuiltin(self)
+Module.get_module_version(self)
+Module.get_submodule(self)
+Module.get_submodules(self)
+Module.is_imported(self, submodule_name)
+
+
+utilmy/tools/cli_code/cli_code/cli_download.py
+-------------------------functions----------------------
+get_arguments()
+main()
+
+-------------------------methods----------------------
+Downloader.__init__(self, url)
+Downloader._transform_dropbox_url(self)
+Downloader._transform_gdrive_url(self)
+Downloader._transform_github_url(self)
+Downloader.adjust_url(self)
+Downloader.clean_netloc(self)
+Downloader.download(self, filepath = '')
+Downloader.get_filename(self, headers)
+
+
+utilmy/tools/cli_code/cli_code/cli_env_autoinstall.py
+-------------------------functions----------------------
+conda_env_exits(conda_env)
+create_env(folder_input, conda_env, python_version = '3.6', packages = 'numpy')
+get_missing(all_packages, env_name = "test")
+get_os()
+get_packages(file)
+get_required_packages(source_files, conda_env = "test")
+load_arguments()
+main()
+os_exec(x)
+scan(data_file)
+
+
+
+utilmy/tools/cli_code/cli_code/cli_format.py
+-------------------------functions----------------------
+format_assignments(text)
+format_comments(text = "default", line_size = 90)
+format_dir(in_dir, out_dir)
+format_file(in_file, out_dir)
+format_imports(text)
+format_logs(text = "default", line_size = 90)
+load_arguments()
+main()
+mod_period(in_file)
+os_glob(in_dir)
+
+
+
+utilmy/tools/cli_code/cli_code/cli_github_search.py
+-------------------------functions----------------------
+get_arguments()
+main()
+search_github(args, start_time)
+
+
+
+utilmy/tools/cli_code/cli_code/cli_json.py
+-------------------------functions----------------------
+dict_update(fields_list, d, value)
+json_codesource_to_json(fpath)
+json_csv_to_json(file_csv = "", out_path = "dataset/")
+json_norm(x)
+json_norm_val(x)
+json_parse(ddict)
+json_to_object(ddict)
+jsons_to_df(json_paths)
+load_callable_from_dict(function_dict, return_other_keys = False)
+load_callable_from_uri(uri)
+load_function(package = "mlmodels.util", name = "path_norm")
+load_function_uri(uri_name = "path_norm")
+log(*s, n = 0, m = 0)
+main()
+os_folder_getfiles(folder, ext, dirlevel = -1, mode = "fullpath")
+os_package_root_path(filepath = "", sublevel = 0, path_add = "")
+params_json_load(path, config_mode = "test", tlist = ["model_pars", "data_pars", "compute_pars", "out_pars"])
+path_norm(path)
+test_functions_json(arg = None)
+test_json_conversion()
+
+-------------------------methods----------------------
+to_namespace.__init__(self, adict)
+to_namespace.get(self, key)
+
+
+utilmy/tools/cli_code/cli_code/cli_module_parser.py
+-------------------------functions----------------------
+_onerror_reraise(e)
+_walk(*args, include_hidden = None, **kwargs)
+analyzeSource(source)
+findVariablesInDir(directory)
+get_arguments()
+main()
+usage(message)
+writeCSV(variables, file_path = None)
+
+-------------------------methods----------------------
+ASTAnalyzer.__init__(self)
+ASTAnalyzer._handleArguments(self, arguments)
+ASTAnalyzer._handleForceGlobalVariable(self, variable_name)
+ASTAnalyzer._handleGlobalVariable(self, variable_name)
+ASTAnalyzer._handleLocalVariable(self, variable_name)
+ASTAnalyzer._handleVariable(self, node)
+ASTAnalyzer._impl_visit_Function(self, node)
+ASTAnalyzer.getVariables(self)
+ASTAnalyzer.visit_AsyncFunctionDef(self, node)
+ASTAnalyzer.visit_ClassDef(self, node)
+ASTAnalyzer.visit_FunctionDef(self, node)
+ASTAnalyzer.visit_Global(self, node)
+ASTAnalyzer.visit_Lambda(self, node)
+ASTAnalyzer.visit_Name(self, node)
+
+
+utilmy/tools/cli_code/cli_code/cli_repo_check.py
+-------------------------functions----------------------
+get_logger()
+get_os()
+git_clone(url, out_dir = None)
+load_arguments()
+main()
+os_system(cmds, stdout_only = True)
+repo_build_conda(in_folder, conda_env = None)
+repo_check_root_files(folder, conda_env)
+repo_generate_signature(folder)
+scan_dir(folder)
+
+
+
+utilmy/tools/cli_code/cli_code/util_cli.py
+-------------------------functions----------------------
+_os_file_search_fast(fname, texts = None, mode = "regex/str")
+os_file_getname(path)
+os_file_getpath(path)
+os_file_gettext(file1)
+os_file_listall(dir1, pattern = "*.*", dirlevel = 1, onlyfolder = 0)
+os_file_rename(some_dir, pattern = "*.*", pattern2 = "", dirlevel = 1)
+os_file_replace(source_file_path, pattern, substring)
+os_file_replacestring1(find_str, rep_str, file_path)
+os_file_replacestring2(findstr, replacestr, some_dir, pattern = "*.*", dirlevel = 1)
+
+
+
+utilmy/tools/cli_code/setup.py
+
+
+utilmy/tools/cli_code/test/cli_convert_ipynb.py
+-------------------------functions----------------------
+check(file_list, dump = False)
+convert2python(source_files, data_file, out_dir)
+load_arguments()
+main()
+scan(data_file)
+
+
+
+utilmy/tools/cli_code/test/run_train.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 0)
+map_model(model_name)
+model_dict_load(model_dict, config_path, config_name, verbose = True)
+run_model_check(path_output, scoring)
+run_train(config_name, config_path = "source/config_model.py", n_sample = 5000, mode = "run_preprocess", model_dict = None, return_mode = 'file')
+save_features(df, name, path)
+train(model_dict, dfX, cols_family, post_process_fun)
+
+
+
+utilmy/tools/cli_code/test/test/run_train.py
+-------------------------functions----------------------
+log(*s, n = 0, m = 0)
+map_model(model_name)
+model_dict_load(model_dict, config_path, config_name, verbose = True)
+run_model_check(path_output, scoring)
+run_train(config_name, config_path = "source/config_model.py", n_sample = 5000, mode  =  "run_preprocess", model_dict =  None, return_mode =  'file')
+save_features(df, name, path)
+train(model_dict, dfX, cols_family, post_process_fun)
+
+
+
+utilmy/tools/cli_code/test/ztest/ast_analyzer_test.py
+-------------------------methods----------------------
+TestFileFinder.test_corner_cases(self)
+TestFileFinder.test_file_finder(self)
+
+
+utilmy/tools/cli_code/test/ztest/file_finder_test.py
+-------------------------methods----------------------
+TestFileFinder.test_corner_cases(self)
+TestFileFinder.test_findVariablesInDir(self)
+TestFileFinder.test_findVariablesInFile(self)
+
+
+utilmy/tools/cli_code/test/ztest/output_test.py
+-------------------------methods----------------------
+TestOutput.test_corner_cases(self)
+TestOutput.test_output(self)
+
+
+utilmy/tools/cli_code/test/ztest/run_batch.py
+
+
+utilmy/tools/cli_code/test/ztest/ztest_batch.py
+
+
+utilmy/tools/cli_code/test/ztest/ztest_import.py
+
+
+utilmy/tools/cli_code/test/ztest/ztest_runall.py
+
+
+utilmy/tools/cli_code/test/ztest/ztest_util.py
+
+
+utilmy/tools/codeparser_project_graph/project_graph/__init__.py
+
+
+utilmy/tools/codeparser_project_graph/setup.py
+
+
+utilmy/tools/codeparser_project_graph/test_script.py
+-------------------------functions----------------------
+sleep_one_seconds()
+sleep_two_seconds()
+
+
+
+utilmy/tools/codeparser_project_graph/test_script_argparse.py
+-------------------------functions----------------------
+foo()
+sleep_one_seconds()
+sleep_two_seconds()
+
+
+
+utilmy/tools/codeparser_project_graph/tests/__init__.py
+
+
+utilmy/tools/codeparser_project_graph/tests/goodnight.py
+-------------------------functions----------------------
+sleep_five_seconds()
+
+
+
+utilmy/tools/codeparser_project_graph/tests/script_test_case_1.py
+-------------------------functions----------------------
+bar()
+foo()
+
+
+
+utilmy/tools/codeparser_project_graph/tests/sub_dir/__init__.py
+
+
+utilmy/tools/codeparser_project_graph/tests/sub_dir/script_test_case_2.py
+-------------------------functions----------------------
+bar()
+foo()
+
+
+
+utilmy/tools/codeparser_project_graph/tests/test_performance_graph.py
+-------------------------functions----------------------
+test_lowlvl()
+test_toplvl()
 
 
 
