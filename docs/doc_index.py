@@ -976,11 +976,17 @@ main()
 
 utilmy/docs/format.py
 -------------------------functions----------------------
-format_addheader(dirin:str = None)
+find_str(lines, word)
+format_add_header(dirin:str = "./")
 help()
+os_file_compile_check(dirin:str, nfile = 10)
+os_file_compile_check_batch(dirin:str, nfile = 10)
+reformat_pyfile(file_path:str)
+reformatter(dirin:str, dirout:str)
 test1()
 test2()
 test_all()
+to_file(lines, fpath)
 
 
 
@@ -1006,6 +1012,15 @@ os_path_norm(diroot)
 run_monkeytype(dirin:str, dirout:str, diroot:str = None, mode = "stub", nfile = 10, exclude = "")
 run_utilmy(nfile = 100)
 run_utilmy2(nfile = 100)
+test1()
+test2()
+test_all()
+
+
+
+utilmy/docs/templates/util_xxx.py
+-------------------------functions----------------------
+help()
 test1()
 test2()
 test_all()
@@ -3212,15 +3227,6 @@ test_image_resize()
 utilmy/templates/templist/pypi_package/tests/test_validate.py
 -------------------------functions----------------------
 test_image_padding_get()
-
-
-
-utilmy/templates/templist/util_xxx.py
--------------------------functions----------------------
-help()
-test1()
-test2()
-test_all()
 
 
 
