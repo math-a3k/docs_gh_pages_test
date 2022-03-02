@@ -43,14 +43,17 @@ githash = get_current_githash()
 #####################################################################################
 ss1 = f"""
 
-Date, visualization utilities in python
+Utilities for 
+   visualization
+   data processing
+   data pipelining
+   batching
+   
 
 Details:
 https://packagegalaxy.com/python/utilmy
 
 
-To report bugs :
-https://github.com/arita37/utilmy_report/issues/1
 
 
 
