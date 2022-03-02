@@ -87,30 +87,30 @@ def os_file_compile_check(filename:str, verbose=1):
 
 
 #############################################################################################
-def format_add_logger(dirin:str,dirout:str):
+def format_add_logger(dirin:str,dirout:str, nfile=1000):
     """  adding log function import and replace all print( with log(
     """
     def reformat_pyfile(file_path:str):
         """
         """
         with open(file_path,'r',encoding='utf-8') as f:
-            file_as_text = f.read()
+            txt = f.read()
         import_line = "from utilmy import log, log2"
-        if file_as_text.find(import_line)==-1:
+        if txt.find(import_line)==-1:
 
             #### It's stupid, did you check.....
-            file_as_text = import_line+"\n"+file_as_text
-        file_as_text = file_as_text.replace("print(",'log(')
-        return file_as_text
+            txt = import_line+"\n"+txt
+        txt = txt.replace("print(",'log(')
+        return txt
 
-    flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="*zz*")
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=nfile, exclude="*zz*")
 
     for fi in flist :
-        fi = os_path_norm(fi)
-        fname = fi.split(os.sep)[-1] 
-        file_formatted = reformat_pyfile(fi) 
+        fi       = os_path_norm(fi)
+        fname    = fi.split(os.sep)[-1] 
+        file_new = reformat_pyfile(fi) 
         with open(dirout+ "/" + fname,'w',encoding='utf-8') as w:
-            w.write(file_formatted)
+            w.write(file_new)
 
 
 
