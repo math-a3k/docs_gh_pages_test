@@ -209,10 +209,16 @@ def test_recsys():
    from utilmy.recsys import metric as m
    m.test_all()
 
+  
+
+#######################################################################################
+def test_compile():
+   from utilmy.docs import format as m
+   log("from utilmy.doc import format")
+
+
 
 import utilmy as  uu
-
-
 
 
 #######################################################################################

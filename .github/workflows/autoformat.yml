@@ -8,7 +8,7 @@ on:
   push:
     branches:
     - autoformat 
-    - Lets7512  ### dev
+    - lets7512  ### dev
 
 #  pull_request:
 #    branches:
@@ -72,9 +72,13 @@ jobs:
       continue-on-error: true
       run:  |
         pip install --upgrade monkeytype
-        python  utilmy/docs/format.py  run_format1
+        python  utilmy/docs/format.py  test1
+        python  utilmy/docs/format.py  format_add_header  --dirin "./"
 
 
+    #- name: test_compile
+    #  # continue-on-error: true
+    #  run: python test.py test_compile
 
 
 
