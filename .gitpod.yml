@@ -5,7 +5,7 @@
 tasks:
   - init: pip install -r py36.txt  &&
           pip install imodels ipython &&
-          pip install -e .  ### install utilmy
+          pip install -e . &&  ### Install utilmy
           git fetch && git pull origin main  --rebase &&
           source init.sh 
           
