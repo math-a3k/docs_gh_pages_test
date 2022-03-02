@@ -1,0 +1,11 @@
+numpy
+pandas
+pyyaml
+nbconvert
+nbformat
+pypandoc
+tqdm
+requests
+beautifulsoup4
+lxml
+fire
