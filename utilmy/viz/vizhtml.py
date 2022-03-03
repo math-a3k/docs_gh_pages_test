@@ -406,6 +406,23 @@ class htmlDoc(object):
         if mode == 'd3':
             html_code = pd_plot_density_d3(df, colx, coly, radius, title, figsize, xlabel, ylabel, color, cfg)
         self.html += "\n\n" + html_code 
+      
+    def plot_parallel(self, df: pd.DataFrame, col=[],
+                    title: str = '',
+                    figsize: tuple = (460, 460), color: str = '#69b3a2',
+                    cfg: dict = {}, mode: str = 'd3', **kw):
+      """Create html density chart.
+      Args:
+         df:         pd Dataframe
+         col:       array of column name
+         ...
+         mode:       d3
+      """
+
+      html_code = ''
+      if mode == 'd3':
+         html_code = pd_plot_parallel_d3(df, col, title, figsize, color, cfg)
+      self.html += "\n\n" + html_code  
 
       
     def images_dir(self, dir_input="*.png",  title: str="", 
@@ -701,6 +718,120 @@ def pd_plot_density_d3(df: pd.DataFrame, colx, coly, radius=9,
     '''.format(data=data, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, n_point=n_point,
                container_id=container_id,
                radius=radius, width=width, height=height, title=title, xlabel=xlabel, ylabel=ylabel, color=color)
+
+    return html_code
+
+
+def pd_plot_parallel_d3(df: pd.DataFrame,
+                        col = [],
+                         title: str = '',
+                         figsize: tuple = (460, 460),
+                         color: str = '#69b3a2',
+                        cfg: dict = {}):
+
+    container_id = 'cid_' + str(np.random.randint(9999, 99999999))
+    html_code = f'<div id="{container_id}"></div>'
+
+    width = figsize[0]
+    height = figsize[1]
+
+    # check col is empty or string
+    if isinstance(col, str):
+        col = [col]
+    if len(col) == 0:
+        col = df.columns.tolist()
+
+    # print(col,"col")
+    for i in col:
+        df.loc[:, i] = df[i].fillna(0)
+        df.loc[:, i] = [to_float(t) for t in df[i].values]
+
+    data = df[col].to_json(orient='records')
+
+    html_code += '''
+        <script>
+    
+          // set the dimensions and margins of the graph
+          var margin = {{ top: 30, right: 10, bottom: 10, left: 0 }},
+            width = {width} - margin.left - margin.right,
+            height = {height} - margin.top - margin.bottom;
+    
+          // append the svg object to the body of the page
+          var svg = d3.select("#{container_id}")
+          .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+                  
+          svg.append("text")
+               .attr("x", width/2)
+               .attr("text-anchor", "middle")
+               .style("font-size", "16px")
+               .text("{title}");
+            
+          
+        // Parse the Data
+        data = {data}  
+            
+        // Extract the list of dimensions we want to keep in the plot. Here I keep all except the column called Species
+        dimensions = d3.keys(data[0]).filter(function(d) {{ 
+          col = {col};
+          if(col.includes(d)){{
+            return d 
+          }}  
+        }})
+
+        // For each dimension, I build a linear scale. I store all in a y object
+        var y = {{}}
+        for (i in dimensions) {{
+          name = dimensions[i]
+          y[name] = d3.scaleLinear()
+            .domain( d3.extent(data, function(d) {{ return +d[name]; }}) )
+            .range([height, 0])
+        }}
+
+        // Build the X scale -> it find the best position for each Y axis
+        x = d3.scalePoint()
+          .range([0, width])
+          .padding(1)
+          .domain(dimensions);
+
+        // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
+        function path(d) {{
+            return d3.line()(dimensions.map(function(p) {{ return [x(p), y[p](d[p])]; }}));
+        }}
+
+        // Draw the lines
+        svg
+          .selectAll("myPath")
+          .data(data)
+          .enter().append("path")
+          .attr("d",  path)
+          .style("fill", "none")
+          .style("stroke", "{color}")
+          .style("opacity", 0.5)
+
+        // Draw the axis:
+        svg.selectAll("myAxis")
+          // For each dimension of the dataset I add a 'g' element:
+          .data(dimensions).enter()
+          .append("g")
+          // I translate this element to its right position on the x axis
+          .attr("transform", function(d) {{ return "translate(" + x(d) + ")"; }})
+          // And I build the axis with the call function
+          .each(function(d) {{ d3.select(this).call(d3.axisLeft().scale(y[d])); }})
+          // Add axis title
+          .append("text")
+            .style("text-anchor", "middle")
+            .attr("y", -9)
+            .text(function(d) {{ return d; }})
+            .style("fill", "black")
+    
+    
+        </script>
+    '''.format(col=col, container_id=container_id, data=data, color=color, width=width, height=height, title=title)
 
     return html_code
 
