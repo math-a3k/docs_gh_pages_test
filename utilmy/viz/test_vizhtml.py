@@ -297,7 +297,6 @@ def test_page():
     vi.html_show(doc.get_html())
     doc.save('test_page.html')
  
- 
 def test_colimage_table():
   doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
   url = 'https://raw.githubusercontent.com/AlexAdvent/high_charts/main/table_data.csv'
@@ -308,7 +307,6 @@ def test_colimage_table():
   doc.table(df, use_datatable=False, table_id="testwithcolimage", custom_css_class='intro', colimage='image_url')
   doc.save(dir_out="testdata/test_viz_table.html")
   doc.open_browser()  # Open myfile.html   
-  
   
 def test_tseries_dateformat():
   data = test_getdata(verbose=False)
