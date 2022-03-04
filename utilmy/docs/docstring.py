@@ -60,11 +60,6 @@ def run_all(mode='overwrite'):
        generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
 
 
-def cli():
-    import argparse
-    args = argp
-
-
 
 
 ##########################################################################################################
@@ -288,8 +283,12 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
         test (Something completely different): whether to write script content to a test_it.py file
     """    
     dirin = Path(dirin) if isinstance(dirin, str) else dirin
-    p = dirin.glob("**/*.py")
-    scripts = [x for x in p if x.is_file()]
+    #p = dirin.glob("**/*.py")
+
+    exclude = "zml"
+    p = glob_glob_python(dirin, suffix ="*.py", nfile=7, exclude=exclude)
+
+    scripts = [x for x in p if Path(x).is_file()]
 
     # print(scripts)
     for script in scripts:
