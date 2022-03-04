@@ -527,13 +527,14 @@ def get_list_function_info(file_path):
     for function in all_functions:
         data = {}
         data["name"]    = function['function_name']
-        lines, indent   = _get_all_lines_in_function(function['function_name'], all_lines)
+        lines, indent, start_idx   = _get_all_lines_in_function(function['function_name'], all_lines)
         data["n_lines"] = len(lines)
         data["variables"], data["n_loop"], data['n_ifthen'] = _get_function_stats(lines, indent)
         data["type"]    = "function"
         data['line']    = function['line']
         data['docs']    = _get_docs(all_file_lines, function['line'], lines)
         data['indent']  = indent
+        data['start_idx'] = start_idx
 
         # calculate code_source
         data["code_source"] = ""
@@ -606,12 +607,14 @@ def get_list_method_info(file_path):
         for method_name in method['listMethods']:
             data                                                = {}
             data["name"]                                        = f"{method['class_name']}:{method_name['method_name']}"
-            lines, indent                                       = _get_all_lines_in_function(method_name['method_name'], class_lines, class_indent)
+            lines, indent, start_idx                            = _get_all_lines_in_function(method_name['method_name'], class_lines, class_indent)
             data["n_lines"]                                     = len(lines)
             data["variables"], data["n_loop"], data['n_ifthen'] = _get_function_stats(lines, indent)
             data["type"]                                        = "method"
             data['line']                                        = method_name['line']
-            data['docs'] =                                      _get_docs(all_file_lines, method_name['line'], lines)
+            data['docs']                                        = _get_docs(all_file_lines, method_name['line'], lines)
+            data['indent']                                      = indent
+            data['start_idx']                                   = start_idx
 
             # calculate code_source
             data["code_source"] = ""
@@ -1016,7 +1019,7 @@ def _get_all_lines_in_function(function_name, array, indentMethod=''):
         OUT: list_lines   - Array of all line of this function
         OUT: indent       - The indent of this function (this will be used for another calculation)
     """
-    re_check = f"{indentMethod}def {function_name}"
+    re_check = f"{indentMethod}def {function_name}\("
 
     response = array.copy()
 
@@ -1045,7 +1048,7 @@ def _get_all_lines_in_function(function_name, array, indentMethod=''):
                 return [], ""
             indent = re.match(r"(\s+)\w*", response[start_idx]).group(1)
     else:
-        return [], ''
+        return [], '', start_idx
 
     # 3. get all lines in function
     list_lines = list()
@@ -1057,7 +1060,7 @@ def _get_all_lines_in_function(function_name, array, indentMethod=''):
         else:
             break
 
-    return list_lines, indent
+    return list_lines, indent, start_idx
 
 
 def _get_all_lines_in_class(class_name, array):
@@ -1110,7 +1113,7 @@ def _get_all_lines_define_function(function_name, array, indentMethod=''):
         OUT: list_lines   - Array of all line used to define the function
         OUT: indent       - The indent of this function (this will be used for another calculation)
     """
-    re_check = f"{indentMethod}def {function_name}"
+    re_check = f"{indentMethod}def {function_name}\("
 
     list_lines = list()
     response = array.copy()
