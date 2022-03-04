@@ -85,6 +85,7 @@ def run_cli():
     add("--out_file",     type=str, default="",      help = "out_file")
     add("--exclude_dir", type=str, default="",       help = "path1,path2")
     add("--prefix",      type=str, default=None,     help = "https://github.com/user/repo/tree/a")
+  
     args = p.parse_args()
 
     doc_dir            = args.out_dir
@@ -167,7 +168,13 @@ def run_cli():
             raise Exception(" Needs repo_url or repo_dir")
 
 
-
+    if args.task[0] == 'docstring':
+        ###  docs  docstring  --repo_dir  myrepo/    --dirout  myrepo/
+        from utilmy.docs import docstring
+        if args.repo_dir is not None :
+            docstring.generate_docstring(args.repo_dir,  dirout= args.dirout, overwrite=True)
+        else:
+            raise Exception(" Needs repo_dir")
 
 
 #############################################################################

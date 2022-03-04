@@ -16,20 +16,20 @@ import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc
 
 #################################################################################################
 def log(*s):
-    """This is the docstring for function log
+    """function log
     Args:
-        *s: input variable *s
+        *s:   
     Returns:
-        None
+        
     """
     print(*s, flush=True)
 
 
 def help():
-    """This is the docstring for function help
+    """function help
     Args:
     Returns:
-        None
+        
     """
     ss  = ""
     ss += HELP
@@ -77,13 +77,13 @@ def log5(*s):
 
 
 def log_trace(msg="", dump_path="", globs=None):
-    """This is the docstring for function log_trace
+    """function log_trace
     Args:
-        msg: input variable msg
-        dump_path: input variable dump_path
-        globs: input variable globs
+        msg:   
+        dump_path:   
+        globs:   
     Returns:
-        None
+        
     """
     print(msg)
     import pdb;
@@ -91,10 +91,10 @@ def log_trace(msg="", dump_path="", globs=None):
 
 
 def profiler_start():
-    """This is the docstring for function profiler_start
+    """function profiler_start
     Args:
     Returns:
-        None
+        
     """
     ### Code profiling
     from pyinstrument import Profiler
@@ -104,10 +104,10 @@ def profiler_start():
 
 
 def profiler_stop():
-    """This is the docstring for function profiler_stop
+    """function profiler_stop
     Args:
     Returns:
-        None
+        
     """
     global profiler
     profiler.stop()

@@ -4,6 +4,9 @@ HELP=""" Automates Python scripts formatting, linting and Mkdocs documentation.
 
 python docs/docstring.py  --dirin  uitl   --dirout    --overwrite False --test True
 
+python utilmy/docs/docstring.py  test1
+
+
 
 """
 import os, sys, ast,re, importlib
@@ -23,7 +26,7 @@ def help():
 
 
 ##########################################################################################################
-def test_all()
+def test_all():
     test1()
 
 
@@ -41,13 +44,32 @@ def test1(mode='test'):
 
     elif 'overwrite' in mode :
        # overwrite scripts
-       generate_docstring(dirin=python_dir, dirout=python_dir, overwrite_script=True, test=False)
+       generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
+
+
+def run_all(mode='overwrite'):
+    log(""" generate_docstring """)
+    # python_tips_dir = Path.cwd().joinpath("utilmy/docs")
+
+    # not use
+    # docstring_from_type_hints(python_tips_dir, python_tips_dir, overwrite_script=True, test=True)
+    
+    python_dir = Path.cwd().joinpath("utilmy/")
+    if 'overwrite' in mode :
+       # overwrite scripts
+       generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
+
+
+def cli():
+    import argparse
+    args = argp
 
 
 
 
 ##########################################################################################################
-def docstring_from_type_hints(dirin: Path, dirout:str, overwrite_script: bool = False, test: bool = True) -> str:
+def docstring_from_type_hints(dirin: Union[str, Path], dirout:Union[str,Path], 
+                              overwrite: bool = False, test: bool = True) -> str:
     """Automate docstring argument variable-type from type-hints.
 
     Args:
@@ -244,7 +266,7 @@ def docstring_from_type_hints(dirin: Path, dirout:str, overwrite_script: bool = 
                 + script_lines[docstring_attr["end_lineno"] :]
             )
 
-        if overwrite_script:
+        if overwrite:
             if test:
                 script = f"{dirout}/test_{script.stem}.py"
             else:
@@ -259,7 +281,7 @@ def docstring_from_type_hints(dirin: Path, dirout:str, overwrite_script: bool = 
 
 
 
-def generate_docstring(dirin: str, dirout: str, overwrite_script: bool = False, test: bool = True):
+def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overwrite: bool = False, test: bool = True):
     """  Generate docstring
         dirin (< nothing >): textual directory to search for Python functions in
         overwrite_script (< wrong variable type>): enables automatic overwriting of Python scripts in dirin
@@ -271,8 +293,8 @@ def generate_docstring(dirin: str, dirout: str, overwrite_script: bool = False, 
 
     # print(scripts)
     for script in scripts:
-        log(script)
-        log2('########## Process functions  ####################################') 
+        log("\n", script)
+        log2('########## Process functions  #############################') 
         list_functions = get_list_function_info(f'{script.parent}/{script.name}')
         for function in list_functions:
             # print('--------')
@@ -337,7 +359,7 @@ def generate_docstring(dirin: str, dirout: str, overwrite_script: bool = False, 
             script_file.writelines(script_lines)
 
 
-        log2('########## Process methods  ###################################') 
+        log2('########## Process methods  ###############################') 
         list_methods = get_list_method_info(file_temp)
         for method in list_methods:
             new_docstring = []
@@ -387,17 +409,111 @@ def generate_docstring(dirin: str, dirout: str, overwrite_script: bool = False, 
                     + script_lines[method["line"] + method['start_idx'] -1:]
                 )
 
-        log2('########## Write on Disk ###################################') 
-        if overwrite_script:
+        log2('########## Write on Disk ################################') 
+        if overwrite:
             script_test = f'{script.parent}/{script.name}'
             with open(script_test, "w") as script_file:
                 script_file.writelines(script_lines)
+            log('compile', os_file_compile_check(script_test, verbose=0) )    
 
-        if test:
+        elif test:
             script_test = f"{dirout}/test_{script.name}"
             with open(script_test, "w") as script_file:
                 script_file.writelines(script_lines)
 
+            log('compile', os_file_compile_check(script_test, verbose=1)  )  
+
+
+
+
+
+
+if 'utilties':
+    def os_path_norm(diroot:str):
+        """os_path_norm 
+        Args:
+            diroot:
+        Returns:
+            _description_
+        """
+        diroot = diroot.replace("\\", "/")
+        return diroot + "/" if diroot[-1] != "/" else  diroot
+
+
+    def glob_glob_python(dirin, suffix ="*.py", nfile=7, exclude=""):
+        """glob_glob_python 
+        Args:
+            dirin: _description_
+            suffix: _description_. Defaults to "*.py".
+            nfile: _description_. Defaults to 7.
+            exclude: _description_. Defaults to "".
+
+        Returns:
+            _description_
+        """
+        import glob
+        flist = glob.glob(dirin + suffix) 
+        flist = flist + glob.glob(dirin + "/**/" + suffix ) 
+        elist = []
+        
+        if exclude != "":    
+           for ei in exclude.split(";"):
+               elist = glob.glob(ei + "/" + suffix ) 
+        flist = [ fi for fi in flist if fi not in elist ]
+
+        #### Unix format 
+        flist = [  fi.replace("\\", "/") for fi in flist]
+
+        flist = flist[:nfile]
+        log(flist)
+        return flist
+
+    def os_makedirs(filename):
+        if isinstance(filename, str):
+            filename = [os.path.dirname(filename)]
+
+        if isinstance(filename, list):
+            folder_list = filename
+            for f in folder_list:
+                try:
+                    if not os.path.exists(f):
+                        os.makedirs(f)
+                except Exception as e:
+                    print(e)
+            return folder_list
+
+
+
+    #############################################################################################
+    def os_file_compile_check_batch(dirin:str, nfile=10) -> dict:
+        """ check if .py can be compiled
+        """
+        flist   = glob_glob_python( dirin, "*.py",nfile= nfile)
+        results = []
+        for fi in flist :
+            res = os_file_compile_check(fi)
+            results.append(res)
+
+        #results = [os.system(f"python -m py_compile {i}") for i in flist]
+        results = { flist[i]:  results[i] for i in range(len(flist)) }
+        return results
+
+
+    def os_file_compile_check(filename:str, verbose=1):
+        """ check if .py can be compiled
+
+        """
+        import ast, traceback
+        try : 
+            with open(filename, mode='r') as f:
+                source = f.read()
+            ast.parse(source)
+            return True
+        except Exception as e:
+            if verbose >0 : 
+                print(e)
+                traceback.print_exc() # Remove to silence any errros
+        return False
 
 
 

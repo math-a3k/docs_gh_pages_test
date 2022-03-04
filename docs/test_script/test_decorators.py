@@ -7,10 +7,10 @@ from utilmy.debug import log
 
 
 def test_all():
-    """This is the docstring for function test_all
+    """function test_all
     Args:
     Returns:
-        None
+        
     """
     test_decorators()	
     test_decorators2()
@@ -41,10 +41,10 @@ def test_decorators():
 
 
 def test_decorators2():
-    """This is the docstring for function test_decorators2
+    """function test_decorators2
     Args:
     Returns:
-        None
+        
     """
     from utilmy.decorators import profiler_decorator, profiler_context
 
@@ -215,10 +215,10 @@ def profiler_decorator_base(fnc):
 
 
 def test0():
-    """This is the docstring for function test0
+    """function test0
     Args:
     Returns:
-        None
+        
     """
     with profiler_context():
         x = sum(range(1000000))
@@ -230,46 +230,46 @@ def test0():
 
 @thread_decorator
 def thread_decorator_test():
-    """This is the docstring for function thread_decorator_test
+    """function thread_decorator_test
     Args:
     Returns:
-        None
+        
     """
     log("thread decorator")
 
 @profiler_decorator_base
 def profiler_decorator_base_test():
-    """This is the docstring for function profiler_decorator_base_test
+    """function profiler_decorator_base_test
     Args:
     Returns:
-        None
+        
     """
     log("profiler decorator")
 
 @timeout_decorator(10)
 def timeout_decorator_test():
-    """This is the docstring for function timeout_decorator_test
+    """function timeout_decorator_test
     Args:
     Returns:
-        None
+        
     """
     log("timeout decorator")
 
 
 @profiler_decorator
 def profiled_sum():
-    """This is the docstring for function profiled_sum
+    """function profiled_sum
     Args:
     Returns:
-        None
+        
     """
     return sum(range(100000))
 
 @timer_decorator
 def dummy_func():
-    """This is the docstring for function dummy_func
+    """function dummy_func
     Args:
     Returns:
-        None
+        
     """
     time.sleep(2)
