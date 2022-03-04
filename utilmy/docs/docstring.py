@@ -286,7 +286,7 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
     #p = dirin.glob("**/*.py")
 
     exclude = "zml"
-    p = glob_glob_python(dirin, suffix ="*.py", nfile=7, exclude=exclude)
+    p = glob_glob_python(dirin, suffix ="*.py", nfile=15000, exclude=exclude)
 
     scripts = [x for x in p if Path(x).is_file()]
 
