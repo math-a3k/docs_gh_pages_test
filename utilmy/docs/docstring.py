@@ -44,13 +44,30 @@ def test1(mode='test'):
 
     elif 'overwrite' in mode :
        # overwrite scripts
-       generate_docstring(dirin=python_dir, dirout=python_dir, overwrite_script=True, test=False)
+       generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
 
+
+def test_all(mode='test'):
+    log(""" generate_docstring """)
+    # python_tips_dir = Path.cwd().joinpath("utilmy/docs")
+
+    # not use
+    # docstring_from_type_hints(python_tips_dir, python_tips_dir, overwrite_script=True, test=True)
+    
+    python_dir = Path.cwd().joinpath("utilmy/")
+    if 'test' in mode :
+       # test custom
+       generate_docstring(dirin=python_dir, dirout=python_dir)
+
+    elif 'overwrite' in mode :
+       # overwrite scripts
+       generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
 
 
 
 ##########################################################################################################
-def docstring_from_type_hints(dirin: Union[str, Path], dirout:str, overwrite_script: bool = False, test: bool = True) -> str:
+def docstring_from_type_hints(dirin: Union[str, Path], dirout:Union[str,Path], 
+                              overwrite: bool = False, test: bool = True) -> str:
     """Automate docstring argument variable-type from type-hints.
 
     Args:
@@ -247,7 +264,7 @@ def docstring_from_type_hints(dirin: Union[str, Path], dirout:str, overwrite_scr
                 + script_lines[docstring_attr["end_lineno"] :]
             )
 
-        if overwrite_script:
+        if overwrite:
             if test:
                 script = f"{dirout}/test_{script.stem}.py"
             else:
@@ -262,7 +279,7 @@ def docstring_from_type_hints(dirin: Union[str, Path], dirout:str, overwrite_scr
 
 
 
-def generate_docstring(dirin: Union[str, Path],  dirout: str, overwrite_script: bool = False, test: bool = True):
+def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overwrite: bool = False, test: bool = True):
     """  Generate docstring
         dirin (< nothing >): textual directory to search for Python functions in
         overwrite_script (< wrong variable type>): enables automatic overwriting of Python scripts in dirin
@@ -391,7 +408,7 @@ def generate_docstring(dirin: Union[str, Path],  dirout: str, overwrite_script: 
                 )
 
         log2('########## Write on Disk ################################') 
-        if overwrite_script:
+        if overwrite:
             script_test = f'{script.parent}/{script.name}'
             with open(script_test, "w") as script_file:
                 script_file.writelines(script_lines)
