@@ -7,7 +7,7 @@ on:
   # but only for the main branch
   push:
     branches:
-    - aautotype
+    - ztyphint
 
 #  pull_request:
 #    branches:

@@ -7,7 +7,7 @@ on:
   # but only for the main branch
   push:
     branches:
-    - zauto_docstring
+    - zdocstring
 
 #  pull_request:
 #    branches:

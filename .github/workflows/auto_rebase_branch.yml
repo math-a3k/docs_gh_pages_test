@@ -5,7 +5,7 @@ on:
   #    - cron:  '*/10 * * * *'   
   push:
     branches:
-    - zauto_rebase_all
+    - zrebase_all
 
 env:
     ROOT_BRANCH_NAME: main

@@ -7,7 +7,7 @@ on:
   # but only for the main branch
   push:
     branches:
-    - autoformat 
+    - zformat 
     - lets7512  ### dev
 
 #  pull_request:
