@@ -1,0 +1,30 @@
+name: Rebase Branches
+on:
+  schedule:
+    - cron:  '0 */6 * * *'   
+  #    - cron:  '*/10 * * * *'   
+  #push:
+  #  branches:
+  #  - main2
+
+env:
+    ROOT_BRANCH_NAME: main
+    BRANCHES_TO_REBASE: alex,tranchung
+jobs:
+  Rebase-All:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Rebasing branches $BRANCHES_TO_REBASE with $ROOT_BRANCH_NAME"
+      - name: Checking out repository code into workspace...
+        uses: actions/checkout@v2
+      - run: echo "Fetching latest..."
+      - run: git fetch origin
+      - run: echo "Beginning rebase..."
+      - run: |
+          IFS=","
+          for branch in $BRANCHES_TO_REBASE; do
+            git rebase origin/$ROOT_BRANCH_NAME origin/$branch
+          done
+          
+          
+          
