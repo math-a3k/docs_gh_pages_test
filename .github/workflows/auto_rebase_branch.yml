@@ -1,7 +1,7 @@
-name: Rebase Branches
+name: Auto Rebase Branches
 on:
   schedule:
-    - cron:  '0 */6 * * *'   
+    - cron:  '0 */1 * * *'   
   #    - cron:  '*/10 * * * *'   
   #push:
   #  branches:
@@ -14,17 +14,21 @@ jobs:
   Rebase-All:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Rebasing branches $BRANCHES_TO_REBASE with $ROOT_BRANCH_NAME"
+      - run: echo "Rebasing branches ${{ env.BRANCHES_TO_REBASE }} with ${{ env.ROOT_BRANCH_NAME }}"
       - name: Checking out repository code into workspace...
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
       - run: echo "Fetching latest..."
       - run: git fetch origin
-      - run: echo "Beginning rebase..."
+      - run: git checkout ${{ env.ROOT_BRANCH_NAME }}
+      - run: git pull --rebase
+      - run: echo "Beginning rebase...."
       - run: |
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
-            git rebase origin/$ROOT_BRANCH_NAME origin/$branch
+            { git checkout $branch  && git pull && git rebase $ROOT_BRANCH_NAME && git push --force-with-lease && echo "Rebase SUCCEEDED for branch $branch" ;} || { echo "Rebase FAILED for branch $branch" && git rebase --abort ; }
           done
           
-          
-          
+  
