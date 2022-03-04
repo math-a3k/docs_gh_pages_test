@@ -23,7 +23,7 @@ def test_all()
 
 
 def test1(mode='test'):
-    log(""" custom_generate_docstring """)
+    log(""" generate_docstring """)
     # python_tips_dir = Path.cwd().joinpath("utilmy/docs")
 
     # not use
@@ -31,12 +31,12 @@ def test1(mode='test'):
 
     if 'test' in mode :
        # test custom
-       custom_generate_docstring(dirin=python_dir, dirout=python_dir)
+       generate_docstring(dirin=python_dir, dirout=python_dir)
 
     elif 'overwrite' in mode :
        # overwrite scripts
        python_dir = Path.cwd().joinpath("test_script")
-       custom_generate_docstring(dirin=python_dir, dirout=python_dir, overwrite_script=True, test=False)
+       generate_docstring(dirin=python_dir, dirout=python_dir, overwrite_script=True, test=False)
 
 
 
@@ -254,7 +254,7 @@ def docstring_from_type_hints(dirin: Path, dirout:str, overwrite_script: bool = 
 
 
 
-def custom_generate_docstring(dirin: str, dirout: str, overwrite_script: bool = False, test: bool = True):
+def generate_docstring(dirin: str, dirout: str, overwrite_script: bool = False, test: bool = True):
     """  Generate docstring
         dirin (< nothing >): textual directory to search for Python functions in
         overwrite_script (< wrong variable type>): enables automatic overwriting of Python scripts in dirin
