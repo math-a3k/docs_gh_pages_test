@@ -60,6 +60,12 @@ def run_all(mode='overwrite'):
        generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
 
 
+def cli():
+    import argparse
+    args = argp
+
+
+
 
 ##########################################################################################################
 def docstring_from_type_hints(dirin: Union[str, Path], dirout:Union[str,Path], 
