@@ -11,7 +11,7 @@ from box import Box
 global verbose
 def get_verbosity(verbose:int=None):
     if verbose is None :
-        verbose = os.environ.get('verbose', 3)
+        verbose = os.environ.get('utilmy-verbose', 3)
     return verbose
 verbose = get_verbosity()   ### Global setting
 
