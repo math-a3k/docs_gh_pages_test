@@ -265,6 +265,7 @@ def custom_generate_docstring(dirin: str, dirout: str, overwrite_script: bool = 
 
     # print(scripts)
     for script in scripts:
+        log(script)
         log2('########## Process functions  ####################################') 
         list_functions = get_list_function_info(f'{script.parent}/{script.name}')
         for function in list_functions:
@@ -293,11 +294,14 @@ def custom_generate_docstring(dirin: str, dirout: str, overwrite_script: bool = 
                 new_docstring.append(f'{function["indent"]}Args:\n')
                 for i in range(len(function['arg_name'])):
                     arg_type_str = f' ( {(function["arg_type"][i])} ) ' if function["arg_type"][i] else ""
-                    new_docstring.append(f'{function["indent"]}    {function["arg_name"][i]}{arg_type_str}: input variable {function["arg_name"][i]}\n')
+
+                    ### TODO argname:   type, default-value,   text explanation
+                    new_docstring.append(f'{function["indent"]}    {function["arg_name"][i]}{arg_type_str}:   \n')
+                    # new_docstring.append(f'{function["indent"]}    {function["arg_name"][i]}{arg_type_str}: {function["arg_name"][i]}\n')
 
                 # new_docstring.append(f'{function["indent"]}Example:')
                 new_docstring.append(f'{function["indent"]}Returns:\n')
-                new_docstring.append(f'{function["indent"]}    None\n')
+                new_docstring.append(f'{function["indent"]}    \n')
                 new_docstring.append(f'{function["indent"]}"""\n')
 
             # print(new_docstring)
@@ -344,11 +348,15 @@ def custom_generate_docstring(dirin: str, dirout: str, overwrite_script: bool = 
                 new_docstring.append(f'{method["indent"]}Args:\n')
                 for i in range(len(method['arg_name'])):
                     arg_type_str = f' (function["arg_type"][i]) ' if method["arg_type"][i] else ""
-                    new_docstring.append(f'{method["indent"]}    {method["arg_name"][i]}{arg_type_str}: input variable {method["arg_name"][i]}\n')
+
+                    ####3 TODO   argname : type, value
+                    new_docstring.append(f'{method["indent"]}    {method["arg_name"][i]}{arg_type_str}:     \n')
+                    #new_docstring.append(f'{method["indent"]}    {method["arg_name"][i]}{arg_type_str}: {method["arg_name"][i]}\n')
+
 
                 # new_docstring.append(f'{function["indent"]}Example:')
                 new_docstring.append(f'{method["indent"]}Returns:\n')
-                new_docstring.append(f'{method["indent"]}    None\n')
+                new_docstring.append(f'{method["indent"]}   \n')
                 new_docstring.append(f'{method["indent"]}"""\n')
 
             # print(new_docstring)
@@ -362,7 +370,6 @@ def custom_generate_docstring(dirin: str, dirout: str, overwrite_script: bool = 
         #     print(method)
         with open(file_temp, "r") as file:
             script_lines = file.readlines()
-
         os.remove(file_temp)
 
         for method in list_methods:
