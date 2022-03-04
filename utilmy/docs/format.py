@@ -84,28 +84,36 @@ def os_file_compile_check(filename:str, verbose=1):
            print(e)
            traceback.print_exc() # Remove to silence any errros
        return False
-#############################################################################################
-def reformat_pyfile(file_path:str):
-    """
-    adding log function import and replace all print( with log(
-    """
-    with open(file_path,'r',encoding='utf-8') as f:
-        file_as_text = f.read()
-    import_line = "from utilmy import log, log2"
-    if file_as_text.find(import_line)==-1:
-        file_as_text = import_line+"\n"+file_as_text
-    file_as_text = file_as_text.replace("print(",'log(')
-    return file_as_text
 
-def reformatter(dirin:str,dirout:str):
-    flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="*zz*")
-    filenames = [x.split(os.sep)[-1] for x in flist]
-    files_formatted = [reformat_pyfile(file) for file in flist]
-    if dirout[-1]!=os.sep:
-        dirout+=os.sep
-    for file_data,filename in zip(files_formatted,filenames):
-        with open(dirout+filename,'w',encoding='utf-8') as w:
-            w.write(file_data)
+
+#############################################################################################
+def format_add_logger(dirin:str,dirout:str, nfile=1000):
+    """  adding log function import and replace all print( with log(
+    """
+    def reformat_pyfile(file_path:str):
+        """
+        """
+        with open(file_path,'r',encoding='utf-8') as f:
+            txt = f.read()
+        import_line = "from utilmy import log, log2"
+        if txt.find(import_line)==-1:
+
+            #### It's stupid, did you check.....
+            txt = import_line+"\n"+txt
+        txt = txt.replace("print(",'log(')
+        return txt
+
+    flist = glob_glob_python(dirin, suffix ="*.py", nfile=nfile, exclude="*zz*")
+
+    for fi in flist :
+        fi       = os_path_norm(fi)
+        fname    = fi.split(os.sep)[-1] 
+        file_new = reformat_pyfile(fi) 
+        with open(dirout+ "/" + fname,'w',encoding='utf-8') as w:
+            w.write(file_new)
+
+
+
 
 #############################################################################################
 def format_add_header(dirin:str="./"):
@@ -181,6 +189,9 @@ if 'utilties':
            for ei in exclude.split(";"):
                elist = glob.glob(ei + "/" + suffix ) 
         flist = [ fi for fi in flist if fi not in elist ]
+
+        #### Unix format 
+        flist = [  fi.replace("\\", "/") for fi in flist]
 
         flist = flist[:nfile]
         log(flist)
