@@ -47,7 +47,7 @@ def test1(mode='test'):
        generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
 
 
-def test_all(mode='test'):
+def run_all(mode='overwrite'):
     log(""" generate_docstring """)
     # python_tips_dir = Path.cwd().joinpath("utilmy/docs")
 
@@ -55,11 +55,7 @@ def test_all(mode='test'):
     # docstring_from_type_hints(python_tips_dir, python_tips_dir, overwrite_script=True, test=True)
     
     python_dir = Path.cwd().joinpath("utilmy/")
-    if 'test' in mode :
-       # test custom
-       generate_docstring(dirin=python_dir, dirout=python_dir)
-
-    elif 'overwrite' in mode :
+    if 'overwrite' in mode :
        # overwrite scripts
        generate_docstring(dirin=python_dir, dirout=python_dir, overwrite=True, test=False)
 
