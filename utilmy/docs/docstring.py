@@ -4,6 +4,9 @@ HELP=""" Automates Python scripts formatting, linting and Mkdocs documentation.
 
 python docs/docstring.py  --dirin  uitl   --dirout    --overwrite False --test True
 
+python utilmy/docs/docstring.py  test1
+
+
 
 """
 import os, sys, ast,re, importlib
@@ -271,8 +274,8 @@ def generate_docstring(dirin: Union[str, Path],  dirout: str, overwrite_script: 
 
     # print(scripts)
     for script in scripts:
-        log(script)
-        log2('########## Process functions  ####################################') 
+        log("\n", script)
+        log2('########## Process functions  #############################') 
         list_functions = get_list_function_info(f'{script.parent}/{script.name}')
         for function in list_functions:
             # print('--------')
@@ -337,7 +340,7 @@ def generate_docstring(dirin: Union[str, Path],  dirout: str, overwrite_script: 
             script_file.writelines(script_lines)
 
 
-        log2('########## Process methods  ###################################') 
+        log2('########## Process methods  #################################') 
         list_methods = get_list_method_info(file_temp)
         for method in list_methods:
             new_docstring = []
@@ -387,7 +390,7 @@ def generate_docstring(dirin: Union[str, Path],  dirout: str, overwrite_script: 
                     + script_lines[method["line"] + method['start_idx'] -1:]
                 )
 
-        log2('########## Write on Disk ###################################') 
+        log2('########## Write on Disk ################################') 
         if overwrite_script:
             script_test = f'{script.parent}/{script.name}'
             with open(script_test, "w") as script_file:

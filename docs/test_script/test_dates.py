@@ -9,10 +9,10 @@ import os, sys, time, datetime,inspect, json, yaml, gc, numpy as np, pandas as p
 from utilmy.utilmy import log, log2
 
 def help():
-    """This is the docstring for function help
+    """function help
     Args:
     Returns:
-        None
+        
     """
     from utilmy import help_create
     print(  HELP + help_create(MNAME) )
@@ -20,10 +20,10 @@ def help():
 
 ####################################################################################################
 def test_all():
-    """This is the docstring for function test_all
+    """function test_all
     Args:
     Returns:
-        None
+        
     """
     log("Testing dates.py ...")
     date_ = date_generate(start='2021-01-01', ndays=100)
@@ -39,13 +39,13 @@ def test_all():
     #pd_date_split(df,coldate="Birthdate")
 
 def random_dates(start, end, size):
-    """This is the docstring for function random_dates
+    """function random_dates
     Args:
-        start: input variable start
-        end: input variable end
-        size: input variable size
+        start:   
+        end:   
+        size:   
     Returns:
-        None
+        
     """
     divide_by = 24 * 60 * 60 * 10**9
     start_u = start.value // divide_by
@@ -53,12 +53,12 @@ def random_dates(start, end, size):
     return pd.to_datetime(np.random.randint(start_u, end_u, size), unit="D")
     
 def random_genders(size, p=None):
-    """This is the docstring for function random_genders
+    """function random_genders
     Args:
-        size: input variable size
-        p: input variable p
+        size:   
+        p:   
     Returns:
-        None
+        
     """
     if not p:
         p = (0.49, 0.49, 0.01, 0.01)
@@ -69,15 +69,15 @@ def random_genders(size, p=None):
 ####################################################################################################
 ##### Utilities for date  ##########################################################################
 def pd_date_split(df, coldate =  'time_key', prefix_col ="",sep="/" ,verbose=False ):
-    """This is the docstring for function pd_date_split
+    """function pd_date_split
     Args:
-        df: input variable df
-        coldate : input variable coldate 
-        prefix_col : input variable prefix_col 
-        sep: input variable sep
-        verbose: input variable verbose
+        df:   
+        coldate :   
+        prefix_col :   
+        sep:   
+        verbose:   
     Returns:
-        None
+        
     """
     import pandas as pd
 
@@ -124,13 +124,13 @@ def date_to_timezone(tdate,  fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
 
 
 def date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo'):
-    """This is the docstring for function date_now
+    """function date_now
     Args:
-        fmt="%Y-%m-%d %H: input variable fmt="%Y-%m-%d %H
-        add_days: input variable add_days
-        timezone: input variable timezone
+        fmt="%Y-%m-%d %H:   
+        add_days:   
+        timezone:   
     Returns:
-        None
+        
     """
     from pytz import timezone as timz
     import datetime
@@ -153,11 +153,11 @@ def date_is_holiday(array):
 
 
 def date_weekmonth2(d):
-     """This is the docstring for function date_weekmonth2
+     """function date_weekmonth2
      Args:
-         d: input variable d
+         d:   
      Returns:
-         None
+         
      """
      w = (d.day-1)//7+1
      if w < 0 or w > 5 :
@@ -176,21 +176,21 @@ def date_weekmonth(date_value):
 
 
 def date_weekyear2(dt) :
- """This is the docstring for function date_weekyear2
+ """function date_weekyear2
  Args:
-     dt: input variable dt
+     dt:   
  Returns:
-     None
+     
  """
  return ((dt - datetime.datetime(dt.year,1,1)).days // 7) + 1
 
 
 def date_weekday_excel(x) :
- """This is the docstring for function date_weekday_excel
+ """function date_weekday_excel
  Args:
-     x: input variable x
+     x:   
  Returns:
-     None
+     
  """
  import datetime
  date = datetime.datetime.strptime(x,"%Y%m%d")
@@ -200,11 +200,11 @@ def date_weekday_excel(x) :
 
 
 def date_weekyear_excel(x) :
- """This is the docstring for function date_weekyear_excel
+ """function date_weekyear_excel
  Args:
-     x: input variable x
+     x:   
  Returns:
-     None
+     
  """
  import datetime
  date = datetime.datetime.strptime(x,"%Y%m%d")
@@ -212,12 +212,12 @@ def date_weekyear_excel(x) :
 
 
 def date_generate(start='2018-01-01', ndays=100) :
- """This is the docstring for function date_generate
+ """function date_generate
  Args:
-     start: input variable start
-     ndays: input variable ndays
+     start:   
+     ndays:   
  Returns:
-     None
+     
  """
  from dateutil.relativedelta import relativedelta
  start0 = datetime.datetime.strptime(start, "%Y-%m-%d")

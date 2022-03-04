@@ -10,10 +10,10 @@ import os, sys, socket, platform, time, gc,logging, random
 from utilmy.utilmy import log, log2
 
 def help():
-    """This is the docstring for function help
+    """function help
     Args:
     Returns:
-        None
+        
     """
     from utilmy import help_create
     ss  = help_create("utilmy.distributed", prefixs= [ 'test'])  #### Merge test code
@@ -22,11 +22,11 @@ def help():
 
 
 def log_mem(*s):
-    """This is the docstring for function log_mem
+    """function log_mem
     Args:
-        *s: input variable *s
+        *s:   
     Returns:
-        None
+        
     """
     try:
         # print(*s, "\n", flush=True)
@@ -121,20 +121,20 @@ def test_index():
 
 
 def test_tofilesafe():
-   """This is the docstring for function test_tofilesafe
+   """function test_tofilesafe
    Args:
    Returns:
-       None
+       
    """
    pass
 
 
 
 def test_all():
-    """This is the docstring for function test_all
+    """function test_all
     Args:
     Returns:
-        None
+        
     """
     test_functions()
     test_funtions_thread()
@@ -157,21 +157,21 @@ class toFile(object):
    def write(self, msg):
         """This is the docstring for function toFile:write
         Args:
-            self: input variable self
-            msg: input variable msg
+            self:     
+            msg:     
         Returns:
-            None
+           
         """
         self.logger.info( msg)
 
 
 def to_file_safe(msg:str, fpath:str):
-   """This is the docstring for function to_file_safe
+   """function to_file_safe
    Args:
-       msg ( str ) : input variable msg
-       fpath ( str ) : input variable fpath
+       msg ( str ) :   
+       fpath ( str ) :   
    Returns:
-       None
+       
    """
    ss = str(msg)
    logger = logging.getLogger('log')
@@ -198,14 +198,14 @@ class IndexLock(object):
     def __init__(self, findex, file_lock=None, min_size=5, skip_comment=True, ntry=20):
         """This is the docstring for function IndexLock:__init__
         Args:
-            self: input variable self
-            findex: input variable findex
-            file_lock: input variable file_lock
-            min_size: input variable min_size
-            skip_comment: input variable skip_comment
-            ntry: input variable ntry
+            self:     
+            findex:     
+            file_lock:     
+            min_size:     
+            skip_comment:     
+            ntry:     
         Returns:
-            None
+           
         """
         self.findex= findex
         os.makedirs(os.path.dirname( os.path.abspath(self.findex)), exist_ok=True)
@@ -227,25 +227,25 @@ class IndexLock(object):
     def read(self,): ### alias
         """This is the docstring for function IndexLock:read
         Args:
-            self: input variable self
-            : input variable 
+            self:     
+            :     
         Returns:
-            None
+           
         """
         """This is the docstring for function IndexLock:save_isok
         Args:
-            self: input variable self
-            flist (function["arg_type"][i]) : input variable flist
+            self:     
+            flist (function["arg_type"][i]) :     
         Returns:
-            None
+           
         """
     def save_filter(self, val:list=None):
         """This is the docstring for function IndexLock:save_filter
         Args:
-            self: input variable self
-            val (function["arg_type"][i]) : input variable val
+            self:     
+            val (function["arg_type"][i]) :     
         Returns:
-            None
+           
         """
         return put(self, val)
 
@@ -254,10 +254,10 @@ class IndexLock(object):
     def get(self, **kw):
         """This is the docstring for function IndexLock:get
         Args:
-            self: input variable self
-            **kw: input variable **kw
+            self:     
+            **kw:     
         Returns:
-            None
+           
         """
         ## return the list of files
         with open(self.findex, mode='r') as fp:
@@ -331,11 +331,11 @@ class Index0(object):
     def __init__(self, findex:str="ztmp_file.txt", ntry=10):
         """This is the docstring for function Index0:__init__
         Args:
-            self: input variable self
-            findex (function["arg_type"][i]) : input variable findex
-            ntry: input variable ntry
+            self:     
+            findex (function["arg_type"][i]) :     
+            ntry:     
         Returns:
-            None
+           
         """
         self.findex = findex
         os.makedirs(os.path.dirname(self.findex), exist_ok=True)
@@ -348,10 +348,10 @@ class Index0(object):
     def read(self,):
         """This is the docstring for function Index0:read
         Args:
-            self: input variable self
-            : input variable 
+            self:     
+            :     
         Returns:
-            None
+           
         """
         import time
         try :
@@ -373,10 +373,10 @@ class Index0(object):
     def save(self, flist:list):
         """This is the docstring for function Index0:save
         Args:
-            self: input variable self
-            flist (function["arg_type"][i]) : input variable flist
+            self:     
+            flist (function["arg_type"][i]) :     
         Returns:
-            None
+           
         """
         if len(flist) < 1 : return True
         ss = ""
@@ -474,11 +474,11 @@ def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock", slee
 
 ################################################################################################
 def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
-    """This is the docstring for function date_now
+    """function date_now
     Args:
-        fmt = "%Y-%m-%d %H: input variable fmt = "%Y-%m-%d %H
+        fmt = "%Y-%m-%d %H:   
     Returns:
-        None
+        
     """
     from pytz import timezone
     from datetime import datetime
@@ -490,24 +490,24 @@ def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
 
 
 def time_sleep_random(nmax=5):
-    """This is the docstring for function time_sleep_random
+    """function time_sleep_random
     Args:
-        nmax: input variable nmax
+        nmax:   
     Returns:
-        None
+        
     """
     import random, time
     time.sleep( random.randrange(nmax) )
 
 
 def save(dd, to_file="", verbose=False):
-  """This is the docstring for function save
+  """function save
   Args:
-      dd: input variable dd
-      to_file: input variable to_file
-      verbose: input variable verbose
+      dd:   
+      to_file:   
+      verbose:   
   Returns:
-      None
+      
   """
   import pickle, os
   os.makedirs(os.path.dirname(to_file), exist_ok=True)
@@ -516,11 +516,11 @@ def save(dd, to_file="", verbose=False):
 
 
 def load(to_file=""):
-  """This is the docstring for function load
+  """function load
   Args:
-      to_file: input variable to_file
+      to_file:   
   Returns:
-      None
+      
   """
   import pickle
   dd =   pickle.load(open(to_file, mode="rb"))
@@ -528,11 +528,11 @@ def load(to_file=""):
 
 
 def load_serialize(name):
-     """This is the docstring for function load_serialize
+     """function load_serialize
      Args:
-         name: input variable name
+         name:   
      Returns:
-         None
+         
      """
      global pcache
      #import diskcache as dc
@@ -542,12 +542,12 @@ def load_serialize(name):
      # return {'a' : {'b': 2}}
 
 def save_serialize(name, value):
-     """This is the docstring for function save_serialize
+     """function save_serialize
      Args:
-         name: input variable name
-         value: input variable value
+         name:   
+         value:   
      Returns:
-         None
+         
      """
      global pcache
      #import diskcache as dc
