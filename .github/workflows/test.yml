@@ -11,6 +11,12 @@ on:
 
     branches-ignore:
       - main
+      - 'z*'
+      - zauto_rebase_all
+      - zdocstring
+      - zttypehint
+      - zformat
+      
 
   pull_request:
     branches:
