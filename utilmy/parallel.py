@@ -10,17 +10,13 @@ from threading import Thread
 from typing import Callable, Tuple, Union
 
 #################################################################################################
-verbose = 0
+verbose = os.environ.get('utilmy_verbose', 0)
+from utilmy import log, log2
 
-def log(*s, **kw):  print(*s, flush=True, **kw)
-def log2(*s, **kw):  
-    if verbose >1 : print(*s, flush=True, **kw)
 
 def help():
     from utilmy import help_create
-    ss  = HELP
-    ss += help_create("utilmy.parallel")
-    print(ss)
+    print(HELP + help_create("utilmy.parallel") )
 
 
 #################################################################################################
@@ -232,7 +228,7 @@ def test_pdreadfile():
 #############################################################################################################
 def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True,
                  n_pool=1, npool=None,
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None,
+                 drop_duplicates=None, col_filter:str=None,  col_filter_vals:list=None, dtype_reduce=None,
                  fun_apply=None, use_ext=None,   **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
@@ -276,10 +272,10 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
                return pd.DataFrame()
 
             # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
-            if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
+            if col_filter is not None :       dfi = dfi[ dfi[col_filter].isin( col_filter_vals) ]
             if cols is not None :             dfi = dfi[cols]
             if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
-            if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)
+            if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates, keep='last')
             if fun_apply is not None  :       dfi = dfi.apply(lambda  x : fun_apply(x), axis=1)
             return dfi
 
@@ -306,7 +302,7 @@ def pd_read_file(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False
 
 
 def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=False, nrows=-1, nfile=1000000, concat_sort=True, n_pool=1, npool=None,
-                 drop_duplicates=None, col_filter=None,  col_filter_val=None, dtype_reduce=None, fun_apply=None, use_ext=None,  **kw):
+                 drop_duplicates=None, col_filter:str=None,  col_filter_vals:list=None, dtype_reduce=None, fun_apply=None, use_ext=None,  **kw):
     """  Read file in parallel from disk : very Fast
     :param path_glob: list of pattern, or sep by ";"
     :return:
@@ -364,7 +360,7 @@ def pd_read_file2(path_glob="*.pkl", ignore_index=True,  cols=None, verbose=Fals
           log(e)
 
         # if dtype_reduce is not None:    dfi = pd_dtype_reduce(dfi, int0 ='int32', float0 = 'float32')
-        if col_filter is not None :       dfi = dfi[ dfi[col_filter] == col_filter_val ]
+        if col_filter is not None :       dfi = dfi[ dfi[col_filter].isin(col_filter_vals) ]
         if cols is not None :             dfi = dfi[cols]
         if nrows > 0        :             dfi = dfi.iloc[:nrows,:]
         if drop_duplicates is not None  : dfi = dfi.drop_duplicates(drop_duplicates)

@@ -8,6 +8,9 @@ from box import Box
 from utilmy.parallel import pd_read_file, pd_read_file2
 
 
+#### Sparse utilities
+from scipy.sparse import coo_matrix, csr_matrix, lil_matrix
+
 ###################################################################################
 from utilmy import log, log2
 
@@ -71,10 +74,13 @@ def test_create_fake_df():
 
 
 ###################################################################################################
-def pd_historylist_to_csr(df:pd.DataFrame, colslist:list=None, hashSize:int=5000, dtype=np.float32, max_rec_perlist=5):
+def pd_historylist_to_csr(df:pd.DataFrame, colslist:list=None, hashSize:int=5000, dtype=np.float32, max_rec_perlist:int=5,
+                            min_rec_perlist:int=0, sep_genre=",", sep_subgenre="/"):
     """ Creates Sparse matrix of dimensions:
-            ncol: hashsize * (nlist1 + nlist2 + ....)    X    nrows: nUserID
 
+            Single value  max=i+1, min=i
+
+            ncol: hashsize * (nlist1 + nlist2 + ....)    X    nrows: nUserID
             xdf:  pd.DataFrame
                 genreCol: string: "4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545"
 
@@ -86,7 +92,7 @@ def pd_historylist_to_csr(df:pd.DataFrame, colslist:list=None, hashSize:int=5000
     from scipy.sparse import coo_matrix, csr_matrix, lil_matrix
 
     ### Ncols = nb of col
-    Xcols = hashSize * len(colslist) * (max_rec_perlist)  # top 5 genre for each reclist
+    Xcols = hashSize * len(colslist) * (max_rec_perlist-min_rec_perlist)  # top 5 genre for each reclist
 
     # No. rows for sparse matrix X, N_userid
     Xrows = len(df)
@@ -94,28 +100,27 @@ def pd_historylist_to_csr(df:pd.DataFrame, colslist:list=None, hashSize:int=5000
     # Create zeros sparse matrix
     X = lil_matrix((Xrows, Xcols), dtype=dtype)
 
-    bucket = 0 ; ntot=1
+    bucket = 0 ; ntot=0
     for coli in colslist:
-        bucket0 =  bucket  ### Updated by hashsize*max_rec
+        bucket0 = bucket  ### Store
         recList = df[coli].values
         for idx, genre_list in enumerate(recList):
-            if isinstance(genre_list, str): genre_list = genre_list.split("/")
+            if isinstance(genre_list, str): genre_list = genre_list.split(sep_genre)  ### 353/34534,  5435/4345, 
 
             ### Iterate for each genre in the reclist and reset to base bucket0
             bucket =  bucket0
-            for genre in genre_list[:max_rec_perlist] :
-                for subgenre in genre.split('/'):
-                    ntot  =  ntot + 1
+            for genre in genre_list[min_rec_perlist:max_rec_perlist] :
+                for subgenre in genre.split(sep_subgenre):  #### 35345/5435/345345
+                    ntot  = ntot + 1
                     colid = mmh3.hash(subgenre.strip(), 42, signed=False) % hashSize
                     X[ (idx, bucket+ colid)] = 1
-                bucket = bucket + hashSize
+                bucket += hashSize
 
     X = csr_matrix( X )
     print('Sparse matrix shape:', X.shape)
     print('Expected no. of Ones: ', ntot )
     print('No. of Ones in the Matrix: ', X.count_nonzero() )
     return X
-
 
 
 #####################################################################################################
