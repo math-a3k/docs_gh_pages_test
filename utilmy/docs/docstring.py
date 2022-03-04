@@ -1,20 +1,25 @@
-HELP="""
-Automates Python scripts formatting, linting and Mkdocs documentation.
+MNAME='utilmy.docs.docstring'
+HELP=""" Automates Python scripts formatting, linting and Mkdocs documentation.
+
+
+python docs/docstring.py  --dirin  uitl   --dirout    --overwrite False --test True
+
 
 """
-import ast
-import importlib
-import re
+import os, sys, ast,re, importlib
 from collections import defaultdict
 from pathlib import Path
 from typing import Union, get_type_hints
-import sys
 from pprint import pprint
-from code_parser import get_list_function_info, get_list_method_info
-import os
+
 
 ##########################################################################################################
+from code_parser import get_list_function_info, get_list_method_info
 from utilmy.utilmy import log, log2
+
+def help():
+    from utilmy import help_create
+    print( HELP + help_create(MNAME))
 
 
 ##########################################################################################################
@@ -260,6 +265,7 @@ def generate_docstring(dirin: str, dirout: str, overwrite_script: bool = False, 
         overwrite_script (< wrong variable type>): enables automatic overwriting of Python scripts in dirin
         test (Something completely different): whether to write script content to a test_it.py file
     """    
+    dirin = Path(dirin) if isinstance(dirin, str) else dirin
     p = dirin.glob("**/*.py")
     scripts = [x for x in p if x.is_file()]
 
