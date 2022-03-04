@@ -11,7 +11,7 @@ from typing import Callable, Tuple, Union
 
 #################################################################################################
 verbose = os.environ.get('utilmy_verbose', 0)
-from utilmy import log, log2
+from utilmy.utilmy import log, log2
 
 
 def help():
