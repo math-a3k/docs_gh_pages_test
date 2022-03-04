@@ -31,4 +31,14 @@ jobs:
             { git checkout $branch  && git pull && git rebase $ROOT_BRANCH_NAME && git push --force-with-lease && echo "Rebase SUCCEEDED for branch $branch" ;} || { echo "Rebase FAILED for branch $branch" && git rebase --abort ; }
           done
           
-  
+#### Iterate All branches  
+#branches=()
+#eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/heads/)"
+#for branch in "${branches[@]}"; do
+#    # …
+#done
+
+
+
+
+
