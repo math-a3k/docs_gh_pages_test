@@ -33,14 +33,14 @@ def test1(mode='test'):
 
     # not use
     # docstring_from_type_hints(python_tips_dir, python_tips_dir, overwrite_script=True, test=True)
-
+    
+    python_dir = Path.cwd().joinpath("docs/test_script")
     if 'test' in mode :
        # test custom
        generate_docstring(dirin=python_dir, dirout=python_dir)
 
     elif 'overwrite' in mode :
        # overwrite scripts
-       python_dir = Path.cwd().joinpath("test_script")
        generate_docstring(dirin=python_dir, dirout=python_dir, overwrite_script=True, test=False)
 
 
