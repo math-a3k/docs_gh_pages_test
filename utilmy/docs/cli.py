@@ -169,6 +169,7 @@ def run_cli():
 
 
     if args.task[0] == 'docstring':
+        ###  docs  docstring  --repo_dir  myrepo/    --dirout  myrepo/
         from utilmy.docs import docstring
         if args.repo_dir is not None :
             docstring.generate_docstring(args.repo_dir,  dirout= args.dirout, overwrite=True)
