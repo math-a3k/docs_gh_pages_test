@@ -1,10 +1,61 @@
+MNAME="utilmy.cli"
+HELP ="""
 
-import fire
+
+"""
+import fire, argparse, os, sys
 
 
+
+#############################################################################################
 def log(*s):
     print(*s, flush=True)
 
+
+#############################################################################################
+def run_cli():
+    """
+        utilmy   deeplearning.keras.util_my
+
+
+
+
+    """
+    import argparse
+    p   = argparse.ArgumentParser()
+    add = p.add_argument
+
+    add('task', metavar='task', type=str, nargs=1, help='colab')
+
+    add("--dirin",    type=str, default=None,     help = "repo_url")
+    add("--repo_dir",    type=str, default="./",     help = "repo_dir")
+    add("--dirout",     type=str, default="docs/",  help = "doc_dir")
+    add("--out_file",     type=str, default="",      help = "out_file")
+    add("--exclude_dir", type=str, default="",       help = "path1,path2")
+    add("--prefix",      type=str, default=None,     help = "https://github.com/user/repo/tree/a")
+  
+    args = p.parse_args()
+
+
+    if args.task == 'colab':
+        from utilmy import util_colab as mm
+        mm.help()
+
+
+    if args.task =='module':
+        import importlib
+        myfun = load_function_uri(uri_name="utilmy.ppandas::test")
+        myfun()
+        #fire.Fire(myfun)
+
+
+
+
+
+
+
+
+#############################################################################################
 
 def load_function_uri(uri_name="myfolder/myfile.py::myFunction"):
     """
@@ -43,22 +94,6 @@ def load_function_uri(uri_name="myfolder/myfile.py::myFunction"):
 
         except Exception as e2:
             raise NameError(  f"Module {pkg} notfound, {e1}, {e2}, os.cwd: {os.getcwd()}")
-
-
-
-
-def run_cli():
-    """
-        utilmy   deeplearning.keras.util_my
-
-
-
-
-    """
-    import importlib
-    myfun = load_function_uri(uri_name="utilmy.ppandas::test")
-
-    fire.Fire(myfun)
 
 
 
