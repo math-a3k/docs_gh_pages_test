@@ -1,7 +1,7 @@
 name: Auto Rebase Branches - main schedule
 on:
   schedule:
-    - cron:  '*/30 * * * *'   
+    - cron:  '* */1 * * *'   
   #    - cron:  '*/10 * * * *'   
   push:
     branches:
@@ -30,8 +30,10 @@ jobs:
           echo "Beginning merge...."
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
-          
-            { git checkout $branch
+            { 
+              echo ""
+              echo "##################"
+              git checkout $branch
               git pull --allow-unrelated-histories 
               git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
               git push
@@ -40,7 +42,6 @@ jobs:
               echo "Merge FAILED for branch $branch"
 
             }
-
 
           done
 
