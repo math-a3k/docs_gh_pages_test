@@ -24,27 +24,6 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
-    - name: Auto generation of docstring
-      continue-on-error: true
-      run:  |
-        git config user.name github-actions
-        git config user.email github-actions@github.com      
-        git checkout main
-        git push origin --delete zdocstring || echo 'already Deleted'
-        git checkout -b zdocstring main
-        git branch -a
-        git add -A
-        git commit -am "copy"   || echo 'nothing'
-        git push origin zdocstring  ||  echo 'nothing2'
-
-        # python  utilmy/docs/docstring.py  generate_docstring --dirin utilmy/  --dirout utilmy/  --overwrite true   --test false
-
-        mkdir utilmy/zzz 
-        git add -A
-        git commit -am "docstring" ||
-        git push origin zdocstring  ||
-
-
 
 
     - name: Set up Python 3.7.*
@@ -94,6 +73,35 @@ jobs:
            python -c "import os, pandas as pd; print(os)"
            python -c "import utilmy"        
         
+
+
+    - name: Reset zdocstring branch
+      continue-on-error: true
+      run:  |
+        git config user.name github-actions
+        git config user.email github-actions@github.com      
+        git checkout main
+        git push origin --delete zdocstring || echo 'already Deleted'
+        git checkout -b zdocstring main
+        git branch -a
+        git add -A
+        git commit -am "copy"   || echo 'nothing'
+        git push origin zdocstring  ||  echo 'nothing2'
+        git branch -a
+
+
+    - name: Auto generation of docstring
+      continue-on-error: true
+      run:  |
+        python  utilmy/docs/docstring.py  generate_docstring --dirin utilmy/  --dirout utilmy/  --overwrite true   --test false
+
+        git add -A || echo 'nothing'
+        git commit -am "docstring" ||   echo 'nothing'
+        git push origin zdocstring  ||  echo 'nothing2'
+
+        echo 'All finished'
+        git branch -a
+
 
 
 
