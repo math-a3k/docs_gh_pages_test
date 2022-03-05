@@ -5,11 +5,11 @@ HELP = """ A simple python module to parse the code and format it based on some 
 Goal is to normalize all python files with similar structure.
 
 Some rules are
-rule 1 - change a line starting with 3 #'s into x #'s where x is 90 by default
-         if no text was found else preserve text and fill the rest with #'s
-rule 2 - normalize log statements in the file
-rule 3 - put all consecutive imports on one line
-rule 4 - align assignment operators
+    rule 1 - change a line starting with 3 #'s into x #'s where x is 90 by default
+            if no text was found else preserve text and fill the rest with #'s
+    rule 2 - normalize log statements in the file
+    rule 3 - put all consecutive imports on one line
+    rule 4 - align assignment operators
 
 
 ### Usage
@@ -29,7 +29,6 @@ python utilmy/docs/format.py  test1
 """
 import os,sys,time,gc, glob, numpy as np, pandas as pd,re, fire, tqdm, datetime
 from box import Box
-
 
 
 #### Types
@@ -62,7 +61,7 @@ def test1():
 def test2() -> None:
     import utilmy
     dirin = os.path.dirname(utilmy.__file__)  ### Repo Root folder
-    dirout = os_makedirs('utilmy\\docs\\test\\')[0] ### test dir
+    dirout = os_makedirs('utilmy/docs/test/')[0] ### test dir
     reformatter(dirin,dirout)
 
 
@@ -83,46 +82,97 @@ def run_format1():
 
     if ".py" in _input:
         if os_file_haschanged(_input):
-            format_file(_input, out_dir)
+            batch_format_file(_input, out_dir)
         else:
             print(f"{_input} is not modified within one week")
     else:
-        format_dir(_input, out_dir)
+        batch_format_dir(_input, out_dir)
+
+
+
+def batch_format_file(in_file, out_dir):
+    # if input is a file and make sure it exits
+    if os.path.isfile(in_file):
+        with open(in_file) as f:
+            text = f.read()
+
+
+        text_f = format_comments(text)
+        text_f = format_logs(text_f)
+        text_f = format_imports(text_f)
+        text_f = format_assignments(text_f)
+
+
+        # get the base directory of source file for makedirs function
+        file_path, file_name = os.path.split(in_file)
+        if not os.path.exists(os.path.join(out_dir, file_path)):
+            os.makedirs(os.path.join(out_dir, file_path))
+
+        fpath2 = os.path.join(out_dir, file_path, file_name) 
+        ftmp =   file_path + "/ztmp.py"
+        with open(ftmp, "w") as f:
+            f.write(text_f)
+
+        #### Compile check
+        isok  = os_file_compile_check(ftmp)
+        if isok :
+            os.remove(fpath2)
+            os.rename(ftmp, fpath2)
+        else :    
+            log('Cannot compile', in_file)
+            os.remove(ftmp)
+            err_list.append(fi)
+
+    else:
+        print(f"No such file exists {in_file}, make sure your path is correct")
+
+
+def batch_format_dir(in_dir, out_dir):
+    src_files = os_glob(in_dir)
+    #flist = glob_glob_python(dirin, suffix ="*.py", nfile=nfile, exclude="*zz*")
+
+    for f in tqdm.tqdm(src_files):
+        if os_file_haschanged(f):
+            batch_format_file(f, out_dir)
+        else:
+            print(f"{f} is not modified within one week")
+
 
 
 
 
 #############################################################################################
-def os_file_compile_check_batch(dirin:str, nfile=10) -> None:
-    """
-    ### DO NOT use Command line  !!!!!!
+if 'check if .py compile':
+    def os_file_compile_check_batch(dirin:str, nfile=10) -> None:
+        """
+        ### DO NOT use Command line  !!!!!!
 
 
 
-    """
-    flist   = glob_glob_python( dirin, "*.py",nfile= nfile)
-    results = []
-    for fi in flist :
-        res = os_file_compile_check(fi)
-        results.append(res)
+        """
+        flist   = glob_glob_python( dirin, "*.py",nfile= nfile)
+        results = []
+        for fi in flist :
+            res = os_file_compile_check(fi)
+            results.append(res)
 
-    #results = [os.system(f"python -m py_compile {i}") for i in flist]
-    results = ["Working" if x==0 else "Failed" for x in results]
-    return results
+        #results = [os.system(f"python -m py_compile {i}") for i in flist]
+        results = ["Working" if x==0 else "Failed" for x in results]
+        return results
 
 
-def os_file_compile_check(filename:str, verbose=1):
-    import ast, traceback
-    try : 
-        with open(filename, mode='r') as f:
-            source = f.read()
-        ast.parse(source)
-        return True
-    except Exception as e:
-       if verbose >0 : 
-           print(e)
-           traceback.print_exc() # Remove to silence any errros
-       return False
+    def os_file_compile_check(filename:str, verbose=1):
+        import ast, traceback
+        try : 
+            with open(filename, mode='r') as f:
+                source = f.read()
+            ast.parse(source)
+            return True
+        except Exception as e:
+        if verbose >0 : 
+            print(e)
+            traceback.print_exc() # Remove to silence any errros
+        return False
 
 
 
@@ -243,130 +293,75 @@ def format_assignments(text):
     return '\n'.join(formated_text)
 
 
-######################################################################################
-def os_glob(in_dir):
-    """
-    os_glob a given directory for all .py files and returns a list of source files.
-    """
-    files = glob.glob(in_dir + "/**/*.py", recursive=True)
-    # remove .ipynb_checkpoints
-    files = [s for s in files if ".ipynb_checkpoints" not in s]
-    # print("os_glob files done ... ")
-    return files
-
-
-def format_file(in_file, out_dir):
-    # if input is a file and make sure it exits
-    if os.path.isfile(in_file):
-        with open(in_file) as f:
-            text = f.read()
-
-        text_f = format_comments(text)
-        text_f = format_logs(text_f)
-        text_f = format_imports(text_f)
-        text_f = format_assignments(text_f)
-
-        # get the base directory of source file for makedirs function
-        file_path, file_name = os.path.split(in_file)
-        if not os.path.exists(os.path.join(out_dir, file_path)):
-            os.makedirs(os.path.join(out_dir, file_path))
-
-        with open(os.path.join(out_dir, file_path, file_name), "w") as f:
-            f.write(text_f)
-
-    else:
-        print(f"No such file exists {in_file}, make sure your path is correct")
-
-
-def format_dir(in_dir, out_dir):
-    src_files = os_glob(in_dir)
-
-    for f in tqdm.tqdm(src_files):
-        if os_file_haschanged(f):
-            format_file(f, out_dir)
-        else:
-            print(f"{f} is not modified within one week")
-
-
-def os_file_haschanged(in_file):
-    file_stats = os.stat(in_file)
-    mod_date = datetime.datetime.fromtimestamp(file_stats.st_mtime)
-    now = datetime.datetime.now()
-    week_delta = datetime.timedelta(weeks=1)
-
-    if now - mod_date < week_delta:
-        return True     # file can be formatted
-    else:
-        return False
-
-
-
-
 
 #############################################################################################
-def format_add_logger(dirin:str,dirout:str, nfile=1000):
+def format_add_logger(txt:str, ):
     """  adding log function import and replace all print( with log(
+    """        
+    import_line = "from utilmy import log, log2"
+    if txt.find(import_line)==-1:
+
+        #### It's stupid, did you check.....
+        txt = import_line+"\n"+txt
+    txt = txt.replace("print(",'log(')
+    return txt
+
+
+def format_add_header(txt:str):
     """
-    def reformat_pyfile(file_path:str):
-        """
-        """
-        with open(file_path,'r',encoding='utf-8') as f:
-            txt = f.read()
-        import_line = "from utilmy import log, log2"
-        if txt.find(import_line)==-1:
-
-            #### It's stupid, did you check.....
-            txt = import_line+"\n"+txt
-        txt = txt.replace("print(",'log(')
-        return txt
-
-    flist = glob_glob_python(dirin, suffix ="*.py", nfile=nfile, exclude="*zz*")
-
-    for fi in flist :
-        fi       = os_path_norm(fi)
-        fname    = fi.split(os.sep)[-1] 
-        file_new = reformat_pyfile(fi) 
-        to_file(file_new, dirout + "/" + fname)
 
 
 
-
-#############################################################################################
-def format_add_header(dirin:str="./"):
-
-    flist = glob_glob_python(dirin, suffix ="*.py", nfile=10, exclude="*zz*")
-
-    ll2 = ""
-    for fi in flist :
-        with open(fi, mode='r') as fp:
-            ll = fp.readlines()
-
-        if find_str(ll,  'MNAME') < 0  : 
-            ll2 = "NAME" + ""
+    """
+    if find_str(txt,  'MNAME') < 0  : 
+        ll2 = "NAME" + ""
 
 
-        if find_str(ll,  'HELP') < 0 : 
-             pass
+    if find_str(txt,  'HELP') < 0 : 
+            pass
 
 
-        
-        ### Write down and check
-        to_file(ll2, finew)
-        isok  = os_file_compile_check(finew)
-        if isok :
-            os.remove(fi)
-            os.rename(finew, fi)
-        else :    
-            os.remove(finew)
-            err_list.append(fi)
+    ### Write down and check
+    to_file(ll2, finew)
+    isok  = os_file_compile_check(finew)
+    if isok :
+        os.remove(fi)
+        os.rename(finew, fi)
+    else :    
+        os.remove(finew)
+        err_list.append(fi)
         
   
 
 
 
 
-
+#############################################################################################
 if 'utilties':
+    def os_glob(in_dir):
+        """
+        os_glob a given directory for all .py files and returns a list of source files.
+        """
+        files = glob.glob(in_dir + "/**/*.py", recursive=True)
+        # remove .ipynb_checkpoints
+        files = [s for s in files if ".ipynb_checkpoints" not in s]
+        # print("os_glob files done ... ")
+        return files
+
+
+    def os_file_haschanged(in_file, weeks=1):
+        file_stats = os.stat(in_file)
+        mod_date = datetime.datetime.fromtimestamp(file_stats.st_mtime)
+        now = datetime.datetime.now()
+        week_delta = datetime.timedelta(weeks=weeks)
+
+        if now - mod_date < week_delta:
+            return True     # file can be formatted
+        else:
+            return False
+
+
+
     def to_file(txt_big, fpath, mode='w', encoding='utf-8'):
         with open(fpath,mode=mode,encoding=encoding) as fp:
             fp.write(txt_big)
@@ -444,4 +439,14 @@ if __name__ == "__main__":
     fire.Fire()  ### python utilmy/ZZZZZ/util_xxxx.py  test1
 
 
+
+
+
+"""
+for fi in flist :
+    fi       = os_path_norm(fi)
+    fname    = fi.split(os.sep)[-1] 
+    file_new = reformat_pyfile(fi) 
+    to_file(file_new, dirout + "/" + fname)
+"""
 
