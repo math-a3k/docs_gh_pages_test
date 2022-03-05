@@ -8,7 +8,12 @@ tasks:
           pip install -e . &&  
           git pull origin main  --rebase &&
           source init.sh 
-          
+
+
+####   /home/gitpod/.bashrc
+
+
+
 #### Local commit applied on 
 
 
