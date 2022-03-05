@@ -1,4 +1,4 @@
-name: Auto docstring - zauto_docstring branch 
+name: Auto docstring - zdocstring branch 
 
 ###  https://github.com/arita37/awesome-actions#static-analysis
 
@@ -97,7 +97,7 @@ jobs:
           commit_options: '--no-verify --signoff'
 
           # Optional glob pattern of files which should be added to the commit
-          file_pattern: docs/types/**.* 
+          file_pattern:  utilmy/**/*.py 
 
           # Optional local file path to the repository
           # Defaults to the root of the repository
