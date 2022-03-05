@@ -78,6 +78,7 @@ jobs:
         git checkout main
         git push origin --delete zdocstring ;
         git checkout -b zdocstring main
+        git branch -a
         git add -A
         git commit -am "copy"
         git push origin zdocstring
