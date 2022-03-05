@@ -27,16 +27,19 @@ jobs:
     - name: Auto generation of docstring
       continue-on-error: true
       run:  |
+        git config user.name github-actions
+        git config user.email github-actions@github.com      
         git checkout main
-        git push origin --delete zdocstring || echo 'already exist'
+        git push origin --delete zdocstring || echo 'already Deleted'
         git checkout -b zdocstring main
         git branch -a
         git add -A
         git commit -am "copy"
         git push origin zdocstring
 
-        python  utilmy/docs/docstring.py  generate_docstring --dirin utilmy/  --dirout utilmy/  --overwrite true   --test false
+        # python  utilmy/docs/docstring.py  generate_docstring --dirin utilmy/  --dirout utilmy/  --overwrite true   --test false
 
+        mkdir utilmy/zzz 
         git add -A
         git commit -am "docstring"
         git push origin zdocstring
