@@ -9,7 +9,7 @@ on:
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass
+    BRANCHES_TO_REBASE: alex,tranchung
 jobs:
   Rebase-All:
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
             git checkout $branch
-            git pull
+            git pull --allow-unrelated-histories 
             git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
             git push
             echo "Merge SUCCEEDED for branch $branch"
