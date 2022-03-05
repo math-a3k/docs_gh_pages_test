@@ -23,7 +23,27 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.head_ref }}
-        
+
+    - name: Auto generation of docstring
+      continue-on-error: true
+      run:  |
+        git checkout main
+        git push origin --delete zdocstring ;
+        git checkout -b zdocstring main
+        git branch -a
+        git add -A
+        git commit -am "copy"
+        git push origin zdocstring
+
+        python  utilmy/docs/docstring.py  generate_docstring --dirin utilmy/  --dirout utilmy/  --overwrite true   --test false
+
+        git add -A
+        git commit -am "docstring"
+        git push origin zdocstring
+
+
+
+
     - name: Set up Python 3.7.*
       uses: actions/setup-python@v1
       with:
@@ -72,22 +92,6 @@ jobs:
            python -c "import utilmy"        
         
 
-    - name: Auto generation of docstring
-      continue-on-error: true
-      run:  |
-        git checkout main
-        git push origin --delete zdocstring ;
-        git checkout -b zdocstring main
-        git branch -a
-        git add -A
-        git commit -am "copy"
-        git push origin zdocstring
-
-        python  utilmy/docs/docstring.py  generate_docstring --dirin utilmy/  --dirout utilmy/  --overwrite true   --test false
-
-        git add -A
-        git commit -am "docstring"
-        git push origin zdocstring
 
 
     # - name: Auto-Commit
