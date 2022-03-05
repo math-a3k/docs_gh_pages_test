@@ -9,7 +9,8 @@ on:
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: alex,tranchung
+    BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass
+    
 jobs:
   Rebase-All:
     runs-on: ubuntu-latest
