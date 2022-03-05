@@ -107,7 +107,7 @@ jobs:
         echo 'All finished'
         git branch -a
 
-s
+
 
     ################################################################
     - name: Code Syntax Checker flake8
