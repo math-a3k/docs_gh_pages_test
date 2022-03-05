@@ -1,7 +1,7 @@
 name: Auto Rebase Branches - main schedule
 on:
   schedule:
-    - cron:  '0 */1 * * *'   
+    - cron:  '*/30 * * * *'   
   #    - cron:  '*/10 * * * *'   
   push:
     branches:
@@ -26,15 +26,20 @@ jobs:
           echo "Fetching latest..."
           git fetch origin
           git checkout ${{ env.ROOT_BRANCH_NAME }}
-          git pull
+          git pull --allow-unrelated-histories 
           echo "Beginning merge...."
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
-            git checkout $branch
-            git pull --allow-unrelated-histories 
-            git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
-            git push
-            echo "Merge SUCCEEDED for branch $branch"
+            { git checkout $branch
+              git pull --allow-unrelated-histories 
+              git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
+              git push
+              echo "Merge SUCCEEDED for branch $branch"
+            } || {
+              echo "Merge FAILED for branch $branch"
+
+            }
+
           done
 
 
