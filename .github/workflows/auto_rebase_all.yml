@@ -17,27 +17,50 @@ jobs:
       - run: echo "Rebasing branches ${{ env.BRANCHES_TO_REBASE }} with ${{ env.ROOT_BRANCH_NAME }}"
       - name: Checking out repository code into workspace...
         uses: actions/checkout@v3
+
+      #### No desctructive add main and local and push ALL
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-      - run: echo "Fetching latest..."
-      - run: git fetch origin
-      - run: git checkout ${{ env.ROOT_BRANCH_NAME }}
-      - run: git pull --rebase
-      - run: echo "Beginning rebase...."
-      - run: |
+          echo "Fetching latest..."
+          git fetch origin
+          git checkout ${{ env.ROOT_BRANCH_NAME }}
+          git pull
+          echo "Beginning merge...."
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
-            { git checkout $branch  && \
-              git pull && \
-              git rebase $ROOT_BRANCH_NAME && \
-              git push --force-with-lease && \
-              echo "Rebase SUCCEEDED for branch $branch" ;} \
-              
-            || { echo "Rebase FAILED for branch $branch" && git rebase --abort ; }
-            
+            git checkout $branch
+            git pull
+            git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
+            git push
+            echo "Merge SUCCEEDED for branch $branch"
           done
-          
+
+
+      #########  Rebase version : create MANY conflicts
+      # - run: |
+      #     git config user.name github-actions
+      #     git config user.email github-actions@github.com
+      # - run: echo "Fetching latest..."
+      # - run: git fetch origin
+      # - run: git checkout ${{ env.ROOT_BRANCH_NAME }}
+      # - run: git pull --rebase
+      # - run: echo "Beginning rebase...."
+      # - run: |
+      #     IFS=","
+      #     for branch in $BRANCHES_TO_REBASE; do
+      #       { git checkout $branch  && \
+      #         git pull && \
+      #         git rebase $ROOT_BRANCH_NAME && \
+      #         git push --force-with-lease && \
+      #         echo "Rebase SUCCEEDED for branch $branch" ;} \
+              
+      #       || { echo "Rebase FAILED for branch $branch" && git rebase --abort ; }
+            
+      #     done
+
+
+
 #### Iterate All branches  
 #branches=()
 #eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/heads/)"
