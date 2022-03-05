@@ -1,4 +1,4 @@
-name: Auto Rebase Branches
+name: Auto Rebase Branches - main schedule
 on:
   schedule:
     - cron:  '0 */1 * * *'   
@@ -10,7 +10,7 @@ on:
 env:
     ROOT_BRANCH_NAME: main
     BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass
-    
+
 jobs:
   Rebase-All:
     runs-on: ubuntu-latest

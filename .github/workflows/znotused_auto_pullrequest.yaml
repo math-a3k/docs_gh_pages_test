@@ -1,4 +1,4 @@
-name:  pullrequest_auto
+name:  zz pullrequest_auto
 
 on:
   #schedule:
