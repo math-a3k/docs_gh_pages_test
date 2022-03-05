@@ -417,17 +417,29 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
 
             log2('########## Write on Disk ################################') 
             if overwrite:
+                script_tmp  = f'{script.parent}/ztmp.py'
                 script_test = f'{script.parent}/{script.name}'
-                with open(script_test, "w") as script_file:
+                with open(script_tmp, "w") as script_file:
                     script_file.writelines(script_lines)
-                log('compile', os_file_compile_check(script_test, verbose=0) )    
+                isok = os_file_compile_check(script_tmp, verbose=0)   
+                log('compile', isok)
+                if isok :
+                    os.remove(script_test)
+                    os.rename(script_tmp, script_test)
+
 
             elif test:
+                script_tmp  = f'{dirout}/ztmp.py'                
                 script_test = f"{dirout}/test_{script.name}"
                 with open(script_test, "w") as script_file:
                     script_file.writelines(script_lines)
 
-                log('compile', os_file_compile_check(script_test, verbose=1)  )  
+                isok = os_file_compile_check(script_tmp, verbose=0)   
+                log('compile', isok)
+                if isok :
+                    os.remove(script_test)
+                    os.rename(script_tmp, script_test)
+
 
         except Exception as e :
             log("\n",e, "\n")
