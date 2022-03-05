@@ -424,7 +424,7 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
                 isok = os_file_compile_check(script_tmp, verbose=0)   
                 log('compile', isok)
                 if isok :
-                    os.remove(script_test)
+                    if os.path.exists(script_test): os.remove(script_test)
                     os.rename(script_tmp, script_test)
 
 
@@ -437,7 +437,7 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
                 isok = os_file_compile_check(script_tmp, verbose=0)   
                 log('compile', isok)
                 if isok :
-                    os.remove(script_test)
+                    if os.path.exists(script_test): os.remove(script_test)
                     os.rename(script_tmp, script_test)
 
 
