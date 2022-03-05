@@ -46,6 +46,39 @@ jobs:
           done
 
 
+
+  ####3 rebase All branches except some branch
+  # Rebase-All:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "Merging  branches ${{ env.BRANCHES_TO_REBASE }} with ${{ env.ROOT_BRANCH_NAME }}"
+  #     - name: Checking out repository code into workspace...
+  #       uses: actions/checkout@v3
+  #     - name: Begin merge process...
+  #       run: |
+  #         git config user.name github-actions
+  #         git config user.email github-actions@github.com
+  #         echo "Fetching latest..."
+  #         git fetch origin
+  #         git checkout ${{ env.ROOT_BRANCH_NAME }}
+  #         echo "Beginning merge...."
+  #         for branch in $(git for-each-ref --format='%(refname:lstrip=-1)' refs/remotes/origin/); do
+  #           if grep -q "$branch" <<< "${{ env.BRANCH_NG }}"
+  #           then
+  #             echo "SKIPPING $branch"
+  #           else
+  #             echo "Working on branch $branch"
+  #             git checkout $branch
+  #             git pull
+  #             git merge ${{ env.ROOT_BRANCH_NAME }} --no-edit || { git add -u . && git commit --no-edit ;}
+  #             git push
+  #             echo "Merge SUCCEEDED for branch $branch"
+  #           fi
+  #         done
+
+
+
+
       #########  Rebase version : create MANY conflicts
       # - run: |
       #     git config user.name github-actions
