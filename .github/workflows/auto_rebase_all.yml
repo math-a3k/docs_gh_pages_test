@@ -30,6 +30,7 @@ jobs:
           echo "Beginning merge...."
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
+          
             { git checkout $branch
               git pull --allow-unrelated-histories 
               git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
@@ -39,6 +40,7 @@ jobs:
               echo "Merge FAILED for branch $branch"
 
             }
+
 
           done
 
