@@ -7,7 +7,8 @@ on:
   # but only for the main branch
   push:
     branches:
-    - main
+    - zrefactor
+
 
   schedule:
     - cron:  '* */24 * * *'      #### 60mins

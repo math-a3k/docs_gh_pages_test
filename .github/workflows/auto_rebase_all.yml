@@ -6,11 +6,12 @@ on:
 
   push:
     branches:
-    - zrebase_all
+    - zrefactor
+
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass,dev01
+    BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass,adev01
 
 jobs:
   Rebase-All:
