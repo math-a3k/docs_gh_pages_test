@@ -34,15 +34,15 @@ jobs:
         git checkout -b zdocstring main
         git branch -a
         git add -A
-        git commit -am "copy"
-        git push origin zdocstring
+        git commit -am "copy"   || echo 'nothing'
+        git push origin zdocstring  ||  echo 'nothing2'
 
         # python  utilmy/docs/docstring.py  generate_docstring --dirin utilmy/  --dirout utilmy/  --overwrite true   --test false
 
         mkdir utilmy/zzz 
         git add -A
-        git commit -am "docstring"
-        git push origin zdocstring
+        git commit -am "docstring" ||
+        git push origin zdocstring  ||
 
 
 
