@@ -2,8 +2,8 @@ fire
 python-box
 numpy
 pandas
-imodels
-# pyinstrument  ### code profile
+# imodels
+pyinstrument  ### code profile
 scipy
 loguru
 

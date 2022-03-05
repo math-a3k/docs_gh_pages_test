@@ -36,17 +36,18 @@ def test_all() -> None:
     test2()
 
 
-
 def test1():
     import utilmy
     dirin = os.path.dirname(  utilmy.__file__ )  ### Repo Root folder
-    os_file_compile_check_batch(dirin)
+    flist = glob_glob_python(dirin,nfile=1)
+    log(flist)
+    os_file_compile_check_batch(flist[0])
 
 
 def test2() -> None:
     import utilmy
     dirin = os.path.dirname(utilmy.__file__)  ### Repo Root folder
-    dirout = os_make_dirs('utilmy\\docs\\test\\')[0] ### test dir
+    dirout = os_makedirs('utilmy\\docs\\test\\')[0] ### test dir
     reformatter(dirin,dirout)
 
 
@@ -109,8 +110,7 @@ def format_add_logger(dirin:str,dirout:str, nfile=1000):
         fi       = os_path_norm(fi)
         fname    = fi.split(os.sep)[-1] 
         file_new = reformat_pyfile(fi) 
-        with open(dirout+ "/" + fname,'w',encoding='utf-8') as w:
-            w.write(file_new)
+        to_file(file_new, dirout + "/" + fname)
 
 
 
@@ -145,19 +145,25 @@ def format_add_header(dirin:str="./"):
             err_list.append(fi)
         
   
-def to_file(lines, fpath):
-    pass
-    
-
-def find_str(lines, word):
-    for ii,li in enumerate(lines) :
-        if word in li : return ii
-    return -1    
-  
 
 
 
 if 'utilties':
+    def to_file(txt_big, fpath, mode='w', encoding='utf-8'):
+        with open(fpath,mode=mode,encoding=encoding) as fp:
+            fp.write(txt_big)
+
+        if not os.path.is_file(fpath) :
+            print('File not exist', fpath)   
+        
+
+    def find_in_lines(lines, word):
+        for ii,li in enumerate(lines) :
+            if word in li : return ii
+        return -1    
+    
+
+
     def os_path_norm(diroot:str):
         """os_path_norm 
         Args:
@@ -197,7 +203,9 @@ if 'utilties':
         log(flist)
         return flist
 
-    def os_make_dirs(filename):
+
+
+    def os_makedirs(filename):
         if isinstance(filename, str):
             filename = [os.path.dirname(filename)]
 

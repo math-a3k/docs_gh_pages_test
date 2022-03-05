@@ -2,9 +2,14 @@ MNAME='utilmy.docs.docstring'
 HELP=""" Automates Python scripts formatting, linting and Mkdocs documentation.
 
 
-python docs/docstring.py  --dirin  uitl   --dirout    --overwrite False --test True
+cd myutil
+pip install -e . ## dev install
 
 python utilmy/docs/docstring.py  test1
+
+python docs/docstring.py  --dirin  uitl   --dirout    --overwrite False --test True
+
+
 
 
 
