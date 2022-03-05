@@ -426,6 +426,8 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
                 if isok :
                     if os.path.exists(script_test): os.remove(script_test)
                     os.rename(script_tmp, script_test)
+                else :
+                    os.remove(script_tmp)
 
 
             elif test:
@@ -439,6 +441,8 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
                 if isok :
                     if os.path.exists(script_test): os.remove(script_test)
                     os.rename(script_tmp, script_test)
+                else :
+                    os.remove(script_tmp)
 
 
         except Exception as e :
