@@ -11,7 +11,7 @@ on:
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass,adev01
+    BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass,adev01,emilio
 
 jobs:
   Rebase-All:
