@@ -169,10 +169,10 @@ if 'check if .py compile':
             ast.parse(source)
             return True
         except Exception as e:
-        if verbose >0 : 
-            print(e)
-            traceback.print_exc() # Remove to silence any errros
-        return False
+            if verbose >0 : 
+                print(e)
+                traceback.print_exc() # Remove to silence any errros
+            return False
 
 
 
