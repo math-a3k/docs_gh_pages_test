@@ -1,7 +1,7 @@
 name: Auto Rebase Branches - main schedule
 on:
   schedule:
-    - cron:  '* */12 * * *'      #### 60mins
+    - cron:  '* */24 * * *'      #### 60mins
     #    - cron:  '*/10 * * * *'   
 
   push:
@@ -11,7 +11,7 @@ on:
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: alex,tranchung,lets7512,andrescass,adev01,emilio
+    BRANCHES_TO_REBASE: aniket,alex,tranchung,lets7512,andrescass,adev01,emilio
 
 jobs:
   Rebase-All:
