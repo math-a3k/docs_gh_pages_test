@@ -4,8 +4,8 @@ name: docs_pages_workflow
 on:
   push:
     branches:
-    - main
-    - yushao
+      - main
+      - yushao
 
  jobs:
   build_docs_job:
