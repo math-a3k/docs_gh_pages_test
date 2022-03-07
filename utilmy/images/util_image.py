@@ -4,11 +4,10 @@ HELP=""" utils images
 
 """
 import os,io, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
-from typing import Union
 from box import Box
 import io, cv2,  tifffile.tifffile, matplotlib
 from PIL import Image
-
+from typing import Union,Tuple,Sequence,List
 
 os.environ['MPLCONFIGDIR'] = "/tmp/"
 try :
@@ -54,7 +53,7 @@ def image_create_fake(
     nimages=1, 
     imsize=(300,300),
     rgb_color = (255, 0, 0)):
-    """TODO: why is this function there at all? 
+    """TODO: whats the use of this function
     """
     import cv2
     import numpy as np
@@ -76,7 +75,31 @@ def image_create_fake(
     return img_list
 
 ################################################################################################
-def prep_images(image_paths, nmax=10000000):
+def prep_image(image_path:str, xdim :int=1, ydim :int=1,
+    mean :float = 0.5,std :float    = 0.5) -> Tuple[Union[list,np.typing.ArrayLike],str] :
+    """ resizes, crops and centers an image (make 0 mean, unit variance).
+    also works with provided mean and std
+    TODO: if mean and std are None, calculate them from the image itself?
+    """
+
+    try :
+        # fname      = str(image_path).split("/")[-1]
+        # id1        = fname.split(".")[0]
+        # print(image_path)
+        image = image_read(image_path)
+        image = image_resize_pad(image, (xdim,ydim), padColor=0)
+        image = image_center_crop(image, (xdim,ydim))
+        assert max(image) > 1, "image should be uint8, 0-255"
+        image = (image / 255)
+        image = (image-mean) /std  # Normalize the image to mean and std
+        image = image.astype('float32')
+        return image, image_path
+    except :
+        return [], ""
+        
+def prep_images(image_paths:Sequence[str], nmax:int=10000000)->List[np.typing.ArrayLike]:
+    """ run prep_image on multiple images
+    """
 
     images = []
     for i in range(len(image_paths)):
@@ -87,6 +110,10 @@ def prep_images(image_paths, nmax=10000000):
 
 
 def prep_images2(image_paths, nmax=10000000):
+    """ TODO: how is this different from prep_image,
+    this can be merged within prep_image by creating a behaviour for mean and std?
+    mostly prints stuff, returns the first image ( why?)
+    """
     images = []
     original_first_image = None
     for i in range(len(image_paths)):
@@ -111,22 +138,7 @@ def prep_images2(image_paths, nmax=10000000):
     return images, original_first_image
 
 
-def prep_image(image_path:str, xdim=1, ydim=1):
-    mean   = [0.5]
-    std    = [0.5]
-    try :
-        # fname      = str(image_path).split("/")[-1]
-        # id1        = fname.split(".")[0]
-        # print(image_path)
-        image = image_read(image_path)
-        image = image_resize_pad(image, (xdim,ydim), padColor=0)
-        image = image_center_crop(image, (xdim,ydim))
-        image = (image / 255)
-        image = (image-mean) /std  # Normalize the image to mean and std
-        image = image.astype('float32')
-        return image, image_path
-    except :
-        return [], ""
+
 
 
 def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
@@ -154,6 +166,8 @@ def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
 def run_multiprocess(myfun, list_args, npool=10, **kwargs):
     """
        res = run_multiprocess(prepro, image_paths, npool=10, )
+       TODO: does this already exist in the multiprocessing module, 
+       and if so should we use that?
     """
     from functools import partial
     from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
