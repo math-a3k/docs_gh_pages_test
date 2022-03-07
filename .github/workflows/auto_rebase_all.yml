@@ -1,7 +1,7 @@
 name: Auto Rebase Branches - main schedule
 on:
   schedule:
-    - cron:  '* */24 * * *'      #### 60mins
+    - cron:  '* 9 * * *'      #### 60mins
     #    - cron:  '*/10 * * * *'   
 
   push:
