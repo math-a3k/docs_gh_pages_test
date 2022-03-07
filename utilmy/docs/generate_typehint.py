@@ -123,10 +123,6 @@ def run_monkeytype(dirin:str, dirout:str, diroot:str=None, mode="stub", nfile=10
             dirin = dirin.replace("\\", "/") + '/'
     """   
 
-
-
-
-
     import os, sys
     os.makedirs(dirout, exist_ok=True)
     if "utilmy." in dirin :
@@ -138,6 +134,8 @@ def run_monkeytype(dirin:str, dirout:str, diroot:str=None, mode="stub", nfile=10
 
     
     flist = glob_glob_python(dirin, suffix ="*.py", nfile=nfile, exclude=exclude)
+    log(flist)
+
     for fi0 in flist :
       log(f"####### Processing file {fi0} ###########")
       fi      = fi0.replace("\\", "/")

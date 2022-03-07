@@ -106,7 +106,7 @@ jobs:
 
 
         git add -A || echo 'nothing'
-        git commit -am "docstring" ||   echo 'nothing'
+        git commit -am "monkey typehint" ||   echo 'nothing'
         git push origin ztypehint  ||  echo 'nothing2'
 
         echo 'All finished'
