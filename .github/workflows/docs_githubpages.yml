@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - yushao
 
 jobs:
   build_docs_job:

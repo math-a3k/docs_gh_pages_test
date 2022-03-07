@@ -69,15 +69,15 @@ for current_version in ${versions}; do
       echo "INFO: Building for ${current_language}"
  
       # HTML #
-      sphinx-build -b html docs_ghpage/ docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
+      sphinx-build -b html utilmy/ docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
  
       # PDF #
-      sphinx-build -b rinoh docs_ghpage/ docs_ghpage/_build/rinoh -D language="${current_language}"
+      sphinx-build -b rinoh utilmy/ docs_ghpage/_build/rinoh -D language="${current_language}"
       mkdir -p "${docroot}/${current_language}/${current_version}"
       cp "docs_ghpage/_build/rinoh/target.pdf" "${docroot}/${current_language}/${current_version}/helloWorld-docs_${current_language}_${current_version}.pdf"
  
       # EPUB #
-      sphinx-build -b epub docs_ghpage/ docs_ghpage/_build/epub -D language="${current_language}"
+      sphinx-build -b epub utilmy/ docs_ghpage/_build/epub -D language="${current_language}"
       mkdir -p "${docroot}/${current_language}/${current_version}"
       cp "docs_ghpage/_build/epub/target.epub" "${docroot}/${current_language}/${current_version}/helloWorld-docs_${current_language}_${current_version}.epub"
  
