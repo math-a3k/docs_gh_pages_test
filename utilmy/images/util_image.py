@@ -36,20 +36,33 @@ def test_all():
 
 def test():
     pass
+def test_image_create_fake():
+    dirout = os.getcwd() + "/ztmp/images/"
+    imsize=(300,300)
+    red = (255, 0, 0)
+    nimages = 1
+    image_create_fake(
+    dirout=dirout, 
+    nimages=nimages, 
+    imsize=imsize,
+    rgb_color = red)
 
 
-def test_image_create_fake(dirout=None, nimages=1, ):
+def image_create_fake(
+    dirout=os.getcwd() + "/ztmp/images/", 
+    nimages=1, 
+    imsize=(300,300),
+    rgb_color = (255, 0, 0)):
+    """TODO: why is this function there at all? 
+    """
     import cv2
     import numpy as np
 
-    dirout = os.getcwd() + "/ztmp/images/"
+    width, height = imsize
     os.makedirs(dirout, exist_ok=True)
     ii = 0 ; img_list =[]
-    for ii in range(nmax):
-        # Create new blank 300x300 red image
-        width1, height1 = 300, 300
-        red = (255, 0, 0)
-        rgb_color= red
+    for ii in range(nimages):
+
         image = np.zeros((height, width, 3), np.uint8)
         color = tuple(reversed(rgb_color))
         image[:] = color
@@ -58,16 +71,18 @@ def test_image_create_fake(dirout=None, nimages=1, ):
             cv2.imwrite( dirout + f'img_{ii}.jpg', image)
         else:
             img_list.append(image)
-
+    # will return empty list if a dirout was provided
+    return img_list
 
 ################################################################################################
 def prep_images(image_paths, nmax=10000000):
-  images = []
-  for i in range(len(image_paths)):
-    if i > nmax : break
-    image =  prep_image(image_paths[i] )
-    images.append(image)
-  return images
+
+    images = []
+    for i in range(len(image_paths)):
+        if i > nmax : break
+            image =  prep_image(image_paths[i] )
+            images.append(image)
+    return images
 
 
 def prep_images2(image_paths, nmax=10000000):
