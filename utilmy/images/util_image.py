@@ -36,6 +36,7 @@ def test_all():
 
 def test():
     pass
+
 def test_image_create_fake():
     dirout = os.getcwd() + "/ztmp/images/"
     imsize=(300,300)
@@ -80,8 +81,8 @@ def prep_images(image_paths, nmax=10000000):
     images = []
     for i in range(len(image_paths)):
         if i > nmax : break
-            image =  prep_image(image_paths[i] )
-            images.append(image)
+        image =  prep_image(image_paths[i] )
+        images.append(image)
     return images
 
 
