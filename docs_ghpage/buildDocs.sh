@@ -58,7 +58,7 @@ for current_version in ${versions}; do
    fi
 
    #### Install utilmy
-   pip install -e .
+   # pip install -e .
 
 
  

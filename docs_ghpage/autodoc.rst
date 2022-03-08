@@ -1,6 +1,6 @@
 .. _autodoc:
  
-helloWorld.py
+
 =============
  
 .. automodule:: utilmy

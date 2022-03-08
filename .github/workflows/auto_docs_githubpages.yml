@@ -1,11 +1,11 @@
-name: docs_github_pages arita37.github.io/myutil/en/yushao/
+name: docs_github_pages arita37.github.io/myutil/en/zdocs_y23487teg65f6/
  
 # execute this workflow automatically when a we push to main
 on:
   push:
     branches:
       - main
-      - yushao
+      - zdocs_y23487teg65f6
 
 jobs:
   build:
