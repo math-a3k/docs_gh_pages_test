@@ -56,6 +56,11 @@ for current_version in ${versions}; do
       echo -e "\tINFO: Couldn't find 'docs_ghpage/conf.py' (skipped)"
       continue
    fi
+
+   #### Install utilmy
+   pip install -e .
+
+
  
    languages="en `find docs_ghpage/locales/ -mindepth 1 -maxdepth 1 -type d -exec basename '{}' \;`"
    for current_language in ${languages}; do
@@ -80,7 +85,7 @@ for current_version in ${versions}; do
       # HTML #
       sphinx-build -b html docs_ghpage/ docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
  
- 
+
       # PDF #
       # sphinx-build -b rinoh utilmy/ docs_ghpage/_build/rinoh -D language="${current_language}"
       # mkdir -p "${docroot}/${current_language}/${current_version}"
