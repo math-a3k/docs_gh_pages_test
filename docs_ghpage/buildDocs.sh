@@ -68,8 +68,17 @@ for current_version in ${versions}; do
       ##########
       echo "INFO: Building for ${current_language}"
  
+
+# Running Sphinx v4.4.0
+# Configuration error:
+# config directory doesn't contain a conf.py file (/__w/myutil/myutil/utilmy)
+# + rsync -av docs_ghpage/_build/html/ /tmp/tmp.EHpPcy6lE3/
+# rsync: change_dir "/__w/myutil/myutil//docs_ghpage/_build/html" failed: No such file or directory (2)
+# sending incremental file list
+# rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1207) [sender=3.1.3]
+
       # HTML #
-      sphinx-build -b html utilmy/ docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
+      sphinx-build -b html docs_ghpage/ docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
  
       # PDF #
       # sphinx-build -b rinoh utilmy/ docs_ghpage/_build/rinoh -D language="${current_language}"
