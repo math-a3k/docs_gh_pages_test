@@ -64,15 +64,16 @@ jobs:
       run: |
            python -c "import os, pandas as pd; print(os)"
            python -c "import utilmy"        
+           pip install -U sphinx
         
-        
+
     ################################################################################
-    - name: Prereqs
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #run: |
-      #  apt-get update
-      #  apt-get install -y git
+    #- name: Prereqs
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  #run: |
+    #  #  apt-get update
+    #  #  apt-get install -y git
 
     - name: Execute script to build our documentation and update pages
       env:
