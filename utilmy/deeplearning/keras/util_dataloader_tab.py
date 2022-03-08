@@ -1,20 +1,245 @@
+# -*- coding: utf-8 -*-
+MNAME="utilmy.deeplearning.keras.util_dataloader_tab"
+HELP="""
+
+
+
+https://www.tensorflow.org/tutorials/structured_data/feature_columns
+
+
+https://www.tensorflow.org/guide/migrate/migrating_feature_columns
 
 
 
 
+
+
+"""
+import os, numpy as np, glob, pandas as pd
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 
 import keras
-import numpy as np
-import pandas as pd
 from keras_dataloader.dataset import Dataset
 
+###################################################################################################################
+from utilmy import log, log2
 
-def default_collate_fn(samples):
-    X = np.array([sample[0] for sample in samples])
-    Y = np.array([sample[1] for sample in samples])
+def help():
+    from utilmy import help_create
+    ss = HELP + help_create(MNAME)
+    log(ss)
 
-    return X, Y
+
+
+
+
+###################################################################################################################
+def test2():  # using predefined df and model training using model.fit()
+    """Tests model training process"""
+    from PIL import Image
+    from pathlib import Path
+    from tensorflow import keras
+    from tensorflow.keras import layers
+
+    def get_model():
+        model = keras.Sequential([
+            keras.Input(shape=(28, 28, 3)),
+            layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
+            layers.MaxPooling2D(pool_size=(2, 2)),
+            layers.Flatten(),
+            layers.Dense(num_labels, activation="softmax"),
+        ])
+        model.compile(loss=tf.keras.losses.CategoricalCrossentropy(),
+                      optimizer=tf.keras.optimizers.Adam(learning_rate=1e-7), metrics=["accuracy"])
+        return model
+
+    #####################################################
+
+    df = test_randaom_ds( num_labels=num_labels,)
+
+    input_layer = pd_to_tf_input_layer(df:pd.DataFrame, 
+
+    cols_cat_dict:    dict, 
+    cols_catstr_dict: dict, 
+
+    cols_num_dict:dict,  
+    is_sparse=True, **kw)
+
+    
+
+    log('############   without Transform')
+
+    model = get_model()
+    model.fit(dt_loader, epochs=1, )
+
+
+
+
+
+
+def pd_to_tf_input_layer(df:pd.DataFrame, 
+
+    cols_cat_dict:    dict, 
+    cols_catstr_dict: dict, 
+
+    cols_num_dict:dict,  
+    is_sparse=True, **kw):
+
+    """
+        pandas --->  Keras Prepro Layers  , sparse format
+
+        df: input dataframe
+        cols_type:  colname --->  type('category, .....),
+        cols_unique:  colname ---> ['red', 'blue'] Unique values (for category)
+
+
+        With Keras preprocessing layers
+
+        inputs = {
+        'type': tf.keras.Input(shape=(), dtype='int64'),
+        'size': tf.keras.Input(shape=(), dtype='string'),
+        'weight': tf.keras.Input(shape=(), dtype='float32'),
+        }
+        # Convert index to one-hot; e.g. [2] -> [0,0,1].
+        type_output = tf.keras.layers.CategoryEncoding(
+            one_hot_dims, output_mode='one_hot')(inputs['type'])
+        # Convert size strings to indices; e.g. ['small'] -> [1].
+        size_output = tf.keras.layers.StringLookup(vocabulary=vocab)(inputs['size'])
+        # Normalize the numeric inputs; e.g. [2.0] -> [0.0].
+        weight_output = tf.keras.layers.Normalization(
+            axis=None, mean=weight_mean, variance=weight_variance)(inputs['weight'])
+        outputs = {
+        'type': type_output,
+        'size': size_output,
+        'weight': weight_output,
+        }
+        preprocessing_model = tf.keras.Model(inputs, outputs)
+
+
+    """
+    inputs = Box({})
+    outputs = Box({})
+
+
+    #### Category
+    for ci in cols_cat_dict['cols']: 
+        inputs[ci] =  tf.keras.Input(shape=(), dtype='int64'),
+
+        is not is_sparse :        
+           outputs[ci] = tf.keras.layers.CategoryEncoding(cols_cat_dict['nunique'][ci], output_mode='one_hot', )(inputs[ci] )
+        else
+           outputs[ci] = ### Sparse
+
+    for ci in cols_catstr_dict['cols']: 
+        inputs[ci] =  tf.keras.Input(shape=(), dtype='string'),
+        is not is_sparse :        
+           outputs[ci] = tf.keras.layers.StringLookup(vocabulary= cols_catstr_dict['vocab'][ci])(inputs[ci] )
+        else
+           outputs[ci] = ### Sparse
+
+    for ci in cols_num_dict['cols']:
+       inputs[ci] = tf.keras.Input(shape=(), dtype='float32')
+
+       outputs[ci] = tf.keras.layers.Normalization(axis=None, mean=cols_num_dict['mean'][ci], variance=cols_num_dict['variance'][ci])(inputs[ci])
+
+    features_prepro_model = tf.keras.Model(inputs, outputs)
+    return features_prepro_model
+
+
+
+
+
+
+def pd_to_tf_features(Xtrain:pd.DataFrame, cols_type_received, cols_ref, **kw):
+    """
+       Create sparse data struccture in KERAS  To plug with MODEL:
+       No data, just virtual data  https://github.com/GoogleCloudPlatform/data-science-on-gcp/blob/master/09_cloudml/flights_model_tf2.ipynb
+
+        ## With feature columns
+        ### Feature columns must be passed as a list to the estimator on creation, and will be called implicitly during training.
+
+        categorical_col = tf1.feature_column.categorical_column_with_identity(
+            'type', num_buckets=one_hot_dims)
+        # Convert index to one-hot; e.g. [2] -> [0,0,1].
+        indicator_col = tf1.feature_column.indicator_column(categorical_col)
+
+        # Convert strings to indices; e.g. ['small'] -> [1].
+        vocab_col = tf1.feature_column.categorical_column_with_vocabulary_list(
+            'size', vocabulary_list=vocab, num_oov_buckets=1)
+        # Embed the indices.
+        embedding_col = tf1.feature_column.embedding_column(vocab_col, embedding_dims)
+
+        normalizer_fn = lambda x: (x - weight_mean) / math.sqrt(weight_variance)
+        # Normalize the numeric inputs; e.g. [2.0] -> [0.0].
+        numeric_col = tf1.feature_column.numeric_column(
+            'weight', normalizer_fn=normalizer_fn)
+
+        estimator = tf1.estimator.DNNClassifier(
+            feature_columns=[indicator_col, embedding_col, numeric_col],
+            hidden_units=[1])
+
+        def _input_fn():
+        return tf1.data.Dataset.from_tensor_slices((features, labels)).batch(1)
+
+        estimator.train(_input_fn)
+
+
+    :return:
+    """
+    from tensorflow.feature_column import (categorical_column_with_hash_bucket,
+        numeric_column, embedding_column, bucketized_column, crossed_column, indicator_column)
+
+    if len(cols_ref) <= 1 :
+        return Xtrain
+
+    dict_sparse, dict_dense = {}, {}
+    for cols_groupname in cols_ref :
+        assert cols_groupname in cols_type_received, "Error missing colgroup in config data_pars[cols_model_type] "
+
+        if cols_groupname == "cols_sparse" :
+           col_list = cols_type_received[cols_groupname]
+           for coli in col_list :
+               m_bucket = min(500, int( Xtrain[coli].nunique()) )
+               dict_sparse[coli] = categorical_column_with_hash_bucket(coli, hash_bucket_size= m_bucket)
+
+        if cols_groupname == "cols_dense" :
+           col_list = cols_type_received[cols_groupname]
+           for coli in col_list :
+               dict_dense[coli] = numeric_column(coli)
+
+        if cols_groupname == "cols_cross" :
+           col_list = cols_type_received[cols_groupname]
+           for coli in col_list :
+               m_bucketi = min(500, int( Xtrain[coli[0]].nunique()) )
+               m_bucketj = min(500, int( Xtrain[coli[1]].nunique()) )
+               dict_sparse[coli[0]+"-"+coli[1]] = crossed_column(coli[0], coli[1], m_bucketi * m_bucketj)
+
+        if cols_groupname == "cols_discretize" :
+           col_list = cols_type_received[cols_groupname]
+           for coli in col_list :
+               bucket_list = np.linspace(min, max, 100).tolist()
+               dict_sparse[coli +"_bin"] = bucketized_column(numeric_column(coli), bucket_list)
+
+
+    #### one-hot encode the sparse columns
+    dict_sparse = { colname : indicator_column(col)  for colname, col in dict_sparse.items()}
+
+    ### Embed
+    dict_embed  = { 'em_{}'.format(colname) : embedding_column(col, 10) for colname, col in dict_sparse.items()}
+
+    dict_dnn    = {**dict_embed,  **dict_dense}
+    dict_linear = {**dict_sparse, **dict_dense}
+
+    return (dict_linear, dict_dnn )
+
+
+
+
+
+
+
+
 
 
 
@@ -22,6 +247,12 @@ def default_collate_fn(samples):
 
 
 ###################################################################################################################
+def default_collate_fn(samples):
+    X = np.array([sample[0] for sample in samples])
+    Y = np.array([sample[1] for sample in samples])
+
+    return X, Y
+
 
 def tf_data_create_sparse(cols_type_received:dict= {'cols_sparse' : ['col1', 'col2'],
                                                      'cols_num'    : ['cola', 'colb']
@@ -89,8 +320,6 @@ def tf_data_create_sparse(cols_type_received:dict= {'cols_sparse' : ['col1', 'co
     # dict_linear = {**dict_cat_sparse, **dict_dense}
 
     return  dict_cat_sparse, dict_cat_embed, dict_dense,
-
-
 
 
 def tf_data_pandas_to_dataset(training_df: pd.DataFrame, colsX: str, coly: str):
@@ -161,9 +390,6 @@ def tf_data_file_to_dataset(pattern, batch_size, mode=tf.estimator.ModeKeys.TRAI
 
 
 
-
-
-
 class DataGenerator(keras.utils.Sequence):
 
     def __init__(self,
@@ -228,11 +454,6 @@ class DataGenerator(keras.utils.Sequence):
 
 
 
-
-
-
-# pylint: disable=C0321,C0103,C0301,E1305,E1121,C0302,C0330,C0111,W0613,W0611,R1705
-# -*- coding: utf-8 -*-
 """
 ipython source/models/keras_widedeep.py  test  --pdb
 python keras_widedeep.py  test
