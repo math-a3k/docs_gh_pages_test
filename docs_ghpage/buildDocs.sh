@@ -85,7 +85,8 @@ for current_version in ${versions}; do
 # rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1207) [sender=3.1.3]
 
       # Generate the RST
-      sphinx-apidoc -f -o docs_ghpage/_build/rst/${current_language}/${current_version}/   utilmy/
+      #sphinx-apidoc -f -o docs_ghpage/_build/rst/${current_language}/${current_version}/   utilmy/
+      sphinx-apidoc -f -o docs_ghpage/  utilmy/
 
 
       # Generate HTML  from RST
