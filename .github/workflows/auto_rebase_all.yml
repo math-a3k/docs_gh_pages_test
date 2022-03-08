@@ -11,7 +11,7 @@ on:
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: aniket,alex,tranchung,lets7512,andrescass,adev01,emilio
+    BRANCHES_TO_REBASE: aniket,alex,tranchung,lets7512,andrescass,adev01,zdocs_y23487teg65f6
 
 jobs:
   Rebase-All:
