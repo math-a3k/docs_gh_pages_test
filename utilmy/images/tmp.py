@@ -4,12 +4,11 @@ HELP=""" utils images
 
 """
 import os,io, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
-from box import Box
-import io, cv2,  tifffile.tifffile, matplotlib
+import cv2,io,  tifffile.tifffile, matplotlib
 from PIL import Image
 from typing import Union,Tuple,Sequence,List
+import numpy.typing
 
-os.environ['MPLCONFIGDIR'] = "/tmp/"
 try :
    from albumentations.core.transforms_interface import ImageOnlyTransform
    import diskcache as dc 
@@ -17,8 +16,6 @@ except : pass
 
 
 #############################################################################################
-from utilmy import pd_read_file
-from utilmy import log, log2
 
 def help():
     from utilmy import help_create
@@ -36,47 +33,11 @@ def test_all():
 def test():
     pass
 
-def test_image_create_fake():
-    dirout = os.getcwd() + "/ztmp/images/"
-    imsize=(300,300)
-    red = (255, 0, 0)
-    nimages = 1
-    image_create_fake(
-    dirout=dirout, 
-    nimages=nimages, 
-    imsize=imsize,
-    rgb_color = red)
 
-
-def image_create_fake(
-    dirout=os.getcwd() + "/ztmp/images/", 
-    nimages=1, 
-    imsize=(300,300),
-    rgb_color = (255, 0, 0)):
-    """TODO: whats the use of this function
-    """
-    import cv2
-    import numpy as np
-
-    width, height = imsize
-    os.makedirs(dirout, exist_ok=True)
-    ii = 0 ; img_list =[]
-    for ii in range(nimages):
-
-        image = np.zeros((height, width, 3), np.uint8)
-        color = tuple(reversed(rgb_color))
-        image[:] = color
-
-        if dirout is not None :
-            cv2.imwrite( dirout + f'img_{ii}.jpg', image)
-        else:
-            img_list.append(image)
-    # will return empty list if a dirout was provided
-    return img_list
 
 ################################################################################################
 def prep_image(image_path:str, xdim :int=1, ydim :int=1,
-    mean :float = 0.5,std :float    = 0.5) -> Tuple[Union[list,np.typing.ArrayLike],str] :
+    mean :float = 0.5,std :float    = 0.5) -> Tuple[Union[list,numpy.typing.ArrayLike],str] :
     """ resizes, crops and centers an image according to
     provided mean and std
     """
@@ -88,28 +49,32 @@ def prep_image(image_path:str, xdim :int=1, ydim :int=1,
         image = image_read(image_path)
         image = image_resize_pad(image, (xdim,ydim), padColor=0)
         image = image_center_crop(image, (xdim,ydim))
-        assert max(image) > 1, "image should be uint8, 0-255"
+        assert np.max(image) > 1, "image should be uint8, 0-255"
         image = (image / 255)           
         image = (image-mean) /std  # Normalize the image to mean and std
         image = image.astype('float32')
+        # import pdb;pdb.set_trace()
         return image, image_path
-    except :
+    except Exception as e:
+        raise e
         return [], ""
         
 def prep_images(image_paths:Sequence[str], nmax:int=10000000, 
     xdim :int=1, ydim :int=1,
-    mean :float = 0.5,std :float    = 0.5)->List[np.typing.ArrayLike]:
+    mean :float = 0.5,std :float    = 0.5)->Tuple[List[np.typing.ArrayLike],List[str]]:
     """ run prep_image on multiple images
     """
 
     images = []
+    paths = []
     for i in range(len(image_paths)):
         if i > nmax : break
-        image =  prep_image(image_paths[i], 
+        image,path =  prep_image(image_paths[i], 
         xdim =xdim, ydim =ydim,
         mean  = mean,std  = std )
         images.append(image)
-    return images
+        paths.append(path)
+    return images,paths
 
 
 def prep_images2(image_paths, nmax=10000000):
@@ -117,6 +82,9 @@ def prep_images2(image_paths, nmax=10000000):
     this can be merged within prep_image by creating a behaviour for mean and std?
     mostly prints stuff, returns the first image ( why?)
     """
+    xdim = 200
+    ydim = 200
+    cdim = 3
     images = []
     original_first_image = None
     for i in range(len(image_paths)):
@@ -144,202 +112,32 @@ def prep_images2(image_paths, nmax=10000000):
 def test_prep_images1_and_2():
     
     import numpy as np
-    import skimage
+    import skimage.io
     impath = 'tempim.png'
     import os
+    error_flag = False
     try:
-        ar = np.random.uniform(size=(200,200,3))
-        skimage.io.imwrite(impath,ar)
+        ar = (np.random.uniform(size=(200,200,3)) * 255).astype(np.float32)
+        skimage.io.imsave(impath,ar)
         images2,original_first_image = prep_images2([impath], nmax=10000000)
-        images = prep_images([impath], nmax=10000000)
-        assert np.abs(images[0] - images2[0]).sum(),'prep_images2 and prep_images not same!'
-    except:
+        images,paths = prep_images([impath],xdim=200,ydim=200, mean=0,std=1,nmax=10000000)
+        error_flag = False
+        if np.abs(images[0] - images2[0]).sum():
+            error_flag = True
+    except Exception as e:
+        
         if os.path.exists(impath):
             os.system('rm '+impath)
-
-def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
-    """ Parallel processing
-
-    """
-    from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
-
-    pool = Pool(npool)
-    res  = pool.map(prepro_image_fun, image_path_list)
-    pool.close() ;     pool.join()  ; pool = None
-
-    print('len res', len(res))
-    images, labels = [], []
-    for (x,y) in res :
-        if len(y)> 0 and len(x)> 0 :
-            images.append(x)
-            labels.append(y)
-
-    print('len images', len(images))
-    print(str(labels)[:60])
-    return images, labels
+        raise e
+    if error_flag:
+        assert False,'prep_images2 and prep_images not same!'
 
 
-def run_multiprocess(myfun, list_args, npool=10, **kwargs):
-    """
-       res = run_multiprocess(prepro, image_paths, npool=10, )
-       TODO: does this already exist in the multiprocessing module, 
-       and if so should we use that?
-    """
-    from functools import partial
-    from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
-    pool = Pool(npool)
-    res  = pool.map( partial(myfun, **kwargs), list_args)
-    pool.close()
-    pool.join()
-    return res
+
 
 
 
 ################################################################################################
-def image_cache_create():
-    #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache
-    #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
-    ####   sleep 56000  && python prepro.py  image_create_cache
-    import cv2, gc, diskcache
-    nmax =  1000000 #  0000
-    global xdim, ydim
-    xdim= 256
-    ydim= 256
-
-    log("### Sub-Category  ################################################################")
-    # in_dir   = data_dir + '/fashion_data/images/'
-    # in_dir   = data_dir + "/train_nobg_256/"
-    in_dir   = data_dir + "/../gsp/v1000k_clean_nobg/"
-
-    image_list = sorted(list(glob.glob(  f'/{in_dir}/*/*.*')))
-    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ]
-    log('N images', len(image_list))
-    # tag   = "-women_topwear"
-    tag      = "train_r2p2_1000k_clean_nobg"
-    tag      = f"{tag}_{xdim}_{ydim}-{nmax}"
-    # db_path  = data_train + f"/img_{tag}.cache"
-    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache"
-
-    log(in_dir)
-    log(db_path)
-
-    def prepro_image2b(image_path):
-        try :
-            fname      = str(image_path).split("/")[-1]
-            id1        = fname.split(".")[0]
-            # print(image_path)
-
-            image = cv2.imread(image_path)
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            # image = util_image.image_resize_pad(image, (xdim,ydim), padColor=255)
-            image = util_image.image_center_crop(image, (245, 245))
-
-            # image = image.astype('float32')
-            return image, image_path
-            #return [1], "1"
-
-        except :
-            try :
-               # image = image.astype('float32')
-               # cache[ fname ] =  image        ### not uulti thread write
-               return image, image_path
-               # return [1], "1"
-            except :
-               return [],""
-
-    log("#### Converting  ############################################################")
-    image_list = image_list[:nmax]
-    log('Size Before', len(image_list))
-
-    import diskcache as dc
-    #  from diskcache import FanoutCache  ### too much space
-    # che = FanoutCache( db_path, shards=4, size_limit=int(60e9), timeout=9999999 )
-    cache = dc.Cache(db_path, size_limit=int(100e9), timeout=9999999 )
-
-    log("#### Load  #################################################################")
-    images, labels = prepro_images_multi(image_list, prepro_image= prepro_image2b, npool=32 )
-
-
-    import asyncio
-    async def set_async(key, val):
-        loop = asyncio.get_running_loop()
-        future = loop.run_in_executor(None, cache.set, key, val)
-        result = await future
-        return result
-
-    # asyncio.run(set_async('test-key', 'test-value'))
-
-
-    log(str(images)[:500],  str(labels)[:500],  )
-    log("#### Saving disk  #################################################################")
-    for path, img in zip(labels, images) :
-       key = os.path.abspath(path)
-       key = key.split("/")[-1]
-       cache[ key ] =  img
-       # asyncio.run(set_async( key , img ))   ##only python 3.7
-
-
-    print('size cache', len(cache),)
-    print( db_path )
-
-    for i,key in enumerate(cache):
-       if i > 3 : break
-       x0 = cache[key]
-       cv2.imwrite( data_train + f"/check_{i}.png", x0 )
-       print(key, x0.shape, str(x0)[:50]  )
-
-
-def image_cache_check(db_path:str="db_images.cache", dirout:str="tmp/", tag="cache1"):
-    ##### Write some sample images  from cache #############################
-    import diskcache as dc
-    cache   = dc.Cache(db_path, size_limit= 100 * 10**9, timeout= 5 )
-    log('Nimages', len(cache) )
-
-    log('### Check writing on disk  ###########################')
-    dir_check = dirout + f"/{tag}/"
-    os.makedirs(dir_check, exist_ok=True)
-    for i, key in enumerate(cache) :
-        if i > 10: break
-        img = cache[key]
-        img = img[:, :, ::-1]
-        key2 = key.split("/")[-1]
-        cv2.imwrite( dir_check + f"/{i}_{key2}"  , img)
-    log( dir_check )
-
-
-def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", tag="cache1"):
-    ##### Write some sample images  from cache #############################
-    import diskcache as dc
-    cache   = dc.Cache(db_dir, size_limit= 100 * 10**9, timeout= 5 )
-    log('Nimages', len(cache) )
-
-
-    log('### Check writing on disk  ###########################')
-    for img_path in image_path_list:
-        img = image_read(img_path)
-        cache[img_path] = img
-
-
-def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3, renorm=True):
-    import cv2
-    os.makedirs(path, exist_ok=True)
-    data_npz = np.load( path_npz  )
-    keys     =  data_npz.keys() if keys is None else keys
-    print('check', keys, "\n" )
-    for key in keys :
-      print(key, str(data_npz[key])[:100], "\n")
-      for i in range(0, n_sample) :
-         try :
-           img = data_npz[key][i]
-           if renorm :
-              img = ( img * 0.5 + 0.5)  * 255
-           cv2.imwrite( f"{path}/img_{tag}_{key}_{i}.png", img )
-         except :
-           pass
-
-
-
-##############################################################################
 def image_read(filepath_or_buffer: Union[str, io.BytesIO]):
     """
     Read a file into an image object
@@ -842,8 +640,7 @@ def os_path_check(path, n=5):
 
 ###################################################################################################
 if __name__ == "__main__":
-    import fire
-    fire.Fire()
+    test_prep_images1_and_2()
 
 
 
