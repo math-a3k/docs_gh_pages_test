@@ -64,7 +64,7 @@ jobs:
       run: |
            python -c "import os, pandas as pd; print(os)"
            python -c "import utilmy"        
-           pip install -U sphinx
+           pip install -U sphinx  sphinx-rtd-theme  GitPython  rinohtype pygments
         
 
     ################################################################################
