@@ -82,8 +82,12 @@ for current_version in ${versions}; do
 # sending incremental file list
 # rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1207) [sender=3.1.3]
 
-      # HTML #
-      sphinx-build -b html docs_ghpage/ docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
+      # Generate the RST
+      sphinx-apidoc -f -o docs_ghpage/_build/rst/${current_language}/${current_version}/   utilmy/
+
+
+      # Generate HTML  from RST
+      sphinx-build -b html docs_ghpage/_build/rst/${current_language}/${current_version}/  docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
  
 
       # PDF #
