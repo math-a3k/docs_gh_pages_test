@@ -86,11 +86,11 @@ for current_version in ${versions}; do
 
       # Generate the RST
       #sphinx-apidoc -f -o docs_ghpage/_build/rst/${current_language}/${current_version}/   utilmy/
-      sphinx-apidoc -f -o docs_ghpage/  utilmy/
+      sphinx-apidoc -f -o     docs_ghpage/     utilmy/
 
 
       # Generate HTML  from RST
-      sphinx-build -b html docs_ghpage/_build/rst/${current_language}/${current_version}/  docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
+      sphinx-build -b html    docs_ghpage/     docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
  
 
       # PDF #
