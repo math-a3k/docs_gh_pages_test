@@ -80,6 +80,7 @@ for current_version in ${versions}; do
       # HTML #
       sphinx-build -b html docs_ghpage/ docs_ghpage/_build/html/${current_language}/${current_version} -D language="${current_language}"
  
+ 
       # PDF #
       # sphinx-build -b rinoh utilmy/ docs_ghpage/_build/rinoh -D language="${current_language}"
       # mkdir -p "${docroot}/${current_language}/${current_version}"

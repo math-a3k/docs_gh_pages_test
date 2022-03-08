@@ -3,7 +3,7 @@
 helloWorld.py
 =============
  
-.. automodule:: helloWorld
+.. automodule:: utilmy
   :members:
   :undoc-members:
  
