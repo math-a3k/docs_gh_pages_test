@@ -13,11 +13,15 @@ on:
       - zdocstring
       - zttypehint
       - zformat
+      - yushao
       
 
   pull_request:
     branches-ignore:
       - main
+      - yushao
+
+
 
 jobs:
   build:
