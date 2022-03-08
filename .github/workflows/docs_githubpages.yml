@@ -1,4 +1,4 @@
-name: docs_pages_workflow
+name: docs_github_pages arita37.github.io/myutil/en/yushao/
  
 # execute this workflow automatically when a we push to main
 on:
