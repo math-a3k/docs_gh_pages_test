@@ -28,6 +28,7 @@ def help():
 
 
 ################################################################################################
+# TESTS
 def test_all():
     log(MNAME)
     test()
@@ -47,7 +48,7 @@ def test_image_create_fake():
     imsize=imsize,
     rgb_color = red)
 
-
+################################################################################################
 def image_create_fake(
     dirout=os.getcwd() + "/ztmp/images/", 
     nimages=1, 
@@ -117,6 +118,9 @@ def prep_images2(image_paths, nmax=10000000):
     this can be merged within prep_image by creating a behaviour for mean and std?
     mostly prints stuff, returns the first image ( why?)
     """
+    xdim = 200
+    ydim = 200
+    cdim = 3
     images = []
     original_first_image = None
     for i in range(len(image_paths)):
@@ -129,33 +133,61 @@ def prep_images2(image_paths, nmax=10000000):
         if (i + 100) % 100 == 0: print(fname, id1)
 
         image = matplotlib.image.imread(image_path)
-
+        
         if images == []:
-            temp = (image / 255)
+            # assert False
+            temp = image
+            if temp.max() > 1:
+                assert temp.max() <= 255, 'max of image should be within 255!'
+                temp = (temp / 255)
+            
             original_first_image = temp.astype('float32')
         resized_image = cv2.resize(image, dsize=(xdim, ydim), interpolation=cv2.INTER_CUBIC)
 
         if resized_image.shape == (xdim, ydim, cdim):
-            resized_image = resized_image / 255
+            if resized_image.max() > 1:
+                assert resized_image.max() <= 255, 'max of image should be within 255!'
+                resized_image = resized_image / 255
             images.append(resized_image.astype('float32'))
+
     return images, original_first_image
 
 
+
 def test_prep_images1_and_2():
-    
+    from matplotlib import pyplot as plt
     import numpy as np
-    import skimage
+    import skimage.io
     impath = 'tempim.png'
     import os
+    error_flag = False
     try:
-        ar = np.random.uniform(size=(200,200,3))
-        skimage.io.imwrite(impath,ar)
+        # ar = (np.random.uniform(size=(200,200,3)) * 255).astype(np.float32)
+        ar = np.tile(np.arange(200)[:,None,None],(1,200,3)).astype(np.uint8)
+        skimage.io.imsave(impath,ar)
         images2,original_first_image = prep_images2([impath], nmax=10000000)
-        images = prep_images([impath], nmax=10000000)
-        assert np.abs(images[0] - images2[0]).sum(),'prep_images2 and prep_images not same!'
-    except:
+        images,paths = prep_images([impath],xdim=200,ydim=200, mean=0,std=1,nmax=10000000)
+        error_flag = False
+        
+        # plt.figure()
+        # plt.imshow(images[0])
+        # plt.title('1')
+        # plt.show()
+
+        # plt.figure()
+        # plt.imshow(images2[0])
+        # plt.title('2')
+        # plt.show()        
+        if np.abs(images[0] - images2[0]).sum():
+            error_flag = True
+    except Exception as e:
+        
         if os.path.exists(impath):
             os.system('rm '+impath)
+        raise e
+    if error_flag:
+        assert False,'prep_images2 and prep_images not same!'
+    
 
 def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
     """ Parallel processing
