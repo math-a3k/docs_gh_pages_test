@@ -41,7 +41,7 @@ release = '1.0.0'
 extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
+    # 'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',  #### Google Doc Style
 ]
@@ -81,6 +81,10 @@ pygments_style = None
 #
 #html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
+
+
+html_show_sourcelink = False
+
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
