@@ -45,7 +45,7 @@ jobs:
     - name: Install repo requirements  1
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: |
-           pip install -r  py36_sphynxdoc.txt
+           pip install -r  py36_min.txt
 
 
     - name: Install utilmy
@@ -67,6 +67,7 @@ jobs:
            python -c "import os, pandas as pd; print(os)"
            python -c "import utilmy"        
            pip install -U sphinx  sphinx-rtd-theme  GitPython  rinohtype pygments
+           pip install -r  py36_sphynxdoc.txt
         
 
     ################################################################################
