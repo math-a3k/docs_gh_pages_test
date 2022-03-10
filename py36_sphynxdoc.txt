@@ -11,6 +11,12 @@ imutils
 
 
 ### Sphynx
+sphinx  
+sphinx-rtd-theme  
+GitPython  
+rinohtype 
+pygments
+
 sphinx-autodoc-typehints
 
 pylint  ### pyreverse
