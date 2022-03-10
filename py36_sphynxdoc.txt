@@ -13,8 +13,7 @@ imutils
 ### Sphynx
 sphinx-autodoc-typehints
 
-
-pyreverse
+pylint  ### pyreverse
 sphinx-pyreverse
 #.. uml:: {{modulename}}
 #    :classes:
