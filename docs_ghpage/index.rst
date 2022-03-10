@@ -9,6 +9,11 @@ Welcome to helloWorld's documentation!
    modules
 
 
+.. uml:: utilmy
+    :classes:
+    :packages:
+
+
 Indices and tables
 ==================
 
