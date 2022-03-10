@@ -1,6 +1,9 @@
 diskcache
 #fbprophet==0.6
 convertdate>=2.1.2
+
+#### deeplearning.keras
+neural_structured_learning 
 opencv-python
 albumentations
 imutils
