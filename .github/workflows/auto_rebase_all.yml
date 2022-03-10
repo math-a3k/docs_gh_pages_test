@@ -1,7 +1,7 @@
 name: Auto Rebase Branches - main schedule
 on:
   schedule:
-    - cron:  '* 13 * * *'      #### 60mins
+    - cron:  '* 13 ** *'      #### 60mins
     #    - cron:  '*/10 * * * *'   
 
   push:
@@ -36,7 +36,7 @@ jobs:
               echo ""
               echo "##################"
               git checkout $branch
-              git pull --allow-unrelated-histories 
+              git pull  $ROOT_BRANCH_NAME --allow-unrelated-histories 
               git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
               git push
               echo "Merge SUCCEEDED for branch $branch"
