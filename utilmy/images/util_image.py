@@ -76,7 +76,7 @@ def image_create_fake(
     return img_list
 
 ################################################################################################
-def prep_image(image_path:str, xdim :int=1, ydim :int=1,
+def image_prep(image_path:str, xdim :int=1, ydim :int=1,
     mean :float = 0.5,std :float    = 0.5) -> Tuple[Union[list,np.typing.ArrayLike],str] :
     """ resizes, crops and centers an image according to
     provided mean and std
@@ -97,27 +97,25 @@ def prep_image(image_path:str, xdim :int=1, ydim :int=1,
     except :
         return [], ""
         
-def prep_images(image_paths:Sequence[str], nmax:int=10000000, 
+def image_prep_many(image_paths:Sequence[str], nmax:int=10000000, 
     xdim :int=1, ydim :int=1,
     mean :float = 0.5,std :float    = 0.5)->List[np.typing.ArrayLike]:
-    """ run prep_image on multiple images
+    """ run image_prep on multiple images
     """
 
     images = []
     for i in range(len(image_paths)):
         if i > nmax : break
-        image =  prep_image(image_paths[i], 
+        image =  image_prep(image_paths[i], 
         xdim =xdim, ydim =ydim,
         mean  = mean,std  = std )
         images.append(image)
     return images
 
-
-def prep_images2(image_paths, nmax=10000000):
-    """ TODO: how is this different from prep_image,
-    this can be merged within prep_image by creating a behaviour for mean and std?
-    mostly prints stuff, returns the first image ( why?)
-    """
+# TODO: how is this different from image_prep,
+# this can be merged within image_prep by creating a behaviour for mean and std?
+# mostly prints stuff, returns the first image ( why?)
+def image_prep_many2(image_paths, nmax=10000000):
     xdim = 200
     ydim = 200
     cdim = 3
@@ -143,7 +141,8 @@ def prep_images2(image_paths, nmax=10000000):
             
             original_first_image = temp.astype('float32')
         resized_image = cv2.resize(image, dsize=(xdim, ydim), interpolation=cv2.INTER_CUBIC)
-
+        #TODO: move this block to image_preps
+        #probably to ignore images that dont have the same shape as the rest?
         if resized_image.shape == (xdim, ydim, cdim):
             if resized_image.max() > 1:
                 assert resized_image.max() <= 255, 'max of image should be within 255!'
@@ -154,7 +153,7 @@ def prep_images2(image_paths, nmax=10000000):
 
 
 
-def test_prep_images1_and_2():
+def test_image_prep1_and_2():
     from matplotlib import pyplot as plt
     import numpy as np
     import skimage.io
@@ -165,8 +164,8 @@ def test_prep_images1_and_2():
         # ar = (np.random.uniform(size=(200,200,3)) * 255).astype(np.float32)
         ar = np.tile(np.arange(200)[:,None,None],(1,200,3)).astype(np.uint8)
         skimage.io.imsave(impath,ar)
-        images2,original_first_image = prep_images2([impath], nmax=10000000)
-        images,paths = prep_images([impath],xdim=200,ydim=200, mean=0,std=1,nmax=10000000)
+        images2,original_first_image = image_prep_many2([impath], nmax=10000000)
+        images,paths = image_prep_many([impath],xdim=200,ydim=200, mean=0,std=1,nmax=10000000)
         error_flag = False
         
         # plt.figure()
@@ -186,12 +185,11 @@ def test_prep_images1_and_2():
             os.system('rm '+impath)
         raise e
     if error_flag:
-        assert False,'prep_images2 and prep_images not same!'
+        assert False,'image_preps2 and image_preps not same!'
     
-
-def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
+#TODO is this redundant to `run_multiprocess`
+def image_preps_mp(image_path_list:list, prepro_image_fun=None, npool=1):
     """ Parallel processing
-
     """
     from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
 
@@ -210,12 +208,11 @@ def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
     print(str(labels)[:60])
     return images, labels
 
-
+#TODO: does this already exist in the multiprocessing module, 
+#and if so should we use that?
 def run_multiprocess(myfun, list_args, npool=10, **kwargs):
     """
        res = run_multiprocess(prepro, image_paths, npool=10, )
-       TODO: does this already exist in the multiprocessing module, 
-       and if so should we use that?
     """
     from functools import partial
     from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
@@ -228,39 +225,45 @@ def run_multiprocess(myfun, list_args, npool=10, **kwargs):
 
 
 ################################################################################################
+#TODO: what is `diskcache`
 def image_cache_create():
     #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     ####   sleep 56000  && python prepro.py  image_create_cache
-    import cv2, gc, diskcache
+    import cv2, gc
+    import diskcache as dc
     nmax =  1000000 #  0000
+    #TODO: why are we using globals?
+    #is this a multprocessed function?
     global xdim, ydim
     xdim= 256
     ydim= 256
 
     log("### Sub-Category  ################################################################")
+    #TODO: should be input
     # in_dir   = data_dir + '/fashion_data/images/'
     # in_dir   = data_dir + "/train_nobg_256/"
     in_dir   = data_dir + "/../gsp/v1000k_clean_nobg/"
 
     image_list = sorted(list(glob.glob(  f'/{in_dir}/*/*.*')))
-    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ]
+    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ] #TODO: some folders to exclude?
     log('N images', len(image_list))
     # tag   = "-women_topwear"
-    tag      = "train_r2p2_1000k_clean_nobg"
+    tag      = "train_r2p2_1000k_clean_nobg" #TODO: take as input
     tag      = f"{tag}_{xdim}_{ydim}-{nmax}"
     # db_path  = data_train + f"/img_{tag}.cache"
-    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache"
+    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache" #TODO: take as input
 
     log(in_dir)
     log(db_path)
-
-    def prepro_image2b(image_path):
+    #TODO: is this a closure, or can this be shifted to outside?
+    def prepro_image2b(image_path): 
         try :
             fname      = str(image_path).split("/")[-1]
             id1        = fname.split(".")[0]
             # print(image_path)
-
+            
+            #TODO: might want to reuse imread in this module?
             image = cv2.imread(image_path)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             # image = util_image.image_resize_pad(image, (xdim,ydim), padColor=255)
@@ -269,8 +272,9 @@ def image_cache_create():
             # image = image.astype('float32')
             return image, image_path
             #return [1], "1"
-
-        except :
+            #TODO: nested try?
+            #TODO: code smell, expect should catch particular exceptions?
+        except : 
             try :
                # image = image.astype('float32')
                # cache[ fname ] =  image        ### not uulti thread write
@@ -283,7 +287,6 @@ def image_cache_create():
     image_list = image_list[:nmax]
     log('Size Before', len(image_list))
 
-    import diskcache as dc
     #  from diskcache import FanoutCache  ### too much space
     # che = FanoutCache( db_path, shards=4, size_limit=int(60e9), timeout=9999999 )
     cache = dc.Cache(db_path, size_limit=int(100e9), timeout=9999999 )
@@ -293,6 +296,7 @@ def image_cache_create():
 
 
     import asyncio
+    #TODO: if awaiting, is async helpful?
     async def set_async(key, val):
         loop = asyncio.get_running_loop()
         future = loop.run_in_executor(None, cache.set, key, val)
@@ -320,7 +324,7 @@ def image_cache_create():
        cv2.imwrite( data_train + f"/check_{i}.png", x0 )
        print(key, x0.shape, str(x0)[:50]  )
 
-
+#TODO: diskcache
 def image_cache_check(db_path:str="db_images.cache", dirout:str="tmp/", tag="cache1"):
     ##### Write some sample images  from cache #############################
     import diskcache as dc
@@ -338,7 +342,7 @@ def image_cache_check(db_path:str="db_images.cache", dirout:str="tmp/", tag="cac
         cv2.imwrite( dir_check + f"/{i}_{key2}"  , img)
     log( dir_check )
 
-
+#TODO: diskcache
 def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", tag="cache1"):
     ##### Write some sample images  from cache #############################
     import diskcache as dc
@@ -351,7 +355,7 @@ def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", t
         img = image_read(img_path)
         cache[img_path] = img
 
-
+#TODO: diskcache
 def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3, renorm=True):
     import cv2
     os.makedirs(path, exist_ok=True)
@@ -425,9 +429,8 @@ image_load = image_read  ## alias
 
 ##############################################################################
 def image_show_in_row(image_list:dict=None):
-    """ # helper function for data visualization
+    """ helper function for data visualization
     Plot images in one row.
-    
     """
     import matplotlib.pyplot as plt
    
