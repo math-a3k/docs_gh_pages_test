@@ -45,7 +45,7 @@ jobs:
     - name: Install repo requirements  1
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: |
-           pip install -r  py36_min.txt
+           pip install -r  py36_sphynxdoc.txt
 
 
     - name: Install utilmy
