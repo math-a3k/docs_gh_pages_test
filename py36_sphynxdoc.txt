@@ -19,6 +19,11 @@ pygments
 
 sphinx-autodoc-typehints
 
+### side bar
+sphinxcontrib-fulltoc
+## extensions = ['sphinxcontrib.fulltoc']
+
+
 pylint  ### pyreverse
 sphinx-pyreverse
 #.. uml:: {{modulename}}
