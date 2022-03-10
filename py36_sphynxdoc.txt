@@ -10,23 +10,26 @@ imutils
 
 
 
-### Sphynx
+### Sphynx  #############################
 sphinx  
 sphinx-rtd-theme  
 GitPython  
 rinohtype 
 pygments
 
-sphinx-autodoc-typehints
 
 ### side bar
-sphinxcontrib-fulltoc
 ## extensions = ['sphinxcontrib.fulltoc']
+sphinxcontrib-fulltoc
 
 
+#### UML Graph
 pylint  ### pyreverse
 sphinx-pyreverse
 #.. uml:: {{modulename}}
 #    :classes:
 #    :packages:
 
+
+
+#sphinx-autodoc-typehints

@@ -45,7 +45,7 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',  #### Google Doc Style
 
-     'sphinxcontrib.fulltoc',
+     #'sphinxcontrib.fulltoc',
 
     #### Buggy 
     #'sphinx_pyreverse'
