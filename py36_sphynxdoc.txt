@@ -7,3 +7,14 @@ neural_structured_learning
 opencv-python
 albumentations
 imutils
+
+
+
+### Sphynx
+sphinx-autodoc-typehints
+
+sphinx-pyreverse
+#.. uml:: {{modulename}}
+#    :classes:
+#    :packages:
+
