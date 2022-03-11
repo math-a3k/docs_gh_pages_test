@@ -1,4 +1,5 @@
 # coding=utf-8
+MNAME="utilmy.parallel"
 HELP="""
     python parallel.py test0
     #  python parallel.py test2
@@ -21,6 +22,15 @@ def help():
 
 #################################################################################################
 #################################################################################################
+def test_all():
+   log(MNAME)
+   test_pdreadfile()
+   test0()
+   # par.test2()
+
+
+
+
 def pd_random(nrows=1000, ncols= 5):
     return pd.DataFrame( np.random.randint(0, 10, size= (nrows, ncols)),  columns= [ str(i) for i in range(ncols) ]   )
 

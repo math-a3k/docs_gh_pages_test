@@ -145,10 +145,7 @@ def test_viz_vizhtml():
 #########################################################################################
 def test_parallel():
    from utilmy import parallel as m
-   log("from utilmy import parallel")
-   m.test_pdreadfile()
-   m.test0()
-   # par.test2()
+   m.test_all()
    
 
 #########################################################################################

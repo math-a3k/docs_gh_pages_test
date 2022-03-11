@@ -1,4 +1,4 @@
-os.getcwd /workspace/myutil/utilmy/tabular
+os.getcwd /home/runner/work/myutil/myutil/utilmy/tabular
 ### drift
 # coding=utf-8
 HELP="""
@@ -52,28 +52,28 @@ def test_all():
     
     def test():
         log("Testing normality...")
-        import utilmy.tabular as m
+        # import utilmy.tabular as m
         test_normality(df["yield"])
         
         
         df1 = pd_generate_data(7, 100)
-        m.test_anova(df1,'cat1','cat2')
-        m.test_normality2(df1, '0', "Shapiro")
-        m.test_plot_qqplot(df1, '1')
+        test_anova(df1,'cat1','cat2')
+        test_normality2(df1, '0', "Shapiro")
+        test_plot_qqplot(df1, '1')
 
         
         log("Testing heteroscedacity...")
-        from utilmy.tabular import test_heteroscedacity
+        # from utilmy.tabular import test_heteroscedacity
         log(test_heteroscedacity(y_test,y_pred))
     
         log("Testing test_mutualinfo()...")
-        from utilmy.tabular import test_mutualinfo
+        # from utilmy.tabular import test_mutualinfo
         df1 = pd_generate_data(7, 100)
 
         test_mutualinfo(df1["0"],df1[["1","2","3"]],colname="test")
 
         log("Testing hypothesis_test()...")
-        from utilmy.tabular import test_hypothesis
+        #from utilmy.tabular import test_hypothesis
         log(test_hypothesis(X_train, X_test,"chisquare"))
 
     def custom_stat(values, axis=1):
@@ -84,7 +84,7 @@ def test_all():
 
     def test_estimator():
         log("Testing estimators()...")
-        from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
+        # from utilmy.tabular import estimator_std_normal,estimator_boostrap_bayes,estimator_bootstrap
         log(estimator_std_normal(y_pred))
         log(estimator_boostrap_bayes(y_pred))
         estimator_bootstrap(y_pred, custom_stat=custom_stat)
@@ -93,9 +93,9 @@ def test_all():
     
     def test_pd_utils():
         log("Testing pd_utils ...")
-        from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
-            pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
-            pd_stat_shift_trend_correlation,pd_stat_shift_changes
+        #from utilmy.tabular import pd_train_test_split_time,pd_to_scipy_sparse_matrix,pd_stat_correl_pair,\
+        #    pd_stat_pandas_profile,pd_stat_distribution_colnum,pd_stat_histogram,pd_stat_shift_trend_changes,\
+        #    pd_stat_shift_trend_correlation,pd_stat_shift_changes
         from utilmy.prepro.util_feature import pd_colnum_tocat_stat
 
         pd_train_test_split_time(df, coltime="block")
@@ -125,7 +125,7 @@ def test_all():
     def test_drift_detect():
         import tensorflow as tf
         from tensorflow.keras.layers import Dense,InputLayer,Dropout
-        from utilmy.tabular import pd_data_drift_detect_alibi
+        # from utilmy.tabular import pd_data_drift_detect_alibi
 
         input_size = X_train.shape[1]
         output_size = y_train.nunique()
@@ -166,7 +166,7 @@ def test_all():
 
     def test_np_utils():
         log("Testing np_utils ...")
-        from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
+        # from utilmy.tabular import np_col_extractname, np_conv_to_one_col, np_list_remove
         import numpy as np
         arr = np.array([[1, 2, 3], [4, 5, 6]])
         np_col_extractname(["aa_","bb-","cc"])
@@ -176,7 +176,7 @@ def test_all():
   
     test()
     test_estimator()
-    test_pd_utils()
+    # test_pd_utils()
     # test_drift_detect()
     test_np_utils()
 
@@ -358,9 +358,10 @@ def y_adjuster_log(y_true, y_pred_log, error_func, **kwargs):
 
 # conduct multiple comparisons
 from tqdm import tqdm
-from typing import Dict, Union, List
+from typing import Dict, Optional, Union, List
 from scipy import stats
 from numpy import float64, ndarray
+from pandas.core.frame import DataFrame
 from pandas.core.series import Series
 
 def test_multiple_comparisons(data: pd.DataFrame, label='y', adjuster=True) -> List[float]:
@@ -410,7 +411,7 @@ def test_multiple_comparisons(data: pd.DataFrame, label='y', adjuster=True) -> L
 
 
     
-def test_anova(df, col1, col2):
+def test_anova(df: DataFrame, col1: str, col2: str) -> None:
     """
     ANOVA test two categorical features
     Input dfframe, 1st feature and 2nd feature
@@ -439,7 +440,7 @@ def test_anova(df, col1, col2):
 
 
 
-def test_normality2(df, column, test_type):
+def test_normality2(df: DataFrame, column: str, test_type: str) -> None:
     """
     Function to check Normal Distribution of a Feature by 3 methods
     Input dfframe, feature name, and a test type
@@ -486,7 +487,7 @@ def test_normality2(df, column, test_type):
                 print(sl,' : ',cv,' ',column,' does not looks normal (fail to reject H0)')
 
 
-def test_plot_qqplot(df, col_name):
+def test_plot_qqplot(df: DataFrame, col_name: str) -> None:
     """
     Function to plot boxplot, histplot and qqplot for numerical feature analyze
     """
@@ -503,7 +504,7 @@ def test_plot_qqplot(df, col_name):
 
 
 ####################################################################################################
-def test_heteroscedacity(y, y_pred, pred_value_only=1):
+def test_heteroscedacity(y: Series, y_pred: ndarray, pred_value_only: int=1) -> Dict[str, Dict[str, float64]]:
     ss = """
        Test  Heteroscedacity :  Residual**2  = Linear(X, Pred, Pred**2)
        F pvalues < 0.01 : Null is Rejected  ---> Not Homoscedastic
@@ -549,7 +550,7 @@ def test_normality(error: Series, distribution: str="norm", test_size_limit: int
     return ddict
 
 
-def test_mutualinfo(error, Xtest, colname=None, bins=5):
+def test_mutualinfo(error: Series, Xtest: DataFrame, colname: Optional[str]=None, bins: int=5) -> Dict[str, float64]:
     """
        Test  Error vs Input Variable Independance byt Mutual ifno
        sklearn.feature_selection.mutual_info_classif(X, y, discrete_features='auto', n_neighbors=3, copy=True, random_state=None)
@@ -565,7 +566,7 @@ def test_mutualinfo(error, Xtest, colname=None, bins=5):
     return dict(zip(colname, res))
 
 
-def test_hypothesis(df_obs, df_ref, method='', **kw):
+def test_hypothesis(df_obs: DataFrame, df_ref: DataFrame, method: str='', **kw):
     """
     https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py
 
@@ -677,7 +678,16 @@ def np_conv_to_one_col(np_array, sep_char="_"):
 
 
 
- 
+
+
+################################################################################
+################################################################################
+if __name__ == '__main__':
+    #import fire
+    #fire.Fire()
+    test_all()
+
+
     
     
     
