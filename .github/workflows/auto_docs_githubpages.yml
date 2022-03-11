@@ -3,11 +3,17 @@ name: docs_github_pages arita37.github.io/myutil/en/zdocs_y23487teg65f6/
 ### target page :  https://arita37.github.io/myutil/en/zdocs_y23487teg65f6/utilmy.html#module-utilmy.cli
 
 # execute this workflow automatically when a we push to main
+
 on:
+  schedule:
+    - cron:  '* 14 * * *'      #### 60mins
+    #    - cron:  '*/10 * * * *'   
+
   push:
     branches:
-      - main
-      - zdocs_y23487teg65f6
+    - zdocs_y23487teg65f6
+
+
 
 jobs:
   build:
