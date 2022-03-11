@@ -46,7 +46,7 @@ def test1():
   os.system( f"ls {dirout}/")
 
 
-def run_utilmy(nfile=100):
+def run_utilmy(nfile=10000):
   log(utilmy.__file__)
   exclude = "";
   dir0   = os.getcwd()
@@ -60,7 +60,7 @@ def run_utilmy(nfile=100):
 
 
 
-def run_utilmy2(nfile=100):
+def run_utilmy2(nfile=100000):
   log(utilmy.__file__)
   exclude = ""; 
   dir0   = os.getcwd()
@@ -137,54 +137,58 @@ def run_monkeytype(dirin:str, dirout:str, diroot:str=None, mode="stub", nfile=10
     log(flist)
 
     for fi0 in flist :
-      log(f"####### Processing file {fi0} ###########")
-      fi      = fi0.replace("\\", "/")
-      fi_dir  = os.path.dirname(fi).replace("\\", "/")  + "/"
-
-      ### Relative to module root path
-      fi_pref  = fi.replace(diroot, "")
-      mod_name = fi_pref.replace(".py","").replace("/",".")
-      mod_name = mod_name[1:] if mod_name[0] == "." else mod_name
-      log(f'fi_dir : {fi_dir},  {fi_pref}')
-
-
-      log(f"#### Runing Monkeytype to get traces database")
-      fi_monkey = os.getcwd() + '/ztmp_monkey.py'
-      ### Monkeytype require using temporary runner script to import packages (Not necessary if the file is a pytest) 
-      with open( fi_monkey, mode='w' ) as fp :
-         fp.write( f"import {mod_name}  as mm ; mm.test_all()" )
-
-      # run monkeytype on temporary script
-      os.system(f"monkeytype run ztmp_monkey.py"  )
-
-
-      log(f"###### Generate output in mode {mode}")
-      ### copy sqlite traces database where our file is located
-      try:  
-        shutil.move("monkeytype.sqlite3", fi_dir + "monkeytype.sqlite3" ) 
-      except: pass
-
-      dircur = os.getcwd()
-      os.chdir(fi_dir)
-      if "full" in mode :  #### Overwrite
-          dirouti = dirout +"/full/"+ fi_pref
-          os_makedirs(dirouti)
-          cmd = f'monkeytype apply {mod_name} > {dirouti} 2>&1' 
-          subprocess.call(cmd, shell=True)
-
-
-      if "stub" in mode:
-          dirouti = dirout +"/stub/"+ fi_pref.replace(".py", ".pyi")
-          os_makedirs(dirouti)       
-          cmd = f'monkeytype stub {mod_name} > {dirouti} 2>&1' 
-          subprocess.call(cmd, shell=True)
-
-      log(f"####### clean up")
       try :
-        os.remove(f'{fi_dir}/monkeytype.sqlite3' )
-        os.remove(fi_monkey)
-      except : pass  
-      os.chdir( dircur )
+        log(f"\n\n\n\n\n\n\n####### Processing file {fi0} ###########")
+        fi      = fi0.replace("\\", "/")
+        fi_dir  = os.path.dirname(fi).replace("\\", "/")  + "/"
+
+        ### Relative to module root path
+        fi_pref  = fi.replace(diroot, "")
+        mod_name = fi_pref.replace(".py","").replace("/",".")
+        mod_name = mod_name[1:] if mod_name[0] == "." else mod_name
+        log(f'fi_dir : {fi_dir},  {fi_pref}')
+
+
+        log(f"#### Runing Monkeytype to get traces database")
+        fi_monkey = os.getcwd() + '/ztmp_monkey.py'
+        ### Monkeytype require using temporary runner script to import packages (Not necessary if the file is a pytest) 
+        with open( fi_monkey, mode='w' ) as fp :
+          fp.write( f"import {mod_name}  as mm ; mm.test_all()" )
+
+        # run monkeytype on temporary script
+        os.system(f"monkeytype run ztmp_monkey.py"  )
+
+
+        log(f"###### Generate output in mode {mode}")
+        ### copy sqlite traces database where our file is located
+        try:  
+          shutil.move("monkeytype.sqlite3", fi_dir + "monkeytype.sqlite3" ) 
+        except: pass
+
+        dircur = os.getcwd()
+        os.chdir(fi_dir)
+        if "full" in mode :  #### Overwrite
+            dirouti = dirout +"/full/"+ fi_pref
+            os_makedirs(dirouti)
+            cmd = f'monkeytype apply {mod_name} > {dirouti} 2>&1' 
+            subprocess.call(cmd, shell=True)
+
+
+        if "stub" in mode:
+            dirouti = dirout +"/stub/"+ fi_pref.replace(".py", ".pyi")
+            os_makedirs(dirouti)       
+            cmd = f'monkeytype stub {mod_name} > {dirouti} 2>&1' 
+            subprocess.call(cmd, shell=True)
+
+        log(f"####### clean up")
+        try :
+          os.remove(f'{fi_dir}/monkeytype.sqlite3' )
+          os.remove(fi_monkey)
+        except : pass  
+        os.chdir( dircur )
+
+      except Exception as e :
+         log(e)
 
 
 
