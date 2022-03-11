@@ -44,6 +44,11 @@ from sklearn.tree._classes import DecisionTreeClassifier
 from typing import List, Optional, Tuple, Type, Union
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = HELP + help_create(MNAME)
     print(ss)
@@ -52,12 +57,22 @@ def help():
 
 #############################################################################################
 def test_all() -> None:
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     log(MNAME)
     test1()
     test2()
 
 
 def test1() -> None:
+  """function test1
+  Args:
+  Returns:
+      
+  """
   from sklearn.linear_model import LinearRegression
   d = Box({})
   d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_regression_boston()
@@ -81,6 +96,11 @@ def test1() -> None:
 
 
 def test2() -> None:
+  """function test2
+  Args:
+  Returns:
+      
+  """
   from sklearn.ensemble import RandomForestClassifier
   from sklearn.tree import DecisionTreeClassifier
   d = Box({})
@@ -103,6 +123,11 @@ def test2() -> None:
 
 
 def test5():
+  """function test5
+  Args:
+  Returns:
+      
+  """
   from sklearn.naive_bayes import GaussianNB
   from mapie.classification import MapieClassifier
   from mapie.metrics import classification_coverage_score
@@ -160,6 +185,15 @@ def model_fit(name: str = 'mapie.regression.MapieRegressor', model: Optional[Uni
 
 
 def model_save(model: Union[MapieClassifier, MapieRegressor], path: Optional[str]=None, info: None=None) -> None:
+    """function model_save
+    Args:
+        model (  Union[MapieClassifier ) :   
+        MapieRegressor]:   
+        path (  Optional[str] ) :   
+        info (  None ) :   
+    Returns:
+        
+    """
     import pickle
     os.makedirs(path, exist_ok=True)
     filename = 'model.pkl'
@@ -171,6 +205,12 @@ def model_save(model: Union[MapieClassifier, MapieRegressor], path: Optional[str
 
 
 def model_load(path: str="") -> Union[MapieClassifier, MapieRegressor]:
+    """function model_load
+    Args:
+        path (  str ) :   
+    Returns:
+        
+    """
     import pickle
     model0 = pickle.load(open(f'{path}/model.pkl', mode='rb'))
     return model0
@@ -210,6 +250,15 @@ def model_viz_classification_preds(preds: ndarray, y_test: ndarray) -> None:
 
 
 def model_eval2(clf, Xval, yval, dirout=""):
+  """function model_eval2
+  Args:
+      clf:   
+      Xval:   
+      yval:   
+      dirout:   
+  Returns:
+      
+  """
   from mapie.classification import MapieClassifier
   from mapie.metrics import classification_coverage_score
   

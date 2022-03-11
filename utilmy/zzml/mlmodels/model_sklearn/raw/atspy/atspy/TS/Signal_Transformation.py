@@ -11,6 +11,13 @@ from . import Utils as tsutil
 
 
 def testTransform_one_seed(tr1 , seed_value):
+    """function testTransform_one_seed
+    Args:
+        tr1:   
+        seed_value:   
+    Returns:
+        
+    """
     df = pd.DataFrame();
     np.random.seed(seed_value)
     df['A'] = np.random.normal(0, 1.0, 10);
@@ -36,11 +43,57 @@ def testTransform_one_seed(tr1 , seed_value):
 
 
 def testTransform(tr1):
+    """function testTransform
+    Args:
+        tr1:   
+    Returns:
+        
+    """
     for seed_value in range(0,10,100):
         testTransform_one_seed(tr1, seed_value)
 
 class cAbstractSignalTransform:
     def __init__(self):
+        """ cSignalTransform_RelativeDifferencing:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cSignalTransform_None:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cSignalTransform_Logit:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cSignalTransform_Fisher:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cSignalTransform_Differencing:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cSignalTransform_Anscombe:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cSignalTransform_Accumulate:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cAbstractSignalTransform:__init__
+        Args:
+        Returns:
+           
+        """
         self.mOriginalSignal = None;
         self.mComplexity = None;
         self.mScaling = None;
@@ -48,9 +101,33 @@ class cAbstractSignalTransform:
         pass
 
     def is_applicable(self, sig):
+        """ cSignalTransform_Quantize:is_applicable
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Logit:is_applicable
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cAbstractSignalTransform:is_applicable
+        Args:
+            sig:     
+        Returns:
+           
+        """
         return True;
 
     def fit_scaling_params(self, sig):
+        """ cAbstractSignalTransform:fit_scaling_params
+        Args:
+            sig:     
+        Returns:
+           
+        """
         if(self.mScaling is not None):
             # self.mMeanValue = np.mean(sig);
             # self.mStdValue = np.std(sig);
@@ -64,9 +141,21 @@ class cAbstractSignalTransform:
             return sig;
 
     def scale_value(self, x):
+        """ cAbstractSignalTransform:scale_value
+        Args:
+            x:     
+        Returns:
+           
+        """
         return (x - self.mMinValue) / self.mDelta;
 
     def scale_signal(self, sig):
+        """ cAbstractSignalTransform:scale_signal
+        Args:
+            sig:     
+        Returns:
+           
+        """
         if(self.mScaling is not None):
             # print("SCALE_START", sig.values[1:5]);
             sig1 = sig.apply(self.scale_value);
@@ -76,10 +165,22 @@ class cAbstractSignalTransform:
             return sig;
 
     def rescale_value(self, x):
+        """ cAbstractSignalTransform:rescale_value
+        Args:
+            x:     
+        Returns:
+           
+        """
         return self.mMinValue + x * self.mDelta;
         
 
     def rescale_signal(self, sig1):
+        """ cAbstractSignalTransform:rescale_signal
+        Args:
+            sig1:     
+        Returns:
+           
+        """
         if(self.mScaling is not None):
             # print("RESCALE_START", sig1.values[1:5]);
             sig = sig1.apply(self.rescale_value);
@@ -89,6 +190,12 @@ class cAbstractSignalTransform:
             return sig1;
 
     def fit(self , sig):
+        """ cAbstractSignalTransform:fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
         # print("FIT_START", self.mOriginalSignal, sig.values[1:5]);
         self.fit_scaling_params(sig);
         sig1 = self.scale_signal(sig);
@@ -97,6 +204,12 @@ class cAbstractSignalTransform:
         pass
 
     def apply(self, sig):
+        """ cAbstractSignalTransform:apply
+        Args:
+            sig:     
+        Returns:
+           
+        """
         # print("APPLY_START", self.mOriginalSignal, sig.values[1:5]);
         sig1 = self.scale_signal(sig);
         sig2 = self.specific_apply(sig1);
@@ -106,6 +219,12 @@ class cAbstractSignalTransform:
         return sig2;
 
     def invert(self, sig1):
+        """ cAbstractSignalTransform:invert
+        Args:
+            sig1:     
+        Returns:
+           
+        """
         # print("INVERT_START", self.mOriginalSignal, sig1.values[1:5]);
         sig2 = self.specific_invert(sig1);
         rescaled_sig = self.rescale_signal(sig2);
@@ -114,16 +233,35 @@ class cAbstractSignalTransform:
 
 
     def transformDataset(self, df, isig):
+        """ cAbstractSignalTransform:transformDataset
+        Args:
+            df:     
+            isig:     
+        Returns:
+           
+        """
         df[self.get_name(isig)] = self.apply(df[isig])
         return df;
 
     def test(self):
+        """ cAbstractSignalTransform:test
+        Args:
+        Returns:
+           
+        """
         # import copy;
         # tr1 = copy.deepcopy(self);
         # testTransform(tr1);
         pass
 
     def dump_apply_invert(self, df_before_apply, df_after_apply):
+        """ cAbstractSignalTransform:dump_apply_invert
+        Args:
+            df_before_apply:     
+            df_after_apply:     
+        Returns:
+           
+        """
         df = pd.DataFrame();
         df['before_apply'] = df_before_apply;
         df['after_apply'] = df_after_apply;
@@ -131,6 +269,13 @@ class cAbstractSignalTransform:
         print("dump_apply_invert_tail", df.tail());
         
     def check_not_nan(self, sig , name):
+        """ cAbstractSignalTransform:check_not_nan
+        Args:
+            sig:     
+            name:     
+        Returns:
+           
+        """
         if(np.isnan(sig).any()):
             print("TRANSFORMATION_RESULT_WITH_NAN_IN_SIGNAL" , sig);
             raise tsutil.Internal_PyAF_Error("Invalid transformation for column '" + name + "'");
@@ -146,15 +291,165 @@ class cSignalTransform_None(cAbstractSignalTransform):
         pass
 
     def get_name(self, iSig):
+        """ cSignalTransform_RelativeDifferencing:get_name
+        Args:
+            iSig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Quantize:get_name
+        Args:
+            iSig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_None:get_name
+        Args:
+            iSig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Logit:get_name
+        Args:
+            iSig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Differencing:get_name
+        Args:
+            iSig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_BoxCox:get_name
+        Args:
+            iSig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Accumulate:get_name
+        Args:
+            iSig:     
+        Returns:
+           
+        """
         return "_" + str(iSig);
     
     def specific_fit(self , sig):
+        """ cSignalTransform_Quantize:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_None:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Fisher:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Anscombe:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Accumulate:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
         pass
     
     def specific_apply(self, df):
+        """ cSignalTransform_RelativeDifferencing:specific_apply
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Quantize:specific_apply
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_None:specific_apply
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Logit:specific_apply
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Differencing:specific_apply
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_BoxCox:specific_apply
+        Args:
+            df:     
+        Returns:
+           
+        """
         return df;
     
     def specific_invert(self, df):
+        """ cSignalTransform_RelativeDifferencing:specific_invert
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Quantize:specific_invert
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_None:specific_invert
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Logit:specific_invert
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Differencing:specific_invert
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_BoxCox:specific_invert
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Accumulate:specific_invert
+        Args:
+            df:     
+        Returns:
+           
+        """
         return df;
 
         
@@ -174,6 +469,24 @@ class cSignalTransform_Accumulate(cAbstractSignalTransform):
         pass
     
     def specific_apply(self, sig):
+        """ cSignalTransform_Fisher:specific_apply
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Anscombe:specific_apply
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Accumulate:specific_apply
+        Args:
+            sig:     
+        Returns:
+           
+        """
         return sig.cumsum(axis = 0)
     
     def specific_invert(self, df):
@@ -185,6 +498,12 @@ class cSignalTransform_Accumulate(cAbstractSignalTransform):
 class cSignalTransform_Quantize(cAbstractSignalTransform):
 
     def __init__(self, iQuantiles):
+        """ cSignalTransform_Quantize:__init__
+        Args:
+            iQuantiles:     
+        Returns:
+           
+        """
         cAbstractSignalTransform.__init__(self);
         self.mQuantiles = iQuantiles;
         self.mFormula = "Quantization";
@@ -208,6 +527,12 @@ class cSignalTransform_Quantize(cAbstractSignalTransform):
         pass
 
     def signal2quant(self, x):
+        """ cSignalTransform_Quantize:signal2quant
+        Args:
+            x:     
+        Returns:
+           
+        """
         curve = self.mCurve;
         return min(curve.keys(), key=lambda y:abs(float(curve[y])-x))
     
@@ -216,6 +541,12 @@ class cSignalTransform_Quantize(cAbstractSignalTransform):
         return lSignal_Q;
 
     def quant2signal(self, x):
+         """ cSignalTransform_Quantize:quant2signal
+         Args:
+             x:     
+         Returns:
+            
+         """
          curve = self.mCurve;
          key = int(x);
          if(key >= self.mMax):
@@ -233,6 +564,12 @@ class cSignalTransform_Quantize(cAbstractSignalTransform):
 class cSignalTransform_BoxCox(cAbstractSignalTransform):
 
     def __init__(self, iLambda):
+        """ cSignalTransform_BoxCox:__init__
+        Args:
+            iLambda:     
+        Returns:
+           
+        """
         cAbstractSignalTransform.__init__(self);
         self.mFormula = "BoxCox";
         self.mLambda = iLambda;
@@ -244,6 +581,30 @@ class cSignalTransform_BoxCox(cAbstractSignalTransform):
         return "Box_Cox_" + str(self.mLambda) + "_" + str(iSig);
 
     def specific_fit(self, sig):
+        """ cSignalTransform_RelativeDifferencing:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Logit:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Differencing:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_BoxCox:specific_fit
+        Args:
+            sig:     
+        Returns:
+           
+        """
         self.mFormula = "BoxCox(Lambda=" + str(self.mLambda) + ")";
         pass
     
@@ -256,6 +617,12 @@ class cSignalTransform_BoxCox(cAbstractSignalTransform):
         return (np.exp(log_df * self.mLambda) - 1) / self.mLambda;
 
     def invert_value(self, y):
+        """ cSignalTransform_BoxCox:invert_value
+        Args:
+            y:     
+        Returns:
+           
+        """
         x = y;
         lEps = 1e-20
         x1 = np.log(max(self.mLambda * x + 1, lEps)) / self.mLambda;
@@ -370,6 +737,12 @@ class cSignalTransform_Logit(cAbstractSignalTransform):
         pass
 
     def logit(self, x):
+        """ cSignalTransform_Logit:logit
+        Args:
+            x:     
+        Returns:
+           
+        """
         eps = 1.0e-8;
         x1 = x;
         if(x < eps):
@@ -380,6 +753,12 @@ class cSignalTransform_Logit(cAbstractSignalTransform):
         return y;
 
     def inv_logit(self, y):
+        """ cSignalTransform_Logit:inv_logit
+        Args:
+            y:     
+        Returns:
+           
+        """
         x = np.exp(y);
         p = x / (1 + x);
         return p;
@@ -422,6 +801,18 @@ class cSignalTransform_Anscombe(cAbstractSignalTransform):
         return y;
     
     def specific_invert(self, sig):
+        """ cSignalTransform_Fisher:specific_invert
+        Args:
+            sig:     
+        Returns:
+           
+        """
+        """ cSignalTransform_Anscombe:specific_invert
+        Args:
+            sig:     
+        Returns:
+           
+        """
         x = sig.apply(lambda x : ((x/2 * x/2) - self.mConstant))
         return x;
 
@@ -456,6 +847,13 @@ class cSignalTransform_Fisher(cAbstractSignalTransform):
 
 
 def create_tranformation(iName , arg):
+    """function create_tranformation
+    Args:
+        iName:   
+        arg:   
+    Returns:
+        
+    """
     if(iName == 'None'):
         return cSignalTransform_None();
 

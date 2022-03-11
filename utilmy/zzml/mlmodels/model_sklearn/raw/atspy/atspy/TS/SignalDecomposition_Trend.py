@@ -21,6 +21,36 @@ from sklearn.linear_model import LinearRegression
 
 class cAbstractTrend:
     def __init__(self):
+        """ cTrendEstimator:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cPolyTrend:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cLinearTrend:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cLag1Trend:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cConstantTrend:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cAbstractTrend:__init__
+        Args:
+        Returns:
+           
+        """
         self.mSignalFrame = pd.DataFrame()
         self.mTimeInfo = tsti.cTimeInfo()
         self.mTrendFrame = pd.DataFrame()
@@ -30,6 +60,13 @@ class cAbstractTrend:
         self.mComplexity = None;
 
     def check_not_nan(self, sig , name):
+        """ cAbstractTrend:check_not_nan
+        Args:
+            sig:     
+            name:     
+        Returns:
+           
+        """
         #print("check_not_nan");
         if(np.isnan(sig).any() or np.isinf(sig).any() ):
             logger = tsutil.get_pyaf_logger();
@@ -39,6 +76,11 @@ class cAbstractTrend:
 
 
     def computePerf(self):
+        """ cAbstractTrend:computePerf
+        Args:
+        Returns:
+           
+        """
         if(self.mOptions.mDebug):
             self.check_not_nan(self.mTrendFrame[self.mOutName + '_residue'], self.mOutName + '_residue')
         # self.mTrendFrame.to_csv(self.mOutName + '_residue' + ".csv");
@@ -61,6 +103,41 @@ class cConstantTrend(cAbstractTrend):
         self.mComplexity = 0;
         
     def addTrendInputVariables(self):
+        """ cTrendEstimator:addTrendInputVariables
+        Args:
+        Returns:
+           
+        """
+        """ cPolyTrend:addTrendInputVariables
+        Args:
+        Returns:
+           
+        """
+        """ cMovingMedianTrend:addTrendInputVariables
+        Args:
+        Returns:
+           
+        """
+        """ cMovingAverageTrend:addTrendInputVariables
+        Args:
+        Returns:
+           
+        """
+        """ cLinearTrend:addTrendInputVariables
+        Args:
+        Returns:
+           
+        """
+        """ cLag1Trend:addTrendInputVariables
+        Args:
+        Returns:
+           
+        """
+        """ cConstantTrend:addTrendInputVariables
+        Args:
+        Returns:
+           
+        """
         self.mTime = self.mTimeInfo.mTime;
         self.mSignal = self.mTimeInfo.mSignal;
         self.mOutName = self.mSignal + "_" + self.mOutName;
@@ -68,12 +145,78 @@ class cConstantTrend(cAbstractTrend):
         self.mTimeInfo.addVars(self.mTrendFrame);
 
     def transformDataset(self, df):
+        """ cPolyTrend:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cMovingMedianTrend:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cMovingAverageTrend:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cLinearTrend:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cLag1Trend:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cConstantTrend:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
         target = df[self.mSignal].values
         df[self.mOutName] = self.mMean * np.ones_like(df[self.mSignal]);
         df[self.mOutName + '_residue'] = target - df[self.mOutName].values        
         return df;
     
     def fit(self):
+        """ cPolyTrend:fit
+        Args:
+        Returns:
+           
+        """
+        """ cMovingMedianTrend:fit
+        Args:
+        Returns:
+           
+        """
+        """ cMovingAverageTrend:fit
+        Args:
+        Returns:
+           
+        """
+        """ cLinearTrend:fit
+        Args:
+        Returns:
+           
+        """
+        """ cLag1Trend:fit
+        Args:
+        Returns:
+           
+        """
+        """ cConstantTrend:fit
+        Args:
+        Returns:
+           
+        """
         # real lag1
         lTrendEstimFrame = self.mSplit.getEstimPart(self.mTrendFrame);
         self.mMean = lTrendEstimFrame[self.mSignal].mean()
@@ -85,6 +228,36 @@ class cConstantTrend(cAbstractTrend):
         # self.mFormula = self.mOutName + "[" + str(self.mMean) + "]";    
 
     def compute(self):
+        """ cPolyTrend:compute
+        Args:
+        Returns:
+           
+        """
+        """ cMovingMedianTrend:compute
+        Args:
+        Returns:
+           
+        """
+        """ cMovingAverageTrend:compute
+        Args:
+        Returns:
+           
+        """
+        """ cLinearTrend:compute
+        Args:
+        Returns:
+           
+        """
+        """ cLag1Trend:compute
+        Args:
+        Returns:
+           
+        """
+        """ cConstantTrend:compute
+        Args:
+        Returns:
+           
+        """
         Y_pred = self.mMean
         return Y_pred
 
@@ -104,6 +277,13 @@ class cLag1Trend(cAbstractTrend):
         self.mTimeInfo.addVars(self.mTrendFrame);
 
     def replaceFirstMissingValue(self, df, series):
+        """ cLag1Trend:replaceFirstMissingValue
+        Args:
+            df:     
+            series:     
+        Returns:
+           
+        """
         # print(self.mDefaultValue, type(self.mDefaultValue));
         # Be explicit here .... some integer index does not work.
         df.loc[df.index[0] , series] = self.mDefaultValue;
@@ -135,6 +315,18 @@ class cLag1Trend(cAbstractTrend):
 
 class cMovingAverageTrend(cAbstractTrend):
     def __init__(self, iWindow):
+        """ cMovingMedianTrend:__init__
+        Args:
+            iWindow:     
+        Returns:
+           
+        """
+        """ cMovingAverageTrend:__init__
+        Args:
+            iWindow:     
+        Returns:
+           
+        """
         cAbstractTrend.__init__(self);
         self.mOutName = "MovingAverage";
         self.mWindow = iWindow;
@@ -314,12 +506,24 @@ class cTrendEstimator:
 
 
     def needMovingTrend(self, df, i):
+        """ cTrendEstimator:needMovingTrend
+        Args:
+            df:     
+            i:     
+        Returns:
+           
+        """
         N = df.shape[0];
         if(N < (12 * i)) :
             return False;
         return True;
         
     def defineTrends(self):
+        """ cTrendEstimator:defineTrends
+        Args:
+        Returns:
+           
+        """
 
         self.mTrendList = [];
         
@@ -356,6 +560,11 @@ class cTrendEstimator:
 
         
     def plotTrend(self):
+        """ cTrendEstimator:plotTrend
+        Args:
+        Returns:
+           
+        """
         for trend in self.mTrendList:
             tsplot.decomp_plot(self.mTrendFrame, self.mTimeInfo.mNormalizedTimeColumn, self.mSignal, trend.mOutName , trend.mOutName + '_residue');
             
@@ -366,6 +575,13 @@ class cTrendEstimator:
         pass
 
     def check_residue(self , sig, name):
+        """ cTrendEstimator:check_residue
+        Args:
+            sig:     
+            name:     
+        Returns:
+           
+        """
 #        print("check_not_nan "  + name);
 #        print(sig);
         if(np.isnan(sig).any()):
@@ -373,6 +589,11 @@ class cTrendEstimator:
         pass
 
     def estimateTrends(self):
+        """ cTrendEstimator:estimateTrends
+        Args:
+        Returns:
+           
+        """
         self.mTime = self.mTimeInfo.mTime;
         self.mSignal = self.mTimeInfo.mSignal;
         self.mTrendFrame = pd.DataFrame()
@@ -390,6 +611,11 @@ class cTrendEstimator:
         pass
 
     def estimateTrend(self):
+        """ cTrendEstimator:estimateTrend
+        Args:
+        Returns:
+           
+        """
         self.defineTrends();
         for trend in self.mTrendList:
             trend.mSignalFrame = self.mSignalFrame;

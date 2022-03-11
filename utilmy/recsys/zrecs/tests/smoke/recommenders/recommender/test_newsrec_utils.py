@@ -17,6 +17,12 @@ except ImportError:
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_news_iterator(mind_resource_path):
+    """function test_news_iterator
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     train_news_file = os.path.join(mind_resource_path, "train", r"news.tsv")
     train_behaviors_file = os.path.join(mind_resource_path, "train", r"behaviors.tsv")
     valid_news_file = os.path.join(mind_resource_path, "valid", r"news.tsv")
@@ -73,6 +79,12 @@ def test_news_iterator(mind_resource_path):
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_naml_iterator(mind_resource_path):
+    """function test_naml_iterator
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     train_news_file = os.path.join(mind_resource_path, "train", r"news.tsv")
     train_behaviors_file = os.path.join(mind_resource_path, "train", r"behaviors.tsv")
     valid_news_file = os.path.join(mind_resource_path, "valid", r"news.tsv")

@@ -52,6 +52,12 @@ print(os.getcwd())
 ####################################################################################################
 class dict2(object):
     def __init__(self, d):
+        """ dict2:__init__
+        Args:
+            d:     
+        Returns:
+           
+        """
         self.__dict__ = d
 
 

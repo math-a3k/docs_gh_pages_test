@@ -10,6 +10,14 @@ import sklearn
 
 
 def log(*s, n=0, m=1):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     print(sjump, sspace, s, sspace, flush=True)
@@ -156,6 +164,11 @@ def metrics_eval(metric_list=["mean_squared_error"], ytrue=None, ypred=None, ypr
 
 
 def test():
+	"""function test
+	Args:
+	Returns:
+	    
+	"""
 	import numpy as np
 	ytrue = np.random.randint(0,5, 10)
 	ypred = np.random.randint(0,5, 10)

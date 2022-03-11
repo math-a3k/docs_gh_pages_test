@@ -23,6 +23,13 @@ class EmbeddingMul(nn.Module):
     """
 
     def __init__(self, depth, device):
+        """ EmbeddingMul:__init__
+        Args:
+            depth:     
+            device:     
+        Returns:
+           
+        """
         super(EmbeddingMul, self).__init__()
         # i.e the dictionnary size
         self.depth = depth
@@ -35,6 +42,11 @@ class EmbeddingMul(nn.Module):
 
     @property
     def requires_grad(self):
+        """ EmbeddingMul:requires_grad
+        Args:
+        Returns:
+           
+        """
         return self._requires_grad
 
     @requires_grad.setter
@@ -92,6 +104,12 @@ class EmbeddingMul(nn.Module):
         return result_new
 
     def to_one_hot(self, input):
+        """ EmbeddingMul:to_one_hot
+        Args:
+            input:     
+        Returns:
+           
+        """
         # Returns a new tensor that doesn't share memory
         result = torch.index_select(
             self.ones, 0, input.view(-1).long()).view(
@@ -100,6 +118,11 @@ class EmbeddingMul(nn.Module):
         return result
 
     def __repr__(self):
+        """ EmbeddingMul:__repr__
+        Args:
+        Returns:
+           
+        """
         return self.__class__.__name__ + "({})".format(self.depth)
 
 

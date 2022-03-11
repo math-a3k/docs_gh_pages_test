@@ -25,6 +25,12 @@ VERBOSE = True
 # MODEL_URI = get_model_uri(__file__)
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 
@@ -33,12 +39,30 @@ global model, session
 
 
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 
 def Modelcustom(n_wide_cross, n_wide, n_feat=8, m_EMBEDDING=10, loss='mse', metric = 'mean_squared_error'):
+        """function Modelcustom
+        Args:
+            n_wide_cross:   
+            n_wide:   
+            n_feat:   
+            m_EMBEDDING:   
+            loss:   
+            metric :   
+        Returns:
+            
+        """
 
         #### Wide model with the functional API
         col_wide_cross          = layers.Input(shape=(n_wide_cross,))
@@ -77,6 +101,14 @@ def Modelcustom(n_wide_cross, n_wide, n_feat=8, m_EMBEDDING=10, loss='mse', metr
 
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
         self.history = None
         if model_pars is None:
@@ -132,6 +164,16 @@ def eval(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     """
 
@@ -149,11 +191,22 @@ def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
 
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
 
 def save(path=None):
+    """function save
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     os.makedirs(path, exist_ok=True)
 
@@ -163,6 +216,12 @@ def save(path=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
 
     filepath = path + 'model.h5'
@@ -172,6 +231,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -183,6 +248,12 @@ def load_info(path=""):
 
 
 def preprocess(prepro_pars):
+    """function preprocess
+    Args:
+        prepro_pars:   
+    Returns:
+        
+    """
     if prepro_pars['type'] == 'test':
         from sklearn.datasets import make_classification
         from sklearn.model_selection import train_test_split
@@ -412,10 +483,23 @@ def get_dataset2(data_pars=None, task_type="train", **kw):
     raise Exception(f' Requires  Xtrain", "Xtest", "ytrain", "ytest" ')
 
 def get_params_sklearn(deep=False):
+    """function get_params_sklearn
+    Args:
+        deep:   
+    Returns:
+        
+    """
     return model.model.get_params(deep=deep)
 
 
 def get_params(param_pars={}, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     import json
     # from jsoncomment import JsonComment ; json = JsonComment()
     pp = param_pars
@@ -433,6 +517,14 @@ def get_params(param_pars={}, **kw):
 
 
 def test_helper(model_pars, data_pars, compute_pars):
+    """function test_helper
+    Args:
+        model_pars:   
+        data_pars:   
+        compute_pars:   
+    Returns:
+        
+    """
     global model, session
 
     root  = "ztmp/"
@@ -466,6 +558,12 @@ def test_helper(model_pars, data_pars, compute_pars):
 #######################################################################################
 
 def test2(config=''):
+    """function test2
+    Args:
+        config:   
+    Returns:
+        
+    """
 
     global model, session
 

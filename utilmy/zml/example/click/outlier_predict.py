@@ -24,11 +24,24 @@ print(root, dir_data)
 
 
 def os_get_function_name():
+    """function os_get_function_name
+    Args:
+    Returns:
+        
+    """
     import sys
     return sys._getframe(1).f_code.co_name
 
 
 def global_pars_update(model_dict,  data_name, config_name):
+    """function global_pars_update
+    Args:
+        model_dict:   
+        data_name:   
+        config_name:   
+    Returns:
+        
+    """
     m                      = {}
     m['config_path']       = root + f"/{config_file}"
     m['config_name']       = config_name
@@ -192,6 +205,14 @@ def titanic_pyod(path_model_out="") :
 #####################################################################################
 ########## Profile data #############################################################
 def data_profile(path_data_train="", path_model="", n_sample= 5000):
+   """function data_profile
+   Args:
+       path_data_train:   
+       path_model:   
+       n_sample:   
+   Returns:
+       
+   """
    from source.run_feature_profile import run_profile
    run_profile(path_data   = path_data_train,
                path_output = path_model + "/profile/",
@@ -216,6 +237,11 @@ from core_run import train
 ###################################################################################
 ######### Check data ##############################################################
 def check():
+   """function check
+   Args:
+   Returns:
+       
+   """
    pass
 
 

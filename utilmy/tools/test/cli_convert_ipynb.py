@@ -19,6 +19,12 @@ import pypandoc as pdoc
 
 
 def scan(data_file):
+    """function scan
+    Args:
+        data_file:   
+    Returns:
+        
+    """
     # note: I have checked os_file_listall, I think the following will be better
     files = glob.glob(data_file + "/**/*.ipynb", recursive=True)
     # remove .ipynb_checkpoints
@@ -28,6 +34,14 @@ def scan(data_file):
 
 
 def convert2python(source_files, data_file, out_dir):
+    """function convert2python
+    Args:
+        source_files:   
+        data_file:   
+        out_dir:   
+    Returns:
+        
+    """
     dst_files = []
     for filepath in tqdm(source_files):
         # export_path = '%s/%s.py'%(out_dir, os.path.basename(filepath[:-6]))
@@ -52,6 +66,13 @@ def convert2python(source_files, data_file, out_dir):
 
 
 def check(file_list, dump=False):
+    """function check
+    Args:
+        file_list:   
+        dump:   
+    Returns:
+        
+    """
     print("Checking results...")
     error_list = []
     error_msgs = []
@@ -111,6 +132,11 @@ def check(file_list, dump=False):
 
 
 def load_arguments():
+    """function load_arguments
+    Args:
+    Returns:
+        
+    """
     import argparse
 
     parser = argparse.ArgumentParser(
@@ -124,6 +150,11 @@ def load_arguments():
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     # if len(sys.argv) != 3:
     #    print('Syntax: %s src_ipny_fold dst_py_fold' % sys.argv[0])
     #    sys.exit(0)

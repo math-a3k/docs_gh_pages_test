@@ -112,6 +112,11 @@ class BaseModel:
         return pred
 
     def _add_summaries(self):
+        """ BaseModel:_add_summaries
+        Args:
+        Returns:
+           
+        """
         tf.compat.v1.summary.scalar("data_loss", self.data_loss)
         tf.compat.v1.summary.scalar("regular_loss", self.regular_loss)
         tf.compat.v1.summary.scalar("loss", self.loss)
@@ -119,6 +124,11 @@ class BaseModel:
         return merged
 
     def _l2_loss(self):
+        """ BaseModel:_l2_loss
+        Args:
+        Returns:
+           
+        """
         l2_loss = tf.zeros([1], dtype=tf.float32)
         # embedding_layer l2 loss
         for param in self.embed_params:
@@ -133,6 +143,11 @@ class BaseModel:
         return l2_loss
 
     def _l1_loss(self):
+        """ BaseModel:_l1_loss
+        Args:
+        Returns:
+           
+        """
         l1_loss = tf.zeros([1], dtype=tf.float32)
         # embedding_layer l2 loss
         for param in self.embed_params:
@@ -163,6 +178,11 @@ class BaseModel:
         return cross_l_loss
 
     def _get_initializer(self):
+        """ BaseModel:_get_initializer
+        Args:
+        Returns:
+           
+        """
         if self.hparams.init_method == "tnormal":
             return tf.truncated_normal_initializer(
                 stddev=self.hparams.init_value, seed=self.seed
@@ -193,6 +213,11 @@ class BaseModel:
             )
 
     def _compute_data_loss(self):
+        """ BaseModel:_compute_data_loss
+        Args:
+        Returns:
+           
+        """
         if self.hparams.loss == "cross_entropy_loss":
             data_loss = tf.reduce_mean(
                 tf.nn.sigmoid_cross_entropy_with_logits(
@@ -319,6 +344,13 @@ class BaseModel:
         return self._activate(logit, activation)
 
     def _activate(self, logit, activation):
+        """ BaseModel:_activate
+        Args:
+            logit:     
+            activation:     
+        Returns:
+           
+        """
         if activation == "sigmoid":
             return tf.nn.sigmoid(logit)
         elif activation == "softmax":

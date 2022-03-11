@@ -19,10 +19,21 @@ import os,sys,  pandas as pd, numpy as np
 
 #################################################################################################
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     ss  = ""
     ss += HELP
     print(ss)

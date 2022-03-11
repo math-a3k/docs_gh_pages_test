@@ -18,6 +18,11 @@ from typing import List
 
 ########################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     from utilmy import text
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
@@ -42,6 +47,16 @@ def test_all():
       
 
 def test():
+    """function test
+    Args:
+    Returns:
+        
+    """
+    """function test
+    Args:
+    Returns:
+        
+    """
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
 
@@ -63,10 +78,21 @@ def test():
       
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(s, flush=True)
 
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     ss  = ""
     ss += HELP
     print(ss)
@@ -114,6 +140,11 @@ def test():
 
 
 def test_lsh():
+    """function test_lsh
+    Args:
+    Returns:
+        
+    """
 
     ll = ['aa bb cc', 'a b c', 'cc bb cc']
     column_name = "sentence"

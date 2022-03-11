@@ -5,6 +5,11 @@ import mygenerator.dataset as dataset
 
 
 def test_image_dataset_get_label_list():
+    """function test_image_dataset_get_label_list
+    Args:
+    Returns:
+        
+    """
     ds = dataset.ImageDataset(meta=pd.DataFrame({"label": ["a", "b", "a", "a"]}))
 
     indices = ds.get_label_list("a")
@@ -13,6 +18,11 @@ def test_image_dataset_get_label_list():
 
 
 def test_image_dataset_len():
+    """function test_image_dataset_len
+    Args:
+    Returns:
+        
+    """
     ds = dataset.ImageDataset(meta=pd.DataFrame({"label": ["a", "b", "a", "a"]}))
 
     l = len(ds)
@@ -21,6 +31,11 @@ def test_image_dataset_len():
 
 
 def test_image_dataset_get_sampe():
+    """function test_image_dataset_get_sampe
+    Args:
+    Returns:
+        
+    """
     def _dummy_get_image_fn(idx):
         return "image from {} index".format(idx)
 
@@ -38,6 +53,11 @@ def test_image_dataset_get_sampe():
 
 
 def test_image_dataset_get_image_only():
+    """function test_image_dataset_get_image_only
+    Args:
+    Returns:
+        
+    """
     uris = ["1.png", "2.png", "3.png"]
 
     def _get_image_fn(idx):
@@ -59,6 +79,11 @@ def test_image_dataset_get_image_only():
 
 
 def test_nlp_dataset_len():
+    """function test_nlp_dataset_len
+    Args:
+    Returns:
+        
+    """
     ds = dataset.NlpDataset(pd.DataFrame({"label": [f"label_{idx}" for idx in range(4)]}))
 
     assert len(ds) == 4

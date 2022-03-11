@@ -33,6 +33,12 @@ def test_getdata(verbose=True):
     return data
 
 def test1(verbose=False):
+    """function test1
+    Args:
+        verbose:   
+    Returns:
+        
+    """
     ####  Test Datatable
     doc = vi.htmlDoc(dir_out="", title="hello", format='myxxxx', cfg={})
     # check add css

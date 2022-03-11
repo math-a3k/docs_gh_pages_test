@@ -2,6 +2,11 @@
 
 
 def benchmark_m4() :
+    """function benchmark_m4
+    Args:
+    Returns:
+        
+    """
     # This example shows how to fit a model and evaluate its predictions.
     import pprint
     from functools import partial

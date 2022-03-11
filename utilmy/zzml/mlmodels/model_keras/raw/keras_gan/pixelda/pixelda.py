@@ -19,6 +19,11 @@ import os
 
 class PixelDA():
     def __init__(self):
+        """ PixelDA:__init__
+        Args:
+        Returns:
+           
+        """
         # Input shape
         self.img_rows = 32
         self.img_cols = 32
@@ -109,6 +114,11 @@ class PixelDA():
 
 
     def build_discriminator(self):
+        """ PixelDA:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         def d_layer(layer_input, filters, f_size=4, normalization=True):
             """Discriminator layer"""
@@ -130,6 +140,11 @@ class PixelDA():
         return Model(img, validity)
 
     def build_classifier(self):
+        """ PixelDA:build_classifier
+        Args:
+        Returns:
+           
+        """
 
         def clf_layer(layer_input, filters, f_size=4, normalization=True):
             """Classifier layer"""
@@ -152,6 +167,14 @@ class PixelDA():
         return Model(img, class_pred)
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ PixelDA:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         half_batch = int(batch_size / 2)
 
@@ -215,6 +238,12 @@ class PixelDA():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ PixelDA:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 2, 5
 
         imgs_A, _ = self.data_loader.load_data(domain="A", batch_size=5)

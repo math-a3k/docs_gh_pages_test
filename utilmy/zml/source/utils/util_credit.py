@@ -22,6 +22,11 @@ print("os.getcwd", os.getcwd())
 
 
 def ztest():
+    """function ztest
+    Args:
+    Returns:
+        
+    """
     import sklearn as sk
     print(sk)
 
@@ -141,6 +146,14 @@ def model_logistic_score(clf, df1, cols, coltarget, outype="score"):
 
 
 def split_train_test(X, y, split_ratio=0.8):
+    """function split_train_test
+    Args:
+        X:   
+        y:   
+        split_ratio:   
+    Returns:
+        
+    """
     train_X, val_X, train_y, val_y = train_test_split(
         X, y, test_size=split_ratio, random_state=42, shuffle=False
     )
@@ -154,6 +167,16 @@ def split_train_test(X, y, split_ratio=0.8):
 
 
 def split_train(df1, ntrain=10000, ntest=100000, colused=None, coltarget=None):
+    """function split_train
+    Args:
+        df1:   
+        ntrain:   
+        ntest:   
+        colused:   
+        coltarget:   
+    Returns:
+        
+    """
     n1 = len(df1[df1[coltarget] == 0])
     dft = pd.concat(
         (
@@ -183,6 +206,17 @@ def split_train(df1, ntrain=10000, ntest=100000, colused=None, coltarget=None):
 
 
 def split_train2(df1, ntrain=10000, ntest=100000, colused=None, coltarget=None, nratio=0.4):
+    """function split_train2
+    Args:
+        df1:   
+        ntrain:   
+        ntest:   
+        colused:   
+        coltarget:   
+        nratio:   
+    Returns:
+        
+    """
     n1 = len(df1[df1[coltarget] == 0])
     n2 = len(df1[df1[coltarget] == 1])
     n2s = int(n2 * nratio)  # 80% of default

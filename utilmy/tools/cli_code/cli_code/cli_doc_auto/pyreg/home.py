@@ -13,6 +13,12 @@ LOGGER = logging.getLogger(__name__)
 
 
 def execute(cliargs):
+    """function execute
+    Args:
+        cliargs:   
+    Returns:
+        
+    """
     config.init(cliargs)
 
     print(config.SRCDIR)
@@ -30,6 +36,11 @@ def execute(cliargs):
 
 
 def to_text_format():
+    """function to_text_format
+    Args:
+    Returns:
+        
+    """
     prefix_path = "D:\\_devs\\Python01\\gitdev\\mlmodels\\"
     # Clean formatting
     with open(config.OUT, mode='r') as f:
@@ -46,6 +57,11 @@ def to_text_format():
 
 
 def to_html_format():
+    """function to_html_format
+    Args:
+    Returns:
+        
+    """
     pass
     # ###### HTML tag  ####################################################
     # head = """

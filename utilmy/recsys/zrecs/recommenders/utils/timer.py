@@ -27,18 +27,39 @@ class Timer(object):
     """
 
     def __init__(self):
+        """ Timer:__init__
+        Args:
+        Returns:
+           
+        """
         self._timer = default_timer
         self._interval = 0
         self.running = False
 
     def __enter__(self):
+        """ Timer:__enter__
+        Args:
+        Returns:
+           
+        """
         self.start()
         return self
 
     def __exit__(self, *args):
+        """ Timer:__exit__
+        Args:
+            *args:     
+        Returns:
+           
+        """
         self.stop()
 
     def __str__(self):
+        """ Timer:__str__
+        Args:
+        Returns:
+           
+        """
         return "{:0.4f}".format(self.interval)
 
     def start(self):

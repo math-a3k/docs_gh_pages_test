@@ -60,6 +60,11 @@ class TestCorrelationCovariance(object):
        [ 6.   ,  1.11 ,  2.469,  3.95 ,  0.952]])
 
     def test_naive_covariance(self):
+        """ TestCorrelationCovariance:test_naive_covariance
+        Args:
+        Returns:
+           
+        """
         assert_allclose(covar(self.d[:, 1:], method='naive'),
                                    np.cov(self.d[:, 1:], rowvar=False))
 
@@ -67,6 +72,11 @@ class TestCorrelationCovariance(object):
                                    np.cov(self.d[:, 1:], rowvar=False))
 
     def test_shifted_covariance(self):
+        """ TestCorrelationCovariance:test_shifted_covariance
+        Args:
+        Returns:
+           
+        """
         assert_allclose(covar(self.d[:, 1:], method='shifted covariance'),
                                    np.cov(self.d[:, 1:], rowvar=False))
 
@@ -74,6 +84,11 @@ class TestCorrelationCovariance(object):
                                    np.cov(self.d[:, 1:], rowvar=False))
 
     def test_two_pass_covariance(self):
+        """ TestCorrelationCovariance:test_two_pass_covariance
+        Args:
+        Returns:
+           
+        """
         assert_allclose(covar(self.d[:, 1:], method='two-pass covariance'),
                                    np.cov(self.d[:, 1:], rowvar=False))
 
@@ -81,10 +96,20 @@ class TestCorrelationCovariance(object):
                                    np.cov(self.d[:, 1:], rowvar=False))
 
     def test_covar_no_method(self):
+        """ TestCorrelationCovariance:test_covar_no_method
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             covar(self.d[:, 1:3], self.d[:, 3:], 'NA_METHOD')
 
     def test_pearson(self):
+        """ TestCorrelationCovariance:test_pearson
+        Args:
+        Returns:
+           
+        """
         assert_allclose(pearson(self.d[:, 1:]),
                                    np.corrcoef(self.d[:, 1:], rowvar=False))
 
@@ -92,6 +117,11 @@ class TestCorrelationCovariance(object):
                                    np.corrcoef(self.d[:, 1:], rowvar=False))
 
     def test_spearman(self):
+        """ TestCorrelationCovariance:test_spearman
+        Args:
+        Returns:
+           
+        """
         assert_allclose(spearman(self.d[:, 1:]),
                                    spearmanr(self.d[:, 1:])[0])
 
@@ -106,6 +136,11 @@ class TestVariance(object):
     fa = np.array(f)
 
     def test_var_corrected_two_pass(self):
+        """ TestVariance:test_var_corrected_two_pass
+        Args:
+        Returns:
+           
+        """
         assert_allclose(np.array(var(self.f)).reshape(4,), np.array([2, 2.25, 0.666667, 2]), rtol=1e-02)
         assert_allclose(np.array(var(self.f, 'corrected two pass')).reshape(4,),
                                    np.array([2, 2.25, 0.666667, 2]), rtol=1e-02)
@@ -113,6 +148,11 @@ class TestVariance(object):
         assert_allclose(var(self.h).reshape(4,), np.array([32, 9, 3.666667, 17]), rtol=1e-02)
 
     def test_var_textbook_one_pass(self):
+        """ TestVariance:test_var_textbook_one_pass
+        Args:
+        Returns:
+           
+        """
         assert_allclose(np.array(var(self.f, 'textbook one pass')).reshape(4,),
                                    np.array([2, 2.25, 0.666667, 2]), rtol=1e-02)
 
@@ -122,6 +162,11 @@ class TestVariance(object):
         assert_almost_equal(var(self.fa[:, 2], 'textbook one pass'), 0.66666666666666663)
 
     def test_var_standard_two_pass(self):
+        """ TestVariance:test_var_standard_two_pass
+        Args:
+        Returns:
+           
+        """
         assert_allclose(np.array(var(self.f, 'standard two pass')).reshape(4,),
                                    np.array([2, 2.25, 0.666667, 2]), rtol=1e-02)
 
@@ -131,6 +176,11 @@ class TestVariance(object):
         assert_equal(var(self.fa[:, 1], 'standard two pass'), 2.25)
 
     def test_var_youngs_cramer(self):
+        """ TestVariance:test_var_youngs_cramer
+        Args:
+        Returns:
+           
+        """
         assert_allclose(np.array(var(self.f, 'youngs cramer')).reshape(4,),
                                    np.array([2, 2.25, 0.666667, 2]), rtol=1e-02)
 
@@ -140,10 +190,20 @@ class TestVariance(object):
         assert_equal(var(self.fa[:, 1], 'youngs cramer'), 2.25)
 
     def test_stddev(self):
+        """ TestVariance:test_stddev
+        Args:
+        Returns:
+           
+        """
         assert_equal(std_dev(self.fa[:, 1]), 1.5)
         assert_allclose(std_dev(self.fa), array([ 1.41421356,  1.5       ,  0.81649658,  1.41421356]))
 
     def test_var_cond(self):
+        """ TestVariance:test_var_cond
+        Args:
+        Returns:
+           
+        """
         assert_almost_equal(variance_condition(self.fa[:, 1]), 1.7638342073763937)
         assert_allclose(variance_condition(self.fa), array([2.23606798, 1.76383421, 5.19615242, 2.23606798]))
 
@@ -159,6 +219,11 @@ class TestVariance(object):
             variance_condition(ff)
 
     def test_errors(self):
+        """ TestVariance:test_errors
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             var(self.f, 'NA')
 
@@ -174,12 +239,32 @@ class TestKurtosis(object):
     s2 = [4, 6, 4, 3, 2, 6, 7]
 
     def test_exceptions(self):
+        """ TestSkewness:test_exceptions
+        Args:
+        Returns:
+           
+        """
+        """ TestMeanAbsoluteDeviation:test_exceptions
+        Args:
+        Returns:
+           
+        """
+        """ TestKurtosis:test_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             kurtosis(self.s1, axis=2)
         with pytest.raises(ValueError):
             kurtosis(np.zeros((4, 4, 4)))
 
     def test_kurtosis(self):
+        """ TestKurtosis:test_kurtosis
+        Args:
+        Returns:
+           
+        """
         k1 = kurtosis(self.s1)
         k2 = kurtosis([self.s1, self.s2], axis=1)
 
@@ -199,6 +284,11 @@ class TestSkewness(object):
             skewness(np.zeros((4, 4, 4)))
 
     def test_skewness(self):
+        """ TestSkewness:test_skewness
+        Args:
+        Returns:
+           
+        """
         s1 = skewness(self.s1)
         s2 = skewness([self.s1, self.s2], axis=1)
 
@@ -219,4 +309,9 @@ class TestMeanAbsoluteDeviation(object):
             mean_absolute_deviation(np.zeros((4, 4, 4)))
 
     def test_mean_deviation(self):
+        """ TestMeanAbsoluteDeviation:test_mean_deviation
+        Args:
+        Returns:
+           
+        """
         pass

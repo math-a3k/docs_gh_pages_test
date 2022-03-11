@@ -15,6 +15,11 @@ from . import Utils as tsutil
 class cPredictionIntervalsEstimator:
     
     def __init__(self):
+        """ cPredictionIntervalsEstimator:__init__
+        Args:
+        Returns:
+           
+        """
         self.mModel = None;
         self.mSignalFrame = pd.DataFrame()
         self.mHorizon = -1;
@@ -23,6 +28,11 @@ class cPredictionIntervalsEstimator:
         self.mTestPerformances = {}
 
     def computePerformances(self):
+        """ cPredictionIntervalsEstimator:computePerformances
+        Args:
+        Returns:
+           
+        """
         self.mTime = self.mModel.mTime;
         self.mSignal = self.mModel.mOriginalSignal;
         self.mHorizon = self.mModel.mTimeInfo.mHorizon;
@@ -51,6 +61,11 @@ class cPredictionIntervalsEstimator:
         # self.dump_detailed();
 
     def dump_detailed(self):
+        """ cPredictionIntervalsEstimator:dump_detailed
+        Args:
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
         lForecastColumn = str(self.mSignal) + "_Forecast";
         for h in range(0 , self.mHorizon):
@@ -62,6 +77,11 @@ class cPredictionIntervalsEstimator:
 
 
     def dump(self):
+        """ cPredictionIntervalsEstimator:dump
+        Args:
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
         lForecastColumn = str(self.mSignal) + "_Forecast";
         for h in range(0 , self.mHorizon):

@@ -7,6 +7,13 @@ from deepctr.models import DIEN
 
 
 def get_xy_fd(use_neg=False, hash_flag=False):
+    """function get_xy_fd
+    Args:
+        use_neg:   
+        hash_flag:   
+    Returns:
+        
+    """
     feature_columns = [SparseFeat('user', 3, embedding_dim=10, use_hash=hash_flag),
                        SparseFeat('gender', 2, embedding_dim=4, use_hash=hash_flag),
                        SparseFeat('item', 3 + 1, embedding_dim=8, use_hash=hash_flag),

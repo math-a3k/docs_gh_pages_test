@@ -28,6 +28,14 @@ slim = tf.contrib.slim
 
 @slim.add_arg_scope
 def apply_activation(x, name=None, activation_fn=None):
+    """function apply_activation
+    Args:
+        x:   
+        name:   
+        activation_fn:   
+    Returns:
+        
+    """
     return activation_fn(x, name=name) if activation_fn else x
 
 
@@ -61,6 +69,14 @@ def _fixed_padding(inputs, kernel_size, rate=1):
 
 
 def _make_divisible(v, divisor, min_value=None):
+    """function _make_divisible
+    Args:
+        v:   
+        divisor:   
+        min_value:   
+    Returns:
+        
+    """
     if min_value is None:
         min_value = divisor
     new_v = max(min_value, int(v + divisor / 2) // divisor * divisor)
@@ -96,6 +112,16 @@ def _set_arg_scope_defaults(defaults):
 
 @slim.add_arg_scope
 def depth_multiplier(output_params, multiplier, divisible_by=8, min_depth=8, **unused_kwargs):
+    """function depth_multiplier
+    Args:
+        output_params:   
+        multiplier:   
+        divisible_by:   
+        min_depth:   
+        **unused_kwargs:   
+    Returns:
+        
+    """
     if "num_outputs" not in output_params:
         return
     d = output_params["num_outputs"]
@@ -106,6 +132,13 @@ _Op = collections.namedtuple("Op", ["op", "params", "multiplier_func"])
 
 
 def op(opfunc, **params):
+    """function op
+    Args:
+        opfunc:   
+        **params:   
+    Returns:
+        
+    """
     multiplier = params.pop("multiplier_transorm", depth_multiplier)
     return _Op(opfunc, params=params, multiplier_func=multiplier)
 
@@ -114,9 +147,22 @@ class NoOpScope(object):
     """No-op context manager."""
 
     def __enter__(self):
+        """ NoOpScope:__enter__
+        Args:
+        Returns:
+           
+        """
         return None
 
     def __exit__(self, exc_type, exc_value, traceback):
+        """ NoOpScope:__exit__
+        Args:
+            exc_type:     
+            exc_value:     
+            traceback:     
+        Returns:
+           
+        """
         return False
 
 
@@ -290,6 +336,13 @@ def mobilenet_base(  # pylint: disable=invalid-name
 
 @contextlib.contextmanager
 def _scope_all(scope, default_scope=None):
+    """function _scope_all
+    Args:
+        scope:   
+        default_scope:   
+    Returns:
+        
+    """
     with tf.variable_scope(scope, default_name=default_scope) as s, tf.name_scope(
         s.original_name_scope
     ):

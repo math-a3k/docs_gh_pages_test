@@ -40,6 +40,13 @@ _IMC_TEST_DATA = [
 # `geoimc_data` tests
 @pytest.mark.parametrize("data, entities", _IMC_TEST_DATA)
 def test_dataptr(data, entities):
+    """function test_dataptr
+    Args:
+        data:   
+        entities:   
+    Returns:
+        
+    """
     ptr = DataPtr(data, entities)
     assert (ptr.get_data() != data).nnz == 0
     assert np.array_equal(ptr.get_entity("row"), entities[0])
@@ -55,6 +62,12 @@ def test_dataptr(data, entities):
     ],
 )
 def test_length_normalize(matrix):
+    """function test_length_normalize
+    Args:
+        matrix:   
+    Returns:
+        
+    """
     assert np.allclose(
         np.sqrt(np.sum(length_normalize(matrix) ** 2, axis=1)),
         np.ones(matrix.shape[0]),
@@ -70,6 +83,12 @@ def test_length_normalize(matrix):
     ],
 )
 def test_mean_center(matrix):
+    """function test_mean_center
+    Args:
+        matrix:   
+    Returns:
+        
+    """
     mean_center(matrix)
     assert np.allclose(
         np.mean(matrix, axis=0), np.zeros(matrix.shape[1], dtype="float64"), atol=1e-10
@@ -77,6 +96,11 @@ def test_mean_center(matrix):
 
 
 def test_reduce_dims():
+    """function test_reduce_dims
+    Args:
+    Returns:
+        
+    """
     matrix = np.random.rand(100, 100)
     assert reduce_dims(matrix, 50).shape[1] == 50
 
@@ -90,6 +114,13 @@ def test_reduce_dims():
     ],
 )
 def test_imcproblem(dataPtr, rank):
+    """function test_imcproblem
+    Args:
+        dataPtr:   
+        rank:   
+    Returns:
+        
+    """
 
     # Test init
     prblm = IMCProblem(dataPtr, rank=rank)
@@ -114,6 +145,11 @@ def test_imcproblem(dataPtr, rank):
 
 # `geoimc_predict` tests
 def test_inferer_init():
+    """function test_inferer_init
+    Args:
+    Returns:
+        
+    """
     assert Inferer(method="dot").method.__name__ == "PlainScalarProduct"
 
 
@@ -125,6 +161,12 @@ def test_inferer_init():
     ],
 )
 def test_inferer_infer(dataPtr):
+    """function test_inferer_infer
+    Args:
+        dataPtr:   
+    Returns:
+        
+    """
     test_data = dataPtr
 
     rowFeatureDim = test_data.get_entity("row").shape[1]

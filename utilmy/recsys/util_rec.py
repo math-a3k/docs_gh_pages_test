@@ -25,9 +25,19 @@ DTYPE = np.float64  # implicit asks for doubles, not float32s...
 
 
 def test_all():
+  """function test_all
+  Args:
+  Returns:
+      
+  """
   pass
 
 def test1():
+    """function test1
+    Args:
+    Returns:
+        
+    """
     from numpy.testing import assert_array_almost_equal
     import pytest
 
@@ -133,6 +143,15 @@ def check_consistent_length(u, i, r):
 
 
 def _make_sparse_csr(data, rows, cols, dtype=DTYPE):
+    """function _make_sparse_csr
+    Args:
+        data:   
+        rows:   
+        cols:   
+        dtype:   
+    Returns:
+        
+    """
     # check lengths
     check_consistent_length(data, rows, cols)
     data, rows, cols = (np.asarray(x) for x in (data, rows, cols))
@@ -203,6 +222,15 @@ def _validate_train_size(train_size):
 
 
 def _get_stratified_tr_mask(u, i, train_size, random_state):
+    """function _get_stratified_tr_mask
+    Args:
+        u:   
+        i:   
+        train_size:   
+        random_state:   
+    Returns:
+        
+    """
     _validate_train_size(train_size)  # validate it's a float
     random_state = check_random_state(random_state)
     n_events = u.shape[0]
@@ -268,6 +296,15 @@ def _get_stratified_tr_mask(u, i, train_size, random_state):
 
 
 def _make_sparse_tr_te(users, items, ratings, train_mask):
+    """function _make_sparse_tr_te
+    Args:
+        users:   
+        items:   
+        ratings:   
+        train_mask:   
+    Returns:
+        
+    """
     # now make the sparse matrices
     r_train = to_sparse_csr(u=users[train_mask], i=items[train_mask],
                             r=ratings[train_mask], axis=0)
@@ -376,10 +413,22 @@ class BaseCrossValidator(six.with_metaclass(ABCMeta)):
     """
 
     def __init__(self, n_splits=3, random_state=None):
+        """ BaseCrossValidator:__init__
+        Args:
+            n_splits:     
+            random_state:     
+        Returns:
+           
+        """
         self.n_splits = n_splits
         self.random_state = random_state
 
     def get_n_splits(self):
+        """ BaseCrossValidator:get_n_splits
+        Args:
+        Returns:
+           
+        """
         return self.n_splits
 
     def split(self, X):

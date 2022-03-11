@@ -11,12 +11,24 @@ from pathlib import Path
 verbosity = 3
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 
 
 ####################################################################################################
 def test_dataset_classifier_covtype(nrows=500):
+    """function test_dataset_classifier_covtype
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     import wget
     # Dense features
     colnum = ["Elevation", "Aspect", "Slope", "Horizontal_Distance_To_Hydrology",]
@@ -53,6 +65,12 @@ def test_dataset_classifier_covtype(nrows=500):
 
 
 def test_dataset_regress_fake(nrows=500):
+    """function test_dataset_regress_fake
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     from sklearn import datasets as sklearn_datasets
     coly   = 'y'
     colnum = ["colnum_" +str(i) for i in range(0, 17) ]
@@ -70,6 +88,12 @@ def test_dataset_regress_fake(nrows=500):
 
 
 def test_dataset_classi_fake(nrows=500):
+    """function test_dataset_classi_fake
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     from sklearn import datasets as sklearn_datasets
     ndim    =11
     coly    = 'y'
@@ -87,6 +111,12 @@ def test_dataset_classi_fake(nrows=500):
 
 
 def test_dataset_petfinder(nrows=1000):
+    """function test_dataset_petfinder
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     import tensorflow as tf
     # Dense features
     colnum = ['PhotoAmt', 'Fee','Age' ]
@@ -190,6 +220,14 @@ def tf_data_create_sparse(cols_type_received:dict= {'cols_sparse' : ['col1', 'co
 
 
 def tf_data_pandas_to_dataset(training_df, colsX, coly):
+    """function tf_data_pandas_to_dataset
+    Args:
+        training_df:   
+        colsX:   
+        coly:   
+    Returns:
+        
+    """
     # tf.enable_eager_execution()
     # features = ['feature1', 'feature2', 'feature3']
     import tensorflow as tf

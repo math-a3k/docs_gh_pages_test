@@ -10,6 +10,12 @@ import os
 
 
 def load_paper_reference(infile):
+    """function load_paper_reference
+    Args:
+        infile:   
+    Returns:
+        
+    """
     r"""
     Returns:
        A dictionary of paperid to its list of reference_paper_IDs:

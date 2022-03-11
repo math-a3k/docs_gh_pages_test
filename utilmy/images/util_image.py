@@ -22,6 +22,11 @@ from utilmy import pd_read_file
 from utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = HELP + help_create(MNAME)
     print(ss)
@@ -30,15 +35,33 @@ def help():
 
 ################################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     log(MNAME)
     test()
 
 
 def test():
+    """function test
+    Args:
+    Returns:
+        
+    """
     pass
 
 
 def test_image_create_fake(dirout=None, nimages=1, ):
+    """function test_image_create_fake
+    Args:
+        dirout:   
+        nimages:   
+        :   
+    Returns:
+        
+    """
     import cv2
     import numpy as np
 
@@ -62,6 +85,13 @@ def test_image_create_fake(dirout=None, nimages=1, ):
 
 ################################################################################################
 def prep_images(image_paths, nmax=10000000):
+  """function prep_images
+  Args:
+      image_paths:   
+      nmax:   
+  Returns:
+      
+  """
   images = []
   for i in range(len(image_paths)):
     if i > nmax : break
@@ -71,6 +101,13 @@ def prep_images(image_paths, nmax=10000000):
 
 
 def prep_images2(image_paths, nmax=10000000):
+    """function prep_images2
+    Args:
+        image_paths:   
+        nmax:   
+    Returns:
+        
+    """
     images = []
     original_first_image = None
     for i in range(len(image_paths)):
@@ -96,6 +133,14 @@ def prep_images2(image_paths, nmax=10000000):
 
 
 def prep_image(image_path:str, xdim=1, ydim=1):
+    """function prep_image
+    Args:
+        image_path ( str ) :   
+        xdim:   
+        ydim:   
+    Returns:
+        
+    """
     mean   = [0.5]
     std    = [0.5]
     try :
@@ -151,6 +196,11 @@ def run_multiprocess(myfun, list_args, npool=10, **kwargs):
 
 ################################################################################################
 def image_cache_create():
+    """function image_cache_create
+    Args:
+    Returns:
+        
+    """
     #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     ####   sleep 56000  && python prepro.py  image_create_cache
@@ -244,6 +294,14 @@ def image_cache_create():
 
 
 def image_cache_check(db_path:str="db_images.cache", dirout:str="tmp/", tag="cache1"):
+    """function image_cache_check
+    Args:
+        db_path ( str ) :   
+        dirout ( str ) :   
+        tag:   
+    Returns:
+        
+    """
     ##### Write some sample images  from cache #############################
     import diskcache as dc
     cache   = dc.Cache(db_path, size_limit= 100 * 10**9, timeout= 5 )
@@ -262,6 +320,14 @@ def image_cache_check(db_path:str="db_images.cache", dirout:str="tmp/", tag="cac
 
 
 def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", tag="cache1"):
+    """function image_cache_save
+    Args:
+        image_path_list ( str ) :   
+        db_dir ( str ) :   
+        tag:   
+    Returns:
+        
+    """
     ##### Write some sample images  from cache #############################
     import diskcache as dc
     cache   = dc.Cache(db_dir, size_limit= 100 * 10**9, timeout= 5 )
@@ -275,6 +341,17 @@ def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", t
 
 
 def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3, renorm=True):
+    """function image_check_npz
+    Args:
+        path_npz:   
+        keys:   
+        path:   
+        tag:   
+        n_sample:   
+        renorm:   
+    Returns:
+        
+    """
     import cv2
     os.makedirs(path, exist_ok=True)
     data_npz = np.load( path_npz  )
@@ -323,6 +400,11 @@ def image_read(filepath_or_buffer: Union[str, io.BytesIO]):
 
 
 def image_save():
+    """function image_save
+    Args:
+    Returns:
+        
+    """
     ##### Write some sample images  ########################
     import diskcache as dc
     db_path = "/data/workspaces/noelkevin01/img/data/fashion/train_npz/small/img_train_r2p2_70k_clean_nobg_256_256-100000.cache"
@@ -371,6 +453,15 @@ def image_show_in_row(image_list:dict=None):
 
 
 def image_resize_ratio(image, width=None, height=None, inter=cv2.INTER_AREA):
+    """function image_resize_ratio
+    Args:
+        image:   
+        width:   
+        height:   
+        inter:   
+    Returns:
+        
+    """
     # Resizes a image and maintains aspect ratio
     # Grab the image size and initialize dimensions
     import cv2
@@ -787,6 +878,13 @@ def image_check():
 
 
 def os_path_check(path, n=5):
+    """function os_path_check
+    Args:
+        path:   
+        n:   
+    Returns:
+        
+    """
     from utilmy import os_system
     print('top files', os_system( f"ls -U   '{path}' | head -{n}") )
     print('nfiles', os_system( f"ls -1q  '{path}' | wc -l") )

@@ -10,6 +10,12 @@ from mygenerator.validate import image_padding_load, image_padding_get
 
 # @pytest.mark.parametrize('seq_width', (('1234', 90)))
 def test_run_cli(tmp_path):
+    """function test_run_cli
+    Args:
+        tmp_path:   
+    Returns:
+        
+    """
     # sequence, width = seq_width
     output_path = tmp_path / "output"
     output_path.mkdir()

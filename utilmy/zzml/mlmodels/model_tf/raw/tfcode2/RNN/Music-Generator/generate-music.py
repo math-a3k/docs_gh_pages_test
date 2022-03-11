@@ -22,6 +22,11 @@ sns.set()
 
 
 def get_notes():
+    """function get_notes
+    Args:
+    Returns:
+        
+    """
     notes = []
     for file in glob.glob("midi_songs/*.mid"):
         midi = converter.parse(file)
@@ -40,6 +45,13 @@ def get_notes():
 
 
 def embed_to_onehot(data, vocab):
+    """function embed_to_onehot
+    Args:
+        data:   
+        vocab:   
+    Returns:
+        
+    """
     onehot = np.zeros((len(data), len(vocab)), dtype=np.float32)
     for i in range(len(data)):
         onehot[i, vocab.index(data[i])] = 1.0
@@ -76,6 +88,16 @@ possible_batch_id = range(len(notes) - sequence_length - 1)
 
 class Model:
     def __init__(self, num_layers, size_layer, dimension, sequence_length, learning_rate):
+        """ Model:__init__
+        Args:
+            num_layers:     
+            size_layer:     
+            dimension:     
+            sequence_length:     
+            learning_rate:     
+        Returns:
+           
+        """
         def lstm_cell():
             return tf.nn.rnn_cell.LSTMCell(size_layer, sequence_length, state_is_tuple=False)
 
@@ -125,6 +147,11 @@ tag
 
 
 def train_random_sequence():
+    """function train_random_sequence
+    Args:
+    Returns:
+        
+    """
     LOST, ACCURACY = [], []
     for i in range(epoch):
         last_time = time.time()
@@ -188,6 +215,14 @@ plt.show()
 
 
 def generate_based_sequence(length_sentence, argmax=False, temp=1):
+    """function generate_based_sequence
+    Args:
+        length_sentence:   
+        argmax:   
+        temp:   
+    Returns:
+        
+    """
     notes_generated = tag
     onehot = embed_to_onehot(tag, notes_vocab)
     init_value = np.zeros((batch_size, num_layers * 2 * size_layer))
@@ -229,6 +264,13 @@ generated_notes = generate_based_sequence(1000)
 
 
 def create_midi(prediction_output, output_name):
+    """function create_midi
+    Args:
+        prediction_output:   
+        output_name:   
+    Returns:
+        
+    """
     offset = 0
     output_notes = []
     for pattern in prediction_output:

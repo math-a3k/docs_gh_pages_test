@@ -5,11 +5,24 @@ import scipy.stats as stats
 class SimpleImputer:
     """ Simple mean/most frequent imputation. """
     def __init__(self, ncat, method='mean'):
+        """ SimpleImputer:__init__
+        Args:
+            ncat:     
+            method:     
+        Returns:
+           
+        """
         self.ncat = ncat
         assert method in ['mean', 'mode'], "%s is not supported as imputation method." %method
         self.method = method
 
     def fit(self, data):
+        """ SimpleImputer:fit
+        Args:
+            data:     
+        Returns:
+           
+        """
         assert data.shape[1] == len(self.ncat), "Data does not match the predefined number of variables."
         self.data = data
         self.values = np.zeros(data.shape[1])
@@ -26,6 +39,12 @@ class SimpleImputer:
         return self
 
     def transform(self, data):
+        """ SimpleImputer:transform
+        Args:
+            data:     
+        Returns:
+           
+        """
         data = data.copy()
         if data.ndim == 1:
             data = np.expand_dims(data, axis=0)

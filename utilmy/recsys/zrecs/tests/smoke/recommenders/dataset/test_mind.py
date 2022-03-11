@@ -59,6 +59,14 @@ from recommenders.datasets.mind import download_mind, extract_mind
     ],
 )
 def test_mind_url(url, content_length, etag):
+    """function test_mind_url
+    Args:
+        url:   
+        content_length:   
+        etag:   
+    Returns:
+        
+    """
     url_headers = requests.head(url).headers
     assert url_headers["Content-Length"] == content_length
     assert url_headers["ETag"] == etag
@@ -67,6 +75,13 @@ def test_mind_url(url, content_length, etag):
 @pytest.mark.smoke
 @pytest.mark.parametrize("size", [("demo"), ("small")])
 def test_extract_mind(size, tmp):
+    """function test_extract_mind
+    Args:
+        size:   
+        tmp:   
+    Returns:
+        
+    """
     train_zip, valid_zip = download_mind(size, dest_path=tmp)
     train_path, valid_path = extract_mind(train_zip, valid_zip, clean_zip_file=False)
 

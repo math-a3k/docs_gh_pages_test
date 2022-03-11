@@ -22,6 +22,12 @@ import core_models.utils as utils
 import warnings
 
 def main(args):
+    """function main
+    Args:
+        args:   
+    Returns:
+        
+    """
 
     # Load datasets
     train_loader, X_train, target_errors_train, dataset_obj_train, attributes = utils.load_data(args.data_folder, args.batch_size,

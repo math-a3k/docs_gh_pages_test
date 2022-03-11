@@ -7,9 +7,19 @@ import pandas
 df = pandas.DataFrame([[3,4,5]*100, [5,2,1]*100])
 df.apply(lambda x: x**3)
 def sleep_one_seconds():
+    """function sleep_one_seconds
+    Args:
+    Returns:
+        
+    """
     time.sleep(1)
 
 def sleep_two_seconds():
+    """function sleep_two_seconds
+    Args:
+    Returns:
+        
+    """
     time.sleep(2)
 
 goodnight()
@@ -19,6 +29,11 @@ for i in range(10):
 bar()
 
 def foo():
+    """function foo
+    Args:
+    Returns:
+        
+    """
     time.sleep(2)
 
 foo()

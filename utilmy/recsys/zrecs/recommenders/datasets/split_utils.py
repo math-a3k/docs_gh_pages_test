@@ -125,6 +125,14 @@ def min_rating_filter_spark(
 
 
 def _get_column_name(name, col_user, col_item):
+    """function _get_column_name
+    Args:
+        name:   
+        col_user:   
+        col_item:   
+    Returns:
+        
+    """
     if name == "user":
         return col_user
     elif name == "item":

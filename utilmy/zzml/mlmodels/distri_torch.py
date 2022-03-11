@@ -145,6 +145,12 @@ optimizer = hvd.DistributedOptimizer(
 
 
 def train(epoch):
+    """function train
+    Args:
+        epoch:   
+    Returns:
+        
+    """
     model.train()
     # Horovod: set epoch to sampler for shuffling.
     train_sampler.set_epoch(epoch)
@@ -172,12 +178,24 @@ def train(epoch):
 
 
 def metric_average(val, name):
+    """function metric_average
+    Args:
+        val:   
+        name:   
+    Returns:
+        
+    """
     tensor = torch.tensor(val)
     avg_tensor = hvd.allreduce(tensor, name=name)
     return avg_tensor.item()
 
 
 def test():
+    """function test
+    Args:
+    Returns:
+        
+    """
     model.eval()
     test_loss = 0.0
     test_accuracy = 0.0

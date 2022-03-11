@@ -16,6 +16,14 @@ ABS_TOL = 0.05
 
 @pytest.mark.smoke
 def test_sar_single_node_smoke(notebooks, output_notebook, kernel_name):
+    """function test_sar_single_node_smoke
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["sar_single_node"]
     pm.execute_notebook(
         notebook_path,
@@ -35,6 +43,14 @@ def test_sar_single_node_smoke(notebooks, output_notebook, kernel_name):
 
 @pytest.mark.smoke
 def test_baseline_deep_dive_smoke(notebooks, output_notebook, kernel_name):
+    """function test_baseline_deep_dive_smoke
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["baseline_deep_dive"]
     pm.execute_notebook(
         notebook_path,
@@ -58,6 +74,14 @@ def test_baseline_deep_dive_smoke(notebooks, output_notebook, kernel_name):
 
 @pytest.mark.smoke
 def test_surprise_svd_smoke(notebooks, output_notebook, kernel_name):
+    """function test_surprise_svd_smoke
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["surprise_svd_deep_dive"]
     pm.execute_notebook(
         notebook_path,
@@ -82,6 +106,14 @@ def test_surprise_svd_smoke(notebooks, output_notebook, kernel_name):
 @pytest.mark.smoke
 @pytest.mark.skip(reason="VW pip package has installation incompatibilities")
 def test_vw_deep_dive_smoke(notebooks, output_notebook, kernel_name):
+    """function test_vw_deep_dive_smoke
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["vowpal_wabbit_deep_dive"]
     pm.execute_notebook(
         notebook_path,
@@ -105,6 +137,14 @@ def test_vw_deep_dive_smoke(notebooks, output_notebook, kernel_name):
 
 @pytest.mark.smoke
 def test_lightgbm_quickstart_smoke(notebooks, output_notebook, kernel_name):
+    """function test_lightgbm_quickstart_smoke
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["lightgbm_quickstart"]
     pm.execute_notebook(
         notebook_path,
@@ -135,6 +175,14 @@ def test_lightgbm_quickstart_smoke(notebooks, output_notebook, kernel_name):
 
 @pytest.mark.smoke
 def test_cornac_bpr_smoke(notebooks, output_notebook, kernel_name):
+    """function test_cornac_bpr_smoke
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["cornac_bpr_deep_dive"]
     pm.execute_notebook(
         notebook_path,
@@ -154,6 +202,15 @@ def test_cornac_bpr_smoke(notebooks, output_notebook, kernel_name):
 
 @pytest.mark.smoke
 def test_mind_utils(notebooks, output_notebook, kernel_name, tmp):
+    """function test_mind_utils
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+        tmp:   
+    Returns:
+        
+    """
     notebook_path = notebooks["mind_utils"]
     MOVIELENS_SAMPLE_SIZE = 5
     pm.execute_notebook(

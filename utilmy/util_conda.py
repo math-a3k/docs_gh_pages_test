@@ -10,6 +10,11 @@ HELP = """ utils for conda/pip
 from utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print( HELP + help_create(MNAME) )
 

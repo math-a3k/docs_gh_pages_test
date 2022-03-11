@@ -21,6 +21,13 @@ from mlmodels.util import os_package_root_path, log
 
 ####################################################################################################
 def _config_process(data_path, config_mode="test"):
+    """function _config_process
+    Args:
+        data_path:   
+        config_mode:   
+    Returns:
+        
+    """
     data_path = Path(os.path.realpath(
         __file__)).parent.parent / "model_gluon/gluon_deepar.json" if data_path == "dataset/" else data_path
 
@@ -47,6 +54,17 @@ def fit(model, sess=None, data_pars=None, model_pars=None, compute_pars=None, ou
 
     # Model predict
 def predict(model, sess=None, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
+        """function predict
+        Args:
+            model:   
+            sess:   
+            data_pars:   
+            compute_pars:   
+            out_pars:   
+            **kwargs:   
+        Returns:
+            
+        """
         ##  Model is class
         ## load test dataset
         data_pars['train'] = False
@@ -77,6 +95,16 @@ def predict(model, sess=None, data_pars=None, compute_pars=None, out_pars=None, 
 
 
 def metrics(ypred, data_pars, compute_pars=None, out_pars=None, **kwargs):
+        """function metrics
+        Args:
+            ypred:   
+            data_pars:   
+            compute_pars:   
+            out_pars:   
+            **kwargs:   
+        Returns:
+            
+        """
         ## load test dataset
         data_pars['train'] = False
         test_ds = get_dataset(data_pars)
@@ -96,18 +124,38 @@ def metrics(ypred, data_pars, compute_pars=None, out_pars=None, **kwargs):
 # save and load model helper function
 class Model_empty(object):
     def __init__(self, model_pars=None, compute_pars=None):
+        """ Model_empty:__init__
+        Args:
+            model_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         ## Empty model for Seaialization
         self.model = None
 
 
 
 def save(model, path):
+    """function save
+    Args:
+        model:   
+        path:   
+    Returns:
+        
+    """
     if os.path.exists(path):
         model.model.serialize(Path(path))
 
 
 
 def load(path):
+    """function load
+    Args:
+        path:   
+    Returns:
+        
+    """
     if os.path.exists(path):
         predictor_deserialized = Predictor.deserialize(Path(path))
 
@@ -120,6 +168,12 @@ def load(path):
 
 # Dataaset
 def get_dataset(data_pars):
+    """function get_dataset
+    Args:
+        data_pars:   
+    Returns:
+        
+    """
     ##check whether dataset is of kind train or test
     data_path = data_pars['train_data_path'] if data_pars['train'] else data_pars['test_data_path']
 
@@ -148,6 +202,13 @@ def get_dataset(data_pars):
 ###############################################################################################################
 ### different plots and output metric
 def plot_prob_forecasts(ypred, out_pars=None):
+    """function plot_prob_forecasts
+    Args:
+        ypred:   
+        out_pars:   
+    Returns:
+        
+    """
     forecast_entry = ypred["forecasts"][0]
     ts_entry = ypred["tss"][0]
 
@@ -164,6 +225,13 @@ def plot_prob_forecasts(ypred, out_pars=None):
 
 
 def plot_predict(item_metrics, out_pars=None):
+    """function plot_predict
+    Args:
+        item_metrics:   
+        out_pars:   
+    Returns:
+        
+    """
     item_metrics.plot(x='MSIS', y='MASE', kind='scatter')
     plt.grid(which="both")
     outpath = out_pars['outpath']

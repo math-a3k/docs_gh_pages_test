@@ -335,6 +335,12 @@ class BaseModel:
         return res
 
     def user(self, batch_user_input):
+        """ BaseModel:user
+        Args:
+            batch_user_input:     
+        Returns:
+           
+        """
         user_input = self._get_user_feature_from_iter(batch_user_input)
         user_vec = self.userencoder.predict_on_batch(user_input)
         user_index = batch_user_input["impr_index_batch"]
@@ -342,6 +348,12 @@ class BaseModel:
         return user_index, user_vec
 
     def news(self, batch_news_input):
+        """ BaseModel:news
+        Args:
+            batch_news_input:     
+        Returns:
+           
+        """
         news_input = self._get_news_feature_from_iter(batch_news_input)
         news_vec = self.newsencoder.predict_on_batch(news_input)
         news_index = batch_news_input["news_index_batch"]
@@ -349,6 +361,13 @@ class BaseModel:
         return news_index, news_vec
 
     def run_user(self, news_filename, behaviors_file):
+        """ BaseModel:run_user
+        Args:
+            news_filename:     
+            behaviors_file:     
+        Returns:
+           
+        """
         if not hasattr(self, "userencoder"):
             raise ValueError("model must have attribute userencoder")
 
@@ -364,6 +383,12 @@ class BaseModel:
         return dict(zip(user_indexes, user_vecs))
 
     def run_news(self, news_filename):
+        """ BaseModel:run_news
+        Args:
+            news_filename:     
+        Returns:
+           
+        """
         if not hasattr(self, "newsencoder"):
             raise ValueError("model must have attribute newsencoder")
 
@@ -379,6 +404,13 @@ class BaseModel:
         return dict(zip(news_indexes, news_vecs))
 
     def run_slow_eval(self, news_filename, behaviors_file):
+        """ BaseModel:run_slow_eval
+        Args:
+            news_filename:     
+            behaviors_file:     
+        Returns:
+           
+        """
         preds = []
         labels = []
         imp_indexes = []
@@ -397,6 +429,13 @@ class BaseModel:
         return group_impr_indexes, group_labels, group_preds
 
     def run_fast_eval(self, news_filename, behaviors_file):
+        """ BaseModel:run_fast_eval
+        Args:
+            news_filename:     
+            behaviors_file:     
+        Returns:
+           
+        """
         news_vecs = self.run_news(news_filename)
         user_vecs = self.run_user(news_filename, behaviors_file)
 

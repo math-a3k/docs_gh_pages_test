@@ -113,36 +113,81 @@ logger_setup(log_config_path=LOG_CONFIG_PATH, log_template=LOG_TEMPLATE)
 ##### Alias ###########################################################################
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.opt(depth=1, lazy=True).info(",".join([str(t) for t in s]))
 
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.opt(depth=1, lazy=True).debug(",".join([str(t) for t in s]))
 
 
 def log3(*s):  ### Debuggine level 2
-    # to enable debug2 logs set level: TRACE in config_log.yaml
-    logger.opt(depth=1, lazy=True).log("DEBUG_2", ",".join([str(t) for t in s]))
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
 
 
 def logw(*s):
+    """function logw
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.opt(depth=1, lazy=True).warning(",".join([str(t) for t in s]))
 
 
 def logc(*s):
+    """function logc
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.opt(depth=1, lazy=True).critical(",".join([str(t) for t in s]))
 
 
 def loge(*s):
+    """function loge
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.opt(depth=1, lazy=True).exception(",".join([str(t) for t in s]))
 
 
 def logr(*s):
+    """function logr
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.opt(depth=1, lazy=True).error(",".join([str(t) for t in s]))
 
 
 #########################################################################################
 def test():
+    """function test
+    Args:
+    Returns:
+        
+    """
     log3("debug2")
     log2("debug")
     log("info")
@@ -185,6 +230,11 @@ def z_logger_stdout_override():
 
 
 def z_logger_custom_1():
+    """function z_logger_custom_1
+    Args:
+    Returns:
+        
+    """
     import logging
     import sys
     from pprint import pformat

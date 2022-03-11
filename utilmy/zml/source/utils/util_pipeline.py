@@ -15,6 +15,15 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 
 
 def pd_pipeline(bin_cols, text_col, X,y ):
+  """function pd_pipeline
+  Args:
+      bin_cols:   
+      text_col:   
+      X:   
+      y:   
+  Returns:
+      
+  """
   bin_pipe = Pipeline([
     ('select_bin', MySelector(cols=bin_cols)),
     ('binarize', MyBinarizer())
@@ -60,6 +69,14 @@ pg = [
 
 
 def pd_grid_search(full_pipeline,X, y):
+  """function pd_grid_search
+  Args:
+      full_pipeline:   
+      X:   
+      y:   
+  Returns:
+      
+  """
   X_train, X_test, y_train, y_test = train_test_split(X, y)
   grid_search = GridSearchCV(full_pipeline, param_grid=pg, cv=3)
 

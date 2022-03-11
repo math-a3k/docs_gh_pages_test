@@ -108,6 +108,14 @@ if not os_variable_exist( "X_transform" ,globals()) :
 
 
 def create_metrics_summary(path_model, im=40, verbose=True):
+   """function create_metrics_summary
+   Args:
+       path_model:   
+       im:   
+       verbose:   
+   Returns:
+       
+   """
    import matplotlib.pyplot as plt 
    path_model = path_model + "/"
    to_path    = path_model + "/metrics/"
@@ -145,6 +153,17 @@ def create_metrics_summary(path_model, im=40, verbose=True):
 
 
 def create_mae_summary( path , path_modelgroup, tag="", ytarget="porder_s2", agg_level= None, verbose=True) :
+    """function create_mae_summary
+    Args:
+        path:   
+        path_modelgroup:   
+        tag:   
+        ytarget:   
+        agg_level:   
+        verbose:   
+    Returns:
+        
+    """
     import json
     to_path = path # path +"/metrics/"
     dfea    = pd.read_csv(to_path + "/df_error_out.csv" )
@@ -183,6 +202,16 @@ def create_mae_summary( path , path_modelgroup, tag="", ytarget="porder_s2", agg
 
 
 def pd_check_na(name, dfXy, verbose = False, debug=False, train_path="ztmp/") :
+  """function pd_check_na
+  Args:
+      name:   
+      dfXy:   
+      verbose :   
+      debug:   
+      train_path:   
+  Returns:
+      
+  """
   log(name, "checking")
   # if verbose :  log_pd(dfXy, n_tail=10)
   # if debug :    dfXy.to_csv( train_path + f"/debug_{name}.csv" )  
@@ -195,6 +224,15 @@ def pd_check_na(name, dfXy, verbose = False, debug=False, train_path="ztmp/") :
 
 
 def train_enhance(dfi, colsref, ytarget, n_sample=5):
+    """function train_enhance
+    Args:
+        dfi:   
+        colsref:   
+        ytarget:   
+        n_sample:   
+    Returns:
+        
+    """
     return dfi
     import copy
     ### Cardianl date X n_item : for missing dates    
@@ -219,6 +257,12 @@ def train_enhance(dfi, colsref, ytarget, n_sample=5):
 
     
 def add_dates(df):
+    """function add_dates
+    Args:
+        df:   
+    Returns:
+        
+    """
     return df
     #### new date
     """

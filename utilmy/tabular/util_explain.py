@@ -27,6 +27,11 @@ from numpy import ndarray
 from typing import List, Optional, Tuple, Union
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print( HELP + help_create(MNAME) )
 
@@ -34,12 +39,22 @@ def help():
 
 #############################################################################################
 def test_all() -> None:
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     log(MNAME)
     test1()
     test2()
 
 
 def test1() -> None:
+    """function test1
+    Args:
+    Returns:
+        
+    """
     d = Box({})
     d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_regression_boston()
     d.task_type = 'regressor'
@@ -75,6 +90,11 @@ def test1() -> None:
 
 
 def test2() -> None:
+    """function test2
+    Args:
+    Returns:
+        
+    """
     d = Box({})
     d.X_train, d.X_test, d.y_train, d.y_test, d.feat_names = test_data_classifier_diabetes()
     d.task_type = 'classifier'
@@ -380,10 +400,27 @@ def model_evaluate(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor],
 
 
 def model_predict(model, predict_pars:dict):
+    """function model_predict
+    Args:
+        model:   
+        predict_pars ( dict ) :   
+    Returns:
+        
+    """
     pass
 
 
 def model_save(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor], path: Optional[str]=None, info: None=None) -> None:
+    """function model_save
+    Args:
+        model (  Union[RuleFitRegressor ) :   
+        FIGSRegressor:   
+        SLIMRegressor]:   
+        path (  Optional[str] ) :   
+        info (  None ) :   
+    Returns:
+        
+    """
     import cloudpickle as pickle
     os.makedirs(path, exist_ok=True)
     filename = "model.pkl"
@@ -395,12 +432,24 @@ def model_save(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor], pat
 
 
 def model_load(path: str="") -> Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor]:
+    """function model_load
+    Args:
+        path (  str ) :   
+    Returns:
+        
+    """
     import cloudpickle as pickle
     model0 = pickle.load(open(f"{path}/model.pkl", mode='rb'))
     return model0
 
 
 def model_info(path=""):
+    """function model_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle
     model0 = pickle.load(open(f"{path}/info.pkl", mode='rb'))
     return model0

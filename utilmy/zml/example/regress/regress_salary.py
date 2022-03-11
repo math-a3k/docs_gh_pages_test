@@ -20,6 +20,14 @@ from source.util_feature import save,os_get_function_name
 
 
 def global_pars_update(model_dict,  data_name, config_name):
+    """function global_pars_update
+    Args:
+        model_dict:   
+        data_name:   
+        config_name:   
+    Returns:
+        
+    """
     print("config_name", config_name)
     dir_data  = root_repo + "/data/"  ; print("dir_data", dir_data)
 
@@ -83,6 +91,14 @@ cols_input_type_1 = {
 
 ####### y normalization #############################################################   
 def y_norm(y, inverse=True, mode='boxcox'):
+    """function y_norm
+    Args:
+        y:   
+        inverse:   
+        mode:   
+    Returns:
+        
+    """
     ## Normalize the input/output
     if mode == 'boxcox':
         width0 = 53.0  # 0,1 factor
@@ -173,6 +189,12 @@ def salary_lightgbm(path_model_out="") :
 
  
 def salary_elasticnetcv(path_model_out=""):
+    """function salary_elasticnetcv
+    Args:
+        path_model_out:   
+    Returns:
+        
+    """
     global model_name
     model_name        = 'ElasticNetCV'
 
@@ -223,6 +245,12 @@ def salary_elasticnetcv(path_model_out=""):
 
 
 def salary_bayesian_pyro(path_model_out="") :
+    """function salary_bayesian_pyro
+    Args:
+        path_model_out:   
+    Returns:
+        
+    """
     global model_name
     model_name        = 'model_bayesian_pyro'
     def post_process_fun(y):
@@ -275,6 +303,12 @@ def salary_bayesian_pyro(path_model_out="") :
 
 
 def salary_glm( path_model_out="") :
+    """function salary_glm
+    Args:
+        path_model_out:   
+    Returns:
+        
+    """
     global model_name
     model_name        = 'TweedieRegressor'
     def post_process_fun(y):
@@ -340,6 +374,11 @@ from core_run import train
 ###################################################################################
 ######### Check data ##############################################################
 def check():
+   """function check
+   Args:
+   Returns:
+       
+   """
    pass
 
 

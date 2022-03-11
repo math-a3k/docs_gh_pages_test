@@ -22,22 +22,52 @@ from utilmy import global_verbosity, os_makedirs, pd_read_file
 verbosity = global_verbosity(__file__,"/../../config.json", 3 )
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 ####################################################################################################
 global model, session
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
@@ -88,6 +118,14 @@ MODEL_LIST      = {'TVAE'           : TVAE,
 ############### Model #########################################################################
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
 
         if model_pars is None:
@@ -203,6 +241,16 @@ def transform(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
 
 
 def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     pass
     ### No need
@@ -210,6 +258,13 @@ def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
 
 #################### util #############################################################
 def save(path=None, info=None):
+    """function save
+    Args:
+        path:   
+        info:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     os.makedirs(path, exist_ok=True)
@@ -222,6 +277,12 @@ def save(path=None, info=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     model0 = pickle.load(open(f"{path}/model.pkl", mode='rb'))
@@ -235,6 +296,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -319,6 +386,11 @@ def get_dataset(data_pars=None, task_type="train", **kw):
 ##################################################################################################################
 ###################### test ######################################################################################
 def test():
+    """function test
+    Args:
+    Returns:
+        
+    """
     from sklearn.datasets import make_classification
     from sklearn.model_selection import train_test_split
 
@@ -421,6 +493,12 @@ def test():
 
 
 def test2(n_sample = 1000):
+    """function test2
+    Args:
+        n_sample :   
+    Returns:
+        
+    """
     #df, colnum, colcat, coly = test_dataset_classi_fake(nrows= n_sample)
     #X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes  = train_test_split2(df, coly)
 
@@ -487,6 +565,14 @@ def test2(n_sample = 1000):
 
 
 def test_helper(model_pars, data_pars, compute_pars):
+    """function test_helper
+    Args:
+        model_pars:   
+        data_pars:   
+        compute_pars:   
+    Returns:
+        
+    """
     global model, session
     root  = "ztmp/"
     model = Model(model_pars=model_pars, data_pars=data_pars, compute_pars=compute_pars)
@@ -755,6 +841,11 @@ def zz_pd_covariate_shift_adjustment():
 ########################################################################################
 ########################################################################################
 def zz_test():
+    """function zz_test
+    Args:
+    Returns:
+        
+    """
     from util_feature import test_get_classification_data
     dfX, dfy = test_get_classification_data()
     cols     = list(dfX.columsn)

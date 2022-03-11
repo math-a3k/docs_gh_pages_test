@@ -19,6 +19,15 @@ import uuid
 #############################################################################################
 # print("os.getcwd", os.getcwd())
 def log(*s, n=0, m=1, **kw):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+        **kw:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
 
@@ -27,6 +36,12 @@ def log(*s, n=0, m=1, **kw):
 
 class dict2(object):
     def __init__(self, d):
+        """ dict2:__init__
+        Args:
+            d:     
+        Returns:
+           
+        """
         self.__dict__ = d
 
 
@@ -85,9 +100,22 @@ df.to_parquet('/users/nick/desktop/test.parquet',
 
     """
     def __init__(self, *args, **kw):
+        """ dictLazy:__init__
+        Args:
+            *args:     
+            **kw:     
+        Returns:
+           
+        """
         self._raw_dict = dict(*args, **kw)
 
     def __getitem__(self, key):
+        """ dictLazy:__getitem__
+        Args:
+            key:     
+        Returns:
+           
+        """
         if key.startswith('#'):
             path = self._raw_dict.__getitem__(key)
 
@@ -104,9 +132,19 @@ df.to_parquet('/users/nick/desktop/test.parquet',
             return self._raw_dict.__getitem__(key)
 
     def __iter__(self):
+        """ dictLazy:__iter__
+        Args:
+        Returns:
+           
+        """
         return iter(self._raw_dict)
 
     def __len__(self):
+        """ dictLazy:__len__
+        Args:
+        Returns:
+           
+        """
         return len(self._raw_dict)
 
 
@@ -129,6 +167,16 @@ def pd_to_scipy_sparse_matrix(df):
 
 
 def pd_to_keyvalue_dict(dfa, colkey= [ "shop_id", "l2_genre_id" ]   , col_list='item_id',  to_file=""):
+    """function pd_to_keyvalue_dict
+    Args:
+        dfa:   
+        colkey:   
+        "l2_genre_id" ]:   
+        col_list:   
+        to_file:   
+    Returns:
+        
+    """
     import copy, pickle
     dfa = copy.deepcopy(dfa)
     def to_key(x):
@@ -188,16 +236,33 @@ FORMATTER_5 = logging.Formatter(
 
 #########################################################################################
 def create_appid(filename):
+    """function create_appid
+    Args:
+        filename:   
+    Returns:
+        
+    """
     # appid  = filename + ',' + str(os.getpid()) + ',' + str( socket.gethostname() )
     appid = filename + "," + str(os.getpid())
     return appid
 
 
 def create_logfilename(filename):
+    """function create_logfilename
+    Args:
+        filename:   
+    Returns:
+        
+    """
     return filename.split("/")[-1].split(".")[0] + ".log"
 
 
 def create_uniqueid():
+    """function create_uniqueid
+    Args:
+    Returns:
+        
+    """
     return datetime.datetime.now().strftime(  "_%Y%m%d%H%M%S_"  )   + str(random.randint(1000, 9999))
     # return arrow.utcnow().to("Japan").format("_YYYYMMDDHHmmss_") + str(random.randint(1000, 9999))
 
@@ -217,6 +282,13 @@ class logger_class(object):
 
     """
     def __init__(self, config_file=None, verbose=True) :
+        """ logger_class:__init__
+        Args:
+            config_file:     
+            verbose:     
+        Returns:
+           
+        """
         self.config     = self.load_config(config_file)
         if verbose: print(self.config)
         d = self.config['logger_config']
@@ -225,6 +297,12 @@ class logger_class(object):
 
 
     def load_config(self, config_file_path=None) :
+        """ logger_class:load_config
+        Args:
+            config_file_path:     
+        Returns:
+           
+        """
         try :
             if config_file_path is None :
                 config_file_path = 'config.yaml'
@@ -237,11 +315,25 @@ class logger_class(object):
 
 
     def log(self,*s, level=1) :
+        """ logger_class:log
+        Args:
+            *s:     
+            level:     
+        Returns:
+           
+        """
         if level <= self.level_max : 
             self.logger.info(*s)
 
 
     def debug(self,*s, level=1) :
+        """ logger_class:debug
+        Args:
+            *s:     
+            level:     
+        Returns:
+           
+        """
         if level <= self.level_max : 
             self.logger.debug(*s)
 
@@ -282,6 +374,12 @@ def logger_setup(logger_name=None, log_file=None, formatter='FORMATTER_0', isrot
 
 
 def logger_handler_console(formatter=None):
+    """function logger_handler_console
+    Args:
+        formatter:   
+    Returns:
+        
+    """
     formatter = FORMATTER_1 if formatter is None else formatter
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(formatter)
@@ -289,6 +387,15 @@ def logger_handler_console(formatter=None):
 
 
 def logger_handler_file(isrotate=False, rotate_time="midnight", formatter=None, log_file_used=None):
+    """function logger_handler_file
+    Args:
+        isrotate:   
+        rotate_time:   
+        formatter:   
+        log_file_used:   
+    Returns:
+        
+    """
     formatter = FORMATTER_1 if formatter is None else formatter
     log_file_used = LOG_FILE if log_file_used is None else log_file_used
     if isrotate:
@@ -303,6 +410,13 @@ def logger_handler_file(isrotate=False, rotate_time="midnight", formatter=None, 
 
 
 def logger_setup2(name=__name__, level=None):
+    """function logger_setup2
+    Args:
+        name:   
+        level:   
+    Returns:
+        
+    """
     _ = level
 
     # logger defines
@@ -320,6 +434,11 @@ def logger_setup2(name=__name__, level=None):
 
 ###########################################################################################################
 def test_log():
+    """function test_log
+    Args:
+    Returns:
+        
+    """
     logger =logger_class(verbose=True)
 
     def log(*s):
@@ -454,10 +573,20 @@ class Downloader:
         self.adjust_url()
 
     def clean_netloc(self):
+        """ Downloader:clean_netloc
+        Args:
+        Returns:
+           
+        """
         clean_netloc = re.sub(r'^www\.', '', self.parsed.netloc)
         self.parsed = self.parsed._replace(netloc=clean_netloc)
 
     def adjust_url(self):
+        """ Downloader:adjust_url
+        Args:
+        Returns:
+           
+        """
         if self.parsed.netloc == self.GITHUB_NETLOC:
             self._transform_github_url()
         elif self.parsed.netloc == self.GDRIVE_NETLOC:
@@ -528,6 +657,12 @@ class Downloader:
 
 ####################################################################################
 def load_dataset_generator(data_pars):
+  """function load_dataset_generator
+  Args:
+      data_pars:   
+  Returns:
+      
+  """
   def sent_generator(TRAIN_DATA_FILE, chunksize):
       import pandas as pd
       reader = pd.read_csv(TRAIN_DATA_FILE, chunksize=chunksize, iterator=True)

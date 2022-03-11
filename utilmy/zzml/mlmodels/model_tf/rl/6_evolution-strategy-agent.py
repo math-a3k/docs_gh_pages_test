@@ -22,6 +22,11 @@ sns.set()
 
 
 def get_imports():
+    """function get_imports
+    Args:
+    Returns:
+        
+    """
     for name, val in globals().items():
         if isinstance(val, types.ModuleType):
             name = val.__name__.split(".")[0]
@@ -44,6 +49,16 @@ class Deep_Evolution_Strategy:
     inputs = None
 
     def __init__(self, weights, reward_function, population_size, sigma, learning_rate):
+        """ Deep_Evolution_Strategy:__init__
+        Args:
+            weights:     
+            reward_function:     
+            population_size:     
+            sigma:     
+            learning_rate:     
+        Returns:
+           
+        """
         self.weights = weights
         self.reward_function = reward_function
         self.population_size = population_size
@@ -51,6 +66,13 @@ class Deep_Evolution_Strategy:
         self.learning_rate = learning_rate
 
     def _get_weight_from_population(self, weights, population):
+        """ Deep_Evolution_Strategy:_get_weight_from_population
+        Args:
+            weights:     
+            population:     
+        Returns:
+           
+        """
         weights_population = []
         for index, i in enumerate(population):
             jittered = self.sigma * i
@@ -58,9 +80,26 @@ class Deep_Evolution_Strategy:
         return weights_population
 
     def get_weights(self):
+        """ Model:get_weights
+        Args:
+        Returns:
+           
+        """
+        """ Deep_Evolution_Strategy:get_weights
+        Args:
+        Returns:
+           
+        """
         return self.weights
 
     def train(self, epoch=100, print_every=1):
+        """ Deep_Evolution_Strategy:train
+        Args:
+            epoch:     
+            print_every:     
+        Returns:
+           
+        """
         lasttime = time.time()
         for i in range(epoch):
             population = []
@@ -89,6 +128,19 @@ class Deep_Evolution_Strategy:
 
 class Model:
     def __init__(self, input_size, layer_size, output_size, window_size, skip, initial_money,iterations=500, checkpoint=10):
+        """ Model:__init__
+        Args:
+            input_size:     
+            layer_size:     
+            output_size:     
+            window_size:     
+            skip:     
+            initial_money:     
+            iterations:     
+            checkpoint:     
+        Returns:
+           
+        """
         self.weights = [
             np.random.randn(input_size, layer_size),
             np.random.randn(layer_size, output_size),
@@ -101,6 +153,12 @@ class Model:
         )
 
     def predict(self, inputs):
+        """ Model:predict
+        Args:
+            inputs:     
+        Returns:
+           
+        """
         feed = np.dot(inputs, self.weights[0]) + self.weights[-1]
         decision = np.dot(feed, self.weights[1])
         return decision
@@ -109,6 +167,12 @@ class Model:
         return self.weights
 
     def set_weights(self, weights):
+        """ Model:set_weights
+        Args:
+            weights:     
+        Returns:
+           
+        """
         self.weights = weights
 
 
@@ -122,6 +186,16 @@ class Agent:
     LEARNING_RATE = 0.03
 
     def __init__(self, model, window_size, trend, skip, initial_money):
+        """ Agent:__init__
+        Args:
+            model:     
+            window_size:     
+            trend:     
+            skip:     
+            initial_money:     
+        Returns:
+           
+        """
         self.model = model
         self.window_size = window_size
         self.half_window = window_size // 2
@@ -137,10 +211,22 @@ class Agent:
         )
 
     def act(self, sequence):
+        """ Agent:act
+        Args:
+            sequence:     
+        Returns:
+           
+        """
         decision = self.model.predict(np.array(sequence))
         return np.argmax(decision[0])
 
     def get_state(self, t):
+        """ Agent:get_state
+        Args:
+            t:     
+        Returns:
+           
+        """
         window_size = self.window_size + 1
         d = t - window_size + 1
         block = self.trend[d : t + 1] if d >= 0 else -d * [self.trend[0]] + self.trend[0 : t + 1]
@@ -150,6 +236,12 @@ class Agent:
         return np.array([res])
 
     def get_reward(self, weights):
+        """ Agent:get_reward
+        Args:
+            weights:     
+        Returns:
+           
+        """
         initial_money = self.initial_money
         starting_money = initial_money
         self.model.weights = weights
@@ -172,9 +264,22 @@ class Agent:
         return ((starting_money - initial_money) / initial_money) * 100
 
     def fit(self, iterations, checkpoint):
+        """ Agent:fit
+        Args:
+            iterations:     
+            checkpoint:     
+        Returns:
+           
+        """
         self.es.train(iterations, print_every=checkpoint)
 
     def run_sequence(self, df_test):
+        """ Agent:run_sequence
+        Args:
+            df_test:     
+        Returns:
+           
+        """
         initial_money = self.initial_money
         state = self.get_state(0)
         starting_money = initial_money
@@ -213,6 +318,14 @@ class Agent:
         return states_buy, states_sell, total_gains, invest
 
 def fit(model, dftrain,  params={}):
+    """function fit
+    Args:
+        model:   
+        dftrain:   
+        params:   
+    Returns:
+        
+    """
     agent = model.agent
     agent.trend = dftrain
     agent.fit(model.iterations, model.checkpoint)
@@ -221,6 +334,15 @@ def fit(model, dftrain,  params={}):
 
 
 def predict(model, sess, dftest, params={}):
+    """function predict
+    Args:
+        model:   
+        sess:   
+        dftest:   
+        params:   
+    Returns:
+        
+    """
     res = model.agent.run_sequence(dftest ) #TODO needs an example function to work
     return res
 
@@ -230,10 +352,22 @@ def predict(model, sess, dftest, params={}):
 #https://stackoverflow.com/questions/2597278/python-load-variables-in-a-dict-into-namespace
 class to_name(object):
   def __init__(self, adict):
+    """ to_name:__init__
+    Args:
+        adict:     
+    Returns:
+       
+    """
     self.__dict__.update(adict)
 
 
 def test(filename= '../dataset/GOOG-year.csv'):
+    """function test
+    Args:
+        filename:   
+    Returns:
+        
+    """
     df = pd.read_csv(filename)
     close = df.Close.values.tolist()
     

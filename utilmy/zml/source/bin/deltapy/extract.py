@@ -33,6 +33,12 @@ def set_property(key, value):
 
 #-> In Package
 def abs_energy(x):
+    """function abs_energy
+    Args:
+        x:   
+    Returns:
+        
+    """
 
     if not isinstance(x, (np.ndarray, pd.Series)):
         x = np.asarray(x)
@@ -45,6 +51,13 @@ def abs_energy(x):
 
 #-> In Package
 def cid_ce(x, normalize):
+    """function cid_ce
+    Args:
+        x:   
+        normalize:   
+    Returns:
+        
+    """
 
     if not isinstance(x, (np.ndarray, pd.Series)):
         x = np.asarray(x)
@@ -65,6 +78,12 @@ def cid_ce(x, normalize):
 
 #-> In Package
 def mean_abs_change(x):
+    """function mean_abs_change
+    Args:
+        x:   
+    Returns:
+        
+    """
     return np.mean(np.abs(np.diff(x)))
 
 # mean_abs_change(df["Close"])
@@ -74,12 +93,25 @@ def mean_abs_change(x):
 
 #-> In Package
 def _roll(a, shift):
+    """function _roll
+    Args:
+        a:   
+        shift:   
+    Returns:
+        
+    """
     if not isinstance(a, np.ndarray):
         a = np.asarray(a)
     idx = shift % len(a)
     return np.concatenate([a[-idx:], a[:-idx]])
 
 def mean_second_derivative_central(x):
+    """function mean_second_derivative_central
+    Args:
+        x:   
+    Returns:
+        
+    """
 
     diff = (_roll(x, 1) - 2 * np.array(x) + _roll(x, -1)) / 2.0
     return np.mean(diff[1:-1])
@@ -91,6 +123,12 @@ def mean_second_derivative_central(x):
 
 #-> In Package
 def variance_larger_than_standard_deviation(x):
+    """function variance_larger_than_standard_deviation
+    Args:
+        x:   
+    Returns:
+        
+    """
 
     y = np.var(x)
     return y > np.sqrt(y)
@@ -104,6 +142,13 @@ var_index_param = {"Volume":None, "Open": None}
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def var_index(time,param=var_index_param):
+    """function var_index
+    Args:
+        time:   
+        param:   
+    Returns:
+        
+    """
     final = []
     keys = []
     for key, magnitude in param.items():
@@ -130,6 +175,13 @@ def var_index(time,param=var_index_param):
 
 #-> In Package
 def symmetry_looking(x, param=[{"r": 0.2}]):
+    """function symmetry_looking
+    Args:
+        x:   
+        param=[{"r":   
+    Returns:
+        
+    """
 
     if not isinstance(x, (np.ndarray, pd.Series)):
         x = np.asarray(x)
@@ -164,6 +216,13 @@ def has_duplicate_max(x):
 #-> In Package
 
 def partial_autocorrelation(x, param=[{"lag": 1}]):
+    """function partial_autocorrelation
+    Args:
+        x:   
+        param=[{"lag":   
+    Returns:
+        
+    """
 
     # Check the difference between demanded lags by param and possible lags to calculate (depends on len(x))
     max_demanded_lag = max([lag["lag"] for lag in param])
@@ -188,6 +247,13 @@ def partial_autocorrelation(x, param=[{"lag": 1}]):
 
 #-> In Package
 def augmented_dickey_fuller(x, param=[{"attr": "teststat"}]):
+    """function augmented_dickey_fuller
+    Args:
+        x:   
+        param=[{"attr":   
+    Returns:
+        
+    """
 
     res = None
     try:
@@ -212,6 +278,12 @@ def augmented_dickey_fuller(x, param=[{"attr": "teststat"}]):
 @set_property("fctype", "simple")
 @set_property("custom", True)
 def gskew(x):
+    """function gskew
+    Args:
+        x:   
+    Returns:
+        
+    """
     interpolation="nearest"
     median_mag = np.median(x)
     F_3_value = np.percentile(x, 3, interpolation=interpolation)
@@ -232,6 +304,13 @@ stestson_param = {"weight":100., "alpha":2., "beta":2., "tol":1.e-6, "nmax":20}
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def stetson_mean(x, param=stestson_param):
+    """function stetson_mean
+    Args:
+        x:   
+        param:   
+    Returns:
+        
+    """
     
     weight= stestson_param["weight"]
     alpha= stestson_param["alpha"]
@@ -259,6 +338,12 @@ def stetson_mean(x, param=stestson_param):
 
 #-> In Package
 def length(x):
+    """function length
+    Args:
+        x:   
+    Returns:
+        
+    """
     return len(x)
     
 # length(df["Close"])
@@ -268,6 +353,12 @@ def length(x):
 
 #-> In Package
 def count_above_mean(x):
+    """function count_above_mean
+    Args:
+        x:   
+    Returns:
+        
+    """
     m = np.mean(x)
     return np.where(x > m)[0].size
 
@@ -280,6 +371,12 @@ def count_above_mean(x):
 
 
 def get_length_sequences_where(x):
+    """function get_length_sequences_where
+    Args:
+        x:   
+    Returns:
+        
+    """
 
     if len(x) == 0:
         return [0]
@@ -288,6 +385,12 @@ def get_length_sequences_where(x):
         return res if len(res) > 0 else [0]
 
 def longest_strike_below_mean(x):
+    """function longest_strike_below_mean
+    Args:
+        x:   
+    Returns:
+        
+    """
 
     if not isinstance(x, (np.ndarray, pd.Series)):
         x = np.asarray(x)
@@ -302,6 +405,13 @@ woz_param = [{"consecutiveStar": n} for n in [2, 4]]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def wozniak(magnitude, param=woz_param):
+    """function wozniak
+    Args:
+        magnitude:   
+        param:   
+    Returns:
+        
+    """
 
     iters = []
     for consecutiveStar in [stars["consecutiveStar"] for stars in param]:
@@ -334,6 +444,12 @@ def wozniak(magnitude, param=woz_param):
 
 #-> In Package
 def last_location_of_maximum(x):
+    """function last_location_of_maximum
+    Args:
+        x:   
+    Returns:
+        
+    """
 
     x = np.asarray(x)
     return 1.0 - np.argmax(x[::-1]) / len(x) if len(x) > 0 else np.NaN
@@ -344,6 +460,14 @@ def last_location_of_maximum(x):
 
 #-> In Package
 def fft_coefficient(x, param = [{"coeff": 10, "attr": "real"}]):
+    """function fft_coefficient
+    Args:
+        x:   
+        param = [{"coeff":   
+        "attr" (  "real"}] ) :   
+    Returns:
+        
+    """
 
     assert min([config["coeff"] for config in param]) >= 0, "Coefficients must be positive or zero."
     assert set([config["attr"] for config in param]) <= set(["imag", "real", "abs", "angle"]), \
@@ -375,6 +499,14 @@ def fft_coefficient(x, param = [{"coeff": 10, "attr": "real"}]):
 
 
 def ar_coefficient(x, param=[{"coeff": 5, "k": 5}]):
+    """function ar_coefficient
+    Args:
+        x:   
+        param=[{"coeff":   
+        "k" (  5}] ) :   
+    Returns:
+        
+    """
 
     calculated_ar_params = {}
 
@@ -414,6 +546,13 @@ def ar_coefficient(x, param=[{"coeff": 5, "k": 5}]):
 
 #-> In Package
 def index_mass_quantile(x, param=[{"q": 0.3}]):
+    """function index_mass_quantile
+    Args:
+        x:   
+        param=[{"q":   
+    Returns:
+        
+    """
 
     x = np.asarray(x)
     abs_x = np.abs(x)
@@ -439,6 +578,13 @@ cwt_param = [ka for ka in [2,6,9]]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def number_cwt_peaks(x, param=cwt_param):
+    """function number_cwt_peaks
+    Args:
+        x:   
+        param:   
+    Returns:
+        
+    """
 
     return [("CWTPeak_{}".format(n), len(find_peaks_cwt(vector=x, widths=np.array(list(range(1, n + 1))), wavelet=ricker))) for n in param]
 
@@ -449,6 +595,13 @@ def number_cwt_peaks(x, param=cwt_param):
 
 #-> In Package
 def spkt_welch_density(x, param=[{"coeff": 5}]):
+    """function spkt_welch_density
+    Args:
+        x:   
+        param=[{"coeff":   
+    Returns:
+        
+    """
     freq, pxx = welch(x, nperseg=min(len(x), 256))
     coeff = [config["coeff"] for config in param]
     indices = ["coeff_{}".format(i) for i in coeff]
@@ -473,6 +626,13 @@ def spkt_welch_density(x, param=[{"coeff": 5}]):
 
 #-> In Package
 def linear_trend_timewise(x, param= [{"attr": "pvalue"}]):
+    """function linear_trend_timewise
+    Args:
+        x:   
+        param= [{"attr":   
+    Returns:
+        
+    """
 
     ix = x.index
 
@@ -493,6 +653,13 @@ def linear_trend_timewise(x, param= [{"attr": "pvalue"}]):
 
 #-> In Package
 def c3(x, lag=3):
+    """function c3
+    Args:
+        x:   
+        lag:   
+    Returns:
+        
+    """
     if not isinstance(x, (np.ndarray, pd.Series)):
         x = np.asarray(x)
     n = x.size
@@ -508,6 +675,13 @@ def c3(x, lag=3):
 
 #-> In Package
 def binned_entropy(x, max_bins=10):
+    """function binned_entropy
+    Args:
+        x:   
+        max_bins:   
+    Returns:
+        
+    """
     if not isinstance(x, (np.ndarray, pd.Series)):
         x = np.asarray(x)
     hist, bin_edges = np.histogram(x, bins=max_bins)
@@ -525,6 +699,14 @@ svd_param = [{"Tau": ta, "DE": de}
                       for de in [3,6]]
                       
 def _embed_seq(X,Tau,D):
+  """function _embed_seq
+  Args:
+      X:   
+      Tau:   
+      D:   
+  Returns:
+      
+  """
   N =len(X)
   if D * Tau > N:
       print("Cannot build such a matrix, because D * Tau > N")
@@ -542,6 +724,13 @@ def _embed_seq(X,Tau,D):
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def svd_entropy(epochs, param=svd_param):
+    """function svd_entropy
+    Args:
+        epochs:   
+        param:   
+    Returns:
+        
+    """
     axis=0
     
     final = []
@@ -566,6 +755,12 @@ def svd_entropy(epochs, param=svd_param):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def _hjorth_mobility(epochs):
+    """function _hjorth_mobility
+    Args:
+        epochs:   
+    Returns:
+        
+    """
     diff = np.diff(epochs, axis=0)
     sigma0 = np.std(epochs, axis=0)
     sigma1 = np.std(diff, axis=0)
@@ -574,6 +769,12 @@ def _hjorth_mobility(epochs):
 @set_property("fctype", "simple")
 @set_property("custom", True)
 def hjorth_complexity(epochs):
+    """function hjorth_complexity
+    Args:
+        epochs:   
+    Returns:
+        
+    """
     diff1 = np.diff(epochs, axis=0)
     diff2 = np.diff(diff1, axis=0)
     sigma1 = np.std(diff1, axis=0)
@@ -587,6 +788,14 @@ def hjorth_complexity(epochs):
 
 #-> In Package
 def _estimate_friedrich_coefficients(x, m, r):
+    """function _estimate_friedrich_coefficients
+    Args:
+        x:   
+        m:   
+        r:   
+    Returns:
+        
+    """
     assert m > 0, "Order of polynomial need to be positive integer, found {}".format(m)
     df = pd.DataFrame({'signal': x[:-1], 'delta': np.diff(x)})
     try:
@@ -609,6 +818,14 @@ def _estimate_friedrich_coefficients(x, m, r):
 
 
 def max_langevin_fixed_point(x, r=3, m=30):
+    """function max_langevin_fixed_point
+    Args:
+        x:   
+        r:   
+        m:   
+    Returns:
+        
+    """
     coeff = _estimate_friedrich_coefficients(x, m, r)
 
     try:
@@ -627,6 +844,13 @@ will_param = [ka for ka in [0.2,3]]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def willison_amplitude(X, param=will_param):
+  """function willison_amplitude
+  Args:
+      X:   
+      param:   
+  Returns:
+      
+  """
   return [("Thresh_{}".format(n),np.sum(np.abs(np.diff(X)) >= n)) for n in param]
 
 # willison_amplitude(df["Close"])
@@ -639,6 +863,13 @@ perc_param = [{"base":ba, "exponent":exp} for ba in [3,5] for exp in [-0.1,-0.2]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def percent_amplitude(x, param =perc_param):
+    """function percent_amplitude
+    Args:
+        x:   
+        param :   
+    Returns:
+        
+    """
     final = []
     for par in param:
       linear_scale_data = par["base"] ** (par["exponent"] * x)
@@ -663,6 +894,13 @@ cad_param = [0.1,1000, -234]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def cad_prob(cads, param=cad_param):
+    """function cad_prob
+    Args:
+        cads:   
+        param:   
+    Returns:
+        
+    """
     return [("time_{}".format(time), stats.percentileofscore(cads, float(time) / (24.0 * 60.0)) / 100.0) for time in param]
     
 # cad_prob(df["Close"])
@@ -675,6 +913,13 @@ zero_param = [0.01, 8]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def zero_crossing_derivative(epochs, param=zero_param):
+    """function zero_crossing_derivative
+    Args:
+        epochs:   
+        param:   
+    Returns:
+        
+    """
     diff = np.diff(epochs)
     norm = diff-diff.mean()
     return [("e_{}".format(e), np.apply_along_axis(lambda epoch: np.sum(((epoch[:-5] <= e) & (epoch[5:] > e))), 0, norm).ravel()[0]) for e in param]
@@ -687,6 +932,12 @@ def zero_crossing_derivative(epochs, param=zero_param):
 @set_property("fctype", "simple")
 @set_property("custom", True)
 def detrended_fluctuation_analysis(epochs):
+    """function detrended_fluctuation_analysis
+    Args:
+        epochs:   
+    Returns:
+        
+    """
     def dfa_1d(X, Ave=None, L=None):
         X = np.array(X)
 
@@ -744,6 +995,13 @@ fisher_param = [{"Tau":ta, "DE":de} for ta in [3,15] for de in [10,5]]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def fisher_information(epochs, param=fisher_param):
+    """function fisher_information
+    Args:
+        epochs:   
+        param:   
+    Returns:
+        
+    """
     def fisher_info_1d(a, tau, de):
         # taken from pyeeg improvements
 
@@ -764,6 +1022,13 @@ hig_param = [{"Kmax": 3},{"Kmax": 5}]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def higuchi_fractal_dimension(epochs, param=hig_param):
+    """function higuchi_fractal_dimension
+    Args:
+        epochs:   
+        param:   
+    Returns:
+        
+    """
     def hfd_1d(X, Kmax):
         
         L = []
@@ -792,6 +1057,12 @@ def higuchi_fractal_dimension(epochs, param=hig_param):
 @set_property("fctype", "simple")
 @set_property("custom", True)
 def petrosian_fractal_dimension(epochs):
+    """function petrosian_fractal_dimension
+    Args:
+        epochs:   
+    Returns:
+        
+    """
     def pfd_1d(X, D=None):
         # taken from pyeeg
         """Compute Petrosian Fractal Dimension of a time series from either two
@@ -822,6 +1093,12 @@ def petrosian_fractal_dimension(epochs):
 @set_property("fctype", "simple")
 @set_property("custom", True)
 def hurst_exponent(epochs):
+    """function hurst_exponent
+    Args:
+        epochs:   
+    Returns:
+        
+    """
     def hurst_1d(X):
 
         X = np.array(X)
@@ -869,6 +1146,13 @@ lyaup_param = [{"Tau":4, "n":3, "T":10, "fs":9},{"Tau":8, "n":7, "T":15, "fs":6}
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def largest_lyauponov_exponent(epochs, param=lyaup_param):
+    """function largest_lyauponov_exponent
+    Args:
+        epochs:   
+        param:   
+    Returns:
+        
+    """
     def LLE_1d(x, tau, n, T, fs):
 
         Em = _embed_seq(x, tau, n)
@@ -924,6 +1208,13 @@ whelch_param = [100,200]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def whelch_method(data, param=whelch_param):
+  """function whelch_method
+  Args:
+      data:   
+      param:   
+  Returns:
+      
+  """
 
   final = []
   for Fs in param:
@@ -946,6 +1237,13 @@ freq_param = [{"fs":50, "sel":15},{"fs":200, "sel":20}]
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def find_freq(serie, param=freq_param):
+    """function find_freq
+    Args:
+        serie:   
+        param:   
+    Returns:
+        
+    """
 
     final = []
     for par in param:
@@ -967,6 +1265,12 @@ def find_freq(serie, param=freq_param):
 #-> In Package
 
 def flux_perc(magnitude):
+    """function flux_perc
+    Args:
+        magnitude:   
+    Returns:
+        
+    """
     sorted_data = np.sort(magnitude)
     lc_length = len(sorted_data)
 
@@ -988,6 +1292,12 @@ def flux_perc(magnitude):
 @set_property("fctype", "simple")
 @set_property("custom", True)
 def range_cum_s(magnitude):
+    """function range_cum_s
+    Args:
+        magnitude:   
+    Returns:
+        
+    """
     sigma = np.std(magnitude)
     N = len(magnitude)
     m = np.mean(magnitude)
@@ -1005,6 +1315,13 @@ struct_param = {"Volume":None, "Open": None}
 @set_property("fctype", "combiner")
 @set_property("custom", True)
 def structure_func(time, param=struct_param):
+      """function structure_func
+      Args:
+          time:   
+          param:   
+      Returns:
+          
+      """
 
       dict_final = {}
       for key, magnitude in param.items():
@@ -1059,6 +1376,12 @@ def structure_func(time, param=struct_param):
 
 #-> In Package
 def kurtosis(x):
+    """function kurtosis
+    Args:
+        x:   
+    Returns:
+        
+    """
 
     if not isinstance(x, pd.Series):
         x = pd.Series(x)

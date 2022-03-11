@@ -248,6 +248,12 @@ class ScaledDotProductAttention():
   """
 
   def __init__(self, attn_dropout=0.0):
+    """ ScaledDotProductAttention:__init__
+    Args:
+        attn_dropout:     
+    Returns:
+       
+    """
     self.dropout = Dropout(attn_dropout)
     self.activation = Activation('softmax')
 

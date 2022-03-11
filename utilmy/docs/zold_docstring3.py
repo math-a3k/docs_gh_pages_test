@@ -13,6 +13,15 @@ from code_parser import get_list_function_info
 
 
 def custom_generate_docstring(repo_dir: str, dirout: str, overwrite_script: bool = False, test: bool = True):
+    """function custom_generate_docstring
+    Args:
+        repo_dir (  str ) :   
+        dirout (  str ) :   
+        overwrite_script (  bool  ) :   
+        test (  bool  ) :   
+    Returns:
+        
+    """
     
     p = repo_dir.glob("**/*.py")
     scripts = [x for x in p if x.is_file()]

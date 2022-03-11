@@ -9,6 +9,13 @@ import wget, yaml
 ##########################################################################################
 ################### donwload  ############################################################
 def unzip(in_dir, out_dir):
+    """function unzip
+    Args:
+        in_dir:   
+        out_dir:   
+    Returns:
+        
+    """
     # !/usr/bin/env python3
     import sys
     import zipfile
@@ -17,6 +24,13 @@ def unzip(in_dir, out_dir):
 
 
 def gzip(dirin='/mydir', dirout="./"):
+    """function gzip
+    Args:
+        dirin:   
+        dirout:   
+    Returns:
+        
+    """
     #  python prepro.py gzip
     name = "_".join(in_dir.split("/")[-2:])
     cmd  = f"tar -czf '{dirout}/{name}.tar.gz'   '{dirin}/'   "
@@ -25,6 +39,13 @@ def gzip(dirin='/mydir', dirout="./"):
 
 
 def dir_size(dirin="mypath", dirout="./save.txt"):
+    """function dir_size
+    Args:
+        dirin:   
+        dirout:   
+    Returns:
+        
+    """
     os.system( f" du -h --max-depth  13   '{dirin}'  | sort -hr  > '{dirout}'  ")
 
     
@@ -46,6 +67,12 @@ def dataset_donwload(url, path_target):
 
 
 def dataset_get_path(cfg: dict):
+    """function dataset_get_path
+    Args:
+        cfg (  dict ) :   
+    Returns:
+        
+    """
     #### Donaload dataset
     # cfg = config_load()
     name = cfg.get("current_dataset", "mnist")
@@ -122,6 +149,13 @@ def os_extract_archive(file_path, path=".", archive_format="auto"):
 
 
 def to_file(s, filep):
+    """function to_file
+    Args:
+        s:   
+        filep:   
+    Returns:
+        
+    """
     with open(filep, mode="a") as fp:
         fp.write(str(s) + "\n")
 

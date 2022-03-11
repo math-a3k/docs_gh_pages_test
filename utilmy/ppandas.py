@@ -109,6 +109,20 @@ def pd_schema_enforce(df, int_default:int=0, dtype_dict:dict=None):
     
 
 def pd_to_mapdict(df, colkey='ranid', colval='item_tag', naval='0', colkey_type='str', colval_type='str', npool=5, nrows=900900900, verbose=True):
+    """function pd_to_mapdict
+    Args:
+        df:   
+        colkey:   
+        colval:   
+        naval:   
+        colkey_type:   
+        colval_type:   
+        npool:   
+        nrows:   
+        verbose:   
+    Returns:
+        
+    """
     ### load Pandas into key-val dict, for apply-map
     if isinstance(df, str):
        dirin = df
@@ -154,18 +168,44 @@ def pd_to_hiveparquet(dirin, dirout="/ztmp_hive_parquet/df.parquet", verbose=Fal
     
     
 def pd_random(nrows=100):
+   """function pd_random
+   Args:
+       nrows:   
+   Returns:
+       
+   """
    df = pd.DataFrame(np.random.randint(0, 10, size=(nrows, 4)), 
                      columns=list('abcd'))
    return df 
 
 
 def pd_merge(df1, df2, on=None, colkeep=None):
+  """function pd_merge
+  Args:
+      df1:   
+      df2:   
+      on:   
+      colkeep:   
+  Returns:
+      
+  """
   ### Faster merge
   cols = list(df2.columns) if colkeep is None else on + colkeep
   return df1.join( df2[ cols   ].set_index(on), on=on, how='left', rsuffix="2")
 
 
 def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsize=(8,4), spacing=0.1, **kwargs):
+    """function pd_plot_multi
+    Args:
+        df:   
+        plot_type:   
+        cols_axe1 ( list ) :   
+        cols_axe2 ( list ) :   
+        figsize:   
+        4:   
+    Returns:
+        
+    """
     from pandas import plotting
     from pandas.plotting import _matplotlib
     from matplotlib import pyplot as plt
@@ -216,6 +256,19 @@ def pd_plot_multi(df, plot_type=None, cols_axe1:list=[], cols_axe2:list=[],figsi
 
 
 def pd_plot_histogram(dfi, path_save=None, nbin=20.0, q5=0.005, q95=0.995, nsample= -1, show=False, clear=True) :
+    """function pd_plot_histogram
+    Args:
+        dfi:   
+        path_save:   
+        nbin:   
+        q5:   
+        q95:   
+        nsample:   
+        show:   
+        clear:   
+    Returns:
+        
+    """
     ### Plot histogram
     from matplotlib import pyplot as plt
     import numpy as np, os, time
@@ -279,6 +332,17 @@ def pd_filter(df, filter_dict="shop_id=11, l1_genre_id>600, l2_genre_id<80311," 
 
 
 def pd_to_file(df, filei,  check=0, verbose=True, show='shape',   **kw):
+  """function pd_to_file
+  Args:
+      df:   
+      filei:   
+      check:   
+      verbose:   
+      show:   
+      **kw:   
+  Returns:
+      
+  """
   import os, gc
   from pathlib import Path
   parent = Path(filei).parent
@@ -307,6 +371,14 @@ def pd_to_file(df, filei,  check=0, verbose=True, show='shape',   **kw):
 
 
 def pd_sample_strat(df, col, n):
+  """function pd_sample_strat
+  Args:
+      df:   
+      col:   
+      n:   
+  Returns:
+      
+  """
   ### Stratified sampling
   # n   = min(n, df[col].value_counts().min())
   df_ = df.groupby(col).apply(lambda x: x.sample(n = n, replace=True))
@@ -315,6 +387,13 @@ def pd_sample_strat(df, col, n):
 
 
 def pd_cartesian(df1, df2) :
+  """function pd_cartesian
+  Args:
+      df1:   
+      df2:   
+  Returns:
+      
+  """
   ### Cartesian preoduct
   import pandas as pd
   col1 =  list(df1.columns)
@@ -330,6 +409,14 @@ def pd_cartesian(df1, df2) :
 
 
 def pd_col_bins(df, col, nbins=5):
+  """function pd_col_bins
+  Args:
+      df:   
+      col:   
+      nbins:   
+  Returns:
+      
+  """
   ### Shortcuts for easy bin of numerical values
   import pandas as pd, numpy as np
   assert nbins < 256, 'nbins< 255'
@@ -408,6 +495,14 @@ def pd_dtype_to_category(df, col_exclude, treshold=0.5):
 
 
 def pd_dtype_getcontinuous(df, cols_exclude:list=[], nsample=-1) :
+    """function pd_dtype_getcontinuous
+    Args:
+        df:   
+        cols_exclude ( list ) :   
+        nsample:   
+    Returns:
+        
+    """
     ### Return continuous variable
     clist = {}
     for ci in df.columns :
@@ -424,6 +519,13 @@ def pd_dtype_getcontinuous(df, cols_exclude:list=[], nsample=-1) :
 
 
 def pd_del(df, cols:list):
+    """function pd_del
+    Args:
+        df:   
+        cols ( list ) :   
+    Returns:
+        
+    """
     ### Delete columns without errors
     for col in cols :
         try:
@@ -433,6 +535,14 @@ def pd_del(df, cols:list):
 
 
 def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
+    """function pd_add_noise
+    Args:
+        df:   
+        level:   
+        cols_exclude ( list ) :   
+    Returns:
+        
+    """
     import numpy as np, pandas as pd
     df2 = pd.DataFrame()
     colsnum = pd_dtype_getcontinuous(df, cols_exclude)
@@ -447,6 +557,14 @@ def pd_add_noise(df, level=0.05, cols_exclude:list=[]) :
 
 
 def pd_cols_unique_count(df, cols_exclude:list=[], nsample=-1) :
+    """function pd_cols_unique_count
+    Args:
+        df:   
+        cols_exclude ( list ) :   
+        nsample:   
+    Returns:
+        
+    """
     ### Return cadinat=lity
     clist = {}
     for ci in df.columns :
@@ -482,15 +600,33 @@ def pd_show(df, nrows=100, reader='notepad.exe', **kw):
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
+        """ dict_to_namespace:__init__
+        Args:
+            d:     
+        Returns:
+           
+        """
         self.__dict__ = d
 
 
 def to_dict(**kw):
+  """function to_dict
+  Args:
+      **kw:   
+  Returns:
+      
+  """
   ## return dict version of the params
   return kw
 
 
 def to_timeunix(datex="2018-01-16"):
+  """function to_timeunix
+  Args:
+      datex:   
+  Returns:
+      
+  """
   if isinstance(datex, str)  :
      return int(time.mktime(datetime.datetime.strptime(datex, "%Y-%m-%d").timetuple()) * 1000)
 
@@ -499,15 +635,36 @@ def to_timeunix(datex="2018-01-16"):
 
 
 def to_datetime(x) :
+  """function to_datetime
+  Args:
+      x:   
+  Returns:
+      
+  """
   import pandas as pd
   return pd.to_datetime( str(x) )
 
 
 def np_list_intersection(l1, l2) :
+  """function np_list_intersection
+  Args:
+      l1:   
+      l2:   
+  Returns:
+      
+  """
   return [x for x in l1 if x in l2]
 
 
 def np_add_remove(set_, to_remove, to_add):
+    """function np_add_remove
+    Args:
+        set_:   
+        to_remove:   
+        to_add:   
+    Returns:
+        
+    """
     # a function that removes list of elements and adds an element from a set
     result_temp = set_.copy()
     for element in to_remove:
@@ -517,6 +674,12 @@ def np_add_remove(set_, to_remove, to_add):
 
 
 def to_float(x):
+    """function to_float
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         return float(x)
     except :
@@ -524,6 +687,12 @@ def to_float(x):
 
 
 def to_int(x):
+    """function to_int
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         return int(x)
     except :
@@ -531,6 +700,12 @@ def to_int(x):
 
 
 def is_int(x):
+    """function is_int
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         int(x)
         return True
@@ -538,6 +713,12 @@ def is_int(x):
         return False    
 
 def is_float(x):
+    """function is_float
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         float(x)
         return True

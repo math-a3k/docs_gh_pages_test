@@ -26,16 +26,32 @@ from code_parser import get_list_function_info, get_list_method_info
 from utilmy.utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print( HELP + help_create(MNAME))
 
 
 ##########################################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     test1()
 
 
 def test1(mode='test'):
+    """function test1
+    Args:
+        mode:   
+    Returns:
+        
+    """
     log(""" generate_docstring """)
     # python_tips_dir = Path.cwd().joinpath("utilmy/docs")
 
@@ -55,6 +71,12 @@ def test1(mode='test'):
 
 
 def run_all(mode='overwrite'):
+    """function run_all
+    Args:
+        mode:   
+    Returns:
+        
+    """
     log(""" generate_docstring """)
     # python_tips_dir = Path.cwd().joinpath("utilmy/docs")
 

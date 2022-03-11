@@ -64,12 +64,24 @@ class TorchEASE:
         self.logger.info("Sparse data built")
 
     def generate_labels(self, df, col):
+        """ TorchEASE:generate_labels
+        Args:
+            df:     
+            col:     
+        Returns:
+           
+        """
         dist_labels = df[[col]].drop_duplicates()
         dist_labels[col + "_id"] = dist_labels[col].astype("category").cat.codes
 
         return dist_labels
 
     def fit(self):
+        """ TorchEASE:fit
+        Args:
+        Returns:
+           
+        """
         self.logger.info("Building G Matrix")
         G = self.sparse.to_dense().t() @ self.sparse.to_dense()
         G += torch.eye(G.shape[0]) * self.reg
@@ -130,5 +142,10 @@ class TorchEASE:
         return pred_df
 
     def score_predictions(self):
+        """ TorchEASE:score_predictions
+        Args:
+        Returns:
+           
+        """
         # TODO: Implement this with some common metrics
         return None

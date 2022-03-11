@@ -64,15 +64,34 @@ import torch
 VERBOSE = True
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 ####################################################################################################
 global model, session
 
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
@@ -80,6 +99,14 @@ def init(*kw, **kwargs):
 
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
 
         if model_pars is None:
@@ -151,6 +178,16 @@ def fit(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars: dict={}, compute_pars: dict={}, out_pars: dict={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars (  dict ) :   
+        compute_pars (  dict ) :   
+        out_pars (  dict ) :   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
 
     if Xpred is None:
@@ -171,6 +208,11 @@ def predict(Xpred=None, data_pars: dict={}, compute_pars: dict={}, out_pars: dic
 
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
@@ -191,6 +233,12 @@ def save(path=None, info=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     model0 = pickle.load(open(path + '/model/model.pkl', mode='rb'))
@@ -209,6 +257,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -318,6 +372,12 @@ def get_dataset(data_pars=None, task_type="train", **kw):
 ####################################################################################################
 ############ Test  #################################################################################
 def test_dataset_covtype(nrows=1000):
+    """function test_dataset_covtype
+    Args:
+        nrows:   
+    Returns:
+        
+    """
 
     # Dense features
     colnum = ["Elevation", "Aspect", "Slope", "Horizontal_Distance_To_Hydrology",
@@ -507,6 +567,11 @@ def test(nrows=1000):
 
 
 def test3():
+    """function test3
+    Args:
+    Returns:
+        
+    """
     pass
 
 

@@ -34,6 +34,12 @@ plt.show()
 
 
 def f(w):
+    """function f
+    Args:
+        w:   
+    Returns:
+        
+    """
     return -np.sum(np.square(solution - w))
 
 
@@ -91,6 +97,14 @@ google.head()
 
 
 def get_state(data, t, n):
+    """function get_state
+    Args:
+        data:   
+        t:   
+        n:   
+    Returns:
+        
+    """
     d = t - n + 1
     block = data[d : t + 1] if d >= 0 else -d * [data[0]] + data[: t + 1]
     res = []
@@ -123,6 +137,16 @@ get_state(close, 2, 10)
 
 class Deep_Evolution_Strategy:
     def __init__(self, weights, reward_function, population_size, sigma, learning_rate):
+        """ Deep_Evolution_Strategy:__init__
+        Args:
+            weights:     
+            reward_function:     
+            population_size:     
+            sigma:     
+            learning_rate:     
+        Returns:
+           
+        """
         self.weights = weights
         self.reward_function = reward_function
         self.population_size = population_size
@@ -130,6 +154,13 @@ class Deep_Evolution_Strategy:
         self.learning_rate = learning_rate
 
     def _get_weight_from_population(self, weights, population):
+        """ Deep_Evolution_Strategy:_get_weight_from_population
+        Args:
+            weights:     
+            population:     
+        Returns:
+           
+        """
         weights_population = []
         for index, i in enumerate(population):
             jittered = self.sigma * i
@@ -137,9 +168,26 @@ class Deep_Evolution_Strategy:
         return weights_population
 
     def get_weights(self):
+        """ Model:get_weights
+        Args:
+        Returns:
+           
+        """
+        """ Deep_Evolution_Strategy:get_weights
+        Args:
+        Returns:
+           
+        """
         return self.weights
 
     def train(self, epoch=100, print_every=1):
+        """ Deep_Evolution_Strategy:train
+        Args:
+            epoch:     
+            print_every:     
+        Returns:
+           
+        """
         lasttime = time.time()
         for i in range(epoch):
             population = []
@@ -171,6 +219,14 @@ class Deep_Evolution_Strategy:
 
 class Model:
     def __init__(self, input_size, layer_size, output_size):
+        """ Model:__init__
+        Args:
+            input_size:     
+            layer_size:     
+            output_size:     
+        Returns:
+           
+        """
         self.weights = [
             np.random.randn(input_size, layer_size),
             np.random.randn(layer_size, output_size),
@@ -179,6 +235,12 @@ class Model:
         ]
 
     def predict(self, inputs):
+        """ Model:predict
+        Args:
+            inputs:     
+        Returns:
+           
+        """
         feed = np.dot(inputs, self.weights[0]) + self.weights[-1]
         decision = np.dot(feed, self.weights[1])
         buy = np.dot(feed, self.weights[2])
@@ -188,6 +250,12 @@ class Model:
         return self.weights
 
     def set_weights(self, weights):
+        """ Model:set_weights
+        Args:
+            weights:     
+        Returns:
+           
+        """
         self.weights = weights
 
 
@@ -216,6 +284,13 @@ max_sell = 5
 
 
 def act(model, sequence):
+    """function act
+    Args:
+        model:   
+        sequence:   
+    Returns:
+        
+    """
     decision, buy = model.predict(np.array(sequence))
     return np.argmax(decision[0]), int(buy[0])
 
@@ -257,6 +332,18 @@ class Agent:
     LEARNING_RATE = 0.03
 
     def __init__(self, model, money, max_buy, max_sell, close, window_size, skip):
+        """ Agent:__init__
+        Args:
+            model:     
+            money:     
+            max_buy:     
+            max_sell:     
+            close:     
+            window_size:     
+            skip:     
+        Returns:
+           
+        """
         self.window_size = window_size
         self.skip = skip
         self.close = close
@@ -273,10 +360,22 @@ class Agent:
         )
 
     def act(self, sequence):
+        """ Agent:act
+        Args:
+            sequence:     
+        Returns:
+           
+        """
         decision, buy = self.model.predict(np.array(sequence))
         return np.argmax(decision[0]), int(buy[0])
 
     def get_reward(self, weights):
+        """ Agent:get_reward
+        Args:
+            weights:     
+        Returns:
+           
+        """
         initial_money = self.initial_money
         starting_money = initial_money
         len_close = len(self.close) - 1
@@ -312,9 +411,21 @@ class Agent:
         return ((initial_money - starting_money) / starting_money) * 100
 
     def fit(self, iterations, checkpoint):
+        """ Agent:fit
+        Args:
+            iterations:     
+            checkpoint:     
+        Returns:
+           
+        """
         self.es.train(iterations, print_every=checkpoint)
 
     def buy(self):
+        """ Agent:buy
+        Args:
+        Returns:
+           
+        """
         initial_money = self.initial_money
         len_close = len(self.close) - 1
         state = get_state(self.close, 0, self.window_size + 1)

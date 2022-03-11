@@ -159,6 +159,13 @@ def cocount_calc_matrix(dirin="gen_text_dist3.txt", dense=True):
 
 
 def cocount_get_topk(matrix, w_to_id):
+    """function cocount_get_topk
+    Args:
+        matrix:   
+        w_to_id:   
+    Returns:
+        
+    """
     def id_to_w(idx, w_to_id):
         for key in w_to_id:
             if w_to_id[key] == idx:
@@ -223,6 +230,12 @@ def cocount_matrix_to_dict(matrix, w_to_id):
 
 
 def cocount_norm(matrix):
+    """function cocount_norm
+    Args:
+        matrix:   
+    Returns:
+        
+    """
     return np.log(1+matrix)
 
 
@@ -405,6 +418,11 @@ def corpus_add_prefix(dirin="gen_text_dist3.txt", dirout="gen_text_dist4.txt"):
 
 
 def run_all():
+    """function run_all
+    Args:
+    Returns:
+        
+    """
     ###########################################################################################
     # Create corpus to train model
     corpus_generate()

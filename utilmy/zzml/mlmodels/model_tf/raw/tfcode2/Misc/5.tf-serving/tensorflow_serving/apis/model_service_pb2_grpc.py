@@ -59,6 +59,13 @@ class ModelServiceServicer(object):
 
 
 def add_ModelServiceServicer_to_server(servicer, server):
+    """function add_ModelServiceServicer_to_server
+    Args:
+        servicer:   
+        server:   
+    Returns:
+        
+    """
     rpc_method_handlers = {
         "GetModelStatus": grpc.unary_unary_rpc_method_handler(
             servicer.GetModelStatus,

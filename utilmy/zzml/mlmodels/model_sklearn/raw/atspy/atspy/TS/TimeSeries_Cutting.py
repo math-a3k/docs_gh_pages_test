@@ -11,13 +11,28 @@ from . import Utils as tsutil
 
 class cCuttingInfo:
     def __init__(self):
+        """ cCuttingInfo:__init__
+        Args:
+        Returns:
+           
+        """
         pass
 
 
     def estimate(self):
+        """ cCuttingInfo:estimate
+        Args:
+        Returns:
+           
+        """
         self.defineCuttingParameters();
 
     def set_default_split(self):
+        """ cCuttingInfo:set_default_split
+        Args:
+        Returns:
+           
+        """
         self.mTrainSize = self.mSignalFrame.shape[0];
         assert(self.mTrainSize > 0);
         lEstEnd = int((self.mTrainSize - self.mHorizon) * self.mOptions.mEstimRatio);
@@ -43,6 +58,12 @@ class cCuttingInfo:
             self.mTestEnd = self.mTrainSize;
 
     def check_split(self, iSplit):
+        """ cCuttingInfo:check_split
+        Args:
+            iSplit:     
+        Returns:
+           
+        """
         if(len(iSplit) != 3):
             raise tsutil.PyAF_Error('Invalid Split ' + str(iSplit));
         if(iSplit[0] < 0.0 or iSplit[0] > 1.0):
@@ -57,6 +78,12 @@ class cCuttingInfo:
 
             
     def set_split(self, iSplit):
+        """ cCuttingInfo:set_split
+        Args:
+            iSplit:     
+        Returns:
+           
+        """
         self.mTrainSize = self.mSignalFrame.shape[0];
         assert(self.mTrainSize > 0);
         self.check_split(iSplit)
@@ -72,6 +99,11 @@ class cCuttingInfo:
         self.mTestEnd = self.mTestStart + lTestSize;
         
     def defineCuttingParameters(self):
+        """ cCuttingInfo:defineCuttingParameters
+        Args:
+        Returns:
+           
+        """
         lStr = "CUTTING_START SignalVariable='" + self.mSignal +"'";
         # print(lStr);
         #print(self.mSignalFrame.head())
@@ -88,21 +120,44 @@ class cCuttingInfo:
         pass
 
     def cutFrame(self, df):
+        """ cCuttingInfo:cutFrame
+        Args:
+            df:     
+        Returns:
+           
+        """
         lFrameFit = df[self.mEstimStart : self.mEstimEnd];
         lFrameForecast = df[self.mValidStart : self.mValidEnd];
         lFrameTest = df[self.mTestStart : self.mTestEnd];
         return (lFrameFit, lFrameForecast, lFrameTest)
 
     def getEstimPart(self, df):
+        """ cCuttingInfo:getEstimPart
+        Args:
+            df:     
+        Returns:
+           
+        """
         lFrameFit = df[self.mEstimStart : self.mEstimEnd];
         return lFrameFit;
 
     def getValidPart(self, df):
+        """ cCuttingInfo:getValidPart
+        Args:
+            df:     
+        Returns:
+           
+        """
         lFrameValid = df[self.mValidStart : self.mValidEnd];
         return lFrameValid;
 
 
     def info(self):
+        """ cCuttingInfo:info
+        Args:
+        Returns:
+           
+        """
         lStr2 += " Estimation = (" + str(self.mEstimStart) + " , " + str(self.mEstimEnd) + ")";
         lStr2 += " Validation = (" + str(self.mValidStart) + " , " + str(self.mValidEnd) + ")";
         lStr2 += " Test = (" + str(self.mTestStart) + " , " + str(self.mTestEnd) + ")";

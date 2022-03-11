@@ -10,22 +10,52 @@ from utilmy import global_verbosity, os_makedirs, pd_read_file
 verbosity = global_verbosity(__file__,"/../../config.json", 3 )
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 ####################################################################################################
 global model, session
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
@@ -50,6 +80,14 @@ except :
 ####################################################################################################
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
 
         if model_pars is None:
@@ -136,6 +174,16 @@ def eval(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     post_process_fun = model.model_pars.get('post_process_fun', None)
     if post_process_fun is None:
@@ -160,6 +208,13 @@ def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
 
 
 def save(path=None, info=None):
+    """function save
+    Args:
+        path:   
+        info:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     os.makedirs(path, exist_ok=True)
@@ -172,6 +227,12 @@ def save(path=None, info=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     model0 = pickle.load(open(f"{path}/model.pkl", mode='rb'))
@@ -185,6 +246,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -226,6 +293,12 @@ def get_dataset(data_pars=None, task_type="train", **kw):
 ####################################################################################################
 ############ Test ##################################################################################
 def test(n_sample = 100):
+    """function test
+    Args:
+        n_sample :   
+    Returns:
+        
+    """
     from adatasets import test_data_classifier_fake
     df, d = test_data_classifier_fake(nrows=500)
     colnum, colcat, coly = d['colnum'], d['colcat'], d['coly']
@@ -333,6 +406,14 @@ def test(n_sample = 100):
 
 
 def test_helper(model_pars, data_pars, compute_pars):
+    """function test_helper
+    Args:
+        model_pars:   
+        data_pars:   
+        compute_pars:   
+    Returns:
+        
+    """
     global model, session
     root  = "ztmp/"
     model = Model(model_pars=model_pars, data_pars=data_pars, compute_pars=compute_pars)
@@ -402,6 +483,11 @@ def is_continuous(v_array):
 
 
 def test2():
+    """function test2
+    Args:
+    Returns:
+        
+    """
     # Load toy dataset
     df   = pd.read_csv('https://raw.githubusercontent.com/arita37/GeFs/master/data/winequality_white.csv', sep=',')
     print(df.head(3).T, df.dtypes, df.shape)
@@ -444,6 +530,12 @@ import pandas as pd
 
 # Auxiliary functions
 def get_dummies(data):
+    """function get_dummies
+    Args:
+        data:   
+    Returns:
+        
+    """
     data = data.copy()
     if isinstance(data, pd.Series):
         data = pd.factorize(data)[0]
@@ -552,6 +644,15 @@ def gef_standardize_data(data, mean, std):
 
 
 def train_test_split2(data, ncat, train_ratio=0.7, prep='std'):
+    """function train_test_split2
+    Args:
+        data:   
+        ncat:   
+        train_ratio:   
+        prep:   
+    Returns:
+        
+    """
     assert train_ratio >= 0
     assert train_ratio <= 1
     shuffle = np.random.choice(range(data.shape[0]), data.shape[0], replace=False)
@@ -634,6 +735,15 @@ def test_converion():
 
 
 def train_test_split(data, ncat, train_ratio=0.7, prep='std'):
+    """function train_test_split
+    Args:
+        data:   
+        ncat:   
+        train_ratio:   
+        prep:   
+    Returns:
+        
+    """
     assert train_ratio >= 0
     assert train_ratio <= 1
     shuffle = np.random.choice(range(data.shape[0]), data.shape[0], replace=False)
@@ -655,6 +765,12 @@ def train_test_split(data, ncat, train_ratio=0.7, prep='std'):
 
 # Preprocessing functions
 def adult(data):
+    """function adult
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['workclass', 'education', 'education-num', 'marital-status', 'occupation',
                'relationship', 'race', 'sex', 'native-country', 'y']
     cont_cols = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'capital-gain',
@@ -665,6 +781,12 @@ def adult(data):
 
 
 def australia(data):
+    """function australia
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['A1', 'A4', 'A5', 'A6', 'A7', 'A9', 'A10', 'A12', 'A13', 'class']
     cont_cols = ['A2', 'A3', 'A8', 'A11', 'A14', 'A15']
     data.loc[:, cat_cols] = get_dummies(data[cat_cols])
@@ -674,6 +796,12 @@ def australia(data):
 
 
 def bank(data):
+    """function bank
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['job', 'marital', 'education', 'default', 'housing', 'loan',
        'contact', 'month', 'day_of_week', 'poutcome', 'y']
     cont_cols = ['age', 'duration', 'campaign', 'previous', 'emp.var.rate',
@@ -685,6 +813,12 @@ def bank(data):
 
 
 def credit(data):
+    """function credit
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['SEX', 'EDUCATION', 'MARRIAGE', 'default payment next month']
     cont_cols = ['LIMIT_BAL', 'AGE', 'PAY_0', 'PAY_2',
        'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 'BILL_AMT1', 'BILL_AMT2',
@@ -696,6 +830,12 @@ def credit(data):
 
 
 def electricity(data):
+    """function electricity
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['day', 'class']
     cont_cols = ['date', 'period', 'nswprice', 'nswdemand', 'vicprice',
        'vicdemand', 'transfer']
@@ -705,6 +845,12 @@ def electricity(data):
 
 
 def segment(data):
+    """function segment
+    Args:
+        data:   
+    Returns:
+        
+    """
     data = data.drop(columns=['region.centroid.col', 'region.pixel.count'])
     cat_cols = ['short.line.density.5', 'short.line.density.2', 'class']
     cont_cols = ['region.centroid.row', 'vedge.mean', 'vegde.sd', 'hedge.mean', 'hedge.sd',
@@ -716,6 +862,12 @@ def segment(data):
 
 
 def german(data):
+    """function german
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = [0, 2, 3, 5, 6, 8, 9, 11, 13, 14, 16, 18, 19, 20]
     cont_cols = [1, 4, 7, 10, 12, 15, 17]
     data.iloc[:, cat_cols] = get_dummies(data[cat_cols])
@@ -724,6 +876,12 @@ def german(data):
 
 
 def vowel(data):
+    """function vowel
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['Speaker_Number', 'Sex', 'Class']
     data.loc[:, cat_cols] = get_dummies(data[cat_cols])
     ncat = learncats(data.values, classcol=data.shape[1]-1)
@@ -731,6 +889,12 @@ def vowel(data):
 
 
 def cmc(data):
+    """function cmc
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['Wifes_education', 'Husbands_education', 'Wifes_religion', 'Wifes_now_working%3F',
             'Husbands_occupation', 'Standard-of-living_index', 'Media_exposure', 'Contraceptive_method_used']
     cont_cols = ['Wifes_age', 'Number_of_children_ever_born']
@@ -740,6 +904,12 @@ def cmc(data):
 
 
 def get_data(name):
+    """function get_data
+    Args:
+        name:   
+    Returns:
+        
+    """
     if 'wine' in name:
         data_red = pd.read_csv('../data/winequality_red.csv')
         data_white = pd.read_csv('../data/winequality_white.csv')

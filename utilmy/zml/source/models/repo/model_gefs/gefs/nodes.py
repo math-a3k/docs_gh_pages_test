@@ -40,6 +40,15 @@ spec['lower'] = float64[:]
 @jitclass(spec)
 class Node:
     def __init__(self, parent, scope, type, n):
+        """ Node:__init__
+        Args:
+            parent:     
+            scope:     
+            type:     
+            n:     
+        Returns:
+           
+        """
         self.id = np.random.randint(0, 10000000) # Random identification number
         self.parent = parent
         # initialize parent and left right children as None
@@ -80,12 +89,29 @@ class Node:
 
     @property
     def nchildren(self):
+        """ Node:nchildren
+        Args:
+        Returns:
+           
+        """
         return len(self.children)
 
     def add_sibling(self, sibling):
+        """ Node:add_sibling
+        Args:
+            sibling:     
+        Returns:
+           
+        """
         self.sibling = sibling
 
     def add_child(self, child):
+        """ Node:add_child
+        Args:
+            child:     
+        Returns:
+           
+        """
         # if parent has no children
         if self.left_child is None:
             # this node is it first child
@@ -99,6 +125,11 @@ class Node:
             self.reweight()
 
     def reweight(self):
+        """ Node:reweight
+        Args:
+        Returns:
+           
+        """
         children_n = np.array([c.n for c in self.children])
         n = np.sum(children_n)
         if n > 0:
@@ -116,28 +147,79 @@ node_type.define(Node.class_type.instance_type)
 
 @njit
 def ProdNode(parent, scope, n):
+    """function ProdNode
+    Args:
+        parent:   
+        scope:   
+        n:   
+    Returns:
+        
+    """
     return Node(parent, scope, 'P', n)
 
 @njit
 def SumNode(parent, scope, n):
+    """function SumNode
+    Args:
+        parent:   
+        scope:   
+        n:   
+    Returns:
+        
+    """
     return Node(parent, scope, 'S', n)
 
 @njit
 def Leaf(parent, scope, n, value, comparison):
+    """function Leaf
+    Args:
+        parent:   
+        scope:   
+        n:   
+        value:   
+        comparison:   
+    Returns:
+        
+    """
     node = Node(parent, scope, 'L', n)
     fit_indicator(node, value, comparison)
     return node
 
 @njit
 def GaussianLeaf(parent, scope, n):
+    """function GaussianLeaf
+    Args:
+        parent:   
+        scope:   
+        n:   
+    Returns:
+        
+    """
     return Node(parent, scope, 'G', n)
 
 @njit
 def MultinomialLeaf(parent, scope, n):
+    """function MultinomialLeaf
+    Args:
+        parent:   
+        scope:   
+        n:   
+    Returns:
+        
+    """
     return Node(parent, scope, 'M', n)
 
 @njit
 def UniformLeaf(parent, scope, n, value):
+    """function UniformLeaf
+    Args:
+        parent:   
+        scope:   
+        n:   
+        value:   
+    Returns:
+        
+    """
     node = Node(parent, scope, 'U', n)
     node.value = value
     return node
@@ -149,6 +231,12 @@ def UniformLeaf(parent, scope, n, value):
 
 
 def n_nodes(node):
+    """function n_nodes
+    Args:
+        node:   
+    Returns:
+        
+    """
     if node.type in ['L', 'G', 'M']:
         return 1
     if node.type in ['S', 'P']:
@@ -157,6 +245,12 @@ def n_nodes(node):
 
 
 def delete(node):
+    """function delete
+    Args:
+        node:   
+    Returns:
+        
+    """
     for c in node.children:
         delete(c)
     node.parent = None
@@ -172,6 +266,15 @@ def delete(node):
 
 @njit
 def fit_gaussian(node, data, upper, lower):
+    """function fit_gaussian
+    Args:
+        node:   
+        data:   
+        upper:   
+        lower:   
+    Returns:
+        
+    """
     assert node.type == 'G', "Only gaussian leaves fit data."
     node.n = data.shape[0]
     m = np.nanmean(data[:, node.scope])
@@ -193,6 +296,14 @@ def fit_gaussian(node, data, upper, lower):
 
 @njit
 def fit_multinomial(node, data, k):
+    """function fit_multinomial
+    Args:
+        node:   
+        data:   
+        k:   
+    Returns:
+        
+    """
     assert node.type == 'M', "Node is not a multinomial leaf."
     d = data[~np.isnan(data[:, node.scope].ravel()), :]  # Filter missing
     d = data[:, node.scope].ravel()  # Project to scope
@@ -208,6 +319,13 @@ def fit_multinomial(node, data, k):
 
 @njit
 def fit_multinomial_with_counts(node, counts):
+    """function fit_multinomial_with_counts
+    Args:
+        node:   
+        counts:   
+    Returns:
+        
+    """
     assert node.type == 'M', "Node is not a multinomial leaf."
     node.logcounts = np.log(np.asarray(counts))
     node.p = counts/np.sum(counts)
@@ -216,6 +334,14 @@ def fit_multinomial_with_counts(node, counts):
 
 @njit
 def fit_indicator(node, value, comparison):
+    """function fit_indicator
+    Args:
+        node:   
+        value:   
+        comparison:   
+    Returns:
+        
+    """
     node.value = value
     node.comparison = comparison
 
@@ -299,6 +425,13 @@ def eval_m(node, evi):
 
 @njit
 def compute_batch_size(n_points, n_features):
+    """function compute_batch_size
+    Args:
+        n_points:   
+        n_features:   
+    Returns:
+        
+    """
     maxmem = max(n_points * n_features + (n_points)/10, 10 * 2 ** 17)
     batch_size = (-n_features + np.sqrt(n_features ** 2 + 4 * maxmem)) / 2
     return int(batch_size)
@@ -502,6 +635,16 @@ def evaluate_class(node, evi, class_var, n_classes, naive):
 
 @njit
 def eval_m_rob(node, evi, n_classes, eps, ismax):
+    """function eval_m_rob
+    Args:
+        node:   
+        evi:   
+        n_classes:   
+        eps:   
+        ismax:   
+    Returns:
+        
+    """
     s = node.scope[0]
     res = np.zeros(evi.shape[0], dtype=np.float64)
     for i in range(evi.shape[0]):

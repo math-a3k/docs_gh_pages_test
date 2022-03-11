@@ -11,24 +11,60 @@ class Version(object):
     pattern = re.compile(r"(version\s*=\s*['\"]\s*(\d+)\s*\.\s*(\d+)\s*\.\s*(\d+)\s*['\"])")
 
     def __init__(self, major, minor, patch):
+        """ Version:__init__
+        Args:
+            major:     
+            minor:     
+            patch:     
+        Returns:
+           
+        """
         self.major = major
         self.minor = minor
         self.patch = patch
 
     def __str__(self):
+        """ Version:__str__
+        Args:
+        Returns:
+           
+        """
         return f'Version({self.stringify()})'
 
     def __repr__(self):
+        """ Version:__repr__
+        Args:
+        Returns:
+           
+        """
         return self.__str__()
 
     def stringify(self):
+        """ Version:stringify
+        Args:
+        Returns:
+           
+        """
         return f'\'{self.major}.{self.minor}.{self.patch}\''
 
     def new_version(self, orig):
+        """ Version:new_version
+        Args:
+            orig:     
+        Returns:
+           
+        """
         return '='.join([orig.split('=')[0], self.stringify()])
 
     @classmethod
     def parse(cls, string):
+        """ Version:parse
+        Args:
+            cls:     
+            string:     
+        Returns:
+           
+        """
         re_result = re.findall(cls.pattern, string)
         if len(re_result) == 0:
             return Exception('Program was not able to parse version string, please check your setup.py file.')
@@ -37,6 +73,11 @@ class Version(object):
 
 
 def get_current_githash():
+    """function get_current_githash
+    Args:
+    Returns:
+        
+    """
     import subprocess
     label = subprocess.check_output(["git", "describe", "--always"]).strip();
     label = label.decode('utf-8')
@@ -44,6 +85,13 @@ def get_current_githash():
 
 
 def update_version(path, n=1):
+    """function update_version
+    Args:
+        path:   
+        n:   
+    Returns:
+        
+    """
     content = open(path, 'r').read()
 
     orig, version = Version.parse(content)
@@ -63,6 +111,12 @@ def update_version(path, n=1):
 
 ############################################################################################################
 def git_commit(message):
+    """function git_commit
+    Args:
+        message:   
+    Returns:
+        
+    """
     if not ask(f'About to git commit {message}, are you sure: '):
         exit()
 
@@ -75,6 +129,13 @@ def git_commit(message):
 
 
 def ask(question, ans='yes'):
+    """function ask
+    Args:
+        question:   
+        ans:   
+    Returns:
+        
+    """
     return input(question).lower() == ans.lower()
 
 
@@ -100,6 +161,12 @@ def pypi_upload():
 
 ############################################################################################################
 def main(*args):
+    """function main
+    Args:
+        *args:   
+    Returns:
+        
+    """
     print('Program Started')
     update_version(setup_file, 1)
     # git_commit(*sys.argv[1:3])

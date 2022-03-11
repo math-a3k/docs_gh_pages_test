@@ -70,6 +70,12 @@ class DNC(snt.RNNCore):
         )
 
     def _clip_if_enabled(self, x):
+        """ DNC:_clip_if_enabled
+        Args:
+            x:     
+        Returns:
+           
+        """
         if self._clip_value > 0:
             return tf.clip_by_value(x, -self._clip_value, self._clip_value)
         else:
@@ -124,6 +130,13 @@ class DNC(snt.RNNCore):
         )
 
     def initial_state(self, batch_size, dtype=tf.float32):
+        """ DNC:initial_state
+        Args:
+            batch_size:     
+            dtype:     
+        Returns:
+           
+        """
         return DNCState(
             controller_state=self._controller.initial_state(batch_size, dtype),
             access_state=self._access.initial_state(batch_size, dtype),
@@ -132,8 +145,18 @@ class DNC(snt.RNNCore):
 
     @property
     def state_size(self):
+        """ DNC:state_size
+        Args:
+        Returns:
+           
+        """
         return self._state_size
 
     @property
     def output_size(self):
+        """ DNC:output_size
+        Args:
+        Returns:
+           
+        """
         return self._output_size

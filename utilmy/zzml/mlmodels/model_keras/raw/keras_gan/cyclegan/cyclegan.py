@@ -18,6 +18,11 @@ import os
 
 class CycleGAN():
     def __init__(self):
+        """ CycleGAN:__init__
+        Args:
+        Returns:
+           
+        """
         # Input shape
         self.img_rows = 128
         self.img_cols = 128
@@ -138,6 +143,11 @@ class CycleGAN():
         return Model(d0, output_img)
 
     def build_discriminator(self):
+        """ CycleGAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         def d_layer(layer_input, filters, f_size=4, normalization=True):
             """Discriminator layer"""
@@ -159,6 +169,14 @@ class CycleGAN():
         return Model(img, validity)
 
     def train(self, epochs, batch_size=1, sample_interval=50):
+        """ CycleGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         start_time = datetime.datetime.now()
 
@@ -218,6 +236,13 @@ class CycleGAN():
                     self.sample_images(epoch, batch_i)
 
     def sample_images(self, epoch, batch_i):
+        """ CycleGAN:sample_images
+        Args:
+            epoch:     
+            batch_i:     
+        Returns:
+           
+        """
         os.makedirs('images/%s' % self.dataset_name, exist_ok=True)
         r, c = 2, 3
 

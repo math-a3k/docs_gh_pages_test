@@ -20,10 +20,26 @@ mnist = input_data.read_data_sets("", validation_size=0)
 
 
 def differentiable_clip(inputs, alpha, rmin, rmax):
+    """function differentiable_clip
+    Args:
+        inputs:   
+        alpha:   
+        rmin:   
+        rmax:   
+    Returns:
+        
+    """
     return tf.sigmoid(-alpha * (inputs - rmin)) + tf.sigmoid(alpha * (inputs - rmax))
 
 
 def double_thresholding(inputs, per_pixel=True):
+    """function double_thresholding
+    Args:
+        inputs:   
+        per_pixel:   
+    Returns:
+        
+    """
     input_shape = inputs.shape.as_list()
     if per_pixel:
         r = tf.Variable(tf.random_normal(input_shape[1:], stddev=np.sqrt(1 / input_shape[-1])))
@@ -35,6 +51,14 @@ def double_thresholding(inputs, per_pixel=True):
 
 
 def conv(inputs, filters, kernel_size):
+    """function conv
+    Args:
+        inputs:   
+        filters:   
+        kernel_size:   
+    Returns:
+        
+    """
     w = tf.Variable(
         tf.random_normal(
             [kernel_size, kernel_size, int(inputs.shape[-1]), filters], stddev=np.sqrt(1 / filters)
@@ -54,6 +78,13 @@ def conv(inputs, filters, kernel_size):
 
 
 def fully_connected(inputs, out_size):
+    """function fully_connected
+    Args:
+        inputs:   
+        out_size:   
+    Returns:
+        
+    """
     w = tf.Variable(
         tf.random_normal([int(inputs.shape[-1]), out_size], stddev=np.sqrt(1 / out_size))
     )
@@ -66,6 +97,12 @@ def fully_connected(inputs, out_size):
 
 class Model:
     def __init__(self, learning_rate):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+        Returns:
+           
+        """
         self.X = tf.placeholder(tf.float32, shape=[None, 28, 28, 1])
         self.Y = tf.placeholder(tf.float32, shape=[None, 10])
         conv1 = tf.nn.relu(conv(self.X, 16, 5))

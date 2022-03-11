@@ -9,6 +9,20 @@ from classification import HungaBungaClassifier
 
 class HungaBungaZeroKnowledge(BaseEstimator):
     def __init__(self, brain=False, test_size = 0.2, n_splits = 5, random_state=None, upsample=True, scoring=None, verbose=True, normalize_x = True, n_jobs =cpu_count() - 1, grid_search=True):
+        """ HungaBungaZeroKnowledge:__init__
+        Args:
+            brain:     
+            test_size :     
+            n_splits :     
+            random_state:     
+            upsample:     
+            scoring:     
+            verbose:     
+            normalize_x :     
+            n_jobs :     
+        Returns:
+           
+        """
         self.model = None
         self.brain = brain
         self.test_size = test_size
@@ -24,6 +38,13 @@ class HungaBungaZeroKnowledge(BaseEstimator):
         super(HungaBungaZeroKnowledge, self).__init__()
 
     def fit(self, X, y):
+        """ HungaBungaZeroKnowledge:fit
+        Args:
+            X:     
+            y:     
+        Returns:
+           
+        """
         try:
             self.model = HungaBungaClassifier(normalize_x=self.normalize_x, test_size=self.test_size, n_splits=self.n_splits, upsample=self.upsample, scoring=self.scoring, verbose=self.verbose, brain=self.brain, n_jobs=self.n_jobs, grid_search=self.grid_search)
             self.model.fit(X, y)
@@ -35,5 +56,11 @@ class HungaBungaZeroKnowledge(BaseEstimator):
         return self
 
     def predict(self, x):
+        """ HungaBungaZeroKnowledge:predict
+        Args:
+            x:     
+        Returns:
+           
+        """
         return self.model.predict(x)
 

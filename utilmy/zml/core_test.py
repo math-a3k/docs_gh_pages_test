@@ -24,6 +24,12 @@ from time import sleep
 
 ####################################################################################################
 def os_bash(cmd):
+  """function os_bash
+  Args:
+      cmd:   
+  Returns:
+      
+  """
   # os_bash("dir ")
   import subprocess
   try :
@@ -35,6 +41,12 @@ def os_bash(cmd):
 
 
 def log_separator(space=140):
+   """function log_separator
+   Args:
+       space:   
+   Returns:
+       
+   """
    print("\n" * 5, "*" * space, flush=True )
 
 
@@ -89,6 +101,13 @@ def log_info_repo(arg=None):
 
 
 def to_logfile(prefix="", dateformat='+%Y-%m-%d_%H:%M:%S,%3N' ) :
+    """function to_logfile
+    Args:
+        prefix:   
+        dateformat='+%Y-%m-%d_%H:   
+    Returns:
+        
+    """
     ### On Linux System
     if dateformat == "" :
            return  f"  2>&1 | tee -a  cd log_{prefix}.txt"
@@ -97,6 +116,11 @@ def to_logfile(prefix="", dateformat='+%Y-%m-%d_%H:%M:%S,%3N' ) :
 
 
 def os_file_current_path():
+    """function os_file_current_path
+    Args:
+    Returns:
+        
+    """
     import inspect, os
     val = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     val = str(val)
@@ -107,6 +131,15 @@ def os_file_current_path():
 
 
 def os_system(cmd, dolog=1, prefix="", dateformat='+%Y-%m-%d_%H:%M:%S,%3N') :
+    """function os_system
+    Args:
+        cmd:   
+        dolog:   
+        prefix:   
+        dateformat='+%Y-%m-%d_%H:   
+    Returns:
+        
+    """
     if dolog :
         cmd = cmd + to_logfile(prefix, dateformat)
     os.system(cmd)
@@ -114,6 +147,12 @@ def os_system(cmd, dolog=1, prefix="", dateformat='+%Y-%m-%d_%H:%M:%S,%3N') :
 
 
 def json_load(path) :
+  """function json_load
+  Args:
+      path:   
+  Returns:
+      
+  """
   try :
     return json.load(open( path, mode='r'))
   except :
@@ -122,6 +161,12 @@ def json_load(path) :
 
 ####################################################################################################
 def log_remote_start(arg=None):
+   """function log_remote_start
+   Args:
+       arg:   
+   Returns:
+       
+   """
    ## Download remote log on disk
    s = """ cd /home/runner/work/dsa2/  && git clone git@github.com:arita37/logs.git  &&  ls && pwd
        """
@@ -132,6 +177,12 @@ def log_remote_start(arg=None):
 
 
 def log_remote_push(name=None):
+   """function log_remote_push
+   Args:
+       name:   
+   Returns:
+       
+   """
    ### Pushing to dsa2_store   with --force
    # tag ="ml_store" & arg.name
    tag = "m_" + str(name)

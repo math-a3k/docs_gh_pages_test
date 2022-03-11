@@ -37,6 +37,11 @@ ITEM_FEAT_COL = "itemFeat"
 
 @pytest.fixture(scope="module")
 def pd_df():
+    """function pd_df
+    Args:
+    Returns:
+        
+    """
     df = pd.DataFrame(
         {
             DEFAULT_USER_COL: [1, 1, 1, 2, 2, 2],
@@ -59,6 +64,12 @@ def pd_df():
 
 @pytest.mark.gpu
 def test_pandas_input_fn(pd_df):
+    """function test_pandas_input_fn
+    Args:
+        pd_df:   
+    Returns:
+        
+    """
     df, _, _ = pd_df
 
     # check dataset
@@ -107,6 +118,11 @@ def test_pandas_input_fn(pd_df):
 
 @pytest.mark.gpu
 def test_build_optimizer():
+    """function test_build_optimizer
+    Args:
+    Returns:
+        
+    """
     adadelta = build_optimizer("Adadelta")
     assert isinstance(adadelta, tf.train.AdadeltaOptimizer)
 
@@ -131,6 +147,13 @@ def test_build_optimizer():
 
 @pytest.mark.gpu
 def test_evaluation_log_hook(pd_df, tmp):
+    """function test_evaluation_log_hook
+    Args:
+        pd_df:   
+        tmp:   
+    Returns:
+        
+    """
     data, users, items = pd_df
 
     # Run hook 10 times

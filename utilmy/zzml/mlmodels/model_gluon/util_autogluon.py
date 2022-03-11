@@ -23,6 +23,14 @@ def os_package_root_path(filepath, sublevel=0, path_add=""):
 
 
 def log(*s, n=0, m=1):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     print(sjump, sspace, s, sspace, flush=True)
@@ -32,6 +40,12 @@ def log(*s, n=0, m=1):
 ####################################################################################################
 ################ Dataset   #########################################################################
 def _get_dataset_from_aws(**kw):
+    """function _get_dataset_from_aws
+    Args:
+        **kw:   
+    Returns:
+        
+    """
     URL_INC_TRAIN = 'https://autogluon.s3.amazonaws.com/datasets/Inc/train.csv'
     URL_INC_TEST = 'https://autogluon.s3.amazonaws.com/datasets/Inc/test.csv'
 
@@ -96,6 +110,12 @@ def import_data_fromfile(**kw):
 
 
 def get_dataset(**kw):
+    """function get_dataset
+    Args:
+        **kw:   
+    Returns:
+        
+    """
 
     if kw['uri_type'] == 'amazon_aws':
         data, label = _get_dataset_from_aws(**kw)
@@ -158,6 +178,16 @@ def fit(model, data_pars=None, model_pars=None, compute_pars=None, out_pars=None
 
 # Model p redict
 def predict(model, data_pars, compute_pars=None, out_pars=None, **kwargs):
+    """function predict
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     ##  Model is class
     ## load test dataset
     data_pars['train'] = False
@@ -175,6 +205,18 @@ def predict(model, data_pars, compute_pars=None, out_pars=None, **kwargs):
 
 
 def metrics(model, ypred, ytrue, data_pars, compute_pars=None, out_pars=None, **kwargs):
+    """function metrics
+    Args:
+        model:   
+        ypred:   
+        ytrue:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     ## load test dataset
     #data_pars['train'] = False
     #test_ds, label = get_dataset(**data_pars)
@@ -196,11 +238,25 @@ def metrics(model, ypred, ytrue, data_pars, compute_pars=None, out_pars=None, **
 # save and load model helper function
 class Model_empty(object):
     def __init__(self, model_pars=None, compute_pars=None):
+        """ Model_empty:__init__
+        Args:
+            model_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         ## Empty model for Seaialization
         self.model = tabular_task
 
 
 def save(model, out_pars):
+    """function save
+    Args:
+        model:   
+        out_pars:   
+    Returns:
+        
+    """
     if not model:
         print("model do not exist!")
     else:
@@ -208,6 +264,12 @@ def save(model, out_pars):
 
 
 def load(path):
+    """function load
+    Args:
+        path:   
+    Returns:
+        
+    """
     if not os.path.exists(path):
         print("model file do not exist!")
         return None

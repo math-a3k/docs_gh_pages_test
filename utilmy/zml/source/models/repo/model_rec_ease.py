@@ -15,26 +15,62 @@ except Exception as e : verbosity = 2
 #raise Exception(f"{e}")
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 def os_makedirs(dir_or_file):
+    """function os_makedirs
+    Args:
+        dir_or_file:   
+    Returns:
+        
+    """
     if os.path.isfile(dir_or_file) :os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
     else : os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
 
 ####################################################################################################
 global model, session
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
@@ -72,6 +108,15 @@ from rectorch.samplers import ArrayDummySampler
 ####################################################################################################
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None, global_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+            global_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars, self.global_pars = model_pars, compute_pars, data_pars, global_pars
         if model_pars is None:
             self.model = None
@@ -167,6 +212,16 @@ def fit(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars=None, compute_pars={}, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     data_sampler = Xpred
     if data_sampler is None:
@@ -183,6 +238,16 @@ def predict(Xpred=None, data_pars=None, compute_pars={}, out_pars={}, **kw):
     
 
 def eval(Xpred=None, data_pars: dict={}, compute_pars: dict={}, out_pars: dict={}, **kw):
+    """function eval
+    Args:
+        Xpred:   
+        data_pars (  dict ) :   
+        compute_pars (  dict ) :   
+        out_pars (  dict ) :   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
   
     data_sampler = data_pars["sampler"]
@@ -201,6 +266,12 @@ def save(path=None, info=None):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -287,6 +358,13 @@ def get_dataset2(data_pars=None, task_type="train", **kw):
 ############ Test  #################################################################################
 
 def train_test_split2(df, coly):
+    """function train_test_split2
+    Args:
+        df:   
+        coly:   
+    Returns:
+        
+    """
     log3(df.dtypes)
     y = df[coly] ### If clonassificati
     X = df.drop(coly,  axis=1)
@@ -302,6 +380,12 @@ def train_test_split2(df, coly):
     return X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes
 
 def get_dataset_sampler(data_pars):
+    """function get_dataset_sampler
+    Args:
+        data_pars:   
+    Returns:
+        
+    """
 
     try:
         cfg_data = data_pars['data_cfg']
@@ -338,9 +422,21 @@ def get_dataset_sampler(data_pars):
     return dataset, sampler
 
 def init_dataset(data_pars):
+    """function init_dataset
+    Args:
+        data_pars:   
+    Returns:
+        
+    """
     data_path = data_pars['data_pars']['data_cfg']["processing"]["data_path"]
     
 def test(n_sample          = 1000):
+    """function test
+    Args:
+        n_sample          :   
+    Returns:
+        
+    """
 
     # #### Matching Big dict  ##################################################
     def post_process_fun(y): return int(y)
@@ -426,6 +522,14 @@ def test(n_sample          = 1000):
 
 
 def test_helper(model_pars, data_pars, compute_pars):
+    """function test_helper
+    Args:
+        model_pars:   
+        data_pars:   
+        compute_pars:   
+    Returns:
+        
+    """
     global model,session
     root  = "ztmp/"
     model = Model(model_pars=model_pars, data_pars=data_pars)

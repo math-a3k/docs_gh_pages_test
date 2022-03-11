@@ -53,6 +53,11 @@ class ASTAnalyzer(ast.NodeVisitor):
     FORCE_GLOBAL = "force_global"
 
     def __init__(self):
+        """ ASTAnalyzer:__init__
+        Args:
+        Returns:
+           
+        """
         self.function_or_class = None
         self.variables = {}
 
@@ -73,26 +78,56 @@ class ASTAnalyzer(ast.NodeVisitor):
         return {k: label_to_bool[v] for (k, v) in self.variables.items()}
 
     def _handleArguments(self, arguments):
+        """ ASTAnalyzer:_handleArguments
+        Args:
+            arguments:     
+        Returns:
+           
+        """
         for arg in arguments.args:
             self._handleLocalVariable(variable_name=arg.arg)
 
     def _handleForceGlobalVariable(self, variable_name):
+        """ ASTAnalyzer:_handleForceGlobalVariable
+        Args:
+            variable_name:     
+        Returns:
+           
+        """
         key = (self.function_or_class, variable_name)
 
         self.variables[key] = self.__class__.FORCE_GLOBAL
 
     def _handleGlobalVariable(self, variable_name):
+        """ ASTAnalyzer:_handleGlobalVariable
+        Args:
+            variable_name:     
+        Returns:
+           
+        """
         key = (self.function_or_class, variable_name)
 
         self.variables.setdefault(key, self.__class__.GLOBAL)
 
     def _handleLocalVariable(self, variable_name):
+        """ ASTAnalyzer:_handleLocalVariable
+        Args:
+            variable_name:     
+        Returns:
+           
+        """
         key = (self.function_or_class, variable_name)
 
         if self.variables.get(key) != self.__class__.FORCE_GLOBAL:
             self.variables[key] = self.__class__.LOCAL
 
     def _handleVariable(self, node):
+        """ ASTAnalyzer:_handleVariable
+        Args:
+            node:     
+        Returns:
+           
+        """
         is_local = False
         if self.function_or_class is not None:
             if type(node.ctx) in [ast.Param, ast.Store, ast.AugStore]:
@@ -108,6 +143,12 @@ class ASTAnalyzer(ast.NodeVisitor):
         self.generic_visit(node)
 
     def _impl_visit_Function(self, node):
+        """ ASTAnalyzer:_impl_visit_Function
+        Args:
+            node:     
+        Returns:
+           
+        """
         old, self.function_or_class = self.function_or_class, node
 
         self._handleArguments(node.args)
@@ -116,26 +157,62 @@ class ASTAnalyzer(ast.NodeVisitor):
         self.function_or_class = old
 
     def visit_AsyncFunctionDef(self, node):
+        """ ASTAnalyzer:visit_AsyncFunctionDef
+        Args:
+            node:     
+        Returns:
+           
+        """
         self._impl_visit_Function(node)
 
     def visit_ClassDef(self, node):
+        """ ASTAnalyzer:visit_ClassDef
+        Args:
+            node:     
+        Returns:
+           
+        """
         old, self.function_or_class = self.function_or_class, node
         self.generic_visit(node)
         self.function_or_class = old
 
     def visit_FunctionDef(self, node):
+        """ ASTAnalyzer:visit_FunctionDef
+        Args:
+            node:     
+        Returns:
+           
+        """
         self._impl_visit_Function(node)
 
     def visit_Global(self, node):
+        """ ASTAnalyzer:visit_Global
+        Args:
+            node:     
+        Returns:
+           
+        """
         for variable_name in node.names:
             self._handleForceGlobalVariable(variable_name)
 
         self.generic_visit(node)
 
     def visit_Lambda(self, node):
+        """ ASTAnalyzer:visit_Lambda
+        Args:
+            node:     
+        Returns:
+           
+        """
         self._impl_visit_Function(node)
 
     def visit_Name(self, node):
+        """ ASTAnalyzer:visit_Name
+        Args:
+            node:     
+        Returns:
+           
+        """
         self._handleVariable(node)
 
 
@@ -200,6 +277,12 @@ def findVariablesInDir(directory):
 
 
 def _onerror_reraise(e):
+    """function _onerror_reraise
+    Args:
+        e:   
+    Returns:
+        
+    """
     raise e
 
 
@@ -252,6 +335,11 @@ def writeCSV(variables, file_path=None):
 
 
 def get_arguments():
+    """function get_arguments
+    Args:
+    Returns:
+        
+    """
     import argparse
     p = argparse.ArgumentParser(
         description='This Python code parser fetches variable information from the given source files.')
@@ -265,6 +353,11 @@ def get_arguments():
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     args = get_arguments()
 
     path = args.dir_in

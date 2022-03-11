@@ -28,6 +28,11 @@ from utilmy.prepro.util_feature import  pd_colnum_tocat, pd_colnum_tocat_stat
 from utilmy.utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print( HELP + help_create("utilmy.tabular") )
 
@@ -182,6 +187,11 @@ def test_all():
 
 
 def test0():
+    """function test0
+    Args:
+    Returns:
+        
+    """
     df = pd_generate_data(7, 100)
     test_anova(df, 'cat1', 'cat2')
     test_normality2(df, '0', "Shapiro")
@@ -192,6 +202,11 @@ def test0():
     '''
 
 def test1():
+    """function test1
+    Args:
+    Returns:
+        
+    """
     from sklearn.tree import DecisionTreeRegressor
     from sklearn.model_selection import train_test_split
 
@@ -213,6 +228,11 @@ def test1():
 
 
 def test3():
+    """function test3
+    Args:
+    Returns:
+        
+    """
     arr = np.array([[1, 2, 3], [4, 5, 6]])
     np_col_extractname(["aa_","bb-","cc"])
     np_list_remove(arr,[1,2,3], mode="exact")
@@ -220,6 +240,12 @@ def test3():
 
 
 def log(*s) -> None:
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(s)
 
 
@@ -504,6 +530,14 @@ def test_plot_qqplot(df: DataFrame, col_name: str) -> None:
 
 ####################################################################################################
 def test_heteroscedacity(y: Series, y_pred: ndarray, pred_value_only: int=1) -> Dict[str, Dict[str, float64]]:
+    """function test_heteroscedacity
+    Args:
+        y (  Series ) :   
+        y_pred (  ndarray ) :   
+        pred_value_only (  int ) :   
+    Returns:
+        
+    """
     ss = """
        Test  Heteroscedacity :  Residual**2  = Linear(X, Pred, Pred**2)
        F pvalues < 0.01 : Null is Rejected  ---> Not Homoscedastic
@@ -585,6 +619,14 @@ def test_hypothesis(df_obs: DataFrame, df_ref: DataFrame, method: str='', **kw):
 ####################################################################################################
 ####################################################################################################
 def estimator_std_normal(err, alpha=0.05, ):
+    """function estimator_std_normal
+    Args:
+        err:   
+        alpha:   
+        :   
+    Returns:
+        
+    """
     # estimate_std( err, alpha=0.05, )
     from scipy import stats
     n = len(err)  # sample sizes
@@ -597,6 +639,14 @@ def estimator_std_normal(err, alpha=0.05, ):
 
 
 def estimator_boostrap_bayes(err, alpha=0.05, ):
+    """function estimator_boostrap_bayes
+    Args:
+        err:   
+        alpha:   
+        :   
+    Returns:
+        
+    """
     from scipy.stats import bayes_mvs
     mean, var, std = bayes_mvs(err, alpha=alpha)
     return mean, var, std

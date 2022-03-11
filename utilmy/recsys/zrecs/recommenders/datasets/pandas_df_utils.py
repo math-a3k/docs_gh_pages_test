@@ -141,6 +141,12 @@ class LibffmConverter:
     """
 
     def __init__(self, filepath=None):
+        """ LibffmConverter:__init__
+        Args:
+            filepath:     
+        Returns:
+           
+        """
         self.filepath = filepath
         self.col_rating = None
         self.field_names = None

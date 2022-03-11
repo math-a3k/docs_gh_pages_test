@@ -19,6 +19,11 @@ import numpy as np
 
 class DUALGAN():
     def __init__(self):
+        """ DUALGAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -72,6 +77,11 @@ class DUALGAN():
                             loss_weights=[1, 1, 100, 100])
 
     def build_generator(self):
+        """ DUALGAN:build_generator
+        Args:
+        Returns:
+           
+        """
 
         X = Input(shape=(self.img_dim,))
 
@@ -95,6 +105,11 @@ class DUALGAN():
         return Model(X, X_translated)
 
     def build_discriminator(self):
+        """ DUALGAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         img = Input(shape=(self.img_dim,))
 
@@ -111,14 +126,36 @@ class DUALGAN():
         return Model(img, validity)
 
     def sample_generator_input(self, X, batch_size):
+        """ DUALGAN:sample_generator_input
+        Args:
+            X:     
+            batch_size:     
+        Returns:
+           
+        """
         # Sample random batch of images from X
         idx = np.random.randint(0, X.shape[0], batch_size)
         return X[idx]
 
     def wasserstein_loss(self, y_true, y_pred):
+        """ DUALGAN:wasserstein_loss
+        Args:
+            y_true:     
+            y_pred:     
+        Returns:
+           
+        """
         return K.mean(y_true * y_pred)
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ DUALGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, _), (_, _) = mnist.load_data()
@@ -190,6 +227,14 @@ class DUALGAN():
                 self.save_imgs(epoch, X_A, X_B)
 
     def save_imgs(self, epoch, X_A, X_B):
+        """ DUALGAN:save_imgs
+        Args:
+            epoch:     
+            X_A:     
+            X_B:     
+        Returns:
+           
+        """
         r, c = 4, 4
 
         # Sample generator inputs

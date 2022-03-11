@@ -29,6 +29,15 @@ df.head()
 
 class Model:
     def __init__(self, input_size, output_size, layer_size, learning_rate):
+        """ Model:__init__
+        Args:
+            input_size:     
+            output_size:     
+            layer_size:     
+            learning_rate:     
+        Returns:
+           
+        """
         self.X = tf.placeholder(tf.float32, (None, input_size))
         self.Y = tf.placeholder(tf.float32, (None, output_size))
         feed_forward = tf.layers.dense(self.X, layer_size, activation=tf.nn.relu)
@@ -53,6 +62,15 @@ class Agent:
     MEMORY_SIZE = 300
 
     def __init__(self, state_size, window_size, trend, skip):
+        """ Agent:__init__
+        Args:
+            state_size:     
+            window_size:     
+            trend:     
+            skip:     
+        Returns:
+           
+        """
         self.state_size = state_size
         self.window_size = window_size
         self.half_window = window_size // 2
@@ -68,16 +86,37 @@ class Agent:
         self.trainable = tf.trainable_variables()
 
     def _assign(self):
+        """ Agent:_assign
+        Args:
+        Returns:
+           
+        """
         for i in range(len(self.trainable) // 2):
             assign_op = self.trainable[i + len(self.trainable) // 2].assign(self.trainable[i])
             self.sess.run(assign_op)
 
     def _memorize(self, state, action, reward, new_state, done):
+        """ Agent:_memorize
+        Args:
+            state:     
+            action:     
+            reward:     
+            new_state:     
+            done:     
+        Returns:
+           
+        """
         self.MEMORIES.append((state, action, reward, new_state, done))
         if len(self.MEMORIES) > self.MEMORY_SIZE:
             self.MEMORIES.popleft()
 
     def _select_action(self, state):
+        """ Agent:_select_action
+        Args:
+            state:     
+        Returns:
+           
+        """
         if np.random.rand() < self.EPSILON:
             action = np.random.randint(self.OUTPUT_SIZE)
         else:
@@ -85,6 +124,12 @@ class Agent:
         return action
 
     def _construct_memories(self, replay):
+        """ Agent:_construct_memories
+        Args:
+            replay:     
+        Returns:
+           
+        """
         states = np.array([a[0] for a in replay])
         new_states = np.array([a[3] for a in replay])
         Q = self.predict(states)
@@ -106,13 +151,31 @@ class Agent:
         return X, Y
 
     def predict(self, inputs):
+        """ Agent:predict
+        Args:
+            inputs:     
+        Returns:
+           
+        """
         return self.sess.run(self.model.logits, feed_dict={self.model.X: inputs})
 
     def get_predicted_action(self, sequence):
+        """ Agent:get_predicted_action
+        Args:
+            sequence:     
+        Returns:
+           
+        """
         prediction = self.predict(np.array(sequence))[0]
         return np.argmax(prediction)
 
     def get_state(self, t):
+        """ Agent:get_state
+        Args:
+            t:     
+        Returns:
+           
+        """
         window_size = self.window_size + 1
         d = t - window_size + 1
         block = self.trend[d : t + 1] if d >= 0 else -d * [self.trend[0]] + self.trend[0 : t + 1]
@@ -122,6 +185,12 @@ class Agent:
         return np.array(res)
 
     def buy(self, initial_money):
+        """ Agent:buy
+        Args:
+            initial_money:     
+        Returns:
+           
+        """
         starting_money = initial_money
         states_sell = []
         states_buy = []
@@ -159,6 +228,14 @@ class Agent:
         return states_buy, states_sell, total_gains, invest
 
     def train(self, iterations, checkpoint, initial_money):
+        """ Agent:train
+        Args:
+            iterations:     
+            checkpoint:     
+            initial_money:     
+        Returns:
+           
+        """
         for i in range(iterations):
             total_profit = 0
             inventory = []

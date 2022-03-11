@@ -57,6 +57,11 @@ except :
 from utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = HELP + help_create(MNAME)
     print(ss)
@@ -66,6 +71,11 @@ def help():
     
 #################################################################################################
 def test_ab_getstat():
+    """function test_ab_getstat
+    Args:
+    Returns:
+        
+    """
     from abra.utils import generate_fake_observations
     
     # generate demo data
@@ -110,12 +120,22 @@ def test_ab_getstat():
 
     
 def test_np_calculate_z_val():
+    """function test_np_calculate_z_val
+    Args:
+    Returns:
+        
+    """
     from numpy.testing import assert_almost_equal
     assert_almost_equal(np_calculate_z_val(sig_level=0.05), 1.9599, decimal=4)
     assert_almost_equal(np_calculate_z_val(sig_level=0.1), 1.6448, decimal=4)
 
 
 def test_np_calculate_confidence_interval():
+    """function test_np_calculate_confidence_interval
+    Args:
+    Returns:
+        
+    """
     from numpy.testing import assert_almost_equal
     ci_1 = np_calculate_confidence_interval(sample_mean=5,
                                             sample_std=1,
@@ -135,6 +155,11 @@ def test_np_calculate_confidence_interval():
 
 
 def test_np_calculate_ab_dist():
+    """function test_np_calculate_ab_dist
+    Args:
+    Returns:
+        
+    """
     dist_1 = np_calculate_ab_dist(stderr=5, d_hat=1, group_type='control')
     assert dist_1.mean() == 0.0
     assert dist_1.std() == 5.0
@@ -145,6 +170,11 @@ def test_np_calculate_ab_dist():
 
 
 def test_pd_generate_ctr_data():
+    """function test_pd_generate_ctr_data
+    Args:
+    Returns:
+        
+    """
     ab_data, ab_summary = pd_generate_ctr_data(1000,1000,0.4,0.7, seed=35)
     ab_summary = ab_summary.reset_index().to_dict(orient='records')
 
@@ -155,11 +185,22 @@ def test_pd_generate_ctr_data():
 
 
 def test_np_calculate_min_sample_size():
+    """function test_np_calculate_min_sample_size
+    Args:
+    Returns:
+        
+    """
     assert np_calculate_min_sample_size(bcr=0.7, mde=0.2) == 62
     assert np_calculate_min_sample_size(bcr=0.7, mde=0.3) == 22
 
 
 def get_ab_test_data(vars_also=False):
+    """function get_ab_test_data
+    Args:
+        vars_also:   
+    Returns:
+        
+    """
     # A is control; B is test
     N_A = 1000
     N_B = 1000
@@ -184,6 +225,11 @@ def get_ab_test_data(vars_also=False):
 
 
 def test_plot_binom_dist():
+    """function test_plot_binom_dist
+    Args:
+    Returns:
+        
+    """
     from numpy.testing import assert_almost_equal
     _, vars = get_ab_test_data(vars_also=True)
 
@@ -205,6 +251,11 @@ def test_plot_binom_dist():
 
 
 def test_plot_ab():
+    """function test_plot_ab
+    Args:
+    Returns:
+        
+    """
     from numpy.testing import assert_almost_equal
     _, vars = get_ab_test_data(vars_also=True)
     bcr = vars['A_cr']
@@ -252,6 +303,11 @@ def test_plot_ab():
 
 
 def test_zplot():
+    """function test_zplot
+    Args:
+    Returns:
+        
+    """
     from numpy.testing import assert_almost_equal
 
     fig, ax = plt.subplots(figsize=(12,6))
@@ -277,6 +333,11 @@ def test_zplot():
 
 
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     test_np_calculate_z_val()
     test_np_calculate_confidence_interval()
     test_np_calculate_ab_dist()

@@ -10,6 +10,11 @@ import os, sys, socket, platform, time, gc,logging, random
 from utilmy.utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss  = help_create("utilmy.distributed", prefixs= [ 'test'])  #### Merge test code
     ss += HELP
@@ -17,6 +22,12 @@ def help():
 
 
 def log_mem(*s):
+    """function log_mem
+    Args:
+        *s:   
+    Returns:
+        
+    """
     try:
         # print(*s, "\n", flush=True)
         import psutil
@@ -110,11 +121,21 @@ def test_index():
 
 
 def test_tofilesafe():
+   """function test_tofilesafe
+   Args:
+   Returns:
+       
+   """
    pass
 
 
 
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     test_functions()
     test_funtions_thread()
     test_index()
@@ -134,10 +155,23 @@ class toFile(object):
       self.logger = logger
 
    def write(self, msg):
+        """ toFile:write
+        Args:
+            msg:     
+        Returns:
+           
+        """
         self.logger.info( msg)
 
 
 def to_file_safe(msg:str, fpath:str):
+   """function to_file_safe
+   Args:
+       msg ( str ) :   
+       fpath ( str ) :   
+   Returns:
+       
+   """
    ss = str(msg)
    logger = logging.getLogger('log')
    logger.setLevel(logging.INFO)
@@ -161,6 +195,16 @@ class IndexLock(object):
     """
     ### Manage Invemtory Index with Atomic Write/Read
     def __init__(self, findex, file_lock=None, min_size=5, skip_comment=True, ntry=20):
+        """ IndexLock:__init__
+        Args:
+            findex:     
+            file_lock:     
+            min_size:     
+            skip_comment:     
+            ntry:     
+        Returns:
+           
+        """
         self.findex= findex
         os.makedirs(os.path.dirname( os.path.abspath(self.findex)), exist_ok=True)
 
@@ -179,18 +223,36 @@ class IndexLock(object):
 
 
     def read(self,): ### alias
-        return self.get()
-
-
-    def save_isok(self, flist:list):   ### Alias
-        return put(self, val)
-
+        """ IndexLock:read
+        Args:
+            :     
+        Returns:
+           
+        """
+        """ IndexLock:save_isok
+        Args:
+            flist (function["arg_type"][i]) :     
+        Returns:
+           
+        """
     def save_filter(self, val:list=None):
+        """ IndexLock:save_filter
+        Args:
+            val (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         return put(self, val)
 
 
     ######################################################################
     def get(self, **kw):
+        """ IndexLock:get
+        Args:
+            **kw:     
+        Returns:
+           
+        """
         ## return the list of files
         with open(self.findex, mode='r') as fp:
             flist = fp.readlines()
@@ -261,6 +323,13 @@ class Index0(object):
     ### to maintain global index, flist = index.read()  index.save(flist)
     """
     def __init__(self, findex:str="ztmp_file.txt", ntry=10):
+        """ Index0:__init__
+        Args:
+            findex (function["arg_type"][i]) :     
+            ntry:     
+        Returns:
+           
+        """
         self.findex = findex
         os.makedirs(os.path.dirname(self.findex), exist_ok=True)
         if not os.path.isfile(self.findex):
@@ -270,6 +339,12 @@ class Index0(object):
         self.ntry= ntry
 
     def read(self,):
+        """ Index0:read
+        Args:
+            :     
+        Returns:
+           
+        """
         import time
         try :
            with open(self.findex, mode='r') as fp:
@@ -288,6 +363,12 @@ class Index0(object):
         return flist2
 
     def save(self, flist:list):
+        """ Index0:save
+        Args:
+            flist (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         if len(flist) < 1 : return True
         ss = ""
         for fi in flist :
@@ -384,6 +465,12 @@ def os_lock_execute(fun_run, fun_args=None, ntry=5, plock="tmp/plock.lock", slee
 
 ################################################################################################
 def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
+    """function date_now
+    Args:
+        fmt = "%Y-%m-%d %H:   
+    Returns:
+        
+    """
     from pytz import timezone
     from datetime import datetime
     # Current time in UTC
@@ -394,11 +481,25 @@ def date_now(fmt = "%Y-%m-%d %H:%M:%S %Z%z"):
 
 
 def time_sleep_random(nmax=5):
+    """function time_sleep_random
+    Args:
+        nmax:   
+    Returns:
+        
+    """
     import random, time
     time.sleep( random.randrange(nmax) )
 
 
 def save(dd, to_file="", verbose=False):
+  """function save
+  Args:
+      dd:   
+      to_file:   
+      verbose:   
+  Returns:
+      
+  """
   import pickle, os
   os.makedirs(os.path.dirname(to_file), exist_ok=True)
   pickle.dump(dd, open(to_file, mode="wb") , protocol=pickle.HIGHEST_PROTOCOL)
@@ -406,12 +507,24 @@ def save(dd, to_file="", verbose=False):
 
 
 def load(to_file=""):
+  """function load
+  Args:
+      to_file:   
+  Returns:
+      
+  """
   import pickle
   dd =   pickle.load(open(to_file, mode="rb"))
   return dd
 
 
 def load_serialize(name):
+     """function load_serialize
+     Args:
+         name:   
+     Returns:
+         
+     """
      global pcache
      #import diskcache as dc
      log2("loading ", pcache)
@@ -420,6 +533,13 @@ def load_serialize(name):
      # return {'a' : {'b': 2}}
 
 def save_serialize(name, value):
+     """function save_serialize
+     Args:
+         name:   
+         value:   
+     Returns:
+         
+     """
      global pcache
      #import diskcache as dc
      log2("inserting ", pcache)

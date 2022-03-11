@@ -44,6 +44,15 @@ MODEL_MAP = {
 ###########################################################################################################
 class Model:
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None, out_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+            out_pars:     
+        Returns:
+           
+        """
         ### Model Structure        ################################
         if model_pars is None :
             self.model = None
@@ -61,6 +70,13 @@ class Model:
 
 
 def get_params(param_pars=None, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     pp          = param_pars
     choice      = pp['choice']
     config_mode = pp['config_mode']
@@ -84,6 +100,13 @@ def get_params(param_pars=None, **kw):
 
 
 def get_dataset(data_pars=None, **kw):
+    """function get_dataset
+    Args:
+        data_pars:   
+        **kw:   
+    Returns:
+        
+    """
     data_path        = data_pars['data_path']
     train_batch_size = data_pars['train_batch_size']
     test_batch_size  = data_pars['test_batch_size']
@@ -101,6 +124,16 @@ def get_dataset(data_pars=None, **kw):
 
 
 def fit(model, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
+    """function fit
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     model0        = model.model
     lr            = compute_pars['learning_rate']
     epochs        = compute_pars["epochs"]
@@ -132,6 +165,18 @@ def fit(model, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
 
 
 def predict(model, session=None, data_pars=None, compute_pars=None, out_pars=None, imax = 1, return_ytrue=1):
+    """function predict
+    Args:
+        model:   
+        session:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        imax :   
+        return_ytrue:   
+    Returns:
+        
+    """
     # get a batch of data
     import numpy as np
     from metrics import metrics_eval
@@ -159,15 +204,38 @@ def predict(model, session=None, data_pars=None, compute_pars=None, out_pars=Non
         return y_pred
 
 def evaluate(model, data_pars=None, compute_pars=None, out_pars=None):
+    """function evaluate
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+    Returns:
+        
+    """
     pass
 
 
 def save(model, session=None, save_pars=None):
+    """function save
+    Args:
+        model:   
+        session:   
+        save_pars:   
+    Returns:
+        
+    """
     from mlmodels.util import save_tch
     save_tch(model=model, save_pars=save_pars)
 
 
 def load(load_pars):
+    """function load
+    Args:
+        load_pars:   
+    Returns:
+        
+    """
     from mlmodels.util import load_tch
     return load_tch(load_pars)
 
@@ -176,6 +244,14 @@ def load(load_pars):
 ###########################################################################################################
 ###########################################################################################################
 def test(data_path="dataset/", pars_choice="json", config_mode="test"):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+        config_mode:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

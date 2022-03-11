@@ -9,6 +9,12 @@ import fire, argparse, os, sys
 
 #############################################################################################
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 

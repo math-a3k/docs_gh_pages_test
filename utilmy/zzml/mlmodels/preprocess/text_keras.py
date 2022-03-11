@@ -8,9 +8,22 @@ import numpy as np
 
 class Preprocess_namentity:
     def __init__(self,max_len,**args):
+        """ Preprocess_namentity:__init__
+        Args:
+            max_len:     
+            **args:     
+        Returns:
+           
+        """
         self.max_len = max_len
     
     def compute(self,df):
+        """ Preprocess_namentity:compute
+        Args:
+            df:     
+        Returns:
+           
+        """
         df = df.fillna(method='ffill')
         ##### Get sentences
         agg = lambda s: [(w, p, t) for w, p, t in zip(s['Word'].values.tolist(),
@@ -54,6 +67,11 @@ class Preprocess_namentity:
         self.data = {"X": X, "y":y,"word_count":len(df['Word'].unique())+2}
 
     def get_data(self):
+        """ Preprocess_namentity:get_data
+        Args:
+        Returns:
+           
+        """
         return self.data
 
 
@@ -79,6 +97,13 @@ def _remove_long_seq(maxlen, seq, label):
 class IMDBDataset:
 
     def __init__(self, *args, **kwargs):
+        """ IMDBDataset:__init__
+        Args:
+            *args:     
+            **kwargs:     
+        Returns:
+           
+        """
         self.start_char = kwargs.get("start_char", 1)
         self.oov_char = kwargs.get("oov_char", 2)
         self.index_from = kwargs.get("index_from", 3)
@@ -87,6 +112,12 @@ class IMDBDataset:
         self.skip_top = kwargs.get("skip_top", 0)
 
     def compute(self, data):
+        """ IMDBDataset:compute
+        Args:
+            data:     
+        Returns:
+           
+        """
         x_test, x_train, labels_test, labels_train = data
         indices = np.arange(len(x_train))
         x_train = x_train[indices]

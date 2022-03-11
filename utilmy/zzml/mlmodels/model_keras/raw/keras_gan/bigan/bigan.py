@@ -18,6 +18,11 @@ import numpy as np
 
 class BIGAN():
     def __init__(self):
+        """ BIGAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -61,6 +66,11 @@ class BIGAN():
 
 
     def build_encoder(self):
+        """ BIGAN:build_encoder
+        Args:
+        Returns:
+           
+        """
         model = Sequential()
 
         model.add(Flatten(input_shape=self.img_shape))
@@ -80,6 +90,11 @@ class BIGAN():
         return Model(img, z)
 
     def build_generator(self):
+        """ BIGAN:build_generator
+        Args:
+        Returns:
+           
+        """
         model = Sequential()
 
         model.add(Dense(512, input_dim=self.latent_dim))
@@ -99,6 +114,11 @@ class BIGAN():
         return Model(z, gen_img)
 
     def build_discriminator(self):
+        """ BIGAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         z = Input(shape=(self.latent_dim, ))
         img = Input(shape=self.img_shape)
@@ -118,6 +138,14 @@ class BIGAN():
         return Model([z, img], validity)
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ BIGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, _), (_, _) = mnist.load_data()
@@ -166,6 +194,12 @@ class BIGAN():
                 self.sample_interval(epoch)
 
     def sample_interval(self, epoch):
+        """ BIGAN:sample_interval
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 5, 5
         z = np.random.normal(size=(25, self.latent_dim))
         gen_imgs = self.generator.predict(z)

@@ -15,6 +15,12 @@ import core_models.parser_arguments as parser_arguments
 
 
 def main(args):
+    """function main
+    Args:
+        args:   
+    Returns:
+        
+    """
 
     # Load datasets
     _, X_train, target_errors_train, _, _ = utils.load_data(args.data_folder, args.batch_size, is_train=True, is_one_hot=args.is_one_hot)

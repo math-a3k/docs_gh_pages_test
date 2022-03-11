@@ -33,6 +33,13 @@ pip install c:\this_is_here\scipy-0.17.0-cp27-none-win_amd64.whl
 
 #-----Get Documentation of the module
 def getmodule_doc(module1, fileout=''):
+  """function getmodule_doc
+  Args:
+      module1:   
+      fileout:   
+  Returns:
+      
+  """
   import codeanalysis as ca
   ca.getmodule_doc(module1, fileout)
   

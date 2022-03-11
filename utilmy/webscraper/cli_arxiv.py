@@ -22,6 +22,16 @@ page_num = 1
 print(os.getcwd() )
 
 def main(url="", path_pdf="data/scraper/v1/pdf/", path_txt="data/scraper/v1/txt/", npage_max=1, tag="v1"):
+    """function main
+    Args:
+        url:   
+        path_pdf:   
+        path_txt:   
+        npage_max:   
+        tag:   
+    Returns:
+        
+    """
     global page_num
     page_num = npage_max
 
@@ -43,6 +53,12 @@ def main(url="", path_pdf="data/scraper/v1/pdf/", path_txt="data/scraper/v1/txt/
 
 
 def parse_main_page(url):
+    """function parse_main_page
+    Args:
+        url:   
+    Returns:
+        
+    """
     print(f"Trying to read URL {url}...")
     response = requests.get(url)
 
@@ -60,6 +76,12 @@ def parse_main_page(url):
 
 
 def process_and_paginate_soup(response_soup):
+    """function process_and_paginate_soup
+    Args:
+        response_soup:   
+    Returns:
+        
+    """
     global page_count
     page_count += 1
 
@@ -95,6 +117,16 @@ def process_and_paginate_soup(response_soup):
 
 
 def process_url(url_data, idx, list_len, path_pdf="", path_txt=""):
+    """function process_url
+    Args:
+        url_data:   
+        idx:   
+        list_len:   
+        path_pdf:   
+        path_txt:   
+    Returns:
+        
+    """
     page_url, page_title = url_data
     page_title = page_title.replace("/", "\u2215")
 

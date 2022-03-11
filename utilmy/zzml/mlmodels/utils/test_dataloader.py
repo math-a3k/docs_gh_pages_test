@@ -19,6 +19,13 @@ from mlmodels.util import load_callable_from_dict, path_norm, path_norm_dict
 
 ###########################################################################3
 def pandas_split_xy(out,data_pars):
+    """function pandas_split_xy
+    Args:
+        out:   
+        data_pars:   
+    Returns:
+        
+    """
     X_c    = data_pars['input_pars'].get('col_Xinput',[])
     y_c    = data_pars['input_pars'].get('col_yinput',[])
     misc_c = data_pars['input_pars'].get('col_miscinput',[])
@@ -31,21 +38,49 @@ def pandas_split_xy(out,data_pars):
 
 
 def pandas_load_train_test(path, test_path, **args):
+    """function pandas_load_train_test
+    Args:
+        path:   
+        test_path:   
+        **args:   
+    Returns:
+        
+    """
     return pd.read_csv(path,**args), pd.read_csv(test_path,**args),
 
 
 def rename_target_to_y(out,data_pars):
+    """function rename_target_to_y
+    Args:
+        out:   
+        data_pars:   
+    Returns:
+        
+    """
     X_c    = data_pars['input_pars'].get('col_Xinput',[])
     y_c    = data_pars['input_pars'].get('col_yinput',[])
     return tuple(df[X_c+y_c].rename(columns={y_c[0]:'y'}, inplace=True) for df in out)
 
 
 def load_npz(path):
+    """function load_npz
+    Args:
+        path:   
+    Returns:
+        
+    """
     npz = np.load(path, allow_pickle=True)
     return tuple(npz[x] for x in sorted(npz.files))
 
 
 def split_xy_from_dict(out, **kwargs):
+    """function split_xy_from_dict
+    Args:
+        out:   
+        **kwargs:   
+    Returns:
+        
+    """
     X_c    = kwargs.get('col_Xinput',[])
     y_c    = kwargs.get('col_yinput',[])
     X      = [out[n] for n in X_c]
@@ -53,6 +88,15 @@ def split_xy_from_dict(out, **kwargs):
     return (*X,*y)
     
 def split_timeseries_df(out,data_pars,length,shift):
+    """function split_timeseries_df
+    Args:
+        out:   
+        data_pars:   
+        length:   
+        shift:   
+    Returns:
+        
+    """
     X_c    = data_pars['input_pars'].get('col_Xinput',[])
     y_c    = data_pars['input_pars'].get('col_yinput',[])
     end_ind = len(out.index) - (len(out.index)%length)
@@ -61,22 +105,60 @@ def split_timeseries_df(out,data_pars,length,shift):
     return X,y
     
 def gluon_append_target_string(out,data_pars):
+    """function gluon_append_target_string
+    Args:
+        out:   
+        data_pars:   
+    Returns:
+        
+    """
     return out, data_pars['input_pars'].get('col_yinput')[0]
 
 def identical_test_set_split(*args,test_size,**kwargs):
+    """function identical_test_set_split
+    Args:
+        *args:   
+        test_size:   
+        **kwargs:   
+    Returns:
+        
+    """
     return (*args,*args)
 
 def read_csvs_from_directory(path,files=None,**args):
+    """function read_csvs_from_directory
+    Args:
+        path:   
+        files:   
+        **args:   
+    Returns:
+        
+    """
     f = [x for x in os.listdir(path) if '.csv' in x] if files is None else [path+'/'+x for x in files]
     return (pd.read_csv(x,**args) for x in f)
 
 def tokenize_x(data,no_classes,max_words=None):
+    """function tokenize_x
+    Args:
+        data:   
+        no_classes:   
+        max_words:   
+    Returns:
+        
+    """
     if max_words is None:
         max_words = data[0].size
     t = Tokenizer(num_words=max_words)
     return t.sequences_to_matrix(data[0], mode='binary'), keras.utils.to_categorical(data[1], no_classes)
 
 def timeseries_split(*args,test_size=0.2):
+    """function timeseries_split
+    Args:
+        *args:   
+        test_size:   
+    Returns:
+        
+    """
     train = []
     test = []
     index = math.floor(len(args[0])*(1-test_size))
@@ -88,12 +170,29 @@ def timeseries_split(*args,test_size=0.2):
 
 class SingleFunctionPreprocessor:
     def __init__(self,func_dict):
+        """ SingleFunctionPreprocessor:__init__
+        Args:
+            func_dict:     
+        Returns:
+           
+        """
         func, args = load_callable_from_dict(func_dict)
         self.func = func
         self.args = args
     def compute(self,data):
+        """ SingleFunctionPreprocessor:compute
+        Args:
+            data:     
+        Returns:
+           
+        """
         self.data = self.func(data,**self.args)
     def get_data(self):
+        """ SingleFunctionPreprocessor:get_data
+        Args:
+        Returns:
+           
+        """
         return self.data
 
 

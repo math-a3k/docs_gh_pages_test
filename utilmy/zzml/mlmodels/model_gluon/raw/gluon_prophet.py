@@ -63,6 +63,14 @@ VERBOSE = False
 #### Model defintion
 class Model(object) :
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None) :
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         ## Empty model for Seaialization
         if model_pars is None and compute_pars is None :
             self.model = None
@@ -76,6 +84,15 @@ class Model(object) :
 
 ########################################################################################################################
 def get_params(choice="", data_path="dataset/", config_mode="test", **kw):
+    """function get_params
+    Args:
+        choice:   
+        data_path:   
+        config_mode:   
+        **kw:   
+    Returns:
+        
+    """
     if choice == "json":
        return _config_process(data_path, config_mode=config_mode)
 
@@ -108,6 +125,13 @@ def get_params(choice="", data_path="dataset/", config_mode="test", **kw):
 
 ########################################################################################################################
 def test(data_path="dataset/", choice=""):
+    """function test
+    Args:
+        data_path:   
+        choice:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

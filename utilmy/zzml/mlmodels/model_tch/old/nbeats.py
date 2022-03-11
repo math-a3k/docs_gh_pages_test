@@ -27,6 +27,14 @@ from mlmodels.model_tch.raw.nbeats.model import NBeatsNet
 # Model
 class Model:
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars = model_pars    
 
         if model_pars is None : 
@@ -44,6 +52,12 @@ class Model:
 
 ####################################################################################################
 def get_data(data_pars):
+  """function get_data
+  Args:
+      data_pars:   
+  Returns:
+      
+  """
   d = data_pars
 
   pred_length = d["prediction_length"]
@@ -78,6 +92,12 @@ def get_data(data_pars):
 
 
 def get_dataset(**kw):
+    """function get_dataset
+    Args:
+        **kw:   
+    Returns:
+        
+    """
     data_path = path_norm( kw['train_data_path'] )
     train_split_ratio = kw.get("train_split_ratio", 0.8)
 
@@ -124,6 +144,14 @@ def get_dataset(**kw):
 
 
 def data_generator(x_full, y_full, bs):
+    """function data_generator
+    Args:
+        x_full:   
+        y_full:   
+        bs:   
+    Returns:
+        
+    """
     def split(arr, size):
         arrays = []
         while len(arr) > size:
@@ -141,6 +169,16 @@ def data_generator(x_full, y_full, bs):
 ######################################################################################################
 # Model fit
 def fit(model, data_pars=None, compute_pars=None, out_pars=None, **kw):
+    """function fit
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     device = torch.device('cpu')
     forecast_length = data_pars["forecast_length"]
     backcast_length = data_pars["backcast_length"]
@@ -167,6 +205,19 @@ def fit(model, data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def fit_simple(net, optimiser, data_generator, on_save_callback, device, data_pars, out_pars, max_grad_steps=500):
+    """function fit_simple
+    Args:
+        net:   
+        optimiser:   
+        data_generator:   
+        on_save_callback:   
+        device:   
+        data_pars:   
+        out_pars:   
+        max_grad_steps:   
+    Returns:
+        
+    """
     print('--- fiting ---')
     initial_grad_step = load_checkpoint(net, optimiser)
 
@@ -194,6 +245,16 @@ def fit_simple(net, optimiser, data_generator, on_save_callback, device, data_pa
 
 
 def predict(model, data_pars=None, compute_pars=None, out_pars=None, **kw):
+    """function predict
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     model0 = model.model
     _, _, x_test, y_test, _ = get_dataset(**data_pars)
 
@@ -209,6 +270,18 @@ def predict(model, data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 ###############################################################################################################
 def plot(net, x, target, backcast_length, forecast_length, grad_step, out_path="./"):
+    """function plot
+    Args:
+        net:   
+        x:   
+        target:   
+        backcast_length:   
+        forecast_length:   
+        grad_step:   
+        out_path:   
+    Returns:
+        
+    """
     import matplotlib.pyplot as plt
     net.eval()
     _, f = net(torch.tensor(x, dtype=torch.float))
@@ -231,6 +304,17 @@ def plot(net, x, target, backcast_length, forecast_length, grad_step, out_path="
 
 
 def plot_model(net, x, target, grad_step, data_pars, disable_plot=False):
+    """function plot_model
+    Args:
+        net:   
+        x:   
+        target:   
+        grad_step:   
+        data_pars:   
+        disable_plot:   
+    Returns:
+        
+    """
     forecast_length = data_pars["forecast_length"]
     backcast_length = data_pars["backcast_length"]
 
@@ -243,6 +327,17 @@ def plot_model(net, x, target, grad_step, data_pars, disable_plot=False):
 
 
 def plot_predict(x_test, y_test, p, data_pars, compute_pars, out_pars):
+    """function plot_predict
+    Args:
+        x_test:   
+        y_test:   
+        p:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+    Returns:
+        
+    """
     import matplotlib.pyplot as plt
     forecast_length = data_pars["forecast_length"]
     backcast_length = data_pars["backcast_length"]
@@ -270,6 +365,15 @@ def plot_predict(x_test, y_test, p, data_pars, compute_pars, out_pars):
 # save and load model helper function
 
 def save_checkpoint(model, optimiser, grad_step, CHECKPOINT_NAME="mycheckpoint"):
+    """function save_checkpoint
+    Args:
+        model:   
+        optimiser:   
+        grad_step:   
+        CHECKPOINT_NAME:   
+    Returns:
+        
+    """
     torch.save({
         'grad_step': grad_step,
         'model_state_dict': model.state_dict(),
@@ -278,6 +382,14 @@ def save_checkpoint(model, optimiser, grad_step, CHECKPOINT_NAME="mycheckpoint")
 
 
 def load_checkpoint(model, optimiser, CHECKPOINT_NAME='nbeats-fiting-checkpoint.th'):
+    """function load_checkpoint
+    Args:
+        model:   
+        optimiser:   
+        CHECKPOINT_NAME:   
+    Returns:
+        
+    """
     if os.path.exists(CHECKPOINT_NAME):
         checkpoint = torch.load(CHECKPOINT_NAME)
         model.load_state_dict(checkpoint['model_state_dict'])
@@ -291,6 +403,14 @@ def load_checkpoint(model, optimiser, CHECKPOINT_NAME='nbeats-fiting-checkpoint.
 
 
 def save(model, session, save_pars):
+    """function save
+    Args:
+        model:   
+        session:   
+        save_pars:   
+    Returns:
+        
+    """
     model0          = model.model
     optimiser       = session
     grad_step       = save_pars['grad_step']
@@ -303,6 +423,12 @@ def save(model, session, save_pars):
 
 
 def load(load_pars):
+    """function load
+    Args:
+        load_pars:   
+    Returns:
+        
+    """
     model   = None
     session = None
 
@@ -311,6 +437,13 @@ def load(load_pars):
 
 #############################################################################################################
 def get_params(param_pars, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     from jsoncomment import JsonComment ; json = JsonComment()
     pp = param_pars
     choice = pp['choice']
@@ -362,6 +495,14 @@ def get_params(param_pars, **kw):
 #############################################################################################################
 
 def test(choice="json", data_path="nbeats.json", config_mode="test"):
+    """function test
+    Args:
+        choice:   
+        data_path:   
+        config_mode:   
+    Returns:
+        
+    """
     ###loading the command line arguments
 
     log("#### Loading params   #######################################")

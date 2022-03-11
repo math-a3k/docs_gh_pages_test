@@ -6,6 +6,30 @@ import sys
 
 class cAbstract_RNN_Model(tsar.cAbstractAR):
     def __init__(self , cycle_residue_name, P , iExogenousInfo = None):
+        """ cMLP_Model:__init__
+        Args:
+            cycle_residue_name:     
+            P:     
+            iExogenousInfo :     
+        Returns:
+           
+        """
+        """ cLSTM_Model:__init__
+        Args:
+            cycle_residue_name:     
+            P:     
+            iExogenousInfo :     
+        Returns:
+           
+        """
+        """ cAbstract_RNN_Model:__init__
+        Args:
+            cycle_residue_name:     
+            P:     
+            iExogenousInfo :     
+        Returns:
+           
+        """
         super().__init__(cycle_residue_name, iExogenousInfo)
         self.mNbLags = P;
         self.mNbExogenousLags = P;
@@ -15,20 +39,52 @@ class cAbstract_RNN_Model(tsar.cAbstractAR):
         sys.setrecursionlimit(1000000);
 
     def dumpCoefficients(self, iMax=10):
+        """ cAbstract_RNN_Model:dumpCoefficients
+        Args:
+            iMax:     
+        Returns:
+           
+        """
         # print(self.mModel.__dict__);
         pass
 
     def build_RNN_Architecture(self):
+        """ cMLP_Model:build_RNN_Architecture
+        Args:
+        Returns:
+           
+        """
+        """ cLSTM_Model:build_RNN_Architecture
+        Args:
+        Returns:
+           
+        """
+        """ cAbstract_RNN_Model:build_RNN_Architecture
+        Args:
+        Returns:
+           
+        """
         assert(0);
 
     # def reshape_inputs(self, iInputs):
         # return iInputs;
 
     def reshape_inputs(self, iInputs):
+        """ cAbstract_RNN_Model:reshape_inputs
+        Args:
+            iInputs:     
+        Returns:
+           
+        """
         lInputs = np.reshape(iInputs, (iInputs.shape[0], 1, iInputs.shape[1]))
         return lInputs;
 
     def fit(self):
+        """ cAbstract_RNN_Model:fit
+        Args:
+        Returns:
+           
+        """
         # print("ESTIMATE_RNN_MODEL_START" , self.mCycleResidueName);
         from keras import callbacks
 
@@ -97,6 +153,13 @@ class cAbstract_RNN_Model(tsar.cAbstractAR):
         # self.testPickle_old();
 
     def transformDataset(self, df, horizon_index = 1):
+        """ cAbstract_RNN_Model:transformDataset
+        Args:
+            df:     
+            horizon_index :     
+        Returns:
+           
+        """
         series = self.mCycleResidueName; 
         if(self.mExogenousInfo is not None):
             df = self.mExogenousInfo.transformDataset(df);
@@ -140,18 +203,50 @@ class cMLP_Model(cAbstract_RNN_Model):
         self.mOutName = self.mCycleResidueName +  '_MLP(' + str(self.mNbLags) + ")";
 
     def __getstate__(self):
+        """ cMLP_Model:__getstate__
+        Args:
+        Returns:
+           
+        """
+        """ cLSTM_Model:__getstate__
+        Args:
+        Returns:
+           
+        """
         dict_out = self.__dict__.copy();
         dict_out["mModel"] = self.mModel.to_json();
         # print("GET_STATE_LSTM", dict_out);
         return dict_out;
 
     def __setstate__(self, istate):
+        """ cMLP_Model:__setstate__
+        Args:
+            istate:     
+        Returns:
+           
+        """
+        """ cLSTM_Model:__setstate__
+        Args:
+            istate:     
+        Returns:
+           
+        """
         # print("LSTM_SET_STATE" , istate);
         from keras.models import model_from_json
         self.__dict__ = istate.copy();
         self.mModel = model_from_json(istate["mModel"]);
 
     def build_RNN_Architecture_template(self):
+        """ cMLP_Model:build_RNN_Architecture_template
+        Args:
+        Returns:
+           
+        """
+        """ cLSTM_Model:build_RNN_Architecture_template
+        Args:
+        Returns:
+           
+        """
         from keras.models import Sequential
         from keras.layers import Dense, Dropout
         from keras.layers import LSTM
@@ -168,6 +263,18 @@ class cMLP_Model(cAbstract_RNN_Model):
         return lModel;
 
     def reshape_target(self, iTarget):
+        """ cMLP_Model:reshape_target
+        Args:
+            iTarget:     
+        Returns:
+           
+        """
+        """ cLSTM_Model:reshape_target
+        Args:
+            iTarget:     
+        Returns:
+           
+        """
         return np.reshape(iTarget, (iTarget.shape[0], 1, 1))
 
 
@@ -212,6 +319,11 @@ class cLSTM_Model(cAbstract_RNN_Model):
 
 
     def testPickle_old(self):
+        """ cLSTM_Model:testPickle_old
+        Args:
+        Returns:
+           
+        """
         import pickle
         out1 = pickle.dumps(self.mModel);
         lModel2 = pickle.loads(out1);
@@ -225,6 +337,11 @@ class cLSTM_Model(cAbstract_RNN_Model):
         print("TEST_PICKLE_OLD_OK")
 
     def testPickle(self):
+        """ cLSTM_Model:testPickle
+        Args:
+        Returns:
+           
+        """
         import dill
         out1 = dill.dumps(self.mModel);
         lModel2 = dill.loads(out1);

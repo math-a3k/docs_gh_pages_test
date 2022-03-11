@@ -8,22 +8,123 @@ import sys
 
 class cAbstract_Scikit_Model(tsar.cAbstractAR):
     def __init__(self , cycle_residue_name, P , iExogenousInfo = None):
+        """ cXGBoost_Model:__init__
+        Args:
+            cycle_residue_name:     
+            P:     
+            iExogenousInfo :     
+        Returns:
+           
+        """
+        """ cSVR_Model:__init__
+        Args:
+            cycle_residue_name:     
+            P:     
+            iExogenousInfo :     
+        Returns:
+           
+        """
+        """ cAutoRegressiveModel:__init__
+        Args:
+            cycle_residue_name:     
+            P:     
+            iExogenousInfo :     
+        Returns:
+           
+        """
+        """ cAbstract_Scikit_Model:__init__
+        Args:
+            cycle_residue_name:     
+            P:     
+            iExogenousInfo :     
+        Returns:
+           
+        """
         super().__init__(cycle_residue_name, iExogenousInfo)
         self.mNbLags = P;
         self.mNbExogenousLags = P;
         self.mScikitModel = None;
 
     def dumpCoefficients(self, iMax=10):
+        """ cXGBoost_Model:dumpCoefficients
+        Args:
+            iMax:     
+        Returns:
+           
+        """
+        """ cSVR_Model:dumpCoefficients
+        Args:
+            iMax:     
+        Returns:
+           
+        """
+        """ cAutoRegressiveModel:dumpCoefficients
+        Args:
+            iMax:     
+        Returns:
+           
+        """
+        """ cAbstract_Scikit_Model:dumpCoefficients
+        Args:
+            iMax:     
+        Returns:
+           
+        """
         # print(self.mScikitModel.__dict__);
         pass
 
     def build_Scikit_Model(self):
+        """ cXGBoost_Model:build_Scikit_Model
+        Args:
+        Returns:
+           
+        """
+        """ cSVR_Model:build_Scikit_Model
+        Args:
+        Returns:
+           
+        """
+        """ cAutoRegressiveModel:build_Scikit_Model
+        Args:
+        Returns:
+           
+        """
+        """ cAbstract_Scikit_Model:build_Scikit_Model
+        Args:
+        Returns:
+           
+        """
         assert(0);
 
     def set_name(self):
+        """ cXGBoost_Model:set_name
+        Args:
+        Returns:
+           
+        """
+        """ cSVR_Model:set_name
+        Args:
+        Returns:
+           
+        """
+        """ cAutoRegressiveModel:set_name
+        Args:
+        Returns:
+           
+        """
+        """ cAbstract_Scikit_Model:set_name
+        Args:
+        Returns:
+           
+        """
         assert(0);
 
     def fit(self):
+        """ cAbstract_Scikit_Model:fit
+        Args:
+        Returns:
+           
+        """
         #  print("ESTIMATE_SCIKIT_MODEL_START" , self.mCycleResidueName);
 
         self.build_Scikit_Model();
@@ -106,6 +207,13 @@ class cAbstract_Scikit_Model(tsar.cAbstractAR):
 
 
     def transformDataset(self, df, horizon_index = 1):
+        """ cAbstract_Scikit_Model:transformDataset
+        Args:
+            df:     
+            horizon_index :     
+        Returns:
+           
+        """
         series = self.mCycleResidueName; 
         if(self.mExogenousInfo is not None):
             df = self.mExogenousInfo.transformDataset(df);
@@ -191,6 +299,11 @@ class cXGBoost_Model(cAbstract_Scikit_Model):
         pass
 
     def get_default_xgb_options(self):
+        """ cXGBoost_Model:get_default_xgb_options
+        Args:
+        Returns:
+           
+        """
         lXGBOptions = dict(n_estimators=10,
                            nthread=1,
                            min_child_weight=10,

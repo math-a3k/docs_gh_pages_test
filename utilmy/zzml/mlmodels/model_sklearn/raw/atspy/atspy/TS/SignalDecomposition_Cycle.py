@@ -18,6 +18,18 @@ import time
 
 class cAbstractCycle:
     def __init__(self , trend):
+        """ cZeroCycle:__init__
+        Args:
+            trend:     
+        Returns:
+           
+        """
+        """ cAbstractCycle:__init__
+        Args:
+            trend:     
+        Returns:
+           
+        """
         self.mTimeInfo = tsti.cTimeInfo()
         self.mTrendFrame = pd.DataFrame()
         self.mCycleFrame = pd.DataFrame()
@@ -28,15 +40,32 @@ class cAbstractCycle:
     
 
     def getCycleResidueName(self):
+        """ cAbstractCycle:getCycleResidueName
+        Args:
+        Returns:
+           
+        """
         return self.getCycleName() + "_residue";
 
 
     def plot(self):
+        """ cAbstractCycle:plot
+        Args:
+        Returns:
+           
+        """
         tsplot.decomp_plot(self.mCycleFrame, self.mTimeInfo.mNormalizedTimeColumn,
                            self.mTrend_residue_name, self.getCycleName() , self.getCycleResidueName());
 
 
     def check_not_nan(self, sig , name):
+        """ cAbstractCycle:check_not_nan
+        Args:
+            sig:     
+            name:     
+        Returns:
+           
+        """
         #print("check_not_nan");
         if(np.isnan(sig).any() or np.isinf(sig).any() ):
             logger = tsutil.get_pyaf_logger();
@@ -46,6 +75,11 @@ class cAbstractCycle:
 
 
     def computePerf(self):
+        """ cAbstractCycle:computePerf
+        Args:
+        Returns:
+           
+        """
         if(self.mOptions.mDebug):
             self.check_not_nan(self.mCycleFrame[self.getCycleResidueName()], self.getCycleResidueName())
         # self.mCycleFrame.to_csv(self.getCycleResidueName() + ".csv");
@@ -68,10 +102,40 @@ class cZeroCycle(cAbstractCycle):
         self.mComplexity = 0;
 
     def getCycleName(self):
+        """ cZeroCycle:getCycleName
+        Args:
+        Returns:
+           
+        """
+        """ cSeasonalPeriodic:getCycleName
+        Args:
+        Returns:
+           
+        """
+        """ cBestCycleForTrend:getCycleName
+        Args:
+        Returns:
+           
+        """
         return self.mTrend_residue_name + "_zeroCycle";
 
 
     def fit(self):
+        """ cZeroCycle:fit
+        Args:
+        Returns:
+           
+        """
+        """ cSeasonalPeriodic:fit
+        Args:
+        Returns:
+           
+        """
+        """ cBestCycleForTrend:fit
+        Args:
+        Returns:
+           
+        """
         self.mTime = self.mTimeInfo.mTime;
         self.mSignal = self.mTimeInfo.mSignal;
         self.mTimeInfo.addVars(self.mCycleFrame);
@@ -81,6 +145,24 @@ class cZeroCycle(cAbstractCycle):
         self.mOutName = self.getCycleName()
         
     def transformDataset(self, df):
+        """ cZeroCycle:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cSeasonalPeriodic:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ cBestCycleForTrend:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
         target = df[self.mTrend_residue_name]
         df[self.getCycleName()] = np.zeros_like(df[self.mTrend_residue_name]);
         df[self.getCycleResidueName()] = target - df[self.getCycleName()].values        
@@ -88,6 +170,13 @@ class cZeroCycle(cAbstractCycle):
 
 class cSeasonalPeriodic(cAbstractCycle):
     def __init__(self , trend, date_part):
+        """ cSeasonalPeriodic:__init__
+        Args:
+            trend:     
+            date_part:     
+        Returns:
+           
+        """
         super().__init__(trend);
         self.mDatePart = date_part;
         self.mEncodedValueDict = {}
@@ -99,6 +188,13 @@ class cSeasonalPeriodic(cAbstractCycle):
         return self.mTrend_residue_name + "_Seasonal_" + self.mDatePart;
 
     def hasEnoughData(self, iTimeMin, iTimeMax):
+        """ cSeasonalPeriodic:hasEnoughData
+        Args:
+            iTimeMin:     
+            iTimeMax:     
+        Returns:
+           
+        """
         lTimeDelta = iTimeMax - iTimeMin;
         lDays = lTimeDelta / np.timedelta64(1,'D');
         lSeconds = lTimeDelta / np.timedelta64(1,'s');
@@ -154,12 +250,24 @@ class cSeasonalPeriodic(cAbstractCycle):
 
     @tsutil.cMemoize
     def get_date_part(self, x):
+        """ cSeasonalPeriodic:get_date_part
+        Args:
+            x:     
+        Returns:
+           
+        """
         lDatepartComputer = self.mTimeInfo.get_date_part_value_computer(self.mDatePart)
         return lDatepartComputer(x)
     
 
     @tsutil.cMemoize
     def get_date_part_encoding(self, x):
+        """ cSeasonalPeriodic:get_date_part_encoding
+        Args:
+            x:     
+        Returns:
+           
+        """
         lDatepartComputer = self.mTimeInfo.get_date_part_value_computer(self.mDatePart)
         dp = lDatepartComputer(x)
         return self.mEncodedValueDict.get(dp , self.mDefaultValue)
@@ -172,6 +280,13 @@ class cSeasonalPeriodic(cAbstractCycle):
 
 class cBestCycleForTrend(cAbstractCycle):
     def __init__(self , trend, criterion):
+        """ cBestCycleForTrend:__init__
+        Args:
+            trend:     
+            criterion:     
+        Returns:
+           
+        """
         super().__init__(trend);
         self.mCycleFrame = pd.DataFrame()
         self.mCyclePerfDict = {}
@@ -185,9 +300,19 @@ class cBestCycleForTrend(cAbstractCycle):
         return self.mTrend_residue_name + "_bestCycle_by" + self.mCriterion;
 
     def dumpCyclePerfs(self):
+        """ cBestCycleForTrend:dumpCyclePerfs
+        Args:
+        Returns:
+           
+        """
         print(self.mCyclePerfDict);
 
     def computeBestCycle(self):
+        """ cBestCycleForTrend:computeBestCycle
+        Args:
+        Returns:
+           
+        """
         # self.dumpCyclePerfs();
         lCycleFrameEstim = self.mSplit.getEstimPart(self.mCycleFrame);
         self.mDefaultValue = lCycleFrameEstim[self.mTrend_residue_name].mean();
@@ -212,6 +337,11 @@ class cBestCycleForTrend(cAbstractCycle):
 
 
     def generate_cycles(self):
+        """ cBestCycleForTrend:generate_cycles
+        Args:
+        Returns:
+           
+        """
         self.mTimeInfo.addVars(self.mCycleFrame);
         self.mCycleFrame[self.mTrend_residue_name ] = self.mTrendFrame[self.mTrend_residue_name]
         lCycleFrameEstim = self.mSplit.getEstimPart(self.mCycleFrame);
@@ -282,12 +412,25 @@ class cBestCycleForTrend(cAbstractCycle):
 class cCycleEstimator:
     
     def __init__(self):
+        """ cCycleEstimator:__init__
+        Args:
+        Returns:
+           
+        """
         self.mTimeInfo = tsti.cTimeInfo()
         self.mTrendFrame = pd.DataFrame()
         self.mCycleFrame = pd.DataFrame()
         self.mCycleList = {}
 
     def addSeasonal(self, trend, seas_type, resolution):
+        """ cCycleEstimator:addSeasonal
+        Args:
+            trend:     
+            seas_type:     
+            resolution:     
+        Returns:
+           
+        """
         if(resolution >= self.mTimeInfo.mResolution):
             lSeasonal = cSeasonalPeriodic(trend, seas_type);
             if(self.mOptions.mActivePeriodics[lSeasonal.mFormula]):
@@ -296,6 +439,11 @@ class cCycleEstimator:
         pass
     
     def defineCycles(self):
+        """ cCycleEstimator:defineCycles
+        Args:
+        Returns:
+           
+        """
         for trend in self.mTrendList:
             self.mCycleList[trend] = [];
 
@@ -325,6 +473,11 @@ class cCycleEstimator:
                 cycle.mOptions = self.mOptions;
             
     def plotCycles(self):
+        """ cCycleEstimator:plotCycles
+        Args:
+        Returns:
+           
+        """
         for trend in self.mTrendList:
             for cycle in self.mCycleList[trend]:
                 cycle.plot()
@@ -332,6 +485,12 @@ class cCycleEstimator:
     
 
     def dumpCyclePerf(self, cycle):
+        """ cCycleEstimator:dumpCyclePerf
+        Args:
+            cycle:     
+        Returns:
+           
+        """
         if(self.mOptions.mDebugCycles):
             logger = tsutil.get_pyaf_logger();
             logger.debug("CYCLE_PERF_DETAIL_COUNT_FIT_FORECAST "  + cycle.mOutName +
@@ -347,6 +506,11 @@ class cCycleEstimator:
 
 
     def estimateCycles(self):
+        """ cCycleEstimator:estimateCycles
+        Args:
+        Returns:
+           
+        """
         self.mTime = self.mTimeInfo.mTime;
         self.mSignal = self.mTimeInfo.mSignal;
         self.mTimeInfo.addVars(self.mCycleFrame);
@@ -373,6 +537,11 @@ class cCycleEstimator:
 
 
     def filterSeasonals(self):
+        """ cCycleEstimator:filterSeasonals
+        Args:
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
         logger.debug("CYCLE_TRAINING_FILTER_SEASONALS_START")
         for trend in self.mTrendList:
@@ -404,6 +573,11 @@ class cCycleEstimator:
         pass
 
     def estimateAllCycles(self):
+        """ cCycleEstimator:estimateAllCycles
+        Args:
+        Returns:
+           
+        """
         self.defineCycles();
         self.estimateCycles()
         if(self.mOptions.mFilterSeasonals):

@@ -5,6 +5,12 @@ uaParseCommon = user_agent_parser.Parse
 
 
 def getall_families_from_useragent(ua_string):
+    """function getall_families_from_useragent
+    Args:
+        ua_string:   
+    Returns:
+        
+    """
     if (ua_string != ua_string) | (ua_string is None):
        return ' - - '
     

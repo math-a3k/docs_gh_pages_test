@@ -5,6 +5,17 @@ import utils.process as process
 class lindley(object):
     
     def __init__(self,M,cat_dims,list_discrete, dic_var_type,records_d,):
+        """ lindley:__init__
+        Args:
+            M:     
+            cat_dims:     
+            list_discrete:     
+            dic_var_type:     
+            records_d:     
+            :     
+        Returns:
+           
+        """
         self._M = M
         self._cat_dims = cat_dims
         self._dic_var_type = dic_var_type

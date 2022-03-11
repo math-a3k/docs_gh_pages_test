@@ -26,6 +26,11 @@ from mlmodels.util import path_norm, path_norm_dict
            
 ####################################################################################################
 def os_file_current_path():
+    """function os_file_current_path
+    Args:
+    Returns:
+        
+    """
     import inspect
     val = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     val = str(os.path.join(val, ""))
@@ -37,6 +42,12 @@ def os_file_current_path():
 
 ##### Create a function called test()   ###########################################################
 def test(arg=None):
+    """function test
+    Args:
+        arg:   
+    Returns:
+        
+    """
     print("os.getcwd", os.getcwd())
     root = mlmodels.__path__[0]   ## Root Folder
     root = root.replace("\\", "//")

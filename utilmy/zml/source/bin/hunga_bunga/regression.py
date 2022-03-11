@@ -285,17 +285,52 @@ tree_models_n_params_small = [
 
 
 def gen_reg_data(x_mu=10., x_sigma=1., num_samples=100, num_features=3, y_formula=sum, y_sigma=1.):
+    """function gen_reg_data
+    Args:
+        x_mu:   
+        x_sigma:   
+        num_samples:   
+        num_features:   
+        y_formula:   
+        y_sigma:   
+    Returns:
+        
+    """
     x = np.random.normal(x_mu, x_sigma, (num_samples, num_features))
     y = np.apply_along_axis(y_formula, 1, x) + np.random.normal(0, y_sigma, (num_samples,))
     return x, y
 
 def run_all_regressors(x, y, small = True, normalize_x = True, n_jobs=cpu_count()-1, brain=False, test_size=0.2, n_splits=5, upsample=True, scoring=None, verbose=False, grid_search=True):
+    """function run_all_regressors
+    Args:
+        x:   
+        y:   
+        small :   
+        normalize_x :   
+        n_jobs:   
+    Returns:
+        
+    """
     all_params = (linear_models_n_params_small if small else linear_models_n_params) + (nn_models_n_params_small if small else nn_models_n_params) + ([] if small else gaussianprocess_models_n_params) + neighbor_models_n_params + (svm_models_n_params_small if small else svm_models_n_params) + (tree_models_n_params_small if small else tree_models_n_params)
     return main_loop(all_params, StandardScaler().fit_transform(x) if normalize_x else x, y, isClassification=False, n_jobs=n_jobs, brain=brain, test_size=test_size, n_splits=n_splits, upsample=upsample, scoring=scoring, verbose=verbose, grid_search=grid_search)
 
 
 class HungaBungaRegressor(RegressorMixin):
     def __init__(self, brain=False, test_size = 0.2, n_splits = 5, random_state=None, upsample=True, scoring=None, verbose=False, normalize_x = True, n_jobs =cpu_count() - 1, grid_search=True):
+        """ HungaBungaRegressor:__init__
+        Args:
+            brain:     
+            test_size :     
+            n_splits :     
+            random_state:     
+            upsample:     
+            scoring:     
+            verbose:     
+            normalize_x :     
+            n_jobs :     
+        Returns:
+           
+        """
         self.model = None
         self.brain = brain
         self.test_size = test_size
@@ -310,10 +345,23 @@ class HungaBungaRegressor(RegressorMixin):
         super(HungaBungaRegressor, self).__init__()
 
     def fit(self, x, y):
+        """ HungaBungaRegressor:fit
+        Args:
+            x:     
+            y:     
+        Returns:
+           
+        """
         self.model = run_all_regressors(x, y, normalize_x=self.normalize_x, test_size=self.test_size, n_splits=self.n_splits, upsample=self.upsample, scoring=self.scoring, verbose=self.verbose, brain=self.brain, n_jobs=self.n_jobs, grid_search=self.grid_search)[0]
         return self
 
     def predict(self, x):
+        """ HungaBungaRegressor:predict
+        Args:
+            x:     
+        Returns:
+           
+        """
         return self.model.predict(x)
 
 

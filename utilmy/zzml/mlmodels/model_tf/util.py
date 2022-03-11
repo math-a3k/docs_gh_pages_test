@@ -25,6 +25,11 @@ import tensorflow as tf
 
 
 def os_module_path():
+    """function os_module_path
+    Args:
+    Returns:
+        
+    """
     current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     parent_dir = os.path.dirname(current_dir)
     # sys.path.insert(0, parent_dir)
@@ -32,6 +37,12 @@ def os_module_path():
 
 
 def os_file_path(data_path):
+    """function os_file_path
+    Args:
+        data_path:   
+    Returns:
+        
+    """
     from pathlib import Path
     data_path = os.path.join(Path(__file__).parent.parent.absolute(), data_path)
     print(data_path)
@@ -81,6 +92,11 @@ def one_hot(length, index):
 
 
 def set_root_dir():
+    """function set_root_dir
+    Args:
+    Returns:
+        
+    """
     current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     parent_dir = os.path.dirname(current_dir)
     sys.path.insert(0, parent_dir)

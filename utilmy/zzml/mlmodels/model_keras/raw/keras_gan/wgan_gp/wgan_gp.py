@@ -26,11 +26,22 @@ import numpy as np
 class RandomWeightedAverage(_Merge):
     """Provides a (random) weighted average between real and generated image samples"""
     def _merge_function(self, inputs):
+        """ RandomWeightedAverage:_merge_function
+        Args:
+            inputs:     
+        Returns:
+           
+        """
         alpha = K.random_uniform((32, 1, 1, 1))
         return (alpha * inputs[0]) + ((1 - alpha) * inputs[1])
 
 class WGANGP():
     def __init__(self):
+        """ WGANGP:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -122,9 +133,21 @@ class WGANGP():
 
 
     def wasserstein_loss(self, y_true, y_pred):
+        """ WGANGP:wasserstein_loss
+        Args:
+            y_true:     
+            y_pred:     
+        Returns:
+           
+        """
         return K.mean(y_true * y_pred)
 
     def build_generator(self):
+        """ WGANGP:build_generator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -149,6 +172,11 @@ class WGANGP():
         return Model(noise, img)
 
     def build_critic(self):
+        """ WGANGP:build_critic
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -179,6 +207,14 @@ class WGANGP():
         return Model(img, validity)
 
     def train(self, epochs, batch_size, sample_interval=50):
+        """ WGANGP:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, _), (_, _) = mnist.load_data()
@@ -222,6 +258,12 @@ class WGANGP():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ WGANGP:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 5, 5
         noise = np.random.normal(0, 1, (r * c, self.latent_dim))
         gen_imgs = self.generator.predict(noise)

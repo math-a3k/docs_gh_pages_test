@@ -51,6 +51,14 @@ def _fixed_padding(inputs, kernel_size, rate=1):
 
 
 def _make_divisible(v, divisor, min_value=None):
+    """function _make_divisible
+    Args:
+        v:   
+        divisor:   
+        min_value:   
+    Returns:
+        
+    """
     if min_value is None:
         min_value = divisor
     new_v = max(min_value, int(v + divisor / 2) // divisor * divisor)
@@ -80,6 +88,12 @@ def _split_divisible(num, num_ways, divisible_by=8):
 
 @contextlib.contextmanager
 def _v1_compatible_scope_naming(scope):
+    """function _v1_compatible_scope_naming
+    Args:
+        scope:   
+    Returns:
+        
+    """
     if scope is None:  # Create uniqified separable blocks.
         with tf.variable_scope(None, default_name="separable") as s, tf.name_scope(
             s.original_name_scope
@@ -160,6 +174,13 @@ def split_separable_conv2d(
 
 
 def expand_input_by_factor(n, divisible_by=8):
+    """function expand_input_by_factor
+    Args:
+        n:   
+        divisible_by:   
+    Returns:
+        
+    """
     return lambda num_inputs, **_: _make_divisible(num_inputs * n, divisible_by)
 
 

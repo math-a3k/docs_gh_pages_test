@@ -55,6 +55,11 @@ def test_resnetlayer() -> None:
     
     
 def test_classifier_multihead() -> None:
+   """function test_classifier_multihead
+   Args:
+   Returns:
+       
+   """
    label_name_ncount = { 'color': 5, 'gender': 2, 'size': 7}
    clf = make_classifier_multihead(label_name_ncount=label_name_ncount,
                                    layers_dim=[128, 1024], tag='1')
@@ -62,16 +67,31 @@ def test_classifier_multihead() -> None:
  
  
 def test_DFC_VAE():
+   """function test_DFC_VAE
+   Args:
+   Returns:
+       
+   """
  
    log(m.summary())
 
 
 def test_encoder():
+   """function test_encoder
+   Args:
+   Returns:
+       
+   """
        
    log(m.summary())
        
        
 def test_decoder():
+   """function test_decoder
+   Args:
+   Returns:
+       
+   """
        
    log(m.summary())
        
@@ -152,6 +172,12 @@ class DepthConvBlock(Layer):
     """
 
     def __init__(self, filters):
+        """ DepthConvBlock:__init__
+        Args:
+            filters:     
+        Returns:
+           
+        """
         super(DepthConvBlock, self).__init__()
         self.conv = DepthwiseConv2D(3, strides=1, padding='same', activation='relu', )
         self.bn1 = BatchNormalization()
@@ -159,6 +185,12 @@ class DepthConvBlock(Layer):
         self.depth_ = Conv2D(filters, 1, strides=1, padding='same', activation='relu', )
 
     def call(self, inputs):
+        """ DepthConvBlock:call
+        Args:
+            inputs:     
+        Returns:
+           
+        """
         return self.bn2(self.depth_(self.bn1(self.conv(inputs))))
 
 
@@ -176,12 +208,29 @@ class CNNBlock(Layer):
     """
 
     def __init__(self, filters: int, kernels: int, strides: int=1, padding: str='valid', activation: Optional[str]=None) -> None:
+        """ CNNBlock:__init__
+        Args:
+            filters (function["arg_type"][i]) :     
+            kernels (function["arg_type"][i]) :     
+            strides (function["arg_type"][i]) :     
+            padding (function["arg_type"][i]) :     
+            activation (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         super(CNNBlock, self).__init__()
         self.cnn = Conv2D(filters, kernels, strides=strides, padding=padding)
         self.bn = BatchNormalization()
         self.activation = tf.keras.activations.get(activation)
 
     def call(self, input_tensor, training=True):
+        """ CNNBlock:call
+        Args:
+            input_tensor:     
+            training:     
+        Returns:
+           
+        """
         x = self.cnn(input_tensor)
         x = self.bn(x, training=training)
         return self.activation(x)
@@ -200,6 +249,13 @@ class ResBlock(Layer):
     """
 
     def __init__(self, filters: List[int], kernels: List[int]) -> None:
+        """ ResBlock:__init__
+        Args:
+            filters (function["arg_type"][i]) :     
+            kernels (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         try:
             assert (type(kernels) == list) and (type(filters) == list)
             assert (len(kernels) == 2) and (len(filters) == 2)
@@ -214,6 +270,13 @@ class ResBlock(Layer):
         self.identity_mapping = Conv2D(filters[1], 1, padding='same')
 
     def call(self, input_tensor, training=False):
+        """ ResBlock:call
+        Args:
+            input_tensor:     
+            training:     
+        Returns:
+           
+        """
         x = self.cnn1(input_tensor)
         x = self.cnn2(x)
         skip = self.identity_mapping(input_tensor)
@@ -234,6 +297,13 @@ class DFC_VAE(tf.keras.Model):
     """Deep Feature Consistent Variational Autoencoder Class"""
 
     def __init__(self, latent_dim, class_dict):
+        """ DFC_VAE:__init__
+        Args:
+            latent_dim:     
+            class_dict:     
+        Returns:
+           
+        """
         super(DFC_VAE, self).__init__()
         self.latent_dim = latent_dim
         self.encoder = make_encoder()
@@ -242,14 +312,34 @@ class DFC_VAE(tf.keras.Model):
         self.classifier = make_classifier(class_dict)
 
     def encode(self, x):
+        """ DFC_VAE:encode
+        Args:
+            x:     
+        Returns:
+           
+        """
         z_mean, z_logsigma = tf.split(self.encoder(x), num_or_size_splits=2, axis=1)
         return z_mean, z_logsigma
 
     def reparameterize(self, z_mean, z_logsigma):
+        """ DFC_VAE:reparameterize
+        Args:
+            z_mean:     
+            z_logsigma:     
+        Returns:
+           
+        """
         eps = tf.random.normal(shape=tf.shape(z_mean))
         return eps * tf.exp(z_logsigma * 0.5) + z_mean
 
     def decode(self, z, apply_sigmoid=False):
+        """ DFC_VAE:decode
+        Args:
+            z:     
+            apply_sigmoid:     
+        Returns:
+           
+        """
         x_recon = self.decoder(z)
         if apply_sigmoid:
             new_x_recon = tf.sigmoid(x_recon)
@@ -257,6 +347,15 @@ class DFC_VAE(tf.keras.Model):
         return x_recon
 
     def call(self, x, training=True, mask=None, y_label_list=None):
+        """ DFC_VAE:call
+        Args:
+            x:     
+            training:     
+            mask:     
+            y_label_list:     
+        Returns:
+           
+        """
         # out_classes = None        
         xcat_all = x[1]  # Category
         x = x[0]  # Image

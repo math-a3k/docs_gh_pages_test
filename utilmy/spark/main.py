@@ -22,6 +22,11 @@ from utilmy.spark.src.utils import config_load, log
 
 ################################################################################
 def config_default():
+  """function config_default
+  Args:
+  Returns:
+      
+  """
   ss ="""
 - sparkconfig:
     maxrecordfile                      : 50000
@@ -63,9 +68,19 @@ def pd_to_spark_hive_format(df, dirout):
   
 
 def config_getdefault():
+    """function config_getdefault
+    Args:
+    Returns:
+        
+    """
     pass
     
 def test():    
+    """function test
+    Args:
+    Returns:
+        
+    """
     from pyspark.sql import SparkSession
     spark = SparkSession.builder\
         .appName('main')\

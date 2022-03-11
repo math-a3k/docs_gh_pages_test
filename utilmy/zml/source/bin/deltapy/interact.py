@@ -10,6 +10,16 @@ from scipy import linalg
 import math
 
 def lowess(df, cols, y, f=2. / 3., iter=3):
+    """function lowess
+    Args:
+        df:   
+        cols:   
+        y:   
+        f:   
+        iter:   
+    Returns:
+        
+    """
     for col in cols:
       n = len(df[col])
       r = int(ceil(f * n))
@@ -78,6 +88,13 @@ def autoregression(df, drop=None, settings={"autoreg_lag":4}):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def muldiv(df, feature_list):
+  """function muldiv
+  Args:
+      df:   
+      feature_list:   
+  Returns:
+      
+  """
   for feat in feature_list:
     for feat_two in feature_list:
       if feat==feat_two:
@@ -93,6 +110,14 @@ def muldiv(df, feature_list):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def decision_tree_disc(df, cols, depth=4 ):
+  """function decision_tree_disc
+  Args:
+      df:   
+      cols:   
+      depth:   
+  Returns:
+      
+  """
   for col in cols:
     df[col +"_m1"] = df[col].shift(1)
     df = df.iloc[1:,:]
@@ -106,6 +131,13 @@ def decision_tree_disc(df, cols, depth=4 ):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def quantile_normalize(df, drop):
+    """function quantile_normalize
+    Args:
+        df:   
+        drop:   
+    Returns:
+        
+    """
 
     if drop:
       keep = df[drop]
@@ -132,6 +164,14 @@ def quantile_normalize(df, drop):
 
 
 def haversine_distance(row, lon="Open", lat="Close"):
+    """function haversine_distance
+    Args:
+        row:   
+        lon:   
+        lat:   
+    Returns:
+        
+    """
     c_lat,c_long = radians(52.5200), radians(13.4050)
     R = 6373.0
     long = radians(row['Open'])
@@ -150,6 +190,12 @@ def haversine_distance(row, lon="Open", lat="Close"):
 
 
 def tech(df):
+      """function tech
+      Args:
+          df:   
+      Returns:
+          
+      """
       return ta.add_all_ta_features(df, open="Open", high="High", low="Low", close="Close", volume="Volume")
   
 # df = tech(df)
@@ -159,6 +205,14 @@ def tech(df):
 
 
 def genetic_feat(df, num_gen=20, num_comp=10):
+  """function genetic_feat
+  Args:
+      df:   
+      num_gen:   
+      num_comp:   
+  Returns:
+      
+  """
   function_set = ['add', 'sub', 'mul', 'div',
                   'sqrt', 'log', 'abs', 'neg', 'inv','tan']
 

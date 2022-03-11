@@ -2,6 +2,12 @@
 import argparse
 
 def getArgs(argv=None):
+    """function getArgs
+    Args:
+        argv:   
+    Returns:
+        
+    """
     parser = argparse.ArgumentParser(description="NN Conditional Prediction Model",)
 
     parser.add_argument('--batch-size', type=int, default=150, metavar="N",

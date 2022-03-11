@@ -11,6 +11,11 @@ from . import Utils as tsutil
 
 class cPerf:
     def __init__(self):
+        """ cPerf:__init__
+        Args:
+        Returns:
+           
+        """
         self.mErrorStdDev = None;
         self.mErrorMean = None;
         self.mMAPE = None;
@@ -25,6 +30,13 @@ class cPerf:
         self.mDebug = False;
 
     def check_not_nan(self, sig , name):
+        """ cPerf:check_not_nan
+        Args:
+            sig:     
+            name:     
+        Returns:
+           
+        """
         #print("check_not_nan");
         if(np.isnan(sig).any()):
             logger = tsutil.get_pyaf_logger();
@@ -33,6 +45,13 @@ class cPerf:
         pass
 
     def compute_MAPE_SMAPE_MASE(self, signal , estimator):
+        """ cPerf:compute_MAPE_SMAPE_MASE
+        Args:
+            signal:     
+            estimator:     
+        Returns:
+           
+        """
         self.mMAPE = None;
         self.mSMAPE = None;
         self.mMASE = None;
@@ -52,12 +71,26 @@ class cPerf:
             self.mSMAPE = round( self.mSMAPE , 4 )
 
     def compute_R2(self, signal , estimator):
+        """ cPerf:compute_R2
+        Args:
+            signal:     
+            estimator:     
+        Returns:
+           
+        """
         SST = np.sum((signal.values - np.mean(signal.values))**2) + 1.0e-10;
         SSRes = np.sum((signal.values - estimator.values)**2)
         R2 = 1 - SSRes/SST
         return R2
 
     def dump_perf_data(self, signal , estimator):
+        """ cPerf:dump_perf_data
+        Args:
+            signal:     
+            estimator:     
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
         df = pd.DataFrame();
         df['sig'] = signal.values;
@@ -66,6 +99,14 @@ class cPerf:
         logger.debug(str(df.tail()));
     
     def compute(self, signal , estimator, name):
+        """ cPerf:compute
+        Args:
+            signal:     
+            estimator:     
+            name:     
+        Returns:
+           
+        """
         try:
             # self.dump_perf_data(signal, estimator);
             return self.real_compute(signal, estimator, name);
@@ -77,6 +118,13 @@ class cPerf:
         pass
 
     def compute_pearson_r(self, signal , estimator):
+        """ cPerf:compute_pearson_r
+        Args:
+            signal:     
+            estimator:     
+        Returns:
+           
+        """
         from scipy.stats import pearsonr
         signal_std = np.std(signal);
         estimator_std = np.std(estimator);
@@ -96,6 +144,14 @@ class cPerf:
         
             
     def real_compute(self, signal , estimator, name):
+        """ cPerf:real_compute
+        Args:
+            signal:     
+            estimator:     
+            name:     
+        Returns:
+           
+        """
         self.mName = name;
         if(self.mDebug):
             self.check_not_nan(signal.values , "signal")
@@ -120,6 +176,15 @@ class cPerf:
         
 
     def computeCriterion(self, signal , estimator, criterion, name):
+        """ cPerf:computeCriterion
+        Args:
+            signal:     
+            estimator:     
+            criterion:     
+            name:     
+        Returns:
+           
+        """
         self.mName = name;
         
         self.mCount = signal.shape[0];
@@ -158,6 +223,12 @@ class cPerf:
         return 0.0;
 
     def getCriterionValue(self, criterion):
+        """ cPerf:getCriterionValue
+        Args:
+            criterion:     
+        Returns:
+           
+        """
         if(criterion == "L1"):
             return self.mL1;
         if(criterion == "L2"):

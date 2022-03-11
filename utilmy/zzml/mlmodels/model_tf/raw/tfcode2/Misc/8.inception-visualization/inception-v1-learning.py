@@ -121,6 +121,12 @@ plt.show()
 
 
 def deprocess_image(x):
+    """function deprocess_image
+    Args:
+        x:   
+    Returns:
+        
+    """
     x -= x.mean()
     x /= x.std() + 1e-5
     x *= 0.1
@@ -134,6 +140,15 @@ def deprocess_image(x):
 
 
 def generate_pattern(layer_name, filter_index, size=150, epoch=40):
+    """function generate_pattern
+    Args:
+        layer_name:   
+        filter_index:   
+        size:   
+        epoch:   
+    Returns:
+        
+    """
     loss = tf.reduce_mean(endpoints[layer_name][:, :, :, filter_index])
     grad = tf.gradients(loss, X)[0]
     grad /= tf.sqrt(tf.reduce_mean(tf.square(grad))) + 1e-5

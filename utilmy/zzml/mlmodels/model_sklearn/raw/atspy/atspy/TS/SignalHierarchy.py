@@ -19,6 +19,11 @@ import time
 class cSignalHierarchy:
 
     def __init__(self):
+        """ cSignalHierarchy:__init__
+        Args:
+        Returns:
+           
+        """
         self.mHierarchy = None;
         self.mHierarchy = None;
         self.mDateColumn = None;
@@ -34,11 +39,21 @@ class cSignalHierarchy:
         self.mModels = None;
         
     def info(self):
+        """ cSignalHierarchy:info
+        Args:
+        Returns:
+           
+        """
         lStr2 = ""
         return lStr2;
 
 
     def to_json(self):
+        """ cSignalHierarchy:to_json
+        Args:
+        Returns:
+           
+        """
         lDict = {};
         lDict['Structure'] = self.mStructure;
         lDict['Models'] = {};
@@ -49,6 +64,11 @@ class cSignalHierarchy:
         return lDict;
 
     def create_HierarchicalStructure(self):
+        """ cSignalHierarchy:create_HierarchicalStructure
+        Args:
+        Returns:
+           
+        """
         self.mLevels = self.mHierarchy['Levels'];
         self.mStructure = {};
         df = self.mHierarchy['Data'];
@@ -67,6 +87,11 @@ class cSignalHierarchy:
         pass
     
     def create_SummingMatrix(self):
+        """ cSignalHierarchy:create_SummingMatrix
+        Args:
+        Returns:
+           
+        """
         lNbNodes = sum([len(self.mStructure[level]) for level in self.mStructure.keys()]);
         lBaseLevelCount = len(self.mStructure[0]);
         lIndices = {};
@@ -90,6 +115,12 @@ class cSignalHierarchy:
         # print(self.mSummingMatrixInverse);
 
     def checkData(self , df):
+        """ cSignalHierarchy:checkData
+        Args:
+            df:     
+        Returns:
+           
+        """
         if(self.mHorizon != int(self.mHorizon)):
             raise tsutil.PyAF_Error("PYAF_ERROR_NON_INTEGER_HORIZON " + str(self.mHorizon));
         if(self.mHorizon < 1):
@@ -123,6 +154,12 @@ class cSignalHierarchy:
 
 
     def create_all_levels_dataset(self, df):
+        """ cSignalHierarchy:create_all_levels_dataset
+        Args:
+            df:     
+        Returns:
+           
+        """
         self.checkData(df);
         lAllLevelsDataset = df.copy();
         lMapped = True;
@@ -151,15 +188,35 @@ class cSignalHierarchy:
 
 
     def addVars(self, df):
+        """ cSignalHierarchy:addVars
+        Args:
+            df:     
+        Returns:
+           
+        """
         lAllLevelsDataset = self.create_all_levels_dataset(df);
         return lAllLevelsDataset;
 
     def transformDataset(self, df):
+        """ cSignalHierarchy:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
         df = self.addVars(df);
         return df;
 
 
     def create_all_levels_models(self, iAllLevelsDataset, H, iDateColumn):
+        """ cSignalHierarchy:create_all_levels_models
+        Args:
+            iAllLevelsDataset:     
+            H:     
+            iDateColumn:     
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_hierarchical_logger();
         self.mModels = {};
         for level in sorted(self.mStructure.keys()):
@@ -176,6 +233,11 @@ class cSignalHierarchy:
 
 
     def fit(self):
+        """ cSignalHierarchy:fit
+        Args:
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
         logger.info("START_HIERARCHICAL_TRAINING")
         start_time = time.time()
@@ -192,12 +254,23 @@ class cSignalHierarchy:
 
 
     def getModelInfo(self):
+        """ cSignalHierarchy:getModelInfo
+        Args:
+        Returns:
+           
+        """
         for level in sorted(self.mModels.keys()):
             for signal in sorted(self.mModels[level].keys()):
                 lEngine = self.mModels[level][signal];
                 lEngine.getModelInfo();
 
     def plot(self , name = None):
+        """ cSignalHierarchy:plot
+        Args:
+            name :     
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
         logger.info("START_HIERARCHICAL_PLOTTING")
         start_time = time.time()
@@ -220,6 +293,12 @@ class cSignalHierarchy:
 
     
     def standardPlots(self , name = None):
+        """ cSignalHierarchy:standardPlots
+        Args:
+            name :     
+        Returns:
+           
+        """
         for level in sorted(self.mModels.keys()):
             for signal in sorted(self.mModels[level].keys()):
                 lEngine = self.mModels[level][signal];
@@ -227,6 +306,14 @@ class cSignalHierarchy:
 
 
     def forecastAllModels(self, iAllLevelsDataset, H, iDateColumn):
+        """ cSignalHierarchy:forecastAllModels
+        Args:
+            iAllLevelsDataset:     
+            H:     
+            iDateColumn:     
+        Returns:
+           
+        """
         lForecast_DF = pd.DataFrame();
         for level in sorted(self.mModels.keys()):
             for signal in sorted(self.mModels[level].keys()):
@@ -245,6 +332,12 @@ class cSignalHierarchy:
         return lForecast_DF;
 
     def getEstimPart(self, df):
+        """ cSignalHierarchy:getEstimPart
+        Args:
+            df:     
+        Returns:
+           
+        """
         level = 0;
         signal = list(self.mModels[level].keys())[0];
         lEngine = self.mModels[level][signal];
@@ -252,6 +345,12 @@ class cSignalHierarchy:
         return lFrameFit;
 
     def getValidPart(self, df):
+        """ cSignalHierarchy:getValidPart
+        Args:
+            df:     
+        Returns:
+           
+        """
         level = 0;
         signal = list(self.mModels[level].keys())[0];
         lEngine = self.mModels[level][signal];
@@ -260,6 +359,12 @@ class cSignalHierarchy:
 
 
     def computeTopDownHistoricalProportions(self, iAllLevelsDataset):
+        """ cSignalHierarchy:computeTopDownHistoricalProportions
+        Args:
+            iAllLevelsDataset:     
+        Returns:
+           
+        """
         self.mAvgHistProp = {};
         self.mPropHistAvg = {};
         # Compute these proportions only on Estimation.
@@ -277,6 +382,12 @@ class cSignalHierarchy:
         pass
         
     def computeTopDownForecastedProportions(self, iForecast_DF):
+        """ cSignalHierarchy:computeTopDownForecastedProportions
+        Args:
+            iForecast_DF:     
+        Returns:
+           
+        """
         self.mForecastedProp = {};
         for level in  sorted(self.mStructure.keys()):
             if(level > 0):
@@ -288,6 +399,15 @@ class cSignalHierarchy:
         pass
 
     def computeBottomUpForecast(self, iForecast_DF, level, signal, iPrefix = "BU"):
+        """ cSignalHierarchy:computeBottomUpForecast
+        Args:
+            iForecast_DF:     
+            level:     
+            signal:     
+            iPrefix :     
+        Returns:
+           
+        """
         new_BU_forecast = None;
         for col1 in sorted(self.mStructure[level][signal]):
             if(new_BU_forecast is None):
@@ -299,6 +419,12 @@ class cSignalHierarchy:
         return new_BU_forecast;
 
     def computeBottomUpForecasts(self, iForecast_DF):
+        """ cSignalHierarchy:computeBottomUpForecasts
+        Args:
+            iForecast_DF:     
+        Returns:
+           
+        """
         lForecast_DF_BU = iForecast_DF;
         # print("STRUCTURE " , self.mStructure.keys());
         for level in sorted(self.mStructure.keys()):
@@ -313,6 +439,12 @@ class cSignalHierarchy:
 
 
     def computePerfOnCombinedForecasts(self, iForecast_DF):
+        """ cSignalHierarchy:computePerfOnCombinedForecasts
+        Args:
+            iForecast_DF:     
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
 
         self.mEstimPerfs = {}
@@ -351,6 +483,14 @@ class cSignalHierarchy:
 
 
     def computeTopDownForecasts(self, iForecast_DF , iProp , iPrefix):
+        """ cSignalHierarchy:computeTopDownForecasts
+        Args:
+            iForecast_DF:     
+            iProp:     
+            iPrefix:     
+        Returns:
+           
+        """
         lForecast_DF_TD = iForecast_DF;
         lLevelsReversed = sorted(self.mStructure.keys(), reverse=True);
         # print("TOPDOWN_STRUCTURE", self.mStructure)
@@ -371,6 +511,14 @@ class cSignalHierarchy:
         return lForecast_DF_TD;
 
     def computeMiddleOutForecasts(self, iForecast_DF , iProp, iPrefix):
+        """ cSignalHierarchy:computeMiddleOutForecasts
+        Args:
+            iForecast_DF:     
+            iProp:     
+            iPrefix:     
+        Returns:
+           
+        """
         lLevels = self.mStructure.keys();
         lMidLevel = len(lLevels) // 2;
         lForecast_DF_MO = iForecast_DF;
@@ -401,6 +549,12 @@ class cSignalHierarchy:
 
 
     def computeOptimalCombination(self, iForecast_DF):
+        """ cSignalHierarchy:computeOptimalCombination
+        Args:
+            iForecast_DF:     
+        Returns:
+           
+        """
         lBaseNames = [];
         for level in  sorted(self.mStructure.keys()):
             for col in sorted(self.mStructure[level].keys()):
@@ -424,6 +578,13 @@ class cSignalHierarchy:
         return lForecast_DF_OC;
 
     def internal_forecast(self , iInputDS, iHorizon):
+        """ cSignalHierarchy:internal_forecast
+        Args:
+            iInputDS:     
+            iHorizon:     
+        Returns:
+           
+        """
 
         lAllLevelsDataset = self.create_all_levels_dataset(iInputDS);
         lForecast_DF = self.forecastAllModels(lAllLevelsDataset, iHorizon, self.mDateColumn);
@@ -455,6 +616,13 @@ class cSignalHierarchy:
         return lForecast_DF
 
     def forecast(self , iInputDS, iHorizon):
+        """ cSignalHierarchy:forecast
+        Args:
+            iInputDS:     
+            iHorizon:     
+        Returns:
+           
+        """
         logger = tsutil.get_pyaf_logger();
         logger.info("START_HIERARCHICAL_FORECASTING")
         start_time = time.time()

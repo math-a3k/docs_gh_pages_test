@@ -29,6 +29,15 @@ df.head()
 
 class Actor:
     def __init__(self, name, input_size, output_size, size_layer):
+        """ Actor:__init__
+        Args:
+            name:     
+            input_size:     
+            output_size:     
+            size_layer:     
+        Returns:
+           
+        """
         with tf.variable_scope(name):
             self.X = tf.placeholder(tf.float32, (None, None, input_size))
             self.hidden_layer = tf.placeholder(tf.float32, (None, 2 * size_layer))
@@ -46,6 +55,16 @@ class Actor:
 
 class Critic:
     def __init__(self, name, input_size, output_size, size_layer, learning_rate):
+        """ Critic:__init__
+        Args:
+            name:     
+            input_size:     
+            output_size:     
+            size_layer:     
+            learning_rate:     
+        Returns:
+           
+        """
         with tf.variable_scope(name):
             self.X = tf.placeholder(tf.float32, (None, None, input_size))
             self.Y = tf.placeholder(tf.float32, (None, output_size))
@@ -85,6 +104,15 @@ class Agent:
     T_COPY = 0
 
     def __init__(self, state_size, window_size, trend, skip):
+        """ Agent:__init__
+        Args:
+            state_size:     
+            window_size:     
+            trend:     
+            skip:     
+        Returns:
+           
+        """
         self.state_size = state_size
         self.window_size = window_size
         self.half_window = window_size // 2
@@ -116,6 +144,13 @@ class Agent:
         self.sess.run(tf.global_variables_initializer())
 
     def _assign(self, from_name, to_name):
+        """ Agent:_assign
+        Args:
+            from_name:     
+            to_name:     
+        Returns:
+           
+        """
         from_w = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=from_name)
         to_w = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=to_name)
         for i in range(len(from_w)):
@@ -123,11 +158,28 @@ class Agent:
             self.sess.run(assign_op)
 
     def _memorize(self, state, action, reward, new_state, dead, rnn_state):
+        """ Agent:_memorize
+        Args:
+            state:     
+            action:     
+            reward:     
+            new_state:     
+            dead:     
+            rnn_state:     
+        Returns:
+           
+        """
         self.MEMORIES.append((state, action, reward, new_state, dead, rnn_state))
         if len(self.MEMORIES) > self.MEMORY_SIZE:
             self.MEMORIES.popleft()
 
     def _select_action(self, state):
+        """ Agent:_select_action
+        Args:
+            state:     
+        Returns:
+           
+        """
         if np.random.rand() < self.EPSILON:
             action = np.random.randint(self.OUTPUT_SIZE)
         else:
@@ -136,6 +188,12 @@ class Agent:
         return action
 
     def _construct_memories_and_train(self, replay):
+        """ Agent:_construct_memories_and_train
+        Args:
+            replay:     
+        Returns:
+           
+        """
         states = np.array([a[0] for a in replay])
         new_states = np.array([a[3] for a in replay])
         init_values = np.array([a[-1] for a in replay])
@@ -188,6 +246,12 @@ class Agent:
         return cost
 
     def get_state(self, t):
+        """ Agent:get_state
+        Args:
+            t:     
+        Returns:
+           
+        """
         window_size = self.window_size + 1
         d = t - window_size + 1
         block = self.trend[d : t + 1] if d >= 0 else -d * [self.trend[0]] + self.trend[0 : t + 1]
@@ -197,6 +261,12 @@ class Agent:
         return np.array(res)
 
     def buy(self, initial_money):
+        """ Agent:buy
+        Args:
+            initial_money:     
+        Returns:
+           
+        """
         starting_money = initial_money
         states_sell = []
         states_buy = []
@@ -250,6 +320,14 @@ class Agent:
         return states_buy, states_sell, total_gains, invest
 
     def train(self, iterations, checkpoint, initial_money):
+        """ Agent:train
+        Args:
+            iterations:     
+            checkpoint:     
+            initial_money:     
+        Returns:
+           
+        """
         for i in range(iterations):
             total_profit = 0
             inventory = []

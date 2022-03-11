@@ -12,6 +12,11 @@ K = 2
 
 @pytest.fixture(scope="module")
 def df():
+    """function df
+    Args:
+    Returns:
+        
+    """
     mock_text = {
         "cord_uid": ["ej795nks", "9mzs5dl4", "u7lz3spe"],
         "doi": ["10.1289/ehp.7117", "10.1289/ehp.7491", "10.1371/journal.pmed.0030149"],
@@ -48,15 +53,33 @@ def df():
 
 @pytest.fixture(scope="module")
 def model():
+    """function model
+    Args:
+    Returns:
+        
+    """
     return TfidfRecommender(id_col="cord_uid", tokenization_method="scibert")
 
 
 def test_init(model):
+    """function test_init
+    Args:
+        model:   
+    Returns:
+        
+    """
     assert model.id_col == "cord_uid"
     assert model.tokenization_method == "scibert"
 
 
 def test_clean_dataframe(model, df):
+    """function test_clean_dataframe
+    Args:
+        model:   
+        df:   
+    Returns:
+        
+    """
     df_clean = model.clean_dataframe(
         df, ["abstract", "full_text"], new_col_name=CLEAN_COL
     )
@@ -71,15 +94,36 @@ def test_clean_dataframe(model, df):
 
 @pytest.fixture(scope="module")
 def df_clean(model, df):
+    """function df_clean
+    Args:
+        model:   
+        df:   
+    Returns:
+        
+    """
     return model.clean_dataframe(df, ["abstract", "full_text"], new_col_name=CLEAN_COL)
 
 
 def test_tokenize_text(model, df_clean):
+    """function test_tokenize_text
+    Args:
+        model:   
+        df_clean:   
+    Returns:
+        
+    """
     _, vectors_tokenized = model.tokenize_text(df_clean)
     assert True not in list(df_clean[CLEAN_COL] == vectors_tokenized)
 
 
 def test_fit(model, df_clean):
+    """function test_fit
+    Args:
+        model:   
+        df_clean:   
+    Returns:
+        
+    """
     tf, vectors_tokenized = model.tokenize_text(df_clean)
     model.fit(tf, vectors_tokenized)
     assert type(model.tfidf_matrix) == scipy.sparse.csr.csr_matrix
@@ -87,6 +131,13 @@ def test_fit(model, df_clean):
 
 @pytest.fixture(scope="module")
 def model_fit(model, df_clean):
+    """function model_fit
+    Args:
+        model:   
+        df_clean:   
+    Returns:
+        
+    """
     model_fit = TfidfRecommender(id_col="cord_uid", tokenization_method="scibert")
     tf, vectors_tokenized = model_fit.tokenize_text(df_clean)
     model_fit.fit(tf, vectors_tokenized)
@@ -95,22 +146,48 @@ def model_fit(model, df_clean):
 
 
 def test_get_tokens(model_fit):
+    """function test_get_tokens
+    Args:
+        model_fit:   
+    Returns:
+        
+    """
     tokens = model_fit.get_tokens()
     assert type(tokens) == dict
     assert type(list(tokens.keys())[0]) == str
 
 
 def test_get_stop_words(model_fit):
+    """function test_get_stop_words
+    Args:
+        model_fit:   
+    Returns:
+        
+    """
     stop_words = model_fit.get_stop_words()
     assert type(list(stop_words)[0]) == str
 
 
 def test_recommend_top_k_items(model_fit, df_clean):
+    """function test_recommend_top_k_items
+    Args:
+        model_fit:   
+        df_clean:   
+    Returns:
+        
+    """
     top_k_recommendations = model_fit.recommend_top_k_items(df_clean, k=K)
     assert len(top_k_recommendations) > len(df_clean)
 
 
 def test_get_top_k_recommendations(model_fit, df_clean):
+    """function test_get_top_k_recommendations
+    Args:
+        model_fit:   
+        df_clean:   
+    Returns:
+        
+    """
     query_id = "ej795nks"
     displayed_top_k = model_fit.get_top_k_recommendations(df_clean, query_id=query_id)
     assert len(displayed_top_k.data) == K

@@ -38,6 +38,11 @@ from typing import List, Optional, Tuple, Union
 #############################################################################################
 from utilmy import log, log2
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print( HELP + help_create(MNAME) )
 
@@ -45,12 +50,22 @@ def help():
 
 #############################################################################################
 def test_all() -> None:
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     log(MNAME)
     test1()
     test2()
 
 
 def test1():
+    """function test1
+    Args:
+    Returns:
+        
+    """
     import utilmy
     dirin = os.path.dirname(  utilmy.__file__ )  ### Repo Root folder
     flist = glob_glob_python(dirin,nfile=1)
@@ -59,6 +74,11 @@ def test1():
 
 
 def test2() -> None:
+    """function test2
+    Args:
+    Returns:
+        
+    """
     import utilmy
     dirin = os.path.dirname(utilmy.__file__)  ### Repo Root folder
     dirout = os_makedirs('utilmy/docs/test/')[0] ### test dir
@@ -67,6 +87,11 @@ def test2() -> None:
 
 #############################################################################################
 def run_format1():
+    """function run_format1
+    Args:
+    Returns:
+        
+    """
     import argparse
     p = argparse.ArgumentParser(description="")
     p.add_argument("--dir_in", "-i", required='True',
@@ -91,6 +116,13 @@ def run_format1():
 
 
 def batch_format_file(in_file, out_dir):
+    """function batch_format_file
+    Args:
+        in_file:   
+        out_dir:   
+    Returns:
+        
+    """
     # if input is a file and make sure it exits
     if os.path.isfile(in_file):
         with open(in_file) as f:
@@ -128,6 +160,13 @@ def batch_format_file(in_file, out_dir):
 
 
 def batch_format_dir(in_dir, out_dir):
+    """function batch_format_dir
+    Args:
+        in_dir:   
+        out_dir:   
+    Returns:
+        
+    """
     src_files = os_glob(in_dir)
     #flist = glob_glob_python(dirin, suffix ="*.py", nfile=nfile, exclude="*zz*")
 

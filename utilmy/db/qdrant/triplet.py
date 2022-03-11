@@ -3,6 +3,12 @@ import time
 import pandas as pd
 
 def new_algo(df):
+    """function new_algo
+    Args:
+        df:   
+    Returns:
+        
+    """
     ddict3 = {}
     df = df[['userid', 'genre_id']]
     user_grouped=df.groupby('userid')

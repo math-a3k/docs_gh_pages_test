@@ -4,6 +4,14 @@ from sklearn.metrics import roc_auc_score
 
 
 def predict(model, uid, pids):
+    """function predict
+    Args:
+        model:   
+        uid:   
+        pids:   
+    Returns:
+        
+    """
 
     scores = (np.dot(model.nodes['user_latent'].get_weights()[0][uid],
                     model.nodes['item_latent'].get_weights()[0][pids].T))

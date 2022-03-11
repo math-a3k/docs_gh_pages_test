@@ -16,10 +16,21 @@ import itertools, time, multiprocessing, pandas as pd, numpy as np, pickle, gc
 
 #################################################################################################
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     ss  = ""
     ss += HELP
     print(ss)
@@ -66,12 +77,25 @@ def log5(*s):
 
 
 def log_trace(msg="", dump_path="", globs=None):
+    """function log_trace
+    Args:
+        msg:   
+        dump_path:   
+        globs:   
+    Returns:
+        
+    """
     print(msg)
     import pdb;
     pdb.set_trace()
 
 
 def profiler_start():
+    """function profiler_start
+    Args:
+    Returns:
+        
+    """
     ### Code profiling
     from pyinstrument import Profiler
     global profiler
@@ -80,6 +104,11 @@ def profiler_start():
 
 
 def profiler_stop():
+    """function profiler_stop
+    Args:
+    Returns:
+        
+    """
     global profiler
     profiler.stop()
     print(profiler.output_text(unicode=True, color=True))

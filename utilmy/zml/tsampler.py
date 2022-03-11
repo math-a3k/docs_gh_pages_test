@@ -19,6 +19,14 @@ sys.path.append(root_repo)
 from source.util_feature import save,os_get_function_name
 
 def global_pars_update(model_dict,  data_name, config_name):
+    """function global_pars_update
+    Args:
+        model_dict:   
+        data_name:   
+        config_name:   
+    Returns:
+        
+    """
     print("config_name", config_name)
     dir_data  = root_repo + "/data/"  ; print("dir_data", dir_data)
 
@@ -76,6 +84,11 @@ cols_input_type_1 = {
 
 ####################################################################################
 def config_sampler() :
+    """function config_sampler
+    Args:
+    Returns:
+        
+    """
     data_name    = "titanic"         ### in data/input/
     model_class  = "CTGAN"  ### ACTUAL Class name for model_sklearn.py
     n_sample     = 1000
@@ -147,11 +160,23 @@ def config_sampler() :
 
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(s, flush=True)
 
 
 
 def test_batch(nsample=1000):
+   """function test_batch
+   Args:
+       nsample:   
+   Returns:
+       
+   """
    ll = [
      ('CTGAN', { })
 

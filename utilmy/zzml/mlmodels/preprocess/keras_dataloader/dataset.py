@@ -11,15 +11,38 @@ class Dataset(object):
     """
 
     def __init__(self, dtype='float32'):
+        """ Dataset:__init__
+        Args:
+            dtype:     
+        Returns:
+           
+        """
         self.dtype = dtype
 
     def __getitem__(self, index):
+        """ Dataset:__getitem__
+        Args:
+            index:     
+        Returns:
+           
+        """
         raise NotImplementedError
 
     def __len__(self):
+        """ Dataset:__len__
+        Args:
+        Returns:
+           
+        """
         raise NotImplementedError
 
     def __add__(self, other):
+        """ Dataset:__add__
+        Args:
+            other:     
+        Returns:
+           
+        """
         return ConcatDataset([self, other])
 
 
@@ -36,6 +59,12 @@ class ConcatDataset(Dataset):
 
     @staticmethod
     def cumsum(sequence):
+        """ ConcatDataset:cumsum
+        Args:
+            sequence:     
+        Returns:
+           
+        """
         r, s = [], 0
         for e in sequence:
             l = len(e)
@@ -44,6 +73,12 @@ class ConcatDataset(Dataset):
         return r
 
     def __init__(self, datasets):
+        """ ConcatDataset:__init__
+        Args:
+            datasets:     
+        Returns:
+           
+        """
         super(ConcatDataset, self).__init__()
         assert len(datasets) > 0, 'datasets should not be an empty iterable'
         self.datasets = list(datasets)
@@ -53,6 +88,12 @@ class ConcatDataset(Dataset):
         return self.cumulative_sizes[-1]
 
     def __getitem__(self, idx):
+        """ ConcatDataset:__getitem__
+        Args:
+            idx:     
+        Returns:
+           
+        """
         dataset_idx = bisect.bisect_right(self.cumulative_sizes, idx)
         if dataset_idx == 0:
             sample_idx = idx
@@ -62,6 +103,11 @@ class ConcatDataset(Dataset):
 
     @property
     def cummulative_sizes(self):
+        """ ConcatDataset:cummulative_sizes
+        Args:
+        Returns:
+           
+        """
         warnings.warn("cummulative_sizes attribute is renamed to "
                       "cumulative_sizes", DeprecationWarning, stacklevel=2)
         return self.cumulative_sizes

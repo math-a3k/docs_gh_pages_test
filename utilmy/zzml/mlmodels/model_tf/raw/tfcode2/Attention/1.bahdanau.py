@@ -57,11 +57,24 @@ UNK = dictionary["UNK"]
 
 class Attention:
     def __init__(self, hidden_size):
+        """ Attention:__init__
+        Args:
+            hidden_size:     
+        Returns:
+           
+        """
         self.hidden_size = hidden_size
         self.dense_layer = tf.layers.Dense(hidden_size)
         self.v = tf.random_normal([hidden_size], mean=0, stddev=1 / np.sqrt(hidden_size))
 
     def score(self, hidden_tensor, encoder_outputs):
+        """ Attention:score
+        Args:
+            hidden_tensor:     
+            encoder_outputs:     
+        Returns:
+           
+        """
         energy = tf.nn.tanh(self.dense_layer(tf.concat([hidden_tensor, encoder_outputs], 2)))
         energy = tf.transpose(energy, [0, 2, 1])
         batch_size = tf.shape(encoder_outputs)[0]
@@ -70,6 +83,13 @@ class Attention:
         return tf.squeeze(energy, 1)
 
     def __call__(self, hidden, encoder_outputs):
+        """ Attention:__call__
+        Args:
+            hidden:     
+            encoder_outputs:     
+        Returns:
+           
+        """
         seq_len = tf.shape(encoder_outputs)[1]
         batch_size = tf.shape(encoder_outputs)[0]
         H = tf.tile(tf.expand_dims(hidden, 1), [1, seq_len, 1])
@@ -79,6 +99,14 @@ class Attention:
 
 class Bahdanau(tf.contrib.rnn.RNNCell):
     def __init__(self, hidden_size, output_size, encoder_outputs):
+        """ Bahdanau:__init__
+        Args:
+            hidden_size:     
+            output_size:     
+            encoder_outputs:     
+        Returns:
+           
+        """
         self.hidden_size = hidden_size
         self.gru = tf.contrib.rnn.GRUCell(hidden_size)
         self.attention = Attention(hidden_size)
@@ -88,16 +116,39 @@ class Bahdanau(tf.contrib.rnn.RNNCell):
 
     @property
     def state_size(self):
+        """ Bahdanau:state_size
+        Args:
+        Returns:
+           
+        """
         return self.hidden_size
 
     @property
     def output_size(self):
+        """ Bahdanau:output_size
+        Args:
+        Returns:
+           
+        """
         return self.hidden_size
 
     def reset_state(self):
+        """ Bahdanau:reset_state
+        Args:
+        Returns:
+           
+        """
         self.stack = []
 
     def __call__(self, inputs, state, scope=None):
+        """ Bahdanau:__call__
+        Args:
+            inputs:     
+            state:     
+            scope:     
+        Returns:
+           
+        """
         attn_weights = self.attention(state, self.encoder_outputs)
         context = tf.matmul(attn_weights, self.encoder_outputs)[:, 0, :]
         rnn_input = tf.concat([inputs, context], 1)
@@ -106,6 +157,13 @@ class Bahdanau(tf.contrib.rnn.RNNCell):
         return output, hidden
 
     def get_attention(self, inputs, state):
+        """ Bahdanau:get_attention
+        Args:
+            inputs:     
+            state:     
+        Returns:
+           
+        """
         attn_weights = self.attention(state, self.encoder_outputs)
         self.stack.append(attn_weights)
         context = tf.matmul(attn_weights, self.encoder_outputs)[:, 0, :]
@@ -120,6 +178,16 @@ class Bahdanau(tf.contrib.rnn.RNNCell):
 
 class Model:
     def __init__(self, size_layer, embedded_size, dict_size, dimension_output, learning_rate):
+        """ Model:__init__
+        Args:
+            size_layer:     
+            embedded_size:     
+            dict_size:     
+            dimension_output:     
+            learning_rate:     
+        Returns:
+           
+        """
 
         self.X = tf.placeholder(tf.int32, [None, None])
         self.Y = tf.placeholder(tf.float32, [None, dimension_output])

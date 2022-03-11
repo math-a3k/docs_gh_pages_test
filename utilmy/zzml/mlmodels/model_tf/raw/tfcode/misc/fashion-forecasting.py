@@ -45,6 +45,16 @@ future_weeks = 30
 
 class Model:
     def __init__(self, learning_rate, num_layers, size, size_layer, forget_bias=0.8):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+            num_layers:     
+            size:     
+            size_layer:     
+            forget_bias:     
+        Returns:
+           
+        """
         def lstm_cell(size_layer):
             return tf.nn.rnn_cell.LSTMCell(size_layer, state_is_tuple=False)
 
@@ -183,6 +193,14 @@ plt.show()
 
 
 def df_shift(df, lag=0, rejected_columns=[]):
+    """function df_shift
+    Args:
+        df:   
+        lag:   
+        rejected_columns:   
+    Returns:
+        
+    """
     df = df.copy()
     if not lag:
         return df

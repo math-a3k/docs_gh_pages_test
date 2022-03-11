@@ -384,6 +384,15 @@ class LightGCN(object):
         return df.replace(-np.inf, np.nan).dropna()
 
     def output_embeddings(self, idmapper, n, target, user_file):
+        """ LightGCN:output_embeddings
+        Args:
+            idmapper:     
+            n:     
+            target:     
+            user_file:     
+        Returns:
+           
+        """
         embeddings = list(target.eval(session=self.sess))
         with open(user_file, "w") as wt:
             for i in range(n):

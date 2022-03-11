@@ -77,6 +77,11 @@ class NextItNetModel(SequentialBaseModel):
             return model_output
 
     def _training_output(self):
+        """ NextItNetModel:_training_output
+        Args:
+        Returns:
+           
+        """
         model_output = tf.repeat(
             self.dilate_input, self.hparams.train_num_ngs + 1, axis=0
         )
@@ -95,6 +100,11 @@ class NextItNetModel(SequentialBaseModel):
         return model_output
 
     def _normal_output(self):
+        """ NextItNetModel:_normal_output
+        Args:
+        Returns:
+           
+        """
         model_output = self.dilate_input[:, -1, :]
         model_output = tf.concat(
             [model_output, self.target_item_embedding[:, -1, :]], -1
