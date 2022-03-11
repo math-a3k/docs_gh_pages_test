@@ -28,7 +28,7 @@ jobs:
           echo "Fetching latest..."
           git fetch origin
           git checkout ${{ env.ROOT_BRANCH_NAME }}
-          git pull --allow-unrelated-histories 
+          # git pull --allow-unrelated-histories 
           echo "Beginning merge...."
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
@@ -36,7 +36,7 @@ jobs:
               echo ""
               echo "##################"
               git checkout $branch
-              git pull  $ROOT_BRANCH_NAME --allow-unrelated-histories 
+              git pull --allow-unrelated-histories 
               git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
               git push
               echo "Merge SUCCEEDED for branch $branch"
