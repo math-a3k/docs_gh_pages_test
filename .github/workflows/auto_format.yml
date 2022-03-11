@@ -85,6 +85,7 @@ jobs:
       run:  |
         git config user.name github-actions
         git config user.email github-actions@github.com      
+        git fetch
         git checkout main
         git push origin --delete zformat || echo 'already Deleted'
         git checkout -b zformat main

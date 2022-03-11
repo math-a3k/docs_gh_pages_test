@@ -85,7 +85,8 @@ jobs:
       #continue-on-error: true
       run:  |
         git config user.name github-actions
-        git config user.email github-actions@github.com      
+        git config user.email github-actions@github.com  
+        git fetch    
         git checkout main
         git push origin --delete zdocstring || echo 'already Deleted'
         git checkout -b zdocstring main
