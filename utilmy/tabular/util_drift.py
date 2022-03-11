@@ -219,7 +219,7 @@ def test3():
     np_conv_to_one_col(arr)
 
 
-def log(*s):
+def log(*s) -> None:
     print(s)
 
 
@@ -357,8 +357,11 @@ def y_adjuster_log(y_true, y_pred_log, error_func, **kwargs):
 
 # conduct multiple comparisons
 from tqdm import tqdm
-from typing import List
+from typing import Dict, Optional, Union, List
 from scipy import stats
+from numpy import float64, ndarray
+from pandas.core.frame import DataFrame
+from pandas.core.series import Series
 
 def test_multiple_comparisons(data: pd.DataFrame, label='y', adjuster=True) -> List[float]:
     """Run multiple t tests.
@@ -407,7 +410,7 @@ def test_multiple_comparisons(data: pd.DataFrame, label='y', adjuster=True) -> L
 
 
     
-def test_anova(df, col1, col2):
+def test_anova(df: DataFrame, col1: str, col2: str) -> None:
     """
     ANOVA test two categorical features
     Input dfframe, 1st feature and 2nd feature
@@ -436,7 +439,7 @@ def test_anova(df, col1, col2):
 
 
 
-def test_normality2(df, column, test_type):
+def test_normality2(df: DataFrame, column: str, test_type: str) -> None:
     """
     Function to check Normal Distribution of a Feature by 3 methods
     Input dfframe, feature name, and a test type
@@ -483,7 +486,7 @@ def test_normality2(df, column, test_type):
                 print(sl,' : ',cv,' ',column,' does not looks normal (fail to reject H0)')
 
 
-def test_plot_qqplot(df, col_name):
+def test_plot_qqplot(df: DataFrame, col_name: str) -> None:
     """
     Function to plot boxplot, histplot and qqplot for numerical feature analyze
     """
@@ -500,7 +503,7 @@ def test_plot_qqplot(df, col_name):
 
 
 ####################################################################################################
-def test_heteroscedacity(y, y_pred, pred_value_only=1):
+def test_heteroscedacity(y: Series, y_pred: ndarray, pred_value_only: int=1) -> Dict[str, Dict[str, float64]]:
     ss = """
        Test  Heteroscedacity :  Residual**2  = Linear(X, Pred, Pred**2)
        F pvalues < 0.01 : Null is Rejected  ---> Not Homoscedastic
@@ -521,7 +524,7 @@ def test_heteroscedacity(y, y_pred, pred_value_only=1):
     return ddict
 
 
-def test_normality(error, distribution="norm", test_size_limit=5000):
+def test_normality(error: Series, distribution: str="norm", test_size_limit: int=5000) -> Dict[str, Dict[str, Union[float, float64, ndarray]]]:
     """
        Test  Is Normal distribution
        F pvalues < 0.01 : Rejected
@@ -546,7 +549,7 @@ def test_normality(error, distribution="norm", test_size_limit=5000):
     return ddict
 
 
-def test_mutualinfo(error, Xtest, colname=None, bins=5):
+def test_mutualinfo(error: Series, Xtest: DataFrame, colname: Optional[str]=None, bins: int=5) -> Dict[str, float64]:
     """
        Test  Error vs Input Variable Independance byt Mutual ifno
        sklearn.feature_selection.mutual_info_classif(X, y, discrete_features='auto', n_neighbors=3, copy=True, random_state=None)
@@ -562,7 +565,7 @@ def test_mutualinfo(error, Xtest, colname=None, bins=5):
     return dict(zip(colname, res))
 
 
-def test_hypothesis(df_obs, df_ref, method='', **kw):
+def test_hypothesis(df_obs: DataFrame, df_ref: DataFrame, method: str='', **kw):
     """
     https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py
 
