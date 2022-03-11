@@ -1,7 +1,7 @@
 name: Auto Rebase Branches - main schedule
 on:
   schedule:
-    - cron:  '* */24 * * *'      #### 60mins
+    - cron:  '* 13 ** *'      #### 60mins
     #    - cron:  '*/10 * * * *'   
 
   push:
@@ -11,7 +11,7 @@ on:
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: aniket,alex,tranchung,lets7512,andrescass,adev01,emilio
+    BRANCHES_TO_REBASE: aniket,alex,tranchung,lets7512,andrescass,adev01,zdocs_y23487teg65f6
 
 jobs:
   Rebase-All:
@@ -28,7 +28,7 @@ jobs:
           echo "Fetching latest..."
           git fetch origin
           git checkout ${{ env.ROOT_BRANCH_NAME }}
-          git pull --allow-unrelated-histories 
+          # git pull --allow-unrelated-histories 
           echo "Beginning merge...."
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do

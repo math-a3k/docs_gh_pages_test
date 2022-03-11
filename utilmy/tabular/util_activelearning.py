@@ -1,28 +1,30 @@
 # -*- coding: utf-8 -*-
-MNAME = "utilmy.tabular.util_explain"
-HELP = """ utils for model explanation
+MNAME = "utilmy.tabular.util_activelearning"
+HELP = """ utils for active learning
+
+
+https://modal-python.readthedocs.io/en/latest/content/examples/Pytorch_integration.html
+
+
+https://github.com/baifanxxx/awesome-active-learning#2022
+
+
+
 """
 import os, numpy as np, glob, pandas as pd, matplotlib.pyplot as plt
 from box import Box
-
 
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor, plot_tree, DecisionTreeClassifier
 from sklearn import metrics
 
 
-from imodels import SLIMRegressor, BayesianRuleListClassifier, RuleFitRegressor, GreedyRuleListClassifier
-from imodels import SLIMClassifier, OneRClassifier, BoostedRulesClassifier
-from imodels.util.convert import tree_to_code
 
 #### Types
 
 
 #############################################################################################
 from utilmy import log, log2
-from imodels.algebraic.slim import SLIMRegressor
-from imodels.rule_set.rule_fit import RuleFitRegressor
-from imodels.tree.figs import FIGSRegressor
 from numpy import ndarray
 from typing import List, Optional, Tuple, Union
 
@@ -321,15 +323,58 @@ def test_imodels():
         mll = np.mean(metrics.log_loss(y_sim, model.predict(X_sim)))
         print(f'lambda: {lambda_reg}\tmlogloss: {mll: 0.2f}\tweights: {model.model_.coef_}')
 
+
+
 #############################################################################################
+def generate_train_samples(model, Xtrain, ytrain, Xnew, ynew):
+  """
+
+
+# Specify our core estimator.
+knn = KNeighborsClassifier(n_neighbors=3)
 
 
 
-"""
+  """
+  from modAL.models import ActiveLearner
+  from modAL.batch import uncertainty_batch_sampling
 
-https://modal-python.readthedocs.io/en/latest/content/examples/Pytorch_integration.html
+  learner = ActiveLearner(
+      estimator=model,
+      query_strategy=uncertainty_batch_sampling,
+      X_training=Xtrain, y_training=ytrain
+  )
 
-"""
+  from modAL.batch import ranked_batch
+  from modAL.uncertainty import classifier_uncertainty
+  from sklearn.metrics.pairwise import pairwise_distances
+
+  uncertainty = classifier_uncertainty(learner, X_pool)
+  distance_scores = pairwise_distances(X_pool, X_training, metric='euclidean').min(axis=1)
+  similarity_scores = 1 / (1 + distance_scores)
+  alpha = len(X_pool)/len(X_raw)
+  scores = alpha * (1 - similarity_scores) + (1 - alpha) * uncertainty
+
+  df = pd.DataFrame(scores, columns=['score_uncertainty']) 
+  return df
+
+
+
+
+def plot_samples(X_pool, X_training):
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+    transformed_pool = pca.transform(X_pool)
+    transformed_training = pca.transform(X_training)
+
+    with plt.style.context('seaborn-white'):
+        plt.figure(figsize=(8, 8))
+        plt.scatter(transformed_pool[:, 0], transformed_pool[:, 1], c=scores, cmap='viridis')
+        plt.colorbar()
+        plt.scatter(transformed_training[:, 0], transformed_training[:, 1], c='r', s=200, label='labeled')
+        plt.title('Scores of the first instance')
+        plt.legend()
+
 
 
 #############################################################################################
@@ -339,26 +384,7 @@ def model_fit(name:str='imodels.SLIMRegressor', model_pars:dict=None, data_pars:
       imodels.SLIMRegressor, BayesianRuleListClassifier, RuleFitRegressor, GreedyRuleListClassifier
       imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier
     """
-    from imodels.util.convert import tree_to_code
-    from sklearn import metrics
 
-    from utilmy.utils import load_function_uri
-    d = Box(data_pars) if data_pars is not None else Box({})
-
-    log("#### model load")    
-    name = name.replace(".", ":")
-    Model0 = load_function_uri(name)
-    model  = Model0(**model_pars)
-
-    log("#### model fit")    ###  brc = BoostedRulesClassifier(n_estimators=10)
-    try :
-       model.fit(d.X_train, d.y_train, feature_names=d.feat_names)
-    except :
-       model.fit(d.X_train, d.y_train, )
-    log(model)
-
-    ### d.get('task_type', 'classifier')
-    if do_eval :
       model_evaluate(model, data_pars)
 
     return model
@@ -383,7 +409,7 @@ def model_predict(model, predict_pars:dict):
     pass
 
 
-def model_save(model: Union[RuleFitRegressor, FIGSRegressor, SLIMRegressor], path: Optional[str]=None, info: None=None) -> None:
+def model_save(model, path: Optional[str]=None, info: None=None) -> None:
     import cloudpickle as pickle
     os.makedirs(path, exist_ok=True)
     filename = "model.pkl"
