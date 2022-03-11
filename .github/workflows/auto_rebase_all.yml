@@ -13,7 +13,9 @@ on:
 
 env:
     ROOT_BRANCH_NAME: main
-    BRANCHES_TO_REBASE: aniket,alex,tranchung,lets7512,andrescass,adev01,zdocs_y23487teg65f6
+    BRANCHES_TO_REBASE: aniket,alex,tranchung,adev01,zdocs_y23487teg65f6,dhamani
+    ### Remove :  lets7512,andrescass,
+
 
 jobs:
   Rebase-All:
@@ -23,7 +25,7 @@ jobs:
       - name: Checking out repository code into workspace...
         uses: actions/checkout@v3
         with:
-            github_token: ${{ secrets.WORKFLOW_TOKEN }}
+            token: ${{ secrets.WORKFLOW_TOKEN }}
 
       #### No desctructive add main and local and push ALL
       - run: |
