@@ -7,7 +7,7 @@ on:
   # but only for the main branch
   push:
     branches:
-    - zrefactor
+    - ztypehint_run
 
   schedule:
     - cron:  '* 3 * * *'      #### 60mins
