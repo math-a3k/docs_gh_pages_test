@@ -1,7 +1,5 @@
 
-
-def run3():
-
+def run4():
 
     from lib2to3.pygram import Symbols
     from dcgpy import expression_gdual_double as expression
@@ -251,4 +249,4 @@ def run3():
 
 
 
-    ## That's it folks
+## That's it folks
