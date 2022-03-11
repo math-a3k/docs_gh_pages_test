@@ -4,11 +4,10 @@ HELP=""" utils images
 
 """
 import os,io, numpy as np, sys, glob, time, copy, json, functools, pandas as pd
-from typing import Union
 from box import Box
 import io, cv2,  tifffile.tifffile, matplotlib
 from PIL import Image
-
+from typing import Union,Tuple,Sequence,List
 
 os.environ['MPLCONFIGDIR'] = "/tmp/"
 try :
@@ -34,6 +33,7 @@ def help():
 
 
 ################################################################################################
+# TESTS
 def test_all():
     """function test_all
     Args:
@@ -52,27 +52,34 @@ def test():
     """
     pass
 
+def test_image_create_fake():
+    dirout = os.getcwd() + "/ztmp/images/"
+    imsize=(300,300)
+    red = (255, 0, 0)
+    nimages = 1
+    image_create_fake(
+    dirout=dirout, 
+    nimages=nimages, 
+    imsize=imsize,
+    rgb_color = red)
 
-def test_image_create_fake(dirout=None, nimages=1, ):
-    """function test_image_create_fake
-    Args:
-        dirout:   
-        nimages:   
-        :   
-    Returns:
-        
+
+################################################################################################
+def image_create_fake(
+    dirout=os.getcwd() + "/ztmp/images/", 
+    nimages=1, 
+    imsize=(300,300),
+    rgb_color = (255, 0, 0)):
+    """TODO: whats the use of this function
     """
     import cv2
     import numpy as np
 
-    dirout = os.getcwd() + "/ztmp/images/"
+    width, height = imsize
     os.makedirs(dirout, exist_ok=True)
     ii = 0 ; img_list =[]
-    for ii in range(nmax):
-        # Create new blank 300x300 red image
-        width1, height1 = 300, 300
-        red = (255, 0, 0)
-        rgb_color= red
+    for ii in range(nimages):
+
         image = np.zeros((height, width, 3), np.uint8)
         color = tuple(reversed(rgb_color))
         image[:] = color
@@ -81,68 +88,20 @@ def test_image_create_fake(dirout=None, nimages=1, ):
             cv2.imwrite( dirout + f'img_{ii}.jpg', image)
         else:
             img_list.append(image)
-
+    # will return empty list if a dirout was provided
+    return img_list
 
 ################################################################################################
-def prep_images(image_paths, nmax=10000000):
-  """function prep_images
-  Args:
-      image_paths:   
-      nmax:   
-  Returns:
-      
-  """
-  images = []
-  for i in range(len(image_paths)):
-    if i > nmax : break
-    image =  prep_image(image_paths[i] )
-    images.append(image)
-  return images
-
-
-def prep_images2(image_paths, nmax=10000000):
-    """function prep_images2
-    Args:
-        image_paths:   
-        nmax:   
-    Returns:
-        
-    """
-    images = []
-    original_first_image = None
-    for i in range(len(image_paths)):
-        if i > nmax: break
-
-        image_path = image_paths[i]
-        fname = str(image_path).split("/")[-1]
-        id1 = fname.split(".")[0]
-
-        if (i + 100) % 100 == 0: print(fname, id1)
-
-        image = matplotlib.image.imread(image_path)
-
-        if images == []:
-            temp = (image / 255)
-            original_first_image = temp.astype('float32')
-        resized_image = cv2.resize(image, dsize=(xdim, ydim), interpolation=cv2.INTER_CUBIC)
-
-        if resized_image.shape == (xdim, ydim, cdim):
-            resized_image = resized_image / 255
-            images.append(resized_image.astype('float32'))
-    return images, original_first_image
-
-
-def prep_image(image_path:str, xdim=1, ydim=1):
-    """function prep_image
+def image_prep(image_path:str, xdim :int=1, ydim :int=1,
+    mean :float = 0.5,std :float    = 0.5) -> Tuple[Union[list,np.typing.ArrayLike],str] :
+    """ resizes, crops and centers an image according to provided mean and std
     Args:
         image_path ( str ) :   
         xdim:   
         ydim:   
     Returns:
-        
+    
     """
-    mean   = [0.5]
-    std    = [0.5]
     try :
         # fname      = str(image_path).split("/")[-1]
         # id1        = fname.split(".")[0]
@@ -150,17 +109,38 @@ def prep_image(image_path:str, xdim=1, ydim=1):
         image = image_read(image_path)
         image = image_resize_pad(image, (xdim,ydim), padColor=0)
         image = image_center_crop(image, (xdim,ydim))
-        image = (image / 255)
+        assert max(image) > 1, "image should be uint8, 0-255"
+        image = (image / 255)           
         image = (image-mean) /std  # Normalize the image to mean and std
         image = image.astype('float32')
         return image, image_path
     except :
         return [], ""
+        
+def image_prep_many(image_paths:Sequence[str], nmax:int=10000000, 
+    xdim :int=1, ydim :int=1,
+    mean :float = 0.5,std :float    = 0.5)->List[np.typing.ArrayLike]:
+    """ run image_prep on multiple images
+    """
+    #TODO: add tqdm for running metrics
+
+    images = []
+    for i in range(len(image_paths)):
+        if i > nmax : break
+        image =  image_prep(image_paths[i], 
+        xdim =xdim, ydim =ydim,
+        mean  = mean,std  = std )
+        images.append(image)
+    return images
 
 
-def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
+
+
+
+    
+#TODO is this redundant to `run_multiprocess`
+def image_preps_mp(image_path_list:list, prepro_image_fun=None, npool=1):
     """ Parallel processing
-
     """
     from multiprocessing.dummy import Pool    #### use threads for I/O bound tasks
 
@@ -179,7 +159,8 @@ def prep_images_multi(image_path_list:list, prepro_image_fun=None, npool=1):
     print(str(labels)[:60])
     return images, labels
 
-
+#TODO: does this already exist in the multiprocessing module, 
+#and if so should we use that?
 def run_multiprocess(myfun, list_args, npool=10, **kwargs):
     """
        res = run_multiprocess(prepro, image_paths, npool=10, )
@@ -195,6 +176,7 @@ def run_multiprocess(myfun, list_args, npool=10, **kwargs):
 
 
 ################################################################################################
+#TODO: what is `diskcache`
 def image_cache_create():
     """function image_cache_create
     Args:
@@ -204,35 +186,40 @@ def image_cache_create():
     #### source activate py38 &&  sleep 13600  && python prepro.py   image_remove_bg     && python prepro.py  image_create_cache
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     ####   sleep 56000  && python prepro.py  image_create_cache
-    import cv2, gc, diskcache
+    import cv2, gc
+    import diskcache as dc
     nmax =  1000000 #  0000
+    #TODO: why are we using globals?
+    #is this a multprocessed function?
     global xdim, ydim
     xdim= 256
     ydim= 256
 
     log("### Sub-Category  ################################################################")
+    #TODO: should be input
     # in_dir   = data_dir + '/fashion_data/images/'
     # in_dir   = data_dir + "/train_nobg_256/"
     in_dir   = data_dir + "/../gsp/v1000k_clean_nobg/"
 
     image_list = sorted(list(glob.glob(  f'/{in_dir}/*/*.*')))
-    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ]
+    image_list = [  t  for t in image_list if "/-1/" not in t  and "/60/" not in t   ] #TODO: some folders to exclude?
     log('N images', len(image_list))
     # tag   = "-women_topwear"
-    tag      = "train_r2p2_1000k_clean_nobg"
+    tag      = "train_r2p2_1000k_clean_nobg" #TODO: take as input
     tag      = f"{tag}_{xdim}_{ydim}-{nmax}"
     # db_path  = data_train + f"/img_{tag}.cache"
-    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache"
+    db_path = "/dev/shm/train_npz/small/" + f"/img_{tag}.cache" #TODO: take as input
 
     log(in_dir)
     log(db_path)
-
-    def prepro_image2b(image_path):
+    #TODO: is this a closure, or can this be shifted to outside?
+    def prepro_image2b(image_path): 
         try :
             fname      = str(image_path).split("/")[-1]
             id1        = fname.split(".")[0]
             # print(image_path)
-
+            
+            #TODO: might want to reuse imread in this module?
             image = cv2.imread(image_path)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             # image = util_image.image_resize_pad(image, (xdim,ydim), padColor=255)
@@ -241,8 +228,9 @@ def image_cache_create():
             # image = image.astype('float32')
             return image, image_path
             #return [1], "1"
-
-        except :
+            #TODO: nested try?
+            #TODO: code smell, expect should catch particular exceptions?
+        except : 
             try :
                # image = image.astype('float32')
                # cache[ fname ] =  image        ### not uulti thread write
@@ -255,7 +243,6 @@ def image_cache_create():
     image_list = image_list[:nmax]
     log('Size Before', len(image_list))
 
-    import diskcache as dc
     #  from diskcache import FanoutCache  ### too much space
     # che = FanoutCache( db_path, shards=4, size_limit=int(60e9), timeout=9999999 )
     cache = dc.Cache(db_path, size_limit=int(100e9), timeout=9999999 )
@@ -265,6 +252,7 @@ def image_cache_create():
 
 
     import asyncio
+    #TODO: if awaiting, is async helpful?
     async def set_async(key, val):
         loop = asyncio.get_running_loop()
         future = loop.run_in_executor(None, cache.set, key, val)
@@ -292,7 +280,7 @@ def image_cache_create():
        cv2.imwrite( data_train + f"/check_{i}.png", x0 )
        print(key, x0.shape, str(x0)[:50]  )
 
-
+#TODO: diskcache
 def image_cache_check(db_path:str="db_images.cache", dirout:str="tmp/", tag="cache1"):
     """function image_cache_check
     Args:
@@ -318,7 +306,7 @@ def image_cache_check(db_path:str="db_images.cache", dirout:str="tmp/", tag="cac
         cv2.imwrite( dir_check + f"/{i}_{key2}"  , img)
     log( dir_check )
 
-
+#TODO: diskcache
 def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", tag="cache1"):
     """function image_cache_save
     Args:
@@ -339,7 +327,7 @@ def image_cache_save(image_path_list:str="db_images.cache", db_dir:str="tmp/", t
         img = image_read(img_path)
         cache[img_path] = img
 
-
+#TODO: diskcache
 def image_check_npz(path_npz,  keys=['train'], path="", tag="", n_sample=3, renorm=True):
     """function image_check_npz
     Args:
@@ -429,9 +417,8 @@ image_load = image_read  ## alias
 
 ##############################################################################
 def image_show_in_row(image_list:dict=None):
-    """ # helper function for data visualization
+    """ helper function for data visualization
     Plot images in one row.
-    
     """
     import matplotlib.pyplot as plt
    
