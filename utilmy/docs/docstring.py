@@ -375,7 +375,7 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
                     pass
                 else:
                     # list of new docstring
-                    new_docstring.append(f'{method["indent"]}"""This is the docstring for function {method["name"]}\n')
+                    new_docstring.append(f'{method["indent"]}""" {method["name"]}\n')
                     # new_docstring.append("")
 
                     # add args
@@ -384,8 +384,9 @@ def generate_docstring(dirin: Union[str, Path],  dirout: Union[str, Path], overw
                         arg_type_str = f' (function["arg_type"][i]) ' if method["arg_type"][i] else ""
 
                         ####3 TODO   argname : type, value
-                        new_docstring.append(f'{method["indent"]}    {method["arg_name"][i]}{arg_type_str}:     \n')
-                        #new_docstring.append(f'{method["indent"]}    {method["arg_name"][i]}{arg_type_str}: {method["arg_name"][i]}\n')
+                        if method["arg_name"][i] not in  ['self'] :
+                           new_docstring.append(f'{method["indent"]}    {method["arg_name"][i]}{arg_type_str}:     \n')
+                           #new_docstring.append(f'{method["indent"]}    {method["arg_name"][i]}{arg_type_str}: {method["arg_name"][i]}\n')
 
 
                     # new_docstring.append(f'{function["indent"]}Example:')
