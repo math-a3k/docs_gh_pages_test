@@ -32,6 +32,15 @@ class Agent:
     OUTPUT_SIZE = 3
 
     def __init__(self, state_size, window_size, trend, skip):
+        """ Agent:__init__
+        Args:
+            state_size:     
+            window_size:     
+            trend:     
+            skip:     
+        Returns:
+           
+        """
         self.state_size = state_size
         self.window_size = window_size
         self.half_window = window_size // 2
@@ -55,9 +64,21 @@ class Agent:
         self.sess.run(tf.global_variables_initializer())
 
     def predict(self, inputs):
+        """ Agent:predict
+        Args:
+            inputs:     
+        Returns:
+           
+        """
         return self.sess.run(self.logits, feed_dict={self.X: inputs})
 
     def get_state(self, t):
+        """ Agent:get_state
+        Args:
+            t:     
+        Returns:
+           
+        """
         window_size = self.window_size + 1
         d = t - window_size + 1
         block = self.trend[d : t + 1] if d >= 0 else -d * [self.trend[0]] + self.trend[0 : t + 1]
@@ -67,6 +88,12 @@ class Agent:
         return np.array([res])
 
     def discount_rewards(self, r):
+        """ Agent:discount_rewards
+        Args:
+            r:     
+        Returns:
+           
+        """
         discounted_r = np.zeros_like(r)
         running_add = 0
         for t in reversed(range(0, r.size)):
@@ -75,10 +102,22 @@ class Agent:
         return discounted_r
 
     def get_predicted_action(self, sequence):
+        """ Agent:get_predicted_action
+        Args:
+            sequence:     
+        Returns:
+           
+        """
         prediction = self.predict(np.array(sequence))[0]
         return np.argmax(prediction)
 
     def buy(self, initial_money):
+        """ Agent:buy
+        Args:
+            initial_money:     
+        Returns:
+           
+        """
         starting_money = initial_money
         states_sell = []
         states_buy = []
@@ -120,6 +159,14 @@ class Agent:
         return states_buy, states_sell, total_gains, invest
 
     def train(self, iterations, checkpoint, initial_money):
+        """ Agent:train
+        Args:
+            iterations:     
+            checkpoint:     
+            initial_money:     
+        Returns:
+           
+        """
         for i in range(iterations):
             ep_history = []
             total_profit = 0

@@ -93,6 +93,11 @@ class DKN(BaseModel):
         return tf.constant(np.load(file_path).astype(np.float32))
 
     def _l2_loss(self):
+        """ DKN:_l2_loss
+        Args:
+        Returns:
+           
+        """
         hparams = self.hparams
         l2_loss = tf.zeros([1], dtype=tf.float32)
         # embedding_layer l2 loss
@@ -117,6 +122,11 @@ class DKN(BaseModel):
         return l2_loss
 
     def _l1_loss(self):
+        """ DKN:_l1_loss
+        Args:
+        Returns:
+           
+        """
         hparams = self.hparams
         l1_loss = tf.zeros([1], dtype=tf.float32)
         # embedding_layer l2 loss
@@ -141,6 +151,11 @@ class DKN(BaseModel):
         return l1_loss
 
     def _build_graph(self):
+        """ DKN:_build_graph
+        Args:
+        Returns:
+           
+        """
         hparams = self.hparams
         self.keep_prob_train = 1 - np.array(hparams.dropout)
         self.keep_prob_test = np.ones_like(hparams.dropout)

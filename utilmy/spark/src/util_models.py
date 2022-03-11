@@ -153,6 +153,12 @@ def Predict(spark, df_m:pyspark.sql.DataFrame, features:list, regressor:str, pat
 ####################################################################
 ####################################################################
 def os_makedirs(path:str):
+  """function os_makedirs
+  Args:
+      path ( str ) :   
+  Returns:
+      
+  """
   if 'hdfs:' not in path :
     os.makedirs(path, exist_ok=True)
   else :

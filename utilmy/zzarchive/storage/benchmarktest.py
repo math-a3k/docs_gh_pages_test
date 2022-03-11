@@ -128,6 +128,12 @@ discount1 = np.exp(-r1*tt)
 
 #----- gbm with path dependance  
 def payoff1(pricepath):
+  """function payoff1
+  Args:
+      pricepath:   
+  Returns:
+      
+  """
   st= pricepath[len(pricepath)-1]
   return np.maximum(st - strike1,0)
 
@@ -143,6 +149,18 @@ dx.bscall(s01,strike1,0,tt, r1,d1,sigma1)
   
 #----gbm with 1 single 0 -->T maturity, european payoff  -----------------------
 def payoffeuro1(st):
+  """function payoffeuro1
+  Args:
+      st:   
+  Returns:
+      
+  """
+  """function payoffeuro1
+  Args:
+      st:   
+  Returns:
+      
+  """
   return np.maximum(st - strike1,0)
 
 allprocesseuro = dx.generateallprocess_gbmeuro(dx.gbm_process, param11, timegrid1 , 15000)
@@ -179,6 +197,12 @@ discount1 = np.exp(-r1*tt)
 
 
 def payoff2(pricepath):
+  """function payoff2
+  Args:
+      pricepath:   
+  Returns:
+      
+  """
   size1 = np.shape(pricepath);  tt= size1[1]; nbasset=size1[0]
   baskett= np.sum( ww * pricepath[:,tt-1] )
   return np.maximum(baskett - strike1,0)

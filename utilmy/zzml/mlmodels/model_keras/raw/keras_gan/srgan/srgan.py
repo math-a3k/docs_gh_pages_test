@@ -32,6 +32,11 @@ import keras.backend as K
 
 class SRGAN():
     def __init__(self):
+        """ SRGAN:__init__
+        Args:
+        Returns:
+           
+        """
         # Input shape
         self.channels = 3
         self.lr_height = 64                 # Low resolution height
@@ -116,6 +121,11 @@ class SRGAN():
         return Model(img, img_features)
 
     def build_generator(self):
+        """ SRGAN:build_generator
+        Args:
+        Returns:
+           
+        """
 
         def residual_block(layer_input, filters):
             """Residual block described in paper"""
@@ -161,6 +171,11 @@ class SRGAN():
         return Model(img_lr, gen_hr)
 
     def build_discriminator(self):
+        """ SRGAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         def d_block(layer_input, filters, strides=1, bn=True):
             """Discriminator layer"""
@@ -189,6 +204,14 @@ class SRGAN():
         return Model(d0, validity)
 
     def train(self, epochs, batch_size=1, sample_interval=50):
+        """ SRGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         start_time = datetime.datetime.now()
 
@@ -237,6 +260,12 @@ class SRGAN():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ SRGAN:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         os.makedirs('images/%s' % self.dataset_name, exist_ok=True)
         r, c = 2, 2
 

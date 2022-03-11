@@ -47,6 +47,12 @@ class Attention(Layer):
         super(Attention, self).__init__(**kwargs)
 
     def build(self, input_shape):
+        """ Attention:build
+        Args:
+            input_shape:     
+        Returns:
+           
+        """
         assert len(input_shape) == 3
 
         self.W = self.add_weight((input_shape[-1],),
@@ -68,10 +74,24 @@ class Attention(Layer):
         self.built = True
 
     def compute_mask(self, input, input_mask=None):
+        """ Attention:compute_mask
+        Args:
+            input:     
+            input_mask:     
+        Returns:
+           
+        """
         # do not pass the mask to the next layers
         return None
 
     def call(self, x, mask=None):
+        """ Attention:call
+        Args:
+            x:     
+            mask:     
+        Returns:
+           
+        """
         features_dim = self.features_dim
         step_dim = self.step_dim
 
@@ -94,4 +114,10 @@ class Attention(Layer):
         return c
 
     def compute_output_shape(self, input_shape):
+        """ Attention:compute_output_shape
+        Args:
+            input_shape:     
+        Returns:
+           
+        """
         return input_shape[0], self.features_dim

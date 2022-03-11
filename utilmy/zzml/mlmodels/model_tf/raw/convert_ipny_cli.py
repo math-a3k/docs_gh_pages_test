@@ -14,6 +14,12 @@ from nbconvert import PythonExporter
 
 
 def scan(data_file):
+    """function scan
+    Args:
+        data_file:   
+    Returns:
+        
+    """
     # note: I have checked os_file_listall, I think the following will be better
     files = glob.glob(data_file + "/**/*.ipynb", recursive=True)
     # remove .ipynb_checkpoints
@@ -24,6 +30,14 @@ def scan(data_file):
 
 
 def convert_topython(source_files, data_file, out_dir):
+    """function convert_topython
+    Args:
+        source_files:   
+        data_file:   
+        out_dir:   
+    Returns:
+        
+    """
 
     dst_files = []
 
@@ -50,6 +64,13 @@ def convert_topython(source_files, data_file, out_dir):
 
 
 def check(file_list, dump=False):
+    """function check
+    Args:
+        file_list:   
+        dump:   
+    Returns:
+        
+    """
 
     error_list = []
     error_msgs = []
@@ -78,6 +99,11 @@ def check(file_list, dump=False):
 
 
 def Run():
+    """function Run
+    Args:
+    Returns:
+        
+    """
     if len(sys.argv) != 3:
         print("Syntax: %s src_ipny_fold dst_py_fold" % sys.argv[0])
         sys.exit(0)

@@ -32,6 +32,12 @@ TemporalLinkageState = collections.namedtuple(
 
 
 def _vector_norms(m):
+    """function _vector_norms
+    Args:
+        m:   
+    Returns:
+        
+    """
     squared_norms = tf.reduce_sum(m * m, axis=2, keep_dims=True)
     return tf.sqrt(squared_norms + _EPSILON)
 
@@ -363,6 +369,12 @@ class Freeness(snt.RNNCore):
             return prev_usage * phi
 
     def _allocation(self, usage):
+        """ Freeness:_allocation
+        Args:
+            usage:     
+        Returns:
+           
+        """
         r"""Computes allocation by sorting `usage`.
 
     This corresponds to the value a = a_t[\phi_t[j]] in the paper.

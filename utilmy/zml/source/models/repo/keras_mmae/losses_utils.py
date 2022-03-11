@@ -69,10 +69,23 @@ class ReductionV2(object):
 
   @classmethod
   def all(cls):
+    """ ReductionV2:all
+    Args:
+        cls:     
+    Returns:
+       
+    """
     return (cls.AUTO, cls.NONE, cls.SUM, cls.SUM_OVER_BATCH_SIZE)
 
   @classmethod
   def validate(cls, key):
+    """ ReductionV2:validate
+    Args:
+        cls:     
+        key:     
+    Returns:
+       
+    """
     if key not in cls.all():
       raise ValueError('Invalid Reduction Key %s.' % key)
 

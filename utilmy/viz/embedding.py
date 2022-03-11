@@ -32,6 +32,12 @@ from viz.zarchive.toptoolbar import TopToolbar
 
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, exist_ok=True)
 
 
@@ -69,12 +75,32 @@ class vizEmbedding:
         self.dist         = None
 
     def run_all(self, mode="mds", col_embed='embed', ndim=2, nmax= 5000, dir_out="ztmp/"):
+       """ vizEmbedding:run_all
+       Args:
+           mode:     
+           col_embed:     
+           ndim:     
+           nmax:     
+           dir_out:     
+       Returns:
+          
+       """
        self.dim_reduction( mode, col_embed, ndim=ndim, nmax= nmax, dir_out=dir_out)
        self.create_clusters(after_dim_reduction=True)
        self.create_visualization(dir_out, mode='d3', cols_label=None, show_server=False)
 
 
     def dim_reduction(self, mode="mds", col_embed='embed', ndim=2, nmax= 5000, dir_out=None): 
+        """ vizEmbedding:dim_reduction
+        Args:
+            mode:     
+            col_embed:     
+            ndim:     
+            nmax:     
+            dir_out:     
+        Returns:
+           
+        """
         
         if ".vec"     in self.path :        
           embs, id_map, df_labels  = embedding_load_word2vec(self.path, nmax= nmax)
@@ -126,6 +152,12 @@ class vizEmbedding:
 
         
     def create_clusters(self, after_dim_reduction=True):        
+        """ vizEmbedding:create_clusters
+        Args:
+            after_dim_reduction:     
+        Returns:
+           
+        """
         km = KMeans(n_clusters=self.num_clusters)
 
         if after_dim_reduction :
@@ -240,6 +272,11 @@ class vizEmbedding:
 
 
     def draw_hiearchy(self):
+        """ vizEmbedding:draw_hiearchy
+        Args:
+        Returns:
+           
+        """
         linkage_matrix = ward(self.dist)  # define the linkage_matrix using ward clustering pre-computed distances
         fig, ax = plt.subplots(figsize=(15, 20))  # set size
         ax = dendrogram(linkage_matrix, orientation="right", labels=self.text_labels)
@@ -254,6 +291,13 @@ class vizEmbedding:
 #########################################################################################################
 
 def embedding_load_word2vec(model_vector_path="model.vec", nmax = 500):
+    """function embedding_load_word2vec
+    Args:
+        model_vector_path:   
+        nmax :   
+    Returns:
+        
+    """
     from gensim.models import KeyedVectors    
     from collections import OrderedDict
     def isvalid(t):
@@ -284,6 +328,13 @@ def embedding_load_word2vec(model_vector_path="model.vec", nmax = 500):
 
 
 def embedding_load_parquet(path="df.parquet", nmax = 500):
+    """function embedding_load_parquet
+    Args:
+        path:   
+        nmax :   
+    Returns:
+        
+    """
     col_embed = "emb"
     colid     = 'id'
 
@@ -307,6 +358,12 @@ def embedding_load_parquet(path="df.parquet", nmax = 500):
 
 
 def tokenize_text(text):
+    """function tokenize_text
+    Args:
+        text:   
+    Returns:
+        
+    """
     return [
         token.lemma_
         for token
@@ -321,6 +378,14 @@ def tokenize_text(text):
 
 
 def run(dir_in="in/model.vec", dir_out="ztmp/", nmax=100):
+   """function run
+   Args:
+       dir_in:   
+       dir_out:   
+       nmax:   
+   Returns:
+       
+   """
    myviz = vizEmbedding(path = dir_in, dir_out= dir_out)
    myviz.run_all(nmax=nmax)
 

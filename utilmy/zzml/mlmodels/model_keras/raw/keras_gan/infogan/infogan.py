@@ -16,6 +16,11 @@ import numpy as np
 
 class INFOGAN():
     def __init__(self):
+        """ INFOGAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -62,6 +67,11 @@ class INFOGAN():
 
 
     def build_generator(self):
+        """ INFOGAN:build_generator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -88,6 +98,11 @@ class INFOGAN():
 
 
     def build_disk_and_q_net(self):
+        """ INFOGAN:build_disk_and_q_net
+        Args:
+        Returns:
+           
+        """
 
         img = Input(shape=self.img_shape)
 
@@ -133,6 +148,12 @@ class INFOGAN():
         return conditional_entropy + entropy
 
     def sample_generator_input(self, batch_size):
+        """ INFOGAN:sample_generator_input
+        Args:
+            batch_size:     
+        Returns:
+           
+        """
         # Generator inputs
         sampled_noise = np.random.normal(0, 1, (batch_size, 62))
         sampled_labels = np.random.randint(0, self.num_classes, batch_size).reshape(-1, 1)
@@ -141,6 +162,14 @@ class INFOGAN():
         return sampled_noise, sampled_labels
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ INFOGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, y_train), (_, _) = mnist.load_data()
@@ -192,6 +221,12 @@ class INFOGAN():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ INFOGAN:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 10, 10
 
         fig, axs = plt.subplots(r, c)
@@ -208,6 +243,11 @@ class INFOGAN():
         plt.close()
 
     def save_model(self):
+        """ INFOGAN:save_model
+        Args:
+        Returns:
+           
+        """
 
         def save(model, model_name):
             model_path = "saved_model/%s.json" % model_name

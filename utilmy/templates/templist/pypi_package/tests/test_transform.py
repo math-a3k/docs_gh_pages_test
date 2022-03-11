@@ -11,6 +11,11 @@ from mygenerator.utils import log, log2
 
 ###############################################################################################
 def test_chars_to_images_transform():
+    """function test_chars_to_images_transform
+    Args:
+    Returns:
+        
+    """
     uris = ["a.png", "b.png", "c.png"]
 
     def _get_image_fn(idx):
@@ -48,6 +53,11 @@ def test_chars_to_images_transform():
 
 
 def test_combine_images_horizontally_transform():
+    """function test_combine_images_horizontally_transform
+    Args:
+    Returns:
+        
+    """
     np.random.seed(42)
 
     def _get_image_fn(idx):
@@ -86,6 +96,11 @@ def test_combine_images_horizontally_transform():
 
 
 def test_scale_image_transform():
+    """function test_scale_image_transform
+    Args:
+    Returns:
+        
+    """
     def _get_image_fn(idx):
         img = [
             np.asarray(
@@ -167,6 +182,12 @@ def create_font_files(font_dir):
 
 
 def test_text_to_image_transform(tmp_path):
+    """function test_text_to_image_transform
+    Args:
+        tmp_path:   
+    Returns:
+        
+    """
     text_0 = "012345678901"
     text_1 = "123456789012"
     image_width = 250

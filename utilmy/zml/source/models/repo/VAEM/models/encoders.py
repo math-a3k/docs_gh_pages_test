@@ -5,6 +5,16 @@ from tensorflow.contrib import layers
 
 class vaem_encoders(object):
     def __init__(self,obs_dim,cat_dims,dim_flt,K = 20,latent_dim = 10):
+        """ vaem_encoders:__init__
+        Args:
+            obs_dim:     
+            cat_dims:     
+            dim_flt:     
+            K :     
+            latent_dim :     
+        Returns:
+           
+        """
 
         self._K = K
         self._latent_dim = latent_dim

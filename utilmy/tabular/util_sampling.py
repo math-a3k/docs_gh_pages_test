@@ -8,6 +8,11 @@ Various samplers
 """
 
 def test():
+  """function test
+  Args:
+  Returns:
+      
+  """
   def matrix_source(): 
       for i in range(0, 1000, 10): 
           yield np.tile(np.arange(i, i + 10), (5, 1)).T

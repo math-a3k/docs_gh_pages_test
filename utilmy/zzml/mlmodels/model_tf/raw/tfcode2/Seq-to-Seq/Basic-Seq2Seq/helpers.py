@@ -2,6 +2,13 @@ import numpy as np
 
 
 def batch(inputs, max_sequence_length=None):
+    """function batch
+    Args:
+        inputs:   
+        max_sequence_length:   
+    Returns:
+        
+    """
 
     sequence_lengths = [len(seq) for seq in inputs]
     batch_size = len(inputs)
@@ -21,6 +28,16 @@ def batch(inputs, max_sequence_length=None):
 
 
 def random_sequences(length_from, length_to, vocab_lower, vocab_upper, batch_size):
+    """function random_sequences
+    Args:
+        length_from:   
+        length_to:   
+        vocab_lower:   
+        vocab_upper:   
+        batch_size:   
+    Returns:
+        
+    """
 
     if length_from > length_to:
         raise ValueError("length_from > length_to")

@@ -24,6 +24,11 @@ def run_cli():
 
 
 def template_show():
+    """function template_show
+    Args:
+    Returns:
+        
+    """
     import glob
     this_repo = os.path.abspath(__file__).replace("\\", "/")
     flist     = os.walk(this_repo +"/templist/")
@@ -31,6 +36,13 @@ def template_show():
 
 
 def template_copy(name, out_dir):
+    """function template_copy
+    Args:
+        name:   
+        out_dir:   
+    Returns:
+        
+    """
     from utilmy import os_copy
     import glob
     from pathlib import Path

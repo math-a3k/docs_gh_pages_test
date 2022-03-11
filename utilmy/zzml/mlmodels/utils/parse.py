@@ -35,6 +35,13 @@ def cli_load_arguments(config_file=None):
 
 
 def extract_args(txt, outfile):
+    """function extract_args
+    Args:
+        txt:   
+        outfile:   
+    Returns:
+        
+    """
     ddict ={}
     for ll in txt :
        # print(ll)

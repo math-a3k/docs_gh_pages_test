@@ -7,6 +7,11 @@ from utilmy.debug import log
 
 
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     test_decorators()	
     test_decorators2()
 
@@ -36,6 +41,11 @@ def test_decorators():
 
 
 def test_decorators2():
+    """function test_decorators2
+    Args:
+    Returns:
+        
+    """
     from utilmy.decorators import profiler_decorator, profiler_context
 
     @profiler_decorator
@@ -205,6 +215,11 @@ def profiler_decorator_base(fnc):
 
 
 def test0():
+    """function test0
+    Args:
+    Returns:
+        
+    """
     with profiler_context():
         x = sum(range(1000000))
         print(x)
@@ -215,21 +230,46 @@ def test0():
 
 @thread_decorator
 def thread_decorator_test():
+    """function thread_decorator_test
+    Args:
+    Returns:
+        
+    """
     log("thread decorator")
 
 @profiler_decorator_base
 def profiler_decorator_base_test():
+    """function profiler_decorator_base_test
+    Args:
+    Returns:
+        
+    """
     log("profiler decorator")
 
 @timeout_decorator(10)
 def timeout_decorator_test():
+    """function timeout_decorator_test
+    Args:
+    Returns:
+        
+    """
     log("timeout decorator")
 
 
 @profiler_decorator
 def profiled_sum():
+    """function profiled_sum
+    Args:
+    Returns:
+        
+    """
     return sum(range(100000))
 
 @timer_decorator
 def dummy_func():
+    """function dummy_func
+    Args:
+    Returns:
+        
+    """
     time.sleep(2)

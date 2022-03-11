@@ -39,6 +39,16 @@ df_log.head()
 
 
 def reducedimension(input_, dimension=2, learning_rate=0.01, hidden_layer=256, epoch=20):
+    """function reducedimension
+    Args:
+        input_:   
+        dimension:   
+        learning_rate:   
+        hidden_layer:   
+        epoch:   
+    Returns:
+        
+    """
 
     input_size = input_.shape[1]
     X = tf.placeholder("float", [None, input_size])
@@ -87,6 +97,17 @@ thought_vector
 
 class Model:
     def __init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias=0.1):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+            num_layers:     
+            size:     
+            size_layer:     
+            output_size:     
+            forget_bias:     
+        Returns:
+           
+        """
         def lstm_cell(size_layer):
             return tf.nn.rnn_cell.LSTMCell(size_layer, state_is_tuple=False)
 
@@ -189,6 +210,13 @@ date_ori = pd.Series(date_ori).dt.strftime(date_format="%Y-%m-%d").tolist()
 
 
 def anchor(signal, weight):
+    """function anchor
+    Args:
+        signal:   
+        weight:   
+    Returns:
+        
+    """
     buffer = []
     last = signal[0]
     for i in signal:

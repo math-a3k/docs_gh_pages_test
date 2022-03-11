@@ -150,6 +150,13 @@ def os_glob(in_dir):
 
 
 def format_file(in_file, out_dir):
+    """function format_file
+    Args:
+        in_file:   
+        out_dir:   
+    Returns:
+        
+    """
     # if input is a file and make sure it exits
     if os.path.isfile(in_file):
         with open(in_file) as f:
@@ -173,6 +180,13 @@ def format_file(in_file, out_dir):
 
 
 def format_dir(in_dir, out_dir):
+    """function format_dir
+    Args:
+        in_dir:   
+        out_dir:   
+    Returns:
+        
+    """
     src_files = os_glob(in_dir)
 
     for f in tqdm.tqdm(src_files):
@@ -183,6 +197,12 @@ def format_dir(in_dir, out_dir):
 
 
 def mod_period(in_file):
+    """function mod_period
+    Args:
+        in_file:   
+    Returns:
+        
+    """
     file_stats = os.stat(in_file)
     mod_date = datetime.datetime.fromtimestamp(file_stats.st_mtime)
     now = datetime.datetime.now()
@@ -213,6 +233,11 @@ def load_arguments():
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     args = load_arguments()
 
     _input = args.dir_in

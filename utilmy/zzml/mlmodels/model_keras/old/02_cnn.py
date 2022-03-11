@@ -41,6 +41,14 @@ def os_package_root_path(filepath, sublevel=0, path_add=""):
 
 
 def log(*s, n=0, m=1):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     print(sjump, sspace, s, sspace, flush=True)
@@ -51,6 +59,14 @@ def log(*s, n=0, m=1):
 class Model(object) :
 
     def __init__(self, model_pars=None, compute_pars=None, data_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            compute_pars:     
+            data_pars:     
+        Returns:
+           
+        """
 
         if model_pars is None and compute_pars is None :
             self.model = None
@@ -88,6 +104,13 @@ class Model(object) :
 
 
 def get_dataset( data_pars, **kw):
+    """function get_dataset
+    Args:
+        data_pars:   
+        **kw:   
+    Returns:
+        
+    """
     log("#### Path params   ################################################")
     data_path = os_package_root_path(__file__, sublevel=0, path_add='')
     out_path = os.getcwd() + "/keras_deepAR/"
@@ -119,6 +142,18 @@ def get_dataset( data_pars, **kw):
   
 
 def fit(model, data_pars=None, model_pars=None, compute_pars=None, out_pars=None,session=None, **kwargs):
+    """function fit
+    Args:
+        model:   
+        data_pars:   
+        model_pars:   
+        compute_pars:   
+        out_pars:   
+        session:   
+        **kwargs:   
+    Returns:
+        
+    """
     # def fit(self,batch_size,epochs):
     data_pars['istrain'] = 1
     x_train, y_train, x_test, y_test = get_dataset(data_pars)
@@ -131,6 +166,17 @@ def fit(model, data_pars=None, model_pars=None, compute_pars=None, out_pars=None
 
 
 def predict(model, session=None, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
+    """function predict
+    Args:
+        model:   
+        session:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     x_train, y_train, x_test, y_test = get_dataset(data_pars)
 
     ypred = model.model.predict(x_test, batch_size=compute_pars["batch_size"], verbose=1)
@@ -138,6 +184,19 @@ def predict(model, session=None, data_pars=None, compute_pars=None, out_pars=Non
 
 
 def metrics(ypred, model, session=None, model_pars=None, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
+    """function metrics
+    Args:
+        ypred:   
+        model:   
+        session:   
+        model_pars:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     x_train, y_train, x_test, y_test = get_dataset(data_pars)
     y_test = keras.utils.to_categorical(y_test, model_pars["nclasses"])
     score = model.model.evaluate(x_test, y_test, verbose=0)
@@ -147,12 +206,26 @@ def metrics(ypred, model, session=None, model_pars=None, data_pars=None, compute
 
 
 def save(model=None, session=None, save_pars={}):
+    """function save
+    Args:
+        model:   
+        session:   
+        save_pars:   
+    Returns:
+        
+    """
     from mlmodels.util import save_keras
     print(save_pars)
     save_keras(model, session, save_pars=save_pars)
 
 
 def load(load_pars={}):
+    """function load
+    Args:
+        load_pars:   
+    Returns:
+        
+    """
     from mlmodels.util import load_keras
     model0 = load_keras(load_pars)
 
@@ -163,6 +236,14 @@ def load(load_pars={}):
 
 ###################################################################################################
 def get_params(choice=0, data_path="dataset/", **kw) :
+    """function get_params
+    Args:
+        choice:   
+        data_path:   
+        **kw:   
+    Returns:
+        
+    """
     if choice == 0 :
         log("#### Path params   ################################################")
         out_path = path_norm("ztest/model_keras/charcnn/")
@@ -198,6 +279,14 @@ def get_params(choice=0, data_path="dataset/", **kw) :
 
 ########################################################################################################################
 def test2(data_path="dataset/", out_path="keras/keras.png", reset=True):
+    """function test2
+    Args:
+        data_path:   
+        out_path:   
+        reset:   
+    Returns:
+        
+    """
     ###loading the command line arguments
     # arg = load_arguments()
 
@@ -233,6 +322,12 @@ def test2(data_path="dataset/", out_path="keras/keras.png", reset=True):
 
 
 def test(data_path="dataset/"):
+    """function test
+    Args:
+        data_path:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

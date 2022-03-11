@@ -37,6 +37,15 @@ else:
 
 
 def user_data_dir(appname=None, appauthor=None, version=None, roaming=False):
+    """function user_data_dir
+    Args:
+        appname:   
+        appauthor:   
+        version:   
+        roaming:   
+    Returns:
+        
+    """
     r"""Return full path to the user-specific data dir for this application.
         "appname" is the name of application.
             If None, just the system directory is returned.
@@ -151,6 +160,15 @@ def site_data_dir(appname=None, appauthor=None, version=None, multipath=False):
 
 
 def user_config_dir(appname=None, appauthor=None, version=None, roaming=False):
+    """function user_config_dir
+    Args:
+        appname:   
+        appauthor:   
+        version:   
+        roaming:   
+    Returns:
+        
+    """
     r"""Return full path to the user-specific config dir for this application.
         "appname" is the name of application.
             If None, just the system directory is returned.
@@ -243,6 +261,15 @@ def site_config_dir(appname=None, appauthor=None, version=None, multipath=False)
 
 
 def user_cache_dir(appname=None, appauthor=None, version=None, opinion=True):
+    """function user_cache_dir
+    Args:
+        appname:   
+        appauthor:   
+        version:   
+        opinion:   
+    Returns:
+        
+    """
     r"""Return full path to the user-specific cache dir for this application.
         "appname" is the name of application.
             If None, just the system directory is returned.
@@ -335,6 +362,15 @@ def user_state_dir(appname=None, appauthor=None, version=None, roaming=False):
 
 
 def user_log_dir(appname=None, appauthor=None, version=None, opinion=True):
+    """function user_log_dir
+    Args:
+        appname:   
+        appauthor:   
+        version:   
+        opinion:   
+    Returns:
+        
+    """
     r"""Return full path to the user-specific log dir for this application.
         "appname" is the name of application.
             If None, just the system directory is returned.
@@ -454,6 +490,12 @@ def _get_win_folder_from_registry(csidl_name):
 
 
 def _get_win_folder_with_ctypes(csidl_name):
+    """function _get_win_folder_with_ctypes
+    Args:
+        csidl_name:   
+    Returns:
+        
+    """
     import ctypes
 
     csidl_const = {
@@ -480,6 +522,12 @@ def _get_win_folder_with_ctypes(csidl_name):
     return buf.value
 
 def _get_win_folder_with_jna(csidl_name):
+    """function _get_win_folder_with_jna
+    Args:
+        csidl_name:   
+    Returns:
+        
+    """
     import array
     from com.sun import jna
     from com.sun.jna.platform import win32
@@ -506,6 +554,12 @@ def _get_win_folder_with_jna(csidl_name):
     return dir
 
 def _get_win_folder_from_environ(csidl_name):
+    """function _get_win_folder_from_environ
+    Args:
+        csidl_name:   
+    Returns:
+        
+    """
     env_var_name = {
         "CSIDL_APPDATA": "APPDATA",
         "CSIDL_COMMON_APPDATA": "ALLUSERSPROFILE",

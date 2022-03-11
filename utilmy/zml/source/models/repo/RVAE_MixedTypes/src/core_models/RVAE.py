@@ -10,6 +10,13 @@ from EmbeddingMul import EmbeddingMul
 
 class VAE(nn.Module):
     def __init__(self, dataset_obj, args):
+        """ VAE:__init__
+        Args:
+            dataset_obj:     
+            args:     
+        Returns:
+           
+        """
 
         super(VAE, self).__init__()
         # NOTE: for feat_select, (col_name, col_type, feat_size) in enumerate(dataset_obj.feat_info)
@@ -149,6 +156,16 @@ class VAE(nn.Module):
 
 
     def encode(self, x_data, one_hot_categ=False, masking=False, drop_mask=[], in_aux_samples=[]):
+        """ VAE:encode
+        Args:
+            x_data:     
+            one_hot_categ:     
+            masking:     
+            drop_mask:     
+            in_aux_samples:     
+        Returns:
+           
+        """
 
         q_params = dict()
 
@@ -171,6 +188,13 @@ class VAE(nn.Module):
         return q_params
 
     def sample_normal(self, q_params_z, eps=None):
+        """ VAE:sample_normal
+        Args:
+            q_params_z:     
+            eps:     
+        Returns:
+           
+        """
 
         if self.training:
 
@@ -185,6 +209,13 @@ class VAE(nn.Module):
             return q_params_z['mu']
 
     def reparameterize(self, q_params, eps_samples=None):
+        """ VAE:reparameterize
+        Args:
+            q_params:     
+            eps_samples:     
+        Returns:
+           
+        """
 
         q_samples = dict()
 
@@ -194,6 +225,12 @@ class VAE(nn.Module):
 
 
     def decode(self, z):
+        """ VAE:decode
+        Args:
+            z:     
+        Returns:
+           
+        """
 
         p_params = dict()
 
@@ -226,6 +263,17 @@ class VAE(nn.Module):
 
 
     def forward(self, x_data, n_epoch=None, one_hot_categ=False, masking=False, drop_mask=[], in_aux_samples=[]):
+        """ VAE:forward
+        Args:
+            x_data:     
+            n_epoch:     
+            one_hot_categ:     
+            masking:     
+            drop_mask:     
+            in_aux_samples:     
+        Returns:
+           
+        """
 
         q_params = self.encode(x_data, one_hot_categ, masking, drop_mask, in_aux_samples)
         q_samples = self.reparameterize(q_params)

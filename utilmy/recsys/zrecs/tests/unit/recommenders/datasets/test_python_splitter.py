@@ -27,6 +27,11 @@ from recommenders.utils.constants import (
 
 @pytest.fixture(scope="module")
 def test_specs():
+    """function test_specs
+    Args:
+    Returns:
+        
+    """
     return {
         "number_of_rows": 1000,
         "seed": 123,
@@ -42,6 +47,12 @@ def test_specs():
 
 @pytest.fixture(scope="module")
 def python_dataset(test_specs):
+    """function python_dataset
+    Args:
+        test_specs:   
+    Returns:
+        
+    """
     def random_date_generator(start_date, range_in_days):
         """Helper function to generate random timestamps.
 
@@ -72,6 +83,12 @@ def python_dataset(test_specs):
 
 @pytest.fixture(scope="module")
 def python_int_dataset(test_specs):
+    """function python_int_dataset
+    Args:
+        test_specs:   
+    Returns:
+        
+    """
     np.random.seed(test_specs["seed"])
 
     # generates the user/item affinity matrix. Ratings are in the interval [0, 5), with 0s denoting unrated items
@@ -84,6 +101,12 @@ def python_int_dataset(test_specs):
 
 @pytest.fixture(scope="module")
 def python_float_dataset(test_specs):
+    """function python_float_dataset
+    Args:
+        test_specs:   
+    Returns:
+        
+    """
     np.random.seed(test_specs["seed"])
 
     # generates the user/item affinity matrix. Ratings are in the interval [0, 5), with 0s denoting unrated items.
@@ -96,6 +119,12 @@ def python_float_dataset(test_specs):
 
 
 def test_split_pandas_data(pandas_dummy_timestamp):
+    """function test_split_pandas_data
+    Args:
+        pandas_dummy_timestamp:   
+    Returns:
+        
+    """
     splits = split_pandas_data_with_ratios(pandas_dummy_timestamp, ratios=[0.5, 0.5])
     assert len(splits[0]) == 5
     assert len(splits[1]) == 5
@@ -115,6 +144,11 @@ def test_split_pandas_data(pandas_dummy_timestamp):
 
 
 def test_min_rating_filter():
+    """function test_min_rating_filter
+    Args:
+    Returns:
+        
+    """
     python_dataset = pd.DataFrame(
         {
             DEFAULT_USER_COL: [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5],
@@ -205,6 +239,13 @@ def test_random_splitter(test_specs, python_dataset):
 
 
 def test_chrono_splitter(test_specs, python_dataset):
+    """function test_chrono_splitter
+    Args:
+        test_specs:   
+        python_dataset:   
+    Returns:
+        
+    """
     splits = python_chrono_split(
         python_dataset, ratio=test_specs["ratio"], min_rating=10, filter_by="user"
     )
@@ -309,6 +350,13 @@ def test_chrono_splitter(test_specs, python_dataset):
 
 
 def test_stratified_splitter(test_specs, python_dataset):
+    """function test_stratified_splitter
+    Args:
+        test_specs:   
+        python_dataset:   
+    Returns:
+        
+    """
     splits = python_stratified_split(
         python_dataset, ratio=test_specs["ratio"], min_rating=10, filter_by="user"
     )
@@ -349,6 +397,13 @@ def test_stratified_splitter(test_specs, python_dataset):
 
 
 def test_int_numpy_stratified_splitter(test_specs, python_int_dataset):
+    """function test_int_numpy_stratified_splitter
+    Args:
+        test_specs:   
+        python_int_dataset:   
+    Returns:
+        
+    """
     # generate a syntetic dataset
     X = python_int_dataset
 
@@ -393,6 +448,13 @@ def test_int_numpy_stratified_splitter(test_specs, python_int_dataset):
 
 
 def test_float_numpy_stratified_splitter(test_specs, python_float_dataset):
+    """function test_float_numpy_stratified_splitter
+    Args:
+        test_specs:   
+        python_float_dataset:   
+    Returns:
+        
+    """
     # generate a syntetic dataset
     X = python_float_dataset
 

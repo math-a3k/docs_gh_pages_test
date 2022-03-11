@@ -6,6 +6,18 @@ tf.disable_v2_behavior()
 
 class VLM(object):
     def __init__(self, num_users, num_items, num_tags, num_factors, var_prior, reg, video_metadata_array):
+        """ VLM:__init__
+        Args:
+            num_users:     
+            num_items:     
+            num_tags:     
+            num_factors:     
+            var_prior:     
+            reg:     
+            video_metadata_array:     
+        Returns:
+           
+        """
         self.num_users = num_users
         self.num_items = num_items
         self.num_tags = num_tags
@@ -16,11 +28,21 @@ class VLM(object):
         self.construct_placeholders()
         
     def construct_placeholders(self):
+        """ VLM:construct_placeholders
+        Args:
+        Returns:
+           
+        """
         # Placeholders for training samples
         self.users_ph = tf.placeholder(dtype=tf.int32, shape=[None])
         self.played_videos_ph = tf.placeholder(dtype=tf.float32, shape=[None, self.num_items])
     
     def construct_model_variables(self):
+        """ VLM:construct_model_variables
+        Args:
+        Returns:
+           
+        """
         # Mean for user latent factors
         self.Mu_Zu = tf.Variable(dtype=tf.float32,
                             initial_value=tf.random_normal(shape=[self.num_users, self.num_factors]), 
@@ -38,6 +60,13 @@ class VLM(object):
                             name = 'mean_latent_factors_zt')
         
     def compute_kl_div(self, lsdev_Zu_batch, Mu_Zu_batch):
+        """ VLM:compute_kl_div
+        Args:
+            lsdev_Zu_batch:     
+            Mu_Zu_batch:     
+        Returns:
+           
+        """
         # KL Divergence needed for ELBO
         sdev_Zu_batch = tf.exp(lsdev_Zu_batch)
         comp1 = self.num_factors * (0.5 * tf.math.log(self.var_prior) - lsdev_Zu_batch)
@@ -48,6 +77,11 @@ class VLM(object):
         return comp1 + comp2 + comp3 - comp4
         
     def construct_graph(self):
+        """ VLM:construct_graph
+        Args:
+        Returns:
+           
+        """
         # Boilerplate Tensorflow
         self.construct_model_variables()
         

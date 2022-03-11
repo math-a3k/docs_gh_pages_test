@@ -21,6 +21,11 @@ def create_blank_image(width, height, rgb_color=(0, 0, 0)):
 
 
 def test_image_merge():
+    """function test_image_merge
+    Args:
+    Returns:
+        
+    """
     imgs = [
         np.asarray(
             [
@@ -61,6 +66,11 @@ def test_image_merge():
 
 
 def test_image_remove_extra_padding():
+    """function test_image_remove_extra_padding
+    Args:
+    Returns:
+        
+    """
     IMAGE_HEIGHT, IMAGE_WIDTH = 300, 300
     COLOR = (0, 0, 0)
     blank_image = create_blank_image(IMAGE_HEIGHT, IMAGE_WIDTH, rgb_color=COLOR)
@@ -78,6 +88,11 @@ def test_image_remove_extra_padding():
 
 
 def test_image_resize():
+    """function test_image_resize
+    Args:
+    Returns:
+        
+    """
     img = np.asarray(
         [
             [1, 2],
@@ -105,6 +120,12 @@ def test_image_resize():
 
 
 def test_image_read(tmp_path):
+    """function test_image_read
+    Args:
+        tmp_path:   
+    Returns:
+        
+    """
     expected_img = create_blank_image(5, 10)
     img_path = str(tmp_path / "img.png")
     cv2.imwrite(img_path, expected_img)

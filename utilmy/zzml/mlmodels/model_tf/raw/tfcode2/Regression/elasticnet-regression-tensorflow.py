@@ -44,6 +44,13 @@ for i, index_combs in enumerate(flat_combs):
 
 class Elasticnet:
     def __init__(self, learning_rate, alpha):
+        """ Elasticnet:__init__
+        Args:
+            learning_rate:     
+            alpha:     
+        Returns:
+           
+        """
         self.X = tf.placeholder(tf.float32, (None, X_new.shape[1]))
         self.Y = tf.placeholder(tf.float32, (None, 1))
         w = tf.Variable(tf.random_normal([X_new.shape[1], 1]))
@@ -98,6 +105,12 @@ line, = ax.plot(X, y_output, lw=2, c="r")
 
 
 def gradient_mean_square(epoch):
+    """function gradient_mean_square
+    Args:
+        epoch:   
+    Returns:
+        
+    """
     cost, y_output, _ = sess.run(
         [model.cost, model.logits, model.optimizer], feed_dict={model.X: X_new, model.Y: Y}
     )

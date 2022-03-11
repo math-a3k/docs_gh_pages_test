@@ -45,6 +45,12 @@ class LSTURModel(BaseModel):
         super().__init__(hparams, iterator_creator, seed=seed)
 
     def _get_input_label_from_iter(self, batch_data):
+        """ LSTURModel:_get_input_label_from_iter
+        Args:
+            batch_data:     
+        Returns:
+           
+        """
         input_feat = [
             batch_data["user_index_batch"],
             batch_data["clicked_title_batch"],
@@ -54,9 +60,21 @@ class LSTURModel(BaseModel):
         return input_feat, input_label
 
     def _get_user_feature_from_iter(self, batch_data):
+        """ LSTURModel:_get_user_feature_from_iter
+        Args:
+            batch_data:     
+        Returns:
+           
+        """
         return [batch_data["clicked_title_batch"], batch_data["user_index_batch"]]
 
     def _get_news_feature_from_iter(self, batch_data):
+        """ LSTURModel:_get_news_feature_from_iter
+        Args:
+            batch_data:     
+        Returns:
+           
+        """
         return batch_data["candidate_title_batch"]
 
     def _build_graph(self):

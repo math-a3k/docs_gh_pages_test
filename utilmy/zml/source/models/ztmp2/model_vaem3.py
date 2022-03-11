@@ -35,9 +35,21 @@ import utils.reward as reward
 verbosity =2
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 :
       print(*s, flush=True)
 
@@ -46,6 +58,13 @@ def log2(*s):
 global model, session
 
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
@@ -141,6 +160,15 @@ def load_data(filePath,categories,cat_col,num_cols,discrete_cols,targetCol,nsamp
 
 
 def encode2(data_decode,list_discrete,records_d,fast_plot):
+    """function encode2
+    Args:
+        data_decode:   
+        list_discrete:   
+        records_d:   
+        fast_plot:   
+    Returns:
+        
+    """
     # Extracting Masked Decomp Data from data_decode function obtained from load_data function
     Data_train_decomp, Data_train_noisy_decomp,mask_train_decomp,Data_test_decomp,mask_test_comp,mask_test_decomp,cat_dims,DIM_FLT,dic_var_type = data_decode
     
@@ -200,6 +228,17 @@ def encode2(data_decode,list_discrete,records_d,fast_plot):
 
 
 def decode2(data_decode,scaling_factor,list_discrete,records_d,plot=False, args=None):
+    """function decode2
+    Args:
+        data_decode:   
+        scaling_factor:   
+        list_discrete:   
+        records_d:   
+        plot:   
+        args:   
+    Returns:
+        
+    """
     # args = params.Params('hyperparameters/bank_SAIA.json')
 
     Data_train_decomp, Data_train_noisy_decomp,mask_train_decomp,Data_test_decomp,mask_test_comp,mask_test_decomp,cat_dims,DIM_FLT,dic_var_type = data_decode
@@ -239,9 +278,34 @@ def decode2(data_decode,scaling_factor,list_discrete,records_d,plot=False, args=
     return vae
 
 def save_model2(model,output_dir):
+    """function save_model2
+    Args:
+        model:   
+        output_dir:   
+    Returns:
+        
+    """
     model.save(output_dir)
 
 def p_vae_active_learning(Data_train_comp, Data_train,mask_train,Data_test,mask_test_comp,mask_test,cat_dims,dim_flt,dic_var_type,args,list_discrete,records_d, estimation_method=1):
+    """function p_vae_active_learning
+    Args:
+        Data_train_comp:   
+        Data_train:   
+        mask_train:   
+        Data_test:   
+        mask_test_comp:   
+        mask_test:   
+        cat_dims:   
+        dim_flt:   
+        dic_var_type:   
+        args:   
+        list_discrete:   
+        records_d:   
+        estimation_method:   
+    Returns:
+        
+    """
     global mask
     list_stage = args.list_stage
     list_strategy = args.list_strategy
@@ -419,6 +483,26 @@ def p_vae_active_learning(Data_train_comp, Data_train,mask_train,Data_test,mask_
 
 
 def train_p_vae(stage, x_train, Data_train,mask_train, epochs, latent_dim,cat_dims,dim_flt,batch_size, p, K,iteration,list_discrete,records_d,args):
+    """function train_p_vae
+    Args:
+        stage:   
+        x_train:   
+        Data_train:   
+        mask_train:   
+        epochs:   
+        latent_dim:   
+        cat_dims:   
+        dim_flt:   
+        batch_size:   
+        p:   
+        K:   
+        iteration:   
+        list_discrete:   
+        records_d:   
+        args:   
+    Returns:
+        
+    """
     global obs_dim
     '''
         This function trains the partial VAE.
@@ -576,10 +660,22 @@ def train_p_vae(stage, x_train, Data_train,mask_train, epochs, latent_dim,cat_di
 
 ##################################################################################################################################
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
 def save(path='', info=None):
+    """function save
+    Args:
+        path:   
+        info:   
+    Returns:
+        
+    """
     import dill as pickle, copy
     global model, session
     os.makedirs(path, exist_ok=True)
@@ -598,6 +694,12 @@ def save(path='', info=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     import dill as pickle
 
@@ -619,6 +721,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -631,6 +739,11 @@ def load_info(path=""):
 ################################################################################################################################
 class Model(object):
     def __init__(self):
+        """ Model:__init__
+        Args:
+        Returns:
+           
+        """
         
         ### Dynamic Dimension : data_pars  ---> model_pars dimension  ###############
         print('Model Instantiated')

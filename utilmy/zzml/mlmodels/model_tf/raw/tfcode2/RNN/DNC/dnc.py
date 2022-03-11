@@ -76,6 +76,13 @@ maxlen = 50
 
 
 def run_model(input_sequence, output_size):
+    """function run_model
+    Args:
+        input_sequence:   
+        output_size:   
+    Returns:
+        
+    """
     access_config = {
         "memory_size": memory_size,
         "word_size": word_size,
@@ -97,6 +104,12 @@ def run_model(input_sequence, output_size):
 
 class Model:
     def __init__(self, dict_size):
+        """ Model:__init__
+        Args:
+            dict_size:     
+        Returns:
+           
+        """
 
         self.X = tf.placeholder(tf.int32, [None, None])
         self.Y = tf.placeholder(tf.float32, [None, dimension_output])

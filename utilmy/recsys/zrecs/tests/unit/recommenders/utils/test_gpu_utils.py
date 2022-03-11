@@ -22,36 +22,71 @@ from recommenders.utils.gpu_utils import (
 
 @pytest.mark.gpu
 def test_get_gpu_info():
+    """function test_get_gpu_info
+    Args:
+    Returns:
+        
+    """
     assert len(get_gpu_info()) >= 1
 
 
 @pytest.mark.gpu
 def test_get_number_gpus():
+    """function test_get_number_gpus
+    Args:
+    Returns:
+        
+    """
     assert get_number_gpus() >= 1
 
 
 @pytest.mark.gpu
 @pytest.mark.skip(reason="TODO: Implement this")
 def test_clear_memory_all_gpus():
+    """function test_clear_memory_all_gpus
+    Args:
+    Returns:
+        
+    """
     pass
 
 
 @pytest.mark.gpu
 @pytest.mark.skipif(sys.platform == "win32", reason="Not implemented on Windows")
 def test_get_cuda_version():
+    """function test_get_cuda_version
+    Args:
+    Returns:
+        
+    """
     assert get_cuda_version() > "9.0.0"
 
 
 @pytest.mark.gpu
 def test_get_cudnn_version():
+    """function test_get_cudnn_version
+    Args:
+    Returns:
+        
+    """
     assert get_cudnn_version() > "7.0.0"
 
 
 @pytest.mark.gpu
 def test_tensorflow_gpu():
+    """function test_tensorflow_gpu
+    Args:
+    Returns:
+        
+    """
     assert tf.test.is_gpu_available()
 
 
 @pytest.mark.gpu
 def test_pytorch_gpu():
+    """function test_pytorch_gpu
+    Args:
+    Returns:
+        
+    """
     assert torch.cuda.is_available()

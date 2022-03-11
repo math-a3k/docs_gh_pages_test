@@ -21,6 +21,11 @@ out_path = ""
 class BGAN():
     """Reference: https://wiseodd.github.io/techblog/2017/03/07/boundary-seeking-gan/"""
     def __init__(self):
+        """ BGAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -54,6 +59,11 @@ class BGAN():
         self.combined.compile(loss=self.boundary_loss, optimizer=optimizer)
 
     def build_generator(self):
+        """ BGAN:build_generator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -77,6 +87,11 @@ class BGAN():
         return Model(noise, img)
 
     def build_discriminator(self):
+        """ BGAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -101,6 +116,14 @@ class BGAN():
         return 0.5 * K.mean((K.log(y_pred) - K.log(1 - y_pred))**2)
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ BGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, _), (_, _) = mnist.load_data()
@@ -148,6 +171,12 @@ class BGAN():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ BGAN:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 5, 5
         noise = np.random.normal(0, 1, (r * c, self.latent_dim))
         gen_imgs = self.generator.predict(noise)

@@ -25,12 +25,24 @@ IMAGE_PIXELS = 28
 
 
 def variable_summaries(var):
+    """function variable_summaries
+    Args:
+        var:   
+    Returns:
+        
+    """
     with tf.name_scope("summaries"):
         mean = tf.reduce_mean(var)
         tf.summary.scalar("mean", mean)
 
 
 def main(_):
+    """function main
+    Args:
+        _:   
+    Returns:
+        
+    """
     mnist = input_data.read_data_sets("/tmp/mnist-data", one_hot=True)
     ps_spec = FLAGS.ps_hosts.split(",")
     worker_spec = FLAGS.worker_hosts.split(",")

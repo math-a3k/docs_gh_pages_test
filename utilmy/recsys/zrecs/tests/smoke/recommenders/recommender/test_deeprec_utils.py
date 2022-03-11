@@ -29,6 +29,12 @@ except ImportError:
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_DKN_iterator(deeprec_resource_path):
+    """function test_DKN_iterator
+    Args:
+        deeprec_resource_path:   
+    Returns:
+        
+    """
     data_path = os.path.join(deeprec_resource_path, "dkn")
     data_file = os.path.join(data_path, r"train_mind_demo.txt")
     news_feature_file = os.path.join(data_path, r"doc_feature.txt")
@@ -88,6 +94,13 @@ def test_DKN_iterator(deeprec_resource_path):
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_Sequential_Iterator(deeprec_resource_path, deeprec_config_path):
+    """function test_Sequential_Iterator
+    Args:
+        deeprec_resource_path:   
+        deeprec_config_path:   
+    Returns:
+        
+    """
     data_path = os.path.join(deeprec_resource_path, "slirec")
     yaml_file = os.path.join(deeprec_config_path, "sli_rec.yaml")
     train_file = os.path.join(data_path, r"train_data")

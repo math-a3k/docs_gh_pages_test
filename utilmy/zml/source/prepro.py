@@ -12,12 +12,30 @@ from utilmy import global_verbosity, os_makedirs
 verbosity = global_verbosity(__file__, "/../config.json" ,default= 5)
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 1 : print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 
@@ -31,20 +49,52 @@ import util_feature
 
 ####################################################################################################
 def log4(*s, n=0, m=1):
+    """function log4
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     if verbosity >= 4:
        print(*s,"\n", flush=True)
 
 def log4_pd(name, df, *s):
+    """function log4_pd
+    Args:
+        name:   
+        df:   
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 4: 
        print("\n",name, df.head(3),  df.shape, df.reset_index().dtypes )
 
 def _pd_colnum(df, col, pars):
+    """function _pd_colnum
+    Args:
+        df:   
+        col:   
+        pars:   
+    Returns:
+        
+    """
     colnum = col
     for x in colnum:
         df[x] = df[x].astype("float32")
     return df
 
 def _pd_colnum_fill_na_median(df, col, pars):
+    """function _pd_colnum_fill_na_median
+    Args:
+        df:   
+        col:   
+        pars:   
+    Returns:
+        
+    """
     for quant_col in col:
         df[quant_col].fillna((df[quant_col].median()), inplace=True)
 
@@ -130,6 +180,14 @@ def pd_col_atemplate(df: pd.DataFrame, col: list=None, pars: dict=None):
 ###########################################################################################
 ##### Label processing   ##################################################################
 def pd_coly_clean(df: pd.DataFrame, col: list=None, pars: dict=None):
+    """function pd_coly_clean
+    Args:
+        df (  pd.DataFrame ) :   
+        col (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     path_features_store = pars['path_features_store']
     # path_pipeline_export = pars['path_pipeline_export']
     coly = col=[0]
@@ -145,6 +203,14 @@ def pd_coly_clean(df: pd.DataFrame, col: list=None, pars: dict=None):
 
 
 def pd_coly(df: pd.DataFrame, col: list=None, pars: dict=None):
+    """function pd_coly
+    Args:
+        df (  pd.DataFrame ) :   
+        col (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     ##### Filtering / cleaning rows :   ################
     coly=col
     def isfloat(x):
@@ -343,6 +409,14 @@ def pd_colnum_bin(df: pd.DataFrame, col: list=None, pars: dict=None):
 
 
 def pd_colnum_binto_onehot(df: pd.DataFrame, col: list=None, pars: dict=None):
+    """function pd_colnum_binto_onehot
+    Args:
+        df (  pd.DataFrame ) :   
+        col (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     assert isinstance(col, list) and isinstance(df, pd.DataFrame)
 
     dfnum_bin     = df[col]
@@ -416,6 +490,14 @@ def pd_colcat_to_onehot(df: pd.DataFrame, col: list=None, pars: dict=None):
 
 
 def pd_colcat_bin(df: pd.DataFrame, col: list=None, pars: dict=None):
+    """function pd_colcat_bin
+    Args:
+        df (  pd.DataFrame ) :   
+        col (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     # dfbum_bin = df[col]
     path_pipeline  = pars.get('path_pipeline', False)
     colcat_bin_map = load(f'{path_pipeline}/colcat_bin_map.pkl') if  path_pipeline else None
@@ -527,6 +609,14 @@ def pd_colcross(df: pd.DataFrame, col: list=None, pars: dict=None):
 
 
 def pd_coldate(df: pd.DataFrame, col: list=None, pars: dict=None):
+    """function pd_coldate
+    Args:
+        df (  pd.DataFrame ) :   
+        col (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     log("##### Coldate processing   ##########################################")
     from utils import util_date
     coldate = col
@@ -650,6 +740,12 @@ def pd_colcat_minhash(df: pd.DataFrame, col: list=None, pars: dict=None):
 
 
 def os_convert_topython_code(txt):
+    """function os_convert_topython_code
+    Args:
+        txt:   
+    Returns:
+        
+    """
     # from sympy import sympify
     # converter = {
     #     'sub': lambda x, y: x - y,
@@ -665,6 +761,14 @@ def os_convert_topython_code(txt):
 
 
 def save_json(js, pfile, mode='a'):
+    """function save_json
+    Args:
+        js:   
+        pfile:   
+        mode:   
+    Returns:
+        
+    """
     import  json
     with open(pfile, mode=mode) as fp :
         json.dump(js, fp)

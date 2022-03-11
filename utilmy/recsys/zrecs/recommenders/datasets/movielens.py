@@ -65,26 +65,56 @@ class _DataFormat:
 
     @property
     def separator(self):
+        """ _DataFormat:separator
+        Args:
+        Returns:
+           
+        """
         return self._sep
 
     @property
     def path(self):
+        """ _DataFormat:path
+        Args:
+        Returns:
+           
+        """
         return self._path
 
     @property
     def has_header(self):
+        """ _DataFormat:has_header
+        Args:
+        Returns:
+           
+        """
         return self._has_header
 
     @property
     def item_separator(self):
+        """ _DataFormat:item_separator
+        Args:
+        Returns:
+           
+        """
         return self._item_sep
 
     @property
     def item_path(self):
+        """ _DataFormat:item_path
+        Args:
+        Returns:
+           
+        """
         return self._item_path
 
     @property
     def item_has_header(self):
+        """ _DataFormat:item_has_header
+        Args:
+        Returns:
+           
+        """
         return self._item_has_header
 
 
@@ -458,6 +488,13 @@ def load_spark_df(
 
 
 def _get_schema(header, schema):
+    """function _get_schema
+    Args:
+        header:   
+        schema:   
+    Returns:
+        
+    """
     if schema is None or len(schema) == 0:
         # Use header to generate schema
         if header is None or len(header) == 0:

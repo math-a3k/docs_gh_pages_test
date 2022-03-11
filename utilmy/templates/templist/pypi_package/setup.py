@@ -15,6 +15,11 @@ with changelog.open("r", encoding="utf-8") as file:
 
 
 def get_current_githash():
+    """function get_current_githash
+    Args:
+    Returns:
+        
+    """
     import subprocess
     label = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip();
     label = label.decode('utf-8')

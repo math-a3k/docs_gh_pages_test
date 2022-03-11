@@ -13,26 +13,62 @@ except Exception as e : verbosity = 2
 #raise Exception(f"{e}")
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 def os_makedirs(dir_or_file):
+    """function os_makedirs
+    Args:
+        dir_or_file:   
+    Returns:
+        
+    """
     if os.path.isfile(dir_or_file) :os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
     else : os.makedirs(os.path.abspath(dir_or_file), exist_ok=True)
 
 ####################################################################################################
 global model, session
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
@@ -61,6 +97,14 @@ path_pkg =  thisfile_dirpath + "/repo/TorchEASE/"
 ####################################################################################################
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
 
         if model_pars is None:
             self.model = None
@@ -91,6 +135,16 @@ def fit(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars=None, compute_pars={}, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     if Xpred is None:
         Xpred = get_dataset(data_pars=data_pars, task_type="predict")
@@ -118,6 +172,12 @@ def save(path=None, info=None):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -133,6 +193,12 @@ def load_info(path=""):
 ############ Test  #################################################################################
 
 def test_dataset_goodbooks(nrows=1000):
+    """function test_dataset_goodbooks
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     from sklearn.preprocessing import LabelEncoder
     data_path = "./goodbooks_dataset"
     if not os.path.isdir(data_path):
@@ -156,6 +222,13 @@ def test_dataset_goodbooks(nrows=1000):
 
 
 def train_test_split2(df, coly):
+    """function train_test_split2
+    Args:
+        df:   
+        coly:   
+    Returns:
+        
+    """
     log3(df.dtypes)
     y = df[coly] ### If clonassificati
     X = df.drop(coly,  axis=1)
@@ -173,6 +246,14 @@ def train_test_split2(df, coly):
 
 
 def get_dataset(data_pars=None, task_type="train", **kwargs):
+    """function get_dataset
+    Args:
+        data_pars:   
+        task_type:   
+        **kwargs:   
+    Returns:
+        
+    """
 
     if task_type == "train":
         n_samples = data_pars["n_sample"]
@@ -194,6 +275,12 @@ def get_dataset(data_pars=None, task_type="train", **kwargs):
         raise Exception(f"Task [{task_type}] not supported, TorchEASE supports 'train', 'predict' tasks")
 
 def test(n_sample          = 1000):
+    """function test
+    Args:
+        n_sample          :   
+    Returns:
+        
+    """
     df, colnum, colcat, coly = test_dataset_goodbooks(nrows= n_sample)
     X,y, X_train, X_valid, y_train, y_valid, X_test,  y_test, num_classes  = train_test_split2(df, coly)
 
@@ -311,6 +398,14 @@ def test(n_sample          = 1000):
 
 
 def test_helper(model_pars, data_pars, compute_pars):
+    """function test_helper
+    Args:
+        model_pars:   
+        data_pars:   
+        compute_pars:   
+    Returns:
+        
+    """
     global model,session
     root  = "ztmp/"
     model = Model(model_pars=model_pars, data_pars=data_pars)

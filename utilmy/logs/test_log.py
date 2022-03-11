@@ -7,6 +7,11 @@ python test.py  test2
 
 """
 def test1():
+    """function test1
+    Args:
+    Returns:
+        
+    """
     from util_log import log3, log2, log, logw, loge, logc, logr
     log3("debug2")
     log2("debug")
@@ -26,6 +31,11 @@ def test1():
 
 
 def test2():
+    """function test2
+    Args:
+    Returns:
+        
+    """
 
     print("\n\n\n########## Test 2############################")
     import util_log
@@ -64,6 +74,11 @@ from loguru import logger
 
 class LoggingStreamHandler(socketserver.StreamRequestHandler):
     def handle(self):
+        """ LoggingStreamHandler:handle
+        Args:
+        Returns:
+           
+        """
         while True:
             chunk = self.connection.recv(4)
             if len(chunk) < 4:
@@ -93,6 +108,11 @@ def test_launch_server():
 
 
 def test_server():
+    """function test_server
+    Args:
+    Returns:
+        
+    """
 
     print("\n\n\n########## Test 2############################")
     import util_log

@@ -38,6 +38,12 @@ except ImportError:
 
 @pytest.mark.gpu
 def test_xdeepfm_component_definition(deeprec_resource_path):
+    """function test_xdeepfm_component_definition
+    Args:
+        deeprec_resource_path:   
+    Returns:
+        
+    """
     data_path = os.path.join(deeprec_resource_path, "xdeepfm")
     yaml_file = os.path.join(data_path, "xDeepFM.yaml")
 
@@ -59,6 +65,12 @@ def test_xdeepfm_component_definition(deeprec_resource_path):
 @pytest.mark.gpu
 @pytest.fixture(scope="module")
 def dkn_files(deeprec_resource_path):
+    """function dkn_files
+    Args:
+        deeprec_resource_path:   
+    Returns:
+        
+    """
     data_path = os.path.join(deeprec_resource_path, "dkn")
     yaml_file = os.path.join(data_path, "dkn.yaml")
     news_feature_file = os.path.join(data_path, r"doc_feature.txt")
@@ -85,6 +97,12 @@ def dkn_files(deeprec_resource_path):
 
 @pytest.mark.gpu
 def test_dkn_component_definition(dkn_files):
+    """function test_dkn_component_definition
+    Args:
+        dkn_files:   
+    Returns:
+        
+    """
     # Load params from fixture
     (
         _,
@@ -117,6 +135,12 @@ def test_dkn_component_definition(dkn_files):
 
 @pytest.mark.gpu
 def test_dkn_item2item_component_definition(dkn_files):
+    """function test_dkn_item2item_component_definition
+    Args:
+        dkn_files:   
+    Returns:
+        
+    """
     # Load params from fixture
     (
         data_path,
@@ -155,6 +179,12 @@ def test_dkn_item2item_component_definition(dkn_files):
 @pytest.mark.gpu
 @pytest.fixture(scope="module")
 def sequential_files(deeprec_resource_path):
+    """function sequential_files
+    Args:
+        deeprec_resource_path:   
+    Returns:
+        
+    """
     data_path = os.path.join(deeprec_resource_path, "slirec")
     train_file = os.path.join(data_path, r"train_data")
     valid_file = os.path.join(data_path, r"valid_data")
@@ -206,6 +236,13 @@ def sequential_files(deeprec_resource_path):
 
 @pytest.mark.gpu
 def test_slirec_component_definition(sequential_files, deeprec_config_path):
+    """function test_slirec_component_definition
+    Args:
+        sequential_files:   
+        deeprec_config_path:   
+    Returns:
+        
+    """
     yaml_file = os.path.join(deeprec_config_path, "sli_rec.yaml")
     data_path, user_vocab, item_vocab, cate_vocab = sequential_files
 
@@ -233,6 +270,13 @@ def test_slirec_component_definition(sequential_files, deeprec_config_path):
 
 @pytest.mark.gpu
 def test_nextitnet_component_definition(sequential_files, deeprec_config_path):
+    """function test_nextitnet_component_definition
+    Args:
+        sequential_files:   
+        deeprec_config_path:   
+    Returns:
+        
+    """
     yaml_file_nextitnet = os.path.join(deeprec_config_path, "nextitnet.yaml")
     data_path, user_vocab, item_vocab, cate_vocab = sequential_files
 
@@ -261,6 +305,13 @@ def test_nextitnet_component_definition(sequential_files, deeprec_config_path):
 
 @pytest.mark.gpu
 def test_sum_component_definition(sequential_files, deeprec_config_path):
+    """function test_sum_component_definition
+    Args:
+        sequential_files:   
+        deeprec_config_path:   
+    Returns:
+        
+    """
     yaml_file_sum = os.path.join(deeprec_config_path, "sum.yaml")
     data_path, user_vocab, item_vocab, cate_vocab = sequential_files
 
@@ -289,6 +340,12 @@ def test_sum_component_definition(sequential_files, deeprec_config_path):
 
 @pytest.mark.gpu
 def test_lightgcn_component_definition(deeprec_config_path):
+    """function test_lightgcn_component_definition
+    Args:
+        deeprec_config_path:   
+    Returns:
+        
+    """
     yaml_file = os.path.join(deeprec_config_path, "lightgcn.yaml")
 
     df = movielens.load_pandas_df(size="100k")

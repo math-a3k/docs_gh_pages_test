@@ -33,6 +33,14 @@ def os_package_root_path(filepath, sublevel=0, path_add=""):
 
 
 def log(*s, n=0, m=1):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     print(sjump, sspace, s, sspace, flush=True)
@@ -40,6 +48,13 @@ def log(*s, n=0, m=1):
 
 ####################################################################################################
 def _config_process(data_path, config_mode="test"):
+    """function _config_process
+    Args:
+        data_path:   
+        config_mode:   
+    Returns:
+        
+    """
     data_path = Path(os.path.realpath(
         __file__)).parent.parent / "model_gluon/gluon_deepar.json" if data_path == "dataset/" else data_path
 
@@ -53,6 +68,12 @@ def _config_process(data_path, config_mode="test"):
 
 # Dataaset
 def get_dataset(**kw):
+    """function get_dataset
+    Args:
+        **kw:   
+    Returns:
+        
+    """
     ##check whether dataset is of kind train or test
     data_path = kw['train_data_path'] if  kw['train'] else kw['test_data_path']
 
@@ -89,12 +110,32 @@ def fit(model, data_pars=None, model_pars=None, compute_pars=None, out_pars=None
 
 # Model p redict
 def predict(model, data_pars, compute_pars=None, out_pars=None, **kwargs):
+    """function predict
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     ##  Model is class
     ## load test dataset
     pass
 
 
 def metrics(ypred, data_pars, compute_pars=None, out_pars=None, **kwargs):
+    """function metrics
+    Args:
+        ypred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     ## load test dataset
     pass
 
@@ -108,11 +149,25 @@ def metrics(ypred, data_pars, compute_pars=None, out_pars=None, **kwargs):
 # save and load model helper function
 class Model_empty(object):
     def __init__(self, model_pars=None, compute_pars=None):
+        """ Model_empty:__init__
+        Args:
+            model_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         ## Empty model for Seaialization
         self.model = None
 
 
 def save(model, path):
+    """function save
+    Args:
+        model:   
+        path:   
+    Returns:
+        
+    """
     if not os.path.exists(os.path.dirname(path)):
         print("model file path do not exist!")
     else:
@@ -120,6 +175,12 @@ def save(model, path):
 
 
 def load(path):
+    """function load
+    Args:
+        path:   
+    Returns:
+        
+    """
     if not os.path.exists(path):
         print("model file do not exist!")
         return None

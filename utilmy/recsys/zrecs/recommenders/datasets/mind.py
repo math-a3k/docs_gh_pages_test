@@ -127,6 +127,13 @@ def read_clickhistory(path, filename):
 
 
 def _newsample(nnn, ratio):
+    """function _newsample
+    Args:
+        nnn:   
+        ratio:   
+    Returns:
+        
+    """
     if ratio > len(nnn):
         return random.sample(nnn * (ratio // len(nnn) + 1), ratio)
     else:
@@ -208,6 +215,15 @@ def get_user_history(train_history, valid_history, user_history_path):
 
 
 def _read_news(filepath, news_words, news_entities, tokenizer):
+    """function _read_news
+    Args:
+        filepath:   
+        news_words:   
+        news_entities:   
+        tokenizer:   
+    Returns:
+        
+    """
     with open(filepath, encoding="utf-8") as f:
         lines = f.readlines()
     for line in lines:

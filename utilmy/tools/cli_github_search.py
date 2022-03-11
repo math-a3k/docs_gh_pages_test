@@ -29,6 +29,13 @@ import pandas as pd
 
 
 def search_github(args, start_time):
+    """function search_github
+    Args:
+        args:   
+        start_time:   
+    Returns:
+        
+    """
     keywords = args.keyword
     created = args.created
     pushed = args.pushed
@@ -147,6 +154,11 @@ def search_github(args, start_time):
 
 
 def get_arguments():
+    """function get_arguments
+    Args:
+    Returns:
+        
+    """
     # TODO: Improve default arguments
     p = argparse.ArgumentParser(
         description='Searches github for given keywords and specified parameters and store resutls in a directory.')
@@ -164,6 +176,11 @@ def get_arguments():
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     start_time = time.time()
     args = get_arguments()
     search_github(args, start_time)

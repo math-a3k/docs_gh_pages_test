@@ -15,6 +15,11 @@ from . import Utils as tsutil
 class cExogenousInfo:
 
     def __init__(self):
+        """ cExogenousInfo:__init__
+        Args:
+        Returns:
+           
+        """
         self.mExogenousVariables = None;
         self.mEncodedExogenous = None;
         self.mExogenousVariableCategories = None;
@@ -25,15 +30,30 @@ class cExogenousInfo:
         self.mExcluded = [];
         
     def info(self):
+        """ cExogenousInfo:info
+        Args:
+        Returns:
+           
+        """
         lStr2 = "ExogenousVariables = '" + self.mExogD +"'";
         return lStr2;
 
 
     def to_json(self):
+        """ cExogenousInfo:to_json
+        Args:
+        Returns:
+           
+        """
         dict1 = {};
         return dict1;
 
     def fit(self):
+        """ cExogenousInfo:fit
+        Args:
+        Returns:
+           
+        """
         self.mExogenousDataFrame = self.mExogenousData[0];
         self.mExogenousVariables = self.mExogenousData[1];
         self.mDateVariable = self.mTimeInfo.mTime;
@@ -43,6 +63,12 @@ class cExogenousInfo:
         # print("preProcessExogenousVariables , dummy columns", self.mEncodedExogenous);
 
     def addVars(self, df):
+        """ cExogenousInfo:addVars
+        Args:
+            df:     
+        Returns:
+           
+        """
         lExogDate = self.mDateVariable;
         N = df.shape[0]
         # print(np.dtype(df[self.mDateVariable]) ,
@@ -74,12 +100,23 @@ class cExogenousInfo:
         return df2;
 
     def transformDataset(self, df):
+        """ cExogenousInfo:transformDataset
+        Args:
+            df:     
+        Returns:
+           
+        """
         # print("BEFORE_EXOG_TRANSFORM_DATASET" , df.shape, df.columns);
         df1 = self.addVars(df);
         # print("AFTER_EXOG_TRANSFORM_DATASET" , df.shape, df.columns);
         return df1;
         
     def createEncodedExogenous(self):
+        """ cExogenousInfo:createEncodedExogenous
+        Args:
+        Returns:
+           
+        """
         self.mExogDummiesDataFrame = pd.DataFrame();
         self.mEncodedExogenous = [];
         self.mEncodedExogenousDataFrame = pd.DataFrame();
@@ -106,6 +143,11 @@ class cExogenousInfo:
 
 
     def updateExogenousVariableInfo(self):
+        """ cExogenousInfo:updateExogenousVariableInfo
+        Args:
+        Returns:
+           
+        """
         # print(self.mExogenousDataFrame.info());
         self.mExogenousVariableCategories = {};
         self.mContExogenousStats = {};

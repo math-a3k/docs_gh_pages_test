@@ -42,6 +42,12 @@ print("os.getcwd", os.getcwd())
 class dict2(object):
     ## Dict with attributes
     def __init__(self, d):
+        """ dict2:__init__
+        Args:
+            d:     
+        Returns:
+           
+        """
         self.__dict__ = d
 
 

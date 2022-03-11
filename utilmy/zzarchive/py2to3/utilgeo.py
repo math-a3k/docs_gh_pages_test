@@ -22,6 +22,15 @@ import arrow
 
 
 def df_to_geojson(df, col_properties, lat='latitude', lon='longitude'):
+    """function df_to_geojson
+    Args:
+        df:   
+        col_properties:   
+        lat:   
+        lon:   
+    Returns:
+        
+    """
     geojson = {'type':'FeatureCollection', 'features':[]}
     
     for _, row in df.iterrows():

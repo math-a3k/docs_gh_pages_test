@@ -25,16 +25,33 @@ import platform
 
 
 def get_os():
+    """function get_os
+    Args:
+    Returns:
+        
+    """
     curr_os = "linux" if "Linux" in platform.platform() else "win"
     return curr_os
 
 
 def os_exec(x):
+    """function os_exec
+    Args:
+        x:   
+    Returns:
+        
+    """
     ret_value = os.system(x)
     return ret_value
 
 
 def scan(data_file):
+    """function scan
+    Args:
+        data_file:   
+    Returns:
+        
+    """
     # note: I have checked os_file_listall, I think the following will be better
     files = glob.glob(data_file + "/**/*.py", recursive=True)
     # remove .ipynb_checkpoints
@@ -172,6 +189,12 @@ def get_required_packages(source_files, conda_env="test"):
 
 
 def conda_env_exits(conda_env):
+    """function conda_env_exits
+    Args:
+        conda_env:   
+    Returns:
+        
+    """
     cmds = ['conda.bat', 'env', 'list']
     p = subprocess.Popen(cmds, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, _ = p.communicate()
@@ -248,6 +271,11 @@ def load_arguments():
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     args = load_arguments()
     create_env(
         args.dir_in, args.conda_env,

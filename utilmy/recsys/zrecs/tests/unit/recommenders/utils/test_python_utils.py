@@ -19,6 +19,12 @@ TOL = 0.0001
 
 @pytest.fixture
 def target_matrices(scope="module"):
+    """function target_matrices
+    Args:
+        scope:   
+    Returns:
+        
+    """
     J1 = np.array([[1.0, 0.0, 0.5], [0.0, 1.0, 0.33333], [0.5, 0.33333, 1.0]])
     J2 = np.array(
         [
@@ -47,11 +53,21 @@ def target_matrices(scope="module"):
 
 @pytest.fixture(scope="module")
 def cooccurrence1():
+    """function cooccurrence1
+    Args:
+    Returns:
+        
+    """
     return np.array([[1.0, 0.0, 1.0], [0.0, 2.0, 1.0], [1.0, 1.0, 2.0]])
 
 
 @pytest.fixture(scope="module")
 def cooccurrence2():
+    """function cooccurrence2
+    Args:
+    Returns:
+        
+    """
     return np.array(
         [
             [2.0, 0.0, 0.0, 1.0],
@@ -64,10 +80,23 @@ def cooccurrence2():
 
 @pytest.fixture(scope="module")
 def scores():
+    """function scores
+    Args:
+    Returns:
+        
+    """
     return np.array([[1, 2, 3, 4, 5], [5, 4, 3, 2, 1], [1, 5, 3, 4, 2]])
 
 
 def test_python_jaccard(cooccurrence1, cooccurrence2, target_matrices):
+    """function test_python_jaccard
+    Args:
+        cooccurrence1:   
+        cooccurrence2:   
+        target_matrices:   
+    Returns:
+        
+    """
     J1 = jaccard(cooccurrence1)
     assert type(J1) == np.ndarray
     assert J1 == target_matrices["jaccard1"]
@@ -78,6 +107,14 @@ def test_python_jaccard(cooccurrence1, cooccurrence2, target_matrices):
 
 
 def test_python_lift(cooccurrence1, cooccurrence2, target_matrices):
+    """function test_python_lift
+    Args:
+        cooccurrence1:   
+        cooccurrence2:   
+        target_matrices:   
+    Returns:
+        
+    """
     L1 = lift(cooccurrence1)
     assert type(L1) == np.ndarray
     assert L1 == target_matrices["lift1"]
@@ -88,6 +125,11 @@ def test_python_lift(cooccurrence1, cooccurrence2, target_matrices):
 
 
 def test_exponential_decay():
+    """function test_exponential_decay
+    Args:
+    Returns:
+        
+    """
     values = np.array([1, 2, 3, 4, 5, 6])
     expected = np.array([0.25, 0.35355339, 0.5, 0.70710678, 1.0, 1.0])
     actual = exponential_decay(value=values, max_val=5, half_life=2)
@@ -95,6 +137,12 @@ def test_exponential_decay():
 
 
 def test_get_top_k_scored_items(scores):
+    """function test_get_top_k_scored_items
+    Args:
+        scores:   
+    Returns:
+        
+    """
     top_items, top_scores = get_top_k_scored_items(
         scores=scores, top_k=3, sort_top_k=True
     )
@@ -104,6 +152,11 @@ def test_get_top_k_scored_items(scores):
 
 
 def test_binarize():
+    """function test_binarize
+    Args:
+    Returns:
+        
+    """
     data = np.array([[2, 7, 0], [8, 2, 9], [9, 9, 4]])
     threshold = 3
     expected = np.array([[0, 1, 0], [1, 0, 1], [1, 1, 1]])
@@ -111,6 +164,12 @@ def test_binarize():
 
 
 def test_rescale(scores):
+    """function test_rescale
+    Args:
+        scores:   
+    Returns:
+        
+    """
     expected = np.array(
         [[0, 0.25, 0.5, 0.75, 1], [1, 0.75, 0.5, 0.25, 0], [0, 1, 0.5, 0.75, 0.25]]
     )

@@ -69,6 +69,15 @@ controller_config = {"hidden_size": size_layer}
 
 class Model:
     def __init__(self, learning_rate, size, size_layer, output_size):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+            size:     
+            size_layer:     
+            output_size:     
+        Returns:
+           
+        """
 
         self.X = tf.placeholder(tf.float32, (None, None, size))
         self.Y = tf.placeholder(tf.float32, (None, output_size))

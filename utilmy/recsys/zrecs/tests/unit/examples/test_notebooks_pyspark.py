@@ -15,6 +15,14 @@ except ImportError:
     sys.platform == "win32", reason="Takes 1087.56s in Windows, while in Linux 52.51s"
 )
 def test_als_pyspark_runs(notebooks, output_notebook, kernel_name):
+    """function test_als_pyspark_runs
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["als_pyspark"]
     pm.execute_notebook(notebook_path, output_notebook, kernel_name=kernel_name)
 
@@ -22,6 +30,14 @@ def test_als_pyspark_runs(notebooks, output_notebook, kernel_name):
 @pytest.mark.notebooks
 @pytest.mark.spark
 def test_data_split_runs(notebooks, output_notebook, kernel_name):
+    """function test_data_split_runs
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["data_split"]
     pm.execute_notebook(notebook_path, output_notebook, kernel_name=kernel_name)
 
@@ -32,6 +48,14 @@ def test_data_split_runs(notebooks, output_notebook, kernel_name):
     sys.platform == "win32", reason="Takes 2764.50s in Windows, while in Linux 124.35s"
 )
 def test_als_deep_dive_runs(notebooks, output_notebook, kernel_name):
+    """function test_als_deep_dive_runs
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["als_deep_dive"]
     pm.execute_notebook(notebook_path, output_notebook, kernel_name=kernel_name)
 
@@ -42,6 +66,14 @@ def test_als_deep_dive_runs(notebooks, output_notebook, kernel_name):
     sys.platform == "win32", reason="Takes 583.75s in Windows, while in Linux 71.77s"
 )
 def test_evaluation_runs(notebooks, output_notebook, kernel_name):
+    """function test_evaluation_runs
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["evaluation"]
     pm.execute_notebook(notebook_path, output_notebook, kernel_name=kernel_name)
 
@@ -49,6 +81,14 @@ def test_evaluation_runs(notebooks, output_notebook, kernel_name):
 @pytest.mark.notebooks
 @pytest.mark.spark
 def test_evaluation_diversity_runs(notebooks, output_notebook, kernel_name):
+    """function test_evaluation_diversity_runs
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["evaluation_diversity"]
     pm.execute_notebook(notebook_path, output_notebook, kernel_name=kernel_name)
 
@@ -59,6 +99,14 @@ def test_evaluation_diversity_runs(notebooks, output_notebook, kernel_name):
     sys.platform == "win32", reason="Takes 2409.69s in Windows, while in Linux 138.30s"
 )
 def test_spark_tuning(notebooks, output_notebook, kernel_name):
+    """function test_spark_tuning
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["spark_tuning"]
     pm.execute_notebook(
         notebook_path,
@@ -78,6 +126,14 @@ def test_spark_tuning(notebooks, output_notebook, kernel_name):
 @pytest.mark.spark
 @pytest.mark.skipif(sys.platform == "win32", reason="Not implemented on Windows")
 def test_mmlspark_lightgbm_criteo_runs(notebooks, output_notebook, kernel_name):
+    """function test_mmlspark_lightgbm_criteo_runs
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     notebook_path = notebooks["mmlspark_lightgbm_criteo"]
     pm.execute_notebook(
         notebook_path,

@@ -18,6 +18,12 @@ from core_models.utils import get_auc_metrics, get_avpr_metrics
 from sklearn import mixture
 
 def is_number(val):
+    """function is_number
+    Args:
+        val:   
+    Returns:
+        
+    """
     # some outliers will be cast to NaN
     # when reading from file (eg. csv)
     # since they do not conform with data types
@@ -125,6 +131,16 @@ def get_prob_matrix(df_dataset, cat_columns, z_mtx=None, dict_densities=None, n_
     return prob_mat, dict_densities, gmm_selected, repair_mat
 
 def error_computation(dataset_obj, X_true, X_hat, dict_densities, mask):
+    """function error_computation
+    Args:
+        dataset_obj:   
+        X_true:   
+        X_hat:   
+        dict_densities:   
+        mask:   
+    Returns:
+        
+    """
 
     cursor_feat = 0
     feature_errors_arr = []
@@ -169,6 +185,12 @@ def error_computation(dataset_obj, X_true, X_hat, dict_densities, mask):
 
 
 def main(args):
+    """function main
+    Args:
+        args:   
+    Returns:
+        
+    """
 
     # Load datasets
     train_loader, X_train, target_errors_train, dataset_obj_train, attributes = utils.load_data(args.data_folder, args.batch_size, 

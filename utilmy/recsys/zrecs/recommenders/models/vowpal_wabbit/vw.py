@@ -263,4 +263,9 @@ class VW:
         )
 
     def __del__(self):
+        """ VW:__del__
+        Args:
+        Returns:
+           
+        """
         self.tempdir.cleanup()

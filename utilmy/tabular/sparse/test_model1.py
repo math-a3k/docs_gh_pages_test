@@ -18,10 +18,21 @@ from tqdm import tqdm
 
 class EASE:
     def __init__(self):
+        """ EASE:__init__
+        Args:
+        Returns:
+           
+        """
         self.user_enc = LabelEncoder()
         self.item_enc = LabelEncoder()
 
     def _get_users_and_items(self, df):
+        """ EASE:_get_users_and_items
+        Args:
+            df:     
+        Returns:
+           
+        """
         users = self.user_enc.fit_transform(df.loc[:, 'user_id'])
         items = self.item_enc.fit_transform(df.loc[:, 'item_id'])
         return users, items
@@ -49,6 +60,15 @@ class EASE:
         self.pred = X.dot(B)
 
     def predict(self, train, users, items, k):
+        """ EASE:predict
+        Args:
+            train:     
+            users:     
+            items:     
+            k:     
+        Returns:
+           
+        """
         df = pd.DataFrame()
         items = self.item_enc.transform(items)
         dd = train.loc[train.user_id.isin(users)]

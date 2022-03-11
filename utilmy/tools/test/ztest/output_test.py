@@ -11,6 +11,11 @@ class TestOutput(unittest.TestCase):
     HEADER_ROW = "filepath,function_or_class_name,variable_name,is_local\n"
 
     def test_corner_cases(self):
+        """ TestOutput:test_corner_cases
+        Args:
+        Returns:
+           
+        """
         mock_file_handle = io.StringIO()
         output.writeCSV(set(), mock_file_handle)
 
@@ -18,6 +23,11 @@ class TestOutput(unittest.TestCase):
         self.assertEqual(TestOutput.HEADER_ROW, got)
 
     def test_output(self):
+        """ TestOutput:test_output
+        Args:
+        Returns:
+           
+        """
         mock_file_handle = io.StringIO()
         mock_function_or_class = unittest.mock.Mock()
         mock_function_or_class.name = "function_name"

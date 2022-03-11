@@ -11,6 +11,26 @@ import numpy as np
 class cModelControl:
 
     def __init__(self):
+        """ cSignalDecomposition_Options:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cModelControl:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cCrostonOptions:__init__
+        Args:
+        Returns:
+           
+        """
+        """ cCrossValidationOptions:__init__
+        Args:
+        Returns:
+           
+        """
         self.mActiveTransformations = {};
         self.mActivePeriodics = {};
         self.mActiveTrends = {};
@@ -42,6 +62,12 @@ class cModelControl:
         self.set_active_autoregressions(self.mKnownAutoRegressions[0:3]);
         
     def set_active_transformations(self, transformations):
+        """ cModelControl:set_active_transformations
+        Args:
+            transformations:     
+        Returns:
+           
+        """
         self.mActiveTransformations = {};
         for transformation in self.mKnownTransformations:
             if(transformation in transformations):
@@ -53,6 +79,12 @@ class cModelControl:
             self.mActiveTransformations['None'] = True;
     
     def set_active_trends(self, trends):
+        """ cModelControl:set_active_trends
+        Args:
+            trends:     
+        Returns:
+           
+        """
         self.mActiveTrends = {};
         for trend in self.mKnownTrends:
             if(trend in trends):
@@ -64,6 +96,12 @@ class cModelControl:
             self.mActiveTrends['ConstantTrend'] = True;                
     
     def set_active_periodics(self, periodics):
+        """ cModelControl:set_active_periodics
+        Args:
+            periodics:     
+        Returns:
+           
+        """
         self.mActivePeriodics = {};
         for period in self.mKnownPeriodics:
             if(period in periodics):
@@ -75,6 +113,12 @@ class cModelControl:
             self.mActivePeriodics['NoCycle'] = True;
                     
     def set_active_autoregressions(self, autoregs):
+        """ cModelControl:set_active_autoregressions
+        Args:
+            autoregs:     
+        Returns:
+           
+        """
         self.mActiveAutoRegressions = {};
         for autoreg in self.mKnownAutoRegressions:
             if(autoreg in autoregs):
@@ -86,15 +130,35 @@ class cModelControl:
             self.mActiveAutoRegressions['NoAR'] = True;
 
     def disable_all_transformations(self):
+        """ cModelControl:disable_all_transformations
+        Args:
+        Returns:
+           
+        """
         self.set_active_transformations([]);
     
     def disable_all_trends(self):
+        """ cModelControl:disable_all_trends
+        Args:
+        Returns:
+           
+        """
         self.set_active_trends([]);
     
     def disable_all_periodics(self):
+        """ cModelControl:disable_all_periodics
+        Args:
+        Returns:
+           
+        """
         self.set_active_periodics([]);
     
     def disable_all_autoregressions(self):
+        """ cModelControl:disable_all_autoregressions
+        Args:
+        Returns:
+           
+        """
         self.set_active_autoregressions([]);
     
 class cCrossValidationOptions:
@@ -142,6 +206,11 @@ class cSignalDecomposition_Options(cModelControl):
         self.disableDebuggingOptions();
 
     def disableDebuggingOptions(self):
+        """ cSignalDecomposition_Options:disableDebuggingOptions
+        Args:
+        Returns:
+           
+        """
         self.mDebug = False;
         self.mDebugCycles = False;
         self.mDebugProfile = False;
@@ -149,6 +218,11 @@ class cSignalDecomposition_Options(cModelControl):
         
         
     def enable_slow_mode(self):
+        """ cSignalDecomposition_Options:enable_slow_mode
+        Args:
+        Returns:
+           
+        """
         self.mQuantiles = [5, 10, 20]; # quintiles, deciles, and vingtiles;)
         self.mMovingAverageLengths = [5, 7, 12, 24 , 30, 60];
         self.mMovingMedianLengths = [5, 7, 12, 24 , 30, 60];
@@ -167,6 +241,11 @@ class cSignalDecomposition_Options(cModelControl):
         self.mCrossValidationOptions.mMethod = "TSCV";        
 
     def enable_fast_mode(self):
+        """ cSignalDecomposition_Options:enable_fast_mode
+        Args:
+        Returns:
+           
+        """
         self.mQuantiles = [5, 10, 20]; # quintiles, deciles, and vingtiles;)
         self.mMovingAverageLengths = [5, 7, 12, 24 , 30, 60];
         self.mMovingMedianLengths = [5, 7, 12, 24 , 30, 60];
@@ -179,6 +258,11 @@ class cSignalDecomposition_Options(cModelControl):
 
     # Add a low-memory mode for Heroku #25
     def enable_low_memory_mode(self):
+        """ cSignalDecomposition_Options:enable_low_memory_mode
+        Args:
+        Returns:
+           
+        """
         self.mMaxAROrder = 7;
         self.set_active_transformations(['None']);
         self.mParallelMode = False;

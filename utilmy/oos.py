@@ -12,6 +12,11 @@ import os, sys, time, datetime,inspect, json, yaml, gc, pandas as pd, numpy as n
 from utilmy.utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = help_create(MNAME) + HELP
     print(ss)
@@ -199,6 +204,11 @@ def test_all():
 
     
 def test0(): 
+    """function test0
+    Args:
+    Returns:
+        
+    """
     os_makedirs('ztmp/ztmp2/myfile.txt')
     os_makedirs('ztmp/ztmp3/ztmp4')
     os_makedirs('/tmp/one/two')
@@ -221,6 +231,11 @@ def test0():
     assert os_platform_os() == sys.platform
 
 def test1():
+    """function test1
+    Args:
+    Returns:
+        
+    """
     int_ = 1
     float_ = 1.1
     is_int(int_)
@@ -229,6 +244,11 @@ def test1():
     to_int(float_)
 
 def test2():
+    """function test2
+    Args:
+    Returns:
+        
+    """
     size_ = os_path_size()
     log("total size", size_)
     result_ = os_path_split("test/tmp/test.txt")
@@ -253,6 +273,11 @@ def test2():
     '''
 
 def test4():
+    """function test4
+    Args:
+    Returns:
+        
+    """
     log(os_get_function_name())
     cwd = os.getcwd()
     log(os_walk(cwd))
@@ -271,6 +296,11 @@ def test4():
     os_file_check("./testdata/tmp/test/file_test.txt")
 
 def test5():
+    """function test5
+    Args:
+    Returns:
+        
+    """
     log("Testing os utils...")
     from utilmy import pd_random
     log(os_platform_os())
@@ -291,15 +321,33 @@ def test5():
 class dict_to_namespace(object):
     #### Dict to namespace
     def __init__(self, d):
+        """ dict_to_namespace:__init__
+        Args:
+            d:     
+        Returns:
+           
+        """
         self.__dict__ = d
 
 
 def to_dict(**kw):
+  """function to_dict
+  Args:
+      **kw:   
+  Returns:
+      
+  """
   ## return dict version of the params
   return kw
 
 
 def to_timeunix(datex="2018-01-16"):
+  """function to_timeunix
+  Args:
+      datex:   
+  Returns:
+      
+  """
   if isinstance(datex, str)  :
      return int(time.mktime(datetime.datetime.strptime(datex, "%Y-%m-%d").timetuple()) * 1000)
 
@@ -308,15 +356,36 @@ def to_timeunix(datex="2018-01-16"):
 
 
 def to_datetime(x) :
+  """function to_datetime
+  Args:
+      x:   
+  Returns:
+      
+  """
   import pandas as pd
   return pd.to_datetime( str(x) )
 
 
 def np_list_intersection(l1, l2) :
+  """function np_list_intersection
+  Args:
+      l1:   
+      l2:   
+  Returns:
+      
+  """
   return [x for x in l1 if x in l2]
 
 
 def np_add_remove(set_, to_remove, to_add):
+    """function np_add_remove
+    Args:
+        set_:   
+        to_remove:   
+        to_add:   
+    Returns:
+        
+    """
     # a function that removes list of elements and adds an element from a set
     result_temp = set_.copy()
     for element in to_remove:
@@ -326,6 +395,12 @@ def np_add_remove(set_, to_remove, to_add):
 
 
 def to_float(x):
+    """function to_float
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         return float(x)
     except :
@@ -333,6 +408,12 @@ def to_float(x):
 
 
 def to_int(x):
+    """function to_int
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         return int(x)
     except :
@@ -340,6 +421,12 @@ def to_int(x):
 
 
 def is_int(x):
+    """function is_int
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         int(x)
         return True
@@ -347,6 +434,12 @@ def is_int(x):
         return False    
 
 def is_float(x):
+    """function is_float
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         float(x)
         return True
@@ -357,6 +450,11 @@ def is_float(x):
 ########################################################################################################
 ##### OS, cofnfig ######################################################################################
 def os_monkeypatch_help():
+    """function os_monkeypatch_help
+    Args:
+    Returns:
+        
+    """
     print( """
     https://medium.com/@chipiga86/python-monkey-patching-like-a-boss-87d7ddb8098e
     
@@ -411,6 +509,14 @@ def os_file_date_modified(dirin, fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
 
 
 def date_to_timezone(tdate,  fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
+    """function date_to_timezone
+    Args:
+        tdate:   
+        fmt="%Y%m%d-%H:   
+        timezone:   
+    Returns:
+        
+    """
     # "%Y-%m-%d %H:%M:%S %Z%z"
     from pytz import timezone as tzone
     import datetime
@@ -434,6 +540,12 @@ def os_process_list():
 
 
 def os_wait_processes(nhours=7):        
+    """function os_wait_processes
+    Args:
+        nhours:   
+    Returns:
+        
+    """
     t0 = time.time()
     while (time.time() - t0 ) < nhours * 3600 :
        hdfs_export()            
@@ -459,17 +571,41 @@ class toFileSafe(object):
       self.logger = logger
       
    def write(self, msg):   
+        """ toFileSafe:write
+        Args:
+            msg:     
+        Returns:
+           
+        """
         self.logger.info( msg)
     
    def log(self, msg):   
+        """ toFileSafe:log
+        Args:
+            msg:     
+        Returns:
+           
+        """
         self.logger.info( msg)    
 
    def w(self, msg):   
+        """ toFileSafe:w
+        Args:
+            msg:     
+        Returns:
+           
+        """
         self.logger.info( msg)   
 
         
         
 def os_path_size(path = '.'):
+    """function os_path_size
+    Args:
+        path :   
+    Returns:
+        
+    """
     total_size = 0
     for dirpath, dirnames, filenames in os.walk(path):
         for f in filenames:
@@ -482,6 +618,12 @@ def os_path_size(path = '.'):
 
 
 def os_path_split(fpath:str=""):
+    """function os_path_split
+    Args:
+        fpath ( str ) :   
+    Returns:
+        
+    """
     #### Get path split
     fpath = fpath.replace("\\", "/")
     if fpath[-1] == "/":
@@ -601,6 +743,18 @@ os_copy = os_copy_safe
 
 
 def os_merge_safe(dirin_list=None, dirout=None, nlevel=5, nfile=5000, nrows=10**8,  cmd_fallback = "umount /mydrive/  && mount /mydrive/  ", sleep=0.3):
+    """function os_merge_safe
+    Args:
+        dirin_list:   
+        dirout:   
+        nlevel:   
+        nfile:   
+        nrows:   
+        cmd_fallback :   
+        sleep:   
+    Returns:
+        
+    """
     ### merge file in safe way
     nrows = 10**8
     flist = []
@@ -637,6 +791,14 @@ def os_merge_safe(dirin_list=None, dirout=None, nlevel=5, nfile=5000, nrows=10**
     
     
 def z_os_search_fast(fname, texts=None, mode="regex/str"):
+    """function z_os_search_fast
+    Args:
+        fname:   
+        texts:   
+        mode:   
+    Returns:
+        
+    """
     import re
     if texts is None:
         texts = ["myword"]
@@ -697,6 +859,11 @@ def os_search_content(srch_pattern=None, mode="str", dir1="", file_pattern="*.*"
 
 
 def os_get_function_name():
+    """function os_get_function_name
+    Args:
+    Returns:
+        
+    """
     ### Get ane,
     import sys, socket
     ss = str(os.getpid()) # + "-" + str( socket.gethostname())
@@ -710,6 +877,13 @@ def os_get_function_name():
 
 
 def os_variable_init(ll, globs):
+    """function os_variable_init
+    Args:
+        ll:   
+        globs:   
+    Returns:
+        
+    """
     for x in ll :
         try :
           globs[x]
@@ -718,6 +892,14 @@ def os_variable_init(ll, globs):
 
 
 def os_import(mod_name="myfile.config.model", globs=None, verbose=True):
+    """function os_import
+    Args:
+        mod_name:   
+        globs:   
+        verbose:   
+    Returns:
+        
+    """
     ### Import in Current Python Session a module   from module import *
     ### from mod_name import *
     module = __import__(mod_name, fromlist=['*'])
@@ -745,6 +927,14 @@ def os_import(mod_name="myfile.config.model", globs=None, verbose=True):
 
 
 def os_variable_exist(x ,globs, msg="") :
+    """function os_variable_exist
+    Args:
+        x:   
+        globs:   
+        msg:   
+    Returns:
+        
+    """
     x_str = str(globs.get(x, None))
     if "None" in x_str:
         log("Using default", x)
@@ -755,6 +945,14 @@ def os_variable_exist(x ,globs, msg="") :
 
 
 def os_variable_check(ll, globs=None, do_terminate=True):
+  """function os_variable_check
+  Args:
+      ll:   
+      globs:   
+      do_terminate:   
+  Returns:
+      
+  """
   import sys
   for x in ll :
       try :
@@ -767,6 +965,13 @@ def os_variable_check(ll, globs=None, do_terminate=True):
 
 
 def os_clean_memory( varlist , globx):
+  """function os_clean_memory
+  Args:
+      varlist:   
+      globx:   
+  Returns:
+      
+  """
   for x in varlist :
     try :
        del globx[x]
@@ -775,6 +980,14 @@ def os_clean_memory( varlist , globx):
 
 
 def os_system_list(ll, logfile=None, sleep_sec=10):
+   """function os_system_list
+   Args:
+       ll:   
+       logfile:   
+       sleep_sec:   
+   Returns:
+       
+   """
    ### Execute a sequence of cmd
    import time, sys
    n = len(ll)
@@ -797,6 +1010,12 @@ def os_system_list(ll, logfile=None, sleep_sec=10):
 
 
 def os_file_check(fp):
+   """function os_file_check
+   Args:
+       fp:   
+   Returns:
+       
+   """
    import os, time
    try :
        log(fp,  os.stat(fp).st_size*0.001, time.ctime(os.path.getmtime(fp)) )
@@ -805,21 +1024,44 @@ def os_file_check(fp):
 
 
 def os_to_file( txt="", filename="ztmp.txt",  mode='a'):
+    """function os_to_file
+    Args:
+        txt:   
+        filename:   
+        mode:   
+    Returns:
+        
+    """
     with open(filename, mode=mode) as fp:
         fp.write(txt + "\n")
 
 
 def os_platform_os():
+    """function os_platform_os
+    Args:
+    Returns:
+        
+    """
     #### get linux or windows
     return sys.platform
 
 
 def os_cpu():
+    """function os_cpu
+    Args:
+    Returns:
+        
+    """
     ### Nb of cpus cores
     return os.cpu_count()
 
 
 def os_platform_ip():
+    """function os_platform_ip
+    Args:
+    Returns:
+        
+    """
     ### IP
     pass
 
@@ -842,6 +1084,16 @@ def os_memory():
 
 
 def os_sleep_cpu(cpu_min=30, sleep=10, interval=5, msg= "", verbose=True):
+    """function os_sleep_cpu
+    Args:
+        cpu_min:   
+        sleep:   
+        interval:   
+        msg:   
+        verbose:   
+    Returns:
+        
+    """
     #### Sleep until CPU becomes normal usage
     import psutil, time
     aux = psutil.cpu_percent(interval=interval)  ### Need to call 2 times
@@ -920,6 +1172,11 @@ def os_removedirs(path, verbose=False):
 
 
 def os_getcwd():
+    """function os_getcwd
+    Args:
+    Returns:
+        
+    """
     ## This is for Windows Path normalized As Linux /
     root = os.path.abspath(os.getcwd()).replace("\\", "/") + "/"
     return  root
@@ -943,6 +1200,12 @@ def os_system(cmd, doprint=False):
 
 
 def os_makedirs(dir_or_file):
+    """function os_makedirs
+    Args:
+        dir_or_file:   
+    Returns:
+        
+    """
     if os.path.isfile(dir_or_file) or "." in dir_or_file.split("/")[-1] :
         os.makedirs(os.path.dirname(os.path.abspath(dir_or_file)), exist_ok=True)
     else :
@@ -993,12 +1256,25 @@ def log5(*s):
     
     
 def log_trace(msg="", dump_path="", globs=None):
+    """function log_trace
+    Args:
+        msg:   
+        dump_path:   
+        globs:   
+    Returns:
+        
+    """
     print(msg)
     import pdb;
     pdb.set_trace()
 
 
 def profiler_start():
+    """function profiler_start
+    Args:
+    Returns:
+        
+    """
     ### Code profiling
     from pyinstrument import Profiler
     global profiler
@@ -1007,6 +1283,11 @@ def profiler_start():
 
 
 def profiler_stop():
+    """function profiler_stop
+    Args:
+    Returns:
+        
+    """
     global profiler
     profiler.stop()
     print(profiler.output_text(unicode=True, color=True))

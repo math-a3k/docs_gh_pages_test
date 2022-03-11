@@ -26,6 +26,13 @@ mnist = input_data.read_data_sets("", one_hot=True)
 
 class Model:
     def __init__(self, learning_rate, y_shape):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+            y_shape:     
+        Returns:
+           
+        """
         self.X = tf.placeholder(tf.float32, (None, 28, 28, 1))
         self.Y = tf.placeholder(tf.float32, (None, y_shape))
 

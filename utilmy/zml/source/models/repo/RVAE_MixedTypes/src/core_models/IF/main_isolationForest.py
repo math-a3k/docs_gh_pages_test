@@ -15,6 +15,12 @@ from sklearn.metrics import average_precision_score as avpr_compute
 
 
 def main(args):
+    """function main
+    Args:
+        args:   
+    Returns:
+        
+    """
 
     # Load datasets
     _, X_train, target_errors_train, _, _ = utils.load_data(args.data_folder, args.batch_size, is_train=True)

@@ -9,10 +9,24 @@ from time import sleep
 
 
 def test_pandas_fillna(data, **args):
+    """function test_pandas_fillna
+    Args:
+        data:   
+        **args:   
+    Returns:
+        
+    """
     return data.fillna(**args)
 
 
 def test_onehot_sentences(data, max_len):
+    """function test_onehot_sentences
+    Args:
+        data:   
+        max_len:   
+    Returns:
+        
+    """
     return (
         lambda df, max_len: (
             lambda d, ml, word_dict, sentence_groups: np.array(
@@ -38,10 +52,23 @@ def test_onehot_sentences(data, max_len):
 
 
 def test_word_count(data):
+    """function test_word_count
+    Args:
+        data:   
+    Returns:
+        
+    """
     return data["Word"].nunique() + 2
 
 
 def test_word_categorical_labels_per_sentence(data, max_len):
+    """function test_word_categorical_labels_per_sentence
+    Args:
+        data:   
+        max_len:   
+    Returns:
+        
+    """
     return (
         lambda df, max_len: (
             lambda d, ml, c, tag_dict, sentence_groups: np.array(
@@ -91,6 +118,13 @@ def clean_str(string):
 
 
 def imdb_spacy_tokenizer(text, lang="en"):
+    """function imdb_spacy_tokenizer
+    Args:
+        text:   
+        lang:   
+    Returns:
+        
+    """
     disable = (
         "tagger",
         "parser",

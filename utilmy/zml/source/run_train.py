@@ -14,12 +14,30 @@ from utilmy import global_verbosity, os_makedirs
 verbosity = global_verbosity(__file__, "/../config.json" ,default= 5)
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 1 : print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 
@@ -35,6 +53,14 @@ from util_feature import   load, save_list, load_function_uri, save
 from run_preprocess import  preprocess, preprocess_load
 
 def save_features(df, name, path):
+    """function save_features
+    Args:
+        df:   
+        name:   
+        path:   
+    Returns:
+        
+    """
     if path is not None :
        os.makedirs( f"{path}/{name}", exist_ok=True)
        df.to_parquet( f"{path}/{name}/features.parquet")
@@ -470,6 +496,15 @@ def run_model_check(path_output, scoring):
 
 
 def mlflow_register(dfXy, model_dict: dict, stats: dict, mlflow_pars:dict ):
+    """function mlflow_register
+    Args:
+        dfXy:   
+        model_dict (  dict ) :   
+        stats (  dict ) :   
+        mlflow_pars ( dict ) :   
+    Returns:
+        
+    """
     log("#### Using mlflow #########################################################")
     # def register(run_name, params, metrics, signature, model_class, tracking_uri= "sqlite:///local.db"):
     from run_mlflow import register

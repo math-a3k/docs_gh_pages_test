@@ -29,6 +29,14 @@ from source.util_feature import save,os_get_function_name
 
 
 def global_pars_update(model_dict,  data_name, config_name):
+    """function global_pars_update
+    Args:
+        model_dict:   
+        data_name:   
+        config_name:   
+    Returns:
+        
+    """
     print("config_name", config_name)
     dir_data  = root_repo + "/data/"  ; print("dir_data", dir_data)
 
@@ -88,6 +96,14 @@ cols_input_type_1 = {
 #####################################################################################
 ####### y normalization #############################################################
 def y_norm(y, inverse=True, mode='boxcox'):
+    """function y_norm
+    Args:
+        y:   
+        inverse:   
+        mode:   
+    Returns:
+        
+    """
     ## Normalize the input/output
     if mode == 'boxcox':
         width0 = 53.0  # 0,1 factor

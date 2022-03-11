@@ -35,6 +35,12 @@ UNTIL_CLS_DEF = '^(?:(?!class\s+[\w_][\w\d_]*).)*'
 
 
 def _wipe_docstrings_comments(src):
+    """function _wipe_docstrings_comments
+    Args:
+        src:   
+    Returns:
+        
+    """
 
     for docstring in re.findall('""".*?"""', src, re.MULTILINE | re.DOTALL):
         src = src.replace(docstring, '')
@@ -47,6 +53,12 @@ def _wipe_docstrings_comments(src):
 
 
 def _match_kwarg(signature):
+    """function _match_kwarg
+    Args:
+        signature:   
+    Returns:
+        
+    """
     LOGGER.debug(signature)
     for name, pattern in VAL_PATTERNS:
         match = re.match(pattern, signature)
@@ -72,6 +84,12 @@ FORMAT = u'%(levelname)-9s [%(module)9s:%(lineno)3s - %(funcName)9s]--> %(messag
 
 
 def _match(signature):
+    """function _match
+    Args:
+        signature:   
+    Returns:
+        
+    """
     # trim whitespaces
     signature = re.sub('^\s+', '', signature)
     signature = re.sub('\s+$', '', signature)
@@ -119,6 +137,12 @@ def _match(signature):
 
 
 def _parse_arglist(arglist):
+    """function _parse_arglist
+    Args:
+        arglist:   
+    Returns:
+        
+    """
     args, kwargs = _match(arglist)
 
     pack = {}
@@ -135,6 +159,12 @@ def _parse_arglist(arglist):
 
 
 def _extract_functions(src):
+    """function _extract_functions
+    Args:
+        src:   
+    Returns:
+        
+    """
     defs = re.findall(
         '^def[ \t]+([\w_][\w\d_]*)\((.*?)\)[\s]*:', src, re.MULTILINE | re.DOTALL)
 
@@ -152,12 +182,24 @@ def _extract_functions(src):
 
 
 def _calc_indent(indent):
+    """function _calc_indent
+    Args:
+        indent:   
+    Returns:
+        
+    """
     if config.TAB:
         return indent.count(' ') / config.TAB
     return indent.count('\t')
 
 
 def _next_class(src):
+    """function _next_class
+    Args:
+        src:   
+    Returns:
+        
+    """
     tmpcls = re.match(CLS_DEF, src, re.MULTILINE | re.DOTALL)
     if not tmpcls:
         return None
@@ -175,6 +217,12 @@ def _next_class(src):
 
 
 def _extract_classes(src):
+    """function _extract_classes
+    Args:
+        src:   
+    Returns:
+        
+    """
     clz = re.findall(CLS_PATTERN, src, re.MULTILINE | re.DOTALL)
 
     classes = []
@@ -228,6 +276,12 @@ def _extract_classes(src):
 
 
 def _analyze_classes(sourcefiles):
+    """function _analyze_classes
+    Args:
+        sourcefiles:   
+    Returns:
+        
+    """
     results = {}
     for path in sourcefiles:
         print(path)
@@ -249,6 +303,12 @@ def _analyze_classes(sourcefiles):
 
 
 def _analyze_functions(sourcefiles):
+    """function _analyze_functions
+    Args:
+        sourcefiles:   
+    Returns:
+        
+    """
     results = {}
 
     for path in sourcefiles:
@@ -271,6 +331,13 @@ def _analyze_functions(sourcefiles):
 
 
 def _documentation(classes, functions):
+    """function _documentation
+    Args:
+        classes:   
+        functions:   
+    Returns:
+        
+    """
     lines = []
 
     # documents class methods
@@ -339,6 +406,12 @@ def _documentation(classes, functions):
 
 
 def analyze(sourcefiles):
+    """function analyze
+    Args:
+        sourcefiles:   
+    Returns:
+        
+    """
     functions = _analyze_functions(sourcefiles)
     classes = _analyze_classes(sourcefiles)
 

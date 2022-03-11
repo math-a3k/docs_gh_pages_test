@@ -274,6 +274,13 @@ class BregmanDivergence(LossFunctionWrapper):
 
     """
     def __init__(self, reduction=ReductionV2.SUM_OVER_BATCH_SIZE, name=None):
+        """ BregmanDivergence:__init__
+        Args:
+            reduction:     
+            name:     
+        Returns:
+           
+        """
 
         def bregman_function(x, y):
             """
@@ -316,6 +323,12 @@ class GaussianDivergence(BregmanDivergence):
 
     """
     def __init__(self, name='gaussian_divergence'):
+        """ GaussianDivergence:__init__
+        Args:
+            name:     
+        Returns:
+           
+        """
         super(GaussianDivergence, self).__init__(name=name)
 
     def _phi(self, z):
@@ -339,6 +352,12 @@ class GammaDivergence(BregmanDivergence):
 
     """
     def __init__(self, name='gamma_divergence'):
+        """ GammaDivergence:__init__
+        Args:
+            name:     
+        Returns:
+           
+        """
         super(GammaDivergence, self).__init__(name=name)
 
     def _phi(self, z):
@@ -364,6 +383,12 @@ class BernoulliDivergence(BregmanDivergence):
 
     """
     def __init__(self, name='bernoulli_divergence'):
+        """ BernoulliDivergence:__init__
+        Args:
+            name:     
+        Returns:
+           
+        """
         super(BernoulliDivergence, self).__init__(name=name)
 
     def _phi(self, z):
@@ -389,6 +414,12 @@ class PoissonDivergence(BregmanDivergence):
 
     """
     def __init__(self, name='poisson_divergence'):
+        """ PoissonDivergence:__init__
+        Args:
+            name:     
+        Returns:
+           
+        """
         super(PoissonDivergence, self).__init__(name=name)
 
     def _phi(self, z):
@@ -422,6 +453,13 @@ class BinomialDivergence(BregmanDivergence):
 
     """
     def __init__(self, n, name='binomial_divergence'):
+        """ BinomialDivergence:__init__
+        Args:
+            n:     
+            name:     
+        Returns:
+           
+        """
         self.n = n
         super(BinomialDivergence, self).__init__(name=name)
 
@@ -454,6 +492,13 @@ class NegativeBinomialDivergence(BregmanDivergence):
 
     """
     def __init__(self, r, name='negative_binomial_divergence'):
+        """ NegativeBinomialDivergence:__init__
+        Args:
+            r:     
+            name:     
+        Returns:
+           
+        """
         self.r = r
         super(NegativeBinomialDivergence, self).__init__(name=name)
 

@@ -13,6 +13,11 @@ class GlassDoor(scrapy.Spider):
     csv_file = "ruru_fix.csv"
 
     def start_requests(self):
+        """ GlassDoor:start_requests
+        Args:
+        Returns:
+           
+        """
         a = csv.DictReader(open(self.csv_file, 'r', encoding='utf-8'))
         for row in a:
             url = "https://inside.com" + row['Title']
@@ -22,6 +27,12 @@ class GlassDoor(scrapy.Spider):
             yield request
 
     def parse(self, response):
+        """ GlassDoor:parse
+        Args:
+            response:     
+        Returns:
+           
+        """
         item = {}
         date_ = response.meta["date"]
         infor = response.xpath('//div[@id="campaign-archive"]/div/section/div/div[2]/div[1]').extract()

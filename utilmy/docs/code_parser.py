@@ -470,6 +470,14 @@ def get_list_variable_global(file_path):
 
 
 def _get_docs(all_lines, index_1, func_lines):
+    """function _get_docs
+    Args:
+        all_lines:   
+        index_1:   
+        func_lines:   
+    Returns:
+        
+    """
     response=[]
     detect_block = False
     start = ''
@@ -864,6 +872,12 @@ def get_list_import_class_as(file_path: str):
 # internal Functions
 # ====================================================================================
 def _get_words(row):
+    """function _get_words
+    Args:
+        row:   
+    Returns:
+        
+    """
     data = [row['code_source'].strip().split(" ")]
     # print(data[0])
     for ele in data[0].copy():
@@ -874,6 +888,12 @@ def _get_words(row):
 
 
 def _get_functions(row):
+    """function _get_functions
+    Args:
+        row:   
+    Returns:
+        
+    """
     list_funcs = []
     list_words = [row['list_words']][0]
     type = [row['type']][0]
@@ -894,6 +914,12 @@ def _get_functions(row):
 
 
 def _get_avg_char_per_word(row):
+    """function _get_avg_char_per_word
+    Args:
+        row:   
+    Returns:
+        
+    """
     return (round(row['n_characters']/row['n_words'], 2)) if (row['n_words'] > 0) else 0
 
 
@@ -986,10 +1012,22 @@ def _clean_data(array):
 
 
 def _remove_empty_line(line):
+    """function _remove_empty_line
+    Args:
+        line:   
+    Returns:
+        
+    """
     return True if line.strip() == "" else False
 
 
 def _remmove_commemt_line(line):
+    """function _remmove_commemt_line
+    Args:
+        line:   
+    Returns:
+        
+    """
     if line.strip()[0] == '#' and ('"""' not in line.strip() or "'''" not in line.strip()):
         return True
     return False
@@ -1006,6 +1044,12 @@ def _get_and_clean_all_lines(file_path):
 
 
 def _get_all_line(file_path):
+    """function _get_all_line
+    Args:
+        file_path:   
+    Returns:
+        
+    """
     with open(file_path, 'r', encoding='utf-8') as f:
         all_lines = (f.readlines())
     return all_lines
@@ -1305,6 +1349,19 @@ def _get_function_stats(array, indent):
 
 
 def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_functions, list_class_as, out_path):
+    """function write_to_file
+    Args:
+        uri:   
+        type:   
+        list_functions:   
+        list_classes:   
+        list_imported:   
+        dict_functions:   
+        list_class_as:   
+        out_path:   
+    Returns:
+        
+    """
     # list_functions = literal_eval(list_functions)
     # print(list_functions)
     info = ''
@@ -1384,6 +1441,11 @@ def write_to_file(uri, type, list_functions, list_classes, list_imported, dict_f
 
 ###############################################################################################################
 def test_example():
+    """function test_example
+    Args:
+    Returns:
+        
+    """
     # export_stats_pertype('parser/test3/arrow_dataset.py', "function", "parser/output/output_function.csv")
     # export_stats_pertype('parser/test3/arrow_dataset.py', "class", "parser/output/output_function.csv")
     export_stats_pertype('parser/code_parser.py', "function", "parser/output/output_function.csv")

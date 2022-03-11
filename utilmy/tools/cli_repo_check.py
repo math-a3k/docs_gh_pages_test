@@ -80,6 +80,12 @@ def os_system(cmds, stdout_only=True):
 
 
 def scan_dir(folder):
+    """function scan_dir
+    Args:
+        folder:   
+    Returns:
+        
+    """
     # note: I have checked os_file_listall, I think the following will be better
     files = glob.glob(folder + "**/*.py")
     # remove .ipynb_checkpoints
@@ -176,6 +182,11 @@ def load_arguments():
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     args = load_arguments()
     # this will be used for the repo name if no name was specified
     reponame = args.repo_url.split("/")[-1].split(".")[0]

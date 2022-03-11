@@ -66,6 +66,14 @@ def _parse(data):
 
 
 def _build_interaction_matrix(rows, cols, data):
+    """function _build_interaction_matrix
+    Args:
+        rows:   
+        cols:   
+        data:   
+    Returns:
+        
+    """
 
     mat = sp.lil_matrix((rows, cols), dtype=np.int32)
 
@@ -134,6 +142,16 @@ def get_movielens_item_metadata(use_item_ids):
 
 
 def get_dense_triplets(uids, pids, nids, num_users, num_items):
+    """function get_dense_triplets
+    Args:
+        uids:   
+        pids:   
+        nids:   
+        num_users:   
+        num_items:   
+    Returns:
+        
+    """
 
     user_identity = np.identity(num_users)
     item_identity = np.identity(num_items)
@@ -142,6 +160,12 @@ def get_dense_triplets(uids, pids, nids, num_users, num_items):
 
 
 def get_triplets(mat):
+    """function get_triplets
+    Args:
+        mat:   
+    Returns:
+        
+    """
 
     return mat.row, mat.col, np.random.randint(mat.shape[1], size=len(mat.row))
 

@@ -22,6 +22,12 @@ class PC:
     """
 
     def __init__(self, ncat=None):
+        """ PC:__init__
+        Args:
+            ncat:     
+        Returns:
+           
+        """
         self.ncat = ncat
         self.root = None
         self.maxv = None
@@ -30,6 +36,17 @@ class PC:
 
 
     def learnspn(self, data, ncat=None, thr=0.001, nclusters=2, max_height=1000000, classcol=None):
+        """ PC:learnspn
+        Args:
+            data:     
+            ncat:     
+            thr:     
+            nclusters:     
+            max_height:     
+            classcol:     
+        Returns:
+           
+        """
         if ncat is not None:
             self.ncat = ncat
         assert self.ncat is not None, "You must provide `ncat`, the number of categories of each class."

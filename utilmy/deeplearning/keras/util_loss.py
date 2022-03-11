@@ -17,10 +17,20 @@ cc.loss= {}
 
 ################TEST###############################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     pass
 
 
 def test_loss1():
+    """function test_loss1
+    Args:
+    Returns:
+        
+    """
     if cc.schedule_type == 'step':
        print("Using 'step-based' learning rate decay")
        schedule = StepDecay(init_lr=cc.learning_rate, factor=0.70, drop_every= 3 )
@@ -152,6 +162,14 @@ def loss_vae(x, output):
 class LearningRateDecay:
     """ Plotting Learning Rate"""
     def plot(self, epochs, title="Learning Rate Schedule", path=None):
+        """ LearningRateDecay:plot
+        Args:
+            epochs:     
+            title:     
+            path:     
+        Returns:
+           
+        """
         # compute the set of learning rates for each corresponding
         # epoch
         pass
@@ -221,12 +239,26 @@ def loss_schedule(mode="step", epoch=1):
 class StepDecay(LearningRateDecay):
     """ Step-based Learning Rate Scheduler"""
     def __init__(self, init_lr=0.01, factor=0.25, drop_every=5):
+        """ StepDecay:__init__
+        Args:
+            init_lr:     
+            factor:     
+            drop_every:     
+        Returns:
+           
+        """
         # store the base initial learning rate, drop factor, and epochs to drop every
         self.init_lr    = init_lr
         self.factor     = factor
         self.drop_every = drop_every
 
     def __call__(self, epoch):
+        """ StepDecay:__call__
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         # compute the learning rate for the current epoch
         if   epoch % 30  < 7 :  return 1e-3 * np.exp(-epoch * 0.005)  ### 0.74 every 10 epoch
         elif epoch % 30  < 17:  return 7e-4 * np.exp(-epoch * 0.005)

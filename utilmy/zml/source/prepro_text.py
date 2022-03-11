@@ -25,17 +25,40 @@ DEBUG_=True
 ####################################################################################################
 ####################################################################################################
 def log(*s, n=0, m=1):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     ### Implement pseudo Logging
     print(sjump, sspace, s, sspace, flush=True)
 
 def logs(*s):
+    """function logs
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if DEBUG_:
         print(*s, flush=True)
 
 
 def log_pd(df, *s, n=0, m=1):
+    """function log_pd
+    Args:
+        df:   
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sjump = "\n" * m
     ### Implement pseudo Logging
     print(sjump,  df.head(n), flush=True)
@@ -46,6 +69,15 @@ from util_feature import  save, load_function_uri, load, save_features
 ####################################################################################################
 
 def pd_coltext_clean( df, col, stopwords= None , pars=None):
+    """function pd_coltext_clean
+    Args:
+        df:   
+        col:   
+        stopwords:   
+        pars:   
+    Returns:
+        
+    """
     import string, re
     ntoken= pars.get('n_token', 1)
     df      = df.fillna("")
@@ -97,6 +129,11 @@ def pd_coltext_wordfreq(df, col, stopwords, ntoken=100):
 
 
 def nlp_get_stopwords():
+    """function nlp_get_stopwords
+    Args:
+    Returns:
+        
+    """
     import json
     import string
     stopwords = json.load(open("source/utils/stopwords_en.json") )["word"]

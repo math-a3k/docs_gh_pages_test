@@ -81,6 +81,14 @@ def sql_query(sqlr='SELECT ticker,shortratio,sector1_id, FROM stockfundamental',
  elif output.find('.csv') > -1 :  df.to_csv(output)
 
 def sql_get_dbschema(dburl='sqlite:///aapackage/store/yahoo.db', dbengine=None, isprint=0):
+    """function sql_get_dbschema
+    Args:
+        dburl='sqlite:   
+        dbengine:   
+        isprint:   
+    Returns:
+        
+    """
     if dbengine is None :
         dbengine = sql.create_engine(dburl)
     inspector = sql.inspect(dbengine)
@@ -94,6 +102,13 @@ def sql_get_dbschema(dburl='sqlite:///aapackage/store/yahoo.db', dbengine=None, 
     return np.array(l1)
 
 def sql_delete_table(name, dbengine):
+ """function sql_delete_table
+ Args:
+     name:   
+     dbengine:   
+ Returns:
+     
+ """
  pd.io.sql.execute('DROP TABLE IF EXISTS '+name, dbengine)
  pd.io.sql.execute('VACUUM', dbengine)
 
@@ -224,6 +239,16 @@ os.unlink("birth.xls")
  dbengine.close()
 
 def sql_insert_df(df, dbtable, dbengine, col_drop=['id'], verbose=1) :
+ """function sql_insert_df
+ Args:
+     df:   
+     dbtable:   
+     dbengine:   
+     col_drop:   
+     verbose:   
+ Returns:
+     
+ """
  for c in df.columns:    #Remove columns
    if c in col_drop:  df = df.drop(c, axis=1)
 
@@ -254,6 +279,15 @@ def sql_insert_df(df, dbtable, dbengine, col_drop=['id'], verbose=1) :
  return res
 
 def sql_insert_csv(csvfile, dbtable, dbengine, col_drop=[]) :
+ """function sql_insert_csv
+ Args:
+     csvfile:   
+     dbtable:   
+     dbengine:   
+     col_drop:   
+ Returns:
+     
+ """
  start = datetime.now()
  chunksize = 20000
  j = 0
@@ -471,6 +505,11 @@ FROM crosstab( 'select student, subject, evaluation_result from evaluations
 
 
 def sql_mysql_insert_excel():
+ """function sql_mysql_insert_excel
+ Args:
+ Returns:
+     
+ """
  import MySQLdb, xlrd
 
  list= xlrd.open_workbook("prod.xls")

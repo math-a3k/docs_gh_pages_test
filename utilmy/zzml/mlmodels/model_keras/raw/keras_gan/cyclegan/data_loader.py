@@ -4,10 +4,26 @@ import numpy as np
 
 class DataLoader():
     def __init__(self, dataset_name, img_res=(128, 128)):
+        """ DataLoader:__init__
+        Args:
+            dataset_name:     
+            img_res:     
+            128:     
+        Returns:
+           
+        """
         self.dataset_name = dataset_name
         self.img_res = img_res
 
     def load_data(self, domain, batch_size=1, is_testing=False):
+        """ DataLoader:load_data
+        Args:
+            domain:     
+            batch_size:     
+            is_testing:     
+        Returns:
+           
+        """
         data_type = "train%s" % domain if not is_testing else "test%s" % domain
         path = glob('./datasets/%s/%s/*' % (self.dataset_name, data_type))
 
@@ -30,6 +46,13 @@ class DataLoader():
         return imgs
 
     def load_batch(self, batch_size=1, is_testing=False):
+        """ DataLoader:load_batch
+        Args:
+            batch_size:     
+            is_testing:     
+        Returns:
+           
+        """
         data_type = "train" if not is_testing else "val"
         path_A = glob('./datasets/%s/%sA/*' % (self.dataset_name, data_type))
         path_B = glob('./datasets/%s/%sB/*' % (self.dataset_name, data_type))
@@ -66,10 +89,22 @@ class DataLoader():
             yield imgs_A, imgs_B
 
     def load_img(self, path):
+        """ DataLoader:load_img
+        Args:
+            path:     
+        Returns:
+           
+        """
         img = self.imread(path)
         img = scipy.misc.imresize(img, self.img_res)
         img = img/127.5 - 1.
         return img[np.newaxis, :, :, :]
 
     def imread(self, path):
+        """ DataLoader:imread
+        Args:
+            path:     
+        Returns:
+           
+        """
         return scipy.misc.imread(path, mode='RGB').astype(np.float)

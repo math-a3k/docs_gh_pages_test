@@ -25,6 +25,13 @@ from mlmodels.util import path_norm, os_package_root_path, log
 #### Model defintion
 class Model(object):
     def __init__(self, model_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         ## Empty model for Seaialization
         if model_pars is None and compute_pars is None:
             self.model = None
@@ -36,6 +43,14 @@ class Model(object):
 
 ########################################################################################################################
 def path_setup(out_folder="", sublevel=0, data_path="dataset/"):
+    """function path_setup
+    Args:
+        out_folder:   
+        sublevel:   
+        data_path:   
+    Returns:
+        
+    """
     data_path = os_package_root_path(path_add=data_path)
     out_path = os.getcwd() + "/" + out_folder
     os.makedirs(out_path, exist_ok=True)
@@ -47,6 +62,12 @@ def path_setup(out_folder="", sublevel=0, data_path="dataset/"):
 
 
 def _config_process(config):
+    """function _config_process
+    Args:
+        config:   
+    Returns:
+        
+    """
     data_pars = config["data_pars"]
 
     log("#### Model params   ################################################")
@@ -75,6 +96,15 @@ def _config_process(config):
 
 
 def get_params(choice="", data_path="dataset/", config_mode="test", **kw):
+    """function get_params
+    Args:
+        choice:   
+        data_path:   
+        config_mode:   
+        **kw:   
+    Returns:
+        
+    """
     if choice == "json":
         data_path = Path(os.path.realpath(
             __file__)).parent.parent / "model_gluon/gluon_automl.json" if data_path == "dataset/" else data_path
@@ -111,6 +141,13 @@ def get_params(choice="", data_path="dataset/", config_mode="test", **kw):
 
 ########################################################################################################################
 def test(data_path="dataset/", pars_choice="json"):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

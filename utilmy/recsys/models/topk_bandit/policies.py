@@ -37,20 +37,98 @@ class Policy:
 
     # Returns a list of size n_recos of playlist ids
     def recommend_to_users_batch(self, batch_users, n_recos=12):
+        """ Policy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+        Returns:
+           
+        """
         return
 
     # Updates policies parameters
     def update_policy(self, user_ids, recos , rewards):
+        """ Policy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+        Returns:
+           
+        """
         return
 
 
 # A simple baseline that randomly recommends n_recos playlists to each user.
 class RandomPolicy(Policy):
     def __init__(self, n_playlists, cascade_model=True):
+        """ RandomPolicy:__init__
+        Args:
+            n_playlists:     
+            cascade_model:     
+        Returns:
+           
+        """
         self.cascade_model = cascade_model
         self.n_playlists = n_playlists
 
     def recommend_to_users_batch(self, batch_users, n_recos=12, l_init=3):
+        """ TSSegmentPolicy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+            l_init:     
+        Returns:
+           
+        """
+        """ TSPolicy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+            l_init:     
+        Returns:
+           
+        """
+        """ RandomPolicy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+            l_init:     
+        Returns:
+           
+        """
+        """ LinearTSPolicy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+            l_init:     
+        Returns:
+           
+        """
+        """ KLUCBSegmentPolicy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+            l_init:     
+        Returns:
+           
+        """
+        """ ExploreThenCommitSegmentPolicy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+            l_init:     
+        Returns:
+           
+        """
+        """ EpsilonGreedySegmentPolicy:recommend_to_users_batch
+        Args:
+            batch_users:     
+            n_recos:     
+            l_init:     
+        Returns:
+           
+        """
         n_users = len(batch_users)
         recos = np.zeros((n_users, n_recos), dtype=np.int64)
         r = np.arange(self.n_playlists)
@@ -60,12 +138,49 @@ class RandomPolicy(Policy):
         return recos
 
     def update_policy(self, user_ids, recos, rewards, l_init=3):
+        """ RandomPolicy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+            l_init:     
+        Returns:
+           
+        """
+        """ KLUCBSegmentPolicy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+            l_init:     
+        Returns:
+           
+        """
+        """ EpsilonGreedySegmentPolicy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+            l_init:     
+        Returns:
+           
+        """
         return
 
 
 #  Upper Confidence Bound (UCB) strategy, using KL-UCB bounds [Garivier and Cappe, 2011] tailored for Bernoulli rewards
 class KLUCBSegmentPolicy(Policy):
     def __init__(self, user_segment, n_playlists, precision = 1e-6, eps = 1e-15, cascade_model=True):
+        """ KLUCBSegmentPolicy:__init__
+        Args:
+            user_segment:     
+            n_playlists:     
+            precision :     
+            eps :     
+            cascade_model:     
+        Returns:
+           
+        """
         self.user_segment = user_segment
         n_segments = len(np.unique(self.user_segment))
         self.playlist_display = np.zeros((n_segments, n_playlists))
@@ -87,11 +202,26 @@ class KLUCBSegmentPolicy(Policy):
         return user_choice
 
     def kl(self, x, y):
+        """ KLUCBSegmentPolicy:kl
+        Args:
+            x:     
+            y:     
+        Returns:
+           
+        """
         x = min(max(x, self.eps), 1 - self.eps)
         y = min(max(y, self.eps), 1 - self.eps)
         return x * log(x / y) + (1 - x) * log((1 - x) / (1 - y))
 
     def scoring_function(self, n_success, n, t):
+        """ KLUCBSegmentPolicy:scoring_function
+        Args:
+            n_success:     
+            n:     
+            t:     
+        Returns:
+           
+        """
         if n == 0:
             return 1.0
         p = n_success / n
@@ -133,6 +263,15 @@ class KLUCBSegmentPolicy(Policy):
 # then recommends the top n_reco playlists with highest mean observed rewards, for each segment
 class ExploreThenCommitSegmentPolicy(Policy):
     def __init__(self, user_segment, n_playlists, min_n, cascade_model=True):
+        """ ExploreThenCommitSegmentPolicy:__init__
+        Args:
+            user_segment:     
+            n_playlists:     
+            min_n:     
+            cascade_model:     
+        Returns:
+           
+        """
         self.user_segment = user_segment
         n_segments = len(np.unique(self.user_segment))
         self.playlist_display = np.zeros((n_segments, n_playlists))
@@ -153,6 +292,24 @@ class ExploreThenCommitSegmentPolicy(Policy):
         return user_choice
 
     def update_policy(self, user_ids, recos , rewards, l_init=3):
+        """ LinearTSPolicy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+            l_init:     
+        Returns:
+           
+        """
+        """ ExploreThenCommitSegmentPolicy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+            l_init:     
+        Returns:
+           
+        """
         batch_size = len(user_ids)
         for i in range(batch_size):
             user_segment = self.user_segment[user_ids[i]]
@@ -171,6 +328,15 @@ class ExploreThenCommitSegmentPolicy(Policy):
 # otherwise recommends the top n_recos with highest mean observed rewards.
 class EpsilonGreedySegmentPolicy(Policy):
     def __init__(self, user_segment, n_playlists, epsilon, cascade_model=True):
+        """ EpsilonGreedySegmentPolicy:__init__
+        Args:
+            user_segment:     
+            n_playlists:     
+            epsilon:     
+            cascade_model:     
+        Returns:
+           
+        """
         self.user_segment = user_segment
         n_segments = len(np.unique(self.user_segment))
         self.playlist_display = np.zeros((n_segments, n_playlists))
@@ -209,6 +375,15 @@ class EpsilonGreedySegmentPolicy(Policy):
 # Global (Multi-Arm, Context-Ignorant) Thompson Sampling strategy, with Beta(alpha_zero,beta_zero) priors
 class TSPolicy(Policy):
     def __init__(self, n_playlists, alpha_zero=1, beta_zero=99, cascade_model=True):
+        """ TSPolicy:__init__
+        Args:
+            n_playlists:     
+            alpha_zero:     
+            beta_zero:     
+            cascade_model:     
+        Returns:
+           
+        """
         self.playlist_display = np.zeros(n_playlists)
         self.playlist_success = np.zeros(n_playlists)
         self.alpha_zero = alpha_zero
@@ -223,6 +398,24 @@ class TSPolicy(Policy):
         return user_choice
 
     def update_policy(self, user_ids, recos , rewards, l_init = 3):
+        """ TSSegmentPolicy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+            l_init :     
+        Returns:
+           
+        """
+        """ TSPolicy:update_policy
+        Args:
+            user_ids:     
+            recos:     
+            rewards:     
+            l_init :     
+        Returns:
+           
+        """
         batch_size = len(user_ids)
         for i in range(batch_size):
             total_stream = len(rewards[i].nonzero())
@@ -238,6 +431,16 @@ class TSPolicy(Policy):
 # Segment-based Thompson Sampling strategy, with Beta(alpha_zero,beta_zero) priors
 class TSSegmentPolicy(Policy):
     def __init__(self, user_segment, n_playlists, alpha_zero=1, beta_zero=99, cascade_model=True):
+        """ TSSegmentPolicy:__init__
+        Args:
+            user_segment:     
+            n_playlists:     
+            alpha_zero:     
+            beta_zero:     
+            cascade_model:     
+        Returns:
+           
+        """
         self.user_segment = user_segment
         n_segments = len(np.unique(self.user_segment))
         self.playlist_display = np.zeros((n_segments, n_playlists))
@@ -309,6 +512,18 @@ def compute_user_K_prime(R, gamma = 0.9, max_K = 12, epsilon = 0.02):
 # Linear Thompson Sampling strategy for fully personalized contextual bandits, as in [Chapelle and Li, 2011]
 class LinearTSPolicy(Policy):
     def __init__(self, user_features, n_playlists, bias=0.0, cascade_model=True, l2_reg=1, shuffle_K=0, epsilon=.0):
+        """ LinearTSPolicy:__init__
+        Args:
+            user_features:     
+            n_playlists:     
+            bias:     
+            cascade_model:     
+            l2_reg:     
+            shuffle_K:     
+            epsilon:     
+        Returns:
+           
+        """
         self.user_features = user_features
         n_dim = user_features.shape[1]
         self.n_playlists = n_playlists

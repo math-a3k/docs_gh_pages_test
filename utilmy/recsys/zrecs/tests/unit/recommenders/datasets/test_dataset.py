@@ -11,12 +11,23 @@ from recommenders.datasets.download_utils import maybe_download, download_path
 
 @pytest.fixture
 def files_fixtures():
+    """function files_fixtures
+    Args:
+    Returns:
+        
+    """
     file_url = "https://raw.githubusercontent.com/Microsoft/Recommenders/main/LICENSE"
     filepath = "license.txt"
     return file_url, filepath
 
 
 def test_maybe_download(files_fixtures):
+    """function test_maybe_download
+    Args:
+        files_fixtures:   
+    Returns:
+        
+    """
     file_url, filepath = files_fixtures
     if os.path.exists(filepath):
         os.remove(filepath)
@@ -27,6 +38,13 @@ def test_maybe_download(files_fixtures):
 
 
 def test_maybe_download_wrong_bytes(caplog, files_fixtures):
+    """function test_maybe_download_wrong_bytes
+    Args:
+        caplog:   
+        files_fixtures:   
+    Returns:
+        
+    """
     caplog.clear()
     caplog.set_level(logging.INFO)
 
@@ -40,6 +58,13 @@ def test_maybe_download_wrong_bytes(caplog, files_fixtures):
 
 
 def test_maybe_download_maybe(caplog, files_fixtures):
+    """function test_maybe_download_maybe
+    Args:
+        caplog:   
+        files_fixtures:   
+    Returns:
+        
+    """
     caplog.clear()
     caplog.set_level(logging.INFO)
 
@@ -54,6 +79,12 @@ def test_maybe_download_maybe(caplog, files_fixtures):
 
 
 def test_maybe_download_retry(caplog):
+    """function test_maybe_download_retry
+    Args:
+        caplog:   
+    Returns:
+        
+    """
     caplog.clear()
     caplog.set_level(logging.INFO)
     with pytest.raises(requests.exceptions.HTTPError):
@@ -64,6 +95,11 @@ def test_maybe_download_retry(caplog):
 
 
 def test_download_path():
+    """function test_download_path
+    Args:
+    Returns:
+        
+    """
     # Check that the temporal path is created and deleted
     with download_path() as path:
         assert os.path.isdir(path)

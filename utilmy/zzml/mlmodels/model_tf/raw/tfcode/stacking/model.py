@@ -4,6 +4,17 @@ import tensorflow as tf
 
 class Model:
     def __init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias=0.1):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+            num_layers:     
+            size:     
+            size_layer:     
+            output_size:     
+            forget_bias:     
+        Returns:
+           
+        """
         def lstm_cell(size_layer):
             return tf.nn.rnn_cell.LSTMCell(size_layer, state_is_tuple=False)
 

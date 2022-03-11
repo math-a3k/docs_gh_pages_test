@@ -7,6 +7,12 @@ from keras_dataloader.dataset import Dataset
 
 
 def default_collate_fn(samples):
+    """function default_collate_fn
+    Args:
+        samples:   
+    Returns:
+        
+    """
     X = np.array([sample[0] for sample in samples])
     Y = np.array([sample[1] for sample in samples])
 
@@ -45,6 +51,12 @@ class DataGenerator(keras.utils.Sequence):
         self.on_epoch_end()
 
     def __getitem__(self, index):
+        """ DataGenerator:__getitem__
+        Args:
+            index:     
+        Returns:
+           
+        """
         indices = self.indices[index * self.batch_size: (index + 1) * self.batch_size]
 
         samples = []
@@ -60,6 +72,11 @@ class DataGenerator(keras.utils.Sequence):
         return X, Y
 
     def on_epoch_end(self):
+        """ DataGenerator:on_epoch_end
+        Args:
+        Returns:
+           
+        """
         n = len(self.dataset)
         seq = np.arange(0, n)
         if self.shuffle:
@@ -73,4 +90,9 @@ class DataGenerator(keras.utils.Sequence):
             self.indices = seq
 
     def __len__(self):
+        """ DataGenerator:__len__
+        Args:
+        Returns:
+           
+        """
         return int(np.floor(len(self.dataset) / self.batch_size))

@@ -28,6 +28,11 @@ client = Client()
 
 
 def get_mnist():
+    """function get_mnist
+    Args:
+    Returns:
+        
+    """
     from tensorflow.examples.tutorials.mnist import input_data
 
     mnist = input_data.read_data_sets("mnist-data", one_hot=True)
@@ -99,6 +104,12 @@ replicas_to_aggregate = len(dask_spec["worker"])
 
 
 def model(server):
+    """function model
+    Args:
+        server:   
+    Returns:
+        
+    """
     worker_device = "/job:%s/task:%d" % (server.server_def.job_name, server.server_def.task_index)
     task_index = server.server_def.task_index
     is_chief = task_index == 0
@@ -213,6 +224,11 @@ def model(server):
 
 
 def ps_task():
+    """function ps_task
+    Args:
+    Returns:
+        
+    """
     with local_client() as c:
         c.worker.tensorflow_server.join()
 
@@ -221,6 +237,11 @@ def ps_task():
 
 
 def scoring_task():
+    """function scoring_task
+    Args:
+    Returns:
+        
+    """
     with local_client() as c:
         # Scores Channel
         scores = c.channel("scores", maxlen=10)
@@ -247,6 +268,11 @@ def scoring_task():
 
 
 def worker_task():
+    """function worker_task
+    Args:
+    Returns:
+        
+    """
     with local_client() as c:
         scores = c.channel("scores")
         num_workers = replicas_to_aggregate = len(dask_spec["worker"])
@@ -291,6 +317,12 @@ dask_spec
 
 
 def transfer_dask_to_tensorflow(batch):
+    """function transfer_dask_to_tensorflow
+    Args:
+        batch:   
+    Returns:
+        
+    """
     worker = get_worker()
     worker.tensorflow_queue.put(batch)
 

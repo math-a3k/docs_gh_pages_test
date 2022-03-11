@@ -50,6 +50,13 @@ def data_preprocess(Data,Mask,dic_var_type):
     return Data_decompressed, Mask_decompressed, cat_dims, flt_len
 
 def cat_to_one_hot(a, dim_cat):
+    """function cat_to_one_hot
+    Args:
+        a:   
+        dim_cat:   
+    Returns:
+        
+    """
     
     b = np.zeros((a.shape[0], dim_cat))
     layer_idx = np.arange(a.shape[0]).reshape(a.shape[0])
@@ -123,6 +130,14 @@ def invert_noise(Data_noisy,list_discrete,records_d):
 
 
 def invert_noise_tf(Data_noisy,list_discrete,records_d):
+    """function invert_noise_tf
+    Args:
+        Data_noisy:   
+        list_discrete:   
+        records_d:   
+    Returns:
+        
+    """
     noise_ratio = 1
     Data_invert = Data_noisy*1
     print(Data_invert)
@@ -180,6 +195,13 @@ def compress_data(decoded,cat_dims, dic_var_type,):
     return decoded
 
 def encode_catrtogrial_column(data, columns):
+    """function encode_catrtogrial_column
+    Args:
+        data:   
+        columns:   
+    Returns:
+        
+    """
     le = LabelEncoder()
     for column in columns:
         data[column] = le.fit_transform(data[column])

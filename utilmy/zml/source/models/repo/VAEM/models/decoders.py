@@ -5,6 +5,16 @@ import utils.process as process
 class vaem_decoders(object):
     
     def __init__(self,obs_dim,cat_dims, list_discrete,records_d,):
+        """ vaem_decoders:__init__
+        Args:
+            obs_dim:     
+            cat_dims:     
+            list_discrete:     
+            records_d:     
+            :     
+        Returns:
+           
+        """
 
         self._obs_dim = obs_dim
         self._cat_dims = cat_dims
@@ -12,6 +22,15 @@ class vaem_decoders(object):
         self._records_d = records_d
 
     def _vaem_decoder(self, z,X, mask, activation=None):
+        """ vaem_decoders:_vaem_decoder
+        Args:
+            z:     
+            X:     
+            mask:     
+            activation:     
+        Returns:
+           
+        """
         z_local = z[:,0:(self._obs_dim-1)]
         cumsum_cat_dims = np.concatenate( ([0],np.cumsum(self._cat_dims)))
         DIM_CAT = (self._cat_dims.sum()).astype(int)

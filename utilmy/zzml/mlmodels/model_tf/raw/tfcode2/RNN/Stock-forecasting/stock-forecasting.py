@@ -24,6 +24,17 @@ sns.set()
 
 class Model:
     def __init__(self, learning_rate, num_layers, size, size_layer, output_size, forget_bias=0.1):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+            num_layers:     
+            size:     
+            size_layer:     
+            output_size:     
+            forget_bias:     
+        Returns:
+           
+        """
         def lstm_cell(size_layer):
             return tf.nn.rnn_cell.LSTMCell(size_layer, state_is_tuple=False)
 
@@ -102,6 +113,12 @@ ax.set_xlabel("epoch: %d, MSE:%f" % (0, np.inf))
 
 
 def train(epoch):
+    """function train
+    Args:
+        epoch:   
+    Returns:
+        
+    """
     df_log = minmax.transform(df.iloc[:, 4:5].astype("float32"))
     df_log = pd.DataFrame(df_log)
     init_value = np.zeros((1, num_layers * 2 * size_layer))

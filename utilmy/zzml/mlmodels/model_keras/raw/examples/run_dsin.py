@@ -7,6 +7,12 @@ from deepctr.models import DSIN
 
 
 def get_xy_fd(hash_flag=False):
+    """function get_xy_fd
+    Args:
+        hash_flag:   
+    Returns:
+        
+    """
     feature_columns = [SparseFeat('user', 3, embedding_dim=10, use_hash=hash_flag),
                        SparseFeat('gender', 2, embedding_dim=4, use_hash=hash_flag),
                        SparseFeat('item', 3 + 1, embedding_dim=4, use_hash=hash_flag),

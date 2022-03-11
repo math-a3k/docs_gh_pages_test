@@ -11,6 +11,13 @@ import gzip
 class DataLoader():
     """Loads images from MNIST (domain A) and MNIST-M (domain B)"""
     def __init__(self, img_res=(128, 128)):
+        """ DataLoader:__init__
+        Args:
+            img_res:     
+            128:     
+        Returns:
+           
+        """
         self.img_res = img_res
 
         self.mnistm_url = 'https://github.com/VanushVaswani/keras_mnistm/releases/download/1.0/keras_mnistm.pkl.gz'
@@ -19,9 +26,21 @@ class DataLoader():
         self.setup_mnistm(img_res)
 
     def normalize(self, images):
+        """ DataLoader:normalize
+        Args:
+            images:     
+        Returns:
+           
+        """
         return images.astype(np.float32) / 127.5 - 1.
 
     def setup_mnist(self, img_res):
+        """ DataLoader:setup_mnist
+        Args:
+            img_res:     
+        Returns:
+           
+        """
 
         print ("Setting up MNIST...")
 
@@ -47,6 +66,12 @@ class DataLoader():
         print ("+ Done.")
 
     def setup_mnistm(self, img_res):
+        """ DataLoader:setup_mnistm
+        Args:
+            img_res:     
+        Returns:
+           
+        """
 
         print ("Setting up MNIST-M...")
 
@@ -86,6 +111,13 @@ class DataLoader():
 
 
     def load_data(self, domain, batch_size=1):
+        """ DataLoader:load_data
+        Args:
+            domain:     
+            batch_size:     
+        Returns:
+           
+        """
 
         X = self.mnist_X if domain == 'A' else self.mnistm_X
         y = self.mnist_y if domain == 'A' else self.mnistm_y

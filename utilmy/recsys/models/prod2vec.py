@@ -8,6 +8,24 @@ class CoveoP2VRecModel(RecModel):
     Implement of the prod2vec model through the standard RecModel interface.
     """
     def __init__(self, **kwargs):
+        """ SpotifyP2VRecModel:__init__
+        Args:
+            **kwargs:     
+        Returns:
+           
+        """
+        """ MovieLensP2VRecModel:__init__
+        Args:
+            **kwargs:     
+        Returns:
+           
+        """
+        """ CoveoP2VRecModel:__init__
+        Args:
+            **kwargs:     
+        Returns:
+           
+        """
         super().__init__(**kwargs)
 
     model_name = "prod2vec"
@@ -43,6 +61,12 @@ class CoveoP2VRecModel(RecModel):
         return predictions
 
     def get_vector(self, product_sku):
+        """ CoveoP2VRecModel:get_vector
+        Args:
+            product_sku:     
+        Returns:
+           
+        """
         try:
             return list(self._model.get_vector(product_sku))
         except Exception as e:
@@ -61,6 +85,13 @@ class SpotifyP2VRecModel(RecModel):
     model_name = "prod2vec"
 
     def train(self, playlists, iterations=15):
+        """ SpotifyP2VRecModel:train
+        Args:
+            playlists:     
+            iterations:     
+        Returns:
+           
+        """
         x_train_uris = [[track['track_uri'] for track in playlist] for playlist in playlists]
         self._model = train_embeddings(x_train_uris, iterations=iterations)
 
@@ -85,6 +116,12 @@ class SpotifyP2VRecModel(RecModel):
         return predictions
 
     def get_vector(self, track_uri):
+        """ SpotifyP2VRecModel:get_vector
+        Args:
+            track_uri:     
+        Returns:
+           
+        """
         try:
             return list(self._model.get_vector(track_uri))
         except Exception as e:
@@ -100,6 +137,13 @@ class MovieLensP2VRecModel(RecModel):
         super().__init__(**kwargs)
 
     def train(self, movies, iterations=15):
+        """ MovieLensP2VRecModel:train
+        Args:
+            movies:     
+            iterations:     
+        Returns:
+           
+        """
         # Get the movie ID and rating for each movie for each unique user
         x_train = [[(x["movieId"], x["rating"]) for x in y] for y in movies]
         self._model = train_embeddings(x_train, iterations=iterations)

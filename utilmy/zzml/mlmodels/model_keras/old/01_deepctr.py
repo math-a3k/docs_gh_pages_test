@@ -134,6 +134,15 @@ MODEL_PARAMS = {
 
 class Model:
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None, **kwargs):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+            **kwargs:     
+        Returns:
+           
+        """
         if model_pars is None :
           return self
        
@@ -164,6 +173,13 @@ class Model:
         
 ##################################################################################################
 def _preprocess_criteo(df, **kw):
+    """function _preprocess_criteo
+    Args:
+        df:   
+        **kw:   
+    Returns:
+        
+    """
     hash_feature = kw.get('hash_feature')
     sparse_col = ['C' + str(i) for i in range(1, 27)]
     dense_col = ['I' + str(i) for i in range(1, 14)]
@@ -200,6 +216,13 @@ def _preprocess_criteo(df, **kw):
 
 
 def _preprocess_movielens(df, **kw):
+    """function _preprocess_movielens
+    Args:
+        df:   
+        **kw:   
+    Returns:
+        
+    """
     multiple_value = kw.get('multiple_value')
     sparse_col = ["movie_id", "user_id", "gender", "age", "occupation", "zip"]
     target = ['rating']
@@ -291,6 +314,13 @@ def _preprocess_movielens(df, **kw):
 
 
 def get_dataset(data_pars=None, **kw):
+    """function get_dataset
+    Args:
+        data_pars:   
+        **kw:   
+    Returns:
+        
+    """
     ##check whether dataset is of kind train or test
     data_path = data_pars.get("train_data_path", "")
     data_type = data_pars['dataset_type']
@@ -352,6 +382,17 @@ def fit(model, session=None, compute_pars=None, data_pars=None, out_pars=None,
 
 # Model p redict
 def predict(model, session=None, compute_pars=None, data_pars=None, out_pars=None, **kwargs):
+    """function predict
+    Args:
+        model:   
+        session:   
+        compute_pars:   
+        data_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     x, y, feature_columns, behavior_feature_list = kwargs["dataset"]
     pred_ans = model.model.predict(x, batch_size=compute_pars['batch_size'])
 
@@ -359,11 +400,28 @@ def predict(model, session=None, compute_pars=None, data_pars=None, out_pars=Non
 
 
 def metrics(ypred, ytrue=None, session=None, compute_pars=None, data_pars=None, out_pars=None, **kwargs):
+    """function metrics
+    Args:
+        ypred:   
+        ytrue:   
+        session:   
+        compute_pars:   
+        data_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     metrics_dict = {"MSE": mean_squared_error(ytrue, ypred)}
     return metrics_dict
 
 
 def reset_model():
+    """function reset_model
+    Args:
+    Returns:
+        
+    """
     pass
 
 
@@ -372,6 +430,14 @@ def reset_model():
 
 ########################################################################################################################
 def path_setup(out_folder="", sublevel=0, data_path="dataset/"):
+    """function path_setup
+    Args:
+        out_folder:   
+        sublevel:   
+        data_path:   
+    Returns:
+        
+    """
     #### Relative path
     data_path = os_package_root_path(__file__, sublevel=sublevel, path_add=data_path)
     out_path = os.getcwd() + "/" + out_folder
@@ -381,6 +447,12 @@ def path_setup(out_folder="", sublevel=0, data_path="dataset/"):
 
 
 def _config_process(config):
+    """function _config_process
+    Args:
+        config:   
+    Returns:
+        
+    """
     data_pars = config["data_pars"]
     model_pars = config["model_pars"]
     compute_pars = config["compute_pars"]
@@ -389,6 +461,14 @@ def _config_process(config):
 
 
 def config_load(data_path, file_default, config_mode):
+    """function config_load
+    Args:
+        data_path:   
+        file_default:   
+        config_mode:   
+    Returns:
+        
+    """
     data_path = Path(os.path.realpath(
         __file__)).parent.parent / file_default if data_path == "dataset/" else data_path
 
@@ -400,6 +480,15 @@ def config_load(data_path, file_default, config_mode):
 
 
 def get_params(choice="", data_path="dataset/", config_mode="test", **kwargs):
+    """function get_params
+    Args:
+        choice:   
+        data_path:   
+        config_mode:   
+        **kwargs:   
+    Returns:
+        
+    """
     if choice == "json":
         model_pars, data_pars, compute_pars, out_pars = config_load(data_path,
                                                                     file_default="model_keras/01_deepctr.json",
@@ -502,6 +591,14 @@ def get_params(choice="", data_path="dataset/", config_mode="test", **kwargs):
 ########################################################################################################################
 ########################################################################################################################
 def test(data_path="dataset/", pars_choice=0, **kwargs):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+        **kwargs:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

@@ -15,18 +15,42 @@ class MicrosoftAcademicGraph:
 
     # constructor
     def __init__(self, root):
+        """ MicrosoftAcademicGraph:__init__
+        Args:
+            root:     
+        Returns:
+           
+        """
         self.root = root
 
     # return stream path
     def get_full_path(self, stream_name):
+        """ MicrosoftAcademicGraph:get_full_path
+        Args:
+            stream_name:     
+        Returns:
+           
+        """
         return self.root + stream_name + ".txt"
 
     # return stream header
     def get_header(self, stream_name):
+        """ MicrosoftAcademicGraph:get_header
+        Args:
+            stream_name:     
+        Returns:
+           
+        """
         return self.streams[stream_name]
 
     # return stream types and columns with date
     def get_type(self, stream_name):
+        """ MicrosoftAcademicGraph:get_type
+        Args:
+            stream_name:     
+        Returns:
+           
+        """
         date_columns = []
         schema = {}
         for field in self.streams[stream_name]:
@@ -41,6 +65,12 @@ class MicrosoftAcademicGraph:
 
     # return stream columns names
     def get_name(self, stream_name):
+        """ MicrosoftAcademicGraph:get_name
+        Args:
+            stream_name:     
+        Returns:
+           
+        """
         names = []
         for field in self.streams[stream_name]:
             fieldname, fieldtype = field.split(":")
@@ -49,6 +79,12 @@ class MicrosoftAcademicGraph:
 
     # return stream Pandas dataFrame
     def get_data_frame(self, stream_name):
+        """ MicrosoftAcademicGraph:get_data_frame
+        Args:
+            stream_name:     
+        Returns:
+           
+        """
         column_name = self.get_name(stream_name)
         column_type, date_columns = self.get_type(stream_name)
         return pd.read_csv(

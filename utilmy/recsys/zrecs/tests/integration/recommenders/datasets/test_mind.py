@@ -11,6 +11,12 @@ from recommenders.datasets.mind import download_mind, extract_mind
 
 @pytest.mark.integration
 def test_download_mind(tmp_path):
+    """function test_download_mind
+    Args:
+        tmp_path:   
+    Returns:
+        
+    """
     train_path, valid_path = download_mind(size="large", dest_path=tmp_path)
     statinfo = os.stat(train_path)
     assert statinfo.st_size == 530196631
@@ -20,6 +26,12 @@ def test_download_mind(tmp_path):
 
 @pytest.mark.integration
 def test_extract_mind(tmp):
+    """function test_extract_mind
+    Args:
+        tmp:   
+    Returns:
+        
+    """
     train_zip, valid_zip = download_mind(size="large", dest_path=tmp)
     train_path, valid_path = extract_mind(train_zip, valid_zip)
 
@@ -45,6 +57,15 @@ def test_extract_mind(tmp):
 @pytest.mark.notebooks
 @pytest.mark.integration
 def test_mind_utils_integration(notebooks, output_notebook, kernel_name, tmp):
+    """function test_mind_utils_integration
+    Args:
+        notebooks:   
+        output_notebook:   
+        kernel_name:   
+        tmp:   
+    Returns:
+        
+    """
     notebook_path = notebooks["mind_utils"]
     pm.execute_notebook(
         notebook_path,

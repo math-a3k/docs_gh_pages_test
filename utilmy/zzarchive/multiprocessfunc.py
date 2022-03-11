@@ -18,6 +18,22 @@ import derivatives as dx
 #-----------Return Partial Result the Monte Carlo simulation---------------
 #----Returning Big array of price is very slow-----------------------------
 def multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky,  nbasset, n, price, type1=0, strike=0, cp=1):
+  """function multigbm_paralell_func
+  Args:
+      nbsimul:   
+      ww:   
+      voldt:   
+      drift:   
+      upper_cholesky:   
+      nbasset:   
+      n:   
+      price:   
+      type1:   
+      strike:   
+      cp:   
+  Returns:
+      
+  """
   if type1==0: sum1=0.0    #Agregate sum
   elif type1==1: allprocess = np.zeros(nbsimul) # Bsk last value      
   elif type1==2: allprocess = np.zeros((nbsimul,nbasset)) # Last value
@@ -71,6 +87,13 @@ def multigbm_paralell_func(nbsimul, ww, voldt, drift, upper_cholesky,  nbasset, 
 #-------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------
 def func(val, lock):
+    """function func
+    Args:
+        val:   
+        lock:   
+    Returns:
+        
+    """
     for i in range(50):
         time.sleep(0.01)
         with lock:
@@ -148,6 +171,19 @@ iiv=np.tensordot(iim, iidbm1, axes=([-1],[0]))
 
 
 def multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky,  nbasset, n, price):
+  """function multigbm_processfast7
+  Args:
+      nbsimul:   
+      s0:   
+      voldt:   
+      drift:   
+      upper_cholesky:   
+      nbasset:   
+      n:   
+      price:   
+  Returns:
+      
+  """
  # allprocess = np.zeros((nbsimul, nbasset, n))
   np.random.seed(1234)
   iidbm1 = np.random.normal(0, 1, (nbasset,n,nbsimul))
@@ -175,6 +211,15 @@ def multigbm_processfast7(nbsimul, s0, voldt, drift, upper_cholesky,  nbasset, n
 
 
 def bm_generator(bm,dt,n,type1):
+ """function bm_generator
+ Args:
+     bm:   
+     dt:   
+     n:   
+     type1:   
+ Returns:
+     
+ """
  tt= dt*n
  if type1==1:
      return bm
@@ -209,6 +254,12 @@ S[:,0] = S0
 
 
 def merge(d2):
+    """function merge
+    Args:
+        d2:   
+    Returns:
+        
+    """
     time.sleep(1) # some time consuming stuffs
     for key in d2.keys():
         if key in d1:
@@ -220,6 +271,13 @@ def merge(d2):
 
 
 def integratenp2(its, nchunk):  
+    """function integratenp2
+    Args:
+        its:   
+        nchunk:   
+    Returns:
+        
+    """
 #    nchunk = 10000
     chunk_size = its / nchunk   
     np.random.seed() 
@@ -232,6 +290,12 @@ def integratenp2(its, nchunk):
 
 
 def integratenp(its):  
+    """function integratenp
+    Args:
+        its:   
+    Returns:
+        
+    """
     nchunk= 5000 
     
     chunk_size = its / nchunk   # I totally cheated and tweaked the number of chunks to get the fastest result
@@ -245,6 +309,12 @@ def integratenp(its):
 
 
 def integratene(its):  
+    """function integratene
+    Args:
+        its:   
+    Returns:
+        
+    """
     nchunk= 2500
     chunk_size = its / nchunk   
     np.random.seed()  # Each process needs a different seed!
@@ -266,6 +336,14 @@ def list_append(count, id, out_list):
 
 
 def parzen_estimation(x_samples, point_x, h):
+    """function parzen_estimation
+    Args:
+        x_samples:   
+        point_x:   
+        h:   
+    Returns:
+        
+    """
     k_n = 0
     for row in x_samples:
         x_i = (point_x - row[:,np.newaxis]) / (h)
@@ -280,21 +358,51 @@ def parzen_estimation(x_samples, point_x, h):
 
 
 def init2(d):
+    """function init2
+    Args:
+        d:   
+    Returns:
+        
+    """
     global d1
     d1 = d
     
 def init_global1(l, r):
+   """function init_global1
+   Args:
+       l:   
+       r:   
+   Returns:
+       
+   """
    global01.lock=l
    global01.res_shared=r
 
 #into multiprocess function
 def np_sin(value):
+    """function np_sin
+    Args:
+        value:   
+    Returns:
+        
+    """
     return np.sin(value)
     
 def ne_sin(x):
+      """function ne_sin
+      Args:
+          x:   
+      Returns:
+          
+      """
       return ne.evaluate("sin(x)")
     
 def res_shared2():
+ """function res_shared2
+ Args:
+ Returns:
+     
+ """
  return res_shared    
     
 

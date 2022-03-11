@@ -21,6 +21,14 @@ print(root)
 
 
 def log(*s, n=0, m=0):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     ### Implement pseudo Logging

@@ -32,6 +32,12 @@ VERBOSE = False
 
 # from mlmodels.util import log, path_norm, get_model_uri
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 
@@ -39,6 +45,13 @@ def log(*s):
 global model, session
 
 def init(*kw, **kwargs) :
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model   = Model(*kw, **kwargs)
     session = None
@@ -46,6 +59,14 @@ def init(*kw, **kwargs) :
     
 class Model(object):
     def __init__(self, model_pars=None,  data_pars=None, compute_pars=None ):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
 
         if model_pars is None :
@@ -98,6 +119,15 @@ def fit_metrics(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(data_pars=None, compute_pars=None, out_pars=None, **kw):
+    """function predict
+    Args:
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     data_pars['train'] = False
     Xpred = get_dataset(data_pars, task_type="predict")
@@ -106,11 +136,23 @@ def predict(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
 
 def save(path=None, info=None):
+    """function save
+    Args:
+        path:   
+        info:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     os.makedirs(path, exist_ok=True)
@@ -124,6 +166,12 @@ def save(path=None, info=None):
     
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     model0 = pickle.load(open( f"{path}/model.pkl", mode='rb') )
@@ -137,6 +185,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl") :   
@@ -148,6 +202,12 @@ def load_info(path=""):
 
 
 def preprocess(prepro_pars):
+    """function preprocess
+    Args:
+        prepro_pars:   
+    Returns:
+        
+    """
     if prepro_pars['type'] == 'test':
         from sklearn.datasets import  make_classification
         from sklearn.model_selection import train_test_split
@@ -208,6 +268,13 @@ def get_dataset(data_pars=None, task_type="train", **kw):
 
 
 def get_params(param_pars={}, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     import json
     #from jsoncomment import JsonComment ; json = JsonComment()
     pp = param_pars
@@ -230,6 +297,14 @@ def get_params(param_pars={}, **kw):
 ################################################################################################
 ########## Tests are normalized Do not Change ##################################################
 def test(data_path="dataset/", pars_choice="json", config_mode="test"):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+        config_mode:   
+    Returns:
+        
+    """
     ### Local test
     global model, session
 

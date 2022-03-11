@@ -4,6 +4,12 @@ import pandas as pd
 
 # Auxiliary functions
 def get_dummies(data):
+    """function get_dummies
+    Args:
+        data:   
+    Returns:
+        
+    """
     data = data.copy()
     if isinstance(data, pd.Series):
         data = pd.factorize(data)[0]
@@ -165,6 +171,15 @@ def is_continuous(data):
 
 
 def train_test_split(data, ncat, train_ratio=0.7, prep='std'):
+    """function train_test_split
+    Args:
+        data:   
+        ncat:   
+        train_ratio:   
+        prep:   
+    Returns:
+        
+    """
     assert train_ratio >= 0
     assert train_ratio <= 1
     shuffle = np.random.choice(range(data.shape[0]), data.shape[0], replace=False)
@@ -186,6 +201,12 @@ def train_test_split(data, ncat, train_ratio=0.7, prep='std'):
 
 # Preprocessing functions
 def adult(data):
+    """function adult
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['workclass', 'education', 'education-num', 'marital-status', 'occupation',
                'relationship', 'race', 'sex', 'native-country', 'y']
     cont_cols = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'capital-gain',
@@ -196,6 +217,12 @@ def adult(data):
 
 
 def australia(data):
+    """function australia
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['A1', 'A4', 'A5', 'A6', 'A7', 'A9', 'A10', 'A12', 'A13', 'class']
     cont_cols = ['A2', 'A3', 'A8', 'A11', 'A14', 'A15']
     data.loc[:, cat_cols] = get_dummies(data[cat_cols])
@@ -205,6 +232,12 @@ def australia(data):
 
 
 def bank(data):
+    """function bank
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['job', 'marital', 'education', 'default', 'housing', 'loan',
        'contact', 'month', 'day_of_week', 'poutcome', 'y']
     cont_cols = ['age', 'duration', 'campaign', 'previous', 'emp.var.rate',
@@ -216,6 +249,12 @@ def bank(data):
 
 
 def credit(data):
+    """function credit
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['SEX', 'EDUCATION', 'MARRIAGE', 'default payment next month']
     cont_cols = ['LIMIT_BAL', 'AGE', 'PAY_0', 'PAY_2',
        'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 'BILL_AMT1', 'BILL_AMT2',
@@ -227,6 +266,12 @@ def credit(data):
 
 
 def electricity(data):
+    """function electricity
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['day', 'class']
     cont_cols = ['date', 'period', 'nswprice', 'nswdemand', 'vicprice',
        'vicdemand', 'transfer']
@@ -236,6 +281,12 @@ def electricity(data):
 
 
 def segment(data):
+    """function segment
+    Args:
+        data:   
+    Returns:
+        
+    """
     data = data.drop(columns=['region.centroid.col', 'region.pixel.count'])
     cat_cols = ['short.line.density.5', 'short.line.density.2', 'class']
     cont_cols = ['region.centroid.row', 'vedge.mean', 'vegde.sd', 'hedge.mean', 'hedge.sd',
@@ -247,6 +298,12 @@ def segment(data):
 
 
 def german(data):
+    """function german
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = [0, 2, 3, 5, 6, 8, 9, 11, 13, 14, 16, 18, 19, 20]
     cont_cols = [1, 4, 7, 10, 12, 15, 17]
     data.iloc[:, cat_cols] = get_dummies(data[cat_cols])
@@ -255,6 +312,12 @@ def german(data):
 
 
 def vowel(data):
+    """function vowel
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['Speaker_Number', 'Sex', 'Class']
     data.loc[:, cat_cols] = get_dummies(data[cat_cols])
     ncat = learncats(data.values, classcol=data.shape[1]-1)
@@ -262,6 +325,12 @@ def vowel(data):
 
 
 def cmc(data):
+    """function cmc
+    Args:
+        data:   
+    Returns:
+        
+    """
     cat_cols = ['Wifes_education', 'Husbands_education', 'Wifes_religion', 'Wifes_now_working%3F',
             'Husbands_occupation', 'Standard-of-living_index', 'Media_exposure', 'Contraceptive_method_used']
     cont_cols = ['Wifes_age', 'Number_of_children_ever_born']
@@ -271,6 +340,12 @@ def cmc(data):
 
 
 def get_data(name):
+    """function get_data
+    Args:
+        name:   
+    Returns:
+        
+    """
     if 'wine' in name:
         data_red = pd.read_csv('../data/winequality_red.csv')
         data_white = pd.read_csv('../data/winequality_white.csv')

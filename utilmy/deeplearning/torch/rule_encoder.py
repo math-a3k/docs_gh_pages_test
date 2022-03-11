@@ -23,6 +23,11 @@ from torch.utils.data import DataLoader, TensorDataset
 from utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = HELP + help_create(MNAME)
     log(ss)
@@ -30,6 +35,11 @@ def help():
 
 #############################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     log(MNAME)
     test()
     # test2()
@@ -39,6 +49,11 @@ def test_all():
 
 ##############################################################################################
 def test():
+    """function test
+    Args:
+    Returns:
+        
+    """
     model_info = {'dataonly': {'rule': 0.0},
                 'ours-beta1.0': {'beta': [1.0], 'scale': 1.0, 'lr': 0.001},
                 'ours-beta0.1': {'beta': [0.1], 'scale': 1.0, 'lr': 0.001},
@@ -135,6 +150,12 @@ def test():
 
 
 def dataset_load_cardio(arg):
+  """function dataset_load_cardio
+  Args:
+      arg:   
+  Returns:
+      
+  """
   # Load dataset
   #url = "https://github.com/caravanuden/cardio/raw/master/cardio_train.csv"
   import wget, glob
@@ -153,6 +174,13 @@ def dataset_load_cardio(arg):
 
 
 def dataset_preprocess_cardio(df, arg):
+    """function dataset_preprocess_cardio
+    Args:
+        df:   
+        arg:   
+    Returns:
+        
+    """
     coly = 'cardio'
     y     = df[coly]
     X_raw = df.drop([coly], axis=1)
@@ -270,6 +298,11 @@ def loss_rule_calc_cardio(model, batch_train_x, loss_rule_func, output, arg, ):
 
 #####  covtype dataset #########################################################################
 def test2():
+    """function test2
+    Args:
+    Returns:
+        
+    """
     model_info = {'dataonly': {'rule': 0.0},
                 'ours-beta0.1': {'beta': [0.1], 'scale': 1.0, 'lr': 0.001},
                 'ours-beta0.1-scale0.1': {'beta': [0.1], 'scale': 0.1},
@@ -355,6 +388,12 @@ def test2():
 
 
 def dataset_load_covtype(arg)->pd.DataFrame:
+  """function dataset_load_covtype
+  Args:
+      arg:   
+  Returns:
+      
+  """
   from sklearn.datasets import fetch_covtype
   df = fetch_covtype(return_X_y=False, as_frame=True)
   df =df.data
@@ -366,6 +405,13 @@ def dataset_load_covtype(arg)->pd.DataFrame:
 
 
 def dataset_preprocess_covtype(df, arg):
+  """function dataset_preprocess_covtype
+  Args:
+      df:   
+      arg:   
+  Returns:
+      
+  """
   coly  = 'Slope'  # df.columns[-1]
   y_raw = df[coly]
   X_raw = df.drop([coly], axis=1)
@@ -408,6 +454,12 @@ def loss_rule_calc_covtype(model, batch_train_x, loss_rule_func, output, arg, ):
 ##############################################################################################
 ###############################################################################################
 def device_setup(arg):
+    """function device_setup
+    Args:
+        arg:   
+    Returns:
+        
+    """
     device = arg.device
     seed   = arg.seed
     random.seed(seed)
@@ -427,6 +479,18 @@ def device_setup(arg):
 
 
 def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, test_X=None, test_y=None,  arg=None):
+    """function dataloader_create
+    Args:
+        train_X:   
+        train_y:   
+        valid_X:   
+        valid_y:   
+        test_X:   
+        test_y:   
+        arg:   
+    Returns:
+        
+    """
     batch_size = arg.batch_size
     train_loader, valid_loader, test_loader = None, None, None
 
@@ -449,6 +513,12 @@ def dataloader_create(train_X=None, train_y=None, valid_X=None, valid_y=None, te
 
 
 def model_load(arg):
+    """function model_load
+    Args:
+        arg:   
+    Returns:
+        
+    """
     model_eval = model_build(arg=arg, mode='test')
 
     checkpoint = torch.load( arg.saved_filename)
@@ -464,6 +534,13 @@ def model_load(arg):
 
 
 def model_build(arg:dict, mode='train'):
+    """function model_build
+    Args:
+        arg ( dict ) :   
+        mode:   
+    Returns:
+        
+    """
     arg = Box(arg)
 
     if 'test' in mode :
@@ -527,6 +604,16 @@ def loss_rule_calc(model, batch_train_x, loss_rule_func, output, arg:dict):
 
 
 def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
+    """function model_train
+    Args:
+        model:   
+        losses:   
+        train_loader:   
+        valid_loader:   
+        arg ( dict ) :   
+    Returns:
+        
+    """
     arg      = Box(arg)  ### Params
     arghisto = Box({})  ### results
 
@@ -640,6 +727,16 @@ def model_train(model, losses, train_loader, valid_loader, arg:dict=None ):
 
 
 def model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_preprocess1 ):
+    """function model_evaluation
+    Args:
+        model_eval:   
+        loss_task_func:   
+        arg:   
+        dataset_load1:   
+        dataset_preprocess1:   
+    Returns:
+        
+    """
     ### Create dataloader
     df = dataset_load1(arg)
     train_X, test_X, train_y, test_y, valid_X, valid_y = dataset_preprocess1(df, arg)
@@ -712,15 +809,50 @@ def model_evaluation(model_eval, loss_task_func, arg, dataset_load1, dataset_pre
 '''model.py '''
 class NaiveModel(nn.Module):
   def __init__(self):
+    """ NaiveModel:__init__
+    Args:
+    Returns:
+       
+    """
     super(NaiveModel, self).__init__()
     self.net = nn.Identity()
 
   def forward(self, x, alpha=0.0):
+    """ Net:forward
+    Args:
+        x:     
+        alpha:     
+    Returns:
+       
+    """
+    """ NaiveModel:forward
+    Args:
+        x:     
+        alpha:     
+    Returns:
+       
+    """
     return self.net(x)
 
 
 class RuleEncoder(nn.Module):
   def __init__(self, input_dim, output_dim, hidden_dim=4):
+    """ RuleEncoder:__init__
+    Args:
+        input_dim:     
+        output_dim:     
+        hidden_dim:     
+    Returns:
+       
+    """
+    """ DataEncoder:__init__
+    Args:
+        input_dim:     
+        output_dim:     
+        hidden_dim:     
+    Returns:
+       
+    """
     super(RuleEncoder, self).__init__()
     self.input_dim = input_dim
     self.output_dim = output_dim
@@ -729,6 +861,18 @@ class RuleEncoder(nn.Module):
                              nn.Linear(hidden_dim, output_dim))
 
   def forward(self, x):
+    """ RuleEncoder:forward
+    Args:
+        x:     
+    Returns:
+       
+    """
+    """ DataEncoder:forward
+    Args:
+        x:     
+    Returns:
+       
+    """
     return self.net(x)
 
 
@@ -747,6 +891,20 @@ class DataEncoder(nn.Module):
 
 class Net(nn.Module):
   def __init__(self, input_dim, output_dim, rule_encoder, data_encoder, hidden_dim=4, n_layers=2, merge='cat', skip=False, input_type='state'):
+    """ Net:__init__
+    Args:
+        input_dim:     
+        output_dim:     
+        rule_encoder:     
+        data_encoder:     
+        hidden_dim:     
+        n_layers:     
+        merge:     
+        skip:     
+        input_type:     
+    Returns:
+       
+    """
     super(Net, self).__init__()
     self.skip = skip
     self.input_type   = input_type
@@ -782,6 +940,13 @@ class Net(nn.Module):
     self.net = nn.Sequential(*self.net)
 
   def get_z(self, x, alpha=0.0):
+    """ Net:get_z
+    Args:
+        x:     
+        alpha:     
+    Returns:
+       
+    """
     rule_z = self.rule_encoder(x)
     data_z = self.data_encoder(x)
 
@@ -821,6 +986,14 @@ class Net(nn.Module):
 from sklearn.metrics import mean_squared_error, accuracy_score, roc_curve, auc, roc_auc_score, precision_score, recall_score, precision_recall_curve, accuracy_score
 
 def get_metrics(y_true, y_pred, y_score):
+    """function get_metrics
+    Args:
+        y_true:   
+        y_pred:   
+        y_score:   
+    Returns:
+        
+    """
     acc = accuracy_score(y_true, y_pred)
     prec = precision_score(y_true, y_pred)
     recall = recall_score(y_true, y_pred)
@@ -830,6 +1003,13 @@ def get_metrics(y_true, y_pred, y_score):
     return acc, prec, recall, fpr, tpr, roc_auc
 
 def get_correct_results(out, label_Y):
+    """function get_correct_results
+    Args:
+        out:   
+        label_Y:   
+    Returns:
+        
+    """
     y_pred_tag = torch.round(out)    # Binary label
     return (y_pred_tag == label_Y).sum().float()
 
@@ -854,6 +1034,12 @@ def get_perturbed_input(input_tensor, pert_coeff):
 
 
 def test_dataset_classification_fake(nrows=500):
+    """function test_dataset_classification_fake
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     from sklearn import datasets as sklearn_datasets
     ndim    =11
     coly    = 'y'

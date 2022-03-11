@@ -22,6 +22,11 @@ sns.set()
 
 
 def get_imports():
+    """function get_imports
+    Args:
+    Returns:
+        
+    """
     for name, val in globals().items():
         if isinstance(val, types.ModuleType):
             name = val.__name__.split(".")[0]
@@ -47,6 +52,14 @@ for r in requirements:
 
 
 def get_state(data, t, n):
+    """function get_state
+    Args:
+        data:   
+        t:   
+        n:   
+    Returns:
+        
+    """
     d = t - n + 1
     block = data[d : t + 1] if d >= 0 else -d * [data[0]] + data[0 : t + 1]
     res = []
@@ -81,6 +94,16 @@ class Deep_Evolution_Strategy:
     inputs = None
 
     def __init__(self, weights, reward_function, population_size, sigma, learning_rate):
+        """ Deep_Evolution_Strategy:__init__
+        Args:
+            weights:     
+            reward_function:     
+            population_size:     
+            sigma:     
+            learning_rate:     
+        Returns:
+           
+        """
         self.weights = weights
         self.reward_function = reward_function
         self.population_size = population_size
@@ -88,6 +111,13 @@ class Deep_Evolution_Strategy:
         self.learning_rate = learning_rate
 
     def _get_weight_from_population(self, weights, population):
+        """ Deep_Evolution_Strategy:_get_weight_from_population
+        Args:
+            weights:     
+            population:     
+        Returns:
+           
+        """
         weights_population = []
         for index, i in enumerate(population):
             jittered = self.sigma * i
@@ -95,9 +125,26 @@ class Deep_Evolution_Strategy:
         return weights_population
 
     def get_weights(self):
+        """ Model:get_weights
+        Args:
+        Returns:
+           
+        """
+        """ Deep_Evolution_Strategy:get_weights
+        Args:
+        Returns:
+           
+        """
         return self.weights
 
     def train(self, epoch=100, print_every=1):
+        """ Deep_Evolution_Strategy:train
+        Args:
+            epoch:     
+            print_every:     
+        Returns:
+           
+        """
         lasttime = time.time()
         for i in range(epoch):
             population = []
@@ -126,6 +173,14 @@ class Deep_Evolution_Strategy:
 
 class Model:
     def __init__(self, input_size, layer_size, output_size):
+        """ Model:__init__
+        Args:
+            input_size:     
+            layer_size:     
+            output_size:     
+        Returns:
+           
+        """
         self.weights = [
             np.random.randn(input_size, layer_size),
             np.random.randn(layer_size, output_size),
@@ -134,6 +189,12 @@ class Model:
         ]
 
     def predict(self, inputs):
+        """ Model:predict
+        Args:
+            inputs:     
+        Returns:
+           
+        """
         feed = np.dot(inputs, self.weights[0]) + self.weights[-1]
         decision = np.dot(feed, self.weights[1])
         buy = np.dot(feed, self.weights[2])
@@ -143,6 +204,12 @@ class Model:
         return self.weights
 
     def set_weights(self, weights):
+        """ Model:set_weights
+        Args:
+            weights:     
+        Returns:
+           
+        """
         self.weights = weights
 
 
@@ -156,6 +223,15 @@ class Agent:
     LEARNING_RATE = 0.03
 
     def __init__(self, model, money, max_buy, max_sell):
+        """ Agent:__init__
+        Args:
+            model:     
+            money:     
+            max_buy:     
+            max_sell:     
+        Returns:
+           
+        """
         self.model = model
         self.initial_money = money
         self.max_buy = max_buy
@@ -169,10 +245,22 @@ class Agent:
         )
 
     def act(self, sequence):
+        """ Agent:act
+        Args:
+            sequence:     
+        Returns:
+           
+        """
         decision, buy = self.model.predict(np.array(sequence))
         return np.argmax(decision[0]), int(buy[0])
 
     def get_reward(self, weights):
+        """ Agent:get_reward
+        Args:
+            weights:     
+        Returns:
+           
+        """
         initial_money = self.initial_money
         starting_money = initial_money
         self.model.weights = weights
@@ -206,9 +294,21 @@ class Agent:
         return ((initial_money - starting_money) / starting_money) * 100
 
     def fit(self, iterations, checkpoint):
+        """ Agent:fit
+        Args:
+            iterations:     
+            checkpoint:     
+        Returns:
+           
+        """
         self.es.train(iterations, print_every=checkpoint)
 
     def buy(self):
+        """ Agent:buy
+        Args:
+        Returns:
+           
+        """
         initial_money = self.initial_money
         state = get_state(close, 0, window_size + 1)
         starting_money = initial_money

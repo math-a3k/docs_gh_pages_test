@@ -26,6 +26,11 @@ from mlmodels.preprocess.generic import get_dataset_torch, torch_datasets_wrappe
 ###############################################################################################################
 ############### Custom Code ###################################################################################
 def torch_transform_mnist():
+    """function torch_transform_mnist
+    Args:
+    Returns:
+        
+    """
     from torchvision import datasets, transforms
     transform=transforms.Compose([
                         transforms.Grayscale(num_output_channels=3),
@@ -37,6 +42,13 @@ def torch_transform_mnist():
 
 
 def torchvision_dataset_MNIST_load(path, **args):
+    """function torchvision_dataset_MNIST_load
+    Args:
+        path:   
+        **args:   
+    Returns:
+        
+    """
     ### only used in Refactoring part
     from torchvision import datasets, transforms
     train_dataset = datasets.MNIST(path, train=True, download=True,
@@ -85,6 +97,13 @@ def torch_transform_data_augment(fixed_scale = 256, train = False):
 
 
 def torch_transform_generic(fixed_scale = 256, train = False):
+    """function torch_transform_generic
+    Args:
+        fixed_scale :   
+        train :   
+    Returns:
+        
+    """
     from torchvision import  transforms
     size = fixed_scale - 2
     transform = {

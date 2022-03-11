@@ -43,6 +43,13 @@ from numba import njit, prange
 
 @njit(parallel=True)
 def cat_dist(X, Y):
+    """function cat_dist
+    Args:
+        X:   
+        Y:   
+    Returns:
+        
+    """
     dist = np.zeros((X.shape[0], Y.shape[0]))
     for i in prange(X.shape[0]):
         for j in prange(Y.shape[0]):
@@ -566,6 +573,13 @@ def _euclidean_distances_upcast(X, XX=None, Y=None, YY=None, batch_size=None):
 
 
 def _argmin_min_reduce(dist, start):
+    """function _argmin_min_reduce
+    Args:
+        dist:   
+        start:   
+    Returns:
+        
+    """
     indices = dist.argmin(axis=1)
     values = dist[np.arange(dist.shape[0]), indices]
     return indices, values

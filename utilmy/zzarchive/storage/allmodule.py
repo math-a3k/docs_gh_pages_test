@@ -2,6 +2,11 @@
 """  All module here for include  """
 
 def aa_isanaconda():
+ """function aa_isanaconda
+ Args:
+ Returns:
+     
+ """
  import sys; 
  txt= sys.version
  if txt.find('Continuum') > 0 : return True

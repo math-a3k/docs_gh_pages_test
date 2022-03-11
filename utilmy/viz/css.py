@@ -45,6 +45,12 @@ grey = """
         }
 """
 def fontsize_css(size):
+    """function fontsize_css
+    Args:
+        size:   
+    Returns:
+        
+    """
     css_8px = base + """
             body,table th,table td,text,
             .highcharts-title,.highcharts-axis-title,

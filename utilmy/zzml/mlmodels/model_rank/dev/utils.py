@@ -16,6 +16,11 @@ from metrics import NDCG
 
 
 def get_device():
+    """function get_device
+    Args:
+    Returns:
+        
+    """
     if torch.cuda.is_available():
         device = "cuda:{}".format(np.random.randint(torch.cuda.device_count()))
     else:
@@ -25,6 +30,14 @@ def get_device():
 
 
 def get_ckptdir(net_name, net_structure, sigma=None):
+    """function get_ckptdir
+    Args:
+        net_name:   
+        net_structure:   
+        sigma:   
+    Returns:
+        
+    """
     net_name = '{}-{}'.format(net_name, '-'.join([str(x) for x in net_structure]))
     if sigma:
         net_name += '-scale-{}'.format(sigma)
@@ -37,6 +50,16 @@ def get_ckptdir(net_name, net_structure, sigma=None):
 
 
 def save_to_ckpt(ckpt_file, epoch, model, optimizer, lr_scheduler):
+    """function save_to_ckpt
+    Args:
+        ckpt_file:   
+        epoch:   
+        model:   
+        optimizer:   
+        lr_scheduler:   
+    Returns:
+        
+    """
     ckpt_file = ckpt_file + '_{}'.format(epoch)
     print(get_time(), 'save to ckpt {}'.format(ckpt_file))
     torch.save({
@@ -70,6 +93,12 @@ def load_train_vali_data(data_fold, small_dataset=False):
 
 
 def init_weights(m):
+    """function init_weights
+    Args:
+        m:   
+    Returns:
+        
+    """
     if type(m) == nn.Linear:
         nn.init.xavier_uniform_(m.weight)
         m.bias.data.fill_(0.01)
@@ -129,6 +158,18 @@ def eval_cross_entropy_loss(model, device, loader, phase="Eval", sigma=1.0):
 
 
 def eval_ndcg_at_k(inference_model, device, df_valid, valid_loader, batch_size, k_list, phase="Eval"):
+    """function eval_ndcg_at_k
+    Args:
+        inference_model:   
+        device:   
+        df_valid:   
+        valid_loader:   
+        batch_size:   
+        k_list:   
+        phase:   
+    Returns:
+        
+    """
     # print("Eval Phase evaluate NDCG @ {}".format(k_list))
     ndcg_metrics = {k: NDCG(k) for k in k_list}
     qids, rels, scores = [], [], []
@@ -164,6 +205,12 @@ def eval_ndcg_at_k(inference_model, device, df_valid, valid_loader, batch_size, 
 
 
 def str2bool(v):
+    """function str2bool
+    Args:
+        v:   
+    Returns:
+        
+    """
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):

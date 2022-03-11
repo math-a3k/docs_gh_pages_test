@@ -40,6 +40,19 @@ MODEL_URI = get_model_uri(__file__)
 ###########################################################################################################
 ###########################################################################################################
 def _train(m, device, train_itr, criterion, optimizer, epoch, max_epoch, imax=1):
+    """function _train
+    Args:
+        m:   
+        device:   
+        train_itr:   
+        criterion:   
+        optimizer:   
+        epoch:   
+        max_epoch:   
+        imax:   
+    Returns:
+        
+    """
     m.train()
     corrects, train_loss = 0.0,0.0
 
@@ -66,6 +79,16 @@ def _train(m, device, train_itr, criterion, optimizer, epoch, max_epoch, imax=1)
     return train_loss, accuracy
     
 def _valid(m, device, test_itr, criterion, imax=1):
+    """function _valid
+    Args:
+        m:   
+        device:   
+        test_itr:   
+        criterion:   
+        imax:   
+    Returns:
+        
+    """
     m.eval()
     corrects, test_loss = 0.0,0.0
     for i,batch in enumerate(test_itr):
@@ -89,11 +112,21 @@ def _valid(m, device, test_itr, criterion, imax=1):
     return test_loss, accuracy
 
 def _get_device():
+    """function _get_device
+    Args:
+    Returns:
+        
+    """
     # use GPU if it is available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     return device
 
 def get_config_file():
+    """function get_config_file
+    Args:
+    Returns:
+        
+    """
     return path_norm('config/model_tch/Imagecnn.json')
 
 
@@ -104,6 +137,15 @@ def get_config_file():
 ###########################################################################################################
 class Model:
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None, out_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+            out_pars:     
+        Returns:
+           
+        """
         self.model_pars   = copy.deepcopy(model_pars)
         self.compute_pars = copy.deepcopy(compute_pars)
         self.data_pars    = copy.deepcopy(data_pars)
@@ -142,6 +184,13 @@ class Model:
 
 
 def get_params(param_pars=None, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     pp          = param_pars
     choice      = pp['choice']
     config_mode = pp['config_mode']
@@ -181,6 +230,13 @@ def get_params(param_pars=None, **kw):
 
 
 def get_dataset(data_pars=None, **kw):
+    """function get_dataset
+    Args:
+        data_pars:   
+        **kw:   
+    Returns:
+        
+    """
 
     if data_pars['dataset'] == 'MNIST':
        train_loader, valid_loader  = get_dataset_mnist_torch(data_pars)
@@ -188,6 +244,16 @@ def get_dataset(data_pars=None, **kw):
 
 
 def fit(model, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
+    """function fit
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     model0        = model.model
     lr            = compute_pars['learning_rate']
     epochs        = compute_pars["epochs"]
@@ -233,6 +299,18 @@ def fit(model, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
 
 
 def predict(model, session=None, data_pars=None, compute_pars=None, out_pars=None, imax = 1, return_ytrue=1):
+    """function predict
+    Args:
+        model:   
+        session:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        imax :   
+        return_ytrue:   
+    Returns:
+        
+    """
     ###### Progressive GAN
     if model.model_pars['repo_uri'] == 'facebookresearch/pytorch_GAN_zoo:hub' :
         model0     = model.model     
@@ -279,10 +357,27 @@ def predict(model, session=None, data_pars=None, compute_pars=None, out_pars=Non
 
 
 def evaluate(model, data_pars=None, compute_pars=None, out_pars=None):
+    """function evaluate
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+    Returns:
+        
+    """
     pass
 
 
 def save(model, session=None, save_pars=None):
+    """function save
+    Args:
+        model:   
+        session:   
+        save_pars:   
+    Returns:
+        
+    """
     import pickle
     from mlmodels.util import save_tch
     save2 = copy.deepcopy(save_pars)
@@ -305,6 +400,12 @@ def save(model, session=None, save_pars=None):
 
 
 def load(load_pars):
+    """function load
+    Args:
+        load_pars:   
+    Returns:
+        
+    """
     from mlmodels.util import load_tch
     import pickle
     load_pars2 = copy.deepcopy(load_pars)
@@ -327,6 +428,14 @@ def load(load_pars):
 ###########################################################################################################
 ###########################################################################################################
 def test(data_path="dataset/", pars_choice="json", config_mode="test"):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+        config_mode:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")
@@ -369,6 +478,14 @@ def test(data_path="dataset/", pars_choice="json", config_mode="test"):
 
 
 def test2(data_path="dataset/", pars_choice="json", config_mode="test"):
+    """function test2
+    Args:
+        data_path:   
+        pars_choice:   
+        config_mode:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")
@@ -451,6 +568,12 @@ def get_dataset2(data_pars=None, **kw):
 
 
 def get_dataset_mnist_torch(data_pars):
+    """function get_dataset_mnist_torch
+    Args:
+        data_pars:   
+    Returns:
+        
+    """
     train_loader = torch.utils.data.DataLoader( datasets.MNIST(data_pars['data_path'], train=True, download=True,
                     transform=transforms.Compose([
                         transforms.Grayscale(num_output_channels=3),

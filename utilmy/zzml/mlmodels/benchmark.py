@@ -41,9 +41,21 @@ from mlmodels.util import (get_recursive_files, load_config, log, os_package_roo
 
 ####################################################################################################
 def get_all_json_path(json_path):
+    """function get_all_json_path
+    Args:
+        json_path:   
+    Returns:
+        
+    """
     return get_recursive_files(json_path, ext='/*.json')
 
 def config_model_list(folder=None):
+    """function config_model_list
+    Args:
+        folder:   
+    Returns:
+        
+    """
     # Get all the model.py into folder
     folder = os_package_root_path() if folder is None else folder
     # print(folder)
@@ -57,6 +69,14 @@ def config_model_list(folder=None):
 
 ####################################################################################################
 def metric_eval(actual=None, pred=None, metric_name="mean_absolute_error"):
+    """function metric_eval
+    Args:
+        actual:   
+        pred:   
+        metric_name:   
+    Returns:
+        
+    """
     metric = getattr(importlib.import_module("sklearn.metrics"), metric_name)
     return metric(actual, pred)
 
@@ -70,6 +90,14 @@ def metric_eval(actual=None, pred=None, metric_name="mean_absolute_error"):
 
 ####################################################################################################
 def benchmark_run(bench_pars=None, args=None, config_mode="test"):
+    """function benchmark_run
+    Args:
+        bench_pars:   
+        args:   
+        config_mode:   
+    Returns:
+        
+    """
       
     dataset_uri  = args.data_path + f"/{args.item_id}.csv"
     json_path    = path_norm( args.path_json )
@@ -199,6 +227,11 @@ def cli_load_arguments(config_file=None):
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     arg = cli_load_arguments()
     """
     if arg.do == "preprocess_v1":

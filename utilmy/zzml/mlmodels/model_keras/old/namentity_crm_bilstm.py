@@ -54,6 +54,15 @@ MODEL_URI = Path(os.path.abspath(__file__)).parent.name + "." + os.path.basename
 ####################################################################################################
 class Model:
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None, **kwargs):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+            **kwargs:     
+        Returns:
+           
+        """
         ### Model Structure        ################################
         if model_pars is None:
             self.model = None
@@ -121,6 +130,17 @@ def evaluate(model, data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(model, sess=None, data_pars=None, out_pars=None, compute_pars=None, **kw):
+    """function predict
+    Args:
+        model:   
+        sess:   
+        data_pars:   
+        out_pars:   
+        compute_pars:   
+        **kw:   
+    Returns:
+        
+    """
     ##### Get Data ###############################################
     data_pars['train'] = False
     _, Xtrain, ytrain, Xtest, ytest = get_dataset(data_pars)
@@ -138,16 +158,35 @@ def predict(model, sess=None, data_pars=None, out_pars=None, compute_pars=None, 
 
 
 def reset_model():
+    """function reset_model
+    Args:
+    Returns:
+        
+    """
     pass
 
 
 def save(model=None, session=None, save_pars=None):
+    """function save
+    Args:
+        model:   
+        session:   
+        save_pars:   
+    Returns:
+        
+    """
     from mlmodels.util import save_keras
     print(save_pars)
     save_keras(model, session, save_pars)
 
 
 def load(load_pars):
+    """function load
+    Args:
+        load_pars:   
+    Returns:
+        
+    """
     from mlmodels.util import load_keras
     print(load_pars)
     model = load_keras(load_pars)
@@ -259,6 +298,13 @@ def _preprocess_test(data_pars, **kw):
 
 
 def get_params(param_pars={}, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     from jsoncomment import JsonComment ; json = JsonComment()
     pp = param_pars
     choice = pp['choice']
@@ -301,6 +347,14 @@ def get_params(param_pars={}, **kw):
 ################################################################################################
 ########## Tests are  ##########################################################################
 def test(data_path="dataset/", pars_choice="json", config_mode="test"):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+        config_mode:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

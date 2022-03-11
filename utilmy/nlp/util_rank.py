@@ -106,6 +106,11 @@ def rank_biased_overlap(list1, list2, p=0.9):
 
 
 def rbo_find_p():
+  """function rbo_find_p
+  Args:
+  Returns:
+      
+  """
   p = 0.9
   d = 10
 

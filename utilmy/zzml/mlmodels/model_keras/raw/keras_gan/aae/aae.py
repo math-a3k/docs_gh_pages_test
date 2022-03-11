@@ -18,6 +18,11 @@ import numpy as np
 
 class AdversarialAutoencoder():
     def __init__(self):
+        """ AdversarialAutoencoder:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -56,6 +61,11 @@ class AdversarialAutoencoder():
 
 
     def build_encoder(self):
+        """ AdversarialAutoencoder:build_encoder
+        Args:
+        Returns:
+           
+        """
         # Encoder
 
         img = Input(shape=self.img_shape)
@@ -74,6 +84,11 @@ class AdversarialAutoencoder():
         return Model(img, latent_repr)
 
     def build_decoder(self):
+        """ AdversarialAutoencoder:build_decoder
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -92,6 +107,11 @@ class AdversarialAutoencoder():
         return Model(z, img)
 
     def build_discriminator(self):
+        """ AdversarialAutoencoder:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -108,6 +128,14 @@ class AdversarialAutoencoder():
         return Model(encoded_repr, validity)
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ AdversarialAutoencoder:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, _), (_, _) = mnist.load_data()
@@ -153,6 +181,12 @@ class AdversarialAutoencoder():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ AdversarialAutoencoder:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 5, 5
 
         z = np.random.normal(size=(r*c, self.latent_dim))
@@ -171,6 +205,11 @@ class AdversarialAutoencoder():
         plt.close()
 
     def save_model(self):
+        """ AdversarialAutoencoder:save_model
+        Args:
+        Returns:
+           
+        """
 
         def save(model, model_name):
             model_path = "saved_model/%s.json" % model_name

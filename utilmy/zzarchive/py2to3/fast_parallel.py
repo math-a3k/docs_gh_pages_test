@@ -74,6 +74,12 @@ Using IPyparalell :
 
 
 def task_summary(tasks):
+  """function task_summary
+  Args:
+      tasks:   
+  Returns:
+      
+  """
   print('\n--------------- Summary ------------------------')
   for k, t in enumerate(tasks) :
     if t.ready() :
