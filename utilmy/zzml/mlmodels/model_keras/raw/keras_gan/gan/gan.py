@@ -16,6 +16,11 @@ import numpy as np
 
 class GAN():
     def __init__(self):
+        """ GAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -50,6 +55,11 @@ class GAN():
 
 
     def build_generator(self):
+        """ GAN:build_generator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -73,6 +83,11 @@ class GAN():
         return Model(noise, img)
 
     def build_discriminator(self):
+        """ GAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -90,6 +105,14 @@ class GAN():
         return Model(img, validity)
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ GAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, _), (_, _) = mnist.load_data()
@@ -139,6 +162,12 @@ class GAN():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ GAN:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 5, 5
         noise = np.random.normal(0, 1, (r * c, self.latent_dim))
         gen_imgs = self.generator.predict(noise)

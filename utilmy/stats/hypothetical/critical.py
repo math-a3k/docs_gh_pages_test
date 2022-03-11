@@ -23,6 +23,13 @@ from numpy import nan, array
 
 
 def chi_square_critical_value(alpha, dof):
+    """function chi_square_critical_value
+    Args:
+        alpha:   
+        dof:   
+    Returns:
+        
+    """
     r"""
     Finds the :math:`\chi^2` critical value given the input alpha-level and degrees of freedom.
 

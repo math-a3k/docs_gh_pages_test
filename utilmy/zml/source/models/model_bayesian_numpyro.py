@@ -10,22 +10,70 @@ from utilmy import global_verbosity, os_makedirs
 verbosity = global_verbosity(__file__, "/../../config.json" ,default= 5)
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 ####################################################################################################
 global model, session
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
@@ -79,6 +127,14 @@ def init(*kw, **kwargs):
 
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
 
         if model_pars is None:
@@ -138,6 +194,16 @@ def fit(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars={}, compute_pars=None, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     # data_pars['train'] = False
 
@@ -205,6 +271,13 @@ def reset():
 
 
 def save(path=None, info=None):
+    """function save
+    Args:
+        path:   
+        info:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     os.makedirs(path, exist_ok=True)
@@ -217,6 +290,12 @@ def save(path=None, info=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     import cloudpickle as pickle
     model0 = pickle.load(open(f"{path}/model.pkl", mode='rb'))
@@ -230,6 +309,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -241,6 +326,12 @@ def load_info(path=""):
 
 
 def preprocess(prepro_pars):
+    """function preprocess
+    Args:
+        prepro_pars:   
+    Returns:
+        
+    """
     if prepro_pars['type'] == 'test':
         from sklearn.datasets import make_classification
         from sklearn.model_selection import train_test_split
@@ -297,6 +388,13 @@ def get_dataset(data_pars=None, task_type="train", **kw):
 
 
 def get_params(param_pars={}, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     import json
     # from jsoncomment import JsonComment ; json = JsonComment()
     pp = param_pars

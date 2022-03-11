@@ -9,12 +9,22 @@ import os, sys, time, datetime,inspect, json, yaml, gc, numpy as np, pandas as p
 from utilmy.utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print(  HELP + help_create(MNAME) )
 
 
 ####################################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     log("Testing dates.py ...")
     date_ = date_generate(start='2021-01-01', ndays=100)
     date_weekyear_excel('20210317')
@@ -29,12 +39,27 @@ def test_all():
     #pd_date_split(df,coldate="Birthdate")
 
 def random_dates(start, end, size):
+    """function random_dates
+    Args:
+        start:   
+        end:   
+        size:   
+    Returns:
+        
+    """
     divide_by = 24 * 60 * 60 * 10**9
     start_u = start.value // divide_by
     end_u = end.value // divide_by
     return pd.to_datetime(np.random.randint(start_u, end_u, size), unit="D")
     
 def random_genders(size, p=None):
+    """function random_genders
+    Args:
+        size:   
+        p:   
+    Returns:
+        
+    """
     if not p:
         p = (0.49, 0.49, 0.01, 0.01)
     gender = ("M", "F", "O", "")
@@ -44,6 +69,16 @@ def random_genders(size, p=None):
 ####################################################################################################
 ##### Utilities for date  ##########################################################################
 def pd_date_split(df, coldate =  'time_key', prefix_col ="",sep="/" ,verbose=False ):
+    """function pd_date_split
+    Args:
+        df:   
+        coldate :   
+        prefix_col :   
+        sep:   
+        verbose:   
+    Returns:
+        
+    """
     import pandas as pd
 
     df = df.drop_duplicates(coldate)
@@ -89,6 +124,14 @@ def date_to_timezone(tdate,  fmt="%Y%m%d-%H:%M", timezone='Asia/Tokyo'):
 
 
 def date_now(fmt="%Y-%m-%d %H:%M:%S %Z%z", add_days=0, timezone='Asia/Tokyo'):
+    """function date_now
+    Args:
+        fmt="%Y-%m-%d %H:   
+        add_days:   
+        timezone:   
+    Returns:
+        
+    """
     from pytz import timezone as timz
     import datetime
     # Current time in UTC
@@ -110,6 +153,12 @@ def date_is_holiday(array):
 
 
 def date_weekmonth2(d):
+     """function date_weekmonth2
+     Args:
+         d:   
+     Returns:
+         
+     """
      w = (d.day-1)//7+1
      if w < 0 or w > 5 :
          return -1
@@ -127,10 +176,22 @@ def date_weekmonth(date_value):
 
 
 def date_weekyear2(dt) :
+ """function date_weekyear2
+ Args:
+     dt:   
+ Returns:
+     
+ """
  return ((dt - datetime.datetime(dt.year,1,1)).days // 7) + 1
 
 
 def date_weekday_excel(x) :
+ """function date_weekday_excel
+ Args:
+     x:   
+ Returns:
+     
+ """
  import datetime
  date = datetime.datetime.strptime(x,"%Y%m%d")
  wday = date.weekday()
@@ -139,12 +200,25 @@ def date_weekday_excel(x) :
 
 
 def date_weekyear_excel(x) :
+ """function date_weekyear_excel
+ Args:
+     x:   
+ Returns:
+     
+ """
  import datetime
  date = datetime.datetime.strptime(x,"%Y%m%d")
  return date.isocalendar()[1]
 
 
 def date_generate(start='2018-01-01', ndays=100) :
+ """function date_generate
+ Args:
+     start:   
+     ndays:   
+ Returns:
+     
+ """
  from dateutil.relativedelta import relativedelta
  start0 = datetime.datetime.strptime(start, "%Y-%m-%d")
  date_list = [start0 + relativedelta(days=x) for x in range(0, ndays)]

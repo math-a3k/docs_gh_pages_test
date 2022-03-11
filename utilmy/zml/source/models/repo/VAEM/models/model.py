@@ -55,6 +55,11 @@ class partial_vaem(object):
 
     #### build VAEM model ####
     def _build_graph(self):
+        """ partial_vaem:_build_graph
+        Args:
+        Returns:
+           
+        """
         with tf.variable_scope('is',reuse=tf.AUTO_REUSE):
             # placeholder for training data
             self.x = tf.placeholder(tf.float32, shape=[None, self._obs_dim])
@@ -316,6 +321,12 @@ class partial_vaem(object):
                 self._sesh.run(init)
     
     def _vamp_prior_empirical_local(self,n_components):
+        """ partial_vaem:_vamp_prior_empirical_local
+        Args:
+            n_components:     
+        Returns:
+           
+        """
         idxs = tf.range(tf.shape(self.x_induce)[0])
         ridxs = tf.random_shuffle(idxs)[:n_components]
         x_vamp = tf.gather(self.x_induce, ridxs,axis = 0)
@@ -325,6 +336,12 @@ class partial_vaem(object):
         return mean_vamp,logvar_vamp
 
     def _vamp_prior_induce_local(self,n_components):
+        """ partial_vaem:_vamp_prior_induce_local
+        Args:
+            n_components:     
+        Returns:
+           
+        """
         x_vamp = tf.get_variable("x_vamp", shape=[n_components, self._obs_dim], initializer=tf.contrib.layers.xavier_initializer())
         encoded_vamp = self._encode._partial_encoder_local(x_vamp,x_vamp*0+1)
         mean_vamp = encoded_vamp[:, :self._obs_dim-1]
@@ -337,6 +354,12 @@ class partial_vaem(object):
         return mean_vamp,logvar_vamp,mean_vamp_batch,logvar_vamp_batch
 
     def _vamp_prior_empirical_global(self,n_components):
+        """ partial_vaem:_vamp_prior_empirical_global
+        Args:
+            n_components:     
+        Returns:
+           
+        """
 #             id_vamp = np.random.choice(self._x_train.shape[0], n_components)
         idxs = tf.range(  tf.minimum( tf.minimum(tf.shape(self.x_induce)[0],n_components),tf.shape(self.z_local)[0]))
         ridxs = tf.random_shuffle(idxs)[:n_components]
@@ -348,6 +371,12 @@ class partial_vaem(object):
         return mean_vamp,logvar_vamp
     
     def _vamp_prior_induce_global(self,n_components):
+        """ partial_vaem:_vamp_prior_induce_global
+        Args:
+            n_components:     
+        Returns:
+           
+        """
         z_vamp = tf.get_variable("z_vamp", shape=[n_components, self._obs_dim-1],initializer=tf.contrib.layers.xavier_initializer())
         x_vamp = tf.get_variable("x_vamp",shape=[n_components, self._obs_dim],initializer=tf.contrib.layers.xavier_initializer())
         encoded_vamp = self._encode._partial_encoder_global(z_vamp,x_vamp, x_vamp*0+1)
@@ -399,14 +428,37 @@ class partial_vaem(object):
         return kl
 
     def _log_normalizing_constant_pointwise(self,mu,log_var):
+        """ partial_vaem:_log_normalizing_constant_pointwise
+        Args:
+            mu:     
+            log_var:     
+        Returns:
+           
+        """
         z = -0.5*np.log(2*np.pi) - 0.5*np.log(2) - 0.5*log_var
         return z
 
     def _entropy_diagnormals_pointwise(self,mu,log_var):
+        """ partial_vaem:_entropy_diagnormals_pointwise
+        Args:
+            mu:     
+            log_var:     
+        Returns:
+           
+        """
         h = 0.5*tf.log(2*np.pi)+0.5*log_var+0.5
         return h
 
     def _kl_diagnormal_vamp(self, mu, log_var,mu_vamp, log_var_vamp):
+        """ partial_vaem:_kl_diagnormal_vamp
+        Args:
+            mu:     
+            log_var:     
+            mu_vamp:     
+            log_var_vamp:     
+        Returns:
+           
+        """
         mean_exp_neg_kl = tf.reduce_mean( tf.exp(- self._kl_diagnormals_pointwise(mu,log_var,mu_vamp,log_var_vamp)),axis=2)
         kl = tf.reduce_sum(self._log_normalizing_constant_pointwise(mu,log_var) - tf.log(mean_exp_neg_kl) + self._entropy_diagnormals_pointwise(mu,log_var))
         return kl
@@ -466,6 +518,16 @@ class partial_vaem(object):
         return se
 
     def _multi_cat_log_likelihood(self, targets, outputs, mask, cat_dims, eps = 1e-2):
+        """ partial_vaem:_multi_cat_log_likelihood
+        Args:
+            targets:     
+            outputs:     
+            mask:     
+            cat_dims:     
+            eps :     
+        Returns:
+           
+        """
         cumsum_cat_dims = tf.cumsum(cat_dims)
         cumsum_outputs = tf.cumsum(outputs,axis = 1)
         local_cumsum_outputs = tf.gather(cumsum_outputs,cumsum_cat_dims-1,axis = 1)
@@ -476,6 +538,16 @@ class partial_vaem(object):
         return log_like, decoded_normalized
 
     def _multi_cat_log_likelihood_featurewise(self, targets, outputs, mask, cat_dims, eps = 1e-2):
+        """ partial_vaem:_multi_cat_log_likelihood_featurewise
+        Args:
+            targets:     
+            outputs:     
+            mask:     
+            cat_dims:     
+            eps :     
+        Returns:
+           
+        """
         cumsum_cat_dims = tf.cumsum(cat_dims)
         cumsum_outputs = tf.cumsum(outputs,axis = 1)
         local_cumsum_outputs = tf.gather(cumsum_outputs,cumsum_cat_dims-1,axis = 1)
@@ -487,6 +559,13 @@ class partial_vaem(object):
 
 
     def _tf_repeat(self,tensor, repeats):
+        """ partial_vaem:_tf_repeat
+        Args:
+            tensor:     
+            repeats:     
+        Returns:
+           
+        """
         i = tf.constant(0)
         n = tf.constant(len(repeats))
         op_tensor = tf.reshape(tensor[:, 0], [-1, 1])
@@ -603,6 +682,16 @@ class partial_vaem(object):
         return nllh, ae
     
     def get_imputation(self, x, mask_obs, cat_dims, dic_var_type,):
+        """ partial_vaem:get_imputation
+        Args:
+            x:     
+            mask_obs:     
+            cat_dims:     
+            dic_var_type:     
+            :     
+        Returns:
+           
+        """
         mask_flt = mask_obs[:, np.ndarray.flatten(np.argwhere(dic_var_type == 0))]
         mask_cat_oh = np.array([]).reshape(x.shape[0], 0)
         for d in range(len(cat_dims)):
@@ -645,6 +734,13 @@ class partial_vaem(object):
         return im
 
     def generateEncodings(self,x,mask):
+        """ partial_vaem:generateEncodings
+        Args:
+            x:     
+            mask:     
+        Returns:
+           
+        """
         enc = self._encoderSesh.run(self.encoded_local,feed_dict={self.x:x,self.mask:mask,self.x_induce:self._x_train})
         return enc
 

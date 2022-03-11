@@ -29,6 +29,13 @@ class BaseIterator(object):
 
     @abc.abstractmethod
     def _convert_data(self, labels, features):
+        """ BaseIterator:_convert_data
+        Args:
+            labels:     
+            features:     
+        Returns:
+           
+        """
         pass
 
     @abc.abstractmethod

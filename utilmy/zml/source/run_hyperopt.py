@@ -20,6 +20,12 @@ obj_fun
 DEBUG = True
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s)
 
 import copy, optuna
@@ -124,6 +130,11 @@ def run_hyper_optuna(obj_fun, pars_dict_init,  pars_dict_range,  engine_pars, nt
 
 
 def test_hyper():
+    """function test_hyper
+    Args:
+    Returns:
+        
+    """
     model_pars ={
 
 
@@ -153,6 +164,11 @@ def test_hyper():
 
 
 def test_hyper3():
+    """function test_hyper3
+    Args:
+    Returns:
+        
+    """
     import pandas as pd
     import numpy as np
 
@@ -177,6 +193,11 @@ def test_hyper3():
 
 
 def test_hyper2():
+    """function test_hyper2
+    Args:
+    Returns:
+        
+    """
     import pandas as pd
     import numpy as np
     import sklearn
@@ -233,6 +254,13 @@ if __name__ == "__main__":
 
 
 def eval_dict(src, dst={}):
+    """function eval_dict
+    Args:
+        src:   
+        dst:   
+    Returns:
+        
+    """
     import pandas as pd
     for key, value in src.items():
         if isinstance(value, dict):

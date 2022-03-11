@@ -100,6 +100,17 @@ def pandas_input_fn(
 
 
 def _dataset(x, y=None, batch_size=128, num_epochs=1, shuffle=False, seed=None):
+    """function _dataset
+    Args:
+        x:   
+        y:   
+        batch_size:   
+        num_epochs:   
+        shuffle:   
+        seed:   
+    Returns:
+        
+    """
     if y is None:
         dataset = tf.data.Dataset.from_tensor_slices(x)
     else:
@@ -275,6 +286,11 @@ class _TrainLogHook(tf.train.SessionRunHook):
         self.step = 0
 
     def begin(self):
+        """ _TrainLogHook:begin
+        Args:
+        Returns:
+           
+        """
         if self.model_dir is not None:
             self.summary_writer = tf.summary.FileWriterCache.get(self.model_dir)
             self.global_step_tensor = tf.train.get_or_create_global_step()
@@ -282,6 +298,12 @@ class _TrainLogHook(tf.train.SessionRunHook):
             self.step = 0
 
     def before_run(self, run_context):
+        """ _TrainLogHook:before_run
+        Args:
+            run_context:     
+        Returns:
+           
+        """
         if self.global_step_tensor is not None:
             requests = {"global_step": self.global_step_tensor}
             return tf.train.SessionRunArgs(requests)
@@ -289,6 +311,13 @@ class _TrainLogHook(tf.train.SessionRunHook):
             return None
 
     def after_run(self, run_context, run_values):
+        """ _TrainLogHook:after_run
+        Args:
+            run_context:     
+            run_values:     
+        Returns:
+           
+        """
         if self.global_step_tensor is not None:
             self.step = run_values.results["global_step"]
         else:
@@ -325,10 +354,23 @@ class _TrainLogHook(tf.train.SessionRunHook):
             tf.logging.set_verbosity(_prev_log_level)
 
     def end(self, session):
+        """ _TrainLogHook:end
+        Args:
+            session:     
+        Returns:
+           
+        """
         if self.summary_writer is not None:
             self.summary_writer.flush()
 
     def _log(self, tag, value):
+        """ _TrainLogHook:_log
+        Args:
+            tag:     
+            value:     
+        Returns:
+           
+        """
         self.logger.log(tag, value)
         if self.summary_writer is not None:
             summary = tf.Summary(value=[tf.Summary.Value(tag=tag, simple_value=value)])

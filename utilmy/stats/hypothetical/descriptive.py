@@ -80,6 +80,14 @@ from hypothetical._lib import _build_summary_matrix
 
 
 def add_noise(cor, epsilon=None, m=None):
+    """function add_noise
+    Args:
+        cor:   
+        epsilon:   
+        m:   
+    Returns:
+        
+    """
     if isinstance(cor, pd.DataFrame):
         cor = cor.values
     elif isinstance(cor, np.ndarray) is False:
@@ -100,6 +108,14 @@ def add_noise(cor, epsilon=None, m=None):
 
 
 def covar(x, y=None, method=None):
+    """function covar
+    Args:
+        x:   
+        y:   
+        method:   
+    Returns:
+        
+    """
     r"""
     Computes the covariance matrix.
 

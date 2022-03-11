@@ -14,12 +14,30 @@ from utilmy import global_verbosity, os_makedirs
 verbosity = global_verbosity(__file__, "/../config.json" ,default= 5)
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 1 : print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 
@@ -32,6 +50,15 @@ log(root)
 
 ####################################################################################################
 def log_pd(df, *s, n=0, m=1):
+    """function log_pd
+    Args:
+        df:   
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sjump = "\n" * m
     ### Implement pseudo Logging
     print(sjump,  df.head(n), flush=True)
@@ -57,6 +84,13 @@ def save_features(df, name, path=None):
 
 
 def load_features(name, path):
+    """function load_features
+    Args:
+        name:   
+        path:   
+    Returns:
+        
+    """
     try:
         return pd.read_parquet(f"{path}/{name}/features.parquet")
     except:

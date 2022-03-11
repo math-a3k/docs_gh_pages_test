@@ -10,22 +10,52 @@ from utilmy import global_verbosity, os_makedirs, pd_read_file
 verbosity = global_verbosity(__file__,"/../../config.json", 3 )
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 ####################################################################################################
 global model, session
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
@@ -72,6 +102,14 @@ except Exception as e :
 ####################################################################################################
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
 
         if model_pars is None:
@@ -106,6 +144,16 @@ def fit(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     if Xpred is None:
         data_pars['train'] = False
@@ -135,6 +183,13 @@ def predict(Xpred=None, data_pars={}, compute_pars={}, out_pars={}, **kw):
 
 
 def save(path=None, info=None):
+    """function save
+    Args:
+        path:   
+        info:   
+    Returns:
+        
+    """
     global model, session
     # import cloudpickle as pickle
     import dill as pickle
@@ -157,6 +212,12 @@ def save(path=None, info=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     # import cloudpickle as pickle
     import dill as pickle
@@ -180,6 +241,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):

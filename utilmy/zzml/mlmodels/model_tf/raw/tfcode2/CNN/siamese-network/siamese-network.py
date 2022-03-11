@@ -22,14 +22,36 @@ mnist = input_data.read_data_sets("/home/husein/space/mnist")
 
 
 def convolutionize(x, conv_w, h=1):
+    """function convolutionize
+    Args:
+        x:   
+        conv_w:   
+        h:   
+    Returns:
+        
+    """
     return tf.nn.conv2d(input=x, filter=conv_w, strides=[1, h, h, 1], padding="SAME")
 
 
 def pooling(wx):
+    """function pooling
+    Args:
+        wx:   
+    Returns:
+        
+    """
     return tf.nn.max_pool(wx, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="SAME")
 
 
 def create_network(X, scope="conv", reuse=False):
+    """function create_network
+    Args:
+        X:   
+        scope:   
+        reuse:   
+    Returns:
+        
+    """
     with tf.variable_scope(scope, reuse=reuse):
         w1 = tf.Variable(tf.random_normal([3, 3, 1, 2], stddev=0.5))
         b1 = tf.Variable(tf.zeros(shape=[2]))
@@ -49,6 +71,11 @@ def create_network(X, scope="conv", reuse=False):
 
 class Siamese:
     def __init__(self):
+        """ Siamese:__init__
+        Args:
+        Returns:
+           
+        """
         self.X1 = tf.placeholder(tf.float32, (None, 28, 28, 1))
         self.X2 = tf.placeholder(tf.float32, (None, 28, 28, 1))
         self.Y = tf.placeholder(tf.float32, [None])

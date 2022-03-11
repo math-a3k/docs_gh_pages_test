@@ -19,6 +19,11 @@ TOL = 0.001
 
 @pytest.fixture
 def rating_true():
+    """function rating_true
+    Args:
+    Returns:
+        
+    """
     return pd.DataFrame(
         {
             DEFAULT_USER_COL: [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
@@ -48,6 +53,12 @@ def rating_true():
 
 
 def test_predict(rating_true):
+    """function test_predict
+    Args:
+        rating_true:   
+    Returns:
+        
+    """
     train_set = cornac.data.Dataset.from_uir(
         rating_true.itertuples(index=False), seed=42
     )
@@ -63,6 +74,12 @@ def test_predict(rating_true):
 
 
 def test_recommend_k_items(rating_true):
+    """function test_recommend_k_items
+    Args:
+        rating_true:   
+    Returns:
+        
+    """
     train_set = cornac.data.Dataset.from_uir(
         rating_true.itertuples(index=False), seed=42
     )

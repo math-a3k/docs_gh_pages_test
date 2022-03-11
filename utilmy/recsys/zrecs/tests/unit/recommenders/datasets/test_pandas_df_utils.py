@@ -33,6 +33,11 @@ def user_item_dataset():
 
 
 def test_negative_feedback_sampler():
+    """function test_negative_feedback_sampler
+    Args:
+    Returns:
+        
+    """
     df = pd.DataFrame(
         data={"userID": [1, 2, 3], "itemID": [1, 2, 3], "rating": [5, 5, 5]}
     )
@@ -127,6 +132,11 @@ def test_negative_feedback_sampler():
 
 
 def test_filter_by():
+    """function test_filter_by
+    Args:
+    Returns:
+        
+    """
     user_df = pd.DataFrame(
         {"user_id": [1, 9, 3, 5, 5, 1], "item_id": [1, 6, 7, 6, 8, 9]}
     )
@@ -146,6 +156,11 @@ def test_filter_by():
 
 
 def test_csv_to_libffm():
+    """function test_csv_to_libffm
+    Args:
+    Returns:
+        
+    """
     df_feature = pd.DataFrame(
         {
             "rating": [1, 0, 0, 1, 1],
@@ -233,6 +248,11 @@ def test_csv_to_libffm():
 
 
 def test_has_columns():
+    """function test_has_columns
+    Args:
+    Returns:
+        
+    """
     df_1 = pd.DataFrame(dict(a=[1, 2, 3]))
     df_2 = pd.DataFrame(dict(b=[7, 8, 9], a=[1, 2, 3]))
 
@@ -243,6 +263,11 @@ def test_has_columns():
 
 
 def test_has_same_base_dtype():
+    """function test_has_same_base_dtype
+    Args:
+    Returns:
+        
+    """
     arr_int32 = np.array([1, 2, 3], dtype=np.int32)
     arr_int64 = np.array([1, 2, 3], dtype=np.int64)
     arr_float32 = np.array([1, 2, 3], dtype=np.float32)
@@ -273,6 +298,11 @@ def test_has_same_base_dtype():
 
 
 def test_lru_cache_df():
+    """function test_lru_cache_df
+    Args:
+    Returns:
+        
+    """
     df1 = pd.DataFrame(dict(a=[1, 2, 3], b=["a", "b", "c"]))
     df2 = pd.DataFrame(dict(a=[1, 2, 3], c=["a", "b", "c"]))
     df3 = pd.DataFrame(dict(a=[1, 2, 3], b=["a", "b", "d"]))

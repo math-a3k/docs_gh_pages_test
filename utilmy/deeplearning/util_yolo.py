@@ -5,18 +5,33 @@ from typing import Dict, Mapping
 
 
 def test_convert_to_yolov5():
+    """function test_convert_to_yolov5
+    Args:
+    Returns:
+        
+    """
     info_dict = { 'bboxes': [{'class': 'AIRPLANE', 'xmin': 171, 'ymin': 161, 'xmax': 185, 'ymax': 172}], 'filename': 'IR_AIRPLANE_0511_297.png', 'image_size': (320, 256, 1) }
     names = {"AIRPLANE":0}
     convert_to_yolov5(info_dict,names, output= "./testdata/util_yolo")
 
 
 def test_yolov5_from_xml():
+    """function test_yolov5_from_xml
+    Args:
+    Returns:
+        
+    """
     yolo_extract_info_from_xml("testdata/util_yolo/724_29873.xml")
     yolov5_from_xml(xml_file_path= "testdata/util_yolo/724_29873.xml",output= "testdata/util_yolo")
     yolov5_from_xml(xml_folder="testdata/util_yolo",output= "testdata/util_yolo")
 
 
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     # test_extract_info_from_xml()
     test_convert_to_yolov5()
     test_yolov5_from_xml()

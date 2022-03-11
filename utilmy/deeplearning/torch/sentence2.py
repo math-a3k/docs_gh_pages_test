@@ -91,6 +91,15 @@ MODEL_URI = get_model_uri(__file__)
 ####################################################################################################
 class Model:
   def __init__(self, model_pars=None, data_pars=None, compute_pars=None, **kwargs):
+    """ Model:__init__
+    Args:
+        model_pars:     
+        data_pars:     
+        compute_pars:     
+        **kwargs:     
+    Returns:
+       
+    """
     self.model_pars = model_pars
     self.model_pars = compute_pars
     self.data_pars = data_pars
@@ -162,6 +171,17 @@ def evaluate(model, session=None, data_pars=None, compute_pars=None, out_pars=No
 
 
 def predict(model, session=None, data_pars=None, out_pars=None, compute_pars=None, **kw):
+    """function predict
+    Args:
+        model:   
+        session:   
+        data_pars:   
+        out_pars:   
+        compute_pars:   
+        **kw:   
+    Returns:
+        
+    """
 
     reader      = get_dataset(data_pars)
     train_fname = 'train.gz' if data_pars["train_type"].lower() == 'nli' else 'sts-train.csv'
@@ -180,14 +200,33 @@ def predict(model, session=None, data_pars=None, out_pars=None, compute_pars=Non
 
   
 def reset_model():
+    """function reset_model
+    Args:
+    Returns:
+        
+    """
     pass
 
 
 def save(model, session=None, save_pars=None):
+    """function save
+    Args:
+        model:   
+        session:   
+        save_pars:   
+    Returns:
+        
+    """
     return torch.save(model.modl, save_pars['path'])
 
 
 def load(load_pars=None):
+    """function load
+    Args:
+        load_pars:   
+    Returns:
+        
+    """
     model = Model(skip_create=True)
     model.model = torch.load(load_pars['path'])
     return model   
@@ -243,6 +282,17 @@ def fit2(model, data_pars=None, model_pars=None, compute_pars=None, out_pars=Non
 
 
 def predict2(model, session=None, data_pars=None, out_pars=None, compute_pars=None, **kw):
+    """function predict2
+    Args:
+        model:   
+        session:   
+        data_pars:   
+        out_pars:   
+        compute_pars:   
+        **kw:   
+    Returns:
+        
+    """
     data_pars['is_train'] = 1
     reader, pars      = get_dataset2(data_pars, model=model)
 
@@ -334,6 +384,13 @@ def get_dataset2(data_pars=None, model=None, **kw):
 
 
 def get_params(param_pars, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     choice      = param_pars['choice']
     config_mode = param_pars['config_mode']
     data_path   = param_pars['data_path']
@@ -382,6 +439,14 @@ def get_params(param_pars, **kw):
 
 ##################################################################################################
 def test(data_path="dataset/", pars_choice="test01", config_mode="test"):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+        config_mode:   
+    Returns:
+        
+    """
     ### Local test
     from mlmodels.util import path_norm
     data_path = path_norm(data_path)

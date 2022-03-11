@@ -14,6 +14,13 @@ from recommenders.utils.notebook_utils import is_jupyter, is_databricks
 
 @pytest.mark.notebooks
 def test_is_jupyter(output_notebook, kernel_name):
+    """function test_is_jupyter
+    Args:
+        output_notebook:   
+        kernel_name:   
+    Returns:
+        
+    """
     # Test on the terminal
     assert is_jupyter() is False
     assert is_databricks() is False

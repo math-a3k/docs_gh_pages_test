@@ -18,6 +18,11 @@ import numpy as np
 class COGAN():
     """Reference: https://wiseodd.github.io/techblog/2017/02/18/coupled_gan/"""
     def __init__(self):
+        """ COGAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -58,6 +63,11 @@ class COGAN():
                                     optimizer=optimizer)
 
     def build_generators(self):
+        """ COGAN:build_generators
+        Args:
+        Returns:
+           
+        """
 
         # Shared weights between generators
         model = Sequential()
@@ -90,6 +100,11 @@ class COGAN():
         return Model(noise, img1), Model(noise, img2)
 
     def build_discriminators(self):
+        """ COGAN:build_discriminators
+        Args:
+        Returns:
+           
+        """
 
         img1 = Input(shape=self.img_shape)
         img2 = Input(shape=self.img_shape)
@@ -113,6 +128,14 @@ class COGAN():
         return Model(img1, validity1), Model(img2, validity2)
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ COGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, _), (_, _) = mnist.load_data()
@@ -172,6 +195,12 @@ class COGAN():
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ COGAN:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 4, 4
         noise = np.random.normal(0, 1, (r * int(c/2), 100))
         gen_imgs1 = self.g1.predict(noise)

@@ -10,6 +10,12 @@ from box import Box
 ####################################################################
 global verbose
 def get_verbosity(verbose:int=None):
+    """function get_verbosity
+    Args:
+        verbose ( int ) :   
+    Returns:
+        
+    """
     if verbose is None :
         verbose = os.environ.get('utilmy-verbose', 3)
     return verbose
@@ -119,6 +125,12 @@ def help_get_funargs(func):
 
 
 def help_signature(f):
+    """function help_signature
+    Args:
+        f:   
+    Returns:
+        
+    """
     from collections import namedtuple
     sig = inspect.signature(f)
     args = [
@@ -170,6 +182,14 @@ def get_verbosity(verbose:int=None):
 
 
 def get_loggers(mode='print', n_loggers=2, verbose_level=None):
+    """function get_loggers
+    Args:
+        mode:   
+        n_loggers:   
+        verbose_level:   
+    Returns:
+        
+    """
     global verbose
     verbose = get_verbosity(verbose_level)
 
@@ -202,6 +222,14 @@ def find_fuzzy(word:str, wlist:list, threshold=0.0):
 
 
 def import_function(fun_name=None, module_name=None, fuzzy_match=False):
+    """function import_function
+    Args:
+        fun_name:   
+        module_name:   
+        fuzzy_match:   
+    Returns:
+        
+    """
     import importlib
 
     try :
@@ -229,6 +257,13 @@ def glob_glob(dirin="**/*.py", nfile=1000, recursive=False, **kw):
 
 
 def sys_exit(msg="exited",  err_int=0):
+    """function sys_exit
+    Args:
+        msg:   
+        err_int:   
+    Returns:
+        
+    """
     import os, sys
     print(msg)         
     ### exit with no error msg 
@@ -238,6 +273,12 @@ def sys_exit(msg="exited",  err_int=0):
 
     
 def sys_install(cmd=""):
+   """function sys_install
+   Args:
+       cmd:   
+   Returns:
+       
+   """
    import os, sys, time  
    print("Installing  ")
    print( cmd +"  \n\n ...") ; time.sleep(7)
@@ -265,6 +306,13 @@ def pip_install(pkg_str=" pandas "):
 
 ###################################################################################################
 def pd_random(ncols=7, nrows=100):
+   """function pd_random
+   Args:
+       ncols:   
+       nrows:   
+   Returns:
+       
+   """
    import pandas as pd
    ll = [[ random.random() for i in range(0, ncols)] for j in range(0, nrows) ]
    df = pd.DataFrame(ll, columns = [str(i) for i in range(0,ncols)])
@@ -316,6 +364,12 @@ class Index0(object):
     ### to maintain global index, flist = index.read()  index.save(flist)
     """
     def __init__(self, findex:str="ztmp_file.txt"):
+        """ Index0:__init__
+        Args:
+            findex (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         self.findex = findex        
         os.makedirs(os.path.dirname(self.findex), exist_ok=True)
         if not os.path.isfile(self.findex):
@@ -323,6 +377,12 @@ class Index0(object):
                 fp.write("")              
 
     def read(self,):            
+        """ Index0:read
+        Args:
+            :     
+        Returns:
+           
+        """
         with open(self.findex, mode='r') as fp:
             flist = fp.readlines()
 
@@ -334,6 +394,12 @@ class Index0(object):
         return flist2    
 
     def save(self, flist:list):
+        """ Index0:save
+        Args:
+            flist (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         if len(flist) < 1 : return True
         ss = ""
         for fi in flist :
@@ -346,6 +412,11 @@ class Index0(object):
 ###################################################################################################
 ###### Test #######################################################################################
 def test_all():
+   """function test_all
+   Args:
+   Returns:
+       
+   """
    import utilmy as m
 
    ###################################################################################
@@ -536,6 +607,11 @@ from utilmy.debug import (
 ######################################################################################################
 ########Git ##########################################################################################
 def git_repo_root():
+    """function git_repo_root
+    Args:
+    Returns:
+        
+    """
     try :
       cmd = "git rev-parse --show-toplevel"
       mout, merr = os_system(cmd)
@@ -546,6 +622,12 @@ def git_repo_root():
 
 
 def git_current_hash(mode='full'):
+   """function git_current_hash
+   Args:
+       mode:   
+   Returns:
+       
+   """
    import subprocess
    # label = subprocess.check_output(["git", "describe", "--always"]).strip();
    label = subprocess.check_output([ 'git', 'rev-parse', 'HEAD' ]).strip();
@@ -564,23 +646,51 @@ class Session(object) :
       sess.save( globals() )
     """
     def __init__(self, dir_session="ztmp/session/",) :
+      """ Session:__init__
+      Args:
+          dir_session:     
+          :     
+      Returns:
+         
+      """
       os.makedirs(dir_session, exist_ok=True)
       self.dir_session =  dir_session
       self.cur_session =  None
       print(self.dir_session)
 
     def show(self) :
+       """ Session:show
+       Args:
+       Returns:
+          
+       """
        import glob
        flist = glob.glob(self.dir_session + "/*" )
        print(flist)
 
     def save(self, name, glob=None, tag="") :
+       """ Session:save
+       Args:
+           name:     
+           glob:     
+           tag:     
+       Returns:
+          
+       """
        path = f"{self.dir_session}/{name}{tag}/"
        self.cur_session = path
        os.makedirs(self.cur_session, exist_ok=True)
        self.save_session(self.cur_session, glob)
 
     def load(self, name, glob:dict=None, tag="") :
+      """ Session:load
+      Args:
+          name:     
+          glob (function["arg_type"][i]) :     
+          tag:     
+      Returns:
+         
+      """
       path = f"{self.dir_session}/{name}{tag}/"
       self.cur_session = path
       print(self.cur_session)
@@ -588,6 +698,14 @@ class Session(object) :
 
 
     def save_session(self, folder , globs, tag="" ) :
+      """ Session:save_session
+      Args:
+          folder:     
+          globs:     
+          tag:     
+      Returns:
+         
+      """
       import pandas as pd
       os.makedirs( folder , exist_ok= True)
       lcheck = [ "<class 'pandas.core.frame.DataFrame'>", "<class 'list'>", "<class 'dict'>",
@@ -626,6 +744,14 @@ class Session(object) :
 
 
 def save(dd, to_file="", verbose=False):
+  """function save
+  Args:
+      dd:   
+      to_file:   
+      verbose:   
+  Returns:
+      
+  """
   import pickle, os
   os.makedirs(os.path.dirname(to_file), exist_ok=True)
   pickle.dump(dd, open(to_file, mode="wb") , protocol=pickle.HIGHEST_PROTOCOL)
@@ -633,6 +759,12 @@ def save(dd, to_file="", verbose=False):
 
 
 def load(to_file=""):
+  """function load
+  Args:
+      to_file:   
+  Returns:
+      
+  """
   import pickle
   dd =   pickle.load(open(to_file, mode="rb"))
   return dd

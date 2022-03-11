@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=C0415
 def test_import():
+    """function test_import
+    Args:
+    Returns:
+        
+    """
     import pandas
     import numpy
     import cv2

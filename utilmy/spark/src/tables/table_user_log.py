@@ -116,6 +116,12 @@ def run(spark:SparkSession, config_name:str):
 
 
 def create_userid(userlogDF:pyspark.sql.DataFrame):
+    """function create_userid
+    Args:
+        userlogDF ( pyspark.sql.DataFrame ) :   
+    Returns:
+        
+    """
     userlogDF = userlogDF.withColumn("user_id", F.concat( 'sourceIP',F.lit('')) )
     return userlogDF
 

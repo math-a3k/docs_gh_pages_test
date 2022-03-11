@@ -27,9 +27,21 @@ except :
 verbosity =2
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 :
       print(*s, flush=True)
 
@@ -38,6 +50,13 @@ def log2(*s):
 global model, session
 
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
@@ -46,6 +65,18 @@ def init(*kw, **kwargs):
 cols_ref_formodel = ['cols_cross_input', 'cols_deep_input', 'cols_deep_input']
 
 def Modelcustom(n_wide_cross, n_wide,n_deep, n_feat=8, m_EMBEDDING=10, loss='mse', metric = 'mean_squared_error'):
+        """function Modelcustom
+        Args:
+            n_wide_cross:   
+            n_wide:   
+            n_deep:   
+            n_feat:   
+            m_EMBEDDING:   
+            loss:   
+            metric :   
+        Returns:
+            
+        """
 
         #### Wide model with the functional API
         col_wide_cross          = layers.Input(shape=(n_wide_cross,))
@@ -151,6 +182,11 @@ def get_dataset(data_pars=None, task_type="train", **kw):
 ########################################################################################################
 ########################### Using Sparse Tensor  #######################################################
 def ModelCustom2():
+    """function ModelCustom2
+    Args:
+    Returns:
+        
+    """
     # Build a wide-and-deep model.
     def wide_and_deep_classifier(inputs, linear_feature_columns, dnn_feature_columns, dnn_hidden_units):
         deep = tf.keras.layers.DenseFeatures(dnn_feature_columns, name='deep_inputs')(inputs)
@@ -335,6 +371,14 @@ def get_dataset2(data_pars=None, task_type="train", **kw):
 
 class Model(object):
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         self.model_pars, self.compute_pars, self.data_pars = model_pars, compute_pars, data_pars
         self.history = None
         if model_pars is None:
@@ -378,6 +422,16 @@ def fit(data_pars=None, compute_pars=None, out_pars=None, **kw):
 
 
 def predict(Xpred=None, data_pars=None, compute_pars={}, out_pars={}, **kw):
+    """function predict
+    Args:
+        Xpred:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kw:   
+    Returns:
+        
+    """
     global model, session
     if Xpred is None:
         Xpred_tuple = get_dataset(data_pars, task_type="predict")
@@ -395,11 +449,23 @@ def predict(Xpred=None, data_pars=None, compute_pars={}, out_pars={}, **kw):
 
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 
 
 def save(path=None, info=None):
+    """function save
+    Args:
+        path:   
+        info:   
+    Returns:
+        
+    """
     import dill as pickle, copy
     global model, session
     os.makedirs(path, exist_ok=True)
@@ -418,6 +484,12 @@ def save(path=None, info=None):
 
 
 def load_model(path=""):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     global model, session
     import dill as pickle
 
@@ -433,6 +505,12 @@ def load_model(path=""):
 
 
 def load_info(path=""):
+    """function load_info
+    Args:
+        path:   
+    Returns:
+        
+    """
     import cloudpickle as pickle, glob
     dd = {}
     for fp in glob.glob(f"{path}/*.pkl"):
@@ -519,6 +597,14 @@ def test(config=''):
 
 
 def test_helper(model_pars, data_pars, compute_pars):
+    """function test_helper
+    Args:
+        model_pars:   
+        data_pars:   
+        compute_pars:   
+    Returns:
+        
+    """
     global model, session
     root  = "ztmp/"
     model = Model(model_pars=model_pars, data_pars=data_pars, compute_pars=compute_pars)

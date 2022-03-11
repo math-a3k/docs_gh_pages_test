@@ -87,6 +87,13 @@ def isin_nb(matrix_in, index_to_remove):
 
 @njit(fastmath=True)
 def bincount(data, n):
+    """function bincount
+    Args:
+        data:   
+        n:   
+    Returns:
+        
+    """
     counts = np.zeros(n, dtype=np.int64)
     for j in range(n):
         counts[j] = np.sum(data==j)
@@ -134,6 +141,13 @@ def isin(a, b):
 
 @njit(fastmath=True)
 def isin_arr(arr, b):
+    """function isin_arr
+    Args:
+        arr:   
+        b:   
+    Returns:
+        
+    """
     res = np.empty(arr.shape[0], dtype=nb.boolean)
     for i in nb.prange(arr.shape[0]):
         res[i] = isin(arr[i], b)
@@ -335,6 +349,16 @@ class Dist:
             The empirical variance, covariance
     """
     def __init__(self, scope, data=None, n=None, lower=-np.Inf, upper=np.Inf):
+        """ Dist:__init__
+        Args:
+            scope:     
+            data:     
+            n:     
+            lower:     
+            upper:     
+        Returns:
+           
+        """
         if not isinstance(scope, list):
             scope = [scope]
         self.scope = scope

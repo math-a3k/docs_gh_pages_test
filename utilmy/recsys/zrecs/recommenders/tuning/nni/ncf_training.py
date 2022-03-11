@@ -19,6 +19,15 @@ logger = logging.getLogger("ncf")
 
 
 def _update_metrics(metrics_dict, metric, params, result):
+    """function _update_metrics
+    Args:
+        metrics_dict:   
+        metric:   
+        params:   
+        result:   
+    Returns:
+        
+    """
     logger.debug("%s@%d = %g", metric, params["k"], result)
     if metric == params["primary_metric"]:
         metrics_dict["default"] = result
@@ -120,6 +129,11 @@ def ncf_training(params):
 
 
 def get_params():
+    """function get_params
+    Args:
+    Returns:
+        
+    """
     parser = argparse.ArgumentParser()
     # Data path
     parser.add_argument(
@@ -152,6 +166,12 @@ def get_params():
 
 
 def main(params):
+    """function main
+    Args:
+        params:   
+    Returns:
+        
+    """
     logger.debug("Args: %s", str(params))
     logger.debug("Number of epochs %d", params["n_epochs"])
 

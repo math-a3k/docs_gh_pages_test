@@ -10,10 +10,21 @@ from typing import List
 from utilmy import log, log2
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(s, flush=True)
 
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy.utilmy import help_create
     ss = HELP + help_create('utilmy.nlp.util_cluster')
     print(ss)
@@ -23,6 +34,11 @@ def help():
 
 ########################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     from utilmy.nlp import util_cluster as m
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
@@ -45,6 +61,11 @@ def test_all():
       
 
 def test2():
+    """function test2
+    Args:
+    Returns:
+        
+    """
     from difflib import SequenceMatcher
     from pandas._testing import assert_series_equal
 
@@ -69,6 +90,11 @@ def test2():
 
 #############################################################################
 def test():
+  """function test
+  Args:
+  Returns:
+      
+  """
 
   column_name = "question1"
   threshold = 0.7
@@ -98,6 +124,11 @@ def test():
 
 
 def test_lsh():
+    """function test_lsh
+    Args:
+    Returns:
+        
+    """
 
     ll = ['aa bb cc', 'a b c', 'cc bb cc']
     column_name = "sentence"

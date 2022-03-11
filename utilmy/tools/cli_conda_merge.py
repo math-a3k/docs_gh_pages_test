@@ -456,16 +456,39 @@ class DAG(object):
     """
 
     def __init__(self):
+        """ DAG:__init__
+        Args:
+        Returns:
+           
+        """
         self.graph = OrderedDict()
 
     def __len__(self):
+        """ DAG:__len__
+        Args:
+        Returns:
+           
+        """
         return len(self.graph)
 
     def add_node(self, node_name):
+        """ DAG:add_node
+        Args:
+            node_name:     
+        Returns:
+           
+        """
         if node_name not in self.graph:
             self.graph[node_name] = []
 
     def add_edge(self, from_node, to_node):
+        """ DAG:add_edge
+        Args:
+            from_node:     
+            to_node:     
+        Returns:
+           
+        """
         if from_node not in self.graph or to_node not in self.graph:
             raise KeyError('one or more nodes do not exist in graph')
         if to_node not in self.graph[from_node]:

@@ -11,6 +11,16 @@ class OnlineLogisticRegression:
 
     # Initializing
     def __init__(self, lambda_, alpha, n_dim, bias, maxiter = 15):
+        """ OnlineLogisticRegression:__init__
+        Args:
+            lambda_:     
+            alpha:     
+            n_dim:     
+            bias:     
+            maxiter :     
+        Returns:
+           
+        """
 
         # Hyperparameter: deviation on the prior (L2 regularizer)
         self.lambda_ = lambda_; self.alpha = alpha; self.maxiter = maxiter
@@ -27,16 +37,37 @@ class OnlineLogisticRegression:
         
     # Loss function
     def loss(self, w, *args):
+        """ OnlineLogisticRegression:loss
+        Args:
+            w:     
+            *args:     
+        Returns:
+           
+        """
         X, y = args
         return 0.5 * (self.q[:-1] * (w[:-1] - self.m[:-1])).dot(w[:-1] - self.m[:-1]) + np.sum([np.log(1 + np.exp(-y[j] * w.dot(X[j]))) for j in range(y.shape[0])])
 
     # Gradient
     def grad(self, w, *args):
+        """ OnlineLogisticRegression:grad
+        Args:
+            w:     
+            *args:     
+        Returns:
+           
+        """
         X, y = args
         return np.concatenate((self.q[:-1] * (w[:-1] - self.m[:-1]),0.0),axis = None) + (-1) * np.array([y[j] *  X[j] / (1. + np.exp(y[j] * w.dot(X[j]))) for j in range(y.shape[0])]).sum(axis = 0)
 
     # Fitting method
     def fit(self, X, y):
+        """ OnlineLogisticRegression:fit
+        Args:
+            X:     
+            y:     
+        Returns:
+           
+        """
                 
         # Step 1, find w
         self.w = minimize(self.loss, self.w, args = (X, y), jac = self.grad, method = "L-BFGS-B", options = {'maxiter': self.maxiter}).x

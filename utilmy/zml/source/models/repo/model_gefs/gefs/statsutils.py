@@ -13,10 +13,24 @@ chdtrc_fn = functype(addr)
 
 @vectorize('float64(float64, float64)')
 def vec_chdtrc(x, y):
+    """function vec_chdtrc
+    Args:
+        x:   
+        y:   
+    Returns:
+        
+    """
     return chdtrc_fn(x, y)
 
 @njit
 def chdtrc(x, y):
+    """function chdtrc
+    Args:
+        x:   
+        y:   
+    Returns:
+        
+    """
     return vec_chdtrc(x, y)
 
 ###############################
@@ -26,6 +40,13 @@ def chdtrc(x, y):
 
 @njit
 def kruskal(x, y):
+    """function kruskal
+    Args:
+        x:   
+        y:   
+    Returns:
+        
+    """
     alldata = np.concatenate((x, y))
     ranked = rankdata(alldata, use_missing=False)
     ties = tiecorrect(ranked[ranked>1])
@@ -92,6 +113,16 @@ def chi_test(var1, var2, correction=True):
 
 @njit
 def kendalltau(x, y, use_ties=True, use_missing=True, method='auto'):
+    """function kendalltau
+    Args:
+        x:   
+        y:   
+        use_ties:   
+        use_missing:   
+        method:   
+    Returns:
+        
+    """
     assert x.size == y.size, "Both variables should have the same number of observations."
     n = x.size
     if n < 2:
@@ -196,6 +227,12 @@ def kendalltau(x, y, use_ties=True, use_missing=True, method='auto'):
 
 @njit
 def unique(ar):
+    """function unique
+    Args:
+        ar:   
+    Returns:
+        
+    """
     perm = ar.argsort()
     aux = ar[perm]
     mask = np.empty(aux.shape, dtype=np.bool_)
@@ -209,6 +246,12 @@ def unique(ar):
 
 @njit
 def margins(a):
+    """function margins
+    Args:
+        a:   
+    Returns:
+        
+    """
     n_axis0 = a.shape[1]
     n_axis1 = a.shape[0]
     margsum0 = np.zeros((1, n_axis0))
@@ -222,6 +265,12 @@ def margins(a):
 
 @njit
 def expected_freq(observed):
+    """function expected_freq
+    Args:
+        observed:   
+    Returns:
+        
+    """
     observed = np.asarray(observed, dtype=np.float64)
     # Create a list of the marginal sums.
     margsum1, margsum0 = margins(observed)
@@ -273,6 +322,12 @@ def rankdata(data, use_missing=True):
 
 @njit
 def find_repeats(arr):
+    """function find_repeats
+    Args:
+        arr:   
+    Returns:
+        
+    """
     assert arr.ndim == 1, "find_repeats only accepts 1d arrays."
     if arr.size == 0:
         return np.array([0], arr.dtype), np.array([0], np.int64)
@@ -372,6 +427,12 @@ def count_tied_groups(x, use_missing=False):
 
 @njit(locals={'fac': uint64})
 def factorial(n):
+    """function factorial
+    Args:
+        n:   
+    Returns:
+        
+    """
     assert n >= 0, "Factorial is only defined for positive numbers."
     if n == 0:
         return 1

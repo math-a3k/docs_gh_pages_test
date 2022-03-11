@@ -40,6 +40,12 @@ logger = util_log.logger_setup(__name__, log_file=None, formatter=util_log.FORMA
 
 
 def log(*argv):
+    """function log
+    Args:
+        *argv:   
+    Returns:
+        
+    """
     logger.info(",".join([str(x) for x in argv]))
 
 
@@ -49,11 +55,26 @@ def log(*argv):
 
 ###############################################################################
 def os_getparent(dir0):
+    """function os_getparent
+    Args:
+        dir0:   
+    Returns:
+        
+    """
     return os.path.abspath(os.path.join(dir0, os.pardir))
 
 
 # noinspection PyTypeChecker
 def ps_process_monitor_child(pid, logfile=None, duration=None, interval=None):
+    """function ps_process_monitor_child
+    Args:
+        pid:   
+        logfile:   
+        duration:   
+        interval:   
+    Returns:
+        
+    """
     # We import psutil here so that the module can be imported even if psutil
     # is not present (for example if accessing the version)
     log("Monitoring Started for Process Id: %s" % str(pid))
@@ -139,6 +160,13 @@ def ps_process_monitor_child(pid, logfile=None, duration=None, interval=None):
 
 
 def ps_wait_process_completion(subprocess_list, waitsec=10):
+    """function ps_wait_process_completion
+    Args:
+        subprocess_list:   
+        waitsec:   
+    Returns:
+        
+    """
     for pid in subprocess_list:
         while True:
             try:
@@ -158,6 +186,14 @@ def ps_wait_process_completion(subprocess_list, waitsec=10):
 
 
 def ps_wait_ressourcefree(cpu_max=90, mem_max=90, waitsec=15):
+    """function ps_wait_ressourcefree
+    Args:
+        cpu_max:   
+        mem_max:   
+        waitsec:   
+    Returns:
+        
+    """
     # wait if computer resources are scarce.
     cpu, mem = 100, 100
     while cpu > cpu_max or mem > mem_max:
@@ -166,6 +202,12 @@ def ps_wait_ressourcefree(cpu_max=90, mem_max=90, waitsec=15):
 
 
 def ps_get_cpu_percent(process):
+    """function ps_get_cpu_percent
+    Args:
+        process:   
+    Returns:
+        
+    """
     try:
         return process.cpu_percent()
     except AttributeError:
@@ -173,6 +215,12 @@ def ps_get_cpu_percent(process):
 
 
 def ps_get_memory_percent(process):
+    """function ps_get_memory_percent
+    Args:
+        process:   
+    Returns:
+        
+    """
     try:
         return process.memory_info()
     except AttributeError:
@@ -180,6 +228,12 @@ def ps_get_memory_percent(process):
 
 
 def ps_all_children(pr):
+    """function ps_all_children
+    Args:
+        pr:   
+    Returns:
+        
+    """
     processes = []
     children = []
     try:
@@ -196,6 +250,12 @@ def ps_all_children(pr):
 
 
 def ps_get_process_status(pr):
+    """function ps_get_process_status
+    Args:
+        pr:   
+    Returns:
+        
+    """
     try:
         pr_status = pr.status()
     except TypeError:  # psutil < 2.0
@@ -207,6 +267,12 @@ def ps_get_process_status(pr):
 
 
 def ps_process_isdead(pid):
+    """function ps_process_isdead
+    Args:
+        pid:   
+    Returns:
+        
+    """
     flag = 0
     try:
         pr = psutil.Process(pid)
@@ -220,6 +286,11 @@ def ps_process_isdead(pid):
 
 
 def ps_get_computer_resources_usage():
+    """function ps_get_computer_resources_usage
+    Args:
+    Returns:
+        
+    """
     cpu_used_percent = psutil.cpu_percent()
 
     mem_info = dict(psutil.virtual_memory()._asdict())
@@ -252,6 +323,12 @@ def ps_find_procs_by_name(name=r"((.*/)?tasks.*/t.*/main\.(py|sh))", ishow=1, is
 
 
 def os_launch(commands):
+    """function os_launch
+    Args:
+        commands:   
+    Returns:
+        
+    """
     processes = []
     for cmd in commands:
         try:
@@ -266,6 +343,12 @@ def os_launch(commands):
 
 
 def ps_terminate(processes):
+    """function ps_terminate
+    Args:
+        processes:   
+    Returns:
+        
+    """
     for p in processes:
         pidi = p.pid
         try:
@@ -281,6 +364,13 @@ def ps_terminate(processes):
 
 
 def os_extract_commands(csv_file, has_header=False):
+    """function os_extract_commands
+    Args:
+        csv_file:   
+        has_header:   
+    Returns:
+        
+    """
     with open(csv_file, "r", newline="") as file:
         reader = csv.reader(file, skipinitialspace=True)
         if has_header:
@@ -291,6 +381,12 @@ def os_extract_commands(csv_file, has_header=False):
 
 
 def ps_is_issue(p):
+    """function ps_is_issue
+    Args:
+        p:   
+    Returns:
+        
+    """
     global pars
 
     pdict = p.as_dict()
@@ -324,6 +420,12 @@ def ps_is_issue(p):
 
 
 def ps_net_send(tperiod=5):
+    """function ps_net_send
+    Args:
+        tperiod:   
+    Returns:
+        
+    """
     x0 = psutil.net_io_counters(pernic=False).bytes_sent
     t0 = time()
     sleep(tperiod)
@@ -333,6 +435,11 @@ def ps_net_send(tperiod=5):
 
 
 def ps_is_issue_system():
+    """function ps_is_issue_system
+    Args:
+    Returns:
+        
+    """
     global net_avg, pars
 
     try:
@@ -455,22 +562,48 @@ else:
 
 
 def os_python_environment():  # pragma: no cover
-    return " ".join([platform.python_implementation(), platform.python_version()])
-
+    """function os_python_environment
+    Args:
+    Returns:
+        
+    """
 
 def os_environment():
+    """function os_environment
+    Args:
+    Returns:
+        
+    """
     return platform.platform()
 
 
 def os_is_wndows():
+    """function os_is_wndows
+    Args:
+    Returns:
+        
+    """
     return platform.system() == "Windows"
 
 
 def np_avg(list):
+    """function np_avg
+    Args:
+        list:   
+    Returns:
+        
+    """
     return sum(list) / float(len(list))
 
 
 def np_pretty_nb(num, suffix=""):
+    """function np_pretty_nb
+    Args:
+        num:   
+        suffix:   
+    Returns:
+        
+    """
     for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
         if abs(num) < 1000.0:
             return "%3.1f%s%s" % (num, unit, suffix)
@@ -523,6 +656,11 @@ class NodeStats:
 
 class IOThroughputAggregator:
     def __init__(self):
+        """ IOThroughputAggregator:__init__
+        Args:
+        Returns:
+           
+        """
         self.last_timestamp = None
         self.last_read = 0
         self.last_write = 0
@@ -600,14 +738,29 @@ class NodeStatsCollector:
         psutil.cpu_percent(interval=None, percpu=True)
 
     def _get_network_usage(self):
+        """ NodeStatsCollector:_get_network_usage
+        Args:
+        Returns:
+           
+        """
         netio = psutil.net_io_counters()
         return self.network.aggregate(netio.bytes_recv, netio.bytes_sent)
 
     def _get_disk_io(self):
+        """ NodeStatsCollector:_get_disk_io
+        Args:
+        Returns:
+           
+        """
         diskio = psutil.disk_io_counters()
         return self.disk.aggregate(diskio.read_bytes, diskio.write_bytes)
 
     def _get_disk_usage(self):
+        """ NodeStatsCollector:_get_disk_usage
+        Args:
+        Returns:
+           
+        """
         disk_usage = dict()
         try:
             disk_usage[_OS_DISK] = psutil.disk_usage(_OS_DISK)
@@ -617,6 +770,11 @@ class NodeStatsCollector:
         return disk_usage
 
     def _sample_stats(self):
+        """ NodeStatsCollector:_sample_stats
+        Args:
+        Returns:
+           
+        """
         # get system-wide counters
         mem = psutil.virtual_memory()
         disk_stats = self._get_disk_io()
@@ -693,6 +851,12 @@ class NodeStatsCollector:
         self.telemetry_client.flush()
 
     def _log_stats(self, stats):
+        """ NodeStatsCollector:_log_stats
+        Args:
+            stats:     
+        Returns:
+           
+        """
         log("========================= Stats =========================")
         log("Cpu percent:            %d%% %s", np_avg(stats.cpu_percent), stats.cpu_percent)
         log(
@@ -755,6 +919,11 @@ def monitor_nodes():
 
 
 def os_generate_cmdline():
+    """function os_generate_cmdline
+    Args:
+    Returns:
+        
+    """
     Mb = 1024 ** 2
     pars = {
         "max_memory": 1500.0 * Mb,

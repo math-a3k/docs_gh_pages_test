@@ -5,11 +5,24 @@ from keras.layers import Layer
 
 class GaussianLayer(Layer):
     def __init__(self, output_dim, **kwargs):
+        """ GaussianLayer:__init__
+        Args:
+            output_dim:     
+            **kwargs:     
+        Returns:
+           
+        """
         self.output_dim = output_dim
         self.kernel_1, self.kernel_2, self.bias_1, self.bias_2 = [], [], [], []
         super(GaussianLayer, self).__init__(**kwargs)
 
     def build(self, input_shape):
+        """ GaussianLayer:build
+        Args:
+            input_shape:     
+        Returns:
+           
+        """
         n_weight_rows = input_shape[2]
         self.kernel_1 = self.add_weight(name='kernel_1',
                                         shape=(n_weight_rows, self.output_dim),
@@ -30,6 +43,12 @@ class GaussianLayer(Layer):
         super(GaussianLayer, self).build(input_shape)
 
     def call(self, x):
+        """ GaussianLayer:call
+        Args:
+            x:     
+        Returns:
+           
+        """
         output_mu = K.dot(x, self.kernel_1) + self.bias_1
         output_sig = K.dot(x, self.kernel_2) + self.bias_2
         output_sig_pos = K.log(1 + K.exp(output_sig)) + 1e-06

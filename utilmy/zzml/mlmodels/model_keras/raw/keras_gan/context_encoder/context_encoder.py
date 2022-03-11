@@ -18,6 +18,11 @@ import numpy as np
 
 class ContextEncoder():
     def __init__(self):
+        """ ContextEncoder:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 32
         self.img_cols = 32
         self.mask_height = 8
@@ -58,6 +63,11 @@ class ContextEncoder():
             optimizer=optimizer)
 
     def build_generator(self):
+        """ ContextEncoder:build_generator
+        Args:
+        Returns:
+           
+        """
 
 
         model = Sequential()
@@ -97,6 +107,11 @@ class ContextEncoder():
         return Model(masked_img, gen_missing)
 
     def build_discriminator(self):
+        """ ContextEncoder:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -119,6 +134,12 @@ class ContextEncoder():
         return Model(img, validity)
 
     def mask_randomly(self, imgs):
+        """ ContextEncoder:mask_randomly
+        Args:
+            imgs:     
+        Returns:
+           
+        """
         y1 = np.random.randint(0, self.img_rows - self.mask_height, imgs.shape[0])
         y2 = y1 + self.mask_height
         x1 = np.random.randint(0, self.img_rows - self.mask_width, imgs.shape[0])
@@ -138,6 +159,14 @@ class ContextEncoder():
 
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ ContextEncoder:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, y_train), (_, _) = cifar10.load_data()
@@ -191,6 +220,13 @@ class ContextEncoder():
                 self.sample_images(epoch, imgs)
 
     def sample_images(self, epoch, imgs):
+        """ ContextEncoder:sample_images
+        Args:
+            epoch:     
+            imgs:     
+        Returns:
+           
+        """
         r, c = 3, 6
 
         masked_imgs, missing_parts, (y1, y2, x1, x2) = self.mask_randomly(imgs)
@@ -214,6 +250,11 @@ class ContextEncoder():
         plt.close()
 
     def save_model(self):
+        """ ContextEncoder:save_model
+        Args:
+        Returns:
+           
+        """
 
         def save(model, model_name):
             model_path = "saved_model/%s.json" % model_name

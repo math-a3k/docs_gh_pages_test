@@ -50,6 +50,12 @@ def spark_dataset(spark):
 
 @pytest.mark.spark
 def test_min_rating_filter(spark_dataset):
+    """function test_min_rating_filter
+    Args:
+        spark_dataset:   
+    Returns:
+        
+    """
     dfs_user = min_rating_filter_spark(spark_dataset, min_rating=5, filter_by="user")
     dfs_item = min_rating_filter_spark(spark_dataset, min_rating=5, filter_by="item")
 
@@ -86,6 +92,12 @@ def test_random_splitter(spark_dataset):
 
 @pytest.mark.spark
 def test_chrono_splitter(spark_dataset):
+    """function test_chrono_splitter
+    Args:
+        spark_dataset:   
+    Returns:
+        
+    """
     splits = spark_chrono_split(
         spark_dataset, ratio=RATIOS[0], filter_by="user", min_rating=10
     )
@@ -117,6 +129,12 @@ def test_chrono_splitter(spark_dataset):
 
 @pytest.mark.spark
 def test_stratified_splitter(spark_dataset):
+    """function test_stratified_splitter
+    Args:
+        spark_dataset:   
+    Returns:
+        
+    """
     splits = spark_stratified_split(
         spark_dataset, ratio=RATIOS[0], filter_by="user", min_rating=10
     )
@@ -143,6 +161,12 @@ def test_stratified_splitter(spark_dataset):
 
 @pytest.mark.spark
 def test_timestamp_splitter(spark_dataset):
+    """function test_timestamp_splitter
+    Args:
+        spark_dataset:   
+    Returns:
+        
+    """
     dfs_rating = spark_dataset.withColumn(
         DEFAULT_TIMESTAMP_COL, col(DEFAULT_TIMESTAMP_COL).cast("float")
     )

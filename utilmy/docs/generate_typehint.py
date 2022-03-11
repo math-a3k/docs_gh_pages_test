@@ -23,16 +23,31 @@ os.environ["MONKEYTYPE_TRACE_MODULES"] = 'utilmy,site-packages'
 from utilmy import log, log2, os_makedirs
 import utilmy
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print( HELP + help_create(MNAME) )
 
 
 ####################################################################################
 def test_all():
+  """function test_all
+  Args:
+  Returns:
+      
+  """
   test1()
 
 
 def test1():
+  """function test1
+  Args:
+  Returns:
+      
+  """
   log(utilmy.__file__)
 
   exclude = ""; nfile= 10
@@ -47,6 +62,12 @@ def test1():
 
 
 def run_utilmy(nfile=10000):
+  """function run_utilmy
+  Args:
+      nfile:   
+  Returns:
+      
+  """
   log(utilmy.__file__)
   exclude = "";
   dir0   = os.getcwd()
@@ -61,6 +82,12 @@ def run_utilmy(nfile=10000):
 
 
 def run_utilmy2(nfile=100000):
+  """function run_utilmy2
+  Args:
+      nfile:   
+  Returns:
+      
+  """
   log(utilmy.__file__)
   exclude = ""; 
   dir0   = os.getcwd()
@@ -75,6 +102,11 @@ def run_utilmy2(nfile=100000):
 
 
 def test2():
+  """function test2
+  Args:
+  Returns:
+      
+  """
   log(utilmy.__file__)
 
   dir0 = utilmy.__file__.replace("\\","/") 
@@ -91,12 +123,27 @@ def test2():
 
 
 def os_path_norm(diroot):
+    """function os_path_norm
+    Args:
+        diroot:   
+    Returns:
+        
+    """
     diroot = diroot.replace("\\", "/")
     return diroot + "/" if diroot[-1] != "/" else  diroot
 
 
 
 def glob_glob_python(dirin, suffix ="*.py", nfile=7, exclude=""):
+    """function glob_glob_python
+    Args:
+        dirin:   
+        suffix :   
+        nfile:   
+        exclude:   
+    Returns:
+        
+    """
     flist = glob.glob(dirin + suffix) 
     flist = flist + glob.glob(dirin + "/**/" + suffix ) 
     if exclude != "":

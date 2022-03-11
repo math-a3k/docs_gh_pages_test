@@ -58,6 +58,12 @@ def _filter_on_size(size=0, f=files):
 
 
 def add(size=10000000):
+    """function add
+    Args:
+        size:   
+    Returns:
+        
+    """
     if size == 0:
         _run("add", ".")
     else:
@@ -66,6 +72,11 @@ def add(size=10000000):
         return files
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     print("adding files")
     files = add()  # change the number to filter files on size , size in bytes
     print('committing files')

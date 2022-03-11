@@ -7,6 +7,12 @@ class SARModel:
     __model = None
 
     def __init__(self, path):
+        """ SARModel:__init__
+        Args:
+            path:     
+        Returns:
+           
+        """
         if SARModel.__model is not None and SARModel.__path == path:
             self.model = SARModel.__model
             return
@@ -28,4 +34,13 @@ class SARModel:
         SARModel.__path = path
 
     def predict(self, items, ratings, top_k, remove_seen):
+        """ SARModel:predict
+        Args:
+            items:     
+            ratings:     
+            top_k:     
+            remove_seen:     
+        Returns:
+           
+        """
         return self.model.predict(items, ratings, top_k, remove_seen)

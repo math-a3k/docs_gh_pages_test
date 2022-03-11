@@ -10,6 +10,11 @@ from typing import Tuple, Union, Iterable
 from tensorflow.python.framework.ops import EagerTensor, Tensor
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = help_create("utilmy.deeplearning.keras.util_similarity") + HELP
     print(ss)
@@ -17,6 +22,11 @@ def help():
 
 ######################################################################################
 def test_all() -> None:
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     test_tf_cdist()
 
 

@@ -10,6 +10,11 @@ from scipy.stats import rankdata, tiecorrect
 
 
 def test_data():
+    """function test_data
+    Args:
+    Returns:
+        
+    """
     datapath = os.path.dirname(os.path.abspath(__file__))
     salaries = pd.read_csv(os.path.join(datapath, 'data/Salaries.csv'))
 
@@ -17,6 +22,11 @@ def test_data():
 
 
 def multivariate_test_data():
+    """function multivariate_test_data
+    Args:
+    Returns:
+        
+    """
     d = np.array([[1., 1.11, 2.569, 3.58, 0.76],
                   [1., 1.19, 2.928, 3.75, 0.821],
                   [1., 1.09, 2.865, 3.93, 0.928],
@@ -70,6 +80,11 @@ def multivariate_test_data():
 
 
 def plants_test_data():
+    """function plants_test_data
+    Args:
+    Returns:
+        
+    """
     datapath = os.path.dirname(os.path.abspath(__file__))
     plants = pd.read_csv(os.path.join(datapath, 'data/PlantGrowth.csv'))
 
@@ -79,6 +94,11 @@ def plants_test_data():
 class TestFriedmanTest(object):
 
     def test_friedman_test(self):
+        """ TestFriedmanTest:test_friedman_test
+        Args:
+        Returns:
+           
+        """
         pass
 
 
@@ -88,6 +108,11 @@ class TestMannWhitney(object):
     mult_data = multivariate_test_data()
 
     def test_mann_whitney(self):
+        """ TestMannWhitney:test_mann_whitney
+        Args:
+        Returns:
+           
+        """
         sal_a = self.data.loc[self.data['discipline'] == 'A']['salary']
         sal_b = self.data.loc[self.data['discipline'] == 'B']['salary']
 
@@ -121,6 +146,21 @@ class TestMannWhitney(object):
         assert no_cont_result['continuity'] is False
 
     def test_exceptions(self):
+        """ TestWilcoxon:test_exceptions
+        Args:
+        Returns:
+           
+        """
+        """ TestMannWhitney:test_exceptions
+        Args:
+        Returns:
+           
+        """
+        """ TestKruskalWallis:test_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             MannWhitney(y1=self.mult_data[:, 1],
                         group=self.mult_data[:, 0])
@@ -135,6 +175,11 @@ class TestWilcoxon(object):
     sal_b = data.loc[data['discipline'] == 'B']['salary']
 
     def test_wilcoxon_one_sample(self):
+        """ TestWilcoxon:test_wilcoxon_one_sample
+        Args:
+        Returns:
+           
+        """
         w = WilcoxonTest(self.sal_a)
 
         test_result = w.test_summary
@@ -144,6 +189,11 @@ class TestWilcoxon(object):
         assert_almost_equal(test_result['z-value'], 11.667217617844829)
 
     def test_wilcoxon_multi_sample(self):
+        """ TestWilcoxon:test_wilcoxon_multi_sample
+        Args:
+        Returns:
+           
+        """
         paired_w = WilcoxonTest(self.mult_data[:, 1], self.mult_data[:, 2], paired=True)
 
         paired_result = paired_w.test_summary
@@ -163,6 +213,11 @@ class TestKruskalWallis(object):
     data = plants_test_data()
 
     def test_kruskal_wallis(self):
+        """ TestKruskalWallis:test_kruskal_wallis
+        Args:
+        Returns:
+           
+        """
         kw = KruskalWallis(self.data['weight'], group=self.data['group'])
 
         test_result = kw.test_summary
@@ -217,6 +272,11 @@ class TestSignTest(object):
            [2, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 2, 5, 2, 5, 3, 1]]
 
     def test_sign_test(self):
+        """ TestSignTest:test_sign_test
+        Args:
+        Returns:
+           
+        """
         s = SignTest(self.f, self.m)
 
         assert_almost_equal(s.p_value, 0.057373046875)
@@ -231,16 +291,31 @@ class TestSignTest(object):
         assert_almost_equal(s.p_value, s2.p_value)
 
     def test_sign_test_less(self):
+        """ TestSignTest:test_sign_test_less
+        Args:
+        Returns:
+           
+        """
         s = SignTest(self.f, self.m, alternative='less')
 
         assert_almost_equal(s.p_value, 0.9935302734375)
 
     def test_sign_test_greater(self):
+        """ TestSignTest:test_sign_test_greater
+        Args:
+        Returns:
+           
+        """
         s = SignTest(self.f, self.m, alternative='greater')
 
         assert_almost_equal(s.p_value, 0.0286865234375)
 
     def test_sign_test_exceptions(self):
+        """ TestSignTest:test_sign_test_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             SignTest(self.f[0:5], self.m)
 
@@ -260,6 +335,11 @@ class TestMedianTest(object):
     g3 = [0, 3, 9, 22, 23, 25, 25, 33, 34, 34, 40, 45, 46, 48, 62, 67, 84]
 
     def test_mediantest(self):
+        """ TestMedianTest:test_mediantest
+        Args:
+        Returns:
+           
+        """
         m = MedianTest(self.g1, self.g2, self.g3)
 
         assert_almost_equal(m.test_statistic, 4.141505553270259)
@@ -268,6 +348,11 @@ class TestMedianTest(object):
         assert_array_almost_equal(m.contingency_table, np.array([[5, 10,  7], [11,  5, 10]]))
 
     def test_median_ties_above(self):
+        """ TestMedianTest:test_median_ties_above
+        Args:
+        Returns:
+           
+        """
         m = MedianTest(self.g1, self.g2, self.g3, ties='above')
 
         assert_almost_equal(m.test_statistic, 5.5017084398976985)
@@ -275,6 +360,11 @@ class TestMedianTest(object):
         assert_array_almost_equal(m.contingency_table, np.array([[5, 11,  9], [11,  4,  8]]))
 
     def test_median_ties_ignore(self):
+        """ TestMedianTest:test_median_ties_ignore
+        Args:
+        Returns:
+           
+        """
         m = MedianTest(self.g1, self.g2, self.g3, ties='ignore')
 
         assert_almost_equal(m.test_statistic, 4.868277103331452)
@@ -282,6 +372,11 @@ class TestMedianTest(object):
         assert_array_almost_equal(m.contingency_table, np.array([[5, 10,  7], [11,  4,  8]]))
 
     def test_median_continuity(self):
+        """ TestMedianTest:test_median_continuity
+        Args:
+        Returns:
+           
+        """
         m = MedianTest(self.g1, self.g2)
 
         assert_almost_equal(m.test_statistic, 2.5996137152777785)
@@ -289,6 +384,11 @@ class TestMedianTest(object):
         assert_almost_equal(m.contingency_table, np.array([[5, 10], [11,  5]]))
 
     def test_median_no_continuity(self):
+        """ TestMedianTest:test_median_no_continuity
+        Args:
+        Returns:
+           
+        """
         m = MedianTest(self.g1, self.g2, continuity=False)
 
         assert_almost_equal(m.test_statistic, 3.888454861111112)
@@ -296,6 +396,11 @@ class TestMedianTest(object):
         assert_almost_equal(m.contingency_table, np.array([[5, 10], [11,  5]]))
 
     def test_median_exceptions(self):
+        """ TestMedianTest:test_median_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             MedianTest(self.g1, self.g2, ties='na')
 
@@ -307,6 +412,11 @@ class TestRunsTest(object):
           'm', 'm', 'm', 'f', 'm', 'f', 'm', 'm']
 
     def test_runs_test_small_sample(self):
+        """ TestRunsTest:test_runs_test_small_sample
+        Args:
+        Returns:
+           
+        """
         r = RunsTest(self.o)
 
         assert r.r == 12
@@ -316,6 +426,11 @@ class TestRunsTest(object):
         assert_array_equal(r.runs, [1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 1])
 
     def test_runs_test_large_sample(self):
+        """ TestRunsTest:test_runs_test_large_sample
+        Args:
+        Returns:
+           
+        """
         r = RunsTest(self.o2)
 
         assert r.r == 35
@@ -332,6 +447,11 @@ class TestVanDerWaerden(object):
     data = plants_test_data()
 
     def test_van_der_waerden(self):
+        """ TestVanDerWaerden:test_van_der_waerden
+        Args:
+        Returns:
+           
+        """
         v = VanDerWaerden(self.data['weight'], group=self.data['group'])
         assert_almost_equal(v.score_variance, 0.8402744001083048)
         assert_almost_equal(v.test_statistic, 7.925272519897477)
@@ -344,6 +464,11 @@ class TestWaldWolfowitz(object):
     c = [23, 8, 24, 15, 8, 6, 15, 15, 21, 23, 16, 15, 24, 15, 21, 15, 18, 14, 22, 15, 14]
 
     def test_wald_wolfowitz(self):
+        """ TestWaldWolfowitz:test_wald_wolfowitz
+        Args:
+        Returns:
+           
+        """
         w = WaldWolfowitz(x=self.e, y=self.c)
 
         assert w.r == 6
@@ -356,6 +481,11 @@ class TestWaldWolfowitz(object):
 
 
 def test_tie_correction():
+    """function test_tie_correction
+    Args:
+    Returns:
+        
+    """
     mult_data = multivariate_test_data()
 
     ranks = rankdata(mult_data[:, 1], 'average')

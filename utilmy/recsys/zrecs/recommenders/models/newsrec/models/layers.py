@@ -310,9 +310,22 @@ class ComputeMasking(layers.Layer):
     """
 
     def __init__(self, **kwargs):
+        """ ComputeMasking:__init__
+        Args:
+            **kwargs:     
+        Returns:
+           
+        """
         super(ComputeMasking, self).__init__(**kwargs)
 
     def call(self, inputs, **kwargs):
+        """ ComputeMasking:call
+        Args:
+            inputs:     
+            **kwargs:     
+        Returns:
+           
+        """
         mask = K.not_equal(inputs, 0)
         return K.cast(mask, K.floatx())
 

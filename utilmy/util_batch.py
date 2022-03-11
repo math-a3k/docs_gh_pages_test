@@ -151,6 +151,11 @@ def test_index():
 
 
 def test_os_process_find_name():
+    """function test_os_process_find_name
+    Args:
+    Returns:
+        
+    """
     # check name with re
     print(os_process_find_name(name="*util_batch.py"))
     # check name without re
@@ -162,6 +167,11 @@ def test_os_process_find_name():
     print(os_process_find_name(name='python*'))
 
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     test_os_process_find_name()
     test_index()
 
@@ -169,6 +179,13 @@ def test_all():
 ########################################################################################
 ##### Date #############################################################################
 def now_weekday_isin(day_week=None, timezone='jp'):
+    """function now_weekday_isin
+    Args:
+        day_week:   
+        timezone:   
+    Returns:
+        
+    """
     # 0 is sunday, 1 is monday
     if not day_week:
         day_week = [0, 1, 2]
@@ -182,6 +199,14 @@ def now_weekday_isin(day_week=None, timezone='jp'):
 
 
 def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp"):
+    """function now_hour_between
+    Args:
+        hour1="12:   
+        hour2="13:   
+        timezone:   
+    Returns:
+        
+    """
     # Daily Batch time is between 2 time.
     timezone = {'jp' : 'Asia/Tokyo', 'utc' : 'utc'}.get(timezone, 'utc')
     format_time = "%H:%M"
@@ -194,6 +219,13 @@ def now_hour_between(hour1="12:45", hour2="13:45", timezone="jp"):
 
 
 def now_daymonth_isin(day_month, timezone="jp"):
+    """function now_daymonth_isin
+    Args:
+        day_month:   
+        timezone:   
+    Returns:
+        
+    """
     # 1th day of month
     timezone = {'jp' : 'Asia/Tokyo', 'utc' : 'utc'}.get(timezone, 'utc')
 
@@ -212,6 +244,15 @@ def now_daymonth_isin(day_month, timezone="jp"):
 
 
 def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='jp'):
+    """function date_now_jp
+    Args:
+        fmt:   
+        add_days:   
+        add_hours:   
+        timezone:   
+    Returns:
+        
+    """
     # "%Y-%m-%d %H:%M:%S %Z%z"
     from pytz import timezone as tzone
     import datetime
@@ -231,6 +272,12 @@ def date_now_jp(fmt="%Y%m%d", add_days=0, add_hours=0, timezone='jp'):
       
         
 def time_sleep_random(nmax=5):
+    """function time_sleep_random
+    Args:
+        nmax:   
+    Returns:
+        
+    """
     import random, time
     time.sleep( random.randrange(nmax) )
               
@@ -239,6 +286,12 @@ def time_sleep_random(nmax=5):
 ####################################################################################################
 ####################################################################################################
 def batchLog(object):    
+    """function batchLog
+    Args:
+        object:   
+    Returns:
+        
+    """
     def __init__(self,dirlog="log/batch_log", use_date=True, tag="", timezone="jp"):
         """  Log on file when task is done and Check if a task is done.
            Log file format:
@@ -286,6 +339,13 @@ def batchLog(object):
 
 #########################################################################################
 def os_wait_filexist(flist, sleep=300):
+    """function os_wait_filexist
+    Args:
+        flist:   
+        sleep:   
+    Returns:
+        
+    """
     import glob, time
     nfile = len(flist)
     ii = -1
@@ -303,6 +363,14 @@ def os_wait_filexist(flist, sleep=300):
 
 
 def os_wait_fileexist2(dirin, ntry_max=100, sleep_time=300): 
+    """function os_wait_fileexist2
+    Args:
+        dirin:   
+        ntry_max:   
+        sleep_time:   
+    Returns:
+        
+    """
     import glob, time
     log('####### Check if file ready', "\n", dirin,)
     ntry=0
@@ -318,6 +386,17 @@ def os_wait_fileexist2(dirin, ntry_max=100, sleep_time=300):
 
 
 def os_wait_cpu_ram_lower(cpu_min=30, sleep=10, interval=5, msg= "", name_proc=None, verbose=True):
+    """function os_wait_cpu_ram_lower
+    Args:
+        cpu_min:   
+        sleep:   
+        interval:   
+        msg:   
+        name_proc:   
+        verbose:   
+    Returns:
+        
+    """
     #### Wait until Server CPU and ram are lower than threshold.    
     #### Sleep until CPU becomes normal usage
     import psutil, time
@@ -369,6 +448,17 @@ def os_process_find_name(name=r"((.*/)?tasks.*/t.*/main\.(py|sh))", ishow=1, isr
 
 
 def os_wait_program_end(cpu_min=30, sleep=60, interval=5, msg= "", program_name=None, verbose=True):
+    """function os_wait_program_end
+    Args:
+        cpu_min:   
+        sleep:   
+        interval:   
+        msg:   
+        program_name:   
+        verbose:   
+    Returns:
+        
+    """
     #### Sleep until CPU becomes normal usage
     import psutil, time
 
@@ -409,10 +499,23 @@ class toFile(object):
       self.logger = logger
 
    def write(self, msg):
+        """ toFile:write
+        Args:
+            msg:     
+        Returns:
+           
+        """
         self.logger.info( msg)
 
 
 def to_file_safe(msg:str, fpath:str):
+   """function to_file_safe
+   Args:
+       msg ( str ) :   
+       fpath ( str ) :   
+   Returns:
+       
+   """
    ss = str(msg)
    logger = logging.getLogger('log')
    logger.setLevel(logging.INFO)
@@ -434,6 +537,16 @@ class IndexLock(object):
     """
     ### Manage Invemtory Index with Atomic Write/Read
     def __init__(self, findex, file_lock=None, min_size=5, skip_comment=True, ntry=20):
+        """ IndexLock:__init__
+        Args:
+            findex:     
+            file_lock:     
+            min_size:     
+            skip_comment:     
+            ntry:     
+        Returns:
+           
+        """
         self.findex= findex
         os.makedirs(os.path.dirname( os.path.abspath(self.findex)), exist_ok=True)
 
@@ -452,18 +565,36 @@ class IndexLock(object):
 
 
     def read(self,): ### alias
-        return self.get()
-
-
-    def save_isok(self, flist:list):   ### Alias
-        return self.put(flist)
-
+        """ IndexLock:read
+        Args:
+            :     
+        Returns:
+           
+        """
+        """ IndexLock:save_isok
+        Args:
+            flist (function["arg_type"][i]) :     
+        Returns:
+           
+        """
     def save_filter(self, val:list=None):
+        """ IndexLock:save_filter
+        Args:
+            val (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         return self.put(val)
 
 
     ######################################################################
     def get(self, **kw):
+        """ IndexLock:get
+        Args:
+            **kw:     
+        Returns:
+           
+        """
         ## return the list of files
         with open(self.findex, mode='r') as fp:
             flist = fp.readlines()
@@ -533,6 +664,13 @@ class Index0(object):
     ### to maintain global index, flist = index.read()  index.save(flist)
     """
     def __init__(self, findex:str="ztmp_file.txt", ntry=10):
+        """ Index0:__init__
+        Args:
+            findex (function["arg_type"][i]) :     
+            ntry:     
+        Returns:
+           
+        """
         self.findex = findex
         os.makedirs(os.path.dirname(self.findex), exist_ok=True)
         if not os.path.isfile(self.findex):
@@ -542,6 +680,12 @@ class Index0(object):
         self.ntry= ntry
 
     def read(self,):
+        """ Index0:read
+        Args:
+            :     
+        Returns:
+           
+        """
         import time
         try :
            with open(self.findex, mode='r') as fp:
@@ -560,6 +704,12 @@ class Index0(object):
         return flist2
 
     def save(self, flist:list):
+        """ Index0:save
+        Args:
+            flist (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         if len(flist) < 1 : return True
         ss = ""
         for fi in flist :
@@ -635,6 +785,11 @@ def os_lock_releaseLock(locked_file_descriptor):
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     test_all()
 
 

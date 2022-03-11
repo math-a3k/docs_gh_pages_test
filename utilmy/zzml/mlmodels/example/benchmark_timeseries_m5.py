@@ -281,11 +281,29 @@ def gluonts_create_timeseries(df_timeseries, submission=1, single_pred_length=28
 
 #### Start Dates for each time series
 def create_startdate(date="2011-01-29", freq="1D", n_timeseries=1):
+   """function create_startdate
+   Args:
+       date:   
+       freq:   
+       n_timeseries:   
+   Returns:
+       
+   """
    start_dates_list = [pd.Timestamp(date, freq=freq) for _ in range(n_timeseries)]
    return start_dates_list
 
 
 def gluonts_create_dataset(train_timeseries_list, start_dates_list, train_dynamic_list,  train_static_list, freq="D" ) :
+    """function gluonts_create_dataset
+    Args:
+        train_timeseries_list:   
+        start_dates_list:   
+        train_dynamic_list:   
+        train_static_list:   
+        freq:   
+    Returns:
+        
+    """
     from gluonts.dataset.common import load_datasets, ListDataset
     from gluonts.dataset.field_names import FieldName
     train_ds = ListDataset([
@@ -325,6 +343,15 @@ df_timeseries = sales_train_val.drop(["id","item_id","dept_id","cat_id","store_i
 
 
 def pandas_to_gluonts_multiseries(df_timeseries, df_dynamic, df_static, pars=None) :
+    """function pandas_to_gluonts_multiseries
+    Args:
+        df_timeseries:   
+        df_dynamic:   
+        df_static:   
+        pars:   
+    Returns:
+        
+    """
 
     submission             = pars['submission']
     single_pred_length     = pars['single_pred_length']
@@ -503,6 +530,16 @@ if not os.path.exists(directory):
     os.makedirs(directory)
     
 def plot_prob_forecasts(ts_entry, forecast_entry, path, sample_id, inline=True):
+    """function plot_prob_forecasts
+    Args:
+        ts_entry:   
+        forecast_entry:   
+        path:   
+        sample_id:   
+        inline:   
+    Returns:
+        
+    """
     plot_length = 150
     pred_intervals = (50, 67, 95, 99)
     legend = ["observations", "median pred"] + [f"{k}% pred interval" for k in pred_intervals][::-1]

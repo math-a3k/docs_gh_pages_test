@@ -59,6 +59,16 @@ UNK = dictionary["UNK"]
 
 
 def linear(args, output_size, bias, bias_start=0.0, scope=None):
+    """function linear
+    Args:
+        args:   
+        output_size:   
+        bias:   
+        bias_start:   
+        scope:   
+    Returns:
+        
+    """
     if args is None or (isinstance(args, (list, tuple)) and not args):
         raise ValueError("`args` must be specified")
     if not isinstance(args, (list, tuple)):
@@ -91,18 +101,44 @@ def linear(args, output_size, bias, bias_start=0.0, scope=None):
 
 class SRUCell(RNNCell):
     def __init__(self, num_units, activation=None, reuse=None):
+        """ SRUCell:__init__
+        Args:
+            num_units:     
+            activation:     
+            reuse:     
+        Returns:
+           
+        """
         self._num_units = num_units
         self._activation = activation or tf.tanh
 
     @property
     def output_size(self):
+        """ SRUCell:output_size
+        Args:
+        Returns:
+           
+        """
         return self._num_units
 
     @property
     def state_size(self):
+        """ SRUCell:state_size
+        Args:
+        Returns:
+           
+        """
         return self._num_units
 
     def __call__(self, inputs, state, scope="SRUCell"):
+        """ SRUCell:__call__
+        Args:
+            inputs:     
+            state:     
+            scope:     
+        Returns:
+           
+        """
 
         with tf.variable_scope(scope):
             with tf.variable_scope("Inputs"):
@@ -119,6 +155,16 @@ class SRUCell(RNNCell):
 
 class Model:
     def __init__(self, size_layer, num_layers, embedded_size, dict_size, dimension_output):
+        """ Model:__init__
+        Args:
+            size_layer:     
+            num_layers:     
+            embedded_size:     
+            dict_size:     
+            dimension_output:     
+        Returns:
+           
+        """
         def cells(reuse=False):
             return SRUCell(size_layer, reuse=reuse)
 

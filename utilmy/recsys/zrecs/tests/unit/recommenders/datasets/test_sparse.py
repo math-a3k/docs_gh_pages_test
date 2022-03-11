@@ -16,6 +16,11 @@ from recommenders.utils.constants import (
 
 @pytest.fixture(scope="module")
 def test_specs():
+    """function test_specs
+    Args:
+    Returns:
+        
+    """
     return {"number_of_items": 50, "number_of_users": 20, "seed": 123}
 
 
@@ -81,6 +86,13 @@ def python_dataset(test_specs):
 
 
 def test_df_to_sparse(test_specs, python_dataset):
+    """function test_df_to_sparse
+    Args:
+        test_specs:   
+        python_dataset:   
+    Returns:
+        
+    """
     # initialize the splitter
     header = {
         "col_user": DEFAULT_USER_COL,
@@ -101,6 +113,13 @@ def test_df_to_sparse(test_specs, python_dataset):
 
 
 def test_sparse_to_df(test_specs, python_dataset):
+    """function test_sparse_to_df
+    Args:
+        test_specs:   
+        python_dataset:   
+    Returns:
+        
+    """
     # initialize the splitter
     header = {
         "col_user": DEFAULT_USER_COL,

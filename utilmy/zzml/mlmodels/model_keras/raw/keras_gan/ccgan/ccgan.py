@@ -20,6 +20,11 @@ import numpy as np
 
 class CCGAN():
     def __init__(self):
+        """ CCGAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 32
         self.img_cols = 32
         self.channels = 1
@@ -101,6 +106,11 @@ class CCGAN():
         return Model(img, output_img)
 
     def build_discriminator(self):
+        """ CCGAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         img = Input(shape=self.img_shape)
 
@@ -127,6 +137,12 @@ class CCGAN():
         return Model(img, [validity, label])
 
     def mask_randomly(self, imgs):
+        """ CCGAN:mask_randomly
+        Args:
+            imgs:     
+        Returns:
+           
+        """
         y1 = np.random.randint(0, self.img_rows - self.mask_height, imgs.shape[0])
         y2 = y1 + self.mask_height
         x1 = np.random.randint(0, self.img_rows - self.mask_width, imgs.shape[0])
@@ -143,6 +159,14 @@ class CCGAN():
 
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ CCGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, y_train), (_, _) = mnist.load_data()
@@ -203,6 +227,13 @@ class CCGAN():
                 self.save_model()
 
     def sample_images(self, epoch, imgs):
+        """ CCGAN:sample_images
+        Args:
+            epoch:     
+            imgs:     
+        Returns:
+           
+        """
         r, c = 3, 6
 
         masked_imgs = self.mask_randomly(imgs)
@@ -226,6 +257,11 @@ class CCGAN():
         plt.close()
 
     def save_model(self):
+        """ CCGAN:save_model
+        Args:
+        Returns:
+           
+        """
 
         def save(model, model_name):
             model_path = "saved_model/%s.json" % model_name

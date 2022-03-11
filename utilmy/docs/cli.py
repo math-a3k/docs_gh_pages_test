@@ -55,6 +55,12 @@ from utilmy.docs import code_parser as cp
 
 
 def os_remove(filepath):
+    """function os_remove
+    Args:
+        filepath:   
+    Returns:
+        
+    """
     try:
         os.remove(filepath)
     except : pass

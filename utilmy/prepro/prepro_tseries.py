@@ -28,12 +28,30 @@ from utilmy import global_verbosity, os_makedirs
 verbosity = global_verbosity(__file__, "/../config.json" ,default= 5)
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 1 : print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 ####################################################################################################
@@ -48,6 +66,14 @@ from util_feature import (load, save_list, load_function_uri,  save,
                           save_features, load_features)
 
 def logd(*s, n=0, m=0):
+    """function logd
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     if DEBUG :
         sspace = "#" * n
         sjump = "\n" * m
@@ -176,6 +202,14 @@ def pd_prepro_custom2(df: pd.DataFrame, cols: list=None, pars: dict=None):
 ###########################################################################################
 ###########################################################################################
 def pd_ts_date(df: pd.DataFrame, cols: list=None, pars: dict=None):
+    """function pd_ts_date
+    Args:
+        df (  pd.DataFrame ) :   
+        cols (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
 
     df      = df[cols]
     coldate = [cols] if isinstance(cols, str) else cols
@@ -298,6 +332,14 @@ def pd_ts_rolling(df: pd.DataFrame, cols: list=None, pars: dict=None):
 
 
 def pd_ts_lag(df: pd.DataFrame, cols: list=None, pars: dict=None):
+    """function pd_ts_lag
+    Args:
+        df (  pd.DataFrame ) :   
+        cols (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     col_new = []
     cat_cols     = []
     id_cols = []
@@ -317,6 +359,14 @@ def pd_ts_lag(df: pd.DataFrame, cols: list=None, pars: dict=None):
 
 
 def pd_ts_difference(df: pd.DataFrame, cols: list=None, pars: dict=None):
+    """function pd_ts_difference
+    Args:
+        df (  pd.DataFrame ) :   
+        cols (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     lag  = pars.get('lag', 1)
     df = df[cols]
     for col in cols :
@@ -367,6 +417,14 @@ def pd_ts_difference(df: pd.DataFrame, cols: list=None, pars: dict=None):
 
 
 def pd_ts_tsfresh_features(df: pd.DataFrame, cols: list=None, pars: dict=None):
+    """function pd_ts_tsfresh_features
+    Args:
+        df (  pd.DataFrame ) :   
+        cols (  list ) :   
+        pars (  dict ) :   
+    Returns:
+        
+    """
     from tsfresh import extract_relevant_features, extract_features
     from tsfresh.utilities.dataframe_functions import roll_time_series
 
@@ -419,6 +477,12 @@ def pd_ts_deltapy_generic(df: pd.DataFrame, cols: list=None, pars: dict=None ):
 ########################################################################################################################
 ########################################################################################################################
 def test_get_sampledata(url="https://github.com/firmai/random-assets-two/raw/master/numpy/tsla.csv"):
+    """function test_get_sampledata
+    Args:
+        url="https:   
+    Returns:
+        
+    """
     df = pd.read_csv(url)
     df["Close_1"] = df["Close"].shift(-1)
     with pd.option_context('mode.use_inf_as_na', True):
@@ -429,6 +493,11 @@ def test_get_sampledata(url="https://github.com/firmai/random-assets-two/raw/mas
 
 
 def test_deltapy_all():
+    """function test_deltapy_all
+    Args:
+    Returns:
+        
+    """
     df = test_get_sampledata();
     df.head()
 
@@ -532,6 +601,11 @@ def test_deltapy_all():
 
 
 def test_prepro_v1():
+    """function test_prepro_v1
+    Args:
+    Returns:
+        
+    """
     df         = test_get_sampledata()
     time_eng  = pd_ts_date(df, ['Date'], pars = {})
     onehot    = pd_ts_onehot(df, ['Name'], {})
@@ -563,6 +637,12 @@ if __name__ == "__main__":
 
 
 def test_deltapy_get_method(df):
+    """function test_deltapy_get_method
+    Args:
+        df:   
+    Returns:
+        
+    """
     prepro_list = [
         {'name': 'deltapy.transform::robust_scaler', 'pars': {'drop': ["Close_1"]}},
         {'name': 'deltapy.transform::standard_scaler', 'pars': {'drop': ["Close_1"]}},
@@ -650,6 +730,11 @@ def test_deltapy_get_method(df):
 
 
 def test_deltapy_all2():
+    """function test_deltapy_all2
+    Args:
+    Returns:
+        
+    """
     df          = test_get_sampledata()
     prepro_list = test_deltapy_get_method(df)
 

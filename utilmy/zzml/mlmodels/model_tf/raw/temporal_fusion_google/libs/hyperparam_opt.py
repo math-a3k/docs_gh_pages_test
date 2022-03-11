@@ -310,6 +310,11 @@ class DistributedHyperparamOptManager(HyperparamOptManager):
 
   @property
   def optimisation_completed(self):
+    """ DistributedHyperparamOptManager:optimisation_completed
+    Args:
+    Returns:
+       
+    """
     return False if self.worker_search_queue else True
 
   def get_next_parameters(self):

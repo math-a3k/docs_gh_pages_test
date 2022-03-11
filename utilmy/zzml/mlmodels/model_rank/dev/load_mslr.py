@@ -11,6 +11,11 @@ from sklearn import preprocessing
 
 
 def get_time():
+    """function get_time
+    Args:
+    Returns:
+        
+    """
     return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
@@ -27,6 +32,11 @@ class DataLoader:
         self.num_sessions = None
 
     def get_num_pairs(self):
+        """ DataLoader:get_num_pairs
+        Args:
+        Returns:
+           
+        """
         if self.num_pairs is not None:
             return self.num_pairs
         self.num_pairs = 0
@@ -40,9 +50,19 @@ class DataLoader:
         return self.num_pairs
 
     def get_num_sessions(self):
+        """ DataLoader:get_num_sessions
+        Args:
+        Returns:
+           
+        """
         return self.num_sessions
 
     def _load_mslr(self):
+        """ DataLoader:_load_mslr
+        Args:
+        Returns:
+           
+        """
         print(get_time(), "load file from {}".format(self.path))
         df = pd.read_csv(self.path, sep=" ", header=None)
         df.drop(columns=df.columns[-1], inplace=True)
@@ -173,6 +193,12 @@ class DataLoader:
         return self.df, scaler
 
     def apply_scaler(self, scaler):
+        """ DataLoader:apply_scaler
+        Args:
+            scaler:     
+        Returns:
+           
+        """
         print(get_time(), "apply scaler to transform feature for {}".format(self.path))
         feature_columns = [str(i) for i in range(1, self.num_features + 1)]
         X_train = self.df[feature_columns]

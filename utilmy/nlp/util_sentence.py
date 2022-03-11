@@ -20,6 +20,11 @@ from utilmy.utilmy import log, log2
 
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = help_create("utilmy.nlp.util_sentence") + HELP
     print(ss)
@@ -27,9 +32,19 @@ def help():
 
 ###################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     pass
     
 def test3():
+  """function test3
+  Args:
+  Returns:
+      
+  """
       ## Check model for various languages ##
   X = [
     
@@ -93,6 +108,11 @@ def test3():
 
 
 def test2():
+  """function test2
+  Args:
+  Returns:
+      
+  """
   ### create sample data with four labels in total ###
   X = [
       # Smartphones
@@ -127,6 +147,11 @@ def test2():
 
 
 def test1():
+  """function test1
+  Args:
+  Returns:
+      
+  """
   import pandas as pd
   df = pd.read_csv('/train_file_sim.csv')
   print(df.head())
@@ -158,6 +183,12 @@ def test1():
 class SentenceEncoder(tf.keras.Model):
   ## create a model on top Universal Sentence Encoder
   def __init__(self, num_labels=None):
+      """ SentenceEncoder:__init__
+      Args:
+          num_labels:     
+      Returns:
+         
+      """
       super().__init__(name="sentence_encoder")
       module_url = "https://tfhub.dev/google/universal-sentence-encoder/4"
       se = hub.load(module_url)
@@ -168,11 +199,24 @@ class SentenceEncoder(tf.keras.Model):
       self.model.add(tf.keras.layers.Dense(num_labels))
 
   def call(self, inputs, **kwargs):
+        """ SentenceEncoder:call
+        Args:
+            inputs:     
+            **kwargs:     
+        Returns:
+           
+        """
         # two outputs from BERT
         return self.model(inputs)
 
 
 def model_load(model_path):
+  """function model_load
+  Args:
+      model_path:   
+  Returns:
+      
+  """
   ### model load
   model     = tf.keras.models.load_model(model_path)
   model_embedding = model.layers[0].layers[0]
@@ -180,12 +224,25 @@ def model_load(model_path):
 
 
 def model_get_embed(model):
+    """function model_get_embed
+    Args:
+        model:   
+    Returns:
+        
+    """
     ### model_embedding('my sentence')    
     model_embed = model.layers[0].layers[0]
     return model_embed
 
 
 def get_embed(model_emb, word) :
+  """function get_embed
+  Args:
+      model_emb:   
+      word:   
+  Returns:
+      
+  """
   return model_emb(word).to_numpy()
 
 

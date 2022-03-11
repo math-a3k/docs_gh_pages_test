@@ -18,6 +18,13 @@ def random_split(x):
 
 @njit('int64[:](int64[:],int64)', fastmath=True, inline='always', boundscheck=False)
 def bincount(data, n):
+    """function bincount
+    Args:
+        data:   
+        n:   
+    Returns:
+        
+    """
     counts = np.zeros(n, dtype=np.int64)
     for j in prange(data.size):
         counts[data[j]] += 1
@@ -85,6 +92,14 @@ def gain(left_counts, right_counts, imp_measure):
 
 @njit("f8(i8[:],i8[:],i8)", fastmath=True, inline='always')
 def gini_gain(left_counts, right_counts, n):
+    """function gini_gain
+    Args:
+        left_counts:   
+        right_counts:   
+        n:   
+    Returns:
+        
+    """
     total_left = 0
     total_right = 0
     gini_left = 0

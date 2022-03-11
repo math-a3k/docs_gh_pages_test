@@ -8,6 +8,13 @@ import pandas as pd
 
 #This gives you a decorator that you can use to corrupt data
 def inject(model, gt=False):
+    """function inject
+    Args:
+        model:   
+        gt:   
+    Returns:
+        
+    """
     def decorator(func):
         def function_helper(*args, **kwargs):
             clean = func(*args, **kwargs)
@@ -24,6 +31,16 @@ def inject(model, gt=False):
 #collects and prints statistics about the
 #dirty data
 def collect_statistics(data, model, udf, metric, trials=10):
+    """function collect_statistics
+    Args:
+        data:   
+        model:   
+        udf:   
+        metric:   
+        trials:   
+    Returns:
+        
+    """
     trials_data = np.zeros((trials,1))
     for i in range(0, trials):
         res = model.apply(data)

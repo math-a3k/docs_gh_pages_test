@@ -618,6 +618,12 @@ class SparkDiversityEvaluation:
         )
 
     def _get_cosine_similarity(self, n_partitions=200):
+        """ SparkDiversityEvaluation:_get_cosine_similarity
+        Args:
+            n_partitions:     
+        Returns:
+           
+        """
 
         if self.item_sim_measure == "item_cooccurrence_count":
             # calculate item-item similarity based on item co-occurrence count
@@ -677,6 +683,13 @@ class SparkDiversityEvaluation:
     @staticmethod
     @udf(returnType=DoubleType())
     def sim_cos(v1, v2):
+        """ SparkDiversityEvaluation:sim_cos
+        Args:
+            v1:     
+            v2:     
+        Returns:
+           
+        """
         p = 2
         return float(v1.dot(v2)) / float(v1.norm(p) * v2.norm(p))
 

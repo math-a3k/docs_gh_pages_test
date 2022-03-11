@@ -59,6 +59,14 @@ def os_package_root_path(filepath, sublevel=0, path_add=""):
 
 
 def log(*s, n=0, m=1):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     print(sjump, sspace, s, sspace, flush=True)
@@ -68,6 +76,13 @@ def log(*s, n=0, m=1):
 
 ##################################################################################################
 def _preprocess_criteo(df, **kw):
+    """function _preprocess_criteo
+    Args:
+        df:   
+        **kw:   
+    Returns:
+        
+    """
     hash_feature = kw.get('hash_feature')
     sparse_col = ['C' + str(i) for i in range(1, 27)]
     dense_col = ['I' + str(i) for i in range(1, 14)]
@@ -104,6 +119,13 @@ def _preprocess_criteo(df, **kw):
 
 
 def _preprocess_movielens(df, **kw):
+    """function _preprocess_movielens
+    Args:
+        df:   
+        **kw:   
+    Returns:
+        
+    """
     multiple_value = kw.get('multiple_value')
     sparse_col = ["movie_id", "user_id", "gender", "age", "occupation", "zip"]
     target = ['rating']
@@ -196,6 +218,13 @@ def _preprocess_movielens(df, **kw):
 
 
 def _preprocess_none(df, **kw):
+        """function _preprocess_none
+        Args:
+            df:   
+            **kw:   
+        Returns:
+            
+        """
         linear_cols = kw['linear_cols']
         dnn_cols = kw['dnn_cols']
         train, test = train_test_split(df, test_size=kw['test_size'])
@@ -206,6 +235,12 @@ def _preprocess_none(df, **kw):
 
 
 def get_dataset(**kw):
+    """function get_dataset
+    Args:
+        **kw:   
+    Returns:
+        
+    """
     ##check whether dataset is of kind train or test
     data_path = kw['train_data_path']
     data_type = kw['dataset_type']
@@ -224,6 +259,13 @@ def get_dataset(**kw):
 ########################################################################################################################
 ########################################################################################################################
 def test(data_path="dataset/", pars_choice=0):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

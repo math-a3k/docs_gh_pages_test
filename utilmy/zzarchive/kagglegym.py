@@ -75,6 +75,15 @@ from sklearn.metrics import r2_score
 
 
 def r_score(y_true, y_pred, sample_weight=None, multioutput=None):
+    """function r_score
+    Args:
+        y_true:   
+        y_pred:   
+        sample_weight:   
+        multioutput:   
+    Returns:
+        
+    """
     r2 = r2_score(y_true, y_pred, sample_weight=sample_weight,    multioutput=multioutput)
     r = (np.sign(r2)*np.sqrt(np.abs(r2)))
     if r <= -1:
@@ -85,6 +94,14 @@ def r_score(y_true, y_pred, sample_weight=None, multioutput=None):
 
 class Observation(object):
     def __init__(self, train, target, features):
+        """ Observation:__init__
+        Args:
+            train:     
+            target:     
+            features:     
+        Returns:
+           
+        """
         self.train = train
         self.target = target
         self.features = features
@@ -92,6 +109,11 @@ class Observation(object):
 
 class Environment(object):
     def __init__(self):
+        """ Environment:__init__
+        Args:
+        Returns:
+           
+        """
         with pd.HDFStore("F:/_data/kaggle/twosigma/train.h5", "r") as hfdata:
             self.timestamp = 0
             fullset = hfdata.get("train")
@@ -113,6 +135,11 @@ class Environment(object):
             self.temp_test_y = None
 
     def reset(self):
+        """ Environment:reset
+        Args:
+        Returns:
+           
+        """
         timesplit = self.unique_timestamp[self.unique_idx]
 
         self.unique_idx = int(self.n / 2)
@@ -133,6 +160,12 @@ class Environment(object):
         return observation
 
     def step(self, target):
+        """ Environment:step
+        Args:
+            target:     
+        Returns:
+           
+        """
         timesplit = self.unique_timestamp[self.unique_idx-1]
         # Since full and target have a different index we need
         # to do a _values trick here to get the assignment working
@@ -169,8 +202,18 @@ class Environment(object):
         return observation, reward, done, info
 
     def __str__(self):
+        """ Environment:__str__
+        Args:
+        Returns:
+           
+        """
         return "Environment()"
 
 
 def make():
+    """function make
+    Args:
+    Returns:
+        
+    """
     return Environment()

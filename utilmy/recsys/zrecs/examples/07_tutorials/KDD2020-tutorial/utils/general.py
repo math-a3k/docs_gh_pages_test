@@ -6,21 +6,47 @@ import numpy as np
 
 
 def add2dict(value, d):
+    """function add2dict
+    Args:
+        value:   
+        d:   
+    Returns:
+        
+    """
     if value not in d:
         d[value] = len(d)
     return d[value]
 
 
 def create_dir(path):
+    """function create_dir
+    Args:
+        path:   
+    Returns:
+        
+    """
     if not os.path.exists(path):
         os.makedirs(path)
 
 
 def list2string(li, sep=","):
+    """function list2string
+    Args:
+        li, sep:   
+    Returns:
+        
+    """
     return sep.join([str(a) for a in li])
 
 
 def dump_dict_as_txt(d, filename):
+    """function dump_dict_as_txt
+    Args:
+        d:   
+        filename:   
+    Returns:
+        
+    """
     with open(filename, "w", encoding="utf-8") as wt:
         wt.write("{0}\n".format(len(d)))
         for k, v in d.items():
@@ -28,6 +54,13 @@ def dump_dict_as_txt(d, filename):
 
 
 def reparameter_sampling(sample_size, probabilities):
+    """function reparameter_sampling
+    Args:
+        sample_size:   
+        probabilities:   
+    Returns:
+        
+    """
     r"""
     Faster sampling algorithm, gumbel softmax trick.
     :param sample_size:

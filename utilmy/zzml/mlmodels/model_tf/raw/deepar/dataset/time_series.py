@@ -14,6 +14,14 @@ class MockTs(Dataset):
     Created mainly for showcase/testing purpose
     """
     def __init__(self, t_min=0, t_max=30, resolution=.1):
+        """ MockTs:__init__
+        Args:
+            t_min:     
+            t_max:     
+            resolution:     
+        Returns:
+           
+        """
         self.t_min = t_min
         self.t_max = t_max
         self.resolution = resolution
@@ -21,6 +29,12 @@ class MockTs(Dataset):
 
     @staticmethod
     def _time_series(t):
+        """ MockTs:_time_series
+        Args:
+            t:     
+        Returns:
+           
+        """
         return t * np.sin(t/6) / 3 + np.sin(t*2)
 
     def next_batch(self, batch_size, n_steps):
@@ -61,6 +75,15 @@ class MockTs(Dataset):
 
 class TimeSeries(Dataset):
     def __init__(self, pandas_df, one_hot_root_list=None, grouping_variable='category', scaler=None):
+        """ TimeSeries:__init__
+        Args:
+            pandas_df:     
+            one_hot_root_list:     
+            grouping_variable:     
+            scaler:     
+        Returns:
+           
+        """
         super().__init__()
         self.data = pandas_df
         self.one_hot_root_list = one_hot_root_list

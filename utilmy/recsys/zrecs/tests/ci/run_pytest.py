@@ -16,6 +16,11 @@ from azureml.core import Run
 
 
 def create_arg_parser():
+    """function create_arg_parser
+    Args:
+    Returns:
+        
+    """
     parser = argparse.ArgumentParser(description="Process inputs")
     # test folder
     parser.add_argument(

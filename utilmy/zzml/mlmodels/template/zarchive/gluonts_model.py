@@ -7,6 +7,13 @@ from mlmodels.model_gluon.util import *
 #### Model defintion
 class Model(object) :
     def __init__(self, model_pars=None, compute_pars=None) :
+        """ Model:__init__
+        Args:
+            model_pars:     
+            compute_pars:     
+        Returns:
+           
+        """
         ## Empty model for Seaialization
         if model_pars is None and compute_pars is None :
             self.model = None
@@ -27,6 +34,14 @@ class Model(object) :
 
 ########################################################################################################################
 def get_params(choice=0, data_path="dataset/", **kw) :
+    """function get_params
+    Args:
+        choice:   
+        data_path:   
+        **kw:   
+    Returns:
+        
+    """
     if choice == 0 :
         log("#### Path params   ################################################")
         data_path = os_package_root_path(__file__, sublevel=2, path_add=data_path)
@@ -61,6 +76,14 @@ def get_params(choice=0, data_path="dataset/", **kw) :
 
 ########################################################################################################################
 def test2(data_path="dataset/", out_path="GLUON/gluon.png", reset=True):
+    """function test2
+    Args:
+        data_path:   
+        out_path:   
+        reset:   
+    Returns:
+        
+    """
     ###loading the command line arguments
     # arg = load_arguments()
 
@@ -96,6 +119,12 @@ def test2(data_path="dataset/", out_path="GLUON/gluon.png", reset=True):
 
 
 def test(data_path="dataset/"):
+    """function test
+    Args:
+        data_path:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

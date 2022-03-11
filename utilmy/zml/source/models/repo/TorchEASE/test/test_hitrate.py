@@ -5,6 +5,11 @@ from main.metrics import hit_rate_k
 
 class TestBasicMetrics(unittest.TestCase):
     def setUp(self):
+        """ TestBasicMetrics:setUp
+        Args:
+        Returns:
+           
+        """
         self.all_misses = pd.DataFrame(
             {
                 "predicted": [
@@ -81,16 +86,31 @@ class TestBasicMetrics(unittest.TestCase):
         )
 
     def test_all_hits(self):
+        """ TestBasicMetrics:test_all_hits
+        Args:
+        Returns:
+           
+        """
         self.assertTrue(
             hit_rate_k(self.all_hits, actual_col="item", pred_col="predicted") == 1.0
         )
 
     def test_all_misses(self):
+        """ TestBasicMetrics:test_all_misses
+        Args:
+        Returns:
+           
+        """
         self.assertTrue(
             hit_rate_k(self.all_misses, actual_col="item", pred_col="predicted") == 0.0
         )
 
     def test_partial_misses(self):
+        """ TestBasicMetrics:test_partial_misses
+        Args:
+        Returns:
+           
+        """
         self.assertTrue(
             hit_rate_k(self.partial_hits, actual_col="item", pred_col="predicted")
             == 5./8.

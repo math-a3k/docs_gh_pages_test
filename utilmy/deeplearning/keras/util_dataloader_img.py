@@ -35,6 +35,11 @@ from utilmy import log, log2
 
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     ss = HELP + help_create("utilmy.deeplearning.keras.util_layers")
     print(ss)
@@ -44,6 +49,11 @@ def help():
 
 ############################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     test()
     test1()
     test2()
@@ -209,6 +219,13 @@ class Transform_sprinkle(ImageOnlyTransform):
         self.sprinkles = Sprinkles(num_holes=num_holes, side_length=side_length)
 
     def apply(self, image: ndarray, **params) -> ndarray:
+        """ Transform_sprinkle:apply
+        Args:
+            image (function["arg_type"][i]) :     
+            **params:     
+        Returns:
+           
+        """
         if isinstance(image, PIL.Image.Image):
             image = tf.constant(np.array(image), dtype=tf.float32)
         elif isinstance(image, np.ndarray):
@@ -302,15 +319,33 @@ class DataLoader_imgdisk(tf.keras.utils.Sequence):
             # np.random.shuffle(self.labels.reset_index(drop=True))
 
     def __len__(self) -> int:
+        """ DataLoader_imgdisk:__len__
+        Args:
+        Returns:
+           
+        """
         return int(np.ceil(len(self.label_df) / float(self.batch_size)))
 
     def __getitem__(self, idx: int) -> Tuple[ndarray, ndarray]:
+        """ DataLoader_imgdisk:__getitem__
+        Args:
+            idx (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         # for X,y in mydatagen :
         batch_x, batch_y = self.__get_data(idx, self.batch_size)
         return np.array(batch_x), np.array(batch_y)
 
 
     def __get_data(self, idx, batch=8):
+        """ DataLoader_imgdisk:__get_data
+        Args:
+            idx:     
+            batch:     
+        Returns:
+           
+        """
         # Create batch targets
         df_batch    = self.label_df[idx * batch:(idx + 1) * self.batch_size]
         batch_x, batch_y = [], []   #  list of output heads
@@ -342,6 +377,15 @@ class DataLoader_img(tf.keras.utils.Sequence):
     """
 
     def __init__(self, x: ndarray, y: ndarray, batch_size: int=32, transform: None=None):
+        """ DataLoader_img:__init__
+        Args:
+            x (function["arg_type"][i]) :     
+            y (function["arg_type"][i]) :     
+            batch_size (function["arg_type"][i]) :     
+            transform (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         self.x = x
         self.y = y
         self.batch_size = batch_size

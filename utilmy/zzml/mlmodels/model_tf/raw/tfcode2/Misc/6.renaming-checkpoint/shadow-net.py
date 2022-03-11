@@ -27,6 +27,11 @@ with open("crnn_model/ord_map.json") as fopen:
 
 class Model:
     def __init__(self):
+        """ Model:__init__
+        Args:
+        Returns:
+           
+        """
         self.X = tf.placeholder(tf.float32, (None, None, 3))
         image = tf.expand_dims(self.X, 0)
         image = tf.image.resize_images(image, [32, 100])
@@ -80,6 +85,12 @@ output
 
 
 def sparse_tensor_to_str(sparse_tensor):
+    """function sparse_tensor_to_str
+    Args:
+        sparse_tensor:   
+    Returns:
+        
+    """
     indices = sparse_tensor.indices
     values = sparse_tensor.values
     values = np.array([order_dict[str(tmp)] for tmp in values])
@@ -113,6 +124,12 @@ char_list = "0123456789abcdefghijklmnopqrstuvwxyz "
 
 
 def sparse_tensor_to_str2(spares_tensor):
+    """function sparse_tensor_to_str2
+    Args:
+        spares_tensor:   
+    Returns:
+        
+    """
 
     indices = spares_tensor.indices
     values = spares_tensor.values

@@ -5,6 +5,22 @@ import models.model as model
 import utils.reward as reward
 
 def p_vae_active_learning(Data_train_compressed, Data_train,mask_train,Data_test,mask_test_compressed,mask_test,cat_dims,dim_flt,dic_var_type,args, estimation_method=1):
+    """function p_vae_active_learning
+    Args:
+        Data_train_compressed:   
+        Data_train:   
+        mask_train:   
+        Data_test:   
+        mask_test_compressed:   
+        mask_test:   
+        cat_dims:   
+        dim_flt:   
+        dic_var_type:   
+        args:   
+        estimation_method:   
+    Returns:
+        
+    """
     
     list_stage = args.list_stage
     list_strategy = args.list_strategy

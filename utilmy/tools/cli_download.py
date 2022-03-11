@@ -54,10 +54,20 @@ class Downloader:
         self.adjust_url()
 
     def clean_netloc(self):
+        """ Downloader:clean_netloc
+        Args:
+        Returns:
+           
+        """
         clean_netloc = re.sub(r'^www\.', '', self.parsed.netloc)
         self.parsed = self.parsed._replace(netloc=clean_netloc)
 
     def adjust_url(self):
+        """ Downloader:adjust_url
+        Args:
+        Returns:
+           
+        """
         if self.parsed.netloc == self.GITHUB_NETLOC:
             self._transform_github_url()
         elif self.parsed.netloc == self.GDRIVE_NETLOC:
@@ -123,6 +133,11 @@ class Downloader:
 
 
 def get_arguments():
+    """function get_arguments
+    Args:
+    Returns:
+        
+    """
     a_p = argparse.ArgumentParser(
         "Download content from github, googledrive and/or drop-box with a single url or list of urls in a file.")
     a_p.add_argument("--url", "-u", default="",
@@ -137,6 +152,11 @@ def get_arguments():
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     args = get_arguments()
 
     if args.url != "":

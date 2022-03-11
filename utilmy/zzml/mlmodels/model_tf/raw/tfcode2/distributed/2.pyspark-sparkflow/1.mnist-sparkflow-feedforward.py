@@ -26,6 +26,13 @@ from sparkflow.tensorflow_async import SparkAsyncDL
 
 
 def download_from_url(url, dst):
+    """function download_from_url
+    Args:
+        url:   
+        dst:   
+    Returns:
+        
+    """
     file_size = int(requests.head(url).headers["Content-Length"])
     if os.path.exists(dst):
         first_byte = os.path.getsize(dst)
@@ -60,6 +67,11 @@ download_from_url(
 
 
 def small_model():
+    """function small_model
+    Args:
+    Returns:
+        
+    """
     x = tf.placeholder(tf.float32, shape=[None, 784], name="x")
     y = tf.placeholder(tf.float32, shape=[None, 10], name="y")
     layer1 = tf.layers.dense(x, 256, activation=tf.nn.relu)

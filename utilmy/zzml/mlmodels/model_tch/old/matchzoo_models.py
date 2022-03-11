@@ -85,6 +85,12 @@ CALLBACKS = {
 
 ###########################################################################################################
 def get_task(model_pars):
+    """function get_task
+    Args:
+        model_pars:   
+    Returns:
+        
+    """
     _task = model_pars['task']
     assert _task in TASKS.keys()
 
@@ -123,6 +129,13 @@ def get_task(model_pars):
 
 
 def get_glove_embedding_matrix(term_index, dimension):
+    """function get_glove_embedding_matrix
+    Args:
+        term_index:   
+        dimension:   
+    Returns:
+        
+    """
     glove_embedding  = mz.datasets.embeddings.load_glove_embedding(dimension=dimension)
     embedding_matrix = glove_embedding.build_matrix(term_index)
     l2_norm          = np.sqrt((embedding_matrix * embedding_matrix).sum(axis=1))
@@ -132,6 +145,15 @@ def get_glove_embedding_matrix(term_index, dimension):
 
 
 def get_data_loader(model_name, preprocessor, preprocess_pars, raw_data):
+    """function get_data_loader
+    Args:
+        model_name:   
+        preprocessor:   
+        preprocess_pars:   
+        raw_data:   
+    Returns:
+        
+    """
 
     pp = preprocess_pars
 
@@ -205,10 +227,22 @@ def update_model_param(params, model, task, preprocessor):
 
 
 def get_config_file():
+    """function get_config_file
+    Args:
+    Returns:
+        
+    """
     return os.path.join(os_package_root_path(__file__, 1), 'config', 'model_tch', 'Imagecnn.json')
 
 
 def get_raw_dataset(data_pars, task):
+    """function get_raw_dataset
+    Args:
+        data_pars:   
+        task:   
+    Returns:
+        
+    """
     if data_pars["dataset"] == "WIKI_QA":
         filter_train_pack_raw = data_pars.get("preprocess").get("train").get("filter", False)
         filter_test_pack_raw  = data_pars.get("preprocess").get("test").get("filter", False)
@@ -223,6 +257,15 @@ def get_raw_dataset(data_pars, task):
 ###########################################################################################################
 class Model:
     def __init__(self, model_pars=None, data_pars=None, compute_pars=None, out_pars=None):
+        """ Model:__init__
+        Args:
+            model_pars:     
+            data_pars:     
+            compute_pars:     
+            out_pars:     
+        Returns:
+           
+        """
         self.model_pars   = deepcopy( model_pars)
         self.compute_pars = deepcopy( compute_pars)
         self.data_pars    = deepcopy( data_pars)
@@ -293,6 +336,16 @@ class Model:
 
 
 def fit(model, data_pars=None, compute_pars=None, out_pars=None, **kwargs):
+    """function fit
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+        **kwargs:   
+    Returns:
+        
+    """
     model0 = model.model
     #epochs = compute_pars["epochs"]
 
@@ -397,6 +450,15 @@ def predict(model, session=None, data_pars=None, compute_pars=None, out_pars=Non
 
 
 def evaluate(model, data_pars=None, compute_pars=None, out_pars=None):
+    """function evaluate
+    Args:
+        model:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+    Returns:
+        
+    """
     pass
 
 
@@ -428,6 +490,13 @@ def load(load_pars):
 
 
 def get_params(param_pars=None, **kw):
+    """function get_params
+    Args:
+        param_pars:   
+        **kw:   
+    Returns:
+        
+    """
     pp          = param_pars
     choice      = pp['choice']
     model_name = pp['model_name']
@@ -450,6 +519,14 @@ def get_params(param_pars=None, **kw):
 ###########################################################################################################
 ###########################################################################################################
 def test_train(data_path, pars_choice, model_name):
+    """function test_train
+    Args:
+        data_path:   
+        pars_choice:   
+        model_name:   
+    Returns:
+        
+    """
     ### Local test
 
     log("#### Loading params   ##############################################")

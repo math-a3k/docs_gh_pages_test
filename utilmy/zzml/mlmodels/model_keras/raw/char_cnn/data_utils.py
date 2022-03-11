@@ -71,6 +71,14 @@ class Data(object):
         return np.asarray(batch_indices, dtype='int64'), np.asarray(classes)
 
     def compute(self, input, *args, **kwargs):
+        """ Data:compute
+        Args:
+            input:     
+            *args:     
+            **kwargs:     
+        Returns:
+           
+        """
         X, y = np.array(input[kwargs.get("colX", "colX")].values), np.array(input[kwargs.get("coly", "coly")].values)
         data = []
         for idx, x in enumerate(X):
@@ -100,6 +108,11 @@ class Data(object):
         return np.asarray(batch_indices, dtype='int64'), np.asarray(classes)
 
     def get_all_data_npz(self):
+        """ Data:get_all_data_npz
+        Args:
+        Returns:
+           
+        """
         with np.load(self.data_source, allow_pickle=True) as f:
             print("f: ", f)
             xs, labels = f['x'], f['y']
@@ -122,6 +135,12 @@ class Data(object):
         return x_train, y_train, x_test, y_test
     
     def fill_to_length_input(self,s):
+        """ Data:fill_to_length_input
+        Args:
+            s:     
+        Returns:
+           
+        """
         max_length = min(len(s), self.length)
         str2idx = np.zeros(self.length, dtype='int64')
         for i in range(1, max_length + 1):

@@ -6,6 +6,11 @@ from deepctr.models import DIN
 
 
 def get_xy_fd():
+    """function get_xy_fd
+    Args:
+    Returns:
+        
+    """
 
     feature_columns = [SparseFeat('user',3,embedding_dim=10),SparseFeat(
         'gender', 2,embedding_dim=4), SparseFeat('item', 3 + 1,embedding_dim=8), SparseFeat('item_gender', 2 + 1,embedding_dim=4),DenseFeat('score', 1)]

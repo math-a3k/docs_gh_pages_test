@@ -36,6 +36,14 @@ def nan_to_num(data):
 
 @njit
 def get_distance(a, b, ncat):
+    """function get_distance
+    Args:
+        a:   
+        b:   
+        ncat:   
+    Returns:
+        
+    """
     distance = 0.
     for i in range(len(a)):
         if np.isnan(a[i]) or np.isnan(b[i]):
@@ -49,6 +57,14 @@ def get_distance(a, b, ncat):
 
 @njit
 def assign(point, centroids, ncat):
+    """function assign
+    Args:
+        point:   
+        centroids:   
+        ncat:   
+    Returns:
+        
+    """
     minDist = np.Inf
     for i in range(centroids.shape[0]):
         dist = get_distance(point, centroids[i, :], ncat)
@@ -60,6 +76,14 @@ def assign(point, centroids, ncat):
 
 @njit
 def assign_clusters(data, centroids, ncat):
+    """function assign_clusters
+    Args:
+        data:   
+        centroids:   
+        ncat:   
+    Returns:
+        
+    """
     error = 0
     labels = np.zeros(data.shape[0], dtype=np.int64)
     for i in range(data.shape[0]):
@@ -70,6 +94,14 @@ def assign_clusters(data, centroids, ncat):
 
 @njit
 def get_error(centroid, data, ncat):
+    """function get_error
+    Args:
+        centroid:   
+        data:   
+        ncat:   
+    Returns:
+        
+    """
     error = 0
     for j in range(data.shape[0]):
         error += get_distance(centroid, data[j, :], ncat)
@@ -122,11 +154,21 @@ class Kmeans:
         self.maxit = maxit
 
     def init_centroids(self):
+        """ Kmeans:init_centroids
+        Args:
+        Returns:
+           
+        """
         seed_idx = np.random.choice(self.data.shape[0], self.k, replace=False)
         self.centroids = self.data[seed_idx, :]
         self.error1 = 0
 
     def update_centroids(self):
+        """ Kmeans:update_centroids
+        Args:
+        Returns:
+           
+        """
         error = 0
         for i in range(self.k):
             cluster_data = self.data[self.labels == i, :]
@@ -140,9 +182,20 @@ class Kmeans:
         self.error1 = error
 
     def assign_clusters(self):
+        """ Kmeans:assign_clusters
+        Args:
+        Returns:
+           
+        """
         self.labels, self.error2 = assign_clusters(self.data, self.centroids, self.ncat)
 
     def fit(self, data):
+        """ Kmeans:fit
+        Args:
+            data:     
+        Returns:
+           
+        """
         assert data.shape[0] >= self.k, "Too few data points."
         self.data = data
         self.nvars = data.shape[1]
@@ -159,6 +212,15 @@ class Kmeans:
 
 
 def makeRandomPoint(n, lower, upper, missing_perc=0.0):
+    """function makeRandomPoint
+    Args:
+        n:   
+        lower:   
+        upper:   
+        missing_perc:   
+    Returns:
+        
+    """
     points = np.random.normal(loc=upper, size=[lower, n])
     missing_mask = np.full(points.size, False)
     missing_mask[:int(missing_perc * points.size)] = True

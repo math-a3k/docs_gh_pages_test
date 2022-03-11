@@ -17,18 +17,33 @@ from utilmy import (os_makedirs, os_system, global_verbosity,  git_repo_root )
 from utilmy import log, log2
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     from utilmy import help_create
     print( HELP + help_create(MNAME) )
 
 
 ##############################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     log(MNAME)
     test()
     test1()
 
 
 def test():
+    """function test
+    Args:
+    Returns:
+        
+    """
     test_dataset_regression_fake(nrows=500, n_features=17)
     test_dataset_classifier_fake(nrows=10)
     test_dataset_classifier_petfinder(nrows=10)
@@ -37,6 +52,11 @@ def test():
 
 
 def test1():
+    """function test1
+    Args:
+    Returns:
+        
+    """
     fetch_dataset("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz",path_target="./testdata/tmp/test")
     df = pd.read_csv("./testdata/tmp/test/crop.data.csv")
     pd_train_test_split(df,  coly="block")
@@ -60,6 +80,12 @@ def template_dataset_classifier_XXXXX(nrows=500, **kw):
 ####################################################################################################
 ########## Classification ##########################################################################
 def test_dataset_classifier_fake(nrows=500):
+    """function test_dataset_classifier_fake
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     from sklearn import datasets as sklearn_datasets
     ndim    =11
     coly    = 'y'
@@ -78,6 +104,13 @@ def test_dataset_classifier_fake(nrows=500):
 
 
 def test_dataset_classifier_pmlb(name='', return_X_y=False):
+    """function test_dataset_classifier_pmlb
+    Args:
+        name:   
+        return_X_y:   
+    Returns:
+        
+    """
     from pmlb import fetch_data, classification_dataset_names
     ds = classification_dataset_names[name]
     pars = {}
@@ -91,6 +124,12 @@ def test_dataset_classifier_pmlb(name='', return_X_y=False):
 
 
 def test_dataset_classifier_covtype(nrows=500):
+    """function test_dataset_classifier_covtype
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     log("start")
 
     import wget
@@ -120,6 +159,12 @@ def test_dataset_classifier_covtype(nrows=500):
 
 
 def test_dataset_classifier_petfinder(nrows=1000):
+    """function test_dataset_classifier_petfinder
+    Args:
+        nrows:   
+    Returns:
+        
+    """
     # Dense features
     import wget
     colnum = ['PhotoAmt', 'Fee','Age' ]
@@ -175,6 +220,13 @@ def test_dataset_classifier_diabetes_traintest():
 #####################################################################################################
 ######  Regression ##################################################################################
 def test_dataset_regression_fake(nrows=500, n_features=17):
+    """function test_dataset_regression_fake
+    Args:
+        nrows:   
+        n_features:   
+    Returns:
+        
+    """
     from sklearn import datasets as sklearn_datasets
     coly   = 'y'
     colnum = ["colnum_" +str(i) for i in range(0, 17) ]

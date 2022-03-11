@@ -34,6 +34,14 @@ print(dir_data)
 
 
 def global_pars_update(model_dict,  data_name, config_name):
+    """function global_pars_update
+    Args:
+        model_dict:   
+        data_name:   
+        config_name:   
+    Returns:
+        
+    """
     m                      = {}
     model_name             = model_dict['model_pars']['model_class']
     m['config_path'] = root + f"/{config_file}"
@@ -51,6 +59,11 @@ def global_pars_update(model_dict,  data_name, config_name):
 
 
 def os_get_function_name():
+    """function os_get_function_name
+    Args:
+    Returns:
+        
+    """
     import sys
     return sys._getframe(1).f_code.co_name
 
@@ -155,6 +168,14 @@ def sentiment_lightgbm(path_model_out="") :
 #####################################################################################
 ########## Profile data #############################################################
 def data_profile(path_data_train="", path_model="", n_sample= 5000):
+   """function data_profile
+   Args:
+       path_data_train:   
+       path_model:   
+       n_sample:   
+   Returns:
+       
+   """
    from source.run_feature_profile import run_profile
    run_profile(path_data   = path_data_train,
                path_output = path_model + "/profile/",
@@ -165,6 +186,13 @@ def data_profile(path_data_train="", path_model="", n_sample= 5000):
 ###################################################################################
 ########## Preprocess #############################################################
 def preprocess(config=None, nsample=None):
+    """function preprocess
+    Args:
+        config:   
+        nsample:   
+    Returns:
+        
+    """
     config_name  = config  if config is not None else config_default
     mdict        = globals()[config_name]()
     m            = mdict['global_pars']
@@ -182,6 +210,13 @@ def preprocess(config=None, nsample=None):
 ##################################################################################
 ########## Train #################################################################
 def train(config=None, nsample=None):
+    """function train
+    Args:
+        config:   
+        nsample:   
+    Returns:
+        
+    """
 
     config_name  = config  if config is not None else config_default
     mdict        = globals()[config_name]()
@@ -200,6 +235,11 @@ def train(config=None, nsample=None):
 ###################################################################################
 ######### Check data ##############################################################
 def check():
+   """function check
+   Args:
+   Returns:
+       
+   """
    pass
 
 
@@ -208,6 +248,13 @@ def check():
 ####################################################################################
 ####### Inference ##################################################################
 def predict(config=None, nsample=None):
+    """function predict
+    Args:
+        config:   
+        nsample:   
+    Returns:
+        
+    """
     config_name  =  config  if config is not None else config_default
     mdict        = globals()[config_name]()
     m            = mdict['global_pars']
@@ -225,6 +272,11 @@ def predict(config=None, nsample=None):
 
 
 def run_all():
+    """function run_all
+    Args:
+    Returns:
+        
+    """
     data_profile()
     preprocess()
     train()
@@ -260,6 +312,12 @@ if __name__ == "__main__":
 
 
 def sentiment_elasticnetcv(path_model_out=""):
+    """function sentiment_elasticnetcv
+    Args:
+        path_model_out:   
+    Returns:
+        
+    """
     global model_name
     model_name        = 'ElasticNetCV'
 
@@ -300,6 +358,12 @@ def sentiment_elasticnetcv(path_model_out=""):
 
 
 def sentiment_bayesian_pyro(path_model_out="") :
+    """function sentiment_bayesian_pyro
+    Args:
+        path_model_out:   
+    Returns:
+        
+    """
     global model_name
     model_name        = 'model_bayesian_pyro'
     def post_process_fun(y):

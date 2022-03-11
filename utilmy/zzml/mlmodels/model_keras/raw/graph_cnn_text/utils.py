@@ -318,6 +318,13 @@ def preprocess_features(features):
 
 
 def normalize_adj(adj, symmetric=True):
+    """function normalize_adj
+    Args:
+        adj:   
+        symmetric:   
+    Returns:
+        
+    """
     if symmetric:
         d = sp.diags(np.power(np.array(adj.sum(1)), -0.5).flatten())
         a_norm = adj.dot(d).transpose().dot(d).tocsr()
@@ -332,6 +339,13 @@ def preprocess_adj(adj):
     return sparse_to_tuple(adj_normalized)
 
 def preprocess_graph(adj, symmetric=True):
+    """function preprocess_graph
+    Args:
+        adj:   
+        symmetric:   
+    Returns:
+        
+    """
     # this function has bugs, return none, decagon defines and do this immediatly. here we load from pkl
     adj = sp.coo_matrix(adj)
     if adj.shape[0] == adj.shape[1]:

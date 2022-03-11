@@ -136,6 +136,13 @@ plt.show()
 
 
 def pct_change(x, period=1):
+    """function pct_change
+    Args:
+        x:   
+        period:   
+    Returns:
+        
+    """
     x = np.array(x)
     return (x[period:] - x[:-period]) / x[:-period]
 

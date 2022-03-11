@@ -22,6 +22,13 @@ from src.utils import config_load, log, spark_check
 
 
 def run(spark:SparkSession, config_path: str='config.yaml'):
+    """function run
+    Args:
+        spark ( SparkSession ) :   
+        config_path (  str ) :   
+    Returns:
+        
+    """
     #Load the yaml config file
     global conf_model
     conf = config_load( config_path  )

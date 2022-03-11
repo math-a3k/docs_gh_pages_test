@@ -26,6 +26,14 @@ from source.util_feature import save,os_get_function_name
 
 
 def global_pars_update(model_dict,  data_name, config_name):
+    """function global_pars_update
+    Args:
+        model_dict:   
+        data_name:   
+        config_name:   
+    Returns:
+        
+    """
     print("config_name", config_name)
     dir_data  = root_repo + "/data/"  ; print("dir_data", dir_data)
 
@@ -108,6 +116,14 @@ cols_input_type_1 = {
 #####################################################################################
 ####### y normalization #############################################################
 def y_norm(y, inverse=True, mode='boxcox'):
+    """function y_norm
+    Args:
+        y:   
+        inverse:   
+        mode:   
+    Returns:
+        
+    """
     ## Normalize the input/output
     if mode == 'boxcox':
         width0 = 53.0  # 0,1 factor
@@ -195,6 +211,12 @@ def house_price_lightgbm(path_model_out="") :
 
 
 def house_price_elasticnetcv(path_model_out=""):
+    """function house_price_elasticnetcv
+    Args:
+        path_model_out:   
+    Returns:
+        
+    """
     model_name   = 'ElasticNetCV'
     config_name  = 'house_price_elasticnetcv'
     n_sample     = 1000
@@ -252,6 +274,11 @@ globals()[config_name]()
 ###################################################################################
 ########## Profile data #############################################################
 def data_profile():
+   """function data_profile
+   Args:
+   Returns:
+       
+   """
    from source.run_feature_profile import run_profile
    run_profile(path_data   = path_data_train,
                path_output = path_model + "/profile/",
@@ -263,6 +290,11 @@ def data_profile():
 ###################################################################################
 ########## Preprocess #############################################################
 def preprocess():
+    """function preprocess
+    Args:
+    Returns:
+        
+    """
     from source import run_preprocess_old
     run_preprocess_old.run_preprocess(model_name =  config_name,
                                       path_data         =  path_data_train,
@@ -275,6 +307,11 @@ def preprocess():
 ############################################################################
 ########## Train ###########################################################
 def train():
+    """function train
+    Args:
+    Returns:
+        
+    """
     from source import run_train
     run_train.run_train(config_name=  config_name,
                         path_data_train=  path_data_train,
@@ -285,12 +322,22 @@ def train():
 ###################################################################################
 ######### Check model #############################################################
 def check():
+   """function check
+   Args:
+   Returns:
+       
+   """
    pass
 
 
 ########################################################################################
 ####### Inference ######################################################################
 def predict():
+    """function predict
+    Args:
+    Returns:
+        
+    """
     from source import run_inference
     run_inference.run_predict(model_name,
                             path_model  = path_model,
@@ -300,6 +347,11 @@ def predict():
 
 
 def run_all():
+    """function run_all
+    Args:
+    Returns:
+        
+    """
     data_profile()
     preprocess()
     train()

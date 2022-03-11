@@ -8,6 +8,12 @@ from mygenerator import pipeline
 
 
 def test_generate_phone_numbers(tmp_path):
+    """function test_generate_phone_numbers
+    Args:
+        tmp_path:   
+    Returns:
+        
+    """
     config_file = "default"
 
     np.random.seed(42)

@@ -11,6 +11,18 @@ import tensorflow as tf
 
 
 def pca_feature(df, memory_issues=False,mem_iss_component=False,variance_or_components=0.80,n_components=5 ,drop_cols=None, non_linear=True):
+  """function pca_feature
+  Args:
+      df:   
+      memory_issues:   
+      mem_iss_component:   
+      variance_or_components:   
+      n_components:   
+      drop_cols:   
+      non_linear:   
+  Returns:
+      
+  """
     
   if non_linear:
     pca = KernelPCA(n_components = n_components, kernel='rbf', fit_inverse_transform=True, random_state = 33, remove_zero_eig= True)
@@ -41,6 +53,15 @@ def pca_feature(df, memory_issues=False,mem_iss_component=False,variance_or_comp
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def cross_lag(df, drop=None, lags=1, components=4 ):
+  """function cross_lag
+  Args:
+      df:   
+      drop:   
+      lags:   
+      components:   
+  Returns:
+      
+  """
 
   if drop:
     keep = df[drop]
@@ -69,6 +90,15 @@ def cross_lag(df, drop=None, lags=1, components=4 ):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def a_chi(df, drop=None, lags=1, sample_steps=2 ):
+  """function a_chi
+  Args:
+      df:   
+      drop:   
+      lags:   
+      sample_steps:   
+  Returns:
+      
+  """
 
   if drop:
     keep = df[drop]
@@ -97,6 +127,14 @@ def a_chi(df, drop=None, lags=1, sample_steps=2 ):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def encoder_dataset(df, drop=None, dimesions=20):
+  """function encoder_dataset
+  Args:
+      df:   
+      drop:   
+      dimesions:   
+  Returns:
+      
+  """
 
   if drop:
     train_scaled = minmax_scale(df.drop(drop,axis=1).values, axis = 0)
@@ -134,6 +172,14 @@ def encoder_dataset(df, drop=None, dimesions=20):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def lle_feat(df, drop=None, components=4):
+  """function lle_feat
+  Args:
+      df:   
+      drop:   
+      components:   
+  Returns:
+      
+  """
 
   if drop:
     keep = df[drop]
@@ -152,6 +198,14 @@ def lle_feat(df, drop=None, components=4):
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def feature_agg(df, drop=None, components=4):
+  """function feature_agg
+  Args:
+      df:   
+      drop:   
+      components:   
+  Returns:
+      
+  """
 
   if drop:
     keep = df[drop]
@@ -175,6 +229,14 @@ def feature_agg(df, drop=None, components=4):
 
 
 def neigh_feat(df, drop, neighbors=6):
+  """function neigh_feat
+  Args:
+      df:   
+      drop:   
+      neighbors:   
+  Returns:
+      
+  """
   
   if drop:
     keep = df[drop]

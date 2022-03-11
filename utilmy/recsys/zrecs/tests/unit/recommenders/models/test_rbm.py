@@ -12,6 +12,11 @@ except ImportError:
 
 @pytest.fixture(scope="module")
 def init_rbm():
+    """function init_rbm
+    Args:
+    Returns:
+        
+    """
     return {
         "n_hidden": 100,
         "epochs": 10,
@@ -26,6 +31,12 @@ def init_rbm():
 
 @pytest.mark.gpu
 def test_class_init(init_rbm):
+    """function test_class_init
+    Args:
+        init_rbm:   
+    Returns:
+        
+    """
     model = RBM(
         hidden_units=init_rbm["n_hidden"],
         training_epoch=init_rbm["epochs"],
@@ -57,6 +68,13 @@ def test_class_init(init_rbm):
 
 @pytest.mark.gpu
 def test_train_param_init(init_rbm, affinity_matrix):
+    """function test_train_param_init
+    Args:
+        init_rbm:   
+        affinity_matrix:   
+    Returns:
+        
+    """
     # obtain the train/test set matrices
     Xtr, Xtst = affinity_matrix
 
@@ -81,6 +99,13 @@ def test_train_param_init(init_rbm, affinity_matrix):
 
 @pytest.mark.gpu
 def test_sampling_funct(init_rbm, affinity_matrix):
+    """function test_sampling_funct
+    Args:
+        init_rbm:   
+        affinity_matrix:   
+    Returns:
+        
+    """
     # obtain the train/test set matrices
     Xtr, Xtst = affinity_matrix
 

@@ -15,6 +15,11 @@ from utilmy import log,log2
 
 ################################################################################################
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     pass
 
 
@@ -23,6 +28,12 @@ def test_all():
 ################################################################################################
 ################################################################################################
 def data_mnist_get_train_test(batch=32):
+    """function data_mnist_get_train_test
+    Args:
+        batch:   
+    Returns:
+        
+    """
     # get dataset from mnist on ready to use format
     import tensorflow as tf
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
@@ -90,6 +101,11 @@ def tensorboard_log(pars_dict:dict=None,  writer=None,  verbose=True):
 
         
 def tf_check():
+    """function tf_check
+    Args:
+    Returns:
+        
+    """
     #### python prepro.py check_tf 
     import tensorflow as tf
     print( tf.config.list_physical_devices())
@@ -97,6 +113,11 @@ def tf_check():
 
     
 def gpu_usage():
+   """function gpu_usage
+   Args:
+   Returns:
+       
+   """
    cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv"
    from utilmy import os_system    
    res = os_system(cmd)
@@ -106,6 +127,11 @@ def gpu_usage():
     
     
 def gpu_available():
+    """function gpu_available
+    Args:
+    Returns:
+        
+    """
     cmd = "nvidia-smi --query-gpu=pci.bus_id,utilization.gpu --format=csv  "
     from utilmy import os_system    
     ss = os_system(cmd)
@@ -217,6 +243,11 @@ def down_page(query, out_dir="query1", genre_en='', id0="", cat="", npage=1) :
 
 
 def create_train_npz():
+    """function create_train_npz
+    Args:
+    Returns:
+        
+    """
     import cv2, gc
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     #### data_dir = pathlib.Path(data_img)
@@ -287,6 +318,11 @@ def create_train_npz():
 
 
 def create_train_parquet():
+    """function create_train_parquet
+    Args:
+    Returns:
+        
+    """
     import cv2, gc
     #### List of images (each in the form of a 28x28x3 numpy array of rgb pixels)  ############
     #### data_dir = pathlib.Path(data_img)

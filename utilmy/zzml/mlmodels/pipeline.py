@@ -54,6 +54,14 @@ def os_package_root_path(filepath, sublevel=0, path_add=""):
 
 
 def log(*s, n=0, m=1):
+    """function log
+    Args:
+        *s:   
+        n:   
+        m:   
+    Returns:
+        
+    """
     sspace = "#" * n
     sjump = "\n" * m
     print(sjump, sspace, s, sspace, flush=True)
@@ -61,6 +69,15 @@ def log(*s, n=0, m=1):
 
 ####################################################################################################
 def pd_na_values(df, cols=None, default=0.0, **kw):
+    """function pd_na_values
+    Args:
+        df:   
+        cols:   
+        default:   
+        **kw:   
+    Returns:
+        
+    """
     cols = cols if cols is not None else list(df.columns)
     for t in cols:
         df[t] = df[t].fillna(default)
@@ -69,6 +86,18 @@ def pd_na_values(df, cols=None, default=0.0, **kw):
 
 
 def generate_data(df, num_data=0, means=[], cov=[[1, 0], [0, 1]]):
+    """function generate_data
+    Args:
+        df:   
+        num_data:   
+        means:   
+        cov:   
+        0]:   
+        [0:   
+        1]]:   
+    Returns:
+        
+    """
     import numpy as np
     means = means
     cov = cov
@@ -86,6 +115,14 @@ def generate_data(df, num_data=0, means=[], cov=[[1, 0], [0, 1]]):
 
 
 def drop_cols(df, cols=None, **kw):
+    """function drop_cols
+    Args:
+        df:   
+        cols:   
+        **kw:   
+    Returns:
+        
+    """
     for t in cols:
         df.drop(t, axis=1)
     return df
@@ -93,11 +130,28 @@ def drop_cols(df, cols=None, **kw):
 
 ###################################################################################################
 def pd_concat(df1, df2, colid1):
+    """function pd_concat
+    Args:
+        df1:   
+        df2:   
+        colid1:   
+    Returns:
+        
+    """
     df3 = df1.join(df2.set_index(colid1), on=colid1, how="left")
     return df3
 
 
 def pipe_split(in_pars, out_pars, compute_pars, **kw):
+    """function pipe_split
+    Args:
+        in_pars:   
+        out_pars:   
+        compute_pars:   
+        **kw:   
+    Returns:
+        
+    """
     df = pd.read_csv(in_pars['in_path'])
     colid = in_pars['colid']
     path = out_pars['out_path']
@@ -116,6 +170,15 @@ def pipe_split(in_pars, out_pars, compute_pars, **kw):
 
 
 def pipe_merge(in_pars, out_pars, compute_pars=None, **kw):
+    """function pipe_merge
+    Args:
+        in_pars:   
+        out_pars:   
+        compute_pars:   
+        **kw:   
+    Returns:
+        
+    """
     dfall = None
     for filename in in_pars['file_list']:
         log(filename)
@@ -127,6 +190,13 @@ def pipe_merge(in_pars, out_pars, compute_pars=None, **kw):
 
 
 def pipe_load(df, **in_pars):
+    """function pipe_load
+    Args:
+        df:   
+        **in_pars:   
+    Returns:
+        
+    """
     path = in_pars['in_path']
     log(path)
 
@@ -145,6 +215,16 @@ def pipe_load(df, **in_pars):
 
 class Pipe(object):
     def __init__(self, pipe_list, in_pars, out_pars, compute_pars=None, **kw):
+        """ Pipe:__init__
+        Args:
+            pipe_list:     
+            in_pars:     
+            out_pars:     
+            compute_pars:     
+            **kw:     
+        Returns:
+           
+        """
 
         self.pipe_list = pipe_list
         self.in_pars = in_pars
@@ -156,6 +236,11 @@ class Pipe(object):
         self.fitted_pipe_list = []
 
     def run(self):
+        """ Pipe:run
+        Args:
+        Returns:
+           
+        """
         if not self.pipe_list: raise Exception("Need init pipe list before running!")
         log('Start execution')
         dfin = None
@@ -192,6 +277,12 @@ class Pipe(object):
                          }, args_pexec))
 
     def get_fitted_pipe_list(self, key=""):
+        """ Pipe:get_fitted_pipe_list
+        Args:
+            key:     
+        Returns:
+           
+        """
         return self.fitted_pipe_list
 
     def get_checkpoint(self):
@@ -202,6 +293,11 @@ class Pipe(object):
         """
 
     def get_model_path(self):
+        """ Pipe:get_model_path
+        Args:
+        Returns:
+           
+        """
         return self.model_path_list
 
 
@@ -228,6 +324,13 @@ def pipe_run_inference(pipe_list, in_pars, out_pars, compute_pars=None, checkpoi
 
 
 def pipe_checkpoint(df, **kw):
+    """function pipe_checkpoint
+    Args:
+        df:   
+        **kw:   
+    Returns:
+        
+    """
     if kw.get("type") == "pandas":
         pickle.dump(df, open(kw["out_path"], 'wb'))
 
@@ -236,14 +339,36 @@ def pipe_checkpoint(df, **kw):
 
 
 def load_model(path):
+    """function load_model
+    Args:
+        path:   
+    Returns:
+        
+    """
     return pickle.load(open(path, mode='rb'))
 
 
 def save_model(model, path):
+    """function save_model
+    Args:
+        model:   
+        path:   
+    Returns:
+        
+    """
     pickle.save(model, open(path, mode='wb'))
 
 
 def get_params(choice="", data_path="dataset/", config_mode="test", **kw):
+    """function get_params
+    Args:
+        choice:   
+        data_path:   
+        config_mode:   
+        **kw:   
+    Returns:
+        
+    """
     compute_pars = {"cpu": True}
     if choice == "colnum":
         root = os_package_root_path(__file__, 0)
@@ -309,6 +434,13 @@ def get_params(choice="", data_path="dataset/", config_mode="test", **kw):
 
 ###################################################################################################
 def test(data_path="/dataset/", pars_choice="colnum"):
+    """function test
+    Args:
+        data_path:   
+        pars_choice:   
+    Returns:
+        
+    """
     ### get params
     log("#### Loading params   ##############################################")
     pipe_list, in_pars, out_pars, compute_pars = get_params(pars_choice, data_path=data_path)

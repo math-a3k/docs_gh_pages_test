@@ -17,6 +17,11 @@ import numpy as np
 
 class SGAN:
     def __init__(self):
+        """ SGAN:__init__
+        Args:
+        Returns:
+           
+        """
         self.img_rows = 28
         self.img_cols = 28
         self.channels = 1
@@ -54,6 +59,11 @@ class SGAN:
         self.combined.compile(loss=['binary_crossentropy'], optimizer=optimizer)
 
     def build_generator(self):
+        """ SGAN:build_generator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -79,6 +89,11 @@ class SGAN:
         return Model(noise, img)
 
     def build_discriminator(self):
+        """ SGAN:build_discriminator
+        Args:
+        Returns:
+           
+        """
 
         model = Sequential()
 
@@ -110,6 +125,14 @@ class SGAN:
         return Model(img, [valid, label])
 
     def train(self, epochs, batch_size=128, sample_interval=50):
+        """ SGAN:train
+        Args:
+            epochs:     
+            batch_size:     
+            sample_interval:     
+        Returns:
+           
+        """
 
         # Load the dataset
         (X_train, y_train), (_, _) = mnist.load_data()
@@ -170,6 +193,12 @@ class SGAN:
                 self.sample_images(epoch)
 
     def sample_images(self, epoch):
+        """ SGAN:sample_images
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         r, c = 5, 5
         noise = np.random.normal(0, 1, (r * c, self.latent_dim))
         gen_imgs = self.generator.predict(noise)
@@ -188,6 +217,11 @@ class SGAN:
         plt.close()
 
     def save_model(self):
+        """ SGAN:save_model
+        Args:
+        Returns:
+           
+        """
 
         def save(model, model_name):
             model_path = "saved_model/%s.json" % model_name

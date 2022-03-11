@@ -33,6 +33,13 @@ def model_create(modelname="", params=None, modelonly=1):
 
 
 def model_instance(name="net", params={}):
+    """function model_instance
+    Args:
+        name:   
+        params:   
+    Returns:
+        
+    """
     if name == "net":
         return Net()
     else  :
@@ -45,6 +52,11 @@ def model_instance(name="net", params={}):
 ####################################################################################################
 class Net(nn.Module):
     def __init__(self):
+        """ Net:__init__
+        Args:
+        Returns:
+           
+        """
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
         self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
@@ -53,6 +65,12 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(50, 10)
 
     def forward(self, x):
+        """ Net:forward
+        Args:
+            x:     
+        Returns:
+           
+        """
         x = F.relu(F.max_pool2d(self.conv1(x), 2))
         x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
         x = x.view(-1, 320)

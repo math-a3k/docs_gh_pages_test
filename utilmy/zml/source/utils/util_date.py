@@ -98,6 +98,12 @@ def datetime_tostring(datelist, fmt="%Y-%m-%d %H:%M:%S"):
 
 
 def datetime_tointhour(datelist):
+    """function datetime_tointhour
+    Args:
+        datelist:   
+    Returns:
+        
+    """
     if not isinstance(datelist, list):
         x = datelist
         y = (
@@ -123,6 +129,12 @@ def datetime_tointhour(datelist):
 
 
 def datetime_toint(datelist):
+    """function datetime_toint
+    Args:
+        datelist:   
+    Returns:
+        
+    """
     if not isinstance(datelist, list):
         x = datelist
         return x.year * 10000 + x.month * 100 + x.day
@@ -133,6 +145,12 @@ def datetime_toint(datelist):
 
 
 def datetime_to_milisec(datelist):
+    """function datetime_to_milisec
+    Args:
+        datelist:   
+    Returns:
+        
+    """
     if not isinstance(datelist, list):
         return (datelist - datetime(1970, 1, 1)).total_seconds()
     else:
@@ -141,6 +159,12 @@ def datetime_to_milisec(datelist):
 
 
 def datetime_weekday(datelist):
+    """function datetime_weekday
+    Args:
+        datelist:   
+    Returns:
+        
+    """
     if not isinstance(datelist, list):
         return int(datelist.strftime("%w"))
     else:
@@ -165,11 +189,23 @@ def datetime_weekday_fast(dateval):
 
 
 def datetime_quarter(datetimex):
+    """function datetime_quarter
+    Args:
+        datetimex:   
+    Returns:
+        
+    """
     m = datetimex.month
     return int(m // 3) + 1
 
 
 def dateime_daytime(datetimex):
+    """function dateime_daytime
+    Args:
+        datetimex:   
+    Returns:
+        
+    """
     h = datetimex.hour
     if h < 11:
         return 0
@@ -184,6 +220,13 @@ def dateime_daytime(datetimex):
 
 
 def datenumpy_todatetime(tt, islocaltime=True):
+    """function datenumpy_todatetime
+    Args:
+        tt:   
+        islocaltime:   
+    Returns:
+        
+    """
     #  http://stackoverflow.com/questions/29753060/how-to-convert-numpy-datetime64-into-datetime
     if type(tt) == np.datetime64:
         if islocaltime:
@@ -201,6 +244,13 @@ def datenumpy_todatetime(tt, islocaltime=True):
 
 
 def datetime_tonumpydate(t, islocaltime=True):
+    """function datetime_tonumpydate
+    Args:
+        t:   
+        islocaltime:   
+    Returns:
+        
+    """
     #  http://stackoverflow.com/questions/29753060/how-to-convert-numpy-datetime64-into-datetime
     return np.datetime64(t)
 
@@ -213,14 +263,32 @@ def date_diffsecond(str_t1, str_t0, fmt='YYYY-MM-DD HH:mm:SS') :
 
 
 def np_dict_tolist(dd):
+    """function np_dict_tolist
+    Args:
+        dd:   
+    Returns:
+        
+    """
     return [val for _, val in list(dd.items())]
 
 
 def np_dict_tostr_val(dd):
+    """function np_dict_tostr_val
+    Args:
+        dd:   
+    Returns:
+        
+    """
     return ",".join([str(val) for _, val in list(dd.items())])
 
 
 def np_dict_tostr_key(dd):
+    """function np_dict_tostr_key
+    Args:
+        dd:   
+    Returns:
+        
+    """
     return ",".join([str(key) for key, _ in list(dd.items())])
 
 

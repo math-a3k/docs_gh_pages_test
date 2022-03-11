@@ -63,6 +63,11 @@ NAN = float("nan")
 
 
 def zdoc():
+    """function zdoc
+    Args:
+    Returns:
+        
+    """
     source = inspect.getsource(ztest)
     print(source)
 
@@ -75,6 +80,12 @@ def str_join(*members):
 
 
 def np_merge(*dicts):
+    """function np_merge
+    Args:
+        *dicts:   
+    Returns:
+        
+    """
     container = {}
     for d in dicts:
         container.update(d)
@@ -82,6 +93,12 @@ def np_merge(*dicts):
 
 
 def module_load(name_or_path="") :
+    """function module_load
+    Args:
+        name_or_path:   
+    Returns:
+        
+    """
     name_or_path = os.path.abspath(name_or_path)
 
     try :
@@ -102,6 +119,12 @@ def module_load(name_or_path="") :
 
 
 def module_getname(name) :
+   """function module_getname
+   Args:
+       name:   
+   Returns:
+       
+   """
    if SEP not in name : return name 
    else  :
     return name.split(SEP)[-1]
@@ -109,6 +132,12 @@ def module_getname(name) :
 
 
 def module_getpath(name) :
+    """function module_getpath
+    Args:
+        name:   
+    Returns:
+        
+    """
     return name
 
 
@@ -128,6 +157,12 @@ class Module:
     self.get_class_methods(), self.isimported(self, name), self.get_mlattr(self, full_name), self.get_submodule(self, attr)."""
 
     def __init__(self, module_name):
+        """ Module:__init__
+        Args:
+            module_name:     
+        Returns:
+           
+        """
         self.module_name = module_name
         self.module = module_load(self.module_name)
         self.module_isbuiltin = self.get_module_isbuiltin()
@@ -146,6 +181,11 @@ class Module:
             return 0
 
     def get_module_isbuiltin(self):
+        """ Module:get_module_isbuiltin
+        Args:
+        Returns:
+           
+        """
         builtin_modules = list(sys.builtin_module_names)
         for x in builtin_modules:
             if self.module.__name__ == x:
@@ -251,6 +291,12 @@ def str_strip_text(string):
 
 
 def obj_get_signature(obj):
+    """function obj_get_signature
+    Args:
+        obj:   
+    Returns:
+        
+    """
     obj_name = obj.__name__
     obj_doc = str_strip_text(pydoc.render_doc(obj))
     match = regex.findall(obj_name + "(\((?>[^()]+|(?1))*\))", obj_doc)[:2]
@@ -266,6 +312,12 @@ def obj_get_signature(obj):
         return ""
 
 def obj_get_full_signature(obj):
+    """function obj_get_full_signature
+    Args:
+        obj:   
+    Returns:
+        
+    """
     arg_full = OrderedDict()
     try:
         args = inspect.signature(obj)
@@ -278,6 +330,12 @@ def obj_get_full_signature(obj):
 
     
 def obj_get_args(obj):
+    """function obj_get_args
+    Args:
+        obj:   
+    Returns:
+        
+    """
     arguments = OrderedDict()
     if inspect.isbuiltin(obj):
         obj_signature = obj_get_signature(obj)
@@ -310,6 +368,12 @@ def obj_get_args(obj):
 
 
 def obj_guess_arg_type(arg_default_values):
+    """function obj_guess_arg_type
+    Args:
+        arg_default_values:   
+    Returns:
+        
+    """
     types = []
     for arg_value in arg_default_values:
         if isinstance(arg_value, str):
@@ -341,6 +405,12 @@ def obj_get_nametype(obj):
 
 
 def obj_class_ispecial(obj):
+    """function obj_class_ispecial
+    Args:
+        obj:   
+    Returns:
+        
+    """
     try:
         inspect.getfullargspec(obj.__init__)
     except TypeError:
@@ -353,6 +423,12 @@ def obj_class_ispecial(obj):
 
 
 def obj_get_type(x):
+    """function obj_get_type
+    Args:
+        x:   
+    Returns:
+        
+    """
     # eval
     if isinstance(x, str):
         return "str"
@@ -419,11 +495,25 @@ def module_signature_get(module_name):
 
 
 def pd_df_expand(x):
+    """function pd_df_expand
+    Args:
+        x:   
+    Returns:
+        
+    """
     y = pd.DataFrame(x.values.tolist())
     return y.stack()
 
 
 def pd_df_format(df, index, filter=True):
+    """function pd_df_format
+    Args:
+        df:   
+        index:   
+        filter:   
+    Returns:
+        
+    """
     level_to_drop = "level_{}".format(len(index))
     # if filter: df = filter_data(['private_methods'], pd.DataFrame(df))   # We keep ALL the data as RAW data in csv.
     print(df)
@@ -503,6 +593,12 @@ def obj_arg_filter_apply_1(df, filter_list=None):
 
 
 def obj_arg_filter_nonetype(x):
+    """function obj_arg_filter_nonetype
+    Args:
+        x:   
+    Returns:
+        
+    """
     try:
         if x["arg_type"] == "NoneType":
             return x["args_dummy"] + "None"
@@ -686,6 +782,14 @@ def module_doc_write(
 
 
 def module_doc_write_batch(module_list=None, list_exclude=None, folder_export="/"):
+    """function module_doc_write_batch
+    Args:
+        module_list:   
+        list_exclude:   
+        folder_export:   
+    Returns:
+        
+    """
     if list_exclude is None:
         list_exclude = [""]
     if module_list is None:
@@ -796,6 +900,12 @@ def obj_guess_arg_type2(full_name, arg_name, type_guess_engine="pytype"):
 ######################################################################################################
 ############## Code Search #################################################################################
 def conda_path_get(subfolder="package/F:/"):
+    """function conda_path_get
+    Args:
+        subfolder="package/F:   
+    Returns:
+        
+    """
     if os.__file__.find("envs") > -1:
         DIRANA = os.__file__.split("envs")[0] + "/"  # Anaconda from linux
     else:
@@ -838,6 +948,12 @@ def os_file_listall(dir1, pattern="*.*", dirlevel=1, onlyfolder=0):
 
 ################################################################################################
 def np_list_dropduplicate(seq):
+    """function np_list_dropduplicate
+    Args:
+        seq:   
+    Returns:
+        
+    """
     seen = set()
     seen_add = seen.add
     return [x for x in seq if not (x in seen or seen_add(x))]
@@ -873,6 +989,14 @@ def code_parse_line(li, pattern_type="import/import_externa"):
 
 ######################################################################################################
 def module_tofolder(name_or_path, outputfolder="./zmp", isdebug=1):
+        """function module_tofolder
+        Args:
+            name_or_path:   
+            outputfolder:   
+            isdebug:   
+        Returns:
+            
+        """
         ### Export docs to specific folder
         module_name = module_getname(name_or_path)
 
@@ -910,6 +1034,13 @@ IIX = 0
 
 
 def log(*args, reset=0):
+    """function log
+    Args:
+        *args:   
+        reset:   
+    Returns:
+        
+    """
     global IIX
     IIX = IIX + 1
     a = ",".join(args)
@@ -917,6 +1048,11 @@ def log(*args, reset=0):
 
 
 def ztest():
+    """function ztest
+    Args:
+    Returns:
+        
+    """
     # DIRCWD = "/home/ubuntu/ztest/"
     print(os.getcwd())
     os.makedirs("ztmp",exist_ok=True)
@@ -956,6 +1092,12 @@ def ztest():
         
 
 def ztest_mod(mod):
+    """function ztest_mod
+    Args:
+        mod:   
+    Returns:
+        
+    """
     DIRCWD = "/home/ubuntu/ztest/"
     
     log("### Unit Tests")
@@ -990,6 +1132,11 @@ def ztest_mod(mod):
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     import argparse
     
     p = argparse.ArgumentParser()

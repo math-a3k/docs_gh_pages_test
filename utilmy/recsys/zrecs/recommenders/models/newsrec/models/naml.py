@@ -41,6 +41,12 @@ class NAMLModel(BaseModel):
         super().__init__(hparams, iterator_creator, seed=seed)
 
     def _get_input_label_from_iter(self, batch_data):
+        """ NAMLModel:_get_input_label_from_iter
+        Args:
+            batch_data:     
+        Returns:
+           
+        """
         input_feat = [
             batch_data["clicked_title_batch"],
             batch_data["clicked_ab_batch"],

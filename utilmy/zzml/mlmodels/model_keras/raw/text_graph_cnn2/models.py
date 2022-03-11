@@ -8,6 +8,12 @@ FLAGS = flags.FLAGS
 
 class Model(object):
     def __init__(self, **kwargs):
+        """ Model:__init__
+        Args:
+            **kwargs:     
+        Returns:
+           
+        """
         allowed_kwargs = {'name', 'logging'}
         for kwarg in kwargs.keys():
             assert kwarg in allowed_kwargs, 'Invalid keyword argument: ' + kwarg
@@ -34,6 +40,11 @@ class Model(object):
         self.opt_op = None
 
     def _build(self):
+        """ Model:_build
+        Args:
+        Returns:
+           
+        """
         raise NotImplementedError
 
     def build(self):
@@ -59,15 +70,66 @@ class Model(object):
         self.opt_op = self.optimizer.minimize(self.loss)
 
     def predict(self):
+        """ Model:predict
+        Args:
+        Returns:
+           
+        """
+        """ MLP:predict
+        Args:
+        Returns:
+           
+        """
+        """ GCN:predict
+        Args:
+        Returns:
+           
+        """
         pass
 
     def _loss(self):
+        """ Model:_loss
+        Args:
+        Returns:
+           
+        """
+        """ MLP:_loss
+        Args:
+        Returns:
+           
+        """
+        """ GCN:_loss
+        Args:
+        Returns:
+           
+        """
         raise NotImplementedError
 
     def _accuracy(self):
+        """ Model:_accuracy
+        Args:
+        Returns:
+           
+        """
+        """ MLP:_accuracy
+        Args:
+        Returns:
+           
+        """
+        """ GCN:_accuracy
+        Args:
+        Returns:
+           
+        """
         raise NotImplementedError
 
     def save(self, sess=None):
+        """ Model:save
+        Args:
+            sess:     
+        Returns:
+           
+        """
         if not sess:
             raise AttributeError("TensorFlow session not provided.")
         saver = tf.train.Saver(self.vars)
@@ -75,6 +137,12 @@ class Model(object):
         print("Model saved in file: %s" % save_path)
 
     def load(self, sess=None):
+        """ Model:load
+        Args:
+            sess:     
+        Returns:
+           
+        """
         if not sess:
             raise AttributeError("TensorFlow session not provided.")
         saver = tf.train.Saver(self.vars)
@@ -85,6 +153,22 @@ class Model(object):
 
 class MLP(Model):
     def __init__(self, placeholders, input_dim, **kwargs):
+        """ MLP:__init__
+        Args:
+            placeholders:     
+            input_dim:     
+            **kwargs:     
+        Returns:
+           
+        """
+        """ GCN:__init__
+        Args:
+            placeholders:     
+            input_dim:     
+            **kwargs:     
+        Returns:
+           
+        """
         super(MLP, self).__init__(**kwargs)
 
         self.inputs = placeholders['features']

@@ -19,6 +19,12 @@ except ImportError:
 
 @pytest.mark.gpu
 def test_nrms_component_definition(mind_resource_path):
+    """function test_nrms_component_definition
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     wordEmb_file = os.path.join(mind_resource_path, "utils", "embedding.npy")
     userDict_file = os.path.join(mind_resource_path, "utils", "uid2index.pkl")
     wordDict_file = os.path.join(mind_resource_path, "utils", "word_dict.pkl")
@@ -49,6 +55,12 @@ def test_nrms_component_definition(mind_resource_path):
 
 @pytest.mark.gpu
 def test_naml_component_definition(mind_resource_path):
+    """function test_naml_component_definition
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     wordEmb_file = os.path.join(mind_resource_path, "utils", "embedding_all.npy")
     userDict_file = os.path.join(mind_resource_path, "utils", "uid2index.pkl")
     wordDict_file = os.path.join(mind_resource_path, "utils", "word_dict_all.pkl")
@@ -83,6 +95,12 @@ def test_naml_component_definition(mind_resource_path):
 
 @pytest.mark.gpu
 def test_npa_component_definition(mind_resource_path):
+    """function test_npa_component_definition
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     wordEmb_file = os.path.join(mind_resource_path, "utils", "embedding.npy")
     userDict_file = os.path.join(mind_resource_path, "utils", "uid2index.pkl")
     wordDict_file = os.path.join(mind_resource_path, "utils", "word_dict.pkl")
@@ -113,6 +131,12 @@ def test_npa_component_definition(mind_resource_path):
 
 @pytest.mark.gpu
 def test_lstur_component_definition(mind_resource_path):
+    """function test_lstur_component_definition
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     wordEmb_file = os.path.join(mind_resource_path, "utils", "embedding.npy")
     userDict_file = os.path.join(mind_resource_path, "utils", "uid2index.pkl")
     wordDict_file = os.path.join(mind_resource_path, "utils", "word_dict.pkl")

@@ -8,6 +8,26 @@ class TestChiSquareCritical(object):
     dof, alpha = 10, 0.05
 
     def test_critical_values(self):
+        """ TestWCritical:test_critical_values
+        Args:
+        Returns:
+           
+        """
+        """ TestUCritical:test_critical_values
+        Args:
+        Returns:
+           
+        """
+        """ TestRCritical:test_critical_values
+        Args:
+        Returns:
+           
+        """
+        """ TestChiSquareCritical:test_critical_values
+        Args:
+        Returns:
+           
+        """
         critical_value = c.chi_square_critical_value(self.alpha, self.dof)
         critical_value2 = c.chi_square_critical_value(str(self.alpha), str(self.dof))
         critical_value3 = c.chi_square_critical_value(str(self.alpha), float(self.dof))
@@ -17,6 +37,26 @@ class TestChiSquareCritical(object):
         assert critical_value3 == 18.307
 
     def test_exceptions(self):
+        """ TestWCritical:test_exceptions
+        Args:
+        Returns:
+           
+        """
+        """ TestUCritical:test_exceptions
+        Args:
+        Returns:
+           
+        """
+        """ TestRCritical:test_exceptions
+        Args:
+        Returns:
+           
+        """
+        """ TestChiSquareCritical:test_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             c.chi_square_critical_value(31, 0.05)
         with pytest.raises(ValueError):

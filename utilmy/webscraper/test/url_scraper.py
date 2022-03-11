@@ -12,6 +12,12 @@ class GlassDoor(scrapy.Spider):
     start_urls = [urll]
 
     def parse(self, response):
+        """ GlassDoor:parse
+        Args:
+            response:     
+        Returns:
+           
+        """
         item = {}
         try:
             infor = response.xpath("//a[text()='Inside Venture Capital']/@href").extract_first()

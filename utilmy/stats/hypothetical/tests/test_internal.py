@@ -5,6 +5,11 @@ from hypothetical._lib import _build_des_mat
 
 
 def test_array():
+    """function test_array
+    Args:
+    Returns:
+        
+    """
     d = np.array([[1., 1.11, 2.569, 3.58, 0.76],
                   [1., 1.19, 2.928, 3.75, 0.821],
                   [1., 1.09, 2.865, 3.93, 0.928],
@@ -58,6 +63,11 @@ def test_array():
 
 
 def test_build_design_matrix():
+    """function test_build_design_matrix
+    Args:
+    Returns:
+        
+    """
     dat = test_array()
     dat_df = pd.DataFrame(dat)
 
@@ -84,5 +94,10 @@ def test_build_design_matrix():
 
 
 def test_build_matrix():
+    """function test_build_matrix
+    Args:
+    Returns:
+        
+    """
     arr1 = [4, 4, 5, 5, 3, 2, 5]
     arr2 = [2, 3, 3, 3, 3, 3, 3]

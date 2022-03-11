@@ -12,6 +12,11 @@ class TestChiSquareContingency(object):
     expected = np.array([[7.3, 30.3, 38.0, 5.4], [18.6, 77.5, 97.1, 13.8], [9.1, 38.2, 47.9, 6.8]])
 
     def test_chi_square_contingency(self):
+        """ TestChiSquareContingency:test_chi_square_contingency
+        Args:
+        Returns:
+           
+        """
         c = ChiSquareContingency(self.observed, self.expected)
 
         assert_almost_equal(c.chi_square, 69.07632536255964)
@@ -34,6 +39,11 @@ class TestChiSquareContingency(object):
         assert_almost_equal(c.chi_square, c2.chi_square)
 
     def test_chi_square_contingency_no_continuity(self):
+        """ TestChiSquareContingency:test_chi_square_contingency_no_continuity
+        Args:
+        Returns:
+           
+        """
         obs = np.array([[23, 40], [11, 75]])
         exp = np.array([[7.3, 30.3], [18.6, 77.5]])
 
@@ -50,6 +60,11 @@ class TestChiSquareContingency(object):
         assert not c.continuity
 
     def test_chi_square_contingency_no_expected(self):
+        """ TestChiSquareContingency:test_chi_square_contingency_no_expected
+        Args:
+        Returns:
+           
+        """
         c = ChiSquareContingency(self.observed)
 
         assert_almost_equal(c.chi_square, 69.3893282675805)
@@ -61,6 +76,11 @@ class TestChiSquareContingency(object):
         assert c.degrees_freedom == 6
 
     def test_chi_square_exceptions(self):
+        """ TestChiSquareContingency:test_chi_square_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             ChiSquareContingency(self.observed, self.expected[:1])
 
@@ -71,6 +91,11 @@ class TestCochranQ(object):
     r3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0]
 
     def test_cochranq(self):
+        """ TestCochranQ:test_cochranq
+        Args:
+        Returns:
+           
+        """
         c = CochranQ(self.r1, self.r2, self.r3)
 
         assert_almost_equal(c.q_statistic, 16.666666666666668)
@@ -78,6 +103,11 @@ class TestCochranQ(object):
         assert c.degrees_freedom == 2
 
     def test_cochranq_exceptions(self):
+        """ TestCochranQ:test_cochranq_exceptions
+        Args:
+        Returns:
+           
+        """
         r1, r2, r3 = [0, 1, 1], [1, 1, 0], [0, 0, 1, 1]
 
         with pytest.raises(ValueError):
@@ -110,6 +140,11 @@ class TestMcNemarTest(object):
     #     assert_almost_equal(m.mcnemar_x2_statistic, m2.mcnemar_x2_statistic)
 
     def test_mcnemartest_exceptions(self):
+        """ TestMcNemarTest:test_mcnemartest_exceptions
+        Args:
+        Returns:
+           
+        """
 
         with pytest.raises(ValueError):
             McNemarTest(np.array([[59, 6], [16, 80], [101, 100]]))
@@ -130,6 +165,11 @@ class TestTableMargins(object):
     cont_table3 = np.array([10, 10, 20])
 
     def test_table_margins(self):
+        """ TestTableMargins:test_table_margins
+        Args:
+        Returns:
+           
+        """
         t = table_margins(self.cont_table)
         t2 = table_margins(self.cont_table3)
 
@@ -137,15 +177,30 @@ class TestTableMargins(object):
         assert all(t2[0] == self.cont_table3)
 
     def test_margins_exceptions(self):
+        """ TestTableMargins:test_margins_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             table_margins(self.cont_table2)
 
     def test_expected_frequencies(self):
+        """ TestTableMargins:test_expected_frequencies
+        Args:
+        Returns:
+           
+        """
         e = expected_frequencies(self.cont_table)
 
         assert_array_almost_equal(e, np.array([[13.33333333, 13.33333333, 13.33333333],
                                                           [16.66666667, 16.66666667, 16.66666667]]))
 
     def test_expected_frequencies_exceptions(self):
+        """ TestTableMargins:test_expected_frequencies_exceptions
+        Args:
+        Returns:
+           
+        """
         with pytest.raises(ValueError):
             expected_frequencies(self.cont_table2)

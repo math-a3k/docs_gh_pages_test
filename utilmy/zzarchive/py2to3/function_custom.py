@@ -96,6 +96,14 @@ def mapping_calc_risk_v01(ss, tr, t, risk0) :
 
 
 def mapping_risk_ww_v01(risk, wwmat, ww2):
+      """function mapping_risk_ww_v01
+      Args:
+          risk:   
+          wwmat:   
+          ww2:   
+      Returns:
+          
+      """
       if   risk== 6.0 :    return ww2                               # Super Bear
       elif risk== 0.0 :    vv= wwmat[:,0];   ww2 = vv / np.sum(vv)  
       elif risk== 2.0 :    vv= wwmat[:,1];   ww2 = vv / np.sum(vv)
@@ -105,6 +113,16 @@ def mapping_risk_ww_v01(risk, wwmat, ww2):
 
 # Initial part
 def mapping_calc_risk_v00(self, ss, tr, t, risk0) :
+     """function mapping_calc_risk_v00
+     Args:
+         self:   
+         ss:   
+         tr:   
+         t:   
+         risk0:   
+     Returns:
+         
+     """
      # Pattern Regime:   Drop --> Crash --> OVerSold --> Recovery ---> Bull ---> Drop 
      if  ss[t,0] < tr[0] and ss[t,2] < tr[1] :
          risk= 6.0    # Super Bear Protection
@@ -131,12 +149,27 @@ def mapping_calc_risk_v00(self, ss, tr, t, risk0) :
 
    
 def getweight(ww,size=(9,3), norm=1):
+ """function getweight
+ Args:
+     ww:   
+     size:   
+     3:   
+ Returns:
+     
+ """
  ww2= np.reshape(ww, size)
  if norm== 1 : ww2= ww2/ np.sum(ww2, axis=0)
  return ww2
 
 
 def fun_obj(vv, ext) :
+  """function fun_obj
+  Args:
+      vv:   
+      ext:   
+  Returns:
+      
+  """
   volta=    pf.folio_volta(ext[0], vv[0], int(vv[1]), ext[1])
   vol= pf.volhisto_fromprice(volta,-1, len(volta))
   return -volta[-1] / vol

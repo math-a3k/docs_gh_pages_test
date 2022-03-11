@@ -33,6 +33,12 @@ class DCG(object):
         return np.sum(np.divide(gain, discount))
 
     def _get_gain(self, targets):
+        """ DCG:_get_gain
+        Args:
+            targets:     
+        Returns:
+           
+        """
         t = targets[:self.k]
         if self.gain_type == 'exp2':
             return np.power(2.0, t) - 1.0
@@ -40,12 +46,24 @@ class DCG(object):
             return t
 
     def _get_discount(self, k):
+        """ DCG:_get_discount
+        Args:
+            k:     
+        Returns:
+           
+        """
         if k > len(self.discount):
             self.discount = self._make_discount(2 * len(self.discount))
         return self.discount[:k]
 
     @staticmethod
     def _make_discount(n):
+        """ DCG:_make_discount
+        Args:
+            n:     
+        Returns:
+           
+        """
         x = np.arange(1, n+1, 1)
         discount = np.log2(x + 1)
         return discount

@@ -77,6 +77,11 @@ class ExperimentConfig(object):
 
   @property
   def data_csv_path(self):
+    """ ExperimentConfig:data_csv_path
+    Args:
+    Returns:
+       
+    """
     csv_map = {
         'volatility': 'formatted_omi_vol.csv',
         'electricity': 'hourly_electricity.csv',
@@ -88,6 +93,11 @@ class ExperimentConfig(object):
 
   @property
   def hyperparam_iterations(self):
+    """ ExperimentConfig:hyperparam_iterations
+    Args:
+    Returns:
+       
+    """
 
     return 240 if self.experiment == 'volatility' else 60
 

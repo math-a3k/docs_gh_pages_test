@@ -12,6 +12,12 @@ LOGGER = logging.getLogger()
 
 
 def list_source_files(srcdir):
+    """function list_source_files
+    Args:
+        srcdir:   
+    Returns:
+        
+    """
     srcs = []
 
     for dirpath, _, files in os.walk(srcdir):
@@ -26,6 +32,13 @@ def list_source_files(srcdir):
 
 
 def filter_by_pattern(paths, patterns):
+    """function filter_by_pattern
+    Args:
+        paths:   
+        patterns:   
+    Returns:
+        
+    """
     if not patterns:
         return paths
 

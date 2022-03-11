@@ -33,6 +33,12 @@ fst = True
 DELIMITER = "/n"
 
 def reinput(user_msg):
+	"""function reinput
+	Args:
+	    user_msg:   
+	Returns:
+	    
+	"""
 	global conditioned_tokens; global fst
 	os.system('cls' if os.name == 'nt' else 'clear')
 	  
@@ -69,6 +75,12 @@ def top_p_filtering(logits, top_p=0.9, filter_value=-float('Inf')):
 
 
 def recalc(p=None):
+	"""function recalc
+	Args:
+	    p:   
+	Returns:
+	    
+	"""
 	global conditioned_tokens
 	global generated_tokens
 	global past
@@ -90,6 +102,11 @@ def recalc(p=None):
 	return next_token.item()
 
 def generate():
+	"""function generate
+	Args:
+	Returns:
+	    
+	"""
 	global conditioned_tokens
 	global generated_tokens
 	global past
@@ -300,12 +317,22 @@ home_page = '''
 
 @app.route("/")
 def home():
+  """function home
+  Args:
+  Returns:
+      
+  """
   return home_page
     # return render_template("home.html")
 
 
 @app.route("/get")
 def get_bot_response():
+    """function get_bot_response
+    Args:
+    Returns:
+        
+    """
     userText = request.args.get('msg')
     reinput(userText)
     output = generate()

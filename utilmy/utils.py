@@ -17,6 +17,13 @@ from loguru import logger
 
 #####################################################################
 def load_function(package="mlmodels.util", name="path_norm"):
+  """function load_function
+  Args:
+      package:   
+      name:   
+  Returns:
+      
+  """
   import importlib
   return  getattr(importlib.import_module(package), name)
 
@@ -62,6 +69,12 @@ def load_function_uri(uri_name="path_norm"):
 
 
 def load_callable_from_uri(uri):
+    """function load_callable_from_uri
+    Args:
+        uri:   
+    Returns:
+        
+    """
     assert(len(uri)>0 and ('::' in uri or '.' in uri))
     if '::' in uri:
         module_path, callable_name = uri.split('::')
@@ -78,6 +91,13 @@ def load_callable_from_uri(uri):
         
 
 def load_callable_from_dict(function_dict, return_other_keys=False):
+    """function load_callable_from_dict
+    Args:
+        function_dict:   
+        return_other_keys:   
+    Returns:
+        
+    """
     function_dict = function_dict.copy()
     uri = function_dict.pop('uri')
     func = load_callable_from_uri(uri)
@@ -132,6 +152,11 @@ def test_all():
 
 
 def test0(): 
+    """function test0
+    Args:
+    Returns:
+        
+    """
     logger_setup()
     log("simple log ")
     log2("debug log")
@@ -139,6 +164,11 @@ def test0():
     loge("error log")
     
 def test1():
+    """function test1
+    Args:
+    Returns:
+        
+    """
     config_load()
     dataset_donwload("https://github.com/arita37/mnist_png/raw/master/mnist_png.tar.gz", './testdata/tmp/test/dataset/')
     os_extract_archive("./testdata/tmp/test/dataset/mnist_png.tar.gz","./testdata/tmp/test/dataset/archive/", archive_format = "auto")
@@ -147,22 +177,51 @@ def test1():
 ##########################################################################################
 ################### Logs Wrapper #########################################################
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.info(",".join([str(t) for t in s]))
 
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.debug(",".join([str(t) for t in s]))
 
 
 def logw(*s):
+    """function logw
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.warning(",".join([str(t) for t in s]))
 
 
 def loge(*s):
+    """function loge
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.error(",".join([str(t) for t in s]))
 
 
 def logger_setup():
+    """function logger_setup
+    Args:
+    Returns:
+        
+    """
     config = {
         "handlers": [
             {
@@ -294,5 +353,12 @@ def os_extract_archive(file_path, path=".", archive_format="auto"):
 
 
 def to_file(s, filep):
+    """function to_file
+    Args:
+        s:   
+        filep:   
+    Returns:
+        
+    """
     with open(filep, mode="a") as fp:
         fp.write(str(s) + "\n")

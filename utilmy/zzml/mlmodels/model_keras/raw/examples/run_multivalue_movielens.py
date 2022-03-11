@@ -8,6 +8,12 @@ from deepctr.models import DeepFM
 
 
 def split(x):
+    """function split
+    Args:
+        x:   
+    Returns:
+        
+    """
     key_ans = x.split('|')
     for key in key_ans:
         if key not in key2index:

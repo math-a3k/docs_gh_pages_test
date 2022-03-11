@@ -26,6 +26,11 @@ ITEM_FEAT_COL = "itemFeat"
 
 @pytest.fixture(scope="module")
 def pd_df():
+    """function pd_df
+    Args:
+    Returns:
+        
+    """
     df = pd.DataFrame(
         {
             DEFAULT_USER_COL: [1, 1, 1, 2, 2, 2],
@@ -48,6 +53,13 @@ def pd_df():
 
 @pytest.mark.gpu
 def test_wide_model(pd_df, tmp):
+    """function test_wide_model
+    Args:
+        pd_df:   
+        tmp:   
+    Returns:
+        
+    """
     data, users, items = pd_df
 
     # Test wide model
@@ -82,6 +94,13 @@ def test_wide_model(pd_df, tmp):
 
 @pytest.mark.gpu
 def test_deep_model(pd_df, tmp):
+    """function test_deep_model
+    Args:
+        pd_df:   
+        tmp:   
+    Returns:
+        
+    """
     data, users, items = pd_df
 
     # Test if deep columns have user and item features
@@ -106,6 +125,13 @@ def test_deep_model(pd_df, tmp):
 
 @pytest.mark.gpu
 def test_wide_deep_model(pd_df, tmp):
+    """function test_wide_deep_model
+    Args:
+        pd_df:   
+        tmp:   
+    Returns:
+        
+    """
     data, users, items = pd_df
 
     # Test if wide and deep columns have correct features

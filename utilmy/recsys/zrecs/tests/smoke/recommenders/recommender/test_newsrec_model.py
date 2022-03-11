@@ -22,6 +22,12 @@ except ImportError:
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_model_nrms(mind_resource_path):
+    """function test_model_nrms
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     train_news_file = os.path.join(mind_resource_path, "train", r"news.tsv")
     train_behaviors_file = os.path.join(mind_resource_path, "train", r"behaviors.tsv")
     valid_news_file = os.path.join(mind_resource_path, "valid", r"news.tsv")
@@ -74,6 +80,12 @@ def test_model_nrms(mind_resource_path):
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_model_naml(mind_resource_path):
+    """function test_model_naml
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     train_news_file = os.path.join(mind_resource_path, "train", r"news.tsv")
     train_behaviors_file = os.path.join(mind_resource_path, "train", r"behaviors.tsv")
     valid_news_file = os.path.join(mind_resource_path, "valid", r"news.tsv")
@@ -128,6 +140,12 @@ def test_model_naml(mind_resource_path):
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_model_lstur(mind_resource_path):
+    """function test_model_lstur
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     train_news_file = os.path.join(mind_resource_path, "train", r"news.tsv")
     train_behaviors_file = os.path.join(mind_resource_path, "train", r"behaviors.tsv")
     valid_news_file = os.path.join(mind_resource_path, "valid", r"news.tsv")
@@ -180,6 +198,12 @@ def test_model_lstur(mind_resource_path):
 @pytest.mark.smoke
 @pytest.mark.gpu
 def test_model_npa(mind_resource_path):
+    """function test_model_npa
+    Args:
+        mind_resource_path:   
+    Returns:
+        
+    """
     train_news_file = os.path.join(mind_resource_path, "train", r"news.tsv")
     train_behaviors_file = os.path.join(mind_resource_path, "train", r"behaviors.tsv")
     valid_news_file = os.path.join(mind_resource_path, "valid", r"news.tsv")

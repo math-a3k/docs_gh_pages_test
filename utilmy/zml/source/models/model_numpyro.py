@@ -76,23 +76,53 @@ from utilmy import global_verbosity, os_makedirs
 verbosity = global_verbosity(__file__, "/../../config.json" ,default= 5)
 
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     print(*s, flush=True)
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 2 : print(*s, flush=True)
 
 def log3(*s):
+    """function log3
+    Args:
+        *s:   
+    Returns:
+        
+    """
     if verbosity >= 3 : print(*s, flush=True)
 
 
 ####################################################################################################
 global model, session
 def init(*kw, **kwargs):
+    """function init
+    Args:
+        *kw:   
+        **kwargs:   
+    Returns:
+        
+    """
     global model, session
     model = Model(*kw, **kwargs)
     session = None
 
 def reset():
+    """function reset
+    Args:
+    Returns:
+        
+    """
     global model, session
     model, session = None, None
 

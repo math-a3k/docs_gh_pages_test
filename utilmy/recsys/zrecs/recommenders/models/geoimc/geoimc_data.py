@@ -135,6 +135,12 @@ class ML_100K(Dataset):
     """
 
     def __init__(self, **kwargs):
+        """ ML_100K:__init__
+        Args:
+            **kwargs:     
+        Returns:
+           
+        """
         super().__init__(self.__class__.__name__, **kwargs)
         self.min_rating = 1
         self.max_rating = 5

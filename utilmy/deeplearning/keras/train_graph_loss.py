@@ -816,17 +816,43 @@ print('Creating dataset...')
 
 class GraphDataGenerator(tf.keras.utils.Sequence):
     def __init__(self, data_iter, graph_dict):
+        """ GraphDataGenerator:__init__
+        Args:
+            data_iter:     
+            graph_dict:     
+        Returns:
+           
+        """
         self.data_iter = data_iter
         self.graph_dict = graph_dict
     
     def __len__(self):
+        """ GraphDataGenerator:__len__
+        Args:
+        Returns:
+           
+        """
         return len(self.data_iter)
     
     def __getitem__(self, idx):
+        """ GraphDataGenerator:__getitem__
+        Args:
+            idx:     
+        Returns:
+           
+        """
         index, batch_x, *batch_y = self.data_iter[idx]
         return self._map_func(index, batch_x, *batch_y)
     
     def _map_func(self, index, x_batch, *y_batch):
+        """ GraphDataGenerator:_map_func
+        Args:
+            index:     
+            x_batch:     
+            *y_batch:     
+        Returns:
+           
+        """
         features_dict = {'feature': x_batch}
         for idx in range(index*batch_size, (index+1)*batch_size):
             neighbor_dict = self.graph_dict[str(idx)]
@@ -866,6 +892,13 @@ all_transforms = {
 }
 
 def plot_grid(images, title=''):
+    """function plot_grid
+    Args:
+        images:   
+        title:   
+    Returns:
+        
+    """
     num_samples = len(images)
     n = int(np.sqrt(num_samples))
     _, axes = plt.subplots(n, n, figsize=(10, 10))
@@ -925,6 +958,13 @@ time_df.plot(kind='barh', x='Transform', figsize=(15, 10))
 class LearningRateDecay:
     """## Summary: Learning rate decay plotting"""
     def plot(self, epochs, title="Learning Rate Schedule"):
+        """ LearningRateDecay:plot
+        Args:
+            epochs:     
+            title:     
+        Returns:
+           
+        """
         # compute the set of learning rates for each corresponding
         # epoch
         lrs = [self(i) for i in epochs]
@@ -939,6 +979,14 @@ class LearningRateDecay:
 class StepDecay(LearningRateDecay):
     """ Summary: Step-based learning rate decay """
     def __init__(self, init_lr=0.01, factor=0.25, drop_every=10):
+        """ StepDecay:__init__
+        Args:
+            init_lr:     
+            factor:     
+            drop_every:     
+        Returns:
+           
+        """
 		# store the base initial learning rate, drop factor, and
 		# epochs to drop every
         self.init_lr = init_lr
@@ -946,6 +994,18 @@ class StepDecay(LearningRateDecay):
         self.drop_every = drop_every
 
     def __call__(self, epoch):
+        """ StepDecay:__call__
+        Args:
+            epoch:     
+        Returns:
+           
+        """
+        """ PolynomialDecay:__call__
+        Args:
+            epoch:     
+        Returns:
+           
+        """
         # compute the learning rate for the current epoch
         exp = np.floor((1 + epoch) / self.drop_every)
         alpha = self.init_lr * (self.factor ** exp)
@@ -956,6 +1016,14 @@ class StepDecay(LearningRateDecay):
 class PolynomialDecay(LearningRateDecay):
     """ Summary: Polynomial-based learning rate decay """
     def __init__(self, max_epochs=100, init_lr=0.01, power=1.0):
+        """ PolynomialDecay:__init__
+        Args:
+            max_epochs:     
+            init_lr:     
+            power:     
+        Returns:
+           
+        """
         # store the maximum number of epochs, base learning rate,
         # and power of the polynomial
         self.max_epochs = max_epochs
@@ -991,6 +1059,22 @@ def visualize_imgs(img_list, path, tag, y_labels, n_sample=None):
 
 @tf.function
 def train_step(x, model, y_label_list=None):
+    """function train_step
+    Args:
+        x:   
+        model:   
+        y_label_list:   
+    Returns:
+        
+    """
+    """function train_step
+    Args:
+        x:   
+        model:   
+        y_label_list:   
+    Returns:
+        
+    """
     with tf.GradientTape() as tape_w:
 
         # A separate GradientTape is needed for watching the input.
@@ -1037,6 +1121,27 @@ def train_step(x, model, y_label_list=None):
 
 @tf.function
 def validation_step(x, model):
+    """function validation_step
+    Args:
+        x:   
+        model:   
+    Returns:
+        
+    """
+    """function validation_step
+    Args:
+        x:   
+        model:   
+    Returns:
+        
+    """
+    """function validation_step
+    Args:
+        x:   
+        model:   
+    Returns:
+        
+    """
     z_mean, z_logsigma, x_recon, out_classes = model(x, training=False)  #Forward pass through the VAE
     loss = perceptual_loss_function(x, x_recon, z_mean, z_logsigma)
     return loss, x_recon, out_classes
@@ -1278,6 +1383,14 @@ plt.show()
 
 @tf.function
 def train_step_2(x, model, y_label_list=None):
+    """function train_step_2
+    Args:
+        x:   
+        model:   
+        y_label_list:   
+    Returns:
+        
+    """
     with tf.GradientTape() as tape:
         z_mean, z_logsigma, x_recon, out_classes = model(x, training=True)      #Forward pass through the VAE
         loss = perceptual_loss_function(x, x_recon, z_mean, z_logsigma,

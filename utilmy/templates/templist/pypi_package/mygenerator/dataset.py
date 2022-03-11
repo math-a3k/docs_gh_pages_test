@@ -38,6 +38,12 @@ class NlpDataset:
     """
 
     def __init__(self, meta: pd.DataFrame):
+        """ NlpDataset:__init__
+        Args:
+            meta (function["arg_type"][i]) :     
+        Returns:
+           
+        """
 
         ### check dataframe:  [ 0=9]
         def is_int(x):
@@ -59,10 +65,22 @@ class NlpDataset:
         return len(self.meta)
 
     def get_sample(self, idx: int):
+        """ NlpDataset:get_sample
+        Args:
+            idx (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         meta = self.meta.iloc[idx]
         return self.get_text_only(idx), meta
 
     def get_text_only(self, idx: int) -> str:
+        """ NlpDataset:get_text_only
+        Args:
+            idx (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         meta = self.meta.iloc[idx]
         text = meta["label"]
         return text
@@ -75,6 +93,12 @@ class PhoneNlpDataset(NlpDataset):
     sentences or word embeddings (vectors).
     """
     def __init__(self, size: int = 1):
+        """ PhoneNlpDataset:__init__
+        Args:
+            size (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         meta_rows = []
 
         #### Randomly generate the dataset  ######################
@@ -103,6 +127,13 @@ class PhoneNlpDataset(NlpDataset):
 
 
     def get_phone_number(self, idx, islocal=False):
+        """ PhoneNlpDataset:get_phone_number
+        Args:
+            idx:     
+            islocal:     
+        Returns:
+           
+        """
         s = self.phone_gen.get_number()
 
         if islocal :
@@ -175,6 +206,12 @@ class ImageDataset:
 
 
     def get_sample(self, idx: int) -> Tuple[Union[np.ndarray, List[np.ndarray]], Meta]:
+        """ ImageDataset:get_sample
+        Args:
+            idx (function["arg_type"][i]) :     
+        Returns:
+           
+        """
         img  = self.get_image_only(idx)
         default_val = ''
 

@@ -94,6 +94,11 @@ def svd_training(args):
 
 
 def main():
+    """function main
+    Args:
+    Returns:
+        
+    """
     parser = argparse.ArgumentParser()
     # Data path
     parser.add_argument(

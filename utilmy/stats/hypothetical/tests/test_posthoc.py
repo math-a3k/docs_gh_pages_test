@@ -11,6 +11,11 @@ class TestGamesHowell(object):
     data = pd.read_csv(os.path.join(datapath, 'data/InsectSprays.csv'))
 
     def test_games_howell(self):
+        """ TestGamesHowell:test_games_howell
+        Args:
+        Returns:
+           
+        """
         sprays = self.data
         spray_test = posthoc.GamesHowell(sprays['count'], group=sprays['spray'])
 
@@ -71,4 +76,9 @@ class TestGamesHowell(object):
 
 
 def test_tukeytest():
+    """function test_tukeytest
+    Args:
+    Returns:
+        
+    """
     pass

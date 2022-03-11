@@ -36,6 +36,14 @@ class DLProgress(tqdm):
     last_block = 0
 
     def hook(self, block_num=1, block_size=1, total_size=None):
+        """ DLProgress:hook
+        Args:
+            block_num:     
+            block_size:     
+            total_size:     
+        Returns:
+           
+        """
         self.total = total_size
         self.update((block_num - self.last_block) * block_size)
         self.last_block = block_num
@@ -84,6 +92,14 @@ plt.subplots_adjust(wspace=0, hspace=0)
 
 
 def first_scale(x, feature_range=(-1, 1)):
+    """function first_scale
+    Args:
+        x:   
+        feature_range:   
+        1:   
+    Returns:
+        
+    """
     x = (x - x.min()) / (255 - x.min())
     min, max = feature_range
     x = x * (max - min) + min
@@ -91,14 +107,32 @@ def first_scale(x, feature_range=(-1, 1)):
 
 
 def first_originate(x):
+    """function first_originate
+    Args:
+        x:   
+    Returns:
+        
+    """
     return (x - x.min()) * 255 / (x.max() - x.min())
 
 
 def second_scale(x):
+    """function second_scale
+    Args:
+        x:   
+    Returns:
+        
+    """
     return x / 127.5 - 1
 
 
 def second_originate(x):
+    """function second_originate
+    Args:
+        x:   
+    Returns:
+        
+    """
     return (x + 1.0) / 2
 
 
@@ -123,6 +157,12 @@ plt.title("originated")
 
 
 def generate_sample(samples):
+    """function generate_sample
+    Args:
+        samples:   
+    Returns:
+        
+    """
     idx = [i for i in xrange(36)]
     fig, axes = plt.subplots(6, 6, sharex=True, sharey=True, figsize=(5, 5))
 
@@ -143,6 +183,15 @@ generate_sample(trainset)
 
 class Model:
     def __init__(self, z_dim, learning_rate=0.0001, beta=0.5, alpha=0.2):
+        """ Model:__init__
+        Args:
+            z_dim:     
+            learning_rate:     
+            beta:     
+            alpha:     
+        Returns:
+           
+        """
 
         self.inputs = tf.placeholder(tf.float32, (None, 32, 32, 3))
         self.Z = tf.placeholder(tf.float32, (None, z_dim))

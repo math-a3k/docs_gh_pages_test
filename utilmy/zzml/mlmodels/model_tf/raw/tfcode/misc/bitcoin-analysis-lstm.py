@@ -57,6 +57,13 @@ df["Close_Price"].describe()
 
 
 def detect(signal, treshold=2.0):
+    """function detect
+    Args:
+        signal:   
+        treshold:   
+    Returns:
+        
+    """
     detected = []
     for i in range(len(signal)):
         if np.abs(signal[i]) > treshold:
@@ -155,6 +162,16 @@ plt.show()
 
 
 def df_shift(df, lag=0, start=1, skip=1, rejected_columns=[]):
+    """function df_shift
+    Args:
+        df:   
+        lag:   
+        start:   
+        skip:   
+        rejected_columns:   
+    Returns:
+        
+    """
     df = df.copy()
     if not lag:
         return df
@@ -216,6 +233,13 @@ plt.show()
 
 
 def moving_average(signal, period):
+    """function moving_average
+    Args:
+        signal:   
+        period:   
+    Returns:
+        
+    """
     buffer = [np.nan] * period
     for i in range(period, len(signal)):
         buffer.append(signal[i - period : i].mean())
@@ -269,6 +293,16 @@ dates = pd.to_datetime(df.iloc[:, 0]).tolist()
 
 class Model:
     def __init__(self, learning_rate, num_layers, size, size_layer, forget_bias=0.8):
+        """ Model:__init__
+        Args:
+            learning_rate:     
+            num_layers:     
+            size:     
+            size_layer:     
+            forget_bias:     
+        Returns:
+           
+        """
         def lstm_cell(size_layer):
             return tf.nn.rnn_cell.LSTMCell(size_layer, state_is_tuple=False)
 
@@ -337,6 +371,15 @@ for i in range(epoch):
 
 
 def predict_future(future_count, df, dates, indices={}):
+    """function predict_future
+    Args:
+        future_count:   
+        df:   
+        dates:   
+        indices:   
+    Returns:
+        
+    """
     date_ori = dates[:]
     cp_df = df.copy()
     output_predict = np.zeros((cp_df.shape[0] + future_count, cp_df.shape[1]))
@@ -391,6 +434,13 @@ def predict_future(future_count, df, dates, indices={}):
 
 
 def anchor(signal, weight):
+    """function anchor
+    Args:
+        signal:   
+        weight:   
+    Returns:
+        
+    """
     buffer = []
     last = signal[0]
     for i in signal:

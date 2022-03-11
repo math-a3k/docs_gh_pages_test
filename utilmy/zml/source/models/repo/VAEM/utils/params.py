@@ -10,6 +10,12 @@ class Params():
     ```
     """
     def __init__(self, json_path):
+        """ Params:__init__
+        Args:
+            json_path:     
+        Returns:
+           
+        """
         self.update(json_path)
     def save(self, json_path):
         """Saves parameters to json file"""

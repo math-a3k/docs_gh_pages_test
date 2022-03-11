@@ -35,6 +35,13 @@ from mlmodels.util import path_norm, log
 from pathlib import Path
 from typing import Dict, List
 def save_to_file(path, data):
+    """function save_to_file
+    Args:
+        path:   
+        data:   
+    Returns:
+        
+    """
     import json
     print(f"saving time-series into {path}")
     path_dir = os.path.dirname(path)
@@ -84,6 +91,12 @@ def gluonts_dataset_to_pandas(dataset_name_list=["m4_hourly", "m4_daily", "m4_we
 
 
 def gluonts_to_pandas(ds):
+   """function gluonts_to_pandas
+   Args:
+       ds:   
+   Returns:
+       
+   """
    from gluonts.dataset.util import to_pandas    
    ll =  [ to_pandas( t ) for t in ds ]
    return ll
@@ -196,6 +209,11 @@ def pandas_to_gluonts(df, pars=None) :
 
 
 def test_gluonts():    
+    """function test_gluonts
+    Args:
+    Returns:
+        
+    """
     df = pd.read_csv(path_norm("dataset/timeseries/TSLA.csv "))
     df = df.set_index("Date")
     pars = { "start" : "", "cols_target" : [ "High", "Low" ],
@@ -300,11 +318,29 @@ def gluonts_create_timeseries(df_timeseries, submission=1, single_pred_length=28
 
 #### Start Dates for each time series
 def create_startdate(date="2011-01-29", freq="1D", n_timeseries=1):
+   """function create_startdate
+   Args:
+       date:   
+       freq:   
+       n_timeseries:   
+   Returns:
+       
+   """
    start_dates_list = [pd.Timestamp(date, freq=freq) for _ in range(n_timeseries)]
    return start_dates_list
 
 
 def gluonts_create_dataset(train_timeseries_list, start_dates_list, train_dynamic_list,  train_static_list, freq="D" ) :
+    """function gluonts_create_dataset
+    Args:
+        train_timeseries_list:   
+        start_dates_list:   
+        train_dynamic_list:   
+        train_static_list:   
+        freq:   
+    Returns:
+        
+    """
     from gluonts.dataset.common import load_datasets, ListDataset
     from gluonts.dataset.field_names import FieldName
     
@@ -324,6 +360,20 @@ def gluonts_create_dataset(train_timeseries_list, start_dates_list, train_dynami
 
 
 def pandas_to_gluonts_multiseries(df_timeseries, df_dynamic, df_static,pars={'submission':True,'single_pred_length':28,'submission_pred_length':10,'n_timeseries':1,'start_date':"2011-01-29",'freq':"1D"}) :
+    """function pandas_to_gluonts_multiseries
+    Args:
+        df_timeseries:   
+        df_dynamic:   
+        df_static:   
+        pars={'submission':   
+        'single_pred_length' ( 28 ) :   
+        'submission_pred_length' ( 10 ) :   
+        'n_timeseries' ( 1 ) :   
+        'start_date' ( "2011-01-29" ) :   
+        'freq' ( "1D"} ) :   
+    Returns:
+        
+    """
     ###         NEW CODE    ######################
     submission             = pars['submission']
     single_pred_length     = pars['single_pred_length']
@@ -441,9 +491,28 @@ class Preprocess_nbeats:
     """
 
     def __init__(self,backcast_length, forecast_length):
+        """ Preprocess_nbeats:__init__
+        Args:
+            backcast_length:     
+            forecast_length:     
+        Returns:
+           
+        """
         self.backcast_length = backcast_length
         self.forecast_length = forecast_length
     def compute(self,df):
+        """ SklearnMinMaxScaler:compute
+        Args:
+            df:     
+        Returns:
+           
+        """
+        """ Preprocess_nbeats:compute
+        Args:
+            df:     
+        Returns:
+           
+        """
         df = df.values  # just keep np array here for simplicity.
         norm_constant = np.max(df)
         df = df / norm_constant
@@ -458,11 +527,27 @@ class Preprocess_nbeats:
         self.data = x_train_batch,y
         
     def get_data(self):
+        """ SklearnMinMaxScaler:get_data
+        Args:
+        Returns:
+           
+        """
+        """ Preprocess_nbeats:get_data
+        Args:
+        Returns:
+           
+        """
         return self.data
         
 class SklearnMinMaxScaler:
 
     def __init__(self, **args):
+        """ SklearnMinMaxScaler:__init__
+        Args:
+            **args:     
+        Returns:
+           
+        """
         from sklearn.preprocessing import MinMaxScaler
         self.preprocessor = MinMaxScaler(**args)
 
@@ -479,6 +564,12 @@ class SklearnMinMaxScaler:
 ####################################################################################################
 ####################################################################################################
 def tofloat(x):
+    """function tofloat
+    Args:
+        x:   
+    Returns:
+        
+    """
     try :
         return float(x)
     except :
@@ -487,6 +578,12 @@ def tofloat(x):
 
 
 def pd_load(path) :
+   """function pd_load
+   Args:
+       path:   
+   Returns:
+       
+   """
    return pd.read_csv(path_norm(path ))
 
 
@@ -530,6 +627,14 @@ def pd_interpolate(df, cols, pars={"method": "linear", "limit_area": "inside"  }
 
 
 def pd_clean_v1(df, cols=None,  pars=None) :
+  """function pd_clean_v1
+  Args:
+      df:   
+      cols:   
+      pars:   
+  Returns:
+      
+  """
   if pars is None :
      pars = {"method" : "linear", "axis": 0,
              }
@@ -542,6 +647,16 @@ def pd_clean_v1(df, cols=None,  pars=None) :
 
 
 def pd_reshape(test, features, target, pred_len, m_feat) :
+    """function pd_reshape
+    Args:
+        test:   
+        features:   
+        target:   
+        pred_len:   
+        m_feat:   
+    Returns:
+        
+    """
     x_test = test[features]
     x_test = x_test.values.reshape(-1, pred_len, m_feat)
     y_test = test[target]
@@ -551,6 +666,14 @@ def pd_reshape(test, features, target, pred_len, m_feat) :
 
 
 def pd_clean(df, cols=None, pars=None ):
+  """function pd_clean
+  Args:
+      df:   
+      cols:   
+      pars:   
+  Returns:
+      
+  """
   cols = df.columns if cols is None else cols
 
   if pars is None :
@@ -694,6 +817,11 @@ def preprocess_timeseries_m5(data_path=None, dataset_name=None, pred_length=10, 
 
 
 def benchmark_m4() :
+    """function benchmark_m4
+    Args:
+    Returns:
+        
+    """
     # This example shows how to fit a model and evaluate its predictions.
     import pprint
     from functools import partial
@@ -762,6 +890,11 @@ def benchmark_m4() :
 
 
 def preprocess_timeseries_m5b() :
+    """function preprocess_timeseries_m5b
+    Args:
+    Returns:
+        
+    """
     ########################
     # %matplotlib inline
     import mxnet as mx

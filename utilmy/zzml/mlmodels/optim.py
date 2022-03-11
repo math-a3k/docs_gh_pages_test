@@ -201,6 +201,18 @@ def optim_optuna(model_uri="model_tf.1_lstm.py",
 
 
 def post_process_best(model, module, model_uri, model_pars_update, data_pars, compute_pars, out_pars):
+    """function post_process_best
+    Args:
+        model:   
+        module:   
+        model_uri:   
+        model_pars_update:   
+        data_pars:   
+        compute_pars:   
+        out_pars:   
+    Returns:
+        
+    """
     log("### Run Model with best   #################################################")
     model = model_create(module, model_pars_update, data_pars, compute_pars)
     model, sess = module.fit(model, data_pars=data_pars, compute_pars=compute_pars, out_pars=out_pars)
@@ -215,6 +227,13 @@ def post_process_best(model, module, model_uri, model_pars_update, data_pars, co
 
 ####################################################################################################
 def test_json(path_json="", config_mode="test"):
+    """function test_json
+    Args:
+        path_json:   
+        config_mode:   
+    Returns:
+        
+    """
     cf = json.load(open( path_norm(path_json), mode='r', encoding='utf-8'))
     cf = cf[config_mode]
 
@@ -234,11 +253,22 @@ def test_json(path_json="", config_mode="test"):
 
 
 def test_all():
+    """function test_all
+    Args:
+    Returns:
+        
+    """
     return 1
 
 
 
 def optim_cli(arg):
+    """function optim_cli
+    Args:
+        arg:   
+    Returns:
+        
+    """
     # model_pars, data_pars, compute_pars = config_get_pars(arg)
     config_file = "template/optim_config.json" if arg.config_file is None else arg.config_file
     config_file =  path_norm( config_file )

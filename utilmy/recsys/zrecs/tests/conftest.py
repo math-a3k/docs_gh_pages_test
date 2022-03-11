@@ -32,6 +32,11 @@ from recommenders.utils.spark_utils import start_or_get_spark
 
 @pytest.fixture(scope="session")
 def output_notebook():
+    """function output_notebook
+    Args:
+    Returns:
+        
+    """
     return "output.ipynb"
 
 
@@ -51,6 +56,12 @@ def path_notebooks():
 
 @pytest.fixture
 def tmp(tmp_path_factory):
+    """function tmp
+    Args:
+        tmp_path_factory:   
+    Returns:
+        
+    """
     with TemporaryDirectory(dir=tmp_path_factory.getbasetemp()) as td:
         yield td
 
@@ -89,6 +100,11 @@ def spark(tmp_path_factory, app_name="Sample", url="local[*]"):
 
 @pytest.fixture(scope="module")
 def sar_settings():
+    """function sar_settings
+    Args:
+    Returns:
+        
+    """
     return {
         # absolute tolerance parameter for matrix equivalence in SAR tests
         "ATOL": 1e-8,
@@ -101,6 +117,11 @@ def sar_settings():
 
 @pytest.fixture(scope="module")
 def header():
+    """function header
+    Args:
+    Returns:
+        
+    """
     header = {
         "col_user": "UserId",
         "col_item": "MovieId",
@@ -112,6 +133,12 @@ def header():
 
 @pytest.fixture(scope="module")
 def pandas_dummy(header):
+    """function pandas_dummy
+    Args:
+        header:   
+    Returns:
+        
+    """
     ratings_dict = {
         header["col_user"]: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2],
         header["col_item"]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -123,6 +150,13 @@ def pandas_dummy(header):
 
 @pytest.fixture(scope="module")
 def pandas_dummy_timestamp(pandas_dummy, header):
+    """function pandas_dummy_timestamp
+    Args:
+        pandas_dummy:   
+        header:   
+    Returns:
+        
+    """
     time = 1535133442
     time_series = [time + 20 * i for i in range(10)]
     df = pandas_dummy
@@ -132,11 +166,24 @@ def pandas_dummy_timestamp(pandas_dummy, header):
 
 @pytest.fixture(scope="module")
 def train_test_dummy_timestamp(pandas_dummy_timestamp):
+    """function train_test_dummy_timestamp
+    Args:
+        pandas_dummy_timestamp:   
+    Returns:
+        
+    """
     return train_test_split(pandas_dummy_timestamp, test_size=0.2, random_state=0)
 
 
 @pytest.fixture(scope="module")
 def demo_usage_data(header, sar_settings):
+    """function demo_usage_data
+    Args:
+        header:   
+        sar_settings:   
+    Returns:
+        
+    """
     # load the data
     data = pd.read_csv(sar_settings["FILE_DIR"] + "demoUsage.csv")
     data["rating"] = pd.Series([1.0] * data.shape[0])
@@ -163,12 +210,25 @@ def demo_usage_data(header, sar_settings):
 
 @pytest.fixture(scope="module")
 def demo_usage_data_spark(spark, demo_usage_data, header):
+    """function demo_usage_data_spark
+    Args:
+        spark:   
+        demo_usage_data:   
+        header:   
+    Returns:
+        
+    """
     data_local = demo_usage_data[[x[1] for x in header.items()]]
     return spark.createDataFrame(data_local)
 
 
 @pytest.fixture(scope="module")
 def criteo_first_row():
+    """function criteo_first_row
+    Args:
+    Returns:
+        
+    """
     return {
         "label": 0,
         "int00": 1,
@@ -215,6 +275,11 @@ def criteo_first_row():
 
 @pytest.fixture(scope="module")
 def notebooks():
+    """function notebooks
+    Args:
+    Returns:
+        
+    """
     folder_notebooks = path_notebooks()
 
     # Path for the notebooks
@@ -338,6 +403,11 @@ def notebooks():
 
 @pytest.fixture(scope="module")
 def test_specs_ncf():
+    """function test_specs_ncf
+    Args:
+    Returns:
+        
+    """
     return {
         "number_of_rows": 1000,
         "user_ids": [1, 2, 3, 4, 5],
@@ -394,6 +464,11 @@ def python_dataset_ncf(test_specs_ncf):
 
 @pytest.fixture(scope="module")
 def test_specs():
+    """function test_specs
+    Args:
+    Returns:
+        
+    """
     return {
         "users": 30,
         "items": 53,
@@ -445,16 +520,32 @@ def affinity_matrix(test_specs):
 
 @pytest.fixture(scope="session")
 def deeprec_resource_path():
+    """function deeprec_resource_path
+    Args:
+    Returns:
+        
+    """
     return Path(__file__).absolute().parent.joinpath("resources", "deeprec")
 
 
 @pytest.fixture(scope="session")
 def mind_resource_path(deeprec_resource_path):
+    """function mind_resource_path
+    Args:
+        deeprec_resource_path:   
+    Returns:
+        
+    """
     return Path(__file__).absolute().parent.joinpath("resources", "mind")
 
 
 @pytest.fixture(scope="module")
 def deeprec_config_path():
+    """function deeprec_config_path
+    Args:
+    Returns:
+        
+    """
     return (
         Path(__file__)
         .absolute()

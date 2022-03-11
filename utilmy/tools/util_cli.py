@@ -81,6 +81,15 @@ for x in aa[2]:
 
 
 def os_file_rename(some_dir, pattern="*.*", pattern2="", dirlevel=1):
+    """function os_file_rename
+    Args:
+        some_dir:   
+        pattern:   
+        pattern2:   
+        dirlevel:   
+    Returns:
+        
+    """
     import fnmatch
     import os
     import numpy as np
@@ -129,6 +138,14 @@ for x in aa[2]:
 
 
 def _os_file_search_fast(fname, texts=None, mode="regex/str"):
+    """function _os_file_search_fast
+    Args:
+        fname:   
+        texts:   
+        mode:   
+    Returns:
+        
+    """
     if texts is None:
         texts = ["myword"]
 
@@ -172,6 +189,14 @@ def _os_file_search_fast(fname, texts=None, mode="regex/str"):
 
 
 def os_file_replace(source_file_path, pattern, substring):
+    """function os_file_replace
+    Args:
+        source_file_path:   
+        pattern:   
+        substring:   
+    Returns:
+        
+    """
     from tempfile import mkstemp
     from shutil import move
     from os import remove
@@ -208,6 +233,12 @@ def os_file_replacestring2(findstr, replacestr, some_dir, pattern="*.*", dirleve
 
 
 def os_file_getname(path):
+    """function os_file_getname
+    Args:
+        path:   
+    Returns:
+        
+    """
     import ntpath
 
     head, tail = ntpath.split(path)
@@ -215,6 +246,12 @@ def os_file_getname(path):
 
 
 def os_file_getpath(path):
+    """function os_file_getpath
+    Args:
+        path:   
+    Returns:
+        
+    """
     import ntpath
 
     head, tail = ntpath.split(path)
@@ -222,6 +259,12 @@ def os_file_getpath(path):
 
 
 def os_file_gettext(file1):
+    """function os_file_gettext
+    Args:
+        file1:   
+    Returns:
+        
+    """
     with open(file1, "r", encoding="UTF-8") as f:
         return f.read()
     # def os_file_listall(some_dir, pattern="*.*", dirlevel=1):
@@ -229,6 +272,15 @@ def os_file_gettext(file1):
 
 
 def os_file_listall(dir1, pattern="*.*", dirlevel=1, onlyfolder=0):
+    """function os_file_listall
+    Args:
+        dir1:   
+        pattern:   
+        dirlevel:   
+        onlyfolder:   
+    Returns:
+        
+    """
     r"""
    # DIRCWD=r"D:\_devs\Python01\project"
    # aa= listallfile(DIRCWD, "*.*", 2)

@@ -17,22 +17,51 @@ from loguru import logger
 ##########################################################################################
 ################### Logs Wrapper #########################################################
 def log(*s):
+    """function log
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.info(",".join([str(t) for t in s]))
 
 
 def log2(*s):
+    """function log2
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.debug(",".join([str(t) for t in s]))
 
 
 def logw(*s):
+    """function logw
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.warning(",".join([str(t) for t in s]))
 
 
 def loge(*s):
+    """function loge
+    Args:
+        *s:   
+    Returns:
+        
+    """
     logger.error(",".join([str(t) for t in s]))
 
 
 def logger_setup():
+    """function logger_setup
+    Args:
+    Returns:
+        
+    """
     config = {
         "handlers": [
             {
@@ -111,6 +140,12 @@ def dataset_donwload(url, path_target):
 
 
 def dataset_get_path(cfg: dict):
+    """function dataset_get_path
+    Args:
+        cfg (  dict ) :   
+    Returns:
+        
+    """
     #### Donaload dataset
     # cfg = config_load()
     name = cfg.get("current_dataset", "mnist")
@@ -187,5 +222,12 @@ def os_extract_archive(file_path, path=".", archive_format="auto"):
 
 
 def to_file(s, filep):
+    """function to_file
+    Args:
+        s:   
+        filep:   
+    Returns:
+        
+    """
     with open(filep, mode="a") as fp:
         fp.write(str(s) + "\n")
