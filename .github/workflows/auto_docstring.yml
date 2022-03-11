@@ -11,7 +11,7 @@ on:
 
 
   schedule:
-    - cron:  '* */24 * * *'      #### 60mins
+    - cron:  '* 2 * * *'      #### 60mins
     #    - cron:  '*/10 * * * *'
 
 
