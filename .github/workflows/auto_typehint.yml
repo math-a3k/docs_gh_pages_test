@@ -7,10 +7,10 @@ on:
   # but only for the main branch
   push:
     branches:
-    - zrefactor
+      - zrefactor
 
   schedule:
-    - cron:  '* */24 * * *'      #### 60mins
+    - cron:  '* 16 * * *'      #### 60mins
     #    - cron:  '*/10 * * * *'
 
 
