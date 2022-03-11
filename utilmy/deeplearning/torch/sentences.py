@@ -14,6 +14,16 @@ train Sentence Transformer with different Losses such as:**
 #!pip3 install python-box
 # !pip install sentence-transformers
 #!pip3 install tensorflow
+
+
+
+
+We create a new end-to-end example on how to use a custom inference.py script with a Sentence Transformer and a mean pooling layer to create sentence embeddings.🤯
+
+🖼  blog: https://lnkd.in/dXNu4R-G
+📈  notebook: https://lnkd.in/dkjDMNaC
+
+
 """
 import sys, os, gzip, csv, random, math, logging, pandas as pd
 from datetime import datetime
