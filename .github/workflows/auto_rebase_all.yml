@@ -22,6 +22,8 @@ jobs:
       - run: echo "Rebasing branches ${{ env.BRANCHES_TO_REBASE }} with ${{ env.ROOT_BRANCH_NAME }}"
       - name: Checking out repository code into workspace...
         uses: actions/checkout@v3
+        with:
+            github_token: ${{ secrets.WORKFLOW_TOKEN }}
 
       #### No desctructive add main and local and push ALL
       - run: |
