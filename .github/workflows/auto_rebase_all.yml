@@ -1,7 +1,9 @@
 name: Auto Rebase Branches - main schedule
+
+
 on:
   schedule:
-    - cron:  '* 13 ** *'      #### 60mins
+    - cron:  '* 13 * * *'      #### 60mins
     #    - cron:  '*/10 * * * *'   
 
   push:
@@ -20,6 +22,8 @@ jobs:
       - run: echo "Rebasing branches ${{ env.BRANCHES_TO_REBASE }} with ${{ env.ROOT_BRANCH_NAME }}"
       - name: Checking out repository code into workspace...
         uses: actions/checkout@v3
+        with:
+            github_token: ${{ secrets.WORKFLOW_TOKEN }}
 
       #### No desctructive add main and local and push ALL
       - run: |
@@ -28,7 +32,6 @@ jobs:
           echo "Fetching latest..."
           git fetch origin
           git checkout ${{ env.ROOT_BRANCH_NAME }}
-          # git pull --allow-unrelated-histories 
           echo "Beginning merge...."
           IFS=","
           for branch in $BRANCHES_TO_REBASE; do
@@ -40,12 +43,15 @@ jobs:
               git merge $ROOT_BRANCH_NAME --no-edit || { git add -u . && git commit --no-edit ;}
               git push
               echo "Merge SUCCEEDED for branch $branch"
+
             } || {
               echo "Merge FAILED for branch $branch"
 
             }
 
           done
+
+
 
 
 
