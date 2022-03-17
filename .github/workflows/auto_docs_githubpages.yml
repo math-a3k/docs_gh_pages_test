@@ -1,4 +1,4 @@
-name: Auto docs_github_pages arita37.github.io/myutil/en/zdocs_y23487teg65f6/
+name: Auto docs_github_pages docs_gh_pages_test
  
 ### target page :  https://arita37.github.io/myutil/en/zdocs_y23487teg65f6/utilmy.html#module-utilmy.cli
 
@@ -10,7 +10,7 @@ on:
 
   push:
     branches:
-    - zdocs_y23487teg65f6
+    - toctree_fix
 
 
 
