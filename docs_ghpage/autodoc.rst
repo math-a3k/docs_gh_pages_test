@@ -1,7 +1,7 @@
 .. _autodoc:
  
-
-=============
+utilmy
+======
  
 .. automodule:: utilmy
   :imported-members:

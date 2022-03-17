@@ -229,7 +229,7 @@ def np_list_intersection(l1, l2) :
 def np_add_remove(set_, to_remove, to_add):
     """function np_add_remove
     Args:
-        set_:   
+        ``set_``:   
         to_remove:   
         to_add:   
     Returns:

@@ -641,7 +641,10 @@ def os_path_split(fpath:str=""):
 
 
 def os_file_replacestring(findstr, replacestr, some_dir, pattern="*.*", dirlevel=1):
-    """ #fil_replacestring_files("logo.png", "logonew.png", r"D:/__Alpaca__details/aiportfolio",
+    """os_file_replacestring
+    
+    .. code:
+        #fil_replacestring_files("logo.png", "logonew.png", r"D:/__Alpaca__details/aiportfolio",
         pattern="*.html", dirlevel=5  )
     """
     def os_file_replacestring1(find_str, rep_str, file_path):

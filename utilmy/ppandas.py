@@ -438,13 +438,13 @@ def pd_dtype_reduce(dfm, int0 ='int32', float0 = 'float32') :
 
 def pd_dtype_count_unique(df, col_continuous=[]):
     """Learns the number of categories in each variable and standardizes the data.
-        ----------
+    
+    Args:
         data: pd.DataFrame
         continuous_ids: list of ints
             List containing the indices of known continuous variables. Useful for
             discrete data like age, which is better modeled as continuous.
-        Returns
-        -------
+    Returns:
         ncat:  number of categories of each variable. -1 if the variable is  continuous.
     """
     import numpy as np

@@ -499,26 +499,28 @@ def pd_apply_parallel(df, fun_apply=None, npool=5, verbose=True ):
 
 ############################################################################################################
 def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
-    """  Multiprocessing execute
-    input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
-    def fun_async(xlist):
-      for x in xlist :
-            download.upload(x[0], x[1])
-          def f(i, n):
-       return i * i + 2*n
-    ..
-     from itertools import repeat
-     N = 10000
-     from pathos.pools import ProcessPool as Pool
-     pool = Pool()
-     ans = pool.map(f, xrange(1000), repeat(20))
-     ans[:10]
-    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
-     # this also works
-     ans = pool.map(lambda x: f(x, 20), xrange(1000))
-     ans[:10]
-    [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
-    input_fixed = {'const': 555}
+    """Multiprocessing execute
+    
+    .. code:
+      input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
+      def fun_async(xlist):
+        for x in xlist :
+              download.upload(x[0], x[1])
+            def f(i, n):
+        return i * i + 2*n
+    
+      from itertools import repeat
+      N = 10000
+      from pathos.pools import ProcessPool as Pool
+      pool = Pool()
+      ans = pool.map(f, xrange(1000), repeat(20))
+      ans[:10]
+      [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+      # this also works
+      ans = pool.map(lambda x: f(x, 20), xrange(1000))
+      ans[:10]
+     [40, 41, 44, 49, 56, 65, 76, 89, 104, 121]
+     input_fixed = {'const': 555}
     """
     import time, functools
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias
@@ -563,11 +565,13 @@ def multiproc_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbos
 
 
 def multithread_run(fun_async, input_list: list, n_pool=5, start_delay=0.1, verbose=True, input_fixed:dict=None, npool=None, **kw):
-    """  input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
-    def fun_async(xlist):
-      for x in xlist :
-            hdfs.upload(x[0], x[1])
-    input_fixed = {'const_var' : 1 }
+    """input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]
+    
+    .. code:
+        def fun_async(xlist):
+            for x in xlist :
+                hdfs.upload(x[0], x[1])
+        input_fixed = {'const_var' : 1 }
     """
     import time, functools
     n_pool = npool if isinstance(npool, int)  else n_pool ## alias

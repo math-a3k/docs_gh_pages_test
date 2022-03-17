@@ -246,8 +246,11 @@ def import_function(fun_name=None, module_name=None, fuzzy_match=False):
 
 
 def glob_glob(dirin="**/*.py", nfile=1000, recursive=False, **kw):
-    """  **/*.py   any sub-directories
-
+    """function glob_glob
+    Args:
+        dirin: any sub-directories
+        nfile:
+        recursive:
     """
     import glob
     flist  = sorted( glob.glob(dirin , recursive= recursive, **kw ))
@@ -289,12 +292,11 @@ def sys_install(cmd=""):
 
 def pip_install(pkg_str=" pandas "):
     """
-        try:
-        import pandas as pd
-    except ImportError:
-        
-    finally:
-        import pandas as pd
+    ..    try:
+    ..        import pandas as pd
+    ..        except ImportError:
+    ..    finally:
+    ..        import pandas as pd
 
     """    
     import subprocess, sys

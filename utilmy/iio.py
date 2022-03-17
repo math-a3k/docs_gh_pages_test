@@ -46,10 +46,10 @@ def test():
   
 #####################################################################################
 def hdfs_put(from_dir="", to_dir="",  verbose=True, n_pool=25, dirlevel=50,  **kw):
-    """
-     hdfs_put LocalFile into HDFS in multi-thread
-    from_dir = "hdfs://nameservice1/user/
-    to_dir   = "data/"
+    """function hdfs_put: LocalFile into HDFS in multi-thread
+    Args:
+        from_dir: "hdfs://nameservice1/user/
+        to_dir: "data/"
 
     """
     import glob, gc,os, time, pyarrow as pa
