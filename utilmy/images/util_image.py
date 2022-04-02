@@ -53,6 +53,11 @@ def test():
     pass
 
 def test_image_create_fake():
+    """function test_image_create_fake
+    Args:
+    Returns:
+        
+    """
     dirout = os.getcwd() + "/ztmp/images/"
     imsize=(300,300)
     red = (255, 0, 0)

@@ -23,15 +23,41 @@ verbose = get_verbosity()   ### Global setting
 
 
 def log(*s, **kw):
+    """function log
+    Args:
+        *s:   
+        **kw:   
+    Returns:
+        
+    """
     print(*s, flush=True, **kw)
 
 def log2(*s, **kw):
+    """function log2
+    Args:
+        *s:   
+        **kw:   
+    Returns:
+        
+    """
     if verbose >=2 : print(*s, flush=True, **kw)
 
 def log3(*s, **kw):
+    """function log3
+    Args:
+        *s:   
+        **kw:   
+    Returns:
+        
+    """
     if verbose >=3 : print(*s, flush=True, **kw)
 
 def help():
+    """function help
+    Args:
+    Returns:
+        
+    """
     suffix = "\n\n\n###############################"
     ss     = help_create(modulename='utilmy', prefixs=None) + suffix
     ss += HELP
