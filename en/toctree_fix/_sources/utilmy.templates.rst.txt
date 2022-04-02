@@ -1,0 +1,21 @@
+utilmy.templates package
+========================
+
+Submodules
+----------
+
+utilmy.templates.cli module
+---------------------------
+
+.. automodule:: utilmy.templates.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.templates
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,117 @@
+utilmy.deeplearning.keras package
+=================================
+
+Submodules
+----------
+
+utilmy.deeplearning.keras.loss\_graph module
+--------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.loss_graph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.loss\_vq\_vae2 module
+-----------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.loss_vq_vae2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.train\_graph\_loss module
+---------------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.train_graph_loss
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.train\_template module
+------------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.train_template
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.train\_vqvae\_loss module
+---------------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.train_vqvae_loss
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_dataloader\_img module
+------------------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_dataloader_img
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_dataloader\_tab module
+------------------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_dataloader_tab
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_debug module
+--------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_debug
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_layers module
+---------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_layers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_loss module
+-------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_loss
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_models module
+---------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_similarity module
+-------------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_similarity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.keras.util\_train module
+--------------------------------------------
+
+.. automodule:: utilmy.deeplearning.keras.util_train
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.deeplearning.keras
+   :members:
+   :undoc-members:
+   :show-inheritance:

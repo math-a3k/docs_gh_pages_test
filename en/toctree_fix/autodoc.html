@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy" href="modules.html" />
+    <link rel="prev" title="Welcome to helloWorld’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">utilmy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">utilmy</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>utilmy</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/autodoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-utilmy">
+<span id="utilmy"></span><span id="autodoc"></span><h1>utilmy<a class="headerlink" href="#module-utilmy" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.Box">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">Box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*args:</span> <span class="pre">typing.Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_box:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_box_attr:</span> <span class="pre">typing.Any</span> <span class="pre">=</span> <span class="pre">&lt;object</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_box_none_transform:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_box_create_on_get:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen_box:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camel_killer_box:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion_box:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modify_tuples_box:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_safe_prefix:</span> <span class="pre">unicode</span> <span class="pre">=</span> <span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_duplicates:</span> <span class="pre">unicode</span> <span class="pre">=</span> <span class="pre">'ignore'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_intact_types:</span> <span class="pre">typing.Union[typing.Tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typing.List]</span> <span class="pre">=</span> <span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_recast:</span> <span class="pre">typing.Dict</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_dots:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_class:</span> <span class="pre">typing.Union[typing.Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typing.Type[Box]]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs:</span> <span class="pre">typing.Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Improved dictionary access through dot notation with additional tools.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>default_box</strong> – Similar to defaultdict, return a default value</p></li>
+<li><p><strong>default_box_attr</strong> – Specify the default replacement.
+WARNING: If this is not the default ‘Box’, it will not be recursive</p></li>
+<li><p><strong>default_box_none_transform</strong> – When using default_box, treat keys with none values as absent. True by default</p></li>
+<li><p><strong>default_box_create_on_get</strong> – On lookup of a key that doesn’t exist, create it if missing</p></li>
+<li><p><strong>frozen_box</strong> – After creation, the box cannot be modified</p></li>
+<li><p><strong>camel_killer_box</strong> – Convert CamelCase to snake_case</p></li>
+<li><p><strong>conversion_box</strong> – Check for near matching keys as attributes</p></li>
+<li><p><strong>modify_tuples_box</strong> – Recreate incoming tuples with dicts into Boxes</p></li>
+<li><p><strong>box_safe_prefix</strong> – Conversion box prefix for unsafe attributes</p></li>
+<li><p><strong>box_duplicates</strong> – “ignore”, “error” or “warn” when duplicates exists in a conversion_box</p></li>
+<li><p><strong>box_intact_types</strong> – tuple of types to ignore converting</p></li>
+<li><p><strong>box_recast</strong> – cast certain keys to a specified type</p></li>
+<li><p><strong>box_dots</strong> – access nested Boxes by period separated keys in string</p></li>
+<li><p><strong>box_class</strong> – change what type of class sub-boxes will be created as</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None.</span>&#160; <span class="pre">Remove</span> <span class="pre">all</span> <span class="pre">items</span> <span class="pre">from</span> <span class="pre">D.</span></span></span><a class="headerlink" href="#utilmy.Box.clear" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">shallow</span> <span class="pre">copy</span> <span class="pre">of</span> <span class="pre">D</span></span></span><a class="headerlink" href="#utilmy.Box.copy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.from_json">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#utilmy.Box" title="utilmy.Box"><span class="pre">Box</span></a></span></span><a class="headerlink" href="#utilmy.Box.from_json" title="Permalink to this definition"></a></dt>
+<dd><p>Transform a json object string into a Box object. If the incoming
+json is a list, you must use BoxList.from_json.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_string</strong> – string to pass to <cite>json.loads</cite></p></li>
+<li><p><strong>filename</strong> – filename to open and pass to <cite>json.load</cite></p></li>
+<li><p><strong>encoding</strong> – File encoding</p></li>
+<li><p><strong>errors</strong> – How to handle encoding errors</p></li>
+<li><p><strong>kwargs</strong> – parameters to pass to <cite>Box()</cite> or <cite>json.loads</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Box object from json data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.from_msgpack">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msgpack_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#utilmy.Box" title="utilmy.Box"><span class="pre">Box</span></a></span></span><a class="headerlink" href="#utilmy.Box.from_msgpack" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.from_toml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_toml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toml_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#utilmy.Box" title="utilmy.Box"><span class="pre">Box</span></a></span></span><a class="headerlink" href="#utilmy.Box.from_toml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.from_yaml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#utilmy.Box" title="utilmy.Box"><span class="pre">Box</span></a></span></span><a class="headerlink" href="#utilmy.Box.from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>Transform a yaml object string into a Box object. By default will use SafeLoader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>yaml_string</strong> – string to pass to <cite>yaml.load</cite></p></li>
+<li><p><strong>filename</strong> – filename to open and pass to <cite>yaml.load</cite></p></li>
+<li><p><strong>encoding</strong> – File encoding</p></li>
+<li><p><strong>errors</strong> – How to handle encoding errors</p></li>
+<li><p><strong>kwargs</strong> – parameters to pass to <cite>Box()</cite> or <cite>yaml.load</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Box object from yaml data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default=&lt;object</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box.get" title="Permalink to this definition"></a></dt>
+<dd><p>Return the value for key if key is in the dictionary, else default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set-like</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">items</span></span></span><a class="headerlink" href="#utilmy.Box.items" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set-like</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">keys</span></span></span><a class="headerlink" href="#utilmy.Box.keys" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.merge_update">
+<span class="sig-name descname"><span class="pre">merge_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box.merge_update" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="optional">]</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">v,</span> <span class="pre">remove</span> <span class="pre">specified</span> <span class="pre">key</span> <span class="pre">and</span> <span class="pre">return</span> <span class="pre">the</span> <span class="pre">corresponding</span> <span class="pre">value.</span></span></span><a class="headerlink" href="#utilmy.Box.pop" title="Permalink to this definition"></a></dt>
+<dd><p>If key is not found, d is returned if given, otherwise KeyError is raised</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.popitem">
+<span class="sig-name descname"><span class="pre">popitem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">(k,</span> <span class="pre">v),</span> <span class="pre">remove</span> <span class="pre">and</span> <span class="pre">return</span> <span class="pre">some</span> <span class="pre">(key,</span> <span class="pre">value)</span> <span class="pre">pair</span> <span class="pre">as</span> <span class="pre">a</span></span></span><a class="headerlink" href="#utilmy.Box.popitem" title="Permalink to this definition"></a></dt>
+<dd><p>2-tuple; but raise KeyError if D is empty.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.setdefault">
+<span class="sig-name descname"><span class="pre">setdefault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box.setdefault" title="Permalink to this definition"></a></dt>
+<dd><p>Insert key with a value of default if key is not in the dictionary.</p>
+<p>Return the value for key if key is in the dictionary, else default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#utilmy.Box.to_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Turn the Box and sub Boxes back into a native python dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>python dictionary of this Box</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">json_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box.to_json" title="Permalink to this definition"></a></dt>
+<dd><p>Transform the Box object into a JSON string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – If provided will save to file</p></li>
+<li><p><strong>encoding</strong> – File encoding</p></li>
+<li><p><strong>errors</strong> – How to handle encoding errors</p></li>
+<li><p><strong>json_kwargs</strong> – additional arguments to pass to json.dump(s)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string of JSON (if no filename provided)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.to_msgpack">
+<span class="sig-name descname"><span class="pre">to_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box.to_msgpack" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.to_toml">
+<span class="sig-name descname"><span class="pre">to_toml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box.to_toml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.to_yaml">
+<span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">os.PathLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_flow_style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">unicode</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">yaml_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Box.to_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>Transform the Box object into a YAML string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – If provided will save to file</p></li>
+<li><p><strong>default_flow_style</strong> – False will recursively dump dicts</p></li>
+<li><p><strong>encoding</strong> – File encoding</p></li>
+<li><p><strong>errors</strong> – How to handle encoding errors</p></li>
+<li><p><strong>yaml_kwargs</strong> – additional arguments to pass to yaml.dump</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string of YAML (if no filename provided)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Box.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">E</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">**F</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None.</span>&#160; <span class="pre">Update</span> <span class="pre">D</span> <span class="pre">from</span> <span class="pre">dict/iterable</span> <span class="pre">E</span> <span class="pre">and</span> <span class="pre">F.</span></span></span><a class="headerlink" href="#utilmy.Box.update" title="Permalink to this definition"></a></dt>
+<dd><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+In either case, this is followed by: for k in F:  D[k] = F[k]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.Index0">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">Index0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">findex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ztmp_file.txt'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Index0" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>### to maintain global index, flist = index.read()  index.save(flist)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Index0.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Index0.read" title="Permalink to this definition"></a></dt>
+<dd><p>Index0:read
+:param :</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Index0.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Index0.save" title="Permalink to this definition"></a></dt>
+<dd><p>Index0:save
+:param flist:
+:type flist: function[“arg_type”][i]</p>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.Session">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">Session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ztmp/session/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Session" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Save Python Interpreter session on disk
+from util import Session
+sess = Session(“recsys”)
+sess.save( globals() )</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Session.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Session.load" title="Permalink to this definition"></a></dt>
+<dd><p>Session:load
+:param name:
+:param glob:
+:type glob: function[“arg_type”][i]
+:param tag:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Session.load_session">
+<span class="sig-name descname"><span class="pre">load_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Session.load_session" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Session.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Session.save" title="Permalink to this definition"></a></dt>
+<dd><p>Session:save
+:param name:
+:param glob:
+:param tag:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Session.save_session">
+<span class="sig-name descname"><span class="pre">save_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Session.save_session" title="Permalink to this definition"></a></dt>
+<dd><p>Session:save_session
+:param folder:
+:param globs:
+:param tag:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.Session.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.Session.show" title="Permalink to this definition"></a></dt>
+<dd><p>Session:show
+Args:
+Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.config_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">config_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_dataclass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#utilmy.Box" title="box.box.Box"><span class="pre">box.box.Box</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.config_load" title="Permalink to this definition"></a></dt>
+<dd><p>Load Config file into a dict
+1) load config_path
+2) If not, load in USER/.myconfig/.config.yaml
+3) If not, create default save in USER/.myconfig/.config.yaml
+:param config_path: path of config or ‘default’ tag value
+:param path_default: path of default config
+:param config_default: dict value of default config
+:param save_default: save default config on disk</p>
+<p>Returns: dict config</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_generate">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2018-01-01'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndays</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_generate" title="Permalink to this definition"></a></dt>
+<dd><p>function date_generate
+:param start:
+:param ndays:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_is_holiday">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_is_holiday</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_is_holiday" title="Permalink to this definition"></a></dt>
+<dd><p>is_holiday([ pd.to_datetime(“2015/1/1”) ] * 10)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_now">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_now</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%Y-%m-%d</span> <span class="pre">%H:%M:%S</span> <span class="pre">%Z%z'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_days</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timezone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Asia/Tokyo'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_now" title="Permalink to this definition"></a></dt>
+<dd><p>function date_now
+:param fmt=”%Y-%m-%d %H:
+:param add_days:
+:param timezone:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_to_timezone">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_to_timezone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tdate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%Y%m%d-%H:%M'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timezone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Asia/Tokyo'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_to_timezone" title="Permalink to this definition"></a></dt>
+<dd><p>dt = datetime.datetime.now(timz(‘UTC’))</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_weekday_excel">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_weekday_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_weekday_excel" title="Permalink to this definition"></a></dt>
+<dd><p>function date_weekday_excel
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_weekmonth">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_weekmonth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_weekmonth" title="Permalink to this definition"></a></dt>
+<dd><p>Incorrect</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_weekmonth2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_weekmonth2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_weekmonth2" title="Permalink to this definition"></a></dt>
+<dd><p>function date_weekmonth2
+:param d:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_weekyear2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_weekyear2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_weekyear2" title="Permalink to this definition"></a></dt>
+<dd><p>function date_weekyear2
+:param dt:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.date_weekyear_excel">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">date_weekyear_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.date_weekyear_excel" title="Permalink to this definition"></a></dt>
+<dd><p>function date_weekyear_excel
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.dict_to_namespace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">dict_to_namespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.dict_to_namespace" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.find_fuzzy">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">find_fuzzy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wlist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.find_fuzzy" title="Permalink to this definition"></a></dt>
+<dd><p>Find closest fuzzy string
+ll = dir(utilmy)
+print(ll)
+find_fuzzy(‘help create fun arguu’, ll)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.get_loggers">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">get_loggers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'print'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_loggers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.get_loggers" title="Permalink to this definition"></a></dt>
+<dd><p>function get_loggers
+:param mode:
+:param n_loggers:
+:param verbose_level:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.get_verbosity">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">get_verbosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.get_verbosity" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.git_current_hash">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">git_current_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.git_current_hash" title="Permalink to this definition"></a></dt>
+<dd><p>function git_current_hash
+:param mode:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.git_repo_root">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">git_repo_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.git_repo_root" title="Permalink to this definition"></a></dt>
+<dd><p>function git_repo_root
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.glob_glob">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">glob_glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'**/*.py'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.glob_glob" title="Permalink to this definition"></a></dt>
+<dd><p>function glob_glob
+:param dirin: any sub-directories
+:param nfile:
+:param recursive:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.global_verbosity">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">global_verbosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_relative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/../../config.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'verbosity'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.global_verbosity" title="Permalink to this definition"></a></dt>
+<dd><p>Get global verbosity
+verbosity = global_verbosity(__file__, “/../../config.json”, default=5 )</p>
+<p>verbosity = global_verbosity(“repo_root”, “config/config.json”, default=5 )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cur_path</strong> – </p></li>
+<li><p><strong>path_relative</strong> – </p></li>
+<li><p><strong>key</strong> – </p></li>
+<li><p><strong>default</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.hdfs_get">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">hdfs_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.hdfs_get" title="Permalink to this definition"></a></dt>
+<dd><p>import fastcounter
+counter = fastcounter.FastWriteCounter,()
+counter.increment(1)
+cnt.value</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.hdfs_put">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">hdfs_put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.hdfs_put" title="Permalink to this definition"></a></dt>
+<dd><p>function hdfs_put: LocalFile into HDFS in multi-thread
+:param from_dir: “hdfs://nameservice1/user/
+:param to_dir: “data/”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.hdfs_walk">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">hdfs_walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hdfs://nameservice1/user/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hdfs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.hdfs_walk" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.help" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.help_create">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">help_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modulename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utilmy.nnumpy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefixs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.help_create" title="Permalink to this definition"></a></dt>
+<dd><p>Extract code source from test code</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.help_get_codesource">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">help_get_codesource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.help_get_codesource" title="Permalink to this definition"></a></dt>
+<dd><p>Extract code source from func name</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.help_get_docstring">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">help_get_docstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.help_get_docstring" title="Permalink to this definition"></a></dt>
+<dd><p>Extract Docstring from func name</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.help_get_funargs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">help_get_funargs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.help_get_funargs" title="Permalink to this definition"></a></dt>
+<dd><p>Extract Docstring  :  (a, b, x=’blah’)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.help_info">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">help_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fun_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'os.system'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doprint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.help_info" title="Permalink to this definition"></a></dt>
+<dd><p>get infos</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.help_signature">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">help_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.help_signature" title="Permalink to this definition"></a></dt>
+<dd><p>function help_signature
+:param f:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.import_function">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">import_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fun_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuzzy_match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.import_function" title="Permalink to this definition"></a></dt>
+<dd><p>function import_function
+:param fun_name:
+:param module_name:
+:param fuzzy_match:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.is_float">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">is_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.is_float" title="Permalink to this definition"></a></dt>
+<dd><p>function is_float
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.is_int">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">is_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.is_int" title="Permalink to this definition"></a></dt>
+<dd><p>function is_int
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.load" title="Permalink to this definition"></a></dt>
+<dd><p>function load
+:param to_file:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.log" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.log10">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">log10</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.log10" title="Permalink to this definition"></a></dt>
+<dd><p>Display variable name, type when showing,  pip install varname</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.log2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">log2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.log2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.log3">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">log3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.log3" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.log_trace">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">log_trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dump_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.log_trace" title="Permalink to this definition"></a></dt>
+<dd><p>function log_trace
+:param msg:
+:param dump_path:
+:param globs:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.multiproc_run">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">multiproc_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fun_async</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_fixed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.multiproc_run" title="Permalink to this definition"></a></dt>
+<dd><p>Multiprocessing execute</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.multithread_run">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">multithread_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fun_async</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_fixed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.multithread_run" title="Permalink to this definition"></a></dt>
+<dd><p>input is as list of tuples  [(x1,x2,x3), (y1,y2,y3) ]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.np_add_remove">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">np_add_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_remove</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_add</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.np_add_remove" title="Permalink to this definition"></a></dt>
+<dd><p>function np_add_remove
+:param <code class="docutils literal notranslate"><span class="pre">set_</span></code>:
+:param to_remove:
+:param to_add:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.np_list_intersection">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">np_list_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.np_list_intersection" title="Permalink to this definition"></a></dt>
+<dd><p>function np_list_intersection
+:param l1:
+:param l2:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_clean_memory">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_clean_memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">varlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_clean_memory" title="Permalink to this definition"></a></dt>
+<dd><p>function os_clean_memory
+:param varlist:
+:param globx:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_copy">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_fallback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_copy" title="Permalink to this definition"></a></dt>
+<dd><p>Copy safe</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_cpu">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_cpu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_cpu" title="Permalink to this definition"></a></dt>
+<dd><p>function os_cpu
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_file_check">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_file_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_file_check" title="Permalink to this definition"></a></dt>
+<dd><p>function os_file_check
+:param fp:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_file_replacestring">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_file_replacestring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">findstr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacestr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">some_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_file_replacestring" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_get_function_name">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_get_function_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_get_function_name" title="Permalink to this definition"></a></dt>
+<dd><p>function os_get_function_name
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_getcwd">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_getcwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_getcwd" title="Permalink to this definition"></a></dt>
+<dd><p>function os_getcwd
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_import">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_import</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mod_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'myfile.config.model'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_import" title="Permalink to this definition"></a></dt>
+<dd><p>function os_import
+:param mod_name:
+:param globs:
+:param verbose:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_makedirs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_makedirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_or_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_makedirs" title="Permalink to this definition"></a></dt>
+<dd><p>function os_makedirs
+:param dir_or_file:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_memory">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_memory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_memory" title="Permalink to this definition"></a></dt>
+<dd><p>Get node total memory and memory usage in linux</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_path_size">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_path_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_path_size" title="Permalink to this definition"></a></dt>
+<dd><p>function os_path_size
+:param path:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_path_split">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_path_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_path_split" title="Permalink to this definition"></a></dt>
+<dd><p>function os_path_split
+:param fpath:
+:type fpath: str</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_platform_ip">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_platform_ip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_platform_ip" title="Permalink to this definition"></a></dt>
+<dd><p>function os_platform_ip
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_platform_os">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_platform_os</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_platform_os" title="Permalink to this definition"></a></dt>
+<dd><p>function os_platform_os
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_remove">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_remove" title="Permalink to this definition"></a></dt>
+<dd><p>issues with no empty Folder
+# Delete everything reachable from the directory named in ‘top’,
+# assuming there are no symbolic links.
+# CAUTION:  This is dangerous!  For example, if top == ‘/’, it could delete all your disk files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_removedirs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_removedirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_removedirs" title="Permalink to this definition"></a></dt>
+<dd><p>issues with no empty Folder
+# Delete everything reachable from the directory named in ‘top’,
+# assuming there are no symbolic links.
+# CAUTION:  This is dangerous!  For example, if top == ‘/’, it could delete all your disk files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_search_content">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_search_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srch_pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'str'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_search_content" title="Permalink to this definition"></a></dt>
+<dd><p>search inside the files</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_sleep_cpu">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_sleep_cpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpu_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_sleep_cpu" title="Permalink to this definition"></a></dt>
+<dd><p>function os_sleep_cpu
+:param cpu_min:
+:param sleep:
+:param interval:
+:param msg:
+:param verbose:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_system">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doprint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_system" title="Permalink to this definition"></a></dt>
+<dd><p>get values
+os_system( f”   ztmp “,  doprint=True)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_system_list">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_system_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_sec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_system_list" title="Permalink to this definition"></a></dt>
+<dd><p>function os_system_list
+:param ll:
+:param logfile:
+:param sleep_sec:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_to_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ztmp.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'a'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_to_file" title="Permalink to this definition"></a></dt>
+<dd><p>function os_to_file
+:param txt:
+:param filename:
+:param mode:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_variable_check">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_variable_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_terminate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_variable_check" title="Permalink to this definition"></a></dt>
+<dd><p>function os_variable_check
+:param ll:
+:param globs:
+:param do_terminate:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_variable_exist">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_variable_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_variable_exist" title="Permalink to this definition"></a></dt>
+<dd><p>function os_variable_exist
+:param x:
+:param globs:
+:param msg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_variable_init">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_variable_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_variable_init" title="Permalink to this definition"></a></dt>
+<dd><p>function os_variable_init
+:param ll:
+:param globs:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.os_walk">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">os_walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.os_walk" title="Permalink to this definition"></a></dt>
+<dd><p>dirlevel=0 : root directory
+dirlevel=1 : 1 path below</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_add_noise">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_add_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_exclude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_add_noise" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_add_noise
+:param df:
+:param level:
+:param cols_exclude:
+:type cols_exclude: list</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_cartesian">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_cartesian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_cartesian" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_cartesian
+:param df1:
+:param df2:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_col_bins">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_col_bins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_col_bins" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_col_bins
+:param df:
+:param col:
+:param nbins:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_cols_unique_count">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_cols_unique_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_exclude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_cols_unique_count" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_cols_unique_count
+:param df:
+:param cols_exclude:
+:type cols_exclude: list
+:param nsample:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_date_split">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_date_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coldate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_key'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_date_split" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_date_split
+:param df:
+:param coldate:
+:param prefix_col:
+:param sep:
+:param verbose:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_del">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_del</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_del" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_del
+:param df:
+:param cols:
+:type cols: list</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_dtype_count_unique">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_dtype_count_unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_continuous</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_dtype_count_unique" title="Permalink to this definition"></a></dt>
+<dd><p>Learns the number of categories in each variable and standardizes the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – pd.DataFrame</p></li>
+<li><p><strong>continuous_ids</strong> – list of ints
+List containing the indices of known continuous variables. Useful for
+discrete data like age, which is better modeled as continuous.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>number of categories of each variable. -1 if the variable is  continuous.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ncat</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_dtype_getcontinuous">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_dtype_getcontinuous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_exclude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_dtype_getcontinuous" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_dtype_getcontinuous
+:param df:
+:param cols_exclude:
+:type cols_exclude: list
+:param nsample:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_dtype_reduce">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_dtype_reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">int0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'int32'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float32'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_dtype_reduce" title="Permalink to this definition"></a></dt>
+<dd><p>Reduce dtype</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_dtype_to_category">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_dtype_to_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_exclude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">treshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_dtype_to_category" title="Permalink to this definition"></a></dt>
+<dd><p>Convert string to category</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_filter">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'shop_id=11,</span> <span class="pre">l1_genre_id&gt;600,</span> <span class="pre">l2_genre_id&lt;80311,'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_filter" title="Permalink to this definition"></a></dt>
+<dd><p>dfi = pd_filter2(dfa, “shop_id=11, l1_genre_id&gt;600, l2_genre_id&lt;80311,” )
+dfi2 = pd_filter(dfa, {“shop_id” : 11} )
+### Dilter dataframe with basic expr</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_generate_data">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_generate_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_generate_data" title="Permalink to this definition"></a></dt>
+<dd><p>Generate sample data for function testing categorical features</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_getdata">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_getdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_getdata" title="Permalink to this definition"></a></dt>
+<dd><p>data = test_get_data()
+df   = data[‘housing.csv’]
+df.head(3)
+<a class="reference external" href="https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data">https://github.com/szrlee/Stock-Time-Series-Analysis/tree/master/data</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_groupby_parallel">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_groupby_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colsgroup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fun_apply</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_groupby_parallel" title="Permalink to this definition"></a></dt>
+<dd><p>Use of multi-thread on group by apply when order is not important</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_merge">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colkeep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_merge" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_merge
+:param df1:
+:param df2:
+:param on:
+:param colkeep:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_plot_histogram">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_plot_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q5</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q95</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.995</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_plot_histogram" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_plot_histogram
+:param dfi:
+:param path_save:
+:param nbin:
+:param q5:
+:param q95:
+:param nsample:
+:param show:
+:param clear:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_plot_multi">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_plot_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_axe1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_axe2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(8,</span> <span class="pre">4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_plot_multi" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_plot_multi
+:param df:
+:param plot_type:
+:param cols_axe1:
+:type cols_axe1: list
+:param cols_axe2:
+:type cols_axe2: list
+:param figsize:
+:param 4:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_random">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_random" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_random
+:param nrows:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_read_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.pkl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_duplicates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_filter_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fun_apply</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_read_file" title="Permalink to this definition"></a></dt>
+<dd><p>Read file in parallel from disk : very Fast
+:param path_glob: list of pattern, or sep by “;”
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_read_file2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_read_file2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.pkl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_duplicates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_filter_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fun_apply</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_read_file2" title="Permalink to this definition"></a></dt>
+<dd><p>Read file in parallel from disk : very Fast
+:param path_glob: list of pattern, or sep by “;”
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_sample_strat">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_sample_strat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_sample_strat" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_sample_strat
+:param df:
+:param col:
+:param n:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_show">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'notepad.exe'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_show" title="Permalink to this definition"></a></dt>
+<dd><p>Show from Dataframe</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_to_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filei</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'shape'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_to_file" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_to_file
+:param df:
+:param filei:
+:param check:
+:param verbose:
+:param show:
+:param **kw:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_to_hiveparquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_to_hiveparquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/ztmp_hive_parquet/df.parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_to_hiveparquet" title="Permalink to this definition"></a></dt>
+<dd><p>Hive parquet needs special headers to read, only fastparquet can do it
+fastparquet.write(filename, data, row_group_offsets=50000000, compression=None, file_scheme=’simple’, open_with=&lt;built-in function open&gt;, mkdirs=&lt;function default_mkdirs&gt;, has_nulls=True, write_index=None, partition_on=[], fixed_text=None, append=False, object_encoding=’infer’, times=’int64’, custom_metadata=None)[source]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pd_to_mapdict">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pd_to_mapdict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ranid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'item_tag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">naval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colkey_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'str'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colval_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'str'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">900900900</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pd_to_mapdict" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_to_mapdict
+:param df:
+:param colkey:
+:param colval:
+:param naval:
+:param colkey_type:
+:param colval_type:
+:param npool:
+:param nrows:
+:param verbose:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.pip_install">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">pip_install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">pandas</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.pip_install" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.print_everywhere">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">print_everywhere</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.print_everywhere" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference external" href="https://github.com/alexmojaki/snoop">https://github.com/alexmojaki/snoop</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.profiler_start">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">profiler_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.profiler_start" title="Permalink to this definition"></a></dt>
+<dd><p>function profiler_start
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.profiler_stop">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">profiler_stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.profiler_stop" title="Permalink to this definition"></a></dt>
+<dd><p>function profiler_stop
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.random_dates">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">random_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.random_dates" title="Permalink to this definition"></a></dt>
+<dd><p>function random_dates
+:param start:
+:param end:
+:param size:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.random_genders">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">random_genders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.random_genders" title="Permalink to this definition"></a></dt>
+<dd><p>function random_genders
+:param size:
+:param p:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.save">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.save" title="Permalink to this definition"></a></dt>
+<dd><p>function save
+:param dd:
+:param to_file:
+:param verbose:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.sys_exit">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">sys_exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exited'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">err_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.sys_exit" title="Permalink to this definition"></a></dt>
+<dd><p>function sys_exit
+:param msg:
+:param err_int:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.sys_install">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">sys_install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.sys_install" title="Permalink to this definition"></a></dt>
+<dd><p>function sys_install
+:param cmd:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.toFileSafe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">toFileSafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.toFileSafe" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.toFileSafe.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.toFileSafe.log" title="Permalink to this definition"></a></dt>
+<dd><p>toFileSafe:log
+:param msg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.toFileSafe.w">
+<span class="sig-name descname"><span class="pre">w</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.toFileSafe.w" title="Permalink to this definition"></a></dt>
+<dd><p>toFileSafe:w
+:param msg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.toFileSafe.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.toFileSafe.write" title="Permalink to this definition"></a></dt>
+<dd><p>toFileSafe:write
+:param msg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.to_datetime">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">to_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.to_datetime" title="Permalink to this definition"></a></dt>
+<dd><p>function to_datetime
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.to_dict">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.to_dict" title="Permalink to this definition"></a></dt>
+<dd><p>function to_dict
+:param **kw:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.to_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ztmp.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'a'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.to_file" title="Permalink to this definition"></a></dt>
+<dd><p>function os_to_file
+:param txt:
+:param filename:
+:param mode:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.to_float">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">to_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valdef</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.to_float" title="Permalink to this definition"></a></dt>
+<dd><p>function to_float
+:param x:
+:param valdef:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.to_int">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">to_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valdef</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.to_int" title="Permalink to this definition"></a></dt>
+<dd><p>function to_int
+:param x:
+:param valdef:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.to_timeunix">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">to_timeunix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2018-01-16'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.to_timeunix" title="Permalink to this definition"></a></dt>
+<dd><p>function to_timeunix
+:param datex:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.z_os_search_fast">
+<span class="sig-prename descclassname"><span class="pre">utilmy.</span></span><span class="sig-name descname"><span class="pre">z_os_search_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'regex/str'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.z_os_search_fast" title="Permalink to this definition"></a></dt>
+<dd><p>function z_os_search_fast
+:param fname:
+:param texts:
+:param mode:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to helloWorld’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="utilmy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

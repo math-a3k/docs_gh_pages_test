@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.recsys package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.spark package" href="utilmy.spark.html" />
+    <link rel="prev" title="utilmy.prepro package" href="utilmy.prepro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.recsys package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-recsys-ab-module">utilmy.recsys.ab module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.recsys.metric">utilmy.recsys.metric module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-recsys-util-rec-module">utilmy.recsys.util_rec module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-recsys-vectors-module">utilmy.recsys.vectors module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.recsys">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.recsys package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.recsys.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-recsys-package">
+<h1>utilmy.recsys package<a class="headerlink" href="#utilmy-recsys-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-recsys-ab-module">
+<h2>utilmy.recsys.ab module<a class="headerlink" href="#utilmy-recsys-ab-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.recsys.metric">
+<span id="utilmy-recsys-metric-module"></span><h2>utilmy.recsys.metric module<a class="headerlink" href="#module-utilmy.recsys.metric" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.catalog_coverage">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">catalog_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">catalog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#utilmy.recsys.metric.catalog_coverage" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the catalog coverage for k lists of recommendations
+:param y_preds: Ordered predictions</p>
+<blockquote>
+<div><p>example: [[‘X’, ‘Y’, ‘Z’], [‘X’, ‘Y’, ‘Z’]]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>catalog</strong> (<em>list</em>) – A list of all unique items in the training data
+example: [‘A’, ‘B’, ‘C’, ‘X’, ‘Y’, Z]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>catalog_coverage</em> – The catalog coverage of the recommendations as a percent
+rounded to 2 decimal places</p></li>
+<li><p><em>———-</em></p></li>
+<li><p><em>Metric Defintion</em></p></li>
+<li><p><em>Ge, M., Delgado-Battenfeld, C., &amp; Jannach, D. (2010, September).</em></p></li>
+<li><p><strong>Beyond accuracy</strong> (<em>evaluating recommender systems by coverage and serendipity.</em>)</p></li>
+<li><p><em>In Proceedings of the fourth ACM conference on Recommender systems (pp. 257-260). ACM.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.coverage_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">coverage_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.coverage_at_k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.help" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.hit_rate_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">hit_rate_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.hit_rate_at_k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.hit_rate_at_k_nep">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">hit_rate_at_k_nep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.hit_rate_at_k_nep" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.intra_list_similarity">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">intra_list_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#utilmy.recsys.metric.intra_list_similarity" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the average intra-list similarity of all recommendations.
+This metric can be used to measure diversity of the list of recommended items.
+:param y_preds: Ordered predictions</p>
+<blockquote>
+<div><p>Example: [[‘X’, ‘Y’, ‘Z’], [‘X’, ‘Y’, ‘Z’]]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_df</strong> (<em>dataframe</em>) – A dataframe with one hot encoded or latent features.
+The dataframe should be indexed by the id used in the recommendations.</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>-------</strong> – The average intra-list similarity for recommendations.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.mean_average_precision">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">mean_average_precision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.mean_average_precision" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the mean average precision on y and labels.
+Returns the mean average precision (MAP) of all the queries. If a query
+has an empty ground truth set, the average precision will be zero and a
+warning is generated.
+:param y: The prediction array. The items that were y_preds, in descending</p>
+<blockquote>
+<div><p>order of relevance.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels</strong> (<em>array-like</em><em>, </em><em>shape=</em><em>(</em><em>n_ratings</em><em>,</em><em>)</em>) – The labels (positively-rated items).</p></li>
+<li><p><strong>assume_unique</strong> (<em>bool</em><em>, </em><em>optional</em><em> (</em><em>default=True</em><em>)</em>) – Whether to assume the items in the labels and y are each
+unique. That is, the same item is not y_preds multiple times or
+rated multiple times.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="k">for</span> <span class="mi">3</span> <span class="n">users</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">preds</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="k">for</span> <span class="n">the</span> <span class="mi">3</span> <span class="n">users</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_average_precision</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="go">0.35502645502645497</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.metrics_calc">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">metrics_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'userid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colrec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reclist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coltrue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'purchaselist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'genrelist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">methods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">featuredf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popdict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.metrics_calc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.metrics_calc_batch">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">metrics_calc_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'userid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colrec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reclist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coltrue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'purchaselist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'genrelist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.metrics_calc_batch" title="Permalink to this definition"></a></dt>
+<dd><p>Distributed metric calculation</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.mrr_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">mrr_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.mrr_at_k" title="Permalink to this definition"></a></dt>
+<dd><p>Computes MRR
+:param y_preds: y, as lists of lists
+:param y_true: target data, as lists of lists (eventually [[sku1], [sku2],…]
+:param k: top-k</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.mrr_at_k_nep">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">mrr_at_k_nep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.mrr_at_k_nep" title="Permalink to this definition"></a></dt>
+<dd><p>Computes MRR
+:param y_preds: y, as lists of lists
+:param y_true: target data, as lists of lists (eventually [[sku1], [sku2],…]
+:param k: top-k</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.ndcg_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">ndcg_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.ndcg_at_k" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the normalized discounted cumulative gain at K.
+Compute the average NDCG value of all the queries, truncated at ranking
+position k. The discounted cumulative gain at position k is computed as:</p>
+<blockquote>
+<div><p>sum,,i=1,,^k^ (2^{relevance of ‘’i’’th item}^ - 1) / log(i + 1)</p>
+</div></blockquote>
+<p>and the NDCG is obtained by dividing the DCG value on the ground truth set.
+In the current implementation, the relevance value is binary.
+If a query has an empty ground truth set, zero will be used as
+NDCG together with a warning.
+:param y: The prediction array. The items that were y_preds, in descending</p>
+<blockquote>
+<div><p>order of relevance.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels</strong> (<em>array-like</em><em>, </em><em>shape=</em><em>(</em><em>n_ratings</em><em>,</em><em>)</em>) – The labels (positively-rated items).</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em><em> (</em><em>default=10</em><em>)</em>) – The rank at which to measure the NDCG.</p></li>
+<li><p><strong>assume_unique</strong> (<em>bool</em><em>, </em><em>optional</em><em> (</em><em>default=True</em><em>)</em>) – Whether to assume the items in the labels and y are each
+unique. That is, the same item is not y_preds multiple times or
+rated multiple times.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="k">for</span> <span class="mi">3</span> <span class="n">users</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">preds</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="k">for</span> <span class="n">the</span> <span class="mi">3</span> <span class="n">users</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ndcg_at_k</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.3333333432674408</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ndcg_at_k</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.48791273434956867</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p>K. Jarvelin and J. Kekalainen, “IR evaluation methods for
+retrieving highly relevant documents.”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.novelty">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">novelty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.recsys.metric.novelty" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the novelty for a list of recommendations
+:param y_preds: Ordered predictions</p>
+<blockquote>
+<div><p>example: [[‘X’, ‘Y’, ‘Z’], [‘X’, ‘Y’, ‘Z’]]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pop</strong> (<em>dictionary</em>) – A dictionary of all items alongside of its occurrences counter in the training data
+example: {1198: 893, 1270: 876, 593: 876, 2762: 867}</p></li>
+<li><p><strong>u</strong> (<em>integer</em>) – The number of users in the training data</p></li>
+<li><p><strong>n</strong> (<em>integer</em>) – The length of recommended lists per user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>novelty</em> – The novelty of the recommendations in system level</p></li>
+<li><p><em>mean_self_information</em> – The novelty of the recommendations in recommended top-N list level</p></li>
+<li><p><em>———-</em></p></li>
+<li><p><em>Metric Defintion</em></p></li>
+<li><p><em>Zhou, T., Kuscsik, Z., Liu, J. G., Medo, M., Wakeling, J. R., &amp; Zhang, Y. C. (2010).</em></p></li>
+<li><p><em>Solving the apparent diversity-accuracy dilemma of recommender systems.</em></p></li>
+<li><p><em>Proceedings of the National Academy of Sciences, 107(10), 4511-4515.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.personalization">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">personalization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#utilmy.recsys.metric.personalization" title="Permalink to this definition"></a></dt>
+<dd><p>Personalization measures recommendation similarity across users.
+A high score indicates good personalization (user’s lists of recommendations are different).
+A low score indicates poor personalization (user’s lists of recommendations are very similar).
+A model is “personalizing” well if the set of recommendations for each user is different.
+Parameters:
+———-
+y_preds : a list of lists</p>
+<blockquote>
+<div><p>Ordered predictions
+example: [[‘X’, ‘Y’, ‘Z’], [‘X’, ‘Y’, ‘Z’]]</p>
+</div></blockquote>
+<blockquote>
+<div><p>The personalization score for all recommendations.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.popularity_bias_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">popularity_bias_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.popularity_bias_at_k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.precision_at">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">precision_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.precision_at" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the precision at K.
+Compute the average precision of all the queries, truncated at
+ranking position k. If for a query, the ranking algorithm returns
+n (n is less than k) results, the precision value will be computed
+as #(relevant items retrieved) / k. This formula also applies when
+the size of the ground truth set is less than k.
+If a query has an empty ground truth set, zero will be used as
+precision together with a warning.
+:param y: The prediction array. The items that were y_preds, in descending</p>
+<blockquote>
+<div><p>order of relevance.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels</strong> (<em>array-like</em><em>, </em><em>shape=</em><em>(</em><em>n_ratings</em><em>,</em><em>)</em>) – The labels (positively-rated items).</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em><em> (</em><em>default=10</em><em>)</em>) – The rank at which to measure the precision.</p></li>
+<li><p><strong>assume_unique</strong> (<em>bool</em><em>, </em><em>optional</em><em> (</em><em>default=True</em><em>)</em>) – Whether to assume the items in the labels and y are each
+unique. That is, the same item is not y_preds multiple times or
+rated multiple times.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="k">for</span> <span class="mi">3</span> <span class="n">users</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">preds</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="k">for</span> <span class="n">the</span> <span class="mi">3</span> <span class="n">users</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">precision_at</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">0.33333333333333331</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">precision_at</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">0.26666666666666666</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">precision_at</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="go">0.17777777777777778</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.precision_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">precision_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.precision_at_k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.recall_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">recall_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.recall_at_k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.recall_average_at_k_mean">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">recall_average_at_k_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#utilmy.recsys.metric.recall_average_at_k_mean" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the mean average recall at k.
+:param actual: Actual items to be y_preds</p>
+<blockquote>
+<div><p>example: [[‘A’, ‘B’, ‘X’], [‘A’, ‘B’, ‘Y’]]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_preds</strong> (<em>a list of lists</em>) – Ordered predictions
+example: [[‘X’, ‘Y’, ‘Z’], [‘X’, ‘Y’, ‘Z’]]</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>-------</strong> – <dl class="simple">
+<dt>recall_average_at_k_mean: int</dt><dd><p>The mean average recall at k (mar&#64;k)</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.recall_avg_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">recall_avg_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#utilmy.recsys.metric.recall_avg_at_k" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the average recall at k.
+:param actual: A list of actual items to be y_preds
+:type actual: list
+:param y_preds: An ordered list of y_preds items
+:type y_preds: list
+:param k: Number of predictions to consider
+:type k: int, default = 10
+:param Returns:
+:param ——-:
+:param score: The average recall at k.
+:type score: int</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.recommender_precision">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">recommender_precision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#utilmy.recsys.metric.recommender_precision" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>actual<span class="classifier">a list of lists</span></dt><dd><p>Actual items to be y_preds
+example: [[‘A’, ‘B’, ‘X’], [‘A’, ‘B’, ‘Y’]]</p>
+</dd>
+<dt>y_preds<span class="classifier">a list of lists</span></dt><dd><p>Ordered predictions
+example: [[‘X’, ‘Y’, ‘Z’], [‘X’, ‘Y’, ‘Z’]]</p>
+</dd>
+</dl>
+<blockquote>
+<div><p>precision: int</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.recommender_recall">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">recommender_recall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#utilmy.recsys.metric.recommender_recall" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>actual<span class="classifier">a list of lists</span></dt><dd><p>Actual items to be y_preds
+example: [[‘A’, ‘B’, ‘X’], [‘A’, ‘B’, ‘Y’]]</p>
+</dd>
+<dt>y_preds<span class="classifier">a list of lists</span></dt><dd><p>Ordered predictions
+example: [[‘X’, ‘Y’, ‘Z’], [‘X’, ‘Y’, ‘Z’]]</p>
+</dd>
+</dl>
+<blockquote>
+<div><p>recall: int</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.sample_hits_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">sample_hits_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.sample_hits_at_k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.sample_misses_at_k">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">sample_misses_at_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.sample_misses_at_k" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.statistics">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.statistics" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.test_all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.test_get_testdata">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">test_get_testdata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.test_get_testdata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.recsys.metric.test_metrics">
+<span class="sig-prename descclassname"><span class="pre">utilmy.recsys.metric.</span></span><span class="sig-name descname"><span class="pre">test_metrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.recsys.metric.test_metrics" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="utilmy-recsys-util-rec-module">
+<h2>utilmy.recsys.util_rec module<a class="headerlink" href="#utilmy-recsys-util-rec-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-recsys-vectors-module">
+<h2>utilmy.recsys.vectors module<a class="headerlink" href="#utilmy-recsys-vectors-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.recsys">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.recsys" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.prepro.html" class="btn btn-neutral float-left" title="utilmy.prepro package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.spark.html" class="btn btn-neutral float-right" title="utilmy.spark package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

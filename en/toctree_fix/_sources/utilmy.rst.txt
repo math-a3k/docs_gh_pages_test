@@ -1,0 +1,246 @@
+utilmy package
+==============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 20
+
+   utilmy.configs
+   utilmy.deeplearning
+   utilmy.docs
+   utilmy.excel
+   utilmy.images
+   utilmy.logs
+   utilmy.nlp
+   utilmy.optim
+   utilmy.prepro
+   utilmy.recsys
+   utilmy.spark
+   utilmy.stats
+   utilmy.tabular
+   utilmy.templates
+   utilmy.tools
+   utilmy.tseries
+   utilmy.viz
+   utilmy.webscraper
+
+Submodules
+----------
+
+utilmy.adatasets module
+-----------------------
+
+.. automodule:: utilmy.adatasets
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.cli module
+-----------------
+
+.. automodule:: utilmy.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.data module
+------------------
+
+.. automodule:: utilmy.data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.dates module
+-------------------
+
+.. automodule:: utilmy.dates
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.debug module
+-------------------
+
+.. automodule:: utilmy.debug
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.decorators module
+------------------------
+
+.. automodule:: utilmy.decorators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.distributed module
+-------------------------
+
+.. automodule:: utilmy.distributed
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.graph module
+-------------------
+
+.. automodule:: utilmy.graph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.iio module
+-----------------
+
+.. automodule:: utilmy.iio
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nnumpy module
+--------------------
+
+.. automodule:: utilmy.nnumpy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.oos module
+-----------------
+
+.. automodule:: utilmy.oos
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.parallel module
+----------------------
+
+.. automodule:: utilmy.parallel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.ppandas module
+---------------------
+
+.. automodule:: utilmy.ppandas
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.ppolars module
+---------------------
+
+.. automodule:: utilmy.ppolars
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_batch module
+-------------------------
+
+.. automodule:: utilmy.util_batch
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_colab module
+-------------------------
+
+.. automodule:: utilmy.util_colab
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_conda module
+-------------------------
+
+.. automodule:: utilmy.util_conda
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_cpu module
+-----------------------
+
+.. automodule:: utilmy.util_cpu
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_dirs module
+------------------------
+
+.. automodule:: utilmy.util_dirs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_download module
+----------------------------
+
+.. automodule:: utilmy.util_download
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_hadoop module
+--------------------------
+
+.. automodule:: utilmy.util_hadoop
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_log module
+-----------------------
+
+.. automodule:: utilmy.util_log
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.util\_zip module
+-----------------------
+
+.. automodule:: utilmy.util_zip
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.utilmy module
+--------------------
+
+.. automodule:: utilmy.utilmy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.utils module
+-------------------
+
+.. automodule:: utilmy.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.zprepro module
+---------------------
+
+.. automodule:: utilmy.zprepro
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy
+   :members:
+   :undoc-members:
+   :show-inheritance:

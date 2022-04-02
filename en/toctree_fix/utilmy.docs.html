@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.docs package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.excel package" href="utilmy.excel.html" />
+    <link rel="prev" title="utilmy.deeplearning.torch.images package" href="utilmy.deeplearning.torch.images.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.docs package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs.cli">utilmy.docs.cli module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs.code_parser">utilmy.docs.code_parser module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-docs-docstring-module">utilmy.docs.docstring module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs.format">utilmy.docs.format module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs.generate_doc">utilmy.docs.generate_doc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs.generate_typehint">utilmy.docs.generate_typehint module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs.zold_cli_format">utilmy.docs.zold_cli_format module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs.zold_docstring2">utilmy.docs.zold_docstring2 module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-docs-zold-docstring3-module">utilmy.docs.zold_docstring3 module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.docs">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.docs package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.docs.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-docs-package">
+<h1>utilmy.docs package<a class="headerlink" href="#utilmy-docs-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.docs.cli">
+<span id="utilmy-docs-cli-module"></span><h2>utilmy.docs.cli module<a class="headerlink" href="#module-utilmy.docs.cli" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.cli.os_remove">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.cli.</span></span><span class="sig-name descname"><span class="pre">os_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.cli.os_remove" title="Permalink to this definition"></a></dt>
+<dd><p>function os_remove
+:param filepath:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.cli.run_cli">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.cli.</span></span><span class="sig-name descname"><span class="pre">run_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.cli.run_cli" title="Permalink to this definition"></a></dt>
+<dd><p>Usage
+cd myutil
+pip install -e  .</p>
+<p>docs  help
+docs markdown –repo_url  <a class="reference external" href="https://github.com/arita37/spacefusion.git">https://github.com/arita37/spacefusion.git</a>   –out_dir docs/</p>
+<p>docs  callgraph  –repo_dir utilmy/      –out_dir docs/
+docs  csv        –repo_dir utilmy/      –out_dir docs/
+docs  txt        –repo_dir utilmy/      –out_dir docs/</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.docs.code_parser">
+<span id="utilmy-docs-code-parser-module"></span><h2>utilmy.docs.code_parser module<a class="headerlink" href="#module-utilmy.docs.code_parser" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>‘file’: export_stats_perfile,
+‘repo’: export_stats_perrepo,
+‘repo_url’: export_stats_repolink,
+‘export_call_graph’: export_call_graph,
+‘export_call_graph_url’: export_call_graph_url,</p>
+</div></blockquote>
+<blockquote>
+<div><p>python code_parser.py file   parser/code_parser.py  method parser/output/output_file.csv</p>
+<p>python code_parser.py repo   parser/test3    parser/output/output_repo.csv</p>
+<p>python code_parser.py repo_url <a class="reference external" href="https://github.com/lucidrains/DALLE-pytorch.git">https://github.com/lucidrains/DALLE-pytorch.git</a> docs/test_example1.csv</p>
+<p>python code_parser.py repo_txt   parser/test3    parser/output/output_repo.csv</p>
+<p>python code_parser.py repo_url_txt <a class="reference external" href="https://github.com/lucidrains/DALLE-pytorch.git">https://github.com/lucidrains/DALLE-pytorch.git</a> docs/test_example1.csv</p>
+<p>python code_parser.py export_call_graph parser/test3   docs/export_call_graph.csv</p>
+<p>python code_parser.py export_call_graph_url <a class="reference external" href="https://github.com/CompVis/taming-transformers.git">https://github.com/CompVis/taming-transformers.git</a> docs/repo_taming_graph.csv</p>
+<p>python code_parser.py export_call_graph &lt;in_path&gt; &lt;out_path&gt;</p>
+</div></blockquote>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_call_graph">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_call_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_call_graph" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py  export_call_graph &lt;in_path&gt; &lt;out_path&gt;</p>
+</div></blockquote>
+<p>Returns:    1  csv output</p>
+<dl>
+<dt>How to grab paht</dt><dd><ol class="arabic simple">
+<li><p>Parse all imports
+from utilmy.tabular import myfun
+uri_dict[“myfun”] = “utilmy.tabular.myfun”</p></li>
+<li><p>## Use uri_dict to map into full path name</p></li>
+</ol>
+<blockquote>
+<div><p>df[‘path2’] = df.apply( lamba x :  uri_dict.get(  x[‘function’], x[‘function’]    ), axis=1)</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_call_graph_url">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_call_graph_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_call_graph_url" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py  export_call_graph_url &lt;repo_link&gt; &lt;out_path&gt;</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>1  csv output</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_stats_perfile">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_stats_perfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_stats_perfile" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py  export_stats_perfile &lt;in_path&gt; &lt;out_path&gt;</p>
+</div></blockquote>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_stats_perrepo">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_stats_perrepo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'csv'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_stats_perrepo" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py  export_stats_perfile &lt;in_path&gt; &lt;out_path&gt;  &lt;type&gt;</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>1  repo   —&gt;  a single file stats for all sub-diractory</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_stats_perrepo_txt">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_stats_perrepo_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_stats_perrepo_txt" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py  repo_txt   parser/test3    parser/output/output_repo.csv</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>1  txt file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_stats_pertype">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_stats_pertype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_stats_pertype" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py type &lt;in_path&gt; &lt;type&gt; &lt;out_path&gt;</p>
+</div></blockquote>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_stats_repolink">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_stats_repolink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'csv'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_stats_repolink" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py  repo_url <a class="reference external" href="https://github.com/lucidrains/DALLE-pytorch.git">https://github.com/lucidrains/DALLE-pytorch.git</a>  &lt;out_path&gt;</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>1  csv   —&gt;  data info detail</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.export_stats_repolink_txt">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">export_stats_repolink_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.export_stats_repolink_txt" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python code_parser.py repo_url_txt <a class="reference external" href="https://github.com/lucidrains/DALLE-pytorch.git">https://github.com/lucidrains/DALLE-pytorch.git</a> docs/test_example1.csv</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>1  txt   —&gt;  data info detail</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_file_stats">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_file_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_file_stats" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get file stars
+:param IN: file_path         - the file path input
+:param OUT: Dict of file stars</p>
+<dl>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“total_functions”: 22,
+“avg_lines” : 110.2,
+“total_class”: 3</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_class_info">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_class_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_class_info" title="Permalink to this definition"></a></dt>
+<dd><p>The class use to get functions stars
+:param IN: file_path         - the file path input
+:param OUT: Array of functions, lines of the function, and variable in function</p>
+<dl>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>[</dt><dd><p>{“function”: “function_name1”, “lines”: 20, “variables”: [“a”, “b”, “c”]},
+{“function”: “function_name2”, “lines”: 30, “variables”: []},</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_class_methods">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_class_methods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_class_methods" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get all classes and all methods in this class of the python file
+:param IN: file_path         - the file path input
+:param OUT: An array of class info [{dict}, {dict}, …]</p>
+<p>Example Output:
+[</p>
+<blockquote>
+<div><p>{“class_name”: “Class1”, “listMethods”: [“method1”, “method2”, “method3”]},
+{“class_name”: “Class2”, “listMethods”: [“method4”, “method5”, “method6”]},</p>
+</div></blockquote>
+<p>]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_class_name">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_class_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_class_name" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get all classes of the python file
+:param IN: file_path         - the file path input
+:param OUT: list_classes     - List all python classes in the input file</p>
+<dl class="simple">
+<dt>Example Output:</dt><dd><p>[‘Class1’, ‘Class1’]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_class_stats">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_class_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_class_stats" title="Permalink to this definition"></a></dt>
+<dd><p>The class use to get functions stars
+:param IN: file_path         - the file path input
+:param OUT: Dataframe with bellow fields</p>
+<blockquote>
+<div><p>uri:   path1/path2/filename.py:function1
+name: function1
+n_lines
+n_words
+n_words_unqiue
+n_characters
+avg_char_per_word = n_charaecter / n_words
+n_loop  : nb of for, while loop
+n_ifthen  : nb of if_then</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>**** return None if no function in</em>) – </p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example Output:</dt><dd><p>uri               name   type  n_variable  n_words  n_words_unique  n_characters  avg_char_per_word  n_loop  n_ifthen</p>
+</dd>
+</dl>
+<p>0  d:/Project/job/test2/zz936/parser/test/keys.py…  BadSignatureError  class           0        1               1             4           4.000000       0         0
+1  d:/Project/job/test2/zz936/parser/test/keys.py…     BadDigestError  class           0        1               1             4           4.000000       0         0
+2  d:/Project/job/test2/zz936/parser/test/keys.py…       VerifyingKey  class          84      301             189          3584          11.906977       0         7
+3  d:/Project/job/test2/zz936/parser/test/keys.py…         SigningKey  class         138      482             310          4615           9.574689       3         9</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_function_info">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_function_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_function_info" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get functions stars
+:param IN: file_path         - the file path input
+:param OUT: Array of functions, lines of the function, and variable in function</p>
+<dl>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>[</dt><dd><p>{“name”: “function_name1”, “lines”: 20, “variables”: [“a”, “b”, “c”]},
+{“name”: “function_name2”, “lines”: 30, “variables”: []},</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_function_name">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_function_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_function_name" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get all functions of the python file
+:param IN: file_path         - the file path input
+:param OUT: list_functions   - List all python functions in the input file</p>
+<dl class="simple">
+<dt>Example Output:</dt><dd><p>[‘func1’, ‘func2’]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_function_stats">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_function_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_function_stats" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get functions stars
+:param IN: file_path         - the file path input
+:param OUT: Dataframe with bellow fields</p>
+<blockquote>
+<div><p>uri:   path1/path2/filename.py:function1
+name: function1
+n_lines
+n_words
+n_words_unqiue
+n_characters
+avg_char_per_word = n_charaecter / n_words
+n_loop  : nb of for, while loop
+n_ifthen  : nb of if_then</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>**** return None if no function in</em>) – </p>
+</dd>
+</dl>
+<dl>
+<dt>Example Output:</dt><dd><blockquote>
+<div><p>uri                                 name  n_variable  n_words  n_words_unique  n_characters  avg_char_per_word  n_loop  n_ifthen</p>
+</div></blockquote>
+<p>0   d:Projectjob      est2zz936parser/test/test2.p…     prepare_target_and_clean_up_test           8       92              32           535           5.815217       0         0
+1   d:Projectjob      est2zz936parser/test/test2.p…                 clean_up_config_test           6       55              19           241           4.381818       0         1
+2   d:Projectjob      est2zz936parser/test/test2.p…         check_default_network_config          22      388              74           955           2.461340       1         5
+3   d:Projectjob      est2zz936parser/test/test2.p…                     check_module_env           9      250              54           553           2.212000       1         1
+4   d:Projectjob      est2zz936parser/test/test2.p…     provision_certificates_to_target           7      101              29           384           3.801980       0         3
+5   d:Projectjob      est2zz936parser/test/test2.p…            config_session_connection           2       14               8            97           6.928571       0         0
+6   d:Projectjob      est2zz936parser/test/test2.p…  config_cipher_suite_and_tcps_action           8      101              30           335           3.316832       0         3</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_import_class_as">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_import_class_as</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_import_class_as" title="Permalink to this definition"></a></dt>
+<dd><p>Get list funtions was imported in python file.
+:param IN: file_path         - the file path input
+:param OUT: List function</p>
+<dl>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>[</dt><dd><p>{‘class’: ‘zc.Class’},
+{‘class’: ‘Hola’}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_imported_func">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_imported_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_imported_func" title="Permalink to this definition"></a></dt>
+<dd><p>Get list funtions was imported in python file.
+:param IN: file_path         - the file path input
+:param OUT: List function</p>
+<dl>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>[</dt><dd><p>{‘func1’: ‘zc.Class’},
+{‘func2’: ‘Hola’}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_method_info">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_method_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_method_info" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>IN</strong> – file_path         - the file path input</p></li>
+<li><p><strong>OUT</strong> – Array of methods in class</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>[</dt><dd><p>{“function”: “function_name1”, “lines”: 20, “variables”: [“a”, “b”, “c”]},
+{“function”: “function_name2”, “lines”: 30, “variables”: []},</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_method_stats">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_method_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_method_stats" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get methods stars
+:param IN: file_path         - the file path input
+:param OUT: Dataframe with bellow fields</p>
+<blockquote>
+<div><p>uri:   path1/path2/filename.py:function1
+name: function1
+n_lines
+n_words
+n_words_unqiue
+n_characters
+avg_char_per_word = n_charaecter / n_words
+n_loop  : nb of for, while loop
+n_ifthen  : nb of if_then</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>**** return None if no function in</em>) – </p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example Output:</dt><dd><p>uri                                               name    type  n_variable  n_words  n_words_unique  n_characters  avg_char_per_word  n_loop  n_ifthen</p>
+</dd>
+</dl>
+<p>0   d:/Project/job/test2/zz936/parser/test/keys.py…                              VerifyingKey:__init__  method           2       11              11           100           9.090909       0         1
+1   d:/Project/job/test2/zz936/parser/test/keys.py…                     VerifyingKey:from_public_point  method          10       13              12           185          14.230769       0         0
+2   d:/Project/job/test2/zz936/parser/test/keys.py…                           VerifyingKey:from_string  method          17       45              39           504          11.200000       0         1
+3   d:/Project/job/test2/zz936/parser/test/keys.py…                              VerifyingKey:from_pem  method           2        2               2            39          19.500000       0         0
+4   d:/Project/job/test2/zz936/parser/test/keys.py…                              VerifyingKey:from_der  method          19       64              38           683          10.671875       0         3
+5   d:/Project/job/test2/zz936/parser/test/keys.py…              VerifyingKey:from_public_key_recovery  method           4        8               8           137          17.125000       0         0
+6   d:/Project/job/test2/zz936/parser/test/keys.py…  VerifyingKey:from_public_key_recovery_with_digest  method          13       24              23           288          12.000000       0         0
+7   d:/Project/job/test2/zz936/parser/test/keys.py…                             VerifyingKey:to_string  method           6       11               8           145          13.181818       0         0
+8   d:/Project/job/test2/zz936/parser/test/keys.py…                                VerifyingKey:to_pem  method           2        4               4            42          10.500000       0         0</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_list_variable_global">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_list_variable_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_list_variable_global" title="Permalink to this definition"></a></dt>
+<dd><p>The function use to get all global variable of the python file
+:param IN: file_path         - the file path input
+:param OUT: list_var         - Array of all global variable</p>
+<dl class="simple">
+<dt>Example Output:</dt><dd><p>[‘Var1’, ‘Var2’]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.get_stats">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">get_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.get_stats" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate stats from datafaframe
+:param df: pandas DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.test_example">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">test_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.test_example" title="Permalink to this definition"></a></dt>
+<dd><p>function test_example
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.code_parser.write_to_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.code_parser.</span></span><span class="sig-name descname"><span class="pre">write_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_imported</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_class_as</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.code_parser.write_to_file" title="Permalink to this definition"></a></dt>
+<dd><p>function write_to_file
+:param uri:
+:param type:
+:param list_functions:
+:param list_classes:
+:param list_imported:
+:param dict_functions:
+:param list_class_as:
+:param out_path:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-docs-docstring-module">
+<h2>utilmy.docs.docstring module<a class="headerlink" href="#utilmy-docs-docstring-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.docs.format">
+<span id="utilmy-docs-format-module"></span><h2>utilmy.docs.format module<a class="headerlink" href="#module-utilmy.docs.format" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.batch_format_dir">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">batch_format_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.batch_format_dir" title="Permalink to this definition"></a></dt>
+<dd><p>function batch_format_dir
+:param in_dir:
+:param out_dir:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.batch_format_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">batch_format_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.batch_format_file" title="Permalink to this definition"></a></dt>
+<dd><p>function batch_format_file
+:param in_file:
+:param out_dir:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.find_in_lines">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">find_in_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.find_in_lines" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.format_add_header">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">format_add_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.format_add_header" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.format_add_logger">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">format_add_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.format_add_logger" title="Permalink to this definition"></a></dt>
+<dd><p>adding log function import and replace all print( with log(</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.format_assignments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">format_assignments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.format_assignments" title="Permalink to this definition"></a></dt>
+<dd><p>Aligns assignment statements in the source file and return a text.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.format_comments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">format_comments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.format_comments" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a string of text and formats it based on rule 1 (see docs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.format_imports">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">format_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.format_imports" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a string of text and formats it based on rule 3 (see docs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.format_logs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">format_logs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.format_logs" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a string of text and formats it based on rule 2 (see docs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.glob_glob_python">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">glob_glob_python</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.py'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.glob_glob_python" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dirin</strong> – _description_</p></li>
+<li><p><strong>suffix</strong> – _description_. Defaults to “<a href="#id1"><span class="problematic" id="id2">*</span></a>.py”.</p></li>
+<li><p><strong>nfile</strong> – _description_. Defaults to 7.</p></li>
+<li><p><strong>exclude</strong> – _description_. Defaults to “”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.os_file_compile_check">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">os_file_compile_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.os_file_compile_check" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.os_file_compile_check_batch">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">os_file_compile_check_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.docs.format.os_file_compile_check_batch" title="Permalink to this definition"></a></dt>
+<dd><p>### DO NOT use Command line  !!!!!!</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.os_file_haschanged">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">os_file_haschanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weeks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.os_file_haschanged" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.os_glob">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">os_glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.os_glob" title="Permalink to this definition"></a></dt>
+<dd><p>os_glob a given directory for all .py files and returns a list of source files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.os_makedirs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">os_makedirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.os_makedirs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.os_path_norm">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">os_path_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diroot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.os_path_norm" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>diroot</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.run_format1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">run_format1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.run_format1" title="Permalink to this definition"></a></dt>
+<dd><p>function run_format1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.test1" title="Permalink to this definition"></a></dt>
+<dd><p>function test1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.docs.format.test2" title="Permalink to this definition"></a></dt>
+<dd><p>function test2
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.docs.format.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.format.to_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.format.</span></span><span class="sig-name descname"><span class="pre">to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt_big</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.format.to_file" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-utilmy.docs.generate_doc">
+<span id="utilmy-docs-generate-doc-module"></span><h2>utilmy.docs.generate_doc module<a class="headerlink" href="#module-utilmy.docs.generate_doc" title="Permalink to this headline"></a></h2>
+<p>Generate markdown documentation from code source.</p>
+<blockquote>
+<div><p>python code_parser.py  repo       –in_path  parser/test3    –out_path  parser/output/output_repo.csv
+python generate_doc.py markdown   –repo_stat_file parser/output/output_repo.csv      –output  parser/output/doc_repo.md  –prefix “<a class="reference external" href="https://github.com/arita37/zz936/tree/a">https://github.com/arita37/zz936/tree/a</a>”
+python generate_doc.py table      –repo_stat_file parser/output/output_repo.csv      –output  parser/output/doc_repo_table.md  –prefix “<a class="reference external" href="https://github.com/arita37/zz936/tree/a">https://github.com/arita37/zz936/tree/a</a>”</p>
+<p class="attribution">—prefix: link to your repo
+###   Note: the repo_stat_file csv file is the file was create python code_parser.py</p>
+</div></blockquote>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.markdown_create_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">markdown_create_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.markdown_create_file" title="Permalink to this definition"></a></dt>
+<dd><p>function markdown_create_file
+:param list_info:
+:param prefix:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.markdown_create_function">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">markdown_create_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_docs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.markdown_create_function" title="Permalink to this definition"></a></dt>
+<dd><p>function markdown_create_function
+:param uri:
+:param name:
+:param type:
+:param args_name:
+:param args_type:
+:param args_value:
+:param start_line:
+:param list_docs:
+:param prefix:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.markdown_createall">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">markdown_createall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.markdown_createall" title="Permalink to this definition"></a></dt>
+<dd><p>function markdown_createall
+:param dfi:
+:param prefix:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.run_markdown">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">run_markdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_stat_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'docs/doc_main.md'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://github.com/user/repo/tree/a'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.run_markdown" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python generate_doc.py run_all &lt;in_file&gt; &lt;out_file&gt; &lt;prefix&gt;</p>
+</div></blockquote>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.run_table">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">run_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_stat_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'docs/doc_table.md'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://github.com/user/repo/tree/a'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.run_table" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python generate_doc.py run_table &lt;in_file&gt; &lt;out_file&gt; &lt;prefix&gt;</p>
+</div></blockquote>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.table_all_row">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">table_all_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.table_all_row" title="Permalink to this definition"></a></dt>
+<dd><p>function table_all_row
+:param list_rows:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.table_create">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">table_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.table_create" title="Permalink to this definition"></a></dt>
+<dd><p>function table_create
+:param dfi:
+:param prefix:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.table_create_row">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">table_create_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_funtions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.table_create_row" title="Permalink to this definition"></a></dt>
+<dd><p>function table_create_row
+:param uri:
+:param name:
+:param type:
+:param start_line:
+:param list_funtions:
+:param prefix:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_doc.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_doc.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_doc.test" title="Permalink to this definition"></a></dt>
+<dd><p>function test
+Args:
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.docs.generate_typehint">
+<span id="utilmy-docs-generate-typehint-module"></span><h2>utilmy.docs.generate_typehint module<a class="headerlink" href="#module-utilmy.docs.generate_typehint" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.glob_glob_python">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">glob_glob_python</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.py'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.glob_glob_python" title="Permalink to this definition"></a></dt>
+<dd><p>function glob_glob_python
+:param dirin:
+:param suffix:
+:param nfile:
+:param exclude:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.os_path_norm">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">os_path_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diroot</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.os_path_norm" title="Permalink to this definition"></a></dt>
+<dd><p>function os_path_norm
+:param diroot:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.run_monkeytype">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">run_monkeytype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diroot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stub'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.run_monkeytype" title="Permalink to this definition"></a></dt>
+<dd><p>Generate type hints for files
+:param dirin: _description_
+:type dirin: str
+:param dirout: _description_
+:type dirout: str
+:param diroot: _description_. Defaults to None.
+:type diroot: str, optional
+:param mode: _description_. Defaults to “stub”.
+:type mode: str, optional
+:param nfile: _description_. Defaults to 10.
+:type nfile: int, optional
+:param exclude: _description_. Defaults to “”.
+:type exclude: str, optional</p>
+<blockquote>
+<div><p>exclude = “”; nfile= 10
+dir0 = os.getcwd()
+dirin  = dir0 + “/utilmy/tabular/”
+dirout = dir0 + “/docs/stub/”
+diroot = dir0
+dirin = dirin.replace(”&quot;, “/”) + ‘/’</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.run_utilmy">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">run_utilmy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.run_utilmy" title="Permalink to this definition"></a></dt>
+<dd><p>function run_utilmy
+:param nfile:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.run_utilmy2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">run_utilmy2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.run_utilmy2" title="Permalink to this definition"></a></dt>
+<dd><p>function run_utilmy2
+:param nfile:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.test1" title="Permalink to this definition"></a></dt>
+<dd><p>function test1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.test2" title="Permalink to this definition"></a></dt>
+<dd><p>function test2
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.generate_typehint.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.generate_typehint.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.generate_typehint.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.docs.zold_cli_format">
+<span id="utilmy-docs-zold-cli-format-module"></span><h2>utilmy.docs.zold_cli_format module<a class="headerlink" href="#module-utilmy.docs.zold_cli_format" title="Permalink to this headline"></a></h2>
+<p>A simple python module to parse the code and format it based on some rules.
+Some rules are:
+rule 1 - change a line starting with 3 #’s into x #’s where x is 90 by default</p>
+<blockquote>
+<div><p>if no text was found else preserve text and fill the rest with #’s</p>
+</div></blockquote>
+<p>rule 2 - normalize log statements in the file
+rule 3 - put all consecutive imports on one line
+rule 4 - align assignment operators</p>
+<p>Usage:</p>
+<p>cli_format -i /path/to/file or /path/to/dir –out_dir /path/to/output</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.format_assignments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">format_assignments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.format_assignments" title="Permalink to this definition"></a></dt>
+<dd><p>Aligns assignment statements in the source file and return a text.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.format_comments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">format_comments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.format_comments" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a string of text and formats it based on rule 1 (see docs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.format_dir">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">format_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.format_dir" title="Permalink to this definition"></a></dt>
+<dd><p>function format_dir
+:param in_dir:
+:param out_dir:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.format_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">format_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.format_file" title="Permalink to this definition"></a></dt>
+<dd><p>function format_file
+:param in_file:
+:param out_dir:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.format_imports">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">format_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.format_imports" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a string of text and formats it based on rule 3 (see docs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.format_logs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">format_logs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.format_logs" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a string of text and formats it based on rule 2 (see docs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.load_arguments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">load_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.load_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the arguments</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.main" title="Permalink to this definition"></a></dt>
+<dd><p>function main
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.mod_period">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">mod_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.mod_period" title="Permalink to this definition"></a></dt>
+<dd><p>function mod_period
+:param in_file:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_cli_format.os_glob">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_cli_format.</span></span><span class="sig-name descname"><span class="pre">os_glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_cli_format.os_glob" title="Permalink to this definition"></a></dt>
+<dd><p>os_glob a given directory for all .py files and returns a list of source files.</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.docs.zold_docstring2">
+<span id="utilmy-docs-zold-docstring2-module"></span><h2>utilmy.docs.zold_docstring2 module<a class="headerlink" href="#module-utilmy.docs.zold_docstring2" title="Permalink to this headline"></a></h2>
+<p>Automates Python scripts formatting, linting and Mkdocs documentation.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_docstring2.automate_mkdocs_from_docstring">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_docstring2.</span></span><span class="sig-name descname"><span class="pre">automate_mkdocs_from_docstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mkdocs_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mkgendocs_f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#utilmy.docs.zold_docstring2.automate_mkdocs_from_docstring" title="Permalink to this definition"></a></dt>
+<dd><p>Automates the -pages for mkgendocs package by adding all Python functions in a directory to the mkgendocs config.
+:param mkdocs_dir: textual directory for the hierarchical directory &amp; navigation in Mkdocs
+:type mkdocs_dir: typing.Union[str, pathlib.Path]
+:param mkgendocs_f: The configurations file for the mkgendocs package
+:type mkgendocs_f: str
+:param repo_dir: textual directory to search for Python functions in
+:type repo_dir: pathlib.Path
+:param match_string: the text to be matches, after which the functions will be added in mkgendocs format
+:type match_string: str</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">automate_mkdocs_from_docstring</span><span class="p">(</span><span class="s1">&#39;scripts&#39;</span><span class="p">,</span> <span class="n">repo_dir</span><span class="o">=</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="n">match_string</span><span class="o">=</span><span class="s1">&#39;pages:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>feedback message</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_docstring2.docstring_from_type_hints">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_docstring2.</span></span><span class="sig-name descname"><span class="pre">docstring_from_type_hints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_script</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#utilmy.docs.zold_docstring2.docstring_from_type_hints" title="Permalink to this definition"></a></dt>
+<dd><p>Automate docstring argument variable-type from type-hints.
+:param repo_dir: textual directory to search for Python functions in
+:type repo_dir: &lt; nothing &gt;
+:param overwrite_script: enables automatic overwriting of Python scripts in repo_dir
+:type overwrite_script: &lt; wrong variable type&gt;
+:param test: whether to write script content to a test_it.py file
+:type test: Something completely different</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>feedback message</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_docstring2.indent">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_docstring2.</span></span><span class="sig-name descname"><span class="pre">indent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#utilmy.docs.zold_docstring2.indent" title="Permalink to this definition"></a></dt>
+<dd><p>Count the indentation in whitespace characters.
+:param string: text with indents
+:type string: str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of whitespace indentations</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.docs.zold_docstring2.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.docs.zold_docstring2.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.docs.zold_docstring2.main" title="Permalink to this definition"></a></dt>
+<dd><p>Execute when running this script.</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-docs-zold-docstring3-module">
+<h2>utilmy.docs.zold_docstring3 module<a class="headerlink" href="#utilmy-docs-zold-docstring3-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.docs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.docs" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.deeplearning.torch.images.html" class="btn btn-neutral float-left" title="utilmy.deeplearning.torch.images package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.excel.html" class="btn btn-neutral float-right" title="utilmy.excel package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

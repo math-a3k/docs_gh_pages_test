@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.deeplearning.keras package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.deeplearning.torch package" href="utilmy.deeplearning.torch.html" />
+    <link rel="prev" title="utilmy.deeplearning.autoencoder package" href="utilmy.deeplearning.autoencoder.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="utilmy.deeplearning.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="utilmy.deeplearning.autoencoder.html">utilmy.deeplearning.autoencoder package</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="#">utilmy.deeplearning.keras package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.keras.loss_graph">utilmy.deeplearning.keras.loss_graph module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-loss-vq-vae2-module">utilmy.deeplearning.keras.loss_vq_vae2 module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-train-graph-loss-module">utilmy.deeplearning.keras.train_graph_loss module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-train-template-module">utilmy.deeplearning.keras.train_template module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-train-vqvae-loss-module">utilmy.deeplearning.keras.train_vqvae_loss module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.keras.util_dataloader_img">utilmy.deeplearning.keras.util_dataloader_img module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-util-dataloader-tab-module">utilmy.deeplearning.keras.util_dataloader_tab module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.keras.util_debug">utilmy.deeplearning.keras.util_debug module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-util-layers-module">utilmy.deeplearning.keras.util_layers module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-util-loss-module">utilmy.deeplearning.keras.util_loss module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.keras.util_models">utilmy.deeplearning.keras.util_models module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.keras.util_similarity">utilmy.deeplearning.keras.util_similarity module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-keras-util-train-module">utilmy.deeplearning.keras.util_train module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.keras">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="utilmy.deeplearning.torch.html">utilmy.deeplearning.torch package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning.util_dl">utilmy.deeplearning.util_dl module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning.util_embedding">utilmy.deeplearning.util_embedding module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning.util_yolo">utilmy.deeplearning.util_yolo module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+          <li><a href="utilmy.deeplearning.html">utilmy.deeplearning package</a> &raquo;</li>
+      <li>utilmy.deeplearning.keras package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.deeplearning.keras.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-deeplearning-keras-package">
+<h1>utilmy.deeplearning.keras package<a class="headerlink" href="#utilmy-deeplearning-keras-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.keras.loss_graph">
+<span id="utilmy-deeplearning-keras-loss-graph-module"></span><h2>utilmy.deeplearning.keras.loss_graph module<a class="headerlink" href="#module-utilmy.deeplearning.keras.loss_graph" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.create_fake_neighbor">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">create_fake_neighbor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.create_fake_neighbor" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Graph regularization</p>
+<p>Parameter:
+x (np.array):
+max_neighbors (integer):</p>
+<p>Returns:
+np.array: containing neighbors
+np.array: containing neighbor_weights</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.create_graph_loss">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">create_graph_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.create_graph_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Creates Graph loss</p>
+<p>Parameter:
+max_neighbors (integer):</p>
+<p>Returns:
+nbr_features_layer (data_type):
+regularizer (data_type):</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.help" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Extract code source from test code</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.map_func">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">map_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor_weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.map_func" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Maps x_batch features</p>
+<p>Parameter:
+x_batch (np.array):
+y_batch (np.array):
+neighbors (data_type):
+neighbor_weights (data_type):</p>
+<p>Returns:
+features_dict (dictionary): containing mapped features of x_batch
+y_batch (np.array):</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.test_adversarial">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">test_adversarial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.test_adversarial" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Adversarial Regularization</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.test_graph_loss">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">test_graph_loss</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.test_graph_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Calculates the graph loss</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.test_step">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">test_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbr_features_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.test_step" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Function defining test steps</p>
+<p>Parameter:
+x (np.array):
+y (np.array):
+model (data_type):
+loss_fn (data_type):
+nbr_features_layer (data_type):
+regularizer (data_type):</p>
+<p>Returns:
+base_output (data_type):
+total_loss (data_type):
+labeled_loss (data_type):
+scaled_graph_loss (data_type):</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.loss_graph.train_step">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.loss_graph.</span></span><span class="sig-name descname"><span class="pre">train_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbr_features_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.loss_graph.train_step" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: Function defining train steps</p>
+<p>Parameter:
+x (np.array):
+y (np.array):
+model (data_type):
+loss_fn (data_type):
+optimizer (data_type):
+nbr_features_layer (data_type):
+regularizer (data_type):</p>
+<p>Returns:
+base_output (data_type):
+total_loss (data_type):
+labeled_loss (data_type):
+scaled_graph_loss (data_type):</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-deeplearning-keras-loss-vq-vae2-module">
+<h2>utilmy.deeplearning.keras.loss_vq_vae2 module<a class="headerlink" href="#utilmy-deeplearning-keras-loss-vq-vae2-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-keras-train-graph-loss-module">
+<h2>utilmy.deeplearning.keras.train_graph_loss module<a class="headerlink" href="#utilmy-deeplearning-keras-train-graph-loss-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-keras-train-template-module">
+<h2>utilmy.deeplearning.keras.train_template module<a class="headerlink" href="#utilmy-deeplearning-keras-train-template-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-keras-train-vqvae-loss-module">
+<h2>utilmy.deeplearning.keras.train_vqvae_loss module<a class="headerlink" href="#utilmy-deeplearning-keras-train-vqvae-loss-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.keras.util_dataloader_img">
+<span id="utilmy-deeplearning-keras-util-dataloader-img-module"></span><h2>utilmy.deeplearning.keras.util_dataloader_img module<a class="headerlink" href="#module-utilmy.deeplearning.keras.util_dataloader_img" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.DataLoader_img">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">DataLoader_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.DataLoader_img" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.keras.utils.data_utils.Sequence</span></code></p>
+<p>Custom DataGenerator using keras Sequence
+Args: x (np array): The input samples from the dataset</p>
+<blockquote>
+<div><p>y (np array): The labels from the dataset
+batch_size (int, optional): batch size for the samples. Defaults to 32.
+augmentations (str, optional): perform augmentations to the input samples. Defaults to None.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.DataLoader_imgdisk">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">DataLoader_imgdisk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'images/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uri'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">albumentations.core.composition.Compose</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_imbalance_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_imbalance_min_sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.DataLoader_imgdisk" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.keras.utils.data_utils.Sequence</span></code></p>
+<p>Custom DataGenerator using Keras Sequence for images on disk
+df_label format :
+id, uri, cat1, cat2, cat3, cat1_onehot, cat1_onehot, ….</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.DataLoader_imgdisk.on_epoch_end">
+<span class="sig-name descname"><span class="pre">on_epoch_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.DataLoader_imgdisk.on_epoch_end" title="Permalink to this definition"></a></dt>
+<dd><p>Method called at the end of every epoch.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">Transform_sprinkle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_holes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">always_apply</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">albumentations.core.transforms_interface.ImageOnlyTransform</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.apply" title="Permalink to this definition"></a></dt>
+<dd><p>Transform_sprinkle:apply
+:param image:
+:type image: function[“arg_type”][i]
+:param **params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.fill_value">
+<span class="sig-name descname"><span class="pre">fill_value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.fill_value" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.interpolation">
+<span class="sig-name descname"><span class="pre">interpolation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.interpolation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.mask_fill_value">
+<span class="sig-name descname"><span class="pre">mask_fill_value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.Transform_sprinkle.mask_fill_value" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.build_tfrecord">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">build_tfrecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfrecord_out_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_records</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(23,</span> <span class="pre">23,</span> <span class="pre">3)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.build_tfrecord" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.get_data_sample">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">get_data_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.get_data_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Get a data sample with batch size from dataset
+:param batch_size: Provide a batch size for sampling
+:type batch_size: int
+:param x_train: Inputs from the dataset
+:type x_train: list
+:param ylabel_dict: True labels for the dataset
+:type ylabel_dict: list
+:param ylabel_name: Samples to select from these columns
+:type ylabel_name: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Selected samples of size batch_size
+y_label_list (list): List of labels from selected samples</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>x (numpy array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.pd_cols_unique_count">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">pd_cols_unique_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_exclude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.pd_cols_unique_count" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.pd_get_onehot_dict">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">pd_get_onehot_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dfref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.pd_get_onehot_dict" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Actual DataFrame</p></li>
+<li><p><strong>dfref</strong> (<em>DataFrame</em>) – Reference DataFrame</p></li>
+<li><p><strong>labels_col</strong> (<em>list</em>) – List of label columns</p></li>
+<li><p><strong>category_dict</strong> – Provide the category list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>label_columns, count</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.pd_label_normalize_freq">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">pd_label_normalize_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.pd_label_normalize_freq" title="Permalink to this definition"></a></dt>
+<dd><p>Resample each class</p>
+<dl class="simple">
+<dt>for ci in cols:</dt><dd><p>nuniques[ci] =  df[ci].nunique()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.pd_merge_labels_imgdir">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">pd_merge_labels_imgdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dflabels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.pd_merge_labels_imgdir" title="Permalink to this definition"></a></dt>
+<dd><p>One Hot encode label_cols
+#    id, uri, cat1, cat2, …. , cat1_onehot
+:param dflabels: DataFrame to perform one hot encoding on
+:type dflabels: DataFrame
+:param img_dir: String Path /<a href="#id1"><span class="problematic" id="id2">*</span></a>.png to image directory
+:type img_dir: Path(str)
+:param labels_col: Columns to perform One Hot encoding on. Defaults to []
+:type labels_col: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>One Hot encoded DataFrame</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.pd_sample_equal">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">pd_sample_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsampl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.pd_sample_equal" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.pd_to_onehot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">pd_to_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dflabels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.pd_to_onehot" title="Permalink to this definition"></a></dt>
+<dd><p>One Hot encode label_cols for predefined df
+#    id, uri, cat1, cat2, …. , cat1_onehot
+:param dflabels: DataFrame to perform one hot encoding on
+:type dflabels: DataFrame
+:param labels_col: Columns to perform One Hot encoding on. Defaults to []
+:type labels_col: list</p>
+<p>Returns: DataFrame: One Hot encoded DataFrame</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.test" title="Permalink to this definition"></a></dt>
+<dd><p>Tests train and test images transformation functions</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.test1" title="Permalink to this definition"></a></dt>
+<dd><p>Tests image dataloader</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.test2" title="Permalink to this definition"></a></dt>
+<dd><p>Tests model training process</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.test_create_random_images_ds">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">test_create_random_images_ds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random_images/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['label']</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.test_create_random_images_ds" title="Permalink to this definition"></a></dt>
+<dd><p>Creates datasets with random images for testing</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.test_create_random_images_ds2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">test_create_random_images_ds2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">10,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random_images/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_class_perlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['gender',</span> <span class="pre">'color',</span> <span class="pre">'size']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uri'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.test_create_random_images_ds2" title="Permalink to this definition"></a></dt>
+<dd><p>Image + labels into Folder + csv files.
+Multiple label:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.tf_byte_feature">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">tf_byte_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.tf_byte_feature" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.tf_float_feature">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">tf_float_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.tf_float_feature" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.tf_int64_feature">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">tf_int64_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.tf_int64_feature" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_dataloader_img.transform_get_basic">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_dataloader_img.</span></span><span class="sig-name descname"><span class="pre">transform_get_basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_dataloader_img.transform_get_basic" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>”  Get Transformation Class for Datalaoder</dt><dd><p>Basic version</p>
+</dd>
+</dl>
+<p>cc.resize.p = 1</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-deeplearning-keras-util-dataloader-tab-module">
+<h2>utilmy.deeplearning.keras.util_dataloader_tab module<a class="headerlink" href="#utilmy-deeplearning-keras-util-dataloader-tab-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.keras.util_debug">
+<span id="utilmy-deeplearning-keras-util-debug-module"></span><h2>utilmy.deeplearning.keras.util_debug module<a class="headerlink" href="#module-utilmy.deeplearning.keras.util_debug" title="Permalink to this headline"></a></h2>
+<p>”
+Tools to debug Keras models, predictions.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.GradCAM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_debug.</span></span><span class="sig-name descname"><span class="pre">GradCAM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classIdx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layerName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.GradCAM" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Summary: Gradient-weighted Class Activation Mapping  Model for mapping gradients onto images</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.GradCAM.compute_heatmap">
+<span class="sig-name descname"><span class="pre">compute_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.GradCAM.compute_heatmap" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.GradCAM.find_target_layer">
+<span class="sig-name descname"><span class="pre">find_target_layer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.GradCAM.find_target_layer" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.GradCAM.overlay_heatmap">
+<span class="sig-name descname"><span class="pre">overlay_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">heatmap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.GradCAM.overlay_heatmap" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.image_compare_modelpred">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_debug.</span></span><span class="sig-name descname"><span class="pre">image_compare_modelpred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.image_compare_modelpred" title="Permalink to this definition"></a></dt>
+<dd><p>File Path (string): Path where the image is stores
+Model Path (string): Path where the model is stored
+Target Size(tuple, size 2): Dimension of input image (height, width)</p>
+<dl class="simple">
+<dt>Output:</dt><dd><p>Class Activation Map overlayed on the original image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.keras_check_layer">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_debug.</span></span><span class="sig-name descname"><span class="pre">keras_check_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mlayer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.keras_check_layer" title="Permalink to this definition"></a></dt>
+<dd><p>Providing a layer,
+build and run the layer</p>
+<p><a class="reference external" href="https://stackoverflow.com/questions/40143676/keras-output-simple-inputs-to-test-layers">https://stackoverflow.com/questions/40143676/keras-output-simple-inputs-to-test-layers</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_debug.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.test_all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_debug.test_classactivation">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_debug.</span></span><span class="sig-name descname"><span class="pre">test_classactivation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_debug.test_classactivation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="utilmy-deeplearning-keras-util-layers-module">
+<h2>utilmy.deeplearning.keras.util_layers module<a class="headerlink" href="#utilmy-deeplearning-keras-util-layers-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-keras-util-loss-module">
+<h2>utilmy.deeplearning.keras.util_loss module<a class="headerlink" href="#utilmy-deeplearning-keras-util-loss-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.keras.util_models">
+<span id="utilmy-deeplearning-keras-util-models-module"></span><h2>utilmy.deeplearning.keras.util_models module<a class="headerlink" href="#module-utilmy.deeplearning.keras.util_models" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.DFC_VAE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">DFC_VAE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.DFC_VAE" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.keras.engine.training.Model</span></code></p>
+<dl class="simple">
+<dt>Deep Feature Consistent Variational Autoencoder Class</dt><dd><p>classfier head</p>
+</dd>
+<dt>with tf.GradientTape() as tape:</dt><dd><p>z_mean, z_logsigma, x_recon, out_classes = model(x, training=True, y_label_list= y_label_list)      #Forward pass through the VAE</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.DFC_VAE.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.DFC_VAE.call" title="Permalink to this definition"></a></dt>
+<dd><p>DFC_VAE:call
+:param x:
+:param training:
+:param mask:
+:param y_label_list:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.DFC_VAE.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_sigmoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.DFC_VAE.decode" title="Permalink to this definition"></a></dt>
+<dd><p>DFC_VAE:decode
+:param z:
+:param apply_sigmoid:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.DFC_VAE.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.DFC_VAE.encode" title="Permalink to this definition"></a></dt>
+<dd><p>DFC_VAE:encode
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.DFC_VAE.reparameterize">
+<span class="sig-name descname"><span class="pre">reparameterize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_logsigma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.DFC_VAE.reparameterize" title="Permalink to this definition"></a></dt>
+<dd><p>DFC_VAE:reparameterize
+:param z_mean:
+:param z_logsigma:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.make_classifier">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">make_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latent_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.make_classifier" title="Permalink to this definition"></a></dt>
+<dd><p>Supervised multi class
+self.gender         = nn.Linear(self.inter_features, self.num_classes[‘gender’])
+self.masterCategory = nn.Linear(self.inter_features, self.num_classes[‘masterCategory’])</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.make_classifier_2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">make_classifier_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latent_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.make_classifier_2" title="Permalink to this definition"></a></dt>
+<dd><p>Supervised multi class
+self.gender         = nn.Linear(self.inter_features, self.num_classes[‘gender’])
+self.masterCategory = nn.Linear(self.inter_features, self.num_classes[‘masterCategory’])
+self.subCategory    = nn.Linear(self.inter_features, self.num_classes[‘subCategory’])
+self.articleType    = nn.Linear(self.inter_features, self.num_classes[‘articleType’])</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.make_decoder">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">make_decoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latent_dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.make_decoder" title="Permalink to this definition"></a></dt>
+<dd><p>ValueError: Dimensions must be equal, but are 3 and 4
+for ‘{{node sub}} = Sub[T=DT_FLOAT](x, sequential_1/conv2d_transpose_3/Relu)’
+with input shapes: [8,256,256,3], [8,256,256,4].</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.make_efficientet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">make_efficientet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cdim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.make_efficientet" title="Permalink to this definition"></a></dt>
+<dd><p>function make_efficientet
+:param xdim:
+:param ydim:
+:param cdim:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.make_encoder">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">make_encoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latent_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.make_encoder" title="Permalink to this definition"></a></dt>
+<dd><p>Creates encoder class</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.test_DFC_VAE">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">test_DFC_VAE</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.test_DFC_VAE" title="Permalink to this definition"></a></dt>
+<dd><p>model = DFC_VAE(5, 5)
+y_label_list = [ [ 1,2], [2,3 ]
+with tf.GradientTape() as tape:</p>
+<blockquote>
+<div><p>z_mean, z_logsigma, x_recon, out_classes = model(x, training=True, y_label_list= y_label_list)      #Forward pass through the VAE</p>
+</div></blockquote>
+<dl>
+<dt>for epoch in range(epoch0, num_epochs):</dt><dd><p>log2(f”Epoch {epoch+1}/{num_epochs}, in {kbatch} kbatches “)</p>
+<p>###### Set learning rate
+cc.lr_actual            = learning_rate_schedule(mode= cc.lrate_mode, epoch=epoch, cc= cc)
+optimizer.learning_rate = cc.lr_actual</p>
+<dl class="simple">
+<dt>for batch_idx, (x,  <a href="#id3"><span class="problematic" id="id4">*</span></a>y_label_list) in enumerate(train_data):</dt><dd><p>if dostop: break
+# log(“x”, x)
+# log(“y_label_list”, y_label_list)
+# log(‘[Epoch {:03d} batch {:04d}/{:04d}]’.format(epoch + 1, batch_idx+1, kbatch))
+# print( str(y_label_list)[:100] )
+train_loss = train_step(x, model, y_label_list=y_label_list)
+dd.train_loss_hist.append( np.mean(train_loss.numpy()) )
+# log( dd.train_loss_hist[-1] )
+# image_check(name= f”{batch_idx}.png”, img=x[0], renorm=False)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_models.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_models.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_models.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>Summary: test the network layer</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.deeplearning.keras.util_similarity">
+<span id="utilmy-deeplearning-keras-util-similarity-module"></span><h2>utilmy.deeplearning.keras.util_similarity module<a class="headerlink" href="#module-utilmy.deeplearning.keras.util_similarity" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_similarity.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_similarity.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.keras.util_similarity.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_similarity.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_similarity.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_similarity.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_similarity.test_tf_cdist">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_similarity.</span></span><span class="sig-name descname"><span class="pre">test_tf_cdist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_similarity.test_tf_cdist" title="Permalink to this definition"></a></dt>
+<dd><p>Tests all similarity functions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_similarity.tf_cdist">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_similarity.</span></span><span class="sig-name descname"><span class="pre">tf_cdist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'euclidean'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.python.framework.ops.EagerTensor</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_similarity.tf_cdist" title="Permalink to this definition"></a></dt>
+<dd><p>Computes <cite>metric</cite> distance between tensors.</p>
+<p>Parameters:
+left, right: tensor or array-like, metric: ‘euclidean’ or ‘cosine’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_similarity.tf_cdist_cos">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_similarity.</span></span><span class="sig-name descname"><span class="pre">tf_cdist_cos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.python.framework.ops.Tensor</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_similarity.tf_cdist_cos" title="Permalink to this definition"></a></dt>
+<dd><p>Computes cosine distance between tensors.</p>
+<p>Parameters:
+left, right: tensor or array-like</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.keras.util_similarity.tf_cdist_euclidean">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.keras.util_similarity.</span></span><span class="sig-name descname"><span class="pre">tf_cdist_euclidean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.python.framework.ops.Tensor</span></span></span><a class="headerlink" href="#utilmy.deeplearning.keras.util_similarity.tf_cdist_euclidean" title="Permalink to this definition"></a></dt>
+<dd><p>Computes euclidean distance between tensors.</p>
+<p>Parameters:
+left, right: tensor or array-like</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-deeplearning-keras-util-train-module">
+<h2>utilmy.deeplearning.keras.util_train module<a class="headerlink" href="#utilmy-deeplearning-keras-util-train-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.keras">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.deeplearning.keras" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.deeplearning.autoencoder.html" class="btn btn-neutral float-left" title="utilmy.deeplearning.autoencoder package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.deeplearning.torch.html" class="btn btn-neutral float-right" title="utilmy.deeplearning.torch package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

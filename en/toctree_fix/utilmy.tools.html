@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.tools package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.tseries package" href="utilmy.tseries.html" />
+    <link rel="prev" title="utilmy.templates package" href="utilmy.templates.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.tools package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools.cli_conda_merge">utilmy.tools.cli_conda_merge module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-tools-cli-convert-ipynb-module">utilmy.tools.cli_convert_ipynb module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-tools-cli-docs-module">utilmy.tools.cli_docs module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools.cli_download">utilmy.tools.cli_download module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools.cli_env_autoinstall">utilmy.tools.cli_env_autoinstall module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools.cli_github_search">utilmy.tools.cli_github_search module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools.cli_json">utilmy.tools.cli_json module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools.cli_module_parser">utilmy.tools.cli_module_parser module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools.cli_repo_check">utilmy.tools.cli_repo_check module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-tools-util-cli-module">utilmy.tools.util_cli module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tools">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.tools package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.tools.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-tools-package">
+<h1>utilmy.tools package<a class="headerlink" href="#utilmy-tools-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.tools.cli_conda_merge">
+<span id="utilmy-tools-cli-conda-merge-module"></span><h2>utilmy.tools.cli_conda_merge module<a class="headerlink" href="#module-utilmy.tools.cli_conda_merge" title="Permalink to this headline"></a></h2>
+<p># Merge-Conda-YAML</p>
+<p>This is a very simple piece of script that allows user to merge multiple YAML
+files generated by anaconda into a single unified YAML. The output of this script is two filetypes,
+one is the merged YAML file while the other is the requirements.txt file ready to be scanned by pip.</p>
+<ul class="simple">
+<li><p>Four yamls are saved in a directory:
+- One with default entries
+- One with versions of all entries
+- One with versions of only prioritized entries (defined in <cite>getPiorityList()</cite> function)
+- One with only the names of the packages</p></li>
+<li><p>Three .txts are saved in the same directory:
+- One with versions of all entries
+- One with versions of only prioritized entries (defined in <cite>getPiorityList()</cite> function)
+- One with only the names of the packages</p></li>
+</ul>
+<p><strong>Changing Output Filenames</strong></p>
+<p>In order to change the name of the output files, edit the “dump(output_yaml)” function definition.</p>
+<p><strong>Changing Priority List</strong></p>
+<p>The list of prioritized packages is defined in “getPiorityList()” function definition and can be changed from there</p>
+<p>Usage:</p>
+<p><cite>cli_conda_merge /path/to/env1.yaml /path/to/env2.yaml</cite></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.DAG">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">DAG</span></span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.DAG" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Directed acyclic graph for merging channel priorities.</p>
+<p>This is a stripped down version adopted from:
+<a class="reference external" href="https://github.com/thieman/py-dag">https://github.com/thieman/py-dag</a> (MIT license)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.DAG.add_edge">
+<span class="sig-name descname"><span class="pre">add_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.DAG.add_edge" title="Permalink to this definition"></a></dt>
+<dd><p>DAG:add_edge
+:param from_node:
+:param to_node:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.DAG.add_node">
+<span class="sig-name descname"><span class="pre">add_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.DAG.add_node" title="Permalink to this definition"></a></dt>
+<dd><p>DAG:add_node
+:param node_name:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.DAG.independent_nodes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">independent_nodes</span></span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.DAG.independent_nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all nodes in the graph with no dependencies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.DAG.topological_sort">
+<span class="sig-name descname"><span class="pre">topological_sort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.DAG.topological_sort" title="Permalink to this definition"></a></dt>
+<dd><p>Return a topological ordering of the DAG.</p>
+<p>Raise an error if this is not possible (graph is not valid).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.DAG.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.DAG.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Return whether the graph doesn’t contain a cycle</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.MergeError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">MergeError</span></span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.MergeError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exceptions that will be used to notify users if any error occurred during the merge</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.dump">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_yaml</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.dump" title="Permalink to this definition"></a></dt>
+<dd><p>Function used to dump the final state of the output files</p>
+<p>This Function will deal with the dumping of the merged YAML
+file as well as the requirements.txt file formatted to be used by PIP</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.getPipRequirementsContent">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">getPipRequirementsContent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dependencies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">versions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priorityVersions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.getPipRequirementsContent" title="Permalink to this definition"></a></dt>
+<dd><p>Function to convert conda dependencies and pip dependencies to a single pip list and sort it</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.getPriorityList">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">getPriorityList</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.getPriorityList" title="Permalink to this definition"></a></dt>
+<dd><p>A simple funciton that reutrns all the packages that
+need to be treated as high-priority dependencies</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main entry point for console_scripts of setup.py</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.merge">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.merge" title="Permalink to this definition"></a></dt>
+<dd><p>Function that will handle the merging of two yamls</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.merge_channels">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">merge_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channels_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.merge_channels" title="Permalink to this definition"></a></dt>
+<dd><p>Merge multiple channel priorities list and output a unified one.</p>
+<p>Use a directed-acyclic graph to create a topological sort of the priorities,
+so that the order from each environment file will be preserved in the output.
+If this cannot be satisfied, a MergeError is raised.
+If no channel priories are found (all are None), return an emply list.
+This part of code is an extract taken from <a class="reference external" href="https://github.com/amitbeka/conda-merge">https://github.com/amitbeka/conda-merge</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.merge_envs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">merge_envs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.merge_envs" title="Permalink to this definition"></a></dt>
+<dd><p>Main entry point for the script</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.merge_pips">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">merge_pips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pips</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.merge_pips" title="Permalink to this definition"></a></dt>
+<dd><p>Merge pip requirements lists the same way as <cite>merge_dependencies</cite> work</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.parse_args">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">parse_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.parse_args" title="Permalink to this definition"></a></dt>
+<dd><p>Parse command line arguments (or user provided ones as list)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.prioritySort">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">prioritySort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dependencies</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.prioritySort" title="Permalink to this definition"></a></dt>
+<dd><p>Function that will sort the dependencies for pip’s requirements.txt format
+while prioritizing the packages defined in getPriorityList() function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.removePinnedDependencies">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">removePinnedDependencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dependencies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">versions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priorityVersions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.removePinnedDependencies" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Function that will strip down each dpendency based on the arguments recieved.</dt><dd><dl class="simple">
+<dt>-If versions is True, version of all entries will be left untouched, if it</dt><dd><p>is False, all versions will be removed.</p>
+</dd>
+<dt>-If priorityVersions is True, the versions of prioritized package’s will be</dt><dd><p>untouched regardless of the ‘version’ variable.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.resolve_dependencies">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">resolve_dependencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dependencies_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.resolve_dependencies" title="Permalink to this definition"></a></dt>
+<dd><p>Merge all dependencies to one list and return it.</p>
+<p>Two overlapping dependencies (e.g. package-a and package-a=1.0.0) are not
+unified, and both are left in the list (except cases of exactly the same
+dependency). Conda itself handles that very well so no need to do this ourselves.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.sortYamlDeps">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">sortYamlDeps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dependencies</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.sortYamlDeps" title="Permalink to this definition"></a></dt>
+<dd><p>Function that will sort and prioritize dependencies of the environment YAML</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.stripPinnedDep">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">stripPinnedDep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.stripPinnedDep" title="Permalink to this definition"></a></dt>
+<dd><p>Function to strip the pinned dependency from an entry</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_conda_merge.stripPinnedVerDep">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_conda_merge.</span></span><span class="sig-name descname"><span class="pre">stripPinnedVerDep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_conda_merge.stripPinnedVerDep" title="Permalink to this definition"></a></dt>
+<dd><p>Function to keep only the package name and remove everything else</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-tools-cli-convert-ipynb-module">
+<h2>utilmy.tools.cli_convert_ipynb module<a class="headerlink" href="#utilmy-tools-cli-convert-ipynb-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-tools-cli-docs-module">
+<h2>utilmy.tools.cli_docs module<a class="headerlink" href="#utilmy-tools-cli-docs-module" title="Permalink to this headline"></a></h2>
+<dl>
+<dt>##############  TODO<span class="classifier">###########################################################</span></dt><dd><ol class="arabic simple">
+<li><dl class="simple">
+<dt>Arguments of functions or methos are missing in XXXX_doc.txt :</dt><dd><p>numpy.random.binomial(n, p, size=None)
+Please add them</p>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="simple">
+<dt>Some issues with :</dt><dd><p>cannot find __path__ for os,sys modules</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>class Module(module_name)
+Class Module gets all the submodules, classes, class_methods and functions of
+the module taken as an argument by its instance. Every instance of the class has:
+ATTRIBUTES: Module.module_name, self.module, self.submodules, self.functions, self.classes, self.class_methods
+METHODS: self.get_module_version(self), self.get_submodules(self), self.get_functions(self), self.get_classes(self),
+self.get_class_methods(), self.isimported(self, name), self.get_mlattr(self, full_name), self.get_submodule(self, attr).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_builtin_functions">
+<span class="sig-name descname"><span class="pre">get_builtin_functions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_builtin_functions" title="Permalink to this definition"></a></dt>
+<dd><p>get_builtin_functions(self) Module method
+return a list of functions of the module taken as an instance argument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_class_methods">
+<span class="sig-name descname"><span class="pre">get_class_methods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_class_methods" title="Permalink to this definition"></a></dt>
+<dd><p>get_class_methods(self) Module method
+return a list of class methods of the module taken as an instance argument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_classes">
+<span class="sig-name descname"><span class="pre">get_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_classes" title="Permalink to this definition"></a></dt>
+<dd><p>get_classes(self) Module method
+return a list of classes of the module taken as an instance argument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_functions">
+<span class="sig-name descname"><span class="pre">get_functions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_functions" title="Permalink to this definition"></a></dt>
+<dd><p>get_functions(self) Module method
+return a list of functions of the module taken as an instance argument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_mlattr">
+<span class="sig-name descname"><span class="pre">get_mlattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_mlattr" title="Permalink to this definition"></a></dt>
+<dd><p>get_mlattr(self, full_name) Module method
+return a multi-level attribute of an object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_module_isbuiltin">
+<span class="sig-name descname"><span class="pre">get_module_isbuiltin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_module_isbuiltin" title="Permalink to this definition"></a></dt>
+<dd><p>Module:get_module_isbuiltin
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_module_version">
+<span class="sig-name descname"><span class="pre">get_module_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_module_version" title="Permalink to this definition"></a></dt>
+<dd><p>get_module_version(self) Module method
+return the version of the module taken as an instance argument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_submodule">
+<span class="sig-name descname"><span class="pre">get_submodule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_submodule" title="Permalink to this definition"></a></dt>
+<dd><p>get_submodule(self, attr) Module method
+return submodule object of the module by its attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.get_submodules">
+<span class="sig-name descname"><span class="pre">get_submodules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.get_submodules" title="Permalink to this definition"></a></dt>
+<dd><p>get_submodules(self) Module method
+return a list of submodules of the module taken as an instance argument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.Module.is_imported">
+<span class="sig-name descname"><span class="pre">is_imported</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">submodule_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.Module.is_imported" title="Permalink to this definition"></a></dt>
+<dd><p>is_imported(self, submodule_name) Module method
+retrun True if submodule was imported and False otherwise.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.code_parse_line">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">code_parse_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'import/import_externa'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.code_parse_line" title="Permalink to this definition"></a></dt>
+<dd><p>External Packages</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.conda_path_get">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">conda_path_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subfolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'package/F:/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.conda_path_get" title="Permalink to this definition"></a></dt>
+<dd><p>function conda_path_get
+:param subfolder=”package/F:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.log" title="Permalink to this definition"></a></dt>
+<dd><p>function log
+:param *args:
+:param reset:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.main" title="Permalink to this definition"></a></dt>
+<dd><p>function main
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_doc_write">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_doc_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_signature_csv_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_doc_write" title="Permalink to this definition"></a></dt>
+<dd><p>Write doc of module: 1 line per function /argument :
+numpy.core.sometrue(a, axis, out, keepdims)
+numpy.core.sort(a, axis, kind, order)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_doc_write_batch">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_doc_write_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_export</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_doc_write_batch" title="Permalink to this definition"></a></dt>
+<dd><p>function module_doc_write_batch
+:param module_list:
+:param list_exclude:
+:param folder_export:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_getname">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_getname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_getname" title="Permalink to this definition"></a></dt>
+<dd><p>function module_getname
+:param name:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_getpath">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_getpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_getpath" title="Permalink to this definition"></a></dt>
+<dd><p>function module_getpath
+:param name:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_or_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_load" title="Permalink to this definition"></a></dt>
+<dd><p>function module_load
+:param name_or_path:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_signature_compare">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_signature_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_csv_new</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_csv_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_signature_compare" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><ol class="arabic simple" start="2">
+<li><p>Take 2 csv files   numpy_doc181.csv       and numpy_doc192.csv   generated by previous method.</p></li>
+</ol>
+</div></blockquote>
+<p>Then, generate a pd dataframe with  the  columns
+module      :   module1
+mod_version      :   19.2.2
+prefix_full   :    module1.class1.subclass2.subclass3
+prefix         :         class1.subclass2.subclass3
+fun_name     :      myfunction1
+fun_doc    :         DocString of function / method</p>
+<p>arg_name     :         myarg
+arg_default_value:    like  5, “default_val”,</p>
+<p>status_arg :   deprecated / new
+status     :   new</p>
+<p>Save the output file in a folder.
+Goal is to check the method which are deprecated / added from source file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_signature_get">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_signature_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_signature_get" title="Permalink to this definition"></a></dt>
+<dd><p>module_signature(module_name) return a dictionary containing information
+about the module functions and methods</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_signature_write">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_signature_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isdebug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_signature_write" title="Permalink to this definition"></a></dt>
+<dd><p>Write down the files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_tofolder">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_tofolder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_or_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./zmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isdebug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_tofolder" title="Permalink to this definition"></a></dt>
+<dd><p>function module_tofolder
+:param name_or_path:
+:param outputfolder:
+:param isdebug:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.module_unitest_write">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">module_unitest_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_signature_csv_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'unittest.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isdebug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.module_unitest_write" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_name</strong> – name of modul in string</p></li>
+<li><p><strong>input_signature_csv_file</strong> – csv file name</p></li>
+<li><p><strong>outputfile</strong> – </p></li>
+<li><p><strong>filter_list</strong> – (“public_only”,””)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.np_list_dropduplicate">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">np_list_dropduplicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.np_list_dropduplicate" title="Permalink to this definition"></a></dt>
+<dd><p>function np_list_dropduplicate
+:param seq:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.np_merge">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">np_merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">dicts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.np_merge" title="Permalink to this definition"></a></dt>
+<dd><p>function np_merge
+:param *dicts:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_arg_filter_apply_1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_arg_filter_apply_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_arg_filter_apply_1" title="Permalink to this definition"></a></dt>
+<dd><p>Apply Sequential Filtering to the frame of argument
+:param df: Signature Datframe
+:param filter_list:    (‘sort_ascending’, 1)  we can add very easily new filter
+:return: dataframe filtering</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_arg_filter_nonetype">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_arg_filter_nonetype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_arg_filter_nonetype" title="Permalink to this definition"></a></dt>
+<dd><p>function obj_arg_filter_nonetype
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_class_ispecial">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_class_ispecial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_class_ispecial" title="Permalink to this definition"></a></dt>
+<dd><p>function obj_class_ispecial
+:param obj:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_arginfo">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_arginfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_arginfo" title="Permalink to this definition"></a></dt>
+<dd><p>get_arginfo(obj, args) return a tuple of the object argument info.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_args">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_args" title="Permalink to this definition"></a></dt>
+<dd><p>function obj_get_args
+:param obj:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_doc_string">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_doc_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_doc_string" title="Permalink to this definition"></a></dt>
+<dd><p>get_doc_string(obj) return object doc string</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_full_signature">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_full_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_full_signature" title="Permalink to this definition"></a></dt>
+<dd><p>function obj_get_full_signature
+:param obj:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_name">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_name" title="Permalink to this definition"></a></dt>
+<dd><p>get_name(obj) return object name.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_nametype">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_nametype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_nametype" title="Permalink to this definition"></a></dt>
+<dd><p>get_name(obj) return object name.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_prefix">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_prefix" title="Permalink to this definition"></a></dt>
+<dd><p>get_prefix(name) return object prefix.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_signature">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_signature" title="Permalink to this definition"></a></dt>
+<dd><p>function obj_get_signature
+:param obj:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_get_type">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_get_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_get_type" title="Permalink to this definition"></a></dt>
+<dd><p>function obj_get_type
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_guess_arg_type">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_guess_arg_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg_default_values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_guess_arg_type" title="Permalink to this definition"></a></dt>
+<dd><p>function obj_guess_arg_type
+:param arg_default_values:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.obj_guess_arg_type2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">obj_guess_arg_type2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_guess_engine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pytype'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.obj_guess_arg_type2" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>guess typing pytypes de Google</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>full_name</strong> – </p></li>
+<li><p><strong>arg_name</strong> – </p></li>
+<li><p><strong>type_guess_engine</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.os_file_listall">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">os_file_listall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onlyfolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.os_file_listall" title="Permalink to this definition"></a></dt>
+<dd><p>dirpath, filename, fullpath
+# DIRCWD=r”D:_devsPython01project”
+# aa= listallfile(DIRCWD, “<em>.</em>”, 2)
+# aa[0][30];   aa[2][30]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.pd_df_expand">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">pd_df_expand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.pd_df_expand" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_df_expand
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.pd_df_format">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">pd_df_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.pd_df_format" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_df_format
+:param df:
+:param index:
+:param filter:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.str_join">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">str_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">members</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.str_join" title="Permalink to this definition"></a></dt>
+<dd><p>join_memebers(member1, …) takes an orbitrary number of
+arguments of type ‘str’and concatinates them with using the ‘.’ separator</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.str_strip_text">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">str_strip_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.str_strip_text" title="Permalink to this definition"></a></dt>
+<dd><p>str_strip_text(string) strip  and
+literals off the string.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.zdoc">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">zdoc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.zdoc" title="Permalink to this definition"></a></dt>
+<dd><p>function zdoc
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.ztest">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">ztest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.ztest" title="Permalink to this definition"></a></dt>
+<dd><p>function ztest
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_docs.ztest_mod">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_docs.</span></span><span class="sig-name descname"><span class="pre">ztest_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mod</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_docs.ztest_mod" title="Permalink to this definition"></a></dt>
+<dd><p>function ztest_mod
+:param mod:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tools.cli_download">
+<span id="utilmy-tools-cli-download-module"></span><h2>utilmy.tools.cli_download module<a class="headerlink" href="#module-utilmy.tools.cli_download" title="Permalink to this headline"></a></h2>
+<p>This script automates downloading of bulk files from github, google drive and dr0pbox.
+You can either provide a single url or a file containg multiple urls,</p>
+<blockquote>
+<div><p>one per line and an optional directory to store download results.</p>
+</div></blockquote>
+<p>Usage:</p>
+<p><cite>cli_download -u a_valid_url</cite></p>
+<p><cite>cli_download -f /path/to/a_valid_urls_file -o my_download_dir</cite></p>
+<p><cite>-u</cite> or <cite>–url</cite> specify a valid url for the file to download
+<cite>-f</cite> or <cite>–file</cite> specify path to a file containing a list of valid urls, one per line
+<cite>-o</cite> or <cite>–dir_out</cite> specify the output directory (default is <cite>downloaded</cite>)</p>
+<p>What is a valid url?</p>
+<ul class="simple">
+<li><p>Github - Url of a _file_ in a github repo e.g., <cite>https://github.com/Chhekur/amazon-scraper/blob/master/README.md</cite></p></li>
+<li><dl class="simple">
+<dt>Google Drive -    Share link of a file on google drive (share setting must be set</dt><dd><p>to <cite>anyone with the link</cite>) e.g., <cite>https://drive.google.com/file/d/1FPn4Q4PClobHgEU4DglyF2Xbs5Boe1r_/view?usp=sharing</cite></p>
+</dd>
+</dl>
+</li>
+<li><p>Dropbox - TO BE TESTED, DON’t OWN A DROPBOX ACCOUNT</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_download.</span></span><span class="sig-name descname"><span class="pre">Downloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_download.Downloader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.DEFAULT_FILENAME">
+<span class="sig-name descname"><span class="pre">DEFAULT_FILENAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'3a87622ff82c4dedb58fee88600f32d0'</span></em><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.DEFAULT_FILENAME" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.DROPBOX_NETLOC">
+<span class="sig-name descname"><span class="pre">DROPBOX_NETLOC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dropbox.com'</span></em><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.DROPBOX_NETLOC" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.GDRIVE_LINK_TEMPLATE">
+<span class="sig-name descname"><span class="pre">GDRIVE_LINK_TEMPLATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://drive.google.com/u/0/uc?id={fileid}&amp;export=download'</span></em><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.GDRIVE_LINK_TEMPLATE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.GDRIVE_NETLOC">
+<span class="sig-name descname"><span class="pre">GDRIVE_NETLOC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'drive.google.com'</span></em><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.GDRIVE_NETLOC" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.GITHUB_NETLOC">
+<span class="sig-name descname"><span class="pre">GITHUB_NETLOC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'github.com'</span></em><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.GITHUB_NETLOC" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.GITHUB_RAW_NETLOC">
+<span class="sig-name descname"><span class="pre">GITHUB_RAW_NETLOC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'raw.githubusercontent.com'</span></em><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.GITHUB_RAW_NETLOC" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.adjust_url">
+<span class="sig-name descname"><span class="pre">adjust_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.adjust_url" title="Permalink to this definition"></a></dt>
+<dd><p>Downloader:adjust_url
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.clean_netloc">
+<span class="sig-name descname"><span class="pre">clean_netloc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.clean_netloc" title="Permalink to this definition"></a></dt>
+<dd><p>Downloader:clean_netloc
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.download" title="Permalink to this definition"></a></dt>
+<dd><p>Downloading and saving file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.Downloader.get_filename">
+<span class="sig-name descname"><span class="pre">get_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_download.Downloader.get_filename" title="Permalink to this definition"></a></dt>
+<dd><p>Attempt to get filename from content-dispositions header.</p>
+<p>If not found: get filename from parsed path
+If both fail: use DEFAULT_FILENAME to save file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.get_arguments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_download.</span></span><span class="sig-name descname"><span class="pre">get_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_download.get_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>function get_arguments
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_download.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_download.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_download.main" title="Permalink to this definition"></a></dt>
+<dd><p>function main
+Args:
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tools.cli_env_autoinstall">
+<span id="utilmy-tools-cli-env-autoinstall-module"></span><h2>utilmy.tools.cli_env_autoinstall module<a class="headerlink" href="#module-utilmy.tools.cli_env_autoinstall" title="Permalink to this headline"></a></h2>
+<p>Automatically create conda virtual environment for a specified repository.
+It also autodetects all required packages and install them into the newly created environment.</p>
+<p>Usage:</p>
+<p><cite>cli_env_autoinstall -i test -n notebook_cvt</cite></p>
+<p><cite>cli_env_autoinstall -i test -n notebook_cvt -py 3.6 -p tensorflow pandas</cite></p>
+<p><cite>-i</cite> or <cite>–dir_in</cite> specify the path to repository (required argument)
+<cite>-n</cite> or <cite>–conda_env</cite> specify name of our conda environment (if not specified, all required packages are installed in a default <cite>test</cite> environment)
+<cite>-py</cite> or <cite>–python_version</cite> specify the python version of the target environment (default is 3.6)
+<cite>-p</cite> or <cite>–packages</cite> specify any extra packages in addition to required ones to install (default is numpy)</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.conda_env_exits">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">conda_env_exits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conda_env</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.conda_env_exits" title="Permalink to this definition"></a></dt>
+<dd><p>function conda_env_exits
+:param conda_env:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.create_env">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">create_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conda_env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'3.6'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'numpy'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.create_env" title="Permalink to this definition"></a></dt>
+<dd><p>Function that creates the conda environment.
+:param: folder_input folder containg the repo.
+:param: conda_env</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.get_missing">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">get_missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_packages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.get_missing" title="Permalink to this definition"></a></dt>
+<dd><p>Take a list of packages that are required, try to import packages
+one by one and if any package throws an error, it will mark it missing.
+Finally returns the list of missing packages.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.get_os">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">get_os</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.get_os" title="Permalink to this definition"></a></dt>
+<dd><p>function get_os
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.get_packages">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">get_packages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.get_packages" title="Permalink to this definition"></a></dt>
+<dd><p>Get all required packages to run a given module,
+both from standard library and from 3rd party.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.get_required_packages">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">get_required_packages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conda_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.get_required_packages" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a list of python modules and calls get_packages function
+on each module, get missing packages using get_missing function,
+removes the white listed packages and finally returns a list of packages
+that are needed to be installed in our environment.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.load_arguments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">load_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.load_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the arguments for the cli_env_autoinstall.py module.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.main" title="Permalink to this definition"></a></dt>
+<dd><p>function main
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.os_exec">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">os_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.os_exec" title="Permalink to this definition"></a></dt>
+<dd><p>function os_exec
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_env_autoinstall.scan">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_env_autoinstall.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_env_autoinstall.scan" title="Permalink to this definition"></a></dt>
+<dd><p>function scan
+:param data_file:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tools.cli_github_search">
+<span id="utilmy-tools-cli-github-search-module"></span><h2>utilmy.tools.cli_github_search module<a class="headerlink" href="#module-utilmy.tools.cli_github_search" title="Permalink to this headline"></a></h2>
+<p>Search on github for keyword(s) with optional parameters to refine your search and get all results in a CSV file.</p>
+<p>Usage:</p>
+<p><cite>cli_github_search amazon scraper</cite></p>
+<p>or refine your search</p>
+<p><cite>cli_github_search keyword1 keyword2 -c &gt;2019-11-10 -p 2019-11-01..2019-11-10 -o results</cite></p>
+<p>These are optional arguments:</p>
+<p><cite>-c</cite> or <cite>–created</cite> specify the period of repository creation
+<cite>-p</cite> or <cite>–pushed</cite> specify the period of pushing to repo
+<cite>-o</cite> or <cite>–dir_out</cite> specify the output folder for storing results (default value is <cite>results</cite>)</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_github_search.get_arguments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_github_search.</span></span><span class="sig-name descname"><span class="pre">get_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_github_search.get_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>function get_arguments
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_github_search.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_github_search.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_github_search.main" title="Permalink to this definition"></a></dt>
+<dd><p>function main
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_github_search.search_github">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_github_search.</span></span><span class="sig-name descname"><span class="pre">search_github</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_github_search.search_github" title="Permalink to this definition"></a></dt>
+<dd><p>function search_github
+:param args:
+:param start_time:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tools.cli_json">
+<span id="utilmy-tools-cli-json-module"></span><h2>utilmy.tools.cli_json module<a class="headerlink" href="#module-utilmy.tools.cli_json" title="Permalink to this headline"></a></h2>
+<p>Alll related to json dynamic parsing</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.dict_update">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">dict_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.dict_update" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fields_list</strong> (<em>list of str</em>) – list of hierarchically sorted dictionary fields leading to value to be modified</p></li>
+<li><p><strong>d</strong> (<em>dict</em>) – dictionary to be modified</p></li>
+<li><p><strong>value</strong> (<em>any type</em>) – new value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>updated dictionary</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.json_codesource_to_json">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">json_codesource_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.json_codesource_to_json" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>read a python file and create json
+Ex:
+def MyClass():</p>
+<blockquote>
+<div><p>def __init__(fname, zout=””):
+def method1(x=1, y=2)</p>
+</div></blockquote>
+</div></blockquote>
+<dl>
+<dt>—&gt;</dt><dd><p>{“uri”: “MyClass”,   “arg” : [“fname”] , “kwargs”: {“out” : “ztmp”} }</p>
+<p>{“uri”: “MyClass.method1”,   “arg” : [] , “kwargs”: {“x” : 1, “y” : 2, } }</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.json_csv_to_json">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">json_csv_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.json_csv_to_json" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>csv</strong> (<em>str</em>) – csv file containing jsons to be normalized</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of normalized jsons as dictionaries</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of dicts</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.json_norm">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">json_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ddict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.json_norm" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.json_norm_val">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">json_norm_val</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.json_norm_val" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.json_parse">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">json_parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ddict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.json_parse" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference external" href="https://github.com/arita37/mlmodels/blob/dev/mlmodels/dataset/test_json/test_functions.json">https://github.com/arita37/mlmodels/blob/dev/mlmodels/dataset/test_json/test_functions.json</a>
+<a class="reference external" href="https://github.com/arita37/mlmodels/blob/dev/mlmodels/dataset/json/benchmark_timeseries/gluonts_m5.json">https://github.com/arita37/mlmodels/blob/dev/mlmodels/dataset/json/benchmark_timeseries/gluonts_m5.json</a></p>
+<blockquote>
+<div><blockquote>
+<div><p>“deepar”: {</p>
+</div></blockquote>
+<dl>
+<dt>“model_pars”: {</dt><dd><p>“model_uri”  : “model_gluon.gluonts_model”,
+“model_name” : “deepar”,
+“model_pars” : {</p>
+<blockquote>
+<div><p>“prediction_length”: 12,
+“freq”: “D”,
+“distr_output” :  {“uri” : “gluonts.distribution.neg_binomial:NegativeBinomialOutput”},</p>
+<p>“distr_output” :  “uri::gluonts.distribution.neg_binomial:NegativeBinomialOutput”,</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.json_to_object">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">json_to_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ddict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.json_to_object" title="Permalink to this definition"></a></dt>
+<dd><p>Execute a function from json to actual arguments
+{uri:    args :[]   , kw_args : {}   }</p>
+<blockquote>
+<div><p>{ “uri” : “mlmodels.util.log”, “args” : [ “x1” , “passed”] ,     “kw_args” : { }  }</p>
+</div></blockquote>
+<p>,{ “uri” : “mlmodels.util:log”, “args” : [ “x1” , “passed”] ,      “kw_args” : { }   }</p>
+<dl>
+<dt>, {“uri”: “mlmodels.data:download_gogledrive”,</dt><dd><blockquote>
+<div><dl>
+<dt>“args”: [[{“fileid”: “1-K72L8aQPsl2qt_uBF-kzbai3TYG6Qg4”, “path_target”: “ztest/covid19/test.json”},</dt><dd><blockquote>
+<div><p>{“fileid”: “<a href="#id3"><span class="problematic" id="id4">1-8Ij1ZXL9YmQRylwRloABdqnxEC1mhP_</span></a>”, “path_target”: “ztest/covid19/train.json” }</p>
+</div></blockquote>
+<p>]],</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>“kw_args” : {}}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.jsons_to_df">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">jsons_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_paths</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.jsons_to_df" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>json_paths</strong> (<em>list of str</em>) – list of json paths</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of the jsons</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.load_callable_from_dict">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">load_callable_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_other_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.load_callable_from_dict" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.load_callable_from_uri">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">load_callable_from_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.load_callable_from_uri" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.load_function">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">load_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mlmodels.util'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'path_norm'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.load_function" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.load_function_uri">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">load_function_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'path_norm'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.load_function_uri" title="Permalink to this definition"></a></dt>
+<dd><p>#load dynamically function from URI</p>
+<p>###### Pandas CSV case : Custom MLMODELS One
+#”dataset”        : “mlmodels.preprocess.generic:pandasDataset”</p>
+<p>###### External File processor :
+#”dataset”        : “MyFolder/preprocess/myfile.py:pandasDataset”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.log" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.os_folder_getfiles">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">os_folder_getfiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fullpath'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.os_folder_getfiles" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder</strong> (<em>string</em>) – folder path to be analyzed</p></li>
+<li><p><strong>ext</strong> (<em>string</em>) – file extension hint example: “<a href="#id1"><span class="problematic" id="id2">*</span></a>.json”</p></li>
+<li><p><strong>dirlevel</strong> (<em>int</em>) – number of levels to be analyzed</p></li>
+<li><p><strong>mode</strong> (<em>string</em>) – either fullpath or filename</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of files paths or names (depending on mode param)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.os_package_root_path">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">os_package_root_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_add</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.os_package_root_path" title="Permalink to this definition"></a></dt>
+<dd><p>get the module package root folder</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.params_json_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">params_json_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['model_pars',</span> <span class="pre">'data_pars',</span> <span class="pre">'compute_pars',</span> <span class="pre">'out_pars']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.params_json_load" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.path_norm">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">path_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.path_norm" title="Permalink to this definition"></a></dt>
+<dd><p>Nornalize Path</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.test_functions_json">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">test_functions_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.test_functions_json" title="Permalink to this definition"></a></dt>
+<dd><p>args :[]   , kw_args : {}</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.test_json_conversion">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">test_json_conversion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.test_json_conversion" title="Permalink to this definition"></a></dt>
+<dd><p>Function to test converting jsons in dataset/json to normalized jsons
+:rtype: list of normalized jsons as dictionaries</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.to_namespace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_json.</span></span><span class="sig-name descname"><span class="pre">to_namespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.to_namespace" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_json.to_namespace.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_json.to_namespace.get" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tools.cli_module_parser">
+<span id="utilmy-tools-cli-module-parser-module"></span><h2>utilmy.tools.cli_module_parser module<a class="headerlink" href="#module-utilmy.tools.cli_module_parser" title="Permalink to this headline"></a></h2>
+<p>This Python code parser fetches variable information from the given source</p>
+<p>The source may be given either as a .py filepath or as a directory path
+containing multiple .py source files</p>
+<p>The output is written to standard output in CSV format with the following
+columns; it starts with a header row:
+filepath,function_or_class_name,variable_name,is_local</p>
+<p>Function_or_class_name defaults to (global) when there’s no enclosing
+function nor class</p>
+<p>Usage:</p>
+<p><cite>cli_env_module_parser -i /path/to/module(s) or package(s) -o module_parsed.csv</cite></p>
+<p><cite>-i</cite> or <cite>–dir_in</cite> specify the path to source file(s) to parse
+<cite>-o</cite> or <cite>–dir_out</cite> option is optional and if not specified, results will be shown on stdout.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">ASTAnalyzer</span></span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NodeVisitor</span></code></p>
+<p>Visits nodes in a Python AST and collects information on variables</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.FORCE_GLOBAL">
+<span class="sig-name descname"><span class="pre">FORCE_GLOBAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'force_global'</span></em><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.FORCE_GLOBAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.GLOBAL">
+<span class="sig-name descname"><span class="pre">GLOBAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'global'</span></em><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.GLOBAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.LOCAL">
+<span class="sig-name descname"><span class="pre">LOCAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'local'</span></em><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.LOCAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.getVariables">
+<span class="sig-name descname"><span class="pre">getVariables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.getVariables" title="Permalink to this definition"></a></dt>
+<dd><p>Lists variables parsed from the given AST</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>{(ast.stmt function_or_class,</dt><dd><p>str variable): bool is_local, …}</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>A dict over all variables encountered in the tree, in following form</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.visit_AsyncFunctionDef">
+<span class="sig-name descname"><span class="pre">visit_AsyncFunctionDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.visit_AsyncFunctionDef" title="Permalink to this definition"></a></dt>
+<dd><p>ASTAnalyzer:visit_AsyncFunctionDef
+:param node:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.visit_ClassDef">
+<span class="sig-name descname"><span class="pre">visit_ClassDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.visit_ClassDef" title="Permalink to this definition"></a></dt>
+<dd><p>ASTAnalyzer:visit_ClassDef
+:param node:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.visit_FunctionDef">
+<span class="sig-name descname"><span class="pre">visit_FunctionDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.visit_FunctionDef" title="Permalink to this definition"></a></dt>
+<dd><p>ASTAnalyzer:visit_FunctionDef
+:param node:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.visit_Global">
+<span class="sig-name descname"><span class="pre">visit_Global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.visit_Global" title="Permalink to this definition"></a></dt>
+<dd><p>ASTAnalyzer:visit_Global
+:param node:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.visit_Lambda">
+<span class="sig-name descname"><span class="pre">visit_Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.visit_Lambda" title="Permalink to this definition"></a></dt>
+<dd><p>ASTAnalyzer:visit_Lambda
+:param node:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.ASTAnalyzer.visit_Name">
+<span class="sig-name descname"><span class="pre">visit_Name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.ASTAnalyzer.visit_Name" title="Permalink to this definition"></a></dt>
+<dd><p>ASTAnalyzer:visit_Name
+:param node:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.analyzeSource">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">analyzeSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.analyzeSource" title="Permalink to this definition"></a></dt>
+<dd><p>Analyzes the given Python source</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source</strong> – string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{(ast.stmt function_or_class,
+str variable_name): bool is_local, …}</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A dict over all variables encountered in the tree, in following form</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.findVariablesInDir">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">findVariablesInDir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.findVariablesInDir" title="Permalink to this definition"></a></dt>
+<dd><p>Lists variables parsed from the given directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> – A path to a directory containing Python code to be parsed</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A set of 4-tuples describing found variables
+{(str file,
+ast.stmt function_or_class,
+str variable,
+bool is_local), …}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.findVariablesInFile">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">findVariablesInFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.findVariablesInFile" title="Permalink to this definition"></a></dt>
+<dd><p>Lists variables parsed from the given file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filepath</strong> – A path to a file containing Python code to be parsed</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A set of 4-tuples describing found variables
+{(str file,
+ast.stmt function_or_class,
+str variable,
+bool is_local), …}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.get_arguments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">get_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.get_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>function get_arguments
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.main" title="Permalink to this definition"></a></dt>
+<dd><p>function main
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.usage">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">usage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.usage" title="Permalink to this definition"></a></dt>
+<dd><p>Prints the usage description</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_module_parser.writeCSV">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_module_parser.</span></span><span class="sig-name descname"><span class="pre">writeCSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_module_parser.writeCSV" title="Permalink to this definition"></a></dt>
+<dd><p>Writes found variables’ data to file_handle in CSV format</p>
+<p>The output is written to standard output by default</p>
+<p>The output starts with a header row:
+filepath,function_or_class_name,variable_name,is_local</p>
+<p>Function_or_class_name defaults to (global) when there’s no enclosing function
+nor class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>variables</strong> – A set of 4-tuples in format provided by the file_finder module</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tools.cli_repo_check">
+<span id="utilmy-tools-cli-repo-check-module"></span><h2>utilmy.tools.cli_repo_check module<a class="headerlink" href="#module-utilmy.tools.cli_repo_check" title="Permalink to this headline"></a></h2>
+<p>Goal is to automate code check using a python script. This scripts do the following
+For a given github repo url:</p>
+<ul class="simple">
+<li><p>Clone the repo with <cite>git clone</cite> and assign either a user specified name or repo’s default name</p></li>
+<li><p>Build a conda env with packages required to use the repo</p></li>
+<li><p>Check if python code is running i.e., run main.py</p></li>
+<li><p>Generate signature docs of python source code</p></li>
+</ul>
+<p>Usage:</p>
+<p><cite>cli_repo_check https://www.github.com/{username}/{reponame}.git -n testing_env</cite></p>
+<p><cite>-o</cite> or <cite>–dir_out</cite> specify the name of target directory to clone the repo (default is {reponame})
+<cite>-n</cite> or <cite>–conda_env</cite> specify name of our conda environment (if not specified, <cite>{reponame}_env</cite> will be used)
+<cite>-py</cite> or <cite>–python_version</cite> specify the python version of the target environment (default is 3.6)
+<cite>-p</cite> or <cite>–packages</cite> specify any extra packages in addition to required ones to install (default is numpy)</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.get_logger">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">get_logger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.get_logger" title="Permalink to this definition"></a></dt>
+<dd><p>Instantiate a logger for this module</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.get_os">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">get_os</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.get_os" title="Permalink to this definition"></a></dt>
+<dd><p>Get the operating system information for the machine running this script.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.git_clone">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">git_clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.git_clone" title="Permalink to this definition"></a></dt>
+<dd><p>Clone a git repository from its url.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.load_arguments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">load_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.load_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>Get arguments from command line.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.main">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.main" title="Permalink to this definition"></a></dt>
+<dd><p>function main
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.os_system">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">os_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.os_system" title="Permalink to this definition"></a></dt>
+<dd><p>Executes system command and
+Get print output from command line
+:param cmds a list containing command and its arguments</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.repo_build_conda">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">repo_build_conda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conda_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.repo_build_conda" title="Permalink to this definition"></a></dt>
+<dd><p>Auto-generate a conda environment for the files in a given repo.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.repo_check_root_files">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">repo_check_root_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conda_env</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.repo_check_root_files" title="Permalink to this definition"></a></dt>
+<dd><p>Launch all files in root (main.py) with subprocess to check if running
+Log error messages on disk</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.repo_generate_signature">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">repo_generate_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.repo_generate_signature" title="Permalink to this definition"></a></dt>
+<dd><p>Generate signature from the code</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tools.cli_repo_check.scan_dir">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tools.cli_repo_check.</span></span><span class="sig-name descname"><span class="pre">scan_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tools.cli_repo_check.scan_dir" title="Permalink to this definition"></a></dt>
+<dd><p>function scan_dir
+:param folder:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-tools-util-cli-module">
+<h2>utilmy.tools.util_cli module<a class="headerlink" href="#utilmy-tools-util-cli-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.tools">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.tools" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.templates.html" class="btn btn-neutral float-left" title="utilmy.templates package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.tseries.html" class="btn btn-neutral float-right" title="utilmy.tseries package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

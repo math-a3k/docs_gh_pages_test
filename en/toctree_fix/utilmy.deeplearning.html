@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.deeplearning package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.deeplearning.autoencoder package" href="utilmy.deeplearning.autoencoder.html" />
+    <link rel="prev" title="utilmy.configs package" href="utilmy.configs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.deeplearning package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="utilmy.deeplearning.autoencoder.html">utilmy.deeplearning.autoencoder package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="utilmy.deeplearning.keras.html">utilmy.deeplearning.keras package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="utilmy.deeplearning.torch.html">utilmy.deeplearning.torch package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.deeplearning.util_dl">utilmy.deeplearning.util_dl module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.deeplearning.util_embedding">utilmy.deeplearning.util_embedding module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.deeplearning.util_yolo">utilmy.deeplearning.util_yolo module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.deeplearning">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.deeplearning package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.deeplearning.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-deeplearning-package">
+<h1>utilmy.deeplearning package<a class="headerlink" href="#utilmy-deeplearning-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utilmy.deeplearning.autoencoder.html">utilmy.deeplearning.autoencoder package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.autoencoder.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.autoencoder.html#module-utilmy.deeplearning.autoencoder.keras_ae">utilmy.deeplearning.autoencoder.keras_ae module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.autoencoder.html#module-utilmy.deeplearning.autoencoder">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilmy.deeplearning.keras.html">utilmy.deeplearning.keras package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#module-utilmy.deeplearning.keras.loss_graph">utilmy.deeplearning.keras.loss_graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-loss-vq-vae2-module">utilmy.deeplearning.keras.loss_vq_vae2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-train-graph-loss-module">utilmy.deeplearning.keras.train_graph_loss module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-train-template-module">utilmy.deeplearning.keras.train_template module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-train-vqvae-loss-module">utilmy.deeplearning.keras.train_vqvae_loss module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#module-utilmy.deeplearning.keras.util_dataloader_img">utilmy.deeplearning.keras.util_dataloader_img module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-util-dataloader-tab-module">utilmy.deeplearning.keras.util_dataloader_tab module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#module-utilmy.deeplearning.keras.util_debug">utilmy.deeplearning.keras.util_debug module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-util-layers-module">utilmy.deeplearning.keras.util_layers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-util-loss-module">utilmy.deeplearning.keras.util_loss module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#module-utilmy.deeplearning.keras.util_models">utilmy.deeplearning.keras.util_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#module-utilmy.deeplearning.keras.util_similarity">utilmy.deeplearning.keras.util_similarity module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#utilmy-deeplearning-keras-util-train-module">utilmy.deeplearning.keras.util_train module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.keras.html#module-utilmy.deeplearning.keras">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilmy.deeplearning.torch.html">utilmy.deeplearning.torch package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.deeplearning.torch.images.html">utilmy.deeplearning.torch.images package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#utilmy-deeplearning-torch-images-base-module">utilmy.deeplearning.torch.images.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#utilmy-deeplearning-torch-images-i3d-module">utilmy.deeplearning.torch.images.i3d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#utilmy-deeplearning-torch-images-x3d-module">utilmy.deeplearning.torch.images.x3d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#module-utilmy.deeplearning.torch.images">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#utilmy-deeplearning-torch-graphnlp-module">utilmy.deeplearning.torch.graphnlp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#module-utilmy.deeplearning.torch.rule_encoder">utilmy.deeplearning.torch.rule_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#utilmy-deeplearning-torch-rule-encoder2-module">utilmy.deeplearning.torch.rule_encoder2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#utilmy-deeplearning-torch-sentence2-module">utilmy.deeplearning.torch.sentence2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#utilmy-deeplearning-torch-sentences-module">utilmy.deeplearning.torch.sentences module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#module-utilmy.deeplearning.torch.util_train">utilmy.deeplearning.torch.util_train module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#utilmy-deeplearning-torch-zkeras-torch-sentence-module">utilmy.deeplearning.torch.zkeras_torch_sentence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.html#module-utilmy.deeplearning.torch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.util_dl">
+<span id="utilmy-deeplearning-util-dl-module"></span><h2>utilmy.deeplearning.util_dl module<a class="headerlink" href="#module-utilmy.deeplearning.util_dl" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.create_train_npz">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">create_train_npz</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.create_train_npz" title="Permalink to this definition"></a></dt>
+<dd><p>function create_train_npz
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.create_train_parquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">create_train_parquet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.create_train_parquet" title="Permalink to this definition"></a></dt>
+<dd><p>function create_train_parquet
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.data_mnist_get_train_test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">data_mnist_get_train_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.data_mnist_get_train_test" title="Permalink to this definition"></a></dt>
+<dd><p>function data_mnist_get_train_test
+:param batch:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.down_page">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">down_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'query1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genre_en</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.down_page" title="Permalink to this definition"></a></dt>
+<dd><p>python prepro.py down_page  ‘メンス+ポロシャツ’    –out_dir men_fs_blue</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.gpu_available">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">gpu_available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.gpu_available" title="Permalink to this definition"></a></dt>
+<dd><p>function gpu_available
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.gpu_usage">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">gpu_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.gpu_usage" title="Permalink to this definition"></a></dt>
+<dd><p>function gpu_usage
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.model_deletes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">model_deletes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.model_deletes" title="Permalink to this definition"></a></dt>
+<dd><p>## Delete files on disk
+python prepro.py model_deletes  –dry 0</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.tensorboard_log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">tensorboard_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pars_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.tensorboard_log" title="Permalink to this definition"></a></dt>
+<dd><p>Save Arbitrary dict in tensorboard
+#### Usage 1
+logdir = ‘logs/params’</p>
+<p>cc = {‘arbitray dict’ : 1, ‘ykey’: {‘mykey2’ : 5 } }</p>
+<p>from tensorboardX import SummaryWriter
+# from tensorboard import SummaryWriter
+tb_writer = SummaryWriter(logdir)
+tensorboard_log(cc, writer= tb_writer)</p>
+<p>%reload_ext tensorboard
+%tensorboard –logdir logs/params/</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_dl.tf_check">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_dl.</span></span><span class="sig-name descname"><span class="pre">tf_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_dl.tf_check" title="Permalink to this definition"></a></dt>
+<dd><p>function tf_check
+Args:
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.deeplearning.util_embedding">
+<span id="utilmy-deeplearning-util-embedding-module"></span><h2>utilmy.deeplearning.util_embedding module<a class="headerlink" href="#module-utilmy.deeplearning.util_embedding" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.TopToolbar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">TopToolbar</span></span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.TopToolbar" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mpld3.plugins.PluginBase</span></code></p>
+<p>Plugin for moving toolbar to top of figure</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.TopToolbar.JAVASCRIPT">
+<span class="sig-name descname"><span class="pre">JAVASCRIPT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">mpld3.register_plugin(&quot;toptoolbar&quot;,</span> <span class="pre">TopToolbar);\n</span>&#160;&#160;&#160; <span class="pre">TopToolbar.prototype</span> <span class="pre">=</span> <span class="pre">Object.create(mpld3.Plugin.prototype);\n</span>&#160;&#160;&#160; <span class="pre">TopToolbar.prototype.constructor</span> <span class="pre">=</span> <span class="pre">TopToolbar;\n</span>&#160;&#160;&#160; <span class="pre">function</span> <span class="pre">TopToolbar(fig,</span> <span class="pre">props){\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">mpld3.Plugin.call(this,</span> <span class="pre">fig,</span> <span class="pre">props);\n</span>&#160;&#160;&#160; <span class="pre">};\n</span>&#160;&#160;&#160; <span class="pre">TopToolbar.prototype.draw</span> <span class="pre">=</span> <span class="pre">function(){\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">//</span> <span class="pre">the</span> <span class="pre">toolbar</span> <span class="pre">svg</span> <span class="pre">doesn\'t</span> <span class="pre">exist\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">//</span> <span class="pre">yet,</span> <span class="pre">so</span> <span class="pre">first</span> <span class="pre">draw</span> <span class="pre">it\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">this.fig.toolbar.draw();\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">//</span> <span class="pre">then</span> <span class="pre">change</span> <span class="pre">the</span> <span class="pre">y</span> <span class="pre">position</span> <span class="pre">to</span> <span class="pre">be\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">//</span> <span class="pre">at</span> <span class="pre">the</span> <span class="pre">top</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">figure\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">this.fig.toolbar.toolbar.attr(&quot;x&quot;,</span> <span class="pre">150);\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">this.fig.toolbar.toolbar.attr(&quot;y&quot;,</span> <span class="pre">400);\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">//</span> <span class="pre">then</span> <span class="pre">remove</span> <span class="pre">the</span> <span class="pre">draw</span> <span class="pre">function,\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">//</span> <span class="pre">so</span> <span class="pre">that</span> <span class="pre">it</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">called</span> <span class="pre">again\n</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">this.fig.toolbar.draw</span> <span class="pre">=</span> <span class="pre">function()</span> <span class="pre">{}\n</span>&#160;&#160;&#160; <span class="pre">}\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#utilmy.deeplearning.util_embedding.TopToolbar.JAVASCRIPT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.convert_txt_to_vector_parquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">convert_txt_to_vector_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.convert_txt_to_vector_parquet" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.data_add_onehot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">data_add_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.data_add_onehot" title="Permalink to this definition"></a></dt>
+<dd><p>id, uri, cat1, cat2, …. , cat1_onehot</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.embedding_load_parquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">embedding_load_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'df.parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.embedding_load_parquet" title="Permalink to this definition"></a></dt>
+<dd><p>id, emb (string , separated)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.embedding_table_comparison">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">embedding_table_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embeddings_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'12pt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'12pt'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.embedding_table_comparison" title="Permalink to this definition"></a></dt>
+<dd><p>list of vectors    vs list of labels
+list of vectors    vs list tof labels</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.embedding_to_parquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">embedding_to_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_linevalid_fun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.embedding_to_parquet" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.faiss_create_index">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">faiss_create_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_or_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'emb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'IVF4096,Flat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emb_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.faiss_create_index" title="Permalink to this definition"></a></dt>
+<dd><p>1 billion size vector creation
+####  python prepro.py   faiss_create_index      2&gt;&amp;1 | tee -a log_faiss.txt</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.faiss_topk">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">faiss_topk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colemb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'emb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">faiss_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.faiss_topk" title="Permalink to this definition"></a></dt>
+<dd><p>id, dist_list, id_list
+## a/adigcb201/ipsvolh03/ndata/cpa//emb/emb//ichiba_order_20210901b_itemtagb2/seq_1000000000/faiss//faiss_trained_9808032.index</p>
+<p><a class="reference external" href="https://github.com/facebookresearch/faiss/issues/632">https://github.com/facebookresearch/faiss/issues/632</a></p>
+<dl>
+<dt>This represents the quantization error for vectors inside the dataset.</dt><dd><p>For vectors in denser areas of the space, the quantization error is lower because the quantization centroids are bigger and vice versa.
+Therefore, there is no limit to this error that is valid over the whole space. However, it is possible to recompute the exact distances once you have the nearest neighbors, by accessing the uncompressed vectors.</p>
+<p>distance -&gt; similarity in uncompressed space is</p>
+<p>dis = 2 - 2 * sim</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.np_matrix_to_str">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">np_matrix_to_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.np_matrix_to_str" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.np_matrix_to_str2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">np_matrix_to_str2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.np_matrix_to_str2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.np_matrix_to_str_sim">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">np_matrix_to_str_sim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.np_matrix_to_str_sim" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.np_str_to_array">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">np_str_to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l2_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.np_str_to_array" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.sim_score2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">sim_score2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.sim_score2" title="Permalink to this definition"></a></dt>
+<dd><p>Sim Score using FAISS</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.simscore_cosinus_calc">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">simscore_cosinus_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">words</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.simscore_cosinus_calc" title="Permalink to this definition"></a></dt>
+<dd><p>Calculation</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.test" title="Permalink to this definition"></a></dt>
+<dd><p>python prepro.py test</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.topk">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">topk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'df_*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.topk" title="Permalink to this definition"></a></dt>
+<dd><p>python prepro.py  topk    <a href="#id1"><span class="problematic" id="id2">|</span></a>&amp; tee -a  /data/worpoch_261/topk/zzlog.py</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.topk_export">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">topk_export</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.topk_export" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>/user/scoon_emb_100k</dt><dd><p>id gender masterCategory subCategory  … masterCategory_pred subCategory_pred articleType_pred  baseColour_pred</p>
+</dd>
+</dl>
+<p>0     cn3357-01_1-11.png  women        apparel     topwear  …                   1                1               32                4
+1      cs6481-01_1-4.png   kids          shoes       shoes  …                   5               20              151                7</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.topk_nearest_vector">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">topk_nearest_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.topk_nearest_vector" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve top k nearest vectors using FAISS</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.topk_predict">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">topk_predict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.topk_predict" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.unzip">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">unzip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.unzip" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.vizEmbedding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">vizEmbedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'myembed.parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">';'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.vizEmbedding" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.vizEmbedding.create_clusters">
+<span class="sig-name descname"><span class="pre">create_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">after_dim_reduction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.vizEmbedding.create_clusters" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.vizEmbedding.create_visualization">
+<span class="sig-name descname"><span class="pre">create_visualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ztmp/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'d3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_server</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.vizEmbedding.create_visualization" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.vizEmbedding.dim_reduction">
+<span class="sig-name descname"><span class="pre">dim_reduction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_embed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'embed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.vizEmbedding.dim_reduction" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.vizEmbedding.draw_hiearchy">
+<span class="sig-name descname"><span class="pre">draw_hiearchy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.vizEmbedding.draw_hiearchy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.vizEmbedding.run_all">
+<span class="sig-name descname"><span class="pre">run_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_embed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'embed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ztmp/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.vizEmbedding.run_all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_embedding.viz_run">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_embedding.</span></span><span class="sig-name descname"><span class="pre">viz_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'in/model.vec'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ztmp/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_embedding.viz_run" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-utilmy.deeplearning.util_yolo">
+<span id="utilmy-deeplearning-util-yolo-module"></span><h2>utilmy.deeplearning.util_yolo module<a class="headerlink" href="#module-utilmy.deeplearning.util_yolo" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_yolo.convert_to_yolov5">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_yolo.</span></span><span class="sig-name descname"><span class="pre">convert_to_yolov5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.deeplearning.util_yolo.convert_to_yolov5" title="Permalink to this definition"></a></dt>
+<dd><p>transfrom data into yoloV5 format from info_dict
+parameters:
+info_dict (dict): dictionary in this format {‘bboxes’: [{‘class’: ,</p>
+<blockquote>
+<div><blockquote>
+<div><p>‘xmin’: ,
+‘ymin’: ,
+‘xmax’: ,
+‘ymax’:
+}],</p>
+</div></blockquote>
+<p>‘filename’: ,
+‘image_size’:
+}</p>
+</div></blockquote>
+<p>names (dict): dictionary of names {class_1:0, class_2:1, class_3: 2}
+output (str): output folder path</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_yolo.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_yolo.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_yolo.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_yolo.test_convert_to_yolov5">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_yolo.</span></span><span class="sig-name descname"><span class="pre">test_convert_to_yolov5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_yolo.test_convert_to_yolov5" title="Permalink to this definition"></a></dt>
+<dd><p>function test_convert_to_yolov5
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_yolo.test_yolov5_from_xml">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_yolo.</span></span><span class="sig-name descname"><span class="pre">test_yolov5_from_xml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.util_yolo.test_yolov5_from_xml" title="Permalink to this definition"></a></dt>
+<dd><p>function test_yolov5_from_xml
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_yolo.yolo_extract_info_from_xml">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_yolo.</span></span><span class="sig-name descname"><span class="pre">yolo_extract_info_from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span></span></span><a class="headerlink" href="#utilmy.deeplearning.util_yolo.yolo_extract_info_from_xml" title="Permalink to this definition"></a></dt>
+<dd><p>extracted data from Xml file formated in VOC</p>
+<p>parameter:
+xml_file(str): xml file path which need to transform</p>
+<p>returns:
+dict: returns all the extracted information from xml which is important in transforming to any format.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.util_yolo.yolov5_from_xml">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.util_yolo.</span></span><span class="sig-name descname"><span class="pre">yolov5_from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'None'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xml_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'None'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'None'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#utilmy.deeplearning.util_yolo.yolov5_from_xml" title="Permalink to this definition"></a></dt>
+<dd><p>transform XML file data from VOC to YOLOV5 Object detection format and saves all the transfromed data at given location</p>
+<p>parameters:
+xml_file_apth(str): xml file path need to transfrom from VOC XML to YoloV5 TXT format
+xml_folder(str): annotation folder path which contain all the xml files
+output(str): location where all the transfromed data is stored</p>
+<p>returns:
+Dict: returns nafrom test import test_yolov5_transformmes of format of annoted classes</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.deeplearning">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.deeplearning" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.configs.html" class="btn btn-neutral float-left" title="utilmy.configs package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.deeplearning.autoencoder.html" class="btn btn-neutral float-right" title="utilmy.deeplearning.autoencoder package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

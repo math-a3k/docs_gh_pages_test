@@ -1,0 +1,69 @@
+utilmy.viz package
+==================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 20
+
+   utilmy.viz.zarchive
+
+Submodules
+----------
+
+utilmy.viz.css module
+---------------------
+
+.. automodule:: utilmy.viz.css
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.viz.embedding module
+---------------------------
+
+.. automodule:: utilmy.viz.embedding
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.viz.template1 module
+---------------------------
+
+.. automodule:: utilmy.viz.template1
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.viz.test\_vizhtml module
+-------------------------------
+
+.. automodule:: utilmy.viz.test_vizhtml
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.viz.util\_map module
+---------------------------
+
+.. automodule:: utilmy.viz.util_map
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.viz.vizhtml module
+-------------------------
+
+.. automodule:: utilmy.viz.vizhtml
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.viz
+   :members:
+   :undoc-members:
+   :show-inheritance:

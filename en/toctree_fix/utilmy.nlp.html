@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.nlp package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.optim package" href="utilmy.optim.html" />
+    <link rel="prev" title="utilmy.logs package" href="utilmy.logs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.nlp package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-nlp-optim-rank-module">utilmy.nlp.optim_rank module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-nlp-rank-fusion-module">utilmy.nlp.rank_fusion module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.nlp.rank_fusion_functions">utilmy.nlp.rank_fusion_functions module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.nlp.util_cluster">utilmy.nlp.util_cluster module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-nlp-util-cocount-module">utilmy.nlp.util_cocount module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.nlp.util_gensim">utilmy.nlp.util_gensim module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-nlp-util-nlp-module">utilmy.nlp.util_nlp module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.nlp.util_rank">utilmy.nlp.util_rank module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-nlp-util-rankmerge-module">utilmy.nlp.util_rankmerge module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-nlp-util-sentence-module">utilmy.nlp.util_sentence module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.nlp">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.nlp package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.nlp.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-nlp-package">
+<h1>utilmy.nlp package<a class="headerlink" href="#utilmy-nlp-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-nlp-optim-rank-module">
+<h2>utilmy.nlp.optim_rank module<a class="headerlink" href="#utilmy-nlp-optim-rank-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-nlp-rank-fusion-module">
+<h2>utilmy.nlp.rank_fusion module<a class="headerlink" href="#utilmy-nlp-rank-fusion-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.nlp.rank_fusion_functions">
+<span id="utilmy-nlp-rank-fusion-functions-module"></span><h2>utilmy.nlp.rank_fusion_functions module<a class="headerlink" href="#module-utilmy.nlp.rank_fusion_functions" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.compareCondor">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">compareCondor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.compareCondor" title="Permalink to this definition"></a></dt>
+<dd><p>function compareCondor
+:param item1:
+:param item2:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.condor">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">condor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_id_scores</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.condor" title="Permalink to this definition"></a></dt>
+<dd><p>function condor
+:param doc_id_scores:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.expn_isr">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">expn_isr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.expn_isr" title="Permalink to this definition"></a></dt>
+<dd><p>function expn_isr
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.expn_rrf">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">expn_rrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.expn_rrf" title="Permalink to this definition"></a></dt>
+<dd><p>function expn_rrf
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.isr">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">isr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.isr" title="Permalink to this definition"></a></dt>
+<dd><p>function isr
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.log_isr">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">log_isr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.log_isr" title="Permalink to this definition"></a></dt>
+<dd><p>function log_isr
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.logn_isr">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">logn_isr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.logn_isr" title="Permalink to this definition"></a></dt>
+<dd><p>function logn_isr
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.logn_rrf">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">logn_rrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.logn_rrf" title="Permalink to this definition"></a></dt>
+<dd><p>function logn_rrf
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.max">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.max" title="Permalink to this definition"></a></dt>
+<dd><p>function max
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.min">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.min" title="Permalink to this definition"></a></dt>
+<dd><p>function min
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.mnz">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">mnz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.mnz" title="Permalink to this definition"></a></dt>
+<dd><p>function mnz
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.rr">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">rr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.rr" title="Permalink to this definition"></a></dt>
+<dd><p>function rr
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.rrf">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">rrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.rrf" title="Permalink to this definition"></a></dt>
+<dd><p>function rrf
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.sum">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.sum" title="Permalink to this definition"></a></dt>
+<dd><p>function sum
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.rank_fusion_functions.votes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.rank_fusion_functions.</span></span><span class="sig-name descname"><span class="pre">votes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.rank_fusion_functions.votes" title="Permalink to this definition"></a></dt>
+<dd><p>function votes
+:param result_list:
+:param params:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.nlp.util_cluster">
+<span id="utilmy-nlp-util-cluster-module"></span><h2>utilmy.nlp.util_cluster module<a class="headerlink" href="#module-utilmy.nlp.util_cluster" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.log" title="Permalink to this definition"></a></dt>
+<dd><p>function log
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.pd_text_getcluster">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">pd_text_getcluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'col'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_perm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.pd_text_getcluster" title="Permalink to this definition"></a></dt>
+<dd><p>For each of the hash function find a cluster and assign unique id to the dataframe cluster_id</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.pd_text_hash_create_lsh">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">pd_text_hash_create_lsh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_perm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.pd_text_hash_create_lsh" title="Permalink to this definition"></a></dt>
+<dd><p>For each of the entry create a hash function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.pd_text_similarity">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">pd_text_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#utilmy.nlp.util_cluster.pd_text_similarity" title="Permalink to this definition"></a></dt>
+<dd><p>Return similarities between two columns with
+python’s SequenceMatcher algorithm
+:param df: Pandas Dataframe.
+:type df: pd.DataFrame
+:param algo: rapidfuzz | editdistance
+:type algo: String
+:param cols: List of of columns name (2 columns)
+:type cols: list[str]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.test" title="Permalink to this definition"></a></dt>
+<dd><p>function test
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.test2" title="Permalink to this definition"></a></dt>
+<dd><p>function test2
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_cluster.test_lsh">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_cluster.</span></span><span class="sig-name descname"><span class="pre">test_lsh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_cluster.test_lsh" title="Permalink to this definition"></a></dt>
+<dd><p>function test_lsh
+Args:
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-nlp-util-cocount-module">
+<h2>utilmy.nlp.util_cocount module<a class="headerlink" href="#utilmy-nlp-util-cocount-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.nlp.util_gensim">
+<span id="utilmy-nlp-util-gensim-module"></span><h2>utilmy.nlp.util_gensim module<a class="headerlink" href="#module-utilmy.nlp.util_gensim" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.bigram_get_list">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">bigram_get_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ranid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'name,</span> <span class="pre">proba'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.bigram_get_list" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.bigram_get_seq3">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">bigram_get_seq3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ranid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itemtag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnorm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.bigram_get_seq3" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.bigram_load_convert">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">bigram_load_convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.bigram_load_convert" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.bigram_write_seq">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">bigram_write_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.bigram_write_seq" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.ccount_get_sample">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">ccount_get_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lproba</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnorm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.ccount_get_sample" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.embedding_load_parquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">embedding_load_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'df.parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.embedding_load_parquet" title="Permalink to this definition"></a></dt>
+<dd><p>id, emb (string , separated)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.embedding_model_to_parquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">embedding_model_to_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_vector_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'model.vec'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.embedding_model_to_parquet" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.embedding_to_parquet">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">embedding_to_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_linevalid_fun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.embedding_to_parquet" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.generate_random_bigrams">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">generate_random_bigrams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigrams_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.generate_random_bigrams" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.gensim_model_check">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">gensim_model_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.gensim_model_check" title="Permalink to this definition"></a></dt>
+<dd><dl>
+<dt>various model check</dt><dd><p>score(sentences, total_sentences=1000000, chunksize=100, queue_factor=2, report_delay=1)
+Score the log probability for a sequence of sentences. This does not change the fitted model in any way (see train() for that).</p>
+<p>Gensim has currently only implemented score for the hierarchical softmax scheme, so you need to have run word2vec with hs=1 and negative=0 for this to work.
+Note that you should specify total_sentences; you’ll run into problems if you ask to score more than this number of sentences but it is inefficient to set the value too high.</p>
+</dd>
+</dl>
+<p>Parameters
+sentences (iterable of list of str) – The sentences iterable can be simply a list of lists of tokens, but for larger corpora, consider an iterable that streams the sentences directly from disk/network. See BrownCorpus, Text8Corpus or LineSentence in word2vec module for such examples.
+total_sentences (int, optional) – Count of sentences.
+chunksize (int, optional) – Chunksize of jobs
+queue_factor (int, optional) – Multiplier for size of queue (number of workers * queue_factor).
+report_delay (float, optional) – Seconds to wait before reporting progress.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.gensim_model_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">gensim_model_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modeltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fastext'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.gensim_model_load" title="Permalink to this definition"></a></dt>
+<dd><p>Loads the FastText model from the given path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dirin</strong> – the path of the saved model</p></li>
+<li><p><strong>modeltye</strong> – </p></li>
+<li><p><strong>kw</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>loaded model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.gensim_model_train_save">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">gensim_model_train_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_or_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirinput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lee_background.cor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./modelout/model'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.gensim_model_train_save" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Trains the Fast text model and saves the model</dt><dd><p>classgensim.models.fasttext.FastText(sentences=None, corpus_file=None, sg=0, hs=0, vector_size=100,
+alpha=0.025, window=5, min_count=5, max_vocab_size=None, word_ngrams=1, sample=0.001,
+seed=1, workers=3, min_alpha=0.0001, negative=5, ns_exponent=0.75, cbow_mean=1,
+hashfxn=&lt;built-in function hash&gt;, epochs=5, null_word=0, min_n=3, max_n=6,
+sorted_vocab=1, bucket=2000000, trim_rule=None,
+batch_words=10000, callbacks=(), max_final_vocab=None, shrink_windows=True)</p>
+</dd>
+</dl>
+<p><a class="reference external" href="https://radimrehurek.com/gensim/models/fasttext.html">https://radimrehurek.com/gensim/models/fasttext.html</a></p>
+<dl class="simple">
+<dt>train(corpus_iterable=None, corpus_file=None, total_examples=None, total_words=None, epochs=None, start_alpha=None,</dt><dd><p>end_alpha=None, word_count=0, queue_factor=2,
+report_delay=1.0, compute_loss=False, callbacks=(), <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model to train</p></li>
+<li><p><strong>dirinput</strong> – the filepath of the input data</p></li>
+<li><p><strong>dirout</strong> – directory to save the model</p></li>
+</ul>
+</dd>
+<dt class="field-even">Epochs</dt>
+<dd class="field-even"><p>number of epochs to train the model</p>
+</dd>
+<dt class="field-odd">Pars</dt>
+<dd class="field-odd"><p>parameters of the creating FastText</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.help" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.np_intersec">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">np_intersec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">va</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.np_intersec" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.np_str_to_array">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">np_str_to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l2_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.np_str_to_array" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.test_all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.test_gensim1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">test_gensim1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.test_gensim1" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.text_generate_random_sentences">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">text_generate_random_sentences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sentences</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.text_generate_random_sentences" title="Permalink to this definition"></a></dt>
+<dd><p>Generates Random sentences and Preprocesses them</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_sentences</strong> – number of sentences to generate</p></li>
+<li><p><strong>dirout</strong> – filepath do write the generated sentences</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>generated sentences</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.text_preprocess">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">text_preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lemmatizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_words</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.text_preprocess" title="Permalink to this definition"></a></dt>
+<dd><p>Preprocessing Function
+:param sentence: sentence to preprocess
+:param lemmatizer: the class which lemmatizes the words
+:param stop_words: stop_words in english <a class="reference external" href="http://xpo6.com/list-of-english-stop-words/">http://xpo6.com/list-of-english-stop-words/</a>
+:return: preprocessed sentence</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_gensim.write_random_sentences_from_bigrams_to_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_gensim.</span></span><span class="sig-name descname"><span class="pre">write_random_sentences_from_bigrams_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sentences</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_gensim.write_random_sentences_from_bigrams_to_file" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="utilmy-nlp-util-nlp-module">
+<h2>utilmy.nlp.util_nlp module<a class="headerlink" href="#utilmy-nlp-util-nlp-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.nlp.util_rank">
+<span id="utilmy-nlp-util-rank-module"></span><h2>utilmy.nlp.util_rank module<a class="headerlink" href="#module-utilmy.nlp.util_rank" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.RankingSimilarity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">RankingSimilarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.RankingSimilarity" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class will include some similarity measures between two different
+ranked lists.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.RankingSimilarity.assert_p">
+<span class="sig-name descname"><span class="pre">assert_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.nlp.util_rank.RankingSimilarity.assert_p" title="Permalink to this definition"></a></dt>
+<dd><p>Make sure p is between (0, 1), if so, assign it to self.p.
+:param p: The value p.
+:type p: float</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.RankingSimilarity.rbo">
+<span class="sig-name descname"><span class="pre">rbo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.RankingSimilarity.rbo" title="Permalink to this definition"></a></dt>
+<dd><p>This the weighted non-conjoint measures, namely, rank-biased overlap.
+Unlike Kendall tau which is correlation based, this is intersection
+based.
+The implementation if from Eq. (4) or Eq. (7) (for p != 1) from the
+RBO paper: <a class="reference external" href="http://www.williamwebber.com/research/papers/wmz10_tois.pdf">http://www.williamwebber.com/research/papers/wmz10_tois.pdf</a>
+If p=1, it returns to the un-bounded set-intersection overlap,
+according to Fagin et al.
+<a class="reference external" href="https://researcher.watson.ibm.com/researcher/files/us-fagin/topk.pdf">https://researcher.watson.ibm.com/researcher/files/us-fagin/topk.pdf</a>
+The fig. 5 in that RBO paper can be used as test case.
+Note there the choice of p is of great importance, since it
+essentically control the “top-weightness”. Simply put, to an extreme,
+a small p value will only consider first few items, whereas a larger p
+value will consider more itmes. See Eq. (21) for quantitative measure.
+:param k: The depth of evaluation.
+:type k: int
+:param p: Weight of each agreement at depth d:</p>
+<blockquote>
+<div><p>p**(d-1). When set to 1.0, there is no weight, the rbo returns
+to average overlap.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ext</strong> (<em>Boolean</em>) – If True, we will extrapolate the rbo,
+as in Eq. (23)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The rbo at depth k (or extrapolated beyond)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.RankingSimilarity.rbo_ext">
+<span class="sig-name descname"><span class="pre">rbo_ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.98</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.RankingSimilarity.rbo_ext" title="Permalink to this definition"></a></dt>
+<dd><p>This is the ultimate implementation of the rbo, namely, the
+extrapolated version. The corresponding formula is Eq. (32) in the rbo
+paper.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.RankingSimilarity.top_weightness">
+<span class="sig-name descname"><span class="pre">top_weightness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.RankingSimilarity.top_weightness" title="Permalink to this definition"></a></dt>
+<dd><p>This function will evaluate the degree of the top-weightness of the
+rbo. It is the implementation of Eq. (21) of the rbo paper.
+As a sanity check (per the rbo paper),
+top_weightness(p=0.9, d=10) should be 86%
+top_weightness(p=0.98, d=50) should be 86% too
+:param p: A value between zero and one.
+:type p: float
+:param d: Evaluation depth of the list.
+:type d: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A float between [0, 1], that indicates the top-weightness.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.rank_adjust">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">rank_adjust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ll2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.rank_adjust" title="Permalink to this definition"></a></dt>
+<dd><p>Re-rank elements of list1 using ranking of list2
+20k dataframe : 6 sec ,  4sec if dict is pre-build</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.rank_biased_overlap">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">rank_biased_overlap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.rank_biased_overlap" title="Permalink to this definition"></a></dt>
+<dd><p>rank based comparison between 2 lists.
+The parameter p is a tunable parameter in the range (0, 1) that can be used to determine
+the contribution of the top d ranks to the final value of the RBO similarity measure.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.rank_topk_check">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">rank_topk_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fasttext'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.rank_topk_check" title="Permalink to this definition"></a></dt>
+<dd><p>Compare ranking in “,” format
+Compare id_list with ref_list  ranking and show some correlation numbers.
+id_list  : Vector based ranking  “,” separated
+ref_list : reference ranking (ie co-count).</p>
+<p>id, id_list,  ref_list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.rank_topk_kendall">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">rank_topk_kendall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.rank_topk_kendall" title="Permalink to this definition"></a></dt>
+<dd><p>kendall_top_k(np.array,np.array,k,p)
+#zero is equal 1 is max distance, compare with 1-scipy.stats.kendalltau(a,b)/2+1/2
+This function generalise kendall-tau as defined in [1] Fagin, Ronald, Ravi Kumar, and D. Sivakumar. “Comparing top k lists.” SIAM Journal on Discrete Mathematics 17.1 (2003): 134-160.
+It returns a distance: 0 for identical (in the sense of top-k) lists and 1 if completely different.
+.. rubric:: Example</p>
+<dl>
+<dt>Simply call it with two same-length arrays of ratings (or also rankings), length of the top elements k (default is the maximum length possible), and p (default is 0, see [1]) as parameters:</dt><dd><blockquote>
+<div><p>$ a = np.array([1,2,3,4,5])
+$ b = np.array([5,4,3,2,1])
+$ kendall_top_k(a,b,k=4)</p>
+</div></blockquote>
+<p>Author: Alessandro Checco  <a class="reference external" href="https://github.com/AlessandroChecco">https://github.com/AlessandroChecco</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.rbo_find_p">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">rbo_find_p</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.rbo_find_p" title="Permalink to this definition"></a></dt>
+<dd><p>function rbo_find_p
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.test" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.nlp.util_rank.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.nlp.util_rank.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.nlp.util_rank.test_all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="utilmy-nlp-util-rankmerge-module">
+<h2>utilmy.nlp.util_rankmerge module<a class="headerlink" href="#utilmy-nlp-util-rankmerge-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-nlp-util-sentence-module">
+<h2>utilmy.nlp.util_sentence module<a class="headerlink" href="#utilmy-nlp-util-sentence-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.nlp">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.nlp" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.logs.html" class="btn btn-neutral float-left" title="utilmy.logs package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.optim.html" class="btn btn-neutral float-right" title="utilmy.optim package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

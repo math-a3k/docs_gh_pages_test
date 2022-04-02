@@ -1,0 +1,85 @@
+utilmy.stats.hypothetical package
+=================================
+
+Submodules
+----------
+
+utilmy.stats.hypothetical.aov module
+------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.aov
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.contingency module
+--------------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.contingency
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.critical module
+-----------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.critical
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.descriptive module
+--------------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.descriptive
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.fa module
+-----------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.fa
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.gof module
+------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.gof
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.hypothesis module
+-------------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.hypothesis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.nonparametric module
+----------------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.nonparametric
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.stats.hypothetical.posthoc module
+----------------------------------------
+
+.. automodule:: utilmy.stats.hypothetical.posthoc
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.stats.hypothetical
+   :members:
+   :undoc-members:
+   :show-inheritance:

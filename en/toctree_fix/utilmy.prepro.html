@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.prepro package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.recsys package" href="utilmy.recsys.html" />
+    <link rel="prev" title="utilmy.optim package" href="utilmy.optim.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.prepro package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.prepro.prepro">utilmy.prepro.prepro module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-prepro-prepro-rec-module">utilmy.prepro.prepro_rec module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.prepro.prepro_text">utilmy.prepro.prepro_text module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-prepro-prepro-tseries-module">utilmy.prepro.prepro_tseries module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.prepro.run_feature_profile">utilmy.prepro.run_feature_profile module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.prepro.util_feature">utilmy.prepro.util_feature module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.prepro">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.prepro package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.prepro.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-prepro-package">
+<h1>utilmy.prepro package<a class="headerlink" href="#utilmy-prepro-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.prepro.prepro">
+<span id="utilmy-prepro-prepro-module"></span><h2>utilmy.prepro.prepro module<a class="headerlink" href="#module-utilmy.prepro.prepro" title="Permalink to this headline"></a></h2>
+<p>colnum, colcat, coldate transformation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.log" title="Permalink to this definition"></a></dt>
+<dd><p>function log
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.log2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">log2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.log2" title="Permalink to this definition"></a></dt>
+<dd><p>function log2
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.log3">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">log3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.log3" title="Permalink to this definition"></a></dt>
+<dd><p>function log3
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.log4">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">log4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.log4" title="Permalink to this definition"></a></dt>
+<dd><p>function log4
+:param *s:
+:param n:
+:param m:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.log4_pd">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">log4_pd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.log4_pd" title="Permalink to this definition"></a></dt>
+<dd><p>function log4_pd
+:param name:
+:param df:
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.os_convert_topython_code">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">os_convert_topython_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.os_convert_topython_code" title="Permalink to this definition"></a></dt>
+<dd><p>function os_convert_topython_code
+:param txt:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_col_atemplate">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_col_atemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_col_atemplate" title="Permalink to this definition"></a></dt>
+<dd><p>Example of custom Processor
+Used at prediction time</p>
+<blockquote>
+<div><p>“path_pipeline”  :</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Training time :</dt><dd><p>“path_features_store” :  to store intermediate dataframe
+“path_pipeline_export”:  to store pipeline  for later usage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_col_genetic_transform">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_col_genetic_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_col_genetic_transform" title="Permalink to this definition"></a></dt>
+<dd><p>Find Symbolic formulae for faeture engineering</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colcat_bin">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_bin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colcat_bin" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_colcat_bin
+:param df:
+:type df: pd.DataFrame
+:param col:
+:type col: list
+:param pars:
+:type pars: dict</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colcat_encoder_generic">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_encoder_generic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colcat_encoder_generic" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Class or decorator
+<a class="reference external" href="https://pypi.org/project/category-encoders/">https://pypi.org/project/category-encoders/</a>
+encoder = ce.BackwardDifferenceEncoder(cols=[…])
+encoder = ce.BaseNEncoder(cols=[…])
+encoder = ce.BinaryEncoder(cols=[…])
+encoder = ce.CatBoostEncoder(cols=[…])
+encoder = ce.CountEncoder(cols=[…])
+encoder = ce.GLMMEncoder(cols=[…])
+encoder = ce.HashingEncoder(cols=[…])
+encoder = ce.HelmertEncoder(cols=[…])
+encoder = ce.JamesSteinEncoder(cols=[…])
+encoder = ce.LeaveOneOutEncoder(cols=[…])
+encoder = ce.MEstimateEncoder(cols=[…])
+encoder = ce.OneHotEncoder(cols=[…])
+encoder = ce.OrdinalEncoder(cols=[…])
+encoder = ce.SumEncoder(cols=[…])
+encoder = ce.PolynomialEncoder(cols=[…])
+encoder = ce.TargetEncoder(cols=[…])
+encoder = ce.WOEEncoder(cols=[…])</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colcat_minhash">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_minhash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colcat_minhash" title="Permalink to this definition"></a></dt>
+<dd><p>MinHash Algo for category
+<a class="reference external" href="https://booking.ai/dont-be-tricked-by-the-hashing-trick-192a6aae3087">https://booking.ai/dont-be-tricked-by-the-hashing-trick-192a6aae3087</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colcat_to_onehot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_to_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colcat_to_onehot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colcross">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colcross</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colcross" title="Permalink to this definition"></a></dt>
+<dd><p>cross_feature_new =  feat1 X feat2  (pair feature)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_coldate">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_coldate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_coldate" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_coldate
+:param df:
+:type df: pd.DataFrame
+:param col:
+:type col: list
+:param pars:
+:type pars: dict</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colnum_bin">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colnum_bin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colnum_bin" title="Permalink to this definition"></a></dt>
+<dd><p>float column into  binned columns
+:param df:
+:param col:
+:param pars:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colnum_binto_onehot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colnum_binto_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colnum_binto_onehot" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_colnum_binto_onehot
+:param df:
+:type df: pd.DataFrame
+:param col:
+:type col: list
+:param pars:
+:type pars: dict</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colnum_normalize">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colnum_normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colnum_normalize" title="Permalink to this definition"></a></dt>
+<dd><p>Float num INTO [0,1]
+‘quantile_cutoff’, ‘quantile_cutoff_2’, ‘minmax’
+‘name’: ‘fillna’, ‘na_val’ : 0.0</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_colnum_quantile_norm">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_colnum_quantile_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_colnum_quantile_norm" title="Permalink to this definition"></a></dt>
+<dd><p>colnum normalization by quantile</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_coly">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_coly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_coly" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_coly
+:param df:
+:type df: pd.DataFrame
+:param col:
+:type col: list
+:param pars:
+:type pars: dict</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.pd_coly_clean">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">pd_coly_clean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.pd_coly_clean" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_coly_clean
+:param df:
+:type df: pd.DataFrame
+:param col:
+:type col: list
+:param pars:
+:type pars: dict</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.prepro_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">prepro_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.prepro_load" title="Permalink to this definition"></a></dt>
+<dd><p>Load previously savec preprocessors</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.prepro_save">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">prepro_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_new</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_new</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepro)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'dict'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.prepro_save" title="Permalink to this definition"></a></dt>
+<dd><p>Save preprocessors and export</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.save_json">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">js</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'a'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.save_json" title="Permalink to this definition"></a></dt>
+<dd><p>function save_json
+:param js:
+:param pfile:
+:param mode:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro.test" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>python example/prepro.py test</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="utilmy-prepro-prepro-rec-module">
+<h2>utilmy.prepro.prepro_rec module<a class="headerlink" href="#utilmy-prepro-prepro-rec-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.prepro.prepro_text">
+<span id="utilmy-prepro-prepro-text-module"></span><h2>utilmy.prepro.prepro_text module<a class="headerlink" href="#module-utilmy.prepro.prepro_text" title="Permalink to this headline"></a></h2>
+<p>Text pre-processing</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.log" title="Permalink to this definition"></a></dt>
+<dd><p>function log
+:param *s:
+:param n:
+:param m:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.log_pd">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">log_pd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.log_pd" title="Permalink to this definition"></a></dt>
+<dd><p>function log_pd
+:param df:
+:param *s:
+:param n:
+:param m:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.logs">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">logs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.logs" title="Permalink to this definition"></a></dt>
+<dd><p>function logs
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.nlp_get_stopwords">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">nlp_get_stopwords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.nlp_get_stopwords" title="Permalink to this definition"></a></dt>
+<dd><p>function nlp_get_stopwords
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.pd_coltext">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">pd_coltext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.pd_coltext" title="Permalink to this definition"></a></dt>
+<dd><p>df : Datframe
+col : list of columns
+pars : dict of pars</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.pd_coltext_clean">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">pd_coltext_clean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopwords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.pd_coltext_clean" title="Permalink to this definition"></a></dt>
+<dd><p>function pd_coltext_clean
+:param df:
+:param col:
+:param stopwords:
+:param pars:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.pd_coltext_universal_google">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">pd_coltext_universal_google</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.pd_coltext_universal_google" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><dl class="simple">
+<dt># Universal sentence encoding from Tensorflow</dt><dd><p>Text —&gt; Vectors</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>from source.preprocessors import  pd_coltext_universal_google
+<a class="reference external" href="https://tfhub.dev/google/universal-sentence-encoder-multilingual/3">https://tfhub.dev/google/universal-sentence-encoder-multilingual/3</a></p>
+<p>#latest Tensorflow that supports sentencepiece is 1.13.1
+!pip uninstall –quiet –yes tensorflow
+!pip install –quiet tensorflow-gpu==1.13.1
+!pip install –quiet tensorflow-hub
+pip install –quiet tf-sentencepiece, simpleneighbors
+!pip install –quiet simpleneighbors</p>
+<p># df : dataframe
+# col : list of text colnum names
+pars</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.prepro_text.pd_coltext_wordfreq">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.prepro_text.</span></span><span class="sig-name descname"><span class="pre">pd_coltext_wordfreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopwords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntoken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.prepro_text.pd_coltext_wordfreq" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>coltext</strong> – text where word frequency should be extracted</p></li>
+<li><p><strong>nb_to_show</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="utilmy-prepro-prepro-tseries-module">
+<h2>utilmy.prepro.prepro_tseries module<a class="headerlink" href="#utilmy-prepro-prepro-tseries-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.prepro.run_feature_profile">
+<span id="utilmy-prepro-run-feature-profile-module"></span><h2>utilmy.prepro.run_feature_profile module<a class="headerlink" href="#module-utilmy.prepro.run_feature_profile" title="Permalink to this headline"></a></h2>
+<p>python classifier_adfraud.py  data_profile  –path_data_train data/input/adfraud/raw/raw_10m.zip</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.run_feature_profile.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.run_feature_profile.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.run_feature_profile.log" title="Permalink to this definition"></a></dt>
+<dd><p>function log
+:param *s:
+:param n:
+:param m:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.run_feature_profile.run_profile">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.run_feature_profile.</span></span><span class="sig-name descname"><span class="pre">run_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data/out/ztmp/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.run_feature_profile.run_profile" title="Permalink to this definition"></a></dt>
+<dd><p>Use folder , filename are fixed.</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.prepro.util_feature">
+<span id="utilmy-prepro-util-feature-module"></span><h2>utilmy.prepro.util_feature module<a class="headerlink" href="#module-utilmy.prepro.util_feature" title="Permalink to this headline"></a></h2>
+<p>Methods for feature extraction and preprocessing
+util_feature: input/output is pandas</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.col_extractname">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">col_extractname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_onehot</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.col_extractname" title="Permalink to this definition"></a></dt>
+<dd><p>Column extraction from onehot name
+:param col_onehot
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.col_remove">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">col_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colsremove</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exact'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.col_remove" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.dict2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">dict2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.dict2" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.estimator_boostrap_bayes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">estimator_boostrap_bayes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.estimator_boostrap_bayes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.estimator_bootstrap">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">estimator_bootstrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_stat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.estimator_bootstrap" title="Permalink to this definition"></a></dt>
+<dd><p>def custom_stat(values, axis=1):
+# stat_val = np.mean(np.asmatrix(values),axis=axis)
+# stat_val = np.std(np.asmatrix(values),axis=axis)p.mean
+stat_val = np.sqrt(np.mean(np.asmatrix(values*values),axis=axis))
+return stat_val</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.estimator_std_normal">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">estimator_std_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.estimator_std_normal" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.feature_correlation_cat">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">feature_correlation_cat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colused</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.feature_correlation_cat" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.feature_importance_perm">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">feature_importance_perm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xtrain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ytrain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_repeats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'neg_root_mean_squared_error'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.feature_importance_perm" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.feature_selection_multicolinear">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">feature_selection_multicolinear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.feature_selection_multicolinear" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.fetch_dataset">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">fetch_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url_dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.fetch_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Fetch dataset from a given URL and save it.</p>
+<p>Currently <cite>github</cite>, <cite>gdrive</cite> and <cite>dropbox</cite> are the only supported sources of
+data. Also only zip files are supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url_dataset</strong> – URL to send</p></li>
+<li><p><strong>path_target</strong> – Path to save dataset</p></li>
+<li><p><strong>file_target</strong> – File to save dataset</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.fetch_spark_koalas">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">fetch_spark_koalas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_data_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_data_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jobId'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.fetch_spark_koalas" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.load" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.load_dataset">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_data_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_data_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jobId'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.load_dataset" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>return a datraframe
+<a class="reference external" href="https://raw.github.com/someguy/brilliant/master/somefile.txt">https://raw.github.com/someguy/brilliant/master/somefile.txt</a></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_data_x</strong> – </p></li>
+<li><p><strong>path_data_y</strong> – </p></li>
+<li><p><strong>colid</strong> – </p></li>
+<li><p><strong>n_sample</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.load_features">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">load_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.load_features" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.load_function_uri">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">load_function_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'myfolder/myfile.py::myFunction'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.load_function_uri" title="Permalink to this definition"></a></dt>
+<dd><p>#load dynamically function from URI pattern
+#”dataset”        : “mlmodels.preprocess.generic:pandasDataset”
+###### External File processor :
+#”dataset”        : “MyFolder/preprocess/myfile.py:pandasDataset”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.log" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.log2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">log2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.log2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.log3">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">log3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.log3" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.metrics_eval">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">metrics_eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['mean_squared_error']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ytrue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ypred</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ypred_proba</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.metrics_eval" title="Permalink to this definition"></a></dt>
+<dd><p>Generic metrics calculation, using sklearn naming pattern</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.np_conv_to_one_col">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">np_conv_to_one_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">np_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep_char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.np_conv_to_one_col" title="Permalink to this definition"></a></dt>
+<dd><p>converts string/numeric columns to one string column
+:param np_array: the numpy array with more than one column
+:param sep_char: the separator character</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.os_get_function_name">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">os_get_function_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.os_get_function_name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.os_getcwd">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">os_getcwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.os_getcwd" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pa_read_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pa_read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'folder_parquet/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pa_read_file" title="Permalink to this definition"></a></dt>
+<dd><p>Requied HDFS connection
+<a class="reference external" href="http://arrow.apache.org/docs/python/parquet.html">http://arrow.apache.org/docs/python/parquet.html</a></p>
+<p>conda install libhdfs3 pyarrow
+in your script.py:</p>
+<blockquote>
+<div><p>import os
+os.environ[‘ARROW_LIBHDFS_DIR’] = ‘/opt/cloudera/parcels/CDH/lib64/’</p>
+</div></blockquote>
+<p><a class="reference external" href="https://stackoverflow.com/questions/18123144/missing-server-jvm-java-jre7-bin-server-jvm-dll">https://stackoverflow.com/questions/18123144/missing-server-jvm-java-jre7-bin-server-jvm-dll</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pa_write_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pa_write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'folder_parquet/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hdfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pa_write_file" title="Permalink to this definition"></a></dt>
+<dd><p>Pandas to HDFS
+pyarrow.parquet.write_table(table, where, row_group_size=None, version=’1.0’,
+use_dictionary=True, compression=’snappy’, write_statistics=True, use_deprecated_int96_timestamps=None,
+coerce_timestamps=None, allow_truncated_timestamps=False, data_page_size=None,
+flavor=None, filesystem=None, compression_level=None, use_byte_stream_split=False, data_page_version=’1.0’, <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs)</p>
+<p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.parquet.write_to_dataset.html#pyarrow.parquet.write_to_dataset">https://arrow.apache.org/docs/python/generated/pyarrow.parquet.write_to_dataset.html#pyarrow.parquet.write_to_dataset</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.params_check">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">params_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.params_check" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Validate a dict parans</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pars</strong> – </p></li>
+<li><p><strong>check_list</strong> – </p></li>
+<li><p><strong>name</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_col_fillna">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_col_fillna</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frequent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colgroupby</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataframe,param'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_col_fillna" title="Permalink to this definition"></a></dt>
+<dd><p>Function to fill NaNs with a specific value in certain columns
+:param df: dataframe
+:param colname: list of columns to remove text
+:param value: value to replace NaNs with</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>new dataframe with filled values</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>df</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_col_filter">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_col_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iscol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_col_filter" title="Permalink to this definition"></a></dt>
+<dd><p># Remove Columns where Index Value is not in the filter_value
+# filter1= X_client[‘client_id’].values
+:param df:
+:param filter_val:
+:param iscol:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_col_merge_onehot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_col_merge_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_col_merge_onehot" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Merge columns into single (hotn</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>colname</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p>:return :</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_col_to_num">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_col_to_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">nan</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_col_to_num" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_col_to_onehot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_col_to_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colonehot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataframe,column'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_col_to_onehot" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>colname</strong> – </p></li>
+<li><p><strong>colonehot</strong> – previous one hot columns</p></li>
+<li><p><strong>returncol</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_colcat_mapping">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_colcat_mapping" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>map category to integers</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>colname</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_colcat_mergecol">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_mergecol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'easy_id'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_colcat_mergecol" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Merge category onehot column</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>l</strong> – </p></li>
+<li><p><strong>x0</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_colcat_toint">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_toint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colcat_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_colcat_toint" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_colcat_tonum">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_colcat_tonum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colcat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_single_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_fact_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_colcat_tonum" title="Permalink to this definition"></a></dt>
+<dd><p>Encoding a data-set with mixed data (numerical and categorical) to a numerical-only data-set,
+using the following logic:
+* categorical with only a single value will be marked as zero (or dropped, if requested)
+* categorical with two values will be replaced with the result of Pandas <cite>factorize</cite>
+* categorical with more than two values will be replaced with the result of Pandas <cite>get_dummies</cite>
+* numerical columns will not be modified
+<strong>Returns:</strong> DataFrame or (DataFrame, dict). If <cite>drop_fact_dict</cite> is True, returns the encoded DataFrame.
+else, returns a tuple of the encoded DataFrame and dictionary, where each key is a two-value column, and the
+value is the original labels, as supplied by Pandas <cite>factorize</cite>. Will be empty if no two-value columns are
+present in the data-set
+:param df: The data-set to encode
+:type df: NumPy ndarray / Pandas DataFrame
+:param colcat: A sequence of the nominal (categorical) columns in the dataset. If string, must be ‘all’ to state that</p>
+<blockquote>
+<div><p>all columns are nominal. If None, nothing happens. Default: ‘all’</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>drop_single_label</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – If True, nominal columns with a only a single value will be dropped.</p></li>
+<li><p><strong>drop_fact_dict</strong> (<em>Boolean</em><em>, </em><em>default = True</em>) – If True, the return value will be the encoded DataFrame alone. If False, it will be a tuple of
+the DataFrame and the dictionary of the binary factorization (originating from pd.factorize)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_colnum_normalize">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_colnum_normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataframe,param'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_colnum_normalize" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>colnum_log</strong> – </p></li>
+<li><p><strong>colproba</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_colnum_tocat">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_colnum_tocat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colexclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colbinmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_bin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataframe,param'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'KMeans_algorithm':</span> <span class="pre">'auto',</span> <span class="pre">'KMeans_copy_x':</span> <span class="pre">True,</span> <span class="pre">'KMeans_init':</span> <span class="pre">'k-means++',</span> <span class="pre">'KMeans_max_iter':</span> <span class="pre">300,</span> <span class="pre">'KMeans_n_clusters':</span> <span class="pre">8,</span> <span class="pre">'KMeans_n_init':</span> <span class="pre">10,</span> <span class="pre">'KMeans_n_jobs':</span> <span class="pre">None,</span> <span class="pre">'KMeans_precompute_distances':</span> <span class="pre">'auto',</span> <span class="pre">'KMeans_random_state':</span> <span class="pre">None,</span> <span class="pre">'KMeans_tol':</span> <span class="pre">0.0001,</span> <span class="pre">'KMeans_verbose':</span> <span class="pre">0}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_colnum_tocat" title="Permalink to this definition"></a></dt>
+<dd><p>colbinmap = for each column, definition of bins
+<a class="reference external" href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing">https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing</a></p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param df</dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">param method</dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">return</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_colnum_tocat_stat">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_colnum_tocat_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cuts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_colnum_tocat_stat" title="Permalink to this definition"></a></dt>
+<dd><p>Bins continuous features into equal sample size buckets and returns the target mean in each bucket. Separates out
+nulls into another bucket.
+:param df: dataframe containg features and target column
+:param feature: feature column name
+:param target_col: target column
+:param bins: Number bins required
+:param cuts: if buckets of certain specific cuts are required. Used on test data to use cuts from train.
+:return: If cuts are passed only df_grouped data is returned, else cuts and df_grouped data is returned</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_feature_generate_cross">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_feature_generate_cross</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_cross_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pct_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_combination</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_feature_generate_cross" title="Permalink to this definition"></a></dt>
+<dd><p>Generate Xi.Xj features and filter based on stats threshold</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_pipeline_apply">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_pipeline_apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipeline</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_pipeline_apply" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>pipe_preprocess_colnum = [
+(pd_col_to_num, {“val”: “?”, })</p>
+</div></blockquote>
+<dl>
+<dt>, (pd_colnum_tocat, {“colname”: None, “colbinmap”: colnum_binmap, ‘bins’: 5,</dt><dd><p>“method”: “uniform”, “suffix”: “_bin”,
+“return_val”: “dataframe”})</p>
+</dd>
+<dt>, (pd_col_to_onehot, {“colname”: None, “colonehot”: colnum_onehot,</dt><dd><blockquote>
+<div><p>“return_val”: “dataframe”})</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>pipeline</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_read_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.pkl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_duplicates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_filter_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_read_file" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Read file in parallel from disk : very Fast</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_glob</strong> – </p></li>
+<li><p><strong>ignore_index</strong> – </p></li>
+<li><p><strong>cols</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+<li><p><strong>nrows</strong> – </p></li>
+<li><p><strong>concat_sort</strong> – </p></li>
+<li><p><strong>n_pool</strong> – </p></li>
+<li><p><strong>drop_duplicates</strong> – </p></li>
+<li><p><strong>shop_id</strong> – </p></li>
+<li><p><strong>kw</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_correl_pair">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_correl_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coltarget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_correl_pair" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Genearte correletion between the column and target column
+df represents the dataframe comprising the column and colname comprising the target column</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>colname</strong> – list of columns</p></li>
+</ul>
+</dd>
+</dl>
+<p>:param coltarget : target column
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_dataset_shift">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_dataset_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dftrain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dftest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colused</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buckets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_dataset_shift" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_datashift_psi">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_datashift_psi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buckettype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bins'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buckets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_datashift_psi" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the PSI (population stability index) across all variables
+:param expected: numpy matrix of original values
+:param actual: numpy matrix of new values, same size as expected
+:param buckettype: type of strategy for creating buckets, bins splits into even splits, quantiles splits into quantile buckets
+:param buckets: number of quantiles to use in bucketing variables
+:param axis: axis by which variables are defined, 0 for vertical, 1 for horizontal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>ndarray of psi values for each variable</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>psi_values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_distribution_colnum">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_distribution_colnum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_distribution_colnum" title="Permalink to this definition"></a></dt>
+<dd><p>Stats the tables</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_histogram">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coltarget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'diff'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_histogram" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>bins</strong> – </p></li>
+<li><p><strong>coltarget</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_pandas_profile">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_pandas_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'report.html'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Pandas</span> <span class="pre">Profile'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_pandas_profile" title="Permalink to this definition"></a></dt>
+<dd><p>Describe the tables
+#Pandas-Profiling 2.0.0
+df.profile_report()</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_shift_changes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_shift_changes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_shift_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates trend changes and correlation between train/test for list of features
+:param df: dfframe containing features and target columns
+:param target_col: target column name
+:param features_list: by default creates plots for all features. If list passed, creates plots of only those features.
+:param bins: number of bins to be created from continuous colname
+:param df_test: test df which has to be compared with input df for correlation
+:return: dfframe with trend changes and trend correlation (if test df passed)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_shift_trend_changes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_shift_trend_changes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.03</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_shift_trend_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates number of times the trend of feature wrt target changed direction.
+:param df: df_grouped dataset
+:param feature: feature column name
+:param target_col: target column
+:param threshold: minimum % difference required to count as trend change
+:return: number of trend chagnes for the feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.pd_stat_shift_trend_correlation">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">pd_stat_shift_trend_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.pd_stat_shift_trend_correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates correlation between train and test trend of colname wrt target.
+:param df: train df data
+:param df_test: test df data
+:param colname: colname column name
+:param target_col: target column name
+:return: trend correlation between train and test</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.save">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.save" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.save_features">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">save_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.save_features" title="Permalink to this definition"></a></dt>
+<dd><p>Save dataframe on disk
+:param df:
+:param name:
+:param path:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.save_list">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">save_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glob</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.save_list" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.test_get_classification_data">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">test_get_classification_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.test_get_classification_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.test_heteroscedacity">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">test_heteroscedacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_value_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.test_heteroscedacity" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.test_mutualinfo">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">test_mutualinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xtest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.test_mutualinfo" title="Permalink to this definition"></a></dt>
+<dd><p>Test  Error vs Input Variable Independance byt Mutual ifno
+sklearn.feature_selection.mutual_info_classif(X, y, discrete_features=’auto’, n_neighbors=3, copy=True, random_state=None)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.prepro.util_feature.test_normality">
+<span class="sig-prename descclassname"><span class="pre">utilmy.prepro.util_feature.</span></span><span class="sig-name descname"><span class="pre">test_normality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.prepro.util_feature.test_normality" title="Permalink to this definition"></a></dt>
+<dd><p>Test  Is Normal distribution
+F pvalues &lt; 0.01 : Rejected</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.prepro">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.prepro" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.optim.html" class="btn btn-neutral float-left" title="utilmy.optim package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.recsys.html" class="btn btn-neutral float-right" title="utilmy.recsys package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

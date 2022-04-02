@@ -1,0 +1,93 @@
+utilmy.nlp package
+==================
+
+Submodules
+----------
+
+utilmy.nlp.optim\_rank module
+-----------------------------
+
+.. automodule:: utilmy.nlp.optim_rank
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.rank\_fusion module
+------------------------------
+
+.. automodule:: utilmy.nlp.rank_fusion
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.rank\_fusion\_functions module
+-----------------------------------------
+
+.. automodule:: utilmy.nlp.rank_fusion_functions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.util\_cluster module
+-------------------------------
+
+.. automodule:: utilmy.nlp.util_cluster
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.util\_cocount module
+-------------------------------
+
+.. automodule:: utilmy.nlp.util_cocount
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.util\_gensim module
+------------------------------
+
+.. automodule:: utilmy.nlp.util_gensim
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.util\_nlp module
+---------------------------
+
+.. automodule:: utilmy.nlp.util_nlp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.util\_rank module
+----------------------------
+
+.. automodule:: utilmy.nlp.util_rank
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.util\_rankmerge module
+---------------------------------
+
+.. automodule:: utilmy.nlp.util_rankmerge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.nlp.util\_sentence module
+--------------------------------
+
+.. automodule:: utilmy.nlp.util_sentence
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.nlp
+   :members:
+   :undoc-members:
+   :show-inheritance:

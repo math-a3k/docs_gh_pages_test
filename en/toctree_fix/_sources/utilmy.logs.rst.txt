@@ -1,0 +1,37 @@
+utilmy.logs package
+===================
+
+Submodules
+----------
+
+utilmy.logs.test\_log module
+----------------------------
+
+.. automodule:: utilmy.logs.test_log
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.logs.util\_log module
+----------------------------
+
+.. automodule:: utilmy.logs.util_log
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.logs.util\_log\_std module
+---------------------------------
+
+.. automodule:: utilmy.logs.util_log_std
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.logs
+   :members:
+   :undoc-members:
+   :show-inheritance:

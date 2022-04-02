@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.logs package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.nlp package" href="utilmy.nlp.html" />
+    <link rel="prev" title="utilmy.images package" href="utilmy.images.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.logs package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.logs.test_log">utilmy.logs.test_log module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.logs.util_log">utilmy.logs.util_log module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.logs.util_log_std">utilmy.logs.util_log_std module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.logs">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.logs package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.logs.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-logs-package">
+<h1>utilmy.logs package<a class="headerlink" href="#utilmy-logs-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.logs.test_log">
+<span id="utilmy-logs-test-log-module"></span><h2>utilmy.logs.test_log module<a class="headerlink" href="#module-utilmy.logs.test_log" title="Permalink to this headline"></a></h2>
+<p>python test.py  test1
+python test.py  test2</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.logs.test_log.LoggingStreamHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.logs.test_log.</span></span><span class="sig-name descname"><span class="pre">LoggingStreamHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.test_log.LoggingStreamHandler" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">socketserver.StreamRequestHandler</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.logs.test_log.LoggingStreamHandler.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.test_log.LoggingStreamHandler.handle" title="Permalink to this definition"></a></dt>
+<dd><p>LoggingStreamHandler:handle
+Args:
+Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.test_log.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.test_log.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.test_log.test1" title="Permalink to this definition"></a></dt>
+<dd><p>function test1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.test_log.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.test_log.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.test_log.test2" title="Permalink to this definition"></a></dt>
+<dd><p>function test2
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.test_log.test_launch_server">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.test_log.</span></span><span class="sig-name descname"><span class="pre">test_launch_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.test_log.test_launch_server" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Server code from loguru.readthedocs.io
+Use to test network logging</p>
+</div></blockquote>
+<p>python   test.py test_launch_server</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.test_log.test_server">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.test_log.</span></span><span class="sig-name descname"><span class="pre">test_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.test_log.test_server" title="Permalink to this definition"></a></dt>
+<dd><p>function test_server
+Args:
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.logs.util_log">
+<span id="utilmy-logs-util-log-module"></span><h2>utilmy.logs.util_log module<a class="headerlink" href="#module-utilmy.logs.util_log" title="Permalink to this headline"></a></h2>
+<dl class="simple">
+<dt>Usage :</dt><dd><p>from util_log import log</p>
+</dd>
+</dl>
+<p># The severity levels
+# Level name    Severity value  Logger method
+# TRACE         5               logger.trace()
+# DEBUG         10              logger.debug()
+# INFO          20              logger.info()
+# SUCCESS       25              logger.success()
+# WARNING       30              logger.warning()
+# ERROR         40              logger.error()
+# CRITICAL      50              logger.critical()</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.log" title="Permalink to this definition"></a></dt>
+<dd><p>function log
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.log2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">log2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.log2" title="Permalink to this definition"></a></dt>
+<dd><p>function log2
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.log3">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">log3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.log3" title="Permalink to this definition"></a></dt>
+<dd><p>function log3
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.logc">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">logc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.logc" title="Permalink to this definition"></a></dt>
+<dd><p>function logc
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.loge">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">loge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.loge" title="Permalink to this definition"></a></dt>
+<dd><p>function loge
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.logger_setup">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">logger_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_config_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.logger_setup" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Generic Logging setup</dt><dd><p>Overide logging using loguru setup
+1) Custom config from log_config_path .yaml file
+2) Use shortname log, log2, logw, loge for logging output</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_config_path</strong> – </p></li>
+<li><p><strong>template_name</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:None</p>
+<p>TODO:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.logr">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">logr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.logr" title="Permalink to this definition"></a></dt>
+<dd><p>function logr
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.logw">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">logw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.logw" title="Permalink to this definition"></a></dt>
+<dd><p>function logw
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.test" title="Permalink to this definition"></a></dt>
+<dd><p>function test
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.z_logger_custom_1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">z_logger_custom_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.z_logger_custom_1" title="Permalink to this definition"></a></dt>
+<dd><p>function z_logger_custom_1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log.z_logger_stdout_override">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log.</span></span><span class="sig-name descname"><span class="pre">z_logger_stdout_override</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log.z_logger_stdout_override" title="Permalink to this definition"></a></dt>
+<dd><p>Redirect stdout –&gt; logger
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.logs.util_log_std">
+<span id="utilmy-logs-util-log-std-module"></span><h2>utilmy.logs.util_log_std module<a class="headerlink" href="#module-utilmy.logs.util_log_std" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://docs.python-guide.org/writing/logging/">https://docs.python-guide.org/writing/logging/</a>
+<a class="reference external" href="https://docs.python.org/3/howto/logging-cookbook.html">https://docs.python.org/3/howto/logging-cookbook.html</a>
+my_logger = util_log.logger_setup(“my module name”, log_file=””)
+APP_ID    = util_log.create_appid(__file__ )
+def log(s1=’’, s2=’’, s3=’’, s4=’’, s5=’’, s6=’’, s7=’’, s8=’’, s9=’’, s10=’’) :</p>
+<blockquote>
+<div><dl class="simple">
+<dt>my_logger.debug( “,”.join( [APP_ID, str(s1), str(s2), str(s3), str(s4), str(s5) ,</dt><dd><p>str(s6), str(s7), str(s8), str(s9), str(s10)] ) )</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Attribute name  Format  Description
+args    You shouldn’t need to format this yourself.     The tuple of arguments merged into msg to
+produce message, or a dict whose values are used for the merge (when there is only one argument,
+and it is a dictionary).
+asctime %(asctime)s     Human-readable time when the LogRecord was created. By default this is of
+the form ‘2003-07-08 16:49:45,896’ (the numbers after the comma are millisecond portion of the
+time).
+created %(created)f     Time when the LogRecord was created (as returned by time.time()).
+exc_info        You shouldn’t need to format this yourself.     Exception tuple (à la sys.exc_info)
+or, if no exception has occurred, None.
+filename        %(filename)s    Filename portion of pathname.
+funcName        %(funcName)s    Name of function containing the logging call.
+levelname       %(levelname)s   Text logging level for the message (‘DEBUG’, ‘INFO’, ‘WARNING’,
+‘ERROR’, ‘CRITICAL’).
+levelno %(levelno)s     Numeric logging level for the message (DEBUG, INFO, WARNING, ERROR, CRITICAL).
+lineno  %(lineno)d      Source line number where the logging call was issued (if available).
+message %(message)s     The logged message, computed as msg % args. This is set when
+Formatter.format() is invoked.
+module  %(module)s      Module (name portion of filename).
+msecs   %(msecs)d       Millisecond portion of the time when the LogRecord was created.
+msg     You shouldn’t need to format this yourself.     The format string passed in the original
+logging call. Merged with args to produce message, or an arbitrary object (see Using arbitrary
+objects as messages).
+name    %(name)s        Name of the logger used to log the call.
+pathname        %(pathname)s    Full pathname of the source file where the logging call was issued
+(if available).
+process %(process)d     Process ID (if available).
+processName     %(processName)s Process name (if available).
+relativeCreated %(relativeCreated)d     Time in milliseconds when the LogRecord was created,
+relative to the time the logging module was loaded.
+stack_info      You shouldn’t need to format this yourself.     Stack frame information
+(where available) from the bottom of the stack in the current thread, up to and including
+the stack frame of the logging call which resulted in the creation of this record.
+thread  %(thread)d      Thread ID (if available).
+threadName      %(threadName)s  Thread name (if available).
+The problem here is that you’re not initializing the root logger; you’re initializing the logger
+for your main module.
+Try this for main.py:
+import logging
+from logging.handlers import RotatingFileHandler
+import submodule
+logger = logging.getLogger()  # Gets the root logger
+logger.setLevel(logging.DEBUG)
+fh = RotatingFileHandler(‘master.log’, maxBytes=2000000, backupCount=10)
+formatter = logging.Formatter(‘%(asctime)s - %(name)s - %(levelname)s - %(message)s’)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+logger.debug(‘DEBUG LEVEL - MAIN MODULE’)
+logger.info(‘INFO LEVEL - MAIN MODULE’)
+submodule.loggerCall()
+Then try this for submodule.py:
+def loggerCall():</p>
+<blockquote>
+<div><p>logger = logging.getLogger(__name__)
+logger.debug(‘SUBMODULE: DEBUG LOGGING MODE : ‘)
+logger.info(‘Submodule: INFO LOG’)
+return</p>
+</div></blockquote>
+<p>Since you said you wanted to send log messages from all your submodules to the same place, you
+should initialize the root logger and then simply use the message logging methods
+(along with setlevel() calls, as appropriate). Because there’s no explicit handler for
+your submodule, logging.getLogger(__name__) will traverse the tree to the root,
+where it will find the handler you established in main.py.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.create_appid">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">create_appid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.create_appid" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.create_logfilename">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">create_logfilename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.create_logfilename" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.create_uniqueid">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">create_uniqueid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.create_uniqueid" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.load_arguments">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">load_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.load_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>Load CLI input, load config.toml , overwrite config.toml by CLI Input
+[{}, {}]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.logger_handler_console">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">logger_handler_console</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formatter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.logger_handler_console" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.logger_handler_file">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">logger_handler_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isrotate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotate_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'midnight'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file_used</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.logger_handler_file" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.logger_setup">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">logger_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger_name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter=&lt;logging.Formatter</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isrotate=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isconsole_output=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_level=10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.logger_setup" title="Permalink to this definition"></a></dt>
+<dd><p>my_logger = util_log.logger_setup(“my module name”, log_file=””)
+APP_ID    = util_log.create_appid(__file__ )
+def log(<a href="#id1"><span class="problematic" id="id2">*</span></a>argv):</p>
+<blockquote>
+<div><p>my_logger.info(“,”.join([str(x) for x in argv]))</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.logger_setup2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">logger_setup2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utilmy.logs.util_log_std'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.logger_setup2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.printlog">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">printlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s5</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s6</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s7</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s8</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s9</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s10</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iswritelog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.printlog" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.logs.util_log_std.writelog">
+<span class="sig-prename descclassname"><span class="pre">utilmy.logs.util_log_std.</span></span><span class="sig-name descname"><span class="pre">writelog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.logs.util_log_std.writelog" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-utilmy.logs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.logs" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.images.html" class="btn btn-neutral float-left" title="utilmy.images package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.nlp.html" class="btn btn-neutral float-right" title="utilmy.nlp package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

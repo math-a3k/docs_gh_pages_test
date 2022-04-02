@@ -1,0 +1,29 @@
+utilmy.stats package
+====================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 20
+
+   utilmy.stats.hypothetical
+
+Submodules
+----------
+
+utilmy.stats.statistics module
+------------------------------
+
+.. automodule:: utilmy.stats.statistics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.stats
+   :members:
+   :undoc-members:
+   :show-inheritance:

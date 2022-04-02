@@ -1,0 +1,93 @@
+utilmy.tools package
+====================
+
+Submodules
+----------
+
+utilmy.tools.cli\_conda\_merge module
+-------------------------------------
+
+.. automodule:: utilmy.tools.cli_conda_merge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_convert\_ipynb module
+---------------------------------------
+
+.. automodule:: utilmy.tools.cli_convert_ipynb
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_docs module
+-----------------------------
+
+.. automodule:: utilmy.tools.cli_docs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_download module
+---------------------------------
+
+.. automodule:: utilmy.tools.cli_download
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_env\_autoinstall module
+-----------------------------------------
+
+.. automodule:: utilmy.tools.cli_env_autoinstall
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_github\_search module
+---------------------------------------
+
+.. automodule:: utilmy.tools.cli_github_search
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_json module
+-----------------------------
+
+.. automodule:: utilmy.tools.cli_json
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_module\_parser module
+---------------------------------------
+
+.. automodule:: utilmy.tools.cli_module_parser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.cli\_repo\_check module
+------------------------------------
+
+.. automodule:: utilmy.tools.cli_repo_check
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tools.util\_cli module
+-----------------------------
+
+.. automodule:: utilmy.tools.util_cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:

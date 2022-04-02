@@ -1,0 +1,21 @@
+utilmy.tseries package
+======================
+
+Submodules
+----------
+
+utilmy.tseries.util\_tseries module
+-----------------------------------
+
+.. automodule:: utilmy.tseries.util_tseries
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.tseries
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,53 @@
+utilmy.optim package
+====================
+
+Submodules
+----------
+
+utilmy.optim.gp module
+----------------------
+
+.. automodule:: utilmy.optim.gp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.optim.gp\_dcgp module
+----------------------------
+
+.. automodule:: utilmy.optim.gp_dcgp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.optim.gp\_formulae module
+--------------------------------
+
+.. automodule:: utilmy.optim.gp_formulae
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.optim.util\_hyper module
+-------------------------------
+
+.. automodule:: utilmy.optim.util_hyper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.optim.util\_optim module
+-------------------------------
+
+.. automodule:: utilmy.optim.util_optim
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.optim
+   :members:
+   :undoc-members:
+   :show-inheritance:

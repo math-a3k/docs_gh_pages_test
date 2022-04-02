@@ -1,0 +1,61 @@
+utilmy.prepro package
+=====================
+
+Submodules
+----------
+
+utilmy.prepro.prepro module
+---------------------------
+
+.. automodule:: utilmy.prepro.prepro
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.prepro.prepro\_rec module
+--------------------------------
+
+.. automodule:: utilmy.prepro.prepro_rec
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.prepro.prepro\_text module
+---------------------------------
+
+.. automodule:: utilmy.prepro.prepro_text
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.prepro.prepro\_tseries module
+------------------------------------
+
+.. automodule:: utilmy.prepro.prepro_tseries
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.prepro.run\_feature\_profile module
+------------------------------------------
+
+.. automodule:: utilmy.prepro.run_feature_profile
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.prepro.util\_feature module
+----------------------------------
+
+.. automodule:: utilmy.prepro.util_feature
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.prepro
+   :members:
+   :undoc-members:
+   :show-inheritance:

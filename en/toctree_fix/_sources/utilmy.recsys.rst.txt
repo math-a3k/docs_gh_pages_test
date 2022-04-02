@@ -1,0 +1,45 @@
+utilmy.recsys package
+=====================
+
+Submodules
+----------
+
+utilmy.recsys.ab module
+-----------------------
+
+.. automodule:: utilmy.recsys.ab
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.recsys.metric module
+---------------------------
+
+.. automodule:: utilmy.recsys.metric
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.recsys.util\_rec module
+------------------------------
+
+.. automodule:: utilmy.recsys.util_rec
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.recsys.vectors module
+----------------------------
+
+.. automodule:: utilmy.recsys.vectors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.recsys
+   :members:
+   :undoc-members:
+   :show-inheritance:

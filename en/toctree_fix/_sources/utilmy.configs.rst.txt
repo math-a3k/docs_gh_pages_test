@@ -1,0 +1,29 @@
+utilmy.configs package
+======================
+
+Submodules
+----------
+
+utilmy.configs.test module
+--------------------------
+
+.. automodule:: utilmy.configs.test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.configs.util\_config module
+----------------------------------
+
+.. automodule:: utilmy.configs.util_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.configs
+   :members:
+   :undoc-members:
+   :show-inheritance:

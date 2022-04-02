@@ -1,0 +1,69 @@
+utilmy.tabular package
+======================
+
+Submodules
+----------
+
+utilmy.tabular.tabular module
+-----------------------------
+
+.. automodule:: utilmy.tabular.tabular
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tabular.util\_activelearning module
+------------------------------------------
+
+.. automodule:: utilmy.tabular.util_activelearning
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tabular.util\_drift module
+---------------------------------
+
+.. automodule:: utilmy.tabular.util_drift
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tabular.util\_explain module
+-----------------------------------
+
+.. automodule:: utilmy.tabular.util_explain
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tabular.util\_sampling module
+------------------------------------
+
+.. automodule:: utilmy.tabular.util_sampling
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tabular.util\_sparse module
+----------------------------------
+
+.. automodule:: utilmy.tabular.util_sparse
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.tabular.util\_uncertainty module
+---------------------------------------
+
+.. automodule:: utilmy.tabular.util_uncertainty
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.tabular
+   :members:
+   :undoc-members:
+   :show-inheritance:

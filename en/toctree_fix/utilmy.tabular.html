@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.tabular package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.templates package" href="utilmy.templates.html" />
+    <link rel="prev" title="utilmy.stats.hypothetical package" href="utilmy.stats.hypothetical.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utilmy.tabular package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tabular.tabular">utilmy.tabular.tabular module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utilmy-tabular-util-activelearning-module">utilmy.tabular.util_activelearning module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tabular.util_drift">utilmy.tabular.util_drift module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tabular.util_explain">utilmy.tabular.util_explain module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tabular.util_sampling">utilmy.tabular.util_sampling module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tabular.util_sparse">utilmy.tabular.util_sparse module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tabular.util_uncertainty">utilmy.tabular.util_uncertainty module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-utilmy.tabular">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+      <li>utilmy.tabular package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.tabular.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-tabular-package">
+<h1>utilmy.tabular package<a class="headerlink" href="#utilmy-tabular-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.tabular.tabular">
+<span id="utilmy-tabular-tabular-module"></span><h2>utilmy.tabular.tabular module<a class="headerlink" href="#module-utilmy.tabular.tabular" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.estimator_boostrap_bayes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">estimator_boostrap_bayes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.estimator_boostrap_bayes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.estimator_bootstrap">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">estimator_bootstrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_stat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.estimator_bootstrap" title="Permalink to this definition"></a></dt>
+<dd><p>def custom_stat(values, axis=1):
+# stat_val = np.mean(np.asmatrix(values),axis=axis)
+# stat_val = np.std(np.asmatrix(values),axis=axis)p.mean
+stat_val = np.sqrt(np.mean(np.asmatrix(values*values),axis=axis))
+return stat_val</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.estimator_std_normal">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">estimator_std_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.estimator_std_normal" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.help" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.log" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.np_col_extractname">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">np_col_extractname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_onehot</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.np_col_extractname" title="Permalink to this definition"></a></dt>
+<dd><p>Column extraction from onehot name
+:param col_onehotp
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.np_conv_to_one_col">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">np_conv_to_one_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">np_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep_char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.np_conv_to_one_col" title="Permalink to this definition"></a></dt>
+<dd><p>converts string/numeric columns to one string column
+:param np_array: the numpy array with more than one column
+:param sep_char: the separator character</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.np_list_remove">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">np_list_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colsremove</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exact'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.np_list_remove" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_data_drift_detect_alibi">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_data_drift_detect_alibi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_new</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&quot;'regressoruncertaintydrift','classifieruncertaintydrift','ksdrift','mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift',</span> <span class="pre">'classifierdrift','spotthediffdrift'&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tensorflow,pytorch'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_data_drift_detect_alibi" title="Permalink to this definition"></a></dt>
+<dd><p>Detecting drift in the dataset using alibi
+<a class="reference external" href="https://docs.seldon.io/projects/alibi-detect/en/latest/api/modules.html">https://docs.seldon.io/projects/alibi-detect/en/latest/api/modules.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – dfframe test dataset to check for drift</p></li>
+<li><p><strong>dfnew</strong> – dfframe test dataset to check for drift</p></li>
+<li><p><strong>backend</strong> – str “tensorflow” or “pytorch”</p></li>
+<li><p><strong>model</strong> – trained pytorch or tensorflow model.</p></li>
+<li><p><strong>p_val</strong> – p value float</p></li>
+</ul>
+</dd>
+</dl>
+<p>example:
+model = tf.keras.Sequential([InputLayer(input_shape=(input_size)),Dropout(0.3),Dense(1)])
+model.compile(optimizer=’adam’,loss=’mse’)
+model.fit(X_train,y_train,epochs=1)</p>
+<p>cd, is_drift_preds = pd_data_drift_detect(X_train, X_test,’regressoruncertaintydrift’,’tensorflow’,model=model)</p>
+<p>from utilmy import import_function
+myclass = import_function(fun_name=’KSDrift’, module_name=’alibi_detect.cd’)
+mdrift = myclass(df.values,p_val=p_val,**kwargs)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_stat_correl_pair">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_stat_correl_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coltarget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_stat_correl_pair" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Genearte correletion between the column and target column
+df represents the dataframe comprising the column and colname comprising the target column</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>colname</strong> – list of columns</p></li>
+</ul>
+</dd>
+</dl>
+<p>:param coltarget : target column
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_stat_distribution_colnum">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_stat_distribution_colnum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_stat_distribution_colnum" title="Permalink to this definition"></a></dt>
+<dd><p>Stats the tables</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_stat_histogram">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_stat_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coltarget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'diff'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_stat_histogram" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – </p></li>
+<li><p><strong>bins</strong> – </p></li>
+<li><p><strong>coltarget</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_stat_pandas_profile">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_stat_pandas_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'report.html'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Pandas</span> <span class="pre">Profile'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_stat_pandas_profile" title="Permalink to this definition"></a></dt>
+<dd><p>Describe the tables
+#Pandas-Profiling 2.0.0
+df.profile_report()</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_stat_shift_changes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_stat_shift_changes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_stat_shift_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates trend changes and correlation between train/test for list of features
+:param df: dfframe containing features and target columns
+:param target_col: target column name
+:param features_list: by default creates plots for all features. If list passed, creates plots of only those features.
+:param bins: number of bins to be created from continuous colname
+:param df_test: test df which has to be compared with input df for correlation
+:return: dfframe with trend changes and trend correlation (if test df passed)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_stat_shift_trend_changes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_stat_shift_trend_changes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.03</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_stat_shift_trend_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates number of times the trend of feature wrt target changed direction.
+:param df: df_grouped dataset
+:param feature: feature column name
+:param target_col: target column
+:param threshold: minimum % difference required to count as trend change
+:return: number of trend chagnes for the feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_stat_shift_trend_correlation">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_stat_shift_trend_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_stat_shift_trend_correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates correlation between train and test trend of colname wrt target.
+:param df: train df data
+:param df_test: test df data
+:param colname: colname column name
+:param target_col: target column name
+:return: trend correlation between train and test</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_to_scipy_sparse_matrix">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_to_scipy_sparse_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_to_scipy_sparse_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a sparse pandas data frame to sparse scipy csr_matrix.
+:param df: pandas data frame
+:return: csr_matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.pd_train_test_split_time">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">pd_train_test_split_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coltime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_key'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.pd_train_test_split_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test0">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test0</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test0" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test1" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test3">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test3" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>#### python test.py   test_tabular</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_anova">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_anova</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_anova" title="Permalink to this definition"></a></dt>
+<dd><p>ANOVA test two categorical features
+Input dfframe, 1st feature and 2nd feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_heteroscedacity">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_heteroscedacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_value_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_heteroscedacity" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_hypothesis">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_hypothesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_hypothesis" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference external" href="https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py">https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_multiple_comparisons">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_multiple_comparisons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjuster</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.tabular.test_multiple_comparisons" title="Permalink to this definition"></a></dt>
+<dd><p>Run multiple t tests.
+p_values = multiple_comparisons(data)</p>
+<dl>
+<dt># bonferroni correction</dt><dd><dl class="simple">
+<dt>print(‘Total number of discoveries is: {:,}’</dt><dd><p>.format(sum([x[1] &lt; threshold / n_trials for x in p_values])))</p>
+</dd>
+<dt>print(‘Percentage of significant results: {:5.2%}’</dt><dd><p>.format(sum([x[1] &lt; threshold / n_trials for x in p_values]) / n_trials))</p>
+</dd>
+</dl>
+<p># Benjamini–Hochberg procedure
+p_values.sort(key=lambda x: x[1])</p>
+<dl class="simple">
+<dt>for i, x in enumerate(p_values):</dt><dd><dl class="simple">
+<dt>if x[1] &gt;= (i + 1) / len(p_values) * threshold:</dt><dd><p>break</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>significant = p_values[:i]</p>
+<dl class="simple">
+<dt>print(‘Total number of discoveries is: {:,}’</dt><dd><p>.format(len(significant)))</p>
+</dd>
+<dt>print(‘Percentage of significant results: {:5.2%}’</dt><dd><p>.format(len(significant) / n_trials))</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_mutualinfo">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_mutualinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xtest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_mutualinfo" title="Permalink to this definition"></a></dt>
+<dd><p>Test  Error vs Input Variable Independance byt Mutual ifno
+sklearn.feature_selection.mutual_info_classif(X, y, discrete_features=’auto’, n_neighbors=3, copy=True, random_state=None)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_normality">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_normality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_normality" title="Permalink to this definition"></a></dt>
+<dd><p>Test  Is Normal distribution
+F pvalues &lt; 0.01 : Rejected</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_normality2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_normality2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_normality2" title="Permalink to this definition"></a></dt>
+<dd><p>Function to check Normal Distribution of a Feature by 3 methods
+Input dfframe, feature name, and a test type
+Three types of test
+1)’Shapiro’
+2)’Normal’
+3)’Anderson’</p>
+<p>output the statistical test score and result whether accept or reject
+Accept mean the feature is Gaussain
+Reject mean the feature is not Gaussain</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.test_plot_qqplot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">test_plot_qqplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.test_plot_qqplot" title="Permalink to this definition"></a></dt>
+<dd><p>Function to plot boxplot, histplot and qqplot for numerical feature analyze</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.tabular.y_adjuster_log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.tabular.</span></span><span class="sig-name descname"><span class="pre">y_adjuster_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred_log</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.tabular.y_adjuster_log" title="Permalink to this definition"></a></dt>
+<dd><p>Adjustment of log, exp transfrmation for yt= y + error
+<a class="reference external" href="https://www.inovex.de/de/blog/honey-i-shrunk-the-target-variable/">https://www.inovex.de/de/blog/honey-i-shrunk-the-target-variable/</a></p>
+<p>log(y) = u =sigma**2</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-tabular-util-activelearning-module">
+<h2>utilmy.tabular.util_activelearning module<a class="headerlink" href="#utilmy-tabular-util-activelearning-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.tabular.util_drift">
+<span id="utilmy-tabular-util-drift-module"></span><h2>utilmy.tabular.util_drift module<a class="headerlink" href="#module-utilmy.tabular.util_drift" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.estimator_boostrap_bayes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">estimator_boostrap_bayes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.estimator_boostrap_bayes" title="Permalink to this definition"></a></dt>
+<dd><p>function estimator_boostrap_bayes
+:param err:
+:param alpha:
+:param :</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.estimator_bootstrap">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">estimator_bootstrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_stat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.estimator_bootstrap" title="Permalink to this definition"></a></dt>
+<dd><p>def custom_stat(values, axis=1):
+# stat_val = np.mean(np.asmatrix(values),axis=axis)
+# stat_val = np.std(np.asmatrix(values),axis=axis)p.mean
+stat_val = np.sqrt(np.mean(np.asmatrix(values*values),axis=axis))
+return stat_val</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.estimator_std_normal">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">estimator_std_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.estimator_std_normal" title="Permalink to this definition"></a></dt>
+<dd><p>function estimator_std_normal
+:param err:
+:param alpha:
+:param :</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.log" title="Permalink to this definition"></a></dt>
+<dd><p>function log
+:param *s:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.np_col_extractname">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">np_col_extractname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_onehot</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.np_col_extractname" title="Permalink to this definition"></a></dt>
+<dd><p>Column extraction from onehot name
+:param col_onehotp
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.np_conv_to_one_col">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">np_conv_to_one_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">np_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep_char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.np_conv_to_one_col" title="Permalink to this definition"></a></dt>
+<dd><p>converts string/numeric columns to one string column
+:param np_array: the numpy array with more than one column
+:param sep_char: the separator character</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.np_list_remove">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">np_list_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colsremove</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exact'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.np_list_remove" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.pd_data_drift_detect_alibi">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">pd_data_drift_detect_alibi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_new</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&quot;'regressoruncertaintydrift','classifieruncertaintydrift','ksdrift','mmddrift','learnedkerneldrift','chisquaredrift','tabulardrift',</span> <span class="pre">'classifierdrift','spotthediffdrift'&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tensorflow,pytorch'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.pd_data_drift_detect_alibi" title="Permalink to this definition"></a></dt>
+<dd><p>Detecting drift in the dataset using alibi
+<a class="reference external" href="https://docs.seldon.io/projects/alibi-detect/en/latest/api/modules.html">https://docs.seldon.io/projects/alibi-detect/en/latest/api/modules.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – dfframe test dataset to check for drift</p></li>
+<li><p><strong>dfnew</strong> – dfframe test dataset to check for drift</p></li>
+<li><p><strong>backend</strong> – str “tensorflow” or “pytorch”</p></li>
+<li><p><strong>model</strong> – trained pytorch or tensorflow model.</p></li>
+<li><p><strong>p_val</strong> – p value float</p></li>
+</ul>
+</dd>
+</dl>
+<p>example:
+model = tf.keras.Sequential([InputLayer(input_shape=(input_size)),Dropout(0.3),Dense(1)])
+model.compile(optimizer=’adam’,loss=’mse’)
+model.fit(X_train,y_train,epochs=1)</p>
+<p>cd, is_drift_preds = pd_data_drift_detect(X_train, X_test,’regressoruncertaintydrift’,’tensorflow’,model=model)</p>
+<p>from utilmy import import_function
+myclass = import_function(fun_name=’KSDrift’, module_name=’alibi_detect.cd’)
+mdrift = myclass(df.values,p_val=p_val,**kwargs)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test0">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test0</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.test0" title="Permalink to this definition"></a></dt>
+<dd><p>function test0
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.test1" title="Permalink to this definition"></a></dt>
+<dd><p>function test1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test3">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.test3" title="Permalink to this definition"></a></dt>
+<dd><p>function test3
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>#### python test.py   test_tabular</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_anova">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_anova</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.test_anova" title="Permalink to this definition"></a></dt>
+<dd><p>ANOVA test two categorical features
+Input dfframe, 1st feature and 2nd feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_heteroscedacity">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_heteroscedacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_value_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.test_heteroscedacity" title="Permalink to this definition"></a></dt>
+<dd><p>function test_heteroscedacity
+:param y:
+:type y: Series
+:param y_pred:
+:type y_pred: ndarray
+:param pred_value_only:
+:type pred_value_only: int</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_hypothesis">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_hypothesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.test_hypothesis" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference external" href="https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py">https://github.com/aschleg/hypothetical/blob/master/tests/test_contingency.py</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_multiple_comparisons">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_multiple_comparisons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjuster</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.test_multiple_comparisons" title="Permalink to this definition"></a></dt>
+<dd><p>Run multiple t tests.
+p_values = multiple_comparisons(data)</p>
+<dl>
+<dt># bonferroni correction</dt><dd><dl class="simple">
+<dt>print(‘Total number of discoveries is: {:,}’</dt><dd><p>.format(sum([x[1] &lt; threshold / n_trials for x in p_values])))</p>
+</dd>
+<dt>print(‘Percentage of significant results: {:5.2%}’</dt><dd><p>.format(sum([x[1] &lt; threshold / n_trials for x in p_values]) / n_trials))</p>
+</dd>
+</dl>
+<p># Benjamini–Hochberg procedure
+p_values.sort(key=lambda x: x[1])</p>
+<dl class="simple">
+<dt>for i, x in enumerate(p_values):</dt><dd><dl class="simple">
+<dt>if x[1] &gt;= (i + 1) / len(p_values) * threshold:</dt><dd><p>break</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>significant = p_values[:i]</p>
+<dl class="simple">
+<dt>print(‘Total number of discoveries is: {:,}’</dt><dd><p>.format(len(significant)))</p>
+</dd>
+<dt>print(‘Percentage of significant results: {:5.2%}’</dt><dd><p>.format(len(significant) / n_trials))</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_mutualinfo">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_mutualinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xtest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.test_mutualinfo" title="Permalink to this definition"></a></dt>
+<dd><p>Test  Error vs Input Variable Independance byt Mutual ifno
+sklearn.feature_selection.mutual_info_classif(X, y, discrete_features=’auto’, n_neighbors=3, copy=True, random_state=None)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_normality">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_normality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.test_normality" title="Permalink to this definition"></a></dt>
+<dd><p>Test  Is Normal distribution
+F pvalues &lt; 0.01 : Rejected</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_normality2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_normality2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.test_normality2" title="Permalink to this definition"></a></dt>
+<dd><p>Function to check Normal Distribution of a Feature by 3 methods
+Input dfframe, feature name, and a test type
+Three types of test
+1)’Shapiro’
+2)’Normal’
+3)’Anderson’</p>
+<p>output the statistical test score and result whether accept or reject
+Accept mean the feature is Gaussain
+Reject mean the feature is not Gaussain</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.test_plot_qqplot">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">test_plot_qqplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_drift.test_plot_qqplot" title="Permalink to this definition"></a></dt>
+<dd><p>Function to plot boxplot, histplot and qqplot for numerical feature analyze</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_drift.y_adjuster_log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_drift.</span></span><span class="sig-name descname"><span class="pre">y_adjuster_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred_log</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_drift.y_adjuster_log" title="Permalink to this definition"></a></dt>
+<dd><p>Adjustment of log, exp transfrmation for yt= y + error
+<a class="reference external" href="https://www.inovex.de/de/blog/honey-i-shrunk-the-target-variable/">https://www.inovex.de/de/blog/honey-i-shrunk-the-target-variable/</a></p>
+<p>log(y) = u =sigma**2</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tabular.util_explain">
+<span id="utilmy-tabular-util-explain-module"></span><h2>utilmy.tabular.util_explain module<a class="headerlink" href="#module-utilmy.tabular.util_explain" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_explain.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.load_function_uri">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">load_function_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'path_norm'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_explain.load_function_uri" title="Permalink to this definition"></a></dt>
+<dd><p>Load dynamically function from URI
+###### Pandas CSV case : Custom MLMODELS One
+#”dataset”        : “mlmodels.preprocess.generic:pandasDataset”
+###### External File processor :
+#”dataset”        : “MyFolder/preprocess/myfile.py:pandasDataset”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_evaluate">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">imodels.rule_set.rule_fit.RuleFitRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.tree.figs.FIGSRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.algebraic.slim.SLIMRegressor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.model_evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate model</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_extract_rules">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_extract_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">imodels.rule_set.rule_fit.RuleFitRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.tree.figs.FIGSRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.algebraic.slim.SLIMRegressor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.model_extract_rules" title="Permalink to this definition"></a></dt>
+<dd><p>From imodel extract rules
+# ‘rule’ is how the feature is constructed
+# ‘coef’ is its weight in the final linear model
+# ‘support’ is the fraction of points it applies to</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_fit">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'imodels.SLIMRegressor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">imodels.rule_set.rule_fit.RuleFitRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.tree.figs.FIGSRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.algebraic.slim.SLIMRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.model_fit" title="Permalink to this definition"></a></dt>
+<dd><p>imodels.SLIMRegressor, BayesianRuleListClassifier, RuleFitRegressor, GreedyRuleListClassifier
+imodels.SLIMClassifier, OneRClassifier, BoostedRulesClassifier</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_info">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_explain.model_info" title="Permalink to this definition"></a></dt>
+<dd><p>function model_info
+:param path:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">imodels.rule_set.rule_fit.RuleFitRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.tree.figs.FIGSRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.algebraic.slim.SLIMRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.model_load" title="Permalink to this definition"></a></dt>
+<dd><p>function model_load
+:param path:
+:type path: str</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_predict">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_explain.model_predict" title="Permalink to this definition"></a></dt>
+<dd><p>function model_predict
+:param model:
+:param predict_pars:
+:type predict_pars: dict</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_save">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">imodels.rule_set.rule_fit.RuleFitRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.tree.figs.FIGSRegressor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">imodels.algebraic.slim.SLIMRegressor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.model_save" title="Permalink to this definition"></a></dt>
+<dd><p>function model_save
+:param model:
+:type model: Union[RuleFitRegressor
+:param FIGSRegressor:
+:param SLIMRegressor]:
+:param path:
+:type path: Optional[str]
+:param info:
+:type info: None</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.model_viz_classification_preds">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">model_viz_classification_preds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">probs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_explain.model_viz_classification_preds" title="Permalink to this definition"></a></dt>
+<dd><p>look at prediction breakdown</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.test1" title="Permalink to this definition"></a></dt>
+<dd><p>function test1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.test2" title="Permalink to this definition"></a></dt>
+<dd><p>function test2
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.test_data_classifier_diabetes">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">test_data_classifier_diabetes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.test_data_classifier_diabetes" title="Permalink to this definition"></a></dt>
+<dd><p>load (classification) data on diabetes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.test_data_regression_boston">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">test_data_regression_boston</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_explain.test_data_regression_boston" title="Permalink to this definition"></a></dt>
+<dd><p>load (regression) data on boston housing prices</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_explain.test_imodels">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_explain.</span></span><span class="sig-name descname"><span class="pre">test_imodels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_explain.test_imodels" title="Permalink to this definition"></a></dt>
+<dd><p>Copy of imodels_demo.ipynb
+Automatically generated by Colaboratory.
+Original file is located at</p>
+<blockquote>
+<div><p><a class="reference external" href="https://colab.research.google.com/drive/18Y5odtkZ1dI9kAs1KMK8Z7u-DKspbP9p">https://colab.research.google.com/drive/18Y5odtkZ1dI9kAs1KMK8Z7u-DKspbP9p</a></p>
+</div></blockquote>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tabular.util_sampling">
+<span id="utilmy-tabular-util-sampling-module"></span><h2>utilmy.tabular.util_sampling module<a class="headerlink" href="#module-utilmy.tabular.util_sampling" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sampling.reservoir_sampling">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sampling.</span></span><span class="sig-name descname"><span class="pre">reservoir_sampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_fac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sampling.reservoir_sampling" title="Permalink to this definition"></a></dt>
+<dd><p>When having a inifinte stream of data
+samples nsample vectors from an iterator src that yields matrices
+nsample * temp_fac is the max size of the temporary buffer.
+rs is a RandomState object</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sampling.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sampling.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sampling.test" title="Permalink to this definition"></a></dt>
+<dd><p>function test
+Args:
+Returns:</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tabular.util_sparse">
+<span id="utilmy-tabular-util-sparse-module"></span><h2>utilmy.tabular.util_sparse module<a class="headerlink" href="#module-utilmy.tabular.util_sparse" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.help" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.is_float">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">is_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.is_float" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.is_int">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">is_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.is_int" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.log">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.log" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.log2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">log2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.log2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.pd_historylist_to_csr">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">pd_historylist_to_csr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df:</span> <span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colslist:</span> <span class="pre">typing.Optional[list]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashSize:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rec_perlist:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_rec_perlist:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep_genre='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep_subgenre='/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.pd_historylist_to_csr" title="Permalink to this definition"></a></dt>
+<dd><p>Creates Sparse matrix of dimensions:</p>
+<p>Single value  max=i+1, min=i</p>
+<p>ncol: hashsize * (nlist1 + nlist2 + ….)    X    nrows: nUserID
+xdf:  pd.DataFrame</p>
+<blockquote>
+<div><p>genreCol: string: “4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545”</p>
+</div></blockquote>
+<p>colist:   list of column names containing history list
+hashSize: size of hash space
+return X: scipy.sparse.coo_matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.test1" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.test_all" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.test_create_fake_df">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">test_create_fake_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.test_create_fake_df" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a fake dataframe:
+:return: xdf: pd.DataFrame</p>
+<blockquote>
+<div><p>userid: int
+genreCol: string: “4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545, 4343/4343/4545”</p>
+</div></blockquote>
+<p>:return:nExpectedOnes = numUsers * numSubGenre * nlist * nGenreCols</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.to_float">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">to_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.to_float" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_sparse.to_int">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_sparse.</span></span><span class="sig-name descname"><span class="pre">to_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_sparse.to_int" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-utilmy.tabular.util_uncertainty">
+<span id="utilmy-tabular-util-uncertainty-module"></span><h2>utilmy.tabular.util_uncertainty module<a class="headerlink" href="#module-utilmy.tabular.util_uncertainty" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.load_function_uri">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">load_function_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'path_norm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">mapie.regression.MapieRegressor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">mapie.classification.MapieClassifier</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.load_function_uri" title="Permalink to this definition"></a></dt>
+<dd><p>Load dynamically function from URI
+###### Pandas CSV case : Custom MLMODELS One
+#”dataset”        : “mlmodels.preprocess.generic:pandasDataset”</p>
+<p>###### External File processor :
+#”dataset”        : “MyFolder/preprocess/myfile.py:pandasDataset”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.model_eval2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">model_eval2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.model_eval2" title="Permalink to this definition"></a></dt>
+<dd><p>function model_eval2
+:param clf:
+:param Xval:
+:param yval:
+:param dirout:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.model_evaluate">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">model_evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">mapie.classification.MapieClassifier</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">mapie.regression.MapieRegressor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.model_evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate model</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.model_fit">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">model_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mapie.regression.MapieRegressor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">sklearn.ensemble._forest.RandomForestClassifier</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">sklearn.tree._classes.DecisionTreeClassifier</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">sklearn.linear_model._base.LinearRegression</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapie_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_prefit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">mapie.classification.MapieClassifier</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">mapie.regression.MapieRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.model_fit" title="Permalink to this definition"></a></dt>
+<dd><p>Fit Mapie
+model :          DecisionTreeClassifier()
+mapie_pars : {‘method’:’naive’, ‘cv’: ‘prefit’, ‘n_jobs’:1, ‘verbose’: 50 },  #### mapie pars
+predict_pars : ‘alpha’:[0.05, 0.32]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.model_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">model_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">mapie.classification.MapieClassifier</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">mapie.regression.MapieRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.model_load" title="Permalink to this definition"></a></dt>
+<dd><p>function model_load
+:param path:
+:type path: str</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.model_predict">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">model_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_pars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.model_predict" title="Permalink to this definition"></a></dt>
+<dd><p>Convenien wrapper</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.model_save">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">model_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">mapie.classification.MapieClassifier</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">mapie.regression.MapieRegressor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.model_save" title="Permalink to this definition"></a></dt>
+<dd><p>function model_save
+:param model:
+:type model: Union[MapieClassifier
+:param MapieRegressor]:
+:param path:
+:type path: Optional[str]
+:param info:
+:type info: None</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.model_viz_classification_preds">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">model_viz_classification_preds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.model_viz_classification_preds" title="Permalink to this definition"></a></dt>
+<dd><p>look at prediction breakdown</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.test1">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.test1" title="Permalink to this definition"></a></dt>
+<dd><p>function test1
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.test2" title="Permalink to this definition"></a></dt>
+<dd><p>function test2
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.test5">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">test5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.test5" title="Permalink to this definition"></a></dt>
+<dd><p>function test5
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.test_data_classifier_digits">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">test_data_classifier_digits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.test_data_classifier_digits" title="Permalink to this definition"></a></dt>
+<dd><p>load (classification) data on diabetes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.tabular.util_uncertainty.test_data_regression_boston">
+<span class="sig-prename descclassname"><span class="pre">utilmy.tabular.util_uncertainty.</span></span><span class="sig-name descname"><span class="pre">test_data_regression_boston</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utilmy.tabular.util_uncertainty.test_data_regression_boston" title="Permalink to this definition"></a></dt>
+<dd><p>load (regression) data on boston housing prices</p>
+</dd></dl>
+
+</section>
+<section id="module-utilmy.tabular">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.tabular" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.stats.hypothetical.html" class="btn btn-neutral float-left" title="utilmy.stats.hypothetical package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.templates.html" class="btn btn-neutral float-right" title="utilmy.templates package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

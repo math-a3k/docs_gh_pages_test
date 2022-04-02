@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilmy.deeplearning.torch package &mdash; utilmy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utilmy.deeplearning.torch.images package" href="utilmy.deeplearning.torch.images.html" />
+    <link rel="prev" title="utilmy.deeplearning.keras package" href="utilmy.deeplearning.keras.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+            <a href="index.html" class="icon icon-home"> utilmy
+          </a>
+              <div class="version">
+                toctree_fix
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autodoc.html">utilmy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utilmy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="utilmy.html">utilmy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="utilmy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="utilmy.configs.html">utilmy.configs package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="utilmy.deeplearning.html">utilmy.deeplearning package</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="utilmy.deeplearning.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="utilmy.deeplearning.autoencoder.html">utilmy.deeplearning.autoencoder package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="utilmy.deeplearning.keras.html">utilmy.deeplearning.keras package</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="#">utilmy.deeplearning.torch package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="utilmy.deeplearning.torch.images.html">utilmy.deeplearning.torch.images package</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-torch-graphnlp-module">utilmy.deeplearning.torch.graphnlp module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.torch.rule_encoder">utilmy.deeplearning.torch.rule_encoder module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-torch-rule-encoder2-module">utilmy.deeplearning.torch.rule_encoder2 module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-torch-sentence2-module">utilmy.deeplearning.torch.sentence2 module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-torch-sentences-module">utilmy.deeplearning.torch.sentences module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.torch.util_train">utilmy.deeplearning.torch.util_train module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#utilmy-deeplearning-torch-zkeras-torch-sentence-module">utilmy.deeplearning.torch.zkeras_torch_sentence module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-utilmy.deeplearning.torch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning.util_dl">utilmy.deeplearning.util_dl module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning.util_embedding">utilmy.deeplearning.util_embedding module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning.util_yolo">utilmy.deeplearning.util_yolo module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="utilmy.deeplearning.html#module-utilmy.deeplearning">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.docs.html">utilmy.docs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.excel.html">utilmy.excel package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.images.html">utilmy.images package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.logs.html">utilmy.logs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.nlp.html">utilmy.nlp package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.optim.html">utilmy.optim package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.prepro.html">utilmy.prepro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.recsys.html">utilmy.recsys package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.spark.html">utilmy.spark package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.stats.html">utilmy.stats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tabular.html">utilmy.tabular package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.templates.html">utilmy.templates package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tools.html">utilmy.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.tseries.html">utilmy.tseries package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.viz.html">utilmy.viz package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilmy.webscraper.html">utilmy.webscraper package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.adatasets">utilmy.adatasets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.cli">utilmy.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.data">utilmy.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.dates">utilmy.dates module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.debug">utilmy.debug module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.decorators">utilmy.decorators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.distributed">utilmy.distributed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.graph">utilmy.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.iio">utilmy.iio module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.nnumpy">utilmy.nnumpy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.oos">utilmy.oos module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.parallel">utilmy.parallel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.ppandas">utilmy.ppandas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-ppolars-module">utilmy.ppolars module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_batch">utilmy.util_batch module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_colab">utilmy.util_colab module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_conda">utilmy.util_conda module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-cpu-module">utilmy.util_cpu module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_dirs">utilmy.util_dirs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_download">utilmy.util_download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_hadoop">utilmy.util_hadoop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-util-log-module">utilmy.util_log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.util_zip">utilmy.util_zip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utilmy">utilmy.utilmy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy.utils">utilmy.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#utilmy-zprepro-module">utilmy.zprepro module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilmy.html#module-utilmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">utilmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">utilmy</a> &raquo;</li>
+          <li><a href="utilmy.html">utilmy package</a> &raquo;</li>
+          <li><a href="utilmy.deeplearning.html">utilmy.deeplearning package</a> &raquo;</li>
+      <li>utilmy.deeplearning.torch package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/maltfield/rtd-github-pages/blob/master/docs/utilmy.deeplearning.torch.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilmy-deeplearning-torch-package">
+<h1>utilmy.deeplearning.torch package<a class="headerlink" href="#utilmy-deeplearning-torch-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utilmy.deeplearning.torch.images.html">utilmy.deeplearning.torch.images package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#utilmy-deeplearning-torch-images-base-module">utilmy.deeplearning.torch.images.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#utilmy-deeplearning-torch-images-i3d-module">utilmy.deeplearning.torch.images.i3d module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#utilmy-deeplearning-torch-images-x3d-module">utilmy.deeplearning.torch.images.x3d module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilmy.deeplearning.torch.images.html#module-utilmy.deeplearning.torch.images">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-torch-graphnlp-module">
+<h2>utilmy.deeplearning.torch.graphnlp module<a class="headerlink" href="#utilmy-deeplearning-torch-graphnlp-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.torch.rule_encoder">
+<span id="utilmy-deeplearning-torch-rule-encoder-module"></span><h2>utilmy.deeplearning.torch.rule_encoder module<a class="headerlink" href="#module-utilmy.deeplearning.torch.rule_encoder" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.DataEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">DataEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.DataEncoder" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.DataEncoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.DataEncoder.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.DataEncoder.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.DataEncoder.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.NaiveModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">NaiveModel</span></span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.NaiveModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.NaiveModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.NaiveModel.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Net:forward
+:param x:
+:param alpha:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.NaiveModel.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.NaiveModel.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.Net">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">Net</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_encoder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_encoder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'state'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.Net" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.Net.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.Net.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.Net.get_z">
+<span class="sig-name descname"><span class="pre">get_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.Net.get_z" title="Permalink to this definition"></a></dt>
+<dd><p>Net:get_z
+:param x:
+:param alpha:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.Net.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.Net.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.RuleEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">RuleEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.RuleEncoder" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.RuleEncoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.RuleEncoder.forward" title="Permalink to this definition"></a></dt>
+<dd><p>RuleEncoder:forward
+:param x:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.RuleEncoder.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.RuleEncoder.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.dataloader_create">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">dataloader_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.dataloader_create" title="Permalink to this definition"></a></dt>
+<dd><p>function dataloader_create
+:param train_X:
+:param train_y:
+:param valid_X:
+:param valid_y:
+:param test_X:
+:param test_y:
+:param arg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.dataset_load_cardio">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">dataset_load_cardio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.dataset_load_cardio" title="Permalink to this definition"></a></dt>
+<dd><p>function dataset_load_cardio
+:param arg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.dataset_load_covtype">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">dataset_load_covtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.dataset_load_covtype" title="Permalink to this definition"></a></dt>
+<dd><p>function dataset_load_covtype
+:param arg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.dataset_preprocess_cardio">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">dataset_preprocess_cardio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.dataset_preprocess_cardio" title="Permalink to this definition"></a></dt>
+<dd><p>function dataset_preprocess_cardio
+:param df:
+:param arg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.dataset_preprocess_covtype">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">dataset_preprocess_covtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.dataset_preprocess_covtype" title="Permalink to this definition"></a></dt>
+<dd><p>function dataset_preprocess_covtype
+:param df:
+:param arg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.device_setup">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">device_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.device_setup" title="Permalink to this definition"></a></dt>
+<dd><p>function device_setup
+:param arg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.get_correct_results">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">get_correct_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_Y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.get_correct_results" title="Permalink to this definition"></a></dt>
+<dd><p>function get_correct_results
+:param out:
+:param label_Y:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.get_metrics">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">get_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.get_metrics" title="Permalink to this definition"></a></dt>
+<dd><p>function get_metrics
+:param y_true:
+:param y_pred:
+:param y_score:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.get_perturbed_input">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">get_perturbed_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pert_coeff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.get_perturbed_input" title="Permalink to this definition"></a></dt>
+<dd><p>X = X + pert_coeff*rand*X
+return input_tensor + input_tensor*pert_coeff*torch.rand()</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.help">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.help" title="Permalink to this definition"></a></dt>
+<dd><p>function help
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.loss_rule_calc">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">loss_rule_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_train_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_rule_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.loss_rule_calc" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate loss for constraints rules</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.loss_rule_calc_cardio">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">loss_rule_calc_cardio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_train_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_rule_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.loss_rule_calc_cardio" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate loss for constraints rules</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.loss_rule_calc_covtype">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">loss_rule_calc_covtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_train_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_rule_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.loss_rule_calc_covtype" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate loss for constraints rules</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.model_build">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">model_build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'train'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.model_build" title="Permalink to this definition"></a></dt>
+<dd><p>function model_build
+:param arg:
+:type arg: dict
+:param mode:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.model_evaluation">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">model_evaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_eval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_task_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_load1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_preprocess1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.model_evaluation" title="Permalink to this definition"></a></dt>
+<dd><p>function model_evaluation
+:param model_eval:
+:param loss_task_func:
+:param arg:
+:param dataset_load1:
+:param dataset_preprocess1:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.model_load">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">model_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.model_load" title="Permalink to this definition"></a></dt>
+<dd><p>function model_load
+:param arg:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.model_train">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">model_train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_loader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.model_train" title="Permalink to this definition"></a></dt>
+<dd><p>function model_train
+:param model:
+:param losses:
+:param train_loader:
+:param valid_loader:
+:param arg:
+:type arg: dict</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.test">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.test" title="Permalink to this definition"></a></dt>
+<dd><p>function test
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.test2">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.test2" title="Permalink to this definition"></a></dt>
+<dd><p>function test2
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.test_all">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.test_all" title="Permalink to this definition"></a></dt>
+<dd><p>function test_all
+Args:
+Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.test_dataset_classification_fake">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">test_dataset_classification_fake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.test_dataset_classification_fake" title="Permalink to this definition"></a></dt>
+<dd><p>function test_dataset_classification_fake
+:param nrows:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utilmy.deeplearning.torch.rule_encoder.verification">
+<span class="sig-prename descclassname"><span class="pre">utilmy.deeplearning.torch.rule_encoder.</span></span><span class="sig-name descname"><span class="pre">verification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pert_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utilmy.deeplearning.torch.rule_encoder.verification" title="Permalink to this definition"></a></dt>
+<dd><p>return the ratio of qualified samples.</p>
+</dd></dl>
+
+</section>
+<section id="utilmy-deeplearning-torch-rule-encoder2-module">
+<h2>utilmy.deeplearning.torch.rule_encoder2 module<a class="headerlink" href="#utilmy-deeplearning-torch-rule-encoder2-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-torch-sentence2-module">
+<h2>utilmy.deeplearning.torch.sentence2 module<a class="headerlink" href="#utilmy-deeplearning-torch-sentence2-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-torch-sentences-module">
+<h2>utilmy.deeplearning.torch.sentences module<a class="headerlink" href="#utilmy-deeplearning-torch-sentences-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.torch.util_train">
+<span id="utilmy-deeplearning-torch-util-train-module"></span><h2>utilmy.deeplearning.torch.util_train module<a class="headerlink" href="#module-utilmy.deeplearning.torch.util_train" title="Permalink to this headline"></a></h2>
+</section>
+<section id="utilmy-deeplearning-torch-zkeras-torch-sentence-module">
+<h2>utilmy.deeplearning.torch.zkeras_torch_sentence module<a class="headerlink" href="#utilmy-deeplearning-torch-zkeras-torch-sentence-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-utilmy.deeplearning.torch">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utilmy.deeplearning.torch" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utilmy.deeplearning.keras.html" class="btn btn-neutral float-left" title="utilmy.deeplearning.keras package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilmy.deeplearning.torch.images.html" class="btn btn-neutral float-right" title="utilmy.deeplearning.torch.images package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: toctree_fix
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl>
+        <dt>Languages</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">en</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/docs_gh_pages_test/es/toctree_fix/">es</a></dd>
+          
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/">toctree_fix</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.pdf">pdf</a></dd>
+        
+          <dd><a href="/docs_gh_pages_test/en/toctree_fix/utilmy-docs_en_toctree_fix.epub">epub</a></dd>
+        
+      </dl>
+      
+      
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+ 
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

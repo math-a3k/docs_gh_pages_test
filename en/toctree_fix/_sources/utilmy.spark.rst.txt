@@ -1,0 +1,38 @@
+utilmy.spark package
+====================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 20
+
+   utilmy.spark.src
+   utilmy.spark.tests
+
+Submodules
+----------
+
+utilmy.spark.main module
+------------------------
+
+.. automodule:: utilmy.spark.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.spark.setup module
+-------------------------
+
+.. automodule:: utilmy.spark.setup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.spark
+   :members:
+   :undoc-members:
+   :show-inheritance:

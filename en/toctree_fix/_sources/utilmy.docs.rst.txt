@@ -1,0 +1,85 @@
+utilmy.docs package
+===================
+
+Submodules
+----------
+
+utilmy.docs.cli module
+----------------------
+
+.. automodule:: utilmy.docs.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.code\_parser module
+-------------------------------
+
+.. automodule:: utilmy.docs.code_parser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.docstring module
+----------------------------
+
+.. automodule:: utilmy.docs.docstring
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.format module
+-------------------------
+
+.. automodule:: utilmy.docs.format
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.generate\_doc module
+--------------------------------
+
+.. automodule:: utilmy.docs.generate_doc
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.generate\_typehint module
+-------------------------------------
+
+.. automodule:: utilmy.docs.generate_typehint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.zold\_cli\_format module
+------------------------------------
+
+.. automodule:: utilmy.docs.zold_cli_format
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.zold\_docstring2 module
+-----------------------------------
+
+.. automodule:: utilmy.docs.zold_docstring2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.docs.zold\_docstring3 module
+-----------------------------------
+
+.. automodule:: utilmy.docs.zold_docstring3
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.docs
+   :members:
+   :undoc-members:
+   :show-inheritance:

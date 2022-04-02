@@ -1,0 +1,21 @@
+utilmy.excel package
+====================
+
+Submodules
+----------
+
+utilmy.excel.xlvba module
+-------------------------
+
+.. automodule:: utilmy.excel.xlvba
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.excel
+   :members:
+   :undoc-members:
+   :show-inheritance:

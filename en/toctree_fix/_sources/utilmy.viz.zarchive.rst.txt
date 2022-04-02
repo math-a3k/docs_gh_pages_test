@@ -1,0 +1,21 @@
+utilmy.viz.zarchive package
+===========================
+
+Submodules
+----------
+
+utilmy.viz.zarchive.toptoolbar module
+-------------------------------------
+
+.. automodule:: utilmy.viz.zarchive.toptoolbar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.viz.zarchive
+   :members:
+   :undoc-members:
+   :show-inheritance:

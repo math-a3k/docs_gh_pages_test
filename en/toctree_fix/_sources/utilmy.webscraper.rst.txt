@@ -1,0 +1,77 @@
+utilmy.webscraper package
+=========================
+
+Submodules
+----------
+
+utilmy.webscraper.cli\_arxiv module
+-----------------------------------
+
+.. automodule:: utilmy.webscraper.cli_arxiv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.webscraper.cli\_openreview module
+----------------------------------------
+
+.. automodule:: utilmy.webscraper.cli_openreview
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.webscraper.cli\_reddit module
+------------------------------------
+
+.. automodule:: utilmy.webscraper.cli_reddit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.webscraper.ner\_extractor module
+---------------------------------------
+
+.. automodule:: utilmy.webscraper.ner_extractor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.webscraper.pdf\_scraper module
+-------------------------------------
+
+.. automodule:: utilmy.webscraper.pdf_scraper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.webscraper.scrape\_batch module
+--------------------------------------
+
+.. automodule:: utilmy.webscraper.scrape_batch
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.webscraper.util\_search module
+-------------------------------------
+
+.. automodule:: utilmy.webscraper.util_search
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.webscraper.util\_web module
+----------------------------------
+
+.. automodule:: utilmy.webscraper.util_web
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.webscraper
+   :members:
+   :undoc-members:
+   :show-inheritance:

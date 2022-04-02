@@ -1,0 +1,47 @@
+utilmy.deeplearning package
+===========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 20
+
+   utilmy.deeplearning.autoencoder
+   utilmy.deeplearning.keras
+   utilmy.deeplearning.torch
+
+Submodules
+----------
+
+utilmy.deeplearning.util\_dl module
+-----------------------------------
+
+.. automodule:: utilmy.deeplearning.util_dl
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.util\_embedding module
+------------------------------------------
+
+.. automodule:: utilmy.deeplearning.util_embedding
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+utilmy.deeplearning.util\_yolo module
+-------------------------------------
+
+.. automodule:: utilmy.deeplearning.util_yolo
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: utilmy.deeplearning
+   :members:
+   :undoc-members:
+   :show-inheritance:
